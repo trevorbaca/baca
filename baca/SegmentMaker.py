@@ -8,7 +8,7 @@ from abjadext import rmakers
 from . import scoping
 from . import indicators
 from . import library
-from . import markuplib
+from . import markups
 from . import overrides as baca_overrides
 from . import pitchclasses
 from . import rhythmcommands
@@ -966,7 +966,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if self.final_markup is None:
             return
         command = library.markup(
-            markuplib.final_markup(*self.final_markup),
+            markups.final_markup(*self.final_markup),
             selector='baca.leaf(-1)',
             direction=abjad.Down,
             )

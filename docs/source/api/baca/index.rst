@@ -32,7 +32,7 @@ baca
    dynamics
    indicators
    library
-   markuplib
+   markups
    overrides
    pitcharray
    pitchclasses
@@ -56,7 +56,7 @@ baca
    dynamics
    indicators
    library
-   markuplib
+   markups
    overrides
    pitcharray
    pitchclasses

@@ -4,7 +4,7 @@ Score template library.
 import abjad
 import roman # type: ignore
 import typing
-from . import markuplib
+from . import markups
 
 
 ### CLASSES ###
@@ -477,8 +477,8 @@ class StringTrioScoreTemplate(ScoreTemplate):
             name='ViolinMusicStaff',
             )
         violin = abjad.Violin(
-            markup=markuplib.instrument('Violin', hcenter_in=10),
-            short_markup=markuplib.short_instrument(
+            markup=markups.instrument('Violin', hcenter_in=10),
+            short_markup=markups.short_instrument(
                 'Vn.',
                 hcenter_in=10,
                 ),
@@ -509,8 +509,8 @@ class StringTrioScoreTemplate(ScoreTemplate):
             viola_music_staff,
             'default_instrument',
             abjad.Viola(
-                markup=markuplib.instrument('Viola', hcenter_in=10),
-                short_markup=markuplib.short_instrument(
+                markup=markups.instrument('Viola', hcenter_in=10),
+                short_markup=markups.short_instrument(
                     'Va.',
                     hcenter_in=10,
                     ),
@@ -537,8 +537,8 @@ class StringTrioScoreTemplate(ScoreTemplate):
             cello_music_staff,
             'default_instrument',
             abjad.Cello(
-                markup=markuplib.instrument('Cello', hcenter_in=10),
-                short_markup=markuplib.short_instrument(
+                markup=markups.instrument('Cello', hcenter_in=10),
+                short_markup=markups.short_instrument(
                     'Vc.',
                     hcenter_in=10,
                     ),
@@ -809,8 +809,8 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
             name='ViolinMusicStaff',
             )
         violin = abjad.Violin(
-            markup=markuplib.instrument('Violin'),
-            short_markup=markuplib.short_instrument('Vn.'),
+            markup=markups.instrument('Violin'),
+            short_markup=markups.short_instrument('Vn.'),
             )
         abjad.annotate(
             violin_music_staff,

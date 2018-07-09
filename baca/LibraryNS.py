@@ -4,7 +4,7 @@ import typing
 from . import scoping
 from . import indicators
 from . import library
-from . import markuplib
+from . import markups
 from . import typings
 from abjadext import rmakers
 from .AnchorSpecifier import AnchorSpecifier
@@ -1722,7 +1722,7 @@ def start_markup(
     Attaches start markup.
     """
     if isinstance(argument, (list, str)):
-        markup = markuplib.instrument(argument, hcenter_in=hcenter_in)
+        markup = markups.instrument(argument, hcenter_in=hcenter_in)
         start_markup = abjad.StartMarkup(
             context=context,
             markup=markup,

@@ -5,7 +5,7 @@ from .commands import *
 from .divisions import *
 from .dynamics import *
 from .indicators import *
-from .markuplib import Markup
+from .markups import Markup
 from .overrides import *
 from .pitcharray import *
 from .pitchcommands import *
@@ -14,7 +14,7 @@ from .rhythmcommands import *
 from .segmentclasses import *
 from .spannercommands import *
 from .templates import *
-from . import markuplib
+from . import markups
 
 # classes
 from .AnchorSpecifier import AnchorSpecifier
