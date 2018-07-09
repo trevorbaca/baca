@@ -37,6 +37,8 @@ class AnchorSpecifier(abjad.AbjadValueObject):
         remote_voice_name=None,
         use_remote_stop_offset=None,
         ):
+        # for selector evaluation:
+        import baca
         if figure_name is not None:
             assert isinstance(figure_name, str), repr(figure_name)
         self._figure_name = figure_name
