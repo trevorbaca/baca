@@ -905,7 +905,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     for command_ in command:
                         if isinstance(command_, abjad.Markup):
                             command_ = library.markup(command_)
-                        assert isinstance(command_, Command), repr(command_)
+                        assert isinstance(command_, commandlib.Command), repr(command_)
                         wrapper = commandlib.CommandWrapper(
                             command=command_,
                             scope=scope,
