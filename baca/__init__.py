@@ -49,7 +49,6 @@ from .SegmentMaker import SegmentMaker
 from .SegmentMaker import WellformednessManager
 from .Selection import Selection
 from .Sequence import Sequence
-from .TimeSignatureGroups import TimeSignatureGroups
 from .Tree import Tree
 
 # expression constructors
