@@ -1,8 +1,8 @@
 import abjad
-from . import commandlib
+from . import evallib
 
 
-class ColorCommand(commandlib.Command):
+class ColorCommand(evallib.Command):
     r"""
     Color command.
 
@@ -328,7 +328,7 @@ class ColorCommand(commandlib.Command):
         selector='baca.leaves()',
         ):
         assert selector is not None
-        commandlib.Command.__init__(self, selector=selector)
+        evallib.Command.__init__(self, selector=selector)
 
     ### SPECIAL METHODS ###
 

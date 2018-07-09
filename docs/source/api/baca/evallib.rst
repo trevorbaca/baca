@@ -1,22 +1,22 @@
-.. _baca--commandlib:
+.. _baca--evallib:
 
-commandlib
-==========
+evallib
+=======
 
-.. automodule:: baca.commandlib
+.. automodule:: baca.evallib
 
-.. currentmodule:: baca.commandlib
+.. currentmodule:: baca.evallib
 
 .. container:: svg-container
 
    .. inheritance-diagram:: baca
-      :lineage: baca.commandlib
+      :lineage: baca.evallib
 
 .. raw:: html
 
    <hr/>
 
-.. rubric:: (4) Commands
+.. rubric:: Classes
    :class: section-header
 
 .. autosummary::
@@ -24,6 +24,11 @@ commandlib
 
    ~Command
    ~CommandWrapper
+   ~Map
+   ~MeasureWrapper
+   ~Scope
+   ~Suite
+   ~TimelineScope
 
 .. autoclass:: Command
 
@@ -137,19 +142,60 @@ commandlib
 
    .. autoattribute:: CommandWrapper.scope
 
-.. raw:: html
+.. autoclass:: Map
 
-   <hr/>
+   .. autosummary::
+      :nosignatures:
 
-.. rubric:: (5) Utilities
-   :class: section-header
+      commands
+      selector
 
-.. autosummary::
-   :nosignatures:
+   .. autosummary::
+      :nosignatures:
 
-   ~MeasureWrapper
-   ~Scope
-   ~TimelineScope
+      runtime
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: Map.__call__
+
+   .. container:: inherited
+
+      .. automethod:: Map.__format__
+
+   .. container:: inherited
+
+      .. automethod:: Map.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read/write properties
+      :class: class-header
+
+   .. autoattribute:: Map.runtime
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: Map.commands
+
+   .. autoattribute:: Map.selector
 
 .. autoclass:: MeasureWrapper
 
@@ -219,108 +265,6 @@ commandlib
 
    .. autoattribute:: Scope.voice_name
 
-.. autoclass:: TimelineScope
-
-   .. autosummary::
-      :nosignatures:
-
-      scopes
-      voice_name
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. container:: inherited
-
-      .. automethod:: TimelineScope.__format__
-
-   .. container:: inherited
-
-      .. automethod:: TimelineScope.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read-only properties
-      :class: class-header
-
-   .. autoattribute:: TimelineScope.scopes
-
-   .. autoattribute:: TimelineScope.voice_name
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Classes
-   :class: section-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~Map
-   ~Suite
-
-.. autoclass:: Map
-
-   .. autosummary::
-      :nosignatures:
-
-      commands
-      selector
-
-   .. autosummary::
-      :nosignatures:
-
-      runtime
-
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. automethod:: Map.__call__
-
-   .. container:: inherited
-
-      .. automethod:: Map.__format__
-
-   .. container:: inherited
-
-      .. automethod:: Map.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read/write properties
-      :class: class-header
-
-   .. autoattribute:: Map.runtime
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read-only properties
-      :class: class-header
-
-   .. autoattribute:: Map.commands
-
-   .. autoattribute:: Map.selector
-
 .. autoclass:: Suite
 
    .. autosummary::
@@ -372,6 +316,40 @@ commandlib
       :class: class-header
 
    .. autoattribute:: Suite.commands
+
+.. autoclass:: TimelineScope
+
+   .. autosummary::
+      :nosignatures:
+
+      scopes
+      voice_name
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: TimelineScope.__format__
+
+   .. container:: inherited
+
+      .. automethod:: TimelineScope.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: TimelineScope.scopes
+
+   .. autoattribute:: TimelineScope.voice_name
 
 .. raw:: html
 

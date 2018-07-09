@@ -1,12 +1,12 @@
 import abjad
 import typing
-from . import commandlib
+from . import evallib
 from . import indicatorlib
 from . import typings
 from .Selection import Selection
 
 
-class MetronomeMarkCommand(commandlib.Command):
+class MetronomeMarkCommand(evallib.Command):
     """
     Metronome mark command.
 
@@ -39,7 +39,7 @@ class MetronomeMarkCommand(commandlib.Command):
         selector: typings.Selector = 'baca.leaf(0)',
         tags: typing.List[abjad.Tag] = None,
         ) -> None:
-        commandlib.Command.__init__(
+        evallib.Command.__init__(
             self,
             deactivate=deactivate,
             selector=selector,

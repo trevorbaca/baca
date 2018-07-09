@@ -53,29 +53,7 @@ Bača API
 .. autosummary::
    :nosignatures:
 
-   ~baca.AccidentalAdjustmentCommand.AccidentalAdjustmentCommand
    ~baca.BCPCommand.BCPCommand
-   ~baca.ClusterCommand.ClusterCommand
-   ~baca.ColorCommand.ColorCommand
-   ~baca.ColorFingeringCommand.ColorFingeringCommand
-   ~baca.ContainerCommand.ContainerCommand
-   ~baca.DiatonicClusterCommand.DiatonicClusterCommand
-   ~baca.GlobalFermataCommand.GlobalFermataCommand
-   ~baca.ImbricationCommand.ImbricationCommand
-   ~baca.IndicatorCommand.IndicatorCommand
-   ~baca.InstrumentChangeCommand.InstrumentChangeCommand
-   ~baca.LabelCommand.LabelCommand
-   ~baca.MetronomeMarkCommand.MetronomeMarkCommand
-   ~baca.MicrotoneDeviationCommand.MicrotoneDeviationCommand
-   ~baca.NestingCommand.NestingCommand
-   ~baca.OctaveDisplacementCommand.OctaveDisplacementCommand
-   ~baca.PartAssignmentCommand.PartAssignmentCommand
-   ~baca.PiecewiseIndicatorCommand.PiecewiseIndicatorCommand
-   ~baca.PitchCommand.PitchCommand
-   ~baca.StaffPositionCommand.StaffPositionCommand
-   ~baca.StaffPositionInterpolationCommand.StaffPositionInterpolationCommand
-   ~baca.TieCorrectionCommand.TieCorrectionCommand
-   ~baca.VoltaCommand.VoltaCommand
 
 .. raw:: html
 
@@ -111,7 +89,29 @@ Bača API
 .. autosummary::
    :nosignatures:
 
+   ~baca.AccidentalAdjustmentCommand.AccidentalAdjustmentCommand
+   ~baca.ClusterCommand.ClusterCommand
+   ~baca.ColorCommand.ColorCommand
+   ~baca.ColorFingeringCommand.ColorFingeringCommand
+   ~baca.ContainerCommand.ContainerCommand
+   ~baca.DiatonicClusterCommand.DiatonicClusterCommand
+   ~baca.GlobalFermataCommand.GlobalFermataCommand
+   ~baca.ImbricationCommand.ImbricationCommand
+   ~baca.IndicatorCommand.IndicatorCommand
+   ~baca.InstrumentChangeCommand.InstrumentChangeCommand
+   ~baca.LabelCommand.LabelCommand
+   ~baca.MetronomeMarkCommand.MetronomeMarkCommand
+   ~baca.MicrotoneDeviationCommand.MicrotoneDeviationCommand
+   ~baca.NestingCommand.NestingCommand
+   ~baca.OctaveDisplacementCommand.OctaveDisplacementCommand
    ~baca.PaddedTuple.PaddedTuple
+   ~baca.PartAssignmentCommand.PartAssignmentCommand
+   ~baca.PiecewiseIndicatorCommand.PiecewiseIndicatorCommand
+   ~baca.PitchCommand.PitchCommand
+   ~baca.StaffPositionCommand.StaffPositionCommand
+   ~baca.StaffPositionInterpolationCommand.StaffPositionInterpolationCommand
+   ~baca.TieCorrectionCommand.TieCorrectionCommand
+   ~baca.VoltaCommand.VoltaCommand
 
 .. raw:: html
 
@@ -401,35 +401,10 @@ Bača API
 
    <hr/>
 
-.. rubric:: :ref:`baca.commandlib <baca--commandlib>`
+.. rubric:: :ref:`baca.divisionlib <baca--divisionlib>`
    :class: section-header
 
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: (4) Commands
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.commandlib.Command
-   ~baca.commandlib.CommandWrapper
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: (5) Utilities
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.commandlib.MeasureWrapper
-   ~baca.commandlib.Scope
-   ~baca.commandlib.TimelineScope
+Division library.
 
 .. raw:: html
 
@@ -441,64 +416,7 @@ Bača API
 .. autosummary::
    :nosignatures:
 
-   ~baca.commandlib.Map
-   ~baca.commandlib.Suite
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Functions
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.commandlib.map
-   ~baca.commandlib.measures
-   ~baca.commandlib.not_parts
-   ~baca.commandlib.not_score
-   ~baca.commandlib.not_segment
-   ~baca.commandlib.only_parts
-   ~baca.commandlib.only_score
-   ~baca.commandlib.only_segment
-   ~baca.commandlib.pick
-   ~baca.commandlib.scope
-   ~baca.commandlib.suite
-   ~baca.commandlib.tag
-   ~baca.commandlib.timeline
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: :ref:`baca.divisionlib <baca--divisionlib>`
-   :class: section-header
-
-Division library.
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: (5) Utilities
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
    ~baca.divisionlib.Division
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: (6) Divisions
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
    ~baca.divisionlib.DivisionMaker
    ~baca.divisionlib.DivisionSequence
    ~baca.divisionlib.DivisionSequenceExpression
@@ -551,22 +469,57 @@ Dynamic library.
 
    <hr/>
 
-.. rubric:: :ref:`baca.indicatorlib <baca--indicatorlib>`
+.. rubric:: :ref:`baca.evallib <baca--evallib>`
    :class: section-header
 
 .. raw:: html
 
    <hr/>
 
-.. rubric:: (5) Utilities
+.. rubric:: Classes
    :class: subsection-header
 
 .. autosummary::
    :nosignatures:
 
-   ~baca.indicatorlib.LBSD
-   ~baca.indicatorlib.SpacingSection
-   ~baca.indicatorlib.StaffLines
+   ~baca.evallib.Command
+   ~baca.evallib.CommandWrapper
+   ~baca.evallib.Map
+   ~baca.evallib.MeasureWrapper
+   ~baca.evallib.Scope
+   ~baca.evallib.Suite
+   ~baca.evallib.TimelineScope
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Functions
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.evallib.map
+   ~baca.evallib.measures
+   ~baca.evallib.not_parts
+   ~baca.evallib.not_score
+   ~baca.evallib.not_segment
+   ~baca.evallib.only_parts
+   ~baca.evallib.only_score
+   ~baca.evallib.only_segment
+   ~baca.evallib.pick
+   ~baca.evallib.scope
+   ~baca.evallib.suite
+   ~baca.evallib.tag
+   ~baca.evallib.timeline
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: :ref:`baca.indicatorlib <baca--indicatorlib>`
+   :class: section-header
 
 .. raw:: html
 
@@ -579,7 +532,10 @@ Dynamic library.
    :nosignatures:
 
    ~baca.indicatorlib.Accelerando
+   ~baca.indicatorlib.LBSD
    ~baca.indicatorlib.Ritardando
+   ~baca.indicatorlib.SpacingSection
+   ~baca.indicatorlib.StaffLines
 
 .. raw:: html
 
@@ -619,7 +575,7 @@ Markup library.
 
    <hr/>
 
-.. rubric:: (5) Utilities
+.. rubric:: Classes
    :class: subsection-header
 
 .. autosummary::
@@ -836,7 +792,7 @@ Override library.
 
    <hr/>
 
-.. rubric:: (4) Commands
+.. rubric:: Classes
    :class: subsection-header
 
 .. autosummary::
@@ -976,7 +932,7 @@ Pitch array library.
 
    <hr/>
 
-.. rubric:: (5) Utilities
+.. rubric:: Classes
    :class: subsection-header
 
 .. autosummary::
@@ -1001,7 +957,19 @@ Pitch library.
 
    <hr/>
 
-.. rubric:: (3) Specifiers
+.. rubric:: (5) Utilities
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.pitchlib.PitchTree
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Classes
    :class: subsection-header
 
 .. autosummary::
@@ -1009,17 +977,6 @@ Pitch library.
 
    ~baca.pitchlib.ArpeggiationSpacingSpecifier
    ~baca.pitchlib.ChordalSpacingSpecifier
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: (5) Utilities
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
    ~baca.pitchlib.CollectionList
    ~baca.pitchlib.Constellation
    ~baca.pitchlib.ConstellationCircuit
@@ -1030,7 +987,6 @@ Pitch library.
    ~baca.pitchlib.PitchClassSet
    ~baca.pitchlib.PitchSegment
    ~baca.pitchlib.PitchSet
-   ~baca.pitchlib.PitchTree
    ~baca.pitchlib.PitchTreeSpanner
    ~baca.pitchlib.ZaggedPitchClassMaker
 
@@ -1047,7 +1003,7 @@ Register library.
 
    <hr/>
 
-.. rubric:: (4) Commands
+.. rubric:: Classes
    :class: subsection-header
 
 .. autosummary::
@@ -1056,17 +1012,6 @@ Register library.
    ~baca.registerlib.RegisterCommand
    ~baca.registerlib.RegisterInterpolationCommand
    ~baca.registerlib.RegisterToOctaveCommand
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: (5) Utilities
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
    ~baca.registerlib.Registration
    ~baca.registerlib.RegistrationComponent
 
@@ -1098,36 +1043,13 @@ Rhythm library.
 
    <hr/>
 
-.. rubric:: (2) Makers
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.rhythmlib.PitchFirstRhythmMaker
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: (3) Specifiers
+.. rubric:: Classes
    :class: subsection-header
 
 .. autosummary::
    :nosignatures:
 
    ~baca.rhythmlib.AcciaccaturaSpecifier
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: (4) Commands
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
    ~baca.rhythmlib.PitchFirstRhythmCommand
    ~baca.rhythmlib.RhythmCommand
 
@@ -1165,6 +1087,7 @@ Rhythm library.
 .. autosummary::
    :nosignatures:
 
+   ~baca.rhythmlib.PitchFirstRhythmMaker
    ~baca.rhythmlib.SkipRhythmMaker
 
 .. raw:: html
@@ -1178,25 +1101,14 @@ Rhythm library.
 
    <hr/>
 
-.. rubric:: (3) Specifiers
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.segmentlib.HorizontalSpacingSpecifier
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: (5) Utilities
+.. rubric:: Classes
    :class: subsection-header
 
 .. autosummary::
    :nosignatures:
 
    ~baca.segmentlib.BreakMeasureMap
+   ~baca.segmentlib.HorizontalSpacingSpecifier
    ~baca.segmentlib.MetronomeMarkMeasureMap
    ~baca.segmentlib.PageSpecifier
    ~baca.segmentlib.StageMeasureMap
@@ -1232,7 +1144,7 @@ Setting library.
 
    <hr/>
 
-.. rubric:: (4) Commands
+.. rubric:: Classes
    :class: subsection-header
 
 .. autosummary::
@@ -1251,7 +1163,7 @@ Setting library.
 
    <hr/>
 
-.. rubric:: (4) Commands
+.. rubric:: Classes
    :class: subsection-header
 
 .. autosummary::
@@ -1295,7 +1207,7 @@ Score template library.
 
    <hr/>
 
-.. rubric:: (5) Utilities
+.. rubric:: Score templates
    :class: subsection-header
 
 .. autosummary::

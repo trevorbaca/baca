@@ -1,6 +1,6 @@
 import abjad
 import typing
-from . import commandlib
+from . import evallib
 from . import library
 from . import typings
 from .Selection import _select
@@ -8,7 +8,7 @@ from .Selection import _select
 
 ### CLASSES ###
 
-class SpannerCommand(commandlib.Command):
+class SpannerCommand(evallib.Command):
     r"""
     Spanner command.
 
@@ -203,7 +203,7 @@ class SpannerCommand(commandlib.Command):
         spanner: abjad.Spanner = None,
         tags: typing.List[abjad.Tag] = None,
         ) -> None:
-        commandlib.Command.__init__(self, deactivate=deactivate, selector=selector)
+        evallib.Command.__init__(self, deactivate=deactivate, selector=selector)
         if detach_first is not None:
             detach_first = bool(detach_first)
         self._detach_first = detach_first
@@ -1217,11 +1217,11 @@ def repeat_tie(
         spanner=abjad.Tie(repeat=True),
         )
 
-def repeat_tie_repeat_pitches() -> commandlib.Map:
+def repeat_tie_repeat_pitches() -> evallib.Map:
     """
     Repeat-ties repeat pitches.
     """
-    return commandlib.map(
+    return evallib.map(
         _select().ltqruns().nontrivial(),
         SpannerCommand(
             selector='baca.qrun(0)',
@@ -2143,11 +2143,11 @@ def tie(
         spanner=tie,
         )
 
-def tie_repeat_pitches() -> commandlib.Map:
+def tie_repeat_pitches() -> evallib.Map:
     """
     Ties repeat pitches.
     """
-    return commandlib.map(
+    return evallib.map(
         _select().ltqruns().nontrivial(),
         tie(),
         )

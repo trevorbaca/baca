@@ -16,8 +16,6 @@ class ScoreTemplate(abjad.ScoreTemplate):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(5) Utilities'
-
     __slots__ = (
         '_defaults',
         )
@@ -271,10 +269,6 @@ class SingleStaffScoreTemplate(ScoreTemplate):
 
     """
 
-    ### CLASS VARIABLES ###
-
-    __documentation_section__ = '(5) Utilities'
-
     ### SPECIAL METHODS ###
 
     def __call__(self) -> abjad.Score:
@@ -456,8 +450,6 @@ class StringTrioScoreTemplate(ScoreTemplate):
     """
 
     ### CLASS VARIABLES ###
-
-    __documentation_section__ = '(5) Utilities'
 
     _part_manifest = abjad.PartManifest(
         abjad.Part(section='Violin', section_abbreviation='VN'),
@@ -671,10 +663,6 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
 
     """
 
-    ### CLASS VARIABLES ###
-
-    __documentation_section__ = '(5) Utilities'
-
     ### SPECIAL METHODS ###
 
     def __call__(self) -> abjad.Score:
@@ -800,10 +788,6 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
             >>
 
     """
-
-    ### CLASS VARIABLES ###
-
-    __documentation_section__ = '(5) Utilities'
 
     ### SPECIAL METHODS ###
 

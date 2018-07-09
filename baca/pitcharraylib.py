@@ -58,8 +58,6 @@ class PitchArray(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(5) Utilities'
-
     __slots__ = (
         '_columns',
         '_rows',
@@ -1061,8 +1059,6 @@ class PitchArrayCell(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(5) Utilities'
-
     __slots__ = (
         '_parent_row',
         '_pitches',
@@ -1669,8 +1665,6 @@ class PitchArrayColumn(abjad.AbjadValueObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(5) Utilities'
-
     __slots__ = (
         '_cells',
         '_column_index',
@@ -2200,8 +2194,6 @@ class PitchArrayList(abjad.TypedList):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(5) Utilities'
-
     __slots__ = (
         )
 
@@ -2334,8 +2326,6 @@ class PitchArrayRow(abjad.AbjadObject):
     """
 
     ### CLASS VARIABLES ###
-
-    __documentation_section__ = '(5) Utilities'
 
     __slots__ = (
         '_cells',

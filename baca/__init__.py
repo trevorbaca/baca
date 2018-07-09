@@ -1,6 +1,6 @@
 import abjad
 from .library import *
-from .commandlib import *
+from .evallib import *
 from .divisionlib import *
 from .dynamiclib import *
 from .indicatorlib import *

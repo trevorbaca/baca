@@ -1,7 +1,7 @@
 import abjad
 import copy
 from abjadext import rmakers
-from . import commandlib
+from . import evallib
 from . import rhythmlib
 from .Coat import Coat
 from .Cursor import Cursor
@@ -10,7 +10,7 @@ from .Selection import Selection
 from .Sequence import Sequence
 
 
-class ImbricationCommand(commandlib.Command):
+class ImbricationCommand(evallib.Command):
     r"""
     Imbrication command.
 

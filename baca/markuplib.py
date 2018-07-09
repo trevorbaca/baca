@@ -16,8 +16,6 @@ class Markup(abjad.Markup):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(5) Utilities'
-
     ### PUBLIC METHODS ###
 
     def boxed(self):

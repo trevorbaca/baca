@@ -1,10 +1,10 @@
 import abjad
 import typing
-from . import commandlib
+from . import evallib
 from . import typings
 
 
-class GlobalFermataCommand(commandlib.Command):
+class GlobalFermataCommand(evallib.Command):
     """
     Global fermata command.
 
@@ -36,7 +36,7 @@ class GlobalFermataCommand(commandlib.Command):
         description: str = None,
         selector: typings.Selector = 'baca.leaf(0)',
         ) -> None:
-        commandlib.Command.__init__(self, selector=selector)
+        evallib.Command.__init__(self, selector=selector)
         if description is not None:
             assert description in GlobalFermataCommand.description_to_command
         self._description = description

@@ -16,7 +16,7 @@ registerlib
 
    <hr/>
 
-.. rubric:: (4) Commands
+.. rubric:: Classes
    :class: section-header
 
 .. autosummary::
@@ -25,6 +25,8 @@ registerlib
    ~RegisterCommand
    ~RegisterInterpolationCommand
    ~RegisterToOctaveCommand
+   ~Registration
+   ~RegistrationComponent
 
 .. autoclass:: RegisterCommand
 
@@ -270,19 +272,6 @@ registerlib
    .. container:: inherited
 
       .. autoattribute:: RegisterToOctaveCommand.tags
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: (5) Utilities
-   :class: section-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~Registration
-   ~RegistrationComponent
 
 .. autoclass:: Registration
 

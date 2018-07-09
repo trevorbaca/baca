@@ -203,8 +203,6 @@ class Division(abjad.NonreducedFraction):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(5) Utilities'
-
     __slots__ = (
         '_payload',
         '_start_offset',
@@ -1148,8 +1146,6 @@ class DivisionMaker(abjad.AbjadValueObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(6) Divisions'
-
     __slots__ = (
         '_callbacks',
         )
@@ -1753,8 +1749,6 @@ class DivisionSequence(abjad.Sequence):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(6) Divisions'
-
     __slots__ = (
         )
 
@@ -2008,8 +2002,6 @@ class DivisionSequenceExpression(abjad.Expression):
 
     ### CLASS VARIALBES ###
 
-    __documentation_section__ = '(6) Divisions'
-
     __slots__ = (
         )
 
@@ -2117,8 +2109,6 @@ class FlattenDivisionCallback(abjad.AbjadValueObject):
     """
 
     ### CLASS VARIABLES ###
-
-    __documentation_section__ = '(6) Divisions'
 
     __slots__ = (
         '_depth',
@@ -2245,8 +2235,6 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
     """
 
     ### CLASS VARIABLES ###
-
-    __documentation_section__ = '(6) Divisions'
 
     __slots__ = (
         '_cyclic',
@@ -2785,8 +2773,6 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
     """
 
     ### CLASS VARIABLES ###
-
-    __documentation_section__ = '(6) Divisions'
 
     __slots__ = (
         '_counts',
@@ -3470,8 +3456,6 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
     """
 
     ### CLASS VARIABLES ###
-
-    __documentation_section__ = '(6) Divisions'
 
     __slots__ = (
         '_callbacks',
@@ -4668,8 +4652,6 @@ class SplitByRoundedRatiosDivisionCallback(abjad.AbjadValueObject):
     """
 
     ### CLASS VARIABLES ###
-
-    __documentation_section__ = '(6) Divisions'
 
     __slots__ = (
         '_ratios',

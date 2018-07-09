@@ -4,14 +4,14 @@ Register library.
 import abjad
 import copy
 import typing
-from . import commandlib
+from . import evallib
 from . import typings
 from .Selection import Selection
 
 
 ### CLASSES ###
 
-class RegisterCommand(commandlib.Command):
+class RegisterCommand(evallib.Command):
     r"""
     Register command.
 
@@ -327,7 +327,7 @@ class RegisterCommand(commandlib.Command):
         registration=None,
         selector='baca.plts()',
         ):
-        commandlib.Command.__init__(self, selector=selector)
+        evallib.Command.__init__(self, selector=selector)
         if registration is not None:
             prototype = Registration
             assert isinstance(registration, prototype), repr(registration)
@@ -396,7 +396,7 @@ class RegisterCommand(commandlib.Command):
         """
         return self._registration
 
-class RegisterInterpolationCommand(commandlib.Command):
+class RegisterInterpolationCommand(evallib.Command):
     r"""
     Register interpolation command.
 
@@ -1370,7 +1370,7 @@ class RegisterInterpolationCommand(commandlib.Command):
         start_pitch: typing.Union[typings.Number, abjad.NumberedPitch] = 0,
         stop_pitch: typing.Union[typings.Number, abjad.NumberedPitch] = 0,
         ) -> None:
-        commandlib.Command.__init__(self, selector=selector)
+        evallib.Command.__init__(self, selector=selector)
         start_pitch = abjad.NumberedPitch(start_pitch)
         self._start_pitch: abjad.NumberedPitch = start_pitch
         stop_pitch = abjad.NumberedPitch(stop_pitch)
@@ -1863,7 +1863,7 @@ class RegisterInterpolationCommand(commandlib.Command):
         """
         return self._stop_pitch
 
-class RegisterToOctaveCommand(commandlib.Command):
+class RegisterToOctaveCommand(evallib.Command):
     r"""
     Register-to-octave command.
 
@@ -2175,7 +2175,7 @@ class RegisterToOctaveCommand(commandlib.Command):
         octave_number=None,
         selector='baca.plts()',
         ):
-        commandlib.Command.__init__(self, selector=selector)
+        evallib.Command.__init__(self, selector=selector)
         if anchor is not None:
             prototype = (abjad.Center, abjad.Down, abjad.Up)
             assert anchor in prototype, repr(anchor)
@@ -2436,8 +2436,6 @@ class Registration(abjad.AbjadValueObject):
         '_components',
         )
 
-    __documentation_section__ = '(5) Utilities'
-
     _publish_storage_format = True
 
     ### INITIALIZER ###
@@ -2566,8 +2564,6 @@ class RegistrationComponent(abjad.AbjadValueObject):
         '_source_pitch_range',
         '_target_octave_start_pitch',
         )
-
-    __documentation_section__ = '(5) Utilities'
 
     ### INITIALIZER ###
 

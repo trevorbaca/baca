@@ -40,8 +40,6 @@ class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(3) Specifiers'
-
     __slots__ = (
         '_direction',
         '_pattern',
@@ -298,8 +296,6 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
     """
 
     ### CLASS VARIABLES ###
-
-    __documentation_section__ = '(3) Specifiers'
 
     __slots__ = (
         '_bass',
@@ -942,8 +938,6 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
     """
 
     ### CLASS VARIABLES ###
-
-    __documentation_section__ = '(5) Utilities'
 
     __slots__ = (
         '_collections',
@@ -2879,8 +2873,6 @@ class Constellation(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(5) Utilities'
-
     ### INITIALIZER ###
 
     def __init__(self, circuit, partitioned_generator_pitch_numbers):
@@ -3313,8 +3305,6 @@ class ConstellationCircuit(abjad.AbjadObject):
     """
 
     ### CLASS VARIABLES ###
-
-    __documentation_section__ = '(5) Utilities'
 
     CC1 = [
         [[-12, -10, 4], [-2, 8, 11, 17], [19, 27, 30, 33, 37]],
@@ -3875,8 +3865,6 @@ class DesignMaker(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(5) Utilities'
-
     __slots__ = (
         '_result',
         )
@@ -4054,8 +4042,6 @@ class HarmonicSeries(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(5) Utilities'
-
     __slots__ = (
         '_fundamental',
         )
@@ -4227,8 +4213,6 @@ class Partial(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(5) Utilities'
-
     __slots__ = (
         '_approximation',
         '_deviation',
@@ -4367,8 +4351,6 @@ class PitchClassSegment(abjad.PitchClassSegment):
     """
 
     ### CLASS VARIABLES ###
-
-    __documentation_section__ = '(5) Utilities'
 
     __slots__ = (
         )
@@ -5516,8 +5498,6 @@ class PitchClassSet(abjad.PitchClassSet):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(5) Utilities'
-
     __slots__ = (
         )
 
@@ -5636,8 +5616,6 @@ class PitchSegment(abjad.PitchSegment):
     """
 
     ### CLASS VARIABLES ###
-
-    __documentation_section__ = '(5) Utilities'
 
     ### PRIVATE METHODS ###
 
@@ -6374,8 +6352,6 @@ class PitchSet(abjad.PitchSet):
     """
 
     ### CLASS VARIABLES ###
-
-    __documentation_section__ = '(5) Utilities'
 
     __slots__ = (
         )
@@ -7291,8 +7267,6 @@ class PitchTree(Tree):
     """
 
     ### CLASS VARIABLES ###
-
-    __documentation_section__ = '(5) Utilities'
 
     __slots__ = (
         )
@@ -9173,8 +9147,6 @@ class PitchTreeSpanner(abjad.Spanner):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(5) Utilities'
-
     __slots__ = (
         '_level',
         )
@@ -9263,8 +9235,6 @@ class ZaggedPitchClassMaker(abjad.AbjadObject):
     """
 
     ### CLASS ATTRIBUTES ###
-
-    __documentation_section__ = '(5) Utilities'
 
     __slots__ = (
         '_division_ratios',

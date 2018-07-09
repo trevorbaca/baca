@@ -1,7 +1,7 @@
 import abjad
 import collections
 import typing
-from . import commandlib
+from . import evallib
 from . import indicatorlib
 from . import library
 from . import typings
@@ -225,8 +225,6 @@ class BreakMeasureMap(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(5) Utilities'
-
     __slots__ = (
         '_bol_measure_numbers',
         '_commands',
@@ -250,7 +248,7 @@ class BreakMeasureMap(abjad.AbjadObject):
         tags: typing.List[str] = None,
         ) -> None:
         tags = tags or []
-        assert commandlib.Command._validate_tags(tags), repr(tags)
+        assert evallib.Command._validate_tags(tags), repr(tags)
         if abjad.tags.BREAK not in tags:
             tags.append(abjad.tags.BREAK)
         self._tags = tags
@@ -377,7 +375,7 @@ class BreakMeasureMap(abjad.AbjadObject):
         """
         Gets tags.
         """
-        assert commandlib.Command._validate_tags(self._tags), repr(self._tags)
+        assert evallib.Command._validate_tags(self._tags), repr(self._tags)
         return self._tags[:]
 
 class HorizontalSpacingSpecifier(abjad.AbjadObject):
@@ -1148,8 +1146,6 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
     """
 
     ### CLASS VARIABLES ###
-
-    __documentation_section__ = '(3) Specifiers'
 
     __slots__ = (
         '_breaks',
@@ -1930,8 +1926,6 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(5) Utilities'
-
     __slots__ = (
         '_items',
         )
@@ -2002,8 +1996,6 @@ class PageSpecifier(abjad.AbjadObject):
     """
 
     ### CLASS VARIABLES ###
-
-    __documentation_section__ = '(5) Utilities'
 
     __slots__ = (
         '_number',
@@ -2104,8 +2096,6 @@ class StageMeasureMap(abjad.AbjadObject):
     """
 
     ### CLASS VARIABLES ###
-
-    __documentation_section__ = '(5) Utilities'
 
     __slots__ = (
         '_items',
@@ -2211,8 +2201,6 @@ class SystemSpecifier(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(5) Utilities'
-
     __slots__ = (
         '_distances',
         '_measure',
@@ -2301,8 +2289,6 @@ class TimeSignatureMaker(abjad.AbjadObject):
     """
 
     ### CLASS VARIABLES ###
-
-    __documentation_section__ = '(5) Utilities'
 
     __slots__ = (
         '_count',

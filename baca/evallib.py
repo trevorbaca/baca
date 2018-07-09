@@ -15,8 +15,6 @@ class Command(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(4) Commands'
-
     __slots__ = (
         '_deactivate',
         '_offset_to_measure_number',
@@ -590,8 +588,6 @@ class CommandWrapper(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(4) Commands'
-
     __slots__ = (
         '_command',
         '_scope',
@@ -689,8 +685,6 @@ class MeasureWrapper(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(5) Utilities'
-
     __slots__ = (
         '_command',
         '_measures',
@@ -738,8 +732,6 @@ class Scope(abjad.AbjadObject):
     """
 
     ### CLASS VARIABLES ###
-
-    __documentation_section__ = '(5) Utilities'
 
     __slots__ = (
         '_stages',
@@ -827,8 +819,6 @@ class TimelineScope(abjad.AbjadObject):
     """
 
     ### CLASS VARIABLES ###
-
-    __documentation_section__ = '(5) Utilities'
 
     __slots__ = (
         '_scopes',

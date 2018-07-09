@@ -1,9 +1,9 @@
 import abjad
-from . import commandlib
+from . import evallib
 from .Selection import Selection
 
 
-class OctaveDisplacementCommand(commandlib.Command):
+class OctaveDisplacementCommand(evallib.Command):
     r"""
     Octave displacement command.
 
@@ -130,7 +130,7 @@ class OctaveDisplacementCommand(commandlib.Command):
         displacements=None,
         selector='baca.plts()',
         ):
-        commandlib.Command.__init__(self, selector=selector)
+        evallib.Command.__init__(self, selector=selector)
         if displacements is not None:
             displacements = tuple(displacements)
             assert self._is_octave_displacement_vector(displacements)

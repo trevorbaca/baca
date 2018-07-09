@@ -16,13 +16,78 @@ segmentlib
 
    <hr/>
 
-.. rubric:: (3) Specifiers
+.. rubric:: Classes
    :class: section-header
 
 .. autosummary::
    :nosignatures:
 
+   ~BreakMeasureMap
    ~HorizontalSpacingSpecifier
+   ~MetronomeMarkMeasureMap
+   ~PageSpecifier
+   ~StageMeasureMap
+   ~SystemSpecifier
+   ~TimeSignatureMaker
+
+.. autoclass:: BreakMeasureMap
+
+   .. autosummary::
+      :nosignatures:
+
+      bol_measure_numbers
+      commands
+      deactivate
+      first_measure_number
+      local_measure_numbers
+      partial_score
+      tag
+      tags
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: BreakMeasureMap.__call__
+
+   .. container:: inherited
+
+      .. automethod:: BreakMeasureMap.__format__
+
+   .. container:: inherited
+
+      .. automethod:: BreakMeasureMap.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: BreakMeasureMap.bol_measure_numbers
+
+   .. autoattribute:: BreakMeasureMap.commands
+
+   .. autoattribute:: BreakMeasureMap.deactivate
+
+   .. autoattribute:: BreakMeasureMap.first_measure_number
+
+   .. autoattribute:: BreakMeasureMap.local_measure_numbers
+
+   .. autoattribute:: BreakMeasureMap.partial_score
+
+   .. autoattribute:: BreakMeasureMap.tag
+
+   .. autoattribute:: BreakMeasureMap.tags
 
 .. autoclass:: HorizontalSpacingSpecifier
 
@@ -108,82 +173,6 @@ segmentlib
    .. autoattribute:: HorizontalSpacingSpecifier.minimum_duration
 
    .. autoattribute:: HorizontalSpacingSpecifier.multiplier
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: (5) Utilities
-   :class: section-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~BreakMeasureMap
-   ~MetronomeMarkMeasureMap
-   ~PageSpecifier
-   ~StageMeasureMap
-   ~SystemSpecifier
-   ~TimeSignatureMaker
-
-.. autoclass:: BreakMeasureMap
-
-   .. autosummary::
-      :nosignatures:
-
-      bol_measure_numbers
-      commands
-      deactivate
-      first_measure_number
-      local_measure_numbers
-      partial_score
-      tag
-      tags
-
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. automethod:: BreakMeasureMap.__call__
-
-   .. container:: inherited
-
-      .. automethod:: BreakMeasureMap.__format__
-
-   .. container:: inherited
-
-      .. automethod:: BreakMeasureMap.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read-only properties
-      :class: class-header
-
-   .. autoattribute:: BreakMeasureMap.bol_measure_numbers
-
-   .. autoattribute:: BreakMeasureMap.commands
-
-   .. autoattribute:: BreakMeasureMap.deactivate
-
-   .. autoattribute:: BreakMeasureMap.first_measure_number
-
-   .. autoattribute:: BreakMeasureMap.local_measure_numbers
-
-   .. autoattribute:: BreakMeasureMap.partial_score
-
-   .. autoattribute:: BreakMeasureMap.tag
-
-   .. autoattribute:: BreakMeasureMap.tags
 
 .. autoclass:: MetronomeMarkMeasureMap
 

@@ -16,7 +16,7 @@ templatelib
 
    <hr/>
 
-.. rubric:: (5) Utilities
+.. rubric:: Score templates
    :class: section-header
 
 .. autosummary::

@@ -16,13 +16,21 @@ divisionlib
 
    <hr/>
 
-.. rubric:: (5) Utilities
+.. rubric:: Classes
    :class: section-header
 
 .. autosummary::
    :nosignatures:
 
    ~Division
+   ~DivisionMaker
+   ~DivisionSequence
+   ~DivisionSequenceExpression
+   ~FlattenDivisionCallback
+   ~FuseByCountsDivisionCallback
+   ~PartitionDivisionCallback
+   ~SplitByDurationsDivisionCallback
+   ~SplitByRoundedRatiosDivisionCallback
 
 .. autoclass:: Division
 
@@ -304,25 +312,6 @@ divisionlib
    .. autoattribute:: Division.start_offset
 
    .. autoattribute:: Division.stop_offset
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: (6) Divisions
-   :class: section-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~DivisionMaker
-   ~DivisionSequence
-   ~DivisionSequenceExpression
-   ~FlattenDivisionCallback
-   ~FuseByCountsDivisionCallback
-   ~PartitionDivisionCallback
-   ~SplitByDurationsDivisionCallback
-   ~SplitByRoundedRatiosDivisionCallback
 
 .. autoclass:: DivisionMaker
 

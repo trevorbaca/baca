@@ -1,11 +1,11 @@
 import abjad
 import typing
-from . import commandlib
+from . import evallib
 from . import typings
 from .Selection import Selection
 
 
-class ContainerCommand(commandlib.Command):
+class ContainerCommand(evallib.Command):
     r"""
     Container command.
 
@@ -107,7 +107,7 @@ class ContainerCommand(commandlib.Command):
         identifier: str = None,
         selector: typings.Selector = 'baca.leaves()',
         ) -> None:
-        commandlib.Command.__init__(self, selector=selector)
+        evallib.Command.__init__(self, selector=selector)
         if identifier is not None:
             if not isinstance(identifier, str):
                 message = f'identifier must be string (not {identifier!r}).'

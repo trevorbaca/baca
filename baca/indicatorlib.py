@@ -206,8 +206,6 @@ class LBSD(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(5) Utilities'
-
     __slots__ = (
         '_alignment_distances',
         '_y_offset',
@@ -520,8 +518,6 @@ class StaffLines(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(5) Utilities'
-
     __slots__ = (
         '_hide',
         '_line_count',
@@ -695,8 +691,6 @@ class SpacingSection(abjad.AbjadObject):
     """
 
     ### CLASS VARIABLES ###
-
-    __documentation_section__ = '(5) Utilities'
 
     __slots__ = (
         '_duration',

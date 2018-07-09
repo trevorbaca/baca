@@ -6,7 +6,7 @@ import collections
 import inspect
 import math
 import typing
-from . import commandlib
+from . import evallib
 from . import typings
 from . import divisionlib
 from .LMRSpecifier import LMRSpecifier
@@ -108,8 +108,6 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
     """
 
     ### CLASS VARIABLES ###
-
-    __documentation_section__ = '(3) Specifiers'
 
     __slots__ = (
         '_durations',
@@ -1107,7 +1105,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
         """
         return self._pattern
 
-class PitchFirstRhythmCommand(commandlib.Command):
+class PitchFirstRhythmCommand(evallib.Command):
     """
     Pitch-first rhythm command.
 
@@ -1410,8 +1408,6 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
     """
 
     ### CLASS VARIABLES ###
-
-    __documentation_section__ = '(2) Makers'
 
     __slots__ = (
         '_acciaccatura_specifiers',
@@ -4003,7 +3999,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             time_signatures=time_signatures,
             )
 
-class RhythmCommand(commandlib.Command):
+class RhythmCommand(evallib.Command):
     r"""
     Rhythm command.
 
@@ -4178,7 +4174,7 @@ class RhythmCommand(commandlib.Command):
         split_at_measure_boundaries: bool = None,
         stages: typing.Tuple[int, int] = None,
         ) -> None:
-        commandlib.Command.__init__(self)
+        evallib.Command.__init__(self)
         if division_expression is not None and division_maker is not None:
             message = 'can not set both division expression and division-maker'
             message += f':\n{division_expression} {division_maker}.'
@@ -5045,8 +5041,6 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
     """
 
     ### CLASS VARIABLES ###
-
-    __documentation_section__ = 'Rhythm-makers'
 
     __slots__ = ()
 

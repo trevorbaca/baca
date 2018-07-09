@@ -16,7 +16,7 @@ settinglib
 
    <hr/>
 
-.. rubric:: (4) Commands
+.. rubric:: Classes
    :class: section-header
 
 .. autosummary::

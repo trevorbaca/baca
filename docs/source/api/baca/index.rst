@@ -27,9 +27,9 @@ baca
    LibraryNS
    LibraryTZ
    SegmentMaker
-   commandlib
    divisionlib
    dynamiclib
+   evallib
    indicatorlib
    library
    markuplib
@@ -51,9 +51,9 @@ baca
    LibraryNS
    LibraryTZ
    SegmentMaker
-   commandlib
    divisionlib
    dynamiclib
+   evallib
    indicatorlib
    library
    markuplib
@@ -123,56 +123,12 @@ baca
 .. toctree::
    :hidden:
 
-   AccidentalAdjustmentCommand
    BCPCommand
-   ClusterCommand
-   ColorCommand
-   ColorFingeringCommand
-   ContainerCommand
-   DiatonicClusterCommand
-   GlobalFermataCommand
-   ImbricationCommand
-   IndicatorCommand
-   InstrumentChangeCommand
-   LabelCommand
-   MetronomeMarkCommand
-   MicrotoneDeviationCommand
-   NestingCommand
-   OctaveDisplacementCommand
-   PartAssignmentCommand
-   PiecewiseIndicatorCommand
-   PitchCommand
-   StaffPositionCommand
-   StaffPositionInterpolationCommand
-   TieCorrectionCommand
-   VoltaCommand
 
 .. autosummary::
    :nosignatures:
 
-   ~AccidentalAdjustmentCommand.AccidentalAdjustmentCommand
    ~BCPCommand.BCPCommand
-   ~ClusterCommand.ClusterCommand
-   ~ColorCommand.ColorCommand
-   ~ColorFingeringCommand.ColorFingeringCommand
-   ~ContainerCommand.ContainerCommand
-   ~DiatonicClusterCommand.DiatonicClusterCommand
-   ~GlobalFermataCommand.GlobalFermataCommand
-   ~ImbricationCommand.ImbricationCommand
-   ~IndicatorCommand.IndicatorCommand
-   ~InstrumentChangeCommand.InstrumentChangeCommand
-   ~LabelCommand.LabelCommand
-   ~MetronomeMarkCommand.MetronomeMarkCommand
-   ~MicrotoneDeviationCommand.MicrotoneDeviationCommand
-   ~NestingCommand.NestingCommand
-   ~OctaveDisplacementCommand.OctaveDisplacementCommand
-   ~PartAssignmentCommand.PartAssignmentCommand
-   ~PiecewiseIndicatorCommand.PiecewiseIndicatorCommand
-   ~PitchCommand.PitchCommand
-   ~StaffPositionCommand.StaffPositionCommand
-   ~StaffPositionInterpolationCommand.StaffPositionInterpolationCommand
-   ~TieCorrectionCommand.TieCorrectionCommand
-   ~VoltaCommand.VoltaCommand
 
 .. raw:: html
 
@@ -225,12 +181,56 @@ baca
 .. toctree::
    :hidden:
 
+   AccidentalAdjustmentCommand
+   ClusterCommand
+   ColorCommand
+   ColorFingeringCommand
+   ContainerCommand
+   DiatonicClusterCommand
+   GlobalFermataCommand
+   ImbricationCommand
+   IndicatorCommand
+   InstrumentChangeCommand
+   LabelCommand
+   MetronomeMarkCommand
+   MicrotoneDeviationCommand
+   NestingCommand
+   OctaveDisplacementCommand
    PaddedTuple
+   PartAssignmentCommand
+   PiecewiseIndicatorCommand
+   PitchCommand
+   StaffPositionCommand
+   StaffPositionInterpolationCommand
+   TieCorrectionCommand
+   VoltaCommand
 
 .. autosummary::
    :nosignatures:
 
+   ~AccidentalAdjustmentCommand.AccidentalAdjustmentCommand
+   ~ClusterCommand.ClusterCommand
+   ~ColorCommand.ColorCommand
+   ~ColorFingeringCommand.ColorFingeringCommand
+   ~ContainerCommand.ContainerCommand
+   ~DiatonicClusterCommand.DiatonicClusterCommand
+   ~GlobalFermataCommand.GlobalFermataCommand
+   ~ImbricationCommand.ImbricationCommand
+   ~IndicatorCommand.IndicatorCommand
+   ~InstrumentChangeCommand.InstrumentChangeCommand
+   ~LabelCommand.LabelCommand
+   ~MetronomeMarkCommand.MetronomeMarkCommand
+   ~MicrotoneDeviationCommand.MicrotoneDeviationCommand
+   ~NestingCommand.NestingCommand
+   ~OctaveDisplacementCommand.OctaveDisplacementCommand
    ~PaddedTuple.PaddedTuple
+   ~PartAssignmentCommand.PartAssignmentCommand
+   ~PiecewiseIndicatorCommand.PiecewiseIndicatorCommand
+   ~PitchCommand.PitchCommand
+   ~StaffPositionCommand.StaffPositionCommand
+   ~StaffPositionInterpolationCommand.StaffPositionInterpolationCommand
+   ~TieCorrectionCommand.TieCorrectionCommand
+   ~VoltaCommand.VoltaCommand
 
 .. raw:: html
 

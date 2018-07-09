@@ -1,9 +1,9 @@
 import abjad
-from . import commandlib
+from . import evallib
 from .Selection import Selection
 
 
-class ClusterCommand(commandlib.Command):
+class ClusterCommand(evallib.Command):
     r"""
     Cluster command.
 
@@ -524,7 +524,7 @@ class ClusterCommand(commandlib.Command):
         start_pitch=None,
         widths=None,
         ):
-        commandlib.Command.__init__(self, selector=selector)
+        evallib.Command.__init__(self, selector=selector)
         assert isinstance(hide_flat_markup, (bool, type(None)))
         self._hide_flat_markup = hide_flat_markup
         if start_pitch is not None:

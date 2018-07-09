@@ -16,7 +16,7 @@ pitcharraylib
 
    <hr/>
 
-.. rubric:: (5) Utilities
+.. rubric:: Classes
    :class: section-header
 
 .. autosummary::
