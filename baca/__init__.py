@@ -20,7 +20,6 @@ from . import markups
 
 # classes
 from .Expression import Expression
-from .ExpressionGallery import ExpressionGallery
 from .PersistentIndicatorTests import PersistentIndicatorTests
 from .SchemeManifest import SchemeManifest
 from .SegmentMaker import SegmentMaker

@@ -82,18 +82,18 @@ baca
    :hidden:
 
    Expression
-   ExpressionGallery
    PersistentIndicatorTests
    SchemeManifest
+   Selection
    Sequence
 
 .. autosummary::
    :nosignatures:
 
    ~Expression.Expression
-   ~ExpressionGallery.ExpressionGallery
    ~PersistentIndicatorTests.PersistentIndicatorTests
    ~SchemeManifest.SchemeManifest
+   ~Selection.Selection
    ~Sequence.Sequence
 
 .. raw:: html
@@ -346,20 +346,3 @@ baca
 .. autofunction:: wleaf
 
 .. autofunction:: wleaves
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Selections
-   :class: section-header
-
-.. toctree::
-   :hidden:
-
-   Selection
-
-.. autosummary::
-   :nosignatures:
-
-   ~Selection.Selection

@@ -24,9 +24,9 @@ Bača API
    :nosignatures:
 
    ~baca.Expression.Expression
-   ~baca.ExpressionGallery.ExpressionGallery
    ~baca.PersistentIndicatorTests.PersistentIndicatorTests
    ~baca.SchemeManifest.SchemeManifest
+   ~baca.Selection.Selection
    ~baca.Sequence.Sequence
 
 .. raw:: html
@@ -119,18 +119,6 @@ Bača API
    ~baca.with_previous_leaf
    ~baca.wleaf
    ~baca.wleaves
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Selections
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.Selection.Selection
 
 .. raw:: html
 
@@ -264,6 +252,18 @@ Bača API
 
    <hr/>
 
+.. rubric:: Classes
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.SegmentMaker.SegmentMaker
+
+.. raw:: html
+
+   <hr/>
+
 .. rubric:: Managers
    :class: subsection-header
 
@@ -271,18 +271,6 @@ Bača API
    :nosignatures:
 
    ~baca.SegmentMaker.WellformednessManager
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Segment-makers
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.SegmentMaker.SegmentMaker
 
 .. raw:: html
 

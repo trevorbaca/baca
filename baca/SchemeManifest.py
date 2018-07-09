@@ -15,6 +15,8 @@ class SchemeManifest(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
+    __documentation_section__ = None
+
     _dynamics = (
         ('baca_appena_udibile', 'appena udibile'),
         ('baca_f_but_accents_sffz', 'f'),
