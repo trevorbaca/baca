@@ -455,15 +455,18 @@ class Suite(abjad.AbjadObject):
 
     def __init__(
         self,
-        *commands: typing.Union[Command, Map, 'Suite'],
+        *commands: typing.Union[Command, Map, 'MeasureWrapper', 'Suite'],
         ) -> None:
-        command_list: typing.List[typing.Union[Command, Map, Suite]] = []
+        command_list: typing.List[
+            typing.Union[Command, Map, MeasureWrapper, Suite]] = []
         for command in commands:
-            if not isinstance(command, (Command, Map, Suite)):
-                message = '\n  Must contain only commands, maps, suites.'
-                message += f'\n  Not {type(command).__name__}: {command!r}.'
-                raise Exception(message)
-            command_list.append(command)
+            if isinstance(command, (Command, Map, MeasureWrapper, Suite)):
+                command_list.append(command)
+                continue
+            message = '\n  Must contain only commands, maps, measure wrappers,'
+            message += ' suites.'
+            message += f'\n  Not {type(command).__name__}: {command!r}.'
+            raise Exception(message)
         self._commands = tuple(command_list)
         self._runtime = abjad.OrderedDict()
 
@@ -484,7 +487,7 @@ class Suite(abjad.AbjadObject):
 
     @property
     def commands(self) -> typing.Tuple[
-        typing.Union[Command, Map, 'Suite'], ...
+        typing.Union[Command, Map, 'MeasureWrapper', 'Suite'], ...
         ]:
         """
         Gets commands.
@@ -494,7 +497,7 @@ class Suite(abjad.AbjadObject):
     @property
     def runtime(self) -> abjad.OrderedDict:
         """
-        Gets segment-maker runtime.
+        Gets segment-maker runtime dictionary.
         """
         return self._runtime
 
@@ -688,25 +691,62 @@ class MeasureWrapper(abjad.AbjadObject):
     __slots__ = (
         '_command',
         '_measures',
+        '_runtime',
         )
 
     ### INITIALIZER ###
 
-    def __init__(self, *, command=None, measures=None):
+    def __init__(
+        self,
+        *,
+        command: typing.Union[Command, Map, Suite] = None,
+        measures: typing.Union[int, typing.List[int], typings.IntegerPair] = None,
+        ) -> None:
         self._command = command
         self._measures = measures
+
+    ### SPECIAL METHODS ###
+
+    def __call__(
+        self,
+        scope: typing.Union['Scope', 'TimelineScope'],
+        ) -> typing.Union['Scope', 'TimelineScope']:
+        """
+        Calls measure wrapper on ``scope``.
+        """
+        assert isinstance(scope, (Scope, TimelineScope)), repr(scope)
+        stages: typing.Union[int, typing.List[int], typings.IntegerPair, None]
+        if isinstance(self.measures, int):
+            stages = (self.measures, self.measures)
+        else:
+            stages = self.measures
+        assert isinstance(stages, tuple), repr(stages)
+        scope_ = abjad.new(
+            scope,
+            stages=stages,
+            )
+        return scope_
 
     ### PUBLIC PROPERTIES ###
 
     @property
-    def command(self):
+    def command(self) -> typing.Union[Command, Map, Suite, None]:
         """
         Gets command.
         """
         return self._command
 
     @property
-    def measures(self):
+    def commands(self) -> typing.List[typing.Union[Command, Map, Suite]]:
+        """
+        Gets command wrapped in list.
+        """
+        assert self.command is not None
+        return [self.command]
+
+    @property
+    def measures(self) -> typing.Union[
+        int, typing.List[int], typings.IntegerPair, None]:
         """
         Gets measures.
         """
@@ -1347,7 +1387,9 @@ def measures(
         wrappers.append(wrapper)
     return wrappers
 
-def not_parts(command: Command) -> typing.Union[Command, Map, Suite]:
+_command_typing = typing.Union[Command, Map, MeasureWrapper, Suite]
+
+def not_parts(command: Command) -> _command_typing:
     """
     Tags ``command`` with ``-PARTS``.
 
@@ -1355,7 +1397,7 @@ def not_parts(command: Command) -> typing.Union[Command, Map, Suite]:
     """
     return tag('-PARTS', command)
 
-def not_score(command: Command) -> typing.Union[Command, Map, Suite]:
+def not_score(command: Command) -> _command_typing:
     """
     Tags ``command`` with ``-SCORE``.
 
@@ -1363,7 +1405,7 @@ def not_score(command: Command) -> typing.Union[Command, Map, Suite]:
     """
     return tag('-SCORE', command)
 
-def not_segment(command: Command) -> typing.Union[Command, Map, Suite]:
+def not_segment(command: Command) -> _command_typing:
     """
     Tags ``command`` with ``-SEGMENT``.
 
@@ -1371,7 +1413,7 @@ def not_segment(command: Command) -> typing.Union[Command, Map, Suite]:
     """
     return tag('-SEGMENT', command)
 
-def only_parts(command: Command) -> typing.Union[Command, Map, Suite]:
+def only_parts(command: Command) -> _command_typing:
     """
     Tags ``command`` with ``+PARTS``.
 
@@ -1379,7 +1421,7 @@ def only_parts(command: Command) -> typing.Union[Command, Map, Suite]:
     """
     return tag('+PARTS', command)
 
-def only_score(command: Command) -> typing.Union[Command, Map, Suite]:
+def only_score(command: Command) -> _command_typing:
     """
     Tags ``command`` with ``+SCORE``.
 
@@ -1387,7 +1429,7 @@ def only_score(command: Command) -> typing.Union[Command, Map, Suite]:
     """
     return tag('+SCORE', command)
 
-def only_segment(command: Command) -> typing.Union[Command, Map, Suite]:
+def only_segment(command: Command) -> _command_typing:
     """
     Tags ``command`` with ``+SEGMENT``.
 
@@ -1575,24 +1617,28 @@ def suite(
         Traceback (most recent call last):
             ...
         Exception:
-            Must contain only commands, maps, suites.
-            Not list: ['Allegro'].
+            Must contain only commands, maps, measure wrappers, suites.
+            Not list:
+            ['Allegro']
 
     """
     for command in commands:
-        if not isinstance(command, (Command, Map, Suite)):
-            message = '\n  Must contain only commands, maps, suites.'
-            message += f'\n  Not {type(command).__name__}: {command!r}.'
-            raise Exception(message)
+        if isinstance(command, (Command, Map, MeasureWrapper, Suite)):
+            continue
+        message = '\n  Must contain only commands, maps, measure wrappers,'
+        message += ' suites.'
+        message += f'\n  Not {type(command).__name__}:'
+        message += f'\n  {format(command)}'
+        raise Exception(message)
     return Suite(*commands)
 
 def tag(
     tags: typing.Union[str, typing.List[str]],
-    command: typing.Union[Command, Map, Suite],
+    command: typing.Union[Command, Map, MeasureWrapper, Suite],
     *,
     deactivate: bool = None,
     tag_measure_number: bool = None,
-    ) -> typing.Union[Command, Map, Suite]:
+    ) -> typing.Union[Command, Map, MeasureWrapper, Suite]:
     """
     Appends each tag in ``tags`` to ``command``.
 
@@ -1606,11 +1652,10 @@ def tag(
         message = f'tags must be string or list of strings'
         message += f' (not {tags!r}).'
         raise Exception(message)
-    if isinstance(command, abjad.Markup):
-        raise Exception('Pass markup command (not markup).')
-        #command = library.markup(command)
     assert Command._validate_tags(tags), repr(tags)
-    if isinstance(command, (Map, Suite)):
+    if not isinstance(command, (Command, Map, MeasureWrapper, Suite)):
+        raise Exception('can only tag command, map, wrapper, suite.')
+    if isinstance(command, (Map, MeasureWrapper, Suite)):
         for command_ in command.commands:
             tag(
                 tags,
@@ -1619,6 +1664,7 @@ def tag(
                 tag_measure_number=tag_measure_number,
                 )
     else:
+        assert isinstance(command, Command), repr(command)
         assert command._tags is not None
         tags.sort()
         tags_ = [abjad.Tag(_) for _ in tags]

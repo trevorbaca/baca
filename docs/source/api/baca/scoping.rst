@@ -203,7 +203,13 @@ scoping
       :nosignatures:
 
       command
+      commands
       measures
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
 
    .. raw:: html
 
@@ -211,6 +217,8 @@ scoping
 
    .. rubric:: Special methods
       :class: class-header
+
+   .. automethod:: MeasureWrapper.__call__
 
    .. container:: inherited
 
@@ -228,6 +236,8 @@ scoping
       :class: class-header
 
    .. autoattribute:: MeasureWrapper.command
+
+   .. autoattribute:: MeasureWrapper.commands
 
    .. autoattribute:: MeasureWrapper.measures
 

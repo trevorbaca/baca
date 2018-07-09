@@ -913,6 +913,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     if isinstance(command.measures, int):
                         stages = (command.measures, command.measures)
                     else:
+                        assert isinstance(command.measures, tuple)
                         stages = command.measures
                     assert isinstance(stages, tuple), repr(stages)
                     scope_ = abjad.new(
