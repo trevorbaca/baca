@@ -810,17 +810,15 @@ class SegmentMaker(abjad.SegmentMaker):
             abbreviations = abjad.OrderedDict()
         abbreviations = abbreviations or abjad.OrderedDict()
         prototype = (scoping.Scope, scoping.TimelineScope)
-        scopes__: typing.List[scoping.scope_typing] = []
+        scopes__: typing.List[scoping.scope_typing]
         if isinstance(scopes, str):
             voice_name = abbreviations.get(scopes, scopes)
             scope = scoping.scope(voice_name)
-            scopes__.append(scope)
+            scopes__ = [scope]
         elif isinstance(scopes, tuple):
-            scopes = self._unpack_scope_pair(scopes, abbreviations)
-            scopes__.extend(scopes)
+            scopes__ = self._unpack_scope_pair(scopes, abbreviations)
         elif isinstance(scopes, prototype):
-            #scopes = [scopes]
-            scopes__.append(scopes)
+            scopes__ = [scopes]
         else:
             assert isinstance(scopes, list), repr(scopes)
             scopes_ = []
@@ -830,8 +828,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     scopes_.extend(scopes__)
                 else:
                     scopes_.append(scope)
-            #scopes = scopes_
-            scopes__.extend(scopes_)
+            scopes__ = scopes_
         assert isinstance(scopes__, list), repr(scopes__)
         scopes_ = []
         for scope in scopes__:
