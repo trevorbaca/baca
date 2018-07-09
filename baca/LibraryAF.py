@@ -5,8 +5,6 @@ from . import commands
 from . import library
 from . import scoping
 from . import typings
-from .AnchorSpecifier import AnchorSpecifier
-from .Coat import Coat
 
 
 def accent(
@@ -403,60 +401,6 @@ def alternate_bow_strokes(
     return commands.IndicatorCommand(
         indicators=indicators,
         selector=selector,
-        )
-
-def anchor(
-    remote_voice_name: str,
-    remote_selector: typings.Selector = None,
-    local_selector: typings.Selector = None,
-    ) -> AnchorSpecifier:
-    """
-    Anchors music in this figure (filtered by ``local_selector``) to
-    start offset of ``remote_voice_name`` (filtered by
-    ``remote_selector``).
-
-    :param remote_voice_name: name of voice to which this music anchors.
-
-    :param remote_seelctor: selector applied to remote voice.
-
-    :param local_selector: selector applied to this music.
-    """
-    return AnchorSpecifier(
-        local_selector=local_selector,
-        remote_selector=remote_selector,
-        remote_voice_name=remote_voice_name,
-        )
-
-def anchor_after(
-    remote_voice_name: str,
-    remote_selector: typings.Selector = None,
-    local_selector: typings.Selector = None,
-    ) -> AnchorSpecifier:
-    """
-    Anchors music in this figure (filtered by ``local_selector``) to
-    stop offset of ``remote_voice_name`` (filtered by ``remote_selector``).
-
-    :param remote_voice_name: name of voice to which this music anchors.
-
-    :param remote_selector: selector applied to remote voice.
-
-    :param local_selector: selector applied to this music.
-    """
-    return AnchorSpecifier(
-        local_selector=local_selector,
-        remote_selector=remote_selector,
-        remote_voice_name=remote_voice_name,
-        use_remote_stop_offset=True,
-        )
-
-def anchor_to_figure(figure_name: str) -> AnchorSpecifier:
-    """
-    Anchors music in this figure to start of ``figure_name``.
-
-    :param figure_name: figure name.
-    """
-    return AnchorSpecifier(
-        figure_name=figure_name,
         )
 
 def apply(
@@ -1722,98 +1666,6 @@ def clef(
         redundant=redundant,
         selector=selector,
         )
-
-def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
-    r"""
-    Coats ``pitch``.
-
-    ..  container:: example
-
-        Coats pitches:
-
-        >>> music_maker = baca.MusicMaker()
-        >>> contribution = music_maker(
-        ...     'Voice 1',
-        ...     3 * [[0, 2, 10]],
-        ...     baca.imbricate(
-        ...         'Voice 2',
-        ...         [baca.coat(0), baca.coat(2), 10, 0, 2],
-        ...         ),
-        ...     baca.rests_around([2], [4]),
-        ...     time_treatments=[-1],
-        ...     )
-        >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
-            <<
-                \context Voice = "Voice 1"
-                {
-                    \voiceOne
-                    {
-                        \times 4/5 {
-                            r8
-                            c'16
-                            [
-                            d'16
-                            bf'16
-                            ]
-                        }
-                        \times 2/3 {
-                            c'16
-                            [
-                            d'16
-                            bf'16
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 6/7 {
-                            c'16
-                            [
-                            d'16
-                            bf'16
-                            ]
-                            r4
-                        }
-                    }
-                }
-                \context Voice = "Voice 2"
-                {
-                    \voiceTwo
-                    {
-                        \override TupletBracket.stencil = ##f
-                        \override TupletNumber.stencil = ##f
-                        \times 4/5 {
-                            s8
-                            s16
-                            s16
-                            bf'16
-                        }
-                        \times 2/3 {
-                            c'16
-                            [
-                            d'16
-                            ]
-                            s16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 6/7 {
-                            s16
-                            s16
-                            s16
-                            s4
-                        }
-                        \revert TupletBracket.stencil
-                        \revert TupletNumber.stencil
-                    }
-                }
-            >>
-
-    """
-    return Coat(pitch)
 
 def cross_staff(
     *,

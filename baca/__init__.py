@@ -6,6 +6,7 @@ from .divisions import *
 from .dynamics import *
 from .indicators import *
 from .markups import Markup
+from .mmaker import *
 from .overrides import *
 from .pitcharray import *
 from .pitchcommands import *
@@ -18,19 +19,9 @@ from .templates import *
 from . import markups
 
 # classes
-from .AnchorSpecifier import AnchorSpecifier
-from .Coat import Coat
 from .Expression import Expression
 from .ExpressionGallery import ExpressionGallery
-from .ImbricationCommand import ImbricationCommand
-from .LMRSpecifier import LMRSpecifier
-from .MusicAccumulator import MusicAccumulator
-from .MusicContribution import MusicContribution
-from .MusicMaker import MusicMaker
-from .NestingCommand import NestingCommand
 from .PersistentIndicatorTests import PersistentIndicatorTests
-from .PitchSpecifier import PitchSpecifier
-from .RestAffixSpecifier import RestAffixSpecifier
 from .SchemeManifest import SchemeManifest
 from .SegmentMaker import SegmentMaker
 from .SegmentMaker import WellformednessManager
