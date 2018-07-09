@@ -1588,7 +1588,7 @@ def suite(
 
 def tag(
     tags: typing.Union[str, typing.List[str]],
-    command: typing.Union[Command, Map, Suite, abjad.Markup],
+    command: typing.Union[Command, Map, Suite],
     *,
     deactivate: bool = None,
     tag_measure_number: bool = None,
@@ -1607,7 +1607,8 @@ def tag(
         message += f' (not {tags!r}).'
         raise Exception(message)
     if isinstance(command, abjad.Markup):
-        command = library.markup(command)
+        raise Exception('Pass markup command (not markup).')
+        #command = library.markup(command)
     assert Command._validate_tags(tags), repr(tags)
     if isinstance(command, (Map, Suite)):
         for command_ in command.commands:
