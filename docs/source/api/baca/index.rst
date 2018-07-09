@@ -22,7 +22,6 @@ baca
 .. toctree::
    :hidden:
 
-   SegmentMaker
    classes
    commands
    divisions
@@ -39,13 +38,13 @@ baca
    rhythmcommands
    scoping
    segmentclasses
+   smaker
    spannercommands
    templates
 
 .. autosummary::
    :nosignatures:
 
-   SegmentMaker
    classes
    commands
    divisions
@@ -62,6 +61,7 @@ baca
    rhythmcommands
    scoping
    segmentclasses
+   smaker
    spannercommands
    templates
 

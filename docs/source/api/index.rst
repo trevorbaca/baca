@@ -126,37 +126,6 @@ Bača API
 
    <hr/>
 
-.. rubric:: :ref:`baca.SegmentMaker <baca--SegmentMaker>`
-   :class: section-header
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Classes
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.SegmentMaker.SegmentMaker
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Managers
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.SegmentMaker.WellformednessManager
-
-.. raw:: html
-
-   <hr/>
-
 .. rubric:: :ref:`baca.classes <baca--classes>`
    :class: section-header
 
@@ -1091,6 +1060,37 @@ Rhythm library.
    ~baca.segmentclasses.page
    ~baca.segmentclasses.scorewide_spacing
    ~baca.segmentclasses.system
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: :ref:`baca.smaker <baca--smaker>`
+   :class: section-header
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Classes
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.smaker.SegmentMaker
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Managers
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.smaker.WellformednessManager
 
 .. raw:: html
 

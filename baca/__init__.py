@@ -22,8 +22,8 @@ from . import markups
 from .Expression import Expression
 from .PersistentIndicatorTests import PersistentIndicatorTests
 from .SchemeManifest import SchemeManifest
-from .SegmentMaker import SegmentMaker
-from .SegmentMaker import WellformednessManager
+from .smaker import SegmentMaker
+from .smaker import WellformednessManager
 from .Selection import Selection
 from .Sequence import Sequence
 

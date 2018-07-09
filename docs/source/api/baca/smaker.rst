@@ -1,16 +1,16 @@
-.. _baca--SegmentMaker:
+.. _baca--smaker:
 
-SegmentMaker
-============
+smaker
+======
 
-.. automodule:: baca.SegmentMaker
+.. automodule:: baca.smaker
 
-.. currentmodule:: baca.SegmentMaker
+.. currentmodule:: baca.smaker
 
 .. container:: svg-container
 
    .. inheritance-diagram:: baca
-      :lineage: baca.SegmentMaker
+      :lineage: baca.smaker
 
 .. raw:: html
 
