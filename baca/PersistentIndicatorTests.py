@@ -8,7 +8,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = None
+    __documentation_section__ = 'Classes'
 
     __slots__ = (
         )

@@ -145,9 +145,6 @@ Bača API
    ~baca.LibraryAF.articulation
    ~baca.LibraryAF.articulations
    ~baca.LibraryAF.bar_extent_persistent
-   ~baca.LibraryAF.beam_divisions
-   ~baca.LibraryAF.beam_everything
-   ~baca.LibraryAF.beam_runs
    ~baca.LibraryAF.breathe
    ~baca.LibraryAF.clef
    ~baca.LibraryAF.cross_staff
@@ -160,7 +157,6 @@ Bača API
    ~baca.LibraryAF.espressivo
    ~baca.LibraryAF.fermata
    ~baca.LibraryAF.flageolet
-   ~baca.LibraryAF.flags
 
 .. raw:: html
 
@@ -1024,6 +1020,10 @@ Rhythm library.
 .. autosummary::
    :nosignatures:
 
+   ~baca.rhythmcommands.beam_divisions
+   ~baca.rhythmcommands.beam_everything
+   ~baca.rhythmcommands.beam_runs
+   ~baca.rhythmcommands.flags
    ~baca.rhythmcommands.make_even_divisions
    ~baca.rhythmcommands.make_fused_tuplet_monads
    ~baca.rhythmcommands.make_multimeasure_rests

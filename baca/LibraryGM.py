@@ -1,8 +1,6 @@
 import abjad
 import typing
-from abjadext import rmakers
 from . import commands
-from . import library
 from . import scoping
 from . import typings
 from .Selection import _select

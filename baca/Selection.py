@@ -19,7 +19,7 @@ class Selection(abjad.Selection):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = None
+    __documentation_section__ = 'Classes'
 
     __slots__ = (
         )

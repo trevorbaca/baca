@@ -1,12 +1,8 @@
 import abjad
 import collections
 import typing
-from abjadext import rmakers
 from . import commands
-from . import library
 from . import typings
-from .Expression import Expression
-from .Selection import Selection
 
 
 def tenuto(

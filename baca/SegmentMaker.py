@@ -129,7 +129,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     """
     
-    __documentation_section__ = None
+    __documentation_section__ = 'Classes'
 
     ### CLASS ATTRIBUTES ###
 

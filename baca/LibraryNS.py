@@ -5,12 +5,9 @@ from . import commands
 from . import indicators
 from . import library
 from . import markups
-from . import scoping
 from . import typings
-from abjadext import rmakers
 from .Selection import Selection
 from .Selection import _select
-from .Sequence import Sequence
 
 
 def one_voice(

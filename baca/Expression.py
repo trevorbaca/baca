@@ -303,7 +303,7 @@ class Expression(abjad.Expression):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = None
+    __documentation_section__ = 'Classes'
 
     ### PRIVATE METHODS ###
 

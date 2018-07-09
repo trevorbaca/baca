@@ -30,9 +30,6 @@ LibraryAF
    ~articulation
    ~articulations
    ~bar_extent_persistent
-   ~beam_divisions
-   ~beam_everything
-   ~beam_runs
    ~breathe
    ~clef
    ~cross_staff
@@ -45,7 +42,6 @@ LibraryAF
    ~espressivo
    ~fermata
    ~flageolet
-   ~flags
 
 .. autofunction:: accent
 
@@ -62,12 +58,6 @@ LibraryAF
 .. autofunction:: articulations
 
 .. autofunction:: bar_extent_persistent
-
-.. autofunction:: beam_divisions
-
-.. autofunction:: beam_everything
-
-.. autofunction:: beam_runs
 
 .. autofunction:: breathe
 
@@ -92,5 +82,3 @@ LibraryAF
 .. autofunction:: fermata
 
 .. autofunction:: flageolet
-
-.. autofunction:: flags

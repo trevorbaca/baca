@@ -15,7 +15,7 @@ class SchemeManifest(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = None
+    __documentation_section__ = 'Classes'
 
     _dynamics = (
         ('baca_appena_udibile', 'appena udibile'),

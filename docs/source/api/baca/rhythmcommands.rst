@@ -246,6 +246,10 @@ rhythmcommands
 .. autosummary::
    :nosignatures:
 
+   ~beam_divisions
+   ~beam_everything
+   ~beam_runs
+   ~flags
    ~make_even_divisions
    ~make_fused_tuplet_monads
    ~make_multimeasure_rests
@@ -264,6 +268,14 @@ rhythmcommands
    ~tie_from
    ~tie_to
    ~untie_to
+
+.. autofunction:: beam_divisions
+
+.. autofunction:: beam_everything
+
+.. autofunction:: beam_runs
+
+.. autofunction:: flags
 
 .. autofunction:: make_even_divisions
 
