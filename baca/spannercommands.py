@@ -1,7 +1,6 @@
 import abjad
 import typing
 from . import classes
-from . import library
 from . import scoping
 from . import typings
 
@@ -240,7 +239,7 @@ class SpannerCommand(scoping.Command):
             spanner = abjad.new(spanner, left_broken=self.left_broken)
         if self.right_broken:
             spanner = abjad.new(spanner, right_broken=self.right_broken)
-        self._apply_tweaks(spanner)
+        self._apply_tweaks(spanner, self.tweaks)
         if self.detach_first:
             abjad.detach(
                 type(spanner),

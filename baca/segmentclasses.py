@@ -4,7 +4,6 @@ import typing
 from . import classes
 from . import commands as baca_commands
 from . import indicators
-from . import library
 from . import scoping
 from . import typings
 

@@ -2,7 +2,6 @@ import abjad
 import typing
 from . import commands
 from . import indicators
-from . import library
 from . import markups
 from . import scoping
 from . import typings
@@ -1770,6 +1769,21 @@ def laissez_vibrer(
         selector=selector,
         )
 
+def literal(
+    string: str,
+    *,
+    format_slot: str = 'before',
+    selector: typings.Selector = 'baca.leaf(0)',
+    ) -> commands.IndicatorCommand:
+    """
+    Attaches LilyPond literal.
+    """
+    literal = abjad.LilyPondLiteral(string, format_slot=format_slot)
+    return commands.IndicatorCommand(
+        indicators=[literal],
+        selector=selector,
+        )
+
 def long_fermata(
     *,
     selector: typings.Selector = 'baca.leaf(0)',
@@ -3327,7 +3341,7 @@ def stop_trill(
     Eventually it will probably be necessary to model ``\stopTrillSpan``
     with a dedicated format slot.
     """
-    return library.literal(
+    return literal(
         r'\stopTrillSpan',
         format_slot='closing',
         selector=selector,
@@ -5005,7 +5019,7 @@ def text_spanner(
             style=style,
             )
         if tweaks:
-            library.apply_tweaks(start_text_span, tweaks)
+            scoping.Command._apply_tweaks(start_text_span, tweaks)
         # kerns bookended hook
         if 'hook' in style:
             assert isinstance(right_markup, abjad.Markup)

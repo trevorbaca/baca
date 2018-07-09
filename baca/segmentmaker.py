@@ -6,8 +6,8 @@ import traceback
 import typing
 from abjadext import rmakers
 from . import classes
+from . import commands as baca_commands
 from . import indicators
-from . import library
 from . import markups
 from . import overrides as baca_overrides
 from . import pitchclasses
@@ -793,7 +793,7 @@ class SegmentMaker(abjad.SegmentMaker):
             if isinstance(command, list):
                 commands_.extend(command)
             elif isinstance(command, abjad.Markup):
-                markup_command = library.markup(command)
+                markup_command = baca_commands.markup(command)
                 commands_.append(markup_command)
             else:
                 commands_.append(command)
@@ -902,7 +902,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 if isinstance(command, list):
                     for command_ in command:
                         if isinstance(command_, abjad.Markup):
-                            command_ = library.markup(command_)
+                            command_ = baca_commands.markup(command_)
                         assert isinstance(command_, scoping.Command), repr(command_)
                         wrapper = scoping.CommandWrapper(
                             command=command_,
@@ -921,7 +921,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         )
                     command = command.command
                     if isinstance(command, abjad.Markup):
-                        command = library.markup(command)
+                        command = baca_commands.markup(command)
                     twoway = (scoping.Command, scoping.Map)
                     assert isinstance(command, twoway), repr(command)
                     wrapper = scoping.CommandWrapper(
@@ -931,7 +931,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     self.wrappers.append(wrapper)
                 else:
                     if isinstance(command, abjad.Markup):
-                        command = library.markup(command)
+                        command = baca_commands.markup(command)
                     threeway = (
                         scoping.Command,
                         scoping.Map,
@@ -964,7 +964,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _add_final_markup(self):
         if self.final_markup is None:
             return
-        command = library.markup(
+        command = baca_commands.markup(
             markups.final_markup(*self.final_markup),
             selector='baca.leaf(-1)',
             direction=abjad.Down,

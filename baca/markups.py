@@ -4,7 +4,6 @@ indicators.Markup library.
 import abjad
 import typing
 from . import indicators
-from . import library
 from . import typings
 
 

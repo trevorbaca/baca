@@ -197,6 +197,7 @@ Bača API
    ~baca.commands.global_fermata
    ~baca.commands.instrument
    ~baca.commands.label
+   ~baca.commands.markup
    ~baca.commands.metronome_mark
    ~baca.commands.one_voice
    ~baca.commands.parts
@@ -306,6 +307,7 @@ Dynamic library.
    ~baca.indicatorcommands.fermata
    ~baca.indicatorcommands.flageolet
    ~baca.indicatorcommands.laissez_vibrer
+   ~baca.indicatorcommands.literal
    ~baca.indicatorcommands.long_fermata
    ~baca.indicatorcommands.marcato
    ~baca.indicatorcommands.margin_markup
@@ -346,29 +348,6 @@ Dynamic library.
    ~baca.indicators.Ritardando
    ~baca.indicators.SpacingSection
    ~baca.indicators.StaffLines
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: :ref:`baca.library <baca--library>`
-   :class: section-header
-
-Function library.
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Functions
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.library.apply_tweaks
-   ~baca.library.literal
-   ~baca.library.markup
 
 .. raw:: html
 

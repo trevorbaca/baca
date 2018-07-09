@@ -36,6 +36,7 @@ indicatorcommands
    ~fermata
    ~flageolet
    ~laissez_vibrer
+   ~literal
    ~long_fermata
    ~marcato
    ~margin_markup
@@ -81,6 +82,8 @@ indicatorcommands
 .. autofunction:: flageolet
 
 .. autofunction:: laissez_vibrer
+
+.. autofunction:: literal
 
 .. autofunction:: long_fermata
 

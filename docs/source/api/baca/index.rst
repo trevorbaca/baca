@@ -28,7 +28,6 @@ baca
    dynamics
    indicatorcommands
    indicators
-   library
    markups
    musicmaker
    overrides
@@ -52,7 +51,6 @@ baca
    dynamics
    indicatorcommands
    indicators
-   library
    markups
    musicmaker
    overrides

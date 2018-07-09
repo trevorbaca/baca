@@ -4,7 +4,6 @@ Override library.
 import abjad
 import typing
 from . import scoping
-from . import library
 from . import typings
 
 

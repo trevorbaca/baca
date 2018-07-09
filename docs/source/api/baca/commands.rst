@@ -1067,6 +1067,7 @@ commands
    ~global_fermata
    ~instrument
    ~label
+   ~markup
    ~metronome_mark
    ~one_voice
    ~parts
@@ -1100,6 +1101,8 @@ commands
 .. autofunction:: instrument
 
 .. autofunction:: label
+
+.. autofunction:: markup
 
 .. autofunction:: metronome_mark
 

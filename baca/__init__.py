@@ -1,5 +1,4 @@
 import abjad
-from .library import *
 from .classes import *
 from .commands import *
 from .divisions import *

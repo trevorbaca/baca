@@ -1,7 +1,6 @@
 import abjad
 import functools
 import typing
-from . import library
 from . import indicators
 from . import typings
 
@@ -61,11 +60,12 @@ class Command(abjad.AbjadObject):
 
     ### PRIVATE METHODS ###
 
-    def _apply_tweaks(self, argument):
-        if not self.tweaks:
+    @staticmethod
+    def _apply_tweaks(argument, tweaks):
+        if not tweaks:
             return
         manager = abjad.tweak(argument)
-        for manager_ in self.tweaks:
+        for manager_ in tweaks:
             tuples = manager_._get_attribute_tuples()
             for attribute, value in tuples:
                 setattr(manager, attribute, value)
