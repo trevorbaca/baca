@@ -27,21 +27,21 @@ baca
    LibraryNS
    LibraryTZ
    SegmentMaker
-   commandlib
-   divisionlib
-   dynamiclib
+   commands
+   divisions
+   dynamics
    evallib
    indicators
    library
    markuplib
-   overridelib
+   overrides
    pitcharray
    pitchclasses
    pitchcommands
-   rhythmlib
-   segmentlib
-   spannerlib
-   templatelib
+   rhythmcommands
+   segmentclasses
+   spannercommands
+   templates
 
 .. autosummary::
    :nosignatures:
@@ -51,21 +51,21 @@ baca
    LibraryNS
    LibraryTZ
    SegmentMaker
-   commandlib
-   divisionlib
-   dynamiclib
+   commands
+   divisions
+   dynamics
    evallib
    indicators
    library
    markuplib
-   overridelib
+   overrides
    pitcharray
    pitchclasses
    pitchcommands
-   rhythmlib
-   segmentlib
-   spannerlib
-   templatelib
+   rhythmcommands
+   segmentclasses
+   spannercommands
+   templates
 
 .. raw:: html
 

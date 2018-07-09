@@ -1,16 +1,16 @@
-.. _baca--divisionlib:
+.. _baca--divisions:
 
-divisionlib
-===========
+divisions
+=========
 
-.. automodule:: baca.divisionlib
+.. automodule:: baca.divisions
 
-.. currentmodule:: baca.divisionlib
+.. currentmodule:: baca.divisions
 
 .. container:: svg-container
 
    .. inheritance-diagram:: baca
-      :lineage: baca.divisionlib
+      :lineage: baca.divisions
 
 .. raw:: html
 

@@ -1,19 +1,19 @@
 import abjad
 from .library import *
 from .evallib import *
-from .commandlib import *
-from .divisionlib import *
-from .dynamiclib import *
+from .commands import *
+from .divisions import *
+from .dynamics import *
 from .indicators import *
 from .markuplib import Markup
-from .overridelib import *
+from .overrides import *
 from .pitcharray import *
 from .pitchcommands import *
 from .pitchclasses import *
-from .rhythmlib import *
-from .segmentlib import *
-from .spannerlib import *
-from .templatelib import *
+from .rhythmcommands import *
+from .segmentclasses import *
+from .spannercommands import *
+from .templates import *
 from . import markuplib
 
 # classes

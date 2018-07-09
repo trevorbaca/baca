@@ -8,7 +8,7 @@ import math
 import typing
 from . import evallib
 from . import typings
-from . import divisionlib
+from . import divisions as baca_divisions
 from .LMRSpecifier import LMRSpecifier
 from .Selection import Selection
 from .Sequence import Sequence
@@ -4162,7 +4162,7 @@ class RhythmCommand(evallib.Command):
     def __init__(
         self,
         *,
-        division_maker: divisionlib.DivisionMaker = None,
+        division_maker: baca_divisions.DivisionMaker = None,
         division_expression: abjad.Expression = None,
         left_broken: bool = None,
         multimeasure_rests: bool = None,
@@ -4181,7 +4181,7 @@ class RhythmCommand(evallib.Command):
             message += f':\n{division_expression} {division_maker}.'
             raise Exception(message)
         if division_maker is not None:
-            assert isinstance(division_maker, divisionlib.division_maker_type), repr(division_maker)
+            assert isinstance(division_maker, baca_divisions.division_maker_type), repr(division_maker)
         self._division_maker = division_maker
         if division_expression is not None:
             assert isinstance(division_expression, abjad.Expression)
@@ -4312,7 +4312,7 @@ class RhythmCommand(evallib.Command):
 
     @staticmethod
     def _durations_to_divisions(durations, start_offset):
-        divisions = [divisionlib.Division(_) for _ in durations]
+        divisions = [baca_divisions.Division(_) for _ in durations]
         durations = [_.duration for _ in divisions]
         start_offset = abjad.Offset(start_offset)
         durations.insert(0, start_offset)
@@ -4320,7 +4320,7 @@ class RhythmCommand(evallib.Command):
         assert len(divisions) == len(start_offsets)
         divisions_ = []
         for division, start_offset in zip(divisions, start_offsets):
-            division_ = divisionlib.Division(
+            division_ = baca_divisions.Division(
                 division,
                 start_offset=start_offset,
                 )
@@ -4345,7 +4345,7 @@ class RhythmCommand(evallib.Command):
             assert self._check_rhythm_maker_pattern_pairs(pairs)
             division_maker = self.division_maker
             if division_maker is None:
-                division_maker = divisionlib.DivisionMaker()
+                division_maker = baca_divisions.DivisionMaker()
             divisions = self._durations_to_divisions(
                 time_signatures,
                 start_offset,
@@ -4590,7 +4590,7 @@ class RhythmCommand(evallib.Command):
         return self._division_expression
 
     @property
-    def division_maker(self) -> typing.Optional[divisionlib.DivisionMakerTyping]:
+    def division_maker(self) -> typing.Optional[baca_divisions.DivisionMakerTyping]:
         """
         Gets division-maker.
         """
@@ -5445,7 +5445,9 @@ def make_repeated_duration_notes(
     tie_specifier = rmakers.TieSpecifier(
         repeat_ties=True,
         )
-    division_expression = divisionlib.split_by_durations(durations=durations)
+    division_expression = baca_divisions.split_by_durations(
+        durations=durations
+        )
     return RhythmCommand(
         division_expression=division_expression,
         rewrite_meter=not(do_not_rewrite_meter),
@@ -5721,7 +5723,7 @@ def repeat_tie_to(
 def rhythm(
     rhythm_maker: typings.RhythmMakerTyping,
     *,
-    division_maker: divisionlib.DivisionMaker = None,
+    division_maker: baca_divisions.DivisionMaker = None,
     division_expression: abjad.Expression = None,
     left_broken: bool = None,
     multimeasure_rests: bool = None,

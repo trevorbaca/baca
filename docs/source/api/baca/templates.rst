@@ -1,16 +1,16 @@
-.. _baca--templatelib:
+.. _baca--templates:
 
-templatelib
-===========
+templates
+=========
 
-.. automodule:: baca.templatelib
+.. automodule:: baca.templates
 
-.. currentmodule:: baca.templatelib
+.. currentmodule:: baca.templates
 
 .. container:: svg-container
 
    .. inheritance-diagram:: baca
-      :lineage: baca.templatelib
+      :lineage: baca.templates
 
 .. raw:: html
 

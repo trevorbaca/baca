@@ -4,8 +4,8 @@ from abjadext import rmakers
 from . import evallib
 from . import pitchcommands
 from . import pitchclasses
-from . import rhythmlib
-from . import spannerlib
+from . import rhythmcommands
+from . import spannercommands
 from .AnchorSpecifier import AnchorSpecifier
 from .ColorCommand import ColorCommand
 from .ImbricationCommand import ImbricationCommand
@@ -622,7 +622,7 @@ class MusicMaker(abjad.AbjadObject):
             selections = [abjad.select(tuplet)]
             specifiers = [
                 _ for _ in specifiers
-                if not isinstance(_, rhythmlib.PitchFirstRhythmCommand)
+                if not isinstance(_, rhythmcommands.PitchFirstRhythmCommand)
                 ]
         else:
             collections = self._coerce_collections(collections)
@@ -844,7 +844,7 @@ class MusicMaker(abjad.AbjadObject):
         selections = len(collections) * [None]
         rhythm_commands, rest_affix_specifiers, specifiers_ = [], [], []
         for specifier in specifiers:
-            if isinstance(specifier, rhythmlib.PitchFirstRhythmCommand):
+            if isinstance(specifier, rhythmcommands.PitchFirstRhythmCommand):
                 rhythm_commands.append(specifier)
             elif isinstance(specifier, RestAffixSpecifier):
                 rest_affix_specifiers.append(specifier)
@@ -880,7 +880,7 @@ class MusicMaker(abjad.AbjadObject):
         assert self._all_are_selections(selections), repr(selections)
         specifiers_ = []
         for specifier in specifiers:
-            if (isinstance(specifier, spannerlib.SpannerCommand) and
+            if (isinstance(specifier, spannercommands.SpannerCommand) and
                 isinstance(specifier.spanner, abjad.Tie)):
                 specifier(selections)
             else:
@@ -1025,8 +1025,8 @@ class MusicMaker(abjad.AbjadObject):
 
     @staticmethod
     def _make_default_rhythm_command():
-        return rhythmlib.PitchFirstRhythmCommand(
-            rhythm_maker=rhythmlib.PitchFirstRhythmMaker(),
+        return rhythmcommands.PitchFirstRhythmCommand(
+            rhythm_maker=rhythmcommands.PitchFirstRhythmMaker(),
             )
 
     def _make_state_manifest(self):

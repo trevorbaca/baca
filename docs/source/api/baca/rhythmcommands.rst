@@ -1,16 +1,16 @@
-.. _baca--rhythmlib:
+.. _baca--rhythmcommands:
 
-rhythmlib
-=========
+rhythmcommands
+==============
 
-.. automodule:: baca.rhythmlib
+.. automodule:: baca.rhythmcommands
 
-.. currentmodule:: baca.rhythmlib
+.. currentmodule:: baca.rhythmcommands
 
 .. container:: svg-container
 
    .. inheritance-diagram:: baca
-      :lineage: baca.rhythmlib
+      :lineage: baca.rhythmcommands
 
 .. raw:: html
 

@@ -1,16 +1,16 @@
-.. _baca--spannerlib:
+.. _baca--spannercommands:
 
-spannerlib
-==========
+spannercommands
+===============
 
-.. automodule:: baca.spannerlib
+.. automodule:: baca.spannercommands
 
-.. currentmodule:: baca.spannerlib
+.. currentmodule:: baca.spannercommands
 
 .. container:: svg-container
 
    .. inheritance-diagram:: baca
-      :lineage: baca.spannerlib
+      :lineage: baca.spannercommands
 
 .. raw:: html
 

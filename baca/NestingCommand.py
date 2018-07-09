@@ -1,6 +1,6 @@
 import abjad
 from . import evallib
-from . import rhythmlib
+from . import rhythmcommands
 from .LMRSpecifier import LMRSpecifier
 
 
@@ -261,7 +261,7 @@ class NestingCommand(evallib.Command):
         self._lmr_specifier = lmr_specifier
         if time_treatments is not None:
             assert isinstance(time_treatments, (list, tuple))
-            is_time_treatment = rhythmlib.PitchFirstRhythmMaker._is_time_treatment
+            is_time_treatment = rhythmcommands.PitchFirstRhythmMaker._is_time_treatment
             for time_treatment in time_treatments:
                 assert is_time_treatment(time_treatment), repr(time_treatment)
         self._time_treatments = time_treatments

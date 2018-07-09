@@ -2,7 +2,7 @@ import abjad
 import copy
 from abjadext import rmakers
 from . import evallib
-from . import rhythmlib
+from . import rhythmcommands
 from .Coat import Coat
 from .Cursor import Cursor
 from .NestingCommand import NestingCommand
@@ -1431,9 +1431,9 @@ class ImbricationCommand(evallib.Command):
         specifiers = self.specifiers or []
         selections = container[:]
         for specifier in specifiers:
-            if isinstance(specifier, rhythmlib.PitchFirstRhythmCommand):
+            if isinstance(specifier, rhythmcommands.PitchFirstRhythmCommand):
                 continue
-            if isinstance(specifier, rhythmlib.RhythmCommand):
+            if isinstance(specifier, rhythmcommands.RhythmCommand):
                 continue
             if isinstance(specifier, ImbricationCommand):
                 continue

@@ -1,16 +1,16 @@
-.. _baca--overridelib:
+.. _baca--overrides:
 
-overridelib
-===========
+overrides
+=========
 
-.. automodule:: baca.overridelib
+.. automodule:: baca.overrides
 
-.. currentmodule:: baca.overridelib
+.. currentmodule:: baca.overrides
 
 .. container:: svg-container
 
    .. inheritance-diagram:: baca
-      :lineage: baca.overridelib
+      :lineage: baca.overrides
 
 .. raw:: html
 

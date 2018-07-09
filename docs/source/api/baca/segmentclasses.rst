@@ -1,16 +1,16 @@
-.. _baca--segmentlib:
+.. _baca--segmentclasses:
 
-segmentlib
-==========
+segmentclasses
+==============
 
-.. automodule:: baca.segmentlib
+.. automodule:: baca.segmentclasses
 
-.. currentmodule:: baca.segmentlib
+.. currentmodule:: baca.segmentclasses
 
 .. container:: svg-container
 
    .. inheritance-diagram:: baca
-      :lineage: baca.segmentlib
+      :lineage: baca.segmentclasses
 
 .. raw:: html
 

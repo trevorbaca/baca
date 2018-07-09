@@ -1,7 +1,7 @@
 import abjad
 import typing
 from abjadext import rmakers
-from . import rhythmlib
+from . import rhythmcommands
 from .MusicMaker import MusicMaker
 from .Selection import _select
 
@@ -255,8 +255,8 @@ class MusicAccumulator(abjad.AbjadObject):
             rmakers.BeamSpecifier(
                 beam_divisions_together=True,
                 ),
-            rhythmlib.PitchFirstRhythmCommand(
-                rhythm_maker=rhythmlib.PitchFirstRhythmMaker(
+            rhythmcommands.PitchFirstRhythmCommand(
+                rhythm_maker=rhythmcommands.PitchFirstRhythmMaker(
                     talea=rmakers.Talea(
                         counts=[1],
                         denominator=16,
@@ -319,7 +319,7 @@ class MusicAccumulator(abjad.AbjadObject):
             if selection:
                 segment_maker(
                     (voice_name, 1),
-                    rhythmlib.make_rhythm(selection)
+                    rhythmcommands.make_rhythm(selection)
                     )
 
     @staticmethod

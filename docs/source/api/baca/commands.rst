@@ -1,16 +1,16 @@
-.. _baca--commandlib:
+.. _baca--commands:
 
-commandlib
-==========
+commands
+========
 
-.. automodule:: baca.commandlib
+.. automodule:: baca.commands
 
-.. currentmodule:: baca.commandlib
+.. currentmodule:: baca.commands
 
 .. container:: svg-container
 
    .. inheritance-diagram:: baca
-      :lineage: baca.commandlib
+      :lineage: baca.commands
 
 .. raw:: html
 

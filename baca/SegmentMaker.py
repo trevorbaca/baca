@@ -9,11 +9,11 @@ from . import evallib
 from . import indicators
 from . import library
 from . import markuplib
-from . import overridelib
+from . import overrides as baca_overrides
 from . import pitchclasses
-from . import rhythmlib
-from . import segmentlib
-from . import templatelib
+from . import rhythmcommands
+from . import segmentclasses
+from . import templates
 from . import typings
 from .Selection import Selection
 from .Sequence import Sequence
@@ -250,7 +250,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self,
         *,
         allow_empty_selections: bool = None,
-        breaks: segmentlib.BreakMeasureMap = None,
+        breaks: segmentclasses.BreakMeasureMap = None,
         clock_time_override: abjad.MetronomeMark = None,
         color_octaves: bool = None,
         color_out_of_range_pitches: bool = True,
@@ -276,13 +276,13 @@ class SegmentMaker(abjad.SegmentMaker):
             ] = None,
         margin_markups: abjad.OrderedDict = None,
         measures_per_stage: typing.List[int] = None,
-        metronome_mark_measure_map: segmentlib.MetronomeMarkMeasureMap = None,
+        metronome_mark_measure_map: segmentclasses.MetronomeMarkMeasureMap = None,
         metronome_marks: abjad.OrderedDict = None,
-        score_template: templatelib.ScoreTemplate = None,
+        score_template: templates.ScoreTemplate = None,
         segment_directory: abjad.Path = None,
         skip_wellformedness_checks: bool = None,
         skips_instead_of_rests: bool = None,
-        spacing: segmentlib.HorizontalSpacingSpecifier = None,
+        spacing: segmentclasses.HorizontalSpacingSpecifier = None,
         test_container_identifiers: bool = None,
         time_signatures: typing.List[tuple] = None,
         transpose_score: bool = None,
@@ -1045,14 +1045,14 @@ class SegmentMaker(abjad.SegmentMaker):
         for current_leaf in abjad.iterate(voice).leaves():
             inspection = abjad.inspect(current_leaf)
             if inspection.has_indicator(abjad.tags.LEFT_BROKEN_REPEAT_TIE_TO):
-                rhythmlib.TieCorrectionCommand._add_tie(
+                rhythmcommands.TieCorrectionCommand._add_tie(
                     current_leaf,
                     direction=abjad.Left,
                     repeat=True,
                     )
                 continue
             elif inspection.has_indicator(abjad.tags.RIGHT_BROKEN_TIE_FROM):
-                rhythmlib.TieCorrectionCommand._add_tie(
+                rhythmcommands.TieCorrectionCommand._add_tie(
                     current_leaf,
                     direction=abjad.Right,
                     repeat=False,
@@ -1662,7 +1662,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 evallib.Suite,
                 )
             assert isinstance(wrapper.command, threeway)
-            if isinstance(wrapper.command, rhythmlib.RhythmCommand):
+            if isinstance(wrapper.command, rhythmcommands.RhythmCommand):
                 continue
             command_count += 1
             selection = self._scope_to_leaf_selection(wrapper)
@@ -1698,7 +1698,7 @@ class SegmentMaker(abjad.SegmentMaker):
             wrappers = self._voice_to_rhythm_wrappers(voice)
             if not wrappers:
                 if self.skips_instead_of_rests:
-                    maker = rhythmlib.SkipRhythmMaker()
+                    maker = rhythmcommands.SkipRhythmMaker()
                 else:
                     mask = rmakers.silence(
                         [0],
@@ -2918,7 +2918,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 if measure_number is None:
                     continue
                 clef = wrapper.indicator
-                command = overridelib.clef_shift(clef, selector='baca.leaf(0)')
+                command = baca_overrides.clef_shift(
+                    clef,
+                    selector='baca.leaf(0)',
+                    )
                 command.runtime = self._bundle_manifests()
                 command(leaf)
 
@@ -3234,7 +3237,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _voice_to_rhythm_wrappers(self, voice):
         wrappers = []
         for wrapper in self.wrappers:
-            if not isinstance(wrapper.command, rhythmlib.RhythmCommand):
+            if not isinstance(wrapper.command, rhythmcommands.RhythmCommand):
                 continue
             if wrapper.scope.voice_name == voice.name:
                 wrappers.append(wrapper)
@@ -3260,7 +3263,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._allow_empty_selections
 
     @property
-    def breaks(self) -> typing.Optional[segmentlib.BreakMeasureMap]:
+    def breaks(self) -> typing.Optional[segmentclasses.BreakMeasureMap]:
         """
         Gets breaks.
         """
@@ -5231,7 +5234,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     @property
     def metronome_mark_measure_map(self) -> typing.Optional[
-        segmentlib.MetronomeMarkMeasureMap]:
+        segmentclasses.MetronomeMarkMeasureMap]:
         r"""
         Gets metronome mark measure map.
 
@@ -5576,7 +5579,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._skips_instead_of_rests
 
     @property
-    def spacing(self) -> typing.Optional[segmentlib.HorizontalSpacingSpecifier]:
+    def spacing(self) -> typing.Optional[segmentclasses.HorizontalSpacingSpecifier]:
         """
         Gets spacing.
         """
