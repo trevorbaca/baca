@@ -1,7 +1,7 @@
 import abjad
 import typing
 from . import typings
-from . import evallib
+from . import scoping
 from .Selection import Selection
 from .Selection import _select
 from .Sequence import Sequence
@@ -9,7 +9,7 @@ from .Sequence import Sequence
 
 ### CLASSES ###
 
-class BCPCommand(evallib.Command):
+class BCPCommand(scoping.Command):
     """
     Bow contact point command.
     """
@@ -35,7 +35,7 @@ class BCPCommand(evallib.Command):
         helper: typing.Callable = None,
         selector: typings.Selector = None,
         ) -> None:
-        evallib.Command.__init__(self, selector=selector)
+        scoping.Command.__init__(self, selector=selector)
         if bcps is None:
             self._validate_bcps(bcps)
         self._bow_contact_points = bcps
@@ -453,7 +453,7 @@ class BCPCommand(evallib.Command):
         """
         return self._tweaks
 
-class VoltaCommand(evallib.Command):
+class VoltaCommand(scoping.Command):
     """
     Volta command.
 

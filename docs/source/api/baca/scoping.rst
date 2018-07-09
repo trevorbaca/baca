@@ -1,16 +1,16 @@
-.. _baca--evallib:
+.. _baca--scoping:
 
-evallib
+scoping
 =======
 
-.. automodule:: baca.evallib
+.. automodule:: baca.scoping
 
-.. currentmodule:: baca.evallib
+.. currentmodule:: baca.scoping
 
 .. container:: svg-container
 
    .. inheritance-diagram:: baca
-      :lineage: baca.evallib
+      :lineage: baca.scoping
 
 .. raw:: html
 

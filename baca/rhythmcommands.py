@@ -6,7 +6,7 @@ import collections
 import inspect
 import math
 import typing
-from . import evallib
+from . import scoping
 from . import typings
 from . import divisions as baca_divisions
 from .LMRSpecifier import LMRSpecifier
@@ -1106,7 +1106,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
         """
         return self._pattern
 
-class PitchFirstRhythmCommand(evallib.Command):
+class PitchFirstRhythmCommand(scoping.Command):
     """
     Pitch-first rhythm command.
 
@@ -4000,7 +4000,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             time_signatures=time_signatures,
             )
 
-class RhythmCommand(evallib.Command):
+class RhythmCommand(scoping.Command):
     r"""
     Rhythm command.
 
@@ -4175,7 +4175,7 @@ class RhythmCommand(evallib.Command):
         split_at_measure_boundaries: bool = None,
         stages: typing.Tuple[int, int] = None,
         ) -> None:
-        evallib.Command.__init__(self)
+        scoping.Command.__init__(self)
         if division_expression is not None and division_maker is not None:
             message = 'can not set both division expression and division-maker'
             message += f':\n{division_expression} {division_maker}.'
@@ -5152,7 +5152,7 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
         """
         return super(SkipRhythmMaker, self).tuplet_specifier
 
-class TieCorrectionCommand(evallib.Command):
+class TieCorrectionCommand(scoping.Command):
     """
     Tie correction command.
 
@@ -5181,7 +5181,7 @@ class TieCorrectionCommand(evallib.Command):
         selector: typings.Selector = 'baca.pleaf(-1)',
         untie: bool = None,
         ) -> None:
-        evallib.Command.__init__(self, selector=selector)
+        scoping.Command.__init__(self, selector=selector)
         if direction is not None:
             assert direction in (abjad.Right, abjad.Left, None)
         self._direction = direction

@@ -1,7 +1,7 @@
 import abjad
 import typing
 from abjadext import rmakers
-from . import evallib
+from . import scoping
 from . import library
 from . import typings
 from .AnchorSpecifier import AnchorSpecifier
@@ -465,8 +465,8 @@ def anchor_to_figure(figure_name: str) -> AnchorSpecifier:
 
 def apply(
     selector: typings.Selector,
-    *commands: typing.Iterable[evallib.Command],
-    ) -> typing.List[evallib.Command]:
+    *commands: typing.Iterable[scoping.Command],
+    ) -> typing.List[scoping.Command]:
     r"""
     Applies ``selector`` to each command in ``commands``.
 
@@ -774,9 +774,9 @@ def apply(
         message = '\n  Selector must be str or expression.'
         message += f'\n  Not {selector!r}.'
         raise Exception(message)
-    commands_: typing.List[evallib.Command] = []
+    commands_: typing.List[scoping.Command] = []
     for command in commands:
-        assert isinstance(command, evallib.Command), repr(command)
+        assert isinstance(command, scoping.Command), repr(command)
         command_ = abjad.new(command, selector=selector)
         commands_.append(command_)
     return commands_
@@ -3277,19 +3277,19 @@ def dynamic_up(
 def edition(
     not_parts: typing.Union[str, abjad.Markup, IndicatorCommand],
     only_parts: typing.Union[str, abjad.Markup, IndicatorCommand],
-    ) -> evallib.Suite:
+    ) -> scoping.Suite:
     """
     Makes not-parts / only-parts markup suite.
     """
     if isinstance(not_parts, (str, abjad.Markup)):
         not_parts = library.markup(not_parts)
     assert isinstance(not_parts, IndicatorCommand)
-    not_parts_ = evallib.not_parts(not_parts)
+    not_parts_ = scoping.not_parts(not_parts)
     if isinstance(only_parts, (str, abjad.Markup)):
         only_parts = library.markup(only_parts)
     assert isinstance(only_parts, IndicatorCommand)
-    only_parts_ = evallib.only_parts(only_parts)
-    return evallib.Suite(
+    only_parts_ = scoping.only_parts(only_parts)
+    return scoping.Suite(
         not_parts_,
         only_parts_,
         )

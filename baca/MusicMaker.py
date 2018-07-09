@@ -1,7 +1,7 @@
 import abjad
 import copy
 from abjadext import rmakers
-from . import evallib
+from . import scoping
 from . import pitchcommands
 from . import pitchclasses
 from . import rhythmcommands
@@ -825,7 +825,7 @@ class MusicMaker(abjad.AbjadObject):
         assert self._all_are_selections(selections), repr(selections)
         for specifier in specifiers:
             if not isinstance(specifier, rmakers.BeamSpecifier):
-                assert isinstance(specifier, (evallib.Command, evallib.Map)), format(specifier)
+                assert isinstance(specifier, (scoping.Command, scoping.Map)), format(specifier)
             specifier(selections)
 
     def _call_rhythm_commands(

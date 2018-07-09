@@ -1,8 +1,8 @@
 import abjad
-from . import evallib
+from . import scoping
 
 
-class LabelCommand(evallib.Command):
+class LabelCommand(scoping.Command):
     r"""
     Label command.
 
@@ -194,7 +194,7 @@ class LabelCommand(evallib.Command):
         expression=None,
         selector='baca.leaves()',
         ):
-        evallib.Command.__init__(self, selector=selector)
+        scoping.Command.__init__(self, selector=selector)
         if expression is not None:
             assert isinstance(expression, abjad.Expression)
         self._expression = expression

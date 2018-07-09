@@ -1,7 +1,7 @@
 import abjad
 import typing
 from abjadext import rmakers
-from . import evallib
+from . import scoping
 from . import library
 from . import typings
 from .GlobalFermataCommand import GlobalFermataCommand
@@ -767,7 +767,7 @@ def margin_markup(
     alert: IndicatorCommand = None,
     context: str = 'Staff',
     selector: typings.Selector = 'baca.leaf(0)',
-    ) -> typing.Union[IndicatorCommand, evallib.Suite]:
+    ) -> typing.Union[IndicatorCommand, scoping.Suite]:
     r"""
     Attaches margin markup.
 
@@ -882,7 +882,7 @@ def margin_markup(
         )
     if bool(alert):
         assert isinstance(alert, IndicatorCommand), repr(alert)
-        return evallib.Suite(command, alert)
+        return scoping.Suite(command, alert)
     else:
         return command
 

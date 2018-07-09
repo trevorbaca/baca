@@ -2,14 +2,14 @@ import abjad
 import collections
 import copy
 import typing
-from . import evallib
+from . import scoping
 from . import typings
 from .IndicatorBundle import IndicatorBundle
 from .IndicatorCommand import IndicatorCommand
 from .Selection import Selection
 
 
-class PiecewiseIndicatorCommand(evallib.Command):
+class PiecewiseIndicatorCommand(scoping.Command):
     """
     Piecewise indicator command.
     """
@@ -43,7 +43,7 @@ class PiecewiseIndicatorCommand(evallib.Command):
         ) -> None:
         # for selector evaluation
         import baca
-        evallib.Command.__init__(self, selector=selector)
+        scoping.Command.__init__(self, selector=selector)
         if bookend is not None:
             assert isinstance(bookend, (int, bool)), repr(bookend)
         self._bookend = bookend
@@ -178,7 +178,7 @@ class PiecewiseIndicatorCommand(evallib.Command):
         from .SegmentMaker import SegmentMaker
         assert isinstance(tag, str), repr(tag)
         for indicator in bundle:
-            reapplied = evallib.Command._remove_reapplied_wrappers(
+            reapplied = scoping.Command._remove_reapplied_wrappers(
                 leaf,
                 indicator,
                 )

@@ -5,7 +5,7 @@ import sys
 import traceback
 import typing
 from abjadext import rmakers
-from . import evallib
+from . import scoping
 from . import indicators
 from . import library
 from . import markuplib
@@ -364,7 +364,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._validate_stage_count = validate_stage_count
         self._voice_metadata: abjad.OrderedDict = abjad.OrderedDict()
         self._voice_names: typing.Optional[typing.Tuple[str, ...]] = None
-        self._wrappers: typing.List[evallib.CommandWrapper] = []
+        self._wrappers: typing.List[scoping.CommandWrapper] = []
         self._import_manifests()
         self._initialize_time_signatures(time_signatures)
         self._validate_measure_count_()
@@ -805,10 +805,10 @@ class SegmentMaker(abjad.SegmentMaker):
         else:
             abbreviations = abjad.OrderedDict()
         abbreviations = abbreviations or abjad.OrderedDict()
-        prototype = (evallib.Scope, evallib.TimelineScope)
+        prototype = (scoping.Scope, scoping.TimelineScope)
         if isinstance(scopes, str):
             voice_name = abbreviations.get(scopes, scopes)
-            scope = evallib.scope(voice_name)
+            scope = scoping.scope(voice_name)
             scopes = [scope]
         elif isinstance(scopes, tuple):
             scopes = self._unpack_scope_pair(scopes, abbreviations)
@@ -829,7 +829,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for scope in scopes:
             if isinstance(scope, str):
                 voice_name = abbreviations.get(scope, scope)
-                scope_ = evallib.scope(voice_name)
+                scope_ = scoping.scope(voice_name)
                 scopes_.append(scope_)
             elif isinstance(scope, tuple):
                 voice_name, stages = scope
@@ -837,10 +837,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 if isinstance(stages, list):
                     stages = self._unpack_stage_token_list(stages)
                     for stage_token in stages:
-                        scope_ = evallib.scope(voice_name, stage_token)
+                        scope_ = scoping.scope(voice_name, stage_token)
                         scopes_.append(scope_)
                 else:
-                    scope_ = evallib.scope(voice_name, stages)
+                    scope_ = scoping.scope(voice_name, stages)
                     scopes_.append(scope_)
             else:
                 scope_ = scope
@@ -853,10 +853,10 @@ class SegmentMaker(abjad.SegmentMaker):
             sixway = (
                 list,
                 abjad.Markup,
-                evallib.Command,
-                evallib.Map,
-                evallib.MeasureWrapper,
-                evallib.Suite,
+                scoping.Command,
+                scoping.Map,
+                scoping.MeasureWrapper,
+                scoping.Suite,
                 )
             if not isinstance(command, sixway):
                 message = '\n\nNeither command nor list of commands:'
@@ -866,7 +866,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for i, scope in enumerate(scopes_):
             if self._voice_names and scope.voice_name not in self._voice_names:
                 raise Exception(f'unknown voice name {scope.voice_name!r}.')
-            if isinstance(scope, evallib.TimelineScope):
+            if isinstance(scope, scoping.TimelineScope):
                 for scope_ in scope.scopes:
                     if scope_.voice_name in abbreviations:
                         voice_name = abbreviations[scope_.voice_name]
@@ -878,8 +878,8 @@ class SegmentMaker(abjad.SegmentMaker):
                     fourway = (
                         list,
                         abjad.Markup,
-                        evallib.Command,
-                        evallib.Suite,
+                        scoping.Command,
+                        scoping.Suite,
                         )
                     assert isinstance(command, fourway), repr(command)
                     if isinstance(match, int):
@@ -904,13 +904,13 @@ class SegmentMaker(abjad.SegmentMaker):
                     for command_ in command:
                         if isinstance(command_, abjad.Markup):
                             command_ = library.markup(command_)
-                        assert isinstance(command_, evallib.Command), repr(command_)
-                        wrapper = evallib.CommandWrapper(
+                        assert isinstance(command_, scoping.Command), repr(command_)
+                        wrapper = scoping.CommandWrapper(
                             command=command_,
                             scope=scope,
                             )
                         self.wrappers.append(wrapper)
-                elif isinstance(command, evallib.MeasureWrapper):
+                elif isinstance(command, scoping.MeasureWrapper):
                     if isinstance(command.measures, int):
                         stages = (command.measures, command.measures)
                     else:
@@ -923,9 +923,9 @@ class SegmentMaker(abjad.SegmentMaker):
                     command = command.command
                     if isinstance(command, abjad.Markup):
                         command = library.markup(command)
-                    twoway = (evallib.Command, evallib.Map)
+                    twoway = (scoping.Command, scoping.Map)
                     assert isinstance(command, twoway), repr(command)
-                    wrapper = evallib.CommandWrapper(
+                    wrapper = scoping.CommandWrapper(
                         command=command,
                         scope=scope_,
                         )
@@ -934,12 +934,12 @@ class SegmentMaker(abjad.SegmentMaker):
                     if isinstance(command, abjad.Markup):
                         command = library.markup(command)
                     threeway = (
-                        evallib.Command,
-                        evallib.Map,
-                        evallib.Suite,
+                        scoping.Command,
+                        scoping.Map,
+                        scoping.Suite,
                         )
                     assert isinstance(command, threeway), repr(command)
-                    wrapper = evallib.CommandWrapper(
+                    wrapper = scoping.CommandWrapper(
                         command=command,
                         scope=scope,
                         )
@@ -1655,11 +1655,11 @@ class SegmentMaker(abjad.SegmentMaker):
     def _call_commands(self):
         command_count = 0
         for wrapper in self.wrappers:
-            assert isinstance(wrapper, evallib.CommandWrapper)
+            assert isinstance(wrapper, scoping.CommandWrapper)
             threeway = (
-                evallib.Command,
-                evallib.Map,
-                evallib.Suite,
+                scoping.Command,
+                scoping.Map,
+                scoping.Suite,
                 )
             assert isinstance(wrapper.command, threeway)
             if isinstance(wrapper.command, rhythmcommands.RhythmCommand):
@@ -1711,7 +1711,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 continue
             rhythms = []
             for wrapper in wrappers:
-                assert isinstance(wrapper, evallib.CommandWrapper)
+                assert isinstance(wrapper, scoping.CommandWrapper)
                 if wrapper.scope.stages is None:
                     raise Exception(format(wrapper))
                 command = wrapper.command
@@ -2849,17 +2849,17 @@ class SegmentMaker(abjad.SegmentMaker):
             else:
                 raise Exception(message)
         assert selection.are_leaves(), repr(selection)
-        if isinstance(wrapper.scope, evallib.TimelineScope):
+        if isinstance(wrapper.scope, scoping.TimelineScope):
             selection = wrapper.scope._sort_by_timeline(selection)
         return selection
 
     def _scope_to_leaf_selections(self, scope):
         if self._cache is None:
             self._cache_leaves()
-        if isinstance(scope, evallib.Scope):
+        if isinstance(scope, scoping.Scope):
             scopes = [scope]
         else:
-            assert isinstance(scope, evallib.TimelineScope)
+            assert isinstance(scope, scoping.TimelineScope)
             scopes = list(scope.scopes)
         leaf_selections = []
         for scope in scopes:
@@ -3185,7 +3185,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for voice_name in voice_names:
             #voice_name = abbreviations.get(voice_name, voice_name)
             for stage_token in stage_tokens:
-                scope = evallib.scope(voice_name, stage_token)
+                scope = scoping.scope(voice_name, stage_token)
                 scopes_.append(scope)
         return scopes_
 
@@ -5883,7 +5883,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._voice_metadata
 
     @property
-    def wrappers(self) -> typing.List[evallib.CommandWrapper]:
+    def wrappers(self) -> typing.List[scoping.CommandWrapper]:
         """
         Gets wrappers.
         """

@@ -1,10 +1,10 @@
 import abjad
-from . import evallib
+from . import scoping
 from . import rhythmcommands
 from .LMRSpecifier import LMRSpecifier
 
 
-class NestingCommand(evallib.Command):
+class NestingCommand(scoping.Command):
     r"""
     Nesting command.
 

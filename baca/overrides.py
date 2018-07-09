@@ -3,14 +3,14 @@ Override library.
 """
 import abjad
 import typing
-from . import evallib
+from . import scoping
 from . import library
 from . import typings
 
 
 ### CLASSES ###
 
-class OverrideCommand(evallib.Command):
+class OverrideCommand(scoping.Command):
     r"""
     Override command.
 
@@ -223,7 +223,7 @@ class OverrideCommand(evallib.Command):
         value: typing.Any = None,
         whitelist: typing.Tuple[type] = None,
         ) -> None:
-        evallib.Command.__init__(
+        scoping.Command.__init__(
             self,
             deactivate=deactivate,
             selector=selector,
@@ -561,11 +561,11 @@ def bar_extent(
         value=pair,
         )
 
-def bar_extent_zero() -> evallib.Suite:
+def bar_extent_zero() -> scoping.Suite:
     """
     Makes bar-extent zero suite.
     """
-    return evallib.suite(
+    return scoping.suite(
         bar_extent(
             (0, 0),
             after=True,
@@ -988,7 +988,7 @@ def clef_shift(
     clef: typing.Union[str, abjad.Clef],
     *,
     selector: typings.Selector = 'baca.leaf(0)',
-    ) -> evallib.Suite:
+    ) -> scoping.Suite:
     """
     Shifts clef to left by width of clef.
     """
@@ -1000,11 +1000,11 @@ def clef_shift(
         assert isinstance(clef, abjad.Clef)
         width = clef._to_width[clef.name]
         extra_offset_x = -width
-    command = evallib.suite(
+    command = scoping.suite(
         clef_x_extent_false(),
         clef_extra_offset((extra_offset_x, 0)),
         )
-    evallib.tag(
+    scoping.tag(
         abjad.tags.SHIFTED_CLEF,
         command,
         tag_measure_number=True,
@@ -1420,14 +1420,14 @@ def dynamic_shift(
     dynamic: typing.Union[str, abjad.Dynamic],
     *,
     selector: typings.Selector = 'baca.leaf(0)',
-    ) -> evallib.Suite:
+    ) -> scoping.Suite:
     """
     Shifts dynamic to left by calculated width of dynamic.
     """
     dynamic = abjad.Dynamic(dynamic)
     width = dynamic._to_width[dynamic.name]
     extra_offset_x = -width
-    return evallib.suite(
+    return scoping.suite(
         dynamic_text_extra_offset(
             (extra_offset_x, 0),
             selector=selector,
@@ -1442,7 +1442,7 @@ def dynamic_shift(
 def dynamic_text_center(
     *,
     selector: typings.Selector = 'baca.pleaf(0)',
-    ) -> evallib.Suite:
+    ) -> scoping.Suite:
     """
     Overrides dynamic text self-alignment-X and dynamic text X-extent.
     """
@@ -1455,7 +1455,7 @@ def dynamic_text_center(
     command_2 = dynamic_text_x_extent_zero(
         selector=selector,
         )
-    return evallib.suite(
+    return scoping.suite(
         command_1,
         command_2,
         )
@@ -1638,7 +1638,7 @@ def dynamic_text_extra_offset(
 def dynamic_text_left(
     *,
     selector: typings.Selector = 'baca.pleaf(0)',
-    ) -> evallib.Suite:
+    ) -> scoping.Suite:
     """
     Overrides dynamic text self-alignment-X and dynamic text X-extent.
     """
@@ -1651,7 +1651,7 @@ def dynamic_text_left(
     command_2 = dynamic_text_x_extent_zero(
         selector=selector,
         )
-    return evallib.suite(
+    return scoping.suite(
         command_1,
         command_2,
         )
@@ -1676,7 +1676,7 @@ def dynamic_text_parent_alignment_x(
 def dynamic_text_right(
     *,
     selector: typings.Selector = 'baca.pleaf(0)',
-    ) -> evallib.Suite:
+    ) -> scoping.Suite:
     """
     Overrides dynamic text self-alignment-X and dynamic text X-extent.
     """
@@ -1689,7 +1689,7 @@ def dynamic_text_right(
     command_2 = dynamic_text_x_extent_zero(
         selector=selector,
         )
-    return evallib.suite(
+    return scoping.suite(
         command_1,
         command_2,
         )
@@ -1830,7 +1830,7 @@ def hairpin_start_shift(
     dynamic: typing.Union[str, abjad.Dynamic],
     *,
     selector: typings.Selector = 'baca.leaf(0)',
-    ) -> evallib.Suite:
+    ) -> scoping.Suite:
     """
     Shifts hairpin start dynamic to left by width of dynamic.
     """
@@ -1838,7 +1838,7 @@ def hairpin_start_shift(
     width = dynamic._to_width[dynamic.name]
     extra_offset_x = -width
     hairpin_shorten_left = width - 1.25
-    return evallib.suite(
+    return scoping.suite(
         dynamic_text_extra_offset((extra_offset_x, 0)),
         dynamic_text_x_extent_zero(),
         hairpin_shorten_pair((hairpin_shorten_left, 0)),

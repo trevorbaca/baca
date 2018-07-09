@@ -3,7 +3,7 @@ import collections
 import numbers
 import typing
 from . import typings
-from . import evallib
+from . import scoping
 from . import pitchclasses
 from .Selection import Selection
 from .Selection import _select
@@ -12,7 +12,7 @@ from .Sequence import Sequence
 
 ### CLASSES ###
 
-class AccidentalAdjustmentCommand(evallib.Command):
+class AccidentalAdjustmentCommand(scoping.Command):
     r"""
     Accidental adjustment command.
 
@@ -116,7 +116,7 @@ class AccidentalAdjustmentCommand(evallib.Command):
         parenthesized: bool = None,
         selector: typings.Selector = 'baca.pleaf(0)',
         ) -> None:
-        evallib.Command.__init__(self, selector=selector)
+        scoping.Command.__init__(self, selector=selector)
         if cautionary is not None:
             cautionary = bool(cautionary)
         self._cautionary = cautionary
@@ -194,7 +194,7 @@ class AccidentalAdjustmentCommand(evallib.Command):
         """
         return self._parenthesized
 
-class ClusterCommand(evallib.Command):
+class ClusterCommand(scoping.Command):
     r"""
     Cluster command.
 
@@ -715,7 +715,7 @@ class ClusterCommand(evallib.Command):
         start_pitch=None,
         widths=None,
         ):
-        evallib.Command.__init__(self, selector=selector)
+        scoping.Command.__init__(self, selector=selector)
         assert isinstance(hide_flat_markup, (bool, type(None)))
         self._hide_flat_markup = hide_flat_markup
         if start_pitch is not None:
@@ -1576,7 +1576,7 @@ class ClusterCommand(evallib.Command):
         """
         return self._widths
 
-class ColorFingeringCommand(evallib.Command):
+class ColorFingeringCommand(scoping.Command):
     r"""
     Color fingering command.
 
@@ -1694,7 +1694,7 @@ class ColorFingeringCommand(evallib.Command):
         numbers=None,
         selector='baca.pheads()',
         ):
-        evallib.Command.__init__(self, selector=selector)
+        scoping.Command.__init__(self, selector=selector)
         if numbers is not None:
             assert abjad.mathtools.all_are_nonnegative_integers(numbers)
             numbers = abjad.CyclicTuple(numbers)
@@ -1739,7 +1739,7 @@ class ColorFingeringCommand(evallib.Command):
         """
         return self._numbers
 
-class DiatonicClusterCommand(evallib.Command):
+class DiatonicClusterCommand(scoping.Command):
     r"""
     Diatonic cluster command.
 
@@ -1777,7 +1777,7 @@ class DiatonicClusterCommand(evallib.Command):
         widths,
         selector='baca.plts()',
         ):
-        evallib.Command.__init__(self, selector=selector)
+        scoping.Command.__init__(self, selector=selector)
         assert abjad.mathtools.all_are_nonnegative_integers(widths)
         widths = abjad.CyclicTuple(widths)
         self._widths = widths
@@ -1972,7 +1972,7 @@ class Loop(abjad.CyclicTuple):
         """
         return self._items
 
-class MicrotoneDeviationCommand(evallib.Command):
+class MicrotoneDeviationCommand(scoping.Command):
     r"""
     Microtone deviation command.
 
@@ -2097,7 +2097,7 @@ class MicrotoneDeviationCommand(evallib.Command):
         deviations=None,
         selector='baca.plts()',
         ):
-        evallib.Command.__init__(self)
+        scoping.Command.__init__(self)
         if deviations is not None:
             assert isinstance(deviations, collections.Iterable)
             assert all(isinstance(_, numbers.Number) for _ in deviations)
@@ -2154,7 +2154,7 @@ class MicrotoneDeviationCommand(evallib.Command):
         """
         return self._deviations
 
-class OctaveDisplacementCommand(evallib.Command):
+class OctaveDisplacementCommand(scoping.Command):
     r"""
     Octave displacement command.
 
@@ -2281,7 +2281,7 @@ class OctaveDisplacementCommand(evallib.Command):
         displacements=None,
         selector='baca.plts()',
         ):
-        evallib.Command.__init__(self, selector=selector)
+        scoping.Command.__init__(self, selector=selector)
         if displacements is not None:
             displacements = tuple(displacements)
             assert self._is_octave_displacement_vector(displacements)
@@ -2347,7 +2347,7 @@ class OctaveDisplacementCommand(evallib.Command):
         """
         return self._displacements
 
-class PitchCommand(evallib.Command):
+class PitchCommand(scoping.Command):
     r"""
     Pitch command.
 
@@ -2722,7 +2722,7 @@ class PitchCommand(evallib.Command):
         pitches: typing.Iterable = None,
         selector: typings.Selector = None,
         ) -> None:
-        evallib.Command.__init__(self, selector=selector)
+        scoping.Command.__init__(self, selector=selector)
         if allow_octaves is not None:
             allow_octaves = bool(allow_octaves)
         self._allow_octaves = allow_octaves
@@ -3001,7 +3001,7 @@ class PitchCommand(evallib.Command):
         """
         return self._state
 
-class RegisterCommand(evallib.Command):
+class RegisterCommand(scoping.Command):
     r"""
     Register command.
 
@@ -3317,7 +3317,7 @@ class RegisterCommand(evallib.Command):
         registration=None,
         selector='baca.plts()',
         ):
-        evallib.Command.__init__(self, selector=selector)
+        scoping.Command.__init__(self, selector=selector)
         if registration is not None:
             prototype = pitchclasses.Registration
             assert isinstance(registration, prototype), repr(registration)
@@ -3386,7 +3386,7 @@ class RegisterCommand(evallib.Command):
         """
         return self._registration
 
-class RegisterInterpolationCommand(evallib.Command):
+class RegisterInterpolationCommand(scoping.Command):
     r"""
     Register interpolation command.
 
@@ -4360,7 +4360,7 @@ class RegisterInterpolationCommand(evallib.Command):
         start_pitch: typing.Union[typings.Number, abjad.NumberedPitch] = 0,
         stop_pitch: typing.Union[typings.Number, abjad.NumberedPitch] = 0,
         ) -> None:
-        evallib.Command.__init__(self, selector=selector)
+        scoping.Command.__init__(self, selector=selector)
         start_pitch = abjad.NumberedPitch(start_pitch)
         self._start_pitch: abjad.NumberedPitch = start_pitch
         stop_pitch = abjad.NumberedPitch(stop_pitch)
@@ -4853,7 +4853,7 @@ class RegisterInterpolationCommand(evallib.Command):
         """
         return self._stop_pitch
 
-class RegisterToOctaveCommand(evallib.Command):
+class RegisterToOctaveCommand(scoping.Command):
     r"""
     Register-to-octave command.
 
@@ -5165,7 +5165,7 @@ class RegisterToOctaveCommand(evallib.Command):
         octave_number=None,
         selector='baca.plts()',
         ):
-        evallib.Command.__init__(self, selector=selector)
+        scoping.Command.__init__(self, selector=selector)
         if anchor is not None:
             prototype = (abjad.Center, abjad.Down, abjad.Up)
             assert anchor in prototype, repr(anchor)
@@ -5393,7 +5393,7 @@ class RegisterToOctaveCommand(evallib.Command):
         """
         return self._octave_number
 
-class StaffPositionCommand(evallib.Command):
+class StaffPositionCommand(scoping.Command):
     r"""
     Staff position command.
 
@@ -5457,7 +5457,7 @@ class StaffPositionCommand(evallib.Command):
         exact: bool = None, 
         selector: typings.Selector = 'baca.plts()',
         ) -> None:
-        evallib.Command.__init__(self, selector=selector)
+        scoping.Command.__init__(self, selector=selector)
         if exact is not None:
             exact = bool(exact)
         self._exact = exact
@@ -5526,7 +5526,7 @@ class StaffPositionCommand(evallib.Command):
         """
         return self._numbers
 
-class StaffPositionInterpolationCommand(evallib.Command):
+class StaffPositionInterpolationCommand(scoping.Command):
     r"""
     Staff position interpolation command.
 
@@ -5711,7 +5711,7 @@ class StaffPositionInterpolationCommand(evallib.Command):
         start_pitch: typing.Union[str, abjad.NamedPitch] = 'C4',
         stop_pitch: typing.Union[str, abjad.NamedPitch] = 'C4',
         ) -> None:
-        evallib.Command.__init__(self, selector=selector)
+        scoping.Command.__init__(self, selector=selector)
         start_pitch = abjad.NamedPitch(start_pitch)
         self._start_pitch: abjad.NamedPitch = start_pitch
         stop_pitch = abjad.NamedPitch(stop_pitch)

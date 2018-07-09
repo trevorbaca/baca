@@ -30,7 +30,6 @@ baca
    commands
    divisions
    dynamics
-   evallib
    indicators
    library
    markuplib
@@ -39,6 +38,7 @@ baca
    pitchclasses
    pitchcommands
    rhythmcommands
+   scoping
    segmentclasses
    spannercommands
    templates
@@ -54,7 +54,6 @@ baca
    commands
    divisions
    dynamics
-   evallib
    indicators
    library
    markuplib
@@ -63,6 +62,7 @@ baca
    pitchclasses
    pitchcommands
    rhythmcommands
+   scoping
    segmentclasses
    spannercommands
    templates

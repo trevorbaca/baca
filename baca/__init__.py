@@ -1,6 +1,6 @@
 import abjad
 from .library import *
-from .evallib import *
+from .scoping import *
 from .commands import *
 from .divisions import *
 from .dynamics import *

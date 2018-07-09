@@ -1,8 +1,8 @@
 import abjad
-from . import evallib
+from . import scoping
 
 
-class ColorCommand(evallib.Command):
+class ColorCommand(scoping.Command):
     r"""
     Color command.
 
@@ -328,7 +328,7 @@ class ColorCommand(evallib.Command):
         selector='baca.leaves()',
         ):
         assert selector is not None
-        evallib.Command.__init__(self, selector=selector)
+        scoping.Command.__init__(self, selector=selector)
 
     ### SPECIAL METHODS ###
 

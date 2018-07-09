@@ -1,7 +1,7 @@
 import abjad
 import collections
 import typing
-from . import evallib
+from . import scoping
 from . import indicators
 from . import library
 from . import typings
@@ -249,7 +249,7 @@ class BreakMeasureMap(abjad.AbjadObject):
         tags: typing.List[str] = None,
         ) -> None:
         tags = tags or []
-        assert evallib.Command._validate_tags(tags), repr(tags)
+        assert scoping.Command._validate_tags(tags), repr(tags)
         if abjad.tags.BREAK not in tags:
             tags.append(abjad.tags.BREAK)
         self._tags = tags
@@ -376,7 +376,7 @@ class BreakMeasureMap(abjad.AbjadObject):
         """
         Gets tags.
         """
-        assert evallib.Command._validate_tags(self._tags), repr(self._tags)
+        assert scoping.Command._validate_tags(self._tags), repr(self._tags)
         return self._tags[:]
 
 class HorizontalSpacingSpecifier(abjad.AbjadObject):

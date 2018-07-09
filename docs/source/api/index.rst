@@ -470,55 +470,6 @@ Dynamic library.
 
    <hr/>
 
-.. rubric:: :ref:`baca.evallib <baca--evallib>`
-   :class: section-header
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Classes
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.evallib.Command
-   ~baca.evallib.CommandWrapper
-   ~baca.evallib.Map
-   ~baca.evallib.MeasureWrapper
-   ~baca.evallib.Scope
-   ~baca.evallib.Suite
-   ~baca.evallib.TimelineScope
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Functions
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.evallib.map
-   ~baca.evallib.measures
-   ~baca.evallib.not_parts
-   ~baca.evallib.not_score
-   ~baca.evallib.not_segment
-   ~baca.evallib.only_parts
-   ~baca.evallib.only_score
-   ~baca.evallib.only_segment
-   ~baca.evallib.pick
-   ~baca.evallib.scope
-   ~baca.evallib.suite
-   ~baca.evallib.tag
-   ~baca.evallib.timeline
-
-.. raw:: html
-
-   <hr/>
-
 .. rubric:: :ref:`baca.indicators <baca--indicators>`
    :class: section-header
 
@@ -1125,6 +1076,55 @@ Rhythm library.
 
    ~baca.rhythmcommands.PitchFirstRhythmMaker
    ~baca.rhythmcommands.SkipRhythmMaker
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: :ref:`baca.scoping <baca--scoping>`
+   :class: section-header
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Classes
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.scoping.Command
+   ~baca.scoping.CommandWrapper
+   ~baca.scoping.Map
+   ~baca.scoping.MeasureWrapper
+   ~baca.scoping.Scope
+   ~baca.scoping.Suite
+   ~baca.scoping.TimelineScope
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Functions
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.scoping.map
+   ~baca.scoping.measures
+   ~baca.scoping.not_parts
+   ~baca.scoping.not_score
+   ~baca.scoping.not_segment
+   ~baca.scoping.only_parts
+   ~baca.scoping.only_score
+   ~baca.scoping.only_segment
+   ~baca.scoping.pick
+   ~baca.scoping.scope
+   ~baca.scoping.suite
+   ~baca.scoping.tag
+   ~baca.scoping.timeline
 
 .. raw:: html
 

@@ -1,12 +1,12 @@
 import abjad
 import collections
 import typing
-from . import evallib
+from . import scoping
 from . import typings
 from .Selection import _select
 
 
-class IndicatorCommand(evallib.Command):
+class IndicatorCommand(scoping.Command):
     r"""
     Indicator command.
 
@@ -227,7 +227,7 @@ class IndicatorCommand(evallib.Command):
         selector: typings.Selector = 'baca.pheads()',
         tags: typing.List[abjad.Tag] = None,
         ) -> None:
-        evallib.Command.__init__(
+        scoping.Command.__init__(
             self,
             deactivate=deactivate,
             selector=selector,
