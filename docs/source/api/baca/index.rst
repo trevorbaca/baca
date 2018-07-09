@@ -22,15 +22,12 @@ baca
 .. toctree::
    :hidden:
 
-   LibraryAF
-   LibraryGM
-   LibraryNS
-   LibraryTZ
    SegmentMaker
    classes
    commands
    divisions
    dynamics
+   indicatorcommands
    indicators
    library
    markups
@@ -48,15 +45,12 @@ baca
 .. autosummary::
    :nosignatures:
 
-   LibraryAF
-   LibraryGM
-   LibraryNS
-   LibraryTZ
    SegmentMaker
    classes
    commands
    divisions
    dynamics
+   indicatorcommands
    indicators
    library
    markups
@@ -146,6 +140,7 @@ baca
    ~ltrun
    ~ltruns
    ~lts
+   ~mleaves
    ~nontrivial
    ~note
    ~notes
@@ -171,6 +166,7 @@ baca
    ~rleaf
    ~rleak
    ~rleaves
+   ~rmleaves
    ~rrun
    ~rruns
    ~run
@@ -267,6 +263,8 @@ baca
 
 .. autofunction:: lts
 
+.. autofunction:: mleaves
+
 .. autofunction:: nontrivial
 
 .. autofunction:: note
@@ -316,6 +314,8 @@ baca
 .. autofunction:: rleak
 
 .. autofunction:: rleaves
+
+.. autofunction:: rmleaves
 
 .. autofunction:: rrun
 

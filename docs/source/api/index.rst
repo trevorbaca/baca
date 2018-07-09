@@ -79,6 +79,7 @@ Bača API
    ~baca.ltrun
    ~baca.ltruns
    ~baca.lts
+   ~baca.mleaves
    ~baca.nontrivial
    ~baca.note
    ~baca.notes
@@ -104,6 +105,7 @@ Bača API
    ~baca.rleaf
    ~baca.rleak
    ~baca.rleaves
+   ~baca.rmleaves
    ~baca.rrun
    ~baca.rruns
    ~baca.run
@@ -119,123 +121,6 @@ Bača API
    ~baca.with_previous_leaf
    ~baca.wleaf
    ~baca.wleaves
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: :ref:`baca.LibraryAF <baca--LibraryAF>`
-   :class: section-header
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Functions
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.LibraryAF.accent
-   ~baca.LibraryAF.allow_octaves
-   ~baca.LibraryAF.alternate_bow_strokes
-   ~baca.LibraryAF.apply
-   ~baca.LibraryAF.arpeggio
-   ~baca.LibraryAF.articulation
-   ~baca.LibraryAF.articulations
-   ~baca.LibraryAF.bar_extent_persistent
-   ~baca.LibraryAF.breathe
-   ~baca.LibraryAF.clef
-   ~baca.LibraryAF.cross_staff
-   ~baca.LibraryAF.double_staccato
-   ~baca.LibraryAF.down_arpeggio
-   ~baca.LibraryAF.down_bow
-   ~baca.LibraryAF.dynamic_down
-   ~baca.LibraryAF.dynamic_up
-   ~baca.LibraryAF.edition
-   ~baca.LibraryAF.espressivo
-   ~baca.LibraryAF.fermata
-   ~baca.LibraryAF.flageolet
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: :ref:`baca.LibraryGM <baca--LibraryGM>`
-   :class: section-header
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Functions
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.LibraryGM.laissez_vibrer
-   ~baca.LibraryGM.long_fermata
-   ~baca.LibraryGM.marcato
-   ~baca.LibraryGM.margin_markup
-   ~baca.LibraryGM.mleaves
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: :ref:`baca.LibraryNS <baca--LibraryNS>`
-   :class: section-header
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Functions
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.LibraryNS.one_voice
-   ~baca.LibraryNS.previous_metadata
-   ~baca.LibraryNS.rehearsal_mark
-   ~baca.LibraryNS.rmleaves
-   ~baca.LibraryNS.short_fermata
-   ~baca.LibraryNS.staccatissimo
-   ~baca.LibraryNS.staccato
-   ~baca.LibraryNS.staff_lines
-   ~baca.LibraryNS.start_markup
-   ~baca.LibraryNS.stem_tremolo
-   ~baca.LibraryNS.stop_trill
-   ~baca.LibraryNS.stopped
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: :ref:`baca.LibraryTZ <baca--LibraryTZ>`
-   :class: section-header
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Functions
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.LibraryTZ.tenuto
-   ~baca.LibraryTZ.up_arpeggio
-   ~baca.LibraryTZ.up_bow
-   ~baca.LibraryTZ.very_long_fermata
-   ~baca.LibraryTZ.voice_four
-   ~baca.LibraryTZ.voice_one
-   ~baca.LibraryTZ.voice_three
-   ~baca.LibraryTZ.voice_two
 
 .. raw:: html
 
@@ -330,15 +215,26 @@ Bača API
 .. autosummary::
    :nosignatures:
 
+   ~baca.commands.allow_octaves
+   ~baca.commands.bar_extent_persistent
    ~baca.commands.bcps
    ~baca.commands.color
    ~baca.commands.container
+   ~baca.commands.cross_staff
+   ~baca.commands.dynamic_down
+   ~baca.commands.dynamic_up
+   ~baca.commands.edition
    ~baca.commands.global_fermata
    ~baca.commands.instrument
    ~baca.commands.label
    ~baca.commands.metronome_mark
+   ~baca.commands.one_voice
    ~baca.commands.parts
-   ~baca.commands.text_spanner
+   ~baca.commands.previous_metadata
+   ~baca.commands.voice_four
+   ~baca.commands.voice_one
+   ~baca.commands.voice_three
+   ~baca.commands.voice_two
    ~baca.commands.volta
 
 .. raw:: html
@@ -408,6 +304,55 @@ Dynamic library.
    ~baca.dynamics.hairpin
    ~baca.dynamics.make_dynamic
    ~baca.dynamics.parse_hairpin_descriptor
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: :ref:`baca.indicatorcommands <baca--indicatorcommands>`
+   :class: section-header
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Functions
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.indicatorcommands.accent
+   ~baca.indicatorcommands.alternate_bow_strokes
+   ~baca.indicatorcommands.arpeggio
+   ~baca.indicatorcommands.articulation
+   ~baca.indicatorcommands.articulations
+   ~baca.indicatorcommands.breathe
+   ~baca.indicatorcommands.clef
+   ~baca.indicatorcommands.double_staccato
+   ~baca.indicatorcommands.down_arpeggio
+   ~baca.indicatorcommands.down_bow
+   ~baca.indicatorcommands.espressivo
+   ~baca.indicatorcommands.fermata
+   ~baca.indicatorcommands.flageolet
+   ~baca.indicatorcommands.laissez_vibrer
+   ~baca.indicatorcommands.long_fermata
+   ~baca.indicatorcommands.marcato
+   ~baca.indicatorcommands.margin_markup
+   ~baca.indicatorcommands.rehearsal_mark
+   ~baca.indicatorcommands.short_fermata
+   ~baca.indicatorcommands.staccatissimo
+   ~baca.indicatorcommands.staccato
+   ~baca.indicatorcommands.staff_lines
+   ~baca.indicatorcommands.start_markup
+   ~baca.indicatorcommands.stem_tremolo
+   ~baca.indicatorcommands.stop_trill
+   ~baca.indicatorcommands.stopped
+   ~baca.indicatorcommands.tenuto
+   ~baca.indicatorcommands.text_spanner
+   ~baca.indicatorcommands.up_arpeggio
+   ~baca.indicatorcommands.up_bow
+   ~baca.indicatorcommands.very_long_fermata
 
 .. raw:: html
 
@@ -1090,6 +1035,7 @@ Rhythm library.
 .. autosummary::
    :nosignatures:
 
+   ~baca.scoping.apply
    ~baca.scoping.map
    ~baca.scoping.measures
    ~baca.scoping.not_parts

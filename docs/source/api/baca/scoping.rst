@@ -361,6 +361,7 @@ scoping
 .. autosummary::
    :nosignatures:
 
+   ~apply
    ~map
    ~measures
    ~not_parts
@@ -374,6 +375,8 @@ scoping
    ~suite
    ~tag
    ~timeline
+
+.. autofunction:: apply
 
 .. autofunction:: map
 

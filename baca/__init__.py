@@ -4,6 +4,7 @@ from .classes import *
 from .commands import *
 from .divisions import *
 from .dynamics import *
+from .indicatorcommands import *
 from .indicators import *
 from .musicmaker import *
 from .overrides import *
@@ -44,9 +45,31 @@ def _publish_selectors(class_):
             return select().{name}(*arguments, **keywords)"""
         exec(statement, globals())
 
-from .LibraryAF import *
-from .LibraryGM import *
-from .LibraryNS import *
-from .LibraryTZ import *
-
 _publish_selectors(Selection)
+
+from .Selection import _select
+# TODO: move to baca.Selection
+def mleaves(count: int) -> abjad.Expression:
+    """
+    Selects all leaves in ``count`` measures.
+    """
+    assert isinstance(count, int), repr(count)
+    selector = _select().leaves().group_by_measure()
+    if 0 < count:
+        selector = selector[:count].flatten()
+    elif count < 0:
+        selector = selector[-count:].flatten()
+    else:
+        raise Exception(count)
+    return selector
+
+# TODO: move to baca.Selection
+def rmleaves(count: int) -> abjad.Expression:
+    """
+    Selects all leaves in ``count`` measures, leaked one leaf to the right.
+    """
+    assert isinstance(count, int), repr(count)
+    selector = _select().leaves().group_by_measure()
+    selector = selector[:count].flatten().rleak()
+    return selector
+

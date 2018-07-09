@@ -2735,6 +2735,153 @@ def volta(
 
 ### FACTORY FUNCTIONS ###
 
+def allow_octaves(
+    *,
+    selector: typings.Selector = 'baca.leaves()',
+    ) -> IndicatorCommand:
+    """
+    Attaches ALLOW_OCTAVE tag.
+    """
+    return IndicatorCommand(
+        indicators=[abjad.tags.ALLOW_OCTAVE],
+        selector=selector,
+        )
+
+def bar_extent_persistent(
+    pair: typings.NumberPair = None,
+    *,
+    selector: typings.Selector = 'baca.leaf(0)',
+    ) -> IndicatorCommand:
+    r"""
+    Makes persistent bar-extent override.
+
+    ..  container:: example
+
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     spacing=baca.minimum_duration((1, 12)),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'MusicVoice',
+        ...     baca.bar_extent_persistent((0, 0)),
+        ...     baca.make_even_divisions(),
+        ...     baca.staff_lines(1),
+        ...     baca.staff_position(0),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
+            <BLANKLINE>
+                        % [GlobalSkips measure 1]                                                    %! SM4
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 2]                                                    %! SM4
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+            <BLANKLINE>
+                        % [GlobalSkips measure 3]                                                    %! SM4
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 4]                                                    %! SM4
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+                        \baca_bar_line_visible                                                       %! SM5
+                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                    }
+                >>
+                \context MusicContext = "MusicContext"
+                <<
+                    \context Staff = "MusicStaff"
+                    {
+                        \context Voice = "MusicVoice"
+                        {
+            <BLANKLINE>
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! SM8:EXPLICIT_PERSISTENT_OVERRIDE:IC
+                            \stopStaff                                                               %! SM8:EXPLICIT_STAFF_LINES:IC
+                            \once \override Staff.StaffSymbol.line-count = 1                         %! SM8:EXPLICIT_STAFF_LINES:IC
+                            \startStaff                                                              %! SM8:EXPLICIT_STAFF_LINES:IC
+                            \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! SM6:EXPLICIT_STAFF_LINES_COLOR:IC
+                            b'8
+                            [
+            <BLANKLINE>
+                            b'8
+            <BLANKLINE>
+                            b'8
+            <BLANKLINE>
+                            b'8
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            b'8
+                            [
+            <BLANKLINE>
+                            b'8
+            <BLANKLINE>
+                            b'8
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            b'8
+                            [
+            <BLANKLINE>
+                            b'8
+            <BLANKLINE>
+                            b'8
+            <BLANKLINE>
+                            b'8
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            b'8
+                            [
+            <BLANKLINE>
+                            b'8
+            <BLANKLINE>
+                            b'8
+                            ]
+            <BLANKLINE>
+                        }
+                    }
+                >>
+            >>
+
+    """
+    override = abjad.PersistentOverride(
+        after=True,
+        attribute='bar_extent',
+        context='Staff',
+        grob='bar_line',
+        value=pair,
+        )
+    return IndicatorCommand(
+        indicators=[override],
+        selector=selector,
+        )
+
 def color(*, selector: typings.Selector = 'baca.leaves()') -> ColorCommand:
     r"""
     Colors leaves.
@@ -3047,6 +3194,716 @@ def container(
     return ContainerCommand(
         identifier=identifier,
         selector=selector,
+        )
+
+def cross_staff(
+    *,
+    selector: typings.Selector = 'baca.phead(0)',
+    ) -> IndicatorCommand:
+    r"""
+    Attaches cross-staff command.
+
+    ..  container:: example
+
+        Attaches cross-staff command to pitched head 0:
+
+        >>> score_template = baca.StringTrioScoreTemplate()
+        >>> accumulator = baca.MusicAccumulator(score_template=score_template)
+        >>> accumulator(
+        ...     accumulator.music_maker(
+        ...         'ViolinMusicVoice',
+        ...         [[9, 11, 12, 14, 16]],
+        ...         baca.flags(),
+        ...         baca.stem_up(),
+        ...         denominator=8,
+        ...         figure_name='vn.1',
+        ...         talea_denominator=8,
+        ...         ),
+        ...     )
+        >>> accumulator(
+        ...     accumulator.music_maker(
+        ...         'ViolaMusicVoice',
+        ...         [[0, 2, 4, 5, 7]],
+        ...         baca.anchor('ViolinMusicVoice'),
+        ...         baca.cross_staff(),
+        ...         baca.flags(),
+        ...         baca.stem_up(),
+        ...         figure_name='va.1',
+        ...         talea_denominator=8,
+        ...         ),
+        ...     )
+        >>> accumulator(
+        ...     accumulator.music_maker(
+        ...         'ViolinMusicVoice',
+        ...         [[15]],
+        ...         baca.flags(),
+        ...         figure_name='vn.2',
+        ...         talea_denominator=8,
+        ...         ),
+        ...     )
+
+        >>> maker = baca.SegmentMaker(
+        ...     ignore_repeat_pitch_classes=True,
+        ...     ignore_unregistered_pitches=True,
+        ...     score_template=accumulator.score_template,
+        ...     spacing=baca.minimum_duration((1, 12)),
+        ...     time_signatures=accumulator.time_signatures,
+        ...     )
+        >>> accumulator.populate_segment_maker(maker)
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
+            <BLANKLINE>
+                        % [GlobalSkips measure 1]                                                    %! SM4
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \time 5/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 5/8
+            <BLANKLINE>
+                        % [GlobalSkips measure 2]                                                    %! SM4
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \time 2/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/8
+                        \baca_bar_line_visible                                                       %! SM5
+                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                    }
+                >>
+                \context MusicContext = "MusicContext"
+                <<
+                    \context StringSectionStaffGroup = "String Section Staff Group"
+                    <<
+                        \tag Violin                                                                  %! ST4
+                        \context ViolinMusicStaff = "ViolinMusicStaff"
+                        {
+                            \context ViolinMusicVoice = "ViolinMusicVoice"
+                            {
+                                {
+                                    \scaleDurations #'(1 . 1) {
+            <BLANKLINE>
+                                        % [ViolinMusicVoice measure 1]                               %! SM4
+                                        \override Stem.direction = #up                               %! OC1
+                                        \clef "treble"                                               %! SM8:DEFAULT_CLEF:ST3
+                                        \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST3
+                                    %@% \override ViolinMusicStaff.Clef.color = ##f                  %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST3
+                                        \set ViolinMusicStaff.forceClef = ##t                        %! SM8:DEFAULT_CLEF:SM33:ST3
+                                        a'8
+                                        ^ \markup {                                                  %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                            \with-color                                              %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                                #(x11-color 'DarkViolet)                             %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                                (Violin)                                             %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                            }                                                        %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                        \override ViolinMusicStaff.Clef.color = #(x11-color 'violet) %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST3
+            <BLANKLINE>
+                                        b'8
+            <BLANKLINE>
+                                        c''8
+            <BLANKLINE>
+                                        d''8
+            <BLANKLINE>
+                                        e''8
+                                        \revert Stem.direction                                       %! OC2
+                                    }
+                                }
+                                {
+                                    \scaleDurations #'(1 . 1) {
+            <BLANKLINE>
+                                        % [ViolinMusicVoice measure 2]                               %! SM4
+                                        ef''!8
+            <BLANKLINE>
+                                    }
+                                }
+                            }
+                        }
+                        \tag Viola                                                                   %! ST4
+                        \context ViolaMusicStaff = "ViolaMusicStaff"
+                        {
+                            \context ViolaMusicVoice = "ViolaMusicVoice"
+                            {
+                                {
+                                    \scaleDurations #'(1 . 1) {
+            <BLANKLINE>
+                                        % [ViolaMusicVoice measure 1]                                %! SM4
+                                        \override Stem.direction = #up                               %! OC1
+                                        \clef "alto"                                                 %! SM8:DEFAULT_CLEF:ST3
+                                        \crossStaff                                                  %! IC
+                                        \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST3
+                                    %@% \override ViolaMusicStaff.Clef.color = ##f                   %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST3
+                                        \set ViolaMusicStaff.forceClef = ##t                         %! SM8:DEFAULT_CLEF:SM33:ST3
+                                        c'8
+                                        ^ \markup {                                                  %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                            \with-color                                              %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                                #(x11-color 'DarkViolet)                             %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                                (Viola)                                              %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                            }                                                        %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                        \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)  %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST3
+            <BLANKLINE>
+                                        d'8
+            <BLANKLINE>
+                                        e'8
+            <BLANKLINE>
+                                        f'8
+            <BLANKLINE>
+                                        g'8
+                                        \revert Stem.direction                                       %! OC2
+                                    }
+                                }
+            <BLANKLINE>
+                                % [ViolaMusicVoice measure 2]                                        %! SM4
+                                R1 * 1/8
+            <BLANKLINE>
+                            }
+                        }
+                        \tag Cello                                                                   %! ST4
+                        \context CelloMusicStaff = "CelloMusicStaff"
+                        {
+                            \context CelloMusicVoice = "CelloMusicVoice"
+                            {
+            <BLANKLINE>
+                                % [CelloMusicVoice measure 1]                                        %! SM4
+                                \clef "bass"                                                         %! SM8:DEFAULT_CLEF:ST3
+                                \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST3
+                            %@% \override CelloMusicStaff.Clef.color = ##f                           %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST3
+                                \set CelloMusicStaff.forceClef = ##t                                 %! SM8:DEFAULT_CLEF:SM33:ST3
+                                R1 * 5/8
+                                ^ \markup {                                                          %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                    \with-color                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                        #(x11-color 'DarkViolet)                                     %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                        (Cello)                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                    }                                                                %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                \override CelloMusicStaff.Clef.color = #(x11-color 'violet)          %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST3
+            <BLANKLINE>
+                                % [CelloMusicVoice measure 2]                                        %! SM4
+                                R1 * 1/8
+            <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+            >>
+
+    ..  container:: example
+
+        Attaches cross-staff command to last two pitched leaves:
+
+        >>> score_template = baca.StringTrioScoreTemplate()
+        >>> accumulator = baca.MusicAccumulator(score_template=score_template)
+        >>> accumulator(
+        ...     accumulator.music_maker(
+        ...         'ViolinMusicVoice',
+        ...         [[9, 11, 12, 14, 16]],
+        ...         baca.flags(),
+        ...         baca.stem_up(),
+        ...         denominator=8,
+        ...         figure_name='vn.1',
+        ...         talea_denominator=8,
+        ...         ),
+        ...     )
+        >>> accumulator(
+        ...     accumulator.music_maker(
+        ...         'ViolaMusicVoice',
+        ...         [[0, 2, 4, 5, 7]],
+        ...         baca.anchor('ViolinMusicVoice'),
+        ...         baca.cross_staff(selector=baca.pleaves()[-2:]),
+        ...         baca.flags(),
+        ...         baca.stem_up(),
+        ...         figure_name='va.1',
+        ...         talea_denominator=8,
+        ...         ),
+        ...     )
+        >>> accumulator(
+        ...     accumulator.music_maker(
+        ...         'ViolinMusicVoice',
+        ...         [[15]],
+        ...         baca.flags(),
+        ...         figure_name='vn.2',
+        ...         talea_denominator=8,
+        ...         ),
+        ...     )
+
+        >>> maker = baca.SegmentMaker(
+        ...     ignore_repeat_pitch_classes=True,
+        ...     ignore_unregistered_pitches=True,
+        ...     score_template=accumulator.score_template,
+        ...     spacing=baca.minimum_duration((1, 12)),
+        ...     time_signatures=accumulator.time_signatures,
+        ...     )
+        >>> accumulator.populate_segment_maker(maker)
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
+            <BLANKLINE>
+                        % [GlobalSkips measure 1]                                                    %! SM4
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \time 5/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 5/8
+            <BLANKLINE>
+                        % [GlobalSkips measure 2]                                                    %! SM4
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \time 2/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/8
+                        \baca_bar_line_visible                                                       %! SM5
+                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                    }
+                >>
+                \context MusicContext = "MusicContext"
+                <<
+                    \context StringSectionStaffGroup = "String Section Staff Group"
+                    <<
+                        \tag Violin                                                                  %! ST4
+                        \context ViolinMusicStaff = "ViolinMusicStaff"
+                        {
+                            \context ViolinMusicVoice = "ViolinMusicVoice"
+                            {
+                                {
+                                    \scaleDurations #'(1 . 1) {
+            <BLANKLINE>
+                                        % [ViolinMusicVoice measure 1]                               %! SM4
+                                        \override Stem.direction = #up                               %! OC1
+                                        \clef "treble"                                               %! SM8:DEFAULT_CLEF:ST3
+                                        \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST3
+                                    %@% \override ViolinMusicStaff.Clef.color = ##f                  %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST3
+                                        \set ViolinMusicStaff.forceClef = ##t                        %! SM8:DEFAULT_CLEF:SM33:ST3
+                                        a'8
+                                        ^ \markup {                                                  %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                            \with-color                                              %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                                #(x11-color 'DarkViolet)                             %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                                (Violin)                                             %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                            }                                                        %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                        \override ViolinMusicStaff.Clef.color = #(x11-color 'violet) %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST3
+            <BLANKLINE>
+                                        b'8
+            <BLANKLINE>
+                                        c''8
+            <BLANKLINE>
+                                        d''8
+            <BLANKLINE>
+                                        e''8
+                                        \revert Stem.direction                                       %! OC2
+                                    }
+                                }
+                                {
+                                    \scaleDurations #'(1 . 1) {
+            <BLANKLINE>
+                                        % [ViolinMusicVoice measure 2]                               %! SM4
+                                        ef''!8
+            <BLANKLINE>
+                                    }
+                                }
+                            }
+                        }
+                        \tag Viola                                                                   %! ST4
+                        \context ViolaMusicStaff = "ViolaMusicStaff"
+                        {
+                            \context ViolaMusicVoice = "ViolaMusicVoice"
+                            {
+                                {
+                                    \scaleDurations #'(1 . 1) {
+            <BLANKLINE>
+                                        % [ViolaMusicVoice measure 1]                                %! SM4
+                                        \override Stem.direction = #up                               %! OC1
+                                        \clef "alto"                                                 %! SM8:DEFAULT_CLEF:ST3
+                                        \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST3
+                                    %@% \override ViolaMusicStaff.Clef.color = ##f                   %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST3
+                                        \set ViolaMusicStaff.forceClef = ##t                         %! SM8:DEFAULT_CLEF:SM33:ST3
+                                        c'8
+                                        ^ \markup {                                                  %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                            \with-color                                              %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                                #(x11-color 'DarkViolet)                             %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                                (Viola)                                              %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                            }                                                        %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                        \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)  %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST3
+            <BLANKLINE>
+                                        d'8
+            <BLANKLINE>
+                                        e'8
+            <BLANKLINE>
+                                        \crossStaff                                                  %! IC
+                                        f'8
+            <BLANKLINE>
+                                        \crossStaff                                                  %! IC
+                                        g'8
+                                        \revert Stem.direction                                       %! OC2
+                                    }
+                                }
+            <BLANKLINE>
+                                % [ViolaMusicVoice measure 2]                                        %! SM4
+                                R1 * 1/8
+            <BLANKLINE>
+                            }
+                        }
+                        \tag Cello                                                                   %! ST4
+                        \context CelloMusicStaff = "CelloMusicStaff"
+                        {
+                            \context CelloMusicVoice = "CelloMusicVoice"
+                            {
+            <BLANKLINE>
+                                % [CelloMusicVoice measure 1]                                        %! SM4
+                                \clef "bass"                                                         %! SM8:DEFAULT_CLEF:ST3
+                                \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST3
+                            %@% \override CelloMusicStaff.Clef.color = ##f                           %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST3
+                                \set CelloMusicStaff.forceClef = ##t                                 %! SM8:DEFAULT_CLEF:SM33:ST3
+                                R1 * 5/8
+                                ^ \markup {                                                          %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                    \with-color                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                        #(x11-color 'DarkViolet)                                     %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                        (Cello)                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                    }                                                                %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
+                                \override CelloMusicStaff.Clef.color = #(x11-color 'violet)          %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST3
+            <BLANKLINE>
+                                % [CelloMusicVoice measure 2]                                        %! SM4
+                                R1 * 1/8
+            <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+            >>
+
+    """
+    return IndicatorCommand(
+        indicators=[abjad.LilyPondLiteral(r'\crossStaff')],
+        selector=selector,
+        )
+
+def dynamic_down(
+    *,
+    selector: typings.Selector = 'baca.leaf(0)',
+    ) -> IndicatorCommand:
+    r"""
+    Attaches dynamic-down command.
+
+    ..  container:: example
+
+        Attaches dynamic-down command to leaf 0:
+
+        >>> music_maker = baca.MusicMaker()
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+        ...     baca.dynamic('p'),
+        ...     baca.dynamic('f', selector=baca.tuplets()[1:2].phead(0)),
+        ...     baca.dynamic_down(),
+        ...     baca.rests_around([2], [4]),
+        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     counts=[1, 1, 5, -1],
+        ...     time_treatments=[-1],
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+            \new Staff
+            <<
+                \context Voice = "Voice 1"
+                {
+                    \voiceOne
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \dynamicDown                                                             %! IC
+                            r8
+                            c'16
+                            \p                                                                       %! IC
+                            [
+                            d'16
+                            ]
+                            bf'4
+                            ~
+                            bf'16
+                            r16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            fs''16
+                            \f                                                                       %! IC
+                            [
+                            e''16
+                            ]
+                            ef''4
+                            ~
+                            ef''16
+                            r16
+                            af''16
+                            [
+                            g''16
+                            ]
+                        }
+                        \times 4/5 {
+                            a'16
+                            r4
+                            \revert TupletBracket.staff-padding                                      %! OC2
+                        }
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        Attaches dynamic-down command to leaf 0 in tuplet 1:
+
+        >>> music_maker = baca.MusicMaker()
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+        ...     baca.dynamic('p'),
+        ...     baca.dynamic('f', selector=baca.tuplets()[1:2].phead(0)),
+        ...     baca.dynamic_down(selector=baca.tuplets()[1:2].leaf(0)),
+        ...     baca.rests_around([2], [4]),
+        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     counts=[1, 1, 5, -1],
+        ...     time_treatments=[-1],
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+            \new Staff
+            <<
+                \context Voice = "Voice 1"
+                {
+                    \voiceOne
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            r8
+                            c'16
+                            \p                                                                       %! IC
+                            [
+                            d'16
+                            ]
+                            bf'4
+                            ~
+                            bf'16
+                            r16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            \dynamicDown                                                             %! IC
+                            fs''16
+                            \f                                                                       %! IC
+                            [
+                            e''16
+                            ]
+                            ef''4
+                            ~
+                            ef''16
+                            r16
+                            af''16
+                            [
+                            g''16
+                            ]
+                        }
+                        \times 4/5 {
+                            a'16
+                            r4
+                            \revert TupletBracket.staff-padding                                      %! OC2
+                        }
+                    }
+                }
+            >>
+
+    """
+    return IndicatorCommand(
+        indicators=[abjad.LilyPondLiteral(r'\dynamicDown')],
+        selector=selector,
+        )
+
+def dynamic_up(
+    *,
+    selector: typings.Selector = 'baca.leaf(0)',
+    ) -> IndicatorCommand:
+    r"""
+    Attaches dynamic-up command.
+
+    ..  container:: example
+
+        Attaches dynamic-up command to leaf 0:
+
+        >>> music_maker = baca.MusicMaker()
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+        ...     baca.dynamic('p'),
+        ...     baca.dynamic('f', selector=baca.tuplets()[1:2].phead(0)),
+        ...     baca.dynamic_up(),
+        ...     baca.rests_around([2], [4]),
+        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     counts=[1, 1, 5, -1],
+        ...     time_treatments=[-1],
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+            \new Staff
+            <<
+                \context Voice = "Voice 1"
+                {
+                    \voiceOne
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \dynamicUp                                                               %! IC
+                            r8
+                            c'16
+                            \p                                                                       %! IC
+                            [
+                            d'16
+                            ]
+                            bf'4
+                            ~
+                            bf'16
+                            r16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            fs''16
+                            \f                                                                       %! IC
+                            [
+                            e''16
+                            ]
+                            ef''4
+                            ~
+                            ef''16
+                            r16
+                            af''16
+                            [
+                            g''16
+                            ]
+                        }
+                        \times 4/5 {
+                            a'16
+                            r4
+                            \revert TupletBracket.staff-padding                                      %! OC2
+                        }
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        Attaches dynamic-up command to leaf 0 in tuplet 1:
+
+        >>> music_maker = baca.MusicMaker()
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+        ...     baca.dynamic('p'),
+        ...     baca.dynamic('f', selector=baca.tuplets()[1:2].phead(0)),
+        ...     baca.dynamic_up(selector=baca.tuplets()[1:2].leaf(0)),
+        ...     baca.rests_around([2], [4]),
+        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     counts=[1, 1, 5, -1],
+        ...     time_treatments=[-1],
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+            \new Staff
+            <<
+                \context Voice = "Voice 1"
+                {
+                    \voiceOne
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            r8
+                            c'16
+                            \p                                                                       %! IC
+                            [
+                            d'16
+                            ]
+                            bf'4
+                            ~
+                            bf'16
+                            r16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            \dynamicUp                                                               %! IC
+                            fs''16
+                            \f                                                                       %! IC
+                            [
+                            e''16
+                            ]
+                            ef''4
+                            ~
+                            ef''16
+                            r16
+                            af''16
+                            [
+                            g''16
+                            ]
+                        }
+                        \times 4/5 {
+                            a'16
+                            r4
+                            \revert TupletBracket.staff-padding                                      %! OC2
+                        }
+                    }
+                }
+            >>
+
+    """
+    return IndicatorCommand(
+        indicators=[abjad.LilyPondLiteral(r'\dynamicUp')],
+        selector=selector,
+        )
+
+def edition(
+    not_parts: typing.Union[str, abjad.Markup, IndicatorCommand],
+    only_parts: typing.Union[str, abjad.Markup, IndicatorCommand],
+    ) -> scoping.Suite:
+    """
+    Makes not-parts / only-parts markup suite.
+    """
+    if isinstance(not_parts, (str, abjad.Markup)):
+        not_parts = library.markup(not_parts)
+    assert isinstance(not_parts, IndicatorCommand)
+    not_parts_ = scoping.not_parts(not_parts)
+    if isinstance(only_parts, (str, abjad.Markup)):
+        only_parts = library.markup(only_parts)
+    assert isinstance(only_parts, IndicatorCommand)
+    only_parts_ = scoping.only_parts(only_parts)
+    return scoping.Suite(
+        not_parts_,
+        only_parts_,
         )
 
 def global_fermata(
@@ -3440,1485 +4297,89 @@ def parts(
         part_assignment=part_assignment,
         )
 
-def text_spanner(
-    items: typing.Union[str, typing.List],
+def one_voice(
     *,
-    bookend: typing.Union[bool, int] = -1,
-    leak: bool = None,
-    lilypond_id: int = None,
-    piece_selector: typings.Selector = 'baca.group()',
-    selector: typings.Selector = 'baca.tleaves()',
-    tweaks: typing.List[abjad.LilyPondTweakManager] = None,
-    ) -> PiecewiseIndicatorCommand:
-    r"""
-    Attaches text span indicators.
-
-    ..  container:: example
-
-        Single-segment spanners.
-
-        Dashed line with arrow:
-
-        >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.minimum_duration((1, 12)),
-        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
-
-        >>> maker(
-        ...     'MusicVoice',
-        ...     baca.text_spanner('pont. => ord.'),
-        ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-        ...     baca.text_spanner_staff_padding(4.5),
-        ...     )
-
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
-            <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-            <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
-            <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \context Staff = "MusicStaff"
-                    {
-                        \context Voice = "MusicVoice"
-                        {
-            <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
-                            \override TextSpanner.staff-padding = #4.5                               %! OC1
-                            e'8
-                            - \abjad_dashed_line_with_arrow                                          %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "pont."              %! PIC
-                            - \tweak bound-details.right.text \markup \baca-right "ord."             %! PIC
-                            - \tweak bound-details.right.padding #0.5                                %! PIC
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
-                            \startTextSpan                                                           %! PIC
-                            [
-            <BLANKLINE>
-                            d''8
-            <BLANKLINE>
-                            f'8
-            <BLANKLINE>
-                            e''8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
-                            g'8
-                            [
-            <BLANKLINE>
-                            f''8
-            <BLANKLINE>
-                            e'8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
-                            d''8
-                            [
-            <BLANKLINE>
-                            f'8
-            <BLANKLINE>
-                            e''8
-            <BLANKLINE>
-                            g'8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
-                            f''8
-                            [
-            <BLANKLINE>
-                            e'8
-            <BLANKLINE>
-                            d''8
-                            \stopTextSpan                                                            %! PIC
-                            ]
-                            \revert TextSpanner.staff-padding                                        %! OC2
-            <BLANKLINE>
-                        }
-                    }
-                >>
-            >>
-
-        Dashed line with hook:
-
-        >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.minimum_duration((1, 12)),
-        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
-
-        >>> maker(
-        ...     'MusicVoice',
-        ...     baca.text_spanner('pont. =| ord.'),
-        ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-        ...     baca.text_spanner_staff_padding(4.5),
-        ...     )
-
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
-            <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-            <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
-            <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \context Staff = "MusicStaff"
-                    {
-                        \context Voice = "MusicVoice"
-                        {
-            <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
-                            \override TextSpanner.staff-padding = #4.5                               %! OC1
-                            e'8
-                            - \abjad_dashed_line_with_hook                                           %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "pont."              %! PIC
-                            - \tweak bound-details.right.text \markup {                              %! PIC
-                                \concat                                                              %! PIC
-                                    {                                                                %! PIC
-                                        \raise                                                       %! PIC
-                                            #-1                                                      %! PIC
-                                            \draw-line                                               %! PIC
-                                                #'(0 . -1)                                           %! PIC
-                                        \hspace                                                      %! PIC
-                                            #0.75                                                    %! PIC
-                                        \general-align                                               %! PIC
-                                            #Y                                                       %! PIC
-                                            #1                                                       %! PIC
-                                            \upright                                                 %! PIC
-                                                ord.                                                 %! PIC
-                                    }                                                                %! PIC
-                                }                                                                    %! PIC
-                            - \tweak bound-details.right.padding #1.25                               %! PIC
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
-                            \startTextSpan                                                           %! PIC
-                            [
-            <BLANKLINE>
-                            d''8
-            <BLANKLINE>
-                            f'8
-            <BLANKLINE>
-                            e''8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
-                            g'8
-                            [
-            <BLANKLINE>
-                            f''8
-            <BLANKLINE>
-                            e'8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
-                            d''8
-                            [
-            <BLANKLINE>
-                            f'8
-            <BLANKLINE>
-                            e''8
-            <BLANKLINE>
-                            g'8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
-                            f''8
-                            [
-            <BLANKLINE>
-                            e'8
-            <BLANKLINE>
-                            d''8
-                            \stopTextSpan                                                            %! PIC
-                            ]
-                            \revert TextSpanner.staff-padding                                        %! OC2
-            <BLANKLINE>
-                        }
-                    }
-                >>
-            >>
-
-        Solid line with arrow:
-
-        >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.minimum_duration((1, 12)),
-        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
-
-        >>> maker(
-        ...     'MusicVoice',
-        ...     baca.text_spanner('pont. -> ord.'),
-        ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-        ...     baca.text_spanner_staff_padding(4.5),
-        ...     )
-
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
-            <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-            <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
-            <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \context Staff = "MusicStaff"
-                    {
-                        \context Voice = "MusicVoice"
-                        {
-            <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
-                            \override TextSpanner.staff-padding = #4.5                               %! OC1
-                            e'8
-                            - \abjad_solid_line_with_arrow                                           %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "pont."              %! PIC
-                            - \tweak bound-details.right.text \markup \baca-right "ord."             %! PIC
-                            - \tweak bound-details.right.padding #0.5                                %! PIC
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
-                            \startTextSpan                                                           %! PIC
-                            [
-            <BLANKLINE>
-                            d''8
-            <BLANKLINE>
-                            f'8
-            <BLANKLINE>
-                            e''8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
-                            g'8
-                            [
-            <BLANKLINE>
-                            f''8
-            <BLANKLINE>
-                            e'8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
-                            d''8
-                            [
-            <BLANKLINE>
-                            f'8
-            <BLANKLINE>
-                            e''8
-            <BLANKLINE>
-                            g'8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
-                            f''8
-                            [
-            <BLANKLINE>
-                            e'8
-            <BLANKLINE>
-                            d''8
-                            \stopTextSpan                                                            %! PIC
-                            ]
-                            \revert TextSpanner.staff-padding                                        %! OC2
-            <BLANKLINE>
-                        }
-                    }
-                >>
-            >>
-
-        Solid line with hook:
-
-        >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.minimum_duration((1, 12)),
-        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
-
-        >>> maker(
-        ...     'MusicVoice',
-        ...     baca.text_spanner('pont. -| ord.'),
-        ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-        ...     baca.text_spanner_staff_padding(4.5),
-        ...     )
-
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
-            <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-            <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
-            <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \context Staff = "MusicStaff"
-                    {
-                        \context Voice = "MusicVoice"
-                        {
-            <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
-                            \override TextSpanner.staff-padding = #4.5                               %! OC1
-                            e'8
-                            - \abjad_solid_line_with_hook                                            %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "pont."              %! PIC
-                            - \tweak bound-details.right.text \markup {                              %! PIC
-                                \concat                                                              %! PIC
-                                    {                                                                %! PIC
-                                        \raise                                                       %! PIC
-                                            #-1                                                      %! PIC
-                                            \draw-line                                               %! PIC
-                                                #'(0 . -1)                                           %! PIC
-                                        \hspace                                                      %! PIC
-                                            #0.75                                                    %! PIC
-                                        \general-align                                               %! PIC
-                                            #Y                                                       %! PIC
-                                            #1                                                       %! PIC
-                                            \upright                                                 %! PIC
-                                                ord.                                                 %! PIC
-                                    }                                                                %! PIC
-                                }                                                                    %! PIC
-                            - \tweak bound-details.right.padding #1.25                               %! PIC
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
-                            \startTextSpan                                                           %! PIC
-                            [
-            <BLANKLINE>
-                            d''8
-            <BLANKLINE>
-                            f'8
-            <BLANKLINE>
-                            e''8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
-                            g'8
-                            [
-            <BLANKLINE>
-                            f''8
-            <BLANKLINE>
-                            e'8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
-                            d''8
-                            [
-            <BLANKLINE>
-                            f'8
-            <BLANKLINE>
-                            e''8
-            <BLANKLINE>
-                            g'8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
-                            f''8
-                            [
-            <BLANKLINE>
-                            e'8
-            <BLANKLINE>
-                            d''8
-                            \stopTextSpan                                                            %! PIC
-                            ]
-                            \revert TextSpanner.staff-padding                                        %! OC2
-            <BLANKLINE>
-                        }
-                    }
-                >>
-            >>
-
-        Invisible lines:
-
-        >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.minimum_duration((1, 12)),
-        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
-
-        >>> maker(
-        ...     'MusicVoice',
-        ...     baca.text_spanner('pont. || ord.'),
-        ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-        ...     baca.text_spanner_staff_padding(4.5),
-        ...     )
-
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
-            <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-            <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
-            <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \context Staff = "MusicStaff"
-                    {
-                        \context Voice = "MusicVoice"
-                        {
-            <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
-                            \override TextSpanner.staff-padding = #4.5                               %! OC1
-                            e'8
-                            - \abjad_invisible_line                                                  %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "pont."              %! PIC
-                            - \tweak bound-details.right.text \markup \baca-right "ord."             %! PIC
-                            - \tweak bound-details.right.padding #0.5                                %! PIC
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
-                            \startTextSpan                                                           %! PIC
-                            [
-            <BLANKLINE>
-                            d''8
-            <BLANKLINE>
-                            f'8
-            <BLANKLINE>
-                            e''8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
-                            g'8
-                            [
-            <BLANKLINE>
-                            f''8
-            <BLANKLINE>
-                            e'8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
-                            d''8
-                            [
-            <BLANKLINE>
-                            f'8
-            <BLANKLINE>
-                            e''8
-            <BLANKLINE>
-                            g'8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
-                            f''8
-                            [
-            <BLANKLINE>
-                            e'8
-            <BLANKLINE>
-                            d''8
-                            \stopTextSpan                                                            %! PIC
-                            ]
-                            \revert TextSpanner.staff-padding                                        %! OC2
-            <BLANKLINE>
-                        }
-                    }
-                >>
-            >>
-
-    ..  container:: example
-
-        Piece selector groups leaves by measures:
-
-        >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.minimum_duration((1, 12)),
-        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
-
-        >>> maker(
-        ...     'MusicVoice',
-        ...     baca.dls_staff_padding(5),
-        ...     baca.text_spanner(
-        ...         'A || B',
-        ...         piece_selector=baca.group_by_measures([1]),
-        ...     ),
-        ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-        ...     baca.text_spanner_staff_padding(4.5),
-        ...     )
-
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
-            <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-            <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
-            <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \context Staff = "MusicStaff"
-                    {
-                        \context Voice = "MusicVoice"
-                        {
-            <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
-                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \override TextSpanner.staff-padding = #4.5                               %! OC1
-                            e'8
-                            - \abjad_invisible_line                                                  %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC
-                            \startTextSpan                                                           %! PIC
-                            [
-            <BLANKLINE>
-                            d''8
-            <BLANKLINE>
-                            f'8
-            <BLANKLINE>
-                            e''8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
-                            g'8
-                            \stopTextSpan                                                            %! PIC
-                            - \abjad_invisible_line                                                  %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC
-                            \startTextSpan                                                           %! PIC
-                            [
-            <BLANKLINE>
-                            f''8
-            <BLANKLINE>
-                            e'8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
-                            d''8
-                            \stopTextSpan                                                            %! PIC
-                            - \abjad_invisible_line                                                  %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC
-                            \startTextSpan                                                           %! PIC
-                            [
-            <BLANKLINE>
-                            f'8
-            <BLANKLINE>
-                            e''8
-            <BLANKLINE>
-                            g'8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
-                            f''8
-                            \stopTextSpan                                                            %! PIC
-                            - \abjad_invisible_line                                                  %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC
-                            - \tweak bound-details.right.text \markup \baca-right "A"                %! PIC
-                            - \tweak bound-details.right.padding #0.5                                %! PIC
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
-                            \startTextSpan                                                           %! PIC
-                            [
-            <BLANKLINE>
-                            e'8
-            <BLANKLINE>
-                            d''8
-                            \stopTextSpan                                                            %! PIC
-                            ]
-                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
-                            \revert TextSpanner.staff-padding                                        %! OC2
-            <BLANKLINE>
-                        }
-                    }
-                >>
-            >>
-
-        With spanners:
-
-        >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.minimum_duration((1, 12)),
-        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
-
-        >>> maker(
-        ...     'MusicVoice',
-        ...     baca.dls_staff_padding(5),
-        ...     baca.text_spanner(
-        ...         'A -> B ->',
-        ...         piece_selector=baca.group_by_measures([1]),
-        ...     ),
-        ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-        ...     baca.text_spanner_staff_padding(4.5),
-        ...     )
-
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
-            <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-            <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
-            <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \context Staff = "MusicStaff"
-                    {
-                        \context Voice = "MusicVoice"
-                        {
-            <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
-                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \override TextSpanner.staff-padding = #4.5                               %! OC1
-                            e'8
-                            - \abjad_solid_line_with_arrow                                           %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC
-                            \startTextSpan                                                           %! PIC
-                            [
-            <BLANKLINE>
-                            d''8
-            <BLANKLINE>
-                            f'8
-            <BLANKLINE>
-                            e''8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
-                            g'8
-                            \stopTextSpan                                                            %! PIC
-                            - \abjad_solid_line_with_arrow                                           %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC
-                            \startTextSpan                                                           %! PIC
-                            [
-            <BLANKLINE>
-                            f''8
-            <BLANKLINE>
-                            e'8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
-                            d''8
-                            \stopTextSpan                                                            %! PIC
-                            - \abjad_solid_line_with_arrow                                           %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC
-                            \startTextSpan                                                           %! PIC
-                            [
-            <BLANKLINE>
-                            f'8
-            <BLANKLINE>
-                            e''8
-            <BLANKLINE>
-                            g'8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
-                            f''8
-                            \stopTextSpan                                                            %! PIC
-                            - \abjad_solid_line_with_arrow                                           %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC
-                            - \tweak bound-details.right.text \markup \baca-right "A"                %! PIC
-                            - \tweak bound-details.right.padding #0.5                                %! PIC
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
-                            \startTextSpan                                                           %! PIC
-                            [
-            <BLANKLINE>
-                            e'8
-            <BLANKLINE>
-                            d''8
-                            \stopTextSpan                                                            %! PIC
-                            ]
-                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
-                            \revert TextSpanner.staff-padding                                        %! OC2
-            <BLANKLINE>
-                        }
-                    }
-                >>
-            >>
-
-        Bookends each piece:
-
-        >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.minimum_duration((1, 12)),
-        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
-
-        >>> maker(
-        ...     'MusicVoice',
-        ...     baca.dls_staff_padding(5),
-        ...     baca.text_spanner(
-        ...         'A || B',
-        ...         bookend=True,
-        ...         piece_selector=baca.group_by_measures([1]),
-        ...     ),
-        ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-        ...     baca.text_spanner_staff_padding(4.5),
-        ...     )
-
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
-            <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-            <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
-            <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \context Staff = "MusicStaff"
-                    {
-                        \context Voice = "MusicVoice"
-                        {
-            <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
-                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \override TextSpanner.staff-padding = #4.5                               %! OC1
-                            e'8
-                            - \abjad_invisible_line                                                  %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC
-                            - \tweak bound-details.right.text \markup \baca-right "B"                %! PIC
-                            - \tweak bound-details.right.padding #0.5                                %! PIC
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
-                            \startTextSpan                                                           %! PIC
-                            [
-            <BLANKLINE>
-                            d''8
-            <BLANKLINE>
-                            f'8
-            <BLANKLINE>
-                            e''8
-                            \stopTextSpan                                                            %! PIC
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
-                            g'8
-                            \stopTextSpan                                                            %! PIC
-                            - \abjad_invisible_line                                                  %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC
-                            - \tweak bound-details.right.text \markup \baca-right "A"                %! PIC
-                            - \tweak bound-details.right.padding #0.5                                %! PIC
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
-                            \startTextSpan                                                           %! PIC
-                            [
-            <BLANKLINE>
-                            f''8
-            <BLANKLINE>
-                            e'8
-                            \stopTextSpan                                                            %! PIC
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
-                            d''8
-                            \stopTextSpan                                                            %! PIC
-                            - \abjad_invisible_line                                                  %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC
-                            - \tweak bound-details.right.text \markup \baca-right "B"                %! PIC
-                            - \tweak bound-details.right.padding #0.5                                %! PIC
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
-                            \startTextSpan                                                           %! PIC
-                            [
-            <BLANKLINE>
-                            f'8
-            <BLANKLINE>
-                            e''8
-            <BLANKLINE>
-                            g'8
-                            \stopTextSpan                                                            %! PIC
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
-                            f''8
-                            \stopTextSpan                                                            %! PIC
-                            - \abjad_invisible_line                                                  %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC
-                            - \tweak bound-details.right.text \markup \baca-right "A"                %! PIC
-                            - \tweak bound-details.right.padding #0.5                                %! PIC
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
-                            \startTextSpan                                                           %! PIC
-                            [
-            <BLANKLINE>
-                            e'8
-            <BLANKLINE>
-                            d''8
-                            \stopTextSpan                                                            %! PIC
-                            ]
-                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
-                            \revert TextSpanner.staff-padding                                        %! OC2
-            <BLANKLINE>
-                        }
-                    }
-                >>
-            >>
-
-        With spanners:
-
-        >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.minimum_duration((1, 12)),
-        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
-
-        >>> maker(
-        ...     'MusicVoice',
-        ...     baca.dls_staff_padding(5),
-        ...     baca.text_spanner(
-        ...         'A -> B ->',
-        ...         bookend=True,
-        ...         piece_selector=baca.group_by_measures([1]),
-        ...     ),
-        ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-        ...     baca.text_spanner_staff_padding(4.5),
-        ...     )
-
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
-            <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-            <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
-            <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \context Staff = "MusicStaff"
-                    {
-                        \context Voice = "MusicVoice"
-                        {
-            <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
-                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \override TextSpanner.staff-padding = #4.5                               %! OC1
-                            e'8
-                            - \abjad_solid_line_with_arrow                                           %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC
-                            - \tweak bound-details.right.text \markup \baca-right "B"                %! PIC
-                            - \tweak bound-details.right.padding #0.5                                %! PIC
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
-                            \startTextSpan                                                           %! PIC
-                            [
-            <BLANKLINE>
-                            d''8
-            <BLANKLINE>
-                            f'8
-            <BLANKLINE>
-                            e''8
-                            \stopTextSpan                                                            %! PIC
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
-                            g'8
-                            \stopTextSpan                                                            %! PIC
-                            - \abjad_solid_line_with_arrow                                           %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC
-                            - \tweak bound-details.right.text \markup \baca-right "A"                %! PIC
-                            - \tweak bound-details.right.padding #0.5                                %! PIC
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
-                            \startTextSpan                                                           %! PIC
-                            [
-            <BLANKLINE>
-                            f''8
-            <BLANKLINE>
-                            e'8
-                            \stopTextSpan                                                            %! PIC
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
-                            d''8
-                            \stopTextSpan                                                            %! PIC
-                            - \abjad_solid_line_with_arrow                                           %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC
-                            - \tweak bound-details.right.text \markup \baca-right "B"                %! PIC
-                            - \tweak bound-details.right.padding #0.5                                %! PIC
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
-                            \startTextSpan                                                           %! PIC
-                            [
-            <BLANKLINE>
-                            f'8
-            <BLANKLINE>
-                            e''8
-            <BLANKLINE>
-                            g'8
-                            \stopTextSpan                                                            %! PIC
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
-                            f''8
-                            \stopTextSpan                                                            %! PIC
-                            - \abjad_solid_line_with_arrow                                           %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC
-                            - \tweak bound-details.right.text \markup \baca-right "A"                %! PIC
-                            - \tweak bound-details.right.padding #0.5                                %! PIC
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
-                            \startTextSpan                                                           %! PIC
-                            [
-            <BLANKLINE>
-                            e'8
-            <BLANKLINE>
-                            d''8
-                            \stopTextSpan                                                            %! PIC
-                            ]
-                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
-                            \revert TextSpanner.staff-padding                                        %! OC2
-            <BLANKLINE>
-                        }
-                    }
-                >>
-            >>
-
-    ..  container:: example
-
-        REGRESSION. Bookended hooks are kerned:
-
-        >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.minimum_duration((1, 12)),
-        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
-
-        >>> maker(
-        ...     'MusicVoice',
-        ...     baca.dls_staff_padding(5),
-        ...     baca.text_spanner(
-        ...         'A -| B -|',
-        ...         piece_selector=baca.group_by_measures([1]),
-        ...     ),
-        ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-        ...     baca.text_spanner_staff_padding(4.5),
-        ...     )
-
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
-            <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-            <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
-            <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \context Staff = "MusicStaff"
-                    {
-                        \context Voice = "MusicVoice"
-                        {
-            <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
-                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \override TextSpanner.staff-padding = #4.5                               %! OC1
-                            e'8
-                            - \abjad_solid_line_with_hook                                            %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC
-                            \startTextSpan                                                           %! PIC
-                            [
-            <BLANKLINE>
-                            d''8
-            <BLANKLINE>
-                            f'8
-            <BLANKLINE>
-                            e''8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
-                            g'8
-                            \stopTextSpan                                                            %! PIC
-                            - \abjad_solid_line_with_hook                                            %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC
-                            \startTextSpan                                                           %! PIC
-                            [
-            <BLANKLINE>
-                            f''8
-            <BLANKLINE>
-                            e'8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
-                            d''8
-                            \stopTextSpan                                                            %! PIC
-                            - \abjad_solid_line_with_hook                                            %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC
-                            \startTextSpan                                                           %! PIC
-                            [
-            <BLANKLINE>
-                            f'8
-            <BLANKLINE>
-                            e''8
-            <BLANKLINE>
-                            g'8
-                            ]
-            <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
-                            f''8
-                            \stopTextSpan                                                            %! PIC
-                            - \abjad_solid_line_with_hook                                            %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC
-                            - \tweak bound-details.right.text \markup {                              %! PIC
-                                \concat                                                              %! PIC
-                                    {                                                                %! PIC
-                                        \raise                                                       %! PIC
-                                            #-1                                                      %! PIC
-                                            \draw-line                                               %! PIC
-                                                #'(0 . -1)                                           %! PIC
-                                        \hspace                                                      %! PIC
-                                            #0.75                                                    %! PIC
-                                        \general-align                                               %! PIC
-                                            #Y                                                       %! PIC
-                                            #1                                                       %! PIC
-                                            \upright                                                 %! PIC
-                                                A                                                    %! PIC
-                                    }                                                                %! PIC
-                                }                                                                    %! PIC
-                            - \tweak bound-details.right.padding #1.25                               %! PIC
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
-                            \startTextSpan                                                           %! PIC
-                            [
-            <BLANKLINE>
-                            e'8
-            <BLANKLINE>
-                            d''8
-                            \stopTextSpan                                                            %! PIC
-                            ]
-                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
-                            \revert TextSpanner.staff-padding                                        %! OC2
-            <BLANKLINE>
-                        }
-                    }
-                >>
-            >>
-
+    selector: typings.Selector = 'baca.leaf(0)',
+    ) -> IndicatorCommand:
     """
-    shape_to_style = {
-        '=>': 'dashed_line_with_arrow',
-        '=|': 'dashed_line_with_hook',
-        '||': 'invisible_line',
-        '->': 'solid_line_with_arrow',
-        '-|': 'solid_line_with_hook',
-        }
-    if isinstance(items, str):
-        items_ = []
-        current_item: typing.List[str] = []
-        for word in items.split():
-            if word in shape_to_style:
-                if current_item:
-                    item_ = ' '.join(current_item)
-                    items_.append(item_)
-                    current_item = []
-                items_.append(word)
-            else:
-                current_item.append(word)
-        if current_item:
-            item_ = ' '.join(current_item)
-            items_.append(item_)
-        items = items_
-    bundles = []
-    if len(items) == 1:
-        raise NotImplementedError('implement lone item')
-    if lilypond_id is None:
-        command = r'\stopTextSpan'
-    elif lilypond_id == 1:
-        command = r'\stopTextSpanOne'
-    elif lilypond_id == 2:
-        command = r'\stopTextSpanTwo'
-    elif lilypond_id == 3:
-        command = r'\stopTextSpanThree'
-    else:
-        raise ValueError(lilypond_id)
-    stop_text_span = abjad.StopTextSpan(command=command)
-    cyclic_items = abjad.CyclicTuple(items)
-    for i, item in enumerate(cyclic_items):
-        if item in shape_to_style:
-            continue
-        if isinstance(item, str):
-            string = rf'\markup \baca-left "{item}"'
-            item_markup = abjad.LilyPondLiteral(string)
-        else:
-            item_markup = item
-            assert isinstance(item_markup, abjad.Markup)
-            item_markup = item_markup.upright()
-        prototype = (abjad.LilyPondLiteral, abjad.Markup)
-        assert isinstance(item_markup, prototype)
-        style = 'invisible_line'
-        if cyclic_items[i + 1] in shape_to_style:
-            style = shape_to_style[cyclic_items[i + 1]]
-            right_text = cyclic_items[i + 2]
-        else:
-            right_text = cyclic_items[i + 1]
-        right_markup: typing.Union[abjad.LilyPondLiteral, abjad.Markup]
-        if isinstance(right_text, str):
-            if 'hook' not in style:
-                string = rf'\markup \baca-right "{right_text}"'
-                right_markup = abjad.LilyPondLiteral(string)
-            else:
-                right_markup = abjad.Markup.from_literal(right_text)
-                assert isinstance(right_markup, abjad.Markup)
-                right_markup = right_markup.upright()
-        else:
-            assert isinstance(right_text, abjad.Markup)
-            right_markup = right_text.upright()
-        if lilypond_id is None:
-            command = r'\startTextSpan'
-        elif lilypond_id == 1:
-            command = r'\startTextSpanOne'
-        elif lilypond_id == 2:
-            command = r'\startTextSpanTwo'
-        elif lilypond_id == 3:
-            command = r'\startTextSpanThree'
-        else:
-            raise ValueError(lilypond_id)
-        start_text_span = abjad.StartTextSpan(
-            command=command,
-            left_text=item_markup,
-            style=style,
-            )
-        if tweaks:
-            library.apply_tweaks(start_text_span, tweaks)
-        # kerns bookended hook
-        if 'hook' in style:
-            assert isinstance(right_markup, abjad.Markup)
-            line = abjad.Markup.draw_line(0, -1)
-            line = line.raise_(-1)
-            hspace = abjad.Markup.hspace(0.75)
-            right_markup = right_markup.general_align('Y', 1)
-            right_markup = abjad.Markup.concat([line, hspace, right_markup])
-        bookended_spanner_start = abjad.new(
-            start_text_span,
-            right_text=right_markup,
-            )
-        # TODO: find some way to make these tweaks explicit to composer
-        manager = abjad.tweak(bookended_spanner_start)
-        manager.bound_details__right__stencil_align_dir_y = abjad.Center
-        if 'hook' in style:
-            manager.bound_details__right__padding = 1.25
-        else:
-            manager.bound_details__right__padding = 0.5
-        bundle = IndicatorBundle(
-            stop_text_span,
-            start_text_span,
-            bookended_spanner_start=bookended_spanner_start,
-            enchained=True,
-            )
-        bundles.append(bundle)
-    return PiecewiseIndicatorCommand(
-        bookend=bookend,
-        bundles=bundles,
-        leak=leak,
-        piece_selector=piece_selector,
+    Makes LilyPond ``\oneVoice`` command.
+    """
+    literal = abjad.LilyPondLiteral(r'\oneVoice')
+    return IndicatorCommand(
+        indicators=[literal],
         selector=selector,
         )
 
+def previous_metadata(path: str) -> typing.Optional[abjad.OrderedDict]:
+    """
+    Gets previous segment metadata before ``path``.
+    """
+    # reproduces abjad.Path.get_previous_path()
+    # because Travis isn't configured for scores-directory calculations
+    definition_py = abjad.Path(path)
+    segment = abjad.Path(definition_py).parent
+    assert segment.is_segment(), repr(segment)
+    segments = segment.parent
+    assert segments.is_segments(), repr(segments)
+    paths = segments.list_paths()
+    paths = [_ for _ in paths if not _.name.startswith('.')]
+    assert all(_.is_dir() for _ in paths), repr(paths)
+    index = paths.index(segment)
+    if index == 0:
+        return None
+    previous_index = index - 1
+    previous_segment = paths[previous_index]
+    previous_metadata = previous_segment.get_metadata()
+    return previous_metadata
+
+def voice_four(
+    *,
+    selector: typings.Selector = 'baca.leaf(0)',
+    ) -> IndicatorCommand:
+    r"""
+    Makes LilyPond ``\voiceFour`` command.
+    """
+    literal = abjad.LilyPondLiteral(r'\voiceFour')
+    return IndicatorCommand(
+        indicators=[literal],
+        selector=selector,
+        )
+
+def voice_one(
+    *,
+    selector: typings.Selector = 'baca.leaf(0)',
+    ) -> IndicatorCommand:
+    r"""
+    Makes LilyPond ``\voiceOne`` command.
+    """
+    literal = abjad.LilyPondLiteral(r'\voiceOne')
+    return IndicatorCommand(
+        indicators=[literal],
+        selector=selector,
+        )
+
+def voice_three(
+    *,
+    selector: typings.Selector = 'baca.leaf(0)',
+    ) -> IndicatorCommand:
+    r"""
+    Makes LilyPond ``\voiceThree`` command.
+    """
+    literal = abjad.LilyPondLiteral(r'\voiceThree')
+    return IndicatorCommand(
+        indicators=[literal],
+        selector=selector,
+        )
+
+def voice_two(
+    *,
+    selector: typings.Selector = 'baca.leaf(0)',
+    ) -> IndicatorCommand:
+    r"""
+    Makes LilyPond ``\voiceTwo`` command.
+    """
+    literal = abjad.LilyPondLiteral(r'\voiceTwo')
+    return IndicatorCommand(
+        indicators=[literal],
+        selector=selector,
+        )

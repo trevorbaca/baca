@@ -1055,22 +1055,45 @@ commands
 .. autosummary::
    :nosignatures:
 
+   ~allow_octaves
+   ~bar_extent_persistent
    ~bcps
    ~color
    ~container
+   ~cross_staff
+   ~dynamic_down
+   ~dynamic_up
+   ~edition
    ~global_fermata
    ~instrument
    ~label
    ~metronome_mark
+   ~one_voice
    ~parts
-   ~text_spanner
+   ~previous_metadata
+   ~voice_four
+   ~voice_one
+   ~voice_three
+   ~voice_two
    ~volta
+
+.. autofunction:: allow_octaves
+
+.. autofunction:: bar_extent_persistent
 
 .. autofunction:: bcps
 
 .. autofunction:: color
 
 .. autofunction:: container
+
+.. autofunction:: cross_staff
+
+.. autofunction:: dynamic_down
+
+.. autofunction:: dynamic_up
+
+.. autofunction:: edition
 
 .. autofunction:: global_fermata
 
@@ -1080,8 +1103,18 @@ commands
 
 .. autofunction:: metronome_mark
 
+.. autofunction:: one_voice
+
 .. autofunction:: parts
 
-.. autofunction:: text_spanner
+.. autofunction:: previous_metadata
+
+.. autofunction:: voice_four
+
+.. autofunction:: voice_one
+
+.. autofunction:: voice_three
+
+.. autofunction:: voice_two
 
 .. autofunction:: volta
