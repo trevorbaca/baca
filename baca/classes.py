@@ -1,7 +1,1200 @@
 import abjad
 import collections
 import copy
+import typing
 
+
+### CLASSES ###
+
+class Counter(abjad.AbjadObject):
+    """
+    Counter.
+
+    ..  container:: example
+
+        Initializes to zero and increments by 1:
+
+        >>> counter = baca.Counter(start=0)
+        >>> counter.start, counter.current
+        (0, 0)
+
+        >>> counter(count=1), counter.current
+        (1, 1)
+        >>> counter(count=1), counter.current
+        (1, 2)
+        >>> counter(count=1), counter.current
+        (1, 3)
+        >>> counter(count=1), counter.current
+        (1, 4)
+
+    ..  container:: example
+
+        Initializes to zero and increments by 2:
+
+        >>> counter = baca.Counter(start=0)
+        >>> counter.start, counter.current
+        (0, 0)
+
+        >>> counter(2), counter.current
+        (2, 2)
+        >>> counter(2), counter.current
+        (2, 4)
+        >>> counter(2), counter.current
+        (2, 6)
+        >>> counter(2), counter.current
+        (2, 8)
+
+    ..  container:: example
+
+        Initializes to 10 and increments by different values:
+
+        >>> counter = baca.Counter(start=10)
+        >>> counter.start, counter.current
+        (10, 10)
+
+        >>> counter(3), counter.current
+        (3, 13)
+        >>> counter(-6), counter.current
+        (-6, 7)
+        >>> counter(5.5), counter.current
+        (5.5, 12.5)
+        >>> counter(-2), counter.current
+        (-2, 10.5)
+
+    """
+
+    ### CLASS VARIABLES ###
+
+    __slots__ = (
+        '_current',
+        '_start',
+        )
+
+    ### INITIALIZER ###
+
+    def __init__(self, *, start=0):
+        self._start = start
+        self._current = start
+
+    ### SPECIAL METHODS ###
+
+    def __call__(self, count=1):
+        """
+        Calls counter.
+
+        Returns new value.
+        """
+        current = self.current + count
+        self._current = current
+        return count
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def current(self):
+        """
+        Gets current value.
+
+        Returns integer.
+        """
+        return self._current
+
+    @property
+    def start(self):
+        """
+        Gets start value.
+
+        Set to integer.
+
+        Returns integer.
+        """
+        return self._start
+
+class Cursor(abjad.AbjadObject):
+    """
+    Cursor.
+
+    ..  container:: example
+
+        Gets elements one at a time:
+
+        >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+        >>> cursor = baca.Cursor(source=source, cyclic=True)
+
+        >>> cursor.next()
+        [13]
+        >>> cursor.next()
+        ['da capo']
+        >>> cursor.next()
+        [Note("cs'8.")]
+        >>> cursor.next()
+        ['rit.']
+        >>> cursor.next()
+        [13]
+        >>> cursor.next()
+        ['da capo']
+
+    ..  container:: example
+
+        Gets different numbers of elements at a time:
+
+        >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+        >>> cursor = baca.Cursor(source=source, cyclic=True)
+
+        >>> cursor.next(count=2)
+        [13, 'da capo']
+        >>> cursor.next(count=-1)
+        ['da capo']
+        >>> cursor.next(count=2)
+        ['da capo', Note("cs'8.")]
+        >>> cursor.next(count=-1)
+        [Note("cs'8.")]
+        >>> cursor.next(count=2)
+        [Note("cs'8."), 'rit.']
+        >>> cursor.next(count=-1)
+        ['rit.']
+
+    """
+
+    ### CLASS VARIABLES ###
+
+    __slots__ = (
+        '_cyclic',
+        '_lone_items',
+        '_position',
+        '_singletons',
+        '_source',
+        '_suppress_exception',
+        )
+
+    _publish_storage_format = True
+
+    ### INITIALIZER ###
+
+    def __init__(
+        self,
+        source=None,
+        *,
+        cyclic=None,
+        position=None,
+        singletons=None,
+        suppress_exception=None,
+        ):
+        if cyclic is not None:
+            cyclic = bool(cyclic)
+        self._cyclic = cyclic
+        source = source or ()
+        assert isinstance(source, collections.Iterable), repr(source)
+        if cyclic:
+            source = abjad.CyclicTuple(source)
+        self._source = source
+        assert isinstance(position, (int, type(None))), repr(position)
+        self._position = position
+        if singletons is not None:
+            singletons = bool(singletons)
+        self._singletons = singletons
+        if suppress_exception is not None:
+            suppress_exception = bool(suppress_exception)
+        self._suppress_exception = suppress_exception
+
+    ### SPECIAL METHODS ###
+
+    def __eq__(self, argument):
+        """
+        Is true when ``argument`` is a cursor with keyword
+        arguments equal to this cursor.
+
+        Returns true or false.
+        """
+        superclass = super(Cursor, self)
+        return superclass.__eq__(argument)
+
+    def __getitem__(self, argument):
+        """
+        Gets item from cursor.
+
+        ..  container:: example
+
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(source=source, cyclic=True)
+
+            >>> cursor[0]
+            13
+
+            >>> cursor[:2]
+            (13, 'da capo')
+
+            >>> cursor[-1]
+            'rit.'
+
+        Returns item or slice.
+        """
+        return self.source.__getitem__(argument)
+
+    def __hash__(self):
+        """
+        Hashes cursor.
+
+        Required to be explicitly redefined on Python 3 if __eq__ changes.
+
+        Returns integer.
+        """
+        return super(Cursor, self).__hash__()
+
+    def __iter__(self, count=1):
+        """
+        Iterates cursor.
+
+        ..  container:: example
+
+            Iterates acyclic cursor:
+
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(source=source)
+            >>> for item in cursor:
+            ...     item
+            ...
+            13
+            'da capo'
+            Note("cs'8.")
+            'rit.'
+
+        ..  container:: example
+
+            Iterates cyclic cursor:
+
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(source=source, cyclic=True)
+            >>> for item in cursor:
+            ...     item
+            ...
+            13
+            'da capo'
+            Note("cs'8.")
+            'rit.'
+
+        Returns generator.
+        """
+        return iter(self.source)
+
+    def __len__(self):
+        """
+        Gets length of cursor.
+
+        ..  container:: example
+
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(source=source)
+            >>> len(cursor)
+            4
+
+        Defined equal to length of cursor source.
+
+        Returns nonnegative integer.
+        """
+        return len(self.source)
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def cyclic(self):
+        """
+        Is true when cursor is cyclic.
+
+        Set to true, false or none.
+
+        Defaults to none.
+
+        Returns true, false or none.
+        """
+        return self._cyclic
+
+    @property
+    def is_exhausted(self):
+        """
+        Is true when cursor is exhausted.
+
+        ..  container:: example
+
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(source=source)
+            >>> cursor.is_exhausted
+            False
+
+            >>> cursor.next(), cursor.is_exhausted
+            ([13], False)
+
+            >>> cursor.next(), cursor.is_exhausted
+            (['da capo'], False)
+
+            >>> cursor.next(), cursor.is_exhausted
+            ([Note("cs'8.")], False)
+
+            >>> cursor.next(), cursor.is_exhausted
+            (['rit.'], True)
+
+        Returns true or false.
+        """
+        if self.position is None:
+            return False
+        try:
+            self.source[self.position]
+        except IndexError:
+            return True
+        return False
+
+    @property
+    def position(self):
+        """
+        Gets position.
+
+        ..  container:: example
+
+            Position starts at none by default:
+
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(source=source, cyclic=True)
+
+            >>> cursor.position is None
+            True
+
+            >>> cursor.next()
+            [13]
+            >>> cursor.next()
+            ['da capo']
+            >>> cursor.next()
+            [Note("cs'8.")]
+            >>> cursor.next()
+            ['rit.']
+
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(
+            ...     source=source,
+            ...     cyclic=True,
+            ...     position=None,
+            ...     )
+
+            >>> cursor.position is None
+            True
+
+            >>> cursor.next(count=-1)
+            ['rit.']
+            >>> cursor.next(count=-1)
+            [Note("cs'8.")]
+            >>> cursor.next(count=-1)
+            ['da capo']
+            >>> cursor.next(count=-1)
+            [13]
+
+        ..  container:: example
+
+            Position starting at 0:
+
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(
+            ...     source=source,
+            ...     cyclic=True,
+            ...     position=0,
+            ...     )
+
+            >>> cursor.position
+            0
+
+            >>> cursor.next()
+            [13]
+            >>> cursor.next()
+            ['da capo']
+            >>> cursor.next()
+            [Note("cs'8.")]
+            >>> cursor.next()
+            ['rit.']
+
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(
+            ...     source=source,
+            ...     cyclic=True,
+            ...     position=0,
+            ...     )
+
+            >>> cursor.position
+            0
+
+            >>> cursor.next(count=-1)
+            ['rit.']
+            >>> cursor.next(count=-1)
+            [Note("cs'8.")]
+            >>> cursor.next(count=-1)
+            ['da capo']
+            >>> cursor.next(count=-1)
+            [13]
+
+        ..  container:: example
+
+            Position starting at -1:
+
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(
+            ...     source=source,
+            ...     cyclic=True,
+            ...     position=-1,
+            ...     )
+
+            >>> cursor.position
+            -1
+
+            >>> cursor.next()
+            ['rit.']
+            >>> cursor.next()
+            [13]
+            >>> cursor.next()
+            ['da capo']
+            >>> cursor.next()
+            [Note("cs'8.")]
+
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(
+            ...     source=source,
+            ...     cyclic=True,
+            ...     position=-1,
+            ...     )
+
+            >>> cursor.position
+            -1
+
+            >>> cursor.next(count=-1)
+            [Note("cs'8.")]
+            >>> cursor.next(count=-1)
+            ['da capo']
+            >>> cursor.next(count=-1)
+            [13]
+            >>> cursor.next(count=-1)
+            ['rit.']
+
+        Returns tuple.
+        """
+        return self._position
+
+    @property
+    def singletons(self):
+        """
+        Is true when cursor returns singletons not enclosed within a list.
+        If false when cursor returns singletons enclosed within a list.
+
+        ..  container:: example
+
+            Returns singletons enclosed within a list:
+
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(
+            ...     source=source,
+            ...     suppress_exception=True,
+            ...     )
+
+            >>> cursor.next()
+            [13]
+
+            >>> cursor.next()
+            ['da capo']
+
+            >>> cursor.next()
+            [Note("cs'8.")]
+
+            >>> cursor.next()
+            ['rit.']
+
+            >>> cursor.next()
+            []
+
+            >>> cursor.next()
+            []
+
+        ..  container:: example
+
+            Returns singletons free of enclosing list:
+
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(
+            ...     source=source,
+            ...     singletons=True,
+            ...     suppress_exception=True,
+            ...     )
+
+            >>> cursor.next()
+            13
+
+            >>> cursor.next()
+            'da capo'
+
+            >>> cursor.next()
+            Note("cs'8.")
+
+            >>> cursor.next()
+            'rit.'
+
+            >>> cursor.next() is None
+            True
+
+            >>> cursor.next() is None
+            True
+
+        """
+        return self._singletons
+
+    @property
+    def source(self):
+        """
+        Gets source.
+
+        ..  container:: example
+
+            List source:
+
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(source=source)
+
+            >>> cursor.source
+            [13, 'da capo', Note("cs'8."), 'rit.']
+
+        ..  container:: example
+
+            Cyclic tuple source:
+
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(source=source, cyclic=True)
+
+            >>> cursor.source
+            CyclicTuple([13, 'da capo', Note("cs'8."), 'rit.'])
+
+        Returns source.
+        """
+        return self._source
+
+    @property
+    def suppress_exception(self):
+        """
+        Is true when cursor returns none on exhaustion.
+        Is false when cursor raises exception on exhaustion.
+
+        ..  container:: example
+
+            Exhausted cursor raises exception:
+
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(source=source)
+            >>> cursor.is_exhausted
+            False
+
+            >>> cursor.next()
+            [13]
+
+            >>> cursor.next()
+            ['da capo']
+
+            >>> cursor.next()
+            [Note("cs'8.")]
+
+            >>> cursor.next()
+            ['rit.']
+
+            >>> cursor.next()
+            Traceback (most recent call last):
+                ...
+            Exception: cursor only 4.
+
+            >>> cursor.next()
+            Traceback (most recent call last):
+                ...
+            Exception: cursor only 4.
+
+        ..  container:: example
+
+            Exhausted cursor returns none:
+
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(
+            ...     source=source,
+            ...     suppress_exception=True,
+            ...     )
+            >>> cursor.is_exhausted
+            False
+
+            >>> cursor.next()
+            [13]
+
+            >>> cursor.next()
+            ['da capo']
+
+            >>> cursor.next()
+            [Note("cs'8.")]
+
+            >>> cursor.next()
+            ['rit.']
+
+            >>> cursor.next()
+            []
+
+            >>> cursor.next()
+            []
+
+        """
+        return self._suppress_exception
+
+    ### PUBLIC METHODS ###
+
+    @staticmethod
+    def from_pitch_class_segments(pitch_class_segments):
+        """
+        Makes cursor from `pitch_class_segments`.
+
+        ..  container:: example
+
+            Makes cursor from pitch-class segments:
+
+            >>> number_lists = [[13, 13.5, 11], [-2, 2, 1.5]]
+            >>> cursor = baca.Cursor.from_pitch_class_segments(
+            ...     number_lists,
+            ...     )
+
+            >>> abjad.f(cursor, strict=89)
+            baca.Cursor(
+                source=abjad.CyclicTuple(
+                    [
+                        abjad.PitchClassSegment(
+                            (
+                                abjad.NumberedPitchClass(1),
+                                abjad.NumberedPitchClass(1.5),
+                                abjad.NumberedPitchClass(11),
+                                ),
+                            item_class=abjad.NumberedPitchClass,
+                            ),
+                        abjad.PitchClassSegment(
+                            (
+                                abjad.NumberedPitchClass(10),
+                                abjad.NumberedPitchClass(2),
+                                abjad.NumberedPitchClass(1.5),
+                                ),
+                            item_class=abjad.NumberedPitchClass,
+                            ),
+                        ]
+                    ),
+                cyclic=True,
+                )
+
+        Coerces numeric `pitch_class_segments`.
+
+        Returns cursor.
+        """
+        cells = []
+        for pitch_class_segment in pitch_class_segments:
+                pitch_class_segment = abjad.PitchClassSegment(
+                    items=pitch_class_segment,
+                    )
+                cells.append(pitch_class_segment)
+        cursor = Cursor(source=cells, cyclic=True)
+        return cursor
+
+    def next(self, count=1, exhausted=False):
+        """
+        Gets next ``count`` elements in source.
+
+        ..  container:: example
+
+            Gets elements one at a time:
+
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(source=source, cyclic=True)
+
+            >>> cursor.next()
+            [13]
+            >>> cursor.next()
+            ['da capo']
+            >>> cursor.next()
+            [Note("cs'8.")]
+            >>> cursor.next()
+            ['rit.']
+            >>> cursor.next()
+            [13]
+            >>> cursor.next()
+            ['da capo']
+
+        ..  container:: example
+
+            Gets elements one at a time in reverse:
+
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(source=source, cyclic=True)
+
+            >>> cursor.next(count=-1)
+            ['rit.']
+            >>> cursor.next(count=-1)
+            [Note("cs'8.")]
+            >>> cursor.next(count=-1)
+            ['da capo']
+            >>> cursor.next(count=-1)
+            [13]
+
+        ..  container:: example
+
+            Gets same two elements forward and back:
+
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(source=source, cyclic=True)
+
+            >>> cursor.next(count=2)
+            [13, 'da capo']
+            >>> cursor.next(count=-2)
+            ['da capo', 13]
+            >>> cursor.next(count=2)
+            [13, 'da capo']
+            >>> cursor.next(count=-2)
+            ['da capo', 13]
+
+        ..  container:: example
+
+            Gets different numbers of elements at a time:
+
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(source=source, cyclic=True)
+
+            >>> cursor.next(count=2)
+            [13, 'da capo']
+            >>> cursor.next(count=-1)
+            ['da capo']
+            >>> cursor.next(count=2)
+            ['da capo', Note("cs'8.")]
+            >>> cursor.next(count=-1)
+            [Note("cs'8.")]
+            >>> cursor.next(count=2)
+            [Note("cs'8."), 'rit.']
+            >>> cursor.next(count=-1)
+            ['rit.']
+
+        ..  container:: example
+
+            Gets different numbers of elements at a time:
+
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(source=source, cyclic=True)
+
+            >>> cursor.next(count=2)
+            [13, 'da capo']
+            >>> cursor.next(count=-3)
+            ['da capo', 13, 'rit.']
+            >>> cursor.next(count=2)
+            ['rit.', 13]
+            >>> cursor.next(count=-3)
+            [13, 'rit.', Note("cs'8.")]
+            >>> cursor.next(count=2)
+            [Note("cs'8."), 'rit.']
+            >>> cursor.next(count=-3)
+            ['rit.', Note("cs'8."), 'da capo']
+
+        ..  container:: example
+
+            Raises exception when cursor is exhausted:
+
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(source=source)
+
+            >>> cursor.next(count=99)
+            Traceback (most recent call last):
+                ...
+            Exception: cursor only 4.
+
+        Returns tuple.
+        """
+        result = []
+        if self.position is None:
+            self._position = 0
+        if 0 < count:
+            for i in range(count):
+                try:
+                    element = self.source[self.position]
+                    result.append(element)
+                except IndexError:
+                    if not self.suppress_exception:
+                        raise Exception(f'cursor only {len(self.source)}.')
+                self._position += 1
+        elif count < 0:
+            for i in range(abs(count)):
+                self._position -= 1
+                try:
+                    element = self.source[self.position]
+                    result.append(element)
+                except IndexError:
+                    if not self.suppress_exception:
+                        raise Exception(f'cursor only {len(self.source)}.')
+        if self.singletons:
+            if len(result) == 0:
+                result = None
+            elif len(result) == 1:
+                result = result[0]
+        if exhausted and not self.is_exhausted:
+            raise Exception(f'cusor not exhausted: {self!r}.')
+        return result
+
+    def reset(self):
+        """
+        Resets cursor.
+
+        ..  container:: example
+
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(source=source)
+
+            >>> cursor.next()
+            [13]
+            >>> cursor.next()
+            ['da capo']
+
+            >>> cursor.reset()
+
+            >>> cursor.next()
+            [13]
+            >>> cursor.next()
+            ['da capo']
+
+        Returns none.
+        """
+        self._position = 0
+
+class PaddedTuple(abjad.AbjadObject):
+    """
+    Padded tuple.
+
+    ..  container:: example
+
+        >>> tuple_ = baca.PaddedTuple('abcd', pad=2)
+
+        >>> tuple_
+        PaddedTuple(['a', 'b', 'c', 'd'], pad=2)
+
+        >>> for i in range(8):
+        ...     print(i, tuple_[i])
+        ...
+        0 a
+        1 b
+        2 c
+        3 d
+        4 c
+        5 d
+        6 c
+        7 d
+
+    Padded tuples overload the item-getting method of built-in tuples.
+
+    Padded tuples return a value for any integer index.
+    """
+
+    ### CLASS VARIABLES ###
+
+    __slots__ = (
+        '_items',
+        '_pad',
+        )
+
+    ### INITIALIZER ###
+
+    def __init__(
+        self,
+        items: typing.Sequence = None,
+        pad: int = 1,
+        ) -> None:
+        items = items or ()
+        items = tuple(items)
+        self._items: typing.Tuple = items
+        assert isinstance(pad, int), repr(pad)
+        assert 1 <= pad, repr(pad)
+        self._pad = pad
+
+    ### SPECIAL METHODS ###
+
+    def __contains__(self, item) -> bool:
+        """
+        Is true when padded tuple contains ``item``.
+        """
+        return self._items.__contains__(item)
+
+    def __eq__(self, argument) -> bool:
+        """
+        Is true when ``argument`` is a tuple with ``items`` and ``pad`` equal
+        to those of this padded tuple.
+        """
+        if isinstance(argument, tuple):
+            return self._items == argument
+        elif isinstance(argument, type(self)):
+            return self._items == argument._items
+        return False
+
+    def __getitem__(self, argument) -> typing.Any:
+        """
+        Gets item or slice identified by ``argument``.
+
+        ..  container:: example
+
+            Gets slice open at right:
+
+            >>> baca.PaddedTuple('abcd', pad=3)[2:]
+            ('c', 'd')
+
+            Gets slice closed at right:
+
+            >>> slice_ = baca.PaddedTuple('abcd', pad=3)[:15]
+            >>> slice_
+            ('a', 'b', 'c', 'd', 'b', 'c', 'd', 'b', 'c', 'd', 'b', 'c', 'd', 'b', 'c')
+
+            >>> len(slice_)
+            15
+
+        Raises index error when ``argument`` can not be found in padded tuple.
+        """
+        if isinstance(argument, slice):
+            if argument.start is None:
+                if argument.stop is None:
+                    start, stop, stride = 0, len(self), 1
+                elif 0 < argument.stop:
+                    start, stop, stride = 0, argument.stop, 1
+                elif argument.stop < 0:
+                    start, stop, stride = -1, stop, -1
+            elif argument.stop is None:
+                if argument.start is None:
+                    start, stop, stride = 0, len(self), 1
+                elif 0 < argument.start:
+                    start, stop, stride = argument.start, len(self), 1
+                elif argument.start < 0:
+                    start, stop, stride = argument.start, -len(self), -1
+            elif 0 < argument.start and 0 < argument.stop:
+                start, stop, stride = argument.start, argument.stop, 1
+            elif argument.start < 0 and argument.stop < 0:
+                start, stop, stride = argument.start, argument.stop, -1
+            else:
+                raise ValueError(argument)
+            items = []
+            for i in range(start, stop, stride):
+                item = self[i]
+                items.append(item)
+            return tuple(items)
+        if not self:
+            raise IndexError(f'padded tuple is empty: {self!r}.')
+        length = len(self)
+        assert isinstance(self.pad, int)
+        if 0 <= argument < len(self):
+            pass
+        elif length <= argument:
+            right = self.pad
+            left = length - right
+            overage = argument - length
+            argument = left + (overage % right)
+        elif -length <= argument < 0:
+            pass
+        else:
+            assert argument < -length
+            left = self.pad
+            right = length - left
+            assert left + right == length
+            overage = abs(argument) - length
+            overage = overage % left
+            if overage == 0:
+                overage = left
+            positive_argument = right + overage
+            argument = -positive_argument
+        return self._items.__getitem__(argument)
+
+    def __hash__(self) -> int:
+        """
+        Hashes padded tuple.
+
+        Redefined in tandem with __eq__.
+        """
+        return super(PaddedTuple, self).__hash__()
+
+    def __iter__(self) -> typing.Iterator:
+        """
+        Iterates padded tuple.
+
+        Iterates items only once.
+
+        Does not iterate infinitely.
+        """
+        return self._items.__iter__()
+
+    def __len__(self) -> int:
+        """
+        Gets length of padded tuple.
+
+        ..  container:: example
+
+            >>> len(baca.PaddedTuple('abcd', pad=3))
+            4
+
+        """
+        assert isinstance(self._items, tuple)
+        return self._items.__len__()
+
+    ### PRIVATE METHODS ###
+
+    def _get_format_specification(self):
+        return abjad.FormatSpecification(
+            client=self,
+            repr_is_indented=False,
+            storage_format_args_values=[list(self._items)],
+            )
+
+    def _get_slice(self, start_index, stop_index):
+        if 0 < stop_index and start_index is None:
+            start_index = 0
+        elif stop_index < 0 and start_index is None:
+            start_index = -1
+        items = []
+        if 0 <= start_index and 0 <= stop_index:
+            for i in range(start_index, stop_index):
+                item = self[i]
+                items.append(item)
+        elif start_index < 0 and stop_index < 0:
+            for i in range(start_index, stop_index, -1):
+                item = self[i]
+                items.append(item)
+        else:
+            raise Exception('slice index signs must be equal.')
+        return tuple(items)
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def items(self) -> typing.Tuple:
+        """
+        Gets items.
+
+        ..  container:: example
+
+            >>> baca.PaddedTuple('abcd', pad=1).items
+            ('a', 'b', 'c', 'd')
+
+            >>> baca.PaddedTuple([1, 2, 3, 4], pad=1).items
+            (1, 2, 3, 4)
+
+        """
+        return self._items
+
+    @property
+    def pad(self) -> typing.Optional[int]:
+        """
+        Gets pad.
+
+        ..  container:: example
+
+            With nonnegative indices:
+
+            >>> tuple_ = baca.PaddedTuple('abcd', pad=1)
+            >>> for i in range(8):
+            ...     print(i, tuple_[i])
+            ...
+            0 a
+            1 b
+            2 c
+            3 d
+            4 d
+            5 d
+            6 d
+            7 d
+
+            >>> tuple_ = baca.PaddedTuple('abcd', pad=2)
+            >>> for i in range(8):
+            ...     print(i, tuple_[i])
+            ...
+            0 a
+            1 b
+            2 c
+            3 d
+            4 c
+            5 d
+            6 c
+            7 d
+
+            >>> tuple_ = baca.PaddedTuple('abcd', pad=3)
+            >>> for i in range(8):
+            ...     print(i, tuple_[i])
+            ...
+            0 a
+            1 b
+            2 c
+            3 d
+            4 b
+            5 c
+            6 d
+            7 b
+
+            >>> tuple_ = baca.PaddedTuple('abcd', pad=4)
+            >>> for i in range(8):
+            ...     print(i, tuple_[i])
+            ...
+            0 a
+            1 b
+            2 c
+            3 d
+            4 a
+            5 b
+            6 c
+            7 d
+
+        ..  container:: example
+
+            With nonpositive indices:
+
+            >>> tuple_ = baca.PaddedTuple('abcd', pad=1)
+            >>> for i in range(-1, -9, -1):
+            ...     print(i, tuple_[i])
+            ...
+            -1 d
+            -2 c
+            -3 b
+            -4 a
+            -5 a
+            -6 a
+            -7 a
+            -8 a
+
+            >>> tuple_ = baca.PaddedTuple('abcd', pad=2)
+            >>> for i in range(-1, -9, -1):
+            ...     print(i, tuple_[i])
+            ...
+            -1 d
+            -2 c
+            -3 b
+            -4 a
+            -5 b
+            -6 a
+            -7 b
+            -8 a
+
+            >>> tuple_ = baca.PaddedTuple('abcd', pad=3)
+            >>> for i in range(-1, -9, -1):
+            ...     print(i, tuple_[i])
+            ...
+            -1 d
+            -2 c
+            -3 b
+            -4 a
+            -5 c
+            -6 b
+            -7 a
+            -8 c
+
+            >>> tuple_ = baca.PaddedTuple('abcd', pad=4)
+            >>> for i in range(-1, -9, -1):
+            ...     print(i, tuple_[i])
+            ...
+            -1 d
+            -2 c
+            -3 b
+            -4 a
+            -5 d
+            -6 c
+            -7 b
+            -8 a
+
+        """
+        return self._pad
 
 class Tree(abjad.AbjadObject):
     """

@@ -1,10 +1,10 @@
 import abjad
 import copy
 from abjadext import rmakers
+from . import classes
 from . import scoping
 from . import rhythmcommands
 from .Coat import Coat
-from .Cursor import Cursor
 from .NestingCommand import NestingCommand
 from .Selection import Selection
 from .Sequence import Sequence
@@ -1352,7 +1352,7 @@ class ImbricationCommand(scoping.Command):
         segment = Sequence(self.segment).flatten(depth=-1)
         if self.by_pitch_class:
             segment = [abjad.NumberedPitchClass(_) for _ in segment]
-        cursor = Cursor(
+        cursor = classes.Cursor(
             singletons=True,
             source=segment,
             suppress_exception=True,

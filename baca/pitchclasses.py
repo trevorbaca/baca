@@ -6,10 +6,9 @@ import collections as collections_module
 import inspect
 import math
 import typing
-from .Cursor import Cursor
+from . import classes
 from .Expression import Expression
 from .Sequence import Sequence
-from .Tree import Tree
 
 
 ### CLASSES ###
@@ -1790,7 +1789,11 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
 
         Returns cursor.
         """
-        return Cursor(cyclic=cyclic, singletons=singletons, source=self)
+        return classes.Cursor(
+            cyclic=cyclic,
+            singletons=singletons,
+            source=self,
+            )
 
     def flatten(self):
         """
@@ -6681,7 +6684,7 @@ class PitchSet(abjad.PitchSet):
             item_class=item_class,
             )
 
-class PitchTree(Tree):
+class PitchTree(classes.Tree):
     r"""
     Pitch tree.
 
@@ -7282,7 +7285,7 @@ class PitchTree(Tree):
         item_class=None,
         ):
         item_class = item_class or abjad.NumberedPitch
-        Tree.__init__(
+        classes.Tree.__init__(
             self,
             items=items,
             item_class=item_class,

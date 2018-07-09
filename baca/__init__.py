@@ -1,6 +1,6 @@
 import abjad
 from .library import *
-from .scoping import *
+from .classes import *
 from .commands import *
 from .divisions import *
 from .dynamics import *
@@ -11,6 +11,7 @@ from .pitcharray import *
 from .pitchcommands import *
 from .pitchclasses import *
 from .rhythmcommands import *
+from .scoping import *
 from .segmentclasses import *
 from .spannercommands import *
 from .templates import *
@@ -19,18 +20,14 @@ from . import markups
 # classes
 from .AnchorSpecifier import AnchorSpecifier
 from .Coat import Coat
-from .Counter import Counter
-from .Cursor import Cursor
 from .Expression import Expression
 from .ExpressionGallery import ExpressionGallery
 from .ImbricationCommand import ImbricationCommand
-from .Interpolator import Interpolator
 from .LMRSpecifier import LMRSpecifier
 from .MusicAccumulator import MusicAccumulator
 from .MusicContribution import MusicContribution
 from .MusicMaker import MusicMaker
 from .NestingCommand import NestingCommand
-from .PaddedTuple import PaddedTuple
 from .PersistentIndicatorTests import PersistentIndicatorTests
 from .PitchSpecifier import PitchSpecifier
 from .RestAffixSpecifier import RestAffixSpecifier
@@ -39,7 +36,6 @@ from .SegmentMaker import SegmentMaker
 from .SegmentMaker import WellformednessManager
 from .Selection import Selection
 from .Sequence import Sequence
-from .Tree import Tree
 
 # expression constructors
 from .pitchclasses import _pitch_class_segment as pitch_class_segment
