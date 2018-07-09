@@ -42,7 +42,7 @@ Pull respositories
 
     cd ~/abjad-ide/ide/docs; make clean; ajv api -I
 
-    cd ~/baca/baca/_docs; make clean; make_baca_api.py
+    cd ~/baca/docs; make clean; make_baca_api.py
 
     cd ~/Scores/_docs; make clean; make_scores_api.py
 
@@ -79,7 +79,7 @@ Apply software updates
 
     cd ~/abjad-ide/ide/docs; make clean; ajv api -I
 
-    cd ~/baca/baca/_docs; make clean; make_baca_api.py
+    cd ~/baca/docs; make clean; make_baca_api.py
 
     cd ~/Scores/_docs; make clean; make_scores_api.py
 
@@ -136,7 +136,7 @@ Package unpushed trevor/dev commits
 
     cd ~/abjad-ide/ide/docs; make clean; ajv api -I
 
-    cd ~/baca/baca/_docs; make clean; make_baca_api.py
+    cd ~/baca/docs; make clean; make_baca_api.py
 
     cd ~/Scores/_docs; make clean; make_scores_api.py
 
@@ -199,7 +199,7 @@ Make new score package
 
     (ww)
 
-    (!ln -s ~/baca/baca/dotfiles/gitignore ~/Scores/my_score/.gitignore)
+    (!ln -s ~/baca/dotfiles/gitignore ~/Scores/my_score/.gitignore)
 
 23. Get existing .travis.yml.
 
@@ -267,7 +267,7 @@ Make new score package
 
     Quit and restart terminal.
 
-33. Add repository to ~/baca/baca/scr/restart-travis-build-set-n script.
+33. Add repository to ~/baca/scr/restart-travis-build-set-n script.
 
 34. Add repository to clone scores script.
     
@@ -517,6 +517,6 @@ Make new score package
 
     cd ~/abjad-ide/ide/docs; make clean; ajv api -I
 
-    cd ~/baca/baca/_docs; make clean; make_baca_api.py
+    cd ~/baca/docs; make clean; make_baca_api.py
 
     cd ~/Scores/_docs; make clean; make_scores_api.py

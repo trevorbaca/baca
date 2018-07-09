@@ -2,7 +2,7 @@
 
 #(set-global-staff-size 16)
 
-\include "/Users/trevorbaca/baca/baca/lilypond/baca.ily"
+\include "/Users/trevorbaca/baca/lilypond/baca.ily"
 
 \paper {
     print-first-page-number = ##f

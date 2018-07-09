@@ -2,7 +2,7 @@
 ###
 ### Symlink to this file with ...
 ###
-###     ln -s ~/baca/baca/dotfiles/gitignore ~/Scores/my_score/.gitignore
+###     ln -s ~/baca/dotfiles/gitignore ~/Scores/my_score/.gitignore
 ###
 ### ... or equivalent.
 
