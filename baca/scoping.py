@@ -1681,7 +1681,7 @@ def tag(
         raise Exception(message)
     assert Command._validate_tags(tags), repr(tags)
     if not isinstance(command, (Command, Map, Suite)):
-        raise Exception('can only tag command, map, wrapper, suite.')
+        raise Exception('can only tag command, map, suite.')
     if isinstance(command, (Map, Suite)):
         for command_ in command.commands:
             tag(

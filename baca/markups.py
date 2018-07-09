@@ -381,6 +381,8 @@ def lhd_plus_half_clt():
 
 def lines(
     items: typing.List,
+    *,
+    boxed: bool = None,
     ) -> indicators.Markup:
     if not isinstance(items, list):
         message = f'items must be list (not {type(items).__name__}):'
@@ -393,13 +395,14 @@ def lines(
         if isinstance(item, (str, abjad.Markup)):
             items_.append(item)
         else:
-            # indicator command
             assert item.indicators is not None
             assert len(item.indicators) == 1
             markup = item.indicators[0]
             items_.append(markup)
     markup = abjad.MarkupList(items_).column()
     markup = indicators.Markup(contents=markup.contents)
+    if boxed:
+        markup = markup.boxed()
     return markup
 
 def loure():
