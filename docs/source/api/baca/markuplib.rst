@@ -460,6 +460,7 @@ markuplib
    ~loure
    ~lv_possibile
    ~make_instrument_name_markup
+   ~markup
    ~molto_flautando
    ~molto_flautando_e_pont
    ~molto_gridato
@@ -729,6 +730,8 @@ markuplib
 .. autofunction:: lv_possibile
 
 .. autofunction:: make_instrument_name_markup
+
+.. autofunction:: markup
 
 .. autofunction:: molto_flautando
 

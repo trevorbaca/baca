@@ -174,6 +174,8 @@ class PiecewiseIndicatorCommand(commandlib.Command):
         leaf,
         tag=None,
         ):
+        # TODO: factor out late import
+        from .SegmentMaker import SegmentMaker
         assert isinstance(tag, str), repr(tag)
         for indicator in bundle:
             reapplied = commandlib.Command._remove_reapplied_wrappers(
@@ -192,7 +194,7 @@ class PiecewiseIndicatorCommand(commandlib.Command):
                     status = 'explicit'
                 else:
                     status = 'redundant'
-                baca.SegmentMaker._treat_persistent_wrapper(
+                SegmentMaker._treat_persistent_wrapper(
                     self.runtime['manifests'],
                     wrapper,
                     status,
