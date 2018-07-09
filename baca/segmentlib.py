@@ -2,7 +2,7 @@ import abjad
 import collections
 import typing
 from . import evallib
-from . import indicatorlib
+from . import indicators
 from . import library
 from . import typings
 from .IndicatorCommand import IndicatorCommand
@@ -1251,7 +1251,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                 duration_ = duration
                 duration *= self._magic_lilypond_eol_adjustment
                 eol_adjusted = True
-            spacing_section = indicatorlib.SpacingSection(duration=duration)
+            spacing_section = indicators.SpacingSection(duration=duration)
             tag = abjad.Tag(abjad.tags.SPACING)
             abjad.attach(spacing_section, skip, tag=tag.prepend('HSS1'))
             if eol_adjusted:
@@ -2166,8 +2166,8 @@ class StageMeasureMap(abjad.AbjadObject):
         int,
         abjad.Fermata,
         abjad.TimeSignature, 
-        indicatorlib.Accelerando,
-        indicatorlib.Ritardando,
+        indicators.Accelerando,
+        indicators.Ritardando,
         ]
 
     def __init__(

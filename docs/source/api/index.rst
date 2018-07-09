@@ -519,7 +519,7 @@ Dynamic library.
 
    <hr/>
 
-.. rubric:: :ref:`baca.indicatorlib <baca--indicatorlib>`
+.. rubric:: :ref:`baca.indicators <baca--indicators>`
    :class: section-header
 
 .. raw:: html
@@ -532,10 +532,10 @@ Dynamic library.
 .. autosummary::
    :nosignatures:
 
-   ~baca.indicatorlib.Accelerando
-   ~baca.indicatorlib.Ritardando
-   ~baca.indicatorlib.SpacingSection
-   ~baca.indicatorlib.StaffLines
+   ~baca.indicators.Accelerando
+   ~baca.indicators.Ritardando
+   ~baca.indicators.SpacingSection
+   ~baca.indicators.StaffLines
 
 .. raw:: html
 

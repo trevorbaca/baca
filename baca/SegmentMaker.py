@@ -6,7 +6,7 @@ import traceback
 import typing
 from abjadext import rmakers
 from . import evallib
-from . import indicatorlib
+from . import indicators
 from . import library
 from . import markuplib
 from . import overridelib
@@ -997,7 +997,7 @@ class SegmentMaker(abjad.SegmentMaker):
         previous_indicator = self._momento_to_indicator(momento)
         if previous_indicator is None:
             return
-        if isinstance(previous_indicator, indicatorlib.SpacingSection):
+        if isinstance(previous_indicator, indicators.SpacingSection):
             return
         if momento.context in self.score:
             momento_context = self.score[momento.context]
@@ -1401,8 +1401,8 @@ class SegmentMaker(abjad.SegmentMaker):
         if last_leaf_metronome_mark:
             tempo_prototype = (
                 abjad.MetronomeMark,
-                indicatorlib.Accelerando,
-                indicatorlib.Ritardando,
+                indicators.Accelerando,
+                indicators.Ritardando,
                 )
             for skip in reversed(skips[:-1]):
                 if abjad.inspect(skip).has_indicator(tempo_prototype):
@@ -1419,11 +1419,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 default=None,
                 )
             accelerando = inspector.get_indicator(
-                indicatorlib.Accelerando,
+                indicators.Accelerando,
                 default=None,
                 )
             ritardando = inspector.get_indicator(
-                indicatorlib.Ritardando,
+                indicators.Ritardando,
                 default=None,
                 )
             if metronome_mark is not None:
@@ -1440,9 +1440,9 @@ class SegmentMaker(abjad.SegmentMaker):
             if metronome_mark is None and metric_modulation is not None:
                 wrapper = inspector.wrapper(abjad.MetricModulation)
             if metronome_mark is None and accelerando is not None:
-                wrapper = inspector.wrapper(indicatorlib.Accelerando)
+                wrapper = inspector.wrapper(indicators.Accelerando)
             if metronome_mark is None and ritardando is not None:
-                wrapper = inspector.wrapper(indicatorlib.Ritardando)
+                wrapper = inspector.wrapper(indicators.Ritardando)
             has_trend = accelerando is not None or ritardando is not None
             if (metronome_mark is None and
                 metric_modulation is None and
@@ -1771,9 +1771,9 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _check_persistent_indicators_for_leaf(self, voice, leaf, i):
         prototype = (
-            indicatorlib.Accelerando,
+            indicators.Accelerando,
             abjad.MetronomeMark,
-            indicatorlib.Ritardando,
+            indicators.Ritardando,
             )
         mark = abjad.inspect(leaf).get_effective(prototype)
         if mark is None:
@@ -2317,7 +2317,7 @@ class SegmentMaker(abjad.SegmentMaker):
             return 'TextScript'
         elif isinstance(indicator, abjad.MarginMarkup):
             return 'InstrumentName'
-        elif isinstance(indicator, indicatorlib.StaffLines):
+        elif isinstance(indicator, indicators.StaffLines):
             return 'StaffSymbol'
         return type(indicator).__name__
 
@@ -2347,9 +2347,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
         elif isinstance(indicator, abjad.PersistentOverride):
             key = indicator
-        elif isinstance(indicator, indicatorlib.StaffLines):
+        elif isinstance(indicator, indicators.StaffLines):
             key = indicator.line_count
-        elif isinstance(indicator, (indicatorlib.Accelerando, indicatorlib.Ritardando)):
+        elif isinstance(indicator, (indicators.Accelerando, indicators.Ritardando)):
             key = f'abjad.{repr(indicator)}'
         else:
             key = str(indicator)
@@ -2411,8 +2411,8 @@ class SegmentMaker(abjad.SegmentMaker):
             indicator = self.metronome_marks.get(key)
         elif prototype is abjad.TimeSignature:
             indicator = abjad.TimeSignature.from_string(key)
-        elif prototype is indicatorlib.StaffLines:
-            indicator = indicatorlib.StaffLines(line_count=key)
+        elif prototype is indicators.StaffLines:
+            indicator = indicators.StaffLines(line_count=key)
         else:
             raise Exception(prototype)
         return indicator
@@ -2651,7 +2651,7 @@ class SegmentMaker(abjad.SegmentMaker):
             indicator = class_(name='', command=momento.value)
         elif isinstance(momento.value, class_):
             indicator = momento.value
-        elif class_ is indicatorlib.StaffLines:
+        elif class_ is indicators.StaffLines:
             indicator = class_(line_count=momento.value)
         else:
             indicator = class_(momento.value)
@@ -2751,9 +2751,9 @@ class SegmentMaker(abjad.SegmentMaker):
                         )
                     continue
                 prototype = (
-                    indicatorlib.Accelerando,
+                    indicators.Accelerando,
                     abjad.MetronomeMark,
-                    indicatorlib.Ritardando,
+                    indicators.Ritardando,
                     )
                 if isinstance(previous_indicator, prototype):
                     if status == 'reapplied':
@@ -2962,8 +2962,8 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         if not self._fermata_start_offsets:
             return
-        prototype = indicatorlib.StaffLines
-        staff_lines = indicatorlib.StaffLines(
+        prototype = indicators.StaffLines
+        staff_lines = indicators.StaffLines(
             line_count=self.fermata_measure_staff_line_count,
             )
         bar_lines_already_styled = []
@@ -2992,7 +2992,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     abjad.attach(literal, next_leaf, tag='SM21')
                 if next_leaf is None and before != staff_lines:
                     before_line_count = getattr(before, 'line_count', 5)
-                    before_staff_lines = indicatorlib.StaffLines(
+                    before_staff_lines = indicators.StaffLines(
                         line_count=before_line_count,
                         hide=True,
                         )
@@ -3049,7 +3049,7 @@ class SegmentMaker(abjad.SegmentMaker):
         assert isinstance(leaf, abjad.Leaf), repr(wrapper)
         indicator = wrapper.indicator
         existing_tag = wrapper.tag
-        tempo_trend = (indicatorlib.Accelerando, indicatorlib.Ritardando)
+        tempo_trend = (indicators.Accelerando, indicators.Ritardando)
         if (isinstance(indicator, abjad.MetronomeMark) and
             abjad.inspect(leaf).has_indicator(tempo_trend)):
             status = 'explicit'
@@ -3112,9 +3112,9 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _treat_untreated_persistent_wrappers(self):
         tempo_prototype = (
-            indicatorlib.Accelerando,
+            indicators.Accelerando,
             abjad.MetronomeMark,
-            indicatorlib.Ritardando,
+            indicators.Ritardando,
             )
         for leaf in abjad.iterate(self.score).leaves():
             for wrapper in abjad.inspect(leaf).wrappers():

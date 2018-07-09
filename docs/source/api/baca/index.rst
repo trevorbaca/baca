@@ -31,7 +31,7 @@ baca
    divisionlib
    dynamiclib
    evallib
-   indicatorlib
+   indicators
    library
    markuplib
    overridelib
@@ -57,7 +57,7 @@ baca
    divisionlib
    dynamiclib
    evallib
-   indicatorlib
+   indicators
    library
    markuplib
    overridelib

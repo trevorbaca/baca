@@ -1,16 +1,16 @@
-.. _baca--indicatorlib:
+.. _baca--indicators:
 
-indicatorlib
-============
+indicators
+==========
 
-.. automodule:: baca.indicatorlib
+.. automodule:: baca.indicators
 
-.. currentmodule:: baca.indicatorlib
+.. currentmodule:: baca.indicators
 
 .. container:: svg-container
 
    .. inheritance-diagram:: baca
-      :lineage: baca.indicatorlib
+      :lineage: baca.indicators
 
 .. raw:: html
 

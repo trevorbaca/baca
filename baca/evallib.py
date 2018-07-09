@@ -2,7 +2,7 @@ import abjad
 import functools
 import typing
 from . import library
-from . import indicatorlib
+from . import indicators
 from . import typings
 
 
@@ -78,8 +78,8 @@ class Command(abjad.AbjadObject):
             return
         tempo_prototype = (
             abjad.MetronomeMark,
-            indicatorlib.Accelerando,
-            indicatorlib.Ritardando,
+            indicators.Accelerando,
+            indicators.Ritardando,
             )
         if isinstance(indicator, abjad.Instrument):
             prototype = abjad.Instrument

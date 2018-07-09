@@ -1,7 +1,7 @@
 import abjad
 import typing
 from . import evallib
-from . import indicatorlib
+from . import indicators
 from . import typings
 from .Selection import Selection
 
@@ -33,8 +33,8 @@ class MetronomeMarkCommand(evallib.Command):
         deactivate: bool = None,
         key: typing.Union[
             str,
-            indicatorlib.Accelerando,
-            indicatorlib.Ritardando] = None,
+            indicators.Accelerando,
+            indicators.Ritardando] = None,
         redundant: bool = None,
         selector: typings.Selector = 'baca.leaf(0)',
         tags: typing.List[abjad.Tag] = None,
@@ -44,7 +44,7 @@ class MetronomeMarkCommand(evallib.Command):
             deactivate=deactivate,
             selector=selector,
             )
-        prototype = (str, indicatorlib.Accelerando, indicatorlib.Ritardando)
+        prototype = (str, indicators.Accelerando, indicators.Ritardando)
         if key is not None:
             assert isinstance(key, prototype), repr(key)
         self._key = key
@@ -99,7 +99,7 @@ class MetronomeMarkCommand(evallib.Command):
 
     @property
     def key(self) -> typing.Optional[typing.Union[str,
-    indicatorlib.Accelerando, indicatorlib.Ritardando]]:
+    indicators.Accelerando, indicators.Ritardando]]:
         """
         Gets metronome mark key.
         """

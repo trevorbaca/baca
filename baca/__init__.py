@@ -4,7 +4,7 @@ from .evallib import *
 from .commandlib import *
 from .divisionlib import *
 from .dynamiclib import *
-from .indicatorlib import *
+from .indicators import *
 from .markuplib import Markup
 from .overridelib import *
 from .pitcharraylib import *

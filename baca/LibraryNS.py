@@ -2,7 +2,7 @@ import abjad
 import collections
 import typing
 from . import evallib
-from . import indicatorlib
+from . import indicators
 from . import library
 from . import markuplib
 from . import typings
@@ -1707,7 +1707,7 @@ def staff_lines(
 
     """
     return IndicatorCommand(
-        indicators=[indicatorlib.StaffLines(line_count=n)],
+        indicators=[indicators.StaffLines(line_count=n)],
         selector=selector,
         )
 
