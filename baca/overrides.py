@@ -1889,7 +1889,8 @@ def mmrest_text_color(
         >>> maker(
         ...     'MusicVoice',
         ...     baca.markup(
-        ...         baca.markups.still().boxed(),
+        ...         'still',
+        ...         boxed=True,
         ...         selector=baca.leaf(1),
         ...         ),
         ...     baca.mmrest_text_color('red'),
@@ -1978,7 +1979,8 @@ def mmrest_text_color(
         ...     'MusicVoice',
         ...     baca.make_notes(),
         ...     baca.markup(
-        ...         baca.markups.still().boxed(),
+        ...         'still',
+        ...         boxed=True,
         ...         selector=baca.leaf(1),
         ...         ),
         ...     baca.mmrest_text_color('red'),
@@ -2017,7 +2019,8 @@ def mmrest_text_extra_offset(
         >>> maker(
         ...     'MusicVoice',
         ...     baca.markup(
-        ...         baca.markups.still().boxed(),
+        ...         'still',
+        ...         boxed=True,
         ...         selector=baca.leaf(1),
         ...         ),
         ...     baca.mmrest_text_extra_offset((0, 2)),
@@ -2119,7 +2122,8 @@ def mmrest_text_padding(
         >>> maker(
         ...     'MusicVoice',
         ...     baca.markup(
-        ...         baca.markups.still().boxed(),
+        ...         'still',
+        ...         boxed=True,
         ...         selector=baca.leaf(1),
         ...         ),
         ...     baca.mmrest_text_padding(2),
@@ -2220,7 +2224,8 @@ def mmrest_text_parent_center(
         >>> maker(
         ...     'MusicVoice',
         ...     baca.markup(
-        ...         baca.markups.still().boxed(),
+        ...         'still',
+        ...         boxed=True,
         ...         selector=baca.leaf(1),
         ...         ),
         ...     baca.mmrest_text_parent_center(),
@@ -2322,7 +2327,8 @@ def mmrest_text_staff_padding(
         >>> maker(
         ...     'MusicVoice',
         ...     baca.markup(
-        ...         baca.markups.still().boxed(),
+        ...         'still',
+        ...         boxed=True,
         ...         selector=baca.leaf(1),
         ...         ),
         ...     baca.mmrest_text_staff_padding(2),
@@ -5843,7 +5849,8 @@ def text_script_color(
         >>> maker(
         ...     'MusicVoice',
         ...     baca.markup(
-        ...         baca.markups.still().boxed(),
+        ...         'still',
+        ...         boxed=True,
         ...         selector=baca.leaf(1),
         ...         ),
         ...     baca.text_script_color('red'),
@@ -6034,7 +6041,8 @@ def text_script_down(
         >>> maker(
         ...     'MusicVoice',
         ...     baca.markup(
-        ...         baca.markups.still().boxed(),
+        ...         'still',
+        ...         boxed=True,
         ...         selector=baca.leaf(1),
         ...         ),
         ...     baca.text_script_down()
@@ -6079,7 +6087,8 @@ def text_script_extra_offset(
         >>> maker(
         ...     'MusicVoice',
         ...     baca.markup(
-        ...         baca.markups.still().boxed(),
+        ...         'still',
+        ...         boxed=True,
         ...         selector=baca.leaf(1),
         ...         ),
         ...     baca.text_script_extra_offset((0, 2)),
@@ -6292,7 +6301,8 @@ def text_script_padding(
         >>> maker(
         ...     'MusicVoice',
         ...     baca.markup(
-        ...         baca.markups.still().boxed(),
+        ...         'still',
+        ...         boxed=True,
         ...         selector=baca.leaf(1),
         ...         ),
         ...     baca.text_script_padding(2),
@@ -6336,7 +6346,8 @@ def text_script_parent_center(
         >>> maker(
         ...     'MusicVoice',
         ...     baca.markup(
-        ...         baca.markups.still().boxed(),
+        ...         'still',
+        ...         boxed=True,
         ...         selector=baca.leaf(1),
         ...         ),
         ...     baca.text_script_parent_center()
@@ -6528,7 +6539,8 @@ def text_script_staff_padding(
         >>> maker(
         ...     'MusicVoice',
         ...     baca.markup(
-        ...         baca.markups.still().boxed(),
+        ...         'still',
+        ...         boxed=True,
         ...         selector=baca.leaf(1),
         ...         ),
         ...     baca.text_script_staff_padding(2)
@@ -6719,7 +6731,8 @@ def text_script_up(
         >>> maker(
         ...     'MusicVoice',
         ...     baca.markup(
-        ...         baca.markups.still().boxed(),
+        ...         'still',
+        ...         boxed=True,
         ...         selector=baca.leaf(1),
         ...         ),
         ...     baca.text_script_up()
