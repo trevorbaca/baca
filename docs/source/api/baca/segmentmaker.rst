@@ -1,16 +1,16 @@
-.. _baca--smaker:
+.. _baca--segmentmaker:
 
-smaker
-======
+segmentmaker
+============
 
-.. automodule:: baca.smaker
+.. automodule:: baca.segmentmaker
 
-.. currentmodule:: baca.smaker
+.. currentmodule:: baca.segmentmaker
 
 .. container:: svg-container
 
    .. inheritance-diagram:: baca
-      :lineage: baca.smaker
+      :lineage: baca.segmentmaker
 
 .. raw:: html
 
@@ -23,6 +23,7 @@ smaker
    :nosignatures:
 
    ~SegmentMaker
+   ~WellformednessManager
 
 .. autoclass:: SegmentMaker
 
@@ -232,18 +233,6 @@ smaker
    .. autoattribute:: SegmentMaker.voice_metadata
 
    .. autoattribute:: SegmentMaker.wrappers
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Managers
-   :class: section-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~WellformednessManager
 
 .. autoclass:: WellformednessManager
 

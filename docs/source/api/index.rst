@@ -1065,7 +1065,7 @@ Rhythm library.
 
    <hr/>
 
-.. rubric:: :ref:`baca.smaker <baca--smaker>`
+.. rubric:: :ref:`baca.segmentmaker <baca--segmentmaker>`
    :class: section-header
 
 .. raw:: html
@@ -1078,19 +1078,8 @@ Rhythm library.
 .. autosummary::
    :nosignatures:
 
-   ~baca.smaker.SegmentMaker
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Managers
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.smaker.WellformednessManager
+   ~baca.segmentmaker.SegmentMaker
+   ~baca.segmentmaker.WellformednessManager
 
 .. raw:: html
 

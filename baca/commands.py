@@ -1515,7 +1515,7 @@ class IndicatorCommand(scoping.Command):
         Calls command on ``argument``.
         """
         # TODO: externalize late import
-        from .smaker import SegmentMaker
+        from .segmentmaker import SegmentMaker
         if argument is None:
             return
         if self.indicators is None:
@@ -2056,7 +2056,7 @@ class MetronomeMarkCommand(scoping.Command):
         """
         Applies command to result of selector called on ``argument``.
         """
-        from .smaker import SegmentMaker
+        from .segmentmaker import SegmentMaker
         if argument is None:
             return
         if self.key is None:
@@ -2338,7 +2338,7 @@ class PiecewiseIndicatorCommand(scoping.Command):
         tag=None,
         ):
         # TODO: factor out late import
-        from .smaker import SegmentMaker
+        from .segmentmaker import SegmentMaker
         assert isinstance(tag, str), repr(tag)
         for indicator in bundle:
             reapplied = scoping.Command._remove_reapplied_wrappers(

@@ -6040,6 +6040,10 @@ class WellformednessManager(abjad.WellformednessManager):
 
     """
 
+    ### CLASS VARIABLES ###
+
+    __documentation_section__ = 'Classes'
+
     ### INITIALIZER ###
 
     def __init__(

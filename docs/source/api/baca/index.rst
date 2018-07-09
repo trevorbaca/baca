@@ -38,7 +38,7 @@ baca
    rhythmcommands
    scoping
    segmentclasses
-   smaker
+   segmentmaker
    spannercommands
    templates
 
@@ -61,7 +61,7 @@ baca
    rhythmcommands
    scoping
    segmentclasses
-   smaker
+   segmentmaker
    spannercommands
    templates
 
