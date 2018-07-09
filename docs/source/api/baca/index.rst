@@ -35,7 +35,7 @@ baca
    library
    markuplib
    overridelib
-   pitcharraylib
+   pitcharray
    pitchcommands
    pitchlib
    registerlib
@@ -61,7 +61,7 @@ baca
    library
    markuplib
    overridelib
-   pitcharraylib
+   pitcharray
    pitchcommands
    pitchlib
    registerlib

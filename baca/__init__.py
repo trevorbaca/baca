@@ -7,7 +7,7 @@ from .dynamiclib import *
 from .indicators import *
 from .markuplib import Markup
 from .overridelib import *
-from .pitcharraylib import *
+from .pitcharray import *
 from .pitchcommands import *
 from .pitchlib import *
 from .registerlib import *

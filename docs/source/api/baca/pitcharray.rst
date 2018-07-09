@@ -1,16 +1,16 @@
-.. _baca--pitcharraylib:
+.. _baca--pitcharray:
 
-pitcharraylib
-=============
+pitcharray
+==========
 
-.. automodule:: baca.pitcharraylib
+.. automodule:: baca.pitcharray
 
-.. currentmodule:: baca.pitcharraylib
+.. currentmodule:: baca.pitcharray
 
 .. container:: svg-container
 
    .. inheritance-diagram:: baca
-      :lineage: baca.pitcharraylib
+      :lineage: baca.pitcharray
 
 .. raw:: html
 

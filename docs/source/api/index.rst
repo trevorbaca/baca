@@ -921,7 +921,7 @@ Override library.
 
    <hr/>
 
-.. rubric:: :ref:`baca.pitcharraylib <baca--pitcharraylib>`
+.. rubric:: :ref:`baca.pitcharray <baca--pitcharray>`
    :class: section-header
 
 Pitch array library.
@@ -936,11 +936,11 @@ Pitch array library.
 .. autosummary::
    :nosignatures:
 
-   ~baca.pitcharraylib.PitchArray
-   ~baca.pitcharraylib.PitchArrayCell
-   ~baca.pitcharraylib.PitchArrayColumn
-   ~baca.pitcharraylib.PitchArrayList
-   ~baca.pitcharraylib.PitchArrayRow
+   ~baca.pitcharray.PitchArray
+   ~baca.pitcharray.PitchArrayCell
+   ~baca.pitcharray.PitchArrayColumn
+   ~baca.pitcharray.PitchArrayList
+   ~baca.pitcharray.PitchArrayRow
 
 .. raw:: html
 
