@@ -25,35 +25,19 @@ Bača API
 
    ~baca.AnchorSpecifier.AnchorSpecifier
    ~baca.Coat.Coat
-   ~baca.ColorCommand.ColorCommand
-   ~baca.ContainerCommand.ContainerCommand
-   ~baca.Counter.Counter
-   ~baca.Cursor.Cursor
    ~baca.Expression.Expression
    ~baca.ExpressionGallery.ExpressionGallery
-   ~baca.GlobalFermataCommand.GlobalFermataCommand
    ~baca.ImbricationCommand.ImbricationCommand
-   ~baca.IndicatorBundle.IndicatorBundle
-   ~baca.IndicatorCommand.IndicatorCommand
-   ~baca.InstrumentChangeCommand.InstrumentChangeCommand
-   ~baca.Interpolator.Interpolator
    ~baca.LMRSpecifier.LMRSpecifier
-   ~baca.LabelCommand.LabelCommand
-   ~baca.MetronomeMarkCommand.MetronomeMarkCommand
    ~baca.MusicAccumulator.MusicAccumulator
    ~baca.MusicContribution.MusicContribution
    ~baca.MusicMaker.MusicMaker
    ~baca.NestingCommand.NestingCommand
-   ~baca.PaddedTuple.PaddedTuple
-   ~baca.PartAssignmentCommand.PartAssignmentCommand
    ~baca.PersistentIndicatorTests.PersistentIndicatorTests
-   ~baca.PiecewiseIndicatorCommand.PiecewiseIndicatorCommand
    ~baca.PitchSpecifier.PitchSpecifier
    ~baca.RestAffixSpecifier.RestAffixSpecifier
    ~baca.SchemeManifest.SchemeManifest
    ~baca.Sequence.Sequence
-   ~baca.TimeSignatureGroups.TimeSignatureGroups
-   ~baca.Tree.Tree
 
 .. raw:: html
 
@@ -192,8 +176,6 @@ Bača API
    ~baca.LibraryAF.breathe
    ~baca.LibraryAF.clef
    ~baca.LibraryAF.coat
-   ~baca.LibraryAF.color
-   ~baca.LibraryAF.container
    ~baca.LibraryAF.cross_staff
    ~baca.LibraryAF.double_staccato
    ~baca.LibraryAF.down_arpeggio
@@ -223,15 +205,11 @@ Bača API
 .. autosummary::
    :nosignatures:
 
-   ~baca.LibraryGM.global_fermata
    ~baca.LibraryGM.imbricate
-   ~baca.LibraryGM.instrument
-   ~baca.LibraryGM.label
    ~baca.LibraryGM.laissez_vibrer
    ~baca.LibraryGM.long_fermata
    ~baca.LibraryGM.marcato
    ~baca.LibraryGM.margin_markup
-   ~baca.LibraryGM.metronome_mark
    ~baca.LibraryGM.mleaves
 
 .. raw:: html
@@ -253,7 +231,6 @@ Bača API
 
    ~baca.LibraryNS.nest
    ~baca.LibraryNS.one_voice
-   ~baca.LibraryNS.parts
    ~baca.LibraryNS.previous_metadata
    ~baca.LibraryNS.rehearsal_mark
    ~baca.LibraryNS.rests_after
@@ -292,7 +269,6 @@ Bača API
    :nosignatures:
 
    ~baca.LibraryTZ.tenuto
-   ~baca.LibraryTZ.text_spanner
    ~baca.LibraryTZ.up_arpeggio
    ~baca.LibraryTZ.up_bow
    ~baca.LibraryTZ.very_long_fermata
@@ -336,6 +312,28 @@ Bača API
 
    <hr/>
 
+.. rubric:: :ref:`baca.classes <baca--classes>`
+   :class: section-header
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Classes
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.classes.Counter
+   ~baca.classes.Cursor
+   ~baca.classes.PaddedTuple
+   ~baca.classes.Tree
+
+.. raw:: html
+
+   <hr/>
+
 .. rubric:: :ref:`baca.commands <baca--commands>`
    :class: section-header
 
@@ -350,6 +348,16 @@ Bača API
    :nosignatures:
 
    ~baca.commands.BCPCommand
+   ~baca.commands.ColorCommand
+   ~baca.commands.ContainerCommand
+   ~baca.commands.GlobalFermataCommand
+   ~baca.commands.IndicatorBundle
+   ~baca.commands.IndicatorCommand
+   ~baca.commands.InstrumentChangeCommand
+   ~baca.commands.LabelCommand
+   ~baca.commands.MetronomeMarkCommand
+   ~baca.commands.PartAssignmentCommand
+   ~baca.commands.PiecewiseIndicatorCommand
    ~baca.commands.VoltaCommand
 
 .. raw:: html
@@ -363,6 +371,14 @@ Bača API
    :nosignatures:
 
    ~baca.commands.bcps
+   ~baca.commands.color
+   ~baca.commands.container
+   ~baca.commands.global_fermata
+   ~baca.commands.instrument
+   ~baca.commands.label
+   ~baca.commands.metronome_mark
+   ~baca.commands.parts
+   ~baca.commands.text_spanner
    ~baca.commands.volta
 
 .. raw:: html

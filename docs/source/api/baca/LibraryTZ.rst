@@ -23,7 +23,6 @@ LibraryTZ
    :nosignatures:
 
    ~tenuto
-   ~text_spanner
    ~up_arpeggio
    ~up_bow
    ~very_long_fermata
@@ -33,8 +32,6 @@ LibraryTZ
    ~voice_two
 
 .. autofunction:: tenuto
-
-.. autofunction:: text_spanner
 
 .. autofunction:: up_arpeggio
 

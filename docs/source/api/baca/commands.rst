@@ -23,6 +23,16 @@ commands
    :nosignatures:
 
    ~BCPCommand
+   ~ColorCommand
+   ~ContainerCommand
+   ~GlobalFermataCommand
+   ~IndicatorBundle
+   ~IndicatorCommand
+   ~InstrumentChangeCommand
+   ~LabelCommand
+   ~MetronomeMarkCommand
+   ~PartAssignmentCommand
+   ~PiecewiseIndicatorCommand
    ~VoltaCommand
 
 .. autoclass:: BCPCommand
@@ -119,6 +129,849 @@ commands
 
    .. autoattribute:: BCPCommand.tweaks
 
+.. autoclass:: ColorCommand
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: ColorCommand.__call__
+
+   .. container:: inherited
+
+      .. automethod:: ColorCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: ColorCommand.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: ColorCommand.get_tag
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read/write properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: ColorCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: ColorCommand.tag_measure_number
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: ColorCommand.deactivate
+
+   .. container:: inherited
+
+      .. autoattribute:: ColorCommand.selector
+
+   .. container:: inherited
+
+      .. autoattribute:: ColorCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: ColorCommand.tags
+
+.. autoclass:: ContainerCommand
+
+   .. autosummary::
+      :nosignatures:
+
+      identifier
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: ContainerCommand.__call__
+
+   .. container:: inherited
+
+      .. automethod:: ContainerCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: ContainerCommand.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: ContainerCommand.get_tag
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read/write properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: ContainerCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: ContainerCommand.tag_measure_number
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: ContainerCommand.deactivate
+
+   .. autoattribute:: ContainerCommand.identifier
+
+   .. container:: inherited
+
+      .. autoattribute:: ContainerCommand.selector
+
+   .. container:: inherited
+
+      .. autoattribute:: ContainerCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: ContainerCommand.tags
+
+.. autoclass:: GlobalFermataCommand
+
+   .. autosummary::
+      :nosignatures:
+
+      description_to_command
+
+   .. autosummary::
+      :nosignatures:
+
+      description
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: GlobalFermataCommand.__call__
+
+   .. container:: inherited
+
+      .. automethod:: GlobalFermataCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: GlobalFermataCommand.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: GlobalFermataCommand.get_tag
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read/write properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: GlobalFermataCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: GlobalFermataCommand.tag_measure_number
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: GlobalFermataCommand.deactivate
+
+   .. autoattribute:: GlobalFermataCommand.description
+
+   .. container:: inherited
+
+      .. autoattribute:: GlobalFermataCommand.selector
+
+   .. container:: inherited
+
+      .. autoattribute:: GlobalFermataCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: GlobalFermataCommand.tags
+
+.. autoclass:: IndicatorBundle
+
+   .. autosummary::
+      :nosignatures:
+
+      compound
+      indicator_only
+      simple
+      spanner_start_only
+      with_indicator
+      with_spanner_start
+      with_spanner_stop
+
+   .. autosummary::
+      :nosignatures:
+
+      bookended_spanner_start
+      enchained
+      indicator
+      indicators
+      spanner_start
+      spanner_stop
+
+   .. autosummary::
+      :nosignatures:
+
+      __iter__
+      __len__
+      __repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: IndicatorBundle.__format__
+
+   .. automethod:: IndicatorBundle.__iter__
+
+   .. automethod:: IndicatorBundle.__len__
+
+   .. automethod:: IndicatorBundle.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. automethod:: IndicatorBundle.compound
+
+   .. automethod:: IndicatorBundle.indicator_only
+
+   .. automethod:: IndicatorBundle.simple
+
+   .. automethod:: IndicatorBundle.spanner_start_only
+
+   .. automethod:: IndicatorBundle.with_indicator
+
+   .. automethod:: IndicatorBundle.with_spanner_start
+
+   .. automethod:: IndicatorBundle.with_spanner_stop
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: IndicatorBundle.bookended_spanner_start
+
+   .. autoattribute:: IndicatorBundle.enchained
+
+   .. autoattribute:: IndicatorBundle.indicator
+
+   .. autoattribute:: IndicatorBundle.indicators
+
+   .. autoattribute:: IndicatorBundle.spanner_start
+
+   .. autoattribute:: IndicatorBundle.spanner_stop
+
+.. autoclass:: IndicatorCommand
+
+   .. autosummary::
+      :nosignatures:
+
+      context
+      indicators
+      redundant
+      tweaks
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: IndicatorCommand.__call__
+
+   .. container:: inherited
+
+      .. automethod:: IndicatorCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: IndicatorCommand.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: IndicatorCommand.get_tag
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read/write properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: IndicatorCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: IndicatorCommand.tag_measure_number
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: IndicatorCommand.context
+
+   .. container:: inherited
+
+      .. autoattribute:: IndicatorCommand.deactivate
+
+   .. autoattribute:: IndicatorCommand.indicators
+
+   .. autoattribute:: IndicatorCommand.redundant
+
+   .. container:: inherited
+
+      .. autoattribute:: IndicatorCommand.selector
+
+   .. container:: inherited
+
+      .. autoattribute:: IndicatorCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: IndicatorCommand.tags
+
+   .. autoattribute:: IndicatorCommand.tweaks
+
+.. autoclass:: InstrumentChangeCommand
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: InstrumentChangeCommand.__call__
+
+   .. container:: inherited
+
+      .. automethod:: InstrumentChangeCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: InstrumentChangeCommand.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: InstrumentChangeCommand.get_tag
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read/write properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: InstrumentChangeCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: InstrumentChangeCommand.tag_measure_number
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: InstrumentChangeCommand.context
+
+   .. container:: inherited
+
+      .. autoattribute:: InstrumentChangeCommand.deactivate
+
+   .. container:: inherited
+
+      .. autoattribute:: InstrumentChangeCommand.indicators
+
+   .. container:: inherited
+
+      .. autoattribute:: InstrumentChangeCommand.redundant
+
+   .. container:: inherited
+
+      .. autoattribute:: InstrumentChangeCommand.selector
+
+   .. container:: inherited
+
+      .. autoattribute:: InstrumentChangeCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: InstrumentChangeCommand.tags
+
+   .. container:: inherited
+
+      .. autoattribute:: InstrumentChangeCommand.tweaks
+
+.. autoclass:: LabelCommand
+
+   .. autosummary::
+      :nosignatures:
+
+      expression
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: LabelCommand.__call__
+
+   .. container:: inherited
+
+      .. automethod:: LabelCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: LabelCommand.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: LabelCommand.get_tag
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read/write properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: LabelCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: LabelCommand.tag_measure_number
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: LabelCommand.deactivate
+
+   .. autoattribute:: LabelCommand.expression
+
+   .. container:: inherited
+
+      .. autoattribute:: LabelCommand.selector
+
+   .. container:: inherited
+
+      .. autoattribute:: LabelCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: LabelCommand.tags
+
+.. autoclass:: MetronomeMarkCommand
+
+   .. autosummary::
+      :nosignatures:
+
+      key
+      redundant
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: MetronomeMarkCommand.__call__
+
+   .. container:: inherited
+
+      .. automethod:: MetronomeMarkCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: MetronomeMarkCommand.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: MetronomeMarkCommand.get_tag
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read/write properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: MetronomeMarkCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: MetronomeMarkCommand.tag_measure_number
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: MetronomeMarkCommand.deactivate
+
+   .. autoattribute:: MetronomeMarkCommand.key
+
+   .. autoattribute:: MetronomeMarkCommand.redundant
+
+   .. container:: inherited
+
+      .. autoattribute:: MetronomeMarkCommand.selector
+
+   .. container:: inherited
+
+      .. autoattribute:: MetronomeMarkCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: MetronomeMarkCommand.tags
+
+.. autoclass:: PartAssignmentCommand
+
+   .. autosummary::
+      :nosignatures:
+
+      part_assignment
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: PartAssignmentCommand.__call__
+
+   .. container:: inherited
+
+      .. automethod:: PartAssignmentCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: PartAssignmentCommand.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: PartAssignmentCommand.get_tag
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read/write properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: PartAssignmentCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: PartAssignmentCommand.tag_measure_number
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: PartAssignmentCommand.deactivate
+
+   .. autoattribute:: PartAssignmentCommand.part_assignment
+
+   .. container:: inherited
+
+      .. autoattribute:: PartAssignmentCommand.selector
+
+   .. container:: inherited
+
+      .. autoattribute:: PartAssignmentCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: PartAssignmentCommand.tags
+
+.. autoclass:: PiecewiseIndicatorCommand
+
+   .. autosummary::
+      :nosignatures:
+
+      bookend
+      bundles
+      final_piece_spanner
+      leak
+      piece_selector
+      remove_length_1_spanner_start
+      right_broken
+      selector
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: PiecewiseIndicatorCommand.__call__
+
+   .. container:: inherited
+
+      .. automethod:: PiecewiseIndicatorCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: PiecewiseIndicatorCommand.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: PiecewiseIndicatorCommand.get_tag
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read/write properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: PiecewiseIndicatorCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: PiecewiseIndicatorCommand.tag_measure_number
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: PiecewiseIndicatorCommand.bookend
+
+   .. autoattribute:: PiecewiseIndicatorCommand.bundles
+
+   .. container:: inherited
+
+      .. autoattribute:: PiecewiseIndicatorCommand.deactivate
+
+   .. autoattribute:: PiecewiseIndicatorCommand.final_piece_spanner
+
+   .. autoattribute:: PiecewiseIndicatorCommand.leak
+
+   .. autoattribute:: PiecewiseIndicatorCommand.piece_selector
+
+   .. autoattribute:: PiecewiseIndicatorCommand.remove_length_1_spanner_start
+
+   .. autoattribute:: PiecewiseIndicatorCommand.right_broken
+
+   .. autoattribute:: PiecewiseIndicatorCommand.selector
+
+   .. container:: inherited
+
+      .. autoattribute:: PiecewiseIndicatorCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: PiecewiseIndicatorCommand.tags
+
 .. autoclass:: VoltaCommand
 
    .. autosummary::
@@ -203,8 +1056,32 @@ commands
    :nosignatures:
 
    ~bcps
+   ~color
+   ~container
+   ~global_fermata
+   ~instrument
+   ~label
+   ~metronome_mark
+   ~parts
+   ~text_spanner
    ~volta
 
 .. autofunction:: bcps
+
+.. autofunction:: color
+
+.. autofunction:: container
+
+.. autofunction:: global_fermata
+
+.. autofunction:: instrument
+
+.. autofunction:: label
+
+.. autofunction:: metronome_mark
+
+.. autofunction:: parts
+
+.. autofunction:: text_spanner
 
 .. autofunction:: volta

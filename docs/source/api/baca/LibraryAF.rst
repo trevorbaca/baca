@@ -39,8 +39,6 @@ LibraryAF
    ~breathe
    ~clef
    ~coat
-   ~color
-   ~container
    ~cross_staff
    ~double_staccato
    ~down_arpeggio
@@ -86,10 +84,6 @@ LibraryAF
 .. autofunction:: clef
 
 .. autofunction:: coat
-
-.. autofunction:: color
-
-.. autofunction:: container
 
 .. autofunction:: cross_staff
 

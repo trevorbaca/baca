@@ -24,7 +24,6 @@ LibraryNS
 
    ~nest
    ~one_voice
-   ~parts
    ~previous_metadata
    ~rehearsal_mark
    ~rests_after
@@ -48,8 +47,6 @@ LibraryNS
 .. autofunction:: nest
 
 .. autofunction:: one_voice
-
-.. autofunction:: parts
 
 .. autofunction:: previous_metadata
 

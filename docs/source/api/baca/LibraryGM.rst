@@ -22,24 +22,14 @@ LibraryGM
 .. autosummary::
    :nosignatures:
 
-   ~global_fermata
    ~imbricate
-   ~instrument
-   ~label
    ~laissez_vibrer
    ~long_fermata
    ~marcato
    ~margin_markup
-   ~metronome_mark
    ~mleaves
 
-.. autofunction:: global_fermata
-
 .. autofunction:: imbricate
-
-.. autofunction:: instrument
-
-.. autofunction:: label
 
 .. autofunction:: laissez_vibrer
 
@@ -48,7 +38,5 @@ LibraryGM
 .. autofunction:: marcato
 
 .. autofunction:: margin_markup
-
-.. autofunction:: metronome_mark
 
 .. autofunction:: mleaves

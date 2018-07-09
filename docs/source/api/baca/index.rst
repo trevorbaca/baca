@@ -27,6 +27,7 @@ baca
    LibraryNS
    LibraryTZ
    SegmentMaker
+   classes
    commands
    divisions
    dynamics
@@ -51,6 +52,7 @@ baca
    LibraryNS
    LibraryTZ
    SegmentMaker
+   classes
    commands
    divisions
    dynamics
@@ -79,70 +81,38 @@ baca
 
    AnchorSpecifier
    Coat
-   ColorCommand
-   ContainerCommand
-   Counter
-   Cursor
    Expression
    ExpressionGallery
-   GlobalFermataCommand
    ImbricationCommand
-   IndicatorBundle
-   IndicatorCommand
-   InstrumentChangeCommand
-   Interpolator
    LMRSpecifier
-   LabelCommand
-   MetronomeMarkCommand
    MusicAccumulator
    MusicContribution
    MusicMaker
    NestingCommand
-   PaddedTuple
-   PartAssignmentCommand
    PersistentIndicatorTests
-   PiecewiseIndicatorCommand
    PitchSpecifier
    RestAffixSpecifier
    SchemeManifest
    Sequence
-   TimeSignatureGroups
-   Tree
 
 .. autosummary::
    :nosignatures:
 
    ~AnchorSpecifier.AnchorSpecifier
    ~Coat.Coat
-   ~ColorCommand.ColorCommand
-   ~ContainerCommand.ContainerCommand
-   ~Counter.Counter
-   ~Cursor.Cursor
    ~Expression.Expression
    ~ExpressionGallery.ExpressionGallery
-   ~GlobalFermataCommand.GlobalFermataCommand
    ~ImbricationCommand.ImbricationCommand
-   ~IndicatorBundle.IndicatorBundle
-   ~IndicatorCommand.IndicatorCommand
-   ~InstrumentChangeCommand.InstrumentChangeCommand
-   ~Interpolator.Interpolator
    ~LMRSpecifier.LMRSpecifier
-   ~LabelCommand.LabelCommand
-   ~MetronomeMarkCommand.MetronomeMarkCommand
    ~MusicAccumulator.MusicAccumulator
    ~MusicContribution.MusicContribution
    ~MusicMaker.MusicMaker
    ~NestingCommand.NestingCommand
-   ~PaddedTuple.PaddedTuple
-   ~PartAssignmentCommand.PartAssignmentCommand
    ~PersistentIndicatorTests.PersistentIndicatorTests
-   ~PiecewiseIndicatorCommand.PiecewiseIndicatorCommand
    ~PitchSpecifier.PitchSpecifier
    ~RestAffixSpecifier.RestAffixSpecifier
    ~SchemeManifest.SchemeManifest
    ~Sequence.Sequence
-   ~TimeSignatureGroups.TimeSignatureGroups
-   ~Tree.Tree
 
 .. raw:: html
 
