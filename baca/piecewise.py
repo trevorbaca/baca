@@ -2610,13 +2610,12 @@ def parse_hairpin_descriptor(
 
 def text_spanner(
     items: typing.Union[str, typing.List],
-    *,
+    *tweaks: abjad.LilyPondTweakManager,
     bookend: typing.Union[bool, int] = -1,
     leak: bool = None,
     lilypond_id: int = None,
     piece_selector: typings.Selector = 'baca.group()',
     selector: typings.Selector = 'baca.tleaves()',
-    tweaks: typing.List[abjad.LilyPondTweakManager] = None,
     ) -> PiecewiseIndicatorCommand:
     r"""
     Attaches text span indicators.

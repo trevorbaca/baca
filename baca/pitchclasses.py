@@ -3,6 +3,7 @@ Pitch library.
 """
 import abjad
 import collections as collections_module
+import copy
 import inspect
 import math
 import typing
