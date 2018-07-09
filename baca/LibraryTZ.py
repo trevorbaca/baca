@@ -1534,7 +1534,8 @@ def text_spanner(
         '-|': 'solid_line_with_hook',
         }
     if isinstance(items, str):
-        items_, current_item = [], []
+        items_ = []
+        current_item: typing.List[str] = []
         for word in items.split():
             if word in shape_to_style:
                 if current_item:
@@ -1562,8 +1563,8 @@ def text_spanner(
     else:
         raise ValueError(lilypond_id)
     stop_text_span = abjad.StopTextSpan(command=command)
-    items_ = abjad.CyclicTuple(items)
-    for i, item in enumerate(items_):
+    cyclic_items = abjad.CyclicTuple(items)
+    for i, item in enumerate(cyclic_items):
         if item in shape_to_style:
             continue
         if isinstance(item, str):
@@ -1576,11 +1577,11 @@ def text_spanner(
         prototype = (abjad.LilyPondLiteral, abjad.Markup)
         assert isinstance(item_markup, prototype)
         style = 'invisible_line'
-        if items_[i + 1] in shape_to_style:
-            style = shape_to_style[items_[i + 1]]
-            right_text = items_[i + 2]
+        if cyclic_items[i + 1] in shape_to_style:
+            style = shape_to_style[cyclic_items[i + 1]]
+            right_text = cyclic_items[i + 2]
         else:
-            right_text = items_[i + 1]
+            right_text = cyclic_items[i + 1]
         right_markup: typing.Union[abjad.LilyPondLiteral, abjad.Markup]
         if isinstance(right_text, str):
             if 'hook' not in style:
