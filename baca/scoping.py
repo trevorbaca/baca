@@ -4,6 +4,16 @@ import functools
 import typing
 from . import indicators
 from . import typings
+measure_indicator_typing = typing.Union[
+    int,
+    typing.List[int],
+    typings.IntegerPair,
+    None,
+    ]
+scope_typing = typing.Union[
+    'Scope',
+    'TimelineScope',
+    ]
 
 
 ### CLASSES ###
@@ -41,7 +51,7 @@ class Command(abjad.AbjadObject):
         # for selector evaluation
         import baca
         self._deactivate = deactivate
-        self._measures = None
+        self._measures: measure_indicator_typing = None
         self._runtime = abjad.OrderedDict()
         if isinstance(selector, str):
             selector_ = eval(selector)
@@ -400,7 +410,7 @@ class Map(abjad.AbjadObject):
                 raise Exception(message)
             command_list.append(command)
         self._commands = tuple(command_list)
-        self._measures = None
+        self._measures: measure_indicator_typing = None
         self._runtime = abjad.OrderedDict()
 
     ### SPECIAL METHODS ###
@@ -519,12 +529,11 @@ class Suite(abjad.AbjadObject):
             if isinstance(command, (Command, Map, Suite)):
                 command_list.append(command)
                 continue
-            message = '\n  Must contain only commands, maps, measure wrappers,'
-            message += ' suites.'
+            message = '\n  Must contain only commands, maps, suites.'
             message += f'\n  Not {type(command).__name__}: {command!r}.'
             raise Exception(message)
         self._commands = tuple(command_list)
-        self._measures = None
+        self._measures: measure_indicator_typing = None
         self._runtime = abjad.OrderedDict()
 
     ### SPECIAL METHODS ###
@@ -1617,7 +1626,7 @@ def scope(
         )
 
 def suite(
-    *commands: Command,
+    *commands: typing.Union[Command, Map, Suite],
     ) -> Suite:
     """
     Makes suite.
@@ -1626,24 +1635,29 @@ def suite(
 
         Raises exception on noncommand:
 
-        >>> baca.suite(['Allegro'])
+        >>> baca.suite('Allegro')
         Traceback (most recent call last):
             ...
         Exception:
-            Must contain only commands, maps, measure wrappers, suites.
-            Not list:
-            ['Allegro']
+            Must contain only commands, maps, suites.
+            Not str:
+            Allegro
 
     """
-    for command in commands:
+    commands_ = []
+    for item in commands:
+        if isinstance(item, (list, tuple)):
+            commands_.extend(item)
+        else:
+            commands_.append(item)
+    for command in commands_:
         if isinstance(command, (Command, Map, Suite)):
             continue
-        message = '\n  Must contain only commands, maps, measure wrappers,'
-        message += ' suites.'
+        message = '\n  Must contain only commands, maps, suites.'
         message += f'\n  Not {type(command).__name__}:'
         message += f'\n  {format(command)}'
         raise Exception(message)
-    return Suite(*commands)
+    return Suite(*commands_)
 
 def tag(
     tags: typing.Union[str, typing.List[str]],

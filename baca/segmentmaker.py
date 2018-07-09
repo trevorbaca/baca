@@ -371,7 +371,11 @@ class SegmentMaker(abjad.SegmentMaker):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, scopes, *commands) -> None:
+    def __call__(
+        self,
+        scopes: typing.Union[scoping.Scope, scoping.TimelineScope],
+        *commands: typing.Union[scoping.Command, scoping.Map, scoping.Suite],
+        ) -> None:
         r"""
         Wraps each command in ``commands`` with each scope in ``scopes``.
 
@@ -806,14 +810,17 @@ class SegmentMaker(abjad.SegmentMaker):
             abbreviations = abjad.OrderedDict()
         abbreviations = abbreviations or abjad.OrderedDict()
         prototype = (scoping.Scope, scoping.TimelineScope)
+        scopes__: typing.List[scoping.scope_typing] = []
         if isinstance(scopes, str):
             voice_name = abbreviations.get(scopes, scopes)
             scope = scoping.scope(voice_name)
-            scopes = [scope]
+            scopes__.append(scope)
         elif isinstance(scopes, tuple):
             scopes = self._unpack_scope_pair(scopes, abbreviations)
+            scopes__.extend(scopes)
         elif isinstance(scopes, prototype):
-            scopes = [scopes]
+            #scopes = [scopes]
+            scopes__.append(scopes)
         else:
             assert isinstance(scopes, list), repr(scopes)
             scopes_ = []
@@ -823,10 +830,11 @@ class SegmentMaker(abjad.SegmentMaker):
                     scopes_.extend(scopes__)
                 else:
                     scopes_.append(scope)
-            scopes = scopes_
-        assert isinstance(scopes, list), repr(scopes)
+            #scopes = scopes_
+            scopes__.extend(scopes_)
+        assert isinstance(scopes__, list), repr(scopes__)
         scopes_ = []
-        for scope in scopes:
+        for scope in scopes__:
             if isinstance(scope, str):
                 voice_name = abbreviations.get(scope, scope)
                 scope_ = scoping.scope(voice_name)
@@ -3164,10 +3172,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 voice_names_.append(result)
         voice_names = voice_names_
         for voice_name in voice_names:
-            #voice_name = abbreviations.get(voice_name, voice_name)
             for stage_token in stage_tokens:
                 scope = scoping.scope(voice_name, stage_token)
                 scopes_.append(scope)
+        prototype = (scoping.Scope, scoping.TimelineScope)
+        assert all(isinstance(_, prototype) for _ in scopes_)
         return scopes_
 
     @staticmethod
