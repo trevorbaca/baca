@@ -32,6 +32,7 @@ baca
    markups
    musicmaker
    overrides
+   persistence
    pitcharray
    pitchclasses
    pitchcommands
@@ -55,6 +56,7 @@ baca
    markups
    musicmaker
    overrides
+   persistence
    pitcharray
    pitchclasses
    pitchcommands
@@ -64,31 +66,6 @@ baca
    segmentmaker
    spannercommands
    templates
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Classes
-   :class: section-header
-
-.. toctree::
-   :hidden:
-
-   Expression
-   PersistentIndicatorTests
-   SchemeManifest
-   Selection
-   Sequence
-
-.. autosummary::
-   :nosignatures:
-
-   ~Expression.Expression
-   ~PersistentIndicatorTests.PersistentIndicatorTests
-   ~SchemeManifest.SchemeManifest
-   ~Selection.Selection
-   ~Sequence.Sequence
 
 .. raw:: html
 

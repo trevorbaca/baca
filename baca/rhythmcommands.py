@@ -6,12 +6,11 @@ import collections
 import inspect
 import math
 import typing
+from abjadext import rmakers
+from . import classes
+from . import divisions as baca_divisions
 from . import scoping
 from . import typings
-from . import divisions as baca_divisions
-from .Selection import Selection
-from .Sequence import Sequence
-from abjadext import rmakers
 mask_typing = typing.Union[rmakers.SilenceMask, rmakers.SustainMask]
 
 
@@ -368,7 +367,7 @@ class RhythmCommand(scoping.Command):
                 start_offset,
                 )
             divisions = division_maker(divisions)
-            divisions = Sequence(divisions).flatten(depth=-1)
+            divisions = classes.Sequence(divisions).flatten(depth=-1)
             divisions = self._apply_division_expression(divisions)
             division_count = len(divisions)
             start_offset = divisions[0].start_offset
@@ -391,7 +390,7 @@ class RhythmCommand(scoping.Command):
                 else:
                     raise Exception(f'no rhythm-maker for division {i}.')
             assert len(labelled_divisions) == len(divisions)
-            labelled_divisions = Sequence(labelled_divisions)
+            labelled_divisions = classes.Sequence(labelled_divisions)
             labelled_divisions = labelled_divisions.group_by(
                 lambda pair: pair[1],
                 )
@@ -1219,7 +1218,7 @@ class TieCorrectionCommand(scoping.Command):
             return
         if self.selector is not None:
             argument = self.selector(argument)
-        leaves = Selection(argument).leaves()
+        leaves = classes.Selection(argument).leaves()
         for leaf in leaves:
             if self.untie is True:
                 self._sever_tie(leaf, self.direction, self.repeat)

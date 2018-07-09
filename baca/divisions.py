@@ -5,8 +5,7 @@ import abjad
 import collections
 import inspect
 import typing
-from .Sequence import Sequence
-from .Sequence import _sequence
+from . import classes
 
 
 ### CLASSES ###
@@ -2127,7 +2126,7 @@ class FlattenDivisionCallback(abjad.AbjadValueObject):
 
         Returns list of divisions or list of division lists.
         """
-        return Sequence(argument).flatten(depth=self.depth)
+        return classes.Sequence(argument).flatten(depth=self.depth)
 
     ### PUBLIC PROPERTIES ###
 
@@ -2586,7 +2585,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
         elif self.counts == abjad.Infinity:
             divisions = [sum(divisions)]
         elif self.counts:
-            parts = Sequence(divisions).partition_by_counts(
+            parts = classes.Sequence(divisions).partition_by_counts(
                 self.counts,
                 cyclic=self.cyclic,
                 overhang=True,
@@ -2935,7 +2934,7 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
             beat_group = list(beat_list)
             grouped_beat_list = [beat_group]
             return grouped_beat_list
-        grouped_beat_list = Sequence(beat_list).partition_by_counts(
+        grouped_beat_list = classes.Sequence(beat_list).partition_by_counts(
             counts=self.counts,
             cyclic=True,
             overhang=False,
@@ -2945,7 +2944,7 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
             return grouped_beat_list
         remainder_length = len(beat_list) - beats_included
         if self.remainder_direction == abjad.Left:
-            grouped_beat_list = Sequence(
+            grouped_beat_list = classes.Sequence(
                 beat_list[remainder_length:]).partition_by_counts(
                 counts=self.counts,
                 cyclic=True,
@@ -2958,7 +2957,7 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
             else:
                 grouped_beat_list.insert(0, remainder)
         else:
-            grouped_beat_list = Sequence(
+            grouped_beat_list = classes.Sequence(
                 beat_list[:-remainder_length]).partition_by_counts(
                 counts=self.counts,
                 cyclic=True,
@@ -3744,12 +3743,12 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             division_list = list(durations)
             pattern_rotation_index = self.pattern_rotation_index or 0
             pattern_rotation_index *= i
-            division_list = Sequence(division_list).rotate(
+            division_list = classes.Sequence(division_list).rotate(
                 n=pattern_rotation_index
                 )
             division_list = list(division_list)
             if self.cyclic:
-                division_list = Sequence(division_list).repeat_to_weight(
+                division_list = classes.Sequence(division_list).repeat_to_weight(
                     input_division,
                     allow_total=abjad.Less,
                     )
@@ -4940,7 +4939,7 @@ def fuse_compound_quarter_divisions(
         cyclic=True,
         overhang=True,
         )
-    expression = expression.map(_sequence().sum())
+    expression = expression.map(classes.sequence_expression().sum())
     expression = expression.flatten(depth=-1)
     return expression
 

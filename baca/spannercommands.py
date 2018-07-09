@@ -1,9 +1,9 @@
 import abjad
 import typing
-from . import scoping
+from . import classes
 from . import library
+from . import scoping
 from . import typings
-from .Selection import _select
 
 
 ### CLASSES ###
@@ -1222,7 +1222,7 @@ def repeat_tie_repeat_pitches() -> scoping.Map:
     Repeat-ties repeat pitches.
     """
     return scoping.map(
-        _select().ltqruns().nontrivial(),
+        classes.selector().ltqruns().nontrivial(),
         SpannerCommand(
             selector='baca.qrun(0)',
             spanner=abjad.Tie(repeat=True),
@@ -2148,7 +2148,7 @@ def tie_repeat_pitches() -> scoping.Map:
     Ties repeat pitches.
     """
     return scoping.map(
-        _select().ltqruns().nontrivial(),
+        classes.selector().ltqruns().nontrivial(),
         tie(),
         )
 

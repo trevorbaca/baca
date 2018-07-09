@@ -12,9 +12,6 @@ from . import rhythmcommands
 from . import scoping
 from . import spannercommands
 from . import typings
-from .Selection import Selection
-from .Selection import _select
-from .Sequence import Sequence
 
 
 ### CLASSES ###
@@ -2585,7 +2582,7 @@ class ImbricationCommand(scoping.Command):
         container = copy.deepcopy(container)
         abjad.override(container).tuplet_bracket.stencil = False
         abjad.override(container).tuplet_number.stencil = False
-        segment = Sequence(self.segment).flatten(depth=-1)
+        segment = classes.Sequence(self.segment).flatten(depth=-1)
         if self.by_pitch_class:
             segment = [abjad.NumberedPitchClass(_) for _ in segment]
         cursor = classes.Cursor(
@@ -2655,7 +2652,7 @@ class ImbricationCommand(scoping.Command):
             abjad.attach(abjad.tags.RIGHT_BROKEN_BEAM, last_leaf)
         selection = abjad.select(container)
         if not self.hocket:
-            for pleaf in Selection(container).pleaves():
+            for pleaf in classes.Selection(container).pleaves():
                 abjad.attach(abjad.tags.ALLOW_OCTAVE, pleaf)
         return {self.voice_name: selection}
 
@@ -5175,7 +5172,7 @@ class MusicAccumulator(abjad.AbjadObject):
             return self._current_offset
         if anchored and remote_voice_name is None:
             return self._score_stop_offset
-        remote_selector = remote_selector or _select().leaf(0)
+        remote_selector = remote_selector or classes.selector().leaf(0)
         floating_selections = self._floating_selections[remote_voice_name]
         selections = [_.annotation for _ in floating_selections]
         result = remote_selector(selections)
@@ -11738,7 +11735,7 @@ class PitchSpecifier(abjad.AbjadObject):
     ### PRIVATE METHODS ###
 
     def _apply_expressions(self, collections):
-        sequence = Sequence(items=collections)
+        sequence = classes.Sequence(items=collections)
         for expression in self.expressions or []:
             assert isinstance(expression, abjad.Expression), repr(expression)
             sequence = expression(sequence)

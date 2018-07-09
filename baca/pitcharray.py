@@ -4,7 +4,7 @@ Pitch array library.
 import abjad
 import copy
 import numbers
-from .Sequence import Sequence
+from . import classes
 
 
 ### CLASSES ###
@@ -329,7 +329,7 @@ class PitchArray(abjad.AbjadObject):
         Returns tuple.
         """
         columns = []
-        cells = Sequence(self.rows).zip(truncate=False)
+        cells = classes.Sequence(self.rows).zip(truncate=False)
         for i, cells in enumerate(cells):
             column = PitchArrayColumn(cells)
             column._parent_array = self
@@ -713,7 +713,7 @@ class PitchArray(abjad.AbjadObject):
                 )
             part_lengths = [len(part) for part in parts]
             cells = pitch_array_row.cells
-            grouped_cells = Sequence(cells).partition_by_counts(
+            grouped_cells = classes.Sequence(cells).partition_by_counts(
                 part_lengths,
                 cyclic=False,
                 overhang=False,

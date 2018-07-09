@@ -7,8 +7,6 @@ import inspect
 import math
 import typing
 from . import classes
-from .Expression import Expression
-from .Sequence import Sequence
 
 
 ### CLASSES ###
@@ -1495,7 +1493,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
 
         Returns new collection list.
         """
-        sequence = Sequence(items=self)
+        sequence = classes.Sequence(items=self)
         collections = []
         for sequence_ in sequence.accumulate(operands=operands):
             collections.extend(sequence_)
@@ -2084,7 +2082,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
 
         Returns new collection list.
         """
-        collections = Sequence(items=self)
+        collections = classes.Sequence(items=self)
         collections = collections.helianthate(n=n, m=m)
         return abjad.new(self, collections=collections)
 
@@ -2179,7 +2177,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
         if isinstance(argument, abjad.Ratio):
             message = 'implement ratio-partition at some point.'
             raise NotImplementedError(message)
-        sequence = Sequence(self)
+        sequence = classes.Sequence(self)
         parts = sequence.partition_by_counts(
             argument,
             cyclic=cyclic,
@@ -2190,7 +2188,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
             collections = [_.join()[0] for _ in collection_lists]
             result = abjad.new(self, collections=collections)
         else:
-            result = Sequence(collection_lists)
+            result = classes.Sequence(collection_lists)
         return result
 
     def read(self, counts=None, check=None):
@@ -2272,7 +2270,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
 
         Returns new collection list.
         """
-        sequence = Sequence(items=self)
+        sequence = classes.Sequence(items=self)
         collections = sequence.remove(indices=indices, period=period)
         return abjad.new(self, collections=collections)
 
@@ -2508,7 +2506,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
 
         Returns new collection list.
         """
-        collections = Sequence(items=self)
+        collections = classes.Sequence(items=self)
         collections = collections.repeat(n=n)
         collections = collections.flatten(depth=1)
         return abjad.new(self, collections=collections)
@@ -2535,7 +2533,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
 
         Returns new collection list.
         """
-        sequence = Sequence(items=self)
+        sequence = classes.Sequence(items=self)
         collections = sequence.retain(indices=indices, period=period)
         return abjad.new(self, collections=collections)
 
@@ -2980,7 +2978,7 @@ class Constellation(abjad.AbjadObject):
     @property
     def _generator_pitch_numbers(self):
         result = self._partitioned_generator_pitch_numbers
-        result = Sequence(result).flatten(depth=-1)
+        result = classes.Sequence(result).flatten(depth=-1)
         return list(sorted(result))
 
     @property
@@ -3191,7 +3189,7 @@ class Constellation(abjad.AbjadObject):
         result = enumerator.yield_outer_product()
         result = list(result)
         for i, part in enumerate(result):
-            result[i] = Sequence(part).flatten(depth=-1)
+            result[i] = classes.Sequence(part).flatten(depth=-1)
         for i, cell in enumerate(result[:]):
             result[i] = cell.sort()
         return result
@@ -3227,7 +3225,7 @@ class Constellation(abjad.AbjadObject):
         """
         chord = abjad.Chord(chord, (1, 4))
         pitch_numbers = [_.number for _ in chord.written_pitches]
-        pitch_numbers = Sequence(items=pitch_numbers)
+        pitch_numbers = classes.Sequence(items=pitch_numbers)
         for i, pitch_number_list in enumerate(self):
             if pitch_number_list == pitch_numbers:
                 return i + 1
@@ -3641,7 +3639,7 @@ class ConstellationCircuit(abjad.AbjadObject):
         Returns LilyPond file.
         """
         chords = list(zip(self._colored_generator_chords, self.pivot_chords))
-        chords = Sequence(chords).flatten(depth=1)
+        chords = classes.Sequence(chords).flatten(depth=1)
         return self._illustrate_chords(chords)
 
     def illustrate_generator_chords(self):
@@ -3771,7 +3769,7 @@ class ConstellationCircuit(abjad.AbjadObject):
         Returns LilyPond file.
         """
         chords = list(zip(self.generator_chords, self.pivot_chords))
-        chords = Sequence(chords).flatten(depth=1)
+        chords = classes.Sequence(chords).flatten(depth=1)
         return self._illustrate_chords(chords)
 
     def illustrate_pivot_chords(self):
@@ -5308,7 +5306,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
         Returns sequence.
         """
-        return Sequence(self)
+        return classes.Sequence(self)
 
     def space_down(self, bass=None, semitones=None, soprano=None):
         r"""
@@ -9516,7 +9514,7 @@ class ZaggedPitchClassMaker(abjad.AbjadObject):
 
         Returns pitch-class tree.
         """
-        pc_cells = Sequence(self.pc_cells)
+        pc_cells = classes.Sequence(self.pc_cells)
         pc_cells = pc_cells.helianthate(-1, 1)
         prototype = (tuple, abjad.Ratio)
         if self.division_ratios is None:
@@ -9524,7 +9522,7 @@ class ZaggedPitchClassMaker(abjad.AbjadObject):
         elif all(isinstance(_, prototype) for _ in self.division_ratios):
             division_ratios = self.division_ratios
         elif all(isinstance(_, list) for _ in self.division_ratios):
-            division_ratios = Sequence(self.division_ratios)
+            division_ratios = classes.Sequence(self.division_ratios)
             division_ratios = division_ratios.helianthate(-1, 1)
             division_ratios = division_ratios.flatten(depth=1)
         division_ratios = [abjad.Ratio(_) for _ in division_ratios]
@@ -9532,19 +9530,19 @@ class ZaggedPitchClassMaker(abjad.AbjadObject):
         pc_cells_copy = pc_cells[:]
         pc_cells = []
         for i, pc_segment in enumerate(pc_cells_copy):
-            parts = Sequence(pc_segment).partition_by_ratio_of_lengths(
+            parts = classes.Sequence(pc_segment).partition_by_ratio_of_lengths(
                 division_ratios[i],
                 )
             pc_cells.extend(parts)
         grouping_counts = self.grouping_counts or [1]
-        pc_cells = Sequence(pc_cells).partition_by_counts(
+        pc_cells = classes.Sequence(pc_cells).partition_by_counts(
             grouping_counts,
             cyclic=True,
             overhang=True,
             )
         # this block was uncommented during krummzeit
         #pc_cells = [abjad.join_subsequences(x) for x in pc_cells]
-        #pc_cells = Sequence(pc_cells).partition_by_counts(
+        #pc_cells = classes.Sequence(pc_cells).partition_by_counts(
         #    grouping_counts,
         #    cyclic=True,
         #    overhang=True,
@@ -9690,7 +9688,7 @@ def _pitch_class_segment(items=None, **keywords):
     if items:
         return PitchClassSegment(items=items, **keywords)
     name = keywords.pop('name', None)
-    expression = Expression(name=name)
+    expression = classes.Expression(name=name)
     callback = expression._make_initializer_callback(
         PitchClassSegment,
         module_names=['baca'],
@@ -9704,7 +9702,7 @@ def _pitch_class_set(items=None, **keywords):
     if items:
         return PitchClassSet(items=items, **keywords)
     name = keywords.pop('name', None)
-    expression = Expression(name=name)
+    expression = classes.Expression(name=name)
     callback = expression._make_initializer_callback(
         PitchClassSet,
         module_names=['baca'],
@@ -9718,7 +9716,7 @@ def _pitch_segment(items=None, **keywords):
     if items:
         return PitchSegment(items=items, **keywords)
     name = keywords.pop('name', None)
-    expression = Expression(name=name)
+    expression = classes.Expression(name=name)
     callback = expression._make_initializer_callback(
         PitchSegment,
         module_names=['baca'],
@@ -9732,7 +9730,7 @@ def _pitch_set(items=None, **keywords):
     if items:
         return PitchSet(items=items, **keywords)
     name = keywords.pop('name', None)
-    expression = Expression(name=name)
+    expression = classes.Expression(name=name)
     callback = expression._make_initializer_callback(
         PitchSet,
         module_names=['baca'],

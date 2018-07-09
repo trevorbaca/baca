@@ -1,13 +1,12 @@
 import abjad
 import collections
 import typing
+from . import classes
 from . import commands as baca_commands
 from . import indicators
 from . import library
 from . import scoping
 from . import typings
-from .Selection import Selection
-from .Sequence import Sequence
 
 
 ### CLASSES ###
@@ -283,7 +282,7 @@ class BreakMeasureMap(abjad.AbjadObject):
         """
         if context is None:
             return
-        skips = Selection(context).skips()
+        skips = classes.Selection(context).skips()
         measure_count = self.partial_score or len(skips)
         last_measure_number = self.first_measure_number + measure_count - 1
         literal = abjad.LilyPondLiteral(r'\autoPageBreaksOff', 'before')
@@ -1220,7 +1219,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         Calls command on ``segment_maker``.
         """
         score = segment_maker.score
-        skips = Selection(score['GlobalSkips']).skips()
+        skips = classes.Selection(score['GlobalSkips']).skips()
         programmatic = True
         if self.measures and len(self.measures) == len(skips):
             programmatic = False
@@ -2387,14 +2386,14 @@ class TimeSignatureMaker(abjad.AbjadObject):
     def __call__(self) -> typing.Tuple[
         typing.List[int],
         MetronomeMarkMeasureMap,
-        Sequence,
+        classes.Sequence,
         ]:
         """
         Calls time-signature-maker.
         """
         if not self.stage_measure_map:
             raise Exception('try TimeSignatureMaker.run() instead.')
-        time_signatures = Sequence(self.time_signatures)
+        time_signatures = classes.Sequence(self.time_signatures)
         time_signatures = time_signatures.rotate(self.rotation)
         time_signatures = time_signatures.flatten(depth=1)
         items_: typing.List[StageMeasureMap.item_type] = []
@@ -2409,7 +2408,9 @@ class TimeSignatureMaker(abjad.AbjadObject):
             time_signatures,
             )
         measures_per_stage = [len(_) for _ in time_signature_groups]
-        time_signatures = Sequence(time_signature_groups).flatten(depth=1)
+        time_signatures = classes.Sequence(time_signature_groups).flatten(
+            depth=1
+            )
         fermata_entries = self.stage_measure_map._make_fermata_entries()
         if self.metronome_mark_measure_map:
             items = self.metronome_mark_measure_map.items
@@ -2531,7 +2532,7 @@ class TimeSignatureMaker(abjad.AbjadObject):
         if self.repeat_count:
             raise Exception('repeat count must be zero with run().')
         result = []
-        time_signatures = Sequence(self.time_signatures)
+        time_signatures = classes.Sequence(self.time_signatures)
         time_signatures = time_signatures.rotate(self.rotation)
         time_signatures = time_signatures.flatten(depth=1)
         i = 0
@@ -2658,7 +2659,7 @@ def breaks(
                 indicators=[break_],
                 selector=selector,
                 )
-            alignment_distances = Sequence(alignment_distances).flatten()
+            alignment_distances = classes.Sequence(alignment_distances).flatten()
             lbsd = LBSD(
                 alignment_distances=alignment_distances,
                 y_offset=y_offset,
@@ -2802,7 +2803,7 @@ def system(
     """
     Makes system specifier.
     """
-    distances_ = Sequence(distances).flatten()
+    distances_ = classes.Sequence(distances).flatten()
     return SystemSpecifier(
         distances=distances_,
         measure=measure,

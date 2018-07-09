@@ -5,18 +5,17 @@ import sys
 import traceback
 import typing
 from abjadext import rmakers
-from . import scoping
+from . import classes
 from . import indicators
 from . import library
 from . import markups
 from . import overrides as baca_overrides
 from . import pitchclasses
 from . import rhythmcommands
+from . import scoping
 from . import segmentclasses
 from . import templates
 from . import typings
-from .Selection import Selection
-from .Sequence import Sequence
 
 
 class SegmentMaker(abjad.SegmentMaker):
@@ -959,7 +958,7 @@ class SegmentMaker(abjad.SegmentMaker):
         strings.append(r'\baca_bar_line_visible')
         strings.append(rf'\bar "{abbreviation}"')
         literal = abjad.LilyPondLiteral(strings, 'after')
-        last_skip = Selection(self.score['GlobalSkips']).skip(-1)
+        last_skip = classes.Selection(self.score['GlobalSkips']).skip(-1)
         abjad.attach(literal, last_skip, tag='SM5')
 
     def _add_final_markup(self):
@@ -1028,7 +1027,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _annotate_sounds_during(self):
         for voice in abjad.iterate(self.score).components(abjad.Voice):
-            pleaves = Selection(voice).pleaves()
+            pleaves = classes.Selection(voice).pleaves()
             value = bool(pleaves)
             abjad.annotate(voice, abjad.tags.SOUNDS_DURING_SEGMENT, value)
             self._sounds_during_segment[voice.name] = value
@@ -1392,7 +1391,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _attach_metronome_mark_text_span_indicators(self):
         indicator_count = 0
-        skips = Selection(self.score['GlobalSkips']).skips()
+        skips = classes.Selection(self.score['GlobalSkips']).skips()
         last_leaf_metronome_mark = abjad.inspect(skips[-1]).get_indicator(
             abjad.MetronomeMark,
             default=None,
@@ -1551,7 +1550,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
 
     def _attach_metronome_marks(self):
-        skips = Selection(self.score['GlobalSkips']).skips()
+        skips = classes.Selection(self.score['GlobalSkips']).skips()
         if not self.metronome_mark_measure_map:
             return
         for stage_number, directive in self.metronome_mark_measure_map:
@@ -2111,7 +2110,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _force_nonnatural_accidentals(self):
         natural = abjad.Accidental('natural')
-        for pleaf in Selection(self.score).pleaves():
+        for pleaf in classes.Selection(self.score).pleaves():
             if isinstance(pleaf, abjad.Note):
                 note_heads = [pleaf.note_head]
             else:
@@ -2173,7 +2172,7 @@ class SegmentMaker(abjad.SegmentMaker):
         measure_indices = [
             _ - first_measure_number - 1 for _ in measure_numbers
             ]
-        skips = Selection(self.score['GlobalSkips']).skips()
+        skips = classes.Selection(self.score['GlobalSkips']).skips()
         for i, skip in enumerate(skips):
             if i in measure_indices:
                 timespan = abjad.inspect(skip).get_timespan()
@@ -2238,7 +2237,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return segment_number + 1
 
     def _get_stage_offsets(self, start_stage, stop_stage):
-        skips = Selection(self.score['GlobalSkips']).skips()
+        skips = classes.Selection(self.score['GlobalSkips']).skips()
         result = self._stage_number_to_measure_indices(start_stage)
         start_measure_index, stop_measure_index = result
         start_skip = skips[start_measure_index]
@@ -2253,7 +2252,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _get_stage_time_signatures(self, start_stage=None, stop_stage=None):
         assert len(self.time_signatures) == sum(self.measures_per_stage)
-        stages = Sequence(self.time_signatures).partition_by_counts(
+        stages = classes.Sequence(self.time_signatures).partition_by_counts(
             self.measures_per_stage,
             )
         start_index = start_stage - 1
@@ -2264,7 +2263,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 stop_stage = self.stage_count
             stop_index = stop_stage
             stages = stages[start_index:stop_index]
-            time_signatures = Sequence(stages).flatten(depth=-1)
+            time_signatures = classes.Sequence(stages).flatten(depth=-1)
         pair = (start_stage, stop_stage)
         start_offset, stop_offset = self._get_stage_offsets(*pair)
         return start_offset, time_signatures
@@ -2420,7 +2419,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _label_clock_time(self):
         if self.environment == 'docs':
             return
-        skips = Selection(self.score['GlobalSkips']).skips()
+        skips = classes.Selection(self.score['GlobalSkips']).skips()
         if self.clock_time_override:
             metronome_mark = self.clock_time_override
             abjad.attach(metronome_mark, skips[0])
@@ -2460,7 +2459,7 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.detach(metronome_mark, skips[0])
 
     def _label_measure_indices(self):
-        skips = Selection(self.score['GlobalSkips']).skips()
+        skips = classes.Selection(self.score['GlobalSkips']).skips()
         first_measure_number = self._get_first_measure_number()
         for measure_index, skip in enumerate(skips):
             measure_number = first_measure_number + measure_index
@@ -2497,7 +2496,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
 
     def _label_stage_numbers(self):
-        skips = Selection(self.score['GlobalSkips']).skips()
+        skips = classes.Selection(self.score['GlobalSkips']).skips()
         for stage_index in range(self.stage_count):
             stage_number = stage_index + 1
             result = self._stage_number_to_measure_indices(stage_number)
@@ -2552,7 +2551,7 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         # empty start bar allows LilyPond to print bar numbers
         # at start of nonfirst segments
-        first_skip = Selection(context).skip(0)
+        first_skip = classes.Selection(context).skip(0)
         literal = abjad.LilyPondLiteral(r'\bar ""')
         tag = abjad.Tag(abjad.tags.EMPTY_START_BAR)
         tag = tag.prepend('+SEGMENT')
@@ -2700,7 +2699,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _populate_offset_to_measure_number(self):
         measure_number = self._get_first_measure_number()
-        for skip in Selection(self.score['GlobalSkips']).skips():
+        for skip in classes.Selection(self.score['GlobalSkips']).skips():
             offset = abjad.inspect(skip).get_timespan().start_offset
             self._offset_to_measure_number[offset] = measure_number
             measure_number += 1
@@ -2812,7 +2811,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _remove_redundant_time_signatures(self):
         previous_time_signature = None
         self._cached_time_signatures = []
-        for skip in Selection(self.score['GlobalSkips']).skips():
+        for skip in classes.Selection(self.score['GlobalSkips']).skips():
             time_signature = abjad.inspect(skip).get_indicator(
                 abjad.TimeSignature
                 )
@@ -3036,7 +3035,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _transpose_score_(self):
         if not self.transpose_score:
             return
-        for pleaf in Selection(self.score).pleaves():
+        for pleaf in classes.Selection(self.score).pleaves():
             if abjad.inspect(pleaf).has_indicator(abjad.tags.DO_NOT_TRANSPOSE):
                 continue
             abjad.Instrument.transpose_from_sounding_pitch(pleaf)
@@ -6240,7 +6239,7 @@ class WellformednessManager(abjad.WellformednessManager):
 
         Returns violators and total.
         """
-        total = len(Selection(argument).plts())
+        total = len(classes.Selection(argument).plts())
         violators = WellformednessManager._find_repeat_pitch_classes(argument)
         return violators, total
 

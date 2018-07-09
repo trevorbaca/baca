@@ -5,7 +5,6 @@ import abjad
 import typing
 from . import typings
 from .commands import IndicatorCommand
-from .Sequence import Sequence
 
 
 def apply_tweaks(argument, tweaks):

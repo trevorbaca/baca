@@ -17,22 +17,6 @@ Bača API
 
    <hr/>
 
-.. rubric:: Classes
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.Expression.Expression
-   ~baca.PersistentIndicatorTests.PersistentIndicatorTests
-   ~baca.SchemeManifest.SchemeManifest
-   ~baca.Selection.Selection
-   ~baca.Sequence.Sequence
-
-.. raw:: html
-
-   <hr/>
-
 .. rubric:: Functions
    :class: subsection-header
 
@@ -141,8 +125,25 @@ Bača API
 
    ~baca.classes.Counter
    ~baca.classes.Cursor
+   ~baca.classes.Expression
    ~baca.classes.PaddedTuple
+   ~baca.classes.SchemeManifest
+   ~baca.classes.Selection
+   ~baca.classes.Sequence
    ~baca.classes.Tree
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Functions
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.classes._select
+   ~baca.classes._sequence
 
 .. raw:: html
 
@@ -780,6 +781,25 @@ Override library.
    ~baca.overrides.tuplet_bracket_up
    ~baca.overrides.tuplet_number_denominator
    ~baca.overrides.tuplet_number_extra_offset
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: :ref:`baca.persistence <baca--persistence>`
+   :class: section-header
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Classes
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.persistence.PersistentIndicatorTests
 
 .. raw:: html
 

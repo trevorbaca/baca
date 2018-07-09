@@ -8,31 +8,25 @@ from .indicatorcommands import *
 from .indicators import *
 from .musicmaker import *
 from .overrides import *
+from .persistence import *
 from .pitcharray import *
 from .pitchcommands import *
 from .pitchclasses import *
 from .rhythmcommands import *
 from .scoping import *
 from .segmentclasses import *
+from .segmentmaker import *
 from .spannercommands import *
 from .templates import *
 from . import markups
 
-# classes
-from .Expression import Expression
-from .PersistentIndicatorTests import PersistentIndicatorTests
-from .SchemeManifest import SchemeManifest
-from .segmentmaker import *
-from .Selection import Selection
-from .Sequence import Sequence
-
 # expression constructors
+from .classes import _select as select
+from .classes import _sequence as sequence
 from .pitchclasses import _pitch_class_segment as pitch_class_segment
 from .pitchclasses import _pitch_class_set as pitch_class_set
 from .pitchclasses import _pitch_set as pitch_set
 from .pitchclasses import _pitch_segment as pitch_segment
-from .Selection import _select as select
-from .Sequence import _sequence as sequence
 
 def _publish_selectors(class_):
     for name in dir(class_):
@@ -46,7 +40,7 @@ def _publish_selectors(class_):
 
 _publish_selectors(Selection)
 
-from .Selection import _select
+from .classes import _select
 # TODO: move to baca.Selection
 def mleaves(count: int) -> abjad.Expression:
     """

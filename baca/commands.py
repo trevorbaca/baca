@@ -1,13 +1,11 @@
 import abjad
 import collections
 import typing
+from . import classes
 from . import indicators
 from . import library
 from . import scoping
 from . import typings
-from .Selection import Selection
-from .Selection import _select
-from .Sequence import Sequence
 
 
 ### CLASSES ###
@@ -62,12 +60,12 @@ class BCPCommand(scoping.Command):
             return
         if self.selector:
             argument = self.selector(argument)
-        leaves = Selection(argument).leaves()
-        bcps_ = Sequence(self.bow_contact_points)
+        leaves = classes.Selection(argument).leaves()
+        bcps_ = classes.Sequence(self.bow_contact_points)
         if self.helper:
             bcps_ = self.helper(bcps_, argument)
         bcps = abjad.CyclicTuple(bcps_)
-        lts = Selection(argument).lts()
+        lts = classes.Selection(argument).lts()
         total = len(lts)
         add_right_text_to_me = None
         if not self.final_spanner:
@@ -923,7 +921,7 @@ class ContainerCommand(scoping.Command):
         else:
             identifier = f'%*% {self.identifier}'
         container = abjad.Container(identifier=identifier)
-        components = Selection(argument).leaves().top()
+        components = classes.Selection(argument).leaves().top()
         abjad.mutate(components).wrap(container)
 
     ### PUBLIC PROPERTIES ###
@@ -1526,7 +1524,7 @@ class IndicatorCommand(scoping.Command):
             argument = self.selector(argument)
         if not argument:
             return
-        for i, leaf in enumerate(_select(argument).leaves()):
+        for i, leaf in enumerate(classes.Selection(argument).leaves()):
             indicators = self.indicators[i]
             indicators = self._token_to_indicators(indicators)
             for indicator in indicators:
@@ -2074,7 +2072,7 @@ class MetronomeMarkCommand(scoping.Command):
             argument = self.selector(argument)
         if not argument:
             return
-        leaf = Selection(argument).leaf(0)
+        leaf = classes.Selection(argument).leaf(0)
         reapplied = self._remove_reapplied_wrappers(leaf, indicator)
         wrapper = abjad.attach(
             indicator,
@@ -2160,7 +2158,7 @@ class PartAssignmentCommand(scoping.Command):
                 raise Exception(message)
         identifier = f'%*% {self.part_assignment!s}'
         container = abjad.Container(identifier=identifier)
-        components = Selection(argument).leaves().top()
+        components = classes.Selection(argument).leaves().top()
         abjad.mutate(components).wrap(container)
 
     ### PUBLIC PROPERTIES ###
@@ -2261,8 +2259,8 @@ class PiecewiseIndicatorCommand(scoping.Command):
             assert isinstance(self.bookend, int), repr(self.bookend)
             bookend_pattern = abjad.index([self.bookend], period=piece_count)
         for i, piece in enumerate(pieces):
-            start_leaf = Selection(piece).leaf(0)
-            stop_leaf = Selection(piece).leaf(-1)
+            start_leaf = classes.Selection(piece).leaf(0)
+            stop_leaf = classes.Selection(piece).leaf(-1)
             if i == 0:
                 is_first_piece = True
             else:
@@ -2457,7 +2455,7 @@ class VoltaCommand(scoping.Command):
             return
         if self.selector is not None:
             argument = self.selector(argument)
-        leaves = Selection(argument).leaves()
+        leaves = classes.Selection(argument).leaves()
         container = abjad.Container()
         abjad.mutate(leaves).wrap(container)
         abjad.attach(abjad.Repeat(), container)

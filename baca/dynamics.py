@@ -3,12 +3,9 @@ Dynamic library.
 """
 import abjad
 import typing
+from . import classes
+from . import commands
 from . import typings
-from .commands import IndicatorBundle
-from .commands import IndicatorCommand
-from .commands import PiecewiseIndicatorCommand
-from .SchemeManifest import SchemeManifest
-from .Sequence import Sequence
 
 
 def dynamic(
@@ -16,7 +13,7 @@ def dynamic(
     *tweaks: abjad.LilyPondTweakManager,
     selector: typings.Selector = 'baca.phead(0)',
     redundant: bool = None,
-    ) -> IndicatorCommand:
+    ) -> commands.IndicatorCommand:
     r"""
     Attaches dynamic.
 
@@ -455,7 +452,7 @@ def dynamic(
         indicator = dynamic
     prototype = (abjad.Dynamic, abjad.DynamicTrend)
     assert isinstance(indicator, prototype), repr(indicator)
-    return IndicatorCommand(
+    return commands.IndicatorCommand(
         *tweaks,
         context='Voice',
         indicators=[indicator],
@@ -473,7 +470,7 @@ def hairpin(
     remove_length_1_spanner_start: bool = None,
     right_broken: bool = None,
     selector: typings.Selector = 'baca.tleaves()'
-    ) -> PiecewiseIndicatorCommand:
+    ) -> commands.PiecewiseIndicatorCommand:
     r"""
     Attaches hairpin.
 
@@ -1847,7 +1844,7 @@ def hairpin(
     else:
         bundles = dynamics
     for item in bundles:
-        assert isinstance(item, IndicatorBundle), repr(dynamic)
+        assert isinstance(item, commands.IndicatorBundle), repr(dynamic)
     final_hairpin_: typing.Union[bool, abjad.DynamicTrend, None] = None
     if isinstance(final_hairpin, bool):
         final_hairpin_ = final_hairpin
@@ -1859,14 +1856,14 @@ def hairpin(
         bundle = bundles[0]
         assert bundle.spanner_start_only()
         dynamic_trend = abjad.new(bundle.spanner_start, left_broken=True)
-        bundle = IndicatorBundle(dynamic_trend)
+        bundle = commands.IndicatorBundle(dynamic_trend)
         bundles[0] = bundle
     if remove_length_1_spanner_start is not None:
         remove_length_1_spanner_start = bool(remove_length_1_spanner_start)
     right_broken_: typing.Any = False
     if bool(right_broken) is True:
         right_broken_ = abjad.LilyPondLiteral(r'\!', format_slot='after')
-    return PiecewiseIndicatorCommand(
+    return commands.PiecewiseIndicatorCommand(
         bookend=bookend,
         bundles=bundles,
         final_piece_spanner=final_hairpin_,
@@ -1947,7 +1944,7 @@ def make_dynamic(string: str) -> typing.Union[
 
     """
     assert isinstance(string, str), repr(string)
-    scheme_manifest = SchemeManifest()
+    scheme_manifest = classes.SchemeManifest()
     known_shapes = abjad.DynamicTrend('<').known_shapes
     indicator: typing.Union[abjad.Dynamic, abjad.DynamicTrend]
     if string == 'niente':
@@ -1994,7 +1991,7 @@ def make_dynamic(string: str) -> typing.Union[
 
 def parse_hairpin_descriptor(
     descriptor: str
-    ) -> typing.List[IndicatorBundle]:
+    ) -> typing.List[commands.IndicatorBundle]:
     r"""
     Parses hairpin descriptor.
 
@@ -2065,36 +2062,36 @@ def parse_hairpin_descriptor(
     assert isinstance(descriptor, str), repr(descriptor)
     indicators: typing.List[
         typing.Union[abjad.Dynamic, abjad.DynamicTrend]] = []
-    bundles: typing.List[IndicatorBundle] = []
+    bundles: typing.List[commands.IndicatorBundle] = []
     for string in descriptor.split():
         indicator = make_dynamic(string)
         indicators.append(indicator)
     if len(indicators) == 1:
-        bundle = IndicatorBundle(indicators[0])
+        bundle = commands.IndicatorBundle(indicators[0])
         bundles.append(bundle)
         return bundles
     if isinstance(indicators[0], abjad.DynamicTrend):
         result = indicators.pop(0)
         assert isinstance(result, abjad.DynamicTrend)
-        bundle = IndicatorBundle(result)
+        bundle = commands.IndicatorBundle(result)
         bundles.append(bundle)
     if len(indicators) == 1:
-        bundle = IndicatorBundle(indicators[0])
+        bundle = commands.IndicatorBundle(indicators[0])
         bundles.append(bundle)
         return bundles
-    for left, right in Sequence(indicators).nwise():
+    for left, right in classes.Sequence(indicators).nwise():
         if (isinstance(left, abjad.DynamicTrend) and
             isinstance(right, abjad.DynamicTrend)):
             raise Exception('consecutive dynamic trends')
         elif (isinstance(left, abjad.Dynamic) and
             isinstance(right, abjad.Dynamic)):
-            bundle = IndicatorBundle(left)
+            bundle = commands.IndicatorBundle(left)
             bundles.append(bundle)
         elif (isinstance(left, abjad.Dynamic) and
             isinstance(right, abjad.DynamicTrend)):
-            bundle = IndicatorBundle(left, right)
+            bundle = commands.IndicatorBundle(left, right)
             bundles.append(bundle)
     if indicators and isinstance(indicators[-1], abjad.Dynamic):
-        bundle = IndicatorBundle(indicators[-1])
+        bundle = commands.IndicatorBundle(indicators[-1])
         bundles.append(bundle)
     return bundles

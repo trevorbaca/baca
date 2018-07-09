@@ -552,7 +552,7 @@ def articulation(
     selector: typings.Selector = 'baca.phead(0)',
     ) -> commands.IndicatorCommand:
     """
-    Attaches ``articulation``.
+    Attaches articulation.
     """
     articulation_ = abjad.Articulation(articulation)
     return commands.IndicatorCommand(
@@ -566,7 +566,7 @@ def articulations(
     selector: typings.Selector = 'baca.pheads()',
     ) -> commands.IndicatorCommand:
     """
-    Attaches ``articulations``.
+    Attaches articulations.
     """
     return commands.IndicatorCommand(
         indicators=articulations,
@@ -578,7 +578,7 @@ def breathe(
     selector: typings.Selector = 'baca.pleaf(-1)',
     ) -> commands.IndicatorCommand:
     """
-    Attaches LilyPond breathe command to pleaf -1.
+    Attaches breathe command.
     """
     breathe = abjad.LilyPondLiteral(r'\breathe', format_slot='after')
     return commands.IndicatorCommand(

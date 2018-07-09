@@ -1,16 +1,28 @@
-.. _baca--PersistentIndicatorTests:
+.. _baca--persistence:
 
-PersistentIndicatorTests
-========================
+persistence
+===========
 
-.. automodule:: baca.PersistentIndicatorTests
+.. automodule:: baca.persistence
 
-.. currentmodule:: baca.PersistentIndicatorTests
+.. currentmodule:: baca.persistence
 
 .. container:: svg-container
 
    .. inheritance-diagram:: baca
-      :lineage: baca.PersistentIndicatorTests
+      :lineage: baca.persistence
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Classes
+   :class: section-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~PersistentIndicatorTests
 
 .. autoclass:: PersistentIndicatorTests
 
