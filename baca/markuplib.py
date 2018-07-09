@@ -467,11 +467,10 @@ def make_instrument_name_markup(string, space, column=True):
         markup = markup.hcenter_in(space)
     return markup
 
-# TODO: remove
-#def markup(string):
-#    return Markup(
-#        string,
-#        )
+def markup(string):
+    return Markup(
+        string,
+        )
 
 def molto_flautando():
     return Markup(

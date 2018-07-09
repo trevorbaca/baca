@@ -1587,7 +1587,7 @@ def text_spanner(
                 string = rf'\markup \baca-right "{right_text}"'
                 right_markup = abjad.LilyPondLiteral(string)
             else:
-                right_markup = abjad.Markup(right_text)
+                right_markup = abjad.Markup.from_literal(right_text)
                 assert isinstance(right_markup, abjad.Markup)
                 right_markup = right_markup.upright()
         else:
