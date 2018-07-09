@@ -946,6 +946,52 @@ Pitch array library.
 
    <hr/>
 
+.. rubric:: :ref:`baca.pitchclasses <baca--pitchclasses>`
+   :class: section-header
+
+Pitch library.
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: (5) Utilities
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.pitchclasses.PitchTree
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Classes
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.pitchclasses.ArpeggiationSpacingSpecifier
+   ~baca.pitchclasses.ChordalSpacingSpecifier
+   ~baca.pitchclasses.CollectionList
+   ~baca.pitchclasses.Constellation
+   ~baca.pitchclasses.ConstellationCircuit
+   ~baca.pitchclasses.DesignMaker
+   ~baca.pitchclasses.HarmonicSeries
+   ~baca.pitchclasses.Partial
+   ~baca.pitchclasses.PitchClassSegment
+   ~baca.pitchclasses.PitchClassSet
+   ~baca.pitchclasses.PitchSegment
+   ~baca.pitchclasses.PitchSet
+   ~baca.pitchclasses.PitchTreeSpanner
+   ~baca.pitchclasses.ZaggedPitchClassMaker
+
+.. raw:: html
+
+   <hr/>
+
 .. rubric:: :ref:`baca.pitchcommands <baca--pitchcommands>`
    :class: section-header
 
@@ -1004,52 +1050,6 @@ Pitch array library.
    ~baca.pitchcommands.pitches
    ~baca.pitchcommands.staff_position
    ~baca.pitchcommands.staff_positions
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: :ref:`baca.pitchlib <baca--pitchlib>`
-   :class: section-header
-
-Pitch library.
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: (5) Utilities
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.pitchlib.PitchTree
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Classes
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.pitchlib.ArpeggiationSpacingSpecifier
-   ~baca.pitchlib.ChordalSpacingSpecifier
-   ~baca.pitchlib.CollectionList
-   ~baca.pitchlib.Constellation
-   ~baca.pitchlib.ConstellationCircuit
-   ~baca.pitchlib.DesignMaker
-   ~baca.pitchlib.HarmonicSeries
-   ~baca.pitchlib.Partial
-   ~baca.pitchlib.PitchClassSegment
-   ~baca.pitchlib.PitchClassSet
-   ~baca.pitchlib.PitchSegment
-   ~baca.pitchlib.PitchSet
-   ~baca.pitchlib.PitchTreeSpanner
-   ~baca.pitchlib.ZaggedPitchClassMaker
 
 .. raw:: html
 

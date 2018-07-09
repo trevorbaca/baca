@@ -3,7 +3,7 @@ import copy
 from abjadext import rmakers
 from . import evallib
 from . import pitchcommands
-from . import pitchlib
+from . import pitchclasses
 from . import registerlib
 from . import rhythmlib
 from . import spannerlib
@@ -732,7 +732,7 @@ class MusicMaker(abjad.AbjadObject):
             abjad.attach(abjad.tags.ALLOW_REPEAT_PITCH, leaf)
 
     def _apply_pitch_specifiers(self, collections, specifiers):
-        prototype = (pitchlib.CollectionList, list, abjad.Sequence)
+        prototype = (pitchclasses.CollectionList, list, abjad.Sequence)
         assert isinstance(collections, prototype), repr(collections)
         specifiers_ = []
         for specifier in specifiers:
@@ -743,12 +743,12 @@ class MusicMaker(abjad.AbjadObject):
         return collections, specifiers_
 
     def _apply_spacing_specifiers(self, collections, specifiers):
-        prototype = (pitchlib.CollectionList, list, abjad.Sequence)
+        prototype = (pitchclasses.CollectionList, list, abjad.Sequence)
         assert isinstance(collections, prototype), repr(collections)
         specifiers_ = []
         prototype = (
-            pitchlib.ArpeggiationSpacingSpecifier,
-            pitchlib.ChordalSpacingSpecifier,
+            pitchclasses.ArpeggiationSpacingSpecifier,
+            pitchclasses.ChordalSpacingSpecifier,
             )
         for specifier in specifiers:
             if isinstance(specifier, prototype):
@@ -901,14 +901,14 @@ class MusicMaker(abjad.AbjadObject):
     def _coerce_collections(collections):
         prototype = (abjad.Segment, abjad.Set)
         if isinstance(collections, prototype):
-            return pitchlib.CollectionList(collections=[collections])
+            return pitchclasses.CollectionList(collections=[collections])
         item_class = abjad.NumberedPitch
         for collection in collections:
             for item in collection:
                 if isinstance(item, str):
                     item_class = abjad.NamedPitch
                     break
-        return pitchlib.CollectionList(
+        return pitchclasses.CollectionList(
             collections=collections,
             item_class=item_class,
             )

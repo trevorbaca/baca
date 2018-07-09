@@ -9,7 +9,7 @@ from .markuplib import Markup
 from .overridelib import *
 from .pitcharray import *
 from .pitchcommands import *
-from .pitchlib import *
+from .pitchclasses import *
 from .registerlib import *
 from .rhythmlib import *
 from .segmentlib import *
@@ -55,10 +55,10 @@ from .TimeSignatureGroups import TimeSignatureGroups
 from .Tree import Tree
 
 # expression constructors
-from .pitchlib import _pitch_class_segment as pitch_class_segment
-from .pitchlib import _pitch_class_set as pitch_class_set
-from .pitchlib import _pitch_set as pitch_set
-from .pitchlib import _pitch_segment as pitch_segment
+from .pitchclasses import _pitch_class_segment as pitch_class_segment
+from .pitchclasses import _pitch_class_set as pitch_class_set
+from .pitchclasses import _pitch_set as pitch_set
+from .pitchclasses import _pitch_segment as pitch_segment
 from .Selection import _select as select
 from .Sequence import _sequence as sequence
 

@@ -1,16 +1,16 @@
-.. _baca--pitchlib:
+.. _baca--pitchclasses:
 
-pitchlib
-========
+pitchclasses
+============
 
-.. automodule:: baca.pitchlib
+.. automodule:: baca.pitchclasses
 
-.. currentmodule:: baca.pitchlib
+.. currentmodule:: baca.pitchclasses
 
 .. container:: svg-container
 
    .. inheritance-diagram:: baca
-      :lineage: baca.pitchlib
+      :lineage: baca.pitchclasses
 
 .. raw:: html
 

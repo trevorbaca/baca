@@ -10,7 +10,7 @@ from . import indicators
 from . import library
 from . import markuplib
 from . import overridelib
-from . import pitchlib
+from . import pitchclasses
 from . import rhythmlib
 from . import segmentlib
 from . import templatelib
@@ -1962,7 +1962,7 @@ class SegmentMaker(abjad.SegmentMaker):
             if not pitches:
                 continue
             pitch_classes = [_.pitch_class for _ in pitches]
-            if pitchlib.PitchClassSegment(pitch_classes).has_duplicates():
+            if pitchclasses.PitchClassSegment(pitch_classes).has_duplicates():
                 color = True
                 for pleaf in pleaves:
                     inspection = abjad.inspect(pleaf)

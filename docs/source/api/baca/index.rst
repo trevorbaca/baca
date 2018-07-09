@@ -36,8 +36,8 @@ baca
    markuplib
    overridelib
    pitcharray
+   pitchclasses
    pitchcommands
-   pitchlib
    registerlib
    rhythmlib
    segmentlib
@@ -62,8 +62,8 @@ baca
    markuplib
    overridelib
    pitcharray
+   pitchclasses
    pitchcommands
-   pitchlib
    registerlib
    rhythmlib
    segmentlib

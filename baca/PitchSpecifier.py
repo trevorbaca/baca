@@ -1,5 +1,5 @@
 import abjad
-from . import pitchlib
+from . import pitchclasses
 from .Sequence import Sequence
 
 
@@ -177,7 +177,7 @@ class PitchSpecifier(abjad.AbjadObject):
         """
         if collections is None:
             return
-        collections = pitchlib.CollectionList(collections=collections)
+        collections = pitchclasses.CollectionList(collections=collections)
         if self.to_pitch_classes:
             collections = collections.to_pitch_classes()
         collections = self._remove_duplicates_(collections)
