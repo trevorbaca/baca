@@ -523,6 +523,7 @@ classes
       ltrun
       ltruns
       lts
+      mleaves
       ntrun
       ntruns
       phead
@@ -540,6 +541,7 @@ classes
       rleaf
       rleak
       rleaves
+      rmleaves
       rrun
       rruns
       skip
@@ -747,6 +749,8 @@ classes
 
       .. automethod:: Selection.map
 
+   .. automethod:: Selection.mleaves
+
    .. container:: inherited
 
       .. automethod:: Selection.nontrivial
@@ -812,6 +816,8 @@ classes
    .. automethod:: Selection.rleak
 
    .. automethod:: Selection.rleaves
+
+   .. automethod:: Selection.rmleaves
 
    .. automethod:: Selection.rrun
 

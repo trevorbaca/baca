@@ -39,30 +39,3 @@ def _publish_selectors(class_):
         exec(statement, globals())
 
 _publish_selectors(Selection)
-
-from .classes import _select
-# TODO: move to baca.Selection
-def mleaves(count: int) -> abjad.Expression:
-    """
-    Selects all leaves in ``count`` measures.
-    """
-    assert isinstance(count, int), repr(count)
-    selector = _select().leaves().group_by_measure()
-    if 0 < count:
-        selector = selector[:count].flatten()
-    elif count < 0:
-        selector = selector[-count:].flatten()
-    else:
-        raise Exception(count)
-    return selector
-
-# TODO: move to baca.Selection
-def rmleaves(count: int) -> abjad.Expression:
-    """
-    Selects all leaves in ``count`` measures, leaked one leaf to the right.
-    """
-    assert isinstance(count, int), repr(count)
-    selector = _select().leaves().group_by_measure()
-    selector = selector[:count].flatten().rleak()
-    return selector
-
