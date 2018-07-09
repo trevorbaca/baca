@@ -108,6 +108,10 @@ overrides
 
    .. container:: inherited
 
+      .. autoattribute:: OverrideCommand.measures
+
+   .. container:: inherited
+
       .. autoattribute:: OverrideCommand.selector
 
    .. container:: inherited

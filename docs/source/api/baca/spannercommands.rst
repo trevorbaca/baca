@@ -99,6 +99,10 @@ spannercommands
 
    .. autoattribute:: SpannerCommand.left_broken
 
+   .. container:: inherited
+
+      .. autoattribute:: SpannerCommand.measures
+
    .. autoattribute:: SpannerCommand.right_broken
 
    .. autoattribute:: SpannerCommand.selector

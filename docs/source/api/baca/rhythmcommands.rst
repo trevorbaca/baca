@@ -112,6 +112,10 @@ rhythmcommands
 
    .. autoattribute:: RhythmCommand.left_broken
 
+   .. container:: inherited
+
+      .. autoattribute:: RhythmCommand.measures
+
    .. autoattribute:: RhythmCommand.multimeasure_rests
 
    .. autoattribute:: RhythmCommand.parameter
@@ -219,6 +223,10 @@ rhythmcommands
       .. autoattribute:: TieCorrectionCommand.deactivate
 
    .. autoattribute:: TieCorrectionCommand.direction
+
+   .. container:: inherited
+
+      .. autoattribute:: TieCorrectionCommand.measures
 
    .. autoattribute:: TieCorrectionCommand.repeat
 

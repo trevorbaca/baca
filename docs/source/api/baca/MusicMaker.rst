@@ -247,6 +247,10 @@ musicmaker
 
    .. autoattribute:: ImbricationCommand.hocket
 
+   .. container:: inherited
+
+      .. autoattribute:: ImbricationCommand.measures
+
    .. autoattribute:: ImbricationCommand.segment
 
    .. autoattribute:: ImbricationCommand.selector
@@ -637,6 +641,10 @@ musicmaker
 
    .. container:: inherited
 
+      .. autoattribute:: NestingCommand.measures
+
+   .. container:: inherited
+
       .. autoattribute:: NestingCommand.selector
 
    .. container:: inherited
@@ -715,6 +723,10 @@ musicmaker
    .. container:: inherited
 
       .. autoattribute:: PitchFirstRhythmCommand.deactivate
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchFirstRhythmCommand.measures
 
    .. autoattribute:: PitchFirstRhythmCommand.pattern
 

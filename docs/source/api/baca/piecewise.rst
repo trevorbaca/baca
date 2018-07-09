@@ -193,6 +193,10 @@ piecewise
 
    .. autoattribute:: PiecewiseIndicatorCommand.leak
 
+   .. container:: inherited
+
+      .. autoattribute:: PiecewiseIndicatorCommand.measures
+
    .. autoattribute:: PiecewiseIndicatorCommand.piece_selector
 
    .. autoattribute:: PiecewiseIndicatorCommand.remove_length_1_spanner_start

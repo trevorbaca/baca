@@ -113,6 +113,10 @@ commands
 
    .. container:: inherited
 
+      .. autoattribute:: BCPCommand.measures
+
+   .. container:: inherited
+
       .. autoattribute:: BCPCommand.selector
 
    .. autoattribute:: BCPCommand.start_command
@@ -187,6 +191,10 @@ commands
    .. container:: inherited
 
       .. autoattribute:: ColorCommand.deactivate
+
+   .. container:: inherited
+
+      .. autoattribute:: ColorCommand.measures
 
    .. container:: inherited
 
@@ -267,6 +275,10 @@ commands
       .. autoattribute:: ContainerCommand.deactivate
 
    .. autoattribute:: ContainerCommand.identifier
+
+   .. container:: inherited
+
+      .. autoattribute:: ContainerCommand.measures
 
    .. container:: inherited
 
@@ -355,6 +367,10 @@ commands
 
    .. container:: inherited
 
+      .. autoattribute:: GlobalFermataCommand.measures
+
+   .. container:: inherited
+
       .. autoattribute:: GlobalFermataCommand.selector
 
    .. container:: inherited
@@ -437,6 +453,10 @@ commands
       .. autoattribute:: IndicatorCommand.deactivate
 
    .. autoattribute:: IndicatorCommand.indicators
+
+   .. container:: inherited
+
+      .. autoattribute:: IndicatorCommand.measures
 
    .. autoattribute:: IndicatorCommand.redundant
 
@@ -522,6 +542,10 @@ commands
    .. container:: inherited
 
       .. autoattribute:: InstrumentChangeCommand.indicators
+
+   .. container:: inherited
+
+      .. autoattribute:: InstrumentChangeCommand.measures
 
    .. container:: inherited
 
@@ -613,6 +637,10 @@ commands
 
    .. container:: inherited
 
+      .. autoattribute:: LabelCommand.measures
+
+   .. container:: inherited
+
       .. autoattribute:: LabelCommand.selector
 
    .. container:: inherited
@@ -691,6 +719,10 @@ commands
       .. autoattribute:: MetronomeMarkCommand.deactivate
 
    .. autoattribute:: MetronomeMarkCommand.key
+
+   .. container:: inherited
+
+      .. autoattribute:: MetronomeMarkCommand.measures
 
    .. autoattribute:: MetronomeMarkCommand.redundant
 
@@ -772,6 +804,10 @@ commands
 
       .. autoattribute:: PartAssignmentCommand.deactivate
 
+   .. container:: inherited
+
+      .. autoattribute:: PartAssignmentCommand.measures
+
    .. autoattribute:: PartAssignmentCommand.part_assignment
 
    .. container:: inherited
@@ -846,6 +882,10 @@ commands
    .. container:: inherited
 
       .. autoattribute:: VoltaCommand.deactivate
+
+   .. container:: inherited
+
+      .. autoattribute:: VoltaCommand.measures
 
    .. container:: inherited
 

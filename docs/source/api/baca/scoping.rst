@@ -25,7 +25,6 @@ scoping
    ~Command
    ~CommandWrapper
    ~Map
-   ~Measures
    ~Scope
    ~Suite
    ~TimelineScope
@@ -41,6 +40,7 @@ scoping
       :nosignatures:
 
       deactivate
+      measures
       selector
       tag
       tags
@@ -102,6 +102,8 @@ scoping
 
    .. autoattribute:: Command.deactivate
 
+   .. autoattribute:: Command.measures
+
    .. autoattribute:: Command.selector
 
    .. autoattribute:: Command.tag
@@ -148,6 +150,7 @@ scoping
       :nosignatures:
 
       commands
+      measures
       selector
 
    .. autosummary::
@@ -195,51 +198,9 @@ scoping
 
    .. autoattribute:: Map.commands
 
+   .. autoattribute:: Map.measures
+
    .. autoattribute:: Map.selector
-
-.. autoclass:: Measures
-
-   .. autosummary::
-      :nosignatures:
-
-      command
-      commands
-      measures
-
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. automethod:: Measures.__call__
-
-   .. container:: inherited
-
-      .. automethod:: Measures.__format__
-
-   .. container:: inherited
-
-      .. automethod:: Measures.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read-only properties
-      :class: class-header
-
-   .. autoattribute:: Measures.command
-
-   .. autoattribute:: Measures.commands
-
-   .. autoattribute:: Measures.measures
 
 .. autoclass:: Scope
 
@@ -281,6 +242,7 @@ scoping
       :nosignatures:
 
       commands
+      measures
 
    .. autosummary::
       :nosignatures:
@@ -326,6 +288,8 @@ scoping
       :class: class-header
 
    .. autoattribute:: Suite.commands
+
+   .. autoattribute:: Suite.measures
 
 .. autoclass:: TimelineScope
 

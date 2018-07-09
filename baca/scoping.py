@@ -1,4 +1,5 @@
 import abjad
+import copy
 import functools
 import typing
 from . import indicators
@@ -16,6 +17,7 @@ class Command(abjad.AbjadObject):
 
     __slots__ = (
         '_deactivate',
+        '_measures',
         '_offset_to_measure_number',
         '_previous_segment_voice_metadata',
         '_runtime',
@@ -39,6 +41,7 @@ class Command(abjad.AbjadObject):
         # for selector evaluation
         import baca
         self._deactivate = deactivate
+        self._measures = None
         self._runtime = abjad.OrderedDict()
         if isinstance(selector, str):
             selector_ = eval(selector)
@@ -69,6 +72,21 @@ class Command(abjad.AbjadObject):
             tuples = manager_._get_attribute_tuples()
             for attribute, value in tuples:
                 setattr(manager, attribute, value)
+
+    def _override_scope(self, scope):
+        assert isinstance(scope, (Scope, TimelineScope)), repr(scope)
+        if not self.measures:
+            return scope
+        if isinstance(self.measures, int):
+            stages = (self.measures, self.measures)
+        else:
+            assert isinstance(self.measures, tuple)
+            stages = self.measures
+        scope_ = abjad.new(
+            scope,
+            stages=stages,
+            )
+        return scope_
 
     @staticmethod
     def _remove_reapplied_wrappers(leaf, indicator):
@@ -155,6 +173,15 @@ class Command(abjad.AbjadObject):
         Is true when command deactivates tag.
         """
         return self._deactivate
+
+    @property
+    def measures(self) -> typing.Union[
+        int, typing.List[int], typings.IntegerPair, None
+        ]:
+        """
+        Gets measures.
+        """
+        return self._measures
 
     @property
     def runtime(self) -> abjad.OrderedDict:
@@ -341,6 +368,7 @@ class Map(abjad.AbjadObject):
 
     __slots__ = (
         '_commands',
+        '_measures',
         '_offset_to_measure_number',
         '_previous_segment_voice_metadata',
         '_runtime',
@@ -372,6 +400,7 @@ class Map(abjad.AbjadObject):
                 raise Exception(message)
             command_list.append(command)
         self._commands = tuple(command_list)
+        self._measures = None
         self._runtime = abjad.OrderedDict()
 
     ### SPECIAL METHODS ###
@@ -396,6 +425,23 @@ class Map(abjad.AbjadObject):
                 items_.append(item_)
         return items_
 
+    ### PRIVATE METHODS ###
+
+    def _override_scope(self, scope):
+        assert isinstance(scope, (Scope, TimelineScope)), repr(scope)
+        if not self.measures:
+            return scope
+        if isinstance(self.measures, int):
+            stages = (self.measures, self.measures)
+        else:
+            assert isinstance(self.measures, tuple)
+            stages = self.measures
+        scope_ = abjad.new(
+            scope,
+            stages=stages,
+            )
+        return scope_
+
     ### PUBLIC PROPERTIES ###
 
     @property
@@ -406,6 +452,15 @@ class Map(abjad.AbjadObject):
         Gets commands.
         """
         return self._commands
+
+    @property
+    def measures(self) -> typing.Union[
+        int, typing.List[int], typings.IntegerPair, None
+        ]:
+        """
+        Gets measures.
+        """
+        return self._measures
 
     @property
     def runtime(self) -> abjad.OrderedDict:
@@ -445,6 +500,7 @@ class Suite(abjad.AbjadObject):
 
     __slots__ = (
         '_commands',
+        '_measures',
         '_offset_to_measure_number',
         '_previous_segment_voice_metadata',
         '_score_template',
@@ -455,12 +511,12 @@ class Suite(abjad.AbjadObject):
 
     def __init__(
         self,
-        *commands: typing.Union[Command, Map, 'Measures', 'Suite'],
+        *commands: typing.Union[Command, Map, 'Suite'],
         ) -> None:
         command_list: typing.List[
-            typing.Union[Command, Map, Measures, Suite]] = []
+            typing.Union[Command, Map, Suite]] = []
         for command in commands:
-            if isinstance(command, (Command, Map, Measures, Suite)):
+            if isinstance(command, (Command, Map, Suite)):
                 command_list.append(command)
                 continue
             message = '\n  Must contain only commands, maps, measure wrappers,'
@@ -468,6 +524,7 @@ class Suite(abjad.AbjadObject):
             message += f'\n  Not {type(command).__name__}: {command!r}.'
             raise Exception(message)
         self._commands = tuple(command_list)
+        self._measures = None
         self._runtime = abjad.OrderedDict()
 
     ### SPECIAL METHODS ###
@@ -483,16 +540,42 @@ class Suite(abjad.AbjadObject):
         for command in self.commands:
             command(argument)
 
+    ### PRIVATE METHODS ###
+
+    def _override_scope(self, scope):
+        assert isinstance(scope, (Scope, TimelineScope)), repr(scope)
+        if not self.measures:
+            return scope
+        if isinstance(self.measures, int):
+            stages = (self.measures, self.measures)
+        else:
+            assert isinstance(self.measures, tuple)
+            stages = self.measures
+        scope_ = abjad.new(
+            scope,
+            stages=stages,
+            )
+        return scope_
+
     ### PUBLIC PROPERTIES ###
 
     @property
     def commands(self) -> typing.Tuple[
-        typing.Union[Command, Map, 'Measures', 'Suite'], ...
+        typing.Union[Command, Map, 'Suite'], ...
         ]:
         """
         Gets commands.
         """
         return self._commands
+
+    @property
+    def measures(self) -> typing.Union[
+        int, typing.List[int], typings.IntegerPair, None
+        ]:
+        """
+        Gets measures.
+        """
+        return self._measures
 
     @property
     def runtime(self) -> abjad.OrderedDict:
@@ -680,77 +763,6 @@ class CommandWrapper(abjad.AbjadObject):
         Returns scope or none.
         """
         return self._scope
-
-class Measures(abjad.AbjadObject):
-    """
-    Measure wrapper.
-    """
-
-    ### CLASS VARIABLES ###
-
-    __slots__ = (
-        '_command',
-        '_measures',
-        '_runtime',
-        )
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        command: typing.Union[Command, Map, Suite] = None,
-        measures: typing.Union[int, typing.List[int], typings.IntegerPair] = None,
-        ) -> None:
-        self._command = command
-        self._measures = measures
-
-    ### SPECIAL METHODS ###
-
-    def __call__(
-        self,
-        scope: typing.Union['Scope', 'TimelineScope'],
-        ) -> typing.Union['Scope', 'TimelineScope']:
-        """
-        Calls measure wrapper on ``scope``.
-        """
-        assert isinstance(scope, (Scope, TimelineScope)), repr(scope)
-        stages: typing.Union[int, typing.List[int], typings.IntegerPair, None]
-        if isinstance(self.measures, int):
-            stages = (self.measures, self.measures)
-        else:
-            stages = self.measures
-        assert isinstance(stages, tuple), repr(stages)
-        scope_ = abjad.new(
-            scope,
-            stages=stages,
-            )
-        return scope_
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def command(self) -> typing.Union[Command, Map, Suite, None]:
-        """
-        Gets command.
-        """
-        return self._command
-
-    @property
-    def commands(self) -> typing.List[typing.Union[Command, Map, Suite]]:
-        """
-        Gets command wrapped in list.
-        """
-        assert self.command is not None
-        return [self.command]
-
-    @property
-    def measures(self) -> typing.Union[
-        int, typing.List[int], typings.IntegerPair, None]:
-        """
-        Gets measures.
-        """
-        return self._measures
 
 class Scope(abjad.AbjadObject):
     """
@@ -1272,7 +1284,7 @@ def map(
 def measures(
     measures: typing.Union[int, typing.List[int], typing.Tuple[int, int]],
     *commands: Command,
-    ) -> typing.List[Measures]:
+    ) -> typing.List[Command]:
     r"""
     Wraps each command in ``commands`` with ``measures``.
 
@@ -1378,16 +1390,17 @@ def measures(
             >>
 
     """
-    wrappers = []
+    from .commands import markup as markup_command
+    commands_ = []
     for command in commands:
-        wrapper = Measures(
-            command=command,
-            measures=measures,
-            )
-        wrappers.append(wrapper)
-    return wrappers
+        if isinstance(command, abjad.Markup):
+            command = markup_command(command)
+        assert isinstance(command, (Command, Map)), repr(command)
+        command._measures = copy.copy(measures)
+        commands_.append(command)
+    return commands_
 
-_command_typing = typing.Union[Command, Map, Measures, Suite]
+_command_typing = typing.Union[Command, Map, Suite]
 
 def not_parts(command: Command) -> _command_typing:
     """
@@ -1623,7 +1636,7 @@ def suite(
 
     """
     for command in commands:
-        if isinstance(command, (Command, Map, Measures, Suite)):
+        if isinstance(command, (Command, Map, Suite)):
             continue
         message = '\n  Must contain only commands, maps, measure wrappers,'
         message += ' suites.'
@@ -1634,11 +1647,11 @@ def suite(
 
 def tag(
     tags: typing.Union[str, typing.List[str]],
-    command: typing.Union[Command, Map, Measures, Suite],
+    command: typing.Union[Command, Map, Suite],
     *,
     deactivate: bool = None,
     tag_measure_number: bool = None,
-    ) -> typing.Union[Command, Map, Measures, Suite]:
+    ) -> typing.Union[Command, Map, Suite]:
     """
     Appends each tag in ``tags`` to ``command``.
 
@@ -1653,9 +1666,9 @@ def tag(
         message += f' (not {tags!r}).'
         raise Exception(message)
     assert Command._validate_tags(tags), repr(tags)
-    if not isinstance(command, (Command, Map, Measures, Suite)):
+    if not isinstance(command, (Command, Map, Suite)):
         raise Exception('can only tag command, map, wrapper, suite.')
-    if isinstance(command, (Map, Measures, Suite)):
+    if isinstance(command, (Map, Suite)):
         for command_ in command.commands:
             tag(
                 tags,

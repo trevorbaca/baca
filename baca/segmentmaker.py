@@ -788,6 +788,7 @@ class SegmentMaker(abjad.SegmentMaker):
             Exception: unknown voice name 'PercussionVoice'.
 
         """
+        # TODO: disallow abjad.Markup
         commands_ = []
         for command in commands:
             if isinstance(command, list):
@@ -854,7 +855,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 abjad.Markup,
                 scoping.Command,
                 scoping.Map,
-                scoping.Measures,
                 scoping.Suite,
                 )
             if not isinstance(command, sixway):
@@ -862,11 +862,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 message += f'\n\n{format(command)}'
                 raise Exception(message)
         scope_count = len(scopes_)
-        for i, scope in enumerate(scopes_):
-            if self._voice_names and scope.voice_name not in self._voice_names:
-                raise Exception(f'unknown voice name {scope.voice_name!r}.')
-            if isinstance(scope, scoping.TimelineScope):
-                for scope_ in scope.scopes:
+        for i, current_scope in enumerate(scopes_):
+            if self._voice_names and current_scope.voice_name not in self._voice_names:
+                raise Exception(f'unknown voice name {current_scope.voice_name!r}.')
+            if isinstance(current_scope, scoping.TimelineScope):
+                for scope_ in current_scope.scopes:
                     if scope_.voice_name in abbreviations:
                         voice_name = abbreviations[scope_.voice_name]
                         scope_._voice_name = voice_name
@@ -904,32 +904,12 @@ class SegmentMaker(abjad.SegmentMaker):
                         if isinstance(command_, abjad.Markup):
                             command_ = baca_commands.markup(command_)
                         assert isinstance(command_, scoping.Command), repr(command_)
+                        scope_ = command_._override_scope(current_scope)
                         wrapper = scoping.CommandWrapper(
                             command=command_,
-                            scope=scope,
+                            scope=scope_,
                             )
                         self.wrappers.append(wrapper)
-                elif isinstance(command, scoping.Measures):
-                    if isinstance(command.measures, int):
-                        stages = (command.measures, command.measures)
-                    else:
-                        assert isinstance(command.measures, tuple)
-                        stages = command.measures
-                    assert isinstance(stages, tuple), repr(stages)
-                    scope_ = abjad.new(
-                        scope,
-                        stages=stages,
-                        )
-                    command = command.command
-                    if isinstance(command, abjad.Markup):
-                        command = baca_commands.markup(command)
-                    twoway = (scoping.Command, scoping.Map)
-                    assert isinstance(command, twoway), repr(command)
-                    wrapper = scoping.CommandWrapper(
-                        command=command,
-                        scope=scope_,
-                        )
-                    self.wrappers.append(wrapper)
                 else:
                     if isinstance(command, abjad.Markup):
                         command = baca_commands.markup(command)
@@ -939,9 +919,10 @@ class SegmentMaker(abjad.SegmentMaker):
                         scoping.Suite,
                         )
                     assert isinstance(command, threeway), repr(command)
+                    scope_ = command._override_scope(current_scope)
                     wrapper = scoping.CommandWrapper(
                         command=command,
-                        scope=scope,
+                        scope=scope_,
                         )
                     self.wrappers.append(wrapper)
 
