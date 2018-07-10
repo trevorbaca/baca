@@ -79,7 +79,15 @@ spannercommands
 
    .. container:: inherited
 
+      .. autoattribute:: SpannerCommand.measures
+
+   .. container:: inherited
+
       .. autoattribute:: SpannerCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: SpannerCommand.scope
 
    .. container:: inherited
 
@@ -99,10 +107,6 @@ spannercommands
    .. autoattribute:: SpannerCommand.detach_first
 
    .. autoattribute:: SpannerCommand.left_broken
-
-   .. container:: inherited
-
-      .. autoattribute:: SpannerCommand.measures
 
    .. autoattribute:: SpannerCommand.right_broken
 

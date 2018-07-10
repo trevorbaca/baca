@@ -674,92 +674,43 @@ class SegmentMaker(abjad.SegmentMaker):
 
         """
         commands_ = classes.Sequence(commands).flatten(
-            classes=(list,),
+            classes=(list, scoping.Suite),
             depth=-1,
             )
         commands = tuple(commands_)
-        for command in commands:
-            if isinstance(command, abjad.Markup):
-                raise Exception(command)
         if self.score_template is not None:
             self._cache_voice_names()
             abbreviations = self.score_template.voice_abbreviations
         else:
             abbreviations = abjad.OrderedDict()
         abbreviations = abbreviations or abjad.OrderedDict()
-        prototype = (scoping.Scope, scoping.TimelineScope)
-        scopes__: typing.List[scoping.scope_typing]
-        if isinstance(scopes, str):
-            voice_name = abbreviations.get(scopes, scopes)
-            scope = scoping.scope(voice_name)
-            scopes__ = [scope]
-        elif isinstance(scopes, tuple):
-            scopes__ = self._unpack_scope_pair(scopes, abbreviations)
-        elif isinstance(scopes, prototype):
-            scopes__ = [scopes]
-        else:
-            assert isinstance(scopes, list), repr(scopes)
-            scopes_ = []
-            for scope in scopes:
-                if isinstance(scope, tuple):
-                    scopes__ = self._unpack_scope_pair(scope, abbreviations)
-                    scopes_.extend(scopes__)
-                else:
-                    scopes_.append(scope)
-            scopes__ = scopes_
-        assert isinstance(scopes__, list), repr(scopes__)
-        scopes_ = []
-        for scope in scopes__:
-            if isinstance(scope, str):
-                voice_name = abbreviations.get(scope, scope)
-                scope_ = scoping.scope(voice_name)
-                scopes_.append(scope_)
-            elif isinstance(scope, tuple):
-                voice_name, stages = scope
-                voice_name = abbreviations.get(voice_name, voice_name)
-                if isinstance(stages, list):
-                    stages = self._unpack_stage_token_list(stages)
-                    for stage_token in stages:
-                        scope_ = scoping.scope(voice_name, stage_token)
-                        scopes_.append(scope_)
-                else:
-                    scope_ = scoping.scope(voice_name, stages)
-                    scopes_.append(scope_)
-            else:
-                scope_ = scope
-                scopes_.append(scope_)
-        assert all(isinstance(_, prototype) for _ in scopes_), repr(scopes_)
+        scopes_ = self._unpack_scopes(scopes, abbreviations)
+        scope_type = (scoping.Scope, scoping.TimelineScope)
+        assert all(isinstance(_, scope_type) for _ in scopes_), repr(scopes_)
         for command in commands:
             if isinstance(command, tuple):
                 assert len(command) == 2, repr(command)
                 command = command[0]
-            fourway = (
-                list,
-                scoping.Command,
-                scoping.Suite,
-                )
-            if not isinstance(command, fourway):
+            if not isinstance(command, (list, scoping.Command, scoping.Suite)):
                 message = '\n\nNeither command nor list of commands:'
                 message += f'\n\n{format(command)}'
                 raise Exception(message)
         scope_count = len(scopes_)
         for i, current_scope in enumerate(scopes_):
-            if self._voice_names and current_scope.voice_name not in self._voice_names:
-                raise Exception(f'unknown voice name {current_scope.voice_name!r}.')
+            if (self._voice_names and
+                current_scope.voice_name not in self._voice_names):
+                message = f'unknown voice name {current_scope.voice_name!r}.'
+                raise Exception(message)
             if isinstance(current_scope, scoping.TimelineScope):
                 for scope_ in current_scope.scopes:
                     if scope_.voice_name in abbreviations:
                         voice_name = abbreviations[scope_.voice_name]
                         scope_._voice_name = voice_name
             for command in commands:
+                threeway = (list, scoping.Command, scoping.Suite)
                 if isinstance(command, tuple):
                     assert len(command) == 2, repr(command)
                     command, match = command
-                    threeway = (
-                        list,
-                        scoping.Command,
-                        scoping.Suite,
-                        )
                     assert isinstance(command, threeway), repr(command)
                     if isinstance(match, int):
                         if 0 <= match and match != i:
@@ -779,24 +730,15 @@ class SegmentMaker(abjad.SegmentMaker):
                         message = 'match must be int, tuple or list'
                         message += f' (not {match!r}).'
                         raise Exception(message)
-                if isinstance(command, list):
-                    for command_ in command:
-                        assert isinstance(command_, scoping.Command), repr(command_)
-                        scope_ = command_._override_scope(current_scope)
-                        wrapper = scoping.CommandWrapper(
-                            command=command_,
-                            scope=scope_,
-                            )
-                        self.wrappers.append(wrapper)
+                if isinstance(command, scoping.Command):
+                    commands_ = [command]
                 else:
-                    twoway = (
-                        scoping.Command,
-                        scoping.Suite,
-                        )
-                    assert isinstance(command, twoway), repr(command)
-                    scope_ = command._override_scope(current_scope)
+                    commands_ = command
+                for command_ in commands_:
+                    assert isinstance(command_, scoping.Command), repr(command_)
+                    scope_ = command_._override_scope(current_scope)
                     wrapper = scoping.CommandWrapper(
-                        command=command,
+                        command=command_,
                         scope=scope_,
                         )
                     self.wrappers.append(wrapper)
@@ -1512,11 +1454,7 @@ class SegmentMaker(abjad.SegmentMaker):
         command_count = 0
         for wrapper in self.wrappers:
             assert isinstance(wrapper, scoping.CommandWrapper)
-            twoway = (
-                scoping.Command,
-                scoping.Suite,
-                )
-            assert isinstance(wrapper.command, twoway)
+            assert isinstance(wrapper.command, scoping.Command)
             if isinstance(wrapper.command, rhythmcommands.RhythmCommand):
                 continue
             command_count += 1
@@ -3043,6 +2981,50 @@ class SegmentMaker(abjad.SegmentMaker):
                 scopes_.append(scope)
         prototype = (scoping.Scope, scoping.TimelineScope)
         assert all(isinstance(_, prototype) for _ in scopes_)
+        return scopes_
+
+    def _unpack_scopes(self, scopes, abbreviations):
+        scope_type = (scoping.Scope, scoping.TimelineScope)
+        scopes__: typing.List[scoping.scope_typing]
+        if isinstance(scopes, str):
+            voice_name = abbreviations.get(scopes, scopes)
+            scope = scoping.scope(voice_name)
+            scopes__ = [scope]
+        elif isinstance(scopes, tuple):
+            scopes__ = self._unpack_scope_pair(scopes, abbreviations)
+        elif isinstance(scopes, scope_type):
+            scopes__ = [scopes]
+        else:
+            assert isinstance(scopes, list), repr(scopes)
+            scopes_ = []
+            for scope in scopes:
+                if isinstance(scope, tuple):
+                    scopes__ = self._unpack_scope_pair(scope, abbreviations)
+                    scopes_.extend(scopes__)
+                else:
+                    scopes_.append(scope)
+            scopes__ = scopes_
+        assert isinstance(scopes__, list), repr(scopes__)
+        scopes_ = []
+        for scope in scopes__:
+            if isinstance(scope, str):
+                voice_name = abbreviations.get(scope, scope)
+                scope_ = scoping.scope(voice_name)
+                scopes_.append(scope_)
+            elif isinstance(scope, tuple):
+                voice_name, stages = scope
+                voice_name = abbreviations.get(voice_name, voice_name)
+                if isinstance(stages, list):
+                    stages = self._unpack_stage_token_list(stages)
+                    for stage_token in stages:
+                        scope_ = scoping.scope(voice_name, stage_token)
+                        scopes_.append(scope_)
+                else:
+                    scope_ = scoping.scope(voice_name, stages)
+                    scopes_.append(scope_)
+            else:
+                scope_ = scope
+                scopes_.append(scope_)
         return scopes_
 
     @staticmethod

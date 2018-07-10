@@ -110,7 +110,7 @@ class Command(abjad.AbjadObject):
         if isinstance(self.measures, int):
             stages = (self.measures, self.measures)
         else:
-            assert isinstance(self.measures, tuple)
+            assert isinstance(self.measures, tuple), repr(self.measures)
             stages = self.measures
         scope_ = abjad.new(
             scope,
@@ -225,6 +225,15 @@ class Command(abjad.AbjadObject):
         Gets measures.
         """
         return self._measures
+
+    @measures.setter
+    def measures(self, argument):
+        """
+        Gets measures.
+        """
+        if argument is not None:
+            assert isinstance(argument, (int, tuple, list)), repr(argument)
+        self._measures = argument
 
     @property
     def runtime(self) -> abjad.OrderedDict:
@@ -363,22 +372,11 @@ class Suite(abjad.AbjadObject):
         for command in self.commands:
             command(argument)
 
-    ### PRIVATE METHODS ###
-
-    def _override_scope(self, scope):
-        assert isinstance(scope, (Scope, TimelineScope)), repr(scope)
-        if not self.measures:
-            return scope
-        if isinstance(self.measures, int):
-            stages = (self.measures, self.measures)
-        else:
-            assert isinstance(self.measures, tuple)
-            stages = self.measures
-        scope_ = abjad.new(
-            scope,
-            stages=stages,
-            )
-        return scope_
+    def __iter__(self):
+        """
+        Iterates commands.
+        """
+        return iter(self.commands)
 
     ### PUBLIC PROPERTIES ###
 
@@ -411,6 +409,16 @@ class Suite(abjad.AbjadObject):
         Gets measures.
         """
         return self._measures
+
+    @measures.setter
+    def measures(self, argument):
+        """
+        Gets measures.
+        """
+        if argument is not None:
+            assert isinstance(argument, (int, tuple, list)), repr(argument)
+        for command in self.commands:
+            command.measures = argument
 
     @property
     def runtime(self) -> abjad.OrderedDict:
@@ -1232,7 +1240,7 @@ def measures(
     commands_ = []
     for command in classes.Sequence(commands).flatten(depth=-1):
         assert isinstance(command, (Command, Suite)), repr(command)
-        command._measures = copy.copy(measures)
+        command.measures = copy.copy(measures)
         commands_.append(command)
     return commands_
 

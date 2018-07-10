@@ -88,7 +88,15 @@ pitchcommands
 
    .. container:: inherited
 
+      .. autoattribute:: AccidentalAdjustmentCommand.measures
+
+   .. container:: inherited
+
       .. autoattribute:: AccidentalAdjustmentCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: AccidentalAdjustmentCommand.scope
 
    .. container:: inherited
 
@@ -108,10 +116,6 @@ pitchcommands
       .. autoattribute:: AccidentalAdjustmentCommand.deactivate
 
    .. autoattribute:: AccidentalAdjustmentCommand.forced
-
-   .. container:: inherited
-
-      .. autoattribute:: AccidentalAdjustmentCommand.measures
 
    .. autoattribute:: AccidentalAdjustmentCommand.parenthesized
 
@@ -180,7 +184,15 @@ pitchcommands
 
    .. container:: inherited
 
+      .. autoattribute:: ClusterCommand.measures
+
+   .. container:: inherited
+
       .. autoattribute:: ClusterCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: ClusterCommand.scope
 
    .. container:: inherited
 
@@ -198,10 +210,6 @@ pitchcommands
       .. autoattribute:: ClusterCommand.deactivate
 
    .. autoattribute:: ClusterCommand.hide_flat_markup
-
-   .. container:: inherited
-
-      .. autoattribute:: ClusterCommand.measures
 
    .. autoattribute:: ClusterCommand.selector
 
@@ -267,7 +275,15 @@ pitchcommands
 
    .. container:: inherited
 
+      .. autoattribute:: ColorFingeringCommand.measures
+
+   .. container:: inherited
+
       .. autoattribute:: ColorFingeringCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: ColorFingeringCommand.scope
 
    .. container:: inherited
 
@@ -283,10 +299,6 @@ pitchcommands
    .. container:: inherited
 
       .. autoattribute:: ColorFingeringCommand.deactivate
-
-   .. container:: inherited
-
-      .. autoattribute:: ColorFingeringCommand.measures
 
    .. autoattribute:: ColorFingeringCommand.numbers
 
@@ -352,7 +364,15 @@ pitchcommands
 
    .. container:: inherited
 
+      .. autoattribute:: DiatonicClusterCommand.measures
+
+   .. container:: inherited
+
       .. autoattribute:: DiatonicClusterCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: DiatonicClusterCommand.scope
 
    .. container:: inherited
 
@@ -368,10 +388,6 @@ pitchcommands
    .. container:: inherited
 
       .. autoattribute:: DiatonicClusterCommand.deactivate
-
-   .. container:: inherited
-
-      .. autoattribute:: DiatonicClusterCommand.measures
 
    .. container:: inherited
 
@@ -502,7 +518,15 @@ pitchcommands
 
    .. container:: inherited
 
+      .. autoattribute:: MicrotoneDeviationCommand.measures
+
+   .. container:: inherited
+
       .. autoattribute:: MicrotoneDeviationCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: MicrotoneDeviationCommand.scope
 
    .. container:: inherited
 
@@ -520,10 +544,6 @@ pitchcommands
       .. autoattribute:: MicrotoneDeviationCommand.deactivate
 
    .. autoattribute:: MicrotoneDeviationCommand.deviations
-
-   .. container:: inherited
-
-      .. autoattribute:: MicrotoneDeviationCommand.measures
 
    .. container:: inherited
 
@@ -587,7 +607,15 @@ pitchcommands
 
    .. container:: inherited
 
+      .. autoattribute:: OctaveDisplacementCommand.measures
+
+   .. container:: inherited
+
       .. autoattribute:: OctaveDisplacementCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: OctaveDisplacementCommand.scope
 
    .. container:: inherited
 
@@ -605,10 +633,6 @@ pitchcommands
       .. autoattribute:: OctaveDisplacementCommand.deactivate
 
    .. autoattribute:: OctaveDisplacementCommand.displacements
-
-   .. container:: inherited
-
-      .. autoattribute:: OctaveDisplacementCommand.measures
 
    .. container:: inherited
 
@@ -680,7 +704,15 @@ pitchcommands
 
    .. container:: inherited
 
+      .. autoattribute:: PitchCommand.measures
+
+   .. container:: inherited
+
       .. autoattribute:: PitchCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchCommand.scope
 
    .. container:: inherited
 
@@ -706,10 +738,6 @@ pitchcommands
    .. autoattribute:: PitchCommand.do_not_transpose
 
    .. autoattribute:: PitchCommand.ignore_incomplete
-
-   .. container:: inherited
-
-      .. autoattribute:: PitchCommand.measures
 
    .. autoattribute:: PitchCommand.parameter
 
@@ -781,7 +809,15 @@ pitchcommands
 
    .. container:: inherited
 
+      .. autoattribute:: RegisterCommand.measures
+
+   .. container:: inherited
+
       .. autoattribute:: RegisterCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: RegisterCommand.scope
 
    .. container:: inherited
 
@@ -797,10 +833,6 @@ pitchcommands
    .. container:: inherited
 
       .. autoattribute:: RegisterCommand.deactivate
-
-   .. container:: inherited
-
-      .. autoattribute:: RegisterCommand.measures
 
    .. autoattribute:: RegisterCommand.registration
 
@@ -868,7 +900,15 @@ pitchcommands
 
    .. container:: inherited
 
+      .. autoattribute:: RegisterInterpolationCommand.measures
+
+   .. container:: inherited
+
       .. autoattribute:: RegisterInterpolationCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: RegisterInterpolationCommand.scope
 
    .. container:: inherited
 
@@ -884,10 +924,6 @@ pitchcommands
    .. container:: inherited
 
       .. autoattribute:: RegisterInterpolationCommand.deactivate
-
-   .. container:: inherited
-
-      .. autoattribute:: RegisterInterpolationCommand.measures
 
    .. autoattribute:: RegisterInterpolationCommand.selector
 
@@ -954,7 +990,15 @@ pitchcommands
 
    .. container:: inherited
 
+      .. autoattribute:: RegisterToOctaveCommand.measures
+
+   .. container:: inherited
+
       .. autoattribute:: RegisterToOctaveCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: RegisterToOctaveCommand.scope
 
    .. container:: inherited
 
@@ -972,10 +1016,6 @@ pitchcommands
    .. container:: inherited
 
       .. autoattribute:: RegisterToOctaveCommand.deactivate
-
-   .. container:: inherited
-
-      .. autoattribute:: RegisterToOctaveCommand.measures
 
    .. autoattribute:: RegisterToOctaveCommand.octave_number
 
@@ -1043,7 +1083,15 @@ pitchcommands
 
    .. container:: inherited
 
+      .. autoattribute:: StaffPositionCommand.measures
+
+   .. container:: inherited
+
       .. autoattribute:: StaffPositionCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: StaffPositionCommand.scope
 
    .. container:: inherited
 
@@ -1063,10 +1111,6 @@ pitchcommands
       .. autoattribute:: StaffPositionCommand.deactivate
 
    .. autoattribute:: StaffPositionCommand.exact
-
-   .. container:: inherited
-
-      .. autoattribute:: StaffPositionCommand.measures
 
    .. autoattribute:: StaffPositionCommand.numbers
 
@@ -1133,7 +1177,15 @@ pitchcommands
 
    .. container:: inherited
 
+      .. autoattribute:: StaffPositionInterpolationCommand.measures
+
+   .. container:: inherited
+
       .. autoattribute:: StaffPositionInterpolationCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: StaffPositionInterpolationCommand.scope
 
    .. container:: inherited
 
@@ -1149,10 +1201,6 @@ pitchcommands
    .. container:: inherited
 
       .. autoattribute:: StaffPositionInterpolationCommand.deactivate
-
-   .. container:: inherited
-
-      .. autoattribute:: StaffPositionInterpolationCommand.measures
 
    .. container:: inherited
 

@@ -226,7 +226,15 @@ musicmaker
 
    .. container:: inherited
 
+      .. autoattribute:: ImbricationCommand.measures
+
+   .. container:: inherited
+
       .. autoattribute:: ImbricationCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: ImbricationCommand.scope
 
    .. container:: inherited
 
@@ -250,10 +258,6 @@ musicmaker
    .. autoattribute:: ImbricationCommand.extend_beam
 
    .. autoattribute:: ImbricationCommand.hocket
-
-   .. container:: inherited
-
-      .. autoattribute:: ImbricationCommand.measures
 
    .. autoattribute:: ImbricationCommand.segment
 
@@ -628,7 +632,15 @@ musicmaker
 
    .. container:: inherited
 
+      .. autoattribute:: NestingCommand.measures
+
+   .. container:: inherited
+
       .. autoattribute:: NestingCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: NestingCommand.scope
 
    .. container:: inherited
 
@@ -646,10 +658,6 @@ musicmaker
       .. autoattribute:: NestingCommand.deactivate
 
    .. autoattribute:: NestingCommand.lmr_specifier
-
-   .. container:: inherited
-
-      .. autoattribute:: NestingCommand.measures
 
    .. container:: inherited
 
@@ -719,7 +727,15 @@ musicmaker
 
    .. container:: inherited
 
+      .. autoattribute:: PitchFirstRhythmCommand.measures
+
+   .. container:: inherited
+
       .. autoattribute:: PitchFirstRhythmCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchFirstRhythmCommand.scope
 
    .. container:: inherited
 
@@ -735,10 +751,6 @@ musicmaker
    .. container:: inherited
 
       .. autoattribute:: PitchFirstRhythmCommand.deactivate
-
-   .. container:: inherited
-
-      .. autoattribute:: PitchFirstRhythmCommand.measures
 
    .. autoattribute:: PitchFirstRhythmCommand.pattern
 

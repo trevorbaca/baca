@@ -80,7 +80,15 @@ overrides
 
    .. container:: inherited
 
+      .. autoattribute:: OverrideCommand.measures
+
+   .. container:: inherited
+
       .. autoattribute:: OverrideCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: OverrideCommand.scope
 
    .. container:: inherited
 
@@ -106,10 +114,6 @@ overrides
       .. autoattribute:: OverrideCommand.deactivate
 
    .. autoattribute:: OverrideCommand.grob
-
-   .. container:: inherited
-
-      .. autoattribute:: OverrideCommand.measures
 
    .. container:: inherited
 

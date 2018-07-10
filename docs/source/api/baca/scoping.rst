@@ -23,7 +23,6 @@ scoping
    :nosignatures:
 
    ~Command
-   ~CommandWrapper
    ~Scope
    ~Suite
    ~TimelineScope
@@ -39,7 +38,6 @@ scoping
       :nosignatures:
 
       deactivate
-      measures
       selector
       tag
       tags
@@ -48,7 +46,9 @@ scoping
       :nosignatures:
 
       map
+      measures
       runtime
+      scope
       tag_measure_number
 
    .. autosummary::
@@ -91,7 +91,11 @@ scoping
 
    .. autoattribute:: Command.map
 
+   .. autoattribute:: Command.measures
+
    .. autoattribute:: Command.runtime
+
+   .. autoattribute:: Command.scope
 
    .. autoattribute:: Command.tag_measure_number
 
@@ -104,47 +108,11 @@ scoping
 
    .. autoattribute:: Command.deactivate
 
-   .. autoattribute:: Command.measures
-
    .. autoattribute:: Command.selector
 
    .. autoattribute:: Command.tag
 
    .. autoattribute:: Command.tags
-
-.. autoclass:: CommandWrapper
-
-   .. autosummary::
-      :nosignatures:
-
-      command
-      scope
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. container:: inherited
-
-      .. automethod:: CommandWrapper.__format__
-
-   .. container:: inherited
-
-      .. automethod:: CommandWrapper.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read-only properties
-      :class: class-header
-
-   .. autoattribute:: CommandWrapper.command
-
-   .. autoattribute:: CommandWrapper.scope
 
 .. autoclass:: Scope
 
@@ -186,18 +154,20 @@ scoping
       :nosignatures:
 
       commands
-      measures
 
    .. autosummary::
       :nosignatures:
 
       map
+      measures
       runtime
+      scope
 
    .. autosummary::
       :nosignatures:
 
       __call__
+      __iter__
 
    .. raw:: html
 
@@ -212,6 +182,8 @@ scoping
 
       .. automethod:: Suite.__format__
 
+   .. automethod:: Suite.__iter__
+
    .. container:: inherited
 
       .. automethod:: Suite.__repr__
@@ -225,7 +197,11 @@ scoping
 
    .. autoattribute:: Suite.map
 
+   .. autoattribute:: Suite.measures
+
    .. autoattribute:: Suite.runtime
+
+   .. autoattribute:: Suite.scope
 
    .. raw:: html
 
@@ -235,8 +211,6 @@ scoping
       :class: class-header
 
    .. autoattribute:: Suite.commands
-
-   .. autoattribute:: Suite.measures
 
 .. autoclass:: TimelineScope
 

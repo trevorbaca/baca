@@ -93,7 +93,15 @@ rhythmcommands
 
    .. container:: inherited
 
+      .. autoattribute:: RhythmCommand.measures
+
+   .. container:: inherited
+
       .. autoattribute:: RhythmCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: RhythmCommand.scope
 
    .. container:: inherited
 
@@ -115,10 +123,6 @@ rhythmcommands
    .. autoattribute:: RhythmCommand.division_maker
 
    .. autoattribute:: RhythmCommand.left_broken
-
-   .. container:: inherited
-
-      .. autoattribute:: RhythmCommand.measures
 
    .. autoattribute:: RhythmCommand.multimeasure_rests
 
@@ -210,7 +214,15 @@ rhythmcommands
 
    .. container:: inherited
 
+      .. autoattribute:: TieCorrectionCommand.measures
+
+   .. container:: inherited
+
       .. autoattribute:: TieCorrectionCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: TieCorrectionCommand.scope
 
    .. container:: inherited
 
@@ -228,10 +240,6 @@ rhythmcommands
       .. autoattribute:: TieCorrectionCommand.deactivate
 
    .. autoattribute:: TieCorrectionCommand.direction
-
-   .. container:: inherited
-
-      .. autoattribute:: TieCorrectionCommand.measures
 
    .. autoattribute:: TieCorrectionCommand.repeat
 

@@ -169,7 +169,15 @@ piecewise
 
    .. container:: inherited
 
+      .. autoattribute:: PiecewiseIndicatorCommand.measures
+
+   .. container:: inherited
+
       .. autoattribute:: PiecewiseIndicatorCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: PiecewiseIndicatorCommand.scope
 
    .. container:: inherited
 
@@ -193,10 +201,6 @@ piecewise
    .. autoattribute:: PiecewiseIndicatorCommand.final_piece_spanner
 
    .. autoattribute:: PiecewiseIndicatorCommand.leak
-
-   .. container:: inherited
-
-      .. autoattribute:: PiecewiseIndicatorCommand.measures
 
    .. autoattribute:: PiecewiseIndicatorCommand.piece_selector
 
