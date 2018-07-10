@@ -33,6 +33,7 @@ class Command(abjad.AbjadObject):
         '_offset_to_measure_number',
         '_previous_segment_voice_metadata',
         '_runtime',
+        '_scope',
         '_score_template',
         '_selector',
         '_tag_measure_number',
@@ -48,6 +49,7 @@ class Command(abjad.AbjadObject):
         *,
         deactivate: bool = None,
         map: typings.Selector = None,
+        scope: scope_typing = None,
         selector: typings.Selector = None,
         tag_measure_number: bool = None,
         ) -> None:
@@ -57,6 +59,7 @@ class Command(abjad.AbjadObject):
         self._map = map
         self._measures: measure_indicator_typing = None
         self._runtime = abjad.OrderedDict()
+        self.scope = scope
         if isinstance(selector, str):
             selector_ = eval(selector)
         else:
@@ -249,6 +252,22 @@ class Command(abjad.AbjadObject):
         """
         assert isinstance(argument, abjad.OrderedDict), repr(argument)
         self._runtime = argument
+
+    @property
+    def scope(self) -> scope_typing:
+        """
+        Gets scope.
+        """
+        return self._scope
+
+    @scope.setter
+    def scope(self, argument):
+        """
+        Gets scope.
+        """
+        if argument is not None:
+            assert isinstance(argument, (Scope, TimelineScope))
+        self._scope = argument
 
     @property
     def selector(self) -> typing.Optional[abjad.Expression]:

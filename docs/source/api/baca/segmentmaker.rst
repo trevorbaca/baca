@@ -41,7 +41,6 @@ segmentmaker
       color_octaves
       color_out_of_range_pitches
       color_repeat_pitch_classes
-      commands
       do_not_check_persistence
       do_not_include_layout_ly
       fermata_measure_staff_line_count
@@ -79,6 +78,7 @@ segmentmaker
       validate_measure_count
       validate_stage_count
       voice_metadata
+      wrappers
 
    .. autosummary::
       :nosignatures:
@@ -141,8 +141,6 @@ segmentmaker
    .. autoattribute:: SegmentMaker.color_out_of_range_pitches
 
    .. autoattribute:: SegmentMaker.color_repeat_pitch_classes
-
-   .. autoattribute:: SegmentMaker.commands
 
    .. autoattribute:: SegmentMaker.do_not_check_persistence
 
@@ -233,6 +231,8 @@ segmentmaker
    .. autoattribute:: SegmentMaker.validate_stage_count
 
    .. autoattribute:: SegmentMaker.voice_metadata
+
+   .. autoattribute:: SegmentMaker.wrappers
 
 .. autoclass:: WellformednessManager
 

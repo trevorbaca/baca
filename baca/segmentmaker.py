@@ -737,6 +737,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 for command_ in commands_:
                     assert isinstance(command_, scoping.Command), repr(command_)
                     scope_ = command_._override_scope(current_scope)
+                    command_.scope = scope_
                     wrapper = scoping.CommandWrapper(
                         command=command_,
                         scope=scope_,
