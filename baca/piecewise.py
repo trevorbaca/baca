@@ -2864,6 +2864,7 @@ def text_spanner(
     items: typing.Union[str, typing.List],
     *tweaks: abjad.LilyPondTweakManager,
     bookend: typing.Union[bool, int] = -1,
+    boxed: bool = None,
     leak: bool = None,
     lilypond_id: int = None,
     piece_selector: typings.Selector = 'baca.group()',
@@ -4236,14 +4237,24 @@ def text_spanner(
             if word in shape_to_style:
                 if current_item:
                     item_ = ' '.join(current_item)
-                    items_.append(item_)
+                    if boxed:
+                        markup = abjad.Markup(item_)
+                        markup = markup.box().override(('box-padding', 0.5))
+                        items_.append(markup)
+                    else:
+                        items_.append(item_)
                     current_item = []
                 items_.append(word)
             else:
                 current_item.append(word)
         if current_item:
             item_ = ' '.join(current_item)
-            items_.append(item_)
+            if boxed:
+                markup = abjad.Markup(item_)
+                markup = markup.box().override(('box-padding', 0.5))
+                items_.append(markup)
+            else:
+                items_.append(item_)
         items = items_
     bundles = []
     if len(items) == 1:
