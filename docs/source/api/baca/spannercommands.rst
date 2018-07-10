@@ -36,11 +36,6 @@ spannercommands
       spanner
       tweaks
 
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-
    .. raw:: html
 
       <hr/>
@@ -48,7 +43,9 @@ spannercommands
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: SpannerCommand.__call__
+   .. container:: inherited
+
+      .. automethod:: SpannerCommand.__call__
 
    .. container:: inherited
 

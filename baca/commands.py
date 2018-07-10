@@ -49,10 +49,7 @@ class BCPCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None) -> None:
-        """
-        Calls command on ``argument``.
-        """
+    def _call(self, argument=None) -> None:
         if argument is None:
             return
         if self.bow_contact_points is None:
@@ -781,7 +778,7 @@ class ColorCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
+    def _call(self, argument=None):
         """
         Calls command on ``argument``.
 
@@ -905,7 +902,7 @@ class ContainerCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None) -> None:
+    def _call(self, argument=None) -> None:
         """
         Inserts ``selector`` output in container.
         """
@@ -971,7 +968,7 @@ class GlobalFermataCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None) -> None:
+    def _call(self, argument=None) -> None:
         """
         Applies command to ``argument`` selector output.
         """
@@ -1259,7 +1256,7 @@ class IndicatorCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None) -> None:
+    def _call(self, argument=None) -> None:
         """
         Calls command on ``argument``.
         """
@@ -1497,7 +1494,7 @@ class InstrumentChangeCommand(IndicatorCommand):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None) -> None:
+    def _call(self, argument=None) -> None:
         """
         Inserts ``selector`` output in container and sets part assignment.
         """
@@ -1520,7 +1517,7 @@ class InstrumentChangeCommand(IndicatorCommand):
                 message = f'{staff.name} does not allow instrument:\n'
                 message += f'  {instrument}'
                 raise Exception(message)
-        super(InstrumentChangeCommand, self).__call__(argument)
+        super()._call(argument)
 
 class LabelCommand(scoping.Command):
     r"""
@@ -1721,7 +1718,7 @@ class LabelCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
+    def _call(self, argument=None):
         """
         Calls command on ``argument``.
 
@@ -1801,7 +1798,7 @@ class MetronomeMarkCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None) -> None:
+    def _call(self, argument=None) -> None:
         """
         Applies command to result of selector called on ``argument``.
         """
@@ -1885,7 +1882,7 @@ class PartAssignmentCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None) -> None:
+    def _call(self, argument=None) -> None:
         """
         Inserts ``selector`` output in container and sets part assignment.
         """
@@ -1939,7 +1936,7 @@ class VoltaCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None) -> None:
+    def _call(self, argument=None) -> None:
         """
         Applies command to result of selector called on ``argument``.
         """

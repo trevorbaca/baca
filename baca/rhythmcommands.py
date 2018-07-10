@@ -1210,7 +1210,7 @@ class TieCorrectionCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None) -> None:
+    def _call(self, argument=None) -> None:
         """
         Applies command to result of selector called on ``argument``.
         """

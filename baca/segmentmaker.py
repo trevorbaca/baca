@@ -374,7 +374,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def __call__(
         self,
         scopes: typing.Union[scoping.Scope, scoping.TimelineScope],
-        *commands: typing.Union[scoping.Command, scoping.Map, scoping.Suite],
+        *commands: typing.Union[scoping.Command, scoping.Suite],
         ) -> None:
         r"""
         Wraps each command in ``commands`` with each scope in ``scopes``.
@@ -673,12 +673,10 @@ class SegmentMaker(abjad.SegmentMaker):
             Exception: unknown voice name 'PercussionVoice'.
 
         """
-        commands_ = []
-        for command in commands:
-            if isinstance(command, list):
-                commands_.extend(command)
-            else:
-                commands_.append(command)
+        commands_ = classes.Sequence(commands).flatten(
+            classes=(list,),
+            depth=-1,
+            )
         commands = tuple(commands_)
         for command in commands:
             if isinstance(command, abjad.Markup):
@@ -735,13 +733,13 @@ class SegmentMaker(abjad.SegmentMaker):
             if isinstance(command, tuple):
                 assert len(command) == 2, repr(command)
                 command = command[0]
-            fiveway = (
+            fourway = (
                 list,
                 scoping.Command,
                 scoping.Map,
                 scoping.Suite,
                 )
-            if not isinstance(command, fiveway):
+            if not isinstance(command, fourway):
                 message = '\n\nNeither command nor list of commands:'
                 message += f'\n\n{format(command)}'
                 raise Exception(message)
@@ -761,6 +759,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     threeway = (
                         list,
                         scoping.Command,
+                        scoping.Map,
                         scoping.Suite,
                         )
                     assert isinstance(command, threeway), repr(command)
@@ -792,12 +791,12 @@ class SegmentMaker(abjad.SegmentMaker):
                             )
                         self.wrappers.append(wrapper)
                 else:
-                    threeway = (
+                    twoway = (
                         scoping.Command,
                         scoping.Map,
                         scoping.Suite,
                         )
-                    assert isinstance(command, threeway), repr(command)
+                    assert isinstance(command, twoway), repr(command)
                     scope_ = command._override_scope(current_scope)
                     wrapper = scoping.CommandWrapper(
                         command=command,
@@ -1516,12 +1515,12 @@ class SegmentMaker(abjad.SegmentMaker):
         command_count = 0
         for wrapper in self.wrappers:
             assert isinstance(wrapper, scoping.CommandWrapper)
-            threeway = (
+            twoway = (
                 scoping.Command,
                 scoping.Map,
                 scoping.Suite,
                 )
-            assert isinstance(wrapper.command, threeway)
+            assert isinstance(wrapper.command, twoway)
             if isinstance(wrapper.command, rhythmcommands.RhythmCommand):
                 continue
             command_count += 1

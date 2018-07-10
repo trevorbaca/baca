@@ -321,7 +321,7 @@ class PiecewiseIndicatorCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None) -> None:
+    def _call(self, argument=None) -> None:
         """
         Calls command on ``argument``.
         """

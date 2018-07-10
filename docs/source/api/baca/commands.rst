@@ -46,11 +46,6 @@ commands
       tag
       tweaks
 
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-
    .. raw:: html
 
       <hr/>
@@ -58,7 +53,9 @@ commands
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: BCPCommand.__call__
+   .. container:: inherited
+
+      .. automethod:: BCPCommand.__call__
 
    .. container:: inherited
 
@@ -137,11 +134,6 @@ commands
 
 .. autoclass:: ColorCommand
 
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-
    .. raw:: html
 
       <hr/>
@@ -149,7 +141,9 @@ commands
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: ColorCommand.__call__
+   .. container:: inherited
+
+      .. automethod:: ColorCommand.__call__
 
    .. container:: inherited
 
@@ -223,11 +217,6 @@ commands
 
       identifier
 
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-
    .. raw:: html
 
       <hr/>
@@ -235,7 +224,9 @@ commands
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: ContainerCommand.__call__
+   .. container:: inherited
+
+      .. automethod:: ContainerCommand.__call__
 
    .. container:: inherited
 
@@ -316,11 +307,6 @@ commands
 
       description
 
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-
    .. raw:: html
 
       <hr/>
@@ -328,7 +314,9 @@ commands
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: GlobalFermataCommand.__call__
+   .. container:: inherited
+
+      .. automethod:: GlobalFermataCommand.__call__
 
    .. container:: inherited
 
@@ -407,11 +395,6 @@ commands
       redundant
       tweaks
 
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-
    .. raw:: html
 
       <hr/>
@@ -419,7 +402,9 @@ commands
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: IndicatorCommand.__call__
+   .. container:: inherited
+
+      .. automethod:: IndicatorCommand.__call__
 
    .. container:: inherited
 
@@ -496,11 +481,6 @@ commands
 
 .. autoclass:: InstrumentChangeCommand
 
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-
    .. raw:: html
 
       <hr/>
@@ -508,7 +488,9 @@ commands
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: InstrumentChangeCommand.__call__
+   .. container:: inherited
+
+      .. automethod:: InstrumentChangeCommand.__call__
 
    .. container:: inherited
 
@@ -598,11 +580,6 @@ commands
 
       expression
 
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-
    .. raw:: html
 
       <hr/>
@@ -610,7 +587,9 @@ commands
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: LabelCommand.__call__
+   .. container:: inherited
+
+      .. automethod:: LabelCommand.__call__
 
    .. container:: inherited
 
@@ -687,11 +666,6 @@ commands
       key
       redundant
 
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-
    .. raw:: html
 
       <hr/>
@@ -699,7 +673,9 @@ commands
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: MetronomeMarkCommand.__call__
+   .. container:: inherited
+
+      .. automethod:: MetronomeMarkCommand.__call__
 
    .. container:: inherited
 
@@ -777,11 +753,6 @@ commands
 
       part_assignment
 
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-
    .. raw:: html
 
       <hr/>
@@ -789,7 +760,9 @@ commands
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: PartAssignmentCommand.__call__
+   .. container:: inherited
+
+      .. automethod:: PartAssignmentCommand.__call__
 
    .. container:: inherited
 
@@ -860,11 +833,6 @@ commands
 
 .. autoclass:: VoltaCommand
 
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-
    .. raw:: html
 
       <hr/>
@@ -872,7 +840,9 @@ commands
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: VoltaCommand.__call__
+   .. container:: inherited
+
+      .. automethod:: VoltaCommand.__call__
 
    .. container:: inherited
 

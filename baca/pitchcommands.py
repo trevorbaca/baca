@@ -128,7 +128,7 @@ class AccidentalAdjustmentCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None) -> None:
+    def _call(self, argument=None) -> None:
         """
         Inserts ``selector`` output in container.
         """
@@ -725,7 +725,7 @@ class ClusterCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
+    def _call(self, argument=None):
         """
         Calls command on ``argument``.
 
@@ -1700,7 +1700,7 @@ class ColorFingeringCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
+    def _call(self, argument=None):
         """
         Calls command on ``argument``.
 
@@ -1782,7 +1782,7 @@ class DiatonicClusterCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
+    def _call(self, argument=None):
         """
         Calls command on ``argument``.
 
@@ -2101,7 +2101,7 @@ class MicrotoneDeviationCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
+    def _call(self, argument=None):
         """
         Cyclically applies deviations to plts in ``argument``.
 
@@ -2286,7 +2286,7 @@ class OctaveDisplacementCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
+    def _call(self, argument=None):
         """
         Calls command on ``argument``.
 
@@ -2745,7 +2745,7 @@ class PitchCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
+    def _call(self, argument=None):
         """
         Calls command on ``argument``.
         """
@@ -3321,7 +3321,7 @@ class RegisterCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
+    def _call(self, argument=None):
         """
         Calls command on ``argument``.
 
@@ -4364,7 +4364,7 @@ class RegisterInterpolationCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None) -> None:
+    def _call(self, argument=None) -> None:
         """
         Calls command on ``argument``.
         """
@@ -5172,7 +5172,7 @@ class RegisterToOctaveCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
+    def _call(self, argument=None):
         """
         Calls command on ``argument``.
 
@@ -5467,7 +5467,7 @@ class StaffPositionCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None) -> None:
+    def _call(self, argument=None) -> None:
         """
         Calls command on ``argument``.
         """
@@ -5715,7 +5715,7 @@ class StaffPositionInterpolationCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None) -> None:
+    def _call(self, argument=None) -> None:
         """
         Calls command on ``argument``.
         """

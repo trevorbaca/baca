@@ -45,11 +45,6 @@ pitchcommands
       forced
       parenthesized
 
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-
    .. raw:: html
 
       <hr/>
@@ -57,7 +52,9 @@ pitchcommands
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: AccidentalAdjustmentCommand.__call__
+   .. container:: inherited
+
+      .. automethod:: AccidentalAdjustmentCommand.__call__
 
    .. container:: inherited
 
@@ -140,11 +137,6 @@ pitchcommands
       start_pitch
       widths
 
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-
    .. raw:: html
 
       <hr/>
@@ -152,7 +144,9 @@ pitchcommands
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: ClusterCommand.__call__
+   .. container:: inherited
+
+      .. automethod:: ClusterCommand.__call__
 
    .. container:: inherited
 
@@ -230,11 +224,6 @@ pitchcommands
 
       numbers
 
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-
    .. raw:: html
 
       <hr/>
@@ -242,7 +231,9 @@ pitchcommands
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: ColorFingeringCommand.__call__
+   .. container:: inherited
+
+      .. automethod:: ColorFingeringCommand.__call__
 
    .. container:: inherited
 
@@ -318,11 +309,6 @@ pitchcommands
 
       widths
 
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-
    .. raw:: html
 
       <hr/>
@@ -330,7 +316,9 @@ pitchcommands
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: DiatonicClusterCommand.__call__
+   .. container:: inherited
+
+      .. automethod:: DiatonicClusterCommand.__call__
 
    .. container:: inherited
 
@@ -471,11 +459,6 @@ pitchcommands
 
       deviations
 
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-
    .. raw:: html
 
       <hr/>
@@ -483,7 +466,9 @@ pitchcommands
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: MicrotoneDeviationCommand.__call__
+   .. container:: inherited
+
+      .. automethod:: MicrotoneDeviationCommand.__call__
 
    .. container:: inherited
 
@@ -559,11 +544,6 @@ pitchcommands
 
       displacements
 
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-
    .. raw:: html
 
       <hr/>
@@ -571,7 +551,9 @@ pitchcommands
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: OctaveDisplacementCommand.__call__
+   .. container:: inherited
+
+      .. automethod:: OctaveDisplacementCommand.__call__
 
    .. container:: inherited
 
@@ -655,11 +637,6 @@ pitchcommands
       pitches
       state
 
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-
    .. raw:: html
 
       <hr/>
@@ -667,7 +644,9 @@ pitchcommands
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: PitchCommand.__call__
+   .. container:: inherited
+
+      .. automethod:: PitchCommand.__call__
 
    .. container:: inherited
 
@@ -759,11 +738,6 @@ pitchcommands
 
       registration
 
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-
    .. raw:: html
 
       <hr/>
@@ -771,7 +745,9 @@ pitchcommands
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: RegisterCommand.__call__
+   .. container:: inherited
+
+      .. automethod:: RegisterCommand.__call__
 
    .. container:: inherited
 
@@ -849,11 +825,6 @@ pitchcommands
       start_pitch
       stop_pitch
 
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-
    .. raw:: html
 
       <hr/>
@@ -861,7 +832,9 @@ pitchcommands
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: RegisterInterpolationCommand.__call__
+   .. container:: inherited
+
+      .. automethod:: RegisterInterpolationCommand.__call__
 
    .. container:: inherited
 
@@ -938,11 +911,6 @@ pitchcommands
       anchor
       octave_number
 
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-
    .. raw:: html
 
       <hr/>
@@ -950,7 +918,9 @@ pitchcommands
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: RegisterToOctaveCommand.__call__
+   .. container:: inherited
+
+      .. automethod:: RegisterToOctaveCommand.__call__
 
    .. container:: inherited
 
@@ -1030,11 +1000,6 @@ pitchcommands
       exact
       numbers
 
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-
    .. raw:: html
 
       <hr/>
@@ -1042,7 +1007,9 @@ pitchcommands
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: StaffPositionCommand.__call__
+   .. container:: inherited
+
+      .. automethod:: StaffPositionCommand.__call__
 
    .. container:: inherited
 
@@ -1123,11 +1090,6 @@ pitchcommands
       start_pitch
       stop_pitch
 
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-
    .. raw:: html
 
       <hr/>
@@ -1135,7 +1097,9 @@ pitchcommands
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: StaffPositionInterpolationCommand.__call__
+   .. container:: inherited
+
+      .. automethod:: StaffPositionInterpolationCommand.__call__
 
    .. container:: inherited
 

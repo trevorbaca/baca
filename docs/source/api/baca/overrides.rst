@@ -37,11 +37,6 @@ overrides
       value
       whitelist
 
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-
    .. raw:: html
 
       <hr/>
@@ -49,7 +44,9 @@ overrides
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: OverrideCommand.__call__
+   .. container:: inherited
+
+      .. automethod:: OverrideCommand.__call__
 
    .. container:: inherited
 

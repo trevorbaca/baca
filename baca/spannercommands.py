@@ -197,12 +197,18 @@ class SpannerCommand(scoping.Command):
         deactivate: bool = None,
         detach_first: bool = None,
         left_broken: bool = None,
+        map: typings.Selector = None,
         right_broken: bool = None,
         selector: typings.Selector = 'baca.leaves()',
         spanner: abjad.Spanner = None,
         tags: typing.List[abjad.Tag] = None,
         ) -> None:
-        scoping.Command.__init__(self, deactivate=deactivate, selector=selector)
+        scoping.Command.__init__(
+            self,
+            deactivate=deactivate,
+            map=map,
+            selector=selector,
+            )
         if detach_first is not None:
             detach_first = bool(detach_first)
         self._detach_first = detach_first
@@ -221,7 +227,7 @@ class SpannerCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
+    def _call(self, argument=None):
         """
         Calls command on ``argument``.
 
@@ -1216,7 +1222,7 @@ def repeat_tie(
         spanner=abjad.Tie(repeat=True),
         )
 
-def repeat_tie_repeat_pitches() -> scoping.Map:
+def repeat_tie_repeat_pitches() -> typing.List[scoping.Map]:
     """
     Repeat-ties repeat pitches.
     """
@@ -2142,7 +2148,7 @@ def tie(
         spanner=tie,
         )
 
-def tie_repeat_pitches() -> scoping.Map:
+def tie_repeat_pitches() -> typing.List[scoping.Map]:
     """
     Ties repeat pitches.
     """

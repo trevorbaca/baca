@@ -2,6 +2,7 @@ import abjad
 import copy
 import functools
 import typing
+from . import classes
 from . import indicators
 from . import typings
 measure_indicator_typing = typing.Union[
@@ -46,13 +47,14 @@ class Command(abjad.AbjadObject):
         self,
         *,
         deactivate: bool = None,
+        map: typings.Selector = None,
         selector: typings.Selector = None,
         tag_measure_number: bool = None,
         ) -> None:
         # for selector evaluation
         import baca
         self._deactivate = deactivate
-        self._map = None
+        self._map = map
         self._measures: measure_indicator_typing = None
         self._runtime = abjad.OrderedDict()
         if isinstance(selector, str):
@@ -71,7 +73,7 @@ class Command(abjad.AbjadObject):
         """
         Calls command on ``argument``.
         """
-        pass
+        return self._call(argument=argument)
 
     ### PRIVATE METHODS ###
 
@@ -84,6 +86,9 @@ class Command(abjad.AbjadObject):
             tuples = manager_._get_attribute_tuples()
             for attribute, value in tuples:
                 setattr(manager, attribute, value)
+
+    def _call(self, argument=None):
+        pass
 
     def _override_scope(self, scope):
         assert isinstance(scope, (Scope, TimelineScope)), repr(scope)
@@ -439,6 +444,8 @@ class Map(abjad.AbjadObject):
             return None
         if not self.commands:
             return None
+        assert len(self.commands) == 1, repr(self.commands)
+        assert self.selector is not None
         if self.selector is not None:
             argument = self.selector(argument)
             if self.selector._is_singular_get_item():
@@ -1294,7 +1301,7 @@ def apply(
 def map(
     selector: typing.Union[abjad.Expression, str],
     *commands: typing.Union[Command, Map, Suite],
-    ) -> Map:
+    ) -> typing.List[Map]:
     """
     Maps ``selector`` to each command in ``commands``.
     """
@@ -1319,12 +1326,13 @@ def map(
     for command in commands_:
         map_ = Map(selector, command)
         result.append(map_)
+        #command.map = selector
     return result
 
 def measures(
     measures: typing.Union[int, typing.List[int], typing.Tuple[int, int]],
     *commands: Command,
-    ) -> typing.List[Command]:
+    ) -> typing.List[typing.Union[Command, Map]]:
     r"""
     Wraps each command in ``commands`` with ``measures``.
 
@@ -1430,11 +1438,13 @@ def measures(
             >>
 
     """
-    from .commands import markup as markup_command
+    #from .commands import markup as markup_command
     commands_ = []
-    for command in commands:
+    #for command in commands:
+    for command in classes.Sequence(commands).flatten(depth=-1):
         if isinstance(command, abjad.Markup):
-            command = markup_command(command)
+            raise Exception('use markup command; not raw markup')
+            #command = markup_command(command)
         assert isinstance(command, (Command, Map)), repr(command)
         command._measures = copy.copy(measures)
         commands_.append(command)

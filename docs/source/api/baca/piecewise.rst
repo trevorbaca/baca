@@ -126,11 +126,6 @@ piecewise
       right_broken
       selector
 
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-
    .. raw:: html
 
       <hr/>
@@ -138,7 +133,9 @@ piecewise
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: PiecewiseIndicatorCommand.__call__
+   .. container:: inherited
+
+      .. automethod:: PiecewiseIndicatorCommand.__call__
 
    .. container:: inherited
 

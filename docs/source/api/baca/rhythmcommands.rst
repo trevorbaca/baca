@@ -167,11 +167,6 @@ rhythmcommands
       repeat
       untie
 
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-
    .. raw:: html
 
       <hr/>
@@ -179,7 +174,9 @@ rhythmcommands
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: TieCorrectionCommand.__call__
+   .. container:: inherited
+
+      .. automethod:: TieCorrectionCommand.__call__
 
    .. container:: inherited
 
