@@ -23,7 +23,6 @@ scoping
    :nosignatures:
 
    ~Command
-   ~CommandWrapper
    ~Scope
    ~Suite
    ~TimelineScope
@@ -114,40 +113,6 @@ scoping
    .. autoattribute:: Command.tag
 
    .. autoattribute:: Command.tags
-
-.. autoclass:: CommandWrapper
-
-   .. autosummary::
-      :nosignatures:
-
-      command
-      scope
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. container:: inherited
-
-      .. automethod:: CommandWrapper.__format__
-
-   .. container:: inherited
-
-      .. automethod:: CommandWrapper.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read-only properties
-      :class: class-header
-
-   .. autoattribute:: CommandWrapper.command
-
-   .. autoattribute:: CommandWrapper.scope
 
 .. autoclass:: Scope
 

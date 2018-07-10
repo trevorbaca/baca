@@ -188,10 +188,11 @@ class RhythmCommand(scoping.Command):
         rewrite_rest_filled: bool = None,
         rhythm_maker: typings.RhythmMakerTyping = None,
         right_broken: bool = None,
+        scope: scoping.scope_typing = None,
         split_at_measure_boundaries: bool = None,
         stages: typing.Tuple[int, int] = None,
         ) -> None:
-        scoping.Command.__init__(self)
+        scoping.Command.__init__(self, scope=scope)
         if division_expression is not None and division_maker is not None:
             message = 'can not set both division expression and division-maker'
             message += f':\n{division_expression} {division_maker}.'

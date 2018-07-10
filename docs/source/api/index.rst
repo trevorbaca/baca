@@ -997,7 +997,6 @@ Rhythm library.
    :nosignatures:
 
    ~baca.scoping.Command
-   ~baca.scoping.CommandWrapper
    ~baca.scoping.Scope
    ~baca.scoping.Suite
    ~baca.scoping.TimelineScope

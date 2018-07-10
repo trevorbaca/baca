@@ -1,4 +1,5 @@
 import abjad
+import copy
 import os
 import pathlib
 import sys
@@ -188,7 +189,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_validate_stage_count',
         '_voice_metadata',
         '_voice_names',
-        '_wrappers',
+        '_commands',
         )
 
     _absolute_string_trio_stylesheet_path = pathlib.Path(
@@ -363,7 +364,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._validate_stage_count = validate_stage_count
         self._voice_metadata: abjad.OrderedDict = abjad.OrderedDict()
         self._voice_names: typing.Optional[typing.Tuple[str, ...]] = None
-        self._wrappers: typing.List[scoping.CommandWrapper] = []
+        self._commands: typing.List[scoping.Command] = []
         self._import_manifests()
         self._initialize_time_signatures(time_signatures)
         self._validate_measure_count_()
@@ -737,12 +738,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 for command_ in commands_:
                     assert isinstance(command_, scoping.Command), repr(command_)
                     scope_ = command_._override_scope(current_scope)
+                    scope_ = copy.copy(scope_)
+                    command_ = copy.copy(command_)
                     command_.scope = scope_
-                    wrapper = scoping.CommandWrapper(
-                        command=command_,
-                        scope=scope_,
-                        )
-                    self.wrappers.append(wrapper)
+                    self.commands.append(command_)
 
     ### PRIVATE METHODS ###
 
@@ -1453,22 +1452,20 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _call_commands(self):
         command_count = 0
-        for wrapper in self.wrappers:
-            assert isinstance(wrapper, scoping.CommandWrapper)
-            assert isinstance(wrapper.command, scoping.Command)
-            if isinstance(wrapper.command, rhythmcommands.RhythmCommand):
+        for command in self.commands:
+            assert isinstance(command, scoping.Command)
+            if isinstance(command, rhythmcommands.RhythmCommand):
                 continue
             command_count += 1
-            selection = self._scope_to_leaf_selection(wrapper)
-            command = wrapper.command
-            voice_name = wrapper.scope.voice_name
+            selection = self._scope_to_leaf_selection(command)
+            voice_name = command.scope.voice_name
             command.runtime = self._bundle_manifests(voice_name)
             try:
                 command(selection)
             except:
-                print(f'Interpreting ...\n\n{format(wrapper)}\n')
+                print(f'Interpreting ...\n\n{format(command)}\n')
                 raise
-            self._handle_mutator(wrapper)
+            self._handle_mutator(command)
             if getattr(command, 'persist', None):
                 parameter = command.parameter
                 state = command.state
@@ -1489,8 +1486,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 voice.name,
                 abjad.OrderedDict(),
                 )
-            wrappers = self._voice_to_rhythm_wrappers(voice)
-            if not wrappers:
+            commands = self._voice_to_rhythm_commands(voice)
+            if not commands:
                 if self.skips_instead_of_rests:
                     maker = rhythmcommands.SkipRhythmMaker()
                 else:
@@ -1504,19 +1501,16 @@ class SegmentMaker(abjad.SegmentMaker):
                 voice.extend(selections)
                 continue
             rhythms = []
-            for wrapper in wrappers:
-                assert isinstance(wrapper, scoping.CommandWrapper)
-                if wrapper.scope.stages is None:
-                    raise Exception(format(wrapper))
-                command = wrapper.command
-                result = self._get_stage_time_signatures(
-                    *wrapper.scope.stages)
+            for command in commands:
+                if command.scope.stages is None:
+                    raise Exception(format(command))
+                result = self._get_stage_time_signatures(*command.scope.stages)
                 start_offset, time_signatures = result
                 command.runtime = self._bundle_manifests(voice.name)
                 try:
                     command(start_offset, time_signatures)
                 except:
-                    print(f'Interpreting ...\n\n{format(wrapper)}\n')
+                    print(f'Interpreting ...\n\n{format(command)}\n')
                     raise
                 rhythm = command.payload
                 rhythms.append(rhythm)
@@ -2077,8 +2071,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return abjad.Tag(tag)
 
     def _handle_mutator(self, command):
-        if (hasattr(command.command, '_mutates_score') and
-            command.command._mutates_score()):
+        if (hasattr(command, '_mutates_score') and command._mutates_score()):
             self._cache = None
             self._update_score_one_time()
 
@@ -2630,21 +2623,21 @@ class SegmentMaker(abjad.SegmentMaker):
                         abjad.detach(wrapper, leaf)
                         break
 
-    def _scope_to_leaf_selection(self, wrapper):
+    def _scope_to_leaf_selection(self, command):
         leaves = []
-        selections = self._scope_to_leaf_selections(wrapper.scope)
+        selections = self._scope_to_leaf_selections(command.scope)
         for selection in selections:
             leaves.extend(selection)
         selection = abjad.select(leaves)
         if not selection:
-            message = f'EMPTY SELECTION:\n\n{format(wrapper)}'
+            message = f'EMPTY SELECTION:\n\n{format(command)}'
             if self.allow_empty_selections:
                 print(message)
             else:
                 raise Exception(message)
         assert selection.are_leaves(), repr(selection)
-        if isinstance(wrapper.scope, scoping.TimelineScope):
-            selection = wrapper.scope._sort_by_timeline(selection)
+        if isinstance(command.scope, scoping.TimelineScope):
+            selection = command.scope._sort_by_timeline(selection)
         return selection
 
     def _scope_to_leaf_selections(self, scope):
@@ -3073,14 +3066,14 @@ class SegmentMaker(abjad.SegmentMaker):
             message = f'{self.stage_count} != {self.validate_stage_count}'
             raise Exception(message)
 
-    def _voice_to_rhythm_wrappers(self, voice):
-        wrappers = []
-        for wrapper in self.wrappers:
-            if not isinstance(wrapper.command, rhythmcommands.RhythmCommand):
+    def _voice_to_rhythm_commands(self, voice):
+        commands = []
+        for command in self.commands:
+            if not isinstance(command, rhythmcommands.RhythmCommand):
                 continue
-            if wrapper.scope.voice_name == voice.name:
-                wrappers.append(wrapper)
-        return wrappers
+            if command.scope.voice_name == voice.name:
+                commands.append(command)
+        return commands
 
     def _whitespace_leaves(self):
         for leaf in abjad.iterate(self.score).leaves():
@@ -5722,11 +5715,11 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._voice_metadata
 
     @property
-    def wrappers(self) -> typing.List[scoping.CommandWrapper]:
+    def commands(self) -> typing.List[scoping.Command]:
         """
-        Gets wrappers.
+        Gets commands.
         """
-        return self._wrappers
+        return self._commands
 
     ### PUBLIC METHODS ###
 
