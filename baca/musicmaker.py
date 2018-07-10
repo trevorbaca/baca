@@ -6304,7 +6304,7 @@ class MusicMaker(abjad.AbjadObject):
         assert self._all_are_selections(selections), repr(selections)
         for specifier in specifiers:
             if not isinstance(specifier, rmakers.BeamSpecifier):
-                assert isinstance(specifier, (scoping.Command, scoping.Map)), format(specifier)
+                assert isinstance(specifier, scoping.Command), format(specifier)
             specifier(selections)
 
     def _call_rhythm_commands(

@@ -736,7 +736,6 @@ class SegmentMaker(abjad.SegmentMaker):
             fourway = (
                 list,
                 scoping.Command,
-                scoping.Map,
                 scoping.Suite,
                 )
             if not isinstance(command, fourway):
@@ -759,7 +758,6 @@ class SegmentMaker(abjad.SegmentMaker):
                     threeway = (
                         list,
                         scoping.Command,
-                        scoping.Map,
                         scoping.Suite,
                         )
                     assert isinstance(command, threeway), repr(command)
@@ -793,7 +791,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 else:
                     twoway = (
                         scoping.Command,
-                        scoping.Map,
                         scoping.Suite,
                         )
                     assert isinstance(command, twoway), repr(command)
@@ -1517,7 +1514,6 @@ class SegmentMaker(abjad.SegmentMaker):
             assert isinstance(wrapper, scoping.CommandWrapper)
             twoway = (
                 scoping.Command,
-                scoping.Map,
                 scoping.Suite,
                 )
             assert isinstance(wrapper.command, twoway)

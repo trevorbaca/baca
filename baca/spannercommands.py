@@ -1222,17 +1222,20 @@ def repeat_tie(
         spanner=abjad.Tie(repeat=True),
         )
 
-def repeat_tie_repeat_pitches() -> typing.List[scoping.Map]:
+def repeat_tie_repeat_pitches() -> SpannerCommand:
     """
     Repeat-ties repeat pitches.
     """
-    return scoping.map(
+    result = scoping.map(
         classes.selector().ltqruns().nontrivial(),
         SpannerCommand(
             selector='baca.qrun(0)',
             spanner=abjad.Tie(repeat=True),
             ),
         )
+    command = result[0]
+    assert isinstance(command, SpannerCommand)
+    return command
 
 def slur(
     *tweaks: abjad.LilyPondTweakManager,
@@ -2148,14 +2151,13 @@ def tie(
         spanner=tie,
         )
 
-def tie_repeat_pitches() -> typing.List[scoping.Map]:
+def tie_repeat_pitches() -> SpannerCommand:
     """
     Ties repeat pitches.
     """
-    return scoping.map(
-        classes.selector().ltqruns().nontrivial(),
-        tie(),
-        )
+    command = tie()
+    command.map = classes.selector().ltqruns().nontrivial()
+    return command
 
 def trill_spanner(
     string: str = None,

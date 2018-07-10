@@ -24,7 +24,6 @@ scoping
 
    ~Command
    ~CommandWrapper
-   ~Map
    ~Scope
    ~Suite
    ~TimelineScope
@@ -146,64 +145,6 @@ scoping
    .. autoattribute:: CommandWrapper.command
 
    .. autoattribute:: CommandWrapper.scope
-
-.. autoclass:: Map
-
-   .. autosummary::
-      :nosignatures:
-
-      commands
-      measures
-      selector
-
-   .. autosummary::
-      :nosignatures:
-
-      runtime
-
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. automethod:: Map.__call__
-
-   .. container:: inherited
-
-      .. automethod:: Map.__format__
-
-   .. container:: inherited
-
-      .. automethod:: Map.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read/write properties
-      :class: class-header
-
-   .. autoattribute:: Map.runtime
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read-only properties
-      :class: class-header
-
-   .. autoattribute:: Map.commands
-
-   .. autoattribute:: Map.measures
-
-   .. autoattribute:: Map.selector
 
 .. autoclass:: Scope
 

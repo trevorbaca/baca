@@ -1193,6 +1193,7 @@ class TieCorrectionCommand(scoping.Command):
         self,
         *,
         direction: abjad.HorizontalAlignment = None,
+        map: typings.Selector = None,
         repeat: bool = None,
         selector: typings.Selector = 'baca.pleaf(-1)',
         untie: bool = None,
@@ -1201,6 +1202,7 @@ class TieCorrectionCommand(scoping.Command):
         if direction is not None:
             assert direction in (abjad.Right, abjad.Left, None)
         self._direction = direction
+        self._map = map
         if repeat is not None:
             repeat = bool(repeat)
         self._repeat = repeat

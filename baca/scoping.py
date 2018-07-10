@@ -73,7 +73,20 @@ class Command(abjad.AbjadObject):
         """
         Calls command on ``argument``.
         """
-        return self._call(argument=argument)
+        if self.map is not None:
+            assert isinstance(self.map, abjad.Expression)
+            argument = self.map(argument)
+            if self.map._is_singular_get_item():
+                argument = [argument]
+#            result = []
+#            for item in argument:
+#                item_ = self._call(argument=item)
+#                result.append(item_)
+#            return result
+            for subargument in argument:
+                self._call(argument=subargument)
+        else:
+            return self._call(argument=argument)
 
     ### PRIVATE METHODS ###
 
@@ -297,224 +310,6 @@ class Command(abjad.AbjadObject):
         # TODO: return empty tag (instead of none)
         return None
 
-class Map(abjad.AbjadObject):
-    r"""
-    Map.
-
-    ..  container:: example
-
-        >>> baca.Map()
-        Map()
-
-    ..  container:: example
-
-        Attaches accents to pitched heads in tuplet 1:
-
-        >>> music_maker = baca.MusicMaker()
-        >>> contribution = music_maker(
-        ...     'Voice 1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.map(
-        ...         baca.tuplet(1),
-        ...         baca.apply(
-        ...             baca.pheads(),
-        ...             baca.marcato(),
-        ...             baca.staccato(),
-        ...             ),
-        ...         baca.slur(
-        ...             abjad.tweak(abjad.Down).direction,
-        ...             ),
-        ...         ),
-        ...     baca.rests_around([2], [4]),
-        ...     baca.tuplet_bracket_staff_padding(5),
-        ...     counts=[1, 1, 5, -1],
-        ...     time_treatments=[-1],
-        ...     )
-        >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
-            <<
-                \context Voice = "Voice 1"
-                {
-                    \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
-                            r8
-                            c'16
-                            [
-                            d'16
-                            ]
-                            bf'4
-                            ~
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
-                            -\marcato                                                                %! IC
-                            -\staccato                                                               %! IC
-                            [
-                            - \tweak direction #down                                                 %! SC
-                            (                                                                        %! SC
-                            e''16
-                            -\marcato                                                                %! IC
-                            -\staccato                                                               %! IC
-                            ]
-                            ef''4
-                            -\marcato                                                                %! IC
-                            -\staccato                                                               %! IC
-                            ~
-                            ef''16
-                            r16
-                            af''16
-                            -\marcato                                                                %! IC
-                            -\staccato                                                               %! IC
-                            [
-                            g''16
-                            -\marcato                                                                %! IC
-                            -\staccato                                                               %! IC
-                            ]
-                            )                                                                        %! SC
-                        }
-                        \times 4/5 {
-                            a'16
-                            r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
-                        }
-                    }
-                }
-            >>
-
-    """
-
-    ### CLASS VARIABLES ###
-
-    __slots__ = (
-        '_commands',
-        '_measures',
-        '_offset_to_measure_number',
-        '_previous_segment_voice_metadata',
-        '_runtime',
-        '_score_template',
-        '_selector',
-        )
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        selector: typings.Selector = None,
-        *commands: typing.Union[Command, 'Map', 'Suite'],
-        ) -> None:
-        if isinstance(selector, str):
-            selector_ = eval(selector)
-        else:
-            selector_ = selector
-        if selector_ is not None:
-            assert isinstance(selector_, abjad.Expression), repr(selector_)
-        self._selector = selector_
-        command_list: typing.List[
-            typing.Union[Command, Map, Suite]
-            ] = []
-        for command in commands:
-            if not isinstance(command, (Command, Map, Suite)):
-                message = '\n  Must contain only commands and suites.'
-                message += f'\n  Not {type(command).__name__}: {command!r}.'
-                raise Exception(message)
-            command_list.append(command)
-        self._commands = tuple(command_list)
-        self._measures: measure_indicator_typing = None
-        self._runtime = abjad.OrderedDict()
-
-    ### SPECIAL METHODS ###
-
-    def __call__(self, argument=None) -> typing.Optional[typing.List]:
-        """
-        Maps each command in ``commands`` to each item in output of selector
-        called on ``argument``.
-        """
-        if argument is None:
-            return None
-        if not self.commands:
-            return None
-        assert len(self.commands) == 1, repr(self.commands)
-        assert self.selector is not None
-        if self.selector is not None:
-            argument = self.selector(argument)
-            if self.selector._is_singular_get_item():
-                argument = [argument]
-        items_ = []
-        for command in self.commands:
-            for item in argument:
-                item_ = command(item)
-                items_.append(item_)
-        return items_
-
-    ### PRIVATE METHODS ###
-
-    def _override_scope(self, scope):
-        assert isinstance(scope, (Scope, TimelineScope)), repr(scope)
-        if not self.measures:
-            return scope
-        if isinstance(self.measures, int):
-            stages = (self.measures, self.measures)
-        else:
-            assert isinstance(self.measures, tuple)
-            stages = self.measures
-        scope_ = abjad.new(
-            scope,
-            stages=stages,
-            )
-        return scope_
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def commands(self) -> typing.Tuple[
-        typing.Union[Command, 'Map', 'Suite'], ...,
-        ]:
-        """
-        Gets commands.
-        """
-        return self._commands
-
-    @property
-    def measures(self) -> measure_indicator_typing: 
-        """
-        Gets measures.
-        """
-        return self._measures
-
-    @property
-    def runtime(self) -> abjad.OrderedDict:
-        """
-        Gets segment-maker runtime dictionary.
-        """
-        return self._runtime
-
-    @runtime.setter
-    def runtime(self, argument):
-        """
-        Gets segment-maker runtime dictionary.
-        """
-        assert isinstance(argument, abjad.OrderedDict), repr(argument)
-        for command in self.commands:
-            command.runtime = argument
-
-    @property
-    def selector(self) -> typing.Optional[abjad.Expression]:
-        """
-        Gets selector.
-        """
-        return self._selector
-
 class Suite(abjad.AbjadObject):
     """
     Suite.
@@ -541,12 +336,11 @@ class Suite(abjad.AbjadObject):
 
     def __init__(
         self,
-        *commands: typing.Union[Command, Map, 'Suite'],
+        *commands: typing.Union[Command, 'Suite'],
         ) -> None:
-        command_list: typing.List[
-            typing.Union[Command, Map, Suite]] = []
+        command_list: typing.List[typing.Union[Command, Suite]] = []
         for command in commands:
-            if isinstance(command, (Command, Map, Suite)):
+            if isinstance(command, (Command, Suite)):
                 command_list.append(command)
                 continue
             message = '\n  Must contain only commands, maps, suites.'
@@ -589,9 +383,7 @@ class Suite(abjad.AbjadObject):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def commands(self) -> typing.Tuple[
-        typing.Union[Command, Map, 'Suite'], ...
-        ]:
+    def commands(self) -> typing.Tuple[typing.Union[Command, 'Suite'], ...]:
         """
         Gets commands.
         """
@@ -737,7 +529,7 @@ class CommandWrapper(abjad.AbjadObject):
             assert isinstance(scope, prototype), format(scope)
         self._scope = scope
         if command is not None:
-            threeway = (Command, Map, Suite)
+            threeway = (Command, Suite)
             assert isinstance(command, threeway), format(command)
         self._command = command
 
@@ -1300,8 +1092,8 @@ def apply(
 
 def map(
     selector: typing.Union[abjad.Expression, str],
-    *commands: typing.Union[Command, Map, Suite],
-    ) -> typing.List[Map]:
+    *commands: typing.Union[Command, Suite],
+    ) -> typing.List[typing.Union[Command, Suite]]:
     """
     Maps ``selector`` to each command in ``commands``.
     """
@@ -1318,21 +1110,20 @@ def map(
         else:
             commands_.append(item)
     for command in commands_:
-        if not isinstance(command, (Command, Map, Suite)):
-            message = '\n  Must be command, map, suite.'
+        if not isinstance(command, (Command, Suite)):
+            message = '\n  Must be command or suite.'
             message += f'\n  Not {type(command).__name__}: {command!r}.'
             raise Exception(message)
     result = []
     for command in commands_:
-        map_ = Map(selector, command)
-        result.append(map_)
-        #command.map = selector
+        command.map = selector
+        result.append(command)
     return result
 
 def measures(
     measures: typing.Union[int, typing.List[int], typing.Tuple[int, int]],
-    *commands: Command,
-    ) -> typing.List[typing.Union[Command, Map]]:
+    *commands: typing.Union[Command, Suite],
+    ) -> typing.List[typing.Union[Command, Suite]]:
     r"""
     Wraps each command in ``commands`` with ``measures``.
 
@@ -1438,19 +1229,14 @@ def measures(
             >>
 
     """
-    #from .commands import markup as markup_command
     commands_ = []
-    #for command in commands:
     for command in classes.Sequence(commands).flatten(depth=-1):
-        if isinstance(command, abjad.Markup):
-            raise Exception('use markup command; not raw markup')
-            #command = markup_command(command)
-        assert isinstance(command, (Command, Map)), repr(command)
+        assert isinstance(command, (Command, Suite)), repr(command)
         command._measures = copy.copy(measures)
         commands_.append(command)
     return commands_
 
-_command_typing = typing.Union[Command, Map, Suite]
+_command_typing = typing.Union[Command, Suite]
 
 def not_parts(command: Command) -> _command_typing:
     """
@@ -1667,7 +1453,7 @@ def scope(
         )
 
 def suite(
-    *commands: typing.Union[Command, Map, Suite],
+    *commands: typing.Union[Command, Suite],
     ) -> Suite:
     """
     Makes suite.
@@ -1692,7 +1478,7 @@ def suite(
         else:
             commands_.append(item)
     for command in commands_:
-        if isinstance(command, (Command, Map, Suite)):
+        if isinstance(command, (Command, Suite)):
             continue
         message = '\n  Must contain only commands, maps, suites.'
         message += f'\n  Not {type(command).__name__}:'
@@ -1702,11 +1488,11 @@ def suite(
 
 def tag(
     tags: typing.Union[str, typing.List[str]],
-    command: typing.Union[Command, Map, Suite],
+    command: typing.Union[Command, Suite],
     *,
     deactivate: bool = None,
     tag_measure_number: bool = None,
-    ) -> typing.Union[Command, Map, Suite]:
+    ) -> typing.Union[Command, Suite]:
     """
     Appends each tag in ``tags`` to ``command``.
 
@@ -1721,9 +1507,9 @@ def tag(
         message += f' (not {tags!r}).'
         raise Exception(message)
     assert Command._validate_tags(tags), repr(tags)
-    if not isinstance(command, (Command, Map, Suite)):
-        raise Exception('can only tag command, map, suite.')
-    if isinstance(command, (Map, Suite)):
+    if not isinstance(command, (Command, Suite)):
+        raise Exception('can only tag command or suite.')
+    if isinstance(command, Suite):
         for command_ in command.commands:
             tag(
                 tags,
