@@ -792,7 +792,9 @@ class SegmentMaker(abjad.SegmentMaker):
             Exception: unknown voice name 'PercussionVoice'.
 
         """
-        # TODO: disallow abjad.Markup
+        for command in commands:
+            if isinstance(command, abjad.Markup):
+                raise Exception(command)
         commands_ = []
         for command in commands:
             if isinstance(command, list):
