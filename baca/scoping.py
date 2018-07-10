@@ -1315,7 +1315,11 @@ def map(
             message = '\n  Must be command, map, suite.'
             message += f'\n  Not {type(command).__name__}: {command!r}.'
             raise Exception(message)
-    return Map(selector, *commands_)
+    result = []
+    for command in commands_:
+        map_ = Map(selector, command)
+        result.append(map_)
+    return result
 
 def measures(
     measures: typing.Union[int, typing.List[int], typing.Tuple[int, int]],

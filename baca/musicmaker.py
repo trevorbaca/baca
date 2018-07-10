@@ -5572,6 +5572,8 @@ class MusicMaker(abjad.AbjadObject):
         thread=None,
         voice_names=None
         ):
+        specifiers = classes.Sequence(specifiers)
+        specifiers = specifiers.flatten()
         if allow_repeats is not None:
             allow_repeats = bool(allow_repeats)
         self._allow_repeats = allow_repeats
@@ -6087,6 +6089,8 @@ class MusicMaker(abjad.AbjadObject):
 
         Returns selection, time signature, state manifest.
         """
+        specifiers = classes.Sequence(specifiers)
+        specifiers = specifiers.flatten()
         if self._is_pitch_input(collections):
             color_unregistered_pitches = False
         self._validate_voice_name(voice_name)
