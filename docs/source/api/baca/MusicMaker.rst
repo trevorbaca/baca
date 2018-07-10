@@ -222,6 +222,10 @@ musicmaker
 
    .. container:: inherited
 
+      .. autoattribute:: ImbricationCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: ImbricationCommand.runtime
 
    .. container:: inherited
@@ -620,6 +624,10 @@ musicmaker
 
    .. container:: inherited
 
+      .. autoattribute:: NestingCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: NestingCommand.runtime
 
    .. container:: inherited
@@ -704,6 +712,10 @@ musicmaker
 
    .. rubric:: Read/write properties
       :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchFirstRhythmCommand.map
 
    .. container:: inherited
 

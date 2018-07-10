@@ -168,6 +168,10 @@ piecewise
 
    .. container:: inherited
 
+      .. autoattribute:: PiecewiseIndicatorCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: PiecewiseIndicatorCommand.runtime
 
    .. container:: inherited

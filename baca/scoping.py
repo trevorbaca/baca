@@ -27,6 +27,7 @@ class Command(abjad.AbjadObject):
 
     __slots__ = (
         '_deactivate',
+        '_map',
         '_measures',
         '_offset_to_measure_number',
         '_previous_segment_voice_metadata',
@@ -51,6 +52,7 @@ class Command(abjad.AbjadObject):
         # for selector evaluation
         import baca
         self._deactivate = deactivate
+        self._map = None
         self._measures: measure_indicator_typing = None
         self._runtime = abjad.OrderedDict()
         if isinstance(selector, str):
@@ -185,9 +187,22 @@ class Command(abjad.AbjadObject):
         return self._deactivate
 
     @property
-    def measures(self) -> typing.Union[
-        int, typing.List[int], typings.IntegerPair, None
-        ]:
+    def map(self) -> typing.Union[str, abjad.Expression, None]:
+        """
+        Gets precondition map.
+        """
+        return self._map
+
+    @map.setter
+    def map(self, argument):
+        """
+        Gets precondition map.
+        """
+        assert isinstance(argument, (str, abjad.Expression)), repr(argument)
+        self._map = argument
+
+    @property
+    def measures(self) -> measure_indicator_typing:
         """
         Gets measures.
         """
@@ -464,9 +479,7 @@ class Map(abjad.AbjadObject):
         return self._commands
 
     @property
-    def measures(self) -> typing.Union[
-        int, typing.List[int], typings.IntegerPair, None
-        ]:
+    def measures(self) -> measure_indicator_typing: 
         """
         Gets measures.
         """
@@ -578,9 +591,23 @@ class Suite(abjad.AbjadObject):
         return self._commands
 
     @property
-    def measures(self) -> typing.Union[
-        int, typing.List[int], typings.IntegerPair, None
-        ]:
+    def map(self) -> None:
+        """
+        Gets precondition map.
+        """
+        pass
+
+    @map.setter
+    def map(self, argument):
+        """
+        Gets precondition map.
+        """
+        assert isinstance(argument, (str, abjad.Expression)), repr(argument)
+        for command in self.commands:
+            command.map = argument
+
+    @property
+    def measures(self) -> measure_indicator_typing:
         """
         Gets measures.
         """

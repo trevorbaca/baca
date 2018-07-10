@@ -88,6 +88,10 @@ commands
 
    .. container:: inherited
 
+      .. autoattribute:: BCPCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: BCPCommand.runtime
 
    .. container:: inherited
@@ -175,6 +179,10 @@ commands
 
    .. container:: inherited
 
+      .. autoattribute:: ColorCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: ColorCommand.runtime
 
    .. container:: inherited
@@ -254,6 +262,10 @@ commands
 
    .. rubric:: Read/write properties
       :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: ContainerCommand.map
 
    .. container:: inherited
 
@@ -346,6 +358,10 @@ commands
 
    .. container:: inherited
 
+      .. autoattribute:: GlobalFermataCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: GlobalFermataCommand.runtime
 
    .. container:: inherited
@@ -433,6 +449,10 @@ commands
 
    .. container:: inherited
 
+      .. autoattribute:: IndicatorCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: IndicatorCommand.runtime
 
    .. container:: inherited
@@ -515,6 +535,10 @@ commands
 
    .. rubric:: Read/write properties
       :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: InstrumentChangeCommand.map
 
    .. container:: inherited
 
@@ -616,6 +640,10 @@ commands
 
    .. container:: inherited
 
+      .. autoattribute:: LabelCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: LabelCommand.runtime
 
    .. container:: inherited
@@ -698,6 +726,10 @@ commands
 
    .. rubric:: Read/write properties
       :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: MetronomeMarkCommand.map
 
    .. container:: inherited
 
@@ -787,6 +819,10 @@ commands
 
    .. container:: inherited
 
+      .. autoattribute:: PartAssignmentCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: PartAssignmentCommand.runtime
 
    .. container:: inherited
@@ -863,6 +899,10 @@ commands
 
    .. rubric:: Read/write properties
       :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: VoltaCommand.map
 
    .. container:: inherited
 

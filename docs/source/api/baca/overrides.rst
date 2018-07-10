@@ -79,6 +79,10 @@ overrides
 
    .. container:: inherited
 
+      .. autoattribute:: OverrideCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: OverrideCommand.runtime
 
    .. container:: inherited

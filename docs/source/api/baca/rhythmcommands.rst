@@ -89,6 +89,10 @@ rhythmcommands
 
    .. container:: inherited
 
+      .. autoattribute:: RhythmCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: RhythmCommand.runtime
 
    .. container:: inherited
@@ -202,6 +206,10 @@ rhythmcommands
 
    .. rubric:: Read/write properties
       :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: TieCorrectionCommand.map
 
    .. container:: inherited
 

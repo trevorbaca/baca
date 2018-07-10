@@ -87,6 +87,10 @@ pitchcommands
 
    .. container:: inherited
 
+      .. autoattribute:: AccidentalAdjustmentCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: AccidentalAdjustmentCommand.runtime
 
    .. container:: inherited
@@ -178,6 +182,10 @@ pitchcommands
 
    .. container:: inherited
 
+      .. autoattribute:: ClusterCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: ClusterCommand.runtime
 
    .. container:: inherited
@@ -264,6 +272,10 @@ pitchcommands
 
    .. container:: inherited
 
+      .. autoattribute:: ColorFingeringCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: ColorFingeringCommand.runtime
 
    .. container:: inherited
@@ -345,6 +357,10 @@ pitchcommands
 
    .. rubric:: Read/write properties
       :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: DiatonicClusterCommand.map
 
    .. container:: inherited
 
@@ -497,6 +513,10 @@ pitchcommands
 
    .. container:: inherited
 
+      .. autoattribute:: MicrotoneDeviationCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: MicrotoneDeviationCommand.runtime
 
    .. container:: inherited
@@ -578,6 +598,10 @@ pitchcommands
 
    .. rubric:: Read/write properties
       :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: OctaveDisplacementCommand.map
 
    .. container:: inherited
 
@@ -670,6 +694,10 @@ pitchcommands
 
    .. rubric:: Read/write properties
       :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchCommand.map
 
    .. container:: inherited
 
@@ -773,6 +801,10 @@ pitchcommands
 
    .. container:: inherited
 
+      .. autoattribute:: RegisterCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: RegisterCommand.runtime
 
    .. container:: inherited
@@ -859,6 +891,10 @@ pitchcommands
 
    .. container:: inherited
 
+      .. autoattribute:: RegisterInterpolationCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: RegisterInterpolationCommand.runtime
 
    .. container:: inherited
@@ -941,6 +977,10 @@ pitchcommands
 
    .. rubric:: Read/write properties
       :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: RegisterToOctaveCommand.map
 
    .. container:: inherited
 
@@ -1032,6 +1072,10 @@ pitchcommands
 
    .. container:: inherited
 
+      .. autoattribute:: StaffPositionCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: StaffPositionCommand.runtime
 
    .. container:: inherited
@@ -1118,6 +1162,10 @@ pitchcommands
 
    .. rubric:: Read/write properties
       :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: StaffPositionInterpolationCommand.map
 
    .. container:: inherited
 

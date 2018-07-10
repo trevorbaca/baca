@@ -48,6 +48,7 @@ scoping
    .. autosummary::
       :nosignatures:
 
+      map
       runtime
       tag_measure_number
 
@@ -88,6 +89,8 @@ scoping
 
    .. rubric:: Read/write properties
       :class: class-header
+
+   .. autoattribute:: Command.map
 
    .. autoattribute:: Command.runtime
 
@@ -247,6 +250,7 @@ scoping
    .. autosummary::
       :nosignatures:
 
+      map
       runtime
 
    .. autosummary::
@@ -277,6 +281,8 @@ scoping
 
    .. rubric:: Read/write properties
       :class: class-header
+
+   .. autoattribute:: Suite.map
 
    .. autoattribute:: Suite.runtime
 

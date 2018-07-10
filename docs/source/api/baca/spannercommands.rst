@@ -78,6 +78,10 @@ spannercommands
 
    .. container:: inherited
 
+      .. autoattribute:: SpannerCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: SpannerCommand.runtime
 
    .. container:: inherited
