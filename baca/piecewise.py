@@ -4231,7 +4231,7 @@ def text_spanner(
         '-|': 'solid_line_with_hook',
         }
     if isinstance(items, str):
-        items_ = []
+        items_: typing.List[typing.Union[str, abjad.Markup]] = []
         current_item: typing.List[str] = []
         for word in items.split():
             if word in shape_to_style:

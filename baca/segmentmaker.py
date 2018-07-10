@@ -646,125 +646,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
-            Coerces markups:
-
-            >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
-
-            >>> maker(
-            ...     'MusicVoice',
-            ...     baca.make_even_divisions(),
-            ...     baca.Markup('Allegro'),
-            ...     )
-
-            >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
-                <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
-                <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 1/2
-                <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 1/2
-                <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "|"                                                                     %! SM5
-                <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
-                <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
-                                \baca_unpitched_music_warning                                            %! SM24
-                                c'8
-                                ^ \markup { Allegro }                                                    %! IC
-                                [
-                <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
-                                c'8
-                <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
-                                c'8
-                <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
-                                c'8
-                                ]
-                <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
-                                \baca_unpitched_music_warning                                            %! SM24
-                                c'8
-                                [
-                <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
-                                c'8
-                <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
-                                c'8
-                                ]
-                <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
-                                \baca_unpitched_music_warning                                            %! SM24
-                                c'8
-                                [
-                <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
-                                c'8
-                <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
-                                c'8
-                <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
-                                c'8
-                                ]
-                <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM4
-                                \baca_unpitched_music_warning                                            %! SM24
-                                c'8
-                                [
-                <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
-                                c'8
-                <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
-                                c'8
-                                ]
-                <BLANKLINE>
-                            }
-                        }
-                    >>
-                >>
-
-        ..  container:: example
-
             Raises exception on noncommand input:
 
             >>> maker(
@@ -792,19 +673,16 @@ class SegmentMaker(abjad.SegmentMaker):
             Exception: unknown voice name 'PercussionVoice'.
 
         """
-        for command in commands:
-            if isinstance(command, abjad.Markup):
-                raise Exception(command)
         commands_ = []
         for command in commands:
             if isinstance(command, list):
                 commands_.extend(command)
-            elif isinstance(command, abjad.Markup):
-                markup_command = baca_commands.markup(command)
-                commands_.append(markup_command)
             else:
                 commands_.append(command)
         commands = tuple(commands_)
+        for command in commands:
+            if isinstance(command, abjad.Markup):
+                raise Exception(command)
         if self.score_template is not None:
             self._cache_voice_names()
             abbreviations = self.score_template.voice_abbreviations
@@ -857,14 +735,13 @@ class SegmentMaker(abjad.SegmentMaker):
             if isinstance(command, tuple):
                 assert len(command) == 2, repr(command)
                 command = command[0]
-            sixway = (
+            fiveway = (
                 list,
-                abjad.Markup,
                 scoping.Command,
                 scoping.Map,
                 scoping.Suite,
                 )
-            if not isinstance(command, sixway):
+            if not isinstance(command, fiveway):
                 message = '\n\nNeither command nor list of commands:'
                 message += f'\n\n{format(command)}'
                 raise Exception(message)
@@ -881,13 +758,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 if isinstance(command, tuple):
                     assert len(command) == 2, repr(command)
                     command, match = command
-                    fourway = (
+                    threeway = (
                         list,
-                        abjad.Markup,
                         scoping.Command,
                         scoping.Suite,
                         )
-                    assert isinstance(command, fourway), repr(command)
+                    assert isinstance(command, threeway), repr(command)
                     if isinstance(match, int):
                         if 0 <= match and match != i:
                             continue
@@ -908,8 +784,6 @@ class SegmentMaker(abjad.SegmentMaker):
                         raise Exception(message)
                 if isinstance(command, list):
                     for command_ in command:
-                        if isinstance(command_, abjad.Markup):
-                            command_ = baca_commands.markup(command_)
                         assert isinstance(command_, scoping.Command), repr(command_)
                         scope_ = command_._override_scope(current_scope)
                         wrapper = scoping.CommandWrapper(
@@ -918,8 +792,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             )
                         self.wrappers.append(wrapper)
                 else:
-                    if isinstance(command, abjad.Markup):
-                        command = baca_commands.markup(command)
                     threeway = (
                         scoping.Command,
                         scoping.Map,
