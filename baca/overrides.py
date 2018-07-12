@@ -216,6 +216,10 @@ class OverrideCommand(scoping.Command):
         context: str = None,
         deactivate: bool = None,
         grob: str = None,
+        map: typings.Selector = None,
+        match: typings.Indices = None,
+        measures: typings.Slice = None,
+        scope: scoping.scope_typing = None,
         selector: typings.Selector = 'baca.leaves()',
         tag_measure_number: bool = None,
         tags: typing.List = None,
@@ -225,6 +229,10 @@ class OverrideCommand(scoping.Command):
         scoping.Command.__init__(
             self,
             deactivate=deactivate,
+            map=map,
+            match=match,
+            measures=measures,
+            scope=scope,
             selector=selector,
             tag_measure_number=tag_measure_number,
             )

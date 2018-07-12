@@ -286,14 +286,25 @@ class PiecewiseIndicatorCommand(scoping.Command):
         bundles: typing.List[IndicatorBundle] = None,
         final_piece_spanner: typing.Any = None,
         leak: bool = None,
+        map: typings.Selector = None,
+        match: typings.Indices = None,
+        measures: typings.Slice = None,
         piece_selector: typings.Selector = 'baca.leaves()',
         remove_length_1_spanner_start: bool = None,
         right_broken: typing.Any = None,
+        scope: scoping.scope_typing = None,
         selector: typings.Selector = 'baca.leaves()',
         ) -> None:
         # for selector evaluation
         import baca
-        scoping.Command.__init__(self, selector=selector)
+        scoping.Command.__init__(
+            self,
+            map=map,
+            match=match,
+            measures=measures,
+            scope=scope,
+            selector=selector,
+            )
         if bookend is not None:
             assert isinstance(bookend, (int, bool)), repr(bookend)
         self._bookend = bookend

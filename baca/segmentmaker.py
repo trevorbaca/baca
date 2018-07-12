@@ -690,8 +690,7 @@ class SegmentMaker(abjad.SegmentMaker):
         assert all(isinstance(_, scope_type) for _ in scopes_), repr(scopes_)
         for command in commands:
             if isinstance(command, tuple):
-                assert len(command) == 2, repr(command)
-                command = command[0]
+                raise Exception('use baca.match().')
             if not isinstance(command, (list, scoping.Command, scoping.Suite)):
                 message = '\n\nNeither command nor list of commands:'
                 message += f'\n\n{format(command)}'
@@ -708,29 +707,8 @@ class SegmentMaker(abjad.SegmentMaker):
                         voice_name = abbreviations[scope_.voice_name]
                         scope_._voice_name = voice_name
             for command in commands:
-                threeway = (list, scoping.Command, scoping.Suite)
-                if isinstance(command, tuple):
-                    assert len(command) == 2, repr(command)
-                    command, match = command
-                    assert isinstance(command, threeway), repr(command)
-                    if isinstance(match, int):
-                        if 0 <= match and match != i:
-                            continue
-                        if match < 0 and -(scope_count - i) != match:
-                            continue
-                    elif isinstance(match, tuple):
-                        assert len(match) == 2, repr(command)
-                        triple = slice(*match).indices(scope_count)
-                        if i not in range(*triple):
-                            continue
-                    elif isinstance(match, list):
-                        assert all(isinstance(_, int) for _ in match)
-                        if i not in match:
-                            continue
-                    else:
-                        message = 'match must be int, tuple or list'
-                        message += f' (not {match!r}).'
-                        raise Exception(message)
+                if not command._matches_scope_index(scope_count, i):
+                    continue
                 if isinstance(command, scoping.Command):
                     commands_ = [command]
                 else:

@@ -198,7 +198,10 @@ class SpannerCommand(scoping.Command):
         detach_first: bool = None,
         left_broken: bool = None,
         map: typings.Selector = None,
+        match: typings.Indices = None,
+        measures: typings.Slice = None,
         right_broken: bool = None,
+        scope: scoping.scope_typing = None,
         selector: typings.Selector = 'baca.leaves()',
         spanner: abjad.Spanner = None,
         tags: typing.List[abjad.Tag] = None,
@@ -207,6 +210,9 @@ class SpannerCommand(scoping.Command):
             self,
             deactivate=deactivate,
             map=map,
+            match=match,
+            measures=measures,
+            scope=scope,
             selector=selector,
             )
         if detach_first is not None:

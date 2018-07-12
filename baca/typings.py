@@ -5,7 +5,11 @@ import abjad
 import typing
 from abjadext import rmakers
 
+IntegerList = typing.List[int]
+
 IntegerPair = typing.Tuple[int, int]
+
+Indices = typing.Union[int, IntegerPair, IntegerList]
 
 Number = typing.Union[int, float]
 
@@ -28,3 +32,5 @@ RhythmMakerTyping = typing.Union[
     ]
 
 Selector = typing.Union[str, abjad.Expression]
+
+Slice = typing.Union[int, IntegerPair]

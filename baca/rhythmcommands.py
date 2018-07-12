@@ -181,6 +181,8 @@ class RhythmCommand(scoping.Command):
         division_maker: baca_divisions.DivisionMaker = None,
         division_expression: abjad.Expression = None,
         left_broken: bool = None,
+        match: typings.Indices = None,
+        measures: typings.Slice = None,
         multimeasure_rests: bool = None,
         persist: str = None,
         reference_meters: typing.Iterable[abjad.Meter] = None,
@@ -192,7 +194,12 @@ class RhythmCommand(scoping.Command):
         split_at_measure_boundaries: bool = None,
         stages: typing.Tuple[int, int] = None,
         ) -> None:
-        scoping.Command.__init__(self, scope=scope)
+        scoping.Command.__init__(
+            self,
+            match=match,
+            measures=measures,
+            scope=scope,
+            )
         if division_expression is not None and division_maker is not None:
             message = 'can not set both division expression and division-maker'
             message += f':\n{division_expression} {division_maker}.'
@@ -1195,11 +1202,20 @@ class TieCorrectionCommand(scoping.Command):
         *,
         direction: abjad.HorizontalAlignment = None,
         map: typings.Selector = None,
+        match: typings.Indices = None,
+        measures: typings.Slice = None,
         repeat: bool = None,
+        scope: scoping.scope_typing = None,
         selector: typings.Selector = 'baca.pleaf(-1)',
         untie: bool = None,
         ) -> None:
-        scoping.Command.__init__(self, selector=selector)
+        scoping.Command.__init__(
+            self,
+            map=map,
+            match=match,
+            measures=measures,
+            scope=scope, selector=selector,
+            )
         if direction is not None:
             assert direction in (abjad.Right, abjad.Left, None)
         self._direction = direction

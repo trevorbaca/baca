@@ -31,9 +31,20 @@ class BCPCommand(scoping.Command):
         bcps: typing.Iterable[typing.Tuple[int, int]] = None,
         final_spanner: bool = None,
         helper: typing.Callable = None,
+        map: typings.Selector = None,
+        match: typings.Indices = None,
+        measures: typings.Slice = None,
+        scope: scoping.scope_typing = None,
         selector: typings.Selector = None,
         ) -> None:
-        scoping.Command.__init__(self, selector=selector)
+        scoping.Command.__init__(
+            self,
+            map=map,
+            match=match,
+            measures=measures,
+            scope=scope,
+            selector=selector,
+            )
         if bcps is None:
             self._validate_bcps(bcps)
         self._bow_contact_points = bcps
@@ -52,12 +63,12 @@ class BCPCommand(scoping.Command):
     def _call(self, argument=None) -> None:
         if argument is None:
             return
-        if self.bow_contact_points is None:
+        if self.bcps is None:
             return
         if self.selector:
             argument = self.selector(argument)
         leaves = classes.Selection(argument).leaves()
-        bcps_ = classes.Sequence(self.bow_contact_points)
+        bcps_ = classes.Sequence(self.bcps)
         if self.helper:
             bcps_ = self.helper(bcps_, argument)
         bcps = abjad.CyclicTuple(bcps_)
@@ -209,9 +220,7 @@ class BCPCommand(scoping.Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def bow_contact_points(self) -> typing.Optional[
-        typing.Iterable[typing.Tuple[int, int]]
-        ]:
+    def bcps(self) -> typing.Optional[typing.Iterable[typings.IntegerPair]]:
         r"""
         Gets bow contact points.
 
@@ -771,10 +780,21 @@ class ColorCommand(scoping.Command):
     def __init__(
         self,
         *,
+        map: typings.Selector = None,
+        match: typings.Indices = None,
+        measures: typings.Slice = None,
+        scope: scoping.scope_typing = None,
         selector='baca.leaves()',
         ):
         assert selector is not None
-        scoping.Command.__init__(self, selector=selector)
+        scoping.Command.__init__(
+            self,
+            map=map,
+            match=match,
+            measures=measures,
+            scope=scope,
+            selector=selector,
+            )
 
     ### SPECIAL METHODS ###
 
@@ -890,9 +910,20 @@ class ContainerCommand(scoping.Command):
         self,
         *,
         identifier: str = None,
+        map: typings.Selector = None,
+        match: typings.Indices = None,
+        measures: typings.Slice = None,
+        scope: scoping.scope_typing = None,
         selector: typings.Selector = 'baca.leaves()',
         ) -> None:
-        scoping.Command.__init__(self, selector=selector)
+        scoping.Command.__init__(
+            self,
+            map=map,
+            match=match,
+            measures=measures,
+            scope=scope,
+            selector=selector,
+            )
         if identifier is not None:
             if not isinstance(identifier, str):
                 message = f'identifier must be string (not {identifier!r}).'
@@ -959,9 +990,20 @@ class GlobalFermataCommand(scoping.Command):
         self,
         *,
         description: str = None,
+        map: typings.Selector = None,
+        match: typings.Indices = None,
+        measures: typings.Slice = None,
+        scope: scoping.scope_typing = None,
         selector: typings.Selector = 'baca.leaf(0)',
         ) -> None:
-        scoping.Command.__init__(self, selector=selector)
+        scoping.Command.__init__(
+            self,
+            map=map,
+            match=match,
+            measures=measures,
+            scope=scope,
+            selector=selector,
+            )
         if description is not None:
             assert description in GlobalFermataCommand.description_to_command
         self._description = description
@@ -1226,13 +1268,21 @@ class IndicatorCommand(scoping.Command):
         context: str = None,
         deactivate: bool = None,
         indicators: typing.List[typing.Any] = None,
+        map: typings.Selector = None,
+        match: typings.Indices = None,
+        measures: typings.Slice = None,
         redundant: bool = None,
+        scope: scoping.scope_typing = None,
         selector: typings.Selector = 'baca.pheads()',
         tags: typing.List[abjad.Tag] = None,
         ) -> None:
         scoping.Command.__init__(
             self,
             deactivate=deactivate,
+            map=map,
+            match=match,
+            measures=measures,
+            scope=scope,
             selector=selector,
             )
         if context is not None:
@@ -1709,9 +1759,20 @@ class LabelCommand(scoping.Command):
         self,
         *,
         expression=None,
+        map: typings.Selector = None,
+        match: typings.Indices = None,
+        measures: typings.Slice = None,
+        scope: scoping.scope_typing = None,
         selector='baca.leaves()',
         ):
-        scoping.Command.__init__(self, selector=selector)
+        scoping.Command.__init__(
+            self,
+            map=map,
+            match=match,
+            measures=measures,
+            scope=scope,
+            selector=selector
+            )
         if expression is not None:
             assert isinstance(expression, abjad.Expression)
         self._expression = expression
@@ -1776,13 +1837,21 @@ class MetronomeMarkCommand(scoping.Command):
             str,
             indicators.Accelerando,
             indicators.Ritardando] = None,
+        map: typings.Selector = None,
+        match: typings.Indices = None,
+        measures: typings.Slice = None,
         redundant: bool = None,
+        scope: scoping.scope_typing = None,
         selector: typings.Selector = 'baca.leaf(0)',
         tags: typing.List[abjad.Tag] = None,
         ) -> None:
         scoping.Command.__init__(
             self,
             deactivate=deactivate,
+            map=map,
+            match=match,
+            measures=measures,
+            scope=scope,
             selector=selector,
             )
         prototype = (str, indicators.Accelerando, indicators.Ritardando)
@@ -1869,10 +1938,21 @@ class PartAssignmentCommand(scoping.Command):
     def __init__(
         self,
         *,
+        map: typings.Selector = None,
+        match: typings.Indices = None,
+        measures: typings.Slice = None,
         part_assignment: abjad.PartAssignment = None,
+        scope: scoping.scope_typing = None,
         selector: typings.Selector = 'baca.leaves()',
         ) -> None:
-        scoping.Command.__init__(self, selector=selector)
+        scoping.Command.__init__(
+            self,
+            map=map,
+            match=match,
+            measures=measures,
+            scope=scope,
+            selector=selector,
+            )
         if part_assignment is not None:
             if not isinstance(part_assignment, abjad.PartAssignment):
                 message = 'part_assignment must be part assignment'

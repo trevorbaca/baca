@@ -5,12 +5,6 @@ import typing
 from . import classes
 from . import indicators
 from . import typings
-measure_indicator_typing = typing.Union[
-    int,
-    typing.List[int],
-    typings.IntegerPair,
-    None,
-    ]
 scope_typing = typing.Union[
     'Scope',
     'TimelineScope',
@@ -29,6 +23,7 @@ class Command(abjad.AbjadObject):
     __slots__ = (
         '_deactivate',
         '_map',
+        '_match',
         '_measures',
         '_offset_to_measure_number',
         '_previous_segment_voice_metadata',
@@ -49,6 +44,8 @@ class Command(abjad.AbjadObject):
         *,
         deactivate: bool = None,
         map: typings.Selector = None,
+        match: typings.Indices = None,
+        measures: typings.Slice = None,
         scope: scope_typing = None,
         selector: typings.Selector = None,
         tag_measure_number: bool = None,
@@ -57,7 +54,8 @@ class Command(abjad.AbjadObject):
         import baca
         self._deactivate = deactivate
         self._map = map
-        self._measures: measure_indicator_typing = None
+        self._match = match
+        self._measures: typing.Union[int, typings.IntegerPair] = None
         self._runtime = abjad.OrderedDict()
         self.scope = scope
         if isinstance(selector, str):
@@ -81,11 +79,6 @@ class Command(abjad.AbjadObject):
             argument = self.map(argument)
             if self.map._is_singular_get_item():
                 argument = [argument]
-#            result = []
-#            for item in argument:
-#                item_ = self._call(argument=item)
-#                result.append(item_)
-#            return result
             for subargument in argument:
                 self._call(argument=subargument)
         else:
@@ -105,6 +98,23 @@ class Command(abjad.AbjadObject):
 
     def _call(self, argument=None):
         pass
+
+    def _matches_scope_index(self, scope_count, i):
+        if isinstance(self.match, int):
+            if 0 <= self.match and self.match != i:
+                return False
+            if self.match < 0 and -(scope_count - i) != self.match:
+                return False
+        elif isinstance(self.match, tuple):
+            assert len(self.match) == 2, repr(command)
+            triple = slice(*self.match).indices(scope_count)
+            if i not in range(*triple):
+                return False
+        elif isinstance(self.match, list):
+            assert all(isinstance(_, int) for _ in self.match)
+            if i not in self.match:
+                return False
+        return True
 
     def _override_scope(self, scope):
         assert isinstance(scope, (Scope, TimelineScope)), repr(scope)
@@ -223,7 +233,14 @@ class Command(abjad.AbjadObject):
         self._map = argument
 
     @property
-    def measures(self) -> measure_indicator_typing:
+    def match(self) -> typing.Optional[typings.Indices]:
+        """
+        Gets match.
+        """
+        return self._match
+
+    @property
+    def measures(self) -> typing.Optional[typings.Slice]:
         """
         Gets measures.
         """
@@ -375,7 +392,7 @@ class Suite(abjad.AbjadObject):
             message += f'\n  Not {type(command).__name__}: {command!r}.'
             raise Exception(message)
         self._commands = tuple(command_list)
-        self._measures: measure_indicator_typing = None
+        self._measures: typings.Slice = None
         self._runtime = abjad.OrderedDict()
 
     ### SPECIAL METHODS ###
@@ -423,7 +440,7 @@ class Suite(abjad.AbjadObject):
             command.map = argument
 
     @property
-    def measures(self) -> measure_indicator_typing:
+    def measures(self) -> typing.Optional[typings.Slice]:
         """
         Gets measures.
         """
@@ -976,19 +993,30 @@ def map(
         result.append(command)
     return result
 
+# TODO: change to baca.scope()
 def match(
     pattern,
-    *commands: Command,
-    ) -> typing.List[typings.Pair]:
+    *commands: typing.Union[Command, Suite],
+    ) -> typing.Union[Command, Suite]:
     """
     Applies each scope that matches ``pattern`` to each command in
     ``commands``.
     """
-    pairs = []
+    if pattern is not None:
+        assert isinstance(pattern, (int, tuple, list)), repr(pattern)
+    result = []
     for command in commands:
-        pair = (command, pattern)
-        pairs.append(pair)
-    return pairs
+        if isinstance(command, Command):
+            command_ = abjad.new(command, match=pattern)
+        else:
+            assert isinstance(command, Suite), repr(command)
+            commands_ = []
+            for command_ in command:
+                command_ = abjad.new(command_, match=pattern)
+                commands_.append(command_)
+            command_ = Suite(*commands_)
+        result.append(command_)
+    return result
 
 def measures(
     measures: typing.Union[int, typing.List[int], typing.Tuple[int, int]],
@@ -1156,6 +1184,7 @@ def only_segment(command: Command) -> _command_typing:
     """
     return tag('+SEGMENT', command)
 
+# TODO: remove in favor of Scope.__init__()
 def scope(
     voice_name: str,
     stages: typing.Union[int, typing.Tuple[int, int]] = (1, -1),

@@ -111,10 +111,21 @@ class AccidentalAdjustmentCommand(scoping.Command):
         *,
         cautionary: bool = None,
         forced: bool = None,
+        map: typings.Selector = None,
+        match: typings.Indices = None,
+        measures: typings.Slice = None,
         parenthesized: bool = None,
+        scope: scoping.scope_typing = None,
         selector: typings.Selector = 'baca.pleaf(0)',
         ) -> None:
-        scoping.Command.__init__(self, selector=selector)
+        scoping.Command.__init__(
+            self,
+            map=map,
+            match=match,
+            measures=measures,
+            scope=scope,
+            selector=selector,
+            )
         if cautionary is not None:
             cautionary = bool(cautionary)
         self._cautionary = cautionary
@@ -709,11 +720,22 @@ class ClusterCommand(scoping.Command):
         self,
         *,
         hide_flat_markup=None,
+        map: typings.Selector = None,
+        match: typings.Indices = None,
+        measures: typings.Slice = None,
+        scope: scoping.scope_typing = None,
         selector='baca.plts()',
         start_pitch=None,
         widths=None,
         ):
-        scoping.Command.__init__(self, selector=selector)
+        scoping.Command.__init__(
+            self,
+            map=map,
+            match=match,
+            measures=measures,
+            scope=scope,
+            selector=selector,
+            )
         assert isinstance(hide_flat_markup, (bool, type(None)))
         self._hide_flat_markup = hide_flat_markup
         if start_pitch is not None:
@@ -1689,10 +1711,21 @@ class ColorFingeringCommand(scoping.Command):
     def __init__(
         self,
         *,
+        map: typings.Selector = None,
+        match: typings.Indices = None,
+        measures: typings.Slice = None,
         numbers=None,
+        scope: scoping.scope_typing = None,
         selector='baca.pheads()',
         ):
-        scoping.Command.__init__(self, selector=selector)
+        scoping.Command.__init__(
+            self,
+            map=map,
+            match=match,
+            measures=measures,
+            scope=scope,
+            selector=selector,
+            )
         if numbers is not None:
             assert abjad.mathtools.all_are_nonnegative_integers(numbers)
             numbers = abjad.CyclicTuple(numbers)
@@ -1772,10 +1805,21 @@ class DiatonicClusterCommand(scoping.Command):
     def __init__(
         self,
         *,
+        map: typings.Selector = None,
+        match: typings.Indices = None,
+        measures: typings.Slice = None,
+        scope: scoping.scope_typing = None,
         widths,
         selector='baca.plts()',
         ):
-        scoping.Command.__init__(self, selector=selector)
+        scoping.Command.__init__(
+            self,
+            map=map,
+            match=match,
+            measures=measures,
+            scope=scope,
+            selector=selector,
+            )
         assert abjad.mathtools.all_are_nonnegative_integers(widths)
         widths = abjad.CyclicTuple(widths)
         self._widths = widths
@@ -2091,9 +2135,20 @@ class MicrotoneDeviationCommand(scoping.Command):
         self,
         *,
         deviations=None,
+        map: typings.Selector = None,
+        match: typings.Indices = None,
+        measures: typings.Slice = None,
+        scope: scoping.scope_typing = None,
         selector='baca.plts()',
         ):
-        scoping.Command.__init__(self)
+        # TODO: pass selector to Command.__init__(); rebuild Krummzeit
+        scoping.Command.__init__(
+            self,
+            map=map,
+            match=match,
+            measures=measures,
+            scope=scope,
+            )
         if deviations is not None:
             assert isinstance(deviations, collections.Iterable)
             assert all(isinstance(_, numbers.Number) for _ in deviations)
@@ -2275,9 +2330,20 @@ class OctaveDisplacementCommand(scoping.Command):
         self,
         *,
         displacements=None,
+        map: typings.Selector = None,
+        match: typings.Indices = None,
+        measures: typings.Slice = None,
+        scope: scoping.scope_typing = None,
         selector='baca.plts()',
         ):
-        scoping.Command.__init__(self, selector=selector)
+        scoping.Command.__init__(
+            self,
+            map=map,
+            match=match,
+            measures=measures,
+            scope=scope,
+            selector=selector,
+            )
         if displacements is not None:
             displacements = tuple(displacements)
             assert self._is_octave_displacement_vector(displacements)
@@ -2714,11 +2780,22 @@ class PitchCommand(scoping.Command):
         cyclic: bool = None,
         do_not_transpose: bool = None,
         ignore_incomplete: bool = None,
+        map: typings.Selector = None,
+        match: typings.Indices = None,
+        measures: typings.Slice = None,
         persist: str = None,
         pitches: typing.Iterable = None,
+        scope: scoping.scope_typing = None,
         selector: typings.Selector = None,
         ) -> None:
-        scoping.Command.__init__(self, selector=selector)
+        scoping.Command.__init__(
+            self,
+            map=map,
+            match=match,
+            measures=measures,
+            scope=scope,
+            selector=selector,
+            )
         if allow_octaves is not None:
             allow_octaves = bool(allow_octaves)
         self._allow_octaves = allow_octaves
@@ -3310,10 +3387,21 @@ class RegisterCommand(scoping.Command):
     def __init__(
         self,
         *,
+        map: typings.Selector = None,
+        match: typings.Indices = None,
+        measures: typings.Slice = None,
         registration=None,
+        scope: scoping.scope_typing = None,
         selector='baca.plts()',
         ):
-        scoping.Command.__init__(self, selector=selector)
+        scoping.Command.__init__(
+            self,
+            map=map,
+            match=match,
+            measures=measures,
+            scope=scope,
+            selector=selector,
+            )
         if registration is not None:
             prototype = pitchclasses.Registration
             assert isinstance(registration, prototype), repr(registration)
@@ -4352,11 +4440,22 @@ class RegisterInterpolationCommand(scoping.Command):
     def __init__(
         self,
         *,
+        map: typings.Selector = None,
+        match: typings.Indices = None,
+        measures: typings.Slice = None,
+        scope: scoping.scope_typing = None,
         selector: typings.Selector = 'baca.plts()',
         start_pitch: typing.Union[typings.Number, abjad.NumberedPitch] = 0,
         stop_pitch: typing.Union[typings.Number, abjad.NumberedPitch] = 0,
         ) -> None:
-        scoping.Command.__init__(self, selector=selector)
+        scoping.Command.__init__(
+            self,
+            map=map,
+            match=match,
+            measures=measures,
+            scope=scope,
+            selector=selector,
+            )
         start_pitch = abjad.NumberedPitch(start_pitch)
         self._start_pitch: abjad.NumberedPitch = start_pitch
         stop_pitch = abjad.NumberedPitch(stop_pitch)
@@ -5159,9 +5258,20 @@ class RegisterToOctaveCommand(scoping.Command):
         *,
         anchor=None,
         octave_number=None,
+        map: typings.Selector = None,
+        match: typings.Indices = None,
+        measures: typings.Slice = None,
+        scope: scoping.scope_typing = None,
         selector='baca.plts()',
         ):
-        scoping.Command.__init__(self, selector=selector)
+        scoping.Command.__init__(
+            self,
+            map=map,
+            match=match,
+            measures=measures,
+            scope=scope,
+            selector=selector,
+            )
         if anchor is not None:
             prototype = (abjad.Center, abjad.Down, abjad.Up)
             assert anchor in prototype, repr(anchor)
@@ -5451,9 +5561,20 @@ class StaffPositionCommand(scoping.Command):
         numbers,
         allow_repeats: bool = None,
         exact: bool = None, 
+        map: typings.Selector = None,
+        match: typings.Indices = None,
+        measures: typings.Slice = None,
+        scope: scoping.scope_typing = None,
         selector: typings.Selector = 'baca.plts()',
         ) -> None:
-        scoping.Command.__init__(self, selector=selector)
+        scoping.Command.__init__(
+            self,
+            map=map,
+            match=match,
+            measures=measures,
+            scope=scope,
+            selector=selector,
+            )
         if exact is not None:
             exact = bool(exact)
         self._exact = exact
@@ -5703,11 +5824,22 @@ class StaffPositionInterpolationCommand(scoping.Command):
     def __init__(
         self,
         *,
+        map: typings.Selector = None,
+        match: typings.Indices = None,
+        measures: typings.Slice = None,
+        scope: scoping.scope_typing = None,
         selector: typings.Selector = 'baca.plts()',
         start_pitch: typing.Union[str, abjad.NamedPitch] = 'C4',
         stop_pitch: typing.Union[str, abjad.NamedPitch] = 'C4',
         ) -> None:
-        scoping.Command.__init__(self, selector=selector)
+        scoping.Command.__init__(
+            self,
+            map=map,
+            match=match,
+            measures=measures,
+            scope=scope,
+            selector=selector,
+            )
         start_pitch = abjad.NamedPitch(start_pitch)
         self._start_pitch: abjad.NamedPitch = start_pitch
         stop_pitch = abjad.NamedPitch(stop_pitch)
