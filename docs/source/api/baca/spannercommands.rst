@@ -108,6 +108,10 @@ spannercommands
 
    .. autoattribute:: SpannerCommand.left_broken
 
+   .. container:: inherited
+
+      .. autoattribute:: SpannerCommand.match
+
    .. autoattribute:: SpannerCommand.right_broken
 
    .. autoattribute:: SpannerCommand.selector

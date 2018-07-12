@@ -38,7 +38,7 @@ commands
    .. autosummary::
       :nosignatures:
 
-      bow_contact_points
+      bcps
       final_spanner
       helper
       start_command
@@ -110,7 +110,7 @@ commands
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: BCPCommand.bow_contact_points
+   .. autoattribute:: BCPCommand.bcps
 
    .. container:: inherited
 
@@ -119,6 +119,10 @@ commands
    .. autoattribute:: BCPCommand.final_spanner
 
    .. autoattribute:: BCPCommand.helper
+
+   .. container:: inherited
+
+      .. autoattribute:: BCPCommand.match
 
    .. container:: inherited
 
@@ -208,6 +212,10 @@ commands
 
    .. container:: inherited
 
+      .. autoattribute:: ColorCommand.match
+
+   .. container:: inherited
+
       .. autoattribute:: ColorCommand.selector
 
    .. container:: inherited
@@ -294,6 +302,10 @@ commands
       .. autoattribute:: ContainerCommand.deactivate
 
    .. autoattribute:: ContainerCommand.identifier
+
+   .. container:: inherited
+
+      .. autoattribute:: ContainerCommand.match
 
    .. container:: inherited
 
@@ -391,6 +403,10 @@ commands
 
    .. container:: inherited
 
+      .. autoattribute:: GlobalFermataCommand.match
+
+   .. container:: inherited
+
       .. autoattribute:: GlobalFermataCommand.selector
 
    .. container:: inherited
@@ -482,6 +498,10 @@ commands
       .. autoattribute:: IndicatorCommand.deactivate
 
    .. autoattribute:: IndicatorCommand.indicators
+
+   .. container:: inherited
+
+      .. autoattribute:: IndicatorCommand.match
 
    .. autoattribute:: IndicatorCommand.redundant
 
@@ -576,6 +596,10 @@ commands
    .. container:: inherited
 
       .. autoattribute:: InstrumentChangeCommand.indicators
+
+   .. container:: inherited
+
+      .. autoattribute:: InstrumentChangeCommand.match
 
    .. container:: inherited
 
@@ -676,6 +700,10 @@ commands
 
    .. container:: inherited
 
+      .. autoattribute:: LabelCommand.match
+
+   .. container:: inherited
+
       .. autoattribute:: LabelCommand.selector
 
    .. container:: inherited
@@ -763,6 +791,10 @@ commands
       .. autoattribute:: MetronomeMarkCommand.deactivate
 
    .. autoattribute:: MetronomeMarkCommand.key
+
+   .. container:: inherited
+
+      .. autoattribute:: MetronomeMarkCommand.match
 
    .. autoattribute:: MetronomeMarkCommand.redundant
 
@@ -853,6 +885,10 @@ commands
 
       .. autoattribute:: PartAssignmentCommand.deactivate
 
+   .. container:: inherited
+
+      .. autoattribute:: PartAssignmentCommand.match
+
    .. autoattribute:: PartAssignmentCommand.part_assignment
 
    .. container:: inherited
@@ -936,6 +972,10 @@ commands
    .. container:: inherited
 
       .. autoattribute:: VoltaCommand.deactivate
+
+   .. container:: inherited
+
+      .. autoattribute:: VoltaCommand.match
 
    .. container:: inherited
 

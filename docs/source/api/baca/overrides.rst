@@ -117,6 +117,10 @@ overrides
 
    .. container:: inherited
 
+      .. autoattribute:: OverrideCommand.match
+
+   .. container:: inherited
+
       .. autoattribute:: OverrideCommand.selector
 
    .. container:: inherited

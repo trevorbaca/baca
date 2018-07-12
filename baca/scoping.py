@@ -55,7 +55,7 @@ class Command(abjad.AbjadObject):
         self._deactivate = deactivate
         self._map = map
         self._match = match
-        self._measures: typing.Union[int, typings.IntegerPair] = None
+        self._measures: typings.Slice = None
         self._runtime = abjad.OrderedDict()
         self.scope = scope
         if isinstance(selector, str):
@@ -997,14 +997,14 @@ def map(
 def match(
     pattern,
     *commands: typing.Union[Command, Suite],
-    ) -> typing.Union[Command, Suite]:
+    ) -> typing.List[typing.Union[Command, Suite]]:
     """
     Applies each scope that matches ``pattern`` to each command in
     ``commands``.
     """
     if pattern is not None:
         assert isinstance(pattern, (int, tuple, list)), repr(pattern)
-    result = []
+    result: typing.List[typing.Union[Command, Suite]] = []
     for command in commands:
         if isinstance(command, Command):
             command_ = abjad.new(command, match=pattern)
@@ -1019,7 +1019,7 @@ def match(
     return result
 
 def measures(
-    measures: typing.Union[int, typing.List[int], typing.Tuple[int, int]],
+    measures: typing.Optional[typings.Slice],
     *commands: typing.Union[Command, Suite],
     ) -> typing.List[typing.Union[Command, Suite]]:
     r"""

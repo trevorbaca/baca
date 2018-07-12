@@ -785,7 +785,7 @@ class ColorCommand(scoping.Command):
         measures: typings.Slice = None,
         scope: scoping.scope_typing = None,
         selector='baca.leaves()',
-        ):
+        ) -> None:
         assert selector is not None
         scoping.Command.__init__(
             self,
@@ -1764,7 +1764,7 @@ class LabelCommand(scoping.Command):
         measures: typings.Slice = None,
         scope: scoping.scope_typing = None,
         selector='baca.leaves()',
-        ):
+        ) -> None:
         scoping.Command.__init__(
             self,
             map=map,

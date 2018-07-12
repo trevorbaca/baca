@@ -38,6 +38,7 @@ scoping
       :nosignatures:
 
       deactivate
+      match
       selector
       tag
       tags
@@ -107,6 +108,8 @@ scoping
       :class: class-header
 
    .. autoattribute:: Command.deactivate
+
+   .. autoattribute:: Command.match
 
    .. autoattribute:: Command.selector
 

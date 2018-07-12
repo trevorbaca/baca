@@ -117,6 +117,10 @@ pitchcommands
 
    .. autoattribute:: AccidentalAdjustmentCommand.forced
 
+   .. container:: inherited
+
+      .. autoattribute:: AccidentalAdjustmentCommand.match
+
    .. autoattribute:: AccidentalAdjustmentCommand.parenthesized
 
    .. container:: inherited
@@ -211,6 +215,10 @@ pitchcommands
 
    .. autoattribute:: ClusterCommand.hide_flat_markup
 
+   .. container:: inherited
+
+      .. autoattribute:: ClusterCommand.match
+
    .. autoattribute:: ClusterCommand.selector
 
    .. autoattribute:: ClusterCommand.start_pitch
@@ -300,6 +308,10 @@ pitchcommands
 
       .. autoattribute:: ColorFingeringCommand.deactivate
 
+   .. container:: inherited
+
+      .. autoattribute:: ColorFingeringCommand.match
+
    .. autoattribute:: ColorFingeringCommand.numbers
 
    .. container:: inherited
@@ -388,6 +400,10 @@ pitchcommands
    .. container:: inherited
 
       .. autoattribute:: DiatonicClusterCommand.deactivate
+
+   .. container:: inherited
+
+      .. autoattribute:: DiatonicClusterCommand.match
 
    .. container:: inherited
 
@@ -547,6 +563,10 @@ pitchcommands
 
    .. container:: inherited
 
+      .. autoattribute:: MicrotoneDeviationCommand.match
+
+   .. container:: inherited
+
       .. autoattribute:: MicrotoneDeviationCommand.selector
 
    .. container:: inherited
@@ -633,6 +653,10 @@ pitchcommands
       .. autoattribute:: OctaveDisplacementCommand.deactivate
 
    .. autoattribute:: OctaveDisplacementCommand.displacements
+
+   .. container:: inherited
+
+      .. autoattribute:: OctaveDisplacementCommand.match
 
    .. container:: inherited
 
@@ -739,6 +763,10 @@ pitchcommands
 
    .. autoattribute:: PitchCommand.ignore_incomplete
 
+   .. container:: inherited
+
+      .. autoattribute:: PitchCommand.match
+
    .. autoattribute:: PitchCommand.parameter
 
    .. autoattribute:: PitchCommand.persist
@@ -834,6 +862,10 @@ pitchcommands
 
       .. autoattribute:: RegisterCommand.deactivate
 
+   .. container:: inherited
+
+      .. autoattribute:: RegisterCommand.match
+
    .. autoattribute:: RegisterCommand.registration
 
    .. container:: inherited
@@ -924,6 +956,10 @@ pitchcommands
    .. container:: inherited
 
       .. autoattribute:: RegisterInterpolationCommand.deactivate
+
+   .. container:: inherited
+
+      .. autoattribute:: RegisterInterpolationCommand.match
 
    .. autoattribute:: RegisterInterpolationCommand.selector
 
@@ -1016,6 +1052,10 @@ pitchcommands
    .. container:: inherited
 
       .. autoattribute:: RegisterToOctaveCommand.deactivate
+
+   .. container:: inherited
+
+      .. autoattribute:: RegisterToOctaveCommand.match
 
    .. autoattribute:: RegisterToOctaveCommand.octave_number
 
@@ -1112,6 +1152,10 @@ pitchcommands
 
    .. autoattribute:: StaffPositionCommand.exact
 
+   .. container:: inherited
+
+      .. autoattribute:: StaffPositionCommand.match
+
    .. autoattribute:: StaffPositionCommand.numbers
 
    .. container:: inherited
@@ -1201,6 +1245,10 @@ pitchcommands
    .. container:: inherited
 
       .. autoattribute:: StaffPositionInterpolationCommand.deactivate
+
+   .. container:: inherited
+
+      .. autoattribute:: StaffPositionInterpolationCommand.match
 
    .. container:: inherited
 

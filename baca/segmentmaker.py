@@ -707,6 +707,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         voice_name = abbreviations[scope_.voice_name]
                         scope_._voice_name = voice_name
             for command in commands:
+                assert isinstance(command, scoping.Command), repr(command)
                 if not command._matches_scope_index(scope_count, i):
                     continue
                 if isinstance(command, scoping.Command):

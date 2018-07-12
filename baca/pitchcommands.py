@@ -727,7 +727,7 @@ class ClusterCommand(scoping.Command):
         selector='baca.plts()',
         start_pitch=None,
         widths=None,
-        ):
+        ) -> None:
         scoping.Command.__init__(
             self,
             map=map,
@@ -1717,7 +1717,7 @@ class ColorFingeringCommand(scoping.Command):
         numbers=None,
         scope: scoping.scope_typing = None,
         selector='baca.pheads()',
-        ):
+        ) -> None:
         scoping.Command.__init__(
             self,
             map=map,
@@ -1811,7 +1811,7 @@ class DiatonicClusterCommand(scoping.Command):
         scope: scoping.scope_typing = None,
         widths,
         selector='baca.plts()',
-        ):
+        ) -> None:
         scoping.Command.__init__(
             self,
             map=map,
@@ -2140,7 +2140,7 @@ class MicrotoneDeviationCommand(scoping.Command):
         measures: typings.Slice = None,
         scope: scoping.scope_typing = None,
         selector='baca.plts()',
-        ):
+        ) -> None:
         # TODO: pass selector to Command.__init__(); rebuild Krummzeit
         scoping.Command.__init__(
             self,
@@ -2335,7 +2335,7 @@ class OctaveDisplacementCommand(scoping.Command):
         measures: typings.Slice = None,
         scope: scoping.scope_typing = None,
         selector='baca.plts()',
-        ):
+        ) -> None:
         scoping.Command.__init__(
             self,
             map=map,
@@ -3393,7 +3393,7 @@ class RegisterCommand(scoping.Command):
         registration=None,
         scope: scoping.scope_typing = None,
         selector='baca.plts()',
-        ):
+        ) -> None:
         scoping.Command.__init__(
             self,
             map=map,
@@ -5263,7 +5263,7 @@ class RegisterToOctaveCommand(scoping.Command):
         measures: typings.Slice = None,
         scope: scoping.scope_typing = None,
         selector='baca.plts()',
-        ):
+        ) -> None:
         scoping.Command.__init__(
             self,
             map=map,
