@@ -1013,6 +1013,7 @@ Rhythm library.
 
    ~baca.scoping.apply
    ~baca.scoping.map
+   ~baca.scoping.match
    ~baca.scoping.measures
    ~baca.scoping.not_parts
    ~baca.scoping.not_score
@@ -1020,7 +1021,6 @@ Rhythm library.
    ~baca.scoping.only_parts
    ~baca.scoping.only_score
    ~baca.scoping.only_segment
-   ~baca.scoping.pick
    ~baca.scoping.scope
    ~baca.scoping.suite
    ~baca.scoping.tag

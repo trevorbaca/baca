@@ -255,6 +255,7 @@ scoping
 
    ~apply
    ~map
+   ~match
    ~measures
    ~not_parts
    ~not_score
@@ -262,7 +263,6 @@ scoping
    ~only_parts
    ~only_score
    ~only_segment
-   ~pick
    ~scope
    ~suite
    ~tag
@@ -271,6 +271,8 @@ scoping
 .. autofunction:: apply
 
 .. autofunction:: map
+
+.. autofunction:: match
 
 .. autofunction:: measures
 
@@ -285,8 +287,6 @@ scoping
 .. autofunction:: only_score
 
 .. autofunction:: only_segment
-
-.. autofunction:: pick
 
 .. autofunction:: scope
 

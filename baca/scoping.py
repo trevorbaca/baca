@@ -976,6 +976,20 @@ def map(
         result.append(command)
     return result
 
+def match(
+    pattern,
+    *commands: Command,
+    ) -> typing.List[typings.Pair]:
+    """
+    Applies each scope that matches ``pattern`` to each command in
+    ``commands``.
+    """
+    pairs = []
+    for command in commands:
+        pair = (command, pattern)
+        pairs.append(pair)
+    return pairs
+
 def measures(
     measures: typing.Union[int, typing.List[int], typing.Tuple[int, int]],
     *commands: typing.Union[Command, Suite],
@@ -1141,19 +1155,6 @@ def only_segment(command: Command) -> _command_typing:
     Returns ``command``.
     """
     return tag('+SEGMENT', command)
-
-def pick(
-    pattern,
-    *commands: Command,
-    ) -> typing.List[typings.Pair]:
-    """
-    Maps ``pattern`` to each command in ``commands``.
-    """
-    pairs = []
-    for command in commands:
-        pair = (command, pattern)
-        pairs.append(pair)
-    return pairs
 
 def scope(
     voice_name: str,
