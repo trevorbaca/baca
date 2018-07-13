@@ -46,7 +46,7 @@ class Scope(abjad.AbjadObject):
         voice_name: str = None,
         ) -> None:
         if isinstance(stages, int):
-            start = stop = stages
+            stages = (stages, stages)
         assert isinstance(stages, tuple), repr(stages)
         assert len(stages) == 2, repr(stages)
         start, stop = stages
