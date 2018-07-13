@@ -1840,7 +1840,6 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
         >>> metronome_marks['72'] = abjad.MetronomeMark((1, 4), 72)
         >>> metronome_marks['90'] = abjad.MetronomeMark((1, 4), 90)
         >>> maker = baca.SegmentMaker(
-        ...     measures_per_stage=[2, 2],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     metronome_mark_measure_map=baca.MetronomeMarkMeasureMap([
         ...         (1, metronome_marks['90']),
@@ -1851,7 +1850,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
         ...     )
 
         >>> maker(
-        ...     ('MusicVoice', 1),
+        ...     ('MusicVoice', (1, 2)),
         ...     baca.pitches('E4 F4'),
         ...     baca.make_even_divisions(),
         ...     )
@@ -1900,11 +1899,6 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                         \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
-            <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 1/2
                         \stopTextSpan                                                                %! MMI1
                     %@% - \abjad_invisible_line                                                      %! MMI2
                     %@% - \tweak bound-details.left.text \markup {                                   %! MMI2
@@ -1928,6 +1922,11 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                                 }                                                                    %! MMI3
                             }                                                                        %! MMI3
                         \startTextSpan                                                               %! MMI3
+            <BLANKLINE>
+                        % [GlobalSkips measure 3]                                                    %! SM4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1

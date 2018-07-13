@@ -2121,7 +2121,6 @@ class ImbricationCommand(scoping.Command):
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_repeat_pitch_classes=True,
-            ...     measures_per_stage=[1, 1],
             ...     score_template=baca.TwoVoiceStaffScoreTemplate(),
             ...     spacing=baca.HorizontalSpacingSpecifier(
             ...         minimum_duration=abjad.Duration(1, 24),

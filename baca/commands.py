@@ -4167,7 +4167,6 @@ def volta(
         Wraps stage 2 global skips in volta container:
 
         >>> maker = baca.SegmentMaker(
-        ...     measures_per_stage=[1, 2, 1],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -4186,7 +4185,7 @@ def volta(
         ...     )
 
         >>> maker(
-        ...     ('GlobalSkips', 2),
+        ...     ('GlobalSkips', (2, 3)),
         ...     baca.volta(),
         ...     )
 
@@ -4269,13 +4268,7 @@ def volta(
                             ]
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! SM4
-                            r8
-            <BLANKLINE>
-                            e''8
-                            [
-            <BLANKLINE>
-                            g'8
-                            ]
+                            R1 * 3/8
             <BLANKLINE>
                         }
                     }

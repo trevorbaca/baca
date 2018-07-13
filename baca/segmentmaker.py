@@ -275,7 +275,6 @@ class SegmentMaker(abjad.SegmentMaker):
             typing.Tuple[abjad.Multiplier, abjad.Tag],
             ] = None,
         margin_markups: abjad.OrderedDict = None,
-        measures_per_stage: typing.List[int] = None,
         metronome_mark_measure_map: segmentclasses.MetronomeMarkMeasureMap = None,
         metronome_marks: abjad.OrderedDict = None,
         score_template: templates.ScoreTemplate = None,
@@ -330,11 +329,10 @@ class SegmentMaker(abjad.SegmentMaker):
         self._last_segment = last_segment
         self._magnify_staves = magnify_staves
         self._margin_markups = margin_markups
-        if measures_per_stage in (True, None):
-            if time_signatures:
-                measures_per_stage = len(time_signatures) * [1]
-            else:
-                measures_per_stage = []
+        if time_signatures:
+            measures_per_stage = len(time_signatures) * [1]
+        else:
+            measures_per_stage = []
         self._measures_per_stage = measures_per_stage
         self._metronome_mark_measure_map = metronome_mark_measure_map
         self._metronome_marks = metronome_marks
