@@ -655,7 +655,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...
             Exception: 
             <BLANKLINE>
-            Neither command nor list of commands:
+            Must be command:
             <BLANKLINE>
             text
 
@@ -687,10 +687,10 @@ class SegmentMaker(abjad.SegmentMaker):
         scope_type = (scoping.Scope, scoping.TimelineScope)
         assert all(isinstance(_, scope_type) for _ in scopes_), repr(scopes_)
         for command in commands:
-            if isinstance(command, tuple):
-                raise Exception('use baca.match().')
-            if not isinstance(command, (list, scoping.Command, scoping.Suite)):
-                message = '\n\nNeither command nor list of commands:'
+            if isinstance(command, list):
+                raise Exception('use baca.suite().')
+            if not isinstance(command, scoping.Command):
+                message = '\n\nMust be command:'
                 message += f'\n\n{format(command)}'
                 raise Exception(message)
         scope_count = len(scopes_)
