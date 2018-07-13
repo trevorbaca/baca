@@ -266,7 +266,6 @@ scoping
    ~only_parts
    ~only_score
    ~only_segment
-   ~scope
    ~suite
    ~tag
    ~timeline
@@ -290,8 +289,6 @@ scoping
 .. autofunction:: only_score
 
 .. autofunction:: only_segment
-
-.. autofunction:: scope
 
 .. autofunction:: suite
 

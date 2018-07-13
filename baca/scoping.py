@@ -42,9 +42,11 @@ class Scope(abjad.AbjadObject):
     def __init__(
         self,
         *,
-        stages: typing.Tuple[int, int] = None,
+        stages: typing.Union[int, typing.Tuple[int, int]] = (1, -1),
         voice_name: str = None,
         ) -> None:
+        if isinstance(stages, int):
+            start = stop = stages
         assert isinstance(stages, tuple), repr(stages)
         assert len(stages) == 2, repr(stages)
         start, stop = stages
@@ -1185,160 +1187,6 @@ def only_segment(command: Command) -> _command_typing:
     """
     return tag('+SEGMENT', command)
 
-# TODO: remove in favor of Scope.__init__()
-def scope(
-    voice_name: str,
-    stages: typing.Union[int, typing.Tuple[int, int]] = (1, -1),
-    ) -> Scope:
-    r"""
-    Scopes ``voice_name`` for ``stages``.
-
-    ..  container:: example
-
-        >>> baca.scope('HornVoiceI', 1)
-        Scope(stages=(1, 1), voice_name='HornVoiceI')
-
-        >>> baca.scope('HornVoiceI', (1, 8))
-        Scope(stages=(1, 8), voice_name='HornVoiceI')
-
-        >>> baca.scope('HornVoiceI', (4, -1))
-        Scope(stages=(4, -1), voice_name='HornVoiceI')
-
-        >>> baca.scope('HornVoiceI')
-        Scope(stages=(1, -1), voice_name='HornVoiceI')
-
-    ..  container:: example
-
-        Negative stage numbers are allowed:
-
-        >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.minimum_duration((1, 12)),
-        ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8)],
-        ...     )
-        >>> maker(
-        ...     'MusicVoice',
-        ...     baca.make_repeated_duration_notes([(1, 8)]),
-        ...     )
-        >>> maker(
-        ...     ('MusicVoice', (-4, -3)),
-        ...     baca.pitch('D4'),
-        ...     )
-        >>> maker(
-        ...     ('MusicVoice', (-2, -1)),
-        ...     baca.pitch('E4'),
-        ...     )
-
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
-            <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                        s1 * 3/8
-            <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        s1 * 3/8
-            <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        s1 * 3/8
-            <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
-            <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \context Staff = "MusicStaff"
-                    {
-                        \context Voice = "MusicVoice"
-                        {
-            <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
-                            d'8
-            <BLANKLINE>
-                            d'8
-            <BLANKLINE>
-                            d'8
-            <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
-                            d'8
-            <BLANKLINE>
-                            d'8
-            <BLANKLINE>
-                            d'8
-            <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
-                            e'8
-            <BLANKLINE>
-                            e'8
-            <BLANKLINE>
-                            e'8
-            <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
-                            e'8
-            <BLANKLINE>
-                            e'8
-            <BLANKLINE>
-                            e'8
-            <BLANKLINE>
-                        }
-                    }
-                >>
-            >>
-
-    ..  container:: example
-
-        Raises exception when stages are other than nonzero integers:
-
-        >>> baca.scope('MusicVoice', 0)
-        Traceback (most recent call last):
-            ...
-        Exception: stages must be nonzero integer or pair of nonzero integers (not 0).
-
-        >>> baca.scope('MusicVoice', 'text')
-        Traceback (most recent call last):
-            ...
-        Exception: stages must be nonzero integer or pair of nonzero integers (not 'text').
-
-    """
-    message = 'stages must be nonzero integer or pair of nonzero integers'
-    message += f' (not {stages!r}).'
-    if isinstance(stages, int):
-        start, stop = stages, stages
-    elif isinstance(stages, tuple):
-        assert len(stages) == 2, repr(stages)
-        start, stop = stages
-    else:
-        raise Exception(message)
-    if (not isinstance(start, int) or
-        not isinstance(stop, int) or 
-        start == 0  or
-        stop == 0):
-        raise Exception(message)
-    stages = (start, stop)
-    return Scope(
-        stages=stages,
-        voice_name=voice_name,
-        )
-
 def suite(
     *commands: typing.Union[Command, Suite],
     ) -> Suite:
@@ -1418,5 +1266,9 @@ def timeline(scopes) -> TimelineScope:
     """
     Makes timeline scope.
     """
-    scopes = [scope(*_) for _ in scopes]
-    return TimelineScope(scopes=scopes)
+    scopes_ = []
+    for scope in scopes:
+        voice_name, measures = scope
+        scope_ = Scope(stages=measures, voice_name=voice_name)
+        scopes_.append(scope_)
+    return TimelineScope(scopes=scopes_)

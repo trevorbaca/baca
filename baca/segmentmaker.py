@@ -2386,6 +2386,31 @@ class SegmentMaker(abjad.SegmentMaker):
             rests.append(rest)
         return rests
 
+    @staticmethod
+    def _make_scope(
+        voice_name: str,
+        stages: typing.Union[int, typing.Tuple[int, int]] = (1, -1),
+        ) -> scoping.Scope:
+        message = 'stages must be nonzero integer or pair of nonzero integers'
+        message += f' (not {stages!r}).'
+        if isinstance(stages, int):
+            start, stop = stages, stages
+        elif isinstance(stages, tuple):
+            assert len(stages) == 2, repr(stages)
+            start, stop = stages
+        else:
+            raise Exception(message)
+        if (not isinstance(start, int) or
+            not isinstance(stop, int) or 
+            start == 0  or
+            stop == 0):
+            raise Exception(message)
+        stages = (start, stop)
+        return scoping.Scope(
+            stages=stages,
+            voice_name=voice_name,
+            )
+
     def _make_score(self):
         score = self.score_template()
         self._score = score
@@ -2948,7 +2973,7 @@ class SegmentMaker(abjad.SegmentMaker):
         voice_names = voice_names_
         for voice_name in voice_names:
             for stage_token in stage_tokens:
-                scope = scoping.scope(voice_name, stage_token)
+                scope = self._make_scope(voice_name, stage_token)
                 scopes_.append(scope)
         prototype = (scoping.Scope, scoping.TimelineScope)
         assert all(isinstance(_, prototype) for _ in scopes_)
@@ -2959,7 +2984,7 @@ class SegmentMaker(abjad.SegmentMaker):
         scopes__: typing.List[scoping.scope_typing]
         if isinstance(scopes, str):
             voice_name = abbreviations.get(scopes, scopes)
-            scope = scoping.scope(voice_name)
+            scope = self._make_scope(voice_name)
             scopes__ = [scope]
         elif isinstance(scopes, tuple):
             scopes__ = self._unpack_scope_pair(scopes, abbreviations)
@@ -2980,7 +3005,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for scope in scopes__:
             if isinstance(scope, str):
                 voice_name = abbreviations.get(scope, scope)
-                scope_ = scoping.scope(voice_name)
+                scope_ = self._make_scope(voice_name)
                 scopes_.append(scope_)
             elif isinstance(scope, tuple):
                 voice_name, stages = scope
@@ -2988,10 +3013,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 if isinstance(stages, list):
                     stages = self._unpack_stage_token_list(stages)
                     for stage_token in stages:
-                        scope_ = scoping.scope(voice_name, stage_token)
+                        scope_ = self._make_scope(voice_name, stage_token)
                         scopes_.append(scope_)
                 else:
-                    scope_ = scoping.scope(voice_name, stages)
+                    scope_ = self._make_scope(voice_name, stages)
                     scopes_.append(scope_)
             else:
                 scope_ = scope
