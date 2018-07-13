@@ -5,13 +5,185 @@ import typing
 from . import classes
 from . import indicators
 from . import typings
-scope_typing = typing.Union[
-    'Scope',
-    'TimelineScope',
-    ]
 
 
 ### CLASSES ###
+
+class Scope(abjad.AbjadObject):
+    """
+    Scope.
+
+    ..  container:: example
+
+        >>> scope = baca.Scope(
+        ...     stages=(1, 9),
+        ...     voice_name='ViolinMusicVoice',
+        ...     )
+
+        >>> abjad.f(scope, strict=89)
+        baca.Scope(
+            stages=(1, 9),
+            voice_name='ViolinMusicVoice',
+            )
+
+    """
+
+    ### CLASS VARIABLES ###
+
+    __slots__ = (
+        '_stages',
+        '_voice_name',
+        )
+
+    _publish_storage_format = True
+
+    ### INITIALIZER ###
+
+    def __init__(
+        self,
+        *,
+        stages: typing.Tuple[int, int] = None,
+        voice_name: str = None,
+        ) -> None:
+        assert isinstance(stages, tuple), repr(stages)
+        assert len(stages) == 2, repr(stages)
+        start, stop = stages
+        assert isinstance(start, int), repr(start)
+        assert start != 0, repr(start)
+        assert isinstance(stop, int), repr(stop)
+        assert stop != 0, repr(stop)
+        self._stages = stages
+        if voice_name is not None:
+            assert isinstance(voice_name, str), repr(voice_name)
+        self._voice_name = voice_name
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def stages(self) -> typing.Tuple[int, int]:
+        """
+        Gets stages.
+        """
+        return self._stages
+
+    @property
+    def voice_name(self) -> typing.Optional[str]:
+        """
+        Gets voice name.
+        """
+        return self._voice_name
+
+class TimelineScope(abjad.AbjadObject):
+    """
+    Timeline scope.
+
+    ..  container:: example
+
+        >>> scope = baca.timeline([
+        ...     ('PianoMusicVoice', (5, 9)),
+        ...     ('ClarinetMusicVoice', (7, 12)),
+        ...     ('ViolinMusicVoice', (8, 12)),
+        ...     ('OboeMusicVoice', (9, 12)),
+        ...     ])
+
+        >>> abjad.f(scope, strict=89)
+        baca.TimelineScope(
+            scopes=(
+                baca.Scope(
+                    stages=(5, 9),
+                    voice_name='PianoMusicVoice',
+                    ),
+                baca.Scope(
+                    stages=(7, 12),
+                    voice_name='ClarinetMusicVoice',
+                    ),
+                baca.Scope(
+                    stages=(8, 12),
+                    voice_name='ViolinMusicVoice',
+                    ),
+                baca.Scope(
+                    stages=(9, 12),
+                    voice_name='OboeMusicVoice',
+                    ),
+                ),
+            )
+
+        ..  container:: example
+
+            >>> baca.TimelineScope()
+            TimelineScope()
+
+    """
+
+    ### CLASS VARIABLES ###
+
+    __slots__ = (
+        '_scopes',
+        )
+
+    _publish_storage_format = True
+
+    ### INITIALIZER ###
+
+    def __init__(
+        self,
+        *,
+        scopes=None,
+        ):
+        if scopes is not None:
+            assert isinstance(scopes, (tuple, list))
+            scopes_ = []
+            for scope in scopes:
+                if not isinstance(scope, Scope):
+                    scope = Scope(*scope)
+                scopes_.append(scope)
+            scopes = scopes_
+            scopes = tuple(scopes)
+        self._scopes = scopes
+
+    ### PRIVATE METHODS ###
+
+    @staticmethod
+    def _sort_by_timeline(leaves):
+        assert leaves.are_leaves(), repr(leaves)
+        def compare(leaf_1, leaf_2):
+            start_offset_1 = abjad.inspect(leaf_1).get_timespan().start_offset
+            start_offset_2 = abjad.inspect(leaf_2).get_timespan().start_offset
+            if start_offset_1 < start_offset_2:
+                return -1
+            if start_offset_2 < start_offset_1:
+                return 1
+            index_1 = abjad.inspect(leaf_1).get_parentage().score_index
+            index_2 = abjad.inspect(leaf_2).get_parentage().score_index
+            if index_1 < index_2:
+                return -1
+            if index_2 < index_1:
+                return 1
+            return 0
+        leaves = list(leaves)
+        leaves.sort(key=functools.cmp_to_key(compare))
+        return abjad.select(leaves)
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def scopes(self) -> typing.Tuple[Scope]:
+        """
+        Gets scopes.
+        """
+        return self._scopes
+
+    @property
+    def voice_name(self) -> str:
+        """
+        Returns ``'TimelineScope'``.
+        """
+        return 'TimelineScope'
+
+scope_typing = typing.Union[
+    Scope,
+    TimelineScope,
+    ]
 
 class Command(abjad.AbjadObject):
     """
@@ -471,177 +643,6 @@ class Suite(abjad.AbjadObject):
         assert isinstance(argument, abjad.OrderedDict), repr(argument)
         for command in self.commands:
             command.runtime = argument
-
-class Scope(abjad.AbjadObject):
-    """
-    Scope.
-
-    ..  container:: example
-
-        >>> scope = baca.Scope(
-        ...     stages=(1, 9),
-        ...     voice_name='ViolinMusicVoice',
-        ...     )
-
-        >>> abjad.f(scope, strict=89)
-        baca.Scope(
-            stages=(1, 9),
-            voice_name='ViolinMusicVoice',
-            )
-
-    """
-
-    ### CLASS VARIABLES ###
-
-    __slots__ = (
-        '_stages',
-        '_voice_name',
-        )
-
-    _publish_storage_format = True
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        stages: typing.Tuple[int, int] = None,
-        voice_name: str = None,
-        ) -> None:
-        assert isinstance(stages, tuple), repr(stages)
-        assert len(stages) == 2, repr(stages)
-        start, stop = stages
-        assert isinstance(start, int), repr(start)
-        assert start != 0, repr(start)
-        assert isinstance(stop, int), repr(stop)
-        assert stop != 0, repr(stop)
-        self._stages = stages
-        if voice_name is not None:
-            assert isinstance(voice_name, str), repr(voice_name)
-        self._voice_name = voice_name
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def stages(self) -> typing.Tuple[int, int]:
-        """
-        Gets stages.
-        """
-        return self._stages
-
-    @property
-    def voice_name(self) -> typing.Optional[str]:
-        """
-        Gets voice name.
-        """
-        return self._voice_name
-
-class TimelineScope(abjad.AbjadObject):
-    """
-    Timeline scope.
-
-    ..  container:: example
-
-        >>> scope = baca.timeline([
-        ...     ('PianoMusicVoice', (5, 9)),
-        ...     ('ClarinetMusicVoice', (7, 12)),
-        ...     ('ViolinMusicVoice', (8, 12)),
-        ...     ('OboeMusicVoice', (9, 12)),
-        ...     ])
-
-        >>> abjad.f(scope, strict=89)
-        baca.TimelineScope(
-            scopes=(
-                baca.Scope(
-                    stages=(5, 9),
-                    voice_name='PianoMusicVoice',
-                    ),
-                baca.Scope(
-                    stages=(7, 12),
-                    voice_name='ClarinetMusicVoice',
-                    ),
-                baca.Scope(
-                    stages=(8, 12),
-                    voice_name='ViolinMusicVoice',
-                    ),
-                baca.Scope(
-                    stages=(9, 12),
-                    voice_name='OboeMusicVoice',
-                    ),
-                ),
-            )
-
-        ..  container:: example
-
-            >>> baca.TimelineScope()
-            TimelineScope()
-
-    """
-
-    ### CLASS VARIABLES ###
-
-    __slots__ = (
-        '_scopes',
-        )
-
-    _publish_storage_format = True
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        scopes=None,
-        ):
-        if scopes is not None:
-            assert isinstance(scopes, (tuple, list))
-            scopes_ = []
-            for scope in scopes:
-                if not isinstance(scope, Scope):
-                    scope = Scope(*scope)
-                scopes_.append(scope)
-            scopes = scopes_
-            scopes = tuple(scopes)
-        self._scopes = scopes
-
-    ### PRIVATE METHODS ###
-
-    @staticmethod
-    def _sort_by_timeline(leaves):
-        assert leaves.are_leaves(), repr(leaves)
-        def compare(leaf_1, leaf_2):
-            start_offset_1 = abjad.inspect(leaf_1).get_timespan().start_offset
-            start_offset_2 = abjad.inspect(leaf_2).get_timespan().start_offset
-            if start_offset_1 < start_offset_2:
-                return -1
-            if start_offset_2 < start_offset_1:
-                return 1
-            index_1 = abjad.inspect(leaf_1).get_parentage().score_index
-            index_2 = abjad.inspect(leaf_2).get_parentage().score_index
-            if index_1 < index_2:
-                return -1
-            if index_2 < index_1:
-                return 1
-            return 0
-        leaves = list(leaves)
-        leaves.sort(key=functools.cmp_to_key(compare))
-        return abjad.select(leaves)
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def scopes(self) -> typing.Tuple[Scope]:
-        """
-        Gets scopes.
-        """
-        return self._scopes
-
-    @property
-    def voice_name(self) -> str:
-        """
-        Returns ``'TimelineScope'``.
-        """
-        return 'TimelineScope'
 
 ### FACTORY FUNCTIONS ###
 
