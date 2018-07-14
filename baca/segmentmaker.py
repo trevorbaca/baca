@@ -164,7 +164,6 @@ class SegmentMaker(abjad.SegmentMaker):
         '_last_segment',
         '_magnify_staves',
         '_margin_markups',
-        '_metronome_mark_measure_map',
         '_metronome_marks',
         '_midi',
         '_nonfirst_segment_lilypond_include',
@@ -277,8 +276,6 @@ class SegmentMaker(abjad.SegmentMaker):
         # TODO: remove:
         margin_markups: abjad.OrderedDict = None,
         # TODO: remove:
-        metronome_mark_measure_map: segmentclasses.MetronomeMarkMeasureMap = None,
-        # TODO: remove:
         metronome_marks: abjad.OrderedDict = None,
         # TODO: remove:
         score_template: templates.ScoreTemplate = None,
@@ -333,7 +330,6 @@ class SegmentMaker(abjad.SegmentMaker):
         self._last_segment = last_segment
         self._magnify_staves = magnify_staves
         self._margin_markups = margin_markups
-        self._metronome_mark_measure_map = metronome_mark_measure_map
         self._metronome_marks = metronome_marks
         self._midi: typing.Optional[bool] = None
         self._offset_to_measure_number: typing.Dict[abjad.Offset, int] = {}
@@ -1008,66 +1004,16 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _attach_fermatas(self):
         always_make_global_rests = self.score_template.always_make_global_rests
-        if (not self.metronome_mark_measure_map and
-            not always_make_global_rests):
+        if not always_make_global_rests:
             del(self.score['GlobalRests'])
             return
         has_fermata = False
-        if self.metronome_mark_measure_map:
-            for entry in self.metronome_mark_measure_map:
-                if isinstance(entry[1], abjad.Fermata):
-                    has_fermata = True
         if not has_fermata and not always_make_global_rests:
             del(self.score['GlobalRests'])
             return
         context = self.score['GlobalRests']
         rests = self._make_multimeasure_rests()
         context.extend(rests)
-        if not self.metronome_mark_measure_map:
-            return
-        directive_prototype = (
-            abjad.BreathMark,
-            abjad.Fermata,
-            )
-        last_measure_index = len(rests) - 1
-        first_measure_number = self._get_first_measure_number()
-        for measure_number, directive in self.metronome_mark_measure_map:
-            if not isinstance(directive, directive_prototype):
-                continue
-            measure_index = measure_number - 1
-            rest = context[measure_index]
-            assert isinstance(rest, abjad.MultimeasureRest)
-            if measure_index == last_measure_index:
-                self._last_measure_is_fermata = True
-            if isinstance(directive, abjad.Fermata):
-                if directive.command == 'shortfermata':
-                    string = 'scripts.ushortfermata'
-                elif directive.command == 'fermata':
-                    string = 'scripts.ufermata'
-                elif directive.command == 'longfermata':
-                    string = 'scripts.ulongfermata'
-                elif directive.command == 'verylongfermata':
-                    string = 'scripts.uverylongfermata'
-                else:
-                    raise Exception(f'unknown fermata: {directive.command!r}.')
-                directive = abjad.Markup.musicglyph(string)
-                directive = abjad.new(directive, direction=abjad.Up)
-            else:
-                directive = abjad.new(directive)
-            abjad.attach(directive, rest, tag='SM18')
-            strings = []
-            string = r'\once \override'
-            string += ' Score.MultiMeasureRest.transparent = ##t'
-            strings.append(string)
-            string = r'\once \override Score.TimeSignature.stencil = ##f'
-            strings.append(string)
-            literal = abjad.LilyPondLiteral(strings)
-            abjad.attach(literal, rest, tag='SM19')
-            abjad.attach(
-                abjad.tags.FERMATA_MEASURE,
-                rest,
-                tag=abjad.tags.FERMATA_MEASURE,
-                )
 
     def _attach_first_appearance_score_template_defaults(self):
         if self.first_segment:
@@ -1314,20 +1260,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 tag='MMI4',
                 )
 
-    def _attach_metronome_marks(self):
-        skips = classes.Selection(self.score['GlobalSkips']).skips()
-        if not self.metronome_mark_measure_map:
-            return
-        for measure_number, directive in self.metronome_mark_measure_map:
-            skip = skips[measure_number - 1]
-            if isinstance(directive, abjad.Fermata):
-                continue
-            abjad.attach(
-                directive,
-                skip,
-                tag='SM43'
-                )
-
     def _born_this_segment(self, component):
         prototype = (abjad.Staff, abjad.StaffGroup)
         assert isinstance(component, prototype), repr(component)
@@ -1439,7 +1371,6 @@ class SegmentMaker(abjad.SegmentMaker):
         return command_count
 
     def _call_rhythm_commands(self):
-        self._attach_metronome_marks()
         self._attach_fermatas()
         command_count = 0
         for voice in abjad.iterate(self.score).components(abjad.Voice):
@@ -5001,149 +4932,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
         """
         return self._metadata
-
-    @property
-    def metronome_mark_measure_map(self) -> typing.Optional[
-        segmentclasses.MetronomeMarkMeasureMap]:
-        r"""
-        Gets metronome mark measure map.
-
-        ..  container:: example
-
-            With metronome mark measure map:
-
-            >>> metronome_marks = abjad.OrderedDict()
-            >>> metronome_marks['90'] = abjad.MetronomeMark((1, 4), 90)
-            >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
-            ...     metronome_mark_measure_map=baca.MetronomeMarkMeasureMap([
-            ...         (1, metronome_marks['90']),
-            ...         ]),
-            ...     metronome_marks=metronome_marks,
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
-
-            >>> maker(
-            ...     'MusicVoice',
-            ...     baca.make_even_divisions(),
-            ...     )
-
-            >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
-                <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
-                <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 1/2
-                            \stopTextSpan                                                                %! MMI1
-                        %@% - \abjad_invisible_line                                                      %! MMI2
-                        %@% - \tweak bound-details.left.text \markup {                                   %! MMI2
-                        %@%     \concat                                                                  %! MMI2
-                        %@%         {                                                                    %! MMI2
-                        %@%             \abjad-metronome-mark-markup #2 #0 #1 #"90"                      %! MMI2
-                        %@%             \hspace                                                          %! MMI2
-                        %@%                 #0.5                                                         %! MMI2
-                        %@%         }                                                                    %! MMI2
-                        %@%     }                                                                        %! MMI2
-                        %@% \startTextSpan                                                               %! MMI2
-                            - \abjad_invisible_line                                                      %! MMI3
-                            - \tweak bound-details.left.text \markup {                                   %! MMI3
-                                \concat                                                                  %! MMI3
-                                    {                                                                    %! MMI3
-                                        \with-color                                                      %! MMI3
-                                            #(x11-color 'blue)                                           %! MMI3
-                                            \abjad-metronome-mark-markup #2 #0 #1 #"90"                  %! MMI3
-                                        \hspace                                                          %! MMI3
-                                            #0.5                                                         %! MMI3
-                                    }                                                                    %! MMI3
-                                }                                                                        %! MMI3
-                            \startTextSpan                                                               %! MMI3
-                <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 1/2
-                <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
-                            s1 * 3/8
-                            \stopTextSpan                                                                %! MMI4
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "|"                                                                     %! SM5
-                <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
-                <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
-                                c'8
-                                [
-                <BLANKLINE>
-                                c'8
-                <BLANKLINE>
-                                c'8
-                <BLANKLINE>
-                                c'8
-                                ]
-                <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
-                                c'8
-                                [
-                <BLANKLINE>
-                                c'8
-                <BLANKLINE>
-                                c'8
-                                ]
-                <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
-                                c'8
-                                [
-                <BLANKLINE>
-                                c'8
-                <BLANKLINE>
-                                c'8
-                <BLANKLINE>
-                                c'8
-                                ]
-                <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM4
-                                c'8
-                                [
-                <BLANKLINE>
-                                c'8
-                <BLANKLINE>
-                                c'8
-                                ]
-                <BLANKLINE>
-                            }
-                        }
-                    >>
-                >>
-
-        """
-        return self._metronome_mark_measure_map
 
     @property
     def metronome_marks(self) -> typing.Optional[abjad.OrderedDict]:

@@ -44,7 +44,6 @@ rhythmcommands
       rhythm_maker
       right_broken
       split_at_measure_boundaries
-      stages
       state
 
    .. autosummary::
@@ -153,8 +152,6 @@ rhythmcommands
       .. autoattribute:: RhythmCommand.selector
 
    .. autoattribute:: RhythmCommand.split_at_measure_boundaries
-
-   .. autoattribute:: RhythmCommand.stages
 
    .. autoattribute:: RhythmCommand.state
 

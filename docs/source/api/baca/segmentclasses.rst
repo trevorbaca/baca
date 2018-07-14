@@ -25,7 +25,6 @@ segmentclasses
    ~BreakMeasureMap
    ~HorizontalSpacingSpecifier
    ~LBSD
-   ~MetronomeMarkMeasureMap
    ~PageSpecifier
    ~StageMeasureMap
    ~SystemSpecifier
@@ -209,44 +208,6 @@ segmentclasses
 
    .. autoattribute:: LBSD.y_offset
 
-.. autoclass:: MetronomeMarkMeasureMap
-
-   .. autosummary::
-      :nosignatures:
-
-      items
-
-   .. autosummary::
-      :nosignatures:
-
-      __getitem__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. container:: inherited
-
-      .. automethod:: MetronomeMarkMeasureMap.__format__
-
-   .. automethod:: MetronomeMarkMeasureMap.__getitem__
-
-   .. container:: inherited
-
-      .. automethod:: MetronomeMarkMeasureMap.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read-only properties
-      :class: class-header
-
-   .. autoattribute:: MetronomeMarkMeasureMap.items
-
 .. autoclass:: PageSpecifier
 
    .. autosummary::
@@ -373,8 +334,6 @@ segmentclasses
 
       count
       fermata_measures
-      metronome_mark_measure_map
-      repeat_count
       rotation
       stage_measure_map
       time_signatures
@@ -420,10 +379,6 @@ segmentclasses
    .. autoattribute:: TimeSignatureMaker.count
 
    .. autoattribute:: TimeSignatureMaker.fermata_measures
-
-   .. autoattribute:: TimeSignatureMaker.metronome_mark_measure_map
-
-   .. autoattribute:: TimeSignatureMaker.repeat_count
 
    .. autoattribute:: TimeSignatureMaker.rotation
 

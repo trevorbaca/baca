@@ -62,7 +62,6 @@ segmentmaker
       margin_markups
       measure_count
       metadata
-      metronome_mark_measure_map
       metronome_marks
       midi
       nonfirst_segment_lilypond_include
@@ -184,8 +183,6 @@ segmentmaker
    .. autoattribute:: SegmentMaker.measure_count
 
    .. autoattribute:: SegmentMaker.metadata
-
-   .. autoattribute:: SegmentMaker.metronome_mark_measure_map
 
    .. autoattribute:: SegmentMaker.metronome_marks
 
