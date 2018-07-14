@@ -2057,7 +2057,7 @@ class TimeSignatureMaker(abjad.AbjadObject):
         time_signatures = classes.Sequence(self.time_signatures)
         time_signatures = time_signatures.rotate(self.rotation)
         time_signatures = time_signatures.flatten(depth=1)
-        time_signatures = abjad.CyclicTuple(time_signatures)
+        time_signatures_ = abjad.CyclicTuple(time_signatures)
         i = 0
         fermata_measures = self._normalize_fermata_measures()
         for j in range(self.count):
@@ -2065,7 +2065,7 @@ class TimeSignatureMaker(abjad.AbjadObject):
             if measure_number in fermata_measures:
                 result.append(abjad.TimeSignature((1, 4)))
             else:
-                time_signature = time_signatures[i]
+                time_signature = time_signatures_[i]
                 result.append(time_signature)
                 i += 1
         return result

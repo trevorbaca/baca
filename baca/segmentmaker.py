@@ -275,6 +275,7 @@ class SegmentMaker(abjad.SegmentMaker):
         metronome_marks: abjad.OrderedDict = None,
         score_template: templates.ScoreTemplate = None,
         segment_directory: abjad.Path = None,
+        spacing: segmentclasses.HorizontalSpacingSpecifier = None,
         skip_wellformedness_checks: bool = None,
         skips_instead_of_rests: bool = None,
         test_container_identifiers: bool = None,
