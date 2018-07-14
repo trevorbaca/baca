@@ -2329,7 +2329,6 @@ class TimeSignatureMaker(abjad.AbjadObject):
         '_count',
         '_fermata_measures',
         '_metronome_mark_measure_map',
-        '_repeat_count',
         '_rotation',
         '_stage_measure_map',
         '_time_signatures',
@@ -2344,7 +2343,6 @@ class TimeSignatureMaker(abjad.AbjadObject):
         count: int = None,
         fermata_measures: typing.List[int] = None,
         metronome_mark_measure_map: MetronomeMarkMeasureMap = None,
-        repeat_count: int = None,
         rotation: int = None,
         stage_measure_map: StageMeasureMap = None,
         ) -> None:
@@ -2356,7 +2354,6 @@ class TimeSignatureMaker(abjad.AbjadObject):
             assert isinstance(count, int), repr(count)
         self._fermata_measures = fermata_measures
         self._metronome_mark_measure_map = metronome_mark_measure_map
-        self._repeat_count = repeat_count
         self._rotation = rotation
         self._stage_measure_map = stage_measure_map
 
@@ -2382,7 +2379,6 @@ class TimeSignatureMaker(abjad.AbjadObject):
             items_.append(item)
         stage_measure_map = StageMeasureMap(items=items_)
         time_signature_groups = self._make_time_signature_groups(
-            self.repeat_count,
             stage_measure_map,
             time_signatures,
             )
@@ -2403,7 +2399,6 @@ class TimeSignatureMaker(abjad.AbjadObject):
 
     def _make_time_signature_groups(
         self,
-        repeat_count,
         stage_measure_map,
         time_signatures,
         ):
@@ -2421,8 +2416,6 @@ class TimeSignatureMaker(abjad.AbjadObject):
                 time_signature_list = list(time_signature_list)
                 index += item
             time_signature_lists.append(time_signature_list)
-        repeat_count = repeat_count or 1
-        time_signature_lists *= repeat_count
         return time_signature_lists
 
     def _normalize_fermata_measures(self):
@@ -2463,13 +2456,6 @@ class TimeSignatureMaker(abjad.AbjadObject):
         return self._metronome_mark_measure_map
 
     @property
-    def repeat_count(self) -> typing.Optional[int]:
-        """
-        Gets repeat count.
-        """
-        return self._repeat_count
-
-    @property
     def rotation(self) -> typing.Optional[int]:
         """
         Gets rotation.
@@ -2508,8 +2494,6 @@ class TimeSignatureMaker(abjad.AbjadObject):
                 )
         if self.stage_measure_map:
             raise Exception('stage measure map must be empty with run().')
-        if self.repeat_count:
-            raise Exception('repeat count must be zero with run().')
         result = []
         time_signatures = classes.Sequence(self.time_signatures)
         time_signatures = time_signatures.rotate(self.rotation)
