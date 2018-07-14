@@ -2313,12 +2313,7 @@ class TimeSignatureMaker(abjad.AbjadObject):
         ...     stage_measure_map=stage_measure_map,
         ...     metronome_mark_measure_map=metronome_mark_measure_map,
         ...     )
-        >>> measures_per_stage, metronome_mark_measure_map, time_signatures = maker()
-
-        >>> measures_per_stage
-        [2, 2, 1]
-
-        >>> time_signatures
+        >>> maker()
         Sequence([(1, 16), (2, 16), (3, 16), (1, 8), TimeSignature((1, 4))])
 
     """
@@ -2359,11 +2354,7 @@ class TimeSignatureMaker(abjad.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self) -> typing.Tuple[
-        typing.List[int],
-        MetronomeMarkMeasureMap,
-        classes.Sequence,
-        ]:
+    def __call__(self) -> classes.Sequence:
         """
         Calls time-signature-maker.
         """
@@ -2382,18 +2373,10 @@ class TimeSignatureMaker(abjad.AbjadObject):
             stage_measure_map,
             time_signatures,
             )
-        measures_per_stage = [len(_) for _ in time_signature_groups]
         time_signatures = classes.Sequence(time_signature_groups).flatten(
             depth=1
             )
-        fermata_entries = self.stage_measure_map._make_fermata_entries()
-        if self.metronome_mark_measure_map:
-            items = self.metronome_mark_measure_map.items
-        else:
-            items = []
-        items = list(items) + list(fermata_entries)
-        metronome_mark_measure_map = MetronomeMarkMeasureMap(items=items)
-        return measures_per_stage, metronome_mark_measure_map, time_signatures
+        return time_signatures
 
     ### PRIVATE METHODS ###
 

@@ -248,6 +248,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self,
         *,
         allow_empty_selections: bool = None,
+        # TODO: remove:
         breaks: segmentclasses.BreakMeasureMap = None,
         clock_time_override: abjad.MetronomeMark = None,
         color_octaves: bool = None,
@@ -266,19 +267,25 @@ class SegmentMaker(abjad.SegmentMaker):
         ignore_unpitched_notes: bool = None,
         ignore_unregistered_pitches: bool = None,
         nonfirst_segment_lilypond_include: bool = None,
+        # TODO: remove:
         instruments: abjad.OrderedDict = None,
         last_segment: bool = None,
         magnify_staves: typing.Union[
             abjad.Multiplier,
             typing.Tuple[abjad.Multiplier, abjad.Tag],
             ] = None,
+        # TODO: remove:
         margin_markups: abjad.OrderedDict = None,
+        # TODO: remove:
         metronome_mark_measure_map: segmentclasses.MetronomeMarkMeasureMap = None,
+        # TODO: remove:
         metronome_marks: abjad.OrderedDict = None,
+        # TODO: remove:
         score_template: templates.ScoreTemplate = None,
         segment_directory: abjad.Path = None,
         skip_wellformedness_checks: bool = None,
         skips_instead_of_rests: bool = None,
+        # TODO: remove:
         spacing: segmentclasses.HorizontalSpacingSpecifier = None,
         test_container_identifiers: bool = None,
         time_signatures: typing.List[tuple] = None,
