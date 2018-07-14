@@ -16,13 +16,13 @@ class Scope(abjad.AbjadObject):
     ..  container:: example
 
         >>> scope = baca.Scope(
-        ...     stages=(1, 9),
+        ...     measures=(1, 9),
         ...     voice_name='ViolinMusicVoice',
         ...     )
 
         >>> abjad.f(scope, strict=89)
         baca.Scope(
-            stages=(1, 9),
+            measures=(1, 9),
             voice_name='ViolinMusicVoice',
             )
 
@@ -31,7 +31,7 @@ class Scope(abjad.AbjadObject):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_stages',
+        '_measures',
         '_voice_name',
         )
 
@@ -42,19 +42,19 @@ class Scope(abjad.AbjadObject):
     def __init__(
         self,
         *,
-        stages: typing.Union[int, typing.Tuple[int, int]] = (1, -1),
+        measures: typing.Union[int, typing.Tuple[int, int]] = (1, -1),
         voice_name: str = None,
         ) -> None:
-        if isinstance(stages, int):
-            stages = (stages, stages)
-        assert isinstance(stages, tuple), repr(stages)
-        assert len(stages) == 2, repr(stages)
-        start, stop = stages
+        if isinstance(measures, int):
+            measures = (measures, measures)
+        assert isinstance(measures, tuple), repr(measures)
+        assert len(measures) == 2, repr(measures)
+        start, stop = measures
         assert isinstance(start, int), repr(start)
         assert start != 0, repr(start)
         assert isinstance(stop, int), repr(stop)
         assert stop != 0, repr(stop)
-        self._stages = stages
+        self._measures = measures
         if voice_name is not None:
             assert isinstance(voice_name, str), repr(voice_name)
         self._voice_name = voice_name
@@ -62,11 +62,11 @@ class Scope(abjad.AbjadObject):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def stages(self) -> typing.Tuple[int, int]:
+    def measures(self) -> typing.Tuple[int, int]:
         """
-        Gets stages.
+        Gets measures.
         """
-        return self._stages
+        return self._measures
 
     @property
     def voice_name(self) -> typing.Optional[str]:
@@ -92,19 +92,19 @@ class TimelineScope(abjad.AbjadObject):
         baca.TimelineScope(
             scopes=(
                 baca.Scope(
-                    stages=(5, 9),
+                    measures=(5, 9),
                     voice_name='PianoMusicVoice',
                     ),
                 baca.Scope(
-                    stages=(7, 12),
+                    measures=(7, 12),
                     voice_name='ClarinetMusicVoice',
                     ),
                 baca.Scope(
-                    stages=(8, 12),
+                    measures=(8, 12),
                     voice_name='ViolinMusicVoice',
                     ),
                 baca.Scope(
-                    stages=(9, 12),
+                    measures=(9, 12),
                     voice_name='OboeMusicVoice',
                     ),
                 ),
@@ -295,13 +295,13 @@ class Command(abjad.AbjadObject):
         if not self.measures:
             return scope
         if isinstance(self.measures, int):
-            stages = (self.measures, self.measures)
+            measures = (self.measures, self.measures)
         else:
             assert isinstance(self.measures, tuple), repr(self.measures)
-            stages = self.measures
+            measures = self.measures
         scope_ = abjad.new(
             scope,
-            stages=stages,
+            measures=measures,
             )
         return scope_
 
@@ -1269,6 +1269,6 @@ def timeline(scopes) -> TimelineScope:
     scopes_ = []
     for scope in scopes:
         voice_name, measures = scope
-        scope_ = Scope(stages=measures, voice_name=voice_name)
+        scope_ = Scope(measures=measures, voice_name=voice_name)
         scopes_.append(scope_)
     return TimelineScope(scopes=scopes_)

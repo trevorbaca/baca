@@ -4045,7 +4045,7 @@ def volta(
 
     ..  container:: example
 
-        Wraps stage 1 (global skips 1 and 2) in volta container:
+        Wraps skips 1 and 2 in volta container:
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
@@ -4164,7 +4164,7 @@ def volta(
 
     ..  container:: example
 
-        Wraps stage 2 global skips in volta container:
+        Wraps measures 2 and 3 in volta container:
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),

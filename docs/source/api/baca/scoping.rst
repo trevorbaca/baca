@@ -122,7 +122,7 @@ scoping
    .. autosummary::
       :nosignatures:
 
-      stages
+      measures
       voice_name
 
    .. raw:: html
@@ -147,7 +147,7 @@ scoping
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: Scope.stages
+   .. autoattribute:: Scope.measures
 
    .. autoattribute:: Scope.voice_name
 

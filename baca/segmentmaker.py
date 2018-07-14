@@ -1479,9 +1479,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 continue
             rhythms = []
             for command in commands:
-                if command.scope.stages is None:
+                if command.scope.measures is None:
                     raise Exception(format(command))
-                result = self._get_stage_time_signatures(*command.scope.stages)
+                result = self._get_stage_time_signatures(
+                    *command.scope.measures)
                 start_offset, time_signatures = result
                 command.runtime = self._bundle_manifests(voice.name)
                 try:
@@ -2633,11 +2634,11 @@ class SegmentMaker(abjad.SegmentMaker):
             except KeyError:
                 print(f'Unknown voice {scope.voice_name} ...\n')
                 raise
-            start = scope.stages[0]
-            if scope.stages[1] == -1:
+            start = scope.measures[0]
+            if scope.measures[1] == -1:
                 stop = self.stage_count + 1
             else:
-                stop = scope.stages[1] + 1
+                stop = scope.measures[1] + 1
             if start < 0:
                 start = self.stage_count - abs(start) + 1
             if stop < 0:
@@ -2949,7 +2950,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for voice_name in voice_names:
             for stage_token in stage_tokens:
                 scope = scoping.Scope(
-                    stages=stage_token,
+                    measures=stage_token,
                     voice_name=voice_name,
                     )
                 scopes_.append(scope)
@@ -2992,7 +2993,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     stages = self._unpack_stage_token_list(stages)
                     for stage_token in stages:
                         scope_ = scoping.Scope(
-                            stages=stage_token,
+                            measures=stage_token,
                             voice_name=voice_name,
                             )
                         scopes_.append(scope_)
@@ -3628,6 +3629,13 @@ class SegmentMaker(abjad.SegmentMaker):
         Returns true, false or none.
         """
         return self._color_repeat_pitch_classes
+
+    @property
+    def commands(self) -> typing.List[scoping.Command]:
+        """
+        Gets commands.
+        """
+        return self._commands
 
     @property
     def do_not_check_persistence(self) -> typing.Optional[bool]:
@@ -5699,13 +5707,6 @@ class SegmentMaker(abjad.SegmentMaker):
         Gets voice metadata.
         """
         return self._voice_metadata
-
-    @property
-    def commands(self) -> typing.List[scoping.Command]:
-        """
-        Gets commands.
-        """
-        return self._commands
 
     ### PUBLIC METHODS ###
 
