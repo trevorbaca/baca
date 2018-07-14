@@ -3131,7 +3131,7 @@ class RegisterCommand(scoping.Command):
 
     ..  container:: example
 
-        First stage only:
+        Tuplet 0 only:
 
         >>> music_maker = baca.MusicMaker()
         >>> contribution = music_maker(
@@ -3183,7 +3183,7 @@ class RegisterCommand(scoping.Command):
 
     ..  container:: example
 
-        Last stage only:
+        Tuplet -1 only:
 
         >>> music_maker = baca.MusicMaker()
 

@@ -167,7 +167,6 @@ class RhythmCommand(scoping.Command):
         '_rhythm_maker',
         '_right_broken',
         '_split_at_measure_boundaries',
-        '_stages',
         '_state',
         )
 
@@ -192,7 +191,6 @@ class RhythmCommand(scoping.Command):
         right_broken: bool = None,
         scope: scoping.scope_typing = None,
         split_at_measure_boundaries: bool = None,
-        stages: typing.Tuple[int, int] = None,
         ) -> None:
         scoping.Command.__init__(
             self,
@@ -237,10 +235,6 @@ class RhythmCommand(scoping.Command):
         if split_at_measure_boundaries is not None:
             split_at_measure_boundaries = bool(split_at_measure_boundaries)
         self._split_at_measure_boundaries = split_at_measure_boundaries
-        if stages is not None:
-            assert isinstance(stages, tuple), repr(stages)
-            assert len(stages) == 2, repr(stages)
-        self._stages = stages
         self._state: typing.Optional[abjad.OrderedDict] = None
 
     ### SPECIAL METHODS ###
@@ -1005,13 +999,6 @@ class RhythmCommand(scoping.Command):
         Is true when command splits at measure boundaries.
         """
         return self._split_at_measure_boundaries
-
-    @property
-    def stages(self) -> typing.Optional[typing.Tuple[int, int]]:
-        """
-        Gets stages.
-        """
-        return self._stages
 
     @property
     def state(self) -> typing.Optional[abjad.OrderedDict]:
@@ -2306,7 +2293,6 @@ def rhythm(
     rewrite_rest_filled: bool = None,
     right_broken: bool = None,
     split_at_measure_boundaries: bool = None,
-    stages: typing.Tuple[int, int] = None,
     ) -> RhythmCommand:
     """
     Makes rhythm command.
@@ -2323,7 +2309,6 @@ def rhythm(
         rhythm_maker=rhythm_maker,
         right_broken=right_broken,
         split_at_measure_boundaries=split_at_measure_boundaries,
-        stages=stages,
         )
 
 def tie_from(
