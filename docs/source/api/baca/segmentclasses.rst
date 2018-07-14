@@ -292,7 +292,6 @@ segmentclasses
       :nosignatures:
 
       items
-      stage_count
 
    .. autosummary::
       :nosignatures:
@@ -324,8 +323,6 @@ segmentclasses
       :class: class-header
 
    .. autoattribute:: StageMeasureMap.items
-
-   .. autoattribute:: StageMeasureMap.stage_count
 
 .. autoclass:: SystemSpecifier
 

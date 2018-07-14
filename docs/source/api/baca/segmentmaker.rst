@@ -61,7 +61,6 @@ segmentmaker
       manifests
       margin_markups
       measure_count
-      measures_per_stage
       metadata
       metronome_mark_measure_map
       metronome_marks
@@ -72,12 +71,10 @@ segmentmaker
       skip_wellformedness_checks
       skips_instead_of_rests
       spacing
-      stage_count
       test_container_identifiers
       time_signatures
       transpose_score
       validate_measure_count
-      validate_stage_count
       voice_metadata
 
    .. autosummary::
@@ -186,8 +183,6 @@ segmentmaker
 
    .. autoattribute:: SegmentMaker.measure_count
 
-   .. autoattribute:: SegmentMaker.measures_per_stage
-
    .. autoattribute:: SegmentMaker.metadata
 
    .. autoattribute:: SegmentMaker.metronome_mark_measure_map
@@ -220,8 +215,6 @@ segmentmaker
 
    .. autoattribute:: SegmentMaker.spacing
 
-   .. autoattribute:: SegmentMaker.stage_count
-
    .. autoattribute:: SegmentMaker.test_container_identifiers
 
    .. autoattribute:: SegmentMaker.time_signatures
@@ -229,8 +222,6 @@ segmentmaker
    .. autoattribute:: SegmentMaker.transpose_score
 
    .. autoattribute:: SegmentMaker.validate_measure_count
-
-   .. autoattribute:: SegmentMaker.validate_stage_count
 
    .. autoattribute:: SegmentMaker.voice_metadata
 

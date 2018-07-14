@@ -2451,10 +2451,10 @@ class SegmentMaker(abjad.SegmentMaker):
     def _print_cache(self):
         for context in self._cache:
             print(f'CONTEXT {context} ...')
-            leaves_by_stage_number = self._cache[context]
-            for stage_number in leaves_by_stage_number:
-                print(f'STAGE {stage_number} ...')
-                for leaf in leaves_by_stage_number[stage_number]:
+            leaves_by_measure_number = self._cache[context]
+            for measure_number in leaves_by_measure_number:
+                print(f'MEASURE {measure_number} ...')
+                for leaf in leaves_by_measure_number[measure_number]:
                     print(leaf)
 
     @staticmethod
@@ -2608,7 +2608,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for scope in scopes:
             leaves = []
             try:
-                leaves_by_stage_number = self._cache[scope.voice_name]
+                leaves_by_measure_number = self._cache[scope.voice_name]
             except KeyError:
                 print(f'Unknown voice {scope.voice_name} ...\n')
                 raise
@@ -2621,8 +2621,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 start = self.measure_count - abs(start) + 1
             if stop < 0:
                 stop = self.measure_count - abs(stop) + 1
-            for stage_number in range(start, stop):
-                leaves.extend(leaves_by_stage_number[stage_number])
+            for measure_number in range(start, stop):
+                leaves.extend(leaves_by_measure_number[measure_number])
             leaf_selections.append(abjad.select(leaves))
         return leaf_selections
 
@@ -2888,15 +2888,15 @@ class SegmentMaker(abjad.SegmentMaker):
         assert isinstance(voice_names, list), repr(voice_names)
         assert all(isinstance(_, str) for _ in voice_names)
         token_type = typing.Union[int, typing.Tuple[int, int]]
-        stage_tokens: typing.List[token_type] = []
+        measure_tokens: typing.List[token_type] = []
         if isinstance(scopes[1], int):
-            stage_tokens.append(scopes[1])
+            measure_tokens.append(scopes[1])
         elif isinstance(scopes[1], tuple):
             assert len(scopes[1]) == 2, repr(scopes)
             start, stop = scopes[1]
-            stage_tokens.append((start, stop))
+            measure_tokens.append((start, stop))
         elif isinstance(scopes[1], list):
-            stage_tokens = self._unpack_stage_token_list(scopes[1])
+            measure_tokens = self._unpack_measure_token_list(scopes[1])
         else:
             raise TypeError(scopes)
         scopes_ = []
@@ -2910,9 +2910,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 voice_names_.append(result)
         voice_names = voice_names_
         for voice_name in voice_names:
-            for stage_token in stage_tokens:
+            for measure_token in measure_tokens:
                 scope = scoping.Scope(
-                    measures=stage_token,
+                    measures=measure_token,
                     voice_name=voice_name,
                     )
                 scopes_.append(scope)
@@ -2949,19 +2949,19 @@ class SegmentMaker(abjad.SegmentMaker):
                 scope_ = scoping.Scope(voice_name=voice_name)
                 scopes_.append(scope_)
             elif isinstance(scope, tuple):
-                voice_name, stages = scope
+                voice_name, measures = scope
                 voice_name = abbreviations.get(voice_name, voice_name)
-                if isinstance(stages, list):
-                    stages = self._unpack_stage_token_list(stages)
-                    for stage_token in stages:
+                if isinstance(measures, list):
+                    measures = self._unpack_measure_token_list(measures)
+                    for measure_token in measures:
                         scope_ = scoping.Scope(
-                            measures=stage_token,
+                            measures=measure_token,
                             voice_name=voice_name,
                             )
                         scopes_.append(scope_)
                 else:
                     scope_ = scoping.Scope(
-                        stages=stages,
+                        measures=measures,
                         voice_name=voice_name,
                         )
                     scopes_.append(scope_)
@@ -2971,19 +2971,19 @@ class SegmentMaker(abjad.SegmentMaker):
         return scopes_
 
     @staticmethod
-    def _unpack_stage_token_list(stage_token_list):
-        assert isinstance(stage_token_list, list), repr(stage_token_list)
-        stage_tokens = []
-        for stage_token in stage_token_list:
-            if isinstance(stage_token, int):
-                stage_tokens.append(stage_token)
-            elif isinstance(stage_token, tuple):
-                assert len(stage_token) == 2, repr(scopes)
-                start, stop = stage_token
-                stage_tokens.append((start, stop))
+    def _unpack_measure_token_list(measure_token_list):
+        assert isinstance(measure_token_list, list), repr(measure_token_list)
+        measure_tokens = []
+        for measure_token in measure_token_list:
+            if isinstance(measure_token, int):
+                measure_tokens.append(measure_token)
+            elif isinstance(measure_token, tuple):
+                assert len(measure_token) == 2, repr(scopes)
+                start, stop = measure_token
+                measure_tokens.append((start, stop))
             else:
-                raise TypeError(stage_token_list)
-        return stage_tokens
+                raise TypeError(measure_token_list)
+        return measure_tokens
 
     def _update_score_one_time(self):
         is_forbidden_to_update = self.score._is_forbidden_to_update
@@ -4839,13 +4839,6 @@ class SegmentMaker(abjad.SegmentMaker):
         if self.time_signatures:
             return len(self.time_signatures)
         return 0
-
-    @property
-    def measures_per_stage(self) -> typing.List[int]:
-        """
-        Gets measures per stage.
-        """
-        return self.measure_count * [1]
 
     @property
     def metadata(self) -> abjad.OrderedDict:
