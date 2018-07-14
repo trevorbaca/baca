@@ -1886,135 +1886,6 @@ class PageSpecifier(abjad.AbjadObject):
         """
         return self._systems
 
-class StageMeasureMap(abjad.AbjadObject):
-    r"""
-    Stage measure map.
-
-    ..  container:: example
-
-        >>> stages = baca.StageMeasureMap([
-        ...     4,
-        ...     4,
-        ...     4, abjad.TimeSignature((1, 4)),
-        ...     4,
-        ...     ])
-
-        >>> abjad.f(stages, strict=89)
-        baca.StageMeasureMap(
-            items=(
-                4,
-                4,
-                4,
-                abjad.TimeSignature((1, 4)),
-                4,
-                ),
-            )
-
-    ..  container:: example
-
-        >>> stages = baca.StageMeasureMap([
-        ...     4,
-        ...     4,
-        ...     4, [abjad.TimeSignature((5, 4)), abjad.TimeSignature((5, 4))],
-        ...     4,
-        ...     ])
-
-        >>> abjad.f(stages, strict=89)
-        baca.StageMeasureMap(
-            items=(
-                4,
-                4,
-                4,
-                [
-                    abjad.TimeSignature((5, 4)),
-                    abjad.TimeSignature((5, 4)),
-                    ],
-                4,
-                ),
-            )
-
-    """
-
-    ### CLASS VARIABLES ###
-
-    __slots__ = (
-        '_items',
-        )
-
-    _publish_storage_format = True
-
-    ### INITIALIZER ###
-
-    item_type = typing.Union[
-        int,
-        abjad.Fermata,
-        abjad.TimeSignature, 
-        indicators.Accelerando,
-        indicators.Ritardando,
-        ]
-
-    def __init__(
-        self,
-        items: typing.List[item_type] = None,
-        ) -> None:
-        items = items or []
-        self._items = tuple(items)
-
-    ### SPECIAL METHODS ###
-
-    def __getitem__(self, argument) -> item_type:
-        """
-        Gets item identified by ``argument``.
-
-        ..  container:: example
-
-            >>> stages = baca.StageMeasureMap([
-            ...     4,
-            ...     4,
-            ...     4, abjad.TimeSignature((1, 4)),
-            ...     4,
-            ...     ])
-
-            >>> stages[0]
-            4
-
-        """
-        return self.items.__getitem__(argument)
-
-    ### PRIVATE METHODS ###
-
-    def _make_fermata_entries(self):
-        fermata_entries = []
-        for stage_index, item in enumerate(self):
-            if isinstance(item, abjad.Fermata):
-                stage_number = stage_index + 1
-                fermata_entry = (stage_number, item)
-                fermata_entries.append(fermata_entry)
-        fermata_entries = tuple(fermata_entries)
-        return fermata_entries
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def items(self) -> typing.Tuple[item_type, ...]:
-        """
-        Gets items.
-
-        ..  container:: example
-
-            >>> stages = baca.StageMeasureMap([
-            ...     4,
-            ...     4,
-            ...     4, abjad.TimeSignature((1, 4)),
-            ...     4,
-            ...     ])
-
-            >>> stages.items
-            (4, 4, 4, TimeSignature((1, 4)), 4)
-
-        """
-        return self._items
-
 class SystemSpecifier(abjad.AbjadObject):
     """
     System specifier.
@@ -2086,17 +1957,13 @@ class TimeSignatureMaker(abjad.AbjadObject):
         ...     [(1, 16), (2, 16), (3, 16)],
         ...     [(1, 8), (2, 8), (3, 8)],
         ...     ]
-        >>> stage_measure_map = baca.StageMeasureMap([
-        ...     2,
-        ...     2,
-        ...     abjad.Fermata('longfermata'),
-        ...     ])
         >>> maker = baca.TimeSignatureMaker(
         ...     time_signatures=time_signatures,
-        ...     stage_measure_map=stage_measure_map,
+        ...     count=5,
+        ...     fermata_measures=[5],
         ...     )
-        >>> maker()
-        Sequence([(1, 16), (2, 16), (3, 16), (1, 8), TimeSignature((1, 4))])
+        >>> maker.run()
+        [(1, 16), (2, 16), (3, 16), (1, 8), TimeSignature((1, 4))]
 
     """
 
@@ -2106,7 +1973,6 @@ class TimeSignatureMaker(abjad.AbjadObject):
         '_count',
         '_fermata_measures',
         '_rotation',
-        '_stage_measure_map',
         '_time_signatures',
         )
 
@@ -2119,7 +1985,6 @@ class TimeSignatureMaker(abjad.AbjadObject):
         count: int = None,
         fermata_measures: typing.List[int] = None,
         rotation: int = None,
-        stage_measure_map: StageMeasureMap = None,
         ) -> None:
         self._time_signatures = time_signatures
         if count is not None:
@@ -2129,56 +1994,8 @@ class TimeSignatureMaker(abjad.AbjadObject):
             assert isinstance(count, int), repr(count)
         self._fermata_measures = fermata_measures
         self._rotation = rotation
-        self._stage_measure_map = stage_measure_map
-
-    ### SPECIAL METHODS ###
-
-    def __call__(self) -> classes.Sequence:
-        """
-        Calls time-signature-maker.
-        """
-        if not self.stage_measure_map:
-            raise Exception('try TimeSignatureMaker.run() instead.')
-        time_signatures = classes.Sequence(self.time_signatures)
-        time_signatures = time_signatures.rotate(self.rotation)
-        time_signatures = time_signatures.flatten(depth=1)
-        items_: typing.List[StageMeasureMap.item_type] = []
-        for item in self.stage_measure_map.items:
-            if isinstance(item, abjad.Fermata):
-                item = abjad.TimeSignature((1, 4))
-            items_.append(item)
-        stage_measure_map = StageMeasureMap(items=items_)
-        time_signature_groups = self._make_time_signature_groups(
-            stage_measure_map,
-            time_signatures,
-            )
-        time_signatures = classes.Sequence(time_signature_groups).flatten(
-            depth=1
-            )
-        return time_signatures
 
     ### PRIVATE METHODS ###
-
-    def _make_time_signature_groups(
-        self,
-        stage_measure_map,
-        time_signatures,
-        ):
-        time_signatures = abjad.CyclicTuple(time_signatures)
-        time_signature_lists = []
-        index = 0
-        for item in stage_measure_map:
-            if isinstance(item, abjad.TimeSignature):
-                time_signature_list = [item]
-            elif isinstance(item, (tuple, list)):
-                time_signature_list = list(item)
-            else:
-                stop = index + item
-                time_signature_list = time_signatures[index:stop]
-                time_signature_list = list(time_signature_list)
-                index += item
-            time_signature_lists.append(time_signature_list)
-        return time_signature_lists
 
     def _normalize_fermata_measures(self):
         fermata_measures = []
@@ -2218,13 +2035,6 @@ class TimeSignatureMaker(abjad.AbjadObject):
         return self._rotation
 
     @property
-    def stage_measure_map(self) -> typing.Optional[StageMeasureMap]:
-        """
-        Gets stage measure map.
-        """
-        return self._stage_measure_map
-
-    @property
     def time_signatures(self) -> typing.List[abjad.TimeSignature]:
         """
         Gets time signatures.
@@ -2243,8 +2053,6 @@ class TimeSignatureMaker(abjad.AbjadObject):
         """
         if not self.count:
             raise Exception('must specify count with run().')
-        if self.stage_measure_map:
-            raise Exception('stage measure map must be empty with run().')
         result = []
         time_signatures = classes.Sequence(self.time_signatures)
         time_signatures = time_signatures.rotate(self.rotation)

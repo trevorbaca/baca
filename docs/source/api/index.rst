@@ -1046,7 +1046,6 @@ Rhythm library.
    ~baca.segmentclasses.HorizontalSpacingSpecifier
    ~baca.segmentclasses.LBSD
    ~baca.segmentclasses.PageSpecifier
-   ~baca.segmentclasses.StageMeasureMap
    ~baca.segmentclasses.SystemSpecifier
    ~baca.segmentclasses.TimeSignatureMaker
 
