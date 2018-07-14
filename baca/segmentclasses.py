@@ -2229,25 +2229,6 @@ class StageMeasureMap(abjad.AbjadObject):
         """
         return self._items
 
-    @property
-    def stage_count(self) -> int:
-        """Gets stage count.
-
-        ..  container:: example
-
-            >>> stages = baca.StageMeasureMap([
-            ...     4,
-            ...     4,
-            ...     4, abjad.TimeSignature((1, 4)),
-            ...     4,
-            ...     ])
-
-            >>> stages.stage_count
-            5
-
-        """
-        return len(self.items)
-
 class SystemSpecifier(abjad.AbjadObject):
     """
     System specifier.

@@ -164,7 +164,6 @@ class SegmentMaker(abjad.SegmentMaker):
         '_last_segment',
         '_magnify_staves',
         '_margin_markups',
-        '_measures_per_stage',
         '_metronome_mark_measure_map',
         '_metronome_marks',
         '_midi',
@@ -186,7 +185,6 @@ class SegmentMaker(abjad.SegmentMaker):
         '_time_signatures',
         '_transpose_score',
         '_validate_measure_count',
-        '_validate_stage_count',
         '_voice_metadata',
         '_voice_names',
         '_commands',
@@ -286,7 +284,6 @@ class SegmentMaker(abjad.SegmentMaker):
         time_signatures: typing.List[tuple] = None,
         transpose_score: bool = None,
         validate_measure_count: int = None,
-        validate_stage_count: int = None,
         ) -> None:
         super(SegmentMaker, self).__init__()
         self._allow_empty_selections = allow_empty_selections
@@ -329,11 +326,6 @@ class SegmentMaker(abjad.SegmentMaker):
         self._last_segment = last_segment
         self._magnify_staves = magnify_staves
         self._margin_markups = margin_markups
-        if time_signatures:
-            measures_per_stage = len(time_signatures) * [1]
-        else:
-            measures_per_stage = []
-        self._measures_per_stage = measures_per_stage
         self._metronome_mark_measure_map = metronome_mark_measure_map
         self._metronome_marks = metronome_marks
         self._midi: typing.Optional[bool] = None
@@ -359,14 +351,12 @@ class SegmentMaker(abjad.SegmentMaker):
         self._test_container_identifiers = test_container_identifiers
         self._transpose_score = transpose_score
         self._validate_measure_count = validate_measure_count
-        self._validate_stage_count = validate_stage_count
         self._voice_metadata: abjad.OrderedDict = abjad.OrderedDict()
         self._voice_names: typing.Optional[typing.Tuple[str, ...]] = None
         self._commands: typing.List[scoping.Command] = []
         self._import_manifests()
         self._initialize_time_signatures(time_signatures)
         self._validate_measure_count_()
-        self._validate_measures_per_stage()
 
     ### SPECIAL METHODS ###
 
@@ -891,11 +881,6 @@ class SegmentMaker(abjad.SegmentMaker):
             stop_offset = start_offset + duration
             previous_stop_offset = stop_offset
 
-    def _assert_valid_stage_number(self, stage_number):
-        if not 1 <= stage_number <= self.stage_count:
-            message = f'must be 1 <= x <= {self.stage_count}: {stage_number}.'
-            raise Exception(message)
-
     @staticmethod
     def _attach_color_cancelation_literal(
         wrapper,
@@ -1042,7 +1027,6 @@ class SegmentMaker(abjad.SegmentMaker):
         for stage_number, directive in self.metronome_mark_measure_map:
             if not isinstance(directive, directive_prototype):
                 continue
-            assert 0 < stage_number <= self.stage_count
             result = self._stage_number_to_measure_indices(stage_number)
             start_measure_index, stop_measure_index = result
             measure_number = first_measure_number + start_measure_index
@@ -1330,7 +1314,6 @@ class SegmentMaker(abjad.SegmentMaker):
         if not self.metronome_mark_measure_map:
             return
         for stage_number, directive in self.metronome_mark_measure_map:
-            self._assert_valid_stage_number(stage_number)
             start, _ = self._stage_number_to_measure_indices(stage_number)
             skip = skips[start]
             if isinstance(directive, abjad.Fermata):
@@ -1378,7 +1361,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _cache_leaves(self):
         stage_timespans = []
-        for stage_index in range(self.stage_count):
+        for stage_index in range(self.measure_count):
             stage_number = stage_index + 1
             stage_offsets = self._get_stage_offsets(stage_number, stage_number)
             stage_timespan = abjad.Timespan(*stage_offsets)
@@ -1391,7 +1374,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for context in contexts:
             leaves_by_stage_number = abjad.OrderedDict()
             self._cache[context.name] = leaves_by_stage_number
-            for stage_index in range(self.stage_count):
+            for stage_index in range(self.measure_count):
                 stage_number = stage_index + 1
                 leaves_by_stage_number[stage_number] = []
             for leaf in abjad.iterate(context).leaves():
@@ -2018,7 +2001,6 @@ class SegmentMaker(abjad.SegmentMaker):
         return start_offset, stop_offset
 
     def _get_stage_time_signatures(self, start_stage=None, stop_stage=None):
-        assert len(self.time_signatures) == sum(self.measures_per_stage)
         stages = classes.Sequence(self.time_signatures).partition_by_counts(
             self.measures_per_stage,
             )
@@ -2027,7 +2009,7 @@ class SegmentMaker(abjad.SegmentMaker):
             time_signatures = stages[start_index]
         else:
             if stop_stage == -1:
-                stop_stage = self.stage_count
+                stop_stage = self.measure_count
             stop_index = stop_stage
             stages = stages[start_index:stop_index]
             time_signatures = classes.Sequence(stages).flatten(depth=-1)
@@ -2263,7 +2245,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _label_stage_numbers(self):
         skips = classes.Selection(self.score['GlobalSkips']).skips()
-        for stage_index in range(self.stage_count):
+        for stage_index in range(self.measure_count):
             stage_number = stage_index + 1
             result = self._stage_number_to_measure_indices(stage_number)
             start_measure_index, stop_measure_index = result
@@ -2636,13 +2618,13 @@ class SegmentMaker(abjad.SegmentMaker):
                 raise
             start = scope.measures[0]
             if scope.measures[1] == -1:
-                stop = self.stage_count + 1
+                stop = self.measure_count + 1
             else:
                 stop = scope.measures[1] + 1
             if start < 0:
-                start = self.stage_count - abs(start) + 1
+                start = self.measure_count - abs(start) + 1
             if stop < 0:
-                stop = self.stage_count - abs(stop) + 1
+                stop = self.measure_count - abs(stop) + 1
             for stage_number in range(start, stop):
                 leaves.extend(leaves_by_stage_number[stage_number])
             leaf_selections.append(abjad.select(leaves))
@@ -2711,9 +2693,9 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _stage_number_to_measure_indices(self, stage_number):
         if stage_number == -1:
-            stage_number = self.stage_count
-        if self.stage_count < stage_number:
-            count = self.stage_count
+            stage_number = self.measure_count
+        if self.measure_count < stage_number:
+            count = self.measure_count
             counter = abjad.String('stage').pluralize(count)
             message = f'segment has only {count} {counter}'
             message += f' (not {stage_number}).'
@@ -3036,21 +3018,6 @@ class SegmentMaker(abjad.SegmentMaker):
         if found != self.validate_measure_count:
             message =  f'found {found} measures'
             message += f' (not {self.validate_measure_count}).'
-            raise Exception(message)
-
-    def _validate_measures_per_stage(self):
-        if self.measures_per_stage is None:
-            return
-        if not sum(self.measures_per_stage) == self.measure_count:
-            message = f'measures per stage {self.measures_per_stage}'
-            message += f' do not match measure count {self.measure_count}.'
-            raise Exception(message)
-
-    def _validate_stage_count_(self):
-        if not self.validate_stage_count:
-            return
-        if self.stage_count != self.validate_stage_count:
-            message = f'{self.stage_count} != {self.validate_stage_count}'
             raise Exception(message)
 
     def _voice_to_rhythm_commands(self, voice):
@@ -4898,10 +4865,7 @@ class SegmentMaker(abjad.SegmentMaker):
         """
         Gets measures per stage.
         """
-        if self._measures_per_stage is None:
-            time_signatures = self.time_signatures or []
-            return [len(time_signatures)]
-        return self._measures_per_stage
+        return self.measure_count * [1]
 
     @property
     def metadata(self) -> abjad.OrderedDict:
@@ -5412,17 +5376,6 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._spacing
 
     @property
-    def stage_count(self) -> int:
-        """
-        Gets stage count.
-
-        Defined equal to 1 when ``self.measures_per_stage`` is none.
-        """
-        if self.measures_per_stage is None:
-            return 1
-        return len(self.measures_per_stage)
-
-    @property
     def test_container_identifiers(self) -> typing.Optional[bool]:
         """
         Is true when segment-maker adds container identifiers in docs
@@ -5694,13 +5647,6 @@ class SegmentMaker(abjad.SegmentMaker):
         """
         return self._validate_measure_count
     
-    @property
-    def validate_stage_count(self) -> typing.Optional[int]:
-        """
-        Gets validate stage count.
-        """
-        return self._validate_stage_count
-
     @property
     def voice_metadata(self) -> abjad.OrderedDict:
         """
