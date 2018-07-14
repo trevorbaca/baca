@@ -1024,15 +1024,13 @@ class SegmentMaker(abjad.SegmentMaker):
             )
         last_measure_index = len(rests) - 1
         first_measure_number = self._get_first_measure_number()
-        for stage_number, directive in self.metronome_mark_measure_map:
+        for measure_number, directive in self.metronome_mark_measure_map:
             if not isinstance(directive, directive_prototype):
                 continue
-            result = self._stage_number_to_measure_indices(stage_number)
-            start_measure_index, stop_measure_index = result
-            measure_number = first_measure_number + start_measure_index
-            rest = context[start_measure_index]
+            measure_index = measure_number - 1
+            rest = context[measure_index]
             assert isinstance(rest, abjad.MultimeasureRest)
-            if start_measure_index == last_measure_index:
+            if measure_index == last_measure_index:
                 self._last_measure_is_fermata = True
             if isinstance(directive, abjad.Fermata):
                 if directive.command == 'shortfermata':
@@ -1313,9 +1311,8 @@ class SegmentMaker(abjad.SegmentMaker):
         skips = classes.Selection(self.score['GlobalSkips']).skips()
         if not self.metronome_mark_measure_map:
             return
-        for stage_number, directive in self.metronome_mark_measure_map:
-            start, _ = self._stage_number_to_measure_indices(stage_number)
-            skip = skips[start]
+        for measure_number, directive in self.metronome_mark_measure_map:
+            skip = skips[measure_number - 1]
             if isinstance(directive, abjad.Fermata):
                 continue
             abjad.attach(
@@ -1360,30 +1357,28 @@ class SegmentMaker(abjad.SegmentMaker):
             self._fermata_measure_numbers.append(measure_number)
 
     def _cache_leaves(self):
-        stage_timespans = []
-        for stage_index in range(self.measure_count):
-            stage_number = stage_index + 1
-            stage_offsets = self._get_stage_offsets(stage_number, stage_number)
-            stage_timespan = abjad.Timespan(*stage_offsets)
-            stage_timespans.append(stage_timespan)
+        measure_timespans = []
+        for measure_index in range(self.measure_count):
+            measure_number = measure_index + 1
+            measure_timespan = self._get_measure_timespan(measure_number)
+            measure_timespans.append(measure_timespan)
         self._cache = abjad.OrderedDict()
         contexts = [self.score['GlobalSkips']]
         if 'GlobalRests' in self.score:
             contexts.append(self.score['GlobalRests'])
         contexts.extend(abjad.select(self.score).components(abjad.Voice))
         for context in contexts:
-            leaves_by_stage_number = abjad.OrderedDict()
-            self._cache[context.name] = leaves_by_stage_number
-            for stage_index in range(self.measure_count):
-                stage_number = stage_index + 1
-                leaves_by_stage_number[stage_number] = []
+            leaves_by_measure_number = abjad.OrderedDict()
+            self._cache[context.name] = leaves_by_measure_number
+            for measure_index in range(self.measure_count):
+                measure_number = measure_index + 1
+                leaves_by_measure_number[measure_number] = []
             for leaf in abjad.iterate(context).leaves():
                 leaf_timespan = abjad.inspect(leaf).get_timespan()
-                for stage_index, stage_timespan in enumerate(stage_timespans):
-                    stage_number = stage_index + 1
-                    if leaf_timespan.starts_during_timespan(stage_timespan):
-                        leaves_by_stage_number[stage_number].append(leaf)
-
+                for i, measure_timespan in enumerate(measure_timespans):
+                    measure_number = i + 1
+                    if leaf_timespan.starts_during_timespan(measure_timespan):
+                        leaves_by_measure_number[measure_number].append(leaf)
 
     def _cache_previously_alive_contexts(self) -> None:
         if self.segment_directory is None:
@@ -1464,8 +1459,8 @@ class SegmentMaker(abjad.SegmentMaker):
             for command in commands:
                 if command.scope.measures is None:
                     raise Exception(format(command))
-                result = self._get_stage_time_signatures(
-                    *command.scope.measures)
+                measures = command.scope.measures
+                result = self._get_measure_time_signatures(*measures)
                 start_offset, time_signatures = result
                 command.runtime = self._bundle_manifests(voice.name)
                 try:
@@ -1916,6 +1911,23 @@ class SegmentMaker(abjad.SegmentMaker):
         if measure_number is not None:
             return f'MEASURE_{measure_number}'
 
+    def _get_measure_offsets(self, start_measure, stop_measure):
+        skips = classes.Selection(self.score['GlobalSkips']).skips()
+        start_skip = skips[start_measure - 1]
+        assert isinstance(start_skip, abjad.Skip), start_skip
+        start_offset = abjad.inspect(start_skip).get_timespan().start_offset
+        stop_skip = skips[stop_measure - 1]
+        assert isinstance(stop_skip, abjad.Skip), stop_skip
+        stop_offset = abjad.inspect(stop_skip).get_timespan().stop_offset
+        return start_offset, stop_offset
+
+    def _get_measure_timespan(self, measure_number):
+        start_offset, stop_offset = self._get_measure_offsets(
+            measure_number,
+            measure_number,
+            )
+        return abjad.Timespan(start_offset, stop_offset)
+
     def _get_measure_timespans(self, measure_numbers):
         timespans = []
         first_measure_number = self._get_first_measure_number()
@@ -1986,36 +1998,22 @@ class SegmentMaker(abjad.SegmentMaker):
                 raise Exception(message)
         return segment_number + 1
 
-    def _get_stage_offsets(self, start_stage, stop_stage):
-        skips = classes.Selection(self.score['GlobalSkips']).skips()
-        result = self._stage_number_to_measure_indices(start_stage)
-        start_measure_index, stop_measure_index = result
-        start_skip = skips[start_measure_index]
-        assert isinstance(start_skip, abjad.Skip), start_skip
-        start_offset = abjad.inspect(start_skip).get_timespan().start_offset
-        result = self._stage_number_to_measure_indices(stop_stage)
-        start_measure_index, stop_measure_index = result
-        stop_skip = skips[stop_measure_index]
-        assert isinstance(stop_skip, abjad.Skip), stop_skip
-        stop_offset = abjad.inspect(stop_skip).get_timespan().stop_offset
-        return start_offset, stop_offset
-
-    def _get_stage_time_signatures(self, start_stage=None, stop_stage=None):
-        stages = classes.Sequence(self.time_signatures).partition_by_counts(
-            self.measures_per_stage,
-            )
-        start_index = start_stage - 1
-        if stop_stage is None:
-            time_signatures = stages[start_index]
+    def _get_measure_time_signatures(
+        self,
+        start_measure=None,
+        stop_measure=None,
+        ):
+        assert stop_measure is not None
+        start_index = start_measure - 1
+        if stop_measure is None:
+            time_signatures = [self.time_signatures[start_index]]
         else:
-            if stop_stage == -1:
-                stop_stage = self.measure_count
-            stop_index = stop_stage
-            stages = stages[start_index:stop_index]
-            time_signatures = classes.Sequence(stages).flatten(depth=-1)
-        pair = (start_stage, stop_stage)
-        start_offset, stop_offset = self._get_stage_offsets(*pair)
-        return start_offset, time_signatures
+            if stop_measure == -1:
+                stop_measure = self.measure_count
+            stop_index = stop_measure
+            time_signatures = self.time_signatures[start_index:stop_index]
+        measure_timespan = self._get_measure_timespan(start_measure)
+        return measure_timespan.start_offset, time_signatures
 
     @staticmethod
     def _get_tag(status, stem, prefix=None, suffix=None):
@@ -2245,19 +2243,17 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _label_stage_numbers(self):
         skips = classes.Selection(self.score['GlobalSkips']).skips()
-        for stage_index in range(self.measure_count):
-            stage_number = stage_index + 1
-            result = self._stage_number_to_measure_indices(stage_number)
-            start_measure_index, stop_measure_index = result
+        for measure_index in range(self.measure_count):
+            measure_number = measure_index + 1
             name = self.segment_name
             if bool(name):
-                string = f'[{name}.{stage_number}]'
+                string = f'[{name}.{measure_number}]'
             else:
-                string = f'[{stage_number}]'
+                string = f'[{measure_number}]'
             markup = abjad.Markup(string)
             markup = markup.with_literal(r'\baca-dark-cyan-markup')
             markup = abjad.new(markup, direction=abjad.Up)
-            skip = skips[start_measure_index]
+            skip = skips[measure_index]
             tag = abjad.Tag(abjad.tags.STAGE_NUMBER_MARKUP)
             abjad.attach(
                 markup,
@@ -2690,22 +2686,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 string += " RepeatTie"
                 literal = abjad.LilyPondLiteral(string)
                 abjad.attach(literal, leaf, tag='SM26')
-
-    def _stage_number_to_measure_indices(self, stage_number):
-        if stage_number == -1:
-            stage_number = self.measure_count
-        if self.measure_count < stage_number:
-            count = self.measure_count
-            counter = abjad.String('stage').pluralize(count)
-            message = f'segment has only {count} {counter}'
-            message += f' (not {stage_number}).'
-            raise Exception(message)
-        measure_indices = abjad.mathtools.cumulative_sums(
-            self.measures_per_stage)
-        stop = stage_number - 1
-        start_measure_index = measure_indices[stop]
-        stop_measure_index = measure_indices[stage_number] - 1
-        return start_measure_index, stop_measure_index
 
     def _style_fermata_measures(self):
         if self.fermata_measure_staff_line_count is None:
