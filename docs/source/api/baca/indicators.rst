@@ -429,6 +429,10 @@ indicators
 
    .. container:: inherited
 
+      .. autoattribute:: Markup.literal
+
+   .. container:: inherited
+
       .. autoattribute:: Markup.tweaks
 
 .. autoclass:: Ritardando

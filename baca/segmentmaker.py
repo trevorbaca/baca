@@ -2125,7 +2125,7 @@ class SegmentMaker(abjad.SegmentMaker):
             brackets=True,
             clock_time=True,
             global_offset=segment_start_offset,
-            markup_command='baca-dark-cyan-markup',
+            markup_command=r'\baca-dark-cyan-markup',
             )
         segment_stop_offset = abjad.Offset(segment_stop_duration)
         self._stop_clock_time = segment_stop_offset.to_clock_string()
@@ -2141,9 +2141,12 @@ class SegmentMaker(abjad.SegmentMaker):
         first_measure_number = self._get_first_measure_number()
         for measure_index, skip in enumerate(skips):
             measure_number = first_measure_number + measure_index
-            markup = abjad.Markup(f'({measure_number})')
-            markup = markup.with_literal(r'\baca-dark-cyan-markup')
-            markup = abjad.new(markup, direction=abjad.Up)
+            string = rf'\baca-dark-cyan-markup ({measure_number})'
+            markup = abjad.Markup.from_literal(
+                string,
+                direction=abjad.Up,
+                literal=True
+                )
             tag = abjad.Tag(abjad.tags.MEASURE_NUMBER_MARKUP)
             abjad.attach(
                 markup,
@@ -2151,9 +2154,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 deactivate=True,
                 tag=tag.prepend('SM31'),
                 )
-            markup = abjad.Markup(f'<{measure_index}>')
-            markup = markup.with_literal(r'\baca-dark-cyan-markup')
-            markup = abjad.new(markup, direction=abjad.Up)
+            string = rf'\baca-dark-cyan-markup <{measure_index}>'
+            markup = abjad.Markup.from_literal(
+                string,
+                direction=abjad.Up,
+                literal=True
+                )
             tag = abjad.Tag(abjad.tags.MEASURE_INDEX_MARKUP)
             abjad.attach(
                 markup,
@@ -2162,9 +2168,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 tag=tag.prepend('SM32'),
                 )
             local_measure_number = measure_index + 1
-            markup = abjad.Markup(f'(({local_measure_number}))')
-            markup = markup.with_literal(r'\baca-dark-cyan-markup')
-            markup = abjad.new(markup, direction=abjad.Up)
+            string = rf'\baca-dark-cyan-markup (({local_measure_number}))'
+            markup = abjad.Markup.from_literal(
+                string,
+                direction=abjad.Up,
+                literal=True,
+                )
             tag = abjad.Tag(abjad.tags.LOCAL_MEASURE_NUMBER_MARKUP)
             abjad.attach(
                 markup,
@@ -2182,9 +2191,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 string = f'[{name}.{measure_number}]'
             else:
                 string = f'[{measure_number}]'
-            markup = abjad.Markup(string)
-            markup = markup.with_literal(r'\baca-dark-cyan-markup')
-            markup = abjad.new(markup, direction=abjad.Up)
+            string = rf'\baca-dark-cyan-markup {string}'
+            markup = abjad.Markup.from_literal(
+                string,
+                direction=abjad.Up,
+                literal=True,
+                )
             skip = skips[measure_index]
             tag = abjad.Tag(abjad.tags.STAGE_NUMBER_MARKUP)
             abjad.attach(
