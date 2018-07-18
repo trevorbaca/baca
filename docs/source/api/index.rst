@@ -46,9 +46,7 @@ Bača API
    ~baca.group_by_duration
    ~baca.group_by_length
    ~baca.group_by_measure
-   ~baca.group_by_measures
    ~baca.group_by_pitch
-   ~baca.group_notes_by_measures
    ~baca.index
    ~baca.items
    ~baca.leaf
@@ -63,6 +61,7 @@ Bača API
    ~baca.ltrun
    ~baca.ltruns
    ~baca.lts
+   ~baca.mgroups
    ~baca.mleaves
    ~baca.nontrivial
    ~baca.note

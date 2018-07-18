@@ -1627,7 +1627,7 @@ def hairpin(
         ...     baca.dls_staff_padding(5),
         ...     baca.hairpin(
         ...         'p f',
-        ...         piece_selector=baca.group_by_measures([1]),
+        ...         piece_selector=baca.mgroups([1]),
         ...     ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -1751,7 +1751,7 @@ def hairpin(
         ...     baca.dls_staff_padding(5),
         ...     baca.hairpin(
         ...         'p < f >',
-        ...         piece_selector=baca.group_by_measures([1]),
+        ...         piece_selector=baca.mgroups([1]),
         ...     ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -1880,7 +1880,7 @@ def hairpin(
         ...     baca.hairpin(
         ...         'p f',
         ...         bookend=True,
-        ...         piece_selector=baca.group_by_measures([1]),
+        ...         piece_selector=baca.mgroups([1]),
         ...     ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -2011,7 +2011,7 @@ def hairpin(
         ...     baca.hairpin(
         ...         'p -- f >',
         ...         bookend=True,
-        ...         piece_selector=baca.group_by_measures([1]),
+        ...         piece_selector=baca.mgroups([1]),
         ...     ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -2150,7 +2150,7 @@ def hairpin(
         ...     baca.hairpin(
         ...         'f > p',
         ...         leak=True,
-        ...         piece_selector=baca.group_by_measures([2])[:1],
+        ...         piece_selector=baca.mgroups([2])[:1],
         ...     ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -2270,7 +2270,7 @@ def hairpin(
         ...     baca.hairpin(
         ...         'f >o niente',
         ...         leak=True,
-        ...         piece_selector=baca.group_by_measures([2])[:1],
+        ...         piece_selector=baca.mgroups([2])[:1],
         ...     ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -3523,7 +3523,7 @@ def text_spanner(
         ...     baca.dls_staff_padding(5),
         ...     baca.text_spanner(
         ...         'A || B',
-        ...         piece_selector=baca.group_by_measures([1]),
+        ...         piece_selector=baca.mgroups([1]),
         ...     ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -3659,7 +3659,7 @@ def text_spanner(
         ...     baca.dls_staff_padding(5),
         ...     baca.text_spanner(
         ...         'A -> B ->',
-        ...         piece_selector=baca.group_by_measures([1]),
+        ...         piece_selector=baca.mgroups([1]),
         ...     ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -3796,7 +3796,7 @@ def text_spanner(
         ...     baca.text_spanner(
         ...         'A || B',
         ...         bookend=True,
-        ...         piece_selector=baca.group_by_measures([1]),
+        ...         piece_selector=baca.mgroups([1]),
         ...     ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -3945,7 +3945,7 @@ def text_spanner(
         ...     baca.text_spanner(
         ...         'A -> B ->',
         ...         bookend=True,
-        ...         piece_selector=baca.group_by_measures([1]),
+        ...         piece_selector=baca.mgroups([1]),
         ...     ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -4095,7 +4095,7 @@ def text_spanner(
         ...     baca.dls_staff_padding(5),
         ...     baca.text_spanner(
         ...         'A -| B -|',
-        ...         piece_selector=baca.group_by_measures([1]),
+        ...         piece_selector=baca.mgroups([1]),
         ...     ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),

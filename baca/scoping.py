@@ -812,7 +812,7 @@ def apply(
         >>> maker(
         ...     'MusicVoice',
         ...     baca.apply(
-        ...         baca.group_by_measures()[1:-1],
+        ...         baca.mgroups()[1:-1],
         ...         baca.marcato(),
         ...         baca.slur(),
         ...         baca.staccato(),

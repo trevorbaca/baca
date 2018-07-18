@@ -1853,6 +1853,23 @@ class SegmentMaker(abjad.SegmentMaker):
         stop_offset = abjad.inspect(stop_skip).get_timespan().stop_offset
         return start_offset, stop_offset
 
+    def _get_measure_time_signatures(
+        self,
+        start_measure=None,
+        stop_measure=None,
+        ):
+        assert stop_measure is not None
+        start_index = start_measure - 1
+        if stop_measure is None:
+            time_signatures = [self.time_signatures[start_index]]
+        else:
+            if stop_measure == -1:
+                stop_measure = self.measure_count
+            stop_index = stop_measure
+            time_signatures = self.time_signatures[start_index:stop_index]
+        measure_timespan = self._get_measure_timespan(start_measure)
+        return measure_timespan.start_offset, time_signatures
+
     def _get_measure_timespan(self, measure_number):
         start_offset, stop_offset = self._get_measure_offsets(
             measure_number,
@@ -1929,23 +1946,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 message = 'previous metadata missing segment number.'
                 raise Exception(message)
         return segment_number + 1
-
-    def _get_measure_time_signatures(
-        self,
-        start_measure=None,
-        stop_measure=None,
-        ):
-        assert stop_measure is not None
-        start_index = start_measure - 1
-        if stop_measure is None:
-            time_signatures = [self.time_signatures[start_index]]
-        else:
-            if stop_measure == -1:
-                stop_measure = self.measure_count
-            stop_index = stop_measure
-            time_signatures = self.time_signatures[start_index:stop_index]
-        measure_timespan = self._get_measure_timespan(start_measure)
-        return measure_timespan.start_offset, time_signatures
 
     @staticmethod
     def _get_tag(status, stem, prefix=None, suffix=None):
@@ -2808,6 +2808,21 @@ class SegmentMaker(abjad.SegmentMaker):
                     status,
                     )
 
+    @staticmethod
+    def _unpack_measure_token_list(measure_token_list):
+        assert isinstance(measure_token_list, list), repr(measure_token_list)
+        measure_tokens = []
+        for measure_token in measure_token_list:
+            if isinstance(measure_token, int):
+                measure_tokens.append(measure_token)
+            elif isinstance(measure_token, tuple):
+                assert len(measure_token) == 2, repr(scopes)
+                start, stop = measure_token
+                measure_tokens.append((start, stop))
+            else:
+                raise TypeError(measure_token_list)
+        return measure_tokens
+
     def _unpack_scope_pair(self, scopes, abbreviations):
         assert isinstance(scopes, tuple), repr(scopes)
         assert len(scopes) == 2, repr(scopes)
@@ -2901,21 +2916,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 scope_ = scope
                 scopes_.append(scope_)
         return scopes_
-
-    @staticmethod
-    def _unpack_measure_token_list(measure_token_list):
-        assert isinstance(measure_token_list, list), repr(measure_token_list)
-        measure_tokens = []
-        for measure_token in measure_token_list:
-            if isinstance(measure_token, int):
-                measure_tokens.append(measure_token)
-            elif isinstance(measure_token, tuple):
-                assert len(measure_token) == 2, repr(scopes)
-                start, stop = measure_token
-                measure_tokens.append((start, stop))
-            else:
-                raise TypeError(measure_token_list)
-        return measure_tokens
 
     def _update_score_one_time(self):
         is_forbidden_to_update = self.score._is_forbidden_to_update
