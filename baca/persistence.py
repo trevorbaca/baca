@@ -1085,6 +1085,76 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                     >>
                 >>
 
+        ..  container:: example
+
+            REGRESSION. Conventional and effort dynamics analyze
+            nonredundantly:
+
+            >>> maker = baca.SegmentMaker(
+            ...     ignore_unpitched_notes=True,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing=baca.minimum_duration((1, 24)),
+            ...     time_signatures=[(3, 8), (3, 8)],
+            ...     )
+            >>> maker(
+            ...     'MusicVoice',
+            ...     baca.make_notes(),
+            ...     baca.dynamic('mf'),
+            ...     baca.dynamic('"mf"', selector=baca.leaf(1)),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> block = abjad.Block(name='layout')
+            >>> block.indent = 0
+            >>> lilypond_file.items.insert(0, block)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score"
+                <<
+                    \context GlobalContext = "GlobalContext"
+                    <<
+                        \context GlobalSkips = "GlobalSkips"
+                        {
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! SM4
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            s1 * 3/8
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! SM4
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            s1 * 3/8
+                            \baca_bar_line_visible                                                       %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext"
+                    <<
+                        \context Staff = "MusicStaff"
+                        {
+                            \context Voice = "MusicVoice"
+                            {
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! SM4
+                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
+                                c'4.
+                                \mf                                                                      %! SM8:EXPLICIT_DYNAMIC:IC
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! SM4
+                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
+                                c'4.
+                                \baca_effort_mf                                                          %! SM8:EXPLICIT_DYNAMIC:IC
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
         """
         pass
 

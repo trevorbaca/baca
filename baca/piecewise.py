@@ -2665,9 +2665,6 @@ def make_dynamic(string: str) -> typing.Union[
         >>> baca.make_dynamic('niente')
         Dynamic('niente', command='\\!', direction=Down, name_is_textual=True)
 
-        >>> baca.make_dynamic('"f"')
-        Dynamic('f', command='\\baca_effort_f')
-
         >>> baca.make_dynamic('<')
         DynamicTrend(shape='<')
 
@@ -2686,6 +2683,16 @@ def make_dynamic(string: str) -> typing.Union[
 
         >>> baca.make_dynamic('f_ancora')
         Dynamic('f', command='\\baca_f_ancora')
+
+    ..  container:: example
+
+        Effort dynamics:
+
+        >>> baca.make_dynamic('"p"')
+        Dynamic('"p"', command='\\baca_effort_p', direction=Down)
+
+        >>> baca.make_dynamic('"f"')
+        Dynamic('"f"', command='\\baca_effort_f', direction=Down)
 
     ..  container:: example
 
@@ -2753,8 +2760,8 @@ def make_dynamic(string: str) -> typing.Union[
             )
     elif string.startswith('"'):
         assert string.endswith('"')
-        string = string.strip('"')
-        command = rf'\baca_effort_{string}'
+        stripped_string = string.strip('"')
+        command = rf'\baca_effort_{stripped_string}'
         indicator = abjad.Dynamic(f'{string}', command=command)
     elif string in known_shapes:
         indicator = abjad.DynamicTrend(string)
@@ -2778,7 +2785,7 @@ def parse_hairpin_descriptor(
 
         >>> for item in baca.parse_hairpin_descriptor('"f"'):
         ...     item
-        IndicatorBundle(Dynamic('f', command='\\baca_effort_f'))
+        IndicatorBundle(Dynamic('"f"', command='\\baca_effort_f', direction=Down))
 
         >>> for item in baca.parse_hairpin_descriptor('niente'):
         ...     item
