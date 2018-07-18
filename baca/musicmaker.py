@@ -11732,8 +11732,7 @@ class PitchSpecifier(abjad.AbjadObject):
 
         Returns string.
         """
-        superclass = super(PitchSpecifier, self)
-        return superclass.__repr__()
+        return super().__repr__()
 
     ### PRIVATE METHODS ###
 

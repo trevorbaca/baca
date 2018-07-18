@@ -342,8 +342,7 @@ class Division(abjad.NonreducedFraction):
         if argument.start_offset is not None:
             start_offsets.append(argument.start_offset)
             stop_offsets.append(argument.stop_offset)
-        superclass = super(Division, self)
-        sum_ = superclass.__add__(argument)
+        sum_ = super().__add__(argument)
         if not start_offsets:
             division = type(self)(sum_)
         elif len(start_offsets) == 1:
@@ -502,8 +501,7 @@ class Division(abjad.NonreducedFraction):
             message = 'both divisions must have (or not have) start offsets.'
             raise Exception(message)
         if self.start_offset is argument.start_offset is None:
-            superclass = super(Division, self)
-            difference = superclass.__sub__(argument)
+            difference = super().__sub__(argument)
             return self._from_pair(difference)
         my_timespan = self._to_timespan()
         expr_timespan = argument._to_timespan()
@@ -1764,8 +1762,7 @@ class DivisionSequence(abjad.Sequence):
             except (TypeError, ValueError):
                 pass
             items_.append(item)
-        superclass = super(DivisionSequence, self)
-        superclass.__init__(items=items_)
+        super().__init__(items=items_)
 
     ### PUBLIC METHODS ###
 

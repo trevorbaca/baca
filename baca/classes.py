@@ -208,8 +208,7 @@ class Cursor(abjad.AbjadObject):
 
         Returns true or false.
         """
-        superclass = super(Cursor, self)
-        return superclass.__eq__(argument)
+        return super().__eq__(argument)
 
     def __getitem__(self, argument):
         """
@@ -241,7 +240,7 @@ class Cursor(abjad.AbjadObject):
 
         Returns integer.
         """
-        return super(Cursor, self).__hash__()
+        return super().__hash__()
 
     def __iter__(self, count=1):
         """
@@ -1477,7 +1476,7 @@ class PaddedTuple(abjad.AbjadObject):
 
         Redefined in tandem with __eq__.
         """
-        return super(PaddedTuple, self).__hash__()
+        return super().__hash__()
 
     def __iter__(self) -> typing.Iterator:
         """
@@ -2002,7 +2001,7 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return super(Selection, self).leaves(
+        return super().leaves(
             abjad.Chord,
             head=True,
             grace_notes=False,
@@ -4611,7 +4610,7 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return super(Selection, self).leaves(
+        return super().leaves(
             grace_notes=False,
             pitched=True,
             )
@@ -6851,7 +6850,7 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return super(Selection, self).leaves(trim=True, grace_notes=False)
+        return super().leaves(trim=True, grace_notes=False)
 
     def wleaf(self, n=0):
         r"""
@@ -9237,8 +9236,7 @@ class Tree(abjad.AbjadObject):
 
         Returns string.
         """
-        superclass = super(Tree, self)
-        return superclass.__format__(format_specification=format_specification)
+        return super().__format__(format_specification=format_specification)
 
     def __getitem__(self, argument):
         """
@@ -9352,7 +9350,7 @@ class Tree(abjad.AbjadObject):
 
         Returns integer.
         """
-        return super(Tree, self).__hash__()
+        return super().__hash__()
 
 # TODO: make this work without recursion error
 #    def __iter__(self):
@@ -9419,8 +9417,7 @@ class Tree(abjad.AbjadObject):
 
         Returns string.
         """
-        superclass = super(Tree, self)
-        return superclass.__repr__()
+        return super().__repr__()
 
     ### PRIVATE PROPERTIES ###
 

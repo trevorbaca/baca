@@ -283,7 +283,7 @@ class SegmentMaker(abjad.SegmentMaker):
         transpose_score: bool = None,
         validate_measure_count: int = None,
         ) -> None:
-        super(SegmentMaker, self).__init__()
+        super().__init__()
         self._allow_empty_selections = allow_empty_selections
         self._breaks = breaks
         if clock_time_override is not None:

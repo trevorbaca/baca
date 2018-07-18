@@ -26,7 +26,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
     ### INITIALIZER ###
 
     def __init__(self) -> None:
-        super(ScoreTemplate, self).__init__()
+        super().__init__()
         self._defaults: list = []
 
     ### PRIVATE METHODS ###

@@ -732,7 +732,7 @@ class SpacingSection(abjad.AbjadObject):
 
         Returns integer.
         """
-        return super(SpacingSection, self).__hash__()
+        return super().__hash__()
 
     def __str__(self):
         """

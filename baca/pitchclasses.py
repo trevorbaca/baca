@@ -1082,8 +1082,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
 
         Returns string.
         """
-        superclass = super(CollectionList, self)
-        return superclass.__format__()
+        return super().__format__()
 
     def __getitem__(self, argument):
         """
@@ -7437,8 +7436,7 @@ class PitchTree(classes.Tree):
 #
 #        Returns Graphviz graph.
 #        """
-#        superclass = super(PitchTree, self)
-#        return superclass.__graph__(**keywords)
+#        return super().__graph__(**keywords)
 
     def __illustrate__(
         self,
@@ -9365,7 +9363,7 @@ class RegistrationComponent(abjad.AbjadValueObject):
 
         Returns true or false.
         """
-        return super(RegistrationComponent, self).__eq__(argument)
+        return super().__eq__(argument)
 
     def __format__(self, format_specification=''):
         """
@@ -9385,7 +9383,7 @@ class RegistrationComponent(abjad.AbjadValueObject):
 
         Returns integer.
         """
-        return super(RegistrationComponent, self).__hash__()
+        return super().__hash__()
 
     ### PUBLIC PROPERTIES ###
 

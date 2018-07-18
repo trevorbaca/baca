@@ -1085,9 +1085,7 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
             baca.SkipRhythmMaker()
 
         """
-        return super(SkipRhythmMaker, self).__format__(
-            format_specification=format_specification,
-            )
+        return super().__format__(format_specification=format_specification)
 
     ### PRIVATE METHODS ###
 
@@ -1161,7 +1159,7 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
 
         Returns tuplet specifier or none.
         """
-        return super(SkipRhythmMaker, self).tuplet_specifier
+        return super().tuplet_specifier
 
 class TieCorrectionCommand(scoping.Command):
     """

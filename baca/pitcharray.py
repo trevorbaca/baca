@@ -171,7 +171,7 @@ class PitchArray(abjad.AbjadObject):
 
         Returns integer.
         """
-        return super(type(self), self).__hash__()
+        return super().__hash__()
 
     def __iadd__(self, argument):
         """
@@ -1717,7 +1717,7 @@ class PitchArrayColumn(abjad.AbjadValueObject):
 
         Returns integer.
         """
-        return super(PitchArrayColumn, self).__hash__()
+        return super().__hash__()
 
     def __ne__(self, argument):
         """
@@ -2456,7 +2456,7 @@ class PitchArrayRow(abjad.AbjadObject):
 
         Returns integer.
         """
-        return super(PitchArrayRow, self).__hash__()
+        return super().__hash__()
 
     def __iadd__(self, argument):
         """
