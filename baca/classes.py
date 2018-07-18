@@ -3674,7 +3674,7 @@ class Selection(abjad.Selection):
 
         ..  container:: example
 
-            Selects leaves in first two measures:
+            Selects leaves in first three measures:
 
             ..  container:: example
 
@@ -3685,7 +3685,7 @@ class Selection(abjad.Selection):
                 >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
                 >>> abjad.show(staff) # doctest: +SKIP
 
-                >>> result = baca.select(staff).mleaves(2)
+                >>> result = baca.select(staff).mleaves(3)
 
                 >>> for item in result:
                 ...     item
@@ -3694,10 +3694,13 @@ class Selection(abjad.Selection):
                 Note("d'8")
                 Note("e'8")
                 Note("f'8")
+                Note("g'8")
+                Note("a'8")
+                Note("b'8")
 
             ..  container:: example expression
 
-                >>> selector = baca.select().mleaves(2)
+                >>> selector = baca.select().mleaves(3)
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
@@ -3705,6 +3708,9 @@ class Selection(abjad.Selection):
                 Note("d'8")
                 Note("e'8")
                 Note("f'8")
+                Note("g'8")
+                Note("a'8")
+                Note("b'8")
 
                 >>> selector.color(result)
                 >>> abjad.show(staff) # doctest: +SKIP
@@ -3740,10 +3746,115 @@ class Selection(abjad.Selection):
                     \once \override NoteHead.color = #blue
                     \once \override Stem.color = #blue
                     f'8
+                    \once \override Accidental.color = #red
+                    \once \override Beam.color = #red
+                    \once \override Dots.color = #red
+                    \once \override NoteHead.color = #red
+                    \once \override Stem.color = #red
                     \time 3/8
                     g'8
+                    \once \override Accidental.color = #blue
+                    \once \override Beam.color = #blue
+                    \once \override Dots.color = #blue
+                    \once \override NoteHead.color = #blue
+                    \once \override Stem.color = #blue
                     a'8
+                    \once \override Accidental.color = #red
+                    \once \override Beam.color = #red
+                    \once \override Dots.color = #red
+                    \once \override NoteHead.color = #red
+                    \once \override Stem.color = #red
                     b'8
+                    \time 1/8
+                    r8
+                }
+
+        ..  container:: example
+
+            Selects leaves in last three measures:
+
+            ..  container:: example
+
+                >>> staff = abjad.Staff("r8 d' e' f' g' a' b' r")
+                >>> abjad.setting(staff).auto_beaming = False
+                >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
+                >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
+                >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
+                >>> abjad.show(staff) # doctest: +SKIP
+
+                >>> result = baca.select(staff).mleaves(-3)
+
+                >>> for item in result:
+                ...     item
+                ...
+                Note("e'8")
+                Note("f'8")
+                Note("g'8")
+                Note("a'8")
+                Note("b'8")
+                Rest('r8')
+
+            ..  container:: example expression
+
+                >>> selector = baca.select().mleaves(-3)
+                >>> result = selector(staff)
+
+                >>> selector.print(result)
+                Note("e'8")
+                Note("f'8")
+                Note("g'8")
+                Note("a'8")
+                Note("b'8")
+                Rest('r8')
+
+                >>> selector.color(result)
+                >>> abjad.show(staff) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(staff)
+                \new Staff
+                \with
+                {
+                    autoBeaming = ##f
+                }
+                {
+                    \time 2/8
+                    r8
+                    d'8
+                    \once \override Accidental.color = #red
+                    \once \override Beam.color = #red
+                    \once \override Dots.color = #red
+                    \once \override NoteHead.color = #red
+                    \once \override Stem.color = #red
+                    e'8
+                    \once \override Accidental.color = #blue
+                    \once \override Beam.color = #blue
+                    \once \override Dots.color = #blue
+                    \once \override NoteHead.color = #blue
+                    \once \override Stem.color = #blue
+                    f'8
+                    \once \override Accidental.color = #red
+                    \once \override Beam.color = #red
+                    \once \override Dots.color = #red
+                    \once \override NoteHead.color = #red
+                    \once \override Stem.color = #red
+                    \time 3/8
+                    g'8
+                    \once \override Accidental.color = #blue
+                    \once \override Beam.color = #blue
+                    \once \override Dots.color = #blue
+                    \once \override NoteHead.color = #blue
+                    \once \override Stem.color = #blue
+                    a'8
+                    \once \override Accidental.color = #red
+                    \once \override Beam.color = #red
+                    \once \override Dots.color = #red
+                    \once \override NoteHead.color = #red
+                    \once \override Stem.color = #red
+                    b'8
+                    \once \override Dots.color = #blue
+                    \once \override Rest.color = #blue
                     \time 1/8
                     r8
                 }
@@ -3756,7 +3867,7 @@ class Selection(abjad.Selection):
         if 0 < count:
             result = result[:count].flatten()
         elif count < 0:
-            result = result[-count:].flatten()
+            result = result[count:].flatten()
         else:
             raise Exception(count)
         return result
