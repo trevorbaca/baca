@@ -4,6 +4,58 @@
 \include "flared-hairpin-for-trevor.ily"
 \include "text-spanner-id.ily"
 
+%%% ARTICULATIONS: BOWSTROKES %%%
+
+baca-full-downbow = \markup {
+    \combine
+        \musicglyph #"scripts.downbow"
+        \path #0.15 
+        #'(
+            (moveto 0.7375 0.05)
+            (rlineto 1 0)
+            (closepath)
+            )
+    }
+
+baca-stop-on-string-full-downbow = \markup {
+    \combine
+        \musicglyph #"scripts.downbow"
+        \path #0.15 
+        #'(
+            (moveto 0.7375 0.05)
+            (rlineto 1 0)
+            (closepath)
+            (rmoveto 1 0.3)
+            (rlineto 0 -0.6)
+            (closepath)
+            )
+    }
+
+baca-full-upbow = \markup {
+    \combine
+        \musicglyph #"scripts.upbow"
+        \path #0.15 
+        #'(
+            (moveto 0.62 2.005)
+            (rlineto 1 0)
+            (closepath)
+            )
+    }
+
+baca-stop-on-string-full-upbow = \markup {
+    \combine
+        \musicglyph #"scripts.upbow"
+        \path #0.15 
+        #'(
+            (moveto 0.62 2.005)
+            (rlineto 1 0)
+            (closepath)
+            (rmoveto 1 0.3)
+            (rlineto 0 -0.6)
+            (closepath)
+            )
+    }
+
 %%% ARTICULATIONS: MULTIPLE STACCATI %%%
 
 baca_staccati =
@@ -125,9 +177,8 @@ baca_unregistered_pitch_warning = \baca_magenta_music
 
 %%% DAMP %%%
 
-baca_karim_damp = \markup{
-    \center-column {
-  {\override #'(thickness . 1.8)
+baca_karim_damp = \markup { \center-column { {
+    \override #'(thickness . 1.8)
     \combine \draw-line #'(-1.5 . 0)
     \combine \draw-line #'(0 . -1.5)
     \combine \draw-line #'(0 . 1.5)
@@ -139,9 +190,13 @@ baca_karim_damp = \markup{
 baca_pierre_damp = \markup {
     \combine \bold "O"
     \path #0.2 
-    #'((moveto -.4 .8)(lineto 2.2 .8)
+    #'(
+        (moveto -.4 .8)
+        (lineto 2.2 .8)
         (closepath)
-        (moveto .9 -.5)(lineto .9 2.1))
+        (moveto .9 -.5)
+        (lineto .9 2.1)
+        )
     }
 
 %%% DYNAMICS: ANCORA %%%
