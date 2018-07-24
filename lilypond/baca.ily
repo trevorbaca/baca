@@ -4,9 +4,9 @@
 \include "flared-hairpin-for-trevor.ily"
 \include "text-spanner-id.ily"
 
-%%% ARTICULATIONS: BOWSTROKES %%%
+%%% BOWSTROKES: MARKUP & ARTICULATIONS %%%
 
-baca-full-downbow = \markup {
+baca_full_downbow_markup = \markup {
     \combine
         \musicglyph #"scripts.downbow"
         \path #0.15 
@@ -17,7 +17,7 @@ baca-full-downbow = \markup {
             )
     }
 
-baca-full-upbow = \markup {
+baca_full_upbow_markup = \markup {
     \combine
         \musicglyph #"scripts.upbow"
         \path #0.15 
@@ -28,7 +28,7 @@ baca-full-upbow = \markup {
             )
     }
 
-baca-stop-on-string = \markup {
+baca_stop_on_string_markup = \markup {
     \path #0.15 
     #'(
         (moveto 0 0)
@@ -40,7 +40,7 @@ baca-stop-on-string = \markup {
         )
     }
 
-baca-stop-on-string-full-downbow = \markup {
+baca_stop_on_string_full_downbow_markup = \markup {
     \combine
         \musicglyph #"scripts.downbow"
         \path #0.15 
@@ -54,7 +54,7 @@ baca-stop-on-string-full-downbow = \markup {
             )
     }
 
-baca-stop-on-string-full-upbow = \markup {
+baca_stop_on_string_full_upbow_markup = \markup {
     \combine
         \musicglyph #"scripts.upbow"
         \path #0.15 
@@ -67,6 +67,95 @@ baca-stop-on-string-full-upbow = \markup {
             (closepath)
             )
     }
+
+#(append! default-script-alist
+   (list
+    `("bacafulldownbow"
+       . (
+           (stencil . ,ly:text-interface::print)
+           (text . ,baca_full_downbow_markup)
+           (avoid-slur . around)
+           (direction . ,UP)
+           (padding . 0.20)
+           (script-priority . 150)
+           (skyline-horizontal-padding . 0.20)
+           (toward-stem-shift . 0.5)
+           ))))
+
+baca_full_downbow = #(make-articulation "bacafulldownbow")
+
+#(append! default-script-alist
+   (list
+    `("bacastoponstringfulldownbow"
+       . (
+           (stencil . ,ly:text-interface::print)
+           (text . ,baca_stop_on_string_full_downbow_markup)
+           (avoid-slur . around)
+           (direction . ,UP)
+           (padding . 0.20)
+           (script-priority . 150)
+           (skyline-horizontal-padding . 0.20)
+           (toward-stem-shift . 0.6)
+           ))))
+
+baca_stop_on_string_full_downbow = #(
+    make-articulation "bacastoponstringfulldownbow")
+
+#(append! default-script-alist
+   (list
+    `("bacafullupbow"
+       . (
+           (stencil . ,ly:text-interface::print)
+           (text . ,baca_full_upbow_markup)
+           (avoid-slur . around)
+           (direction . ,UP)
+           (padding . 0.20)
+           (script-priority . 150)
+           (skyline-horizontal-padding . 0.20)
+           (toward-stem-shift . 0.5)
+           ))))
+
+baca_full_upbow = #(make-articulation "bacafullupbow")
+
+#(append! default-script-alist
+   (list
+    `("bacastoponstringfullupbow"
+       . (
+           (stencil . ,ly:text-interface::print)
+           (text . ,baca_stop_on_string_full_upbow_markup)
+           (avoid-slur . around)
+           (direction . ,UP)
+           (padding . 0.20)
+           (script-priority . 150)
+           (skyline-horizontal-padding . 0.20)
+           (toward-stem-shift . 0.6)
+           ))))
+
+baca_stop_on_string_full_upbow = #(
+    make-articulation "bacastoponstringfullupbow")
+
+#(append! default-script-alist
+   (list
+    `("bacastoponstring"
+       . (
+           (stencil . ,ly:text-interface::print)
+           (text . ,baca_stop_on_string_markup)
+           (avoid-slur . around)
+           (direction . ,UP)
+           (padding . 0.20)
+           (script-priority . 150)
+           (skyline-horizontal-padding . 0.20)
+           (toward-stem-shift . 0.4)
+           ))))
+
+baca_stop_on_string = #(make-articulation "bacastoponstring")
+
+\layout {
+    \context {
+        \Score
+        scriptDefinitions = #default-script-alist
+    }
+}
 
 %%% ARTICULATIONS: MULTIPLE STACCATI %%%
 
@@ -189,7 +278,7 @@ baca_unregistered_pitch_warning = \baca_magenta_music
 
 %%% DAMP %%%
 
-baca_karim_damp = \markup { \center-column { {
+baca_karim_damp_markup = \markup { \center-column { {
     \override #'(thickness . 1.8)
     \combine \draw-line #'(-1.5 . 0)
     \combine \draw-line #'(0 . -1.5)
@@ -199,7 +288,7 @@ baca_karim_damp = \markup { \center-column { {
     }}}
 
 % use scale instead of fontsize
-baca_pierre_damp = \markup {
+baca_pierre_damp_markup = \markup {
     \combine \bold "O"
     \path #0.2 
     #'(
