@@ -17,6 +17,29 @@ baca-full-downbow = \markup {
             )
     }
 
+baca-full-upbow = \markup {
+    \combine
+        \musicglyph #"scripts.upbow"
+        \path #0.15 
+        #'(
+            (moveto 0.62 2.005)
+            (rlineto 1 0)
+            (closepath)
+            )
+    }
+
+baca-stop-on-string = \markup {
+    \path #0.15 
+    #'(
+        (moveto 0 0)
+        (rlineto 1 0)
+        (closepath)
+        (rmoveto 1 0.3)
+        (rlineto 0 -0.6)
+        (closepath)
+        )
+    }
+
 baca-stop-on-string-full-downbow = \markup {
     \combine
         \musicglyph #"scripts.downbow"
@@ -27,17 +50,6 @@ baca-stop-on-string-full-downbow = \markup {
             (closepath)
             (rmoveto 1 0.3)
             (rlineto 0 -0.6)
-            (closepath)
-            )
-    }
-
-baca-full-upbow = \markup {
-    \combine
-        \musicglyph #"scripts.upbow"
-        \path #0.15 
-        #'(
-            (moveto 0.62 2.005)
-            (rlineto 1 0)
             (closepath)
             )
     }
