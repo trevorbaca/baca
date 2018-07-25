@@ -59,25 +59,25 @@ class RhythmCommand(scoping.Command):
                         % [GlobalSkips measure 1]                                                    %! SM4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
                         \baca_bar_line_visible                                                       %! SM5
                         \bar "|"                                                                     %! SM5
@@ -519,25 +519,25 @@ class RhythmCommand(scoping.Command):
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
                             \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM4
                             \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM4
                             \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                             \baca_bar_line_visible                                                       %! SM5
                             \bar "|"                                                                     %! SM5
@@ -713,7 +713,7 @@ class RhythmCommand(scoping.Command):
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                             \time 10/8                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 5/4
                             \baca_bar_line_visible                                                       %! SM5
                             \bar "|"                                                                     %! SM5
@@ -818,7 +818,7 @@ class RhythmCommand(scoping.Command):
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \baca_new_spacing_section #1 #16                                             %! HSS1:SPACING
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 1/2
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
@@ -2127,25 +2127,25 @@ def repeat_tie_from(
                         % [GlobalSkips measure 1]                                                    %! SM4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
                         \baca_bar_line_visible                                                       %! SM5
                         \bar "|"                                                                     %! SM5
@@ -2221,25 +2221,25 @@ def repeat_tie_to(
                         % [GlobalSkips measure 1]                                                    %! SM4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
                         \baca_bar_line_visible                                                       %! SM5
                         \bar "|"                                                                     %! SM5
@@ -2345,22 +2345,22 @@ def tie_from(
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! SM4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
                         \baca_bar_line_visible                                                       %! SM5
                         \bar "|"                                                                     %! SM5
@@ -2434,22 +2434,22 @@ def tie_to(
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! SM4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
                         \baca_bar_line_visible                                                       %! SM5
                         \bar "|"                                                                     %! SM5
@@ -2524,22 +2524,22 @@ def untie_to(
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! SM4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 1/2
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                         s1 * 3/8
                         \baca_bar_line_visible                                                       %! SM5
                         \bar "|"                                                                     %! SM5

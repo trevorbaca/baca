@@ -63,7 +63,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -145,7 +145,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -239,7 +239,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -332,7 +332,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -415,7 +415,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -523,7 +523,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -605,7 +605,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
@@ -683,7 +683,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
@@ -762,7 +762,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
@@ -829,7 +829,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
@@ -909,7 +909,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
@@ -974,7 +974,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
@@ -1054,7 +1054,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
@@ -1122,7 +1122,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
@@ -1219,7 +1219,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -1283,7 +1283,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -1344,7 +1344,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -1422,7 +1422,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -1486,7 +1486,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -1547,7 +1547,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -1637,7 +1637,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -1702,7 +1702,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -1764,7 +1764,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -1855,7 +1855,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -1920,7 +1920,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -1982,7 +1982,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -2070,7 +2070,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 1/2
                 <BLANKLINE>
@@ -2147,7 +2147,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 4/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 1/2
                 <BLANKLINE>
@@ -2221,7 +2221,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 4/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 1/2
                 <BLANKLINE>
@@ -2330,7 +2330,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -2395,7 +2395,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -2457,7 +2457,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -2567,7 +2567,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -2641,7 +2641,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -2712,7 +2712,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -2800,7 +2800,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -2874,7 +2874,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -2945,7 +2945,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -3045,7 +3045,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -3120,7 +3120,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -3192,7 +3192,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -3293,7 +3293,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -3368,7 +3368,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -3440,7 +3440,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -3538,7 +3538,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 1/2
                 <BLANKLINE>
@@ -3635,7 +3635,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 4/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 1/2
                 <BLANKLINE>
@@ -3729,7 +3729,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 4/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 1/2
                 <BLANKLINE>
@@ -3858,7 +3858,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -3933,7 +3933,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -4005,7 +4005,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_lbsd #0 #'(11) %! IC:BREAK
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak %! IC:BREAK
                             s1 * 3/8
                 <BLANKLINE>
@@ -4112,7 +4112,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 1/2
                 <BLANKLINE>
@@ -4241,7 +4241,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \baca_lbsd #4 #'(8)                                                          %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                             \stopTextSpan                                                                %! MMI1
@@ -4353,7 +4353,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_lbsd #4 #'(8)                                                          %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                             \stopTextSpan                                                                %! MMI1
@@ -4467,7 +4467,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_lbsd #4 #'(8)                                                          %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                             \stopTextSpan                                                                %! MMI1
@@ -4567,7 +4567,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \baca_lbsd #4 #'(8)                                                          %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                             \stopTextSpan                                                                %! MMI1
@@ -4687,7 +4687,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_lbsd #4 #'(8)                                                          %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                             \stopTextSpan                                                                %! MMI1
@@ -4787,7 +4787,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
@@ -4914,7 +4914,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
@@ -4985,7 +4985,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
@@ -5072,7 +5072,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
@@ -5147,7 +5147,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
@@ -5227,7 +5227,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
@@ -5308,7 +5308,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
@@ -5377,7 +5377,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 1]                                                    %! SM4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
@@ -5461,7 +5461,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             s1 * 3/8
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM4
@@ -5552,7 +5552,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \baca_lbsd #4 #'(8)                                                          %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                             \stopTextSpan                                                                %! MMI1
@@ -5668,7 +5668,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_lbsd #4 #'(8)                                                          %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                             \stopTextSpan                                                                %! MMI1
@@ -5786,7 +5786,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_lbsd #4 #'(8)                                                          %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                             \stopTextSpan                                                                %! MMI1
@@ -5893,7 +5893,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \noBreak                                                                     %! BMM2:BREAK
                             \baca_lbsd #4 #'(8)                                                          %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                             \stopTextSpan                                                                %! MMI1
@@ -6044,7 +6044,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_lbsd #4 #'(8)                                                          %! IC:BREAK
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
                             \stopTextSpan                                                                %! MMI1
