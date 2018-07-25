@@ -4531,78 +4531,30 @@ class RegisterInterpolationCommand(scoping.Command):
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
-                                \once \override Accidental.color = #green
-                                \once \override Beam.color = #green
-                                \once \override Dots.color = #green
-                                \once \override NoteHead.color = #green
-                                \once \override Stem.color = #green
+                                \abjad_color_music "green"
                                 fs'16
                                 [
-                                \once \override Accidental.color = #green
-                                \once \override Beam.color = #green
-                                \once \override Dots.color = #green
-                                \once \override NoteHead.color = #green
-                                \once \override Stem.color = #green
+                                \abjad_color_music "green"
                                 e'16
-                                \once \override Accidental.color = #green
-                                \once \override Beam.color = #green
-                                \once \override Dots.color = #green
-                                \once \override NoteHead.color = #green
-                                \once \override Stem.color = #green
+                                \abjad_color_music "green"
                                 ef''16
-                                \once \override Accidental.color = #green
-                                \once \override Beam.color = #green
-                                \once \override Dots.color = #green
-                                \once \override NoteHead.color = #green
-                                \once \override Stem.color = #green
+                                \abjad_color_music "green"
                                 f''16
-                                \once \override Accidental.color = #green
-                                \once \override Beam.color = #green
-                                \once \override Dots.color = #green
-                                \once \override NoteHead.color = #green
-                                \once \override Stem.color = #green
+                                \abjad_color_music "green"
                                 a'16
-                                \once \override Accidental.color = #green
-                                \once \override Beam.color = #green
-                                \once \override Dots.color = #green
-                                \once \override NoteHead.color = #green
-                                \once \override Stem.color = #green
+                                \abjad_color_music "green"
                                 bf'16
-                                \once \override Accidental.color = #green
-                                \once \override Beam.color = #green
-                                \once \override Dots.color = #green
-                                \once \override NoteHead.color = #green
-                                \once \override Stem.color = #green
+                                \abjad_color_music "green"
                                 c''16
-                                \once \override Accidental.color = #green
-                                \once \override Beam.color = #green
-                                \once \override Dots.color = #green
-                                \once \override NoteHead.color = #green
-                                \once \override Stem.color = #green
+                                \abjad_color_music "green"
                                 b''16
-                                \once \override Accidental.color = #green
-                                \once \override Beam.color = #green
-                                \once \override Dots.color = #green
-                                \once \override NoteHead.color = #green
-                                \once \override Stem.color = #green
+                                \abjad_color_music "green"
                                 af''16
-                                \once \override Accidental.color = #green
-                                \once \override Beam.color = #green
-                                \once \override Dots.color = #green
-                                \once \override NoteHead.color = #green
-                                \once \override Stem.color = #green
+                                \abjad_color_music "green"
                                 g''16
-                                \once \override Accidental.color = #green
-                                \once \override Beam.color = #green
-                                \once \override Dots.color = #green
-                                \once \override NoteHead.color = #green
-                                \once \override Stem.color = #green
+                                \abjad_color_music "green"
                                 cs'''16
-                                \once \override Accidental.color = #green
-                                \once \override Beam.color = #green
-                                \once \override Dots.color = #green
-                                \once \override NoteHead.color = #green
-                                \once \override Stem.color = #green
+                                \abjad_color_music "green"
                                 d'''16
                                 ]
                             }
@@ -4668,78 +4620,30 @@ class RegisterInterpolationCommand(scoping.Command):
                                 ]
                             }
                             \scaleDurations #'(1 . 1) {
-                                \once \override Accidental.color = #green
-                                \once \override Beam.color = #green
-                                \once \override Dots.color = #green
-                                \once \override NoteHead.color = #green
-                                \once \override Stem.color = #green
+                                \abjad_color_music "green"
                                 fs'16
                                 [
-                                \once \override Accidental.color = #green
-                                \once \override Beam.color = #green
-                                \once \override Dots.color = #green
-                                \once \override NoteHead.color = #green
-                                \once \override Stem.color = #green
+                                \abjad_color_music "green"
                                 e'16
-                                \once \override Accidental.color = #green
-                                \once \override Beam.color = #green
-                                \once \override Dots.color = #green
-                                \once \override NoteHead.color = #green
-                                \once \override Stem.color = #green
+                                \abjad_color_music "green"
                                 ef''16
-                                \once \override Accidental.color = #green
-                                \once \override Beam.color = #green
-                                \once \override Dots.color = #green
-                                \once \override NoteHead.color = #green
-                                \once \override Stem.color = #green
+                                \abjad_color_music "green"
                                 f''16
-                                \once \override Accidental.color = #green
-                                \once \override Beam.color = #green
-                                \once \override Dots.color = #green
-                                \once \override NoteHead.color = #green
-                                \once \override Stem.color = #green
+                                \abjad_color_music "green"
                                 a'16
-                                \once \override Accidental.color = #green
-                                \once \override Beam.color = #green
-                                \once \override Dots.color = #green
-                                \once \override NoteHead.color = #green
-                                \once \override Stem.color = #green
+                                \abjad_color_music "green"
                                 bf'16
-                                \once \override Accidental.color = #green
-                                \once \override Beam.color = #green
-                                \once \override Dots.color = #green
-                                \once \override NoteHead.color = #green
-                                \once \override Stem.color = #green
+                                \abjad_color_music "green"
                                 c''16
-                                \once \override Accidental.color = #green
-                                \once \override Beam.color = #green
-                                \once \override Dots.color = #green
-                                \once \override NoteHead.color = #green
-                                \once \override Stem.color = #green
+                                \abjad_color_music "green"
                                 b''16
-                                \once \override Accidental.color = #green
-                                \once \override Beam.color = #green
-                                \once \override Dots.color = #green
-                                \once \override NoteHead.color = #green
-                                \once \override Stem.color = #green
+                                \abjad_color_music "green"
                                 af''16
-                                \once \override Accidental.color = #green
-                                \once \override Beam.color = #green
-                                \once \override Dots.color = #green
-                                \once \override NoteHead.color = #green
-                                \once \override Stem.color = #green
+                                \abjad_color_music "green"
                                 g''16
-                                \once \override Accidental.color = #green
-                                \once \override Beam.color = #green
-                                \once \override Dots.color = #green
-                                \once \override NoteHead.color = #green
-                                \once \override Stem.color = #green
+                                \abjad_color_music "green"
                                 cs'''16
-                                \once \override Accidental.color = #green
-                                \once \override Beam.color = #green
-                                \once \override Dots.color = #green
-                                \once \override NoteHead.color = #green
-                                \once \override Stem.color = #green
+                                \abjad_color_music "green"
                                 d'''16
                                 ]
                             }
@@ -4776,154 +4680,58 @@ class RegisterInterpolationCommand(scoping.Command):
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \abjad_color_music "red"
                                 fs'16
                                 [
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \abjad_color_music "red"
                                 e'16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \abjad_color_music "red"
                                 ef''16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \abjad_color_music "red"
                                 f''16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \abjad_color_music "red"
                                 a'16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \abjad_color_music "red"
                                 bf'16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \abjad_color_music "red"
                                 c''16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \abjad_color_music "red"
                                 b''16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \abjad_color_music "red"
                                 af''16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \abjad_color_music "red"
                                 g''16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \abjad_color_music "red"
                                 cs'''16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \abjad_color_music "red"
                                 d'''16
                                 ]
                             }
                             \scaleDurations #'(1 . 1) {
-                                \once \override Accidental.color = #blue
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
+                                \abjad_color_music "blue"
                                 fs'16
                                 [
-                                \once \override Accidental.color = #blue
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
+                                \abjad_color_music "blue"
                                 e'16
-                                \once \override Accidental.color = #blue
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
+                                \abjad_color_music "blue"
                                 ef''16
-                                \once \override Accidental.color = #blue
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
+                                \abjad_color_music "blue"
                                 f''16
-                                \once \override Accidental.color = #blue
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
+                                \abjad_color_music "blue"
                                 a'16
-                                \once \override Accidental.color = #blue
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
+                                \abjad_color_music "blue"
                                 bf'16
-                                \once \override Accidental.color = #blue
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
+                                \abjad_color_music "blue"
                                 c''16
-                                \once \override Accidental.color = #blue
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
+                                \abjad_color_music "blue"
                                 b''16
-                                \once \override Accidental.color = #blue
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
+                                \abjad_color_music "blue"
                                 af''16
-                                \once \override Accidental.color = #blue
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
+                                \abjad_color_music "blue"
                                 g''16
-                                \once \override Accidental.color = #blue
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
+                                \abjad_color_music "blue"
                                 cs'''16
-                                \once \override Accidental.color = #blue
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
+                                \abjad_color_music "blue"
                                 d'''16
                                 ]
                             }
@@ -5940,91 +5748,51 @@ def bass_to_octave(
                     \voiceOne
                     {
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <c d bf>8
                             ~
                             [
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <c d bf>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             f'8
                             ~
                             [
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             f'32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <ef' e' fs''>8
                             ~
                             [
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <ef' e' fs''>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <g af'>8
                             ~
                             [
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <g af'>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             a8
                             ~
                             [
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             a32
                             ]
                             r16.
@@ -6063,91 +5831,51 @@ def bass_to_octave(
                     \voiceOne
                     {
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <c d bf>8
                             ~
                             [
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <c d bf>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             f8
                             ~
                             [
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             f32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <ef e fs'>8
                             ~
                             [
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <ef e fs'>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <g af'>8
                             ~
                             [
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <g af'>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             a8
                             ~
                             [
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             a32
                             ]
                             r16.
@@ -6210,37 +5938,21 @@ def bass_to_octave(
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <g af'>8
                             ~
                             [
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <g af'>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             a8
                             ~
                             [
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             a32
                             ]
                             r16.
@@ -6291,91 +6003,51 @@ def center_to_octave(
                     \voiceOne
                     {
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <c, d, bf,>8
                             ~
                             [
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <c, d, bf,>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             f8
                             ~
                             [
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             f32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <ef e fs'>8
                             ~
                             [
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <ef e fs'>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <g, af>8
                             ~
                             [
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <g, af>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             a,8
                             ~
                             [
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             a,32
                             ]
                             r16.
@@ -6414,91 +6086,51 @@ def center_to_octave(
                     \voiceOne
                     {
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <c d bf>8
                             ~
                             [
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <c d bf>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             f8
                             ~
                             [
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             f32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <ef e fs'>8
                             ~
                             [
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <ef e fs'>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <g, af>8
                             ~
                             [
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <g, af>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             a8
                             ~
                             [
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             a32
                             ]
                             r16.
@@ -6561,37 +6193,21 @@ def center_to_octave(
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <g, af>8
                             ~
                             [
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <g, af>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             a8
                             ~
                             [
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             a32
                             ]
                             r16.
@@ -7169,48 +6785,23 @@ def register(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             fs16
                             [
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             e'16
                             ]
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             ef'4
                             ~
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             ef'16
-                            \once \override Dots.color = #green
-                            \once \override Rest.color = #green
+                            \abjad_color_music "green"
                             r16
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             af16
                             [
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             g16
                             ]
                         }
@@ -7327,48 +6918,23 @@ def register(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             fs16
                             [
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             e'16
                             ]
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             ef'4
                             ~
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             ef'16
-                            \once \override Dots.color = #green
-                            \once \override Rest.color = #green
+                            \abjad_color_music "green"
                             r16
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             af'16
                             [
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             g''16
                             ]
                         }
@@ -7428,91 +6994,51 @@ def soprano_to_octave(
                     \voiceOne
                     {
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <c,, d,, bf,,>8
                             ~
                             [
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <c,, d,, bf,,>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             f,8
                             ~
                             [
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             f,32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <ef, e, fs>8
                             ~
                             [
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <ef, e, fs>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <g,, af,>8
                             ~
                             [
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <g,, af,>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             a,,8
                             ~
                             [
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             a,,32
                             ]
                             r16.
@@ -7551,91 +7077,51 @@ def soprano_to_octave(
                     \voiceOne
                     {
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <c d bf>8
                             ~
                             [
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <c d bf>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             f8
                             ~
                             [
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             f32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <ef, e, fs>8
                             ~
                             [
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <ef, e, fs>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <g, af>8
                             ~
                             [
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <g, af>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             a8
                             ~
                             [
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             a32
                             ]
                             r16.
@@ -7698,37 +7184,21 @@ def soprano_to_octave(
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <g, af>8
                             ~
                             [
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <g, af>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             a8
                             ~
                             [
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             a32
                             ]
                             r16.

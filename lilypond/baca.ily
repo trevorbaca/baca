@@ -239,42 +239,45 @@ baca_lbsd = #(define-music-function
 
 %%% COLOR: MUSIC %%%
 
-baca_goldenrod_music = {
-    \once \override Accidental.color = #(x11-color 'goldenrod)
-    \once \override Beam.color = #(x11-color 'goldenrod)
-    \once \override Dots.color = #(x11-color 'goldenrod)
-    \once \override Flag.color = #(x11-color 'goldenrod)
-    \once \override NoteHead.color = #(x11-color 'goldenrod)
-    \once \override Stem.color = #(x11-color 'goldenrod)
-    }
+baca_octave_warning = #(
+    define-music-function (parser location music) (ly:music?)
+    #{
+    \abjad_color_music red
+    $music
+    #}
+    )
 
-baca_magenta_music = {
-    \once \override Accidental.color = #magenta
-    \once \override Beam.color = #magenta
-    \once \override Dots.color = #magenta
-    \once \override Flag.color = #magenta
-    \once \override NoteHead.color = #magenta
-    \once \override Stem.color = #magenta
-    }
+baca_out_of_range_warning = #(
+    define-music-function (parser location music) (ly:music?)
+    #{
+    \abjad_color_music red
+    $music
+    #}
+    )
 
-baca_red_music = {
-    \once \override Accidental.color = #red
-    \once \override Beam.color = #red
-    \once \override Dots.color = #red
-    \once \override Flag.color = #red
-    \once \override NoteHead.color = #red
-    \once \override Stem.color = #red
-    }
+baca_repeat_pitch_class_warning = #(
+    define-music-function (parser location music) (ly:music?)
+    #{
+    \abjad_color_music red
+    $music
+    #}
+    )
 
-baca_octave_warning = \baca_red_music
+baca_unpitched_music_warning = #(
+    define-music-function (parser location music) (ly:music?)
+    #{
+    \abjad_color_music goldenrod
+    $music
+    #}
+    )
 
-baca_out_of_range_warning = \baca_red_music
-
-baca_repeat_pitch_class_warning = \baca_red_music
-
-baca_unpitched_music_warning = \baca_goldenrod_music
-
-baca_unregistered_pitch_warning = \baca_magenta_music
+baca_unregistered_pitch_warning = #(
+    define-music-function (parser location music) (ly:music?)
+    #{
+    \abjad_color_music magenta
+    $music
+    #}
+    )
 
 %%% DAMP %%%
 

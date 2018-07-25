@@ -7961,12 +7961,8 @@ class PitchTree(classes.Tree):
                             \consists Horizontal_bracket_engraver
                         }
                         {
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
                             \time 1/8
+                            \abjad_color_music "red"
                             e'8
                             ^ \markup { 0 }
                             \startGroup
@@ -7981,39 +7977,19 @@ class PitchTree(classes.Tree):
                             af'8
                             b'8
                             a'8
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             cs'8
                             \stopGroup
                             s8
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             cs'8
                             ^ \markup { 2 }
                             \startGroup
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             d'8
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             d'8
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             e'8
                             \stopGroup
                             s8

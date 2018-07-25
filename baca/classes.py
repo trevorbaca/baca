@@ -1853,11 +1853,7 @@ class Selection(abjad.Selection):
                             bf'16
                             <a'' b''>16
                             e'16
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <fs' gs'>4
                             ~
                             <fs' gs'>16
@@ -1940,18 +1936,10 @@ class Selection(abjad.Selection):
                         \times 10/9 {
                             r16
                             bf'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <a'' b''>16
                             c'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <d' e'>4
                             ~
                             <d' e'>16
@@ -1959,18 +1947,10 @@ class Selection(abjad.Selection):
                         \times 8/9 {
                             r16
                             bf'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <a'' b''>16
                             d'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <e' fs'>4
                             ~
                             <e' fs'>16
@@ -1979,18 +1959,10 @@ class Selection(abjad.Selection):
                         \times 10/9 {
                             r16
                             bf'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <a'' b''>16
                             e'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <fs' gs'>4
                             ~
                             <fs' gs'>16
@@ -2316,11 +2288,7 @@ class Selection(abjad.Selection):
                             c'16
                             <d' e'>4
                             ~
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <d' e'>16
                         }
                         \times 8/9 {
@@ -2395,47 +2363,21 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    \once \override Accidental.color = #red
-                    \once \override Beam.color = #red
-                    \once \override Dots.color = #red
-                    \once \override NoteHead.color = #red
-                    \once \override Stem.color = #red
+                    \abjad_color_music "red"
                     c'8
-                    \once \override Dots.color = #blue
-                    \once \override Rest.color = #blue
+                    \abjad_color_music "blue"
                     r8
-                    \once \override Accidental.color = #blue
-                    \once \override Beam.color = #blue
-                    \once \override Dots.color = #blue
-                    \once \override NoteHead.color = #blue
-                    \once \override Stem.color = #blue
+                    \abjad_color_music "blue"
                     d'8
-                    \once \override Accidental.color = #blue
-                    \once \override Beam.color = #blue
-                    \once \override Dots.color = #blue
-                    \once \override NoteHead.color = #blue
-                    \once \override Stem.color = #blue
+                    \abjad_color_music "blue"
                     e'8
-                    \once \override Dots.color = #red
-                    \once \override Rest.color = #red
+                    \abjad_color_music "red"
                     r8
-                    \once \override Accidental.color = #red
-                    \once \override Beam.color = #red
-                    \once \override Dots.color = #red
-                    \once \override NoteHead.color = #red
-                    \once \override Stem.color = #red
+                    \abjad_color_music "red"
                     f'8
-                    \once \override Accidental.color = #red
-                    \once \override Beam.color = #red
-                    \once \override Dots.color = #red
-                    \once \override NoteHead.color = #red
-                    \once \override Stem.color = #red
+                    \abjad_color_music "red"
                     g'8
-                    \once \override Accidental.color = #red
-                    \once \override Beam.color = #red
-                    \once \override Dots.color = #red
-                    \once \override NoteHead.color = #red
-                    \once \override Stem.color = #red
+                    \abjad_color_music "red"
                     a'8
                 }
 
@@ -2521,47 +2463,22 @@ class Selection(abjad.Selection):
                             c'16
                             <d' e'>4
                             ~
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <d' e'>16
                         }
                         \times 8/9 {
-                            \once \override Dots.color = #blue
-                            \once \override Rest.color = #blue
+                            \abjad_color_music "blue"
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             bf'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <a'' b''>16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             d'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <e' fs'>4
                             ~
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <e' fs'>16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -2644,56 +2561,26 @@ class Selection(abjad.Selection):
                         \time 7/4
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
-                            \once \override Dots.color = #red
-                            \once \override Rest.color = #red
+                            \abjad_color_music "red"
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             bf'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <a'' b''>16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             c'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <d' e'>4
                             ~
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <d' e'>16
                         }
                         \times 8/9 {
-                            \once \override Dots.color = #red
-                            \once \override Rest.color = #red
+                            \abjad_color_music "red"
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             bf'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <a'' b''>16
                             d'16
                             <e' fs'>4
@@ -2797,18 +2684,10 @@ class Selection(abjad.Selection):
                             bf'16
                             <a'' b''>16
                             e'16
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <fs' gs'>4
                             ~
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <fs' gs'>16
                         }
                     }   % measure
@@ -2876,11 +2755,7 @@ class Selection(abjad.Selection):
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
                             r16
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             bf'16
                             <a'' b''>16
                             c'16
@@ -3005,102 +2880,46 @@ class Selection(abjad.Selection):
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             bf'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <a'' b''>16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             c'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <d' e'>4
                             ~
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <d' e'>16
                         }
                         \times 8/9 {
-                            \once \override Dots.color = #blue
-                            \once \override Rest.color = #blue
+                            \abjad_color_music "blue"
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             bf'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <a'' b''>16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             d'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <e' fs'>4
                             ~
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <e' fs'>16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
-                            \once \override Dots.color = #blue
-                            \once \override Rest.color = #blue
+                            \abjad_color_music "blue"
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             bf'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <a'' b''>16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             e'16
-                            \once \override Dots.color = #blue
-                            \once \override Rest.color = #blue
+                            \abjad_color_music "blue"
                             r4
-                            \once \override Dots.color = #red
-                            \once \override Rest.color = #red
+                            \abjad_color_music "red"
                             r16
                         }
                     }   % measure
@@ -3190,18 +3009,10 @@ class Selection(abjad.Selection):
                             e'16
                             e'16
                             e'16
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <fs' gs'>4
                             ~
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <fs' gs'>16
                         }
                     }   % measure
@@ -3281,105 +3092,45 @@ class Selection(abjad.Selection):
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             c'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             c'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             c'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <d' e'>4
                             ~
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <d' e'>16
                         }
                         \times 8/9 {
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             d'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             d'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             d'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <e' fs'>4
                             ~
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <e' fs'>16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             e'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             e'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             e'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <fs' gs'>4
                             ~
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <fs' gs'>16
                         }
                     }   % measure
@@ -3471,36 +3222,16 @@ class Selection(abjad.Selection):
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
                             r16
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             e'16
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             e'16
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             e'16
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <fs' gs'>4
                             ~
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <fs' gs'>16
                         }
                     }   % measure
@@ -3574,105 +3305,45 @@ class Selection(abjad.Selection):
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             c'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             c'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             c'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <d' e'>4
                             ~
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <d' e'>16
                         }
                         \times 8/9 {
                             r16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             d'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             d'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             d'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <e' fs'>4
                             ~
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <e' fs'>16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             e'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             e'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             e'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <fs' gs'>4
                             ~
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <fs' gs'>16
                         }
                     }   % measure
@@ -3770,112 +3441,49 @@ class Selection(abjad.Selection):
                         \time 7/4
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
-                            \once \override Dots.color = #red
-                            \once \override Rest.color = #red
+                            \abjad_color_music "red"
                             r16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             bf'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <a'' b''>16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             c'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <d' e'>4
                             ~
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <d' e'>16
                         }
                         \times 8/9 {
-                            \once \override Dots.color = #blue
-                            \once \override Rest.color = #blue
+                            \abjad_color_music "blue"
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             bf'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <a'' b''>16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             d'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <e' fs'>4
                             ~
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <e' fs'>16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
-                            \once \override Dots.color = #red
-                            \once \override Rest.color = #red
+                            \abjad_color_music "red"
                             r16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             bf'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <a'' b''>16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             e'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <fs' gs'>4
                             ~
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <fs' gs'>16
                         }
                     }   % measure
@@ -3954,112 +3562,49 @@ class Selection(abjad.Selection):
                         \time 7/4
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
-                            \once \override Dots.color = #red
-                            \once \override Rest.color = #red
+                            \abjad_color_music "red"
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             bf'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <a'' b''>16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             c'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <d' e'>4
                             ~
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <d' e'>16
                         }
                         \times 8/9 {
-                            \once \override Dots.color = #red
-                            \once \override Rest.color = #red
+                            \abjad_color_music "red"
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             bf'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <a'' b''>16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             d'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <e' fs'>4
                             ~
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <e' fs'>16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
-                            \once \override Dots.color = #red
-                            \once \override Rest.color = #red
+                            \abjad_color_music "red"
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             bf'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <a'' b''>16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             e'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <fs' gs'>4
                             ~
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <fs' gs'>16
                         }
                     }   % measure
@@ -4123,50 +3668,24 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    \once \override Dots.color = #red
-                    \once \override Rest.color = #red
                     \time 2/8
+                    \abjad_color_music "red"
                     r8
-                    \once \override Accidental.color = #red
-                    \once \override Beam.color = #red
-                    \once \override Dots.color = #red
-                    \once \override NoteHead.color = #red
-                    \once \override Stem.color = #red
+                    \abjad_color_music "red"
                     d'8
-                    \once \override Accidental.color = #red
-                    \once \override Beam.color = #red
-                    \once \override Dots.color = #red
-                    \once \override NoteHead.color = #red
-                    \once \override Stem.color = #red
+                    \abjad_color_music "red"
                     e'8
-                    \once \override Accidental.color = #red
-                    \once \override Beam.color = #red
-                    \once \override Dots.color = #red
-                    \once \override NoteHead.color = #red
-                    \once \override Stem.color = #red
+                    \abjad_color_music "red"
                     f'8
-                    \once \override Accidental.color = #blue
-                    \once \override Beam.color = #blue
-                    \once \override Dots.color = #blue
-                    \once \override NoteHead.color = #blue
-                    \once \override Stem.color = #blue
                     \time 3/8
+                    \abjad_color_music "blue"
                     g'8
-                    \once \override Accidental.color = #blue
-                    \once \override Beam.color = #blue
-                    \once \override Dots.color = #blue
-                    \once \override NoteHead.color = #blue
-                    \once \override Stem.color = #blue
+                    \abjad_color_music "blue"
                     a'8
-                    \once \override Accidental.color = #blue
-                    \once \override Beam.color = #blue
-                    \once \override Dots.color = #blue
-                    \once \override NoteHead.color = #blue
-                    \once \override Stem.color = #blue
+                    \abjad_color_music "blue"
                     b'8
-                    \once \override Dots.color = #blue
-                    \once \override Rest.color = #blue
                     \time 1/8
+                    \abjad_color_music "blue"
                     r8
                 }
 
@@ -4235,46 +3754,21 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    \once \override Dots.color = #red
-                    \once \override Rest.color = #red
                     \time 2/8
+                    \abjad_color_music "red"
                     r8
-                    \once \override Accidental.color = #blue
-                    \once \override Beam.color = #blue
-                    \once \override Dots.color = #blue
-                    \once \override NoteHead.color = #blue
-                    \once \override Stem.color = #blue
+                    \abjad_color_music "blue"
                     d'8
-                    \once \override Accidental.color = #red
-                    \once \override Beam.color = #red
-                    \once \override Dots.color = #red
-                    \once \override NoteHead.color = #red
-                    \once \override Stem.color = #red
+                    \abjad_color_music "red"
                     e'8
-                    \once \override Accidental.color = #blue
-                    \once \override Beam.color = #blue
-                    \once \override Dots.color = #blue
-                    \once \override NoteHead.color = #blue
-                    \once \override Stem.color = #blue
+                    \abjad_color_music "blue"
                     f'8
-                    \once \override Accidental.color = #red
-                    \once \override Beam.color = #red
-                    \once \override Dots.color = #red
-                    \once \override NoteHead.color = #red
-                    \once \override Stem.color = #red
                     \time 3/8
+                    \abjad_color_music "red"
                     g'8
-                    \once \override Accidental.color = #blue
-                    \once \override Beam.color = #blue
-                    \once \override Dots.color = #blue
-                    \once \override NoteHead.color = #blue
-                    \once \override Stem.color = #blue
+                    \abjad_color_music "blue"
                     a'8
-                    \once \override Accidental.color = #red
-                    \once \override Beam.color = #red
-                    \once \override Dots.color = #red
-                    \once \override NoteHead.color = #red
-                    \once \override Stem.color = #red
+                    \abjad_color_music "red"
                     b'8
                     \time 1/8
                     r8
@@ -4333,40 +3827,19 @@ class Selection(abjad.Selection):
                     \time 2/8
                     r8
                     d'8
-                    \once \override Accidental.color = #red
-                    \once \override Beam.color = #red
-                    \once \override Dots.color = #red
-                    \once \override NoteHead.color = #red
-                    \once \override Stem.color = #red
+                    \abjad_color_music "red"
                     e'8
-                    \once \override Accidental.color = #blue
-                    \once \override Beam.color = #blue
-                    \once \override Dots.color = #blue
-                    \once \override NoteHead.color = #blue
-                    \once \override Stem.color = #blue
+                    \abjad_color_music "blue"
                     f'8
-                    \once \override Accidental.color = #red
-                    \once \override Beam.color = #red
-                    \once \override Dots.color = #red
-                    \once \override NoteHead.color = #red
-                    \once \override Stem.color = #red
                     \time 3/8
+                    \abjad_color_music "red"
                     g'8
-                    \once \override Accidental.color = #blue
-                    \once \override Beam.color = #blue
-                    \once \override Dots.color = #blue
-                    \once \override NoteHead.color = #blue
-                    \once \override Stem.color = #blue
+                    \abjad_color_music "blue"
                     a'8
-                    \once \override Accidental.color = #red
-                    \once \override Beam.color = #red
-                    \once \override Dots.color = #red
-                    \once \override NoteHead.color = #red
-                    \once \override Stem.color = #red
+                    \abjad_color_music "red"
                     b'8
-                    \once \override Dots.color = #blue
-                    \once \override Rest.color = #blue
                     \time 1/8
+                    \abjad_color_music "blue"
                     r8
                 }
 
@@ -4459,36 +3932,16 @@ class Selection(abjad.Selection):
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
                             r16
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             e'16
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             e'16
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             e'16
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <fs' gs'>4
                             ~
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <fs' gs'>16
                         }
                     }   % measure
@@ -4562,105 +4015,45 @@ class Selection(abjad.Selection):
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             c'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             c'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             c'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <d' e'>4
                             ~
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <d' e'>16
                         }
                         \times 8/9 {
                             r16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             d'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             d'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             d'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <e' fs'>4
                             ~
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <e' fs'>16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             e'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             e'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             e'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <fs' gs'>4
                             ~
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <fs' gs'>16
                         }
                     }   % measure
@@ -4750,11 +4143,7 @@ class Selection(abjad.Selection):
                             bf'16
                             <a'' b''>16
                             e'16
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <fs' gs'>4
                             ~
                             <fs' gs'>16
@@ -4848,58 +4237,26 @@ class Selection(abjad.Selection):
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             bf'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <a'' b''>16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             c'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <d' e'>4
                             ~
                             <d' e'>16
                         }
                         \times 8/9 {
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             bf'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <a'' b''>16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             d'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <e' fs'>4
                             ~
                             <e' fs'>16
@@ -4907,29 +4264,13 @@ class Selection(abjad.Selection):
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             bf'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <a'' b''>16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             e'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <fs' gs'>4
                             ~
                             <fs' gs'>16
@@ -5023,11 +4364,7 @@ class Selection(abjad.Selection):
                             e'16
                             <fs' gs'>4
                             ~
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <fs' gs'>16
                         }
                     }   % measure
@@ -5125,105 +4462,45 @@ class Selection(abjad.Selection):
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             bf'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <a'' b''>16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             c'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <d' e'>4
                             ~
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <d' e'>16
                         }
                         \times 8/9 {
                             r16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             bf'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <a'' b''>16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             d'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <e' fs'>4
                             ~
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <e' fs'>16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             bf'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <a'' b''>16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             e'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <fs' gs'>4
                             ~
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <fs' gs'>16
                         }
                     }   % measure
@@ -5316,18 +4593,10 @@ class Selection(abjad.Selection):
                             bf'16
                             <a'' b''>16
                             e'16
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <fs' gs'>4
                             ~
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <fs' gs'>16
                         }
                     }   % measure
@@ -5419,105 +4688,45 @@ class Selection(abjad.Selection):
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             bf'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <a'' b''>16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             c'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <d' e'>4
                             ~
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <d' e'>16
                         }
                         \times 8/9 {
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             bf'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <a'' b''>16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             d'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <e' fs'>4
                             ~
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <e' fs'>16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             bf'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <a'' b''>16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             e'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <fs' gs'>4
                             ~
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <fs' gs'>16
                         }
                     }   % measure
@@ -5609,11 +4818,7 @@ class Selection(abjad.Selection):
                             e'16
                             <fs' gs'>4
                             ~
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <fs' gs'>16
                         }
                     }   % measure
@@ -5705,90 +4910,42 @@ class Selection(abjad.Selection):
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             bf'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <a'' b''>16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             c'16
                             <d' e'>4
                             ~
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <d' e'>16
                         }
                         \times 8/9 {
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             bf'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <a'' b''>16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             d'16
                             <e' fs'>4
                             ~
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <e' fs'>16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             bf'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <a'' b''>16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             e'16
                             <fs' gs'>4
                             ~
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <fs' gs'>16
                         }
                     }   % measure
@@ -5877,11 +5034,7 @@ class Selection(abjad.Selection):
                             r16
                             bf'16
                             <a'' b''>16
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             e'16
                             <fs' gs'>4
                             ~
@@ -5970,23 +5123,11 @@ class Selection(abjad.Selection):
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             bf'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <a'' b''>16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             c'16
                             <d' e'>4
                             ~
@@ -5994,23 +5135,11 @@ class Selection(abjad.Selection):
                         }
                         \times 8/9 {
                             r16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             bf'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <a'' b''>16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             d'16
                             <e' fs'>4
                             ~
@@ -6019,23 +5148,11 @@ class Selection(abjad.Selection):
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             bf'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <a'' b''>16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             e'16
                             <fs' gs'>4
                             ~
@@ -6132,18 +5249,10 @@ class Selection(abjad.Selection):
                             e'16
                             e'16
                             e'16
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <fs' gs'>4
                             ~
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <fs' gs'>16
                         }
                     }   % measure
@@ -6223,105 +5332,45 @@ class Selection(abjad.Selection):
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             c'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             c'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             c'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <d' e'>4
                             ~
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <d' e'>16
                         }
                         \times 8/9 {
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             d'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             d'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             d'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <e' fs'>4
                             ~
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <e' fs'>16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             e'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             e'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             e'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <fs' gs'>4
                             ~
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <fs' gs'>16
                         }
                     }   % measure
@@ -6410,8 +5459,7 @@ class Selection(abjad.Selection):
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
-                            \once \override Dots.color = #green
-                            \once \override Rest.color = #green
+                            \abjad_color_music "green"
                             r16
                             bf'16
                             <a'' b''>16
@@ -6473,47 +5521,21 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    \once \override Accidental.color = #red
-                    \once \override Beam.color = #red
-                    \once \override Dots.color = #red
-                    \once \override NoteHead.color = #red
-                    \once \override Stem.color = #red
+                    \abjad_color_music "red"
                     c'8
-                    \once \override Dots.color = #red
-                    \once \override Rest.color = #red
+                    \abjad_color_music "red"
                     r8
-                    \once \override Accidental.color = #blue
-                    \once \override Beam.color = #blue
-                    \once \override Dots.color = #blue
-                    \once \override NoteHead.color = #blue
-                    \once \override Stem.color = #blue
+                    \abjad_color_music "blue"
                     d'8
-                    \once \override Accidental.color = #blue
-                    \once \override Beam.color = #blue
-                    \once \override Dots.color = #blue
-                    \once \override NoteHead.color = #blue
-                    \once \override Stem.color = #blue
+                    \abjad_color_music "blue"
                     e'8
-                    \once \override Dots.color = #blue
-                    \once \override Rest.color = #blue
+                    \abjad_color_music "blue"
                     r8
-                    \once \override Accidental.color = #red
-                    \once \override Beam.color = #red
-                    \once \override Dots.color = #red
-                    \once \override NoteHead.color = #red
-                    \once \override Stem.color = #red
+                    \abjad_color_music "red"
                     f'8
-                    \once \override Accidental.color = #red
-                    \once \override Beam.color = #red
-                    \once \override Dots.color = #red
-                    \once \override NoteHead.color = #red
-                    \once \override Stem.color = #red
+                    \abjad_color_music "red"
                     g'8
-                    \once \override Accidental.color = #red
-                    \once \override Beam.color = #red
-                    \once \override Dots.color = #red
-                    \once \override NoteHead.color = #red
-                    \once \override Stem.color = #red
+                    \abjad_color_music "red"
                     a'8
                 }
 
@@ -6602,45 +5624,23 @@ class Selection(abjad.Selection):
                             <d' e'>16
                         }
                         \times 8/9 {
-                            \once \override Dots.color = #red
-                            \once \override Rest.color = #red
+                            \abjad_color_music "red"
                             r16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             bf'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <a'' b''>16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             d'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <e' fs'>4
                             ~
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <e' fs'>16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
-                            \once \override Dots.color = #red
-                            \once \override Rest.color = #red
+                            \abjad_color_music "red"
                             r16
                             bf'16
                             <a'' b''>16
@@ -6709,34 +5709,17 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    \once \override Dots.color = #red
-                    \once \override Rest.color = #red
                     \time 2/8
+                    \abjad_color_music "red"
                     r8
-                    \once \override Accidental.color = #blue
-                    \once \override Beam.color = #blue
-                    \once \override Dots.color = #blue
-                    \once \override NoteHead.color = #blue
-                    \once \override Stem.color = #blue
+                    \abjad_color_music "blue"
                     d'8
-                    \once \override Accidental.color = #red
-                    \once \override Beam.color = #red
-                    \once \override Dots.color = #red
-                    \once \override NoteHead.color = #red
-                    \once \override Stem.color = #red
+                    \abjad_color_music "red"
                     e'8
-                    \once \override Accidental.color = #blue
-                    \once \override Beam.color = #blue
-                    \once \override Dots.color = #blue
-                    \once \override NoteHead.color = #blue
-                    \once \override Stem.color = #blue
+                    \abjad_color_music "blue"
                     f'8
-                    \once \override Accidental.color = #red
-                    \once \override Beam.color = #red
-                    \once \override Dots.color = #red
-                    \once \override NoteHead.color = #red
-                    \once \override Stem.color = #red
                     \time 3/8
+                    \abjad_color_music "red"
                     g'8
                     a'8
                     b'8
@@ -6816,42 +5799,21 @@ class Selection(abjad.Selection):
                         }
                         \times 8/9 {
                             r16
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             d'16
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             d'16
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             d'16
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <e' fs'>4
                             ~
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <e' fs'>16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
-                            \once \override Dots.color = #green
-                            \once \override Rest.color = #green
+                            \abjad_color_music "green"
                             r16
                             e'16
                             e'16
@@ -6931,109 +5893,47 @@ class Selection(abjad.Selection):
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             c'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             c'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             c'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <d' e'>4
                             ~
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <d' e'>16
                         }
                         \times 8/9 {
-                            \once \override Dots.color = #red
-                            \once \override Rest.color = #red
+                            \abjad_color_music "red"
                             r16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             d'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             d'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             d'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <e' fs'>4
                             ~
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <e' fs'>16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
-                            \once \override Dots.color = #blue
-                            \once \override Rest.color = #blue
+                            \abjad_color_music "blue"
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             e'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             e'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             e'16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <fs' gs'>4
                             ~
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <fs' gs'>16
                         }
                     }   % measure
@@ -7231,11 +6131,7 @@ class Selection(abjad.Selection):
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
                             r16
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             bf'16
                             <a'' b''>16
                             c'16
@@ -7361,109 +6257,47 @@ class Selection(abjad.Selection):
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             bf'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <a'' b''>16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             c'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <d' e'>4
                             ~
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <d' e'>16
                         }
                         \times 8/9 {
-                            \once \override Dots.color = #blue
-                            \once \override Rest.color = #blue
+                            \abjad_color_music "blue"
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             bf'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <a'' b''>16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             d'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <e' fs'>4
                             ~
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <e' fs'>16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
-                            \once \override Dots.color = #blue
-                            \once \override Rest.color = #blue
+                            \abjad_color_music "blue"
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             bf'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <a'' b''>16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             e'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <fs' gs'>4
                             ~
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <fs' gs'>16
                         }
                     }   % measure
@@ -7535,11 +6369,7 @@ class Selection(abjad.Selection):
                             c'16
                             <d' e'>4
                             ~
-                            \once \override Accidental.color = #green
-                            \once \override Beam.color = #green
-                            \once \override Dots.color = #green
-                            \once \override NoteHead.color = #green
-                            \once \override Stem.color = #green
+                            \abjad_color_music "green"
                             <d' e'>16
                         }
                         \times 8/9 {
@@ -7634,8 +6464,7 @@ class Selection(abjad.Selection):
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
-                            \once \override Dots.color = #green
-                            \once \override Rest.color = #green
+                            \abjad_color_music "green"
                             r16
                             bf'16
                             <a'' b''>16
@@ -7730,53 +6559,27 @@ class Selection(abjad.Selection):
                             c'16
                             <d' e'>4
                             ~
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <d' e'>16
                         }
                         \times 8/9 {
-                            \once \override Dots.color = #blue
-                            \once \override Rest.color = #blue
+                            \abjad_color_music "blue"
                             r16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             bf'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <a'' b''>16
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             d'16
-                            \once \override Accidental.color = #blue
-                            \once \override Beam.color = #blue
-                            \once \override Dots.color = #blue
-                            \once \override NoteHead.color = #blue
-                            \once \override Stem.color = #blue
+                            \abjad_color_music "blue"
                             <e' fs'>4
                             ~
-                            \once \override Accidental.color = #red
-                            \once \override Beam.color = #red
-                            \once \override Dots.color = #red
-                            \once \override NoteHead.color = #red
-                            \once \override Stem.color = #red
+                            \abjad_color_music "red"
                             <e' fs'>16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
-                            \once \override Dots.color = #blue
-                            \once \override Rest.color = #blue
+                            \abjad_color_music "blue"
                             r16
                             bf'16
                             <a'' b''>16
