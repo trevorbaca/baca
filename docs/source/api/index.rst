@@ -64,6 +64,7 @@ Bača API
    ~baca.ltrun
    ~baca.ltruns
    ~baca.lts
+   ~baca.lyparts
    ~baca.mgroups
    ~baca.mleaves
    ~baca.nontrivial

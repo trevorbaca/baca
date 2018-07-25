@@ -524,6 +524,7 @@ classes
       ltrun
       ltruns
       lts
+      lyparts
       mgroups
       mleaves
       ntrun
@@ -748,6 +749,8 @@ classes
    .. automethod:: Selection.ltruns
 
    .. automethod:: Selection.lts
+
+   .. automethod:: Selection.lyparts
 
    .. container:: inherited
 

@@ -116,6 +116,7 @@ baca
    ~ltrun
    ~ltruns
    ~lts
+   ~lyparts
    ~mgroups
    ~mleaves
    ~nontrivial
@@ -241,6 +242,8 @@ baca
 .. autofunction:: ltruns
 
 .. autofunction:: lts
+
+.. autofunction:: lyparts
 
 .. autofunction:: mgroups
 
