@@ -56,6 +56,8 @@ Bača API
    ~baca.lleaves
    ~baca.logical_ties
    ~baca.lt
+   ~baca.ltleaf
+   ~baca.ltleaves
    ~baca.ltqrun
    ~baca.ltqruns
    ~baca.ltrun

@@ -516,6 +516,8 @@ classes
       lleak
       lleaves
       lt
+      ltleaf
+      ltleaves
       ltqrun
       ltqruns
       ltrun
@@ -729,6 +731,10 @@ classes
       .. automethod:: Selection.logical_ties
 
    .. automethod:: Selection.lt
+
+   .. automethod:: Selection.ltleaf
+
+   .. automethod:: Selection.ltleaves
 
    .. automethod:: Selection.ltqrun
 

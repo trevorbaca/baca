@@ -108,6 +108,8 @@ baca
    ~lleaves
    ~logical_ties
    ~lt
+   ~ltleaf
+   ~ltleaves
    ~ltqrun
    ~ltqruns
    ~ltrun
@@ -222,6 +224,10 @@ baca
 .. autofunction:: logical_ties
 
 .. autofunction:: lt
+
+.. autofunction:: ltleaf
+
+.. autofunction:: ltleaves
 
 .. autofunction:: ltqrun
 
