@@ -515,6 +515,7 @@ classes
       lleaf
       lleak
       lleaves
+      lparts
       lt
       ltleaf
       ltleaves
@@ -729,6 +730,8 @@ classes
    .. container:: inherited
 
       .. automethod:: Selection.logical_ties
+
+   .. automethod:: Selection.lparts
 
    .. automethod:: Selection.lt
 

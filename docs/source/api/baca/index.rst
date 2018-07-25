@@ -107,6 +107,7 @@ baca
    ~lleak
    ~lleaves
    ~logical_ties
+   ~lparts
    ~lt
    ~ltleaf
    ~ltleaves
@@ -222,6 +223,8 @@ baca
 .. autofunction:: lleaves
 
 .. autofunction:: logical_ties
+
+.. autofunction:: lparts
 
 .. autofunction:: lt
 

@@ -55,6 +55,7 @@ Bača API
    ~baca.lleak
    ~baca.lleaves
    ~baca.logical_ties
+   ~baca.lparts
    ~baca.lt
    ~baca.ltleaf
    ~baca.ltleaves
