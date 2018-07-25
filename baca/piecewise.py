@@ -4089,6 +4089,130 @@ def text_spanner(
 
     ..  container:: example
 
+        REGRESSION. Backslashed markup is handled correctly:
+
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     spacing=baca.minimum_duration((1, 12)),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'MusicVoice',
+        ...     baca.dls_staff_padding(5),
+        ...     baca.text_spanner(
+        ...         r'\baca_damp_markup =|',
+        ...         bookend=False,
+        ...         selector=baca.rmleaves(2),
+        ...         ),
+        ...     baca.make_even_divisions(),
+        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+        ...     baca.text_spanner_staff_padding(4.5),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
+            <BLANKLINE>
+                        % [GlobalSkips measure 1]                                                    %! SM4
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 2]                                                    %! SM4
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+            <BLANKLINE>
+                        % [GlobalSkips measure 3]                                                    %! SM4
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 4]                                                    %! SM4
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color #'blue                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+                        \baca_bar_line_visible                                                       %! SM5
+                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                    }
+                >>
+                \context MusicContext = "MusicContext"
+                <<
+                    \context Staff = "MusicStaff"
+                    {
+                        \context Voice = "MusicVoice"
+                        {
+            <BLANKLINE>
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
+                            \override TextSpanner.staff-padding = #4.5                               %! OC1
+                            e'8
+                            - \abjad_dashed_line_with_hook                                           %! PIC
+                            - \tweak bound-details.left.text \markup \baca-left \baca_damp_markup    %! PIC
+                            \startTextSpan                                                           %! PIC
+                            [
+            <BLANKLINE>
+                            d''8
+            <BLANKLINE>
+                            f'8
+            <BLANKLINE>
+                            e''8
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            g'8
+                            [
+            <BLANKLINE>
+                            f''8
+            <BLANKLINE>
+                            e'8
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            d''8
+                            \stopTextSpan                                                            %! PIC
+                            [
+            <BLANKLINE>
+                            f'8
+            <BLANKLINE>
+                            e''8
+            <BLANKLINE>
+                            g'8
+                            ]
+            <BLANKLINE>
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            f''8
+                            [
+            <BLANKLINE>
+                            e'8
+            <BLANKLINE>
+                            d''8
+                            ]
+                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
+                            \revert TextSpanner.staff-padding                                        %! OC2
+            <BLANKLINE>
+                        }
+                    }
+                >>
+            >>
+
+    ..  container:: example
+
         REGRESSION. Bookended hooks are kerned:
 
         >>> maker = baca.SegmentMaker(
@@ -4256,7 +4380,8 @@ def text_spanner(
                 if current_item:
                     item_ = ' '.join(current_item)
                     if boxed:
-                        markup = abjad.Markup(item_)
+                        #markup = abjad.Markup(item_)
+                        markup = abjad.Markup.from_literal(item_)
                         markup = markup.box().override(('box-padding', 0.5))
                         items_.append(markup)
                     else:
@@ -4268,7 +4393,8 @@ def text_spanner(
         if current_item:
             item_ = ' '.join(current_item)
             if boxed:
-                markup = abjad.Markup(item_)
+                #markup = abjad.Markup(item_)
+                markup = abjad.Markup.from_literal(item_)
                 markup = markup.box().override(('box-padding', 0.5))
                 items_.append(markup)
             else:
@@ -4292,7 +4418,10 @@ def text_spanner(
     for i, item in enumerate(cyclic_items):
         if item in shape_to_style:
             continue
-        if isinstance(item, str):
+        if isinstance(item, str) and item.startswith('\\'):
+            string = rf'\markup \baca-left {item}'
+            item_markup = abjad.LilyPondLiteral(string)
+        elif isinstance(item, str):
             string = rf'\markup \baca-left "{item}"'
             item_markup = abjad.LilyPondLiteral(string)
         else:
@@ -4310,7 +4439,10 @@ def text_spanner(
         right_markup: typing.Union[abjad.LilyPondLiteral, abjad.Markup]
         if isinstance(right_text, str):
             if 'hook' not in style:
-                string = rf'\markup \baca-right "{right_text}"'
+                if right_text.startswith('\\'):
+                    string = rf'\markup \baca-right {right_text}'
+                else:
+                    string = rf'\markup \baca-right "{right_text}"'
                 right_markup = abjad.LilyPondLiteral(string)
             else:
                 right_markup = abjad.Markup.from_literal(right_text)

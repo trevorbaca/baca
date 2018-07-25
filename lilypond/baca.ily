@@ -278,27 +278,35 @@ baca_unregistered_pitch_warning = \baca_magenta_music
 
 %%% DAMP %%%
 
-baca_karim_damp_markup = \markup { \center-column { {
-    \override #'(thickness . 1.8)
-    \combine \draw-line #'(-1.5 . 0)
-    \combine \draw-line #'(0 . -1.5)
-    \combine \draw-line #'(0 . 1.5)
-    \combine \draw-line #'(1.5 . 0)
-    \draw-circle #0.8 #0.2 ##f
-    }}}
-
-% use scale instead of fontsize
-baca_pierre_damp_markup = \markup {
-    \combine \bold "O"
-    \path #0.2 
+baca_damp_markup = \markup {
+    \scale #'(0.75 . 0.75)
+    \combine
+    \bold \override #'(font-name . "Times") "O"
+    \path #0.15
     #'(
-        (moveto -.4 .8)
-        (lineto 2.2 .8)
+        (moveto -.4 .7)
+        (rlineto 2.4 0)
         (closepath)
-        (moveto .9 -.5)
-        (lineto .9 2.1)
+        (moveto .8 -.5)
+        (rlineto 0 2.4)
         )
     }
+
+#(append! default-script-alist
+   (list
+    `("bacadamp"
+       . (
+           (stencil . ,ly:text-interface::print)
+           (text . ,baca_damp_markup)
+           (avoid-slur . around)
+           (direction . ,UP)
+           (padding . 0.20)
+           (script-priority . 125)
+           (skyline-horizontal-padding . 0.20)
+           ;;(toward-stem-shift . 0.5)
+           ))))
+
+baca_damp = #(make-articulation "bacadamp")
 
 %%% DYNAMICS: ANCORA %%%
 
