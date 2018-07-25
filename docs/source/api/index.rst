@@ -295,6 +295,7 @@ Division library.
    ~baca.indicatorcommands.staff_lines
    ~baca.indicatorcommands.start_markup
    ~baca.indicatorcommands.stem_tremolo
+   ~baca.indicatorcommands.stop_on_string
    ~baca.indicatorcommands.stop_trill
    ~baca.indicatorcommands.stopped
    ~baca.indicatorcommands.tenuto

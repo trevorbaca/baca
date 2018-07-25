@@ -47,6 +47,7 @@ indicatorcommands
    ~staff_lines
    ~start_markup
    ~stem_tremolo
+   ~stop_on_string
    ~stop_trill
    ~stopped
    ~tenuto
@@ -103,6 +104,8 @@ indicatorcommands
 .. autofunction:: start_markup
 
 .. autofunction:: stem_tremolo
+
+.. autofunction:: stop_on_string
 
 .. autofunction:: stop_trill
 
