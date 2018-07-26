@@ -999,8 +999,7 @@ def hairpin(
     piece_selector: typings.Selector = 'baca.group()',
     remove_length_1_spanner_start: bool = None,
     right_broken: bool = None,
-    # TODO: possibly change selctor to baca.leaves()?
-    selector: typings.Selector = 'baca.tleaves()'
+    selector: typings.Selector = 'baca.leaves()'
     ) -> PiecewiseIndicatorCommand:
     r"""
     Attaches hairpin.
@@ -2901,8 +2900,7 @@ def text_spanner(
     leak: bool = None,
     lilypond_id: int = None,
     piece_selector: typings.Selector = 'baca.group()',
-    # TODO: possibly change selctor to baca.leaves()?
-    selector: typings.Selector = 'baca.tleaves()',
+    selector: typings.Selector = 'baca.leaves()',
     ) -> PiecewiseIndicatorCommand:
     r"""
     Attaches text span indicators.
