@@ -1936,16 +1936,16 @@ def make_multimeasure_rests() -> RhythmCommand:
         )
 
 def make_notes(
-    division_mask: mask_typing = None,
+    dmask: mask_typing = None,
     repeat_ties: bool = False,
     ) -> RhythmCommand:
     """
     Makes notes; rewrites meter.
     """
-    if division_mask is None:
+    if dmask is None:
         division_masks = None
     else:
-        division_masks = [division_mask]
+        division_masks = [dmask]
     tie_specifier = None
     if repeat_ties:
         tie_specifier = rmakers.TieSpecifier(repeat_ties=True)
@@ -1958,18 +1958,18 @@ def make_notes(
         )
 
 def make_repeat_tied_notes(
-    division_mask: mask_typing = None,
+    dmask: mask_typing = None,
     do_not_rewrite_meter: bool = None,
     ) -> RhythmCommand:
     """
     Makes repeat-tied notes; rewrites meter.
     """
-    if division_mask is None:
+    if dmask is None:
         division_masks = None
-    elif isinstance(division_mask, list):
-        division_masks = division_mask[:]
+    elif isinstance(dmask, list):
+        division_masks = dmask[:]
     else:
-        division_masks = [division_mask]
+        division_masks = [dmask]
     return RhythmCommand(
         rewrite_meter=not(do_not_rewrite_meter),
         rhythm_maker=rmakers.NoteRhythmMaker(
@@ -1985,16 +1985,16 @@ def make_repeated_duration_notes(
     durations: typing.Iterable,
     *,
     beam_specifier: rmakers.BeamSpecifier = None,
-    division_mask: rmakers.Mask = None,
+    dmask: rmakers.Mask = None,
     do_not_rewrite_meter: bool = None,
     ) -> RhythmCommand:
     """
     Makes repeated-duration notes; rewrites meter.
     """
-    if division_mask is None:
+    if dmask is None:
         division_masks = None
     else:
-        division_masks = [division_mask]
+        division_masks = [dmask]
     if isinstance(durations, abjad.Duration):
         durations = [durations]
     elif isinstance(durations, tuple):
