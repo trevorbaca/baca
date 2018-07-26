@@ -1938,7 +1938,7 @@ def make_multimeasure_rests() -> RhythmCommand:
 
 def make_notes(
     *,
-    dmask: mask_typing = None,
+    dmask: rmakers.MaskKeyword = None,
     repeat_ties: bool = False,
     ) -> RhythmCommand:
     """
@@ -1957,7 +1957,7 @@ def make_notes(
 
 def make_repeat_tied_notes(
     *,
-    dmask: mask_typing = None,
+    dmask: rmakers.MaskKeyword = None,
     do_not_rewrite_meter: bool = None,
     ) -> RhythmCommand:
     """
@@ -1978,7 +1978,7 @@ def make_repeated_duration_notes(
     durations: typing.Iterable,
     *,
     beam_specifier: rmakers.BeamSpecifier = None,
-    dmask: rmakers.Mask = None,
+    dmask: rmakers.MaskKeyword = None,
     do_not_rewrite_meter: bool = None,
     ) -> RhythmCommand:
     """
