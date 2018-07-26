@@ -1472,6 +1472,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _check_range(self):
         markup = abjad.Markup('*', direction=abjad.Up)
         abjad.tweak(markup).color = 'red'
+        tag = abjad.tags.ALLOW_OUT_OF_RANGE
         for voice in abjad.iterate(self.score).components(abjad.Voice):
             for pleaf in abjad.iterate(voice).leaves(pitched=True):
                 instrument = abjad.inspect(pleaf).get_effective(
@@ -1480,10 +1481,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 if instrument is None:
                     continue
                 if pleaf not in instrument.pitch_range:
+                    if abjad.inspect(pleaf).has_indicator(tag):
+                        continue
                     if not self.ignore_out_of_range_pitches:
-                        raise Exception(
-                            f'{voice.name} out of range {pleaf!r}.',
-                            )
+                        message = f'{voice.name} out of range {pleaf!r}.'
+                        raise Exception(message)
                     if self.color_out_of_range_pitches:
                         abjad.attach(markup, pleaf, tag='SM13')
                         string = r'\baca_out_of_range_warning'

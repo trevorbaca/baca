@@ -2760,6 +2760,7 @@ class PitchCommand(scoping.Command):
 
     __slots__ = (
         '_allow_octaves',
+        '_allow_out_of_range',
         '_allow_repeats',
         '_cyclic',
         '_do_not_transpose',
@@ -2776,6 +2777,7 @@ class PitchCommand(scoping.Command):
         self,
         *,
         allow_octaves: bool = None,
+        allow_out_of_range: bool = None,
         allow_repeats: bool = None,
         cyclic: bool = None,
         do_not_transpose: bool = None,
@@ -2799,6 +2801,9 @@ class PitchCommand(scoping.Command):
         if allow_octaves is not None:
             allow_octaves = bool(allow_octaves)
         self._allow_octaves = allow_octaves
+        if allow_out_of_range is not None:
+            allow_out_of_range = bool(allow_out_of_range)
+        self._allow_out_of_range = allow_out_of_range
         if allow_repeats is not None:
             allow_repeats = bool(allow_repeats)
         self._allow_repeats = allow_repeats
@@ -2856,6 +2861,9 @@ class PitchCommand(scoping.Command):
             if self.allow_octaves:
                 for pleaf in plt:
                     abjad.attach(abjad.tags.ALLOW_OCTAVE, pleaf)
+            if self.allow_out_of_range:
+                for pleaf in plt:
+                    abjad.attach(abjad.tags.ALLOW_OUT_OF_RANGE, pleaf)
             if self.allow_repeats:
                 for pleaf in plt:
                     abjad.attach(abjad.tags.ALLOW_REPEAT_PITCH, pleaf)
@@ -2992,6 +3000,13 @@ class PitchCommand(scoping.Command):
         Is true when command allows octaves.
         """
         return self._allow_octaves
+
+    @property
+    def allow_out_of_range(self) -> typing.Optional[bool]:
+        """
+        Is true when command allows out-of-range pitches.
+        """
+        return self._allow_out_of_range
 
     @property
     def allow_repeats(self) -> typing.Optional[bool]:
@@ -6610,21 +6625,26 @@ def natural_clusters(
 def pitch(
     pitch,
     *,
-    selector: typings.Selector = 'baca.pleaves()',
+    allow_out_of_range: bool = None,
     do_not_transpose: bool = None,
     persist: str = None,
+    selector: typings.Selector = 'baca.pleaves()',
     ) -> PitchCommand:
     """
     Makes pitch command.
     """
     if isinstance(pitch, (list, tuple)) and len(pitch) == 1:
         raise Exception(f'one-note chord {pitch!r}?')
+    if allow_out_of_range not in (None, True, False):
+        raise Exception('allow_out_of_range must be boolean'
+            f' (not {allow_out_of_range!r}).')
     if do_not_transpose not in (None, True, False):
         raise Exception('do_not_transpose must be boolean'
             f' (not {do_not_transpose!r}).')
     if persist is not None and not isinstance(persist, str):
         raise Exception(f'persist name must be string (not {persist!r}).')
     return PitchCommand(
+        allow_out_of_range=allow_out_of_range,
         allow_repeats=True,
         cyclic=True,
         do_not_transpose=do_not_transpose,

@@ -676,6 +676,7 @@ pitchcommands
       :nosignatures:
 
       allow_octaves
+      allow_out_of_range
       allow_repeats
       cyclic
       do_not_transpose
@@ -750,6 +751,8 @@ pitchcommands
       :class: class-header
 
    .. autoattribute:: PitchCommand.allow_octaves
+
+   .. autoattribute:: PitchCommand.allow_out_of_range
 
    .. autoattribute:: PitchCommand.allow_repeats
 

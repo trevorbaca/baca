@@ -1944,17 +1944,13 @@ def make_notes(
     """
     Makes notes; rewrites meter.
     """
-    if dmask is None:
-        division_masks = None
-    else:
-        division_masks = [dmask]
     tie_specifier = None
     if repeat_ties:
         tie_specifier = rmakers.TieSpecifier(repeat_ties=True)
     return RhythmCommand(
         rewrite_meter=True,
         rhythm_maker=rmakers.NoteRhythmMaker(
-            division_masks=division_masks,
+            division_masks=dmask,
             tie_specifier=tie_specifier,
             )
         )
@@ -1967,16 +1963,10 @@ def make_repeat_tied_notes(
     """
     Makes repeat-tied notes; rewrites meter.
     """
-    if dmask is None:
-        division_masks = None
-    elif isinstance(dmask, list):
-        division_masks = dmask[:]
-    else:
-        division_masks = [dmask]
     return RhythmCommand(
         rewrite_meter=not(do_not_rewrite_meter),
         rhythm_maker=rmakers.NoteRhythmMaker(
-            division_masks=division_masks,
+            division_masks=dmask,
             tie_specifier=rmakers.TieSpecifier(
                 tie_across_divisions=True,
                 repeat_ties=True,
@@ -1994,10 +1984,6 @@ def make_repeated_duration_notes(
     """
     Makes repeated-duration notes; rewrites meter.
     """
-    if dmask is None:
-        division_masks = None
-    else:
-        division_masks = [dmask]
     if isinstance(durations, abjad.Duration):
         durations = [durations]
     elif isinstance(durations, tuple):
@@ -2014,7 +2000,7 @@ def make_repeated_duration_notes(
         rewrite_meter=not(do_not_rewrite_meter),
         rhythm_maker=rmakers.NoteRhythmMaker(
             beam_specifier=beam_specifier,
-            division_masks=division_masks,
+            division_masks=dmask,
             tie_specifier=tie_specifier,
             ),
         )
@@ -2029,14 +2015,20 @@ def make_rests() -> RhythmCommand:
             ),
         )
 
-def make_rhythm(selection: abjad.Selection) -> RhythmCommand:
+def make_rhythm(
+    selection: typing.Union[str, abjad.Selection],
+    ) -> RhythmCommand:
     """
     Sets rhythm to ``selection``.
     """
-    assert isinstance(selection, abjad.Selection), repr(selection)
-    assert all(isinstance(_,  abjad.Component) for _ in selection)
+    if isinstance(selection, str):
+        container = abjad.Container(selection)
+        rhythm_maker = abjad.mutate(container).eject_contents()
+    else:
+        assert isinstance(selection, abjad.Selection), repr(selection)
+        rhythm_maker = selection
     return RhythmCommand(
-        rhythm_maker=selection,
+        rhythm_maker=rhythm_maker,
         )
 
 def make_single_attack(duration) -> RhythmCommand:
