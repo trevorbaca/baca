@@ -2706,6 +2706,16 @@ def make_dynamic(string: str) -> typing.Union[
 
     ..  container:: example
 
+        Sempre dynamics:
+
+        >>> baca.make_dynamic('p_sempre')
+        Dynamic('p', command='\\baca_p_sempre')
+
+        >>> baca.make_dynamic('f_sempre')
+        Dynamic('f', command='\\baca_f_sempre')
+
+    ..  container:: example
+
         Subito dynamics:
 
         >>> baca.make_dynamic('p_sub')
@@ -2738,6 +2748,10 @@ def make_dynamic(string: str) -> typing.Union[
     elif string.endswith('_poss'):
         dynamic = string.split('_')[0]
         command = rf'\baca_{dynamic}_poss'
+        indicator = abjad.Dynamic(dynamic, command=command)
+    elif string.endswith('_sempre'):
+        dynamic = string.split('_')[0]
+        command = rf'\baca_{dynamic}_sempre'
         indicator = abjad.Dynamic(dynamic, command=command)
     elif string.endswith('_sub'):
         dynamic = string.split('_')[0]
