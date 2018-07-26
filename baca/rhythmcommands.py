@@ -1894,6 +1894,7 @@ def make_even_divisions() -> RhythmCommand:
         )
 
 def make_fused_tuplet_monads(
+    *,
     tuplet_ratio: typing.Tuple[int] = None,
     ) -> RhythmCommand:
     """
@@ -1936,6 +1937,7 @@ def make_multimeasure_rests() -> RhythmCommand:
         )
 
 def make_notes(
+    *,
     dmask: mask_typing = None,
     repeat_ties: bool = False,
     ) -> RhythmCommand:
@@ -1958,6 +1960,7 @@ def make_notes(
         )
 
 def make_repeat_tied_notes(
+    *,
     dmask: mask_typing = None,
     do_not_rewrite_meter: bool = None,
     ) -> RhythmCommand:
