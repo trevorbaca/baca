@@ -2116,15 +2116,16 @@ def make_rhythm(
     """
     if isinstance(selection, str):
         container = abjad.Container(selection)
-        selection = abjad.mutate(container).eject_contents()
+        argument = abjad.mutate(container).eject_contents()
     else:
         assert isinstance(selection, abjad.Selection), repr(selection)
+        argument = selection
     if repeat_tie_threshold is not None:
         repeat = abjad.Tie._coerce_inequality(repeat_tie_threshold)
-        for tie in abjad.inspect(selection).get_spanners(abjad.Tie):
+        for tie in abjad.inspect(argument).get_spanners(abjad.Tie):
             tie._repeat = repeat
     return RhythmCommand(
-        rhythm_maker=selection,
+        rhythm_maker=argument,
         )
 
 def make_single_attack(duration) -> RhythmCommand:
