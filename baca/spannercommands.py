@@ -2114,9 +2114,9 @@ def tie(
                             \override TupletBracket.staff-padding = #5                               %! OC1
                             r8
                             c'16
+                            ~                                                                        %! SC
                             [
                             c'16
-                            \repeatTie                                                               %! SC
                             ]
                             bf'4
                             bf'16
@@ -2128,9 +2128,9 @@ def tie(
                             bf'16
                             [
                             e''16
+                            ~                                                                        %! SC
                             ]
                             e''4
-                            \repeatTie                                                               %! SC
                             e''16
                             \repeatTie                                                               %! SC
                             r16
