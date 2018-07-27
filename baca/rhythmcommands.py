@@ -2017,18 +2017,114 @@ def make_rests() -> RhythmCommand:
 
 def make_rhythm(
     selection: typing.Union[str, abjad.Selection],
+    *,
+    repeat_tie_threshold: typing.Union[
+        bool,
+        typings.IntegerPair,
+        abjad.DurationInequality,
+        ] = None,
     ) -> RhythmCommand:
-    """
+    r"""
     Sets rhythm to ``selection``.
+
+    ..  container:: example
+
+        With ``repeat_tie_threshold``:
+
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     spacing=baca.minimum_duration((1, 12)),
+        ...     time_signatures=[(3, 8), (4, 8), (3,8), (4, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'MusicVoice',
+        ...     baca.make_rhythm(
+        ...         "d'4. ~ d'2 ~ d'4. ~ d'2",
+        ...         repeat_tie_threshold=(4, 8),
+        ...         ),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
+            <BLANKLINE>
+                        % [GlobalSkips measure 1]                                                    %! SM4
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+            <BLANKLINE>
+                        % [GlobalSkips measure 2]                                                    %! SM4
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 3]                                                    %! SM4
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+            <BLANKLINE>
+                        % [GlobalSkips measure 4]                                                    %! SM4
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+                        \baca_bar_line_visible                                                       %! SM5
+                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                    }
+                >>
+                \context MusicContext = "MusicContext"
+                <<
+                    \context Staff = "MusicStaff"
+                    {
+                        \context Voice = "MusicVoice"
+                        {
+            <BLANKLINE>
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            d'4.
+                            ~
+            <BLANKLINE>
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            d'2
+            <BLANKLINE>
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            d'4.
+                            \repeatTie
+                            ~
+            <BLANKLINE>
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            d'2
+            <BLANKLINE>
+                        }
+                    }
+                >>
+            >>
+
     """
     if isinstance(selection, str):
         container = abjad.Container(selection)
-        rhythm_maker = abjad.mutate(container).eject_contents()
+        selection = abjad.mutate(container).eject_contents()
     else:
         assert isinstance(selection, abjad.Selection), repr(selection)
-        rhythm_maker = selection
+    if repeat_tie_threshold is not None:
+        repeat = abjad.Tie._coerce_inequality(repeat_tie_threshold)
+        for tie in abjad.inspect(selection).get_spanners(abjad.Tie):
+            tie._repeat = repeat
     return RhythmCommand(
-        rhythm_maker=rhythm_maker,
+        rhythm_maker=selection,
         )
 
 def make_single_attack(duration) -> RhythmCommand:
