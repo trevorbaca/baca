@@ -1606,7 +1606,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> metadata['persistent_indicators']['MusicStaff'] = [
             ...     abjad.Momento(
             ...         context='MusicVoice',
-            ...         prototype='abjad.Instrument',
+            ...         manifest='instruments',
             ...         value='Piccolo',
             ...         )
             ...     ]
@@ -1824,7 +1824,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> metadata['persistent_indicators']['MusicStaff'] = [
             ...     abjad.Momento(
             ...         context='MusicVoice',
-            ...         prototype='abjad.Instrument',
+            ...         manifest='instruments',
             ...         value='Flute',
             ...         )
             ...     ]
@@ -2299,7 +2299,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> metadata['persistent_indicators']['MusicStaff'] = [
             ...     abjad.Momento(
             ...         context='MusicVoice',
-            ...         prototype='abjad.Instrument',
+            ...         manifest='instruments',
             ...         value='Flute',
             ...         )
             ...     ]
@@ -3014,7 +3014,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> metadata['persistent_indicators']['MusicStaff'] = [
             ...     abjad.Momento(
             ...         context='MusicVoice',
-            ...         prototype='abjad.MarginMarkup',
+            ...         manifest='margin_markups',
             ...         value='I+II',
             ...         )
             ...     ]
@@ -3262,7 +3262,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> metadata['persistent_indicators']['MusicStaff'] = [
             ...     abjad.Momento(
             ...         context='MusicVoice',
-            ...         prototype='abjad.MarginMarkup',
+            ...         manifest='margin_markups',
             ...         value='I+II',
             ...         )
             ...     ]
@@ -3827,7 +3827,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> metadata['persistent_indicators']['MusicStaff'] = [
             ...     abjad.Momento(
             ...         context='MusicVoice',
-            ...         prototype='abjad.MarginMarkup',
+            ...         manifest='margin_markups',
             ...         value='I+II',
             ...         )
             ...     ]
@@ -4321,7 +4321,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> metadata['persistent_indicators']['Score'] = [
             ...     abjad.Momento(
             ...         context='GlobalSkips',
-            ...         prototype='abjad.MetronomeMark',
+            ...         manifest='metronome_marks',
             ...         value='90',
             ...         )
             ...     ]
@@ -4435,7 +4435,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> metadata['persistent_indicators']['Score'] = [
             ...     abjad.Momento(
             ...         context='GlobalSkips',
-            ...         prototype='abjad.MetronomeMark',
+            ...         manifest='metronome_marks',
             ...         value='90',
             ...         )
             ...     ]
@@ -4655,7 +4655,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> metadata['persistent_indicators']['Score'] = [
             ...     abjad.Momento(
             ...         context='GlobalSkips',
-            ...         prototype='abjad.MetronomeMark',
+            ...         manifest='metronome_marks',
             ...         value='112',
             ...         )
             ...     ]
@@ -5636,8 +5636,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> metadata['persistent_indicators']['Score'] = [
             ...     abjad.Momento(
             ...         context='GlobalSkips',
-            ...         prototype='abjad.MetronomeMark',
-            ...         value='baca.Ritardando()',
+            ...         prototype='baca.Ritardando',
             ...         )
             ...     ]
             >>> metadata['segment_number'] = 1
@@ -5754,8 +5753,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> metadata['persistent_indicators']['Score'] = [
             ...     abjad.Momento(
             ...         context='GlobalSkips',
-            ...         prototype='abjad.MetronomeMark',
-            ...         value='baca.Accelerando()',
+            ...         prototype='baca.Accelerando',
             ...         )
             ...     ]
             >>> metadata['segment_number'] = 1
@@ -6012,8 +6010,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> metadata['persistent_indicators']['Score'] = [
             ...     abjad.Momento(
             ...         context='GlobalSkips',
-            ...         prototype='abjad.MetronomeMark',
-            ...         value='baca.Accelerando()',
+            ...         prototype='baca.Accelerando',
             ...         )
             ...     ]
             >>> metadata['segment_number'] = 1

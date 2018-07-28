@@ -915,7 +915,7 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         if not getattr(wrapper.indicator, 'parameter', False):
             return
-        if wrapper.indicator.parameter == 'abjad.MetronomeMark':
+        if wrapper.indicator.parameter == 'METRONOME_MARK':
             return
         if isinstance(wrapper.indicator, abjad.PersistentOverride):
             return
@@ -1583,17 +1583,22 @@ class SegmentMaker(abjad.SegmentMaker):
                 parentage = abjad.inspect(leaf).parentage()
                 first_context = parentage.get_first(abjad.Context)
                 indicator = wrapper.indicator
+                prototype, manifest = None, None
+                if isinstance(indicator, abjad.Instrument):
+                    manifest = 'instruments'
+                elif isinstance(indicator, abjad.MetronomeMark):
+                    manifest = 'metronome_marks'
+                elif isinstance(indicator, abjad.MarginMarkup):
+                    manifest = 'margin_markups'
+                else:
+                    prototype = type(indicator)
+                    prototype = self._prototype_string(prototype)
                 value = self._indicator_to_key(indicator, self.manifests)
                 if value is None and self.environment != 'docs':
                     raise Exception(
                         'can not find persistent indicator in manifest:\n\n'
                         f'  {indicator}'
                         )
-                if isinstance(indicator.parameter, str):
-                    prototype = indicator.parameter
-                else:
-                    prototype = type(indicator)
-                    prototype = self._prototype_string(prototype)
                 editions = wrapper.tag.editions()
                 if editions:
                     words = [str(_) for _ in editions]
@@ -1603,12 +1608,13 @@ class SegmentMaker(abjad.SegmentMaker):
                 momento = abjad.Momento(
                     context=first_context.name,
                     edition=editions,
+                    manifest=manifest,
                     prototype=prototype,
                     value=value,
                     )
                 momentos.append(momento)
             if momentos:
-                momentos.sort(key=lambda _: _.prototype)
+                momentos.sort(key=lambda _: format(_))
                 result[context.name] = momentos
         dictionary = self.previous_metadata.get('persistent_indicators')
         if dictionary:
@@ -2028,8 +2034,10 @@ class SegmentMaker(abjad.SegmentMaker):
             key = indicator
         elif isinstance(indicator, indicators.StaffLines):
             key = indicator.line_count
-        elif isinstance(indicator, (indicators.Accelerando, indicators.Ritardando)):
-            key = f'abjad.{repr(indicator)}'
+        elif isinstance(
+            indicator, (indicators.Accelerando, indicators.Ritardando)
+            ):
+            key = {'hide': indicator.hide}
         else:
             key = str(indicator)
         return key
@@ -2322,14 +2330,8 @@ class SegmentMaker(abjad.SegmentMaker):
     def _momento_to_indicator(self, momento):
         # for selector evaluation:
         import baca
-        if momento.value is None:
-            return
-        if momento.value in ('baca.Accelerando()', 'baca.Ritardando()'):
-            indicator = eval(momento.value)
-            return indicator
-        if momento.prototype in self._prototype_to_manifest_name:
-            name = self._prototype_to_manifest_name.get(momento.prototype)
-            dictionary = getattr(self, name)
+        if momento.manifest is not None:
+            dictionary = getattr(self, momento.manifest)
             if dictionary is None:
                 raise Exception(f'can not find {name!r} manifest.')
             return dictionary.get(momento.value)
@@ -2342,8 +2344,15 @@ class SegmentMaker(abjad.SegmentMaker):
             indicator = momento.value
         elif class_ is indicators.StaffLines:
             indicator = class_(line_count=momento.value)
+        elif momento.value is None:
+            indicator = class_()
+        elif isinstance(momento.value, dict):
+            indicator = class_(**momento.value)
         else:
-            indicator = class_(momento.value)
+            try:
+                indicator = class_(momento.value)
+            except:
+                raise Exception(format(momento))
         return indicator
 
     def _parallelize_multimeasure_rests(self):
