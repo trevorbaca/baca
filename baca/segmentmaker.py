@@ -913,9 +913,9 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         if isinstance(wrapper.indicator, abjad.Instrument):
             return
-        if not getattr(wrapper.indicator, 'persistent', False):
+        if not getattr(wrapper.indicator, 'parameter', False):
             return
-        if wrapper.indicator.persistent == 'abjad.MetronomeMark':
+        if wrapper.indicator.parameter == 'abjad.MetronomeMark':
             return
         if isinstance(wrapper.indicator, abjad.PersistentOverride):
             return
@@ -1589,8 +1589,8 @@ class SegmentMaker(abjad.SegmentMaker):
                         'can not find persistent indicator in manifest:\n\n'
                         f'  {indicator}'
                         )
-                if isinstance(indicator.persistent, str):
-                    prototype = indicator.persistent
+                if isinstance(indicator.parameter, str):
+                    prototype = indicator.parameter
                 else:
                     prototype = type(indicator)
                     prototype = self._prototype_string(prototype)
@@ -2717,7 +2717,7 @@ class SegmentMaker(abjad.SegmentMaker):
     @staticmethod
     def _treat_persistent_wrapper(manifests, wrapper, status):
         assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
-        assert bool(wrapper.indicator.persistent), repr(wrapper)
+        assert bool(wrapper.indicator.parameter), repr(wrapper)
         assert isinstance(status, str), repr(status)
         context = wrapper._find_correct_effective_context()
         assert isinstance(context, abjad.Context), repr(wrapper)
@@ -2794,7 +2794,7 @@ class SegmentMaker(abjad.SegmentMaker):
             )
         for leaf in abjad.iterate(self.score).leaves():
             for wrapper in abjad.inspect(leaf).wrappers():
-                if not getattr(wrapper.indicator, 'persistent', False):
+                if not getattr(wrapper.indicator, 'parameter', False):
                     continue
                 if wrapper.tag and wrapper.tag.has_persistence_tag():
                     continue

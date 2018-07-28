@@ -50,7 +50,7 @@ class Accelerando(abjad.AbjadValueObject):
 
     _context = 'Score'
 
-    _persistent = 'abjad.MetronomeMark'
+    _parameter = 'abjad.MetronomeMark'
 
     ### INITIALIZER ###
 
@@ -180,17 +180,17 @@ class Accelerando(abjad.AbjadValueObject):
         return self._markup
 
     @property
-    def persistent(self) -> str:
+    def parameter(self) -> str:
         """
         Is ``'abjad.MetronomeMark'``.
 
         ..  container:: example
 
-            >>> baca.Accelerando().persistent
+            >>> baca.Accelerando().parameter
             'abjad.MetronomeMark'
 
         """
-        return self._persistent
+        return self._parameter
 
     @property
     def tweaks(self) -> None:
@@ -311,7 +311,7 @@ class Ritardando(abjad.AbjadValueObject):
 
     _context = 'Score'
 
-    _persistent = 'abjad.MetronomeMark'
+    _parameter = 'abjad.MetronomeMark'
 
     ### INITIALIZER ###
 
@@ -467,17 +467,17 @@ class Ritardando(abjad.AbjadValueObject):
         return self._markup
 
     @property
-    def persistent(self) -> str:
+    def parameter(self) -> str:
         """
         Is ``'abjad.MetronomeMark'``.
 
         ..  container:: example
 
-            >>> baca.Ritardando().persistent
+            >>> baca.Ritardando().parameter
             'abjad.MetronomeMark'
 
         """
-        return self._persistent
+        return self._parameter
 
     @property
     def tweaks(self) -> None:
@@ -500,7 +500,7 @@ class StaffLines(abjad.AbjadObject):
 
     _context = 'Staff'
 
-    _persistent = True
+    _parameter = True
 
     ### INITIALIZER ###
 
@@ -628,18 +628,18 @@ class StaffLines(abjad.AbjadObject):
         return self._line_count
 
     @property
-    def persistent(self):
+    def parameter(self):
         """
         Is class constant true.
 
         ..  container:: example
 
-            >>> baca.StaffLines(line_count=1).persistent
+            >>> baca.StaffLines(line_count=1).parameter
             True
 
         Returns true.
         """
-        return self._persistent
+        return self._parameter
 
 class SpacingSection(abjad.AbjadObject):
     r"""
@@ -673,7 +673,7 @@ class SpacingSection(abjad.AbjadObject):
 
     _context = 'Score'
 
-    _persistent = True
+    _parameter = True
 
     ### INITIALIZER ###
 
@@ -787,18 +787,18 @@ class SpacingSection(abjad.AbjadObject):
         return self._duration
 
 #    @property
-#    def persistent(self):
+#    def parameter(self):
 #        """
 #        Is class constant true.
 #
 #        ..  container:: example
 #
-#            >>> baca.SpacingSection((2, 24)).persistent
+#            >>> baca.SpacingSection((2, 24)).parameter
 #            True
 #
 #        Returns true.
 #        """
-#        return self._persistent
+#        return self._parameter
 
     ### PUBLIC METHODS ###
 

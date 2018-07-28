@@ -307,7 +307,7 @@ class Command(abjad.AbjadObject):
 
     @staticmethod
     def _remove_reapplied_wrappers(leaf, indicator):
-        if not getattr(indicator, 'persistent', False):
+        if not getattr(indicator, 'parameter', False):
             return
         if abjad.inspect(leaf).timespan().start_offset != 0:
             return

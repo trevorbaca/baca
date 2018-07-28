@@ -36,7 +36,7 @@ indicators
       context
       hide
       markup
-      persistent
+      parameter
       tweaks
 
    .. autosummary::
@@ -86,7 +86,7 @@ indicators
 
    .. autoattribute:: Accelerando.markup
 
-   .. autoattribute:: Accelerando.persistent
+   .. autoattribute:: Accelerando.parameter
 
    .. autoattribute:: Accelerando.tweaks
 
@@ -443,7 +443,7 @@ indicators
       context
       hide
       markup
-      persistent
+      parameter
       tweaks
 
    .. autosummary::
@@ -493,7 +493,7 @@ indicators
 
    .. autoattribute:: Ritardando.markup
 
-   .. autoattribute:: Ritardando.persistent
+   .. autoattribute:: Ritardando.parameter
 
    .. autoattribute:: Ritardando.tweaks
 
@@ -563,7 +563,7 @@ indicators
       context
       hide
       line_count
-      persistent
+      parameter
 
    .. autosummary::
       :nosignatures:
@@ -600,4 +600,4 @@ indicators
 
    .. autoattribute:: StaffLines.line_count
 
-   .. autoattribute:: StaffLines.persistent
+   .. autoattribute:: StaffLines.parameter
