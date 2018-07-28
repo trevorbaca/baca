@@ -5090,7 +5090,7 @@ class MusicAccumulator(abjad.AbjadObject):
                 selection,
                 music_contribution,
                 )
-            stop_offset = start_offset + abjad.inspect(selection).get_duration()
+            stop_offset = start_offset + abjad.inspect(selection).duration()
             timespan = abjad.Timespan(start_offset, stop_offset)
             floating_selection = abjad.AnnotatedTimespan(
                 timespan.start_offset,
@@ -5116,7 +5116,7 @@ class MusicAccumulator(abjad.AbjadObject):
                 leaf_start_offset = floating_selection.start_offset
                 leaves = abjad.iterate(floating_selection.annotation).leaves()
                 for leaf in leaves:
-                    markup = abjad.inspect(leaf).get_indicators(abjad.Markup)
+                    markup = abjad.inspect(leaf).indicators(abjad.Markup)
                     for markup_ in markup:
                         if (isinstance(markup_._annotation, str) and
                             markup_._annotation.startswith('figure name: ')):
@@ -5127,7 +5127,7 @@ class MusicAccumulator(abjad.AbjadObject):
                                 )
                             if figure_name_ == figure_name:
                                 return leaf_start_offset
-                    leaf_duration = abjad.inspect(leaf).get_duration()
+                    leaf_duration = abjad.inspect(leaf).duration()
                     leaf_start_offset += leaf_duration
         raise Exception(f'can not find figure {figure_name!r}.')
 
@@ -5136,7 +5136,7 @@ class MusicAccumulator(abjad.AbjadObject):
         for floating_selection in floating_selections:
             leaf_start_offset = abjad.Offset(0)
             for leaf_ in abjad.iterate(floating_selection.annotation).leaves():
-                leaf_duration = abjad.inspect(leaf_).get_duration()
+                leaf_duration = abjad.inspect(leaf_).duration()
                 if leaf_ is leaf:
                     found_leaf = True
                     break
@@ -5195,7 +5195,7 @@ class MusicAccumulator(abjad.AbjadObject):
             selected_leaves = list(abjad.iterate(result).leaves())
             first_selected_leaf = selected_leaves[0]
             dummy_container = abjad.Container(selection)
-            timespan = abjad.inspect(first_selected_leaf).get_timespan()
+            timespan = abjad.inspect(first_selected_leaf).timespan()
             del(dummy_container[:])
             local_anchor_offset = timespan.start_offset
         start_offset = remote_anchor_offset - local_anchor_offset
@@ -5395,7 +5395,7 @@ class MusicContribution(abjad.AbjadValueObject):
         for voice_name in sorted(self.selections):
             selection = self[voice_name]
             if selection:
-                durations.append(abjad.inspect(selection).get_duration())
+                durations.append(abjad.inspect(selection).duration())
         assert len(set(durations)) == 1, repr(durations)
         return durations[0]
 
@@ -6517,7 +6517,7 @@ class MusicMaker(abjad.AbjadObject):
     def _make_time_signature(self, selection, denominator=None):
         if denominator is None:
             denominator = self.denominator
-        duration = abjad.inspect(selection).get_duration()
+        duration = abjad.inspect(selection).duration()
         if denominator is not None:
             duration = duration.with_denominator(denominator)
         time_signature = abjad.TimeSignature(duration)
@@ -8599,7 +8599,7 @@ class NestingCommand(scoping.Command):
             assert isinstance(tuplet, abjad.Tuplet), repr(tuplet)
         if isinstance(time_treatment, str):
             addendum = abjad.Duration(time_treatment)
-            contents_duration = abjad.inspect(tuplet_selection).get_duration()
+            contents_duration = abjad.inspect(tuplet_selection).duration()
             target_duration = contents_duration + addendum
             multiplier = target_duration / contents_duration
             tuplet = abjad.Tuplet(multiplier, [])
@@ -8610,7 +8610,7 @@ class NestingCommand(scoping.Command):
             abjad.mutate(tuplet_selection).wrap(tuplet)
         elif time_treatment.__class__ is abjad.Duration:
             target_duration = time_treatment
-            contents_duration = abjad.inspect(tuplet_selection).get_duration()
+            contents_duration = abjad.inspect(tuplet_selection).duration()
             multiplier = target_duration / contents_duration
             #tuplet = abjad.Tuplet(multiplier, tuplet_selection)
             tuplet = abjad.Tuplet(multiplier, [])
@@ -9245,7 +9245,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         tuplet = abjad.Tuplet((1, 1), leaf_selection)
         if len(tuplet) == 1:
             return tuplet
-        durations = [abjad.inspect(_).get_duration() for _ in leaf_selection]
+        durations = [abjad.inspect(_).duration() for _ in leaf_selection]
         if accelerando_indicator == 'accel':
             exponent = 0.625
         elif accelerando_indicator == 'rit':
@@ -9259,7 +9259,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             abjad.override(leaf_selection[0]).beam.grow_direction = abjad.Right
         elif rhythm_maker_class._is_ritardando(leaf_selection):
             abjad.override(leaf_selection[0]).beam.grow_direction = abjad.Left
-        duration = abjad.inspect(tuplet).get_duration()
+        duration = abjad.inspect(tuplet).duration()
         duration = abjad.Duration(duration)
         markup = duration.to_score_markup()
         markup = markup.scale((0.75, 0.75))
@@ -9508,7 +9508,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             tuplet = abjad.Tuplet(time_treatment, leaf_selection)
         elif time_treatment.__class__ is abjad.Duration:
             tuplet_duration = time_treatment
-            contents_duration = abjad.inspect(leaf_selection).get_duration()
+            contents_duration = abjad.inspect(leaf_selection).duration()
             multiplier = tuplet_duration / contents_duration
             tuplet = abjad.Tuplet(multiplier, leaf_selection)
             if not tuplet.multiplier.normalized():
@@ -9545,7 +9545,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         extra_count,
         denominator,
         ):
-        contents_duration = abjad.inspect(leaf_selection).get_duration()
+        contents_duration = abjad.inspect(leaf_selection).duration()
         contents_duration = contents_duration.with_denominator(denominator)
         contents_count = contents_duration.numerator
         if 0 < extra_count:

@@ -91,7 +91,7 @@ class BCPCommand(scoping.Command):
         if (self.final_spanner and
             not self._is_rest(lts[-1]) and
             len(lts[-1]) == 1):
-            next_leaf_after_argument = abjad.inspect(lts[-1][-1]).get_leaf(1)
+            next_leaf_after_argument = abjad.inspect(lts[-1][-1]).leaf(1)
             if next_leaf_after_argument is None:
                 raise Exception(
                     'can not attach final spanner:'
@@ -112,7 +112,7 @@ class BCPCommand(scoping.Command):
                     tag=self.tag,
                     )
                 break
-            previous_leaf = abjad.inspect(lt.head).get_leaf(-1)
+            previous_leaf = abjad.inspect(lt.head).leaf(-1)
             if (self._is_rest(lt.head) and
                 (self._is_rest(previous_leaf) or previous_leaf is None)):
                 continue
@@ -204,7 +204,7 @@ class BCPCommand(scoping.Command):
         prototype = (abjad.Rest, abjad.MultimeasureRest, abjad.Skip)
         if isinstance(argument, prototype):
             return True
-        annotation = abjad.inspect(argument).get_annotation('is_sounding')
+        annotation = abjad.inspect(argument).annotation('is_sounding')
         if annotation is False:
             return True
         return False
@@ -1446,9 +1446,9 @@ class InstrumentChangeCommand(IndicatorCommand):
             argument = self.selector(argument)
         if self.indicators is None:
             return
-        first_leaf = abjad.inspect(argument).get_leaf(0)
+        first_leaf = abjad.inspect(argument).leaf(0)
         if first_leaf is not None:
-            parentage = abjad.inspect(first_leaf).get_parentage()
+            parentage = abjad.inspect(first_leaf).parentage()
             staff = parentage.get_first(abjad.Staff)
             instrument = self.indicators[0]
             assert isinstance(instrument, abjad.Instrument), repr(instrument)
@@ -1862,10 +1862,10 @@ class PartAssignmentCommand(scoping.Command):
             return
         if self.selector is not None:
             argument = self.selector(argument)
-        first_leaf = abjad.inspect(argument).get_leaf(0)
+        first_leaf = abjad.inspect(argument).leaf(0)
         if first_leaf is None:
             return
-        parentage = abjad.inspect(first_leaf).get_parentage()
+        parentage = abjad.inspect(first_leaf).parentage()
         voice = parentage.get_first(abjad.Voice)
         if voice is not None and self.part_assignment is not None:
             if not self.runtime['score_template'].allows_part_assignment(

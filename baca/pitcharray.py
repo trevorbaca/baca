@@ -268,10 +268,10 @@ class PitchArray(abjad.AbjadObject):
     def _get_leaf_offsets(argment):
         offsets = []
         for leaf in abjad.iterate(argment).leaves():
-            start_offset = abjad.inspect(leaf).get_timespan().start_offset
+            start_offset = abjad.inspect(leaf).timespan().start_offset
             if start_offset not in offsets:
                 offsets.append(start_offset)
-            stop_offset = abjad.inspect(leaf).get_timespan().stop_offset
+            stop_offset = abjad.inspect(leaf).timespan().stop_offset
             if stop_offset not in offsets:
                 offsets.append(stop_offset)
         offsets.sort()
@@ -705,7 +705,7 @@ class PitchArray(abjad.AbjadObject):
             durations = []
             leaves = abjad.iterate(leaf_iterable).leaves()
             for leaf in leaves:
-                durations.append(abjad.inspect(leaf).get_duration())
+                durations.append(abjad.inspect(leaf).duration())
             parts = abjad.mutate(items).split(
                 durations,
                 cyclic=False,

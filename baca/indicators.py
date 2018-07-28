@@ -576,7 +576,7 @@ class StaffLines(abjad.AbjadObject):
         bundle = abjad.LilyPondFormatBundle()
         if self.hide:
             return bundle
-        staff = abjad.inspect(component).get_parentage().get_first(abjad.Staff)
+        staff = abjad.inspect(component).parentage().get_first(abjad.Staff)
         strings = self._get_lilypond_format(context=staff)
         bundle.before.commands.extend(strings)
         return bundle

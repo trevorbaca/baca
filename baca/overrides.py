@@ -292,7 +292,7 @@ class OverrideCommand(scoping.Command):
         if lilypond_type in dir(abjad):
             context = getattr(abjad, lilypond_type)
             assert issubclass(context, abjad.Context), repr(context)
-            parentage = abjad.inspect(leaves[0]).get_parentage()
+            parentage = abjad.inspect(leaves[0]).parentage()
             context = parentage.get_first(context) or context()
             lilypond_type = context.lilypond_type
             assert isinstance(lilypond_type, str), repr(lilypond_type)

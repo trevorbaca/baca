@@ -249,8 +249,8 @@ class RhythmCommand(scoping.Command):
         """
         music, start_offset = self._make_rhythm(start_offset, time_signatures)
         assert isinstance(music, (tuple, list, abjad.Voice))
-        first_leaf = abjad.inspect(music).get_leaf(0)
-        last_leaf = abjad.inspect(music).get_leaf(-1)
+        first_leaf = abjad.inspect(music).leaf(0)
+        last_leaf = abjad.inspect(music).leaf(-1)
         pitched_prototype = (abjad.Note, abjad.Chord)
         payload = abjad.AnnotatedTimespan(
             start_offset=start_offset,
@@ -1237,9 +1237,9 @@ class TieCorrectionCommand(scoping.Command):
         left_broken, right_broken = None, None
         if direction is None:
             direction = abjad.Right
-        current_tie = abjad.inspect(current_leaf).get_spanner(abjad.Tie)
+        current_tie = abjad.inspect(current_leaf).spanner(abjad.Tie)
         if direction == abjad.Right:
-            next_leaf = abjad.inspect(current_leaf).get_leaf(1)
+            next_leaf = abjad.inspect(current_leaf).leaf(1)
             if next_leaf is None:
                 right_broken = True
                 if current_tie is not None:
@@ -1249,7 +1249,7 @@ class TieCorrectionCommand(scoping.Command):
                     new_leaves = [current_leaf]
                     new_tie = abjad.Tie(repeat=repeat)
             else:
-                next_tie = abjad.inspect(next_leaf).get_spanner(abjad.Tie)
+                next_tie = abjad.inspect(next_leaf).spanner(abjad.Tie)
                 if current_tie is not None and next_tie is not None:
                     if current_tie is next_tie:
                         return
@@ -1268,7 +1268,7 @@ class TieCorrectionCommand(scoping.Command):
                     new_tie = abjad.Tie(repeat=repeat)
         else:
             assert direction == abjad.Left
-            previous_leaf = abjad.inspect(current_leaf).get_leaf(-1)
+            previous_leaf = abjad.inspect(current_leaf).leaf(-1)
             if previous_leaf is None:
                 left_broken = True
                 if current_tie is not None:
@@ -1278,7 +1278,7 @@ class TieCorrectionCommand(scoping.Command):
                     new_leaves = [current_leaf]
                     new_tie = abjad.Tie(repeat=repeat)
             else:
-                previous_tie = abjad.inspect(previous_leaf).get_spanner(
+                previous_tie = abjad.inspect(previous_leaf).spanner(
                     abjad.Tie)
                 if previous_tie is not None and current_tie is not None:
                     if previous_tie is current_tie:
@@ -1308,7 +1308,7 @@ class TieCorrectionCommand(scoping.Command):
 
     @staticmethod
     def _sever_tie(current_leaf, direction, repeat):
-        current_tie = abjad.inspect(current_leaf).get_spanner(abjad.Tie)
+        current_tie = abjad.inspect(current_leaf).spanner(abjad.Tie)
         if current_tie is None:
             return
         if direction is None:
@@ -2122,7 +2122,7 @@ def make_rhythm(
         argument = selection
     if repeat_tie_threshold is not None:
         repeat = abjad.Tie._coerce_inequality(repeat_tie_threshold)
-        for tie in abjad.inspect(argument).get_spanners(abjad.Tie):
+        for tie in abjad.inspect(argument).spanners(abjad.Tie):
             tie._repeat = repeat
     return RhythmCommand(
         rhythm_maker=argument,

@@ -762,7 +762,7 @@ class ClusterCommand(scoping.Command):
         if not argument:
             return
         leaf = classes.Selection(argument).leaf(0)
-        root = abjad.inspect(leaf).get_parentage().root
+        root = abjad.inspect(leaf).parentage().root
         with abjad.ForbidUpdate(component=root):
             for i, plt in enumerate(classes.Selection(argument).plts()):
                 width = self.widths[i]
@@ -2841,7 +2841,7 @@ class PitchCommand(scoping.Command):
             return
         plts = []
         for pleaf in classes.Selection(argument).pleaves():
-            plt = abjad.inspect(pleaf).get_logical_tie()
+            plt = abjad.inspect(pleaf).logical_tie()
             if plt.head is pleaf:
                 plts.append(plt)
         self._check_length(plts)
@@ -2969,7 +2969,7 @@ class PitchCommand(scoping.Command):
                 for leaf in lt:
                     rest = abjad.Rest(leaf.written_duration)
                     abjad.mutate(leaf).replace(rest, wrappers=True)
-                new_lt = abjad.inspect(rest).get_logical_tie()
+                new_lt = abjad.inspect(rest).logical_tie()
         elif isinstance(pitch, collections.Iterable):
             if isinstance(lt.head, abjad.Chord):
                 for chord in lt:
@@ -2979,7 +2979,7 @@ class PitchCommand(scoping.Command):
                 for leaf in lt:
                     chord = abjad.Chord(pitch, leaf.written_duration)
                     abjad.mutate(leaf).replace(chord, wrappers=True)
-                new_lt = abjad.inspect(chord).get_logical_tie()
+                new_lt = abjad.inspect(chord).logical_tie()
         else:
             if isinstance(lt.head, abjad.Note):
                 for note in lt:
@@ -2989,7 +2989,7 @@ class PitchCommand(scoping.Command):
                 for leaf in lt:
                     note = abjad.Note(pitch, leaf.written_duration)
                     abjad.mutate(leaf).replace(note, wrappers=True)
-                new_lt = abjad.inspect(note).get_logical_tie()
+                new_lt = abjad.inspect(note).logical_tie()
         return new_lt
 
     ### PUBLIC PROPERTIES ###
@@ -5423,7 +5423,7 @@ class StaffPositionCommand(scoping.Command):
             argument = self.selector(argument)
         plt_count = 0
         for i, plt in enumerate(classes.Selection(argument).plts()):
-            clef = abjad.inspect(plt.head).get_effective(
+            clef = abjad.inspect(plt.head).effective(
                 abjad.Clef,
                 default=abjad.Clef('treble'),
                 )
@@ -5683,10 +5683,10 @@ class StaffPositionInterpolationCommand(scoping.Command):
             return
         count = len(plts)
         start_pl = plts[0].head
-        clef = abjad.inspect(start_pl).get_effective(abjad.Clef)
+        clef = abjad.inspect(start_pl).effective(abjad.Clef)
         start_staff_position = self.start_pitch.to_staff_position(clef=clef)
         stop_pl = plts[-1].head
-        clef = abjad.inspect(stop_pl).get_effective(
+        clef = abjad.inspect(stop_pl).effective(
             abjad.Clef,
             default=abjad.Clef('treble'),
             )
@@ -5699,7 +5699,7 @@ class StaffPositionInterpolationCommand(scoping.Command):
             staff_position = unit_distance * i + start_staff_position.number
             staff_position = round(staff_position)
             staff_position = abjad.StaffPosition(staff_position)
-            clef = abjad.inspect(plt.head).get_effective(
+            clef = abjad.inspect(plt.head).effective(
                 abjad.Clef,
                 default=abjad.Clef('treble'),
                 )

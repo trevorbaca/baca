@@ -1286,16 +1286,16 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         measure_timespans = []
         durations_by_measure = []
         for skip in skips:
-            measure_timespan = abjad.inspect(skip).get_timespan()
+            measure_timespan = abjad.inspect(skip).timespan()
             measure_timespans.append(measure_timespan)
             durations_by_measure.append([])
         leaf_timespans = set()
         leaf_count = 0
         for leaf in leaves:
-            leaf_timespan = abjad.inspect(leaf).get_timespan()
+            leaf_timespan = abjad.inspect(leaf).timespan()
             leaf_duration = leaf_timespan.duration
             prototype = (abjad.Multiplier, abjad.NonreducedFraction)
-            multiplier = abjad.inspect(leaf).get_indicator(prototype)
+            multiplier = abjad.inspect(leaf).indicator(prototype)
             if multiplier is not None:
                 leaf_duration = leaf_duration / multiplier
             pair = (leaf_timespan, leaf_duration)
@@ -1326,7 +1326,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         if (self.fermata_measure_numbers and
             measure_number in self.fermata_measure_numbers):
             return True
-        measure_timespan = abjad.inspect(skip).get_timespan()
+        measure_timespan = abjad.inspect(skip).timespan()
         return measure_timespan.start_offset in self._fermata_start_offsets
 
     ### PUBLIC PROPERTIES ###

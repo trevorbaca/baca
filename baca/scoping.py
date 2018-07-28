@@ -149,14 +149,14 @@ class TimelineScope(abjad.AbjadObject):
     def _sort_by_timeline(leaves):
         assert leaves.are_leaves(), repr(leaves)
         def compare(leaf_1, leaf_2):
-            start_offset_1 = abjad.inspect(leaf_1).get_timespan().start_offset
-            start_offset_2 = abjad.inspect(leaf_2).get_timespan().start_offset
+            start_offset_1 = abjad.inspect(leaf_1).timespan().start_offset
+            start_offset_2 = abjad.inspect(leaf_2).timespan().start_offset
             if start_offset_1 < start_offset_2:
                 return -1
             if start_offset_2 < start_offset_1:
                 return 1
-            index_1 = abjad.inspect(leaf_1).get_parentage().score_index
-            index_2 = abjad.inspect(leaf_2).get_parentage().score_index
+            index_1 = abjad.inspect(leaf_1).parentage().score_index
+            index_2 = abjad.inspect(leaf_2).parentage().score_index
             if index_1 < index_2:
                 return -1
             if index_2 < index_1:
@@ -309,7 +309,7 @@ class Command(abjad.AbjadObject):
     def _remove_reapplied_wrappers(leaf, indicator):
         if not getattr(indicator, 'persistent', False):
             return
-        if abjad.inspect(leaf).get_timespan().start_offset != 0:
+        if abjad.inspect(leaf).timespan().start_offset != 0:
             return
         tempo_prototype = (
             abjad.MetronomeMark,
@@ -338,8 +338,8 @@ class Command(abjad.AbjadObject):
         effective_wrapper = abjad.inspect(leaf).effective_wrapper(prototype)
         if effective_wrapper and effective_wrapper not in wrappers:
             component = effective_wrapper.component
-            start_1 = abjad.inspect(leaf).get_timespan().start_offset
-            start_2 = abjad.inspect(component).get_timespan().start_offset
+            start_1 = abjad.inspect(leaf).timespan().start_offset
+            start_2 = abjad.inspect(component).timespan().start_offset
             if start_1 == start_2:
                 wrappers_ = abjad.inspect(component).wrappers()
                 wrappers.extend(wrappers_)
@@ -515,7 +515,7 @@ class Command(abjad.AbjadObject):
         """
         tags = self.tags[:]
         if self.tag_measure_number:
-            start_offset = abjad.inspect(leaf).get_timespan().start_offset
+            start_offset = abjad.inspect(leaf).timespan().start_offset
             measure_number = self.runtime[
                 'offset_to_measure_number'].get(start_offset)
             if measure_number is not None:

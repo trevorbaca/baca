@@ -766,12 +766,12 @@ class SegmentMaker(abjad.SegmentMaker):
         else:
             # context alive in previous segment doesn't exist in this segment
             return
-        leaf = abjad.inspect(momento_context).get_leaf(0)
+        leaf = abjad.inspect(momento_context).leaf(0)
         if isinstance(previous_indicator, abjad.Instrument):
             prototype = abjad.Instrument
         else:
             prototype = type(previous_indicator)
-        indicator = abjad.inspect(leaf).get_indicator(prototype)
+        indicator = abjad.inspect(leaf).indicator(prototype)
         status = None
         if indicator is None:
             status = 'reapplied'
@@ -823,13 +823,13 @@ class SegmentMaker(abjad.SegmentMaker):
             if not dummy_tie._attachment_test(current_leaf):
                 continue
             if abjad.inspect(current_leaf).has_indicator(abjad.tags.TIE_TO):
-                previous_leaf = abjad.inspect(current_leaf).get_leaf(-1)
+                previous_leaf = abjad.inspect(current_leaf).leaf(-1)
                 if dummy_tie._attachment_test(previous_leaf):
                     previous_logical_tie = abjad.inspect(
-                        previous_leaf).get_logical_tie()
+                        previous_leaf).logical_tie()
                     if current_leaf not in previous_logical_tie:
                         current_logical_tie = abjad.inspect(
-                            current_leaf).get_logical_tie()
+                            current_leaf).logical_tie()
                         leaves = previous_logical_tie + current_logical_tie
                         abjad.detach(abjad.Tie, previous_leaf)
                         abjad.detach(abjad.Tie, current_leaf)
@@ -840,13 +840,13 @@ class SegmentMaker(abjad.SegmentMaker):
                         abjad.attach(tie, leaves, tag='SM16')
                 abjad.detach(abjad.tags.TIE_TO, current_leaf)
             if abjad.inspect(current_leaf).has_indicator(abjad.tags.TIE_FROM):
-                next_leaf = abjad.inspect(current_leaf).get_leaf(1)
+                next_leaf = abjad.inspect(current_leaf).leaf(1)
                 if dummy_tie._attachment_test(next_leaf):
                     current_logical_tie = abjad.inspect(
-                        current_leaf).get_logical_tie()
+                        current_leaf).logical_tie()
                     if next_leaf not in current_logical_tie:
                         next_logical_tie = abjad.inspect(
-                            next_leaf).get_logical_tie()
+                            next_leaf).logical_tie()
                         leaves = current_logical_tie + next_logical_tie
                         abjad.detach(abjad.Tie, current_leaf)
                         abjad.detach(abjad.Tie, next_leaf)
@@ -874,7 +874,7 @@ class SegmentMaker(abjad.SegmentMaker):
             start_offset = rhythm.start_offset
             if start_offset < previous_stop_offset:
                 raise Exception(f'{voice} has overlapping rhythms.')
-            duration = abjad.inspect(rhythm.annotation).get_duration()
+            duration = abjad.inspect(rhythm.annotation).duration()
             stop_offset = start_offset + duration
             previous_stop_offset = stop_offset
 
@@ -1097,7 +1097,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _attach_metronome_mark_text_span_indicators(self):
         indicator_count = 0
         skips = classes.Selection(self.score['GlobalSkips']).skips()
-        last_leaf_metronome_mark = abjad.inspect(skips[-1]).get_indicator(
+        last_leaf_metronome_mark = abjad.inspect(skips[-1]).indicator(
             abjad.MetronomeMark,
             default=None,
             )
@@ -1114,19 +1114,19 @@ class SegmentMaker(abjad.SegmentMaker):
                     break
         for skip in skips:
             inspector = abjad.inspect(skip)
-            metronome_mark = inspector.get_indicator(
+            metronome_mark = inspector.indicator(
                 abjad.MetronomeMark,
                 default=None,
                 )
-            metric_modulation = inspector.get_indicator(
+            metric_modulation = inspector.indicator(
                 abjad.MetricModulation,
                 default=None,
                 )
-            accelerando = inspector.get_indicator(
+            accelerando = inspector.indicator(
                 indicators.Accelerando,
                 default=None,
                 )
-            ritardando = inspector.get_indicator(
+            ritardando = inspector.indicator(
                 indicators.Ritardando,
                 default=None,
                 )
@@ -1284,7 +1284,7 @@ class SegmentMaker(abjad.SegmentMaker):
             if measure_index == last_measure_index:
                 self._last_measure_is_fermata = True
             measure_number = first_measure_number + measure_index
-            timespan = abjad.inspect(mm_rest).get_timespan()
+            timespan = abjad.inspect(mm_rest).timespan()
             self._fermata_start_offsets.append(timespan.start_offset)
             self._fermata_stop_offsets.append(timespan.stop_offset)
             self._fermata_measure_numbers.append(measure_number)
@@ -1307,7 +1307,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 measure_number = measure_index + 1
                 leaves_by_measure_number[measure_number] = []
             for leaf in abjad.iterate(context).leaves():
-                leaf_timespan = abjad.inspect(leaf).get_timespan()
+                leaf_timespan = abjad.inspect(leaf).timespan()
                 for i, measure_timespan in enumerate(measure_timespans):
                     measure_number = i + 1
                     if leaf_timespan.starts_during_timespan(measure_timespan):
@@ -1440,7 +1440,7 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         tag = abjad.tags.SOUNDS_DURING_SEGMENT
         for voice in abjad.iterate(self.score).components(abjad.Voice):
-            if not abjad.inspect(voice).get_annotation(tag):
+            if not abjad.inspect(voice).annotation(tag):
                 continue
             for i, leaf in enumerate(abjad.iterate(voice).leaves()):
                 self._check_persistent_indicators_for_leaf(voice.name, leaf, i)
@@ -1451,20 +1451,20 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.MetronomeMark,
             indicators.Ritardando,
             )
-        mark = abjad.inspect(leaf).get_effective(prototype)
+        mark = abjad.inspect(leaf).effective(prototype)
         if mark is None:
             message = f'{voice} leaf {i} ({leaf!s}) missing metronome mark.'
             raise Exception(message)
-        instrument = abjad.inspect(leaf).get_effective(abjad.Instrument)
+        instrument = abjad.inspect(leaf).effective(abjad.Instrument)
         if instrument is None:
             message = f'{voice} leaf {i} ({leaf!s}) missing instrument.'
             raise Exception(message)
         if not self.score_template.do_not_require_margin_markup:
-            markup = abjad.inspect(leaf).get_effective(abjad.MarginMarkup)
+            markup = abjad.inspect(leaf).effective(abjad.MarginMarkup)
             if markup is None:
                 message = f'{voice} leaf {i} ({leaf!s}) missing margin markup.'
                 raise Exception(message)
-        clef = abjad.inspect(leaf).get_effective(abjad.Clef)
+        clef = abjad.inspect(leaf).effective(abjad.Clef)
         if clef is None:
             message = f'{voice} leaf {i} ({leaf!s}) missing clef.'
             raise Exception(message)
@@ -1475,7 +1475,7 @@ class SegmentMaker(abjad.SegmentMaker):
         tag = abjad.tags.ALLOW_OUT_OF_RANGE
         for voice in abjad.iterate(self.score).components(abjad.Voice):
             for pleaf in abjad.iterate(voice).leaves(pitched=True):
-                instrument = abjad.inspect(pleaf).get_effective(
+                instrument = abjad.inspect(pleaf).effective(
                     abjad.Instrument
                     )
                 if instrument is None:
@@ -1522,7 +1522,7 @@ class SegmentMaker(abjad.SegmentMaker):
             if staff.name in self._previously_alive_contexts:
                 continue
             for leaf in abjad.iterate(staff).leaves():
-                margin_markup = abjad.inspect(leaf).get_effective(prototype)
+                margin_markup = abjad.inspect(leaf).effective(prototype)
                 if margin_markup is not None:
                     key = self._indicator_to_key(
                         margin_markup,
@@ -1580,7 +1580,7 @@ class SegmentMaker(abjad.SegmentMaker):
             dictionary = context._get_persistent_wrappers()
             for wrapper in dictionary.values():
                 leaf = wrapper.component
-                parentage = abjad.inspect(leaf).get_parentage()
+                parentage = abjad.inspect(leaf).parentage()
                 first_context = parentage.get_first(abjad.Context)
                 indicator = wrapper.indicator
                 value = self._indicator_to_key(indicator, self.manifests)
@@ -1697,7 +1697,7 @@ class SegmentMaker(abjad.SegmentMaker):
         first_measure_number = self._get_first_measure_number()
         for context in contexts:
             for leaf in abjad.iterate(context).leaves():
-                offset = abjad.inspect(leaf).get_timespan().start_offset
+                offset = abjad.inspect(leaf).timespan().start_offset
                 measure_number = self._offset_to_measure_number.get(
                     offset,
                     None,
@@ -1734,7 +1734,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     @staticmethod
     def _extend_beam(leaf):
-        beam = abjad.inspect(leaf).get_spanner(abjad.Beam)
+        beam = abjad.inspect(leaf).spanner(abjad.Beam)
         if beam is None:
             return
         all_leaves = []
@@ -1743,17 +1743,17 @@ class SegmentMaker(abjad.SegmentMaker):
         if beam.durations:
             durations.extend(beam.durations)
         else:
-            duration = abjad.inspect(beam.leaves).get_duration()
+            duration = abjad.inspect(beam.leaves).duration()
             durations.append(duration)
         intervening_skips = []
         index = 1
         while True:
-            next_leaf = abjad.inspect(leaf).get_leaf(index)
+            next_leaf = abjad.inspect(leaf).leaf(index)
             if next_leaf is None:
                 return
             index += 1
             if isinstance(next_leaf, abjad.Skip):
-                beam = abjad.inspect(next_leaf).get_spanner(abjad.Beam)
+                beam = abjad.inspect(next_leaf).spanner(abjad.Beam)
                 if beam is None:
                     intervening_skips.append(next_leaf)
                     continue
@@ -1762,29 +1762,29 @@ class SegmentMaker(abjad.SegmentMaker):
         all_leaves.extend(intervening_skips)
         if intervening_skips:
             intervening_skips = abjad.select(intervening_skips)
-            duration = abjad.inspect(intervening_skips).get_duration()
+            duration = abjad.inspect(intervening_skips).duration()
             durations.append(duration)
-        beam = abjad.inspect(next_leaf).get_spanner(abjad.Beam)
+        beam = abjad.inspect(next_leaf).spanner(abjad.Beam)
         if beam is None:
             all_leaves.append(next_leaf)
-            duration = abjad.inspect(next_leaf).get_duration()
+            duration = abjad.inspect(next_leaf).duration()
             durations.append(duration)
         else:
             all_leaves.extend(beam.leaves)
             if beam.durations:
                 durations.extend(beam.durations)
             else:
-                duration = abjad.inspect(beam.leaves).get_duration()
+                duration = abjad.inspect(beam.leaves).duration()
                 durations.append(duration)
         abjad.detach(abjad.Beam, next_leaf)
         all_leaves = abjad.select(all_leaves)
-        assert abjad.inspect(all_leaves).get_duration() == sum(durations)
+        assert abjad.inspect(all_leaves).duration() == sum(durations)
         beam = abjad.Beam(beam_rests=True, durations=durations)
         abjad.attach(beam, all_leaves, tag='SM35')
 
     def _extend_beams(self):
         for leaf in abjad.iterate(self.score).leaves():
-            if abjad.inspect(leaf).get_indicator(abjad.tags.RIGHT_BROKEN_BEAM):
+            if abjad.inspect(leaf).indicator(abjad.tags.RIGHT_BROKEN_BEAM):
                 self._extend_beam(leaf)
 
     def _force_nonnatural_accidentals(self):
@@ -1823,12 +1823,12 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _get_lilypond_includes(self):
         if self.environment == 'docs':
-            if abjad.inspect(self.score).get_indicator(abjad.tags.TWO_VOICE):
+            if abjad.inspect(self.score).indicator(abjad.tags.TWO_VOICE):
                 return ['two-voice-staff.ily']
             else:
                 return ['string-trio.ily']
         elif self.environment == 'external':
-            if abjad.inspect(self.score).get_indicator(abjad.tags.TWO_VOICE):
+            if abjad.inspect(self.score).indicator(abjad.tags.TWO_VOICE):
                 return [self._absolute_two_voice_staff_stylesheet_path]
             else:
                 return [self._absolute_string_trio_stylesheet_path]
@@ -1840,7 +1840,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return includes
 
     def _get_measure_number_tag(self, leaf):
-        start_offset = abjad.inspect(leaf).get_timespan().start_offset
+        start_offset = abjad.inspect(leaf).timespan().start_offset
         measure_number = self._offset_to_measure_number.get(start_offset)
         if measure_number is not None:
             return f'MEASURE_{measure_number}'
@@ -1849,10 +1849,10 @@ class SegmentMaker(abjad.SegmentMaker):
         skips = classes.Selection(self.score['GlobalSkips']).skips()
         start_skip = skips[start_measure - 1]
         assert isinstance(start_skip, abjad.Skip), start_skip
-        start_offset = abjad.inspect(start_skip).get_timespan().start_offset
+        start_offset = abjad.inspect(start_skip).timespan().start_offset
         stop_skip = skips[stop_measure - 1]
         assert isinstance(stop_skip, abjad.Skip), stop_skip
-        stop_offset = abjad.inspect(stop_skip).get_timespan().stop_offset
+        stop_offset = abjad.inspect(stop_skip).timespan().stop_offset
         return start_offset, stop_offset
 
     def _get_measure_time_signatures(
@@ -1888,7 +1888,7 @@ class SegmentMaker(abjad.SegmentMaker):
         skips = classes.Selection(self.score['GlobalSkips']).skips()
         for i, skip in enumerate(skips):
             if i in measure_indices:
-                timespan = abjad.inspect(skip).get_timespan()
+                timespan = abjad.inspect(skip).timespan()
                 timespans.append(timespan)
         return timespans
 
@@ -2065,7 +2065,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     )
                 result.extend(silences)
             result.extend(rhythm.annotation)
-            duration = abjad.inspect(rhythm.annotation).get_duration()
+            duration = abjad.inspect(rhythm.annotation).duration()
             previous_stop_offset = start_offset + duration
         if previous_stop_offset < segment_duration:
             silences = self._make_measure_silences(
@@ -2103,7 +2103,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if self.clock_time_override:
             metronome_mark = self.clock_time_override
             abjad.attach(metronome_mark, skips[0])
-        if abjad.inspect(skips[0]).get_effective(abjad.MetronomeMark) is None:
+        if abjad.inspect(skips[0]).effective(abjad.MetronomeMark) is None:
             return
         start_clock_time = self._get_previous_stop_clock_time()
         start_clock_time = start_clock_time or "0'00''"
@@ -2220,7 +2220,7 @@ class SegmentMaker(abjad.SegmentMaker):
         string = rf'\magnifyStaff #{numerator}/{denominator}'
         tag = abjad.Tag(tag).prepend('SM41')
         for staff in abjad.iterate(self.score).components(abjad.Staff):
-            first_leaf = abjad.inspect(staff).get_leaf(0)
+            first_leaf = abjad.inspect(staff).leaf(0)
             assert first_leaf is not None
             literal = abjad.LilyPondLiteral(string)
             abjad.attach(
@@ -2350,25 +2350,25 @@ class SegmentMaker(abjad.SegmentMaker):
         prototype = abjad.MultimeasureRest
         context = self.score['MusicContext']
         for mmrest in abjad.iterate(context).components(prototype):
-            previous = abjad.inspect(mmrest).get_leaf(-1)
+            previous = abjad.inspect(mmrest).leaf(-1)
             if previous is None:
                 continue
             if isinstance(previous, prototype):
                 continue
             should_parallelize = False
-            spanners = abjad.inspect(previous).get_spanners(abjad.TextSpanner)
+            spanners = abjad.inspect(previous).spanners(abjad.TextSpanner)
             for spanner in spanners:
                 if getattr(spanner, 'leak', False) is True:
                     should_parallelize = True
-            for indicator in abjad.inspect(previous).get_indicators(
+            for indicator in abjad.inspect(previous).indicators(
                 abjad.StopTextSpan):
                 if indicator.leak is True:
                     should_parallelize = True
             if not should_parallelize:
                 continue
-            parentage = abjad.inspect(previous).get_parentage()
+            parentage = abjad.inspect(previous).parentage()
             voice = parentage.get_first(abjad.Voice)
-            multiplier = abjad.inspect(mmrest).get_indicator(
+            multiplier = abjad.inspect(mmrest).indicator(
                 abjad.Multiplier,
                 )
             before = abjad.LilyPondLiteral(
@@ -2390,7 +2390,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _populate_offset_to_measure_number(self):
         measure_number = self._get_first_measure_number()
         for skip in classes.Selection(self.score['GlobalSkips']).skips():
-            offset = abjad.inspect(skip).get_timespan().start_offset
+            offset = abjad.inspect(skip).timespan().start_offset
             self._offset_to_measure_number[offset] = measure_number
             measure_number += 1
 
@@ -2502,7 +2502,7 @@ class SegmentMaker(abjad.SegmentMaker):
         previous_time_signature = None
         self._cached_time_signatures = []
         for skip in classes.Selection(self.score['GlobalSkips']).skips():
-            time_signature = abjad.inspect(skip).get_indicator(
+            time_signature = abjad.inspect(skip).indicator(
                 abjad.TimeSignature
                 )
             self._cached_time_signatures.append(str(time_signature))
@@ -2593,7 +2593,7 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         for staff in abjad.iterate(self.score).components(abjad.Staff):
             for leaf in abjad.iterate(staff).leaves():
-                start_offset = abjad.inspect(leaf).get_timespan().start_offset
+                start_offset = abjad.inspect(leaf).timespan().start_offset
                 if start_offset not in fermata_stop_offsets:
                     continue
                 wrapper = abjad.inspect(leaf).wrapper(abjad.Clef)
@@ -2617,17 +2617,17 @@ class SegmentMaker(abjad.SegmentMaker):
     def _shorten_long_repeat_ties(self):
         leaves = abjad.iterate(self.score).leaves()
         for leaf in leaves:
-            ties = abjad.inspect(leaf).get_spanners(abjad.Tie)
+            ties = abjad.inspect(leaf).spanners(abjad.Tie)
             if not ties:
                 continue
             tie = ties.pop()
             if not tie.repeat:
                 continue
-            previous_leaf = abjad.inspect(leaf).get_leaf(-1)
+            previous_leaf = abjad.inspect(leaf).leaf(-1)
             if previous_leaf is None:
                 continue
             minimum_duration = abjad.Duration(1, 8)
-            if abjad.inspect(previous_leaf).get_duration() < minimum_duration:
+            if abjad.inspect(previous_leaf).duration() < minimum_duration:
                 string = r"\shape #'((2 . 0) (1 . 0) (0.5 . 0) (0 . 0))"
                 string += " RepeatTie"
                 literal = abjad.LilyPondLiteral(string)
@@ -2645,13 +2645,13 @@ class SegmentMaker(abjad.SegmentMaker):
         bar_lines_already_styled = []
         for staff in abjad.iterate(self.score).components(abjad.Staff):
             for leaf in abjad.iterate(staff).leaves():
-                start_offset = abjad.inspect(leaf).get_timespan().start_offset
+                start_offset = abjad.inspect(leaf).timespan().start_offset
                 if start_offset not in self._fermata_start_offsets:
                     continue
-                before = abjad.inspect(leaf).get_effective(prototype)
-                next_leaf = abjad.inspect(leaf).get_leaf(1)
+                before = abjad.inspect(leaf).effective(prototype)
+                next_leaf = abjad.inspect(leaf).leaf(1)
                 if next_leaf is not None:
-                    after = abjad.inspect(next_leaf).get_effective(prototype)
+                    after = abjad.inspect(next_leaf).effective(prototype)
                 if before != staff_lines:
                     strings = staff_lines._get_lilypond_format(context=staff)
                     if getattr(before, 'line_count', 5) == 5:
@@ -2730,7 +2730,7 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.inspect(leaf).has_indicator(tempo_trend)):
             status = 'explicit'
         if (isinstance(wrapper.indicator, abjad.Dynamic) and
-            abjad.inspect(leaf).get_indicators(abjad.DynamicTrend)):
+            abjad.inspect(leaf).indicators(abjad.DynamicTrend)):
             status = 'explicit'
         SegmentMaker._attach_color_literal(
             wrapper,
@@ -2805,7 +2805,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 else:
                     prototype = type(wrapper.indicator)
 
-                previous_indicator = abjad.inspect(leaf).get_effective(
+                previous_indicator = abjad.inspect(leaf).effective(
                     prototype,
                     n=-1,
                     )
@@ -2959,7 +2959,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for leaf in abjad.iterate(self.score).leaves():
             literal = abjad.LilyPondLiteral('', 'absolute_before')
             abjad.attach(literal, leaf, tag=None)
-            if abjad.inspect(leaf).get_leaf(1) is None:
+            if abjad.inspect(leaf).leaf(1) is None:
                 literal = abjad.LilyPondLiteral('', 'absolute_after')
                 abjad.attach(literal, leaf, tag=None)
 

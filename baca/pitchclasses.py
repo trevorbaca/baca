@@ -7719,7 +7719,7 @@ class PitchTree(classes.Tree):
             markup_direction=markup_direction,
             )
         assert leaf_list_stack == [], repr(leaf_list_stack)
-        first_leaf = abjad.inspect(voice).get_leaf(n=0)
+        first_leaf = abjad.inspect(voice).leaf(n=0)
         abjad.attach(abjad.TimeSignature((1, 8)), first_leaf)
         self._color_repeats(color_repeats, voice)
         self._attach_cell_indices(cell_indices, voice)
@@ -7733,7 +7733,7 @@ class PitchTree(classes.Tree):
         abjad.override(score).stem.stencil = False
         abjad.override(score).text_script.staff_padding = 2
         abjad.override(score).time_signature.stencil = False
-        last_leaf = abjad.inspect(score).get_leaf(-1)
+        last_leaf = abjad.inspect(score).leaf(-1)
         string = r'\override Score.BarLine.transparent = ##f'
         literal = abjad.LilyPondLiteral(string, 'after')
         abjad.attach(literal, last_leaf)
@@ -7781,7 +7781,7 @@ class PitchTree(classes.Tree):
             return
         cell_spanners = self._get_cell_spanners(voice)
         cell_spanners.sort(
-            key=lambda x: abjad.inspect(x).get_timespan().start_offset
+            key=lambda x: abjad.inspect(x).timespan().start_offset
             )
         if cell_indices is True:
             direction = abjad.Up
@@ -7789,7 +7789,7 @@ class PitchTree(classes.Tree):
             direction = cell_indices
         cell_index = 0
         for cell_spanner in cell_spanners:
-            #negative_level = abjad.inspect(cell_spanner).get_indicator(int)
+            #negative_level = abjad.inspect(cell_spanner).indicator(int)
             negative_level = cell_spanner.level
             if negative_level != -2:
                 continue
@@ -7820,7 +7820,7 @@ class PitchTree(classes.Tree):
         spanners = []
         prototype = PitchTreeSpanner
         for leaf in abjad.iterate(voice).leaves():
-            for spanner in abjad.inspect(leaf).get_spanners(prototype):
+            for spanner in abjad.inspect(leaf).spanners(prototype):
                 if spanner not in spanners:
                     spanners.append(spanner)
         return spanners
@@ -7879,7 +7879,7 @@ class PitchTree(classes.Tree):
                 leaf = first_note
                 while leaf is not last_note:
                     leaves_with_skips.append(leaf)
-                    leaf = abjad.inspect(leaf).get_leaf(n=1)
+                    leaf = abjad.inspect(leaf).leaf(n=1)
                 leaves_with_skips.append(leaf)
                 #spanner = abjad.Spanner()
                 negative_level = node._get_level(negative=True)
