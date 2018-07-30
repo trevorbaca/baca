@@ -45,6 +45,7 @@ indicators
       hide
       markup
       parameter
+      persistent
       tweaks
 
    .. raw:: html
@@ -90,6 +91,8 @@ indicators
    .. autoattribute:: Accelerando.markup
 
    .. autoattribute:: Accelerando.parameter
+
+   .. autoattribute:: Accelerando.persistent
 
    .. autoattribute:: Accelerando.tweaks
 
@@ -462,6 +465,7 @@ indicators
       hide
       markup
       parameter
+      persistent
       tweaks
 
    .. raw:: html
@@ -507,6 +511,8 @@ indicators
    .. autoattribute:: Ritardando.markup
 
    .. autoattribute:: Ritardando.parameter
+
+   .. autoattribute:: Ritardando.persistent
 
    .. autoattribute:: Ritardando.tweaks
 
@@ -584,6 +590,7 @@ indicators
       hide
       line_count
       parameter
+      persistent
 
    .. raw:: html
 
@@ -616,3 +623,5 @@ indicators
    .. autoattribute:: StaffLines.line_count
 
    .. autoattribute:: StaffLines.parameter
+
+   .. autoattribute:: StaffLines.persistent

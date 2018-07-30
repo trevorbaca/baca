@@ -1099,7 +1099,6 @@ class SegmentMaker(abjad.SegmentMaker):
         skips = classes.Selection(self.score['GlobalSkips']).skips()
         last_leaf_metronome_mark = abjad.inspect(skips[-1]).indicator(
             abjad.MetronomeMark,
-            default=None,
             )
         add_right_text_to_me = None
         if last_leaf_metronome_mark:
