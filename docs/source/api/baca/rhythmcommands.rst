@@ -27,9 +27,17 @@ rhythmcommands
 
 .. autoclass:: RhythmCommand
 
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
    .. autosummary::
       :nosignatures:
 
+      __call__
       division_expression
       division_maker
       left_broken
@@ -45,11 +53,6 @@ rhythmcommands
       right_broken
       split_at_measure_boundaries
       state
-
-   .. autosummary::
-      :nosignatures:
-
-      __call__
 
    .. raw:: html
 
@@ -164,6 +167,13 @@ rhythmcommands
       .. autoattribute:: RhythmCommand.tags
 
 .. autoclass:: TieCorrectionCommand
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
@@ -353,16 +363,19 @@ rhythmcommands
 
 .. autoclass:: SkipRhythmMaker
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      tuplet_specifier
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
 
       __call__
       __format__
+      tuplet_specifier
 
    .. raw:: html
 

@@ -38,6 +38,13 @@ pitchcommands
 
 .. autoclass:: AccidentalAdjustmentCommand
 
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
    .. autosummary::
       :nosignatures:
 
@@ -137,6 +144,13 @@ pitchcommands
 
 .. autoclass:: ClusterCommand
 
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
    .. autosummary::
       :nosignatures:
 
@@ -235,6 +249,13 @@ pitchcommands
 
 .. autoclass:: ColorFingeringCommand
 
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
    .. autosummary::
       :nosignatures:
 
@@ -327,6 +348,13 @@ pitchcommands
       .. autoattribute:: ColorFingeringCommand.tags
 
 .. autoclass:: DiatonicClusterCommand
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
@@ -421,16 +449,19 @@ pitchcommands
 
 .. autoclass:: Loop
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      intervals
-      items
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
 
       __getitem__
+      intervals
+      items
 
    .. raw:: html
 
@@ -485,6 +516,13 @@ pitchcommands
    .. autoattribute:: Loop.items
 
 .. autoclass:: MicrotoneDeviationCommand
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
@@ -579,6 +617,13 @@ pitchcommands
 
 .. autoclass:: OctaveDisplacementCommand
 
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
    .. autosummary::
       :nosignatures:
 
@@ -671,6 +716,13 @@ pitchcommands
       .. autoattribute:: OctaveDisplacementCommand.tags
 
 .. autoclass:: PitchCommand
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
@@ -792,6 +844,13 @@ pitchcommands
 
 .. autoclass:: RegisterCommand
 
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
    .. autosummary::
       :nosignatures:
 
@@ -884,6 +943,13 @@ pitchcommands
       .. autoattribute:: RegisterCommand.tags
 
 .. autoclass:: RegisterInterpolationCommand
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
@@ -980,6 +1046,13 @@ pitchcommands
 
 .. autoclass:: RegisterToOctaveCommand
 
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
    .. autosummary::
       :nosignatures:
 
@@ -1075,6 +1148,13 @@ pitchcommands
       .. autoattribute:: RegisterToOctaveCommand.tags
 
 .. autoclass:: StaffPositionCommand
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
@@ -1174,6 +1254,13 @@ pitchcommands
       .. autoattribute:: StaffPositionCommand.tags
 
 .. autoclass:: StaffPositionInterpolationCommand
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:

@@ -27,14 +27,17 @@ segmentmaker
 
 .. autoclass:: SegmentMaker
 
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
    .. autosummary::
       :nosignatures:
 
-      run
-
-   .. autosummary::
-      :nosignatures:
-
+      __call__
       allow_empty_selections
       breaks
       clock_time_override
@@ -66,6 +69,7 @@ segmentmaker
       midi
       nonfirst_segment_lilypond_include
       previous_metadata
+      run
       score_template
       skip_wellformedness_checks
       skips_instead_of_rests
@@ -75,11 +79,6 @@ segmentmaker
       transpose_score
       validate_measure_count
       voice_metadata
-
-   .. autosummary::
-      :nosignatures:
-
-      __call__
 
    .. raw:: html
 
@@ -224,21 +223,20 @@ segmentmaker
 
 .. autoclass:: WellformednessManager
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      is_well_formed
-      tabulate_wellformedness
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
 
       __call__
-
-   .. autosummary::
-      :nosignatures:
-
       check_repeat_pitch_classes
+      is_well_formed
+      tabulate_wellformedness
 
    .. raw:: html
 
@@ -286,10 +284,6 @@ segmentmaker
 
    .. container:: inherited
 
-      .. automethod:: WellformednessManager.check_mismatched_enchained_hairpins
-
-   .. container:: inherited
-
       .. automethod:: WellformednessManager.check_mispitched_ties
 
    .. container:: inherited
@@ -322,23 +316,11 @@ segmentmaker
 
    .. container:: inherited
 
-      .. automethod:: WellformednessManager.check_overlapping_hairpins
-
-   .. container:: inherited
-
       .. automethod:: WellformednessManager.check_overlapping_octavation_spanners
 
    .. container:: inherited
 
-      .. automethod:: WellformednessManager.check_overlapping_ties
-
-   .. container:: inherited
-
       .. automethod:: WellformednessManager.check_overlapping_trill_spanners
-
-   .. container:: inherited
-
-      .. automethod:: WellformednessManager.check_tied_rests
 
    .. automethod:: WellformednessManager.is_well_formed
 

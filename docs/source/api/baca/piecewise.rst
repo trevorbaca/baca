@@ -27,26 +27,12 @@ piecewise
 
 .. autoclass:: IndicatorBundle
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      compound
-      indicator_only
-      simple
-      spanner_start_only
-      with_indicator
-      with_spanner_start
-      with_spanner_stop
+      <hr/>
 
-   .. autosummary::
-      :nosignatures:
-
-      bookended_spanner_start
-      enchained
-      indicator
-      indicators
-      spanner_start
-      spanner_stop
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
@@ -54,6 +40,19 @@ piecewise
       __iter__
       __len__
       __repr__
+      bookended_spanner_start
+      compound
+      enchained
+      indicator
+      indicator_only
+      indicators
+      simple
+      spanner_start
+      spanner_start_only
+      spanner_stop
+      with_indicator
+      with_spanner_start
+      with_spanner_stop
 
    .. raw:: html
 
@@ -113,6 +112,13 @@ piecewise
    .. autoattribute:: IndicatorBundle.spanner_stop
 
 .. autoclass:: PiecewiseIndicatorCommand
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:

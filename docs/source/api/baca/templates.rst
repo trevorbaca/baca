@@ -30,24 +30,23 @@ templates
 
 .. autoclass:: ScoreTemplate
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      voice_colors
+      <hr/>
 
-   .. autosummary::
-      :nosignatures:
-
-      group_families
-      make_music_context
-      make_piano_staff
-      make_square_staff_group
-      make_staff_group
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
 
       defaults
+      group_families
+      make_music_context
+      make_piano_staff
+      make_square_staff_group
+      make_staff_group
+      voice_colors
 
    .. raw:: html
 
@@ -139,6 +138,13 @@ templates
       .. autoattribute:: ScoreTemplate.voice_abbreviations
 
 .. autoclass:: SingleStaffScoreTemplate
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
@@ -246,6 +252,13 @@ templates
 
 .. autoclass:: StringTrioScoreTemplate
 
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
    .. autosummary::
       :nosignatures:
 
@@ -352,6 +365,13 @@ templates
 
 .. autoclass:: TwoVoiceStaffScoreTemplate
 
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
    .. autosummary::
       :nosignatures:
 
@@ -457,6 +477,13 @@ templates
       .. autoattribute:: TwoVoiceStaffScoreTemplate.voice_abbreviations
 
 .. autoclass:: ViolinSoloScoreTemplate
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:

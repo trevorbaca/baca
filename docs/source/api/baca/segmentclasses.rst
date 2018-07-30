@@ -31,9 +31,17 @@ segmentclasses
 
 .. autoclass:: BreakMeasureMap
 
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
    .. autosummary::
       :nosignatures:
 
+      __call__
       bol_measure_numbers
       commands
       deactivate
@@ -42,11 +50,6 @@ segmentclasses
       partial_score
       tag
       tags
-
-   .. autosummary::
-      :nosignatures:
-
-      __call__
 
    .. raw:: html
 
@@ -90,14 +93,17 @@ segmentclasses
 
 .. autoclass:: HorizontalSpacingSpecifier
 
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
    .. autosummary::
       :nosignatures:
 
-      override
-
-   .. autosummary::
-      :nosignatures:
-
+      __call__
       bol_measure_numbers
       breaks
       eol_measure_numbers
@@ -110,11 +116,7 @@ segmentclasses
       measures
       minimum_duration
       multiplier
-
-   .. autosummary::
-      :nosignatures:
-
-      __call__
+      override
 
    .. raw:: html
 
@@ -175,6 +177,13 @@ segmentclasses
 
 .. autoclass:: LBSD
 
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
    .. autosummary::
       :nosignatures:
 
@@ -209,6 +218,13 @@ segmentclasses
 
 .. autoclass:: PageSpecifier
 
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
    .. autosummary::
       :nosignatures:
 
@@ -242,6 +258,13 @@ segmentclasses
    .. autoattribute:: PageSpecifier.systems
 
 .. autoclass:: SystemSpecifier
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
@@ -280,10 +303,12 @@ segmentclasses
 
 .. autoclass:: TimeSignatureMaker
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      run
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
@@ -291,6 +316,7 @@ segmentclasses
       count
       fermata_measures
       rotation
+      run
       time_signatures
 
    .. raw:: html

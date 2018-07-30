@@ -35,6 +35,13 @@ commands
 
 .. autoclass:: BCPCommand
 
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
    .. autosummary::
       :nosignatures:
 
@@ -228,6 +235,13 @@ commands
 
 .. autoclass:: ContainerCommand
 
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
    .. autosummary::
       :nosignatures:
 
@@ -321,15 +335,18 @@ commands
 
 .. autoclass:: GlobalFermataCommand
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      description_to_command
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
 
       description
+      description_to_command
 
    .. raw:: html
 
@@ -418,6 +435,13 @@ commands
       .. autoattribute:: GlobalFermataCommand.tags
 
 .. autoclass:: IndicatorCommand
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
@@ -623,6 +647,13 @@ commands
 
 .. autoclass:: LabelCommand
 
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
    .. autosummary::
       :nosignatures:
 
@@ -715,6 +746,13 @@ commands
       .. autoattribute:: LabelCommand.tags
 
 .. autoclass:: MetronomeMarkCommand
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
@@ -811,6 +849,13 @@ commands
       .. autoattribute:: MetronomeMarkCommand.tags
 
 .. autoclass:: PartAssignmentCommand
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:

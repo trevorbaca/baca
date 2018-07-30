@@ -33,16 +33,19 @@ classes
 
 .. autoclass:: Counter
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      current
-      start
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
 
       __call__
+      current
+      start
 
    .. raw:: html
 
@@ -74,21 +77,12 @@ classes
 
 .. autoclass:: Cursor
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      next
-      reset
+      <hr/>
 
-   .. autosummary::
-      :nosignatures:
-
-      cyclic
-      is_exhausted
-      position
-      singletons
-      source
-      suppress_exception
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
@@ -98,11 +92,15 @@ classes
       __hash__
       __iter__
       __len__
-
-   .. autosummary::
-      :nosignatures:
-
+      cyclic
       from_pitch_class_segments
+      is_exhausted
+      next
+      position
+      reset
+      singletons
+      source
+      suppress_exception
 
    .. raw:: html
 
@@ -169,6 +167,13 @@ classes
    .. autoattribute:: Cursor.suppress_exception
 
 .. autoclass:: Expression
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
@@ -405,11 +410,12 @@ classes
 
 .. autoclass:: PaddedTuple
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      items
-      pad
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
@@ -420,6 +426,8 @@ classes
       __hash__
       __iter__
       __len__
+      items
+      pad
 
    .. raw:: html
 
@@ -461,14 +469,17 @@ classes
 
 .. autoclass:: SchemeManifest
 
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
    .. autosummary::
       :nosignatures:
 
       dynamic_to_steady_state
-
-   .. autosummary::
-      :nosignatures:
-
       dynamics
 
    .. raw:: html
@@ -505,6 +516,13 @@ classes
    .. autoattribute:: SchemeManifest.dynamics
 
 .. autoclass:: Selection
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
@@ -885,6 +903,13 @@ classes
 
 .. autoclass:: Sequence
 
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
    .. autosummary::
       :nosignatures:
 
@@ -1131,17 +1156,12 @@ classes
 
 .. autoclass:: Tree
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      get_payload
-      iterate
+      <hr/>
 
-   .. autosummary::
-      :nosignatures:
-
-      item_class
-      items
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
@@ -1153,6 +1173,10 @@ classes
       __hash__
       __len__
       __repr__
+      get_payload
+      item_class
+      items
+      iterate
 
    .. raw:: html
 

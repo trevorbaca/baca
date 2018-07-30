@@ -29,33 +29,28 @@ scoping
 
 .. autoclass:: Command
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      get_tag
+      <hr/>
 
-   .. autosummary::
-      :nosignatures:
-
-      deactivate
-      match
-      selector
-      tag
-      tags
-
-   .. autosummary::
-      :nosignatures:
-
-      map
-      measures
-      runtime
-      scope
-      tag_measure_number
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
 
       __call__
+      deactivate
+      get_tag
+      map
+      match
+      measures
+      runtime
+      scope
+      selector
+      tag
+      tag_measure_number
+      tags
 
    .. raw:: html
 
@@ -119,6 +114,13 @@ scoping
 
 .. autoclass:: Scope
 
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
    .. autosummary::
       :nosignatures:
 
@@ -153,23 +155,22 @@ scoping
 
 .. autoclass:: Suite
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      commands
+      <hr/>
 
-   .. autosummary::
-      :nosignatures:
-
-      map
-      measures
-      runtime
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
 
       __call__
       __iter__
+      commands
+      map
+      measures
+      runtime
 
    .. raw:: html
 
@@ -213,6 +214,13 @@ scoping
    .. autoattribute:: Suite.commands
 
 .. autoclass:: TimelineScope
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:

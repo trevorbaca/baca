@@ -26,6 +26,13 @@ spannercommands
 
 .. autoclass:: SpannerCommand
 
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
    .. autosummary::
       :nosignatures:
 

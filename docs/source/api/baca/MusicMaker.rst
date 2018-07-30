@@ -37,17 +37,20 @@ musicmaker
 
 .. autoclass:: AcciaccaturaSpecifier
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      durations
-      lmr_specifier
-      pattern
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
 
       __call__
+      durations
+      lmr_specifier
+      pattern
 
    .. raw:: html
 
@@ -80,6 +83,13 @@ musicmaker
    .. autoattribute:: AcciaccaturaSpecifier.pattern
 
 .. autoclass:: AnchorSpecifier
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
@@ -136,6 +146,13 @@ musicmaker
 
 .. autoclass:: Coat
 
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
    .. autosummary::
       :nosignatures:
 
@@ -167,9 +184,17 @@ musicmaker
 
 .. autoclass:: ImbricationCommand
 
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
    .. autosummary::
       :nosignatures:
 
+      __call__
       allow_unused_pitches
       by_pitch_class
       extend_beam
@@ -179,11 +204,6 @@ musicmaker
       specifiers
       truncate_ties
       voice_name
-
-   .. autosummary::
-      :nosignatures:
-
-      __call__
 
    .. raw:: html
 
@@ -283,9 +303,17 @@ musicmaker
 
 .. autoclass:: LMRSpecifier
 
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
    .. autosummary::
       :nosignatures:
 
+      __call__
       left_counts
       left_cyclic
       left_length
@@ -298,11 +326,6 @@ musicmaker
       right_cyclic
       right_length
       right_reversed
-
-   .. autosummary::
-      :nosignatures:
-
-      __call__
 
    .. raw:: html
 
@@ -354,28 +377,23 @@ musicmaker
 
 .. autoclass:: MusicAccumulator
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      assemble
-      populate_segment_maker
+      <hr/>
 
-   .. autosummary::
-      :nosignatures:
-
-      music_maker
-      score_template
-      time_signatures
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
 
       __call__
-
-   .. autosummary::
-      :nosignatures:
-
+      assemble
+      music_maker
+      populate_segment_maker
+      score_template
       show
+      time_signatures
 
    .. raw:: html
 
@@ -429,28 +447,27 @@ musicmaker
 
 .. autoclass:: MusicContribution
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      print_color_selector_result
+      <hr/>
 
-   .. autosummary::
-      :nosignatures:
-
-      anchor
-      color_selector
-      color_selector_result
-      figure_name
-      hide_time_signature
-      selections
-      state_manifest
-      time_signature
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
 
       __getitem__
       __iter__
+      anchor
+      color_selector
+      color_selector_result
+      figure_name
+      hide_time_signature
+      print_color_selector_result
+      selections
+      state_manifest
+      time_signature
 
    .. raw:: html
 
@@ -517,25 +534,24 @@ musicmaker
 
 .. autoclass:: MusicMaker
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      allow_repeats
-      color_unregistered_pitches
-      denominator
-      specifiers
-      thread
-      voice_names
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
 
       __call__
-
-   .. autosummary::
-      :nosignatures:
-
+      allow_repeats
+      color_unregistered_pitches
+      denominator
       show
+      specifiers
+      thread
+      voice_names
 
    .. raw:: html
 
@@ -584,16 +600,19 @@ musicmaker
 
 .. autoclass:: NestingCommand
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      lmr_specifier
-      time_treatments
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
 
       __call__
+      lmr_specifier
+      time_treatments
 
    .. raw:: html
 
@@ -683,16 +702,19 @@ musicmaker
 
 .. autoclass:: PitchFirstRhythmCommand
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      pattern
-      rhythm_maker
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
 
       __call__
+      pattern
+      rhythm_maker
 
    .. raw:: html
 
@@ -782,19 +804,22 @@ musicmaker
 
 .. autoclass:: PitchSpecifier
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      expressions
-      remove_duplicate_pitch_classes
-      remove_duplicates
-      to_pitch_classes
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
 
       __call__
       __repr__
+      expressions
+      remove_duplicate_pitch_classes
+      remove_duplicates
+      to_pitch_classes
 
    .. raw:: html
 
@@ -828,18 +853,21 @@ musicmaker
 
 .. autoclass:: RestAffixSpecifier
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      pattern
-      prefix
-      skips_instead_of_rests
-      suffix
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
 
       __call__
+      pattern
+      prefix
+      skips_instead_of_rests
+      suffix
 
    .. raw:: html
 
@@ -952,28 +980,27 @@ musicmaker
 
 .. autoclass:: PitchFirstRhythmMaker
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      acciaccatura_specifiers
-      beam_specifier
-      division_masks
-      duration_specifier
-      logical_tie_masks
-      talea
-      tie_specifier
-      time_treatments
-      tuplet_specifier
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
 
       __call__
-
-   .. autosummary::
-      :nosignatures:
-
+      acciaccatura_specifiers
+      beam_specifier
+      division_masks
+      duration_specifier
+      logical_tie_masks
       show
+      talea
+      tie_specifier
+      time_treatments
+      tuplet_specifier
 
    .. raw:: html
 

@@ -34,18 +34,12 @@ divisions
 
 .. autoclass:: Division
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      yield_equivalent_durations
+      <hr/>
 
-   .. autosummary::
-      :nosignatures:
-
-      duration
-      payload
-      start_offset
-      stop_offset
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
@@ -56,11 +50,12 @@ divisions
       __new__
       __str__
       __sub__
-
-   .. autosummary::
-      :nosignatures:
-
+      duration
+      payload
+      start_offset
+      stop_offset
       yield_durations
+      yield_equivalent_durations
       yield_nonreduced_fractions
 
    .. raw:: html
@@ -315,30 +310,25 @@ divisions
 
 .. autoclass:: DivisionMaker
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      append_callback
-      flatten
-      fuse_by_counts
-      partition_by_counts
-      split_by_durations
-      split_by_rounded_ratios
+      <hr/>
 
-   .. autosummary::
-      :nosignatures:
-
-      callbacks
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
 
       __call__
-
-   .. autosummary::
-      :nosignatures:
-
+      append_callback
+      callbacks
+      flatten
+      fuse_by_counts
+      partition_by_counts
       show
+      split_by_durations
+      split_by_rounded_ratios
 
    .. raw:: html
 
@@ -407,6 +397,13 @@ divisions
    .. autoattribute:: DivisionMaker.callbacks
 
 .. autoclass:: DivisionSequence
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
@@ -632,12 +629,12 @@ divisions
 
 .. autoclass:: DivisionSequenceExpression
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      division_sequence
-      split_by_durations
-      split_by_rounded_ratios
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
@@ -645,6 +642,9 @@ divisions
       __add__
       __getitem__
       __radd__
+      division_sequence
+      split_by_durations
+      split_by_rounded_ratios
 
    .. raw:: html
 
@@ -876,15 +876,18 @@ divisions
 
 .. autoclass:: FlattenDivisionCallback
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      depth
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
 
       __call__
+      depth
 
    .. raw:: html
 
@@ -926,17 +929,20 @@ divisions
 
 .. autoclass:: FuseByCountsDivisionCallback
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      counts
-      cyclic
-      secondary_division_maker
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
 
       __call__
+      counts
+      cyclic
+      secondary_division_maker
 
    .. raw:: html
 
@@ -982,13 +988,12 @@ divisions
 
 .. autoclass:: PartitionDivisionCallback
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      append_remainder
-      counts
-      fuse_assignable_total_duration
-      remainder_direction
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
@@ -996,6 +1001,10 @@ divisions
       __call__
       __format__
       __repr__
+      append_remainder
+      counts
+      fuse_assignable_total_duration
+      remainder_direction
 
    .. raw:: html
 
@@ -1039,24 +1048,23 @@ divisions
 
 .. autoclass:: SplitByDurationsDivisionCallback
 
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
    .. autosummary::
       :nosignatures:
 
+      __call__
       compound_meter_multiplier
       cyclic
       durations
       pattern_rotation_index
       remainder
       remainder_fuse_threshold
-
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-
-   .. autosummary::
-      :nosignatures:
-
       show
 
    .. raw:: html
@@ -1118,15 +1126,18 @@ divisions
 
 .. autoclass:: SplitByRoundedRatiosDivisionCallback
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      ratios
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
 
       __call__
+      ratios
 
    .. raw:: html
 

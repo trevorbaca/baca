@@ -26,6 +26,13 @@ overrides
 
 .. autoclass:: OverrideCommand
 
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
    .. autosummary::
       :nosignatures:
 

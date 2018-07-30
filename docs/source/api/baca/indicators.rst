@@ -30,19 +30,22 @@ indicators
 
 .. autoclass:: Accelerando
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      context
-      hide
-      markup
-      parameter
-      tweaks
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
 
       __str__
+      context
+      hide
+      markup
+      parameter
+      tweaks
 
    .. raw:: html
 
@@ -91,6 +94,13 @@ indicators
    .. autoattribute:: Accelerando.tweaks
 
 .. autoclass:: Markup
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
@@ -437,19 +447,22 @@ indicators
 
 .. autoclass:: Ritardando
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      context
-      hide
-      markup
-      parameter
-      tweaks
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
 
       __str__
+      context
+      hide
+      markup
+      parameter
+      tweaks
 
    .. raw:: html
 
@@ -499,10 +512,12 @@ indicators
 
 .. autoclass:: SpacingSection
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      duration
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
@@ -510,10 +525,7 @@ indicators
       __eq__
       __hash__
       __str__
-
-   .. autosummary::
-      :nosignatures:
-
+      duration
       from_string
 
    .. raw:: html
@@ -557,18 +569,21 @@ indicators
 
 .. autoclass:: StaffLines
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      context
-      hide
-      line_count
-      parameter
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
 
       __eq__
+      context
+      hide
+      line_count
+      parameter
 
    .. raw:: html
 

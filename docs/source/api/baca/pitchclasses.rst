@@ -42,16 +42,19 @@ pitchclasses
 
 .. autoclass:: ArpeggiationSpacingSpecifier
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      direction
-      pattern
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
 
       __call__
+      direction
+      pattern
 
    .. raw:: html
 
@@ -95,19 +98,22 @@ pitchclasses
 
 .. autoclass:: ChordalSpacingSpecifier
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      bass
-      direction
-      minimum_semitones
-      pattern
-      soprano
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
 
       __call__
+      bass
+      direction
+      minimum_semitones
+      pattern
+      soprano
 
    .. raw:: html
 
@@ -157,15 +163,30 @@ pitchclasses
 
 .. autoclass:: CollectionList
 
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
    .. autosummary::
       :nosignatures:
 
+      __add__
+      __eq__
+      __format__
+      __getitem__
+      __illustrate__
+      __len__
+      __repr__
       accumulate
       arpeggiate_down
       arpeggiate_up
       bass_to_octave
       center_to_octave
       chords
+      collections
       cursor
       flatten
       has_duplicate_pitch_classes
@@ -173,6 +194,7 @@ pitchclasses
       has_repeat_pitch_classes
       has_repeats
       helianthate
+      item_class
       join
       partition
       read
@@ -189,23 +211,6 @@ pitchclasses
       to_pitch_classes
       to_pitches
       transpose
-
-   .. autosummary::
-      :nosignatures:
-
-      collections
-      item_class
-
-   .. autosummary::
-      :nosignatures:
-
-      __add__
-      __eq__
-      __format__
-      __getitem__
-      __illustrate__
-      __len__
-      __repr__
 
    .. raw:: html
 
@@ -330,28 +335,12 @@ pitchclasses
 
 .. autoclass:: Constellation
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      get_chord
-      get_number_of_chord
-      make_chords
-      make_labeled_chords
-      make_labeled_colored_chords
-      show_colored_generator_chord
-      show_colored_generator_chord_and_pivot_chord
-      show_generator_chord
-      show_generator_chord_and_pivot_chord
-      show_pivot_chord
+      <hr/>
 
-   .. autosummary::
-      :nosignatures:
-
-      constellation_number
-      generator_chord
-      partitioned_generator_pitch_numbers
-      pitch_range
-      pivot_chord
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
@@ -360,11 +349,22 @@ pitchclasses
       __getitem__
       __len__
       __repr__
-
-   .. autosummary::
-      :nosignatures:
-
       constellate
+      constellation_number
+      generator_chord
+      get_chord
+      get_number_of_chord
+      make_chords
+      make_labeled_chords
+      make_labeled_colored_chords
+      partitioned_generator_pitch_numbers
+      pitch_range
+      pivot_chord
+      show_colored_generator_chord
+      show_colored_generator_chord_and_pivot_chord
+      show_generator_chord
+      show_generator_chord_and_pivot_chord
+      show_pivot_chord
 
    .. raw:: html
 
@@ -440,39 +440,30 @@ pitchclasses
 
 .. autoclass:: ConstellationCircuit
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      make_constellation_circuit_1
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
 
       CC1
-
-   .. autosummary::
-      :nosignatures:
-
+      __getitem__
+      __len__
+      __repr__
+      generator_chords
       get
       illustrate_colored_generator_chords
       illustrate_colored_generator_chords_and_pivot_chords
       illustrate_generator_chords
       illustrate_generator_chords_and_pivot_chords
       illustrate_pivot_chords
-
-   .. autosummary::
-      :nosignatures:
-
-      generator_chords
+      make_constellation_circuit_1
       pitch_range
       pivot_chords
-
-   .. autosummary::
-      :nosignatures:
-
-      __getitem__
-      __len__
-      __repr__
 
    .. raw:: html
 
@@ -534,16 +525,19 @@ pitchclasses
 
 .. autoclass:: DesignMaker
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      partition
-      partition_cyclic
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
 
       __call__
+      partition
+      partition_cyclic
 
    .. raw:: html
 
@@ -575,20 +569,19 @@ pitchclasses
 
 .. autoclass:: HarmonicSeries
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      partial
+      <hr/>
 
-   .. autosummary::
-      :nosignatures:
-
-      fundamental
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
 
       __illustrate__
+      fundamental
+      partial
 
    .. raw:: html
 
@@ -626,6 +619,13 @@ pitchclasses
    .. autoattribute:: HarmonicSeries.fundamental
 
 .. autoclass:: Partial
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
@@ -667,9 +667,17 @@ pitchclasses
 
 .. autoclass:: PitchClassSegment
 
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
    .. autosummary::
       :nosignatures:
 
+      __eq__
       alpha
       arpeggiate_down
       arpeggiate_up
@@ -681,11 +689,6 @@ pitchclasses
       sequence
       space_down
       space_up
-
-   .. autosummary::
-      :nosignatures:
-
-      __eq__
 
    .. raw:: html
 
@@ -857,16 +860,19 @@ pitchclasses
 
 .. autoclass:: PitchClassSet
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      to_pitch_classes
-      to_pitches
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
 
       __eq__
+      to_pitch_classes
+      to_pitches
 
    .. raw:: html
 
@@ -1060,6 +1066,13 @@ pitchclasses
 
 .. autoclass:: PitchSegment
 
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
    .. autosummary::
       :nosignatures:
 
@@ -1247,17 +1260,20 @@ pitchclasses
 
 .. autoclass:: PitchSet
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      space_down
-      space_up
-      to_pitch_classes
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
 
       __eq__
+      space_down
+      space_up
+      to_pitch_classes
 
    .. raw:: html
 
@@ -1445,19 +1461,22 @@ pitchclasses
 
 .. autoclass:: PitchTree
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      has_repeats
-      invert
-      retrograde
-      rotate
-      transpose
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
 
       __illustrate__
+      has_repeats
+      invert
+      retrograde
+      rotate
+      transpose
 
    .. raw:: html
 
@@ -1538,6 +1557,13 @@ pitchclasses
 
 .. autoclass:: PitchTreeSpanner
 
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
    .. autosummary::
       :nosignatures:
 
@@ -1601,15 +1627,18 @@ pitchclasses
 
 .. autoclass:: Registration
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      components
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
 
       __call__
+      components
 
    .. raw:: html
 
@@ -1651,11 +1680,12 @@ pitchclasses
 
 .. autoclass:: RegistrationComponent
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      source_pitch_range
-      target_octave_start_pitch
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
@@ -1663,6 +1693,8 @@ pitchclasses
       __eq__
       __format__
       __hash__
+      source_pitch_range
+      target_octave_start_pitch
 
    .. raw:: html
 
@@ -1698,12 +1730,12 @@ pitchclasses
 
 .. autoclass:: ZaggedPitchClassMaker
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      division_ratios
-      grouping_counts
-      pc_cells
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
@@ -1711,6 +1743,9 @@ pitchclasses
       __call__
       __eq__
       __hash__
+      division_ratios
+      grouping_counts
+      pc_cells
 
    .. raw:: html
 

@@ -5627,6 +5627,7 @@ class WellformednessManager(abjad.WellformednessManager):
             ...     print(total)
             ...     print(violators)
             ...     print()
+            ...
             check_discontiguous_spanners
             0
             []
@@ -5644,10 +5645,6 @@ class WellformednessManager(abjad.WellformednessManager):
             []
             <BLANKLINE>
             check_misfilled_measures
-            0
-            []
-            <BLANKLINE>
-            check_mismatched_enchained_hairpins
             0
             []
             <BLANKLINE>
@@ -5683,15 +5680,7 @@ class WellformednessManager(abjad.WellformednessManager):
             0
             set()
             <BLANKLINE>
-            check_overlapping_hairpins
-            0
-            set()
-            <BLANKLINE>
             check_overlapping_octavation_spanners
-            0
-            []
-            <BLANKLINE>
-            check_overlapping_ties
             0
             []
             <BLANKLINE>
@@ -5702,10 +5691,6 @@ class WellformednessManager(abjad.WellformednessManager):
             check_repeat_pitch_classes
             4
             [LogicalTie([Note("c'4")]), LogicalTie([Note("c'4")]), LogicalTie([Note("d'4")]), LogicalTie([Note("d'4")])]
-            <BLANKLINE>
-            check_tied_rests
-            0
-            []
             <BLANKLINE>
 
         Returns (violators, total, check) triples.
@@ -5841,7 +5826,6 @@ class WellformednessManager(abjad.WellformednessManager):
             0 /	1 empty containers
             0 /	0 misdurated measures
             0 /	0 misfilled measures
-            0 /	0 mismatched enchained hairpins
             0 /	0 mispitched ties
             0 /	4 misrepresented flags
             0 /	5 missing parents
@@ -5850,12 +5834,9 @@ class WellformednessManager(abjad.WellformednessManager):
             0 /	4 out of range notes
             0 /	0 overlapping beams
             0 /	0 overlapping glissandi
-            0 /	0 overlapping hairpins
             0 /	0 overlapping octavation spanners
-            0 /	0 overlapping ties
             0 /	0 overlapping trill spanners
             0 /	4 repeat pitch classes
-            0 /	0 tied rests
 
         ..  container:: example
 
@@ -5870,7 +5851,6 @@ class WellformednessManager(abjad.WellformednessManager):
             0 /	1 empty containers
             0 /	0 misdurated measures
             0 /	0 misfilled measures
-            0 /	0 mismatched enchained hairpins
             0 /	0 mispitched ties
             0 /	4 misrepresented flags
             0 /	5 missing parents
@@ -5879,12 +5859,9 @@ class WellformednessManager(abjad.WellformednessManager):
             0 /	4 out of range notes
             0 /	0 overlapping beams
             0 /	0 overlapping glissandi
-            0 /	0 overlapping hairpins
             0 /	0 overlapping octavation spanners
-            0 /	0 overlapping ties
             0 /	0 overlapping trill spanners
             4 /	4 repeat pitch classes
-            0 /	0 tied rests
 
         Returns string.
         """

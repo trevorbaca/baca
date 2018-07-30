@@ -26,6 +26,13 @@ persistence
 
 .. autoclass:: PersistentIndicatorTests
 
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
    .. autosummary::
       :nosignatures:
 

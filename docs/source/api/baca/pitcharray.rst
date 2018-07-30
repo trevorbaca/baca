@@ -30,46 +30,12 @@ pitcharray
 
 .. autoclass:: PitchArray
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      from_counts
-      from_score
+      <hr/>
 
-   .. autosummary::
-      :nosignatures:
-
-      append_column
-      append_row
-      apply_pitches_by_row
-      copy_subarray
-      has_spanning_cell_over_index
-      list_nonspanning_subarrays
-      pad_to_depth
-      pad_to_width
-      pop_column
-      pop_row
-      remove_row
-      to_measures
-
-   .. autosummary::
-      :nosignatures:
-
-      cell_tokens_by_row
-      cell_widths_by_row
-      cells
-      columns
-      depth
-      dimensions
-      has_voice_crossing
-      is_rectangular
-      pitches
-      pitches_by_row
-      rows
-      size
-      voice_crossing_count
-      weight
-      width
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
@@ -84,6 +50,35 @@ pitcharray
       __ne__
       __setitem__
       __str__
+      append_column
+      append_row
+      apply_pitches_by_row
+      cell_tokens_by_row
+      cell_widths_by_row
+      cells
+      columns
+      copy_subarray
+      depth
+      dimensions
+      from_counts
+      from_score
+      has_spanning_cell_over_index
+      has_voice_crossing
+      is_rectangular
+      list_nonspanning_subarrays
+      pad_to_depth
+      pad_to_width
+      pitches
+      pitches_by_row
+      pop_column
+      pop_row
+      remove_row
+      rows
+      size
+      to_measures
+      voice_crossing_count
+      weight
+      width
 
    .. raw:: html
 
@@ -201,15 +196,18 @@ pitcharray
 
 .. autoclass:: PitchArrayCell
 
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
    .. autosummary::
       :nosignatures:
 
+      __str__
       append_pitch
-      matches_cell
-
-   .. autosummary::
-      :nosignatures:
-
       column_indices
       column_start_index
       column_stop_index
@@ -217,24 +215,16 @@ pitcharray
       is_first_in_row
       is_last_in_row
       item
+      matches_cell
       next
       parent_array
       parent_column
       parent_row
+      pitches
       previous
       row_index
       weight
       width
-
-   .. autosummary::
-      :nosignatures:
-
-      pitches
-
-   .. autosummary::
-      :nosignatures:
-
-      __str__
 
    .. raw:: html
 
@@ -312,32 +302,12 @@ pitcharray
 
 .. autoclass:: PitchArrayColumn
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      append
-      extend
-      remove_pitches
+      <hr/>
 
-   .. autosummary::
-      :nosignatures:
-
-      cell_tokens
-      cell_widths
-      cells
-      column_index
-      depth
-      dimensions
-      has_voice_crossing
-      is_defective
-      parent_array
-      pitches
-      start_cells
-      start_pitches
-      stop_cells
-      stop_pitches
-      weight
-      width
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
@@ -347,6 +317,25 @@ pitcharray
       __hash__
       __ne__
       __str__
+      append
+      cell_tokens
+      cell_widths
+      cells
+      column_index
+      depth
+      dimensions
+      extend
+      has_voice_crossing
+      is_defective
+      parent_array
+      pitches
+      remove_pitches
+      start_cells
+      start_pitches
+      stop_cells
+      stop_pitches
+      weight
+      width
 
    .. raw:: html
 
@@ -430,6 +419,13 @@ pitcharray
    .. autoattribute:: PitchArrayColumn.width
 
 .. autoclass:: PitchArrayList
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
@@ -568,43 +564,12 @@ pitcharray
 
 .. autoclass:: PitchArrayRow
 
-   .. autosummary::
-      :nosignatures:
+   .. raw:: html
 
-      append
-      apply_pitches
-      copy_subrow
-      empty_pitches
-      extend
-      has_spanning_cell_over_index
-      index
-      merge
-      pad_to_width
-      pop
-      remove
-      to_measure
-      withdraw
+      <hr/>
 
-   .. autosummary::
-      :nosignatures:
-
-      cell_tokens
-      cell_widths
-      cells
-      depth
-      dimensions
-      is_defective
-      is_in_range
-      parent_array
-      pitches
-      row_index
-      weight
-      width
-
-   .. autosummary::
-      :nosignatures:
-
-      pitch_range
+   .. rubric:: Attributes Summary
+      :class: class-header
 
    .. autosummary::
       :nosignatures:
@@ -619,6 +584,32 @@ pitcharray
       __len__
       __ne__
       __str__
+      append
+      apply_pitches
+      cell_tokens
+      cell_widths
+      cells
+      copy_subrow
+      depth
+      dimensions
+      empty_pitches
+      extend
+      has_spanning_cell_over_index
+      index
+      is_defective
+      is_in_range
+      merge
+      pad_to_width
+      parent_array
+      pitch_range
+      pitches
+      pop
+      remove
+      row_index
+      to_measure
+      weight
+      width
+      withdraw
 
    .. raw:: html
 
