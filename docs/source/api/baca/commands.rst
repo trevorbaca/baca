@@ -448,6 +448,7 @@ commands
 
       context
       indicators
+      predicate
       redundant
       tweaks
 
@@ -526,6 +527,8 @@ commands
    .. container:: inherited
 
       .. autoattribute:: IndicatorCommand.match
+
+   .. autoattribute:: IndicatorCommand.predicate
 
    .. autoattribute:: IndicatorCommand.redundant
 
@@ -624,6 +627,10 @@ commands
    .. container:: inherited
 
       .. autoattribute:: InstrumentChangeCommand.match
+
+   .. container:: inherited
+
+      .. autoattribute:: InstrumentChangeCommand.predicate
 
    .. container:: inherited
 

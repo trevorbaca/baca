@@ -283,6 +283,7 @@ Division library.
    ~baca.indicatorcommands.espressivo
    ~baca.indicatorcommands.fermata
    ~baca.indicatorcommands.flageolet
+   ~baca.indicatorcommands.hide_black_note_heads
    ~baca.indicatorcommands.laissez_vibrer
    ~baca.indicatorcommands.literal
    ~baca.indicatorcommands.long_fermata

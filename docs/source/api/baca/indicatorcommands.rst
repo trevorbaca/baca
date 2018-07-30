@@ -35,6 +35,7 @@ indicatorcommands
    ~espressivo
    ~fermata
    ~flageolet
+   ~hide_black_note_heads
    ~laissez_vibrer
    ~literal
    ~long_fermata
@@ -80,6 +81,8 @@ indicatorcommands
 .. autofunction:: fermata
 
 .. autofunction:: flageolet
+
+.. autofunction:: hide_black_note_heads
 
 .. autofunction:: laissez_vibrer
 

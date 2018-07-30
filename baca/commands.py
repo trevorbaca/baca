@@ -1147,6 +1147,7 @@ class IndicatorCommand(scoping.Command):
     __slots__ = (
         '_context',
         '_indicators',
+        '_predicate',
         '_redundant',
         '_tags',
         '_tweaks',
@@ -1163,6 +1164,7 @@ class IndicatorCommand(scoping.Command):
         map: typings.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
+        predicate: typing.Callable = None,
         redundant: bool = None,
         scope: scoping.scope_typing = None,
         selector: typings.Selector = 'baca.pheads()',
@@ -1187,6 +1189,7 @@ class IndicatorCommand(scoping.Command):
             else:
                 indicators_ = abjad.CyclicTuple([indicators])
         self._indicators = indicators_
+        self._predicate = predicate
         if redundant is not None:
             redundant = bool(redundant)
         self._redundant = redundant
@@ -1215,6 +1218,8 @@ class IndicatorCommand(scoping.Command):
         if not argument:
             return
         for i, leaf in enumerate(classes.Selection(argument).leaves()):
+            if self.predicate and not self.predicate(leaf):
+                continue
             indicators = self.indicators[i]
             indicators = self._token_to_indicators(indicators)
             for indicator in indicators:
@@ -1414,6 +1419,13 @@ class IndicatorCommand(scoping.Command):
 
         """
         return self._indicators
+
+    @property
+    def predicate(self) -> typing.Optional[typing.Callable]:
+        """
+        Gets predicate.
+        """
+        return self._predicate
 
     @property
     def redundant(self) -> typing.Optional[bool]:

@@ -1621,6 +1621,102 @@ def flageolet(
         selector=selector,
         )
 
+def hide_black_note_heads(
+    *,
+    selector: typings.Selector = 'baca.leaves()',
+    ) -> commands.IndicatorCommand:
+    """
+    Attaches note-head stencil false to black note-heads.
+
+    ..  container:: example
+
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'MusicVoice',
+        ...     baca.hide_black_note_heads(),
+        ...     baca.make_notes()
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "GlobalContext"
+                <<
+                    \context GlobalSkips = "GlobalSkips"
+                    {
+            <BLANKLINE>
+                        % [GlobalSkips measure 1]                                                    %! SM4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 2]                                                    %! SM4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+            <BLANKLINE>
+                        % [GlobalSkips measure 3]                                                    %! SM4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % [GlobalSkips measure 4]                                                    %! SM4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        s1 * 3/8
+                        \baca_bar_line_visible                                                       %! SM5
+                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                    }
+                >>
+                \context MusicContext = "MusicContext"
+                <<
+                    \context Staff = "MusicStaff"
+                    {
+                        \context Voice = "MusicVoice"
+                        {
+            <BLANKLINE>
+                            % [MusicVoice measure 1]                                                 %! SM4
+                            \baca_unpitched_music_warning                                            %! SM24
+                            c'2
+            <BLANKLINE>
+                            % [MusicVoice measure 2]                                                 %! SM4
+                            \once \override NoteHead.transparent = ##t                               %! IC
+                            \baca_unpitched_music_warning                                            %! SM24
+                            c'4.
+            <BLANKLINE>
+                            % [MusicVoice measure 3]                                                 %! SM4
+                            \baca_unpitched_music_warning                                            %! SM24
+                            c'2
+            <BLANKLINE>
+                            % [MusicVoice measure 4]                                                 %! SM4
+                            \once \override NoteHead.transparent = ##t                               %! IC
+                            \baca_unpitched_music_warning                                            %! SM24
+                            c'4.
+            <BLANKLINE>
+                        }
+                    }
+                >>
+            >>
+
+    """
+    string = r'\once \override NoteHead.transparent = ##t'
+    literal = abjad.LilyPondLiteral(string)
+    return commands.IndicatorCommand(
+        indicators=[literal],
+        predicate=lambda _: _.written_duration < abjad.Duration(1, 2),
+        selector=selector,
+        )
+
 def laissez_vibrer(
     *,
     selector: typings.Selector  = 'baca.ptail(0)',
