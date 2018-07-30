@@ -913,9 +913,9 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         if isinstance(wrapper.indicator, abjad.Instrument):
             return
-        if not getattr(wrapper.indicator, 'parameter', False):
+        if not getattr(wrapper.indicator, 'persistent', False):
             return
-        if wrapper.indicator.parameter == 'METRONOME_MARK':
+        if getattr(wrapper.indicator, 'parameter', None) == 'METRONOME_MARK':
             return
         if isinstance(wrapper.indicator, abjad.PersistentOverride):
             return
@@ -2727,7 +2727,7 @@ class SegmentMaker(abjad.SegmentMaker):
     @staticmethod
     def _treat_persistent_wrapper(manifests, wrapper, status):
         assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
-        assert bool(wrapper.indicator.parameter), repr(wrapper)
+        assert bool(wrapper.indicator.persistent), repr(wrapper)
         assert isinstance(status, str), repr(status)
         context = wrapper._find_correct_effective_context()
         assert isinstance(context, abjad.Context), repr(wrapper)
@@ -2811,7 +2811,7 @@ class SegmentMaker(abjad.SegmentMaker):
             )
         for leaf in abjad.iterate(self.score).leaves():
             for wrapper in abjad.inspect(leaf).wrappers():
-                if not getattr(wrapper.indicator, 'parameter', False):
+                if not getattr(wrapper.indicator, 'persistent', False):
                     continue
                 if wrapper.tag and wrapper.tag.has_persistence_tag():
                     continue

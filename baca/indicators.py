@@ -530,8 +530,6 @@ class StaffLines(abjad.AbjadObject):
 
     _context = 'Staff'
 
-    _parameter = True
-
     _persistent = True
 
     ### INITIALIZER ###
@@ -658,20 +656,6 @@ class StaffLines(abjad.AbjadObject):
         Returns nonnegative integer.
         """
         return self._line_count
-
-    @property
-    def parameter(self):
-        """
-        Is true.
-
-        ..  container:: example
-
-            >>> baca.StaffLines(line_count=1).parameter
-            True
-
-        Class constant.
-        """
-        return self._parameter
 
     @property
     def persistent(self):

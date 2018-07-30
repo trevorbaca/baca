@@ -589,7 +589,6 @@ indicators
       context
       hide
       line_count
-      parameter
       persistent
 
    .. raw:: html
@@ -621,7 +620,5 @@ indicators
    .. autoattribute:: StaffLines.hide
 
    .. autoattribute:: StaffLines.line_count
-
-   .. autoattribute:: StaffLines.parameter
 
    .. autoattribute:: StaffLines.persistent

@@ -307,7 +307,7 @@ class Command(abjad.AbjadObject):
 
     @staticmethod
     def _remove_reapplied_wrappers(leaf, indicator):
-        if not getattr(indicator, 'parameter', False):
+        if not getattr(indicator, 'persistent', False):
             return
         prototype = (abjad.StartTextSpan, abjad.StopTextSpan)
         if isinstance(indicator, prototype):
