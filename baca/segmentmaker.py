@@ -1499,7 +1499,7 @@ class SegmentMaker(abjad.SegmentMaker):
             self.color_repeat_pitch_classes or
             self.ignore_repeat_pitch_classes):
             return
-        manager = WellformednessManager(allow_percussion_clef=True)
+        manager = Wellformedness(allow_percussion_clef=True)
         if not manager.is_well_formed(self.score):
             message = manager.tabulate_wellformedness(self.score)
             raise Exception('\n' + message)
@@ -1663,7 +1663,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _color_repeat_pitch_classes_(self):
         if not self.color_repeat_pitch_classes:
             return
-        manager = WellformednessManager
+        manager = Wellformedness
         lts = manager._find_repeat_pitch_classes(self.score)
         markup = abjad.Markup('@', direction=abjad.Up)
         abjad.tweak(markup).color = 'red'
@@ -5579,14 +5579,14 @@ class SegmentMaker(abjad.SegmentMaker):
         assert isinstance(self.lilypond_file, abjad.LilyPondFile)
         return self.lilypond_file
 
-class WellformednessManager(abjad.WellformednessManager):
+class Wellformedness(abjad.Wellformedness):
     """
     Wellformedness manager.
 
     ..  container:: example
 
-        >>> baca.WellformednessManager()
-        WellformednessManager()
+        >>> baca.Wellformedness()
+        Wellformedness()
 
     """
 
@@ -5601,7 +5601,7 @@ class WellformednessManager(abjad.WellformednessManager):
         *,
         allow_percussion_clef=None,
         ):
-        abjad.WellformednessManager.__init__(
+        abjad.Wellformedness.__init__(
             self,
             allow_percussion_clef=allow_percussion_clef,
             )
@@ -5620,7 +5620,7 @@ class WellformednessManager(abjad.WellformednessManager):
         ..  container:: example
 
             >>> voice = abjad.Voice("c'4 c' d' d'")
-            >>> manager = baca.WellformednessManager()
+            >>> manager = baca.Wellformedness()
             >>> result = manager(voice)
             >>> for violators, total, check in result:
             ...     print(check)
@@ -5747,7 +5747,7 @@ class WellformednessManager(abjad.WellformednessManager):
             >>> voice = abjad.Voice("c'4 d' e' f'")
             >>> abjad.show(voice, strict=89) # doctest: +SKIP
 
-            >>> manager = baca.WellformednessManager
+            >>> manager = baca.Wellformedness
             >>> manager.check_repeat_pitch_classes(voice)
             ([], 4)
 
@@ -5758,7 +5758,7 @@ class WellformednessManager(abjad.WellformednessManager):
             >>> voice = abjad.Voice("c'4 c' d' d'")
             >>> abjad.show(voice, strict=89) # doctest: +SKIP
 
-            >>> manager = baca.WellformednessManager
+            >>> manager = baca.Wellformedness
             >>> manager.check_repeat_pitch_classes(voice)
             ([LogicalTie([Note("c'4")]), LogicalTie([Note("c'4")]), LogicalTie([Note("d'4")]), LogicalTie([Note("d'4")])], 4)
 
@@ -5769,14 +5769,14 @@ class WellformednessManager(abjad.WellformednessManager):
             >>> voice = abjad.Voice("c'4 d' e' e''")
             >>> abjad.show(voice, strict=89) # doctest: +SKIP
 
-            >>> manager = baca.WellformednessManager
+            >>> manager = baca.Wellformedness
             >>> manager.check_repeat_pitch_classes(voice)
             ([LogicalTie([Note("e'4")]), LogicalTie([Note("e''4")])], 4)
 
         Returns violators and total.
         """
         total = len(classes.Selection(argument).plts())
-        violators = WellformednessManager._find_repeat_pitch_classes(argument)
+        violators = Wellformedness._find_repeat_pitch_classes(argument)
         return violators, total
 
     def is_well_formed(self, argument=None):
@@ -5788,7 +5788,7 @@ class WellformednessManager(abjad.WellformednessManager):
             Is well-formed:
 
             >>> voice = abjad.Voice("c'4 d' e' f'")
-            >>> manager = baca.WellformednessManager()
+            >>> manager = baca.Wellformedness()
             >>> manager.is_well_formed(voice)
             True
 
@@ -5797,7 +5797,7 @@ class WellformednessManager(abjad.WellformednessManager):
             Repeat pitches are not well-formed:
 
             >>> voice = abjad.Voice("c'4 c' d' d'")
-            >>> manager = baca.WellformednessManager()
+            >>> manager = baca.Wellformedness()
             >>> manager.is_well_formed(voice)
             False
 
@@ -5818,7 +5818,7 @@ class WellformednessManager(abjad.WellformednessManager):
             Is well-formed:
 
             >>> voice = abjad.Voice("c'4 d' e' f'")
-            >>> manager = baca.WellformednessManager()
+            >>> manager = baca.Wellformedness()
             >>> string = manager.tabulate_wellformedness(voice)
             >>> print(string)
             0 /	0 discontiguous spanners
@@ -5843,7 +5843,7 @@ class WellformednessManager(abjad.WellformednessManager):
             Repeat pitches are not well-formed:
 
             >>> voice = abjad.Voice("c'4 c' d' d'")
-            >>> manager = baca.WellformednessManager()
+            >>> manager = baca.Wellformedness()
             >>> string = manager.tabulate_wellformedness(voice)
             >>> print(string)
             0 /	0 discontiguous spanners
