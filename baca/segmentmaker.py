@@ -2733,6 +2733,8 @@ class SegmentMaker(abjad.SegmentMaker):
         leaf = wrapper.component
         assert isinstance(leaf, abjad.Leaf), repr(wrapper)
         indicator = wrapper.indicator
+        if isinstance(indicator, abjad.DynamicTrend):
+            return
         existing_tag = wrapper.tag
         tempo_trend = (indicators.Accelerando, indicators.Ritardando)
         if (isinstance(indicator, abjad.MetronomeMark) and
@@ -5692,6 +5694,10 @@ class Wellformedness(abjad.Wellformedness):
             4
             [LogicalTie([Note("c'4")]), LogicalTie([Note("c'4")]), LogicalTie([Note("d'4")]), LogicalTie([Note("d'4")])]
             <BLANKLINE>
+            check_unterminated_hairpins
+            0
+            []
+            <BLANKLINE>
 
         Returns (violators, total, check) triples.
         """
@@ -5837,6 +5843,7 @@ class Wellformedness(abjad.Wellformedness):
             0 /	0 overlapping octavation spanners
             0 /	0 overlapping trill spanners
             0 /	4 repeat pitch classes
+            0 /	0 unterminated hairpins
 
         ..  container:: example
 
@@ -5862,6 +5869,7 @@ class Wellformedness(abjad.Wellformedness):
             0 /	0 overlapping octavation spanners
             0 /	0 overlapping trill spanners
             4 /	4 repeat pitch classes
+            0 /	0 unterminated hairpins
 
         Returns string.
         """

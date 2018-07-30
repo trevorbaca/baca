@@ -322,6 +322,10 @@ segmentmaker
 
       .. automethod:: Wellformedness.check_overlapping_trill_spanners
 
+   .. container:: inherited
+
+      .. automethod:: Wellformedness.check_unterminated_hairpins
+
    .. automethod:: Wellformedness.is_well_formed
 
    .. automethod:: Wellformedness.tabulate_wellformedness
