@@ -1583,6 +1583,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 parentage = abjad.inspect(leaf).parentage()
                 first_context = parentage.get_first(abjad.Context)
                 indicator = wrapper.indicator
+                if isinstance(indicator, abjad.StopTextSpan):
+                    continue
                 prototype, manifest = None, None
                 if isinstance(indicator, abjad.Instrument):
                     manifest = 'instruments'
@@ -2733,7 +2735,12 @@ class SegmentMaker(abjad.SegmentMaker):
         leaf = wrapper.component
         assert isinstance(leaf, abjad.Leaf), repr(wrapper)
         indicator = wrapper.indicator
-        if isinstance(indicator, abjad.DynamicTrend):
+        prototype = (
+            abjad.DynamicTrend,
+            abjad.StartTextSpan,
+            abjad.StopTextSpan,
+            )
+        if isinstance(indicator, prototype):
             return
         existing_tag = wrapper.tag
         tempo_trend = (indicators.Accelerando, indicators.Ritardando)
@@ -5698,6 +5705,10 @@ class Wellformedness(abjad.Wellformedness):
             0
             []
             <BLANKLINE>
+            check_unterminated_text_spanners
+            0
+            []
+            <BLANKLINE>
 
         Returns (violators, total, check) triples.
         """
@@ -5844,6 +5855,7 @@ class Wellformedness(abjad.Wellformedness):
             0 /	0 overlapping trill spanners
             0 /	4 repeat pitch classes
             0 /	0 unterminated hairpins
+            0 /	0 unterminated text spanners
 
         ..  container:: example
 
@@ -5870,6 +5882,7 @@ class Wellformedness(abjad.Wellformedness):
             0 /	0 overlapping trill spanners
             4 /	4 repeat pitch classes
             0 /	0 unterminated hairpins
+            0 /	0 unterminated text spanners
 
         Returns string.
         """

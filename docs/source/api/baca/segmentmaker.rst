@@ -326,6 +326,10 @@ segmentmaker
 
       .. automethod:: Wellformedness.check_unterminated_hairpins
 
+   .. container:: inherited
+
+      .. automethod:: Wellformedness.check_unterminated_text_spanners
+
    .. automethod:: Wellformedness.is_wellformed
 
    .. automethod:: Wellformedness.tabulate_wellformedness
