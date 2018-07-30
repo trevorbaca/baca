@@ -1500,7 +1500,7 @@ class SegmentMaker(abjad.SegmentMaker):
             self.ignore_repeat_pitch_classes):
             return
         manager = Wellformedness(allow_percussion_clef=True)
-        if not manager.is_well_formed(self.score):
+        if not manager.is_wellformed(self.score):
             message = manager.tabulate_wellformedness(self.score)
             raise Exception('\n' + message)
 
@@ -5785,26 +5785,26 @@ class Wellformedness(abjad.Wellformedness):
         violators = Wellformedness._find_repeat_pitch_classes(argument)
         return violators, total
 
-    def is_well_formed(self, argument=None):
+    def is_wellformed(self, argument=None):
         r"""
-        Is true when ``argument`` is well-formed.
+        Is true when ``argument`` is wellformed.
 
         ..  container:: example
 
-            Is well-formed:
+            Is wellformed:
 
             >>> voice = abjad.Voice("c'4 d' e' f'")
             >>> manager = baca.Wellformedness()
-            >>> manager.is_well_formed(voice)
+            >>> manager.is_wellformed(voice)
             True
 
         ..  container:: example
 
-            Repeat pitches are not well-formed:
+            Repeat pitches are not wellformed:
 
             >>> voice = abjad.Voice("c'4 c' d' d'")
             >>> manager = baca.Wellformedness()
-            >>> manager.is_well_formed(voice)
+            >>> manager.is_wellformed(voice)
             False
 
         Returns true or false.
@@ -5821,7 +5821,7 @@ class Wellformedness(abjad.Wellformedness):
 
         ..  container:: example
 
-            Is well-formed:
+            Is wellformed:
 
             >>> voice = abjad.Voice("c'4 d' e' f'")
             >>> manager = baca.Wellformedness()
@@ -5847,7 +5847,7 @@ class Wellformedness(abjad.Wellformedness):
 
         ..  container:: example
 
-            Repeat pitches are not well-formed:
+            Repeat pitches are not wellformed:
 
             >>> voice = abjad.Voice("c'4 c' d' d'")
             >>> manager = baca.Wellformedness()

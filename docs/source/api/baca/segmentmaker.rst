@@ -235,7 +235,7 @@ segmentmaker
 
       __call__
       check_repeat_pitch_classes
-      is_well_formed
+      is_wellformed
       tabulate_wellformedness
 
    .. raw:: html
@@ -326,7 +326,7 @@ segmentmaker
 
       .. automethod:: Wellformedness.check_unterminated_hairpins
 
-   .. automethod:: Wellformedness.is_well_formed
+   .. automethod:: Wellformedness.is_wellformed
 
    .. automethod:: Wellformedness.tabulate_wellformedness
 
