@@ -915,7 +915,7 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         if not getattr(wrapper.indicator, 'persistent', False):
             return
-        if getattr(wrapper.indicator, 'parameter', None) == 'TEMPO':
+        if getattr(wrapper.indicator, 'parameter', None) == 'METRONOME_MARK':
             return
         if isinstance(wrapper.indicator, abjad.PersistentOverride):
             return

@@ -50,7 +50,7 @@ class Accelerando(abjad.AbjadValueObject):
 
     _context = 'Score'
 
-    _parameter = 'TEMPO'
+    _parameter = 'METRONOME_MARK'
 
     _persistent = True
 
@@ -184,12 +184,12 @@ class Accelerando(abjad.AbjadValueObject):
     @property
     def parameter(self) -> str:
         """
-        Is ``'TEMPO'``.
+        Is ``'METRONOME_MARK'``.
 
         ..  container:: example
 
             >>> baca.Accelerando().parameter
-            'TEMPO'
+            'METRONOME_MARK'
 
         """
         return self._parameter
@@ -326,7 +326,7 @@ class Ritardando(abjad.AbjadValueObject):
 
     _context = 'Score'
 
-    _parameter = 'TEMPO'
+    _parameter = 'METRONOME_MARK'
 
     _persistent = True
 
@@ -486,12 +486,12 @@ class Ritardando(abjad.AbjadValueObject):
     @property
     def parameter(self) -> str:
         """
-        Is ``'TEMPO'``.
+        Is ``'METRONOME_MARK'``.
 
         ..  container:: example
 
             >>> baca.Ritardando().parameter
-            'TEMPO'
+            'METRONOME_MARK'
 
         """
         return self._parameter
