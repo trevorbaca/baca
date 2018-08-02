@@ -314,12 +314,15 @@ class Command(abjad.AbjadObject):
             return
         if abjad.inspect(leaf).timespan().start_offset != 0:
             return
-        prototype = object
-        attributes = None
+        tempo_prototype = (
+            abjad.MetronomeMark,
+            indicators.Accelerando,
+            indicators.Ritardando,
+            )
         if isinstance(indicator, abjad.Instrument):
             prototype = abjad.Instrument
-        elif getattr(indicator, 'parameter', None) == 'TEMPO':
-            attributes = {'parameter': 'TEMPO'}
+        elif isinstance(indicator, tempo_prototype):
+            prototype = tempo_prototype
         else:
             prototype = type(indicator)
         stem = abjad.String.to_indicator_stem(indicator)
@@ -335,10 +338,7 @@ class Command(abjad.AbjadObject):
         reapplied_wrappers = []
         reapplied_indicators = []
         wrappers = list(abjad.inspect(leaf).wrappers())
-        effective_wrapper = abjad.inspect(leaf).effective_wrapper(
-            prototype,
-            attributes=attributes,
-            )
+        effective_wrapper = abjad.inspect(leaf).effective_wrapper(prototype)
         if effective_wrapper and effective_wrapper not in wrappers:
             component = effective_wrapper.component
             start_1 = abjad.inspect(leaf).timespan().start_offset

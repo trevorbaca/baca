@@ -1102,9 +1102,13 @@ class SegmentMaker(abjad.SegmentMaker):
             )
         add_right_text_to_me = None
         if last_leaf_metronome_mark:
+            tempo_prototype = (
+                abjad.MetronomeMark,
+                indicators.Accelerando,
+                indicators.Ritardando,
+                )
             for skip in reversed(skips[:-1]):
-                attributes = {'parameter': 'TEMPO'}
-                if abjad.inspect(skip).has_indicator(attributes=attributes):
+                if abjad.inspect(skip).has_indicator(tempo_prototype):
                     add_right_text_to_me = skip
                     break
         for skip in skips:
@@ -2800,6 +2804,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
 
     def _treat_untreated_persistent_wrappers(self):
+        tempo_prototype = (
+            indicators.Accelerando,
+            abjad.MetronomeMark,
+            indicators.Ritardando,
+            )
         for leaf in abjad.iterate(self.score).leaves():
             for wrapper in abjad.inspect(leaf).wrappers():
                 if not getattr(wrapper.indicator, 'persistent', False):
@@ -2808,8 +2817,11 @@ class SegmentMaker(abjad.SegmentMaker):
                     continue
                 if isinstance(wrapper.indicator, abjad.Instrument):
                     prototype = abjad.Instrument
+                elif isinstance(wrapper.indicator, tempo_prototype):
+                    prototype = tempo_prototype
                 else:
                     prototype = type(wrapper.indicator)
+
                 previous_indicator = abjad.inspect(leaf).effective(
                     prototype,
                     n=-1,
