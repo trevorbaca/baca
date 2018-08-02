@@ -2016,6 +2016,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 key = 'niente'
             else:
                 key = indicator.command or indicator.name
+        elif isinstance(indicator, abjad.DynamicTrend):
+            key = indicator.shape
         elif isinstance(indicator, abjad.Instrument):
             key = SegmentMaker._get_key(
                 manifests['abjad.Instrument'],
