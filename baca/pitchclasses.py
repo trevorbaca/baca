@@ -7789,7 +7789,6 @@ class PitchTree(classes.Tree):
             direction = cell_indices
         cell_index = 0
         for cell_spanner in cell_spanners:
-            #negative_level = abjad.inspect(cell_spanner).indicator(int)
             negative_level = cell_spanner.level
             if negative_level != -2:
                 continue

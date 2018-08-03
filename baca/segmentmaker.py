@@ -2738,7 +2738,6 @@ class SegmentMaker(abjad.SegmentMaker):
         assert isinstance(leaf, abjad.Leaf), repr(wrapper)
         indicator = wrapper.indicator
         prototype = (
-            #abjad.DynamicTrend,
             abjad.StartTextSpan,
             abjad.StopTextSpan,
             )
@@ -2754,11 +2753,8 @@ class SegmentMaker(abjad.SegmentMaker):
             status = 'explicit'
         if isinstance(wrapper.indicator, abjad.DynamicTrend):
             color = SegmentMaker._status_to_color[status]
-            # TODO: extend abjad.tweak() with tag=None keyword
-            #abjad.tweak(wrapper.indicator, tag='FOO').color = color
-            abjad.tweak(wrapper.indicator).color = color
+            abjad.tweak(wrapper.indicator, tag='SM43').color = color
             SegmentMaker._set_status_tag(wrapper, status)
-            # HERE
             return
         SegmentMaker._attach_color_literal(
             wrapper,
