@@ -2753,7 +2753,7 @@ class SegmentMaker(abjad.SegmentMaker):
             status = 'explicit'
         if isinstance(wrapper.indicator, abjad.DynamicTrend):
             color = SegmentMaker._status_to_color[status]
-            abjad.tweak(wrapper.indicator, tag='SM43').color = color
+            manager = abjad.tweak(wrapper.indicator, tag='SM43').color = color
             SegmentMaker._set_status_tag(wrapper, status)
             return
         SegmentMaker._attach_color_literal(

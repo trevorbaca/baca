@@ -11,6 +11,7 @@ from . import typings
 
 ### CLASSES ###
 
+# TODO: change __init__ / __repr__ so indicators are visible in interpreter
 class IndicatorBundle(abjad.AbjadObject):
     """
     IndicatorBundle.
@@ -403,6 +404,8 @@ class PiecewiseIndicatorCommand(scoping.Command):
             self._attach_indicators(
                 bundle,
                 start_leaf,
+                # TODO:
+                #tag='PIC_1',
                 tag='PIC',
                 )
             next_bundle = self.bundles[i + 1]
@@ -420,6 +423,8 @@ class PiecewiseIndicatorCommand(scoping.Command):
                 self._attach_indicators(
                     next_bundle,
                     stop_leaf,
+                    # TODO:
+                    #tag='PIC_2',
                     tag='PIC',
                     )
             elif is_final_piece and next_bundle.spanner_stop:
@@ -430,6 +435,8 @@ class PiecewiseIndicatorCommand(scoping.Command):
                 self._attach_indicators(
                     bundle,
                     stop_leaf,
+                    # TODO:
+                    #tag='PIC_3',
                     tag='PIC',
                     )
 

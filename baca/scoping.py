@@ -309,11 +309,16 @@ class Command(abjad.AbjadObject):
     def _remove_reapplied_wrappers(leaf, indicator):
         if not getattr(indicator, 'persistent', False):
             return
+        # TODO: getattr(indicator, 'parameter', NONE) == # 'TEXT_SPAN'
         prototype = (abjad.StartTextSpan, abjad.StopTextSpan)
         if isinstance(indicator, prototype):
             return
         if abjad.inspect(leaf).timespan().start_offset != 0:
             return
+        dynamic_prototype = (
+            abjad.Dynamic,
+            abjad.DynamicTrend,
+            )
         tempo_prototype = (
             abjad.MetronomeMark,
             indicators.Accelerando,
@@ -321,6 +326,8 @@ class Command(abjad.AbjadObject):
             )
         if isinstance(indicator, abjad.Instrument):
             prototype = abjad.Instrument
+        elif isinstance(indicator, dynamic_prototype):
+            prototype = dynamic_prototype
         elif isinstance(indicator, tempo_prototype):
             prototype = tempo_prototype
         else:
@@ -339,18 +346,6 @@ class Command(abjad.AbjadObject):
         reapplied_indicators = []
         wrappers = list(abjad.inspect(leaf).wrappers())
         effective_wrapper = abjad.inspect(leaf).effective_wrapper(prototype)
-
-#        if (isinstance(indicator, abjad.DynamicTrend) and
-#            effective_wrapper is not None):
-#            print()
-#            for wrapper in wrappers:
-#                print(wrapper)
-#            print()
-#            print(effective_wrapper)
-#            print()
-#            #raise Exception(stem, indicator, wrappers)
-#            #raise Exception('ASDF')
-
         if effective_wrapper and effective_wrapper not in wrappers:
             component = effective_wrapper.component
             start_1 = abjad.inspect(leaf).timespan().start_offset
@@ -376,7 +371,8 @@ class Command(abjad.AbjadObject):
             if count != 1:
                 for reapplied_wrapper in reapplied_wrappers:
                     print(reapplied_wrapper)
-                message = f'found {count} reapplied indicator(s);'
+                counter = abjad.String('indicator').pluralize(count)
+                message = f'found {count} reapplied {counter};'
                 message += ' expecting 1.\n\n'
                 raise Exception(message)
             return reapplied_indicators[0]
