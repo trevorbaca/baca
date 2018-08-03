@@ -122,6 +122,17 @@ segmentmaker
 
       <hr/>
 
+   .. rubric:: Class & static methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: SegmentMaker.comment_measure_numbers
+
+   .. raw:: html
+
+      <hr/>
+
    .. rubric:: Read-only properties
       :class: class-header
 

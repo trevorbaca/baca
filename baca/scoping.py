@@ -339,6 +339,18 @@ class Command(abjad.AbjadObject):
         reapplied_indicators = []
         wrappers = list(abjad.inspect(leaf).wrappers())
         effective_wrapper = abjad.inspect(leaf).effective_wrapper(prototype)
+
+#        if (isinstance(indicator, abjad.DynamicTrend) and
+#            effective_wrapper is not None):
+#            print()
+#            for wrapper in wrappers:
+#                print(wrapper)
+#            print()
+#            print(effective_wrapper)
+#            print()
+#            #raise Exception(stem, indicator, wrappers)
+#            #raise Exception('ASDF')
+
         if effective_wrapper and effective_wrapper not in wrappers:
             component = effective_wrapper.component
             start_1 = abjad.inspect(leaf).timespan().start_offset

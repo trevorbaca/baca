@@ -2451,6 +2451,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         status,
                         )
                     continue
+                # TODO: change to parameter comparison
                 prototype = (
                     indicators.Accelerando,
                     abjad.MetronomeMark,
@@ -2737,7 +2738,7 @@ class SegmentMaker(abjad.SegmentMaker):
         assert isinstance(leaf, abjad.Leaf), repr(wrapper)
         indicator = wrapper.indicator
         prototype = (
-            abjad.DynamicTrend,
+            #abjad.DynamicTrend,
             abjad.StartTextSpan,
             abjad.StopTextSpan,
             )
@@ -2751,6 +2752,14 @@ class SegmentMaker(abjad.SegmentMaker):
         if (isinstance(wrapper.indicator, abjad.Dynamic) and
             abjad.inspect(leaf).indicators(abjad.DynamicTrend)):
             status = 'explicit'
+        if isinstance(wrapper.indicator, abjad.DynamicTrend):
+            color = SegmentMaker._status_to_color[status]
+            # TODO: extend abjad.tweak() with tag=None keyword
+            #abjad.tweak(wrapper.indicator, tag='FOO').color = color
+            abjad.tweak(wrapper.indicator).color = color
+            SegmentMaker._set_status_tag(wrapper, status)
+            # HERE
+            return
         SegmentMaker._attach_color_literal(
             wrapper,
             status,

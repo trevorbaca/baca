@@ -811,7 +811,8 @@ def dynamic(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
                             e'8
                             \p                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
-                            \<                                                                       %! IC
+                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:IC
+                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
                             [
             <BLANKLINE>
                             d''8
@@ -1075,7 +1076,8 @@ def hairpin(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             e'8
                             \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
-                            \<                                                                       %! PIC
+                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             [
             <BLANKLINE>
                             d''8
@@ -1193,9 +1195,10 @@ def hairpin(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             e'8
                             \baca_effort_ff                                                          %! SM8:EXPLICIT_DYNAMIC:PIC
-                            - \tweak to-barline ##t                                                  %! PIC
-                            - \tweak circled-tip ##t                                                 %! PIC
-                            \>                                                                       %! PIC
+                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC
+                            - \tweak to-barline ##t                                                  %! SM8:EXPLICIT_DYNAMIC:PIC
+                            - \tweak circled-tip ##t                                                 %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \>                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             [
             <BLANKLINE>
                             d''8
@@ -1313,8 +1316,9 @@ def hairpin(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             e'8
                             \!                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
-                            - \tweak circled-tip ##t                                                 %! PIC
-                            \<                                                                       %! PIC
+                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC
+                            - \tweak circled-tip ##t                                                 %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             [
             <BLANKLINE>
                             d''8
@@ -1432,8 +1436,9 @@ def hairpin(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             e'8
                             \baca_effort_p                                                           %! SM8:EXPLICIT_DYNAMIC:PIC
-                            - \tweak stencil #constante-hairpin                                      %! PIC
-                            \<                                                                       %! PIC
+                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC
+                            - \tweak stencil #constante-hairpin                                      %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             [
             <BLANKLINE>
                             d''8
@@ -1558,8 +1563,9 @@ def hairpin(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             e'8
                             \baca_effort_mp                                                          %! SM8:EXPLICIT_DYNAMIC:PIC
-                            - \tweak stencil #abjad-flared-hairpin                                   %! PIC
-                            \<                                                                       %! PIC
+                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC
+                            - \tweak stencil #abjad-flared-hairpin                                   %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             [
             <BLANKLINE>
                             d''8
@@ -1584,8 +1590,9 @@ def hairpin(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             d''8
                             \baca_effort_mf                                                          %! SM8:EXPLICIT_DYNAMIC:PIC
-                            - \tweak stencil #abjad-flared-hairpin                                   %! PIC
-                            \>                                                                       %! PIC
+                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC
+                            - \tweak stencil #abjad-flared-hairpin                                   %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \>                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             [
             <BLANKLINE>
                             f'8
@@ -1810,7 +1817,8 @@ def hairpin(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             e'8
                             \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
-                            \<                                                                       %! PIC
+                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             [
             <BLANKLINE>
                             d''8
@@ -1824,7 +1832,8 @@ def hairpin(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             g'8
                             \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
-                            \>                                                                       %! PIC
+                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \>                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             [
             <BLANKLINE>
                             f''8
@@ -1836,7 +1845,8 @@ def hairpin(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             d''8
                             \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
-                            \<                                                                       %! PIC
+                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             [
             <BLANKLINE>
                             f'8
@@ -1850,7 +1860,8 @@ def hairpin(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             f''8
                             \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
-                            \>                                                                       %! PIC
+                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \>                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             [
             <BLANKLINE>
                             e'8
@@ -2070,8 +2081,9 @@ def hairpin(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             e'8
                             \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
-                            - \tweak stencil #constante-hairpin                                      %! PIC
-                            \<                                                                       %! PIC
+                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC
+                            - \tweak stencil #constante-hairpin                                      %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             [
             <BLANKLINE>
                             d''8
@@ -2087,7 +2099,8 @@ def hairpin(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             g'8
                             \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
-                            \>                                                                       %! PIC
+                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \>                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             [
             <BLANKLINE>
                             f''8
@@ -2101,8 +2114,9 @@ def hairpin(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             d''8
                             \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
-                            - \tweak stencil #constante-hairpin                                      %! PIC
-                            \<                                                                       %! PIC
+                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC
+                            - \tweak stencil #constante-hairpin                                      %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             [
             <BLANKLINE>
                             f'8
@@ -2118,7 +2132,8 @@ def hairpin(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             f''8
                             \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
-                            \>                                                                       %! PIC
+                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \>                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             [
             <BLANKLINE>
                             e'8
@@ -2209,7 +2224,8 @@ def hairpin(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             e'8
                             \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
-                            \>                                                                       %! PIC
+                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \>                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             [
             <BLANKLINE>
                             d''8
@@ -2329,9 +2345,10 @@ def hairpin(
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
                             e'8
                             \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
-                            - \tweak to-barline ##t                                                  %! PIC
-                            - \tweak circled-tip ##t                                                 %! PIC
-                            \>                                                                       %! PIC
+                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC
+                            - \tweak to-barline ##t                                                  %! SM8:EXPLICIT_DYNAMIC:PIC
+                            - \tweak circled-tip ##t                                                 %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \>                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             [
             <BLANKLINE>
                             d''8
@@ -2565,7 +2582,8 @@ def hairpin(
                             % [MusicVoice measure 1]                                                 %! SM4
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
                             e'8
-                            \<                                                                       %! PIC
+                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
                             [
             <BLANKLINE>
                             d''8
