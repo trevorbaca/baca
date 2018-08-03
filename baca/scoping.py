@@ -700,31 +700,31 @@ def apply(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -735,73 +735,73 @@ def apply(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
-                            \baca_unpitched_music_warning                                            %! SM24
+                            % [MusicVoice measure 1]                                                 %! SM_4
+                            \baca_unpitched_music_warning                                            %! SM_24
                             c'8
                             [
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM24
+                            \baca_unpitched_music_warning                                            %! SM_24
                             c'8
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM24
+                            \baca_unpitched_music_warning                                            %! SM_24
                             c'8
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM24
+                            \baca_unpitched_music_warning                                            %! SM_24
                             c'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
-                            \baca_unpitched_music_warning                                            %! SM24
+                            % [MusicVoice measure 2]                                                 %! SM_4
+                            \baca_unpitched_music_warning                                            %! SM_24
                             c'8
                             -\marcato                                                                %! IC
                             -\staccato                                                               %! IC
                             [
                             (                                                                        %! SC
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM24
+                            \baca_unpitched_music_warning                                            %! SM_24
                             c'8
                             -\marcato                                                                %! IC
                             -\staccato                                                               %! IC
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM24
+                            \baca_unpitched_music_warning                                            %! SM_24
                             c'8
                             -\marcato                                                                %! IC
                             -\staccato                                                               %! IC
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
-                            \baca_unpitched_music_warning                                            %! SM24
+                            % [MusicVoice measure 3]                                                 %! SM_4
+                            \baca_unpitched_music_warning                                            %! SM_24
                             c'8
                             -\marcato                                                                %! IC
                             -\staccato                                                               %! IC
                             [
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM24
+                            \baca_unpitched_music_warning                                            %! SM_24
                             c'8
                             -\marcato                                                                %! IC
                             -\staccato                                                               %! IC
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM24
+                            \baca_unpitched_music_warning                                            %! SM_24
                             c'8
                             -\marcato                                                                %! IC
                             -\staccato                                                               %! IC
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM24
+                            \baca_unpitched_music_warning                                            %! SM_24
                             c'8
                             -\marcato                                                                %! IC
                             -\staccato                                                               %! IC
                             ]
                             )                                                                        %! SC
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
-                            \baca_unpitched_music_warning                                            %! SM24
+                            % [MusicVoice measure 4]                                                 %! SM_4
+                            \baca_unpitched_music_warning                                            %! SM_24
                             c'8
                             [
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM24
+                            \baca_unpitched_music_warning                                            %! SM_24
                             c'8
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM24
+                            \baca_unpitched_music_warning                                            %! SM_24
                             c'8
                             ]
             <BLANKLINE>
@@ -844,31 +844,31 @@ def apply(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -879,73 +879,73 @@ def apply(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
-                            \baca_unpitched_music_warning                                            %! SM24
+                            % [MusicVoice measure 1]                                                 %! SM_4
+                            \baca_unpitched_music_warning                                            %! SM_24
                             c'8
                             [
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM24
+                            \baca_unpitched_music_warning                                            %! SM_24
                             c'8
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM24
+                            \baca_unpitched_music_warning                                            %! SM_24
                             c'8
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM24
+                            \baca_unpitched_music_warning                                            %! SM_24
                             c'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
-                            \baca_unpitched_music_warning                                            %! SM24
+                            % [MusicVoice measure 2]                                                 %! SM_4
+                            \baca_unpitched_music_warning                                            %! SM_24
                             c'8
                             -\marcato                                                                %! IC
                             -\staccato                                                               %! IC
                             [
                             (                                                                        %! SC
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM24
+                            \baca_unpitched_music_warning                                            %! SM_24
                             c'8
                             -\marcato                                                                %! IC
                             -\staccato                                                               %! IC
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM24
+                            \baca_unpitched_music_warning                                            %! SM_24
                             c'8
                             -\marcato                                                                %! IC
                             -\staccato                                                               %! IC
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
-                            \baca_unpitched_music_warning                                            %! SM24
+                            % [MusicVoice measure 3]                                                 %! SM_4
+                            \baca_unpitched_music_warning                                            %! SM_24
                             c'8
                             -\marcato                                                                %! IC
                             -\staccato                                                               %! IC
                             [
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM24
+                            \baca_unpitched_music_warning                                            %! SM_24
                             c'8
                             -\marcato                                                                %! IC
                             -\staccato                                                               %! IC
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM24
+                            \baca_unpitched_music_warning                                            %! SM_24
                             c'8
                             -\marcato                                                                %! IC
                             -\staccato                                                               %! IC
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM24
+                            \baca_unpitched_music_warning                                            %! SM_24
                             c'8
                             -\marcato                                                                %! IC
                             -\staccato                                                               %! IC
                             ]
                             )                                                                        %! SC
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
-                            \baca_unpitched_music_warning                                            %! SM24
+                            % [MusicVoice measure 4]                                                 %! SM_4
+                            \baca_unpitched_music_warning                                            %! SM_24
                             c'8
                             [
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM24
+                            \baca_unpitched_music_warning                                            %! SM_24
                             c'8
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM24
+                            \baca_unpitched_music_warning                                            %! SM_24
                             c'8
                             ]
             <BLANKLINE>
@@ -1073,31 +1073,31 @@ def measures(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #16                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #16                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM_4
                         \baca_new_spacing_section #1 #16                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM_4
                         \baca_new_spacing_section #1 #16                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -1108,7 +1108,7 @@ def measures(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             e'8
                             [
             <BLANKLINE>
@@ -1119,7 +1119,7 @@ def measures(
                             f'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             e'8
                             [
             <BLANKLINE>
@@ -1128,10 +1128,10 @@ def measures(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             f'2
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             f'4.
                             \repeatTie
             <BLANKLINE>

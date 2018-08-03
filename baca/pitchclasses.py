@@ -1187,7 +1187,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
                             g''8
                             \stopGroup
                             s8
-                            \bar "|."                                                                    %! SCORE1
+                            \bar "|."                                                                    %! SCORE_1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -4322,7 +4322,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     g'8
                     bqf'8
                     g'8
-                    \bar "|."                                                                            %! SCORE1
+                    \bar "|."                                                                            %! SCORE_1
                     \override Score.BarLine.transparent = ##f
                 }
 
@@ -4344,7 +4344,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     g'8
                     bqf'8
                     g'8
-                    \bar "|."                                                                            %! SCORE1
+                    \bar "|."                                                                            %! SCORE_1
                     \override Score.BarLine.transparent = ##f
                 }
 
@@ -4420,7 +4420,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                         fs'8
                         bqs'8
                         fs'8
-                        \bar "|."                                                                            %! SCORE1
+                        \bar "|."                                                                            %! SCORE_1
                         \override Score.BarLine.transparent = ##f
                     }
 
@@ -4446,7 +4446,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                         fs'8
                         bqs'8
                         fs'8
-                        \bar "|."                                                                            %! SCORE1
+                        \bar "|."                                                                            %! SCORE_1
                         \override Score.BarLine.transparent = ##f
                     }
 
@@ -4474,7 +4474,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                         g'8
                         bqf'8
                         g'8
-                        \bar "|."                                                                            %! SCORE1
+                        \bar "|."                                                                            %! SCORE_1
                         \override Score.BarLine.transparent = ##f
                     }
 
@@ -4523,7 +4523,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                         g'8
                         bqf'8
                         g'8
-                        \bar "|."                                                                            %! SCORE1
+                        \bar "|."                                                                            %! SCORE_1
                         \override Score.BarLine.transparent = ##f
                     }
 
@@ -5179,7 +5179,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     bqf'8
                     fs'8
                     g'8
-                    \bar "|."                                                                            %! SCORE1
+                    \bar "|."                                                                            %! SCORE_1
                     \override Score.BarLine.transparent = ##f
                 }
 
@@ -5204,7 +5204,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     g'8
                     bqf'8
                     g'8
-                    \bar "|."                                                                            %! SCORE1
+                    \bar "|."                                                                            %! SCORE_1
                     \override Score.BarLine.transparent = ##f
                 }
 
@@ -5237,7 +5237,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     g'8
                     bqf'8
                     g'8
-                    \bar "|."                                                                            %! SCORE1
+                    \bar "|."                                                                            %! SCORE_1
                     \override Score.BarLine.transparent = ##f
                 }
 
@@ -5261,7 +5261,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     fs'8
                     g'8
                     g'8
-                    \bar "|."                                                                            %! SCORE1
+                    \bar "|."                                                                            %! SCORE_1
                     \override Score.BarLine.transparent = ##f
                 }
 
@@ -5297,7 +5297,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     f'8
                     fs'8
                     g'8
-                    \bar "|."                                                                            %! SCORE1
+                    \bar "|."                                                                            %! SCORE_1
                     \override Score.BarLine.transparent = ##f
                 }
 
@@ -5328,7 +5328,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     f'8
                     fs'8
                     g'8
-                    \bar "|."                                                                            %! SCORE1
+                    \bar "|."                                                                            %! SCORE_1
                     \override Score.BarLine.transparent = ##f
                 }
 
@@ -5410,7 +5410,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     f'8
                     fs'8
                     g'8
-                    \bar "|."                                                                            %! SCORE1
+                    \bar "|."                                                                            %! SCORE_1
                     \override Score.BarLine.transparent = ##f
                 }
 
@@ -6750,7 +6750,7 @@ class PitchTree(classes.Tree):
                         f'8
                         \stopGroup
                         s8
-                        \bar "|."                                                                    %! SCORE1
+                        \bar "|."                                                                    %! SCORE_1
                         \override Score.BarLine.transparent = ##f
                     }
                 }
@@ -6827,7 +6827,7 @@ class PitchTree(classes.Tree):
                         f'8
                         \stopGroup
                         s8
-                        \bar "|."                                                                    %! SCORE1
+                        \bar "|."                                                                    %! SCORE_1
                         \override Score.BarLine.transparent = ##f
                     }
                 }
@@ -6900,7 +6900,7 @@ class PitchTree(classes.Tree):
                         f'8
                         \stopGroup
                         s8
-                        \bar "|."                                                                    %! SCORE1
+                        \bar "|."                                                                    %! SCORE_1
                         \override Score.BarLine.transparent = ##f
                     }
                 }
@@ -6977,7 +6977,7 @@ class PitchTree(classes.Tree):
                         f'8
                         \stopGroup
                         s8
-                        \bar "|."                                                                    %! SCORE1
+                        \bar "|."                                                                    %! SCORE_1
                         \override Score.BarLine.transparent = ##f
                     }
                 }
@@ -7050,7 +7050,7 @@ class PitchTree(classes.Tree):
                         f'8
                         \stopGroup
                         s8
-                        \bar "|."                                                                    %! SCORE1
+                        \bar "|."                                                                    %! SCORE_1
                         \override Score.BarLine.transparent = ##f
                     }
                 }
@@ -7122,7 +7122,7 @@ class PitchTree(classes.Tree):
                         ef'8
                         \stopGroup
                         s8
-                        \bar "|."                                                                    %! SCORE1
+                        \bar "|."                                                                    %! SCORE_1
                         \override Score.BarLine.transparent = ##f
                     }
                 }
@@ -7261,7 +7261,7 @@ class PitchTree(classes.Tree):
                         fs'8
                         \stopGroup
                         s8
-                        \bar "|."                                                                    %! SCORE1
+                        \bar "|."                                                                    %! SCORE_1
                         \override Score.BarLine.transparent = ##f
                     }
                 }
@@ -7516,7 +7516,7 @@ class PitchTree(classes.Tree):
                             f'8
                             \stopGroup
                             s8
-                            \bar "|."                                                                    %! SCORE1
+                            \bar "|."                                                                    %! SCORE_1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -7613,7 +7613,7 @@ class PitchTree(classes.Tree):
                             f'8
                             \stopGroup
                             s8
-                            \bar "|."                                                                    %! SCORE1
+                            \bar "|."                                                                    %! SCORE_1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -7696,7 +7696,7 @@ class PitchTree(classes.Tree):
                             fs'8
                             \stopGroup
                             s8
-                            \bar "|."                                                                    %! SCORE1
+                            \bar "|."                                                                    %! SCORE_1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -7993,7 +7993,7 @@ class PitchTree(classes.Tree):
                             e'8
                             \stopGroup
                             s8
-                            \bar "|."                                                                    %! SCORE1
+                            \bar "|."                                                                    %! SCORE_1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -8066,7 +8066,7 @@ class PitchTree(classes.Tree):
                             f'8
                             \stopGroup
                             s8
-                            \bar "|."                                                                    %! SCORE1
+                            \bar "|."                                                                    %! SCORE_1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -8148,7 +8148,7 @@ class PitchTree(classes.Tree):
                             f'8
                             \stopGroup
                             s8
-                            \bar "|."                                                                    %! SCORE1
+                            \bar "|."                                                                    %! SCORE_1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -8217,7 +8217,7 @@ class PitchTree(classes.Tree):
                             ef'''8
                             \stopGroup
                             s8
-                            \bar "|."                                                                    %! SCORE1
+                            \bar "|."                                                                    %! SCORE_1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -8286,7 +8286,7 @@ class PitchTree(classes.Tree):
                             g8
                             \stopGroup
                             s8
-                            \bar "|."                                                                    %! SCORE1
+                            \bar "|."                                                                    %! SCORE_1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -8355,7 +8355,7 @@ class PitchTree(classes.Tree):
                             a''8
                             \stopGroup
                             s8
-                            \bar "|."                                                                    %! SCORE1
+                            \bar "|."                                                                    %! SCORE_1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -8443,7 +8443,7 @@ class PitchTree(classes.Tree):
                             f'8
                             \stopGroup
                             s8
-                            \bar "|."                                                                    %! SCORE1
+                            \bar "|."                                                                    %! SCORE_1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -8512,7 +8512,7 @@ class PitchTree(classes.Tree):
                             bf'8
                             \stopGroup
                             s8
-                            \bar "|."                                                                    %! SCORE1
+                            \bar "|."                                                                    %! SCORE_1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -8599,7 +8599,7 @@ class PitchTree(classes.Tree):
                             f'8
                             \stopGroup
                             s8
-                            \bar "|."                                                                    %! SCORE1
+                            \bar "|."                                                                    %! SCORE_1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -8668,7 +8668,7 @@ class PitchTree(classes.Tree):
                             cs'8
                             \stopGroup
                             s8
-                            \bar "|."                                                                    %! SCORE1
+                            \bar "|."                                                                    %! SCORE_1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -8737,7 +8737,7 @@ class PitchTree(classes.Tree):
                             bf'8
                             \stopGroup
                             s8
-                            \bar "|."                                                                    %! SCORE1
+                            \bar "|."                                                                    %! SCORE_1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -8806,7 +8806,7 @@ class PitchTree(classes.Tree):
                             f'8
                             \stopGroup
                             s8
-                            \bar "|."                                                                    %! SCORE1
+                            \bar "|."                                                                    %! SCORE_1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -8894,7 +8894,7 @@ class PitchTree(classes.Tree):
                             f'8
                             \stopGroup
                             s8
-                            \bar "|."                                                                    %! SCORE1
+                            \bar "|."                                                                    %! SCORE_1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -8963,7 +8963,7 @@ class PitchTree(classes.Tree):
                             fs''8
                             \stopGroup
                             s8
-                            \bar "|."                                                                    %! SCORE1
+                            \bar "|."                                                                    %! SCORE_1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -9032,7 +9032,7 @@ class PitchTree(classes.Tree):
                             e8
                             \stopGroup
                             s8
-                            \bar "|."                                                                    %! SCORE1
+                            \bar "|."                                                                    %! SCORE_1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -9101,7 +9101,7 @@ class PitchTree(classes.Tree):
                             f'8
                             \stopGroup
                             s8
-                            \bar "|."                                                                    %! SCORE1
+                            \bar "|."                                                                    %! SCORE_1
                             \override Score.BarLine.transparent = ##f
                         }
                     }

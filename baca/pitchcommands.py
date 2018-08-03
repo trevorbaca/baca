@@ -46,27 +46,27 @@ class AccidentalAdjustmentCommand(scoping.Command):
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -77,16 +77,16 @@ class AccidentalAdjustmentCommand(scoping.Command):
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             e'!2
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             f'!4.
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             e'2
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             f'4.
             <BLANKLINE>
                         }
@@ -596,27 +596,27 @@ class ClusterCommand(scoping.Command):
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -627,7 +627,7 @@ class ClusterCommand(scoping.Command):
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
@@ -645,7 +645,7 @@ class ClusterCommand(scoping.Command):
                                         }
                                 }
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
@@ -663,7 +663,7 @@ class ClusterCommand(scoping.Command):
                                         }
                                 }
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
@@ -681,7 +681,7 @@ class ClusterCommand(scoping.Command):
                                         }
                                 }
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
@@ -836,27 +836,27 @@ class ClusterCommand(scoping.Command):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
                 <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 3]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 4]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "|"                                                                     %! SM5
+                            \baca_bar_line_visible                                                       %! SM_5
+                            \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
                         }
                     >>
@@ -867,7 +867,7 @@ class ClusterCommand(scoping.Command):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM_4
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -881,7 +881,7 @@ class ClusterCommand(scoping.Command):
                                         \natural
                                     }
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM_4
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -895,7 +895,7 @@ class ClusterCommand(scoping.Command):
                                         \natural
                                     }
                 <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
+                                % [MusicVoice measure 3]                                                 %! SM_4
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -909,7 +909,7 @@ class ClusterCommand(scoping.Command):
                                         \natural
                                     }
                 <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM4
+                                % [MusicVoice measure 4]                                                 %! SM_4
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -982,27 +982,27 @@ class ClusterCommand(scoping.Command):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
                 <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 3]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 4]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "|"                                                                     %! SM5
+                            \baca_bar_line_visible                                                       %! SM_5
+                            \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
                         }
                     >>
@@ -1013,7 +1013,7 @@ class ClusterCommand(scoping.Command):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM_4
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1031,7 +1031,7 @@ class ClusterCommand(scoping.Command):
                                             }
                                     }
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM_4
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1049,7 +1049,7 @@ class ClusterCommand(scoping.Command):
                                             }
                                     }
                 <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
+                                % [MusicVoice measure 3]                                                 %! SM_4
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1067,7 +1067,7 @@ class ClusterCommand(scoping.Command):
                                             }
                                     }
                 <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM4
+                                % [MusicVoice measure 4]                                                 %! SM_4
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1118,27 +1118,27 @@ class ClusterCommand(scoping.Command):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
                 <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 3]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 4]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "|"                                                                     %! SM5
+                            \baca_bar_line_visible                                                       %! SM_5
+                            \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
                         }
                     >>
@@ -1149,7 +1149,7 @@ class ClusterCommand(scoping.Command):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM_4
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1167,7 +1167,7 @@ class ClusterCommand(scoping.Command):
                                             }
                                     }
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM_4
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1185,7 +1185,7 @@ class ClusterCommand(scoping.Command):
                                             }
                                     }
                 <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
+                                % [MusicVoice measure 3]                                                 %! SM_4
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1203,7 +1203,7 @@ class ClusterCommand(scoping.Command):
                                             }
                                     }
                 <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM4
+                                % [MusicVoice measure 4]                                                 %! SM_4
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1265,27 +1265,27 @@ class ClusterCommand(scoping.Command):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
                 <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 3]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 4]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "|"                                                                     %! SM5
+                            \baca_bar_line_visible                                                       %! SM_5
+                            \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
                         }
                     >>
@@ -1296,7 +1296,7 @@ class ClusterCommand(scoping.Command):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM_4
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1314,7 +1314,7 @@ class ClusterCommand(scoping.Command):
                                             }
                                     }
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM_4
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1332,7 +1332,7 @@ class ClusterCommand(scoping.Command):
                                             }
                                     }
                 <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
+                                % [MusicVoice measure 3]                                                 %! SM_4
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1350,7 +1350,7 @@ class ClusterCommand(scoping.Command):
                                             }
                                     }
                 <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM4
+                                % [MusicVoice measure 4]                                                 %! SM_4
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1401,27 +1401,27 @@ class ClusterCommand(scoping.Command):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
                 <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 3]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 4]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "|"                                                                     %! SM5
+                            \baca_bar_line_visible                                                       %! SM_5
+                            \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
                         }
                     >>
@@ -1432,7 +1432,7 @@ class ClusterCommand(scoping.Command):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM_4
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1450,7 +1450,7 @@ class ClusterCommand(scoping.Command):
                                             }
                                     }
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM_4
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1468,7 +1468,7 @@ class ClusterCommand(scoping.Command):
                                             }
                                     }
                 <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
+                                % [MusicVoice measure 3]                                                 %! SM_4
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1486,7 +1486,7 @@ class ClusterCommand(scoping.Command):
                                             }
                                     }
                 <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM4
+                                % [MusicVoice measure 4]                                                 %! SM_4
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1538,27 +1538,27 @@ class ClusterCommand(scoping.Command):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
                 <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 3]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 4]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "|"                                                                     %! SM5
+                            \baca_bar_line_visible                                                       %! SM_5
+                            \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
                         }
                     >>
@@ -1569,16 +1569,16 @@ class ClusterCommand(scoping.Command):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM_4
                                 e'2
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM_4
                                 e'4.
                 <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
+                                % [MusicVoice measure 3]                                                 %! SM_4
                                 e'2
                 <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM4
+                                % [MusicVoice measure 4]                                                 %! SM_4
                                 e'4.
                 <BLANKLINE>
                             }
@@ -1629,27 +1629,27 @@ class ColorFingeringCommand(scoping.Command):
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -1660,10 +1660,10 @@ class ColorFingeringCommand(scoping.Command):
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             e'2
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             e'4.
                             ^ \markup {
                                 \override
@@ -1673,7 +1673,7 @@ class ColorFingeringCommand(scoping.Command):
                                             1
                                 }
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             e'2
                             ^ \markup {
                                 \override
@@ -1683,7 +1683,7 @@ class ColorFingeringCommand(scoping.Command):
                                             2
                                 }
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             e'4.
                             ^ \markup {
                                 \override
@@ -2045,27 +2045,27 @@ class MicrotoneDeviationCommand(scoping.Command):
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -2076,7 +2076,7 @@ class MicrotoneDeviationCommand(scoping.Command):
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             e'8
                             [
             <BLANKLINE>
@@ -2087,7 +2087,7 @@ class MicrotoneDeviationCommand(scoping.Command):
                             eqf'!8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             e'8
                             [
             <BLANKLINE>
@@ -2096,7 +2096,7 @@ class MicrotoneDeviationCommand(scoping.Command):
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             eqf'!8
                             [
             <BLANKLINE>
@@ -2107,7 +2107,7 @@ class MicrotoneDeviationCommand(scoping.Command):
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             eqf'!8
                             [
             <BLANKLINE>
@@ -2240,27 +2240,27 @@ class OctaveDisplacementCommand(scoping.Command):
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -2271,7 +2271,7 @@ class OctaveDisplacementCommand(scoping.Command):
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             g'8
                             [
             <BLANKLINE>
@@ -2282,7 +2282,7 @@ class OctaveDisplacementCommand(scoping.Command):
                             g''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             g'8
                             [
             <BLANKLINE>
@@ -2291,7 +2291,7 @@ class OctaveDisplacementCommand(scoping.Command):
                             g8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             g8
                             [
             <BLANKLINE>
@@ -2302,7 +2302,7 @@ class OctaveDisplacementCommand(scoping.Command):
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             g'8
                             [
             <BLANKLINE>
@@ -2441,27 +2441,27 @@ class PitchCommand(scoping.Command):
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -2472,7 +2472,7 @@ class PitchCommand(scoping.Command):
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             g''8
                             [
             <BLANKLINE>
@@ -2483,7 +2483,7 @@ class PitchCommand(scoping.Command):
                             e''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             f''8
                             [
             <BLANKLINE>
@@ -2492,7 +2492,7 @@ class PitchCommand(scoping.Command):
                             g''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             cs''!8
                             [
             <BLANKLINE>
@@ -2503,7 +2503,7 @@ class PitchCommand(scoping.Command):
                             f''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             b''8
                             [
             <BLANKLINE>
@@ -2545,27 +2545,27 @@ class PitchCommand(scoping.Command):
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -2576,7 +2576,7 @@ class PitchCommand(scoping.Command):
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             c'8
                             [
             <BLANKLINE>
@@ -2587,7 +2587,7 @@ class PitchCommand(scoping.Command):
                             <b' cs''!>8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             d''8
                             [
             <BLANKLINE>
@@ -2596,7 +2596,7 @@ class PitchCommand(scoping.Command):
                             f'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             fs'!8
                             [
             <BLANKLINE>
@@ -2607,7 +2607,7 @@ class PitchCommand(scoping.Command):
                             c'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             f'8
                             [
             <BLANKLINE>
@@ -2649,27 +2649,27 @@ class PitchCommand(scoping.Command):
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -2680,7 +2680,7 @@ class PitchCommand(scoping.Command):
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             <c' d' e' f' g' a' b'>8
                             [
             <BLANKLINE>
@@ -2691,7 +2691,7 @@ class PitchCommand(scoping.Command):
                             <c' d' e' f' g' a' b'>8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             <c' d' e' f' g' a' b'>8
                             [
             <BLANKLINE>
@@ -2700,7 +2700,7 @@ class PitchCommand(scoping.Command):
                             <c' d' e' f' g' a' b'>8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             <c' d' e' f' g' a' b'>8
                             [
             <BLANKLINE>
@@ -2711,7 +2711,7 @@ class PitchCommand(scoping.Command):
                             <c' d' e' f' g' a' b'>8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             <c' d' e' f' g' a' b'>8
                             [
             <BLANKLINE>
@@ -3282,27 +3282,27 @@ class RegisterCommand(scoping.Command):
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -3313,7 +3313,7 @@ class RegisterCommand(scoping.Command):
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             g''8
                             [
             <BLANKLINE>
@@ -3324,7 +3324,7 @@ class RegisterCommand(scoping.Command):
                             gtqs''!8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             aqf''!8
                             [
             <BLANKLINE>
@@ -3333,7 +3333,7 @@ class RegisterCommand(scoping.Command):
                             atqf''!8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             g''8
                             [
             <BLANKLINE>
@@ -3344,7 +3344,7 @@ class RegisterCommand(scoping.Command):
                             gtqs''!8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             aqf''!8
                             [
             <BLANKLINE>
@@ -3635,47 +3635,47 @@ class RegisterInterpolationCommand(scoping.Command):
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 5]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 5]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 6]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 6]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 7]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 7]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 8]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 8]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -3686,7 +3686,7 @@ class RegisterInterpolationCommand(scoping.Command):
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             fs''!8
                             [
             <BLANKLINE>
@@ -3697,7 +3697,7 @@ class RegisterInterpolationCommand(scoping.Command):
                             f''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             a''8
                             [
             <BLANKLINE>
@@ -3706,7 +3706,7 @@ class RegisterInterpolationCommand(scoping.Command):
                             c''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             b''8
                             [
             <BLANKLINE>
@@ -3717,7 +3717,7 @@ class RegisterInterpolationCommand(scoping.Command):
                             cs''!8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             d''8
                             [
             <BLANKLINE>
@@ -3726,7 +3726,7 @@ class RegisterInterpolationCommand(scoping.Command):
                             e''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 5]                                                 %! SM4
+                            % [MusicVoice measure 5]                                                 %! SM_4
                             ef''!8
                             [
             <BLANKLINE>
@@ -3737,7 +3737,7 @@ class RegisterInterpolationCommand(scoping.Command):
                             bf''!8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 6]                                                 %! SM4
+                            % [MusicVoice measure 6]                                                 %! SM_4
                             c''8
                             [
             <BLANKLINE>
@@ -3746,7 +3746,7 @@ class RegisterInterpolationCommand(scoping.Command):
                             af''!8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 7]                                                 %! SM4
+                            % [MusicVoice measure 7]                                                 %! SM_4
                             g''8
                             [
             <BLANKLINE>
@@ -3757,7 +3757,7 @@ class RegisterInterpolationCommand(scoping.Command):
                             fs''!8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 8]                                                 %! SM4
+                            % [MusicVoice measure 8]                                                 %! SM_4
                             e''8
                             [
             <BLANKLINE>
@@ -3802,47 +3802,47 @@ class RegisterInterpolationCommand(scoping.Command):
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 5]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 5]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 6]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 6]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 7]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 7]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 8]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 8]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -3853,7 +3853,7 @@ class RegisterInterpolationCommand(scoping.Command):
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             fs''!8
                             [
             <BLANKLINE>
@@ -3864,7 +3864,7 @@ class RegisterInterpolationCommand(scoping.Command):
                             f''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             a''8
                             [
             <BLANKLINE>
@@ -3873,7 +3873,7 @@ class RegisterInterpolationCommand(scoping.Command):
                             c''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             b'8
                             [
             <BLANKLINE>
@@ -3884,7 +3884,7 @@ class RegisterInterpolationCommand(scoping.Command):
                             cs''!8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             d''8
                             [
             <BLANKLINE>
@@ -3893,7 +3893,7 @@ class RegisterInterpolationCommand(scoping.Command):
                             e''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 5]                                                 %! SM4
+                            % [MusicVoice measure 5]                                                 %! SM_4
                             ef''!8
                             [
             <BLANKLINE>
@@ -3904,7 +3904,7 @@ class RegisterInterpolationCommand(scoping.Command):
                             bf'!8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 6]                                                 %! SM4
+                            % [MusicVoice measure 6]                                                 %! SM_4
                             c''8
                             [
             <BLANKLINE>
@@ -3913,7 +3913,7 @@ class RegisterInterpolationCommand(scoping.Command):
                             af'!8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 7]                                                 %! SM4
+                            % [MusicVoice measure 7]                                                 %! SM_4
                             g'8
                             [
             <BLANKLINE>
@@ -3924,7 +3924,7 @@ class RegisterInterpolationCommand(scoping.Command):
                             fs'!8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 8]                                                 %! SM4
+                            % [MusicVoice measure 8]                                                 %! SM_4
                             e'8
                             [
             <BLANKLINE>
@@ -3969,47 +3969,47 @@ class RegisterInterpolationCommand(scoping.Command):
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 5]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 5]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 6]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 6]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 7]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 7]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 8]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 8]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -4020,7 +4020,7 @@ class RegisterInterpolationCommand(scoping.Command):
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             fs'!8
                             [
             <BLANKLINE>
@@ -4031,7 +4031,7 @@ class RegisterInterpolationCommand(scoping.Command):
                             f'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             a'8
                             [
             <BLANKLINE>
@@ -4040,7 +4040,7 @@ class RegisterInterpolationCommand(scoping.Command):
                             c''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             b'8
                             [
             <BLANKLINE>
@@ -4051,7 +4051,7 @@ class RegisterInterpolationCommand(scoping.Command):
                             cs''!8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             d''8
                             [
             <BLANKLINE>
@@ -4060,7 +4060,7 @@ class RegisterInterpolationCommand(scoping.Command):
                             e''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 5]                                                 %! SM4
+                            % [MusicVoice measure 5]                                                 %! SM_4
                             ef''!8
                             [
             <BLANKLINE>
@@ -4071,7 +4071,7 @@ class RegisterInterpolationCommand(scoping.Command):
                             bf'!8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 6]                                                 %! SM4
+                            % [MusicVoice measure 6]                                                 %! SM_4
                             c''8
                             [
             <BLANKLINE>
@@ -4080,7 +4080,7 @@ class RegisterInterpolationCommand(scoping.Command):
                             af'!8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 7]                                                 %! SM4
+                            % [MusicVoice measure 7]                                                 %! SM_4
                             g''8
                             [
             <BLANKLINE>
@@ -4091,7 +4091,7 @@ class RegisterInterpolationCommand(scoping.Command):
                             fs''!8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 8]                                                 %! SM4
+                            % [MusicVoice measure 8]                                                 %! SM_4
                             e''8
                             [
             <BLANKLINE>
@@ -4136,47 +4136,47 @@ class RegisterInterpolationCommand(scoping.Command):
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 5]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 5]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 6]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 6]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 7]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 7]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 8]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 8]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -4187,7 +4187,7 @@ class RegisterInterpolationCommand(scoping.Command):
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             fs''!8
                             [
             <BLANKLINE>
@@ -4198,7 +4198,7 @@ class RegisterInterpolationCommand(scoping.Command):
                             f''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             a'8
                             [
             <BLANKLINE>
@@ -4207,7 +4207,7 @@ class RegisterInterpolationCommand(scoping.Command):
                             c''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             b'8
                             [
             <BLANKLINE>
@@ -4218,7 +4218,7 @@ class RegisterInterpolationCommand(scoping.Command):
                             cs''!8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             d'8
                             [
             <BLANKLINE>
@@ -4227,7 +4227,7 @@ class RegisterInterpolationCommand(scoping.Command):
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 5]                                                 %! SM4
+                            % [MusicVoice measure 5]                                                 %! SM_4
                             ef'!8
                             [
             <BLANKLINE>
@@ -4238,7 +4238,7 @@ class RegisterInterpolationCommand(scoping.Command):
                             bf!8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 6]                                                 %! SM4
+                            % [MusicVoice measure 6]                                                 %! SM_4
                             c'8
                             [
             <BLANKLINE>
@@ -4247,7 +4247,7 @@ class RegisterInterpolationCommand(scoping.Command):
                             af!8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 7]                                                 %! SM4
+                            % [MusicVoice measure 7]                                                 %! SM_4
                             g8
                             [
             <BLANKLINE>
@@ -4258,7 +4258,7 @@ class RegisterInterpolationCommand(scoping.Command):
                             fs!8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 8]                                                 %! SM4
+                            % [MusicVoice measure 8]                                                 %! SM_4
                             e8
                             [
             <BLANKLINE>
@@ -4303,47 +4303,47 @@ class RegisterInterpolationCommand(scoping.Command):
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 5]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 5]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 6]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 6]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 7]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 7]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 8]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 8]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -4354,7 +4354,7 @@ class RegisterInterpolationCommand(scoping.Command):
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             fs!8
                             [
             <BLANKLINE>
@@ -4365,7 +4365,7 @@ class RegisterInterpolationCommand(scoping.Command):
                             f8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             a8
                             [
             <BLANKLINE>
@@ -4374,7 +4374,7 @@ class RegisterInterpolationCommand(scoping.Command):
                             c'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             b8
                             [
             <BLANKLINE>
@@ -4385,7 +4385,7 @@ class RegisterInterpolationCommand(scoping.Command):
                             cs'!8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             d'8
                             [
             <BLANKLINE>
@@ -4394,7 +4394,7 @@ class RegisterInterpolationCommand(scoping.Command):
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 5]                                                 %! SM4
+                            % [MusicVoice measure 5]                                                 %! SM_4
                             ef'!8
                             [
             <BLANKLINE>
@@ -4405,7 +4405,7 @@ class RegisterInterpolationCommand(scoping.Command):
                             bf'!8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 6]                                                 %! SM4
+                            % [MusicVoice measure 6]                                                 %! SM_4
                             c''8
                             [
             <BLANKLINE>
@@ -4414,7 +4414,7 @@ class RegisterInterpolationCommand(scoping.Command):
                             af'!8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 7]                                                 %! SM4
+                            % [MusicVoice measure 7]                                                 %! SM_4
                             g'8
                             [
             <BLANKLINE>
@@ -4425,7 +4425,7 @@ class RegisterInterpolationCommand(scoping.Command):
                             fs''!8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 8]                                                 %! SM4
+                            % [MusicVoice measure 8]                                                 %! SM_4
                             e''8
                             [
             <BLANKLINE>
@@ -6524,27 +6524,27 @@ def force_accidental(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -6555,18 +6555,18 @@ def force_accidental(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             e'2                                                                      %! AJC:+PARTS
                         %@% e'!2                                                                     %! AJC:-PARTS
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             f'4.                                                                     %! AJC:+PARTS
                         %@% f'!4.                                                                    %! AJC:-PARTS
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             e'2
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             f'4.
             <BLANKLINE>
                         }

@@ -1654,27 +1654,27 @@ def hide_black_note_heads(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -1685,22 +1685,22 @@ def hide_black_note_heads(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
-                            \baca_unpitched_music_warning                                            %! SM24
+                            % [MusicVoice measure 1]                                                 %! SM_4
+                            \baca_unpitched_music_warning                                            %! SM_24
                             c'2
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             \once \override NoteHead.transparent = ##t                               %! IC
-                            \baca_unpitched_music_warning                                            %! SM24
+                            \baca_unpitched_music_warning                                            %! SM_24
                             c'4.
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
-                            \baca_unpitched_music_warning                                            %! SM24
+                            % [MusicVoice measure 3]                                                 %! SM_4
+                            \baca_unpitched_music_warning                                            %! SM_24
                             c'2
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             \once \override NoteHead.transparent = ##t                               %! IC
-                            \baca_unpitched_music_warning                                            %! SM24
+                            \baca_unpitched_music_warning                                            %! SM_24
                             c'4.
             <BLANKLINE>
                         }
@@ -2206,27 +2206,27 @@ def margin_markup(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -2237,7 +2237,7 @@ def margin_markup(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \set Staff.instrumentName =                                              %! SM8:EXPLICIT_MARGIN_MARKUP:IC
                             \markup { Fl. }                                                          %! SM8:EXPLICIT_MARGIN_MARKUP:IC
                             \set Staff.shortInstrumentName =                                         %! SM8:EXPLICIT_MARGIN_MARKUP:IC
@@ -2255,13 +2255,13 @@ def margin_markup(
                             \set Staff.shortInstrumentName =                                         %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
                             \markup { Fl. }                                                          %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             f'4.
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             e'2
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             f'4.
             <BLANKLINE>
                         }
@@ -2791,29 +2791,29 @@ def staff_lines(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        s1 * 3/8
-            <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 5]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                        % [GlobalSkips measure 5]                                                    %! SM_4
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        s1 * 3/8
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -2824,7 +2824,7 @@ def staff_lines(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \stopStaff                                                               %! SM8:EXPLICIT_STAFF_LINES:IC
                             \once \override Staff.StaffSymbol.line-count = 1                         %! SM8:EXPLICIT_STAFF_LINES:IC
                             \startStaff                                                              %! SM8:EXPLICIT_STAFF_LINES:IC
@@ -2836,16 +2836,16 @@ def staff_lines(
                             a4.
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! SM6:EXPLICIT_CLEF_REDRAW_COLOR:IC
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             b4.
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             c'4.
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             d'4.
             <BLANKLINE>
-                            % [MusicVoice measure 5]                                                 %! SM4
+                            % [MusicVoice measure 5]                                                 %! SM_4
                             e'4.
             <BLANKLINE>
                         }
@@ -2883,29 +2883,29 @@ def staff_lines(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        s1 * 3/8
-            <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 5]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                        % [GlobalSkips measure 5]                                                    %! SM_4
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        s1 * 3/8
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -2916,7 +2916,7 @@ def staff_lines(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \stopStaff                                                               %! SM8:EXPLICIT_STAFF_LINES:IC
                             \once \override Staff.StaffSymbol.line-count = 1                         %! SM8:EXPLICIT_STAFF_LINES:IC
                             \startStaff                                                              %! SM8:EXPLICIT_STAFF_LINES:IC
@@ -2928,16 +2928,16 @@ def staff_lines(
                             b,4.
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! SM6:EXPLICIT_CLEF_REDRAW_COLOR:IC
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             c4.
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             d4.
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             e4.
             <BLANKLINE>
-                            % [MusicVoice measure 5]                                                 %! SM4
+                            % [MusicVoice measure 5]                                                 %! SM_4
                             f4.
             <BLANKLINE>
                         }
@@ -2976,29 +2976,29 @@ def staff_lines(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        s1 * 3/8
-            <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 5]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                        % [GlobalSkips measure 5]                                                    %! SM_4
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        s1 * 3/8
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -3009,7 +3009,7 @@ def staff_lines(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \stopStaff                                                               %! SM8:EXPLICIT_STAFF_LINES:IC
                             \once \override Staff.StaffSymbol.line-count = 2                         %! SM8:EXPLICIT_STAFF_LINES:IC
                             \startStaff                                                              %! SM8:EXPLICIT_STAFF_LINES:IC
@@ -3021,16 +3021,16 @@ def staff_lines(
                             a4.
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! SM6:EXPLICIT_CLEF_REDRAW_COLOR:IC
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             b4.
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             c'4.
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             d'4.
             <BLANKLINE>
-                            % [MusicVoice measure 5]                                                 %! SM4
+                            % [MusicVoice measure 5]                                                 %! SM_4
                             e'4.
             <BLANKLINE>
                         }
@@ -3067,29 +3067,29 @@ def staff_lines(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        s1 * 3/8
-            <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 5]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                        % [GlobalSkips measure 5]                                                    %! SM_4
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        s1 * 3/8
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -3100,7 +3100,7 @@ def staff_lines(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \stopStaff                                                               %! SM8:EXPLICIT_STAFF_LINES:IC
                             \once \override Staff.StaffSymbol.line-count = 2                         %! SM8:EXPLICIT_STAFF_LINES:IC
                             \startStaff                                                              %! SM8:EXPLICIT_STAFF_LINES:IC
@@ -3112,16 +3112,16 @@ def staff_lines(
                             b,4.
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! SM6:EXPLICIT_CLEF_REDRAW_COLOR:IC
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             c4.
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             d4.
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             e4.
             <BLANKLINE>
-                            % [MusicVoice measure 5]                                                 %! SM4
+                            % [MusicVoice measure 5]                                                 %! SM_4
                             f4.
             <BLANKLINE>
                         }
@@ -3164,29 +3164,29 @@ def staff_lines(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        s1 * 3/8
-            <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 5]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                        % [GlobalSkips measure 5]                                                    %! SM_4
+                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        s1 * 3/8
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -3197,7 +3197,7 @@ def staff_lines(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \stopStaff                                                               %! SM8:EXPLICIT_STAFF_LINES:IC
                             \once \override Staff.StaffSymbol.line-count = 2                         %! SM8:EXPLICIT_STAFF_LINES:IC
                             \startStaff                                                              %! SM8:EXPLICIT_STAFF_LINES:IC
@@ -3209,16 +3209,16 @@ def staff_lines(
                             g'4.
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! SM6:EXPLICIT_CLEF_REDRAW_COLOR:IC
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             a'4.
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             b'4.
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             c''4.
             <BLANKLINE>
-                            % [MusicVoice measure 5]                                                 %! SM4
+                            % [MusicVoice measure 5]                                                 %! SM_4
                             d''4.
             <BLANKLINE>
                         }

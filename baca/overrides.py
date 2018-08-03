@@ -103,27 +103,27 @@ class OverrideCommand(scoping.Command):
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -134,7 +134,7 @@ class OverrideCommand(scoping.Command):
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \override Beam.positions = #'(6 . 6)                                     %! OC1
                             \override Stem.direction = #up                                           %! OC1
                             e'8
@@ -148,7 +148,7 @@ class OverrideCommand(scoping.Command):
                             \override Rest.direction = #up                                           %! OC1
                             r8
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             e''8
                             [
             <BLANKLINE>
@@ -157,7 +157,7 @@ class OverrideCommand(scoping.Command):
                             f''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             r8
             <BLANKLINE>
                             e'8
@@ -168,7 +168,7 @@ class OverrideCommand(scoping.Command):
                             f'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             r8
                             \revert Rest.direction                                                   %! OC2
             <BLANKLINE>
@@ -475,31 +475,31 @@ def bar_extent(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -510,7 +510,7 @@ def bar_extent(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             e'8
                             [
             <BLANKLINE>
@@ -521,7 +521,7 @@ def bar_extent(
                             e''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             \override Staff.BarLine.bar-extent = #'(-4 . 4)                          %! OC1
                             g'8
                             [
@@ -532,7 +532,7 @@ def bar_extent(
                             ]
                             \revert Staff.BarLine.bar-extent                                         %! OC2
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             d''8
                             [
             <BLANKLINE>
@@ -543,7 +543,7 @@ def bar_extent(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             f''8
                             [
             <BLANKLINE>
@@ -628,27 +628,27 @@ def bar_line_transparent(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -659,7 +659,7 @@ def bar_line_transparent(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \override Score.BarLine.transparent = ##t                                %! OC1
                             e'8
                             [
@@ -671,7 +671,7 @@ def bar_line_transparent(
             <BLANKLINE>
                             r8
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             e''8
                             [
             <BLANKLINE>
@@ -680,7 +680,7 @@ def bar_line_transparent(
                             f''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             r8
             <BLANKLINE>
                             e'8
@@ -691,7 +691,7 @@ def bar_line_transparent(
                             f'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             r8
             <BLANKLINE>
                             e''8
@@ -742,27 +742,27 @@ def bar_line_transparent(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -773,7 +773,7 @@ def bar_line_transparent(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             e'8
                             [
             <BLANKLINE>
@@ -784,7 +784,7 @@ def bar_line_transparent(
             <BLANKLINE>
                             r8
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             \override Score.BarLine.transparent = ##t                                %! OC1
                             e''8
                             [
@@ -795,7 +795,7 @@ def bar_line_transparent(
                             ]
                             \revert Score.BarLine.transparent                                        %! OC2
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             r8
             <BLANKLINE>
                             e'8
@@ -806,7 +806,7 @@ def bar_line_transparent(
                             f'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             r8
             <BLANKLINE>
                             e''8
@@ -1096,22 +1096,22 @@ def dls_staff_padding(
                             \override TupletBracket.staff-padding = #5                               %! OC1
                             r8
                             c'16
-                            \p                                                                       %! PIC
-                            \<                                                                       %! PIC
+                            \p                                                                       %! PIC_1
+                            \<                                                                       %! PIC_1
                             [
                             d'16
                             ]
                             bf'4
                             ~
                             bf'16
-                            \f                                                                       %! PIC
+                            \f                                                                       %! PIC_2
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            \p                                                                       %! PIC
-                            \<                                                                       %! PIC
+                            \p                                                                       %! PIC_1
+                            \<                                                                       %! PIC_1
                             [
                             e''16
                             ]
@@ -1122,12 +1122,12 @@ def dls_staff_padding(
                             af''16
                             [
                             g''16
-                            \f                                                                       %! PIC
+                            \f                                                                       %! PIC_2
                             ]
                         }
                         \times 4/5 {
                             a'16
-                            \p                                                                       %! PIC
+                            \p                                                                       %! PIC_1
                             r4
                             \revert DynamicLineSpanner.staff-padding                                 %! OC2
                             \revert TupletBracket.staff-padding                                      %! OC2
@@ -1175,23 +1175,23 @@ def dls_staff_padding(
                             \override TupletBracket.staff-padding = #5                               %! OC1
                             r8
                             c'16
-                            \p                                                                       %! PIC
-                            \<                                                                       %! PIC
+                            \p                                                                       %! PIC_1
+                            \<                                                                       %! PIC_1
                             [
                             d'16
                             ]
                             bf'4
                             ~
                             bf'16
-                            \f                                                                       %! PIC
+                            \f                                                                       %! PIC_2
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             \override DynamicLineSpanner.staff-padding = #'4                         %! OC1
                             fs''16
-                            \p                                                                       %! PIC
-                            \<                                                                       %! PIC
+                            \p                                                                       %! PIC_1
+                            \<                                                                       %! PIC_1
                             [
                             e''16
                             ]
@@ -1202,13 +1202,13 @@ def dls_staff_padding(
                             af''16
                             [
                             g''16
-                            \f                                                                       %! PIC
+                            \f                                                                       %! PIC_2
                             ]
                             \revert DynamicLineSpanner.staff-padding                                 %! OC2
                         }
                         \times 4/5 {
                             a'16
-                            \p                                                                       %! PIC
+                            \p                                                                       %! PIC_1
                             r4
                             \revert TupletBracket.staff-padding                                      %! OC2
                         }
@@ -1271,22 +1271,22 @@ def dls_up(
                             \override TupletBracket.staff-padding = #5                               %! OC1
                             r8
                             c'16
-                            \p                                                                       %! PIC
-                            \<                                                                       %! PIC
+                            \p                                                                       %! PIC_1
+                            \<                                                                       %! PIC_1
                             [
                             d'16
                             ]
                             bf'4
                             ~
                             bf'16
-                            \f                                                                       %! PIC
+                            \f                                                                       %! PIC_2
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            \p                                                                       %! PIC
-                            \<                                                                       %! PIC
+                            \p                                                                       %! PIC_1
+                            \<                                                                       %! PIC_1
                             [
                             e''16
                             ]
@@ -1297,12 +1297,12 @@ def dls_up(
                             af''16
                             [
                             g''16
-                            \f                                                                       %! PIC
+                            \f                                                                       %! PIC_2
                             ]
                         }
                         \times 4/5 {
                             a'16
-                            \p                                                                       %! PIC
+                            \p                                                                       %! PIC_1
                             r4
                             \revert DynamicLineSpanner.direction                                     %! OC2
                             \revert TupletBracket.staff-padding                                      %! OC2
@@ -1350,23 +1350,23 @@ def dls_up(
                             \override TupletBracket.staff-padding = #5                               %! OC1
                             r8
                             c'16
-                            \p                                                                       %! PIC
-                            \<                                                                       %! PIC
+                            \p                                                                       %! PIC_1
+                            \<                                                                       %! PIC_1
                             [
                             d'16
                             ]
                             bf'4
                             ~
                             bf'16
-                            \f                                                                       %! PIC
+                            \f                                                                       %! PIC_2
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             \override DynamicLineSpanner.direction = #up                             %! OC1
                             fs''16
-                            \p                                                                       %! PIC
-                            \<                                                                       %! PIC
+                            \p                                                                       %! PIC_1
+                            \<                                                                       %! PIC_1
                             [
                             e''16
                             ]
@@ -1377,13 +1377,13 @@ def dls_up(
                             af''16
                             [
                             g''16
-                            \f                                                                       %! PIC
+                            \f                                                                       %! PIC_2
                             ]
                             \revert DynamicLineSpanner.direction                                     %! OC2
                         }
                         \times 4/5 {
                             a'16
-                            \p                                                                       %! PIC
+                            \p                                                                       %! PIC_1
                             r4
                             \revert TupletBracket.staff-padding                                      %! OC2
                         }
@@ -1921,27 +1921,27 @@ def mmrest_text_color(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -1952,11 +1952,11 @@ def mmrest_text_color(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \override MultiMeasureRestText.color = #red                              %! OC1
                             R1 * 1/2
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             R1 * 3/8
                             ^ \markup {                                                              %! IC
                                 \override                                                            %! IC
@@ -1965,10 +1965,10 @@ def mmrest_text_color(
                                         still                                                        %! IC
                                 }                                                                    %! IC
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             R1 * 1/2
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             R1 * 3/8
                             \revert MultiMeasureRestText.color                                       %! OC2
             <BLANKLINE>
@@ -2051,27 +2051,27 @@ def mmrest_text_extra_offset(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -2082,11 +2082,11 @@ def mmrest_text_extra_offset(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \override MultiMeasureRestText.extra-offset = #'(0 . 2)                  %! OC1
                             R1 * 1/2
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             R1 * 3/8
                             ^ \markup {                                                              %! IC
                                 \override                                                            %! IC
@@ -2095,10 +2095,10 @@ def mmrest_text_extra_offset(
                                         still                                                        %! IC
                                 }                                                                    %! IC
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             R1 * 1/2
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             R1 * 3/8
                             \revert MultiMeasureRestText.extra-offset                                %! OC2
             <BLANKLINE>
@@ -2154,27 +2154,27 @@ def mmrest_text_padding(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -2185,11 +2185,11 @@ def mmrest_text_padding(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \override MultiMeasureRestText.padding = #2                              %! OC1
                             R1 * 1/2
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             R1 * 3/8
                             ^ \markup {                                                              %! IC
                                 \override                                                            %! IC
@@ -2198,10 +2198,10 @@ def mmrest_text_padding(
                                         still                                                        %! IC
                                 }                                                                    %! IC
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             R1 * 1/2
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             R1 * 3/8
                             \revert MultiMeasureRestText.padding                                     %! OC2
             <BLANKLINE>
@@ -2256,27 +2256,27 @@ def mmrest_text_parent_center(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -2287,11 +2287,11 @@ def mmrest_text_parent_center(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \override MultiMeasureRestText.parent-alignment-X = #0                   %! OC1
                             R1 * 1/2
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             R1 * 3/8
                             ^ \markup {                                                              %! IC
                                 \override                                                            %! IC
@@ -2300,10 +2300,10 @@ def mmrest_text_parent_center(
                                         still                                                        %! IC
                                 }                                                                    %! IC
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             R1 * 1/2
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             R1 * 3/8
                             \revert MultiMeasureRestText.parent-alignment-X                          %! OC2
             <BLANKLINE>
@@ -2359,27 +2359,27 @@ def mmrest_text_staff_padding(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -2390,11 +2390,11 @@ def mmrest_text_staff_padding(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \override MultiMeasureRestText.staff-padding = #2                        %! OC1
                             R1 * 1/2
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             R1 * 3/8
                             ^ \markup {                                                              %! IC
                                 \override                                                            %! IC
@@ -2403,10 +2403,10 @@ def mmrest_text_staff_padding(
                                         still                                                        %! IC
                                 }                                                                    %! IC
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             R1 * 1/2
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             R1 * 3/8
                             \revert MultiMeasureRestText.staff-padding                               %! OC2
             <BLANKLINE>
@@ -6886,12 +6886,12 @@ def text_spanner_staff_padding(
                             \override TupletBracket.staff-padding = #5                               %! OC1
                             r8
                             c'16
-                            - \abjad_dashed_line_with_arrow                                          %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "pont."              %! PIC
-                            - \tweak bound-details.right.text \markup \baca-right "ord."             %! PIC
-                            - \tweak bound-details.right.padding #0.5                                %! PIC
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
-                            \startTextSpan                                                           %! PIC
+                            - \abjad_dashed_line_with_arrow                                          %! PIC_1
+                            - \tweak bound-details.left.text \markup \baca-left "pont."              %! PIC_1
+                            - \tweak bound-details.right.text \markup \baca-right "ord."             %! PIC_1
+                            - \tweak bound-details.right.padding #0.5                                %! PIC_1
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC_1
+                            \startTextSpan                                                           %! PIC_1
                             [
                             d'16
                             ]
@@ -6917,7 +6917,7 @@ def text_spanner_staff_padding(
                         }
                         \times 4/5 {
                             a'16
-                            \stopTextSpan                                                            %! PIC
+                            \stopTextSpan                                                            %! PIC_2
                             r4
                             \revert TextSpanner.staff-padding                                        %! OC2
                             \revert TextScript.staff-padding                                         %! OC2
@@ -6979,12 +6979,12 @@ def text_spanner_staff_padding(
                         \times 9/10 {
                             \override TextSpanner.staff-padding = #6                                 %! OC1
                             fs''16
-                            - \abjad_dashed_line_with_arrow                                          %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "pont."              %! PIC
-                            - \tweak bound-details.right.text \markup \baca-right "ord."             %! PIC
-                            - \tweak bound-details.right.padding #0.5                                %! PIC
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
-                            \startTextSpan                                                           %! PIC
+                            - \abjad_dashed_line_with_arrow                                          %! PIC_1
+                            - \tweak bound-details.left.text \markup \baca-left "pont."              %! PIC_1
+                            - \tweak bound-details.right.text \markup \baca-right "ord."             %! PIC_1
+                            - \tweak bound-details.right.padding #0.5                                %! PIC_1
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC_1
+                            \startTextSpan                                                           %! PIC_1
                             [
                             e''16
                             ]
@@ -6995,7 +6995,7 @@ def text_spanner_staff_padding(
                             af''16
                             [
                             g''16
-                            \stopTextSpan                                                            %! PIC
+                            \stopTextSpan                                                            %! PIC_2
                             ]
                             \revert TextSpanner.staff-padding                                        %! OC2
                         }

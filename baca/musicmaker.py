@@ -69,35 +69,43 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                     }
                     \scaleDurations #'(1 . 1) {
                         \acciaccatura {
-                            fs''16 [                                                                 %! ACC1
-                            e''16 ]                                                                  %! ACC1
+                            fs''16
+                            [                                                                        %! ACC_1
+                            e''16
+                            ]                                                                        %! ACC_1
                         }
                         ef''8
                     }
                     \scaleDurations #'(1 . 1) {
                         \acciaccatura {
-                            af''16 [                                                                 %! ACC1
+                            af''16
+                            [                                                                        %! ACC_1
                             g''16
-                            a'16 ]                                                                   %! ACC1
+                            a'16
+                            ]                                                                        %! ACC_1
                         }
                         c'8
                     }
                     \scaleDurations #'(1 . 1) {
                         \acciaccatura {
-                            d'16 [                                                                   %! ACC1
+                            d'16
+                            [                                                                        %! ACC_1
                             bf'16
                             fs''16
-                            e''16 ]                                                                  %! ACC1
+                            e''16
+                            ]                                                                        %! ACC_1
                         }
                         ef''8
                     }
                     \scaleDurations #'(1 . 1) {
                         \acciaccatura {
-                            af''16 [                                                                 %! ACC1
+                            af''16
+                            [                                                                        %! ACC_1
                             g''16
                             a'16
                             c'16
-                            d'16 ]                                                                   %! ACC1
+                            d'16
+                            ]                                                                        %! ACC_1
                         }
                         bf'8
                     }
@@ -163,7 +171,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                 abjad.attach(
                     abjad.Beam(),
                     acciaccatura_container[:],
-                    tag='ACC1',
+                    tag='ACC_1',
                     )
             acciaccatura_containers.append(acciaccatura_container)
         assert len(acciaccatura_containers) == len(collection)
@@ -236,35 +244,43 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                fs''16 [                                                                 %! ACC1
-                                e''16 ]                                                                  %! ACC1
+                                fs''16
+                                [                                                                        %! ACC_1
+                                e''16
+                                ]                                                                        %! ACC_1
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                af''16 [                                                                 %! ACC1
+                                af''16
+                                [                                                                        %! ACC_1
                                 g''16
-                                a'16 ]                                                                   %! ACC1
+                                a'16
+                                ]                                                                        %! ACC_1
                             }
                             c'8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                d'16 [                                                                   %! ACC1
+                                d'16
+                                [                                                                        %! ACC_1
                                 bf'16
                                 fs''16
-                                e''16 ]                                                                  %! ACC1
+                                e''16
+                                ]                                                                        %! ACC_1
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                af''16 [                                                                 %! ACC1
+                                af''16
+                                [                                                                        %! ACC_1
                                 g''16
                                 a'16
                                 c'16
-                                d'16 ]                                                                   %! ACC1
+                                d'16
+                                ]                                                                        %! ACC_1
                             }
                             bf'8
                         }
@@ -320,35 +336,43 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                fs''8 [                                                                  %! ACC1
-                                e''8 ]                                                                   %! ACC1
+                                fs''8
+                                [                                                                        %! ACC_1
+                                e''8
+                                ]                                                                        %! ACC_1
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                af''8 [                                                                  %! ACC1
+                                af''8
+                                [                                                                        %! ACC_1
                                 g''8
-                                a'8 ]                                                                    %! ACC1
+                                a'8
+                                ]                                                                        %! ACC_1
                             }
                             c'8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                d'8 [                                                                    %! ACC1
+                                d'8
+                                [                                                                        %! ACC_1
                                 bf'8
                                 fs''8
-                                e''8 ]                                                                   %! ACC1
+                                e''8
+                                ]                                                                        %! ACC_1
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                af''8 [                                                                  %! ACC1
+                                af''8
+                                [                                                                        %! ACC_1
                                 g''8
                                 a'8
                                 c'8
-                                d'8 ]                                                                    %! ACC1
+                                d'8
+                                ]                                                                        %! ACC_1
                             }
                             bf'8
                         }
@@ -415,35 +439,43 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                fs''16 [                                                                 %! ACC1
-                                e''16 ]                                                                  %! ACC1
+                                fs''16
+                                [                                                                        %! ACC_1
+                                e''16
+                                ]                                                                        %! ACC_1
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                af''16 [                                                                 %! ACC1
+                                af''16
+                                [                                                                        %! ACC_1
                                 g''16
-                                a'16 ]                                                                   %! ACC1
+                                a'16
+                                ]                                                                        %! ACC_1
                             }
                             c'8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                d'16 [                                                                   %! ACC1
+                                d'16
+                                [                                                                        %! ACC_1
                                 bf'16
                                 fs''16
-                                e''16 ]                                                                  %! ACC1
+                                e''16
+                                ]                                                                        %! ACC_1
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                af''16 [                                                                 %! ACC1
+                                af''16
+                                [                                                                        %! ACC_1
                                 g''16
                                 a'16
                                 c'16
-                                d'16 ]                                                                   %! ACC1
+                                d'16
+                                ]                                                                        %! ACC_1
                             }
                             bf'8
                         }
@@ -504,15 +536,19 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                fs''16 [                                                                 %! ACC1
-                                e''16 ]                                                                  %! ACC1
+                                fs''16
+                                [                                                                        %! ACC_1
+                                e''16
+                                ]                                                                        %! ACC_1
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                af''16 [                                                                 %! ACC1
-                                g''16 ]                                                                  %! ACC1
+                                af''16
+                                [                                                                        %! ACC_1
+                                g''16
+                                ]                                                                        %! ACC_1
                             }
                             a'8
                             [
@@ -521,8 +557,10 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                d'16 [                                                                   %! ACC1
-                                bf'16 ]                                                                  %! ACC1
+                                d'16
+                                [                                                                        %! ACC_1
+                                bf'16
+                                ]                                                                        %! ACC_1
                             }
                             fs''8
                             [
@@ -532,8 +570,10 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                af''16 [                                                                 %! ACC1
-                                g''16 ]                                                                  %! ACC1
+                                af''16
+                                [                                                                        %! ACC_1
+                                g''16
+                                ]                                                                        %! ACC_1
                             }
                             a'8
                             [
@@ -598,8 +638,10 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                fs''16 [                                                                 %! ACC1
-                                e''16 ]                                                                  %! ACC1
+                                fs''16
+                                [                                                                        %! ACC_1
+                                e''16
+                                ]                                                                        %! ACC_1
                             }
                             ef''8
                         }
@@ -607,8 +649,10 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             af''8
                             [
                             \acciaccatura {
-                                g''16 [                                                                  %! ACC1
-                                a'16 ]                                                                   %! ACC1
+                                g''16
+                                [                                                                        %! ACC_1
+                                a'16
+                                ]                                                                        %! ACC_1
                             }
                             c'8
                             ]
@@ -618,8 +662,10 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             [
                             bf'8
                             \acciaccatura {
-                                fs''16 [                                                                 %! ACC1
-                                e''16 ]                                                                  %! ACC1
+                                fs''16
+                                [                                                                        %! ACC_1
+                                e''16
+                                ]                                                                        %! ACC_1
                             }
                             ef''8
                             ]
@@ -630,8 +676,10 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             g''8
                             a'8
                             \acciaccatura {
-                                c'16 [                                                                   %! ACC1
-                                d'16 ]                                                                   %! ACC1
+                                c'16
+                                [                                                                        %! ACC_1
+                                d'16
+                                ]                                                                        %! ACC_1
                             }
                             bf'8
                             ]
@@ -694,15 +742,19 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                fs''16 [                                                                 %! ACC1
-                                e''16 ]                                                                  %! ACC1
+                                fs''16
+                                [                                                                        %! ACC_1
+                                e''16
+                                ]                                                                        %! ACC_1
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                af''16 [                                                                 %! ACC1
-                                g''16 ]                                                                  %! ACC1
+                                af''16
+                                [                                                                        %! ACC_1
+                                g''16
+                                ]                                                                        %! ACC_1
                             }
                             a'8
                             [
@@ -711,8 +763,10 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                d'16 [                                                                   %! ACC1
-                                bf'16 ]                                                                  %! ACC1
+                                d'16
+                                [                                                                        %! ACC_1
+                                bf'16
+                                ]                                                                        %! ACC_1
                             }
                             fs''8
                             [
@@ -724,14 +778,18 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                af''16 [                                                                 %! ACC1
-                                g''16 ]                                                                  %! ACC1
+                                af''16
+                                [                                                                        %! ACC_1
+                                g''16
+                                ]                                                                        %! ACC_1
                             }
                             a'8
                             [
                             \acciaccatura {
-                                c'16 [                                                                   %! ACC1
-                                d'16 ]                                                                   %! ACC1
+                                c'16
+                                [                                                                        %! ACC_1
+                                d'16
+                                ]                                                                        %! ACC_1
                             }
                             bf'8
                             ]
@@ -801,8 +859,10 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             af''8
                             [
                             \acciaccatura {
-                                g''16 [                                                                  %! ACC1
-                                a'16 ]                                                                   %! ACC1
+                                g''16
+                                [                                                                        %! ACC_1
+                                a'16
+                                ]                                                                        %! ACC_1
                             }
                             c'8
                             ]
@@ -811,9 +871,11 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             d'8
                             [
                             \acciaccatura {
-                                bf'16 [                                                                  %! ACC1
+                                bf'16
+                                [                                                                        %! ACC_1
                                 fs''16
-                                e''16 ]                                                                  %! ACC1
+                                e''16
+                                ]                                                                        %! ACC_1
                             }
                             ef''8
                             ]
@@ -822,10 +884,12 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             af''8
                             [
                             \acciaccatura {
-                                g''16 [                                                                  %! ACC1
+                                g''16
+                                [                                                                        %! ACC_1
                                 a'16
                                 c'16
-                                d'16 ]                                                                   %! ACC1
+                                d'16
+                                ]                                                                        %! ACC_1
                             }
                             bf'8
                             ]
@@ -893,35 +957,43 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                fs''16 [                                                                 %! ACC1
-                                e''16 ]                                                                  %! ACC1
+                                fs''16
+                                [                                                                        %! ACC_1
+                                e''16
+                                ]                                                                        %! ACC_1
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                af''16 [                                                                 %! ACC1
+                                af''16
+                                [                                                                        %! ACC_1
                                 g''16
-                                a'16 ]                                                                   %! ACC1
+                                a'16
+                                ]                                                                        %! ACC_1
                             }
                             c'8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                d'16 [                                                                   %! ACC1
+                                d'16
+                                [                                                                        %! ACC_1
                                 bf'16
                                 fs''16
-                                e''16 ]                                                                  %! ACC1
+                                e''16
+                                ]                                                                        %! ACC_1
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                af''16 [                                                                 %! ACC1
+                                af''16
+                                [                                                                        %! ACC_1
                                 g''16
                                 a'16
                                 c'16
-                                d'16 ]                                                                   %! ACC1
+                                d'16
+                                ]                                                                        %! ACC_1
                             }
                             bf'8
                         }
@@ -1001,11 +1073,13 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                af''16 [                                                                 %! ACC1
+                                af''16
+                                [                                                                        %! ACC_1
                                 g''16
                                 a'16
                                 c'16
-                                d'16 ]                                                                   %! ACC1
+                                d'16
+                                ]                                                                        %! ACC_1
                             }
                             bf'8
                         }
@@ -1068,9 +1142,11 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                af''16 [                                                                 %! ACC1
+                                af''16
+                                [                                                                        %! ACC_1
                                 g''16
-                                a'16 ]                                                                   %! ACC1
+                                a'16
+                                ]                                                                        %! ACC_1
                             }
                             c'8
                         }
@@ -1085,11 +1161,13 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                af''16 [                                                                 %! ACC1
+                                af''16
+                                [                                                                        %! ACC_1
                                 g''16
                                 a'16
                                 c'16
-                                d'16 ]                                                                   %! ACC1
+                                d'16
+                                ]                                                                        %! ACC_1
                             }
                             bf'8
                         }
@@ -2164,19 +2242,19 @@ class ImbricationCommand(scoping.Command):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \time 7/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \time 7/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 7/16
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \time 1/4                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \time 1/4                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/4
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "|"                                                                     %! SM5
+                            \baca_bar_line_visible                                                       %! SM_5
+                            \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
                         }
                     >>
@@ -2191,17 +2269,17 @@ class ImbricationCommand(scoping.Command):
                                     \override TupletNumber.stencil = ##f
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % [MusicVoiceOne measure 1]                                      %! SM4
+                                        % [MusicVoiceOne measure 1]                                      %! SM_4
                                         s16
-                                        [                                                                %! SM35
+                                        [                                                                %! SM_35
                 <BLANKLINE>
-                                        \set stemLeftBeamCount = 2                                       %! SM35
-                                        \set stemRightBeamCount = 2                                      %! SM35
+                                        \set stemLeftBeamCount = 2                                       %! SM_35
+                                        \set stemRightBeamCount = 2                                      %! SM_35
                                         d'16
                                         -\staccato                                                       %! IC
                 <BLANKLINE>
-                                        \set stemLeftBeamCount = 2                                       %! SM35
-                                        \set stemRightBeamCount = 2                                      %! SM35
+                                        \set stemLeftBeamCount = 2                                       %! SM_35
+                                        \set stemRightBeamCount = 2                                      %! SM_35
                                         bf'!16
                                         -\staccato                                                       %! IC
                 <BLANKLINE>
@@ -2223,21 +2301,21 @@ class ImbricationCommand(scoping.Command):
                                     \override TupletNumber.stencil = ##f
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % [MusicVoiceOne measure 2]                                      %! SM4
+                                        % [MusicVoiceOne measure 2]                                      %! SM_4
                                         s16
                 <BLANKLINE>
-                                        \set stemLeftBeamCount = 2                                       %! SM35
-                                        \set stemRightBeamCount = 2                                      %! SM35
+                                        \set stemLeftBeamCount = 2                                       %! SM_35
+                                        \set stemRightBeamCount = 2                                      %! SM_35
                                         cs''!16
                                         -\staccato                                                       %! IC
                 <BLANKLINE>
-                                        \set stemLeftBeamCount = 2                                       %! SM35
-                                        \set stemRightBeamCount = 2                                      %! SM35
+                                        \set stemLeftBeamCount = 2                                       %! SM_35
+                                        \set stemRightBeamCount = 2                                      %! SM_35
                                         a'16
                                         -\staccato                                                       %! IC
                 <BLANKLINE>
                                         s16
-                                        ]                                                                %! SM35
+                                        ]                                                                %! SM_35
                 <BLANKLINE>
                                     }
                                     \revert TupletBracket.stencil
@@ -2249,7 +2327,7 @@ class ImbricationCommand(scoping.Command):
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % [MusicVoiceTwo measure 1]                                      %! SM4
+                                        % [MusicVoiceTwo measure 1]                                      %! SM_4
                                         \set stemLeftBeamCount = 0
                                         \set stemRightBeamCount = 2
                                         c'16
@@ -2286,7 +2364,7 @@ class ImbricationCommand(scoping.Command):
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % [MusicVoiceTwo measure 2]                                      %! SM4
+                                        % [MusicVoiceTwo measure 2]                                      %! SM_4
                                         \set stemLeftBeamCount = 0
                                         \set stemRightBeamCount = 2
                                         g''16
@@ -6936,8 +7014,8 @@ class MusicMaker(abjad.AbjadObject):
                         {
                             \scaleDurations #'(1 . 1) {
                                 c'16
-                                \p                                                                       %! PIC
-                                \<                                                                       %! PIC
+                                \p                                                                       %! PIC_1
+                                \<                                                                       %! PIC_1
                                 [
                                 d'16
                                 bf'16
@@ -6957,7 +7035,7 @@ class MusicMaker(abjad.AbjadObject):
                                 cs''16
                                 a'16
                                 af'16
-                                \f                                                                       %! PIC
+                                \f                                                                       %! PIC_2
                                 ]
                             }
                         }
@@ -7004,20 +7082,20 @@ class MusicMaker(abjad.AbjadObject):
                         {
                             \scaleDurations #'(1 . 1) {
                                 c'16
-                                \p                                                                       %! PIC
-                                \<                                                                       %! PIC
+                                \p                                                                       %! PIC_1
+                                \<                                                                       %! PIC_1
                                 [
                                 d'16
                                 bf'16
                                 fs''16
-                                \f                                                                       %! PIC
+                                \f                                                                       %! PIC_2
                                 ]
                             }
                             \scaleDurations #'(1 . 1) {
                                 r16
                                 ef''16
-                                \p                                                                       %! PIC
-                                \<                                                                       %! PIC
+                                \p                                                                       %! PIC_1
+                                \<                                                                       %! PIC_1
                                 [
                                 b''16
                                 ]
@@ -7028,7 +7106,7 @@ class MusicMaker(abjad.AbjadObject):
                                 cs''16
                                 a'16
                                 af'16
-                                \f                                                                       %! PIC
+                                \f                                                                       %! PIC_2
                                 ]
                             }
                         }
@@ -7072,13 +7150,13 @@ class MusicMaker(abjad.AbjadObject):
                         {
                             \scaleDurations #'(1 . 1) {
                                 c'16
-                                \p                                                                       %! PIC
-                                \<                                                                       %! PIC
+                                \p                                                                       %! PIC_1
+                                \<                                                                       %! PIC_1
                                 [
                                 d'16
                                 bf'16
                                 fs''16
-                                \f                                                                       %! PIC
+                                \f                                                                       %! PIC_2
                                 ]
                             }
                             \scaleDurations #'(1 . 1) {
@@ -7090,13 +7168,13 @@ class MusicMaker(abjad.AbjadObject):
                             }
                             \scaleDurations #'(1 . 1) {
                                 g''16
-                                \f                                                                       %! PIC
-                                \>                                                                       %! PIC
+                                \f                                                                       %! PIC_1
+                                \>                                                                       %! PIC_1
                                 [
                                 cs''16
                                 a'16
                                 af'16
-                                \p                                                                       %! PIC
+                                \p                                                                       %! PIC_2
                                 ]
                             }
                         }
@@ -7140,34 +7218,34 @@ class MusicMaker(abjad.AbjadObject):
                         {
                             \scaleDurations #'(1 . 1) {
                                 c'16
-                                \p                                                                       %! PIC
-                                \<                                                                       %! PIC
+                                \p                                                                       %! PIC_1
+                                \<                                                                       %! PIC_1
                                 [
                                 d'16
                                 bf'16
                                 fs''16
-                                \f                                                                       %! PIC
+                                \f                                                                       %! PIC_2
                                 ]
                             }
                             \scaleDurations #'(1 . 1) {
                                 e''16
-                                \p                                                                       %! PIC
-                                \<                                                                       %! PIC
+                                \p                                                                       %! PIC_1
+                                \<                                                                       %! PIC_1
                                 [
                                 ef''16
                                 b''16
-                                \f                                                                       %! PIC
+                                \f                                                                       %! PIC_2
                                 ]
                             }
                             \scaleDurations #'(1 . 1) {
                                 g''16
-                                \f                                                                       %! PIC
-                                \>                                                                       %! PIC
+                                \f                                                                       %! PIC_1
+                                \>                                                                       %! PIC_1
                                 [
                                 cs''16
                                 a'16
                                 af'16
-                                \p                                                                       %! PIC
+                                \p                                                                       %! PIC_2
                                 ]
                             }
                         }
@@ -8339,19 +8417,19 @@ class NestingCommand(scoping.Command):
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                        \time 1/2                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 1/2                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                        \time 1/4                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 1/4                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/4
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -8370,36 +8448,36 @@ class NestingCommand(scoping.Command):
                                 \times 8/7 {
                                     \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                        % [MusicVoice measure 1]                                     %! SM4
-                                        \set stemLeftBeamCount = 0                                   %! SM35
-                                        \set stemRightBeamCount = 2                                  %! SM35
+                                        % [MusicVoice measure 1]                                     %! SM_4
+                                        \set stemLeftBeamCount = 0                                   %! SM_35
+                                        \set stemRightBeamCount = 2                                  %! SM_35
                                         c'16
-                                        [                                                            %! SM35
+                                        [                                                            %! SM_35
             <BLANKLINE>
-                                        \set stemLeftBeamCount = 2                                   %! SM35
-                                        \set stemRightBeamCount = 2                                  %! SM35
+                                        \set stemLeftBeamCount = 2                                   %! SM_35
+                                        \set stemRightBeamCount = 2                                  %! SM_35
                                         d'16
             <BLANKLINE>
-                                        \set stemLeftBeamCount = 2                                   %! SM35
-                                        \set stemRightBeamCount = 2                                  %! SM35
+                                        \set stemLeftBeamCount = 2                                   %! SM_35
+                                        \set stemRightBeamCount = 2                                  %! SM_35
                                         bf'!16
             <BLANKLINE>
-                                        \set stemLeftBeamCount = 2                                   %! SM35
-                                        \set stemRightBeamCount = 1                                  %! SM35
+                                        \set stemLeftBeamCount = 2                                   %! SM_35
+                                        \set stemRightBeamCount = 1                                  %! SM_35
                                         fs''!16
                                     }
                                     \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                        \set stemLeftBeamCount = 1                                   %! SM35
-                                        \set stemRightBeamCount = 2                                  %! SM35
+                                        \set stemLeftBeamCount = 1                                   %! SM_35
+                                        \set stemRightBeamCount = 2                                  %! SM_35
                                         e''16
             <BLANKLINE>
-                                        \set stemLeftBeamCount = 2                                   %! SM35
-                                        \set stemRightBeamCount = 2                                  %! SM35
+                                        \set stemLeftBeamCount = 2                                   %! SM_35
+                                        \set stemRightBeamCount = 2                                  %! SM_35
                                         ef''!16
             <BLANKLINE>
-                                        \set stemLeftBeamCount = 2                                   %! SM35
-                                        \set stemRightBeamCount = 1                                  %! SM35
+                                        \set stemLeftBeamCount = 2                                   %! SM_35
+                                        \set stemRightBeamCount = 1                                  %! SM_35
                                         b''16
                                     }
                                 }
@@ -8407,23 +8485,23 @@ class NestingCommand(scoping.Command):
                             {
                                 \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                    % [MusicVoice measure 2]                                         %! SM4
-                                    \set stemLeftBeamCount = 1                                       %! SM35
-                                    \set stemRightBeamCount = 2                                      %! SM35
+                                    % [MusicVoice measure 2]                                         %! SM_4
+                                    \set stemLeftBeamCount = 1                                       %! SM_35
+                                    \set stemRightBeamCount = 2                                      %! SM_35
                                     g''16
             <BLANKLINE>
-                                    \set stemLeftBeamCount = 2                                       %! SM35
-                                    \set stemRightBeamCount = 2                                      %! SM35
+                                    \set stemLeftBeamCount = 2                                       %! SM_35
+                                    \set stemRightBeamCount = 2                                      %! SM_35
                                     cs''!16
             <BLANKLINE>
-                                    \set stemLeftBeamCount = 2                                       %! SM35
-                                    \set stemRightBeamCount = 2                                      %! SM35
+                                    \set stemLeftBeamCount = 2                                       %! SM_35
+                                    \set stemRightBeamCount = 2                                      %! SM_35
                                     a'16
             <BLANKLINE>
-                                    \set stemLeftBeamCount = 2                                       %! SM35
-                                    \set stemRightBeamCount = 0                                      %! SM35
+                                    \set stemLeftBeamCount = 2                                       %! SM_35
+                                    \set stemRightBeamCount = 0                                      %! SM_35
                                     af'!16
-                                    ]                                                                %! SM35
+                                    ]                                                                %! SM_35
             <BLANKLINE>
                                 }
                             }
@@ -9525,7 +9603,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                 abjad.attach(
                     grace_container,
                     logical_tie.head,
-                    tag='PFRM1',
+                    tag='PFRM_1',
                     )
         if tuplet.trivial():
             tuplet.hide = True
@@ -9629,35 +9707,43 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                fs''16 [                                                                 %! ACC1
-                                e''16 ]                                                                  %! ACC1
+                                fs''16
+                                [                                                                        %! ACC_1
+                                e''16
+                                ]                                                                        %! ACC_1
                             }
                             ef''4
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                af''16 [                                                                 %! ACC1
+                                af''16
+                                [                                                                        %! ACC_1
                                 g''16
-                                a'16 ]                                                                   %! ACC1
+                                a'16
+                                ]                                                                        %! ACC_1
                             }
                             c'4
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                d'16 [                                                                   %! ACC1
+                                d'16
+                                [                                                                        %! ACC_1
                                 bf'16
                                 fs''16
-                                e''16 ]                                                                  %! ACC1
+                                e''16
+                                ]                                                                        %! ACC_1
                             }
                             ef''4
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                af''16 [                                                                 %! ACC1
+                                af''16
+                                [                                                                        %! ACC_1
                                 g''16
                                 a'16
                                 c'16
-                                d'16 ]                                                                   %! ACC1
+                                d'16
+                                ]                                                                        %! ACC_1
                             }
                             bf'4
                         }
@@ -9714,46 +9800,56 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                d'16 [                                                                   %! ACC1
-                                bf'16 ]                                                                  %! ACC1
+                                d'16
+                                [                                                                        %! ACC_1
+                                bf'16
+                                ]                                                                        %! ACC_1
                             }
                             r4
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                fs''16 [                                                                 %! ACC1
+                                fs''16
+                                [                                                                        %! ACC_1
                                 e''16
-                                ef''16 ]                                                                 %! ACC1
+                                ef''16
+                                ]                                                                        %! ACC_1
                             }
                             r4
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                af''16 [                                                                 %! ACC1
+                                af''16
+                                [                                                                        %! ACC_1
                                 g''16
                                 a'16
-                                c'16 ]                                                                   %! ACC1
+                                c'16
+                                ]                                                                        %! ACC_1
                             }
                             r4
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                d'16 [                                                                   %! ACC1
+                                d'16
+                                [                                                                        %! ACC_1
                                 bf'16
                                 fs''16
                                 e''16
-                                ef''16 ]                                                                 %! ACC1
+                                ef''16
+                                ]                                                                        %! ACC_1
                             }
                             r4
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
-                                af''16 [                                                                 %! ACC1
+                                af''16
+                                [                                                                        %! ACC_1
                                 g''16
                                 a'16
                                 c'16
                                 d'16
-                                bf'16 ]                                                                  %! ACC1
+                                bf'16
+                                ]                                                                        %! ACC_1
                             }
                             r4
                         }

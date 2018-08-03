@@ -69,7 +69,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
             if part_names and tag_ not in part_names:
                 raise Exception(f'not listed in parts manifest: {tag_!r}.')
         literal = abjad.LilyPondLiteral(fr'\tag {tag}', 'before')
-        abjad.attach(literal, context, tag='ST4')
+        abjad.attach(literal, context, tag='ST_4')
 
     @staticmethod
     def _set_square_delimiter(staff_group):
@@ -219,27 +219,27 @@ class SingleStaffScoreTemplate(ScoreTemplate):
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -250,16 +250,16 @@ class SingleStaffScoreTemplate(ScoreTemplate):
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             R1 * 1/2
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             R1 * 3/8
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             R1 * 1/2
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             R1 * 3/8
             <BLANKLINE>
                         }
@@ -325,27 +325,27 @@ class StringTrioScoreTemplate(ScoreTemplate):
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -353,92 +353,92 @@ class StringTrioScoreTemplate(ScoreTemplate):
                 <<
                     \context StringSectionStaffGroup = "String Section Staff Group"
                     <<
-                        \tag Violin                                                                  %! ST4
+                        \tag Violin                                                                  %! ST_4
                         \context ViolinMusicStaff = "ViolinMusicStaff"
                         {
                             \context ViolinMusicVoice = "ViolinMusicVoice"
                             {
             <BLANKLINE>
-                                % [ViolinMusicVoice measure 1]                                       %! SM4
-                                \clef "treble"                                                       %! SM8:DEFAULT_CLEF:ST3
-                                \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST3
-                            %@% \override ViolinMusicStaff.Clef.color = ##f                          %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST3
-                                \set ViolinMusicStaff.forceClef = ##t                                %! SM8:DEFAULT_CLEF:SM33:ST3
+                                % [ViolinMusicVoice measure 1]                                       %! SM_4
+                                \clef "treble"                                                       %! SM8:DEFAULT_CLEF:ST_3
+                                \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST_3
+                            %@% \override ViolinMusicStaff.Clef.color = ##f                          %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST_3
+                                \set ViolinMusicStaff.forceClef = ##t                                %! SM8:DEFAULT_CLEF:SM33:ST_3
                                 R1 * 1/2
-                                ^ \markup {                                                          %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                    \with-color                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                        #(x11-color 'DarkViolet)                                     %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                        (Violin)                                                     %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                    }                                                                %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                \override ViolinMusicStaff.Clef.color = #(x11-color 'violet)         %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST3
+                                ^ \markup {                                                          %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                                    \with-color                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                                        #(x11-color 'DarkViolet)                                     %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                                        (Violin)                                                     %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                                    }                                                                %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                                \override ViolinMusicStaff.Clef.color = #(x11-color 'violet)         %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST_3
             <BLANKLINE>
-                                % [ViolinMusicVoice measure 2]                                       %! SM4
+                                % [ViolinMusicVoice measure 2]                                       %! SM_4
                                 R1 * 3/8
             <BLANKLINE>
-                                % [ViolinMusicVoice measure 3]                                       %! SM4
+                                % [ViolinMusicVoice measure 3]                                       %! SM_4
                                 R1 * 1/2
             <BLANKLINE>
-                                % [ViolinMusicVoice measure 4]                                       %! SM4
+                                % [ViolinMusicVoice measure 4]                                       %! SM_4
                                 R1 * 3/8
             <BLANKLINE>
                             }
                         }
-                        \tag Viola                                                                   %! ST4
+                        \tag Viola                                                                   %! ST_4
                         \context ViolaMusicStaff = "ViolaMusicStaff"
                         {
                             \context ViolaMusicVoice = "ViolaMusicVoice"
                             {
             <BLANKLINE>
-                                % [ViolaMusicVoice measure 1]                                        %! SM4
-                                \clef "alto"                                                         %! SM8:DEFAULT_CLEF:ST3
-                                \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST3
-                            %@% \override ViolaMusicStaff.Clef.color = ##f                           %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST3
-                                \set ViolaMusicStaff.forceClef = ##t                                 %! SM8:DEFAULT_CLEF:SM33:ST3
+                                % [ViolaMusicVoice measure 1]                                        %! SM_4
+                                \clef "alto"                                                         %! SM8:DEFAULT_CLEF:ST_3
+                                \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST_3
+                            %@% \override ViolaMusicStaff.Clef.color = ##f                           %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST_3
+                                \set ViolaMusicStaff.forceClef = ##t                                 %! SM8:DEFAULT_CLEF:SM33:ST_3
                                 R1 * 1/2
-                                ^ \markup {                                                          %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                    \with-color                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                        #(x11-color 'DarkViolet)                                     %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                        (Viola)                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                    }                                                                %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)          %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST3
+                                ^ \markup {                                                          %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                                    \with-color                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                                        #(x11-color 'DarkViolet)                                     %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                                        (Viola)                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                                    }                                                                %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                                \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)          %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST_3
             <BLANKLINE>
-                                % [ViolaMusicVoice measure 2]                                        %! SM4
+                                % [ViolaMusicVoice measure 2]                                        %! SM_4
                                 R1 * 3/8
             <BLANKLINE>
-                                % [ViolaMusicVoice measure 3]                                        %! SM4
+                                % [ViolaMusicVoice measure 3]                                        %! SM_4
                                 R1 * 1/2
             <BLANKLINE>
-                                % [ViolaMusicVoice measure 4]                                        %! SM4
+                                % [ViolaMusicVoice measure 4]                                        %! SM_4
                                 R1 * 3/8
             <BLANKLINE>
                             }
                         }
-                        \tag Cello                                                                   %! ST4
+                        \tag Cello                                                                   %! ST_4
                         \context CelloMusicStaff = "CelloMusicStaff"
                         {
                             \context CelloMusicVoice = "CelloMusicVoice"
                             {
             <BLANKLINE>
-                                % [CelloMusicVoice measure 1]                                        %! SM4
-                                \clef "bass"                                                         %! SM8:DEFAULT_CLEF:ST3
-                                \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST3
-                            %@% \override CelloMusicStaff.Clef.color = ##f                           %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST3
-                                \set CelloMusicStaff.forceClef = ##t                                 %! SM8:DEFAULT_CLEF:SM33:ST3
+                                % [CelloMusicVoice measure 1]                                        %! SM_4
+                                \clef "bass"                                                         %! SM8:DEFAULT_CLEF:ST_3
+                                \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST_3
+                            %@% \override CelloMusicStaff.Clef.color = ##f                           %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST_3
+                                \set CelloMusicStaff.forceClef = ##t                                 %! SM8:DEFAULT_CLEF:SM33:ST_3
                                 R1 * 1/2
-                                ^ \markup {                                                          %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                    \with-color                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                        #(x11-color 'DarkViolet)                                     %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                        (Cello)                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                    }                                                                %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                \override CelloMusicStaff.Clef.color = #(x11-color 'violet)          %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST3
+                                ^ \markup {                                                          %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                                    \with-color                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                                        #(x11-color 'DarkViolet)                                     %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                                        (Cello)                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                                    }                                                                %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                                \override CelloMusicStaff.Clef.color = #(x11-color 'violet)          %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST_3
             <BLANKLINE>
-                                % [CelloMusicVoice measure 2]                                        %! SM4
+                                % [CelloMusicVoice measure 2]                                        %! SM_4
                                 R1 * 3/8
             <BLANKLINE>
-                                % [CelloMusicVoice measure 3]                                        %! SM4
+                                % [CelloMusicVoice measure 3]                                        %! SM_4
                                 R1 * 1/2
             <BLANKLINE>
-                                % [CelloMusicVoice measure 4]                                        %! SM4
+                                % [CelloMusicVoice measure 4]                                        %! SM_4
                                 R1 * 3/8
             <BLANKLINE>
                             }
@@ -597,27 +597,27 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -628,32 +628,32 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
                         \context MusicVoiceOne = "MusicVoiceOne"
                         {
             <BLANKLINE>
-                            % [MusicVoiceOne measure 1]                                              %! SM4
+                            % [MusicVoiceOne measure 1]                                              %! SM_4
                             R1 * 1/2
             <BLANKLINE>
-                            % [MusicVoiceOne measure 2]                                              %! SM4
+                            % [MusicVoiceOne measure 2]                                              %! SM_4
                             R1 * 3/8
             <BLANKLINE>
-                            % [MusicVoiceOne measure 3]                                              %! SM4
+                            % [MusicVoiceOne measure 3]                                              %! SM_4
                             R1 * 1/2
             <BLANKLINE>
-                            % [MusicVoiceOne measure 4]                                              %! SM4
+                            % [MusicVoiceOne measure 4]                                              %! SM_4
                             R1 * 3/8
             <BLANKLINE>
                         }
                         \context MusicVoiceTwo = "MusicVoiceTwo"
                         {
             <BLANKLINE>
-                            % [MusicVoiceTwo measure 1]                                              %! SM4
+                            % [MusicVoiceTwo measure 1]                                              %! SM_4
                             R1 * 1/2
             <BLANKLINE>
-                            % [MusicVoiceTwo measure 2]                                              %! SM4
+                            % [MusicVoiceTwo measure 2]                                              %! SM_4
                             R1 * 3/8
             <BLANKLINE>
-                            % [MusicVoiceTwo measure 3]                                              %! SM4
+                            % [MusicVoiceTwo measure 3]                                              %! SM_4
                             R1 * 1/2
             <BLANKLINE>
-                            % [MusicVoiceTwo measure 4]                                              %! SM4
+                            % [MusicVoiceTwo measure 4]                                              %! SM_4
                             R1 * 3/8
             <BLANKLINE>
                         }
@@ -728,58 +728,58 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
                 \context MusicContext = "MusicContext"
                 <<
-                    \tag Violin                                                                      %! ST4
+                    \tag Violin                                                                      %! ST_4
                     \context ViolinMusicStaff = "ViolinMusicStaff"
                     {
                         \context ViolinMusicVoice = "ViolinMusicVoice"
                         {
             <BLANKLINE>
-                            % [ViolinMusicVoice measure 1]                                           %! SM4
-                            \clef "treble"                                                           %! SM8:DEFAULT_CLEF:ST3
-                            \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet)   %! SM6:DEFAULT_CLEF_COLOR:ST3
-                        %@% \override ViolinMusicStaff.Clef.color = ##f                              %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST3
-                            \set ViolinMusicStaff.forceClef = ##t                                    %! SM8:DEFAULT_CLEF:SM33:ST3
+                            % [ViolinMusicVoice measure 1]                                           %! SM_4
+                            \clef "treble"                                                           %! SM8:DEFAULT_CLEF:ST_3
+                            \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet)   %! SM6:DEFAULT_CLEF_COLOR:ST_3
+                        %@% \override ViolinMusicStaff.Clef.color = ##f                              %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST_3
+                            \set ViolinMusicStaff.forceClef = ##t                                    %! SM8:DEFAULT_CLEF:SM33:ST_3
                             R1 * 1/2
-                            ^ \markup {                                                              %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                \with-color                                                          %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                    #(x11-color 'DarkViolet)                                         %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                    (Violin)                                                         %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                }                                                                    %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                            \override ViolinMusicStaff.Clef.color = #(x11-color 'violet)             %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST3
+                            ^ \markup {                                                              %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                                \with-color                                                          %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                                    #(x11-color 'DarkViolet)                                         %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                                    (Violin)                                                         %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                                }                                                                    %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                            \override ViolinMusicStaff.Clef.color = #(x11-color 'violet)             %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST_3
             <BLANKLINE>
-                            % [ViolinMusicVoice measure 2]                                           %! SM4
+                            % [ViolinMusicVoice measure 2]                                           %! SM_4
                             R1 * 3/8
             <BLANKLINE>
-                            % [ViolinMusicVoice measure 3]                                           %! SM4
+                            % [ViolinMusicVoice measure 3]                                           %! SM_4
                             R1 * 1/2
             <BLANKLINE>
-                            % [ViolinMusicVoice measure 4]                                           %! SM4
+                            % [ViolinMusicVoice measure 4]                                           %! SM_4
                             R1 * 3/8
             <BLANKLINE>
                         }

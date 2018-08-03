@@ -51,27 +51,27 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -82,7 +82,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             c'8
                             [
             <BLANKLINE>
@@ -93,7 +93,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             c'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             c'8
                             [
             <BLANKLINE>
@@ -102,7 +102,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             c'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             c'8
                             [
             <BLANKLINE>
@@ -113,7 +113,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             c'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             c'8
                             [
             <BLANKLINE>
@@ -391,27 +391,27 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
                 <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 3]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 4]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "|"                                                                     %! SM5
+                            \baca_bar_line_visible                                                       %! SM_5
+                            \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
                         }
                     >>
@@ -422,70 +422,70 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
-                                \baca_unpitched_music_warning                                            %! SM24
+                                % [MusicVoice measure 1]                                                 %! SM_4
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 ^ \markup { 0 }
                                 [
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 ^ \markup { 1 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 ^ \markup { 2 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 ^ \markup { 3 }
                                 ]
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
-                                \baca_unpitched_music_warning                                            %! SM24
+                                % [MusicVoice measure 2]                                                 %! SM_4
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 ^ \markup { 4 }
                                 [
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 ^ \markup { 5 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 ^ \markup { 6 }
                                 ]
                 <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
-                                \baca_unpitched_music_warning                                            %! SM24
+                                % [MusicVoice measure 3]                                                 %! SM_4
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 ^ \markup { 7 }
                                 [
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 ^ \markup { 8 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 ^ \markup { 9 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 ^ \markup { 10 }
                                 ]
                 <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM4
-                                \baca_unpitched_music_warning                                            %! SM24
+                                % [MusicVoice measure 4]                                                 %! SM_4
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 ^ \markup { 11 }
                                 [
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 ^ \markup { 12 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 ^ \markup { 13 }
                                 ]
@@ -526,27 +526,27 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
                 <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 3]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 4]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "|"                                                                     %! SM5
+                            \baca_bar_line_visible                                                       %! SM_5
+                            \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
                         }
                     >>
@@ -557,70 +557,70 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
-                                \baca_unpitched_music_warning                                            %! SM24
+                                % [MusicVoice measure 1]                                                 %! SM_4
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 ^ \markup { 0 }
                                 [
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 ^ \markup { 1 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 ^ \markup { 2 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 ^ \markup { 3 }
                                 ]
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
-                                \baca_unpitched_music_warning                                            %! SM24
+                                % [MusicVoice measure 2]                                                 %! SM_4
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 ^ \markup { 4 }
                                 [
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 ^ \markup { 5 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 ^ \markup { 6 }
                                 ]
                 <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
-                                \baca_unpitched_music_warning                                            %! SM24
+                                % [MusicVoice measure 3]                                                 %! SM_4
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 ^ \markup { 7 }
                                 [
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 ^ \markup { 8 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 ^ \markup { 9 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 ^ \markup { 10 }
                                 ]
                 <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM4
-                                \baca_unpitched_music_warning                                            %! SM24
+                                % [MusicVoice measure 4]                                                 %! SM_4
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 ^ \markup { 11 }
                                 [
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 ^ \markup { 12 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 ^ \markup { 13 }
                                 ]
@@ -722,7 +722,7 @@ class SegmentMaker(abjad.SegmentMaker):
         strings.append(rf'\bar "{abbreviation}"')
         literal = abjad.LilyPondLiteral(strings, 'after')
         last_skip = classes.Selection(self.score['GlobalSkips']).skip(-1)
-        abjad.attach(literal, last_skip, tag='SM5')
+        abjad.attach(literal, last_skip, tag='SM_5')
 
     def _add_final_markup(self):
         if self.final_markup is None:
@@ -837,7 +837,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         string = abjad.tags.REPEAT_TIE 
                         repeat_ties = inspector.has_indicator(string)
                         tie = abjad.Tie(repeat=repeat_ties)
-                        abjad.attach(tie, leaves, tag='SM16')
+                        abjad.attach(tie, leaves, tag='SM_16')
                 abjad.detach(abjad.tags.TIE_TO, current_leaf)
             if abjad.inspect(current_leaf).has_indicator(abjad.tags.TIE_FROM):
                 next_leaf = abjad.inspect(current_leaf).leaf(1)
@@ -854,7 +854,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         string = abjad.tags.REPEAT_TIE
                         repeat_ties = inspector.has_indicator(string)
                         tie = abjad.Tie(repeat=repeat_ties)
-                        abjad.attach(tie, leaves, tag='SM17')
+                        abjad.attach(tie, leaves, tag='SM_17')
                 abjad.detach(abjad.tags.TIE_FROM, current_leaf)
 
     def _apply_spacing(self):
@@ -1178,7 +1178,7 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.attach(
                 stop_text_span,
                 skip,
-                tag='MMI1',
+                tag='MMI_1',
                 )
             if add_right_text_to_me is skip:
                 right_text = last_leaf_metronome_mark._get_markup()
@@ -1193,7 +1193,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 start_text_span,
                 skip,
                 deactivate=True,
-                tag='MMI2',
+                tag='MMI_2',
                 )
             string = str(tag)
             if 'DEFAULT' in string:
@@ -1242,7 +1242,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 start_text_span,
                 skip,
                 deactivate=False,
-                tag='MMI3',
+                tag='MMI_3',
                 )
         if indicator_count:
             last_skip = skip
@@ -1250,7 +1250,7 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.attach(
                 stop_text_span,
                 last_skip,
-                tag='MMI4',
+                tag='MMI_4',
                 )
 
     def _born_this_segment(self, component):
@@ -1486,10 +1486,10 @@ class SegmentMaker(abjad.SegmentMaker):
                         message = f'{voice.name} out of range {pleaf!r}.'
                         raise Exception(message)
                     if self.color_out_of_range_pitches:
-                        abjad.attach(markup, pleaf, tag='SM13')
+                        abjad.attach(markup, pleaf, tag='SM_13')
                         string = r'\baca_out_of_range_warning'
                         literal = abjad.LilyPondLiteral(string)
-                        abjad.attach(literal, pleaf, tag='SM13')
+                        abjad.attach(literal, pleaf, tag='SM_13')
 
     def _check_wellformedness(self):
         if self.skip_wellformedness_checks:
@@ -1656,10 +1656,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 if not color:
                     continue
                 for pleaf in pleaves:
-                    abjad.attach(markup, pleaf, tag='SM12')
+                    abjad.attach(markup, pleaf, tag='SM_12')
                     string = r'\baca_octave_warning'
                     literal = abjad.LilyPondLiteral(string)
-                    abjad.attach(literal, pleaf, tag='SM12')
+                    abjad.attach(literal, pleaf, tag='SM_12')
 
     def _color_repeat_pitch_classes_(self):
         if not self.color_repeat_pitch_classes:
@@ -1670,10 +1670,10 @@ class SegmentMaker(abjad.SegmentMaker):
         abjad.tweak(markup).color = 'red'
         for lt in lts:
             for leaf in lt:
-                abjad.attach(markup, leaf, tag='SM14')
+                abjad.attach(markup, leaf, tag='SM_14')
                 string = r'\baca_repeat_pitch_class_warning'
                 literal = abjad.LilyPondLiteral(string)
-                abjad.attach(literal, leaf, tag='SM14')
+                abjad.attach(literal, leaf, tag='SM_14')
 
     def _color_unpitched_notes(self):
         if self.ignore_unpitched_notes:
@@ -1684,7 +1684,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 continue
             string = r'\baca_unpitched_music_warning'
             literal = abjad.LilyPondLiteral(string)
-            abjad.attach(literal, pleaf, tag='SM24')
+            abjad.attach(literal, pleaf, tag='SM_24')
 
     def _color_unregistered_pitches(self):
         if self.ignore_unregistered_pitches:
@@ -1695,7 +1695,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 continue
             string = r'\baca_unregistered_pitch_warning'
             literal = abjad.LilyPondLiteral(string)
-            abjad.attach(literal, pleaf, tag='SM25')
+            abjad.attach(literal, pleaf, tag='SM_25')
 
     def _comment_measure_numbers(self):
         contexts = []
@@ -1725,7 +1725,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     string += f' measure {measure_number} /'
                     string += f' measure {local_measure_number}]'
                 literal = abjad.LilyPondLiteral(string, 'absolute_before')
-                abjad.attach(literal, leaf, tag='SM4')
+                abjad.attach(literal, leaf, tag='SM_4')
 
     def _deactivate_tags(self, tags):
         if not tags:
@@ -1787,7 +1787,7 @@ class SegmentMaker(abjad.SegmentMaker):
         all_leaves = abjad.select(all_leaves)
         assert abjad.inspect(all_leaves).duration() == sum(durations)
         beam = abjad.Beam(beam_rests=True, durations=durations)
-        abjad.attach(beam, all_leaves, tag='SM35')
+        abjad.attach(beam, all_leaves, tag='SM_35')
 
     def _extend_beams(self):
         for leaf in abjad.iterate(self.score).leaves():
@@ -2246,7 +2246,7 @@ class SegmentMaker(abjad.SegmentMaker):
             skip = abjad.Skip(1)
             multiplier = abjad.Multiplier(time_signature.duration)
             abjad.attach(multiplier, skip, tag=None)
-            abjad.attach(time_signature, skip, context='Score', tag='SM1')
+            abjad.attach(time_signature, skip, context='Score', tag='SM_1')
             context.append(skip)
         if self.first_segment:
             return
@@ -2644,7 +2644,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 string = r"\shape #'((2 . 0) (1 . 0) (0.5 . 0) (0 . 0))"
                 string += " RepeatTie"
                 literal = abjad.LilyPondLiteral(string)
-                abjad.attach(literal, leaf, tag='SM26')
+                abjad.attach(literal, leaf, tag='SM_26')
 
     def _style_fermata_measures(self):
         if self.fermata_measure_staff_line_count is None:
@@ -2674,11 +2674,11 @@ class SegmentMaker(abjad.SegmentMaker):
                         strings.append(string)
                     if strings:
                         literal = abjad.LilyPondLiteral(strings)
-                        abjad.attach(literal, leaf, tag='SM20')
+                        abjad.attach(literal, leaf, tag='SM_20')
                 if next_leaf is not None and staff_lines != after:
                     strings = after._get_lilypond_format(context=staff)
                     literal = abjad.LilyPondLiteral(strings)
-                    abjad.attach(literal, next_leaf, tag='SM21')
+                    abjad.attach(literal, next_leaf, tag='SM_21')
                 if next_leaf is None and before != staff_lines:
                     before_line_count = getattr(before, 'line_count', 5)
                     before_staff_lines = indicators.StaffLines(
@@ -2688,7 +2688,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     abjad.attach(
                         before_staff_lines,
                         leaf,
-                        tag='SM23',
+                        tag='SM_23',
                         synthetic_offset=1_000_000,
                         )
                 if start_offset in bar_lines_already_styled:
@@ -2753,7 +2753,7 @@ class SegmentMaker(abjad.SegmentMaker):
             status = 'explicit'
         if isinstance(wrapper.indicator, abjad.DynamicTrend):
             color = SegmentMaker._status_to_color[status]
-            manager = abjad.tweak(wrapper.indicator, tag='SM43').color = color
+            manager = abjad.tweak(wrapper.indicator, tag='SM_43').color = color
             SegmentMaker._set_status_tag(wrapper, status)
             return
         SegmentMaker._attach_color_literal(
@@ -3067,17 +3067,17 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM_4
                             \baca_new_spacing_section #1 #31                                             %! HSS1:SPACING
-                            \time 6/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \time 6/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #31                                             %! HSS1:SPACING
                             s1 * 3/8
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "|"                                                                     %! SM5
+                            \baca_bar_line_visible                                                       %! SM_5
+                            \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
                         }
                     >>
@@ -3085,7 +3085,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     <<
                         \context StringSectionStaffGroup = "String Section Staff Group"
                         <<
-                            \tag Violin                                                                  %! ST4
+                            \tag Violin                                                                  %! ST_4
                             \context ViolinMusicStaff = "ViolinMusicStaff"
                             {
                                 \context ViolinMusicVoice = "ViolinMusicVoice"
@@ -3093,25 +3093,25 @@ class SegmentMaker(abjad.SegmentMaker):
                                     {
                                         \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                            % [ViolinMusicVoice measure 1]                               %! SM4
-                                            \clef "treble"                                               %! SM8:DEFAULT_CLEF:ST3
-                                            \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST3
-                                        %@% \override ViolinMusicStaff.Clef.color = ##f                  %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST3
-                                            \set ViolinMusicStaff.forceClef = ##t                        %! SM8:DEFAULT_CLEF:SM33:ST3
+                                            % [ViolinMusicVoice measure 1]                               %! SM_4
+                                            \clef "treble"                                               %! SM8:DEFAULT_CLEF:ST_3
+                                            \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST_3
+                                        %@% \override ViolinMusicStaff.Clef.color = ##f                  %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST_3
+                                            \set ViolinMusicStaff.forceClef = ##t                        %! SM8:DEFAULT_CLEF:SM33:ST_3
                                             d'16
-                                            ^ \markup {                                                  %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                                \with-color                                              %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                                    #(x11-color 'DarkViolet)                             %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                                    (Violin)                                             %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                                }                                                        %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                            \override ViolinMusicStaff.Clef.color = #(x11-color 'violet) %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST3
+                                            ^ \markup {                                                  %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                                                \with-color                                              %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                                                    #(x11-color 'DarkViolet)                             %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                                                    (Violin)                                             %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                                                }                                                        %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                                            \override ViolinMusicStaff.Clef.color = #(x11-color 'violet) %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST_3
                 <BLANKLINE>
                                             e'16
                 <BLANKLINE>
-                                            \baca_octave_warning                                         %! SM12
+                                            \baca_octave_warning                                         %! SM_12
                                             f'16
-                                            - \tweak color #red                                          %! SM12
-                                            ^ \markup { OCTAVE }                                         %! SM12
+                                            - \tweak color #red                                          %! SM_12
+                                            ^ \markup { OCTAVE }                                         %! SM_12
                 <BLANKLINE>
                                             g'16
                 <BLANKLINE>
@@ -3121,36 +3121,36 @@ class SegmentMaker(abjad.SegmentMaker):
                                         }
                                     }
                 <BLANKLINE>
-                                    % [ViolinMusicVoice measure 2]                                       %! SM4
+                                    % [ViolinMusicVoice measure 2]                                       %! SM_4
                                     R1 * 3/8
                 <BLANKLINE>
                                 }
                             }
-                            \tag Viola                                                                   %! ST4
+                            \tag Viola                                                                   %! ST_4
                             \context ViolaMusicStaff = "ViolaMusicStaff"
                             {
                                 \context ViolaMusicVoice = "ViolaMusicVoice"
                                 {
                 <BLANKLINE>
-                                    % [ViolaMusicVoice measure 1]                                        %! SM4
-                                    \clef "alto"                                                         %! SM8:DEFAULT_CLEF:ST3
-                                    \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST3
-                                %@% \override ViolaMusicStaff.Clef.color = ##f                           %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST3
-                                    \set ViolaMusicStaff.forceClef = ##t                                 %! SM8:DEFAULT_CLEF:SM33:ST3
+                                    % [ViolaMusicVoice measure 1]                                        %! SM_4
+                                    \clef "alto"                                                         %! SM8:DEFAULT_CLEF:ST_3
+                                    \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST_3
+                                %@% \override ViolaMusicStaff.Clef.color = ##f                           %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST_3
+                                    \set ViolaMusicStaff.forceClef = ##t                                 %! SM8:DEFAULT_CLEF:SM33:ST_3
                                     R1 * 3/8
-                                    ^ \markup {                                                          %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                        \with-color                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                            #(x11-color 'DarkViolet)                                     %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                            (Viola)                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                        }                                                                %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                    \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)          %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST3
+                                    ^ \markup {                                                          %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                                        \with-color                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                                            #(x11-color 'DarkViolet)                                     %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                                            (Viola)                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                                        }                                                                %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                                    \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)          %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST_3
                 <BLANKLINE>
-                                    % [ViolaMusicVoice measure 2]                                        %! SM4
+                                    % [ViolaMusicVoice measure 2]                                        %! SM_4
                                     R1 * 3/8
                 <BLANKLINE>
                                 }
                             }
-                            \tag Cello                                                                   %! ST4
+                            \tag Cello                                                                   %! ST_4
                             \context CelloMusicStaff = "CelloMusicStaff"
                             {
                                 \context CelloMusicVoice = "CelloMusicVoice"
@@ -3158,25 +3158,25 @@ class SegmentMaker(abjad.SegmentMaker):
                                     {
                                         \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                            % [CelloMusicVoice measure 1]                                %! SM4
-                                            \clef "bass"                                                 %! SM8:DEFAULT_CLEF:ST3
-                                            \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST3
-                                        %@% \override CelloMusicStaff.Clef.color = ##f                   %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST3
-                                            \set CelloMusicStaff.forceClef = ##t                         %! SM8:DEFAULT_CLEF:SM33:ST3
+                                            % [CelloMusicVoice measure 1]                                %! SM_4
+                                            \clef "bass"                                                 %! SM8:DEFAULT_CLEF:ST_3
+                                            \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST_3
+                                        %@% \override CelloMusicStaff.Clef.color = ##f                   %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST_3
+                                            \set CelloMusicStaff.forceClef = ##t                         %! SM8:DEFAULT_CLEF:SM33:ST_3
                                             a16
-                                            ^ \markup {                                                  %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                                \with-color                                              %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                                    #(x11-color 'DarkViolet)                             %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                                    (Cello)                                              %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                                }                                                        %! SM11:DEFAULT_INSTRUMENT_ALERT:ST1
-                                            \override CelloMusicStaff.Clef.color = #(x11-color 'violet)  %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST3
+                                            ^ \markup {                                                  %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                                                \with-color                                              %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                                                    #(x11-color 'DarkViolet)                             %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                                                    (Cello)                                              %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                                                }                                                        %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                                            \override CelloMusicStaff.Clef.color = #(x11-color 'violet)  %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST_3
                 <BLANKLINE>
                                             g16
                 <BLANKLINE>
-                                            \baca_octave_warning                                         %! SM12
+                                            \baca_octave_warning                                         %! SM_12
                                             f16
-                                            - \tweak color #red                                          %! SM12
-                                            ^ \markup { OCTAVE }                                         %! SM12
+                                            - \tweak color #red                                          %! SM_12
+                                            ^ \markup { OCTAVE }                                         %! SM_12
                 <BLANKLINE>
                                             e16
                 <BLANKLINE>
@@ -3186,7 +3186,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         }
                                     }
                 <BLANKLINE>
-                                    % [CelloMusicVoice measure 2]                                        %! SM4
+                                    % [CelloMusicVoice measure 2]                                        %! SM_4
                                     R1 * 3/8
                 <BLANKLINE>
                                 }
@@ -3267,31 +3267,31 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \time 1/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \time 1/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/16
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \time 7/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \time 7/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 7/16
                 <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
+                            % [GlobalSkips measure 3]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \time 1/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \time 1/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/16
                 <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
+                            % [GlobalSkips measure 4]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "|"                                                                     %! SM5
+                            \baca_bar_line_visible                                                       %! SM_5
+                            \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
                         }
                     >>
@@ -3304,7 +3304,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % [MusicVoice measure 1]                                         %! SM4
+                                        % [MusicVoice measure 1]                                         %! SM_4
                                         e'16
                                         ^ \markup {                                                      %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
                                             \with-color                                                  %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
@@ -3316,11 +3316,11 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % [MusicVoice measure 2]                                         %! SM4
-                                        \baca_out_of_range_warning                                       %! SM13
+                                        % [MusicVoice measure 2]                                         %! SM_4
+                                        \baca_out_of_range_warning                                       %! SM_13
                                         c16
-                                        - \tweak color #red                                              %! SM13
-                                        ^ \markup { * }                                                  %! SM13
+                                        - \tweak color #red                                              %! SM_13
+                                        ^ \markup { * }                                                  %! SM_13
                 <BLANKLINE>
                                         d'16
                 <BLANKLINE>
@@ -3338,14 +3338,14 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % [MusicVoice measure 3]                                         %! SM4
+                                        % [MusicVoice measure 3]                                         %! SM_4
                                         b'16
                                     }
                                 }
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % [MusicVoice measure 4]                                         %! SM4
+                                        % [MusicVoice measure 4]                                         %! SM_4
                                         bf'!16
                 <BLANKLINE>
                                         g'16
@@ -3437,31 +3437,31 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \time 1/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \time 1/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/16
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \time 7/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \time 7/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 7/16
                 <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
+                            % [GlobalSkips measure 3]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \time 1/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \time 1/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/16
                 <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
+                            % [GlobalSkips measure 4]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "|"                                                                     %! SM5
+                            \baca_bar_line_visible                                                       %! SM_5
+                            \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
                         }
                     >>
@@ -3474,14 +3474,14 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % [MusicVoice measure 1]                                         %! SM4
+                                        % [MusicVoice measure 1]                                         %! SM_4
                                         e'16
                                     }
                                 }
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % [MusicVoice measure 2]                                         %! SM4
+                                        % [MusicVoice measure 2]                                         %! SM_4
                                         fs'!16
                 <BLANKLINE>
                                         d'16
@@ -3490,15 +3490,15 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                         f'16
                 <BLANKLINE>
-                                        \baca_repeat_pitch_class_warning                                 %! SM14
+                                        \baca_repeat_pitch_class_warning                                 %! SM_14
                                         a'16
-                                        - \tweak color #red                                              %! SM14
-                                        ^ \markup { @ }                                                  %! SM14
+                                        - \tweak color #red                                              %! SM_14
+                                        ^ \markup { @ }                                                  %! SM_14
                 <BLANKLINE>
-                                        \baca_repeat_pitch_class_warning                                 %! SM14
+                                        \baca_repeat_pitch_class_warning                                 %! SM_14
                                         a'16
-                                        - \tweak color #red                                              %! SM14
-                                        ^ \markup { @ }                                                  %! SM14
+                                        - \tweak color #red                                              %! SM_14
+                                        ^ \markup { @ }                                                  %! SM_14
                 <BLANKLINE>
                                         c'16
                                     }
@@ -3506,29 +3506,29 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % [MusicVoice measure 3]                                         %! SM4
+                                        % [MusicVoice measure 3]                                         %! SM_4
                                         b'16
                                     }
                                 }
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % [MusicVoice measure 4]                                         %! SM4
+                                        % [MusicVoice measure 4]                                         %! SM_4
                                         bf'!16
                 <BLANKLINE>
                                         g'16
                 <BLANKLINE>
                                         a'16
                 <BLANKLINE>
-                                        \baca_repeat_pitch_class_warning                                 %! SM14
+                                        \baca_repeat_pitch_class_warning                                 %! SM_14
                                         c''16
-                                        - \tweak color #red                                              %! SM14
-                                        ^ \markup { @ }                                                  %! SM14
+                                        - \tweak color #red                                              %! SM_14
+                                        ^ \markup { @ }                                                  %! SM_14
                 <BLANKLINE>
-                                        \baca_repeat_pitch_class_warning                                 %! SM14
+                                        \baca_repeat_pitch_class_warning                                 %! SM_14
                                         c'16
-                                        - \tweak color #red                                              %! SM14
-                                        ^ \markup { @ }                                                  %! SM14
+                                        - \tweak color #red                                              %! SM_14
+                                        ^ \markup { @ }                                                  %! SM_14
                 <BLANKLINE>
                                         f'16
                 <BLANKLINE>
@@ -3608,27 +3608,27 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
                 <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 3]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 4]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "|"                                                                     %! SM5
+                            \baca_bar_line_visible                                                       %! SM_5
+                            \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
                         }
                     >>
@@ -3639,7 +3639,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM_4
                                 c'8
                                 [
                 <BLANKLINE>
@@ -3650,7 +3650,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 c'8
                                 ]
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM_4
                                 c'8
                                 [
                 <BLANKLINE>
@@ -3659,7 +3659,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 c'8
                                 ]
                 <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
+                                % [MusicVoice measure 3]                                                 %! SM_4
                                 c'8
                                 [
                 <BLANKLINE>
@@ -3670,7 +3670,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 c'8
                                 ]
                 <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM4
+                                % [MusicVoice measure 4]                                                 %! SM_4
                                 c'8
                                 [
                 <BLANKLINE>
@@ -3711,27 +3711,27 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
                 <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 3]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 4]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "||"                                                                    %! SM5
+                            \baca_bar_line_visible                                                       %! SM_5
+                            \bar "||"                                                                    %! SM_5
                 <BLANKLINE>
                         }
                     >>
@@ -3742,7 +3742,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM_4
                                 c'8
                                 [
                 <BLANKLINE>
@@ -3753,7 +3753,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 c'8
                                 ]
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM_4
                                 c'8
                                 [
                 <BLANKLINE>
@@ -3762,7 +3762,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 c'8
                                 ]
                 <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
+                                % [MusicVoice measure 3]                                                 %! SM_4
                                 c'8
                                 [
                 <BLANKLINE>
@@ -3773,7 +3773,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 c'8
                                 ]
                 <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM4
+                                % [MusicVoice measure 4]                                                 %! SM_4
                                 c'8
                                 [
                 <BLANKLINE>
@@ -3816,27 +3816,27 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
                 <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 3]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 4]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "|."                                                                    %! SM5
+                            \baca_bar_line_visible                                                       %! SM_5
+                            \bar "|."                                                                    %! SM_5
                 <BLANKLINE>
                         }
                     >>
@@ -3847,7 +3847,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM_4
                                 c'8
                                 [
                 <BLANKLINE>
@@ -3858,7 +3858,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 c'8
                                 ]
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM_4
                                 c'8
                                 [
                 <BLANKLINE>
@@ -3867,7 +3867,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 c'8
                                 ]
                 <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
+                                % [MusicVoice measure 3]                                                 %! SM_4
                                 c'8
                                 [
                 <BLANKLINE>
@@ -3878,7 +3878,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 c'8
                                 ]
                 <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM4
+                                % [MusicVoice measure 4]                                                 %! SM_4
                                 c'8
                                 [
                 <BLANKLINE>
@@ -3923,27 +3923,27 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
                 <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 3]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 4]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "||"                                                                    %! SM5
+                            \baca_bar_line_visible                                                       %! SM_5
+                            \bar "||"                                                                    %! SM_5
                 <BLANKLINE>
                         }
                     >>
@@ -3954,7 +3954,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM_4
                                 c'8
                                 [
                 <BLANKLINE>
@@ -3965,7 +3965,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 c'8
                                 ]
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM_4
                                 c'8
                                 [
                 <BLANKLINE>
@@ -3974,7 +3974,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 c'8
                                 ]
                 <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
+                                % [MusicVoice measure 3]                                                 %! SM_4
                                 c'8
                                 [
                 <BLANKLINE>
@@ -3985,7 +3985,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 c'8
                                 ]
                 <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM4
+                                % [MusicVoice measure 4]                                                 %! SM_4
                                 c'8
                                 [
                 <BLANKLINE>
@@ -4038,27 +4038,27 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
                 <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 3]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 4]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "|."                                                                    %! SM5
+                            \baca_bar_line_visible                                                       %! SM_5
+                            \bar "|."                                                                    %! SM_5
                 <BLANKLINE>
                         }
                     >>
@@ -4069,7 +4069,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM_4
                                 c'8
                                 [
                 <BLANKLINE>
@@ -4080,7 +4080,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 c'8
                                 ]
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM_4
                                 c'8
                                 [
                 <BLANKLINE>
@@ -4089,7 +4089,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 c'8
                                 ]
                 <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
+                                % [MusicVoice measure 3]                                                 %! SM_4
                                 c'8
                                 [
                 <BLANKLINE>
@@ -4100,7 +4100,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 c'8
                                 ]
                 <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM4
+                                % [MusicVoice measure 4]                                                 %! SM_4
                                 c'8
                                 [
                 <BLANKLINE>
@@ -4108,23 +4108,23 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                 \once \override TextScript.extra-offset = #'(-9 . -2)
                                 c'8
-                                _ \markup {                                                              %! SCORE2
-                                    \override                                                            %! SCORE2
-                                        #'(font-name . "Palatino")                                       %! SCORE2
-                                        \with-color                                                      %! SCORE2
-                                            #black                                                       %! SCORE2
-                                            \right-column                                                %! SCORE2
-                                                {                                                        %! SCORE2
-                                                    \line                                                %! SCORE2
-                                                        {                                                %! SCORE2
-                                                            "Madison, WI"                                %! SCORE2
-                                                        }                                                %! SCORE2
-                                                    \line                                                %! SCORE2
-                                                        {                                                %! SCORE2
-                                                            "October 2016"                               %! SCORE2
-                                                        }                                                %! SCORE2
-                                                }                                                        %! SCORE2
-                                    }                                                                    %! SCORE2
+                                _ \markup {                                                              %! SCORE_2
+                                    \override                                                            %! SCORE_2
+                                        #'(font-name . "Palatino")                                       %! SCORE_2
+                                        \with-color                                                      %! SCORE_2
+                                            #black                                                       %! SCORE_2
+                                            \right-column                                                %! SCORE_2
+                                                {                                                        %! SCORE_2
+                                                    \line                                                %! SCORE_2
+                                                        {                                                %! SCORE_2
+                                                            "Madison, WI"                                %! SCORE_2
+                                                        }                                                %! SCORE_2
+                                                    \line                                                %! SCORE_2
+                                                        {                                                %! SCORE_2
+                                                            "October 2016"                               %! SCORE_2
+                                                        }                                                %! SCORE_2
+                                                }                                                        %! SCORE_2
+                                    }                                                                    %! SCORE_2
                                 ]
                 <BLANKLINE>
                             }
@@ -4205,27 +4205,27 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
                 <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 3]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 4]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "|"                                                                     %! SM5
+                            \baca_bar_line_visible                                                       %! SM_5
+                            \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
                         }
                     >>
@@ -4236,7 +4236,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM_4
                                 c'8
                                 [
                 <BLANKLINE>
@@ -4247,7 +4247,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 c'8
                                 ]
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM_4
                                 c'8
                                 [
                 <BLANKLINE>
@@ -4256,7 +4256,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 c'8
                                 ]
                 <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
+                                % [MusicVoice measure 3]                                                 %! SM_4
                                 c'8
                                 [
                 <BLANKLINE>
@@ -4267,7 +4267,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 c'8
                                 ]
                 <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM4
+                                % [MusicVoice measure 4]                                                 %! SM_4
                                 c'8
                                 [
                 <BLANKLINE>
@@ -4308,27 +4308,27 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
                 <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 3]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 4]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "|"                                                                     %! SM5
+                            \baca_bar_line_visible                                                       %! SM_5
+                            \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
                         }
                     >>
@@ -4339,57 +4339,57 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
-                                \baca_unpitched_music_warning                                            %! SM24
+                                % [MusicVoice measure 1]                                                 %! SM_4
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 [
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 ]
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
-                                \baca_unpitched_music_warning                                            %! SM24
+                                % [MusicVoice measure 2]                                                 %! SM_4
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 [
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 ]
                 <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
-                                \baca_unpitched_music_warning                                            %! SM24
+                                % [MusicVoice measure 3]                                                 %! SM_4
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 [
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 ]
                 <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM4
-                                \baca_unpitched_music_warning                                            %! SM24
+                                % [MusicVoice measure 4]                                                 %! SM_4
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 [
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM24
+                                \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 ]
                 <BLANKLINE>
@@ -4476,25 +4476,25 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \time 3/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \time 3/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/16
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            s1 * 3/16
-                <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/16
                 <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
+                            % [GlobalSkips measure 3]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/16
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                            % [GlobalSkips measure 4]                                                    %! SM_4
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            s1 * 3/16
+                            \baca_bar_line_visible                                                       %! SM_5
+                            \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
                         }
                     >>
@@ -4507,18 +4507,18 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % [MusicVoice measure 1]                                         %! SM4
+                                        % [MusicVoice measure 1]                                         %! SM_4
                                         e'8.
                                     }
                                 }
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % [MusicVoice measure 2]                                         %! SM4
+                                        % [MusicVoice measure 2]                                         %! SM_4
                                         \acciaccatura {
                 <BLANKLINE>
                                             fs'16
-                                            [                                                            %! ACC1
+                                            [                                                            %! ACC_1
                 <BLANKLINE>
                                             d'16
                 <BLANKLINE>
@@ -4529,7 +4529,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             a'16
                 <BLANKLINE>
                                             af'16
-                                            ]                                                            %! ACC1
+                                            ]                                                            %! ACC_1
                 <BLANKLINE>
                                         }
                                         c'8.
@@ -4538,18 +4538,18 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % [MusicVoice measure 3]                                         %! SM4
+                                        % [MusicVoice measure 3]                                         %! SM_4
                                         b'8.
                                     }
                                 }
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % [MusicVoice measure 4]                                         %! SM4
+                                        % [MusicVoice measure 4]                                         %! SM_4
                                         \acciaccatura {
                 <BLANKLINE>
                                             bf'16
-                                            [                                                            %! ACC1
+                                            [                                                            %! ACC_1
                 <BLANKLINE>
                                             g'16
                 <BLANKLINE>
@@ -4558,7 +4558,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             af'16
                 <BLANKLINE>
                                             c'16
-                                            ]                                                            %! ACC1
+                                            ]                                                            %! ACC_1
                 <BLANKLINE>
                                         }
                                         f'8.
@@ -4639,25 +4639,25 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
+                            % [GlobalSkips measure 1]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \time 3/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \time 3/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/16
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            s1 * 3/16
-                <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
+                            % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/16
                 <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
+                            % [GlobalSkips measure 3]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/16
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                            % [GlobalSkips measure 4]                                                    %! SM_4
+                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            s1 * 3/16
+                            \baca_bar_line_visible                                                       %! SM_5
+                            \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
                         }
                     >>
@@ -4670,75 +4670,75 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % [MusicVoice measure 1]                                         %! SM4
-                                        \baca_unregistered_pitch_warning                                 %! SM25
+                                        % [MusicVoice measure 1]                                         %! SM_4
+                                        \baca_unregistered_pitch_warning                                 %! SM_25
                                         e'8.
                                     }
                                 }
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % [MusicVoice measure 2]                                         %! SM4
+                                        % [MusicVoice measure 2]                                         %! SM_4
                                         \acciaccatura {
                 <BLANKLINE>
-                                            \baca_unregistered_pitch_warning                             %! SM25
+                                            \baca_unregistered_pitch_warning                             %! SM_25
                                             fs'16
-                                            [                                                            %! ACC1
+                                            [                                                            %! ACC_1
                 <BLANKLINE>
-                                            \baca_unregistered_pitch_warning                             %! SM25
+                                            \baca_unregistered_pitch_warning                             %! SM_25
                                             d'16
                 <BLANKLINE>
-                                            \baca_unregistered_pitch_warning                             %! SM25
+                                            \baca_unregistered_pitch_warning                             %! SM_25
                                             ef'16
                 <BLANKLINE>
-                                            \baca_unregistered_pitch_warning                             %! SM25
+                                            \baca_unregistered_pitch_warning                             %! SM_25
                                             f'16
                 <BLANKLINE>
-                                            \baca_unregistered_pitch_warning                             %! SM25
+                                            \baca_unregistered_pitch_warning                             %! SM_25
                                             a'16
                 <BLANKLINE>
-                                            \baca_unregistered_pitch_warning                             %! SM25
+                                            \baca_unregistered_pitch_warning                             %! SM_25
                                             af'16
-                                            ]                                                            %! ACC1
+                                            ]                                                            %! ACC_1
                 <BLANKLINE>
                                         }
-                                        \baca_unregistered_pitch_warning                                 %! SM25
+                                        \baca_unregistered_pitch_warning                                 %! SM_25
                                         c'8.
                                     }
                                 }
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % [MusicVoice measure 3]                                         %! SM4
-                                        \baca_unregistered_pitch_warning                                 %! SM25
+                                        % [MusicVoice measure 3]                                         %! SM_4
+                                        \baca_unregistered_pitch_warning                                 %! SM_25
                                         b'8.
                                     }
                                 }
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % [MusicVoice measure 4]                                         %! SM4
+                                        % [MusicVoice measure 4]                                         %! SM_4
                                         \acciaccatura {
                 <BLANKLINE>
-                                            \baca_unregistered_pitch_warning                             %! SM25
+                                            \baca_unregistered_pitch_warning                             %! SM_25
                                             bf'16
-                                            [                                                            %! ACC1
+                                            [                                                            %! ACC_1
                 <BLANKLINE>
-                                            \baca_unregistered_pitch_warning                             %! SM25
+                                            \baca_unregistered_pitch_warning                             %! SM_25
                                             g'16
                 <BLANKLINE>
-                                            \baca_unregistered_pitch_warning                             %! SM25
+                                            \baca_unregistered_pitch_warning                             %! SM_25
                                             a'16
                 <BLANKLINE>
-                                            \baca_unregistered_pitch_warning                             %! SM25
+                                            \baca_unregistered_pitch_warning                             %! SM_25
                                             af'16
                 <BLANKLINE>
-                                            \baca_unregistered_pitch_warning                             %! SM25
+                                            \baca_unregistered_pitch_warning                             %! SM_25
                                             c'16
-                                            ]                                                            %! ACC1
+                                            ]                                                            %! ACC_1
                 <BLANKLINE>
                                         }
-                                        \baca_unregistered_pitch_warning                                 %! SM25
+                                        \baca_unregistered_pitch_warning                                 %! SM_25
                                         f'8.
                 <BLANKLINE>
                                     }
@@ -4849,28 +4849,28 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
+                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
                 <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 3]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 4]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "|"                                                                     %! SM5
+                            \baca_bar_line_visible                                                       %! SM_5
+                            \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
                         }
                     >>
@@ -4881,7 +4881,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM_4
                                 \clef "alto"                                                             %! SM8:REAPPLIED_CLEF:SM37
                                 \once \override Staff.Clef.color = #(x11-color 'green4)                  %! SM6:REAPPLIED_CLEF_COLOR:SM37
                             %@% \override Staff.Clef.color = ##f                                         %! SM7:REAPPLIED_CLEF_COLOR_CANCELLATION:SM37
@@ -4889,13 +4889,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                 R1 * 1/2
                                 \override Staff.Clef.color = #(x11-color 'OliveDrab)                     %! SM6:REAPPLIED_CLEF_REDRAW_COLOR:SM37
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM_4
                                 R1 * 3/8
                 <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
+                                % [MusicVoice measure 3]                                                 %! SM_4
                                 R1 * 1/2
                 <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM4
+                                % [MusicVoice measure 4]                                                 %! SM_4
                                 R1 * 3/8
                 <BLANKLINE>
                             }
@@ -5046,27 +5046,27 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
                 <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 3]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 4]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "|"                                                                     %! SM5
+                            \baca_bar_line_visible                                                       %! SM_5
+                            \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
                         }
                     >>
@@ -5077,16 +5077,16 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM_4
                                 R1 * 1/2
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM_4
                                 R1 * 3/8
                 <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
+                                % [MusicVoice measure 3]                                                 %! SM_4
                                 R1 * 1/2
                 <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM4
+                                % [MusicVoice measure 4]                                                 %! SM_4
                                 R1 * 3/8
                 <BLANKLINE>
                             }
@@ -5117,27 +5117,27 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
                 <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 3]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 4]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "|"                                                                     %! SM5
+                            \baca_bar_line_visible                                                       %! SM_5
+                            \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
                         }
                     >>
@@ -5148,16 +5148,16 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM_4
                                 s1 * 1/2
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM_4
                                 s1 * 3/8
                 <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
+                                % [MusicVoice measure 3]                                                 %! SM_4
                                 s1 * 1/2
                 <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM4
+                                % [MusicVoice measure 4]                                                 %! SM_4
                                 s1 * 3/8
                 <BLANKLINE>
                             }
@@ -5228,27 +5228,27 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
                 <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 3]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 4]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "|"                                                                     %! SM5
+                            \baca_bar_line_visible                                                       %! SM_5
+                            \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
                         }
                     >>
@@ -5259,7 +5259,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM_4
                                 fs'!8
                                 ^ \markup {                                                              %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
                                     \with-color                                                          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
@@ -5275,7 +5275,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 g'8
                                 ]
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM_4
                                 fs'!8
                                 [
                 <BLANKLINE>
@@ -5284,7 +5284,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 fs'!8
                                 ]
                 <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
+                                % [MusicVoice measure 3]                                                 %! SM_4
                                 g'8
                                 [
                 <BLANKLINE>
@@ -5295,7 +5295,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 fs'!8
                                 ]
                 <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM4
+                                % [MusicVoice measure 4]                                                 %! SM_4
                                 g'8
                                 [
                 <BLANKLINE>
@@ -5342,27 +5342,27 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
                 <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 3]                                                    %! SM_4
+                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 1/2
                 <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                            % [GlobalSkips measure 4]                                                    %! SM_4
+                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             s1 * 3/8
-                            \baca_bar_line_visible                                                       %! SM5
-                            \bar "|"                                                                     %! SM5
+                            \baca_bar_line_visible                                                       %! SM_5
+                            \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
                         }
                     >>
@@ -5373,7 +5373,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM4
+                                % [MusicVoice measure 1]                                                 %! SM_4
                                 e'8
                                 ^ \markup {                                                              %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
                                     \with-color                                                          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
@@ -5389,7 +5389,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 f'8
                                 ]
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM4
+                                % [MusicVoice measure 2]                                                 %! SM_4
                                 e'8
                                 [
                 <BLANKLINE>
@@ -5398,7 +5398,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 e'8
                                 ]
                 <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM4
+                                % [MusicVoice measure 3]                                                 %! SM_4
                                 f'8
                                 [
                 <BLANKLINE>
@@ -5409,7 +5409,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 e'8
                                 ]
                 <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM4
+                                % [MusicVoice measure 4]                                                 %! SM_4
                                 f'8
                                 [
                 <BLANKLINE>

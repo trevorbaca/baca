@@ -404,9 +404,7 @@ class PiecewiseIndicatorCommand(scoping.Command):
             self._attach_indicators(
                 bundle,
                 start_leaf,
-                # TODO:
-                #tag='PIC_1',
-                tag='PIC',
+                tag='PIC_1',
                 )
             next_bundle = self.bundles[i + 1]
             if should_bookend:
@@ -423,9 +421,7 @@ class PiecewiseIndicatorCommand(scoping.Command):
                 self._attach_indicators(
                     next_bundle,
                     stop_leaf,
-                    # TODO:
-                    #tag='PIC_2',
-                    tag='PIC',
+                    tag='PIC_2',
                     )
             elif is_final_piece and next_bundle.spanner_stop:
                 spanner_stop = next_bundle.spanner_stop
@@ -435,9 +431,7 @@ class PiecewiseIndicatorCommand(scoping.Command):
                 self._attach_indicators(
                     bundle,
                     stop_leaf,
-                    # TODO:
-                    #tag='PIC_3',
-                    tag='PIC',
+                    tag='PIC_3',
                     )
 
     ### PRIVATE METHODS ###
@@ -778,31 +772,31 @@ def dynamic(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #13                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #13                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM_4
                         \baca_new_spacing_section #1 #13                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM_4
                         \baca_new_spacing_section #1 #13                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -813,12 +807,12 @@ def dynamic(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
                             e'8
                             \p                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
-                            - \tweak color #blue                                                     %! SM43 %! SM8:EXPLICIT_DYNAMIC:IC
+                            - \tweak color #blue                                                     %! SM_43 %! SM8:EXPLICIT_DYNAMIC:IC
                             \<                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
                             [
             <BLANKLINE>
@@ -829,7 +823,7 @@ def dynamic(
                             c''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             g'8
                             [
             <BLANKLINE>
@@ -838,7 +832,7 @@ def dynamic(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             d''8
                             [
             <BLANKLINE>
@@ -849,7 +843,7 @@ def dynamic(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             f''8
                             [
             <BLANKLINE>
@@ -897,31 +891,31 @@ def dynamic(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -932,7 +926,7 @@ def dynamic(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
                             e'8
@@ -947,7 +941,7 @@ def dynamic(
                             c''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             g'8
                             [
             <BLANKLINE>
@@ -956,7 +950,7 @@ def dynamic(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             d''8
                             [
             <BLANKLINE>
@@ -967,7 +961,7 @@ def dynamic(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             f''8
                             [
             <BLANKLINE>
@@ -1043,31 +1037,31 @@ def hairpin(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -1078,13 +1072,13 @@ def hairpin(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             e'8
-                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
-                            - \tweak color #blue                                                     %! SM43 %! SM8:EXPLICIT_DYNAMIC:PIC
-                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak color #blue                                                     %! SM_43 %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             d''8
@@ -1094,7 +1088,7 @@ def hairpin(
                             e''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             g'8
                             [
             <BLANKLINE>
@@ -1103,7 +1097,7 @@ def hairpin(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             d''8
                             [
             <BLANKLINE>
@@ -1114,15 +1108,15 @@ def hairpin(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             f''8
                             [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             d''8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_2
                             ]
                             \revert DynamicLineSpanner.staff-padding                                 %! OC2
             <BLANKLINE>
@@ -1162,31 +1156,31 @@ def hairpin(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -1197,15 +1191,15 @@ def hairpin(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             e'8
-                            \baca_effort_ff                                                          %! SM8:EXPLICIT_DYNAMIC:PIC
-                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC
-                            - \tweak to-barline ##t                                                  %! SM8:EXPLICIT_DYNAMIC:PIC
-                            - \tweak circled-tip ##t                                                 %! SM8:EXPLICIT_DYNAMIC:PIC
-                            \>                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \baca_effort_ff                                                          %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak to-barline ##t                                                  %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak circled-tip ##t                                                 %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \>                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             d''8
@@ -1215,7 +1209,7 @@ def hairpin(
                             c''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             g'8
                             [
             <BLANKLINE>
@@ -1224,7 +1218,7 @@ def hairpin(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             d''8
                             [
             <BLANKLINE>
@@ -1235,15 +1229,15 @@ def hairpin(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             f''8
                             [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             d''8
-                            \!                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \!                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_2
                             ]
                             \revert DynamicLineSpanner.staff-padding                                 %! OC2
             <BLANKLINE>
@@ -1283,31 +1277,31 @@ def hairpin(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -1318,14 +1312,14 @@ def hairpin(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             e'8
-                            \!                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
-                            - \tweak color #blue                                                     %! SM43 %! SM8:EXPLICIT_DYNAMIC:PIC
-                            - \tweak circled-tip ##t                                                 %! SM8:EXPLICIT_DYNAMIC:PIC
-                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \!                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak color #blue                                                     %! SM_43 %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak circled-tip ##t                                                 %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             d''8
@@ -1335,7 +1329,7 @@ def hairpin(
                             c''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             g'8
                             [
             <BLANKLINE>
@@ -1344,7 +1338,7 @@ def hairpin(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             d''8
                             [
             <BLANKLINE>
@@ -1355,15 +1349,15 @@ def hairpin(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             f''8
                             [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             d''8
-                            \baca_effort_ff                                                          %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \baca_effort_ff                                                          %! SM8:EXPLICIT_DYNAMIC:PIC_2
                             ]
                             \revert DynamicLineSpanner.staff-padding                                 %! OC2
             <BLANKLINE>
@@ -1403,31 +1397,31 @@ def hairpin(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -1438,14 +1432,14 @@ def hairpin(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             e'8
-                            \baca_effort_p                                                           %! SM8:EXPLICIT_DYNAMIC:PIC
-                            - \tweak color #blue                                                     %! SM43 %! SM8:EXPLICIT_DYNAMIC:PIC
-                            - \tweak stencil #constante-hairpin                                      %! SM8:EXPLICIT_DYNAMIC:PIC
-                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \baca_effort_p                                                           %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak color #blue                                                     %! SM_43 %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak stencil #constante-hairpin                                      %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             d''8
@@ -1455,7 +1449,7 @@ def hairpin(
                             c''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             g'8
                             [
             <BLANKLINE>
@@ -1464,7 +1458,7 @@ def hairpin(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             d''8
                             [
             <BLANKLINE>
@@ -1475,15 +1469,15 @@ def hairpin(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             f''8
                             [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             d''8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_2
                             ]
                             \revert DynamicLineSpanner.staff-padding                                 %! OC2
             <BLANKLINE>
@@ -1530,31 +1524,31 @@ def hairpin(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -1565,14 +1559,14 @@ def hairpin(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             e'8
-                            \baca_effort_mp                                                          %! SM8:EXPLICIT_DYNAMIC:PIC
-                            - \tweak color #blue                                                     %! SM43 %! SM8:EXPLICIT_DYNAMIC:PIC
-                            - \tweak stencil #abjad-flared-hairpin                                   %! SM8:EXPLICIT_DYNAMIC:PIC
-                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \baca_effort_mp                                                          %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak color #blue                                                     %! SM_43 %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak stencil #abjad-flared-hairpin                                   %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             d''8
@@ -1582,24 +1576,24 @@ def hairpin(
                             c''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             g'8
                             [
             <BLANKLINE>
                             f''8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             e'8
-                            \baca_effort_f                                                           %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \baca_effort_f                                                           %! SM8:EXPLICIT_DYNAMIC:PIC_2
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            % [MusicVoice measure 3]                                                 %! SM_4
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             d''8
-                            \baca_effort_mf                                                          %! SM8:EXPLICIT_DYNAMIC:PIC
-                            - \tweak color #blue                                                     %! SM43 %! SM8:EXPLICIT_DYNAMIC:PIC
-                            - \tweak stencil #abjad-flared-hairpin                                   %! SM8:EXPLICIT_DYNAMIC:PIC
-                            \>                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \baca_effort_mf                                                          %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak color #blue                                                     %! SM_43 %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak stencil #abjad-flared-hairpin                                   %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \>                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             f'8
@@ -1609,15 +1603,15 @@ def hairpin(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             f''8
                             [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             d''8
-                            \baca_effort_p                                                           %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \baca_effort_p                                                           %! SM8:EXPLICIT_DYNAMIC:PIC_2
                             ]
                             \revert DynamicLineSpanner.staff-padding                                 %! OC2
             <BLANKLINE>
@@ -1660,31 +1654,31 @@ def hairpin(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -1695,11 +1689,11 @@ def hairpin(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             e'8
-                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             d''8
@@ -1709,10 +1703,10 @@ def hairpin(
                             e''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            % [MusicVoice measure 2]                                                 %! SM_4
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             g'8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             f''8
@@ -1720,10 +1714,10 @@ def hairpin(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            % [MusicVoice measure 3]                                                 %! SM_4
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             d''8
-                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             f'8
@@ -1733,17 +1727,17 @@ def hairpin(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            % [MusicVoice measure 4]                                                 %! SM_4
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             f''8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             d''8
-                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_2
                             ]
                             \revert DynamicLineSpanner.staff-padding                                 %! OC2
             <BLANKLINE>
@@ -1784,31 +1778,31 @@ def hairpin(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -1819,13 +1813,13 @@ def hairpin(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             e'8
-                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
-                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC
-                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             d''8
@@ -1835,12 +1829,12 @@ def hairpin(
                             e''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            % [MusicVoice measure 2]                                                 %! SM_4
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             g'8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
-                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC
-                            \>                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \>                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             f''8
@@ -1848,12 +1842,12 @@ def hairpin(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            % [MusicVoice measure 3]                                                 %! SM_4
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             d''8
-                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
-                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC
-                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             f'8
@@ -1863,19 +1857,19 @@ def hairpin(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            % [MusicVoice measure 4]                                                 %! SM_4
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             f''8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
-                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC
-                            \>                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \>                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             d''8
-                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_2
                             ]
                             \revert DynamicLineSpanner.staff-padding                                 %! OC2
             <BLANKLINE>
@@ -1917,31 +1911,31 @@ def hairpin(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -1952,61 +1946,61 @@ def hairpin(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             e'8
-                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             d''8
             <BLANKLINE>
                             f'8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             e''8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_2
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
-                            \once \override Voice.DynamicText.color = #(x11-color 'DeepPink1)        %! SM6:REDUNDANT_DYNAMIC_COLOR:PIC
+                            % [MusicVoice measure 2]                                                 %! SM_4
+                            \once \override Voice.DynamicText.color = #(x11-color 'DeepPink1)        %! SM6:REDUNDANT_DYNAMIC_COLOR:PIC_1
                             g'8
-                            \f                                                                       %! SM8:REDUNDANT_DYNAMIC:PIC
+                            \f                                                                       %! SM8:REDUNDANT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             f''8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             e'8
-                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_2
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
-                            \once \override Voice.DynamicText.color = #(x11-color 'DeepPink1)        %! SM6:REDUNDANT_DYNAMIC_COLOR:PIC
+                            % [MusicVoice measure 3]                                                 %! SM_4
+                            \once \override Voice.DynamicText.color = #(x11-color 'DeepPink1)        %! SM6:REDUNDANT_DYNAMIC_COLOR:PIC_1
                             d''8
-                            \p                                                                       %! SM8:REDUNDANT_DYNAMIC:PIC
+                            \p                                                                       %! SM8:REDUNDANT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             f'8
             <BLANKLINE>
                             e''8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             g'8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_2
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
-                            \once \override Voice.DynamicText.color = #(x11-color 'DeepPink1)        %! SM6:REDUNDANT_DYNAMIC_COLOR:PIC
+                            % [MusicVoice measure 4]                                                 %! SM_4
+                            \once \override Voice.DynamicText.color = #(x11-color 'DeepPink1)        %! SM6:REDUNDANT_DYNAMIC_COLOR:PIC_1
                             f''8
-                            \f                                                                       %! SM8:REDUNDANT_DYNAMIC:PIC
+                            \f                                                                       %! SM8:REDUNDANT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             d''8
-                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_2
                             ]
                             \revert DynamicLineSpanner.staff-padding                                 %! OC2
             <BLANKLINE>
@@ -2048,31 +2042,31 @@ def hairpin(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -2083,71 +2077,71 @@ def hairpin(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             e'8
-                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
-                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC
-                            - \tweak stencil #constante-hairpin                                      %! SM8:EXPLICIT_DYNAMIC:PIC
-                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak stencil #constante-hairpin                                      %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             d''8
             <BLANKLINE>
                             f'8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             e''8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_2
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            % [MusicVoice measure 2]                                                 %! SM_4
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             g'8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
-                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC
-                            \>                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \>                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             f''8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             e'8
-                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_2
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            % [MusicVoice measure 3]                                                 %! SM_4
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             d''8
-                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
-                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC
-                            - \tweak stencil #constante-hairpin                                      %! SM8:EXPLICIT_DYNAMIC:PIC
-                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak stencil #constante-hairpin                                      %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             f'8
             <BLANKLINE>
                             e''8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             g'8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_2
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            % [MusicVoice measure 4]                                                 %! SM_4
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             f''8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
-                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC
-                            \>                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \>                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             d''8
-                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_2
                             ]
                             \revert DynamicLineSpanner.staff-padding                                 %! OC2
             <BLANKLINE>
@@ -2191,31 +2185,31 @@ def hairpin(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -2226,13 +2220,13 @@ def hairpin(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             e'8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
-                            - \tweak color #blue                                                     %! SM43 %! SM8:EXPLICIT_DYNAMIC:PIC
-                            \>                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak color #blue                                                     %! SM_43 %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \>                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             d''8
@@ -2242,18 +2236,18 @@ def hairpin(
                             e''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             g'8
                             [
             <BLANKLINE>
                             f''8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             e'8
                             ]
-                            <> \p                                                                    %! SM8:EXPLICIT_DYNAMIC:PIC
+                            <> \p                                                                    %! SM8:EXPLICIT_DYNAMIC:PIC_2
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             d''8
                             [
             <BLANKLINE>
@@ -2264,7 +2258,7 @@ def hairpin(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             f''8
                             [
             <BLANKLINE>
@@ -2312,31 +2306,31 @@ def hairpin(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -2347,15 +2341,15 @@ def hairpin(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             e'8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
-                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC
-                            - \tweak to-barline ##t                                                  %! SM8:EXPLICIT_DYNAMIC:PIC
-                            - \tweak circled-tip ##t                                                 %! SM8:EXPLICIT_DYNAMIC:PIC
-                            \>                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak to-barline ##t                                                  %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak circled-tip ##t                                                 %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \>                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             d''8
@@ -2365,18 +2359,18 @@ def hairpin(
                             e''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             g'8
                             [
             <BLANKLINE>
                             f''8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             e'8
                             ]
-                            <> \!                                                                    %! SM8:EXPLICIT_DYNAMIC:PIC
+                            <> \!                                                                    %! SM8:EXPLICIT_DYNAMIC:PIC_2
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             d''8
                             [
             <BLANKLINE>
@@ -2387,7 +2381,7 @@ def hairpin(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             f''8
                             [
             <BLANKLINE>
@@ -2433,31 +2427,31 @@ def hairpin(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -2468,11 +2462,11 @@ def hairpin(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             e'8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             d''8
@@ -2482,7 +2476,7 @@ def hairpin(
                             c''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             g'8
                             [
             <BLANKLINE>
@@ -2491,7 +2485,7 @@ def hairpin(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             d''8
                             [
             <BLANKLINE>
@@ -2502,7 +2496,7 @@ def hairpin(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             f''8
                             [
             <BLANKLINE>
@@ -2551,31 +2545,31 @@ def hairpin(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -2586,11 +2580,11 @@ def hairpin(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
                             e'8
-                            - \tweak color #blue                                                     %! SM43 %! SM8:EXPLICIT_DYNAMIC:PIC
-                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC
+                            - \tweak color #blue                                                     %! SM_43 %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             d''8
@@ -2600,7 +2594,7 @@ def hairpin(
                             c''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             g'8
                             [
             <BLANKLINE>
@@ -2609,7 +2603,7 @@ def hairpin(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             d''8
                             [
             <BLANKLINE>
@@ -2620,7 +2614,7 @@ def hairpin(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             f''8
                             [
             <BLANKLINE>
@@ -2963,31 +2957,31 @@ def text_spanner(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -2998,15 +2992,15 @@ def text_spanner(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \override TextSpanner.staff-padding = #4.5                               %! OC1
                             e'8
-                            - \abjad_dashed_line_with_arrow                                          %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "pont."              %! PIC
-                            - \tweak bound-details.right.text \markup \baca-right "ord."             %! PIC
-                            - \tweak bound-details.right.padding #0.5                                %! PIC
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
-                            \startTextSpan                                                           %! PIC
+                            - \abjad_dashed_line_with_arrow                                          %! PIC_1
+                            - \tweak bound-details.left.text \markup \baca-left "pont."              %! PIC_1
+                            - \tweak bound-details.right.text \markup \baca-right "ord."             %! PIC_1
+                            - \tweak bound-details.right.padding #0.5                                %! PIC_1
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC_1
+                            \startTextSpan                                                           %! PIC_1
                             [
             <BLANKLINE>
                             d''8
@@ -3016,7 +3010,7 @@ def text_spanner(
                             e''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             g'8
                             [
             <BLANKLINE>
@@ -3025,7 +3019,7 @@ def text_spanner(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             d''8
                             [
             <BLANKLINE>
@@ -3036,14 +3030,14 @@ def text_spanner(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             f''8
                             [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
                             d''8
-                            \stopTextSpan                                                            %! PIC
+                            \stopTextSpan                                                            %! PIC_2
                             ]
                             \revert TextSpanner.staff-padding                                        %! OC2
             <BLANKLINE>
@@ -3081,31 +3075,31 @@ def text_spanner(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -3116,30 +3110,30 @@ def text_spanner(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \override TextSpanner.staff-padding = #4.5                               %! OC1
                             e'8
-                            - \abjad_dashed_line_with_hook                                           %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "pont."              %! PIC
-                            - \tweak bound-details.right.text \markup {                              %! PIC
-                                \concat                                                              %! PIC
-                                    {                                                                %! PIC
-                                        \raise                                                       %! PIC
-                                            #-1                                                      %! PIC
-                                            \draw-line                                               %! PIC
-                                                #'(0 . -1)                                           %! PIC
-                                        \hspace                                                      %! PIC
-                                            #0.75                                                    %! PIC
-                                        \general-align                                               %! PIC
-                                            #Y                                                       %! PIC
-                                            #1                                                       %! PIC
-                                            \upright                                                 %! PIC
-                                                ord.                                                 %! PIC
-                                    }                                                                %! PIC
-                                }                                                                    %! PIC
-                            - \tweak bound-details.right.padding #1.25                               %! PIC
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
-                            \startTextSpan                                                           %! PIC
+                            - \abjad_dashed_line_with_hook                                           %! PIC_1
+                            - \tweak bound-details.left.text \markup \baca-left "pont."              %! PIC_1
+                            - \tweak bound-details.right.text \markup {                              %! PIC_1
+                                \concat                                                              %! PIC_1
+                                    {                                                                %! PIC_1
+                                        \raise                                                       %! PIC_1
+                                            #-1                                                      %! PIC_1
+                                            \draw-line                                               %! PIC_1
+                                                #'(0 . -1)                                           %! PIC_1
+                                        \hspace                                                      %! PIC_1
+                                            #0.75                                                    %! PIC_1
+                                        \general-align                                               %! PIC_1
+                                            #Y                                                       %! PIC_1
+                                            #1                                                       %! PIC_1
+                                            \upright                                                 %! PIC_1
+                                                ord.                                                 %! PIC_1
+                                    }                                                                %! PIC_1
+                                }                                                                    %! PIC_1
+                            - \tweak bound-details.right.padding #1.25                               %! PIC_1
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC_1
+                            \startTextSpan                                                           %! PIC_1
                             [
             <BLANKLINE>
                             d''8
@@ -3149,7 +3143,7 @@ def text_spanner(
                             e''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             g'8
                             [
             <BLANKLINE>
@@ -3158,7 +3152,7 @@ def text_spanner(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             d''8
                             [
             <BLANKLINE>
@@ -3169,14 +3163,14 @@ def text_spanner(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             f''8
                             [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
                             d''8
-                            \stopTextSpan                                                            %! PIC
+                            \stopTextSpan                                                            %! PIC_2
                             ]
                             \revert TextSpanner.staff-padding                                        %! OC2
             <BLANKLINE>
@@ -3214,31 +3208,31 @@ def text_spanner(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -3249,15 +3243,15 @@ def text_spanner(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \override TextSpanner.staff-padding = #4.5                               %! OC1
                             e'8
-                            - \abjad_solid_line_with_arrow                                           %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "pont."              %! PIC
-                            - \tweak bound-details.right.text \markup \baca-right "ord."             %! PIC
-                            - \tweak bound-details.right.padding #0.5                                %! PIC
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
-                            \startTextSpan                                                           %! PIC
+                            - \abjad_solid_line_with_arrow                                           %! PIC_1
+                            - \tweak bound-details.left.text \markup \baca-left "pont."              %! PIC_1
+                            - \tweak bound-details.right.text \markup \baca-right "ord."             %! PIC_1
+                            - \tweak bound-details.right.padding #0.5                                %! PIC_1
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC_1
+                            \startTextSpan                                                           %! PIC_1
                             [
             <BLANKLINE>
                             d''8
@@ -3267,7 +3261,7 @@ def text_spanner(
                             e''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             g'8
                             [
             <BLANKLINE>
@@ -3276,7 +3270,7 @@ def text_spanner(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             d''8
                             [
             <BLANKLINE>
@@ -3287,14 +3281,14 @@ def text_spanner(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             f''8
                             [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
                             d''8
-                            \stopTextSpan                                                            %! PIC
+                            \stopTextSpan                                                            %! PIC_2
                             ]
                             \revert TextSpanner.staff-padding                                        %! OC2
             <BLANKLINE>
@@ -3332,31 +3326,31 @@ def text_spanner(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -3367,30 +3361,30 @@ def text_spanner(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \override TextSpanner.staff-padding = #4.5                               %! OC1
                             e'8
-                            - \abjad_solid_line_with_hook                                            %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "pont."              %! PIC
-                            - \tweak bound-details.right.text \markup {                              %! PIC
-                                \concat                                                              %! PIC
-                                    {                                                                %! PIC
-                                        \raise                                                       %! PIC
-                                            #-1                                                      %! PIC
-                                            \draw-line                                               %! PIC
-                                                #'(0 . -1)                                           %! PIC
-                                        \hspace                                                      %! PIC
-                                            #0.75                                                    %! PIC
-                                        \general-align                                               %! PIC
-                                            #Y                                                       %! PIC
-                                            #1                                                       %! PIC
-                                            \upright                                                 %! PIC
-                                                ord.                                                 %! PIC
-                                    }                                                                %! PIC
-                                }                                                                    %! PIC
-                            - \tweak bound-details.right.padding #1.25                               %! PIC
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
-                            \startTextSpan                                                           %! PIC
+                            - \abjad_solid_line_with_hook                                            %! PIC_1
+                            - \tweak bound-details.left.text \markup \baca-left "pont."              %! PIC_1
+                            - \tweak bound-details.right.text \markup {                              %! PIC_1
+                                \concat                                                              %! PIC_1
+                                    {                                                                %! PIC_1
+                                        \raise                                                       %! PIC_1
+                                            #-1                                                      %! PIC_1
+                                            \draw-line                                               %! PIC_1
+                                                #'(0 . -1)                                           %! PIC_1
+                                        \hspace                                                      %! PIC_1
+                                            #0.75                                                    %! PIC_1
+                                        \general-align                                               %! PIC_1
+                                            #Y                                                       %! PIC_1
+                                            #1                                                       %! PIC_1
+                                            \upright                                                 %! PIC_1
+                                                ord.                                                 %! PIC_1
+                                    }                                                                %! PIC_1
+                                }                                                                    %! PIC_1
+                            - \tweak bound-details.right.padding #1.25                               %! PIC_1
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC_1
+                            \startTextSpan                                                           %! PIC_1
                             [
             <BLANKLINE>
                             d''8
@@ -3400,7 +3394,7 @@ def text_spanner(
                             e''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             g'8
                             [
             <BLANKLINE>
@@ -3409,7 +3403,7 @@ def text_spanner(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             d''8
                             [
             <BLANKLINE>
@@ -3420,14 +3414,14 @@ def text_spanner(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             f''8
                             [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
                             d''8
-                            \stopTextSpan                                                            %! PIC
+                            \stopTextSpan                                                            %! PIC_2
                             ]
                             \revert TextSpanner.staff-padding                                        %! OC2
             <BLANKLINE>
@@ -3465,31 +3459,31 @@ def text_spanner(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -3500,15 +3494,15 @@ def text_spanner(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \override TextSpanner.staff-padding = #4.5                               %! OC1
                             e'8
-                            - \abjad_invisible_line                                                  %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "pont."              %! PIC
-                            - \tweak bound-details.right.text \markup \baca-right "ord."             %! PIC
-                            - \tweak bound-details.right.padding #0.5                                %! PIC
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
-                            \startTextSpan                                                           %! PIC
+                            - \abjad_invisible_line                                                  %! PIC_1
+                            - \tweak bound-details.left.text \markup \baca-left "pont."              %! PIC_1
+                            - \tweak bound-details.right.text \markup \baca-right "ord."             %! PIC_1
+                            - \tweak bound-details.right.padding #0.5                                %! PIC_1
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC_1
+                            \startTextSpan                                                           %! PIC_1
                             [
             <BLANKLINE>
                             d''8
@@ -3518,7 +3512,7 @@ def text_spanner(
                             e''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             g'8
                             [
             <BLANKLINE>
@@ -3527,7 +3521,7 @@ def text_spanner(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             d''8
                             [
             <BLANKLINE>
@@ -3538,14 +3532,14 @@ def text_spanner(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             f''8
                             [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
                             d''8
-                            \stopTextSpan                                                            %! PIC
+                            \stopTextSpan                                                            %! PIC_2
                             ]
                             \revert TextSpanner.staff-padding                                        %! OC2
             <BLANKLINE>
@@ -3589,31 +3583,31 @@ def text_spanner(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -3624,13 +3618,13 @@ def text_spanner(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
                             \override TextSpanner.staff-padding = #4.5                               %! OC1
                             e'8
-                            - \abjad_invisible_line                                                  %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC
-                            \startTextSpan                                                           %! PIC
+                            - \abjad_invisible_line                                                  %! PIC_1
+                            - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC_1
+                            \startTextSpan                                                           %! PIC_1
                             [
             <BLANKLINE>
                             d''8
@@ -3640,12 +3634,12 @@ def text_spanner(
                             e''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             g'8
-                            \stopTextSpan                                                            %! PIC
-                            - \abjad_invisible_line                                                  %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC
-                            \startTextSpan                                                           %! PIC
+                            \stopTextSpan                                                            %! PIC_1
+                            - \abjad_invisible_line                                                  %! PIC_1
+                            - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC_1
+                            \startTextSpan                                                           %! PIC_1
                             [
             <BLANKLINE>
                             f''8
@@ -3653,12 +3647,12 @@ def text_spanner(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             d''8
-                            \stopTextSpan                                                            %! PIC
-                            - \abjad_invisible_line                                                  %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC
-                            \startTextSpan                                                           %! PIC
+                            \stopTextSpan                                                            %! PIC_1
+                            - \abjad_invisible_line                                                  %! PIC_1
+                            - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC_1
+                            \startTextSpan                                                           %! PIC_1
                             [
             <BLANKLINE>
                             f'8
@@ -3668,21 +3662,21 @@ def text_spanner(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             f''8
-                            \stopTextSpan                                                            %! PIC
-                            - \abjad_invisible_line                                                  %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC
-                            - \tweak bound-details.right.text \markup \baca-right "A"                %! PIC
-                            - \tweak bound-details.right.padding #0.5                                %! PIC
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
-                            \startTextSpan                                                           %! PIC
+                            \stopTextSpan                                                            %! PIC_1
+                            - \abjad_invisible_line                                                  %! PIC_1
+                            - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC_1
+                            - \tweak bound-details.right.text \markup \baca-right "A"                %! PIC_1
+                            - \tweak bound-details.right.padding #0.5                                %! PIC_1
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC_1
+                            \startTextSpan                                                           %! PIC_1
                             [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
                             d''8
-                            \stopTextSpan                                                            %! PIC
+                            \stopTextSpan                                                            %! PIC_2
                             ]
                             \revert DynamicLineSpanner.staff-padding                                 %! OC2
                             \revert TextSpanner.staff-padding                                        %! OC2
@@ -3725,31 +3719,31 @@ def text_spanner(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -3760,13 +3754,13 @@ def text_spanner(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
                             \override TextSpanner.staff-padding = #4.5                               %! OC1
                             e'8
-                            - \abjad_solid_line_with_arrow                                           %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC
-                            \startTextSpan                                                           %! PIC
+                            - \abjad_solid_line_with_arrow                                           %! PIC_1
+                            - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC_1
+                            \startTextSpan                                                           %! PIC_1
                             [
             <BLANKLINE>
                             d''8
@@ -3776,12 +3770,12 @@ def text_spanner(
                             e''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             g'8
-                            \stopTextSpan                                                            %! PIC
-                            - \abjad_solid_line_with_arrow                                           %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC
-                            \startTextSpan                                                           %! PIC
+                            \stopTextSpan                                                            %! PIC_1
+                            - \abjad_solid_line_with_arrow                                           %! PIC_1
+                            - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC_1
+                            \startTextSpan                                                           %! PIC_1
                             [
             <BLANKLINE>
                             f''8
@@ -3789,12 +3783,12 @@ def text_spanner(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             d''8
-                            \stopTextSpan                                                            %! PIC
-                            - \abjad_solid_line_with_arrow                                           %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC
-                            \startTextSpan                                                           %! PIC
+                            \stopTextSpan                                                            %! PIC_1
+                            - \abjad_solid_line_with_arrow                                           %! PIC_1
+                            - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC_1
+                            \startTextSpan                                                           %! PIC_1
                             [
             <BLANKLINE>
                             f'8
@@ -3804,21 +3798,21 @@ def text_spanner(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             f''8
-                            \stopTextSpan                                                            %! PIC
-                            - \abjad_solid_line_with_arrow                                           %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC
-                            - \tweak bound-details.right.text \markup \baca-right "A"                %! PIC
-                            - \tweak bound-details.right.padding #0.5                                %! PIC
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
-                            \startTextSpan                                                           %! PIC
+                            \stopTextSpan                                                            %! PIC_1
+                            - \abjad_solid_line_with_arrow                                           %! PIC_1
+                            - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC_1
+                            - \tweak bound-details.right.text \markup \baca-right "A"                %! PIC_1
+                            - \tweak bound-details.right.padding #0.5                                %! PIC_1
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC_1
+                            \startTextSpan                                                           %! PIC_1
                             [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
                             d''8
-                            \stopTextSpan                                                            %! PIC
+                            \stopTextSpan                                                            %! PIC_2
                             ]
                             \revert DynamicLineSpanner.staff-padding                                 %! OC2
                             \revert TextSpanner.staff-padding                                        %! OC2
@@ -3862,31 +3856,31 @@ def text_spanner(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -3897,16 +3891,16 @@ def text_spanner(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
                             \override TextSpanner.staff-padding = #4.5                               %! OC1
                             e'8
-                            - \abjad_invisible_line                                                  %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC
-                            - \tweak bound-details.right.text \markup \baca-right "B"                %! PIC
-                            - \tweak bound-details.right.padding #0.5                                %! PIC
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
-                            \startTextSpan                                                           %! PIC
+                            - \abjad_invisible_line                                                  %! PIC_1
+                            - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC_1
+                            - \tweak bound-details.right.text \markup \baca-right "B"                %! PIC_1
+                            - \tweak bound-details.right.padding #0.5                                %! PIC_1
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC_1
+                            \startTextSpan                                                           %! PIC_1
                             [
             <BLANKLINE>
                             d''8
@@ -3914,35 +3908,35 @@ def text_spanner(
                             f'8
             <BLANKLINE>
                             e''8
-                            \stopTextSpan                                                            %! PIC
+                            \stopTextSpan                                                            %! PIC_2
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             g'8
-                            \stopTextSpan                                                            %! PIC
-                            - \abjad_invisible_line                                                  %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC
-                            - \tweak bound-details.right.text \markup \baca-right "A"                %! PIC
-                            - \tweak bound-details.right.padding #0.5                                %! PIC
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
-                            \startTextSpan                                                           %! PIC
+                            \stopTextSpan                                                            %! PIC_1
+                            - \abjad_invisible_line                                                  %! PIC_1
+                            - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC_1
+                            - \tweak bound-details.right.text \markup \baca-right "A"                %! PIC_1
+                            - \tweak bound-details.right.padding #0.5                                %! PIC_1
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC_1
+                            \startTextSpan                                                           %! PIC_1
                             [
             <BLANKLINE>
                             f''8
             <BLANKLINE>
                             e'8
-                            \stopTextSpan                                                            %! PIC
+                            \stopTextSpan                                                            %! PIC_2
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             d''8
-                            \stopTextSpan                                                            %! PIC
-                            - \abjad_invisible_line                                                  %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC
-                            - \tweak bound-details.right.text \markup \baca-right "B"                %! PIC
-                            - \tweak bound-details.right.padding #0.5                                %! PIC
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
-                            \startTextSpan                                                           %! PIC
+                            \stopTextSpan                                                            %! PIC_1
+                            - \abjad_invisible_line                                                  %! PIC_1
+                            - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC_1
+                            - \tweak bound-details.right.text \markup \baca-right "B"                %! PIC_1
+                            - \tweak bound-details.right.padding #0.5                                %! PIC_1
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC_1
+                            \startTextSpan                                                           %! PIC_1
                             [
             <BLANKLINE>
                             f'8
@@ -3950,24 +3944,24 @@ def text_spanner(
                             e''8
             <BLANKLINE>
                             g'8
-                            \stopTextSpan                                                            %! PIC
+                            \stopTextSpan                                                            %! PIC_2
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             f''8
-                            \stopTextSpan                                                            %! PIC
-                            - \abjad_invisible_line                                                  %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC
-                            - \tweak bound-details.right.text \markup \baca-right "A"                %! PIC
-                            - \tweak bound-details.right.padding #0.5                                %! PIC
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
-                            \startTextSpan                                                           %! PIC
+                            \stopTextSpan                                                            %! PIC_1
+                            - \abjad_invisible_line                                                  %! PIC_1
+                            - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC_1
+                            - \tweak bound-details.right.text \markup \baca-right "A"                %! PIC_1
+                            - \tweak bound-details.right.padding #0.5                                %! PIC_1
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC_1
+                            \startTextSpan                                                           %! PIC_1
                             [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
                             d''8
-                            \stopTextSpan                                                            %! PIC
+                            \stopTextSpan                                                            %! PIC_2
                             ]
                             \revert DynamicLineSpanner.staff-padding                                 %! OC2
                             \revert TextSpanner.staff-padding                                        %! OC2
@@ -4011,31 +4005,31 @@ def text_spanner(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -4046,16 +4040,16 @@ def text_spanner(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
                             \override TextSpanner.staff-padding = #4.5                               %! OC1
                             e'8
-                            - \abjad_solid_line_with_arrow                                           %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC
-                            - \tweak bound-details.right.text \markup \baca-right "B"                %! PIC
-                            - \tweak bound-details.right.padding #0.5                                %! PIC
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
-                            \startTextSpan                                                           %! PIC
+                            - \abjad_solid_line_with_arrow                                           %! PIC_1
+                            - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC_1
+                            - \tweak bound-details.right.text \markup \baca-right "B"                %! PIC_1
+                            - \tweak bound-details.right.padding #0.5                                %! PIC_1
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC_1
+                            \startTextSpan                                                           %! PIC_1
                             [
             <BLANKLINE>
                             d''8
@@ -4063,35 +4057,35 @@ def text_spanner(
                             f'8
             <BLANKLINE>
                             e''8
-                            \stopTextSpan                                                            %! PIC
+                            \stopTextSpan                                                            %! PIC_2
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             g'8
-                            \stopTextSpan                                                            %! PIC
-                            - \abjad_solid_line_with_arrow                                           %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC
-                            - \tweak bound-details.right.text \markup \baca-right "A"                %! PIC
-                            - \tweak bound-details.right.padding #0.5                                %! PIC
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
-                            \startTextSpan                                                           %! PIC
+                            \stopTextSpan                                                            %! PIC_1
+                            - \abjad_solid_line_with_arrow                                           %! PIC_1
+                            - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC_1
+                            - \tweak bound-details.right.text \markup \baca-right "A"                %! PIC_1
+                            - \tweak bound-details.right.padding #0.5                                %! PIC_1
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC_1
+                            \startTextSpan                                                           %! PIC_1
                             [
             <BLANKLINE>
                             f''8
             <BLANKLINE>
                             e'8
-                            \stopTextSpan                                                            %! PIC
+                            \stopTextSpan                                                            %! PIC_2
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             d''8
-                            \stopTextSpan                                                            %! PIC
-                            - \abjad_solid_line_with_arrow                                           %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC
-                            - \tweak bound-details.right.text \markup \baca-right "B"                %! PIC
-                            - \tweak bound-details.right.padding #0.5                                %! PIC
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
-                            \startTextSpan                                                           %! PIC
+                            \stopTextSpan                                                            %! PIC_1
+                            - \abjad_solid_line_with_arrow                                           %! PIC_1
+                            - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC_1
+                            - \tweak bound-details.right.text \markup \baca-right "B"                %! PIC_1
+                            - \tweak bound-details.right.padding #0.5                                %! PIC_1
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC_1
+                            \startTextSpan                                                           %! PIC_1
                             [
             <BLANKLINE>
                             f'8
@@ -4099,24 +4093,24 @@ def text_spanner(
                             e''8
             <BLANKLINE>
                             g'8
-                            \stopTextSpan                                                            %! PIC
+                            \stopTextSpan                                                            %! PIC_2
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             f''8
-                            \stopTextSpan                                                            %! PIC
-                            - \abjad_solid_line_with_arrow                                           %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC
-                            - \tweak bound-details.right.text \markup \baca-right "A"                %! PIC
-                            - \tweak bound-details.right.padding #0.5                                %! PIC
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
-                            \startTextSpan                                                           %! PIC
+                            \stopTextSpan                                                            %! PIC_1
+                            - \abjad_solid_line_with_arrow                                           %! PIC_1
+                            - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC_1
+                            - \tweak bound-details.right.text \markup \baca-right "A"                %! PIC_1
+                            - \tweak bound-details.right.padding #0.5                                %! PIC_1
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC_1
+                            \startTextSpan                                                           %! PIC_1
                             [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
                             d''8
-                            \stopTextSpan                                                            %! PIC
+                            \stopTextSpan                                                            %! PIC_2
                             ]
                             \revert DynamicLineSpanner.staff-padding                                 %! OC2
                             \revert TextSpanner.staff-padding                                        %! OC2
@@ -4162,31 +4156,31 @@ def text_spanner(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -4197,13 +4191,13 @@ def text_spanner(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
                             \override TextSpanner.staff-padding = #4.5                               %! OC1
                             e'8
-                            - \abjad_dashed_line_with_hook                                           %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left \baca_damp_markup    %! PIC
-                            \startTextSpan                                                           %! PIC
+                            - \abjad_dashed_line_with_hook                                           %! PIC_1
+                            - \tweak bound-details.left.text \markup \baca-left \baca_damp_markup    %! PIC_1
+                            \startTextSpan                                                           %! PIC_1
                             [
             <BLANKLINE>
                             d''8
@@ -4213,7 +4207,7 @@ def text_spanner(
                             e''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             g'8
                             [
             <BLANKLINE>
@@ -4222,9 +4216,9 @@ def text_spanner(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             d''8
-                            \stopTextSpan                                                            %! PIC
+                            \stopTextSpan                                                            %! PIC_3
                             [
             <BLANKLINE>
                             f'8
@@ -4234,7 +4228,7 @@ def text_spanner(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             f''8
                             [
             <BLANKLINE>
@@ -4285,31 +4279,31 @@ def text_spanner(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM4
+                        % [GlobalSkips measure 1]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM4
+                        % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM4
+                        % [GlobalSkips measure 3]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 1/2
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM4
+                        % [GlobalSkips measure 4]                                                    %! SM_4
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM1
+                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
+                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                         s1 * 3/8
-                        \baca_bar_line_visible                                                       %! SM5
-                        \bar "|"                                                                     %! SM5
+                        \baca_bar_line_visible                                                       %! SM_5
+                        \bar "|"                                                                     %! SM_5
             <BLANKLINE>
                     }
                 >>
@@ -4320,13 +4314,13 @@ def text_spanner(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM4
+                            % [MusicVoice measure 1]                                                 %! SM_4
                             \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
                             \override TextSpanner.staff-padding = #4.5                               %! OC1
                             e'8
-                            - \abjad_solid_line_with_hook                                            %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC
-                            \startTextSpan                                                           %! PIC
+                            - \abjad_solid_line_with_hook                                            %! PIC_1
+                            - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC_1
+                            \startTextSpan                                                           %! PIC_1
                             [
             <BLANKLINE>
                             d''8
@@ -4336,12 +4330,12 @@ def text_spanner(
                             e''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM4
+                            % [MusicVoice measure 2]                                                 %! SM_4
                             g'8
-                            \stopTextSpan                                                            %! PIC
-                            - \abjad_solid_line_with_hook                                            %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC
-                            \startTextSpan                                                           %! PIC
+                            \stopTextSpan                                                            %! PIC_1
+                            - \abjad_solid_line_with_hook                                            %! PIC_1
+                            - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC_1
+                            \startTextSpan                                                           %! PIC_1
                             [
             <BLANKLINE>
                             f''8
@@ -4349,12 +4343,12 @@ def text_spanner(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM4
+                            % [MusicVoice measure 3]                                                 %! SM_4
                             d''8
-                            \stopTextSpan                                                            %! PIC
-                            - \abjad_solid_line_with_hook                                            %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC
-                            \startTextSpan                                                           %! PIC
+                            \stopTextSpan                                                            %! PIC_1
+                            - \abjad_solid_line_with_hook                                            %! PIC_1
+                            - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC_1
+                            \startTextSpan                                                           %! PIC_1
                             [
             <BLANKLINE>
                             f'8
@@ -4364,36 +4358,36 @@ def text_spanner(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM4
+                            % [MusicVoice measure 4]                                                 %! SM_4
                             f''8
-                            \stopTextSpan                                                            %! PIC
-                            - \abjad_solid_line_with_hook                                            %! PIC
-                            - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC
-                            - \tweak bound-details.right.text \markup {                              %! PIC
-                                \concat                                                              %! PIC
-                                    {                                                                %! PIC
-                                        \raise                                                       %! PIC
-                                            #-1                                                      %! PIC
-                                            \draw-line                                               %! PIC
-                                                #'(0 . -1)                                           %! PIC
-                                        \hspace                                                      %! PIC
-                                            #0.75                                                    %! PIC
-                                        \general-align                                               %! PIC
-                                            #Y                                                       %! PIC
-                                            #1                                                       %! PIC
-                                            \upright                                                 %! PIC
-                                                A                                                    %! PIC
-                                    }                                                                %! PIC
-                                }                                                                    %! PIC
-                            - \tweak bound-details.right.padding #1.25                               %! PIC
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC
-                            \startTextSpan                                                           %! PIC
+                            \stopTextSpan                                                            %! PIC_1
+                            - \abjad_solid_line_with_hook                                            %! PIC_1
+                            - \tweak bound-details.left.text \markup \baca-left "B"                  %! PIC_1
+                            - \tweak bound-details.right.text \markup {                              %! PIC_1
+                                \concat                                                              %! PIC_1
+                                    {                                                                %! PIC_1
+                                        \raise                                                       %! PIC_1
+                                            #-1                                                      %! PIC_1
+                                            \draw-line                                               %! PIC_1
+                                                #'(0 . -1)                                           %! PIC_1
+                                        \hspace                                                      %! PIC_1
+                                            #0.75                                                    %! PIC_1
+                                        \general-align                                               %! PIC_1
+                                            #Y                                                       %! PIC_1
+                                            #1                                                       %! PIC_1
+                                            \upright                                                 %! PIC_1
+                                                A                                                    %! PIC_1
+                                    }                                                                %! PIC_1
+                                }                                                                    %! PIC_1
+                            - \tweak bound-details.right.padding #1.25                               %! PIC_1
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PIC_1
+                            \startTextSpan                                                           %! PIC_1
                             [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
                             d''8
-                            \stopTextSpan                                                            %! PIC
+                            \stopTextSpan                                                            %! PIC_2
                             ]
                             \revert DynamicLineSpanner.staff-padding                                 %! OC2
                             \revert TextSpanner.staff-padding                                        %! OC2
