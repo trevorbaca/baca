@@ -56,31 +56,31 @@ class RhythmCommand(scoping.Command):
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
-                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
+                        \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }
                 >>
@@ -91,7 +91,7 @@ class RhythmCommand(scoping.Command):
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \baca_unpitched_music_warning                                            %! SM_24
                             c'8
                             [
@@ -103,7 +103,7 @@ class RhythmCommand(scoping.Command):
                             c'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             \baca_unpitched_music_warning                                            %! SM_24
                             c'8
                             [
@@ -118,7 +118,7 @@ class RhythmCommand(scoping.Command):
                             c'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             \baca_unpitched_music_warning                                            %! SM_24
                             c'8
                             [
@@ -130,7 +130,7 @@ class RhythmCommand(scoping.Command):
                             c'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             \baca_unpitched_music_warning                                            %! SM_24
                             c'8
                             [
@@ -516,31 +516,31 @@ class RhythmCommand(scoping.Command):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                            % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                            \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
+                            % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                             \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                            \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                            \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
+                            % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                             \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                            \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
+                            % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                             \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                            \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
-                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                            \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            s1 * 1/2                                                                     %! _make_global_skips(1)
+                            \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                            \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
                         }
                     >>
@@ -551,7 +551,7 @@ class RhythmCommand(scoping.Command):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                                % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                                 [
@@ -562,7 +562,7 @@ class RhythmCommand(scoping.Command):
                                 \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
+                                % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                                 \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                 <BLANKLINE>
@@ -575,7 +575,7 @@ class RhythmCommand(scoping.Command):
                                 \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                 <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
+                                % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                                 \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                 <BLANKLINE>
@@ -585,7 +585,7 @@ class RhythmCommand(scoping.Command):
                                 \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                 <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
+                                % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                                 \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                 <BLANKLINE>
@@ -710,13 +710,13 @@ class RhythmCommand(scoping.Command):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                            % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                            \time 10/8                                                                   %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                            s1 * 5/4                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
-                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
+                            \time 10/8                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                            \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            s1 * 5/4                                                                     %! _make_global_skips(1)
+                            \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                            \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
                         }
                     >>
@@ -727,7 +727,7 @@ class RhythmCommand(scoping.Command):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                                % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 \baca_unpitched_music_warning                                            %! SM_24
                                 c'4.
                 <BLANKLINE>
@@ -815,29 +815,29 @@ class RhythmCommand(scoping.Command):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                            % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \baca_new_spacing_section #1 #16                                             %! HSS1:SPACING
-                            \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                            \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
+                            % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                             \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                            s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
+                            % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                             \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                            s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
+                            % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                             \baca_new_spacing_section #1 #16                                             %! HSS1:SPACING
-                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                            s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
-                            % [GlobalSkips measure 5]                                                    %! COMMENT_MEASURE_NUMBERS
+                            % [GlobalSkips measure 5]                                                    %! _comment_measure_numbers
                             \baca_new_spacing_section #1 #16                                             %! HSS1:SPACING
-                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
-                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
+                            s1 * 1/2                                                                     %! _make_global_skips(1)
+                            \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                            \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
                         }
                     >>
@@ -848,9 +848,9 @@ class RhythmCommand(scoping.Command):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
-                                \override TextScript.font-size = #-2                                     %! OVERRIDE_COMMAND_1
-                                \override TextScript.staff-padding = #5                                  %! OVERRIDE_COMMAND_1
+                                % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                                \override TextScript.font-size = #-2                                     %! OverrideCommand(1)
+                                \override TextScript.staff-padding = #5                                  %! OverrideCommand(1)
                                 \baca_unpitched_music_warning                                            %! SM_24
                                 c'8.
                                 _ \markup {
@@ -876,7 +876,7 @@ class RhythmCommand(scoping.Command):
                                     }
                                 ~
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
+                                % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                                 \baca_unpitched_music_warning                                            %! SM_24
                                 c'8
                 <BLANKLINE>
@@ -896,7 +896,7 @@ class RhythmCommand(scoping.Command):
                                         16
                                     }
                 <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
+                                % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                                 r2
                                 _ \markup {
                                     \fraction
@@ -904,7 +904,7 @@ class RhythmCommand(scoping.Command):
                                         16
                                     }
                 <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
+                                % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                                 \baca_unpitched_music_warning                                            %! SM_24
                                 c'16
                                 _ \markup {
@@ -929,7 +929,7 @@ class RhythmCommand(scoping.Command):
                                         16
                                     }
                 <BLANKLINE>
-                                % [MusicVoice measure 5]                                                 %! COMMENT_MEASURE_NUMBERS
+                                % [MusicVoice measure 5]                                                 %! _comment_measure_numbers
                                 \baca_unpitched_music_warning                                            %! SM_24
                                 c'4
                                 _ \markup {
@@ -955,8 +955,8 @@ class RhythmCommand(scoping.Command):
                                         16
                                     }
                                 ]
-                                \revert TextScript.font-size                                             %! OVERRIDE_COMMAND_2
-                                \revert TextScript.staff-padding                                         %! OVERRIDE_COMMAND_2
+                                \revert TextScript.font-size                                             %! OverrideCommand(2)
+                                \revert TextScript.staff-padding                                         %! OverrideCommand(2)
                 <BLANKLINE>
                             }
                         }
@@ -1686,7 +1686,7 @@ def beam_runs(*, hide_nibs: bool = False) -> rmakers.BeamSpecifier:
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             \set stemLeftBeamCount = 2
                             \set stemRightBeamCount = 2
@@ -1737,7 +1737,7 @@ def beam_runs(*, hide_nibs: bool = False) -> rmakers.BeamSpecifier:
                             a'16
                             ]
                             r8
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -1771,7 +1771,7 @@ def beam_runs(*, hide_nibs: bool = False) -> rmakers.BeamSpecifier:
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -1800,7 +1800,7 @@ def beam_runs(*, hide_nibs: bool = False) -> rmakers.BeamSpecifier:
                             a'16
                             ]
                             r8
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -1846,7 +1846,7 @@ def flags() -> rmakers.BeamSpecifier:
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
                             d'16
@@ -1869,7 +1869,7 @@ def flags() -> rmakers.BeamSpecifier:
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -2058,31 +2058,31 @@ def make_rhythm(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
-                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
+                        \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }
                 >>
@@ -2093,19 +2093,19 @@ def make_rhythm(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             d'4.
                             ~
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             d'2
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             d'4.
                             \repeatTie
                             ~
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             d'2
             <BLANKLINE>
                         }
@@ -2216,31 +2216,31 @@ def repeat_tie_from(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
-                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+                        \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }
                 >>
@@ -2251,17 +2251,17 @@ def repeat_tie_from(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             c'2
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             c'4.
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             c'2
                             \repeatTie                                                               %! TCC
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             c'4.
             <BLANKLINE>
                         }
@@ -2310,31 +2310,31 @@ def repeat_tie_to(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
-                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+                        \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }
                 >>
@@ -2345,17 +2345,17 @@ def repeat_tie_to(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             c'2
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             c'4.
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             c'2
                             \repeatTie                                                               %! TCC
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             c'4.
             <BLANKLINE>
                         }
@@ -2435,27 +2435,27 @@ def tie_from(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
-                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
-                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
-                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
-                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
-                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
+                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+                        \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }
                 >>
@@ -2466,17 +2466,17 @@ def tie_from(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             c'2
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             c'4.
                             ~                                                                        %! TCC
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             c'2
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             c'4.
             <BLANKLINE>
                         }
@@ -2524,27 +2524,27 @@ def tie_to(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
-                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
-                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
-                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
-                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
-                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
+                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+                        \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }
                 >>
@@ -2555,17 +2555,17 @@ def tie_to(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             c'2
                             ~                                                                        %! TCC
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             c'4.
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             c'2
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             c'4.
             <BLANKLINE>
                         }
@@ -2614,27 +2614,27 @@ def untie_to(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
-                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
-                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
-                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
-                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
-                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
+                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+                        \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }
                 >>
@@ -2645,18 +2645,18 @@ def untie_to(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             c'2
                             ~
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             c'4.
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             c'2
                             ~
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             c'4.
             <BLANKLINE>
                         }

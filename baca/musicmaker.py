@@ -1524,7 +1524,7 @@ class ImbricationCommand(scoping.Command):
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 d'16
-                                -\staccato                                                           %! INDICATOR_COMMAND
+                                -\staccato                                                           %! IndicatorCommand
                                 s16
                                 s16
                                 s16
@@ -1535,11 +1535,11 @@ class ImbricationCommand(scoping.Command):
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 g''16
-                                -\staccato                                                           %! INDICATOR_COMMAND
+                                -\staccato                                                           %! IndicatorCommand
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 a'16
-                                -\staccato                                                           %! INDICATOR_COMMAND
+                                -\staccato                                                           %! IndicatorCommand
                                 s16
                             }
                             \scaleDurations #'(1 . 1) {
@@ -1628,7 +1628,7 @@ class ImbricationCommand(scoping.Command):
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 1
                                 e''16
-                                -\accent                                                             %! INDICATOR_COMMAND
+                                -\accent                                                             %! IndicatorCommand
                             }
                             \scaleDurations #'(1 . 1) {
                                 s16
@@ -1642,11 +1642,11 @@ class ImbricationCommand(scoping.Command):
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 bf'16
-                                -\accent                                                             %! INDICATOR_COMMAND
+                                -\accent                                                             %! IndicatorCommand
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 fs''16
-                                -\accent                                                             %! INDICATOR_COMMAND
+                                -\accent                                                             %! IndicatorCommand
                                 s16
                                 s16
                                 ]
@@ -1724,7 +1724,7 @@ class ImbricationCommand(scoping.Command):
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 d'16
-                                -\accent                                                             %! INDICATOR_COMMAND
+                                -\accent                                                             %! IndicatorCommand
                                 s16
                                 s16
                                 s16
@@ -1736,11 +1736,11 @@ class ImbricationCommand(scoping.Command):
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 g''16
-                                -\accent                                                             %! INDICATOR_COMMAND
+                                -\accent                                                             %! IndicatorCommand
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 a'16
-                                -\accent                                                             %! INDICATOR_COMMAND
+                                -\accent                                                             %! IndicatorCommand
                                 s16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
@@ -1750,11 +1750,11 @@ class ImbricationCommand(scoping.Command):
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 fs''16
-                                -\accent                                                             %! INDICATOR_COMMAND
+                                -\accent                                                             %! IndicatorCommand
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 e''16
-                                -\accent                                                             %! INDICATOR_COMMAND
+                                -\accent                                                             %! IndicatorCommand
                                 s16
                                 ]
                             }
@@ -1771,70 +1771,70 @@ class ImbricationCommand(scoping.Command):
                                 \set stemLeftBeamCount = 0
                                 \set stemRightBeamCount = 2
                                 c'16
-                                -\staccato                                                           %! INDICATOR_COMMAND
+                                -\staccato                                                           %! IndicatorCommand
                                 [
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 d'16
-                                -\staccato                                                           %! INDICATOR_COMMAND
+                                -\staccato                                                           %! IndicatorCommand
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 bf'16
-                                -\staccato                                                           %! INDICATOR_COMMAND
+                                -\staccato                                                           %! IndicatorCommand
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 fs''16
-                                -\staccato                                                           %! INDICATOR_COMMAND
+                                -\staccato                                                           %! IndicatorCommand
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 1
                                 e''16
-                                -\staccato                                                           %! INDICATOR_COMMAND
+                                -\staccato                                                           %! IndicatorCommand
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 6/5 {
                                 \set stemLeftBeamCount = 1
                                 \set stemRightBeamCount = 2
                                 ef''16
-                                -\staccato                                                           %! INDICATOR_COMMAND
+                                -\staccato                                                           %! IndicatorCommand
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 af''16
-                                -\staccato                                                           %! INDICATOR_COMMAND
+                                -\staccato                                                           %! IndicatorCommand
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 g''16
-                                -\staccato                                                           %! INDICATOR_COMMAND
+                                -\staccato                                                           %! IndicatorCommand
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 a'16
-                                -\staccato                                                           %! INDICATOR_COMMAND
+                                -\staccato                                                           %! IndicatorCommand
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 1
                                 c'16
-                                -\staccato                                                           %! INDICATOR_COMMAND
+                                -\staccato                                                           %! IndicatorCommand
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 6/5 {
                                 \set stemLeftBeamCount = 1
                                 \set stemRightBeamCount = 2
                                 d'16
-                                -\staccato                                                           %! INDICATOR_COMMAND
+                                -\staccato                                                           %! IndicatorCommand
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 bf'16
-                                -\staccato                                                           %! INDICATOR_COMMAND
+                                -\staccato                                                           %! IndicatorCommand
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 fs''16
-                                -\staccato                                                           %! INDICATOR_COMMAND
+                                -\staccato                                                           %! IndicatorCommand
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 e''16
-                                -\staccato                                                           %! INDICATOR_COMMAND
+                                -\staccato                                                           %! IndicatorCommand
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 0
                                 ef''16
-                                -\staccato                                                           %! INDICATOR_COMMAND
+                                -\staccato                                                           %! IndicatorCommand
                                 ]
                             }
                         }
@@ -1965,21 +1965,21 @@ class ImbricationCommand(scoping.Command):
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 1
                                     bf'8.
-                                    -\accent                                                             %! INDICATOR_COMMAND
+                                    -\accent                                                             %! IndicatorCommand
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 1
                                     fs''8.
-                                    -\accent                                                             %! INDICATOR_COMMAND
+                                    -\accent                                                             %! IndicatorCommand
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 1
                                     e''8.
-                                    -\accent                                                             %! INDICATOR_COMMAND
+                                    -\accent                                                             %! IndicatorCommand
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 1
                                     ef''8.
-                                    -\accent                                                             %! INDICATOR_COMMAND
+                                    -\accent                                                             %! IndicatorCommand
                                     s8.
                                     s8.
                                 }
@@ -2072,7 +2072,7 @@ class ImbricationCommand(scoping.Command):
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     c'16
-                                    -\accent                                                             %! INDICATOR_COMMAND
+                                    -\accent                                                             %! IndicatorCommand
                                     [
                                     s16
                                     s16
@@ -2091,11 +2091,11 @@ class ImbricationCommand(scoping.Command):
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     bf'16
-                                    -\accent                                                             %! INDICATOR_COMMAND
+                                    -\accent                                                             %! IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''16
-                                    -\accent                                                             %! INDICATOR_COMMAND
+                                    -\accent                                                             %! IndicatorCommand
                                     s16
                                 }
                                 \scaleDurations #'(1 . 1) {
@@ -2242,19 +2242,19 @@ class ImbricationCommand(scoping.Command):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                            % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \time 7/16                                                                   %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                            s1 * 7/16                                                                    %! MAKE_GLOBAL_SKIPS_1
+                            \time 7/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                            \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            s1 * 7/16                                                                    %! _make_global_skips(1)
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
+                            % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \time 1/4                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                            s1 * 1/4                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
-                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
+                            \time 1/4                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                            \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            s1 * 1/4                                                                     %! _make_global_skips(1)
+                            \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                            \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
                         }
                     >>
@@ -2269,19 +2269,19 @@ class ImbricationCommand(scoping.Command):
                                     \override TupletNumber.stencil = ##f
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % [MusicVoiceOne measure 1]                                      %! COMMENT_MEASURE_NUMBERS
+                                        % [MusicVoiceOne measure 1]                                      %! _comment_measure_numbers
                                         s16
                                         [                                                                %! SM_35
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2                                       %! SM_35
                                         \set stemRightBeamCount = 2                                      %! SM_35
                                         d'16
-                                        -\staccato                                                       %! INDICATOR_COMMAND
+                                        -\staccato                                                       %! IndicatorCommand
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2                                       %! SM_35
                                         \set stemRightBeamCount = 2                                      %! SM_35
                                         bf'!16
-                                        -\staccato                                                       %! INDICATOR_COMMAND
+                                        -\staccato                                                       %! IndicatorCommand
                 <BLANKLINE>
                                         s16
                                     }
@@ -2301,18 +2301,18 @@ class ImbricationCommand(scoping.Command):
                                     \override TupletNumber.stencil = ##f
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % [MusicVoiceOne measure 2]                                      %! COMMENT_MEASURE_NUMBERS
+                                        % [MusicVoiceOne measure 2]                                      %! _comment_measure_numbers
                                         s16
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2                                       %! SM_35
                                         \set stemRightBeamCount = 2                                      %! SM_35
                                         cs''!16
-                                        -\staccato                                                       %! INDICATOR_COMMAND
+                                        -\staccato                                                       %! IndicatorCommand
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2                                       %! SM_35
                                         \set stemRightBeamCount = 2                                      %! SM_35
                                         a'16
-                                        -\staccato                                                       %! INDICATOR_COMMAND
+                                        -\staccato                                                       %! IndicatorCommand
                 <BLANKLINE>
                                         s16
                                         ]                                                                %! SM_35
@@ -2327,7 +2327,7 @@ class ImbricationCommand(scoping.Command):
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % [MusicVoiceTwo measure 1]                                      %! COMMENT_MEASURE_NUMBERS
+                                        % [MusicVoiceTwo measure 1]                                      %! _comment_measure_numbers
                                         \set stemLeftBeamCount = 0
                                         \set stemRightBeamCount = 2
                                         c'16
@@ -2364,7 +2364,7 @@ class ImbricationCommand(scoping.Command):
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % [MusicVoiceTwo measure 2]                                      %! COMMENT_MEASURE_NUMBERS
+                                        % [MusicVoiceTwo measure 2]                                      %! _comment_measure_numbers
                                         \set stemLeftBeamCount = 0
                                         \set stemRightBeamCount = 2
                                         g''16
@@ -2860,7 +2860,7 @@ class ImbricationCommand(scoping.Command):
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
-                                    -\accent                                                             %! INDICATOR_COMMAND
+                                    -\accent                                                             %! IndicatorCommand
                                     s16
                                     s16
                                     s16
@@ -2871,11 +2871,11 @@ class ImbricationCommand(scoping.Command):
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     g''16
-                                    -\accent                                                             %! INDICATOR_COMMAND
+                                    -\accent                                                             %! IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     a'16
-                                    -\accent                                                             %! INDICATOR_COMMAND
+                                    -\accent                                                             %! IndicatorCommand
                                     s16
                                     ]
                                 }
@@ -2891,46 +2891,46 @@ class ImbricationCommand(scoping.Command):
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     c'16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                     [
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     bf'16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
                                     e''16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     ef''16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     af''16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     g''16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     a'16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 0
                                     c'16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                     ]
                                 }
                             }
@@ -3070,7 +3070,7 @@ class ImbricationCommand(scoping.Command):
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
-                                    -\accent                                                             %! INDICATOR_COMMAND
+                                    -\accent                                                             %! IndicatorCommand
                                     s16
                                     s16
                                     s16
@@ -3081,11 +3081,11 @@ class ImbricationCommand(scoping.Command):
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     g''16
-                                    -\accent                                                             %! INDICATOR_COMMAND
+                                    -\accent                                                             %! IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     a'16
-                                    -\accent                                                             %! INDICATOR_COMMAND
+                                    -\accent                                                             %! IndicatorCommand
                                     s16
                                 }
                                 \scaleDurations #'(1 . 1) {
@@ -3094,11 +3094,11 @@ class ImbricationCommand(scoping.Command):
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''16
-                                    -\accent                                                             %! INDICATOR_COMMAND
+                                    -\accent                                                             %! IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     e''16
-                                    -\accent                                                             %! INDICATOR_COMMAND
+                                    -\accent                                                             %! IndicatorCommand
                                     s16
                                     ]
                                 }
@@ -3114,53 +3114,53 @@ class ImbricationCommand(scoping.Command):
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     c'16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                     [
                                     s16
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     bf'16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
                                     e''16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     ef''16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     af''16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                     s16
                                     s16
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
                                     c'16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     d'16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     bf'16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                     s16
                                     s16
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 0
                                     ef''16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                     ]
                                 }
                             }
@@ -3265,22 +3265,22 @@ class ImbricationCommand(scoping.Command):
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
-                                    -\accent                                                             %! INDICATOR_COMMAND
+                                    -\accent                                                             %! IndicatorCommand
                                     s16
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''16
-                                    -\accent                                                             %! INDICATOR_COMMAND
+                                    -\accent                                                             %! IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
                                     e''16
-                                    -\accent                                                             %! INDICATOR_COMMAND
+                                    -\accent                                                             %! IndicatorCommand
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     ef''16
-                                    -\accent                                                             %! INDICATOR_COMMAND
+                                    -\accent                                                             %! IndicatorCommand
                                     s16
                                     s16
                                     s16
@@ -3298,82 +3298,82 @@ class ImbricationCommand(scoping.Command):
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     c'16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                     [
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     bf'16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
                                     e''16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     ef''16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     af''16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     g''16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
                                     a'16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     c'16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     bf'16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
                                     e''16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     ef''16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     af''16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     g''16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 0
                                     a'16
-                                    -\staccato                                                           %! INDICATOR_COMMAND
+                                    -\staccato                                                           %! IndicatorCommand
                                     ]
                                 }
                             }
@@ -7014,8 +7014,8 @@ class MusicMaker(abjad.AbjadObject):
                         {
                             \scaleDurations #'(1 . 1) {
                                 c'16
-                                \p                                                                       %! PIC_1
-                                \<                                                                       %! PIC_1
+                                \p                                                                       %! PiecewiseIndicatorCommand(1)
+                                \<                                                                       %! PiecewiseIndicatorCommand(1)
                                 [
                                 d'16
                                 bf'16
@@ -7035,7 +7035,7 @@ class MusicMaker(abjad.AbjadObject):
                                 cs''16
                                 a'16
                                 af'16
-                                \f                                                                       %! PIC_2
+                                \f                                                                       %! PiecewiseIndicatorCommand(2)
                                 ]
                             }
                         }
@@ -7082,20 +7082,20 @@ class MusicMaker(abjad.AbjadObject):
                         {
                             \scaleDurations #'(1 . 1) {
                                 c'16
-                                \p                                                                       %! PIC_1
-                                \<                                                                       %! PIC_1
+                                \p                                                                       %! PiecewiseIndicatorCommand(1)
+                                \<                                                                       %! PiecewiseIndicatorCommand(1)
                                 [
                                 d'16
                                 bf'16
                                 fs''16
-                                \f                                                                       %! PIC_2
+                                \f                                                                       %! PiecewiseIndicatorCommand(2)
                                 ]
                             }
                             \scaleDurations #'(1 . 1) {
                                 r16
                                 ef''16
-                                \p                                                                       %! PIC_1
-                                \<                                                                       %! PIC_1
+                                \p                                                                       %! PiecewiseIndicatorCommand(1)
+                                \<                                                                       %! PiecewiseIndicatorCommand(1)
                                 [
                                 b''16
                                 ]
@@ -7106,7 +7106,7 @@ class MusicMaker(abjad.AbjadObject):
                                 cs''16
                                 a'16
                                 af'16
-                                \f                                                                       %! PIC_2
+                                \f                                                                       %! PiecewiseIndicatorCommand(2)
                                 ]
                             }
                         }
@@ -7150,13 +7150,13 @@ class MusicMaker(abjad.AbjadObject):
                         {
                             \scaleDurations #'(1 . 1) {
                                 c'16
-                                \p                                                                       %! PIC_1
-                                \<                                                                       %! PIC_1
+                                \p                                                                       %! PiecewiseIndicatorCommand(1)
+                                \<                                                                       %! PiecewiseIndicatorCommand(1)
                                 [
                                 d'16
                                 bf'16
                                 fs''16
-                                \f                                                                       %! PIC_2
+                                \f                                                                       %! PiecewiseIndicatorCommand(2)
                                 ]
                             }
                             \scaleDurations #'(1 . 1) {
@@ -7168,13 +7168,13 @@ class MusicMaker(abjad.AbjadObject):
                             }
                             \scaleDurations #'(1 . 1) {
                                 g''16
-                                \f                                                                       %! PIC_1
-                                \>                                                                       %! PIC_1
+                                \f                                                                       %! PiecewiseIndicatorCommand(1)
+                                \>                                                                       %! PiecewiseIndicatorCommand(1)
                                 [
                                 cs''16
                                 a'16
                                 af'16
-                                \p                                                                       %! PIC_2
+                                \p                                                                       %! PiecewiseIndicatorCommand(2)
                                 ]
                             }
                         }
@@ -7218,34 +7218,34 @@ class MusicMaker(abjad.AbjadObject):
                         {
                             \scaleDurations #'(1 . 1) {
                                 c'16
-                                \p                                                                       %! PIC_1
-                                \<                                                                       %! PIC_1
+                                \p                                                                       %! PiecewiseIndicatorCommand(1)
+                                \<                                                                       %! PiecewiseIndicatorCommand(1)
                                 [
                                 d'16
                                 bf'16
                                 fs''16
-                                \f                                                                       %! PIC_2
+                                \f                                                                       %! PiecewiseIndicatorCommand(2)
                                 ]
                             }
                             \scaleDurations #'(1 . 1) {
                                 e''16
-                                \p                                                                       %! PIC_1
-                                \<                                                                       %! PIC_1
+                                \p                                                                       %! PiecewiseIndicatorCommand(1)
+                                \<                                                                       %! PiecewiseIndicatorCommand(1)
                                 [
                                 ef''16
                                 b''16
-                                \f                                                                       %! PIC_2
+                                \f                                                                       %! PiecewiseIndicatorCommand(2)
                                 ]
                             }
                             \scaleDurations #'(1 . 1) {
                                 g''16
-                                \f                                                                       %! PIC_1
-                                \>                                                                       %! PIC_1
+                                \f                                                                       %! PiecewiseIndicatorCommand(1)
+                                \>                                                                       %! PiecewiseIndicatorCommand(1)
                                 [
                                 cs''16
                                 a'16
                                 af'16
-                                \p                                                                       %! PIC_2
+                                \p                                                                       %! PiecewiseIndicatorCommand(2)
                                 ]
                             }
                         }
@@ -8417,19 +8417,19 @@ class NestingCommand(scoping.Command):
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                        \time 1/2                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        \time 1/2                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                        \time 1/4                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/4                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
-                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
+                        \time 1/4                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/4                                                                     %! _make_global_skips(1)
+                        \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }
                 >>
@@ -8448,7 +8448,7 @@ class NestingCommand(scoping.Command):
                                 \times 8/7 {
                                     \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                        % [MusicVoice measure 1]                                     %! COMMENT_MEASURE_NUMBERS
+                                        % [MusicVoice measure 1]                                     %! _comment_measure_numbers
                                         \set stemLeftBeamCount = 0                                   %! SM_35
                                         \set stemRightBeamCount = 2                                  %! SM_35
                                         c'16
@@ -8485,7 +8485,7 @@ class NestingCommand(scoping.Command):
                             {
                                 \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                    % [MusicVoice measure 2]                                         %! COMMENT_MEASURE_NUMBERS
+                                    % [MusicVoice measure 2]                                         %! _comment_measure_numbers
                                     \set stemLeftBeamCount = 1                                       %! SM_35
                                     \set stemRightBeamCount = 2                                      %! SM_35
                                     g''16
@@ -12911,7 +12911,7 @@ def imbricate(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -12940,7 +12940,7 @@ def imbricate(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -13029,7 +13029,7 @@ def nest(
                         \times 13/11 {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                           %! OVERRIDE_COMMAND_1
+                                \override TupletBracket.staff-padding = #5                           %! OverrideCommand(1)
                                 r8
                                 c'16
                                 [
@@ -13058,7 +13058,7 @@ def nest(
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert TupletBracket.staff-padding                                  %! OVERRIDE_COMMAND_2
+                                \revert TupletBracket.staff-padding                                  %! OverrideCommand(2)
                             }
                         }
                     }
@@ -13102,7 +13102,7 @@ def rests_after(counts: typing.Iterable[int]) -> RestAffixSpecifier:
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 7/8 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             c'16
                             [
                             d'16
@@ -13130,7 +13130,7 @@ def rests_after(counts: typing.Iterable[int]) -> RestAffixSpecifier:
                         \times 2/3 {
                             a'16
                             r8
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -13173,7 +13173,7 @@ def rests_around(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -13202,7 +13202,7 @@ def rests_around(
                         \times 2/3 {
                             a'16
                             r8
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -13243,7 +13243,7 @@ def rests_before(counts: typing.List[int]) -> RestAffixSpecifier:
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -13271,7 +13271,7 @@ def rests_before(counts: typing.List[int]) -> RestAffixSpecifier:
                         }
                         \scaleDurations #'(1 . 1) {
                             a'16
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -13327,7 +13327,7 @@ def skips_after(counts: typing.List[int]) -> RestAffixSpecifier:
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 7/8 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             c'16
                             [
                             d'16
@@ -13355,7 +13355,7 @@ def skips_after(counts: typing.List[int]) -> RestAffixSpecifier:
                         \times 2/3 {
                             a'16
                             s8
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -13399,7 +13399,7 @@ def skips_around(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             s8
                             c'16
                             [
@@ -13428,7 +13428,7 @@ def skips_around(
                         \times 2/3 {
                             a'16
                             s8
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -13472,7 +13472,7 @@ def skips_before(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             s8
                             c'16
                             [
@@ -13500,7 +13500,7 @@ def skips_before(
                         }
                         \scaleDurations #'(1 . 1) {
                             a'16
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }

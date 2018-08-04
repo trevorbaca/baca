@@ -44,10 +44,10 @@ def accent(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
-                            -\accent                                                                 %! INDICATOR_COMMAND
+                            -\accent                                                                 %! IndicatorCommand
                             [
                             d'16
                             ]
@@ -74,7 +74,7 @@ def accent(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -111,7 +111,7 @@ def accent(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -125,27 +125,27 @@ def accent(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\accent                                                                 %! INDICATOR_COMMAND
+                            -\accent                                                                 %! IndicatorCommand
                             [
                             e''16
-                            -\accent                                                                 %! INDICATOR_COMMAND
+                            -\accent                                                                 %! IndicatorCommand
                             ]
                             ef''4
-                            -\accent                                                                 %! INDICATOR_COMMAND
+                            -\accent                                                                 %! IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            -\accent                                                                 %! INDICATOR_COMMAND
+                            -\accent                                                                 %! IndicatorCommand
                             [
                             g''16
-                            -\accent                                                                 %! INDICATOR_COMMAND
+                            -\accent                                                                 %! IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -195,16 +195,16 @@ def alternate_bow_strokes(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
-                            -\downbow                                                                %! INDICATOR_COMMAND
+                            -\downbow                                                                %! IndicatorCommand
                             [
                             d'16
-                            -\upbow                                                                  %! INDICATOR_COMMAND
+                            -\upbow                                                                  %! IndicatorCommand
                             ]
                             bf'4
-                            -\downbow                                                                %! INDICATOR_COMMAND
+                            -\downbow                                                                %! IndicatorCommand
                             ~
                             bf'16
                             r16
@@ -212,28 +212,28 @@ def alternate_bow_strokes(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\upbow                                                                  %! INDICATOR_COMMAND
+                            -\upbow                                                                  %! IndicatorCommand
                             [
                             e''16
-                            -\downbow                                                                %! INDICATOR_COMMAND
+                            -\downbow                                                                %! IndicatorCommand
                             ]
                             ef''4
-                            -\upbow                                                                  %! INDICATOR_COMMAND
+                            -\upbow                                                                  %! IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            -\downbow                                                                %! INDICATOR_COMMAND
+                            -\downbow                                                                %! IndicatorCommand
                             [
                             g''16
-                            -\upbow                                                                  %! INDICATOR_COMMAND
+                            -\upbow                                                                  %! IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
-                            -\downbow                                                                %! INDICATOR_COMMAND
+                            -\downbow                                                                %! IndicatorCommand
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -267,16 +267,16 @@ def alternate_bow_strokes(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #6                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #6                               %! OverrideCommand(1)
                             r8
                             c'16
-                            -\upbow                                                                  %! INDICATOR_COMMAND
+                            -\upbow                                                                  %! IndicatorCommand
                             [
                             d'16
-                            -\downbow                                                                %! INDICATOR_COMMAND
+                            -\downbow                                                                %! IndicatorCommand
                             ]
                             bf'4
-                            -\upbow                                                                  %! INDICATOR_COMMAND
+                            -\upbow                                                                  %! IndicatorCommand
                             ~
                             bf'16
                             r16
@@ -284,28 +284,28 @@ def alternate_bow_strokes(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\downbow                                                                %! INDICATOR_COMMAND
+                            -\downbow                                                                %! IndicatorCommand
                             [
                             e''16
-                            -\upbow                                                                  %! INDICATOR_COMMAND
+                            -\upbow                                                                  %! IndicatorCommand
                             ]
                             ef''4
-                            -\downbow                                                                %! INDICATOR_COMMAND
+                            -\downbow                                                                %! IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            -\upbow                                                                  %! INDICATOR_COMMAND
+                            -\upbow                                                                  %! IndicatorCommand
                             [
                             g''16
-                            -\downbow                                                                %! INDICATOR_COMMAND
+                            -\downbow                                                                %! IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
-                            -\upbow                                                                  %! INDICATOR_COMMAND
+                            -\upbow                                                                  %! IndicatorCommand
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -342,7 +342,7 @@ def alternate_bow_strokes(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #6                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #6                               %! OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -356,27 +356,27 @@ def alternate_bow_strokes(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\downbow                                                                %! INDICATOR_COMMAND
+                            -\downbow                                                                %! IndicatorCommand
                             [
                             e''16
-                            -\upbow                                                                  %! INDICATOR_COMMAND
+                            -\upbow                                                                  %! IndicatorCommand
                             ]
                             ef''4
-                            -\downbow                                                                %! INDICATOR_COMMAND
+                            -\downbow                                                                %! IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            -\upbow                                                                  %! INDICATOR_COMMAND
+                            -\upbow                                                                  %! IndicatorCommand
                             [
                             g''16
-                            -\downbow                                                                %! INDICATOR_COMMAND
+                            -\downbow                                                                %! IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -426,7 +426,7 @@ def arpeggio(
                     {
                         \scaleDurations #'(1 . 1) {
                             <c' d' bf'>8
-                            -\arpeggio                                                               %! INDICATOR_COMMAND
+                            -\arpeggio                                                               %! IndicatorCommand
                             ~
                             [
                             <c' d' bf'>32
@@ -511,7 +511,7 @@ def arpeggio(
                         }
                         \scaleDurations #'(1 . 1) {
                             <ef'' e'' fs'''>8
-                            -\arpeggio                                                               %! INDICATOR_COMMAND
+                            -\arpeggio                                                               %! IndicatorCommand
                             ~
                             [
                             <ef'' e'' fs'''>32
@@ -520,7 +520,7 @@ def arpeggio(
                         }
                         \scaleDurations #'(1 . 1) {
                             <g' af''>8
-                            -\arpeggio                                                               %! INDICATOR_COMMAND
+                            -\arpeggio                                                               %! IndicatorCommand
                             ~
                             [
                             <g' af''>32
@@ -622,8 +622,8 @@ def clef(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #7                               %! OVERRIDE_COMMAND_1
-                            \clef "alto"                                                             %! INDICATOR_COMMAND
+                            \override TupletBracket.staff-padding = #7                               %! OverrideCommand(1)
+                            \clef "alto"                                                             %! IndicatorCommand
                             r8
                             c'16
                             [
@@ -652,7 +652,7 @@ def clef(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -689,7 +689,7 @@ def clef(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #7                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #7                               %! OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -702,7 +702,7 @@ def clef(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \clef "alto"                                                             %! INDICATOR_COMMAND
+                            \clef "alto"                                                             %! IndicatorCommand
                             fs''16
                             [
                             e''16
@@ -719,7 +719,7 @@ def clef(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -768,10 +768,10 @@ def double_staccato(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
-                            -\baca_staccati #2                                                       %! INDICATOR_COMMAND
+                            -\baca_staccati #2                                                       %! IndicatorCommand
                             [
                             d'16
                             ]
@@ -798,7 +798,7 @@ def double_staccato(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -835,7 +835,7 @@ def double_staccato(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -849,27 +849,27 @@ def double_staccato(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\baca_staccati #2                                                       %! INDICATOR_COMMAND
+                            -\baca_staccati #2                                                       %! IndicatorCommand
                             [
                             e''16
-                            -\baca_staccati #2                                                       %! INDICATOR_COMMAND
+                            -\baca_staccati #2                                                       %! IndicatorCommand
                             ]
                             ef''4
-                            -\baca_staccati #2                                                       %! INDICATOR_COMMAND
+                            -\baca_staccati #2                                                       %! IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            -\baca_staccati #2                                                       %! INDICATOR_COMMAND
+                            -\baca_staccati #2                                                       %! IndicatorCommand
                             [
                             g''16
-                            -\baca_staccati #2                                                       %! INDICATOR_COMMAND
+                            -\baca_staccati #2                                                       %! IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -913,9 +913,9 @@ def down_arpeggio(
                     \voiceOne
                     {
                         \scaleDurations #'(1 . 1) {
-                            \arpeggioArrowDown                                                       %! INDICATOR_COMMAND
+                            \arpeggioArrowDown                                                       %! IndicatorCommand
                             <c' d' bf'>8
-                            \arpeggio                                                                %! INDICATOR_COMMAND
+                            \arpeggio                                                                %! IndicatorCommand
                             ~
                             [
                             <c' d' bf'>32
@@ -999,9 +999,9 @@ def down_arpeggio(
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \arpeggioArrowDown                                                       %! INDICATOR_COMMAND
+                            \arpeggioArrowDown                                                       %! IndicatorCommand
                             <ef'' e'' fs'''>8
-                            \arpeggio                                                                %! INDICATOR_COMMAND
+                            \arpeggio                                                                %! IndicatorCommand
                             ~
                             [
                             <ef'' e'' fs'''>32
@@ -1009,9 +1009,9 @@ def down_arpeggio(
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \arpeggioArrowDown                                                       %! INDICATOR_COMMAND
+                            \arpeggioArrowDown                                                       %! IndicatorCommand
                             <g' af''>8
-                            \arpeggio                                                                %! INDICATOR_COMMAND
+                            \arpeggio                                                                %! IndicatorCommand
                             ~
                             [
                             <g' af''>32
@@ -1071,10 +1071,10 @@ def down_bow(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
-                            -\downbow                                                                %! INDICATOR_COMMAND
+                            -\downbow                                                                %! IndicatorCommand
                             [
                             d'16
                             ]
@@ -1101,7 +1101,7 @@ def down_bow(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -1138,7 +1138,7 @@ def down_bow(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -1152,27 +1152,27 @@ def down_bow(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\downbow                                                                %! INDICATOR_COMMAND
+                            -\downbow                                                                %! IndicatorCommand
                             [
                             e''16
-                            -\downbow                                                                %! INDICATOR_COMMAND
+                            -\downbow                                                                %! IndicatorCommand
                             ]
                             ef''4
-                            -\downbow                                                                %! INDICATOR_COMMAND
+                            -\downbow                                                                %! IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            -\downbow                                                                %! INDICATOR_COMMAND
+                            -\downbow                                                                %! IndicatorCommand
                             [
                             g''16
-                            -\downbow                                                                %! INDICATOR_COMMAND
+                            -\downbow                                                                %! IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -1219,10 +1219,10 @@ def espressivo(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
-                            -\espressivo                                                             %! INDICATOR_COMMAND
+                            -\espressivo                                                             %! IndicatorCommand
                             [
                             d'16
                             ]
@@ -1249,7 +1249,7 @@ def espressivo(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -1286,7 +1286,7 @@ def espressivo(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -1300,27 +1300,27 @@ def espressivo(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\espressivo                                                             %! INDICATOR_COMMAND
+                            -\espressivo                                                             %! IndicatorCommand
                             [
                             e''16
-                            -\espressivo                                                             %! INDICATOR_COMMAND
+                            -\espressivo                                                             %! IndicatorCommand
                             ]
                             ef''4
-                            -\espressivo                                                             %! INDICATOR_COMMAND
+                            -\espressivo                                                             %! IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            -\espressivo                                                             %! INDICATOR_COMMAND
+                            -\espressivo                                                             %! IndicatorCommand
                             [
                             g''16
-                            -\espressivo                                                             %! INDICATOR_COMMAND
+                            -\espressivo                                                             %! IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -1367,9 +1367,9 @@ def fermata(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
-                            -\fermata                                                                %! INDICATOR_COMMAND
+                            -\fermata                                                                %! IndicatorCommand
                             c'16
                             [
                             d'16
@@ -1397,7 +1397,7 @@ def fermata(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -1431,7 +1431,7 @@ def fermata(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -1445,7 +1445,7 @@ def fermata(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\fermata                                                                %! INDICATOR_COMMAND
+                            -\fermata                                                                %! IndicatorCommand
                             [
                             e''16
                             ]
@@ -1461,7 +1461,7 @@ def fermata(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -1508,10 +1508,10 @@ def flageolet(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
-                            -\flageolet                                                              %! INDICATOR_COMMAND
+                            -\flageolet                                                              %! IndicatorCommand
                             [
                             d'16
                             ]
@@ -1538,7 +1538,7 @@ def flageolet(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -1575,7 +1575,7 @@ def flageolet(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -1589,27 +1589,27 @@ def flageolet(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\flageolet                                                              %! INDICATOR_COMMAND
+                            -\flageolet                                                              %! IndicatorCommand
                             [
                             e''16
-                            -\flageolet                                                              %! INDICATOR_COMMAND
+                            -\flageolet                                                              %! IndicatorCommand
                             ]
                             ef''4
-                            -\flageolet                                                              %! INDICATOR_COMMAND
+                            -\flageolet                                                              %! IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            -\flageolet                                                              %! INDICATOR_COMMAND
+                            -\flageolet                                                              %! IndicatorCommand
                             [
                             g''16
-                            -\flageolet                                                              %! INDICATOR_COMMAND
+                            -\flageolet                                                              %! IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -1654,27 +1654,27 @@ def hide_black_note_heads(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
-                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
-                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
-                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
-                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
-                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
+                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+                        \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }
                 >>
@@ -1685,21 +1685,21 @@ def hide_black_note_heads(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \baca_unpitched_music_warning                                            %! SM_24
                             c'2
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
-                            \once \override NoteHead.transparent = ##t                               %! INDICATOR_COMMAND
+                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            \once \override NoteHead.transparent = ##t                               %! IndicatorCommand
                             \baca_unpitched_music_warning                                            %! SM_24
                             c'4.
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             \baca_unpitched_music_warning                                            %! SM_24
                             c'2
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
-                            \once \override NoteHead.transparent = ##t                               %! INDICATOR_COMMAND
+                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            \once \override NoteHead.transparent = ##t                               %! IndicatorCommand
                             \baca_unpitched_music_warning                                            %! SM_24
                             c'4.
             <BLANKLINE>
@@ -1752,10 +1752,10 @@ def laissez_vibrer(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
-                            -\laissezVibrer                                                          %! INDICATOR_COMMAND
+                            -\laissezVibrer                                                          %! IndicatorCommand
                             [
                             d'16
                             ]
@@ -1782,7 +1782,7 @@ def laissez_vibrer(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -1819,7 +1819,7 @@ def laissez_vibrer(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -1833,27 +1833,27 @@ def laissez_vibrer(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\laissezVibrer                                                          %! INDICATOR_COMMAND
+                            -\laissezVibrer                                                          %! IndicatorCommand
                             [
                             e''16
-                            -\laissezVibrer                                                          %! INDICATOR_COMMAND
+                            -\laissezVibrer                                                          %! IndicatorCommand
                             ]
                             ef''4
                             ~
                             ef''16
-                            -\laissezVibrer                                                          %! INDICATOR_COMMAND
+                            -\laissezVibrer                                                          %! IndicatorCommand
                             r16
                             af''16
-                            -\laissezVibrer                                                          %! INDICATOR_COMMAND
+                            -\laissezVibrer                                                          %! IndicatorCommand
                             [
                             g''16
-                            -\laissezVibrer                                                          %! INDICATOR_COMMAND
+                            -\laissezVibrer                                                          %! IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -1915,9 +1915,9 @@ def long_fermata(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
-                            -\longfermata                                                            %! INDICATOR_COMMAND
+                            -\longfermata                                                            %! IndicatorCommand
                             c'16
                             [
                             d'16
@@ -1945,7 +1945,7 @@ def long_fermata(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -1979,7 +1979,7 @@ def long_fermata(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -1993,7 +1993,7 @@ def long_fermata(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\longfermata                                                            %! INDICATOR_COMMAND
+                            -\longfermata                                                            %! IndicatorCommand
                             [
                             e''16
                             ]
@@ -2009,7 +2009,7 @@ def long_fermata(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -2056,10 +2056,10 @@ def marcato(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
-                            -\marcato                                                                %! INDICATOR_COMMAND
+                            -\marcato                                                                %! IndicatorCommand
                             [
                             d'16
                             ]
@@ -2086,7 +2086,7 @@ def marcato(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -2123,7 +2123,7 @@ def marcato(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -2137,27 +2137,27 @@ def marcato(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\marcato                                                                %! INDICATOR_COMMAND
+                            -\marcato                                                                %! IndicatorCommand
                             [
                             e''16
-                            -\marcato                                                                %! INDICATOR_COMMAND
+                            -\marcato                                                                %! IndicatorCommand
                             ]
                             ef''4
-                            -\marcato                                                                %! INDICATOR_COMMAND
+                            -\marcato                                                                %! IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            -\marcato                                                                %! INDICATOR_COMMAND
+                            -\marcato                                                                %! IndicatorCommand
                             [
                             g''16
-                            -\marcato                                                                %! INDICATOR_COMMAND
+                            -\marcato                                                                %! IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -2206,27 +2206,27 @@ def margin_markup(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
-                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
-                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
-                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
-                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
-                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
+                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+                        \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }
                 >>
@@ -2237,31 +2237,23 @@ def margin_markup(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
-                            \set Staff.instrumentName =                                              %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
-                            \markup { Fl. }                                                          %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
-                            \set Staff.shortInstrumentName =                                         %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
-                            \markup { Fl. }                                                          %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
-                            \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! ATTACH_COLOR_LITERAL_2:EXPLICIT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND
+                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
+                            \markup { Fl. }                                                          %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
+                            \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                             e'2
-                            ^ \markup {                                                              %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
-                                \with-color                                                          %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
-                                    #(x11-color 'blue)                                               %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
-                                    [MarginMarkup]                                                   %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
-                                }                                                                    %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
-                            \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! ATTACH_COLOR_LITERAL_2:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND
-                            \set Staff.instrumentName =                                              %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
-                            \markup { Fl. }                                                          %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
-                            \set Staff.shortInstrumentName =                                         %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
-                            \markup { Fl. }                                                          %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                            ^ \markup \baca-explicit-indicator-markup "[MarginMarkup]"               %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
+                            \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
+                            \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand
+                            \markup { Fl. }                                                          %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             f'4.
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             e'2
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             f'4.
             <BLANKLINE>
                         }
@@ -2348,9 +2340,9 @@ def short_fermata(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
-                            -\shortfermata                                                           %! INDICATOR_COMMAND
+                            -\shortfermata                                                           %! IndicatorCommand
                             c'16
                             [
                             d'16
@@ -2378,7 +2370,7 @@ def short_fermata(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -2414,7 +2406,7 @@ def short_fermata(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -2428,7 +2420,7 @@ def short_fermata(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\shortfermata                                                           %! INDICATOR_COMMAND
+                            -\shortfermata                                                           %! IndicatorCommand
                             [
                             e''16
                             ]
@@ -2444,7 +2436,7 @@ def short_fermata(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -2491,10 +2483,10 @@ def staccatissimo(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
-                            -\staccatissimo                                                          %! INDICATOR_COMMAND
+                            -\staccatissimo                                                          %! IndicatorCommand
                             [
                             d'16
                             ]
@@ -2521,7 +2513,7 @@ def staccatissimo(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -2558,7 +2550,7 @@ def staccatissimo(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -2572,27 +2564,27 @@ def staccatissimo(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\staccatissimo                                                          %! INDICATOR_COMMAND
+                            -\staccatissimo                                                          %! IndicatorCommand
                             [
                             e''16
-                            -\staccatissimo                                                          %! INDICATOR_COMMAND
+                            -\staccatissimo                                                          %! IndicatorCommand
                             ]
                             ef''4
-                            -\staccatissimo                                                          %! INDICATOR_COMMAND
+                            -\staccatissimo                                                          %! IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            -\staccatissimo                                                          %! INDICATOR_COMMAND
+                            -\staccatissimo                                                          %! IndicatorCommand
                             [
                             g''16
-                            -\staccatissimo                                                          %! INDICATOR_COMMAND
+                            -\staccatissimo                                                          %! IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -2639,10 +2631,10 @@ def staccato(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
-                            -\staccato                                                               %! INDICATOR_COMMAND
+                            -\staccato                                                               %! IndicatorCommand
                             [
                             d'16
                             ]
@@ -2669,7 +2661,7 @@ def staccato(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -2706,7 +2698,7 @@ def staccato(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -2720,27 +2712,27 @@ def staccato(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\staccato                                                               %! INDICATOR_COMMAND
+                            -\staccato                                                               %! IndicatorCommand
                             [
                             e''16
-                            -\staccato                                                               %! INDICATOR_COMMAND
+                            -\staccato                                                               %! IndicatorCommand
                             ]
                             ef''4
-                            -\staccato                                                               %! INDICATOR_COMMAND
+                            -\staccato                                                               %! IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            -\staccato                                                               %! INDICATOR_COMMAND
+                            -\staccato                                                               %! IndicatorCommand
                             [
                             g''16
-                            -\staccato                                                               %! INDICATOR_COMMAND
+                            -\staccato                                                               %! IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -2791,29 +2783,29 @@ def staff_lines(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 5]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 5]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
-                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+                        \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }
                 >>
@@ -2824,28 +2816,28 @@ def staff_lines(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
-                            \stopStaff                                                               %! SET_STATUS_TAG:EXPLICIT_STAFF_LINES:INDICATOR_COMMAND
-                            \once \override Staff.StaffSymbol.line-count = 1                         %! SET_STATUS_TAG:EXPLICIT_STAFF_LINES:INDICATOR_COMMAND
-                            \startStaff                                                              %! SET_STATUS_TAG:EXPLICIT_STAFF_LINES:INDICATOR_COMMAND
-                            \clef "percussion"                                                       %! SET_STATUS_TAG:EXPLICIT_CLEF:INDICATOR_COMMAND
-                            \once \override Staff.Clef.color = #(x11-color 'blue)                    %! ATTACH_COLOR_LITERAL_2:EXPLICIT_CLEF_COLOR:INDICATOR_COMMAND
-                        %@% \override Staff.Clef.color = ##f                                         %! ATTACH_COLOR_LITERAL_1:EXPLICIT_CLEF_COLOR_CANCELLATION:INDICATOR_COMMAND
-                            \set Staff.forceClef = ##t                                               %! SET_STATUS_TAG:EXPLICIT_CLEF:SM33:INDICATOR_COMMAND
-                            \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_STAFF_LINES_COLOR:INDICATOR_COMMAND
+                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
+                            \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
+                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
+                            \clef "percussion"                                                       %! EXPLICIT_CLEF:_set_status_tag:IndicatorCommand
+                            \once \override Staff.Clef.color = #(x11-color 'blue)                    %! EXPLICIT_CLEF_COLOR:_attach_color_literal(2)
+                        %@% \override Staff.Clef.color = ##f                                         %! EXPLICIT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
+                            \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:SM33:IndicatorCommand
+                            \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:_attach_color_literal(2)
                             a4.
-                            \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! ATTACH_COLOR_LITERAL_2:EXPLICIT_CLEF_REDRAW_COLOR:INDICATOR_COMMAND
+                            \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             b4.
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             c'4.
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             d'4.
             <BLANKLINE>
-                            % [MusicVoice measure 5]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 5]                                                 %! _comment_measure_numbers
                             e'4.
             <BLANKLINE>
                         }
@@ -2883,29 +2875,29 @@ def staff_lines(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 5]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 5]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
-                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+                        \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }
                 >>
@@ -2916,28 +2908,28 @@ def staff_lines(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
-                            \stopStaff                                                               %! SET_STATUS_TAG:EXPLICIT_STAFF_LINES:INDICATOR_COMMAND
-                            \once \override Staff.StaffSymbol.line-count = 1                         %! SET_STATUS_TAG:EXPLICIT_STAFF_LINES:INDICATOR_COMMAND
-                            \startStaff                                                              %! SET_STATUS_TAG:EXPLICIT_STAFF_LINES:INDICATOR_COMMAND
-                            \clef "bass"                                                             %! SET_STATUS_TAG:EXPLICIT_CLEF:INDICATOR_COMMAND
-                            \once \override Staff.Clef.color = #(x11-color 'blue)                    %! ATTACH_COLOR_LITERAL_2:EXPLICIT_CLEF_COLOR:INDICATOR_COMMAND
-                        %@% \override Staff.Clef.color = ##f                                         %! ATTACH_COLOR_LITERAL_1:EXPLICIT_CLEF_COLOR_CANCELLATION:INDICATOR_COMMAND
-                            \set Staff.forceClef = ##t                                               %! SET_STATUS_TAG:EXPLICIT_CLEF:SM33:INDICATOR_COMMAND
-                            \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_STAFF_LINES_COLOR:INDICATOR_COMMAND
+                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
+                            \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
+                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
+                            \clef "bass"                                                             %! EXPLICIT_CLEF:_set_status_tag:IndicatorCommand
+                            \once \override Staff.Clef.color = #(x11-color 'blue)                    %! EXPLICIT_CLEF_COLOR:_attach_color_literal(2)
+                        %@% \override Staff.Clef.color = ##f                                         %! EXPLICIT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
+                            \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:SM33:IndicatorCommand
+                            \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:_attach_color_literal(2)
                             b,4.
-                            \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! ATTACH_COLOR_LITERAL_2:EXPLICIT_CLEF_REDRAW_COLOR:INDICATOR_COMMAND
+                            \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             c4.
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             d4.
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             e4.
             <BLANKLINE>
-                            % [MusicVoice measure 5]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 5]                                                 %! _comment_measure_numbers
                             f4.
             <BLANKLINE>
                         }
@@ -2976,29 +2968,29 @@ def staff_lines(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 5]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 5]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
-                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+                        \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }
                 >>
@@ -3009,28 +3001,28 @@ def staff_lines(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
-                            \stopStaff                                                               %! SET_STATUS_TAG:EXPLICIT_STAFF_LINES:INDICATOR_COMMAND
-                            \once \override Staff.StaffSymbol.line-count = 2                         %! SET_STATUS_TAG:EXPLICIT_STAFF_LINES:INDICATOR_COMMAND
-                            \startStaff                                                              %! SET_STATUS_TAG:EXPLICIT_STAFF_LINES:INDICATOR_COMMAND
-                            \clef "percussion"                                                       %! SET_STATUS_TAG:EXPLICIT_CLEF:INDICATOR_COMMAND
-                            \once \override Staff.Clef.color = #(x11-color 'blue)                    %! ATTACH_COLOR_LITERAL_2:EXPLICIT_CLEF_COLOR:INDICATOR_COMMAND
-                        %@% \override Staff.Clef.color = ##f                                         %! ATTACH_COLOR_LITERAL_1:EXPLICIT_CLEF_COLOR_CANCELLATION:INDICATOR_COMMAND
-                            \set Staff.forceClef = ##t                                               %! SET_STATUS_TAG:EXPLICIT_CLEF:SM33:INDICATOR_COMMAND
-                            \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_STAFF_LINES_COLOR:INDICATOR_COMMAND
+                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
+                            \once \override Staff.StaffSymbol.line-count = 2                         %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
+                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
+                            \clef "percussion"                                                       %! EXPLICIT_CLEF:_set_status_tag:IndicatorCommand
+                            \once \override Staff.Clef.color = #(x11-color 'blue)                    %! EXPLICIT_CLEF_COLOR:_attach_color_literal(2)
+                        %@% \override Staff.Clef.color = ##f                                         %! EXPLICIT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
+                            \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:SM33:IndicatorCommand
+                            \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:_attach_color_literal(2)
                             a4.
-                            \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! ATTACH_COLOR_LITERAL_2:EXPLICIT_CLEF_REDRAW_COLOR:INDICATOR_COMMAND
+                            \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             b4.
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             c'4.
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             d'4.
             <BLANKLINE>
-                            % [MusicVoice measure 5]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 5]                                                 %! _comment_measure_numbers
                             e'4.
             <BLANKLINE>
                         }
@@ -3067,29 +3059,29 @@ def staff_lines(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 5]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 5]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
-                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+                        \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }
                 >>
@@ -3100,28 +3092,28 @@ def staff_lines(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
-                            \stopStaff                                                               %! SET_STATUS_TAG:EXPLICIT_STAFF_LINES:INDICATOR_COMMAND
-                            \once \override Staff.StaffSymbol.line-count = 2                         %! SET_STATUS_TAG:EXPLICIT_STAFF_LINES:INDICATOR_COMMAND
-                            \startStaff                                                              %! SET_STATUS_TAG:EXPLICIT_STAFF_LINES:INDICATOR_COMMAND
-                            \clef "bass"                                                             %! SET_STATUS_TAG:EXPLICIT_CLEF:INDICATOR_COMMAND
-                            \once \override Staff.Clef.color = #(x11-color 'blue)                    %! ATTACH_COLOR_LITERAL_2:EXPLICIT_CLEF_COLOR:INDICATOR_COMMAND
-                        %@% \override Staff.Clef.color = ##f                                         %! ATTACH_COLOR_LITERAL_1:EXPLICIT_CLEF_COLOR_CANCELLATION:INDICATOR_COMMAND
-                            \set Staff.forceClef = ##t                                               %! SET_STATUS_TAG:EXPLICIT_CLEF:SM33:INDICATOR_COMMAND
-                            \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_STAFF_LINES_COLOR:INDICATOR_COMMAND
+                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
+                            \once \override Staff.StaffSymbol.line-count = 2                         %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
+                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
+                            \clef "bass"                                                             %! EXPLICIT_CLEF:_set_status_tag:IndicatorCommand
+                            \once \override Staff.Clef.color = #(x11-color 'blue)                    %! EXPLICIT_CLEF_COLOR:_attach_color_literal(2)
+                        %@% \override Staff.Clef.color = ##f                                         %! EXPLICIT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
+                            \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:SM33:IndicatorCommand
+                            \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:_attach_color_literal(2)
                             b,4.
-                            \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! ATTACH_COLOR_LITERAL_2:EXPLICIT_CLEF_REDRAW_COLOR:INDICATOR_COMMAND
+                            \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             c4.
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             d4.
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             e4.
             <BLANKLINE>
-                            % [MusicVoice measure 5]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 5]                                                 %! _comment_measure_numbers
                             f4.
             <BLANKLINE>
                         }
@@ -3164,29 +3156,29 @@ def staff_lines(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 5]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 5]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
-                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+                        \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }
                 >>
@@ -3197,28 +3189,28 @@ def staff_lines(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
-                            \stopStaff                                                               %! SET_STATUS_TAG:EXPLICIT_STAFF_LINES:INDICATOR_COMMAND
-                            \once \override Staff.StaffSymbol.line-count = 2                         %! SET_STATUS_TAG:EXPLICIT_STAFF_LINES:INDICATOR_COMMAND
-                            \startStaff                                                              %! SET_STATUS_TAG:EXPLICIT_STAFF_LINES:INDICATOR_COMMAND
-                            \clef "bass"                                                             %! SET_STATUS_TAG:EXPLICIT_CLEF:INDICATOR_COMMAND
-                            \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_STAFF_LINES_COLOR:INDICATOR_COMMAND
-                            \once \override Staff.Clef.color = #(x11-color 'blue)                    %! ATTACH_COLOR_LITERAL_2:EXPLICIT_CLEF_COLOR:INDICATOR_COMMAND
-                        %@% \override Staff.Clef.color = ##f                                         %! ATTACH_COLOR_LITERAL_1:EXPLICIT_CLEF_COLOR_CANCELLATION:INDICATOR_COMMAND
-                            \set Staff.forceClef = ##t                                               %! SET_STATUS_TAG:EXPLICIT_CLEF:SM33:INDICATOR_COMMAND
+                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
+                            \once \override Staff.StaffSymbol.line-count = 2                         %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
+                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
+                            \clef "bass"                                                             %! EXPLICIT_CLEF:_set_status_tag:IndicatorCommand
+                            \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:_attach_color_literal(2)
+                            \once \override Staff.Clef.color = #(x11-color 'blue)                    %! EXPLICIT_CLEF_COLOR:_attach_color_literal(2)
+                        %@% \override Staff.Clef.color = ##f                                         %! EXPLICIT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
+                            \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:SM33:IndicatorCommand
                             g'4.
-                            \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! ATTACH_COLOR_LITERAL_2:EXPLICIT_CLEF_REDRAW_COLOR:INDICATOR_COMMAND
+                            \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             a'4.
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             b'4.
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             c''4.
             <BLANKLINE>
-                            % [MusicVoice measure 5]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 5]                                                 %! _comment_measure_numbers
                             d''4.
             <BLANKLINE>
                         }
@@ -3237,12 +3229,17 @@ def start_markup(
     *,
     context: str = 'Staff',
     hcenter_in: typings.Number = None,
+    literal: bool = None,
     selector: typings.Selector = 'baca.leaf(0)',
     ) -> commands.IndicatorCommand:
     """
     Attaches start markup.
     """
-    if isinstance(argument, (list, str)):
+    if literal is True:
+        assert isinstance(argument, str), repr(argument)
+        assert argument.startswith('\\'), repr(argument)
+        start_markup = abjad.StartMarkup(markup=argument)
+    elif isinstance(argument, (list, str)):
         markup = markups.instrument(argument, hcenter_in=hcenter_in)
         start_markup = abjad.StartMarkup(
             context=context,
@@ -3265,7 +3262,7 @@ def start_markup(
     command = commands.IndicatorCommand(
         indicators=[start_markup],
         selector=selector,
-        tags=[abjad.Tag('STMK'), abjad.Tag('-PARTS')],
+        tags=[abjad.Tag('baca_start_markup'), abjad.Tag('-PARTS')],
         )
     return command
 
@@ -3305,10 +3302,10 @@ def stem_tremolo(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
-                            :32                                                                      %! INDICATOR_COMMAND
+                            :32                                                                      %! IndicatorCommand
                             [
                             d'16
                             ]
@@ -3335,7 +3332,7 @@ def stem_tremolo(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -3372,7 +3369,7 @@ def stem_tremolo(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -3386,28 +3383,28 @@ def stem_tremolo(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            :32                                                                      %! INDICATOR_COMMAND
+                            :32                                                                      %! IndicatorCommand
                             [
                             e''16
-                            :32                                                                      %! INDICATOR_COMMAND
+                            :32                                                                      %! IndicatorCommand
                             ]
                             ef''4
-                            :32                                                                      %! INDICATOR_COMMAND
+                            :32                                                                      %! IndicatorCommand
                             ~
                             ef''16
-                            :32                                                                      %! INDICATOR_COMMAND
+                            :32                                                                      %! IndicatorCommand
                             r16
                             af''16
-                            :32                                                                      %! INDICATOR_COMMAND
+                            :32                                                                      %! IndicatorCommand
                             [
                             g''16
-                            :32                                                                      %! INDICATOR_COMMAND
+                            :32                                                                      %! IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -3454,7 +3451,7 @@ def stop_on_string(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -3482,9 +3479,9 @@ def stop_on_string(
                         }
                         \times 4/5 {
                             a'16
-                            \baca_stop_on_string                                                     %! INDICATOR_COMMAND
+                            \baca_stop_on_string                                                     %! IndicatorCommand
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -3559,10 +3556,10 @@ def stopped(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
-                            -\stopped                                                                %! INDICATOR_COMMAND
+                            -\stopped                                                                %! IndicatorCommand
                             [
                             d'16
                             ]
@@ -3589,7 +3586,7 @@ def stopped(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -3636,10 +3633,10 @@ def tenuto(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
-                            -\tenuto                                                                 %! INDICATOR_COMMAND
+                            -\tenuto                                                                 %! IndicatorCommand
                             [
                             d'16
                             ]
@@ -3666,7 +3663,7 @@ def tenuto(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -3703,7 +3700,7 @@ def tenuto(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -3717,27 +3714,27 @@ def tenuto(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\tenuto                                                                 %! INDICATOR_COMMAND
+                            -\tenuto                                                                 %! IndicatorCommand
                             [
                             e''16
-                            -\tenuto                                                                 %! INDICATOR_COMMAND
+                            -\tenuto                                                                 %! IndicatorCommand
                             ]
                             ef''4
-                            -\tenuto                                                                 %! INDICATOR_COMMAND
+                            -\tenuto                                                                 %! IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            -\tenuto                                                                 %! INDICATOR_COMMAND
+                            -\tenuto                                                                 %! IndicatorCommand
                             [
                             g''16
-                            -\tenuto                                                                 %! INDICATOR_COMMAND
+                            -\tenuto                                                                 %! IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -3783,9 +3780,9 @@ def up_arpeggio(
                     \voiceOne
                     {
                         \scaleDurations #'(1 . 1) {
-                            \arpeggioArrowUp                                                         %! INDICATOR_COMMAND
+                            \arpeggioArrowUp                                                         %! IndicatorCommand
                             <c' d' bf'>8
-                            \arpeggio                                                                %! INDICATOR_COMMAND
+                            \arpeggio                                                                %! IndicatorCommand
                             ~
                             [
                             <c' d' bf'>32
@@ -3869,9 +3866,9 @@ def up_arpeggio(
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \arpeggioArrowUp                                                         %! INDICATOR_COMMAND
+                            \arpeggioArrowUp                                                         %! IndicatorCommand
                             <ef'' e'' fs'''>8
-                            \arpeggio                                                                %! INDICATOR_COMMAND
+                            \arpeggio                                                                %! IndicatorCommand
                             ~
                             [
                             <ef'' e'' fs'''>32
@@ -3879,9 +3876,9 @@ def up_arpeggio(
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \arpeggioArrowUp                                                         %! INDICATOR_COMMAND
+                            \arpeggioArrowUp                                                         %! IndicatorCommand
                             <g' af''>8
-                            \arpeggio                                                                %! INDICATOR_COMMAND
+                            \arpeggio                                                                %! IndicatorCommand
                             ~
                             [
                             <g' af''>32
@@ -3941,10 +3938,10 @@ def up_bow(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
-                            -\upbow                                                                  %! INDICATOR_COMMAND
+                            -\upbow                                                                  %! IndicatorCommand
                             [
                             d'16
                             ]
@@ -3971,7 +3968,7 @@ def up_bow(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -4008,7 +4005,7 @@ def up_bow(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -4022,27 +4019,27 @@ def up_bow(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\upbow                                                                  %! INDICATOR_COMMAND
+                            -\upbow                                                                  %! IndicatorCommand
                             [
                             e''16
-                            -\upbow                                                                  %! INDICATOR_COMMAND
+                            -\upbow                                                                  %! IndicatorCommand
                             ]
                             ef''4
-                            -\upbow                                                                  %! INDICATOR_COMMAND
+                            -\upbow                                                                  %! IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            -\upbow                                                                  %! INDICATOR_COMMAND
+                            -\upbow                                                                  %! IndicatorCommand
                             [
                             g''16
-                            -\upbow                                                                  %! INDICATOR_COMMAND
+                            -\upbow                                                                  %! IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -4089,9 +4086,9 @@ def very_long_fermata(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
-                            -\verylongfermata                                                        %! INDICATOR_COMMAND
+                            -\verylongfermata                                                        %! IndicatorCommand
                             c'16
                             [
                             d'16
@@ -4119,7 +4116,7 @@ def very_long_fermata(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }
@@ -4155,7 +4152,7 @@ def very_long_fermata(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -4169,7 +4166,7 @@ def very_long_fermata(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\verylongfermata                                                        %! INDICATOR_COMMAND
+                            -\verylongfermata                                                        %! IndicatorCommand
                             [
                             e''16
                             ]
@@ -4185,7 +4182,7 @@ def very_long_fermata(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
                 }

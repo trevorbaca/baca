@@ -1,18 +1,56 @@
 %%% COLOR: MARKUP %%%
 
+#(define-markup-command (baca-explicit-indicator-markup layout props text) (markup?)
+    "Blue markup for explicit status."
+    (interpret-markup layout props
+        #{
+        \markup \with-color #(x11-color 'blue) { #text }
+        #}
+        )
+    )
+
 #(define-markup-command (baca-dark-cyan-markup layout props text) (markup?)
     "Dark cyan with font size 3."
     (interpret-markup layout props
-        #{\markup \fontsize #3 \with-color #(x11-color 'DarkCyan) { #text }
-            #}
+        #{
+        \markup \fontsize #3 \with-color #(x11-color 'DarkCyan) { #text }
+        #}
+        )
+    )
+
+#(define-markup-command (baca-default-indicator-markup layout props text) (markup?)
+    "Dark violet for default indicators."
+    (interpret-markup layout props
+        #{
+        \markup \with-color #(x11-color 'DarkViolet) { #text }
+        #}
+        )
+    )
+
+#(define-markup-command (baca-redundant-indicator-markup layout props text) (markup?)
+    "DeepPink1 for redundant indicators."
+    (interpret-markup layout props
+        #{
+        \markup \with-color #(x11-color 'DeepPink1) { #text }
+        #}
         )
     )
 
 #(define-markup-command (baca-forest-green-markup layout props text) (markup?)
     "Forest green with font size 3."
     (interpret-markup layout props
-        #{\markup \fontsize #3 \with-color #(x11-color 'ForestGreen) { #text }
-            #}
+        #{
+        \markup \fontsize #3 \with-color #(x11-color 'ForestGreen) { #text }
+        #}
+        )
+    )
+
+#(define-markup-command (baca-reapplied-indicator-markup layout props text) (markup?)
+    "Green4 markup for reapplied indicators."
+    (interpret-markup layout props
+        #{
+        \markup \with-color #(x11-color 'green4) { #text }
+        #}
         )
     )
 

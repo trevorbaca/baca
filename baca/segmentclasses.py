@@ -40,40 +40,40 @@ class BreakMeasureMap(abjad.AbjadObject):
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \autoPageBreaksOff                                                           %! BMM1:BREAK
                         \noBreak                                                                     %! BMM2:BREAK
-                        \baca_lbsd #0 #'(10 20)                                                      %! INDICATOR_COMMAND:BREAK
-                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        \pageBreak                                                                   %! INDICATOR_COMMAND:BREAK
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        \baca_lbsd #0 #'(10 20)                                                      %! IndicatorCommand:BREAK
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        \pageBreak                                                                   %! IndicatorCommand:BREAK
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                         \noBreak                                                                     %! BMM2:BREAK
-                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                         \noBreak                                                                     %! BMM2:BREAK
-                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                         \noBreak                                                                     %! BMM2:BREAK
-                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 5]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 5]                                                    %! _comment_measure_numbers
                         \noBreak                                                                     %! BMM2:BREAK
-                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
-                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
+                        \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }
                 >>
@@ -87,19 +87,15 @@ class BreakMeasureMap(abjad.AbjadObject):
                             \context ViolinMusicVoice = "ViolinMusicVoice"
                             {
             <BLANKLINE>
-                                % [ViolinMusicVoice measure 1]                                       %! COMMENT_MEASURE_NUMBERS
-                                \clef "treble"                                                       %! SET_STATUS_TAG:DEFAULT_CLEF:ST_3
-                                \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! ATTACH_COLOR_LITERAL_2:DEFAULT_CLEF_COLOR:ST_3
-                            %@% \override ViolinMusicStaff.Clef.color = ##f                          %! ATTACH_COLOR_LITERAL_1:DEFAULT_CLEF_COLOR_CANCELLATION:ST_3
-                                \set ViolinMusicStaff.forceClef = ##t                                %! SET_STATUS_TAG:DEFAULT_CLEF:SM33:ST_3
+                                % [ViolinMusicVoice measure 1]                                       %! _comment_measure_numbers
+                                \clef "treble"                                                       %! DEFAULT_CLEF:_set_status_tag:ScoreTemplate(3)
+                                \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
+                            %@% \override ViolinMusicStaff.Clef.color = ##f                          %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
+                                \set ViolinMusicStaff.forceClef = ##t                                %! DEFAULT_CLEF:_set_status_tag:SM33:ScoreTemplate(3)
                                 e'8
-                                ^ \markup {                                                          %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
-                                    \with-color                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
-                                        #(x11-color 'DarkViolet)                                     %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
-                                        (Violin)                                                     %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
-                                    }                                                                %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
+                                ^ \markup \baca-default-indicator-markup "(Violin)"                  %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                 [
-                                \override ViolinMusicStaff.Clef.color = #(x11-color 'violet)         %! ATTACH_COLOR_LITERAL_2:DEFAULT_CLEF_REDRAW_COLOR:ST_3
+                                \override ViolinMusicStaff.Clef.color = #(x11-color 'violet)         %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
                                 e'8
             <BLANKLINE>
@@ -108,7 +104,7 @@ class BreakMeasureMap(abjad.AbjadObject):
                                 e'8
                                 ]
             <BLANKLINE>
-                                % [ViolinMusicVoice measure 2]                                       %! COMMENT_MEASURE_NUMBERS
+                                % [ViolinMusicVoice measure 2]                                       %! _comment_measure_numbers
                                 e'8
                                 [
             <BLANKLINE>
@@ -117,7 +113,7 @@ class BreakMeasureMap(abjad.AbjadObject):
                                 e'8
                                 ]
             <BLANKLINE>
-                                % [ViolinMusicVoice measure 3]                                       %! COMMENT_MEASURE_NUMBERS
+                                % [ViolinMusicVoice measure 3]                                       %! _comment_measure_numbers
                                 e'8
                                 [
             <BLANKLINE>
@@ -128,7 +124,7 @@ class BreakMeasureMap(abjad.AbjadObject):
                                 e'8
                                 ]
             <BLANKLINE>
-                                % [ViolinMusicVoice measure 4]                                       %! COMMENT_MEASURE_NUMBERS
+                                % [ViolinMusicVoice measure 4]                                       %! _comment_measure_numbers
                                 e'8
                                 [
             <BLANKLINE>
@@ -137,7 +133,7 @@ class BreakMeasureMap(abjad.AbjadObject):
                                 e'8
                                 ]
             <BLANKLINE>
-                                % [ViolinMusicVoice measure 5]                                       %! COMMENT_MEASURE_NUMBERS
+                                % [ViolinMusicVoice measure 5]                                       %! _comment_measure_numbers
                                 e'8
                                 [
             <BLANKLINE>
@@ -156,29 +152,25 @@ class BreakMeasureMap(abjad.AbjadObject):
                             \context ViolaMusicVoice = "ViolaMusicVoice"
                             {
             <BLANKLINE>
-                                % [ViolaMusicVoice measure 1]                                        %! COMMENT_MEASURE_NUMBERS
-                                \clef "alto"                                                         %! SET_STATUS_TAG:DEFAULT_CLEF:ST_3
-                                \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! ATTACH_COLOR_LITERAL_2:DEFAULT_CLEF_COLOR:ST_3
-                            %@% \override ViolaMusicStaff.Clef.color = ##f                           %! ATTACH_COLOR_LITERAL_1:DEFAULT_CLEF_COLOR_CANCELLATION:ST_3
-                                \set ViolaMusicStaff.forceClef = ##t                                 %! SET_STATUS_TAG:DEFAULT_CLEF:SM33:ST_3
+                                % [ViolaMusicVoice measure 1]                                        %! _comment_measure_numbers
+                                \clef "alto"                                                         %! DEFAULT_CLEF:_set_status_tag:ScoreTemplate(3)
+                                \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
+                            %@% \override ViolaMusicStaff.Clef.color = ##f                           %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
+                                \set ViolaMusicStaff.forceClef = ##t                                 %! DEFAULT_CLEF:_set_status_tag:SM33:ScoreTemplate(3)
                                 R1 * 1/2
-                                ^ \markup {                                                          %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
-                                    \with-color                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
-                                        #(x11-color 'DarkViolet)                                     %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
-                                        (Viola)                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
-                                    }                                                                %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
-                                \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)          %! ATTACH_COLOR_LITERAL_2:DEFAULT_CLEF_REDRAW_COLOR:ST_3
+                                ^ \markup \baca-default-indicator-markup "(Viola)"                   %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                                \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
-                                % [ViolaMusicVoice measure 2]                                        %! COMMENT_MEASURE_NUMBERS
+                                % [ViolaMusicVoice measure 2]                                        %! _comment_measure_numbers
                                 R1 * 3/8
             <BLANKLINE>
-                                % [ViolaMusicVoice measure 3]                                        %! COMMENT_MEASURE_NUMBERS
+                                % [ViolaMusicVoice measure 3]                                        %! _comment_measure_numbers
                                 R1 * 1/2
             <BLANKLINE>
-                                % [ViolaMusicVoice measure 4]                                        %! COMMENT_MEASURE_NUMBERS
+                                % [ViolaMusicVoice measure 4]                                        %! _comment_measure_numbers
                                 R1 * 3/8
             <BLANKLINE>
-                                % [ViolaMusicVoice measure 5]                                        %! COMMENT_MEASURE_NUMBERS
+                                % [ViolaMusicVoice measure 5]                                        %! _comment_measure_numbers
                                 R1 * 1/2
             <BLANKLINE>
                             }
@@ -189,29 +181,25 @@ class BreakMeasureMap(abjad.AbjadObject):
                             \context CelloMusicVoice = "CelloMusicVoice"
                             {
             <BLANKLINE>
-                                % [CelloMusicVoice measure 1]                                        %! COMMENT_MEASURE_NUMBERS
-                                \clef "bass"                                                         %! SET_STATUS_TAG:DEFAULT_CLEF:ST_3
-                                \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! ATTACH_COLOR_LITERAL_2:DEFAULT_CLEF_COLOR:ST_3
-                            %@% \override CelloMusicStaff.Clef.color = ##f                           %! ATTACH_COLOR_LITERAL_1:DEFAULT_CLEF_COLOR_CANCELLATION:ST_3
-                                \set CelloMusicStaff.forceClef = ##t                                 %! SET_STATUS_TAG:DEFAULT_CLEF:SM33:ST_3
+                                % [CelloMusicVoice measure 1]                                        %! _comment_measure_numbers
+                                \clef "bass"                                                         %! DEFAULT_CLEF:_set_status_tag:ScoreTemplate(3)
+                                \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
+                            %@% \override CelloMusicStaff.Clef.color = ##f                           %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
+                                \set CelloMusicStaff.forceClef = ##t                                 %! DEFAULT_CLEF:_set_status_tag:SM33:ScoreTemplate(3)
                                 R1 * 1/2
-                                ^ \markup {                                                          %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
-                                    \with-color                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
-                                        #(x11-color 'DarkViolet)                                     %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
-                                        (Cello)                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
-                                    }                                                                %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
-                                \override CelloMusicStaff.Clef.color = #(x11-color 'violet)          %! ATTACH_COLOR_LITERAL_2:DEFAULT_CLEF_REDRAW_COLOR:ST_3
+                                ^ \markup \baca-default-indicator-markup "(Cello)"                   %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                                \override CelloMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
-                                % [CelloMusicVoice measure 2]                                        %! COMMENT_MEASURE_NUMBERS
+                                % [CelloMusicVoice measure 2]                                        %! _comment_measure_numbers
                                 R1 * 3/8
             <BLANKLINE>
-                                % [CelloMusicVoice measure 3]                                        %! COMMENT_MEASURE_NUMBERS
+                                % [CelloMusicVoice measure 3]                                        %! _comment_measure_numbers
                                 R1 * 1/2
             <BLANKLINE>
-                                % [CelloMusicVoice measure 4]                                        %! COMMENT_MEASURE_NUMBERS
+                                % [CelloMusicVoice measure 4]                                        %! _comment_measure_numbers
                                 R1 * 3/8
             <BLANKLINE>
-                                % [CelloMusicVoice measure 5]                                        %! COMMENT_MEASURE_NUMBERS
+                                % [CelloMusicVoice measure 5]                                        %! _comment_measure_numbers
                                 R1 * 1/2
             <BLANKLINE>
                             }
@@ -411,27 +399,27 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
-                        \time 8/16                                                                   %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        \time 8/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
-                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
-                        \time 2/4                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        \time 2/4                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
-                        \time 1/2                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
-                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
+                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        \time 1/2                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
+                        \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }
                 >>
@@ -442,7 +430,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             e'8
                             [
             <BLANKLINE>
@@ -453,7 +441,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             f'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             e'8
                             [
             <BLANKLINE>
@@ -464,7 +452,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             f'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             e'8
                             [
             <BLANKLINE>
@@ -475,7 +463,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             f'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             e'8
                             [
             <BLANKLINE>
@@ -520,31 +508,31 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #8                                              %! HSS1:SPACING
-                        \time 8/16                                                                   %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        \time 8/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #8                                              %! HSS1:SPACING
-                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #8                                              %! HSS1:SPACING
-                        \time 2/4                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        \time 2/4                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #8                                              %! HSS1:SPACING
-                        \time 1/2                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
-                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
+                        \time 1/2                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
+                        \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }
                 >>
@@ -555,7 +543,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             e'8
                             [
             <BLANKLINE>
@@ -566,7 +554,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             f'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             e'8
                             [
             <BLANKLINE>
@@ -577,7 +565,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             f'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             e'8
                             [
             <BLANKLINE>
@@ -588,7 +576,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             f'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             e'8
                             [
             <BLANKLINE>
@@ -635,31 +623,31 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #8                                              %! HSS1:SPACING
-                        \time 8/16                                                                   %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        \time 8/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #8                                              %! HSS1:SPACING
-                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #8                                              %! HSS1:SPACING
-                        \time 2/4                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        \time 2/4                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #8                                              %! HSS1:SPACING
-                        \time 1/2                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
-                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
+                        \time 1/2                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
+                        \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }
                 >>
@@ -670,7 +658,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             e'8
                             [
             <BLANKLINE>
@@ -681,7 +669,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             f'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             e'8
                             [
             <BLANKLINE>
@@ -692,7 +680,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             f'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             e'8
                             [
             <BLANKLINE>
@@ -703,7 +691,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             f'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             e'8
                             [
             <BLANKLINE>
@@ -751,31 +739,31 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #16                                             %! HSS1:SPACING
-                        \time 8/16                                                                   %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        \time 8/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #16                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #16                                             %! HSS1:SPACING
-                        \time 2/4                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        \time 2/4                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #16                                             %! HSS1:SPACING
-                        \time 1/2                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
-                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
+                        \time 1/2                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
+                        \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }
                 >>
@@ -786,7 +774,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             e'8
                             [
             <BLANKLINE>
@@ -797,7 +785,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             f'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             e'8
                             [
             <BLANKLINE>
@@ -808,7 +796,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             f'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             e'8
                             [
             <BLANKLINE>
@@ -819,7 +807,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             f'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             e'8
                             [
             <BLANKLINE>
@@ -868,31 +856,31 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #16                                             %! HSS1:SPACING
-                        \time 8/16                                                                   %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        \time 8/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #16                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #16                                             %! HSS1:SPACING
-                        \time 2/4                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        \time 2/4                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #16                                             %! HSS1:SPACING
-                        \time 1/2                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
-                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
+                        \time 1/2                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
+                        \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }
                 >>
@@ -903,7 +891,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             e'8
                             [
             <BLANKLINE>
@@ -914,7 +902,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             f'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             e'8
                             [
             <BLANKLINE>
@@ -925,7 +913,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             f'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             e'8
                             [
             <BLANKLINE>
@@ -936,7 +924,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             f'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
+                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             e'8
                             [
             <BLANKLINE>
@@ -997,19 +985,19 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #16                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
+                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #16                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
-                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
-                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
-                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+                        \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }
                 >>
@@ -1060,7 +1048,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 }
                             \times 1/1 {
             <BLANKLINE>
-                                % [MusicVoice measure 1]                                             %! COMMENT_MEASURE_NUMBERS
+                                % [MusicVoice measure 1]                                             %! _comment_measure_numbers
                                 \once \override Beam.grow-direction = #right
                                 e'16 * 63/32
                                 [
@@ -1118,7 +1106,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 }
                             \times 1/1 {
             <BLANKLINE>
-                                % [MusicVoice measure 2]                                             %! COMMENT_MEASURE_NUMBERS
+                                % [MusicVoice measure 2]                                             %! _comment_measure_numbers
                                 \once \override Beam.grow-direction = #right
                                 e'16 * 117/64
                                 [
