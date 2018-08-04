@@ -1111,7 +1111,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 if abjad.inspect(skip).has_indicator(tempo_prototype):
                     add_right_text_to_me = skip
                     break
-        for skip in skips:
+        for i, skip in enumerate(skips):
             inspector = abjad.inspect(skip)
             metronome_mark = inspector.indicator(
                 abjad.MetronomeMark,
@@ -1174,12 +1174,13 @@ class SegmentMaker(abjad.SegmentMaker):
                 style = 'dashed_line_with_arrow'
             else:
                 style = 'invisible_line'
-            stop_text_span = abjad.StopTextSpan()
-            abjad.attach(
-                stop_text_span,
-                skip,
-                tag='MMI_1',
-                )
+            if 0 < i:
+                stop_text_span = abjad.StopTextSpan()
+                abjad.attach(
+                    stop_text_span,
+                    skip,
+                    tag='MMI_1',
+                    )
             if add_right_text_to_me is skip:
                 right_text = last_leaf_metronome_mark._get_markup()
             else:

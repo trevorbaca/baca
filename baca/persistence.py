@@ -4244,7 +4244,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
-                            \stopTextSpan                                                                %! MMI_1
                         %@% - \abjad_invisible_line                                                      %! MMI_2
                         %@% - \tweak bound-details.left.text \markup {                                   %! MMI_2
                         %@%     \concat                                                                  %! MMI_2
@@ -4356,7 +4355,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
-                            \stopTextSpan                                                                %! MMI_1
                         %@% - \abjad_invisible_line                                                      %! MMI_2
                         %@% - \tweak bound-details.left.text \markup {                                   %! MMI_2
                         %@%     \concat                                                                  %! MMI_2
@@ -4470,7 +4468,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
-                            \stopTextSpan                                                                %! MMI_1
                         %@% - \abjad_invisible_line                                                      %! MMI_2
                         %@% - \tweak bound-details.left.text \markup {                                   %! MMI_2
                         %@%     \concat                                                                  %! MMI_2
@@ -4570,7 +4567,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
-                            \stopTextSpan                                                                %! MMI_1
                         %@% - \abjad_invisible_line                                                      %! MMI_2
                         %@% - \tweak bound-details.left.text \markup {                                   %! MMI_2
                         %@%     \concat                                                                  %! MMI_2
@@ -4690,7 +4686,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
-                            \stopTextSpan                                                                %! MMI_1
                         %@% - \abjad_invisible_line                                                      %! MMI_2
                         %@% - \tweak bound-details.left.text \markup {                                   %! MMI_2
                         %@%     \concat                                                                  %! MMI_2
@@ -5555,7 +5550,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
-                            \stopTextSpan                                                                %! MMI_1
                         %@% - \abjad_dashed_line_with_arrow                                              %! MMI_2
                         %@% - \tweak bound-details.left.text \markup {                                   %! MMI_2
                         %@%     \concat                                                                  %! MMI_2
@@ -5670,7 +5664,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
-                            \stopTextSpan                                                                %! MMI_1
                         %@% - \abjad_dashed_line_with_arrow                                              %! MMI_2
                         %@% - \tweak bound-details.left.text \markup {                                   %! MMI_2
                         %@%     \concat                                                                  %! MMI_2
@@ -5787,7 +5780,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
-                            \stopTextSpan                                                                %! MMI_1
                         %@% - \abjad_dashed_line_with_arrow                                              %! MMI_2
                         %@% - \tweak bound-details.left.text \markup {                                   %! MMI_2
                         %@%     \concat                                                                  %! MMI_2
@@ -5894,7 +5886,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
-                            \stopTextSpan                                                                %! MMI_1
                         %@% - \abjad_dashed_line_with_arrow                                              %! MMI_2
                         %@% - \tweak bound-details.left.text \markup {                                   %! MMI_2
                         %@%     \concat                                                                  %! MMI_2
@@ -6044,7 +6035,6 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
                             s1 * 3/8
-                            \stopTextSpan                                                                %! MMI_1
                         %@% - \abjad_dashed_line_with_arrow                                              %! MMI_2
                         %@% - \tweak bound-details.left.text \markup {                                   %! MMI_2
                         %@%     \concat                                                                  %! MMI_2
