@@ -39,8 +39,8 @@ class OverrideCommand(scoping.Command):
                     \voiceOne
                     {
                         \scaleDurations #'(1 . 1) {
-                            \override Beam.positions = #'(6 . 6)                                     %! OC1
-                            \override Stem.direction = #up                                           %! OC1
+                            \override Beam.positions = #'(6 . 6)                                     %! OVERRIDE_COMMAND_1
+                            \override Stem.direction = #up                                           %! OVERRIDE_COMMAND_1
                             c'16
                             [
                             d'16
@@ -58,8 +58,8 @@ class OverrideCommand(scoping.Command):
                         }
                         \scaleDurations #'(1 . 1) {
                             a'16
-                            \revert Beam.positions                                                   %! OC2
-                            \revert Stem.direction                                                   %! OC2
+                            \revert Beam.positions                                                   %! OVERRIDE_COMMAND_2
+                            \revert Stem.direction                                                   %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -103,27 +103,27 @@ class OverrideCommand(scoping.Command):
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -134,9 +134,9 @@ class OverrideCommand(scoping.Command):
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
-                            \override Beam.positions = #'(6 . 6)                                     %! OC1
-                            \override Stem.direction = #up                                           %! OC1
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override Beam.positions = #'(6 . 6)                                     %! OVERRIDE_COMMAND_1
+                            \override Stem.direction = #up                                           %! OVERRIDE_COMMAND_1
                             e'8
                             [
             <BLANKLINE>
@@ -145,10 +145,10 @@ class OverrideCommand(scoping.Command):
                             f'8
                             ]
             <BLANKLINE>
-                            \override Rest.direction = #up                                           %! OC1
+                            \override Rest.direction = #up                                           %! OVERRIDE_COMMAND_1
                             r8
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                             e''8
                             [
             <BLANKLINE>
@@ -157,7 +157,7 @@ class OverrideCommand(scoping.Command):
                             f''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             r8
             <BLANKLINE>
                             e'8
@@ -168,17 +168,17 @@ class OverrideCommand(scoping.Command):
                             f'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             r8
-                            \revert Rest.direction                                                   %! OC2
+                            \revert Rest.direction                                                   %! OVERRIDE_COMMAND_2
             <BLANKLINE>
                             e''8
                             [
             <BLANKLINE>
                             g'8
                             ]
-                            \revert Beam.positions                                                   %! OC2
-                            \revert Stem.direction                                                   %! OC2
+                            \revert Beam.positions                                                   %! OVERRIDE_COMMAND_2
+                            \revert Stem.direction                                                   %! OVERRIDE_COMMAND_2
             <BLANKLINE>
                         }
                     }
@@ -313,9 +313,9 @@ class OverrideCommand(scoping.Command):
         literal = abjad.LilyPondLiteral(string, format_slot)
         tag = self.get_tag(leaves[0])
         if tag:
-            tag = tag.prepend('OC1')
+            tag = tag.prepend('OVERRIDE_COMMAND_1')
         else:
-            tag = abjad.Tag('OC1')
+            tag = abjad.Tag('OVERRIDE_COMMAND_1')
         abjad.attach(
             literal,
             leaves[0],
@@ -332,9 +332,9 @@ class OverrideCommand(scoping.Command):
         literal = abjad.LilyPondLiteral(string, 'after')
         tag = self.get_tag(leaves[-1])
         if tag:
-            tag = tag.prepend('OC2')
+            tag = tag.prepend('OVERRIDE_COMMAND_2')
         else:
-            tag = abjad.Tag('OC2')
+            tag = abjad.Tag('OVERRIDE_COMMAND_2')
         abjad.attach(
             literal,
             leaves[-1],
@@ -475,31 +475,31 @@ def bar_extent(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -510,7 +510,7 @@ def bar_extent(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
                             e'8
                             [
             <BLANKLINE>
@@ -521,8 +521,8 @@ def bar_extent(
                             e''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
-                            \override Staff.BarLine.bar-extent = #'(-4 . 4)                          %! OC1
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override Staff.BarLine.bar-extent = #'(-4 . 4)                          %! OVERRIDE_COMMAND_1
                             g'8
                             [
             <BLANKLINE>
@@ -530,9 +530,9 @@ def bar_extent(
             <BLANKLINE>
                             e'8
                             ]
-                            \revert Staff.BarLine.bar-extent                                         %! OC2
+                            \revert Staff.BarLine.bar-extent                                         %! OVERRIDE_COMMAND_2
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             d''8
                             [
             <BLANKLINE>
@@ -543,7 +543,7 @@ def bar_extent(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             f''8
                             [
             <BLANKLINE>
@@ -551,7 +551,7 @@ def bar_extent(
             <BLANKLINE>
                             d''8
                             ]
-                            \once \override Staff.BarLine.bar-extent = #'(-4 . 4)                    %! OC1
+                            \once \override Staff.BarLine.bar-extent = #'(-4 . 4)                    %! OVERRIDE_COMMAND_1
             <BLANKLINE>
                         }
                     }
@@ -628,27 +628,27 @@ def bar_line_transparent(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -659,8 +659,8 @@ def bar_line_transparent(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
-                            \override Score.BarLine.transparent = ##t                                %! OC1
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override Score.BarLine.transparent = ##t                                %! OVERRIDE_COMMAND_1
                             e'8
                             [
             <BLANKLINE>
@@ -671,7 +671,7 @@ def bar_line_transparent(
             <BLANKLINE>
                             r8
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                             e''8
                             [
             <BLANKLINE>
@@ -680,7 +680,7 @@ def bar_line_transparent(
                             f''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             r8
             <BLANKLINE>
                             e'8
@@ -691,7 +691,7 @@ def bar_line_transparent(
                             f'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             r8
             <BLANKLINE>
                             e''8
@@ -699,7 +699,7 @@ def bar_line_transparent(
             <BLANKLINE>
                             g'8
                             ]
-                            \revert Score.BarLine.transparent                                        %! OC2
+                            \revert Score.BarLine.transparent                                        %! OVERRIDE_COMMAND_2
             <BLANKLINE>
                         }
                     }
@@ -742,27 +742,27 @@ def bar_line_transparent(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -773,7 +773,7 @@ def bar_line_transparent(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
                             e'8
                             [
             <BLANKLINE>
@@ -784,8 +784,8 @@ def bar_line_transparent(
             <BLANKLINE>
                             r8
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
-                            \override Score.BarLine.transparent = ##t                                %! OC1
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override Score.BarLine.transparent = ##t                                %! OVERRIDE_COMMAND_1
                             e''8
                             [
             <BLANKLINE>
@@ -793,9 +793,9 @@ def bar_line_transparent(
             <BLANKLINE>
                             f''8
                             ]
-                            \revert Score.BarLine.transparent                                        %! OC2
+                            \revert Score.BarLine.transparent                                        %! OVERRIDE_COMMAND_2
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             r8
             <BLANKLINE>
                             e'8
@@ -806,7 +806,7 @@ def bar_line_transparent(
                             f'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             r8
             <BLANKLINE>
                             e''8
@@ -862,7 +862,7 @@ def beam_positions(
                     \voiceOne
                     {
                         \times 4/5 {
-                            \override Beam.positions = #'(6 . 6)                                     %! OC1
+                            \override Beam.positions = #'(6 . 6)                                     %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             [
@@ -882,7 +882,7 @@ def beam_positions(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert Beam.positions                                                   %! OC2
+                            \revert Beam.positions                                                   %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -921,7 +921,7 @@ def beam_positions(
                             ]
                         }
                         \times 4/5 {
-                            \override Beam.positions = #'(6 . 6)                                     %! OC1
+                            \override Beam.positions = #'(6 . 6)                                     %! OVERRIDE_COMMAND_1
                             fs''16
                             [
                             e''16
@@ -929,7 +929,7 @@ def beam_positions(
                             af''16
                             g''16
                             ]
-                            \revert Beam.positions                                                   %! OC2
+                            \revert Beam.positions                                                   %! OVERRIDE_COMMAND_2
                         }
                         \times 4/5 {
                             a'16
@@ -1092,8 +1092,8 @@ def dls_staff_padding(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override DynamicLineSpanner.staff-padding = #'4                         %! OC1
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override DynamicLineSpanner.staff-padding = #'4                         %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             \p                                                                       %! PIC_1
@@ -1129,8 +1129,8 @@ def dls_staff_padding(
                             a'16
                             \p                                                                       %! PIC_1
                             r4
-                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert DynamicLineSpanner.staff-padding                                 %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -1172,7 +1172,7 @@ def dls_staff_padding(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             \p                                                                       %! PIC_1
@@ -1188,7 +1188,7 @@ def dls_staff_padding(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override DynamicLineSpanner.staff-padding = #'4                         %! OC1
+                            \override DynamicLineSpanner.staff-padding = #'4                         %! OVERRIDE_COMMAND_1
                             fs''16
                             \p                                                                       %! PIC_1
                             \<                                                                       %! PIC_1
@@ -1204,13 +1204,13 @@ def dls_staff_padding(
                             g''16
                             \f                                                                       %! PIC_2
                             ]
-                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
+                            \revert DynamicLineSpanner.staff-padding                                 %! OVERRIDE_COMMAND_2
                         }
                         \times 4/5 {
                             a'16
                             \p                                                                       %! PIC_1
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -1267,8 +1267,8 @@ def dls_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override DynamicLineSpanner.direction = #up                             %! OC1
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override DynamicLineSpanner.direction = #up                             %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             \p                                                                       %! PIC_1
@@ -1304,8 +1304,8 @@ def dls_up(
                             a'16
                             \p                                                                       %! PIC_1
                             r4
-                            \revert DynamicLineSpanner.direction                                     %! OC2
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert DynamicLineSpanner.direction                                     %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -1347,7 +1347,7 @@ def dls_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             \p                                                                       %! PIC_1
@@ -1363,7 +1363,7 @@ def dls_up(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override DynamicLineSpanner.direction = #up                             %! OC1
+                            \override DynamicLineSpanner.direction = #up                             %! OVERRIDE_COMMAND_1
                             fs''16
                             \p                                                                       %! PIC_1
                             \<                                                                       %! PIC_1
@@ -1379,13 +1379,13 @@ def dls_up(
                             g''16
                             \f                                                                       %! PIC_2
                             ]
-                            \revert DynamicLineSpanner.direction                                     %! OC2
+                            \revert DynamicLineSpanner.direction                                     %! OVERRIDE_COMMAND_2
                         }
                         \times 4/5 {
                             a'16
                             \p                                                                       %! PIC_1
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -1509,11 +1509,11 @@ def dynamic_text_extra_offset(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
-                            \once \override DynamicText.extra-offset = #'(-3 . 0)                    %! OC1
+                            \once \override DynamicText.extra-offset = #'(-3 . 0)                    %! OVERRIDE_COMMAND_1
                             c'16
-                            \p                                                                       %! IC
+                            \p                                                                       %! INDICATOR_COMMAND
                             [
                             d'16
                             ]
@@ -1525,7 +1525,7 @@ def dynamic_text_extra_offset(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            \f                                                                       %! IC
+                            \f                                                                       %! INDICATOR_COMMAND
                             [
                             e''16
                             ]
@@ -1541,7 +1541,7 @@ def dynamic_text_extra_offset(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -1581,10 +1581,10 @@ def dynamic_text_extra_offset(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
-                            \p                                                                       %! IC
+                            \p                                                                       %! INDICATOR_COMMAND
                             [
                             d'16
                             ]
@@ -1595,9 +1595,9 @@ def dynamic_text_extra_offset(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \once \override DynamicText.extra-offset = #'(-3 . 0)                    %! OC1
+                            \once \override DynamicText.extra-offset = #'(-3 . 0)                    %! OVERRIDE_COMMAND_1
                             fs''16
-                            \f                                                                       %! IC
+                            \f                                                                       %! INDICATOR_COMMAND
                             [
                             e''16
                             ]
@@ -1613,7 +1613,7 @@ def dynamic_text_extra_offset(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -1921,27 +1921,27 @@ def mmrest_text_color(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -1952,25 +1952,25 @@ def mmrest_text_color(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
-                            \override MultiMeasureRestText.color = #red                              %! OC1
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override MultiMeasureRestText.color = #red                              %! OVERRIDE_COMMAND_1
                             R1 * 1/2
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                             R1 * 3/8
-                            ^ \markup {                                                              %! IC
-                                \override                                                            %! IC
-                                    #'(box-padding . 0.5)                                            %! IC
-                                    \box                                                             %! IC
-                                        still                                                        %! IC
-                                }                                                                    %! IC
+                            ^ \markup {                                                              %! INDICATOR_COMMAND
+                                \override                                                            %! INDICATOR_COMMAND
+                                    #'(box-padding . 0.5)                                            %! INDICATOR_COMMAND
+                                    \box                                                             %! INDICATOR_COMMAND
+                                        still                                                        %! INDICATOR_COMMAND
+                                }                                                                    %! INDICATOR_COMMAND
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             R1 * 1/2
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             R1 * 3/8
-                            \revert MultiMeasureRestText.color                                       %! OC2
+                            \revert MultiMeasureRestText.color                                       %! OVERRIDE_COMMAND_2
             <BLANKLINE>
                         }
                     }
@@ -2051,27 +2051,27 @@ def mmrest_text_extra_offset(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -2082,25 +2082,25 @@ def mmrest_text_extra_offset(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
-                            \override MultiMeasureRestText.extra-offset = #'(0 . 2)                  %! OC1
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override MultiMeasureRestText.extra-offset = #'(0 . 2)                  %! OVERRIDE_COMMAND_1
                             R1 * 1/2
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                             R1 * 3/8
-                            ^ \markup {                                                              %! IC
-                                \override                                                            %! IC
-                                    #'(box-padding . 0.5)                                            %! IC
-                                    \box                                                             %! IC
-                                        still                                                        %! IC
-                                }                                                                    %! IC
+                            ^ \markup {                                                              %! INDICATOR_COMMAND
+                                \override                                                            %! INDICATOR_COMMAND
+                                    #'(box-padding . 0.5)                                            %! INDICATOR_COMMAND
+                                    \box                                                             %! INDICATOR_COMMAND
+                                        still                                                        %! INDICATOR_COMMAND
+                                }                                                                    %! INDICATOR_COMMAND
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             R1 * 1/2
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             R1 * 3/8
-                            \revert MultiMeasureRestText.extra-offset                                %! OC2
+                            \revert MultiMeasureRestText.extra-offset                                %! OVERRIDE_COMMAND_2
             <BLANKLINE>
                         }
                     }
@@ -2154,27 +2154,27 @@ def mmrest_text_padding(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -2185,25 +2185,25 @@ def mmrest_text_padding(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
-                            \override MultiMeasureRestText.padding = #2                              %! OC1
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override MultiMeasureRestText.padding = #2                              %! OVERRIDE_COMMAND_1
                             R1 * 1/2
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                             R1 * 3/8
-                            ^ \markup {                                                              %! IC
-                                \override                                                            %! IC
-                                    #'(box-padding . 0.5)                                            %! IC
-                                    \box                                                             %! IC
-                                        still                                                        %! IC
-                                }                                                                    %! IC
+                            ^ \markup {                                                              %! INDICATOR_COMMAND
+                                \override                                                            %! INDICATOR_COMMAND
+                                    #'(box-padding . 0.5)                                            %! INDICATOR_COMMAND
+                                    \box                                                             %! INDICATOR_COMMAND
+                                        still                                                        %! INDICATOR_COMMAND
+                                }                                                                    %! INDICATOR_COMMAND
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             R1 * 1/2
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             R1 * 3/8
-                            \revert MultiMeasureRestText.padding                                     %! OC2
+                            \revert MultiMeasureRestText.padding                                     %! OVERRIDE_COMMAND_2
             <BLANKLINE>
                         }
                     }
@@ -2256,27 +2256,27 @@ def mmrest_text_parent_center(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -2287,25 +2287,25 @@ def mmrest_text_parent_center(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
-                            \override MultiMeasureRestText.parent-alignment-X = #0                   %! OC1
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override MultiMeasureRestText.parent-alignment-X = #0                   %! OVERRIDE_COMMAND_1
                             R1 * 1/2
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                             R1 * 3/8
-                            ^ \markup {                                                              %! IC
-                                \override                                                            %! IC
-                                    #'(box-padding . 0.5)                                            %! IC
-                                    \box                                                             %! IC
-                                        still                                                        %! IC
-                                }                                                                    %! IC
+                            ^ \markup {                                                              %! INDICATOR_COMMAND
+                                \override                                                            %! INDICATOR_COMMAND
+                                    #'(box-padding . 0.5)                                            %! INDICATOR_COMMAND
+                                    \box                                                             %! INDICATOR_COMMAND
+                                        still                                                        %! INDICATOR_COMMAND
+                                }                                                                    %! INDICATOR_COMMAND
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             R1 * 1/2
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             R1 * 3/8
-                            \revert MultiMeasureRestText.parent-alignment-X                          %! OC2
+                            \revert MultiMeasureRestText.parent-alignment-X                          %! OVERRIDE_COMMAND_2
             <BLANKLINE>
                         }
                     }
@@ -2359,27 +2359,27 @@ def mmrest_text_staff_padding(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -2390,25 +2390,25 @@ def mmrest_text_staff_padding(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
-                            \override MultiMeasureRestText.staff-padding = #2                        %! OC1
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override MultiMeasureRestText.staff-padding = #2                        %! OVERRIDE_COMMAND_1
                             R1 * 1/2
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                             R1 * 3/8
-                            ^ \markup {                                                              %! IC
-                                \override                                                            %! IC
-                                    #'(box-padding . 0.5)                                            %! IC
-                                    \box                                                             %! IC
-                                        still                                                        %! IC
-                                }                                                                    %! IC
+                            ^ \markup {                                                              %! INDICATOR_COMMAND
+                                \override                                                            %! INDICATOR_COMMAND
+                                    #'(box-padding . 0.5)                                            %! INDICATOR_COMMAND
+                                    \box                                                             %! INDICATOR_COMMAND
+                                        still                                                        %! INDICATOR_COMMAND
+                                }                                                                    %! INDICATOR_COMMAND
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             R1 * 1/2
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             R1 * 3/8
-                            \revert MultiMeasureRestText.staff-padding                               %! OC2
+                            \revert MultiMeasureRestText.staff-padding                               %! OVERRIDE_COMMAND_2
             <BLANKLINE>
                         }
                     }
@@ -2517,9 +2517,9 @@ def note_head_style_cross(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
-                            \override NoteHead.style = #'cross                                       %! OC1
+                            \override NoteHead.style = #'cross                                       %! OVERRIDE_COMMAND_1
                             c'16
                             [
                             d'16
@@ -2546,9 +2546,9 @@ def note_head_style_cross(
                         }
                         \times 4/5 {
                             a'16
-                            \revert NoteHead.style                                                   %! OC2
+                            \revert NoteHead.style                                                   %! OVERRIDE_COMMAND_2
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -2582,7 +2582,7 @@ def note_head_style_cross(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             [
@@ -2595,7 +2595,7 @@ def note_head_style_cross(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override NoteHead.style = #'cross                                       %! OC1
+                            \override NoteHead.style = #'cross                                       %! OVERRIDE_COMMAND_1
                             fs''16
                             [
                             e''16
@@ -2608,12 +2608,12 @@ def note_head_style_cross(
                             [
                             g''16
                             ]
-                            \revert NoteHead.style                                                   %! OC2
+                            \revert NoteHead.style                                                   %! OVERRIDE_COMMAND_2
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -2662,9 +2662,9 @@ def note_head_style_harmonic(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
-                            \override NoteHead.style = #'harmonic                                    %! OC1
+                            \override NoteHead.style = #'harmonic                                    %! OVERRIDE_COMMAND_1
                             c'16
                             [
                             d'16
@@ -2691,9 +2691,9 @@ def note_head_style_harmonic(
                         }
                         \times 4/5 {
                             a'16
-                            \revert NoteHead.style                                                   %! OC2
+                            \revert NoteHead.style                                                   %! OVERRIDE_COMMAND_2
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -2727,7 +2727,7 @@ def note_head_style_harmonic(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             [
@@ -2740,7 +2740,7 @@ def note_head_style_harmonic(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override NoteHead.style = #'harmonic                                    %! OC1
+                            \override NoteHead.style = #'harmonic                                    %! OVERRIDE_COMMAND_1
                             fs''16
                             [
                             e''16
@@ -2753,12 +2753,12 @@ def note_head_style_harmonic(
                             [
                             g''16
                             ]
-                            \revert NoteHead.style                                                   %! OC2
+                            \revert NoteHead.style                                                   %! OVERRIDE_COMMAND_2
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -2874,10 +2874,10 @@ def repeat_tie_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
-                            \override RepeatTie.direction = #down                                    %! OC1
-                            \override Stem.direction = #up                                           %! OC1
+                            \override RepeatTie.direction = #down                                    %! OVERRIDE_COMMAND_1
+                            \override Stem.direction = #up                                           %! OVERRIDE_COMMAND_1
                             b'16
                             [
                             b'16
@@ -2903,10 +2903,10 @@ def repeat_tie_down(
                         }
                         \times 4/5 {
                             b'16
-                            \revert RepeatTie.direction                                              %! OC2
-                            \revert Stem.direction                                                   %! OC2
+                            \revert RepeatTie.direction                                              %! OVERRIDE_COMMAND_2
+                            \revert Stem.direction                                                   %! OVERRIDE_COMMAND_2
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -2948,9 +2948,9 @@ def repeat_tie_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
-                            \override Stem.direction = #up                                           %! OC1
+                            \override Stem.direction = #up                                           %! OVERRIDE_COMMAND_1
                             b'16
                             [
                             b'16
@@ -2963,7 +2963,7 @@ def repeat_tie_down(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 7/8 {
-                            \override RepeatTie.direction = #down                                    %! OC1
+                            \override RepeatTie.direction = #down                                    %! OVERRIDE_COMMAND_1
                             b'16
                             [
                             b'16
@@ -2973,14 +2973,14 @@ def repeat_tie_down(
                             \repeatTie                                                               %! SC
                             b'16
                             \repeatTie                                                               %! SC
-                            \revert RepeatTie.direction                                              %! OC2
+                            \revert RepeatTie.direction                                              %! OVERRIDE_COMMAND_2
                             r16
                         }
                         \times 4/5 {
                             b'16
-                            \revert Stem.direction                                                   %! OC2
+                            \revert Stem.direction                                                   %! OVERRIDE_COMMAND_2
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -3062,10 +3062,10 @@ def repeat_tie_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
-                            \override RepeatTie.direction = #up                                      %! OC1
-                            \override Stem.direction = #down                                         %! OC1
+                            \override RepeatTie.direction = #up                                      %! OVERRIDE_COMMAND_1
+                            \override Stem.direction = #down                                         %! OVERRIDE_COMMAND_1
                             b'16
                             [
                             b'16
@@ -3091,10 +3091,10 @@ def repeat_tie_up(
                         }
                         \times 4/5 {
                             b'16
-                            \revert RepeatTie.direction                                              %! OC2
-                            \revert Stem.direction                                                   %! OC2
+                            \revert RepeatTie.direction                                              %! OVERRIDE_COMMAND_2
+                            \revert Stem.direction                                                   %! OVERRIDE_COMMAND_2
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -3136,9 +3136,9 @@ def repeat_tie_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
-                            \override Stem.direction = #down                                         %! OC1
+                            \override Stem.direction = #down                                         %! OVERRIDE_COMMAND_1
                             b'16
                             [
                             b'16
@@ -3151,7 +3151,7 @@ def repeat_tie_up(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 7/8 {
-                            \override RepeatTie.direction = #up                                      %! OC1
+                            \override RepeatTie.direction = #up                                      %! OVERRIDE_COMMAND_1
                             b'16
                             [
                             b'16
@@ -3161,14 +3161,14 @@ def repeat_tie_up(
                             \repeatTie                                                               %! SC
                             b'16
                             \repeatTie                                                               %! SC
-                            \revert RepeatTie.direction                                              %! OC2
+                            \revert RepeatTie.direction                                              %! OVERRIDE_COMMAND_2
                             r16
                         }
                         \times 4/5 {
                             b'16
-                            \revert Stem.direction                                                   %! OC2
+                            \revert Stem.direction                                                   %! OVERRIDE_COMMAND_2
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -3217,8 +3217,8 @@ def rest_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Rest.direction = #down                                         %! OC1
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override Rest.direction = #down                                         %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             [
@@ -3247,8 +3247,8 @@ def rest_down(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert Rest.direction                                                   %! OC2
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert Rest.direction                                                   %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -3285,7 +3285,7 @@ def rest_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             [
@@ -3305,7 +3305,7 @@ def rest_down(
                             ef''4
                             ~
                             ef''16
-                            \once \override Rest.direction = #down                                   %! OC1
+                            \once \override Rest.direction = #down                                   %! OVERRIDE_COMMAND_1
                             r16
                             af''16
                             [
@@ -3315,7 +3315,7 @@ def rest_down(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -3388,8 +3388,8 @@ def rest_position(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Rest.staff-position = #-6                                      %! OC1
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override Rest.staff-position = #-6                                      %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             [
@@ -3418,8 +3418,8 @@ def rest_position(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert Rest.staff-position                                              %! OC2
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert Rest.staff-position                                              %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -3456,7 +3456,7 @@ def rest_position(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             [
@@ -3476,7 +3476,7 @@ def rest_position(
                             ef''4
                             ~
                             ef''16
-                            \once \override Rest.staff-position = #-6                                %! OC1
+                            \once \override Rest.staff-position = #-6                                %! OVERRIDE_COMMAND_1
                             r16
                             af''16
                             [
@@ -3486,7 +3486,7 @@ def rest_position(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -3535,8 +3535,8 @@ def rest_transparent(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Rest.transparent = ##t                                         %! OC1
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override Rest.transparent = ##t                                         %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             [
@@ -3565,8 +3565,8 @@ def rest_transparent(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert Rest.transparent                                                 %! OC2
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert Rest.transparent                                                 %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -3603,7 +3603,7 @@ def rest_transparent(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             [
@@ -3623,7 +3623,7 @@ def rest_transparent(
                             ef''4
                             ~
                             ef''16
-                            \once \override Rest.transparent = ##t                                   %! OC1
+                            \once \override Rest.transparent = ##t                                   %! OVERRIDE_COMMAND_1
                             r16
                             af''16
                             [
@@ -3633,7 +3633,7 @@ def rest_transparent(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -3682,8 +3682,8 @@ def rest_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Rest.direction = #up                                           %! OC1
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override Rest.direction = #up                                           %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             [
@@ -3712,8 +3712,8 @@ def rest_up(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert Rest.direction                                                   %! OC2
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert Rest.direction                                                   %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -3750,7 +3750,7 @@ def rest_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             [
@@ -3770,7 +3770,7 @@ def rest_up(
                             ef''4
                             ~
                             ef''16
-                            \once \override Rest.direction = #up                                     %! OC1
+                            \once \override Rest.direction = #up                                     %! OVERRIDE_COMMAND_1
                             r16
                             af''16
                             [
@@ -3780,7 +3780,7 @@ def rest_up(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -3831,17 +3831,17 @@ def script_color(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Script.color = #red                                            %! OC1
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override Script.color = #red                                            %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             [
                             d'16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ]
                             bf'4
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ~
                             bf'16
                             r16
@@ -3849,29 +3849,29 @@ def script_color(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             [
                             e''16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ]
                             ef''4
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ~
                             ef''16
                             r16
                             af''16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             [
                             g''16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ]
                         }
                         \times 4/5 {
                             a'16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             r4
-                            \revert Script.color                                                     %! OC2
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert Script.color                                                     %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -3909,47 +3909,47 @@ def script_color(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             [
                             d'16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ]
                             bf'4
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ~
                             bf'16
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Script.color = #red                                            %! OC1
+                            \override Script.color = #red                                            %! OVERRIDE_COMMAND_1
                             fs''16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             [
                             e''16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ]
                             ef''4
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ~
                             ef''16
                             r16
                             af''16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             [
                             g''16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ]
-                            \revert Script.color                                                     %! OC2
+                            \revert Script.color                                                     %! OVERRIDE_COMMAND_2
                         }
                         \times 4/5 {
                             a'16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -3999,17 +3999,17 @@ def script_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Script.direction = #down                                       %! OC1
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override Script.direction = #down                                       %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             [
                             d'16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ]
                             bf'4
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ~
                             bf'16
                             r16
@@ -4017,29 +4017,29 @@ def script_down(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             [
                             e''16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ]
                             ef''4
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ~
                             ef''16
                             r16
                             af''16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             [
                             g''16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ]
                         }
                         \times 4/5 {
                             a'16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             r4
-                            \revert Script.direction                                                 %! OC2
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert Script.direction                                                 %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -4077,47 +4077,47 @@ def script_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             [
                             d'16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ]
                             bf'4
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ~
                             bf'16
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Script.direction = #down                                       %! OC1
+                            \override Script.direction = #down                                       %! OVERRIDE_COMMAND_1
                             fs''16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             [
                             e''16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ]
                             ef''4
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ~
                             ef''16
                             r16
                             af''16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             [
                             g''16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ]
-                            \revert Script.direction                                                 %! OC2
+                            \revert Script.direction                                                 %! OVERRIDE_COMMAND_2
                         }
                         \times 4/5 {
                             a'16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -4168,17 +4168,17 @@ def script_extra_offset(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
-                            \once \override Script.extra-offset = #'(-1.5 . 0)                       %! OC1
+                            \once \override Script.extra-offset = #'(-1.5 . 0)                       %! OVERRIDE_COMMAND_1
                             c'16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             [
                             d'16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ]
                             bf'4
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ~
                             bf'16
                             r16
@@ -4186,28 +4186,28 @@ def script_extra_offset(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             [
                             e''16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ]
                             ef''4
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ~
                             ef''16
                             r16
                             af''16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             [
                             g''16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ]
                         }
                         \times 4/5 {
                             a'16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -4245,46 +4245,46 @@ def script_extra_offset(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             [
                             d'16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ]
                             bf'4
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ~
                             bf'16
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \once \override Script.extra-offset = #'(-1.5 . 0)                       %! OC1
+                            \once \override Script.extra-offset = #'(-1.5 . 0)                       %! OVERRIDE_COMMAND_1
                             fs''16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             [
                             e''16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ]
                             ef''4
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ~
                             ef''16
                             r16
                             af''16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             [
                             g''16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ]
                         }
                         \times 4/5 {
                             a'16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -4364,17 +4364,17 @@ def script_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Script.direction = #up                                         %! OC1
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override Script.direction = #up                                         %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             [
                             d'16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ]
                             bf'4
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ~
                             bf'16
                             r16
@@ -4382,29 +4382,29 @@ def script_up(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             [
                             e''16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ]
                             ef''4
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ~
                             ef''16
                             r16
                             af''16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             [
                             g''16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ]
                         }
                         \times 4/5 {
                             a'16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             r4
-                            \revert Script.direction                                                 %! OC2
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert Script.direction                                                 %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -4442,47 +4442,47 @@ def script_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             [
                             d'16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ]
                             bf'4
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ~
                             bf'16
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Script.direction = #up                                         %! OC1
+                            \override Script.direction = #up                                         %! OVERRIDE_COMMAND_1
                             fs''16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             [
                             e''16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ]
                             ef''4
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ~
                             ef''16
                             r16
                             af''16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             [
                             g''16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             ]
-                            \revert Script.direction                                                 %! OC2
+                            \revert Script.direction                                                 %! OVERRIDE_COMMAND_2
                         }
                         \times 4/5 {
                             a'16
-                            -\accent                                                                 %! IC
+                            -\accent                                                                 %! INDICATOR_COMMAND
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -4535,8 +4535,8 @@ def slur_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Slur.direction = #down                                         %! OC1
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override Slur.direction = #down                                         %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             [
@@ -4569,8 +4569,8 @@ def slur_down(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert Slur.direction                                                   %! OC2
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert Slur.direction                                                   %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -4611,7 +4611,7 @@ def slur_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             [
@@ -4626,7 +4626,7 @@ def slur_down(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Slur.direction = #down                                         %! OC1
+                            \override Slur.direction = #down                                         %! OVERRIDE_COMMAND_1
                             fs''16
                             [
                             (                                                                        %! SC
@@ -4641,12 +4641,12 @@ def slur_down(
                             g''16
                             ]
                             )                                                                        %! SC
-                            \revert Slur.direction                                                   %! OC2
+                            \revert Slur.direction                                                   %! OVERRIDE_COMMAND_2
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -4701,11 +4701,11 @@ def slur_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Slur.direction = #up                                           %! OC1
-                            \override TupletBracket.staff-padding = #5                               %! OC1
-                            \override TupletBracket.direction = #down                                %! OC1
+                            \override Slur.direction = #up                                           %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.direction = #down                                %! OVERRIDE_COMMAND_1
                             r8
-                            \override Stem.direction = #down                                         %! OC1
+                            \override Stem.direction = #down                                         %! OVERRIDE_COMMAND_1
                             c'16
                             [
                             (                                                                        %! SC
@@ -4736,11 +4736,11 @@ def slur_up(
                         }
                         \times 4/5 {
                             a'16
-                            \revert Stem.direction                                                   %! OC2
+                            \revert Stem.direction                                                   %! OVERRIDE_COMMAND_2
                             r4
-                            \revert Slur.direction                                                   %! OC2
-                            \revert TupletBracket.staff-padding                                      %! OC2
-                            \revert TupletBracket.direction                                          %! OC2
+                            \revert Slur.direction                                                   %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.direction                                          %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -4783,10 +4783,10 @@ def slur_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
-                            \override TupletBracket.direction = #down                                %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.direction = #down                                %! OVERRIDE_COMMAND_1
                             r8
-                            \override Stem.direction = #down                                         %! OC1
+                            \override Stem.direction = #down                                         %! OVERRIDE_COMMAND_1
                             c'16
                             [
                             (                                                                        %! SC
@@ -4800,7 +4800,7 @@ def slur_up(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Slur.direction = #up                                           %! OC1
+                            \override Slur.direction = #up                                           %! OVERRIDE_COMMAND_1
                             fs''16
                             [
                             (                                                                        %! SC
@@ -4815,14 +4815,14 @@ def slur_up(
                             g''16
                             ]
                             )                                                                        %! SC
-                            \revert Slur.direction                                                   %! OC2
+                            \revert Slur.direction                                                   %! OVERRIDE_COMMAND_2
                         }
                         \times 4/5 {
                             a'16
-                            \revert Stem.direction                                                   %! OC2
+                            \revert Stem.direction                                                   %! OVERRIDE_COMMAND_2
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
-                            \revert TupletBracket.direction                                          %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.direction                                          %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -4909,8 +4909,8 @@ def span_bar_transparent(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \once \override Score.SpanBar.transparent = ##t                          %! OC1
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \once \override Score.SpanBar.transparent = ##t                          %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             [
@@ -4939,7 +4939,7 @@ def span_bar_transparent(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -4991,9 +4991,9 @@ def stem_color(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
-                            \override Stem.color = #red                                              %! OC1
+                            \override Stem.color = #red                                              %! OVERRIDE_COMMAND_1
                             c'16
                             [
                             d'16
@@ -5020,9 +5020,9 @@ def stem_color(
                         }
                         \times 4/5 {
                             a'16
-                            \revert Stem.color                                                       %! OC2
+                            \revert Stem.color                                                       %! OVERRIDE_COMMAND_2
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -5059,7 +5059,7 @@ def stem_color(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             [
@@ -5072,7 +5072,7 @@ def stem_color(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Stem.color = #red                                              %! OC1
+                            \override Stem.color = #red                                              %! OVERRIDE_COMMAND_1
                             fs''16
                             [
                             e''16
@@ -5085,12 +5085,12 @@ def stem_color(
                             [
                             g''16
                             ]
-                            \revert Stem.color                                                       %! OC2
+                            \revert Stem.color                                                       %! OVERRIDE_COMMAND_2
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -5140,9 +5140,9 @@ def stem_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
-                            \override Stem.direction = #down                                         %! OC1
+                            \override Stem.direction = #down                                         %! OVERRIDE_COMMAND_1
                             c'16
                             [
                             d'16
@@ -5169,9 +5169,9 @@ def stem_down(
                         }
                         \times 4/5 {
                             a'16
-                            \revert Stem.direction                                                   %! OC2
+                            \revert Stem.direction                                                   %! OVERRIDE_COMMAND_2
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -5209,9 +5209,9 @@ def stem_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
-                            \override Stem.direction = #up                                           %! OC1
+                            \override Stem.direction = #up                                           %! OVERRIDE_COMMAND_1
                             c'16
                             [
                             d'16
@@ -5223,7 +5223,7 @@ def stem_down(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Stem.direction = #down                                         %! OC1
+                            \override Stem.direction = #down                                         %! OVERRIDE_COMMAND_1
                             fs''16
                             [
                             e''16
@@ -5236,13 +5236,13 @@ def stem_down(
                             [
                             g''16
                             ]
-                            \revert Stem.direction                                                   %! OC2
+                            \revert Stem.direction                                                   %! OVERRIDE_COMMAND_2
                         }
                         \times 4/5 {
                             a'16
-                            \revert Stem.direction                                                   %! OC2
+                            \revert Stem.direction                                                   %! OVERRIDE_COMMAND_2
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -5319,9 +5319,9 @@ def stem_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
-                            \override Stem.direction = #up                                           %! OC1
+                            \override Stem.direction = #up                                           %! OVERRIDE_COMMAND_1
                             c'16
                             [
                             d'16
@@ -5348,9 +5348,9 @@ def stem_up(
                         }
                         \times 4/5 {
                             a'16
-                            \revert Stem.direction                                                   %! OC2
+                            \revert Stem.direction                                                   %! OVERRIDE_COMMAND_2
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -5388,9 +5388,9 @@ def stem_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
-                            \override Stem.direction = #down                                         %! OC1
+                            \override Stem.direction = #down                                         %! OVERRIDE_COMMAND_1
                             c'16
                             [
                             d'16
@@ -5402,7 +5402,7 @@ def stem_up(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Stem.direction = #up                                           %! OC1
+                            \override Stem.direction = #up                                           %! OVERRIDE_COMMAND_1
                             fs''16
                             [
                             e''16
@@ -5415,13 +5415,13 @@ def stem_up(
                             [
                             g''16
                             ]
-                            \revert Stem.direction                                                   %! OC2
+                            \revert Stem.direction                                                   %! OVERRIDE_COMMAND_2
                         }
                         \times 4/5 {
                             bf'16
-                            \revert Stem.direction                                                   %! OC2
+                            \revert Stem.direction                                                   %! OVERRIDE_COMMAND_2
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -5470,8 +5470,8 @@ def strict_note_spacing_off(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Score.SpacingSpanner.strict-note-spacing = ##f                 %! OC1
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override Score.SpacingSpanner.strict-note-spacing = ##f                 %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             [
@@ -5500,8 +5500,8 @@ def strict_note_spacing_off(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert Score.SpacingSpanner.strict-note-spacing                         %! OC2
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert Score.SpacingSpanner.strict-note-spacing                         %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -5557,8 +5557,8 @@ def sustain_pedal_staff_padding(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OC1
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             \set Staff.pedalSustainStyle = #'bracket                                 %! SC
                             r8
                             \sustainOn                                                               %! SC
@@ -5596,8 +5596,8 @@ def sustain_pedal_staff_padding(
                             \sustainOn                                                               %! SC
                             r4
                             \sustainOff                                                              %! SC
-                            \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OC2
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -5638,7 +5638,7 @@ def sustain_pedal_staff_padding(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             \set Staff.pedalSustainStyle = #'bracket                                 %! SC
                             r8
                             \sustainOn                                                               %! SC
@@ -5654,7 +5654,7 @@ def sustain_pedal_staff_padding(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OC1
+                            \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OVERRIDE_COMMAND_1
                             \set Staff.pedalSustainStyle = #'bracket                                 %! SC
                             fs''16
                             [
@@ -5670,7 +5670,7 @@ def sustain_pedal_staff_padding(
                             g''16
                             ]
                             \sustainOff                                                              %! SC
-                            \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OC2
+                            \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OVERRIDE_COMMAND_2
                         }
                         \times 4/5 {
                             \set Staff.pedalSustainStyle = #'bracket                                 %! SC
@@ -5678,7 +5678,7 @@ def sustain_pedal_staff_padding(
                             \sustainOn                                                               %! SC
                             r4
                             \sustainOff                                                              %! SC
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -5735,11 +5735,11 @@ def text_script_color(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TextScript.color = #red                                        %! OC1
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TextScript.color = #red                                        %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
-                            ^ \markup { "più mosso" }                                                %! IC
+                            ^ \markup { "più mosso" }                                                %! INDICATOR_COMMAND
                             [
                             d'16
                             ]
@@ -5751,7 +5751,7 @@ def text_script_color(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            ^ \markup { "lo stesso tempo" }                                          %! IC
+                            ^ \markup { "lo stesso tempo" }                                          %! INDICATOR_COMMAND
                             [
                             e''16
                             ]
@@ -5767,8 +5767,8 @@ def text_script_color(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TextScript.color                                                 %! OC2
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TextScript.color                                                 %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -5810,10 +5810,10 @@ def text_script_color(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
-                            ^ \markup { "più mosso" }                                                %! IC
+                            ^ \markup { "più mosso" }                                                %! INDICATOR_COMMAND
                             [
                             d'16
                             ]
@@ -5824,9 +5824,9 @@ def text_script_color(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TextScript.color = #red                                        %! OC1
+                            \override TextScript.color = #red                                        %! OVERRIDE_COMMAND_1
                             fs''16
-                            ^ \markup { "lo stesso tempo" }                                          %! IC
+                            ^ \markup { "lo stesso tempo" }                                          %! INDICATOR_COMMAND
                             [
                             e''16
                             ]
@@ -5838,12 +5838,12 @@ def text_script_color(
                             [
                             g''16
                             ]
-                            \revert TextScript.color                                                 %! OC2
+                            \revert TextScript.color                                                 %! OVERRIDE_COMMAND_2
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -5927,11 +5927,11 @@ def text_script_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TextScript.direction = #down                                   %! OC1
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TextScript.direction = #down                                   %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
-                            ^ \markup { "più mosso" }                                                %! IC
+                            ^ \markup { "più mosso" }                                                %! INDICATOR_COMMAND
                             [
                             d'16
                             ]
@@ -5943,7 +5943,7 @@ def text_script_down(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            ^ \markup { "lo stesso tempo" }                                          %! IC
+                            ^ \markup { "lo stesso tempo" }                                          %! INDICATOR_COMMAND
                             [
                             e''16
                             ]
@@ -5959,8 +5959,8 @@ def text_script_down(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TextScript.direction                                             %! OC2
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TextScript.direction                                             %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -6002,10 +6002,10 @@ def text_script_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
-                            ^ \markup { "più mosso" }                                                %! IC
+                            ^ \markup { "più mosso" }                                                %! INDICATOR_COMMAND
                             [
                             d'16
                             ]
@@ -6016,9 +6016,9 @@ def text_script_down(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TextScript.direction = #down                                   %! OC1
+                            \override TextScript.direction = #down                                   %! OVERRIDE_COMMAND_1
                             fs''16
-                            ^ \markup { "lo stesso tempo" }                                          %! IC
+                            ^ \markup { "lo stesso tempo" }                                          %! INDICATOR_COMMAND
                             [
                             e''16
                             ]
@@ -6030,12 +6030,12 @@ def text_script_down(
                             [
                             g''16
                             ]
-                            \revert TextScript.direction                                             %! OC2
+                            \revert TextScript.direction                                             %! OVERRIDE_COMMAND_2
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -6187,11 +6187,11 @@ def text_script_padding(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TextScript.padding = #4                                        %! OC1
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TextScript.padding = #4                                        %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
-                            ^ \markup { "più mosso" }                                                %! IC
+                            ^ \markup { "più mosso" }                                                %! INDICATOR_COMMAND
                             [
                             d'16
                             ]
@@ -6203,7 +6203,7 @@ def text_script_padding(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            ^ \markup { "lo stesso tempo" }                                          %! IC
+                            ^ \markup { "lo stesso tempo" }                                          %! INDICATOR_COMMAND
                             [
                             e''16
                             ]
@@ -6219,8 +6219,8 @@ def text_script_padding(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TextScript.padding                                               %! OC2
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TextScript.padding                                               %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -6262,10 +6262,10 @@ def text_script_padding(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
-                            ^ \markup { "più mosso" }                                                %! IC
+                            ^ \markup { "più mosso" }                                                %! INDICATOR_COMMAND
                             [
                             d'16
                             ]
@@ -6276,9 +6276,9 @@ def text_script_padding(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TextScript.padding = #4                                        %! OC1
+                            \override TextScript.padding = #4                                        %! OVERRIDE_COMMAND_1
                             fs''16
-                            ^ \markup { "lo stesso tempo" }                                          %! IC
+                            ^ \markup { "lo stesso tempo" }                                          %! INDICATOR_COMMAND
                             [
                             e''16
                             ]
@@ -6290,12 +6290,12 @@ def text_script_padding(
                             [
                             g''16
                             ]
-                            \revert TextScript.padding                                               %! OC2
+                            \revert TextScript.padding                                               %! OVERRIDE_COMMAND_2
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -6425,11 +6425,11 @@ def text_script_staff_padding(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TextScript.staff-padding = #4                                  %! OC1
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TextScript.staff-padding = #4                                  %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
-                            ^ \markup { "più mosso" }                                                %! IC
+                            ^ \markup { "più mosso" }                                                %! INDICATOR_COMMAND
                             [
                             d'16
                             ]
@@ -6441,7 +6441,7 @@ def text_script_staff_padding(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            ^ \markup { "lo stesso tempo" }                                          %! IC
+                            ^ \markup { "lo stesso tempo" }                                          %! INDICATOR_COMMAND
                             [
                             e''16
                             ]
@@ -6457,8 +6457,8 @@ def text_script_staff_padding(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TextScript.staff-padding                                         %! OC2
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TextScript.staff-padding                                         %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -6500,10 +6500,10 @@ def text_script_staff_padding(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
-                            ^ \markup { "più mosso" }                                                %! IC
+                            ^ \markup { "più mosso" }                                                %! INDICATOR_COMMAND
                             [
                             d'16
                             ]
@@ -6514,9 +6514,9 @@ def text_script_staff_padding(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TextScript.staff-padding = #4                                  %! OC1
+                            \override TextScript.staff-padding = #4                                  %! OVERRIDE_COMMAND_1
                             fs''16
-                            ^ \markup { "lo stesso tempo" }                                          %! IC
+                            ^ \markup { "lo stesso tempo" }                                          %! INDICATOR_COMMAND
                             [
                             e''16
                             ]
@@ -6528,12 +6528,12 @@ def text_script_staff_padding(
                             [
                             g''16
                             ]
-                            \revert TextScript.staff-padding                                         %! OC2
+                            \revert TextScript.staff-padding                                         %! OVERRIDE_COMMAND_2
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -6617,11 +6617,11 @@ def text_script_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TextScript.direction = #up                                     %! OC1
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TextScript.direction = #up                                     %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
-                            ^ \markup { "più mosso" }                                                %! IC
+                            ^ \markup { "più mosso" }                                                %! INDICATOR_COMMAND
                             [
                             d'16
                             ]
@@ -6633,7 +6633,7 @@ def text_script_up(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            ^ \markup { "lo stesso tempo" }                                          %! IC
+                            ^ \markup { "lo stesso tempo" }                                          %! INDICATOR_COMMAND
                             [
                             e''16
                             ]
@@ -6649,8 +6649,8 @@ def text_script_up(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TextScript.direction                                             %! OC2
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TextScript.direction                                             %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -6692,10 +6692,10 @@ def text_script_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
-                            ^ \markup { "più mosso" }                                                %! IC
+                            ^ \markup { "più mosso" }                                                %! INDICATOR_COMMAND
                             [
                             d'16
                             ]
@@ -6706,9 +6706,9 @@ def text_script_up(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TextScript.direction = #up                                     %! OC1
+                            \override TextScript.direction = #up                                     %! OVERRIDE_COMMAND_1
                             fs''16
-                            ^ \markup { "lo stesso tempo" }                                          %! IC
+                            ^ \markup { "lo stesso tempo" }                                          %! INDICATOR_COMMAND
                             [
                             e''16
                             ]
@@ -6720,12 +6720,12 @@ def text_script_up(
                             [
                             g''16
                             ]
-                            \revert TextScript.direction                                             %! OC2
+                            \revert TextScript.direction                                             %! OVERRIDE_COMMAND_2
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -6881,9 +6881,9 @@ def text_spanner_staff_padding(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TextSpanner.staff-padding = #6                                 %! OC1
-                            \override TextScript.staff-padding = #6                                  %! OC1
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TextSpanner.staff-padding = #6                                 %! OVERRIDE_COMMAND_1
+                            \override TextScript.staff-padding = #6                                  %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             - \abjad_dashed_line_with_arrow                                          %! PIC_1
@@ -6919,9 +6919,9 @@ def text_spanner_staff_padding(
                             a'16
                             \stopTextSpan                                                            %! PIC_2
                             r4
-                            \revert TextSpanner.staff-padding                                        %! OC2
-                            \revert TextScript.staff-padding                                         %! OC2
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TextSpanner.staff-padding                                        %! OVERRIDE_COMMAND_2
+                            \revert TextScript.staff-padding                                         %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -6963,8 +6963,8 @@ def text_spanner_staff_padding(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TextScript.staff-padding = #6                                  %! OC1
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TextScript.staff-padding = #6                                  %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             [
@@ -6977,7 +6977,7 @@ def text_spanner_staff_padding(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TextSpanner.staff-padding = #6                                 %! OC1
+                            \override TextSpanner.staff-padding = #6                                 %! OVERRIDE_COMMAND_1
                             fs''16
                             - \abjad_dashed_line_with_arrow                                          %! PIC_1
                             - \tweak bound-details.left.text \markup \baca-left "pont."              %! PIC_1
@@ -6997,13 +6997,13 @@ def text_spanner_staff_padding(
                             g''16
                             \stopTextSpan                                                            %! PIC_2
                             ]
-                            \revert TextSpanner.staff-padding                                        %! OC2
+                            \revert TextSpanner.staff-padding                                        %! OVERRIDE_COMMAND_2
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TextScript.staff-padding                                         %! OC2
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TextScript.staff-padding                                         %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -7100,10 +7100,10 @@ def tie_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
-                            \override Stem.direction = #up                                           %! OC1
-                            \override Tie.direction = #down                                          %! OC1
+                            \override Stem.direction = #up                                           %! OVERRIDE_COMMAND_1
+                            \override Tie.direction = #down                                          %! OVERRIDE_COMMAND_1
                             b'16
                             ~                                                                        %! SC
                             [
@@ -7129,10 +7129,10 @@ def tie_down(
                         }
                         \times 4/5 {
                             b'16
-                            \revert Stem.direction                                                   %! OC2
-                            \revert Tie.direction                                                    %! OC2
+                            \revert Stem.direction                                                   %! OVERRIDE_COMMAND_2
+                            \revert Tie.direction                                                    %! OVERRIDE_COMMAND_2
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -7174,9 +7174,9 @@ def tie_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
-                            \override Stem.direction = #up                                           %! OC1
+                            \override Stem.direction = #up                                           %! OVERRIDE_COMMAND_1
                             b'16
                             ~                                                                        %! SC
                             [
@@ -7189,7 +7189,7 @@ def tie_down(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 7/8 {
-                            \override Tie.direction = #down                                          %! OC1
+                            \override Tie.direction = #down                                          %! OVERRIDE_COMMAND_1
                             b'16
                             ~                                                                        %! SC
                             [
@@ -7199,14 +7199,14 @@ def tie_down(
                             b'4
                             ~                                                                        %! SC
                             b'16
-                            \revert Tie.direction                                                    %! OC2
+                            \revert Tie.direction                                                    %! OVERRIDE_COMMAND_2
                             r16
                         }
                         \times 4/5 {
                             b'16
-                            \revert Stem.direction                                                   %! OC2
+                            \revert Stem.direction                                                   %! OVERRIDE_COMMAND_2
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -7260,10 +7260,10 @@ def tie_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
-                            \override Stem.direction = #down                                         %! OC1
-                            \override Tie.direction = #up                                            %! OC1
+                            \override Stem.direction = #down                                         %! OVERRIDE_COMMAND_1
+                            \override Tie.direction = #up                                            %! OVERRIDE_COMMAND_1
                             b'16
                             ~                                                                        %! SC
                             [
@@ -7289,10 +7289,10 @@ def tie_up(
                         }
                         \times 4/5 {
                             b'16
-                            \revert Stem.direction                                                   %! OC2
-                            \revert Tie.direction                                                    %! OC2
+                            \revert Stem.direction                                                   %! OVERRIDE_COMMAND_2
+                            \revert Tie.direction                                                    %! OVERRIDE_COMMAND_2
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -7334,9 +7334,9 @@ def tie_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
-                            \override Stem.direction = #down                                         %! OC1
+                            \override Stem.direction = #down                                         %! OVERRIDE_COMMAND_1
                             b'16
                             ~                                                                        %! SC
                             [
@@ -7349,7 +7349,7 @@ def tie_up(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 7/8 {
-                            \override Tie.direction = #up                                            %! OC1
+                            \override Tie.direction = #up                                            %! OVERRIDE_COMMAND_1
                             b'16
                             ~                                                                        %! SC
                             [
@@ -7359,14 +7359,14 @@ def tie_up(
                             b'4
                             ~                                                                        %! SC
                             b'16
-                            \revert Tie.direction                                                    %! OC2
+                            \revert Tie.direction                                                    %! OVERRIDE_COMMAND_2
                             r16
                         }
                         \times 4/5 {
                             b'16
-                            \revert Stem.direction                                                   %! OC2
+                            \revert Stem.direction                                                   %! OVERRIDE_COMMAND_2
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -7416,8 +7416,8 @@ def time_signature_extra_offset(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \once \override Score.TimeSignature.extra-offset = #'(-6 . 0)            %! OC1
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \once \override Score.TimeSignature.extra-offset = #'(-6 . 0)            %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             [
@@ -7446,7 +7446,7 @@ def time_signature_extra_offset(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -7497,8 +7497,8 @@ def time_signature_transparent(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Score.TimeSignature.transparent = ##t                          %! OC1
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override Score.TimeSignature.transparent = ##t                          %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             [
@@ -7527,8 +7527,8 @@ def time_signature_transparent(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert Score.TimeSignature.transparent                                  %! OC2
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert Score.TimeSignature.transparent                                  %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -7609,8 +7609,8 @@ def tuplet_bracket_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
-                            \override TupletBracket.direction = #down                                %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.direction = #down                                %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             [
@@ -7639,8 +7639,8 @@ def tuplet_bracket_down(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
-                            \revert TupletBracket.direction                                          %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.direction                                          %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -7677,7 +7677,7 @@ def tuplet_bracket_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             [
@@ -7690,7 +7690,7 @@ def tuplet_bracket_down(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.direction = #down                                %! OC1
+                            \override TupletBracket.direction = #down                                %! OVERRIDE_COMMAND_1
                             fs''16
                             [
                             e''16
@@ -7703,12 +7703,12 @@ def tuplet_bracket_down(
                             [
                             g''16
                             ]
-                            \revert TupletBracket.direction                                          %! OC2
+                            \revert TupletBracket.direction                                          %! OVERRIDE_COMMAND_2
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -7758,8 +7758,8 @@ def tuplet_bracket_extra_offset(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \once \override TupletBracket.extra-offset = #'(-1 . 0)                  %! OC1
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \once \override TupletBracket.extra-offset = #'(-1 . 0)                  %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             [
@@ -7788,7 +7788,7 @@ def tuplet_bracket_extra_offset(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -7825,7 +7825,7 @@ def tuplet_bracket_extra_offset(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             [
@@ -7838,7 +7838,7 @@ def tuplet_bracket_extra_offset(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \once \override TupletBracket.extra-offset = #'(-1 . 0)                  %! OC1
+                            \once \override TupletBracket.extra-offset = #'(-1 . 0)                  %! OVERRIDE_COMMAND_1
                             fs''16
                             [
                             e''16
@@ -7855,7 +7855,7 @@ def tuplet_bracket_extra_offset(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -7949,7 +7949,7 @@ def tuplet_bracket_staff_padding(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             [
@@ -7978,7 +7978,7 @@ def tuplet_bracket_staff_padding(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -8026,7 +8026,7 @@ def tuplet_bracket_staff_padding(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             fs''16
                             [
                             e''16
@@ -8039,7 +8039,7 @@ def tuplet_bracket_staff_padding(
                             [
                             g''16
                             ]
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                         \times 4/5 {
                             a'16
@@ -8092,8 +8092,8 @@ def tuplet_bracket_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
-                            \override TupletBracket.direction = #up                                  %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.direction = #up                                  %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             [
@@ -8122,8 +8122,8 @@ def tuplet_bracket_up(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
-                            \revert TupletBracket.direction                                          %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.direction                                          %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -8160,7 +8160,7 @@ def tuplet_bracket_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             [
@@ -8173,7 +8173,7 @@ def tuplet_bracket_up(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.direction = #up                                  %! OC1
+                            \override TupletBracket.direction = #up                                  %! OVERRIDE_COMMAND_1
                             fs''16
                             [
                             e''16
@@ -8186,12 +8186,12 @@ def tuplet_bracket_up(
                             [
                             g''16
                             ]
-                            \revert TupletBracket.direction                                          %! OC2
+                            \revert TupletBracket.direction                                          %! OVERRIDE_COMMAND_2
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -8255,8 +8255,8 @@ def tuplet_number_extra_offset(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
-                            \once \override TupletNumber.extra-offset = #'(-1 . 0)                   %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \once \override TupletNumber.extra-offset = #'(-1 . 0)                   %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             [
@@ -8285,7 +8285,7 @@ def tuplet_number_extra_offset(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -8322,7 +8322,7 @@ def tuplet_number_extra_offset(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             [
@@ -8335,7 +8335,7 @@ def tuplet_number_extra_offset(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \once \override TupletNumber.extra-offset = #'(-1 . 0)                   %! OC1
+                            \once \override TupletNumber.extra-offset = #'(-1 . 0)                   %! OVERRIDE_COMMAND_1
                             fs''16
                             [
                             e''16
@@ -8352,7 +8352,7 @@ def tuplet_number_extra_offset(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }

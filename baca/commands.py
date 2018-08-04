@@ -55,7 +55,7 @@ class BCPCommand(scoping.Command):
             assert callable(helper), repr(helper)
         self._helper = helper
         self._validate_tweaks(tweaks)
-        self._tags = [abjad.Tag('BACA_BCP_COMMAND')]
+        self._tags = [abjad.Tag('BCP_COMMAND')]
         self._tweaks = tweaks
 
     ### SPECIAL METHODS ###
@@ -262,31 +262,31 @@ class BCPCommand(scoping.Command):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #16                                             %! HSS1:SPACING
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                            \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                             s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #16                                             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM_4
+                            % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #16                                             %! HSS1:SPACING
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                            \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                             s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! SM_4
+                            % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #16                                             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -297,108 +297,108 @@ class BCPCommand(scoping.Command):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
                                 e'8
-                                -\downbow                                                                %! BACA_BCP_COMMAND
-                                \bacaStopTextSpanBCP                                                     %! BACA_BCP_COMMAND
-                                - \abjad_solid_line_with_arrow                                           %! BACA_BCP_COMMAND
-                                - \tweak bound-details.left.text \markup \baca-bcp-left #1 #5            %! BACA_BCP_COMMAND
-                                \bacaStartTextSpanBCP                                                    %! BACA_BCP_COMMAND
+                                -\downbow                                                                %! BCP_COMMAND
+                                \bacaStopTextSpanBCP                                                     %! BCP_COMMAND
+                                - \abjad_solid_line_with_arrow                                           %! BCP_COMMAND
+                                - \tweak bound-details.left.text \markup \baca-bcp-left #1 #5            %! BCP_COMMAND
+                                \bacaStartTextSpanBCP                                                    %! BCP_COMMAND
                                 [
                 <BLANKLINE>
                                 f'8
-                                -\upbow                                                                  %! BACA_BCP_COMMAND
-                                \bacaStopTextSpanBCP                                                     %! BACA_BCP_COMMAND
-                                - \abjad_solid_line_with_arrow                                           %! BACA_BCP_COMMAND
-                                - \tweak bound-details.left.text \markup \baca-bcp-left #2 #5            %! BACA_BCP_COMMAND
-                                \bacaStartTextSpanBCP                                                    %! BACA_BCP_COMMAND
+                                -\upbow                                                                  %! BCP_COMMAND
+                                \bacaStopTextSpanBCP                                                     %! BCP_COMMAND
+                                - \abjad_solid_line_with_arrow                                           %! BCP_COMMAND
+                                - \tweak bound-details.left.text \markup \baca-bcp-left #2 #5            %! BCP_COMMAND
+                                \bacaStartTextSpanBCP                                                    %! BCP_COMMAND
                 <BLANKLINE>
                                 e'8
-                                -\downbow                                                                %! BACA_BCP_COMMAND
-                                \bacaStopTextSpanBCP                                                     %! BACA_BCP_COMMAND
-                                - \abjad_solid_line_with_arrow                                           %! BACA_BCP_COMMAND
-                                - \tweak bound-details.left.text \markup \baca-bcp-left #1 #5            %! BACA_BCP_COMMAND
-                                \bacaStartTextSpanBCP                                                    %! BACA_BCP_COMMAND
+                                -\downbow                                                                %! BCP_COMMAND
+                                \bacaStopTextSpanBCP                                                     %! BCP_COMMAND
+                                - \abjad_solid_line_with_arrow                                           %! BCP_COMMAND
+                                - \tweak bound-details.left.text \markup \baca-bcp-left #1 #5            %! BCP_COMMAND
+                                \bacaStartTextSpanBCP                                                    %! BCP_COMMAND
                 <BLANKLINE>
                                 f'8
-                                -\upbow                                                                  %! BACA_BCP_COMMAND
-                                \bacaStopTextSpanBCP                                                     %! BACA_BCP_COMMAND
+                                -\upbow                                                                  %! BCP_COMMAND
+                                \bacaStopTextSpanBCP                                                     %! BCP_COMMAND
                                 ]
-                                - \abjad_solid_line_with_arrow                                           %! BACA_BCP_COMMAND
-                                - \tweak bound-details.left.text \markup \baca-bcp-left #2 #5            %! BACA_BCP_COMMAND
-                                \bacaStartTextSpanBCP                                                    %! BACA_BCP_COMMAND
+                                - \abjad_solid_line_with_arrow                                           %! BCP_COMMAND
+                                - \tweak bound-details.left.text \markup \baca-bcp-left #2 #5            %! BCP_COMMAND
+                                \bacaStartTextSpanBCP                                                    %! BCP_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 e'8
-                                -\downbow                                                                %! BACA_BCP_COMMAND
-                                \bacaStopTextSpanBCP                                                     %! BACA_BCP_COMMAND
-                                - \abjad_solid_line_with_arrow                                           %! BACA_BCP_COMMAND
-                                - \tweak bound-details.left.text \markup \baca-bcp-left #1 #5            %! BACA_BCP_COMMAND
-                                \bacaStartTextSpanBCP                                                    %! BACA_BCP_COMMAND
+                                -\downbow                                                                %! BCP_COMMAND
+                                \bacaStopTextSpanBCP                                                     %! BCP_COMMAND
+                                - \abjad_solid_line_with_arrow                                           %! BCP_COMMAND
+                                - \tweak bound-details.left.text \markup \baca-bcp-left #1 #5            %! BCP_COMMAND
+                                \bacaStartTextSpanBCP                                                    %! BCP_COMMAND
                                 [
                 <BLANKLINE>
                                 f'8
-                                -\upbow                                                                  %! BACA_BCP_COMMAND
-                                \bacaStopTextSpanBCP                                                     %! BACA_BCP_COMMAND
-                                - \abjad_solid_line_with_arrow                                           %! BACA_BCP_COMMAND
-                                - \tweak bound-details.left.text \markup \baca-bcp-left #2 #5            %! BACA_BCP_COMMAND
-                                - \tweak bound-details.right.text \markup \baca-bcp-right #1 #5          %! BACA_BCP_COMMAND
-                                \bacaStartTextSpanBCP                                                    %! BACA_BCP_COMMAND
+                                -\upbow                                                                  %! BCP_COMMAND
+                                \bacaStopTextSpanBCP                                                     %! BCP_COMMAND
+                                - \abjad_solid_line_with_arrow                                           %! BCP_COMMAND
+                                - \tweak bound-details.left.text \markup \baca-bcp-left #2 #5            %! BCP_COMMAND
+                                - \tweak bound-details.right.text \markup \baca-bcp-right #1 #5          %! BCP_COMMAND
+                                \bacaStartTextSpanBCP                                                    %! BCP_COMMAND
                 <BLANKLINE>
                                 e'8
-                                \bacaStopTextSpanBCP                                                     %! BACA_BCP_COMMAND
+                                \bacaStopTextSpanBCP                                                     %! BCP_COMMAND
                                 ]
                 <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM_4
+                                % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                                 f'8
-                                -\downbow                                                                %! BACA_BCP_COMMAND
-                                \bacaStopTextSpanBCP                                                     %! BACA_BCP_COMMAND
-                                - \abjad_solid_line_with_arrow                                           %! BACA_BCP_COMMAND
-                                - \tweak bound-details.left.text \markup \baca-bcp-left #3 #5            %! BACA_BCP_COMMAND
-                                \bacaStartTextSpanBCP                                                    %! BACA_BCP_COMMAND
+                                -\downbow                                                                %! BCP_COMMAND
+                                \bacaStopTextSpanBCP                                                     %! BCP_COMMAND
+                                - \abjad_solid_line_with_arrow                                           %! BCP_COMMAND
+                                - \tweak bound-details.left.text \markup \baca-bcp-left #3 #5            %! BCP_COMMAND
+                                \bacaStartTextSpanBCP                                                    %! BCP_COMMAND
                                 [
                 <BLANKLINE>
                                 e'8
-                                -\upbow                                                                  %! BACA_BCP_COMMAND
-                                \bacaStopTextSpanBCP                                                     %! BACA_BCP_COMMAND
-                                - \abjad_solid_line_with_arrow                                           %! BACA_BCP_COMMAND
-                                - \tweak bound-details.left.text \markup \baca-bcp-left #4 #5            %! BACA_BCP_COMMAND
-                                \bacaStartTextSpanBCP                                                    %! BACA_BCP_COMMAND
+                                -\upbow                                                                  %! BCP_COMMAND
+                                \bacaStopTextSpanBCP                                                     %! BCP_COMMAND
+                                - \abjad_solid_line_with_arrow                                           %! BCP_COMMAND
+                                - \tweak bound-details.left.text \markup \baca-bcp-left #4 #5            %! BCP_COMMAND
+                                \bacaStartTextSpanBCP                                                    %! BCP_COMMAND
                 <BLANKLINE>
                                 f'8
-                                -\downbow                                                                %! BACA_BCP_COMMAND
-                                \bacaStopTextSpanBCP                                                     %! BACA_BCP_COMMAND
-                                - \abjad_solid_line_with_arrow                                           %! BACA_BCP_COMMAND
-                                - \tweak bound-details.left.text \markup \baca-bcp-left #3 #5            %! BACA_BCP_COMMAND
-                                \bacaStartTextSpanBCP                                                    %! BACA_BCP_COMMAND
+                                -\downbow                                                                %! BCP_COMMAND
+                                \bacaStopTextSpanBCP                                                     %! BCP_COMMAND
+                                - \abjad_solid_line_with_arrow                                           %! BCP_COMMAND
+                                - \tweak bound-details.left.text \markup \baca-bcp-left #3 #5            %! BCP_COMMAND
+                                \bacaStartTextSpanBCP                                                    %! BCP_COMMAND
                 <BLANKLINE>
                                 e'8
-                                -\upbow                                                                  %! BACA_BCP_COMMAND
-                                \bacaStopTextSpanBCP                                                     %! BACA_BCP_COMMAND
+                                -\upbow                                                                  %! BCP_COMMAND
+                                \bacaStopTextSpanBCP                                                     %! BCP_COMMAND
                                 ]
-                                - \abjad_solid_line_with_arrow                                           %! BACA_BCP_COMMAND
-                                - \tweak bound-details.left.text \markup \baca-bcp-left #4 #5            %! BACA_BCP_COMMAND
-                                \bacaStartTextSpanBCP                                                    %! BACA_BCP_COMMAND
+                                - \abjad_solid_line_with_arrow                                           %! BCP_COMMAND
+                                - \tweak bound-details.left.text \markup \baca-bcp-left #4 #5            %! BCP_COMMAND
+                                \bacaStartTextSpanBCP                                                    %! BCP_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! SM_4
+                                % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                                 f'8
-                                -\downbow                                                                %! BACA_BCP_COMMAND
-                                \bacaStopTextSpanBCP                                                     %! BACA_BCP_COMMAND
-                                - \abjad_solid_line_with_arrow                                           %! BACA_BCP_COMMAND
-                                - \tweak bound-details.left.text \markup \baca-bcp-left #3 #5            %! BACA_BCP_COMMAND
-                                \bacaStartTextSpanBCP                                                    %! BACA_BCP_COMMAND
+                                -\downbow                                                                %! BCP_COMMAND
+                                \bacaStopTextSpanBCP                                                     %! BCP_COMMAND
+                                - \abjad_solid_line_with_arrow                                           %! BCP_COMMAND
+                                - \tweak bound-details.left.text \markup \baca-bcp-left #3 #5            %! BCP_COMMAND
+                                \bacaStartTextSpanBCP                                                    %! BCP_COMMAND
                                 [
                 <BLANKLINE>
                                 e'8
-                                -\upbow                                                                  %! BACA_BCP_COMMAND
-                                \bacaStopTextSpanBCP                                                     %! BACA_BCP_COMMAND
-                                - \abjad_solid_line_with_arrow                                           %! BACA_BCP_COMMAND
-                                - \tweak bound-details.left.text \markup \baca-bcp-left #4 #5            %! BACA_BCP_COMMAND
-                                - \tweak bound-details.right.text \markup \baca-bcp-right #3 #5          %! BACA_BCP_COMMAND
-                                \bacaStartTextSpanBCP                                                    %! BACA_BCP_COMMAND
+                                -\upbow                                                                  %! BCP_COMMAND
+                                \bacaStopTextSpanBCP                                                     %! BCP_COMMAND
+                                - \abjad_solid_line_with_arrow                                           %! BCP_COMMAND
+                                - \tweak bound-details.left.text \markup \baca-bcp-left #4 #5            %! BCP_COMMAND
+                                - \tweak bound-details.right.text \markup \baca-bcp-right #3 #5          %! BCP_COMMAND
+                                \bacaStartTextSpanBCP                                                    %! BCP_COMMAND
                 <BLANKLINE>
                                 f'8
-                                \bacaStopTextSpanBCP                                                     %! BACA_BCP_COMMAND
+                                \bacaStopTextSpanBCP                                                     %! BCP_COMMAND
                                 ]
                 <BLANKLINE>
                             }
@@ -445,7 +445,7 @@ class BCPCommand(scoping.Command):
         ..  container:: example
 
             >>> baca.BCPCommand().tag
-            Tag('BACA_BCP_COMMAND')
+            Tag('BCP_COMMAND')
 
         """
         return super().tag
@@ -570,27 +570,27 @@ class ColorCommand(scoping.Command):
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -601,7 +601,7 @@ class ColorCommand(scoping.Command):
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
                             \abjad_color_music "red"
                             e'8
                             [
@@ -616,7 +616,7 @@ class ColorCommand(scoping.Command):
                             e''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                             \abjad_color_music "red"
                             g'8
                             [
@@ -628,7 +628,7 @@ class ColorCommand(scoping.Command):
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             \abjad_color_music "blue"
                             d''8
                             [
@@ -643,7 +643,7 @@ class ColorCommand(scoping.Command):
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             \abjad_color_music "blue"
                             f''8
                             [
@@ -736,27 +736,27 @@ class ContainerCommand(scoping.Command):
                 \context GlobalSkips = "GlobalSkips"
                 {
         <BLANKLINE>
-                    % [GlobalSkips measure 1]                                                    %! SM_4
-                    \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                    \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                    % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                    \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                    \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                     s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
         <BLANKLINE>
-                    % [GlobalSkips measure 2]                                                    %! SM_4
-                    \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                    \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                    % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
+                    \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                    \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                     s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
         <BLANKLINE>
-                    % [GlobalSkips measure 3]                                                    %! SM_4
-                    \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                    \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                    % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
+                    \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                    \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                     s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
         <BLANKLINE>
-                    % [GlobalSkips measure 4]                                                    %! SM_4
-                    \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                    \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                    % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
+                    \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                    \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                     s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                    \baca_bar_line_visible                                                       %! SM_5
-                    \bar "|"                                                                     %! SM_5
+                    \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                    \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
         <BLANKLINE>
                 }
             >>
@@ -768,18 +768,18 @@ class ContainerCommand(scoping.Command):
                     {
                         {   %*% ViolinI
         <BLANKLINE>
-                            % [MusicVoice measure 1]                                             %! SM_4
+                            % [MusicVoice measure 1]                                             %! COMMENT_MEASURE_NUMBERS
                             e'2
         <BLANKLINE>
-                            % [MusicVoice measure 2]                                             %! SM_4
+                            % [MusicVoice measure 2]                                             %! COMMENT_MEASURE_NUMBERS
                             f'4.
                         }   %*% ViolinI
                         {   %*% ViolinII
         <BLANKLINE>
-                            % [MusicVoice measure 3]                                             %! SM_4
+                            % [MusicVoice measure 3]                                             %! COMMENT_MEASURE_NUMBERS
                             e'2
         <BLANKLINE>
-                            % [MusicVoice measure 4]                                             %! SM_4
+                            % [MusicVoice measure 4]                                             %! COMMENT_MEASURE_NUMBERS
                             f'4.
         <BLANKLINE>
                         }   %*% ViolinII
@@ -919,7 +919,7 @@ class GlobalFermataCommand(scoping.Command):
             string = f'scripts.u{command}'
             directive = abjad.Markup.musicglyph(string)
             directive = abjad.new(directive, direction=abjad.Up)
-            abjad.attach(directive, leaf, tag='GFC_1')
+            abjad.attach(directive, leaf, tag='GLOBAL_FERMATA_COMMAND_1')
             strings = []
             string = r'\once \override'
             string += ' Score.MultiMeasureRest.transparent = ##t'
@@ -927,7 +927,7 @@ class GlobalFermataCommand(scoping.Command):
             string = r'\once \override Score.TimeSignature.stencil = ##f'
             strings.append(string)
             literal = abjad.LilyPondLiteral(strings)
-            abjad.attach(literal, leaf, tag='GFC_2')
+            abjad.attach(literal, leaf, tag='GLOBAL_FERMATA_COMMAND_2')
             abjad.attach(
                 abjad.tags.FERMATA_MEASURE,
                 leaf,
@@ -981,37 +981,37 @@ class IndicatorCommand(scoping.Command):
                     {
                         \scaleDurations #'(1 . 1) {
                             c'8
-                            \fermata                                                                 %! IC
+                            \fermata                                                                 %! INDICATOR_COMMAND
                             ~
                             [
                             c'32
                             d'8
-                            \fermata                                                                 %! IC
+                            \fermata                                                                 %! INDICATOR_COMMAND
                             bf'8
-                            \fermata                                                                 %! IC
+                            \fermata                                                                 %! INDICATOR_COMMAND
                             ]
                         }
                         \scaleDurations #'(1 . 1) {
                             fs''8
-                            \fermata                                                                 %! IC
+                            \fermata                                                                 %! INDICATOR_COMMAND
                             ~
                             [
                             fs''32
                             e''8
-                            \fermata                                                                 %! IC
+                            \fermata                                                                 %! INDICATOR_COMMAND
                             ef''8
-                            \fermata                                                                 %! IC
+                            \fermata                                                                 %! INDICATOR_COMMAND
                             af''8
-                            \fermata                                                                 %! IC
+                            \fermata                                                                 %! INDICATOR_COMMAND
                             ~
                             af''32
                             g''8
-                            \fermata                                                                 %! IC
+                            \fermata                                                                 %! INDICATOR_COMMAND
                             ]
                         }
                         \scaleDurations #'(1 . 1) {
                             a'8
-                            \fermata                                                                 %! IC
+                            \fermata                                                                 %! INDICATOR_COMMAND
                             ~
                             [
                             a'32
@@ -1050,27 +1050,27 @@ class IndicatorCommand(scoping.Command):
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -1081,58 +1081,58 @@ class IndicatorCommand(scoping.Command):
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
                             e'8
-                            \fermata                                                                 %! IC
+                            \fermata                                                                 %! INDICATOR_COMMAND
                             [
             <BLANKLINE>
                             d''8
-                            \fermata                                                                 %! IC
+                            \fermata                                                                 %! INDICATOR_COMMAND
             <BLANKLINE>
                             f'8
-                            \fermata                                                                 %! IC
+                            \fermata                                                                 %! INDICATOR_COMMAND
             <BLANKLINE>
                             e''8
-                            \fermata                                                                 %! IC
+                            \fermata                                                                 %! INDICATOR_COMMAND
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                             g'8
-                            \fermata                                                                 %! IC
+                            \fermata                                                                 %! INDICATOR_COMMAND
                             [
             <BLANKLINE>
                             f''8
-                            \fermata                                                                 %! IC
+                            \fermata                                                                 %! INDICATOR_COMMAND
             <BLANKLINE>
                             e'8
-                            \fermata                                                                 %! IC
+                            \fermata                                                                 %! INDICATOR_COMMAND
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             d''8
-                            \fermata                                                                 %! IC
+                            \fermata                                                                 %! INDICATOR_COMMAND
                             [
             <BLANKLINE>
                             f'8
-                            \fermata                                                                 %! IC
+                            \fermata                                                                 %! INDICATOR_COMMAND
             <BLANKLINE>
                             e''8
-                            \fermata                                                                 %! IC
+                            \fermata                                                                 %! INDICATOR_COMMAND
             <BLANKLINE>
                             g'8
-                            \fermata                                                                 %! IC
+                            \fermata                                                                 %! INDICATOR_COMMAND
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             f''8
-                            \fermata                                                                 %! IC
+                            \fermata                                                                 %! INDICATOR_COMMAND
                             [
             <BLANKLINE>
                             e'8
-                            \fermata                                                                 %! IC
+                            \fermata                                                                 %! INDICATOR_COMMAND
             <BLANKLINE>
                             d''8
-                            \fermata                                                                 %! IC
+                            \fermata                                                                 %! INDICATOR_COMMAND
                             ]
             <BLANKLINE>
                         }
@@ -1230,7 +1230,7 @@ class IndicatorCommand(scoping.Command):
                     leaf,
                     context=self.context,
                     deactivate=self.deactivate,
-                    tag=self.tag.prepend('IC'),
+                    tag=self.tag.prepend('INDICATOR_COMMAND'),
                     wrapper=True,
                     )
                 if indicator == reapplied:
@@ -1304,37 +1304,37 @@ class IndicatorCommand(scoping.Command):
                         {
                             \scaleDurations #'(1 . 1) {
                                 c'8
-                                \fermata                                                                 %! IC
+                                \fermata                                                                 %! INDICATOR_COMMAND
                                 ~
                                 [
                                 c'32
                                 d'8
-                                \fermata                                                                 %! IC
+                                \fermata                                                                 %! INDICATOR_COMMAND
                                 bf'8
-                                \fermata                                                                 %! IC
+                                \fermata                                                                 %! INDICATOR_COMMAND
                                 ]
                             }
                             \scaleDurations #'(1 . 1) {
                                 fs''8
-                                \fermata                                                                 %! IC
+                                \fermata                                                                 %! INDICATOR_COMMAND
                                 ~
                                 [
                                 fs''32
                                 e''8
-                                \fermata                                                                 %! IC
+                                \fermata                                                                 %! INDICATOR_COMMAND
                                 ef''8
-                                \fermata                                                                 %! IC
+                                \fermata                                                                 %! INDICATOR_COMMAND
                                 af''8
-                                \fermata                                                                 %! IC
+                                \fermata                                                                 %! INDICATOR_COMMAND
                                 ~
                                 af''32
                                 g''8
-                                \fermata                                                                 %! IC
+                                \fermata                                                                 %! INDICATOR_COMMAND
                                 ]
                             }
                             \scaleDurations #'(1 . 1) {
                                 a'8
-                                \fermata                                                                 %! IC
+                                \fermata                                                                 %! INDICATOR_COMMAND
                                 ~
                                 [
                                 a'32
@@ -1382,7 +1382,7 @@ class IndicatorCommand(scoping.Command):
                         {
                             \scaleDurations #'(1 . 1) {
                                 c'8
-                                \fermata                                                                 %! IC
+                                \fermata                                                                 %! INDICATOR_COMMAND
                                 ~
                                 [
                                 c'32
@@ -1392,14 +1392,14 @@ class IndicatorCommand(scoping.Command):
                             }
                             \scaleDurations #'(1 . 1) {
                                 fs''8
-                                \fermata                                                                 %! IC
+                                \fermata                                                                 %! INDICATOR_COMMAND
                                 ~
                                 [
                                 fs''32
                                 e''8
                                 ef''8
                                 af''8
-                                \fermata                                                                 %! IC
+                                \fermata                                                                 %! INDICATOR_COMMAND
                                 ~
                                 af''32
                                 g''8
@@ -1407,7 +1407,7 @@ class IndicatorCommand(scoping.Command):
                             }
                             \scaleDurations #'(1 . 1) {
                                 a'8
-                                \fermata                                                                 %! IC
+                                \fermata                                                                 %! INDICATOR_COMMAND
                                 ~
                                 [
                                 a'32
@@ -1506,27 +1506,27 @@ class LabelCommand(scoping.Command):
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -1537,7 +1537,7 @@ class LabelCommand(scoping.Command):
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
                             e'8
                             ^ \markup { E4 }
                             [
@@ -1552,7 +1552,7 @@ class LabelCommand(scoping.Command):
                             ^ \markup { E5 }
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                             g'8
                             ^ \markup { G4 }
                             [
@@ -1564,7 +1564,7 @@ class LabelCommand(scoping.Command):
                             ^ \markup { E4 }
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             d''8
                             ^ \markup { D5 }
                             [
@@ -1579,7 +1579,7 @@ class LabelCommand(scoping.Command):
                             ^ \markup { G4 }
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             f''8
                             ^ \markup { F5 }
                             [
@@ -1984,31 +1984,31 @@ def bar_extent_persistent(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -2019,12 +2019,12 @@ def bar_extent_persistent(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
-                            \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! SM8:EXPLICIT_PERSISTENT_OVERRIDE:IC
-                            \stopStaff                                                               %! SM8:EXPLICIT_STAFF_LINES:IC
-                            \once \override Staff.StaffSymbol.line-count = 1                         %! SM8:EXPLICIT_STAFF_LINES:IC
-                            \startStaff                                                              %! SM8:EXPLICIT_STAFF_LINES:IC
-                            \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! SM6:EXPLICIT_STAFF_LINES_COLOR:IC
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! SET_STATUS_TAG:EXPLICIT_PERSISTENT_OVERRIDE:INDICATOR_COMMAND
+                            \stopStaff                                                               %! SET_STATUS_TAG:EXPLICIT_STAFF_LINES:INDICATOR_COMMAND
+                            \once \override Staff.StaffSymbol.line-count = 1                         %! SET_STATUS_TAG:EXPLICIT_STAFF_LINES:INDICATOR_COMMAND
+                            \startStaff                                                              %! SET_STATUS_TAG:EXPLICIT_STAFF_LINES:INDICATOR_COMMAND
+                            \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_STAFF_LINES_COLOR:INDICATOR_COMMAND
                             b'8
                             [
             <BLANKLINE>
@@ -2035,7 +2035,7 @@ def bar_extent_persistent(
                             b'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                             b'8
                             [
             <BLANKLINE>
@@ -2044,7 +2044,7 @@ def bar_extent_persistent(
                             b'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             b'8
                             [
             <BLANKLINE>
@@ -2055,7 +2055,7 @@ def bar_extent_persistent(
                             b'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             b'8
                             [
             <BLANKLINE>
@@ -2135,7 +2135,7 @@ def color(*, selector: typings.Selector = 'baca.leaves()') -> ColorCommand:
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             \abjad_color_music "red"
                             r8
                             \abjad_color_music "blue"
@@ -2173,7 +2173,7 @@ def color(*, selector: typings.Selector = 'baca.leaves()') -> ColorCommand:
                             a'16
                             \abjad_color_music "red"
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -2208,7 +2208,7 @@ def color(*, selector: typings.Selector = 'baca.leaves()') -> ColorCommand:
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             d'16
@@ -2238,7 +2238,7 @@ def color(*, selector: typings.Selector = 'baca.leaves()') -> ColorCommand:
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -2281,27 +2281,27 @@ def container(
                 \context GlobalSkips = "GlobalSkips"
                 {
         <BLANKLINE>
-                    % [GlobalSkips measure 1]                                                    %! SM_4
-                    \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                    \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                    % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                    \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                    \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                     s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
         <BLANKLINE>
-                    % [GlobalSkips measure 2]                                                    %! SM_4
-                    \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                    \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                    % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
+                    \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                    \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                     s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
         <BLANKLINE>
-                    % [GlobalSkips measure 3]                                                    %! SM_4
-                    \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                    \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                    % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
+                    \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                    \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                     s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
         <BLANKLINE>
-                    % [GlobalSkips measure 4]                                                    %! SM_4
-                    \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                    \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                    % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
+                    \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                    \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                     s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                    \baca_bar_line_visible                                                       %! SM_5
-                    \bar "|"                                                                     %! SM_5
+                    \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                    \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
         <BLANKLINE>
                 }
             >>
@@ -2313,18 +2313,18 @@ def container(
                     {
                         {   %*% ViolinI
         <BLANKLINE>
-                            % [MusicVoice measure 1]                                             %! SM_4
+                            % [MusicVoice measure 1]                                             %! COMMENT_MEASURE_NUMBERS
                             e'2
         <BLANKLINE>
-                            % [MusicVoice measure 2]                                             %! SM_4
+                            % [MusicVoice measure 2]                                             %! COMMENT_MEASURE_NUMBERS
                             f'4.
                         }   %*% ViolinI
                         {   %*% ViolinII
         <BLANKLINE>
-                            % [MusicVoice measure 3]                                             %! SM_4
+                            % [MusicVoice measure 3]                                             %! COMMENT_MEASURE_NUMBERS
                             e'2
         <BLANKLINE>
-                            % [MusicVoice measure 4]                                             %! SM_4
+                            % [MusicVoice measure 4]                                             %! COMMENT_MEASURE_NUMBERS
                             f'4.
         <BLANKLINE>
                         }   %*% ViolinII
@@ -2410,19 +2410,19 @@ def cross_staff(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 5/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 5/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 5/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 2/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 2/16                                                                   %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -2438,19 +2438,19 @@ def cross_staff(
                                 {
                                     \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                        % [ViolinMusicVoice measure 1]                               %! SM_4
-                                        \override Stem.direction = #up                               %! OC1
-                                        \clef "treble"                                               %! SM8:DEFAULT_CLEF:ST_3
-                                        \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST_3
-                                    %@% \override ViolinMusicStaff.Clef.color = ##f                  %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST_3
-                                        \set ViolinMusicStaff.forceClef = ##t                        %! SM8:DEFAULT_CLEF:SM33:ST_3
+                                        % [ViolinMusicVoice measure 1]                               %! COMMENT_MEASURE_NUMBERS
+                                        \override Stem.direction = #up                               %! OVERRIDE_COMMAND_1
+                                        \clef "treble"                                               %! SET_STATUS_TAG:DEFAULT_CLEF:ST_3
+                                        \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! ATTACH_COLOR_LITERAL_2:DEFAULT_CLEF_COLOR:ST_3
+                                    %@% \override ViolinMusicStaff.Clef.color = ##f                  %! ATTACH_COLOR_LITERAL_1:DEFAULT_CLEF_COLOR_CANCELLATION:ST_3
+                                        \set ViolinMusicStaff.forceClef = ##t                        %! SET_STATUS_TAG:DEFAULT_CLEF:SM33:ST_3
                                         a'8
                                         ^ \markup {                                                  %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                             \with-color                                              %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                                 #(x11-color 'DarkViolet)                             %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                                 (Violin)                                             %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                             }                                                        %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
-                                        \override ViolinMusicStaff.Clef.color = #(x11-color 'violet) %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST_3
+                                        \override ViolinMusicStaff.Clef.color = #(x11-color 'violet) %! ATTACH_COLOR_LITERAL_2:DEFAULT_CLEF_REDRAW_COLOR:ST_3
             <BLANKLINE>
                                         b'8
             <BLANKLINE>
@@ -2459,13 +2459,13 @@ def cross_staff(
                                         d''8
             <BLANKLINE>
                                         e''8
-                                        \revert Stem.direction                                       %! OC2
+                                        \revert Stem.direction                                       %! OVERRIDE_COMMAND_2
                                     }
                                 }
                                 {
                                     \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                        % [ViolinMusicVoice measure 2]                               %! SM_4
+                                        % [ViolinMusicVoice measure 2]                               %! COMMENT_MEASURE_NUMBERS
                                         ef''!8
             <BLANKLINE>
                                     }
@@ -2480,20 +2480,20 @@ def cross_staff(
                                 {
                                     \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                        % [ViolaMusicVoice measure 1]                                %! SM_4
-                                        \override Stem.direction = #up                               %! OC1
-                                        \clef "alto"                                                 %! SM8:DEFAULT_CLEF:ST_3
-                                        \crossStaff                                                  %! IC
-                                        \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST_3
-                                    %@% \override ViolaMusicStaff.Clef.color = ##f                   %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST_3
-                                        \set ViolaMusicStaff.forceClef = ##t                         %! SM8:DEFAULT_CLEF:SM33:ST_3
+                                        % [ViolaMusicVoice measure 1]                                %! COMMENT_MEASURE_NUMBERS
+                                        \override Stem.direction = #up                               %! OVERRIDE_COMMAND_1
+                                        \clef "alto"                                                 %! SET_STATUS_TAG:DEFAULT_CLEF:ST_3
+                                        \crossStaff                                                  %! INDICATOR_COMMAND
+                                        \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! ATTACH_COLOR_LITERAL_2:DEFAULT_CLEF_COLOR:ST_3
+                                    %@% \override ViolaMusicStaff.Clef.color = ##f                   %! ATTACH_COLOR_LITERAL_1:DEFAULT_CLEF_COLOR_CANCELLATION:ST_3
+                                        \set ViolaMusicStaff.forceClef = ##t                         %! SET_STATUS_TAG:DEFAULT_CLEF:SM33:ST_3
                                         c'8
                                         ^ \markup {                                                  %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                             \with-color                                              %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                                 #(x11-color 'DarkViolet)                             %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                                 (Viola)                                              %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                             }                                                        %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
-                                        \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)  %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST_3
+                                        \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)  %! ATTACH_COLOR_LITERAL_2:DEFAULT_CLEF_REDRAW_COLOR:ST_3
             <BLANKLINE>
                                         d'8
             <BLANKLINE>
@@ -2502,11 +2502,11 @@ def cross_staff(
                                         f'8
             <BLANKLINE>
                                         g'8
-                                        \revert Stem.direction                                       %! OC2
+                                        \revert Stem.direction                                       %! OVERRIDE_COMMAND_2
                                     }
                                 }
             <BLANKLINE>
-                                % [ViolaMusicVoice measure 2]                                        %! SM_4
+                                % [ViolaMusicVoice measure 2]                                        %! COMMENT_MEASURE_NUMBERS
                                 R1 * 1/8
             <BLANKLINE>
                             }
@@ -2517,20 +2517,20 @@ def cross_staff(
                             \context CelloMusicVoice = "CelloMusicVoice"
                             {
             <BLANKLINE>
-                                % [CelloMusicVoice measure 1]                                        %! SM_4
-                                \clef "bass"                                                         %! SM8:DEFAULT_CLEF:ST_3
-                                \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST_3
-                            %@% \override CelloMusicStaff.Clef.color = ##f                           %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST_3
-                                \set CelloMusicStaff.forceClef = ##t                                 %! SM8:DEFAULT_CLEF:SM33:ST_3
+                                % [CelloMusicVoice measure 1]                                        %! COMMENT_MEASURE_NUMBERS
+                                \clef "bass"                                                         %! SET_STATUS_TAG:DEFAULT_CLEF:ST_3
+                                \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! ATTACH_COLOR_LITERAL_2:DEFAULT_CLEF_COLOR:ST_3
+                            %@% \override CelloMusicStaff.Clef.color = ##f                           %! ATTACH_COLOR_LITERAL_1:DEFAULT_CLEF_COLOR_CANCELLATION:ST_3
+                                \set CelloMusicStaff.forceClef = ##t                                 %! SET_STATUS_TAG:DEFAULT_CLEF:SM33:ST_3
                                 R1 * 5/8
                                 ^ \markup {                                                          %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                     \with-color                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                         #(x11-color 'DarkViolet)                                     %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                         (Cello)                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                     }                                                                %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
-                                \override CelloMusicStaff.Clef.color = #(x11-color 'violet)          %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST_3
+                                \override CelloMusicStaff.Clef.color = #(x11-color 'violet)          %! ATTACH_COLOR_LITERAL_2:DEFAULT_CLEF_REDRAW_COLOR:ST_3
             <BLANKLINE>
-                                % [CelloMusicVoice measure 2]                                        %! SM_4
+                                % [CelloMusicVoice measure 2]                                        %! COMMENT_MEASURE_NUMBERS
                                 R1 * 1/8
             <BLANKLINE>
                             }
@@ -2599,19 +2599,19 @@ def cross_staff(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 5/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 5/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 5/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 2/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 2/16                                                                   %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -2627,19 +2627,19 @@ def cross_staff(
                                 {
                                     \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                        % [ViolinMusicVoice measure 1]                               %! SM_4
-                                        \override Stem.direction = #up                               %! OC1
-                                        \clef "treble"                                               %! SM8:DEFAULT_CLEF:ST_3
-                                        \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST_3
-                                    %@% \override ViolinMusicStaff.Clef.color = ##f                  %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST_3
-                                        \set ViolinMusicStaff.forceClef = ##t                        %! SM8:DEFAULT_CLEF:SM33:ST_3
+                                        % [ViolinMusicVoice measure 1]                               %! COMMENT_MEASURE_NUMBERS
+                                        \override Stem.direction = #up                               %! OVERRIDE_COMMAND_1
+                                        \clef "treble"                                               %! SET_STATUS_TAG:DEFAULT_CLEF:ST_3
+                                        \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! ATTACH_COLOR_LITERAL_2:DEFAULT_CLEF_COLOR:ST_3
+                                    %@% \override ViolinMusicStaff.Clef.color = ##f                  %! ATTACH_COLOR_LITERAL_1:DEFAULT_CLEF_COLOR_CANCELLATION:ST_3
+                                        \set ViolinMusicStaff.forceClef = ##t                        %! SET_STATUS_TAG:DEFAULT_CLEF:SM33:ST_3
                                         a'8
                                         ^ \markup {                                                  %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                             \with-color                                              %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                                 #(x11-color 'DarkViolet)                             %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                                 (Violin)                                             %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                             }                                                        %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
-                                        \override ViolinMusicStaff.Clef.color = #(x11-color 'violet) %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST_3
+                                        \override ViolinMusicStaff.Clef.color = #(x11-color 'violet) %! ATTACH_COLOR_LITERAL_2:DEFAULT_CLEF_REDRAW_COLOR:ST_3
             <BLANKLINE>
                                         b'8
             <BLANKLINE>
@@ -2648,13 +2648,13 @@ def cross_staff(
                                         d''8
             <BLANKLINE>
                                         e''8
-                                        \revert Stem.direction                                       %! OC2
+                                        \revert Stem.direction                                       %! OVERRIDE_COMMAND_2
                                     }
                                 }
                                 {
                                     \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                        % [ViolinMusicVoice measure 2]                               %! SM_4
+                                        % [ViolinMusicVoice measure 2]                               %! COMMENT_MEASURE_NUMBERS
                                         ef''!8
             <BLANKLINE>
                                     }
@@ -2669,34 +2669,34 @@ def cross_staff(
                                 {
                                     \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                        % [ViolaMusicVoice measure 1]                                %! SM_4
-                                        \override Stem.direction = #up                               %! OC1
-                                        \clef "alto"                                                 %! SM8:DEFAULT_CLEF:ST_3
-                                        \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST_3
-                                    %@% \override ViolaMusicStaff.Clef.color = ##f                   %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST_3
-                                        \set ViolaMusicStaff.forceClef = ##t                         %! SM8:DEFAULT_CLEF:SM33:ST_3
+                                        % [ViolaMusicVoice measure 1]                                %! COMMENT_MEASURE_NUMBERS
+                                        \override Stem.direction = #up                               %! OVERRIDE_COMMAND_1
+                                        \clef "alto"                                                 %! SET_STATUS_TAG:DEFAULT_CLEF:ST_3
+                                        \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! ATTACH_COLOR_LITERAL_2:DEFAULT_CLEF_COLOR:ST_3
+                                    %@% \override ViolaMusicStaff.Clef.color = ##f                   %! ATTACH_COLOR_LITERAL_1:DEFAULT_CLEF_COLOR_CANCELLATION:ST_3
+                                        \set ViolaMusicStaff.forceClef = ##t                         %! SET_STATUS_TAG:DEFAULT_CLEF:SM33:ST_3
                                         c'8
                                         ^ \markup {                                                  %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                             \with-color                                              %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                                 #(x11-color 'DarkViolet)                             %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                                 (Viola)                                              %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                             }                                                        %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
-                                        \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)  %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST_3
+                                        \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)  %! ATTACH_COLOR_LITERAL_2:DEFAULT_CLEF_REDRAW_COLOR:ST_3
             <BLANKLINE>
                                         d'8
             <BLANKLINE>
                                         e'8
             <BLANKLINE>
-                                        \crossStaff                                                  %! IC
+                                        \crossStaff                                                  %! INDICATOR_COMMAND
                                         f'8
             <BLANKLINE>
-                                        \crossStaff                                                  %! IC
+                                        \crossStaff                                                  %! INDICATOR_COMMAND
                                         g'8
-                                        \revert Stem.direction                                       %! OC2
+                                        \revert Stem.direction                                       %! OVERRIDE_COMMAND_2
                                     }
                                 }
             <BLANKLINE>
-                                % [ViolaMusicVoice measure 2]                                        %! SM_4
+                                % [ViolaMusicVoice measure 2]                                        %! COMMENT_MEASURE_NUMBERS
                                 R1 * 1/8
             <BLANKLINE>
                             }
@@ -2707,20 +2707,20 @@ def cross_staff(
                             \context CelloMusicVoice = "CelloMusicVoice"
                             {
             <BLANKLINE>
-                                % [CelloMusicVoice measure 1]                                        %! SM_4
-                                \clef "bass"                                                         %! SM8:DEFAULT_CLEF:ST_3
-                                \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST_3
-                            %@% \override CelloMusicStaff.Clef.color = ##f                           %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST_3
-                                \set CelloMusicStaff.forceClef = ##t                                 %! SM8:DEFAULT_CLEF:SM33:ST_3
+                                % [CelloMusicVoice measure 1]                                        %! COMMENT_MEASURE_NUMBERS
+                                \clef "bass"                                                         %! SET_STATUS_TAG:DEFAULT_CLEF:ST_3
+                                \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! ATTACH_COLOR_LITERAL_2:DEFAULT_CLEF_COLOR:ST_3
+                            %@% \override CelloMusicStaff.Clef.color = ##f                           %! ATTACH_COLOR_LITERAL_1:DEFAULT_CLEF_COLOR_CANCELLATION:ST_3
+                                \set CelloMusicStaff.forceClef = ##t                                 %! SET_STATUS_TAG:DEFAULT_CLEF:SM33:ST_3
                                 R1 * 5/8
                                 ^ \markup {                                                          %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                     \with-color                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                         #(x11-color 'DarkViolet)                                     %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                         (Cello)                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                     }                                                                %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
-                                \override CelloMusicStaff.Clef.color = #(x11-color 'violet)          %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST_3
+                                \override CelloMusicStaff.Clef.color = #(x11-color 'violet)          %! ATTACH_COLOR_LITERAL_2:DEFAULT_CLEF_REDRAW_COLOR:ST_3
             <BLANKLINE>
-                                % [CelloMusicVoice measure 2]                                        %! SM_4
+                                % [CelloMusicVoice measure 2]                                        %! COMMENT_MEASURE_NUMBERS
                                 R1 * 1/8
             <BLANKLINE>
                             }
@@ -2772,11 +2772,11 @@ def dynamic_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
-                            \dynamicDown                                                             %! IC
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \dynamicDown                                                             %! INDICATOR_COMMAND
                             r8
                             c'16
-                            \p                                                                       %! IC
+                            \p                                                                       %! INDICATOR_COMMAND
                             [
                             d'16
                             ]
@@ -2788,7 +2788,7 @@ def dynamic_down(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            \f                                                                       %! IC
+                            \f                                                                       %! INDICATOR_COMMAND
                             [
                             e''16
                             ]
@@ -2804,7 +2804,7 @@ def dynamic_down(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -2840,10 +2840,10 @@ def dynamic_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
-                            \p                                                                       %! IC
+                            \p                                                                       %! INDICATOR_COMMAND
                             [
                             d'16
                             ]
@@ -2854,9 +2854,9 @@ def dynamic_down(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \dynamicDown                                                             %! IC
+                            \dynamicDown                                                             %! INDICATOR_COMMAND
                             fs''16
-                            \f                                                                       %! IC
+                            \f                                                                       %! INDICATOR_COMMAND
                             [
                             e''16
                             ]
@@ -2872,7 +2872,7 @@ def dynamic_down(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -2921,11 +2921,11 @@ def dynamic_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
-                            \dynamicUp                                                               %! IC
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
+                            \dynamicUp                                                               %! INDICATOR_COMMAND
                             r8
                             c'16
-                            \p                                                                       %! IC
+                            \p                                                                       %! INDICATOR_COMMAND
                             [
                             d'16
                             ]
@@ -2937,7 +2937,7 @@ def dynamic_up(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            \f                                                                       %! IC
+                            \f                                                                       %! INDICATOR_COMMAND
                             [
                             e''16
                             ]
@@ -2953,7 +2953,7 @@ def dynamic_up(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -2989,10 +2989,10 @@ def dynamic_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
-                            \p                                                                       %! IC
+                            \p                                                                       %! INDICATOR_COMMAND
                             [
                             d'16
                             ]
@@ -3003,9 +3003,9 @@ def dynamic_up(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \dynamicUp                                                               %! IC
+                            \dynamicUp                                                               %! INDICATOR_COMMAND
                             fs''16
-                            \f                                                                       %! IC
+                            \f                                                                       %! INDICATOR_COMMAND
                             [
                             e''16
                             ]
@@ -3021,7 +3021,7 @@ def dynamic_up(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -3118,7 +3118,7 @@ def label(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             ^ \markup { C4 }
@@ -3156,7 +3156,7 @@ def label(
                             a'16
                             ^ \markup { A4 }
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -3193,7 +3193,7 @@ def label(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             [
@@ -3227,7 +3227,7 @@ def label(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -3276,11 +3276,11 @@ def markup(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.outside-staff-priority = #1000                   %! OC1
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.outside-staff-priority = #1000                   %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
-                            ^ \markup { "più mosso" }                                                %! IC
+                            ^ \markup { "più mosso" }                                                %! INDICATOR_COMMAND
                             [
                             d'16
                             ]
@@ -3307,8 +3307,8 @@ def markup(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.outside-staff-priority                             %! OC2
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.outside-staff-priority                             %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -3346,8 +3346,8 @@ def markup(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.outside-staff-priority = #1000                   %! OC1
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.outside-staff-priority = #1000                   %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             [
@@ -3361,7 +3361,7 @@ def markup(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            ^ \markup { "più mosso" }                                                %! IC
+                            ^ \markup { "più mosso" }                                                %! INDICATOR_COMMAND
                             [
                             e''16
                             ]
@@ -3377,8 +3377,8 @@ def markup(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.outside-staff-priority                             %! OC2
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.outside-staff-priority                             %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -3416,8 +3416,8 @@ def markup(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.outside-staff-priority = #1000                   %! OC1
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.outside-staff-priority = #1000                   %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             [
@@ -3431,28 +3431,28 @@ def markup(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            ^ \markup { * }                                                          %! IC
+                            ^ \markup { * }                                                          %! INDICATOR_COMMAND
                             [
                             e''16
-                            ^ \markup { * }                                                          %! IC
+                            ^ \markup { * }                                                          %! INDICATOR_COMMAND
                             ]
                             ef''4
-                            ^ \markup { * }                                                          %! IC
+                            ^ \markup { * }                                                          %! INDICATOR_COMMAND
                             ~
                             ef''16
                             r16
                             af''16
-                            ^ \markup { * }                                                          %! IC
+                            ^ \markup { * }                                                          %! INDICATOR_COMMAND
                             [
                             g''16
-                            ^ \markup { * }                                                          %! IC
+                            ^ \markup { * }                                                          %! INDICATOR_COMMAND
                             ]
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.outside-staff-priority                             %! OC2
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.outside-staff-priority                             %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -3490,11 +3490,11 @@ def markup(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.outside-staff-priority = #1000                   %! OC1
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.outside-staff-priority = #1000                   %! OVERRIDE_COMMAND_1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
-                            ^ \markup { \baca_triple_diamond_markup }                                %! IC
+                            ^ \markup { \baca_triple_diamond_markup }                                %! INDICATOR_COMMAND
                             [
                             d'16
                             ]
@@ -3521,8 +3521,8 @@ def markup(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.outside-staff-priority                             %! OC2
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.outside-staff-priority                             %! OVERRIDE_COMMAND_2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -3622,27 +3622,27 @@ def parts(
                 \context GlobalSkips = "GlobalSkips"
                 {
         <BLANKLINE>
-                    % [GlobalSkips measure 1]                                                    %! SM_4
-                    \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                    \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                    % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                    \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                    \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                     s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
         <BLANKLINE>
-                    % [GlobalSkips measure 2]                                                    %! SM_4
-                    \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                    \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                    % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
+                    \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                    \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                     s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
         <BLANKLINE>
-                    % [GlobalSkips measure 3]                                                    %! SM_4
-                    \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                    \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                    % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
+                    \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                    \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                     s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
         <BLANKLINE>
-                    % [GlobalSkips measure 4]                                                    %! SM_4
-                    \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                    \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                    % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
+                    \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                    \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                     s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                    \baca_bar_line_visible                                                       %! SM_5
-                    \bar "|"                                                                     %! SM_5
+                    \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                    \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
         <BLANKLINE>
                 }
             >>
@@ -3657,26 +3657,26 @@ def parts(
                         {
                             {   %*% PartAssignment('Violin')
         <BLANKLINE>
-                                % [ViolinMusicVoice measure 1]                                   %! SM_4
-                                \clef "treble"                                                   %! SM8:DEFAULT_CLEF:ST_3
-                                \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST_3
-                            %@% \override ViolinMusicStaff.Clef.color = ##f                      %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST_3
-                                \set ViolinMusicStaff.forceClef = ##t                            %! SM8:DEFAULT_CLEF:SM33:ST_3
+                                % [ViolinMusicVoice measure 1]                                   %! COMMENT_MEASURE_NUMBERS
+                                \clef "treble"                                                   %! SET_STATUS_TAG:DEFAULT_CLEF:ST_3
+                                \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! ATTACH_COLOR_LITERAL_2:DEFAULT_CLEF_COLOR:ST_3
+                            %@% \override ViolinMusicStaff.Clef.color = ##f                      %! ATTACH_COLOR_LITERAL_1:DEFAULT_CLEF_COLOR_CANCELLATION:ST_3
+                                \set ViolinMusicStaff.forceClef = ##t                            %! SET_STATUS_TAG:DEFAULT_CLEF:SM33:ST_3
                                 e'2
                                 ^ \markup {                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                     \with-color                                                  %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                         #(x11-color 'DarkViolet)                                 %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                         (Violin)                                                 %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                     }                                                            %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
-                                \override ViolinMusicStaff.Clef.color = #(x11-color 'violet)     %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST_3
+                                \override ViolinMusicStaff.Clef.color = #(x11-color 'violet)     %! ATTACH_COLOR_LITERAL_2:DEFAULT_CLEF_REDRAW_COLOR:ST_3
         <BLANKLINE>
-                                % [ViolinMusicVoice measure 2]                                   %! SM_4
+                                % [ViolinMusicVoice measure 2]                                   %! COMMENT_MEASURE_NUMBERS
                                 e'4.
         <BLANKLINE>
-                                % [ViolinMusicVoice measure 3]                                   %! SM_4
+                                % [ViolinMusicVoice measure 3]                                   %! COMMENT_MEASURE_NUMBERS
                                 e'2
         <BLANKLINE>
-                                % [ViolinMusicVoice measure 4]                                   %! SM_4
+                                % [ViolinMusicVoice measure 4]                                   %! COMMENT_MEASURE_NUMBERS
                                 e'4.
         <BLANKLINE>
                             }   %*% PartAssignment('Violin')
@@ -3688,26 +3688,26 @@ def parts(
                         \context ViolaMusicVoice = "ViolaMusicVoice"
                         {
         <BLANKLINE>
-                            % [ViolaMusicVoice measure 1]                                        %! SM_4
-                            \clef "alto"                                                         %! SM8:DEFAULT_CLEF:ST_3
-                            \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST_3
-                        %@% \override ViolaMusicStaff.Clef.color = ##f                           %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST_3
-                            \set ViolaMusicStaff.forceClef = ##t                                 %! SM8:DEFAULT_CLEF:SM33:ST_3
+                            % [ViolaMusicVoice measure 1]                                        %! COMMENT_MEASURE_NUMBERS
+                            \clef "alto"                                                         %! SET_STATUS_TAG:DEFAULT_CLEF:ST_3
+                            \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! ATTACH_COLOR_LITERAL_2:DEFAULT_CLEF_COLOR:ST_3
+                        %@% \override ViolaMusicStaff.Clef.color = ##f                           %! ATTACH_COLOR_LITERAL_1:DEFAULT_CLEF_COLOR_CANCELLATION:ST_3
+                            \set ViolaMusicStaff.forceClef = ##t                                 %! SET_STATUS_TAG:DEFAULT_CLEF:SM33:ST_3
                             R1 * 1/2
                             ^ \markup {                                                          %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                 \with-color                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                     #(x11-color 'DarkViolet)                                     %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                     (Viola)                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                 }                                                                %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
-                            \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)          %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST_3
+                            \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)          %! ATTACH_COLOR_LITERAL_2:DEFAULT_CLEF_REDRAW_COLOR:ST_3
         <BLANKLINE>
-                            % [ViolaMusicVoice measure 2]                                        %! SM_4
+                            % [ViolaMusicVoice measure 2]                                        %! COMMENT_MEASURE_NUMBERS
                             R1 * 3/8
         <BLANKLINE>
-                            % [ViolaMusicVoice measure 3]                                        %! SM_4
+                            % [ViolaMusicVoice measure 3]                                        %! COMMENT_MEASURE_NUMBERS
                             R1 * 1/2
         <BLANKLINE>
-                            % [ViolaMusicVoice measure 4]                                        %! SM_4
+                            % [ViolaMusicVoice measure 4]                                        %! COMMENT_MEASURE_NUMBERS
                             R1 * 3/8
         <BLANKLINE>
                         }
@@ -3718,26 +3718,26 @@ def parts(
                         \context CelloMusicVoice = "CelloMusicVoice"
                         {
         <BLANKLINE>
-                            % [CelloMusicVoice measure 1]                                        %! SM_4
-                            \clef "bass"                                                         %! SM8:DEFAULT_CLEF:ST_3
-                            \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_CLEF_COLOR:ST_3
-                        %@% \override CelloMusicStaff.Clef.color = ##f                           %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST_3
-                            \set CelloMusicStaff.forceClef = ##t                                 %! SM8:DEFAULT_CLEF:SM33:ST_3
+                            % [CelloMusicVoice measure 1]                                        %! COMMENT_MEASURE_NUMBERS
+                            \clef "bass"                                                         %! SET_STATUS_TAG:DEFAULT_CLEF:ST_3
+                            \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! ATTACH_COLOR_LITERAL_2:DEFAULT_CLEF_COLOR:ST_3
+                        %@% \override CelloMusicStaff.Clef.color = ##f                           %! ATTACH_COLOR_LITERAL_1:DEFAULT_CLEF_COLOR_CANCELLATION:ST_3
+                            \set CelloMusicStaff.forceClef = ##t                                 %! SET_STATUS_TAG:DEFAULT_CLEF:SM33:ST_3
                             R1 * 1/2
                             ^ \markup {                                                          %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                 \with-color                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                     #(x11-color 'DarkViolet)                                     %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                     (Cello)                                                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                 }                                                                %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
-                            \override CelloMusicStaff.Clef.color = #(x11-color 'violet)          %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST_3
+                            \override CelloMusicStaff.Clef.color = #(x11-color 'violet)          %! ATTACH_COLOR_LITERAL_2:DEFAULT_CLEF_REDRAW_COLOR:ST_3
         <BLANKLINE>
-                            % [CelloMusicVoice measure 2]                                        %! SM_4
+                            % [CelloMusicVoice measure 2]                                        %! COMMENT_MEASURE_NUMBERS
                             R1 * 3/8
         <BLANKLINE>
-                            % [CelloMusicVoice measure 3]                                        %! SM_4
+                            % [CelloMusicVoice measure 3]                                        %! COMMENT_MEASURE_NUMBERS
                             R1 * 1/2
         <BLANKLINE>
-                            % [CelloMusicVoice measure 4]                                        %! SM_4
+                            % [CelloMusicVoice measure 4]                                        %! COMMENT_MEASURE_NUMBERS
                             R1 * 3/8
         <BLANKLINE>
                         }
@@ -3914,30 +3914,30 @@ def volta(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                         \repeat volta 2
                         {
             <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                %! SM_4
-                            \time 3/8                                                                %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue"                                        %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                            % [GlobalSkips measure 2]                                                %! COMMENT_MEASURE_NUMBERS
+                            \time 3/8                                                                %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue"                                        %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                             s1 * 3/8                                                                 %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                %! SM_4
-                            \time 4/8                                                                %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue"                                        %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                            % [GlobalSkips measure 3]                                                %! COMMENT_MEASURE_NUMBERS
+                            \time 4/8                                                                %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue"                                        %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                             s1 * 1/2                                                                 %! MAKE_GLOBAL_SKIPS_1
                         }
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -3948,7 +3948,7 @@ def volta(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
                             e'8
                             [
             <BLANKLINE>
@@ -3959,7 +3959,7 @@ def volta(
             <BLANKLINE>
                             r8
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                             e''8
                             [
             <BLANKLINE>
@@ -3968,7 +3968,7 @@ def volta(
                             f''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             r8
             <BLANKLINE>
                             e'8
@@ -3979,7 +3979,7 @@ def volta(
                             f'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             r8
             <BLANKLINE>
                             e''8
@@ -4033,30 +4033,30 @@ def volta(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                         \repeat volta 2
                         {
             <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                %! SM_4
-                            \time 3/8                                                                %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue"                                        %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                            % [GlobalSkips measure 2]                                                %! COMMENT_MEASURE_NUMBERS
+                            \time 3/8                                                                %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue"                                        %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                             s1 * 3/8                                                                 %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                %! SM_4
-                            \time 4/8                                                                %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue"                                        %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                            % [GlobalSkips measure 3]                                                %! COMMENT_MEASURE_NUMBERS
+                            \time 4/8                                                                %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue"                                        %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                             s1 * 1/2                                                                 %! MAKE_GLOBAL_SKIPS_1
                         }
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -4067,7 +4067,7 @@ def volta(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
                             e'8
                             [
             <BLANKLINE>
@@ -4078,7 +4078,7 @@ def volta(
             <BLANKLINE>
                             r8
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                             e''8
                             [
             <BLANKLINE>
@@ -4087,7 +4087,7 @@ def volta(
                             f''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             r8
             <BLANKLINE>
                             e'8
@@ -4098,7 +4098,7 @@ def volta(
                             f'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             R1 * 3/8
             <BLANKLINE>
                         }

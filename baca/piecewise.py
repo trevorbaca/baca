@@ -575,10 +575,10 @@ def dynamic(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
-                            \f                                                                       %! IC
+                            \f                                                                       %! INDICATOR_COMMAND
                             [
                             d'16
                             ]
@@ -605,7 +605,7 @@ def dynamic(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -639,7 +639,7 @@ def dynamic(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
                             [
@@ -653,7 +653,7 @@ def dynamic(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            \f                                                                       %! IC
+                            \f                                                                       %! INDICATOR_COMMAND
                             [
                             e''16
                             ]
@@ -669,7 +669,7 @@ def dynamic(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -703,10 +703,10 @@ def dynamic(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OC1
+                            \override TupletBracket.staff-padding = #5                               %! OVERRIDE_COMMAND_1
                             r8
                             c'16
-                            \baca_effort_f                                                                %! IC
+                            \baca_effort_f                                                           %! INDICATOR_COMMAND
                             [
                             d'16
                             ]
@@ -733,7 +733,7 @@ def dynamic(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OC2
+                            \revert TupletBracket.staff-padding                                      %! OVERRIDE_COMMAND_2
                         }
                     }
                 }
@@ -772,31 +772,31 @@ def dynamic(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #13                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #13                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #13                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #13                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -807,13 +807,13 @@ def dynamic(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
-                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override DynamicLineSpanner.staff-padding = #'5                         %! OVERRIDE_COMMAND_1
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:INDICATOR_COMMAND
                             e'8
-                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
-                            - \tweak color #blue                                                     %! SM_43 %! SM8:EXPLICIT_DYNAMIC:IC
-                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
+                            \p                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:INDICATOR_COMMAND
+                            - \tweak color #blue                                                     %! SM_43 %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:INDICATOR_COMMAND
+                            \<                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:INDICATOR_COMMAND
                             [
             <BLANKLINE>
                             d''8
@@ -823,7 +823,7 @@ def dynamic(
                             c''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                             g'8
                             [
             <BLANKLINE>
@@ -832,7 +832,7 @@ def dynamic(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             d''8
                             [
             <BLANKLINE>
@@ -843,17 +843,17 @@ def dynamic(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             f''8
                             [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:INDICATOR_COMMAND
                             d''8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
+                            \f                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:INDICATOR_COMMAND
                             ]
-                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
+                            \revert DynamicLineSpanner.staff-padding                                 %! OVERRIDE_COMMAND_2
             <BLANKLINE>
                         }
                     }
@@ -891,31 +891,31 @@ def dynamic(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -926,12 +926,12 @@ def dynamic(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
-                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override DynamicLineSpanner.staff-padding = #'5                         %! OVERRIDE_COMMAND_1
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:INDICATOR_COMMAND
                             e'8
-                            - \tweak color #red                                                      %! SM8:EXPLICIT_DYNAMIC:IC
-                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
+                            - \tweak color #red                                                      %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:INDICATOR_COMMAND
+                            \p                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:INDICATOR_COMMAND
                             [
             <BLANKLINE>
                             d''8
@@ -941,7 +941,7 @@ def dynamic(
                             c''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                             g'8
                             [
             <BLANKLINE>
@@ -950,7 +950,7 @@ def dynamic(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             d''8
                             [
             <BLANKLINE>
@@ -961,7 +961,7 @@ def dynamic(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             f''8
                             [
             <BLANKLINE>
@@ -969,7 +969,7 @@ def dynamic(
             <BLANKLINE>
                             d''8
                             ]
-                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
+                            \revert DynamicLineSpanner.staff-padding                                 %! OVERRIDE_COMMAND_2
             <BLANKLINE>
                         }
                     }
@@ -1037,31 +1037,31 @@ def hairpin(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -1072,13 +1072,13 @@ def hairpin(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
-                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override DynamicLineSpanner.staff-padding = #'5                         %! OVERRIDE_COMMAND_1
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             e'8
-                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            - \tweak color #blue                                                     %! SM_43 %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \p                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak color #blue                                                     %! SM_43 %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            \<                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             d''8
@@ -1088,7 +1088,7 @@ def hairpin(
                             e''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                             g'8
                             [
             <BLANKLINE>
@@ -1097,7 +1097,7 @@ def hairpin(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             d''8
                             [
             <BLANKLINE>
@@ -1108,17 +1108,17 @@ def hairpin(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             f''8
                             [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             d''8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_2
+                            \f                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_2
                             ]
-                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
+                            \revert DynamicLineSpanner.staff-padding                                 %! OVERRIDE_COMMAND_2
             <BLANKLINE>
                         }
                     }
@@ -1156,31 +1156,31 @@ def hairpin(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -1191,15 +1191,15 @@ def hairpin(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
-                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override DynamicLineSpanner.staff-padding = #'5                         %! OVERRIDE_COMMAND_1
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             e'8
-                            \baca_effort_ff                                                          %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            - \tweak to-barline ##t                                                  %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            - \tweak circled-tip ##t                                                 %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            \>                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \baca_effort_ff                                                          %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak color #blue                                                     %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak to-barline ##t                                                  %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak circled-tip ##t                                                 %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            \>                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             d''8
@@ -1209,7 +1209,7 @@ def hairpin(
                             c''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                             g'8
                             [
             <BLANKLINE>
@@ -1218,7 +1218,7 @@ def hairpin(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             d''8
                             [
             <BLANKLINE>
@@ -1229,17 +1229,17 @@ def hairpin(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             f''8
                             [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             d''8
-                            \!                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_2
+                            \!                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_2
                             ]
-                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
+                            \revert DynamicLineSpanner.staff-padding                                 %! OVERRIDE_COMMAND_2
             <BLANKLINE>
                         }
                     }
@@ -1277,31 +1277,31 @@ def hairpin(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -1312,14 +1312,14 @@ def hairpin(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
-                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override DynamicLineSpanner.staff-padding = #'5                         %! OVERRIDE_COMMAND_1
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             e'8
-                            \!                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            - \tweak color #blue                                                     %! SM_43 %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            - \tweak circled-tip ##t                                                 %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \!                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak color #blue                                                     %! SM_43 %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak circled-tip ##t                                                 %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            \<                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             d''8
@@ -1329,7 +1329,7 @@ def hairpin(
                             c''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                             g'8
                             [
             <BLANKLINE>
@@ -1338,7 +1338,7 @@ def hairpin(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             d''8
                             [
             <BLANKLINE>
@@ -1349,17 +1349,17 @@ def hairpin(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             f''8
                             [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             d''8
-                            \baca_effort_ff                                                          %! SM8:EXPLICIT_DYNAMIC:PIC_2
+                            \baca_effort_ff                                                          %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_2
                             ]
-                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
+                            \revert DynamicLineSpanner.staff-padding                                 %! OVERRIDE_COMMAND_2
             <BLANKLINE>
                         }
                     }
@@ -1397,31 +1397,31 @@ def hairpin(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -1432,14 +1432,14 @@ def hairpin(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
-                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override DynamicLineSpanner.staff-padding = #'5                         %! OVERRIDE_COMMAND_1
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             e'8
-                            \baca_effort_p                                                           %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            - \tweak color #blue                                                     %! SM_43 %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            - \tweak stencil #constante-hairpin                                      %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \baca_effort_p                                                           %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak color #blue                                                     %! SM_43 %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak stencil #constante-hairpin                                      %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            \<                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             d''8
@@ -1449,7 +1449,7 @@ def hairpin(
                             c''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                             g'8
                             [
             <BLANKLINE>
@@ -1458,7 +1458,7 @@ def hairpin(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             d''8
                             [
             <BLANKLINE>
@@ -1469,17 +1469,17 @@ def hairpin(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             f''8
                             [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             d''8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_2
+                            \f                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_2
                             ]
-                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
+                            \revert DynamicLineSpanner.staff-padding                                 %! OVERRIDE_COMMAND_2
             <BLANKLINE>
                         }
                     }
@@ -1524,31 +1524,31 @@ def hairpin(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -1559,14 +1559,14 @@ def hairpin(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
-                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override DynamicLineSpanner.staff-padding = #'5                         %! OVERRIDE_COMMAND_1
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             e'8
-                            \baca_effort_mp                                                          %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            - \tweak color #blue                                                     %! SM_43 %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            - \tweak stencil #abjad-flared-hairpin                                   %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \baca_effort_mp                                                          %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak color #blue                                                     %! SM_43 %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak stencil #abjad-flared-hairpin                                   %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            \<                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             d''8
@@ -1576,24 +1576,24 @@ def hairpin(
                             c''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                             g'8
                             [
             <BLANKLINE>
                             f''8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             e'8
-                            \baca_effort_f                                                           %! SM8:EXPLICIT_DYNAMIC:PIC_2
+                            \baca_effort_f                                                           %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_2
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             d''8
-                            \baca_effort_mf                                                          %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            - \tweak color #blue                                                     %! SM_43 %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            - \tweak stencil #abjad-flared-hairpin                                   %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            \>                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \baca_effort_mf                                                          %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak color #blue                                                     %! SM_43 %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak stencil #abjad-flared-hairpin                                   %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            \>                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             f'8
@@ -1603,17 +1603,17 @@ def hairpin(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             f''8
                             [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             d''8
-                            \baca_effort_p                                                           %! SM8:EXPLICIT_DYNAMIC:PIC_2
+                            \baca_effort_p                                                           %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_2
                             ]
-                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
+                            \revert DynamicLineSpanner.staff-padding                                 %! OVERRIDE_COMMAND_2
             <BLANKLINE>
                         }
                     }
@@ -1654,31 +1654,31 @@ def hairpin(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -1689,11 +1689,11 @@ def hairpin(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
-                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override DynamicLineSpanner.staff-padding = #'5                         %! OVERRIDE_COMMAND_1
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             e'8
-                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \p                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             d''8
@@ -1703,10 +1703,10 @@ def hairpin(
                             e''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             g'8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \f                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             f''8
@@ -1714,10 +1714,10 @@ def hairpin(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             d''8
-                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \p                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             f'8
@@ -1727,19 +1727,19 @@ def hairpin(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             f''8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \f                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             d''8
-                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_2
+                            \p                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_2
                             ]
-                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
+                            \revert DynamicLineSpanner.staff-padding                                 %! OVERRIDE_COMMAND_2
             <BLANKLINE>
                         }
                     }
@@ -1778,31 +1778,31 @@ def hairpin(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -1813,13 +1813,13 @@ def hairpin(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
-                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override DynamicLineSpanner.staff-padding = #'5                         %! OVERRIDE_COMMAND_1
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             e'8
-                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \p                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak color #blue                                                     %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            \<                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             d''8
@@ -1829,12 +1829,12 @@ def hairpin(
                             e''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             g'8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            \>                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \f                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak color #blue                                                     %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            \>                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             f''8
@@ -1842,12 +1842,12 @@ def hairpin(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             d''8
-                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \p                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak color #blue                                                     %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            \<                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             f'8
@@ -1857,21 +1857,21 @@ def hairpin(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             f''8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            \>                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \f                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak color #blue                                                     %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            \>                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             d''8
-                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_2
+                            \p                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_2
                             ]
-                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
+                            \revert DynamicLineSpanner.staff-padding                                 %! OVERRIDE_COMMAND_2
             <BLANKLINE>
                         }
                     }
@@ -1911,31 +1911,31 @@ def hairpin(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -1946,63 +1946,63 @@ def hairpin(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
-                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override DynamicLineSpanner.staff-padding = #'5                         %! OVERRIDE_COMMAND_1
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             e'8
-                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \p                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             d''8
             <BLANKLINE>
                             f'8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             e''8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_2
+                            \f                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_2
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
-                            \once \override Voice.DynamicText.color = #(x11-color 'DeepPink1)        %! SM6:REDUNDANT_DYNAMIC_COLOR:PIC_1
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \once \override Voice.DynamicText.color = #(x11-color 'DeepPink1)        %! ATTACH_COLOR_LITERAL_2:REDUNDANT_DYNAMIC_COLOR:PIC_1
                             g'8
-                            \f                                                                       %! SM8:REDUNDANT_DYNAMIC:PIC_1
+                            \f                                                                       %! SET_STATUS_TAG:REDUNDANT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             f''8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             e'8
-                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_2
+                            \p                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_2
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
-                            \once \override Voice.DynamicText.color = #(x11-color 'DeepPink1)        %! SM6:REDUNDANT_DYNAMIC_COLOR:PIC_1
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \once \override Voice.DynamicText.color = #(x11-color 'DeepPink1)        %! ATTACH_COLOR_LITERAL_2:REDUNDANT_DYNAMIC_COLOR:PIC_1
                             d''8
-                            \p                                                                       %! SM8:REDUNDANT_DYNAMIC:PIC_1
+                            \p                                                                       %! SET_STATUS_TAG:REDUNDANT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             f'8
             <BLANKLINE>
                             e''8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             g'8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_2
+                            \f                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_2
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
-                            \once \override Voice.DynamicText.color = #(x11-color 'DeepPink1)        %! SM6:REDUNDANT_DYNAMIC_COLOR:PIC_1
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \once \override Voice.DynamicText.color = #(x11-color 'DeepPink1)        %! ATTACH_COLOR_LITERAL_2:REDUNDANT_DYNAMIC_COLOR:PIC_1
                             f''8
-                            \f                                                                       %! SM8:REDUNDANT_DYNAMIC:PIC_1
+                            \f                                                                       %! SET_STATUS_TAG:REDUNDANT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             d''8
-                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_2
+                            \p                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_2
                             ]
-                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
+                            \revert DynamicLineSpanner.staff-padding                                 %! OVERRIDE_COMMAND_2
             <BLANKLINE>
                         }
                     }
@@ -2042,31 +2042,31 @@ def hairpin(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -2077,73 +2077,73 @@ def hairpin(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
-                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override DynamicLineSpanner.staff-padding = #'5                         %! OVERRIDE_COMMAND_1
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             e'8
-                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            - \tweak stencil #constante-hairpin                                      %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \p                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak color #blue                                                     %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak stencil #constante-hairpin                                      %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            \<                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             d''8
             <BLANKLINE>
                             f'8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             e''8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_2
+                            \f                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_2
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             g'8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            \>                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \f                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak color #blue                                                     %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            \>                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             f''8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             e'8
-                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_2
+                            \p                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_2
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             d''8
-                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            - \tweak stencil #constante-hairpin                                      %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \p                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak color #blue                                                     %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak stencil #constante-hairpin                                      %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            \<                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             f'8
             <BLANKLINE>
                             e''8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             g'8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_2
+                            \f                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_2
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             f''8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            \>                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \f                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak color #blue                                                     %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            \>                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             d''8
-                            \p                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_2
+                            \p                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_2
                             ]
-                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
+                            \revert DynamicLineSpanner.staff-padding                                 %! OVERRIDE_COMMAND_2
             <BLANKLINE>
                         }
                     }
@@ -2185,31 +2185,31 @@ def hairpin(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -2220,13 +2220,13 @@ def hairpin(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
-                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override DynamicLineSpanner.staff-padding = #'5                         %! OVERRIDE_COMMAND_1
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             e'8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            - \tweak color #blue                                                     %! SM_43 %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            \>                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \f                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak color #blue                                                     %! SM_43 %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            \>                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             d''8
@@ -2236,18 +2236,18 @@ def hairpin(
                             e''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                             g'8
                             [
             <BLANKLINE>
                             f''8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             e'8
                             ]
-                            <> \p                                                                    %! SM8:EXPLICIT_DYNAMIC:PIC_2
+                            <> \p                                                                    %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_2
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             d''8
                             [
             <BLANKLINE>
@@ -2258,7 +2258,7 @@ def hairpin(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             f''8
                             [
             <BLANKLINE>
@@ -2266,7 +2266,7 @@ def hairpin(
             <BLANKLINE>
                             d''8
                             ]
-                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
+                            \revert DynamicLineSpanner.staff-padding                                 %! OVERRIDE_COMMAND_2
             <BLANKLINE>
                         }
                     }
@@ -2306,31 +2306,31 @@ def hairpin(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -2341,15 +2341,15 @@ def hairpin(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
-                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override DynamicLineSpanner.staff-padding = #'5                         %! OVERRIDE_COMMAND_1
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             e'8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            - \tweak color #blue                                                     %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            - \tweak to-barline ##t                                                  %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            - \tweak circled-tip ##t                                                 %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            \>                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \f                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak color #blue                                                     %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak to-barline ##t                                                  %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak circled-tip ##t                                                 %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            \>                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             d''8
@@ -2359,18 +2359,18 @@ def hairpin(
                             e''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                             g'8
                             [
             <BLANKLINE>
                             f''8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_2
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_2
                             e'8
                             ]
-                            <> \!                                                                    %! SM8:EXPLICIT_DYNAMIC:PIC_2
+                            <> \!                                                                    %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_2
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             d''8
                             [
             <BLANKLINE>
@@ -2381,7 +2381,7 @@ def hairpin(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             f''8
                             [
             <BLANKLINE>
@@ -2389,7 +2389,7 @@ def hairpin(
             <BLANKLINE>
                             d''8
                             ]
-                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
+                            \revert DynamicLineSpanner.staff-padding                                 %! OVERRIDE_COMMAND_2
             <BLANKLINE>
                         }
                     }
@@ -2427,31 +2427,31 @@ def hairpin(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -2462,11 +2462,11 @@ def hairpin(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
-                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:PIC_1
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override DynamicLineSpanner.staff-padding = #'5                         %! OVERRIDE_COMMAND_1
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:PIC_1
                             e'8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            \f                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             d''8
@@ -2476,7 +2476,7 @@ def hairpin(
                             c''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                             g'8
                             [
             <BLANKLINE>
@@ -2485,7 +2485,7 @@ def hairpin(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             d''8
                             [
             <BLANKLINE>
@@ -2496,7 +2496,7 @@ def hairpin(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             f''8
                             [
             <BLANKLINE>
@@ -2504,7 +2504,7 @@ def hairpin(
             <BLANKLINE>
                             d''8
                             ]
-                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
+                            \revert DynamicLineSpanner.staff-padding                                 %! OVERRIDE_COMMAND_2
             <BLANKLINE>
                         }
                     }
@@ -2545,31 +2545,31 @@ def hairpin(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -2580,11 +2580,11 @@ def hairpin(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
-                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override DynamicLineSpanner.staff-padding = #'5                         %! OVERRIDE_COMMAND_1
                             e'8
-                            - \tweak color #blue                                                     %! SM_43 %! SM8:EXPLICIT_DYNAMIC:PIC_1
-                            \<                                                                       %! SM8:EXPLICIT_DYNAMIC:PIC_1
+                            - \tweak color #blue                                                     %! SM_43 %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
+                            \<                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:PIC_1
                             [
             <BLANKLINE>
                             d''8
@@ -2594,7 +2594,7 @@ def hairpin(
                             c''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                             g'8
                             [
             <BLANKLINE>
@@ -2603,7 +2603,7 @@ def hairpin(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             d''8
                             [
             <BLANKLINE>
@@ -2614,17 +2614,17 @@ def hairpin(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             f''8
                             [
             <BLANKLINE>
                             e'8
             <BLANKLINE>
-                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
+                            \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:INDICATOR_COMMAND
                             d''8
-                            \f                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
+                            \f                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:INDICATOR_COMMAND
                             ]
-                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
+                            \revert DynamicLineSpanner.staff-padding                                 %! OVERRIDE_COMMAND_2
             <BLANKLINE>
                         }
                     }
@@ -2957,31 +2957,31 @@ def text_spanner(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -2992,8 +2992,8 @@ def text_spanner(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
-                            \override TextSpanner.staff-padding = #4.5                               %! OC1
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override TextSpanner.staff-padding = #4.5                               %! OVERRIDE_COMMAND_1
                             e'8
                             - \abjad_dashed_line_with_arrow                                          %! PIC_1
                             - \tweak bound-details.left.text \markup \baca-left "pont."              %! PIC_1
@@ -3010,7 +3010,7 @@ def text_spanner(
                             e''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                             g'8
                             [
             <BLANKLINE>
@@ -3019,7 +3019,7 @@ def text_spanner(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             d''8
                             [
             <BLANKLINE>
@@ -3030,7 +3030,7 @@ def text_spanner(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             f''8
                             [
             <BLANKLINE>
@@ -3039,7 +3039,7 @@ def text_spanner(
                             d''8
                             \stopTextSpan                                                            %! PIC_2
                             ]
-                            \revert TextSpanner.staff-padding                                        %! OC2
+                            \revert TextSpanner.staff-padding                                        %! OVERRIDE_COMMAND_2
             <BLANKLINE>
                         }
                     }
@@ -3075,31 +3075,31 @@ def text_spanner(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -3110,8 +3110,8 @@ def text_spanner(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
-                            \override TextSpanner.staff-padding = #4.5                               %! OC1
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override TextSpanner.staff-padding = #4.5                               %! OVERRIDE_COMMAND_1
                             e'8
                             - \abjad_dashed_line_with_hook                                           %! PIC_1
                             - \tweak bound-details.left.text \markup \baca-left "pont."              %! PIC_1
@@ -3143,7 +3143,7 @@ def text_spanner(
                             e''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                             g'8
                             [
             <BLANKLINE>
@@ -3152,7 +3152,7 @@ def text_spanner(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             d''8
                             [
             <BLANKLINE>
@@ -3163,7 +3163,7 @@ def text_spanner(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             f''8
                             [
             <BLANKLINE>
@@ -3172,7 +3172,7 @@ def text_spanner(
                             d''8
                             \stopTextSpan                                                            %! PIC_2
                             ]
-                            \revert TextSpanner.staff-padding                                        %! OC2
+                            \revert TextSpanner.staff-padding                                        %! OVERRIDE_COMMAND_2
             <BLANKLINE>
                         }
                     }
@@ -3208,31 +3208,31 @@ def text_spanner(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -3243,8 +3243,8 @@ def text_spanner(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
-                            \override TextSpanner.staff-padding = #4.5                               %! OC1
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override TextSpanner.staff-padding = #4.5                               %! OVERRIDE_COMMAND_1
                             e'8
                             - \abjad_solid_line_with_arrow                                           %! PIC_1
                             - \tweak bound-details.left.text \markup \baca-left "pont."              %! PIC_1
@@ -3261,7 +3261,7 @@ def text_spanner(
                             e''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                             g'8
                             [
             <BLANKLINE>
@@ -3270,7 +3270,7 @@ def text_spanner(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             d''8
                             [
             <BLANKLINE>
@@ -3281,7 +3281,7 @@ def text_spanner(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             f''8
                             [
             <BLANKLINE>
@@ -3290,7 +3290,7 @@ def text_spanner(
                             d''8
                             \stopTextSpan                                                            %! PIC_2
                             ]
-                            \revert TextSpanner.staff-padding                                        %! OC2
+                            \revert TextSpanner.staff-padding                                        %! OVERRIDE_COMMAND_2
             <BLANKLINE>
                         }
                     }
@@ -3326,31 +3326,31 @@ def text_spanner(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -3361,8 +3361,8 @@ def text_spanner(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
-                            \override TextSpanner.staff-padding = #4.5                               %! OC1
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override TextSpanner.staff-padding = #4.5                               %! OVERRIDE_COMMAND_1
                             e'8
                             - \abjad_solid_line_with_hook                                            %! PIC_1
                             - \tweak bound-details.left.text \markup \baca-left "pont."              %! PIC_1
@@ -3394,7 +3394,7 @@ def text_spanner(
                             e''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                             g'8
                             [
             <BLANKLINE>
@@ -3403,7 +3403,7 @@ def text_spanner(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             d''8
                             [
             <BLANKLINE>
@@ -3414,7 +3414,7 @@ def text_spanner(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             f''8
                             [
             <BLANKLINE>
@@ -3423,7 +3423,7 @@ def text_spanner(
                             d''8
                             \stopTextSpan                                                            %! PIC_2
                             ]
-                            \revert TextSpanner.staff-padding                                        %! OC2
+                            \revert TextSpanner.staff-padding                                        %! OVERRIDE_COMMAND_2
             <BLANKLINE>
                         }
                     }
@@ -3459,31 +3459,31 @@ def text_spanner(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -3494,8 +3494,8 @@ def text_spanner(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
-                            \override TextSpanner.staff-padding = #4.5                               %! OC1
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override TextSpanner.staff-padding = #4.5                               %! OVERRIDE_COMMAND_1
                             e'8
                             - \abjad_invisible_line                                                  %! PIC_1
                             - \tweak bound-details.left.text \markup \baca-left "pont."              %! PIC_1
@@ -3512,7 +3512,7 @@ def text_spanner(
                             e''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                             g'8
                             [
             <BLANKLINE>
@@ -3521,7 +3521,7 @@ def text_spanner(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             d''8
                             [
             <BLANKLINE>
@@ -3532,7 +3532,7 @@ def text_spanner(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             f''8
                             [
             <BLANKLINE>
@@ -3541,7 +3541,7 @@ def text_spanner(
                             d''8
                             \stopTextSpan                                                            %! PIC_2
                             ]
-                            \revert TextSpanner.staff-padding                                        %! OC2
+                            \revert TextSpanner.staff-padding                                        %! OVERRIDE_COMMAND_2
             <BLANKLINE>
                         }
                     }
@@ -3583,31 +3583,31 @@ def text_spanner(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -3618,9 +3618,9 @@ def text_spanner(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
-                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \override TextSpanner.staff-padding = #4.5                               %! OC1
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override DynamicLineSpanner.staff-padding = #'5                         %! OVERRIDE_COMMAND_1
+                            \override TextSpanner.staff-padding = #4.5                               %! OVERRIDE_COMMAND_1
                             e'8
                             - \abjad_invisible_line                                                  %! PIC_1
                             - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC_1
@@ -3634,7 +3634,7 @@ def text_spanner(
                             e''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                             g'8
                             \stopTextSpan                                                            %! PIC_1
                             - \abjad_invisible_line                                                  %! PIC_1
@@ -3647,7 +3647,7 @@ def text_spanner(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             d''8
                             \stopTextSpan                                                            %! PIC_1
                             - \abjad_invisible_line                                                  %! PIC_1
@@ -3662,7 +3662,7 @@ def text_spanner(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             f''8
                             \stopTextSpan                                                            %! PIC_1
                             - \abjad_invisible_line                                                  %! PIC_1
@@ -3678,8 +3678,8 @@ def text_spanner(
                             d''8
                             \stopTextSpan                                                            %! PIC_2
                             ]
-                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
-                            \revert TextSpanner.staff-padding                                        %! OC2
+                            \revert DynamicLineSpanner.staff-padding                                 %! OVERRIDE_COMMAND_2
+                            \revert TextSpanner.staff-padding                                        %! OVERRIDE_COMMAND_2
             <BLANKLINE>
                         }
                     }
@@ -3719,31 +3719,31 @@ def text_spanner(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -3754,9 +3754,9 @@ def text_spanner(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
-                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \override TextSpanner.staff-padding = #4.5                               %! OC1
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override DynamicLineSpanner.staff-padding = #'5                         %! OVERRIDE_COMMAND_1
+                            \override TextSpanner.staff-padding = #4.5                               %! OVERRIDE_COMMAND_1
                             e'8
                             - \abjad_solid_line_with_arrow                                           %! PIC_1
                             - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC_1
@@ -3770,7 +3770,7 @@ def text_spanner(
                             e''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                             g'8
                             \stopTextSpan                                                            %! PIC_1
                             - \abjad_solid_line_with_arrow                                           %! PIC_1
@@ -3783,7 +3783,7 @@ def text_spanner(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             d''8
                             \stopTextSpan                                                            %! PIC_1
                             - \abjad_solid_line_with_arrow                                           %! PIC_1
@@ -3798,7 +3798,7 @@ def text_spanner(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             f''8
                             \stopTextSpan                                                            %! PIC_1
                             - \abjad_solid_line_with_arrow                                           %! PIC_1
@@ -3814,8 +3814,8 @@ def text_spanner(
                             d''8
                             \stopTextSpan                                                            %! PIC_2
                             ]
-                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
-                            \revert TextSpanner.staff-padding                                        %! OC2
+                            \revert DynamicLineSpanner.staff-padding                                 %! OVERRIDE_COMMAND_2
+                            \revert TextSpanner.staff-padding                                        %! OVERRIDE_COMMAND_2
             <BLANKLINE>
                         }
                     }
@@ -3856,31 +3856,31 @@ def text_spanner(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -3891,9 +3891,9 @@ def text_spanner(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
-                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \override TextSpanner.staff-padding = #4.5                               %! OC1
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override DynamicLineSpanner.staff-padding = #'5                         %! OVERRIDE_COMMAND_1
+                            \override TextSpanner.staff-padding = #4.5                               %! OVERRIDE_COMMAND_1
                             e'8
                             - \abjad_invisible_line                                                  %! PIC_1
                             - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC_1
@@ -3911,7 +3911,7 @@ def text_spanner(
                             \stopTextSpan                                                            %! PIC_2
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                             g'8
                             \stopTextSpan                                                            %! PIC_1
                             - \abjad_invisible_line                                                  %! PIC_1
@@ -3928,7 +3928,7 @@ def text_spanner(
                             \stopTextSpan                                                            %! PIC_2
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             d''8
                             \stopTextSpan                                                            %! PIC_1
                             - \abjad_invisible_line                                                  %! PIC_1
@@ -3947,7 +3947,7 @@ def text_spanner(
                             \stopTextSpan                                                            %! PIC_2
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             f''8
                             \stopTextSpan                                                            %! PIC_1
                             - \abjad_invisible_line                                                  %! PIC_1
@@ -3963,8 +3963,8 @@ def text_spanner(
                             d''8
                             \stopTextSpan                                                            %! PIC_2
                             ]
-                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
-                            \revert TextSpanner.staff-padding                                        %! OC2
+                            \revert DynamicLineSpanner.staff-padding                                 %! OVERRIDE_COMMAND_2
+                            \revert TextSpanner.staff-padding                                        %! OVERRIDE_COMMAND_2
             <BLANKLINE>
                         }
                     }
@@ -4005,31 +4005,31 @@ def text_spanner(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -4040,9 +4040,9 @@ def text_spanner(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
-                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \override TextSpanner.staff-padding = #4.5                               %! OC1
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override DynamicLineSpanner.staff-padding = #'5                         %! OVERRIDE_COMMAND_1
+                            \override TextSpanner.staff-padding = #4.5                               %! OVERRIDE_COMMAND_1
                             e'8
                             - \abjad_solid_line_with_arrow                                           %! PIC_1
                             - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC_1
@@ -4060,7 +4060,7 @@ def text_spanner(
                             \stopTextSpan                                                            %! PIC_2
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                             g'8
                             \stopTextSpan                                                            %! PIC_1
                             - \abjad_solid_line_with_arrow                                           %! PIC_1
@@ -4077,7 +4077,7 @@ def text_spanner(
                             \stopTextSpan                                                            %! PIC_2
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             d''8
                             \stopTextSpan                                                            %! PIC_1
                             - \abjad_solid_line_with_arrow                                           %! PIC_1
@@ -4096,7 +4096,7 @@ def text_spanner(
                             \stopTextSpan                                                            %! PIC_2
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             f''8
                             \stopTextSpan                                                            %! PIC_1
                             - \abjad_solid_line_with_arrow                                           %! PIC_1
@@ -4112,8 +4112,8 @@ def text_spanner(
                             d''8
                             \stopTextSpan                                                            %! PIC_2
                             ]
-                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
-                            \revert TextSpanner.staff-padding                                        %! OC2
+                            \revert DynamicLineSpanner.staff-padding                                 %! OVERRIDE_COMMAND_2
+                            \revert TextSpanner.staff-padding                                        %! OVERRIDE_COMMAND_2
             <BLANKLINE>
                         }
                     }
@@ -4156,31 +4156,31 @@ def text_spanner(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -4191,9 +4191,9 @@ def text_spanner(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
-                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \override TextSpanner.staff-padding = #4.5                               %! OC1
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override DynamicLineSpanner.staff-padding = #'5                         %! OVERRIDE_COMMAND_1
+                            \override TextSpanner.staff-padding = #4.5                               %! OVERRIDE_COMMAND_1
                             e'8
                             - \abjad_dashed_line_with_hook                                           %! PIC_1
                             - \tweak bound-details.left.text \markup \baca-left \baca_damp_markup    %! PIC_1
@@ -4207,7 +4207,7 @@ def text_spanner(
                             e''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                             g'8
                             [
             <BLANKLINE>
@@ -4216,7 +4216,7 @@ def text_spanner(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             d''8
                             \stopTextSpan                                                            %! PIC_3
                             [
@@ -4228,7 +4228,7 @@ def text_spanner(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             f''8
                             [
             <BLANKLINE>
@@ -4236,8 +4236,8 @@ def text_spanner(
             <BLANKLINE>
                             d''8
                             ]
-                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
-                            \revert TextSpanner.staff-padding                                        %! OC2
+                            \revert DynamicLineSpanner.staff-padding                                 %! OVERRIDE_COMMAND_2
+                            \revert TextSpanner.staff-padding                                        %! OVERRIDE_COMMAND_2
             <BLANKLINE>
                         }
                     }
@@ -4279,31 +4279,31 @@ def text_spanner(
                     \context GlobalSkips = "GlobalSkips"
                     {
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! SM_4
+                        % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! SM_4
+                        % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! SM_4
+                        % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! SM_4
+                        % [GlobalSkips measure 4]                                                    %! COMMENT_MEASURE_NUMBERS
                         \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
-                        \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                        \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                        \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                        \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                         s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        \baca_bar_line_visible                                                       %! SM_5
-                        \bar "|"                                                                     %! SM_5
+                        \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                        \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
             <BLANKLINE>
                     }
                 >>
@@ -4314,9 +4314,9 @@ def text_spanner(
                         \context Voice = "MusicVoice"
                         {
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! SM_4
-                            \override DynamicLineSpanner.staff-padding = #'5                         %! OC1
-                            \override TextSpanner.staff-padding = #4.5                               %! OC1
+                            % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                            \override DynamicLineSpanner.staff-padding = #'5                         %! OVERRIDE_COMMAND_1
+                            \override TextSpanner.staff-padding = #4.5                               %! OVERRIDE_COMMAND_1
                             e'8
                             - \abjad_solid_line_with_hook                                            %! PIC_1
                             - \tweak bound-details.left.text \markup \baca-left "A"                  %! PIC_1
@@ -4330,7 +4330,7 @@ def text_spanner(
                             e''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! SM_4
+                            % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                             g'8
                             \stopTextSpan                                                            %! PIC_1
                             - \abjad_solid_line_with_hook                                            %! PIC_1
@@ -4343,7 +4343,7 @@ def text_spanner(
                             e'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! SM_4
+                            % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                             d''8
                             \stopTextSpan                                                            %! PIC_1
                             - \abjad_solid_line_with_hook                                            %! PIC_1
@@ -4358,7 +4358,7 @@ def text_spanner(
                             g'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! SM_4
+                            % [MusicVoice measure 4]                                                 %! COMMENT_MEASURE_NUMBERS
                             f''8
                             \stopTextSpan                                                            %! PIC_1
                             - \abjad_solid_line_with_hook                                            %! PIC_1
@@ -4389,8 +4389,8 @@ def text_spanner(
                             d''8
                             \stopTextSpan                                                            %! PIC_2
                             ]
-                            \revert DynamicLineSpanner.staff-padding                                 %! OC2
-                            \revert TextSpanner.staff-padding                                        %! OC2
+                            \revert DynamicLineSpanner.staff-padding                                 %! OVERRIDE_COMMAND_2
+                            \revert TextSpanner.staff-padding                                        %! OVERRIDE_COMMAND_2
             <BLANKLINE>
                         }
                     }

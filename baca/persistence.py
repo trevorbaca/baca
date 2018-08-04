@@ -57,24 +57,24 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak                                                                   %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! INDICATOR_COMMAND:BREAK
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak                                                                   %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
-                            \break                                                                       %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! INDICATOR_COMMAND:BREAK
+                            \break                                                                       %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -85,15 +85,15 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
-                                \clef "treble"                                                           %! SM8:DEFAULT_CLEF:ST_3
-                                \once \override Staff.Clef.color = #(x11-color 'DarkViolet)              %! SM6:DEFAULT_CLEF_COLOR:ST_3
-                            %@% \override Staff.Clef.color = ##f                                         %! SM7:DEFAULT_CLEF_COLOR_CANCELLATION:ST_3
-                                \set Staff.forceClef = ##t                                               %! SM8:DEFAULT_CLEF:SM33:ST_3
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \clef "treble"                                                           %! SET_STATUS_TAG:DEFAULT_CLEF:ST_3
+                                \once \override Staff.Clef.color = #(x11-color 'DarkViolet)              %! ATTACH_COLOR_LITERAL_2:DEFAULT_CLEF_COLOR:ST_3
+                            %@% \override Staff.Clef.color = ##f                                         %! ATTACH_COLOR_LITERAL_1:DEFAULT_CLEF_COLOR_CANCELLATION:ST_3
+                                \set Staff.forceClef = ##t                                               %! SET_STATUS_TAG:DEFAULT_CLEF:SM33:ST_3
                                 R1 * 3/8
-                                \override Staff.Clef.color = #(x11-color 'violet)                        %! SM6:DEFAULT_CLEF_REDRAW_COLOR:ST_3
+                                \override Staff.Clef.color = #(x11-color 'violet)                        %! ATTACH_COLOR_LITERAL_2:DEFAULT_CLEF_REDRAW_COLOR:ST_3
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 R1 * 3/8
                 <BLANKLINE>
                             }
@@ -139,24 +139,24 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak                                                                   %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! INDICATOR_COMMAND:BREAK
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak                                                                   %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
-                            \break                                                                       %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! INDICATOR_COMMAND:BREAK
+                            \break                                                                       %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -167,15 +167,15 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
-                                \clef "treble"                                                           %! SM8:EXPLICIT_CLEF:IC
-                                \once \override Staff.Clef.color = #(x11-color 'blue)                    %! SM6:EXPLICIT_CLEF_COLOR:IC
-                            %@% \override Staff.Clef.color = ##f                                         %! SM7:EXPLICIT_CLEF_COLOR_CANCELLATION:IC
-                                \set Staff.forceClef = ##t                                               %! SM8:EXPLICIT_CLEF:SM33:IC
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \clef "treble"                                                           %! SET_STATUS_TAG:EXPLICIT_CLEF:INDICATOR_COMMAND
+                                \once \override Staff.Clef.color = #(x11-color 'blue)                    %! ATTACH_COLOR_LITERAL_2:EXPLICIT_CLEF_COLOR:INDICATOR_COMMAND
+                            %@% \override Staff.Clef.color = ##f                                         %! ATTACH_COLOR_LITERAL_1:EXPLICIT_CLEF_COLOR_CANCELLATION:INDICATOR_COMMAND
+                                \set Staff.forceClef = ##t                                               %! SET_STATUS_TAG:EXPLICIT_CLEF:SM33:INDICATOR_COMMAND
                                 R1 * 3/8
-                                \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! SM6:EXPLICIT_CLEF_REDRAW_COLOR:IC
+                                \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! ATTACH_COLOR_LITERAL_2:EXPLICIT_CLEF_REDRAW_COLOR:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 R1 * 3/8
                 <BLANKLINE>
                             }
@@ -232,25 +232,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak                                                                   %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! INDICATOR_COMMAND:BREAK
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar ""                                                                      %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak                                                                   %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
-                            \break                                                                       %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! INDICATOR_COMMAND:BREAK
+                            \break                                                                       %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -261,15 +261,15 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
-                                \clef "alto"                                                             %! SM8:EXPLICIT_CLEF:IC
-                                \once \override Staff.Clef.color = #(x11-color 'blue)                    %! SM6:EXPLICIT_CLEF_COLOR:IC
-                            %@% \override Staff.Clef.color = ##f                                         %! SM7:EXPLICIT_CLEF_COLOR_CANCELLATION:IC
-                                \set Staff.forceClef = ##t                                               %! SM8:EXPLICIT_CLEF:SM33:IC
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \clef "alto"                                                             %! SET_STATUS_TAG:EXPLICIT_CLEF:INDICATOR_COMMAND
+                                \once \override Staff.Clef.color = #(x11-color 'blue)                    %! ATTACH_COLOR_LITERAL_2:EXPLICIT_CLEF_COLOR:INDICATOR_COMMAND
+                            %@% \override Staff.Clef.color = ##f                                         %! ATTACH_COLOR_LITERAL_1:EXPLICIT_CLEF_COLOR_CANCELLATION:INDICATOR_COMMAND
+                                \set Staff.forceClef = ##t                                               %! SET_STATUS_TAG:EXPLICIT_CLEF:SM33:INDICATOR_COMMAND
                                 R1 * 3/8
-                                \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! SM6:EXPLICIT_CLEF_REDRAW_COLOR:IC
+                                \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! ATTACH_COLOR_LITERAL_2:EXPLICIT_CLEF_REDRAW_COLOR:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 R1 * 3/8
                 <BLANKLINE>
                             }
@@ -325,25 +325,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak                                                                   %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! INDICATOR_COMMAND:BREAK
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar ""                                                                      %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak                                                                   %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
-                            \break                                                                       %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! INDICATOR_COMMAND:BREAK
+                            \break                                                                       %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -354,15 +354,15 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
-                                \clef "treble"                                                           %! SM8:REAPPLIED_CLEF:SM37
-                                \once \override Staff.Clef.color = #(x11-color 'green4)                  %! SM6:REAPPLIED_CLEF_COLOR:SM37
-                            %@% \override Staff.Clef.color = ##f                                         %! SM7:REAPPLIED_CLEF_COLOR_CANCELLATION:SM37
-                                \set Staff.forceClef = ##t                                               %! SM8:REAPPLIED_CLEF:SM33:SM37
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \clef "treble"                                                           %! SET_STATUS_TAG:REAPPLIED_CLEF:SM37
+                                \once \override Staff.Clef.color = #(x11-color 'green4)                  %! ATTACH_COLOR_LITERAL_2:REAPPLIED_CLEF_COLOR:SM37
+                            %@% \override Staff.Clef.color = ##f                                         %! ATTACH_COLOR_LITERAL_1:REAPPLIED_CLEF_COLOR_CANCELLATION:SM37
+                                \set Staff.forceClef = ##t                                               %! SET_STATUS_TAG:REAPPLIED_CLEF:SM33:SM37
                                 R1 * 3/8
-                                \override Staff.Clef.color = #(x11-color 'OliveDrab)                     %! SM6:REAPPLIED_CLEF_REDRAW_COLOR:SM37
+                                \override Staff.Clef.color = #(x11-color 'OliveDrab)                     %! ATTACH_COLOR_LITERAL_2:REAPPLIED_CLEF_REDRAW_COLOR:SM37
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 R1 * 3/8
                 <BLANKLINE>
                             }
@@ -409,29 +409,29 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak                                                                   %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! INDICATOR_COMMAND:BREAK
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak                                                                   %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM_4
+                            % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
-                            \break                                                                       %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! INDICATOR_COMMAND:BREAK
+                            \break                                                                       %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -442,23 +442,23 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
-                                \clef "treble"                                                           %! SM8:EXPLICIT_CLEF:IC
-                                \once \override Staff.Clef.color = #(x11-color 'blue)                    %! SM6:EXPLICIT_CLEF_COLOR:IC
-                            %@% \override Staff.Clef.color = ##f                                         %! SM7:EXPLICIT_CLEF_COLOR_CANCELLATION:IC
-                                \set Staff.forceClef = ##t                                               %! SM8:EXPLICIT_CLEF:SM33:IC
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \clef "treble"                                                           %! SET_STATUS_TAG:EXPLICIT_CLEF:INDICATOR_COMMAND
+                                \once \override Staff.Clef.color = #(x11-color 'blue)                    %! ATTACH_COLOR_LITERAL_2:EXPLICIT_CLEF_COLOR:INDICATOR_COMMAND
+                            %@% \override Staff.Clef.color = ##f                                         %! ATTACH_COLOR_LITERAL_1:EXPLICIT_CLEF_COLOR_CANCELLATION:INDICATOR_COMMAND
+                                \set Staff.forceClef = ##t                                               %! SET_STATUS_TAG:EXPLICIT_CLEF:SM33:INDICATOR_COMMAND
                                 R1 * 3/8
-                                \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! SM6:EXPLICIT_CLEF_REDRAW_COLOR:IC
+                                \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! ATTACH_COLOR_LITERAL_2:EXPLICIT_CLEF_REDRAW_COLOR:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
-                                \clef "treble"                                                           %! SM8:REDUNDANT_CLEF:IC
-                                \once \override Staff.Clef.color = #(x11-color 'DeepPink1)               %! SM6:REDUNDANT_CLEF_COLOR:IC
-                            %@% \override Staff.Clef.color = ##f                                         %! SM7:REDUNDANT_CLEF_COLOR_CANCELLATION:IC
-                                \set Staff.forceClef = ##t                                               %! SM8:REDUNDANT_CLEF:SM33:IC
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \clef "treble"                                                           %! SET_STATUS_TAG:REDUNDANT_CLEF:INDICATOR_COMMAND
+                                \once \override Staff.Clef.color = #(x11-color 'DeepPink1)               %! ATTACH_COLOR_LITERAL_2:REDUNDANT_CLEF_COLOR:INDICATOR_COMMAND
+                            %@% \override Staff.Clef.color = ##f                                         %! ATTACH_COLOR_LITERAL_1:REDUNDANT_CLEF_COLOR_CANCELLATION:INDICATOR_COMMAND
+                                \set Staff.forceClef = ##t                                               %! SET_STATUS_TAG:REDUNDANT_CLEF:SM33:INDICATOR_COMMAND
                                 R1 * 3/8
-                                \override Staff.Clef.color = #(x11-color 'DeepPink4)                     %! SM6:REDUNDANT_CLEF_REDRAW_COLOR:IC
+                                \override Staff.Clef.color = #(x11-color 'DeepPink4)                     %! ATTACH_COLOR_LITERAL_2:REDUNDANT_CLEF_REDRAW_COLOR:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM_4
+                                % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                                 R1 * 3/8
                 <BLANKLINE>
                             }
@@ -516,25 +516,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak                                                                   %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! INDICATOR_COMMAND:BREAK
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar ""                                                                      %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak                                                                   %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
-                            \break                                                                       %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! INDICATOR_COMMAND:BREAK
+                            \break                                                                       %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -545,15 +545,15 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
-                                \clef "treble"                                                           %! SM8:REDUNDANT_CLEF:IC
-                                \once \override Staff.Clef.color = #(x11-color 'DeepPink1)               %! SM6:REDUNDANT_CLEF_COLOR:IC
-                            %@% \override Staff.Clef.color = ##f                                         %! SM7:REDUNDANT_CLEF_COLOR_CANCELLATION:IC
-                                \set Staff.forceClef = ##t                                               %! SM8:REDUNDANT_CLEF:SM33:IC
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \clef "treble"                                                           %! SET_STATUS_TAG:REDUNDANT_CLEF:INDICATOR_COMMAND
+                                \once \override Staff.Clef.color = #(x11-color 'DeepPink1)               %! ATTACH_COLOR_LITERAL_2:REDUNDANT_CLEF_COLOR:INDICATOR_COMMAND
+                            %@% \override Staff.Clef.color = ##f                                         %! ATTACH_COLOR_LITERAL_1:REDUNDANT_CLEF_COLOR_CANCELLATION:INDICATOR_COMMAND
+                                \set Staff.forceClef = ##t                                               %! SET_STATUS_TAG:REDUNDANT_CLEF:SM33:INDICATOR_COMMAND
                                 R1 * 3/8
-                                \override Staff.Clef.color = #(x11-color 'DeepPink4)                     %! SM6:REDUNDANT_CLEF_REDRAW_COLOR:IC
+                                \override Staff.Clef.color = #(x11-color 'DeepPink4)                     %! ATTACH_COLOR_LITERAL_2:REDUNDANT_CLEF_REDRAW_COLOR:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 R1 * 3/8
                 <BLANKLINE>
                             }
@@ -602,17 +602,17 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -623,12 +623,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
-                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:INDICATOR_COMMAND
                                 c'4.
-                                \f                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
+                                \f                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -679,18 +679,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar ""                                                                      %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -701,12 +701,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
-                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:INDICATOR_COMMAND
                                 c'4.
-                                \p                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
+                                \p                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -758,18 +758,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar ""                                                                      %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -780,12 +780,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
-                                \once \override Voice.DynamicText.color = #(x11-color 'green4)           %! SM6:REAPPLIED_DYNAMIC_COLOR:SM37
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \once \override Voice.DynamicText.color = #(x11-color 'green4)           %! ATTACH_COLOR_LITERAL_2:REAPPLIED_DYNAMIC_COLOR:SM37
                                 c'4.
-                                \f                                                                       %! SM8:REAPPLIED_DYNAMIC:SM37
+                                \f                                                                       %! SET_STATUS_TAG:REAPPLIED_DYNAMIC:SM37
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -826,17 +826,17 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -847,15 +847,15 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
-                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:INDICATOR_COMMAND
                                 c'4.
-                                \f                                                                       %! SM8:EXPLICIT_DYNAMIC:IC
+                                \f                                                                       %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
-                                \once \override Voice.DynamicText.color = #(x11-color 'DeepPink1)        %! SM6:REDUNDANT_DYNAMIC_COLOR:IC
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \once \override Voice.DynamicText.color = #(x11-color 'DeepPink1)        %! ATTACH_COLOR_LITERAL_2:REDUNDANT_DYNAMIC_COLOR:INDICATOR_COMMAND
                                 c'4.
-                                \f                                                                       %! SM8:REDUNDANT_DYNAMIC:IC
+                                \f                                                                       %! SET_STATUS_TAG:REDUNDANT_DYNAMIC:INDICATOR_COMMAND
                 <BLANKLINE>
                             }
                         }
@@ -905,18 +905,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar ""                                                                      %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -927,12 +927,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
-                                \once \override Voice.DynamicText.color = #(x11-color 'DeepPink1)        %! SM6:REDUNDANT_DYNAMIC_COLOR:IC
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \once \override Voice.DynamicText.color = #(x11-color 'DeepPink1)        %! ATTACH_COLOR_LITERAL_2:REDUNDANT_DYNAMIC_COLOR:INDICATOR_COMMAND
                                 c'4.
-                                \f                                                                       %! SM8:REDUNDANT_DYNAMIC:IC
+                                \f                                                                       %! SET_STATUS_TAG:REDUNDANT_DYNAMIC:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -971,17 +971,17 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -992,15 +992,15 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
-                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:INDICATOR_COMMAND
                                 c'4.
-                                \sfz                                                                     %! SM8:EXPLICIT_DYNAMIC:IC
+                                \sfz                                                                     %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
-                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:INDICATOR_COMMAND
                                 c'4.
-                                \sfz                                                                     %! SM8:EXPLICIT_DYNAMIC:IC
+                                \sfz                                                                     %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:INDICATOR_COMMAND
                 <BLANKLINE>
                             }
                         }
@@ -1050,18 +1050,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar ""                                                                      %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -1072,12 +1072,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
-                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:INDICATOR_COMMAND
                                 c'4.
-                                \sfz                                                                     %! SM8:EXPLICIT_DYNAMIC:IC
+                                \sfz                                                                     %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -1119,17 +1119,17 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -1140,15 +1140,15 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
-                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:INDICATOR_COMMAND
                                 c'4.
-                                \mf                                                                      %! SM8:EXPLICIT_DYNAMIC:IC
+                                \mf                                                                      %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
-                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! SM6:EXPLICIT_DYNAMIC_COLOR:IC
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_DYNAMIC_COLOR:INDICATOR_COMMAND
                                 c'4.
-                                \baca_effort_mf                                                          %! SM8:EXPLICIT_DYNAMIC:IC
+                                \baca_effort_mf                                                          %! SET_STATUS_TAG:EXPLICIT_DYNAMIC:INDICATOR_COMMAND
                 <BLANKLINE>
                             }
                         }
@@ -1213,24 +1213,24 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak                                                                   %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! INDICATOR_COMMAND:BREAK
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak                                                                   %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
-                            \break                                                                       %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! INDICATOR_COMMAND:BREAK
+                            \break                                                                       %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -1241,7 +1241,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                                 ^ \markup {                                                              %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                     \with-color                                                          %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
@@ -1249,7 +1249,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                         (“Flute”)                                                        %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                     }                                                                    %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -1277,24 +1277,24 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1] %! SM_4
+                            % [GlobalSkips measure 1] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11) %! IC:BREAK
-                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \time 3/8 %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue" %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2] %! SM_4
+                            % [GlobalSkips measure 2] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11) %! IC:BREAK
-                            \break %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \break %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible %! SM_5
-                            \bar "|"               %! SM_5
+                            \baca_bar_line_visible %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"               %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -1305,7 +1305,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1] %! SM_4
+                                % [MusicVoice measure 1] %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                             %%% ^ \markup {                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                             %%%     \with-color                  %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
@@ -1313,7 +1313,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             %%%         (“Flute”)                %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                             %%%     }                            %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                 <BLANKLINE>
-                                % [MusicVoice measure 2] %! SM_4
+                                % [MusicVoice measure 2] %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -1338,24 +1338,24 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1] %! SM_4
+                            % [GlobalSkips measure 1] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11) %! IC:BREAK
-                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \time 3/8 %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue" %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2] %! SM_4
+                            % [GlobalSkips measure 2] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11) %! IC:BREAK
-                            \break %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \break %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible %! SM_5
-                            \bar "|"               %! SM_5
+                            \baca_bar_line_visible %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"               %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -1366,7 +1366,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1] %! SM_4
+                                % [MusicVoice measure 1] %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                                 ^ \markup {                      %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                     \with-color                  %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
@@ -1374,7 +1374,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                         (“Flute”)                %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                                     }                            %! SM11:DEFAULT_INSTRUMENT_ALERT:ST_1
                 <BLANKLINE>
-                                % [MusicVoice measure 2] %! SM_4
+                                % [MusicVoice measure 2] %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -1416,24 +1416,24 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak                                                                   %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! INDICATOR_COMMAND:BREAK
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak                                                                   %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
-                            \break                                                                       %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! INDICATOR_COMMAND:BREAK
+                            \break                                                                       %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -1444,15 +1444,15 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
-                                ^ \markup {                                                              %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                                    \with-color                                                          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                                        #(x11-color 'blue)                                               %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                                        (“Flute”)                                                        %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                                    }                                                                    %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                ^ \markup {                                                              %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                    \with-color                                                          %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                        #(x11-color 'blue)                                               %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                        (“Flute”)                                                        %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                    }                                                                    %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -1480,24 +1480,24 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1] %! SM_4
+                            % [GlobalSkips measure 1] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11) %! IC:BREAK
-                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \time 3/8 %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue" %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2] %! SM_4
+                            % [GlobalSkips measure 2] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11) %! IC:BREAK
-                            \break %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \break %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible %! SM_5
-                            \bar "|"               %! SM_5
+                            \baca_bar_line_visible %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"               %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -1508,15 +1508,15 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1] %! SM_4
+                                % [MusicVoice measure 1] %! COMMENT_MEASURE_NUMBERS
                                 c'4.
-                            %%% ^ \markup {                %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                            %%%     \with-color            %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                            %%%         #(x11-color 'blue) %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                            %%%         (“Flute”)          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                            %%%     }                      %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                            %%% ^ \markup {                %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                            %%%     \with-color            %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                            %%%         #(x11-color 'blue) %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                            %%%         (“Flute”)          %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                            %%%     }                      %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2] %! SM_4
+                                % [MusicVoice measure 2] %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -1541,24 +1541,24 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1] %! SM_4
+                            % [GlobalSkips measure 1] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11) %! IC:BREAK
-                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \time 3/8 %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue" %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2] %! SM_4
+                            % [GlobalSkips measure 2] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11) %! IC:BREAK
-                            \break %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \break %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible %! SM_5
-                            \bar "|"               %! SM_5
+                            \baca_bar_line_visible %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"               %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -1569,15 +1569,15 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1] %! SM_4
+                                % [MusicVoice measure 1] %! COMMENT_MEASURE_NUMBERS
                                 c'4.
-                                ^ \markup {                %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                                    \with-color            %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                                        #(x11-color 'blue) %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                                        (“Flute”)          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                                    }                      %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                ^ \markup {                %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                    \with-color            %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                        #(x11-color 'blue) %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                        (“Flute”)          %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                    }                      %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2] %! SM_4
+                                % [MusicVoice measure 2] %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -1630,25 +1630,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak                                                                   %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! INDICATOR_COMMAND:BREAK
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar ""                                                                      %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak                                                                   %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
-                            \break                                                                       %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! INDICATOR_COMMAND:BREAK
+                            \break                                                                       %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -1659,15 +1659,15 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
-                                ^ \markup {                                                              %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                                    \with-color                                                          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                                        #(x11-color 'blue)                                               %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                                        (“Flute”)                                                        %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                                    }                                                                    %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                ^ \markup {                                                              %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                    \with-color                                                          %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                        #(x11-color 'blue)                                               %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                        (“Flute”)                                                        %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                    }                                                                    %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -1695,25 +1695,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1] %! SM_4
+                            % [GlobalSkips measure 1] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11) %! IC:BREAK
-                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \time 3/8 %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar "" %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue" %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2] %! SM_4
+                            % [GlobalSkips measure 2] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11) %! IC:BREAK
-                            \break %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \break %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible %! SM_5
-                            \bar "|"               %! SM_5
+                            \baca_bar_line_visible %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"               %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -1724,15 +1724,15 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1] %! SM_4
+                                % [MusicVoice measure 1] %! COMMENT_MEASURE_NUMBERS
                                 c'4.
-                            %%% ^ \markup {                %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                            %%%     \with-color            %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                            %%%         #(x11-color 'blue) %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                            %%%         (“Flute”)          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                            %%%     }                      %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                            %%% ^ \markup {                %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                            %%%     \with-color            %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                            %%%         #(x11-color 'blue) %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                            %%%         (“Flute”)          %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                            %%%     }                      %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2] %! SM_4
+                                % [MusicVoice measure 2] %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -1757,25 +1757,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1] %! SM_4
+                            % [GlobalSkips measure 1] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11) %! IC:BREAK
-                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \time 3/8 %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar "" %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue" %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2] %! SM_4
+                            % [GlobalSkips measure 2] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11) %! IC:BREAK
-                            \break %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \break %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible %! SM_5
-                            \bar "|"               %! SM_5
+                            \baca_bar_line_visible %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"               %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -1786,15 +1786,15 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1] %! SM_4
+                                % [MusicVoice measure 1] %! COMMENT_MEASURE_NUMBERS
                                 c'4.
-                                ^ \markup {                %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                                    \with-color            %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                                        #(x11-color 'blue) %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                                        (“Flute”)          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                                    }                      %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                ^ \markup {                %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                    \with-color            %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                        #(x11-color 'blue) %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                        (“Flute”)          %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                    }                      %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2] %! SM_4
+                                % [MusicVoice measure 2] %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -1848,25 +1848,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak                                                                   %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! INDICATOR_COMMAND:BREAK
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar ""                                                                      %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak                                                                   %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
-                            \break                                                                       %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! INDICATOR_COMMAND:BREAK
+                            \break                                                                       %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -1877,7 +1877,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                                 ^ \markup {                                                              %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
                                     \with-color                                                          %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
@@ -1885,7 +1885,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                         (“Flute”)                                                        %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
                                     }                                                                    %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -1913,25 +1913,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1] %! SM_4
+                            % [GlobalSkips measure 1] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11) %! IC:BREAK
-                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \time 3/8 %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar "" %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue" %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2] %! SM_4
+                            % [GlobalSkips measure 2] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11) %! IC:BREAK
-                            \break %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \break %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible %! SM_5
-                            \bar "|"               %! SM_5
+                            \baca_bar_line_visible %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"               %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -1942,7 +1942,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1] %! SM_4
+                                % [MusicVoice measure 1] %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                             %%% ^ \markup {                  %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
                             %%%     \with-color              %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
@@ -1950,7 +1950,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             %%%         (“Flute”)            %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
                             %%%     }                        %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
                 <BLANKLINE>
-                                % [MusicVoice measure 2] %! SM_4
+                                % [MusicVoice measure 2] %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -1975,25 +1975,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1] %! SM_4
+                            % [GlobalSkips measure 1] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11) %! IC:BREAK
-                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \time 3/8 %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar "" %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue" %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2] %! SM_4
+                            % [GlobalSkips measure 2] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11) %! IC:BREAK
-                            \break %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \break %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible %! SM_5
-                            \bar "|"               %! SM_5
+                            \baca_bar_line_visible %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"               %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -2004,7 +2004,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1] %! SM_4
+                                % [MusicVoice measure 1] %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                                 ^ \markup {                  %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
                                     \with-color              %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
@@ -2012,7 +2012,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                         (“Flute”)            %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
                                     }                        %! SM11:REAPPLIED_INSTRUMENT_ALERT:SM37
                 <BLANKLINE>
-                                % [MusicVoice measure 2] %! SM_4
+                                % [MusicVoice measure 2] %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -2064,29 +2064,29 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak                                                                   %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! INDICATOR_COMMAND:BREAK
+                            \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak                                                                   %! INDICATOR_COMMAND:BREAK
                             s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM_4
+                            % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
-                            \break                                                                       %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! INDICATOR_COMMAND:BREAK
+                            \break                                                                       %! INDICATOR_COMMAND:BREAK
                             s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -2097,23 +2097,23 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'2
-                                ^ \markup {                                                              %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                                    \with-color                                                          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                                        #(x11-color 'blue)                                               %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                                        (“Flute”)                                                        %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                                    }                                                                    %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                ^ \markup {                                                              %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                    \with-color                                                          %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                        #(x11-color 'blue)                                               %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                        (“Flute”)                                                        %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                    }                                                                    %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'2
-                                ^ \markup {                                                              %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
-                                    \with-color                                                          %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
-                                        #(x11-color 'DeepPink1)                                          %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
-                                        (“Flute”)                                                        %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
-                                    }                                                                    %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                ^ \markup {                                                              %! SM11:REDUNDANT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                    \with-color                                                          %! SM11:REDUNDANT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                        #(x11-color 'DeepPink1)                                          %! SM11:REDUNDANT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                        (“Flute”)                                                        %! SM11:REDUNDANT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                    }                                                                    %! SM11:REDUNDANT_INSTRUMENT_ALERT:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM_4
+                                % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'2
                 <BLANKLINE>
                             }
@@ -2141,29 +2141,29 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1] %! SM_4
+                            % [GlobalSkips measure 1] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11) %! IC:BREAK
-                            \time 4/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \time 4/8 %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue" %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak %! INDICATOR_COMMAND:BREAK
                             s1 * 1/2 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2] %! SM_4
+                            % [GlobalSkips measure 2] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             s1 * 1/2 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 3] %! SM_4
+                            % [GlobalSkips measure 3] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11) %! IC:BREAK
-                            \break %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \break %! INDICATOR_COMMAND:BREAK
                             s1 * 1/2 %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible %! SM_5
-                            \bar "|"               %! SM_5
+                            \baca_bar_line_visible %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"               %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -2174,23 +2174,23 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1] %! SM_4
+                                % [MusicVoice measure 1] %! COMMENT_MEASURE_NUMBERS
                                 c'2
-                            %%% ^ \markup {                %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                            %%%     \with-color            %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                            %%%         #(x11-color 'blue) %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                            %%%         (“Flute”)          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                            %%%     }                      %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                            %%% ^ \markup {                %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                            %%%     \with-color            %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                            %%%         #(x11-color 'blue) %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                            %%%         (“Flute”)          %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                            %%%     }                      %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2] %! SM_4
+                                % [MusicVoice measure 2] %! COMMENT_MEASURE_NUMBERS
                                 c'2
-                            %%% ^ \markup {                     %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
-                            %%%     \with-color                 %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
-                            %%%         #(x11-color 'DeepPink1) %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
-                            %%%         (“Flute”)               %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
-                            %%%     }                           %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                            %%% ^ \markup {                     %! SM11:REDUNDANT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                            %%%     \with-color                 %! SM11:REDUNDANT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                            %%%         #(x11-color 'DeepPink1) %! SM11:REDUNDANT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                            %%%         (“Flute”)               %! SM11:REDUNDANT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                            %%%     }                           %! SM11:REDUNDANT_INSTRUMENT_ALERT:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 3] %! SM_4
+                                % [MusicVoice measure 3] %! COMMENT_MEASURE_NUMBERS
                                 c'2
                 <BLANKLINE>
                             }
@@ -2215,29 +2215,29 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1] %! SM_4
+                            % [GlobalSkips measure 1] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11) %! IC:BREAK
-                            \time 4/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \time 4/8 %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue" %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak %! INDICATOR_COMMAND:BREAK
                             s1 * 1/2 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2] %! SM_4
+                            % [GlobalSkips measure 2] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             s1 * 1/2 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 3] %! SM_4
+                            % [GlobalSkips measure 3] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11) %! IC:BREAK
-                            \break %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \break %! INDICATOR_COMMAND:BREAK
                             s1 * 1/2 %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible %! SM_5
-                            \bar "|"               %! SM_5
+                            \baca_bar_line_visible %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"               %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -2248,23 +2248,23 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1] %! SM_4
+                                % [MusicVoice measure 1] %! COMMENT_MEASURE_NUMBERS
                                 c'2
-                                ^ \markup {                %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                                    \with-color            %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                                        #(x11-color 'blue) %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                                        (“Flute”)          %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
-                                    }                      %! SM11:EXPLICIT_INSTRUMENT_ALERT:IC
+                                ^ \markup {                %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                    \with-color            %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                        #(x11-color 'blue) %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                        (“Flute”)          %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                    }                      %! SM11:EXPLICIT_INSTRUMENT_ALERT:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2] %! SM_4
+                                % [MusicVoice measure 2] %! COMMENT_MEASURE_NUMBERS
                                 c'2
-                                ^ \markup {                     %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
-                                    \with-color                 %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
-                                        #(x11-color 'DeepPink1) %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
-                                        (“Flute”)               %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
-                                    }                           %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                ^ \markup {                     %! SM11:REDUNDANT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                    \with-color                 %! SM11:REDUNDANT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                        #(x11-color 'DeepPink1) %! SM11:REDUNDANT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                        (“Flute”)               %! SM11:REDUNDANT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                    }                           %! SM11:REDUNDANT_INSTRUMENT_ALERT:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 3] %! SM_4
+                                % [MusicVoice measure 3] %! COMMENT_MEASURE_NUMBERS
                                 c'2
                 <BLANKLINE>
                             }
@@ -2323,25 +2323,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak                                                                   %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! INDICATOR_COMMAND:BREAK
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar ""                                                                      %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak                                                                   %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
-                            \break                                                                       %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! INDICATOR_COMMAND:BREAK
+                            \break                                                                       %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -2352,15 +2352,15 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
-                                ^ \markup {                                                              %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
-                                    \with-color                                                          %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
-                                        #(x11-color 'DeepPink1)                                          %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
-                                        (“Flute”)                                                        %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
-                                    }                                                                    %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                ^ \markup {                                                              %! SM11:REDUNDANT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                    \with-color                                                          %! SM11:REDUNDANT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                        #(x11-color 'DeepPink1)                                          %! SM11:REDUNDANT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                        (“Flute”)                                                        %! SM11:REDUNDANT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                    }                                                                    %! SM11:REDUNDANT_INSTRUMENT_ALERT:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -2388,25 +2388,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1] %! SM_4
+                            % [GlobalSkips measure 1] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11) %! IC:BREAK
-                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \time 3/8 %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar "" %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue" %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2] %! SM_4
+                            % [GlobalSkips measure 2] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11) %! IC:BREAK
-                            \break %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \break %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible %! SM_5
-                            \bar "|"               %! SM_5
+                            \baca_bar_line_visible %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"               %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -2417,15 +2417,15 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1] %! SM_4
+                                % [MusicVoice measure 1] %! COMMENT_MEASURE_NUMBERS
                                 c'4.
-                            %%% ^ \markup {                     %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
-                            %%%     \with-color                 %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
-                            %%%         #(x11-color 'DeepPink1) %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
-                            %%%         (“Flute”)               %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
-                            %%%     }                           %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                            %%% ^ \markup {                     %! SM11:REDUNDANT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                            %%%     \with-color                 %! SM11:REDUNDANT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                            %%%         #(x11-color 'DeepPink1) %! SM11:REDUNDANT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                            %%%         (“Flute”)               %! SM11:REDUNDANT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                            %%%     }                           %! SM11:REDUNDANT_INSTRUMENT_ALERT:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2] %! SM_4
+                                % [MusicVoice measure 2] %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -2450,25 +2450,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1] %! SM_4
+                            % [GlobalSkips measure 1] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11) %! IC:BREAK
-                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \time 3/8 %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar "" %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue" %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2] %! SM_4
+                            % [GlobalSkips measure 2] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11) %! IC:BREAK
-                            \break %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \break %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible %! SM_5
-                            \bar "|"               %! SM_5
+                            \baca_bar_line_visible %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"               %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -2479,15 +2479,15 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1] %! SM_4
+                                % [MusicVoice measure 1] %! COMMENT_MEASURE_NUMBERS
                                 c'4.
-                                ^ \markup {                     %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
-                                    \with-color                 %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
-                                        #(x11-color 'DeepPink1) %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
-                                        (“Flute”)               %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
-                                    }                           %! SM11:REDUNDANT_INSTRUMENT_ALERT:IC
+                                ^ \markup {                     %! SM11:REDUNDANT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                    \with-color                 %! SM11:REDUNDANT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                        #(x11-color 'DeepPink1) %! SM11:REDUNDANT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                        (“Flute”)               %! SM11:REDUNDANT_INSTRUMENT_ALERT:INDICATOR_COMMAND
+                                    }                           %! SM11:REDUNDANT_INSTRUMENT_ALERT:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2] %! SM_4
+                                % [MusicVoice measure 2] %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -2561,24 +2561,24 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak                                                                   %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! INDICATOR_COMMAND:BREAK
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak                                                                   %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
-                            \break                                                                       %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! INDICATOR_COMMAND:BREAK
+                            \break                                                                       %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -2589,25 +2589,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
-                                \set Staff.instrumentName =                                              %! SM8:DEFAULT_MARGIN_MARKUP:ST2:-PARTS
-                                \markup { I+II }                                                         %! SM8:DEFAULT_MARGIN_MARKUP:ST2:-PARTS
-                                \set Staff.shortInstrumentName =                                         %! SM8:DEFAULT_MARGIN_MARKUP:ST2:-PARTS
-                                \markup { I+II }                                                         %! SM8:DEFAULT_MARGIN_MARKUP:ST2:-PARTS
-                                \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)    %! SM6:DEFAULT_MARGIN_MARKUP_COLOR:ST2:-PARTS
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \set Staff.instrumentName =                                              %! SET_STATUS_TAG:DEFAULT_MARGIN_MARKUP:ST2:-PARTS
+                                \markup { I+II }                                                         %! SET_STATUS_TAG:DEFAULT_MARGIN_MARKUP:ST2:-PARTS
+                                \set Staff.shortInstrumentName =                                         %! SET_STATUS_TAG:DEFAULT_MARGIN_MARKUP:ST2:-PARTS
+                                \markup { I+II }                                                         %! SET_STATUS_TAG:DEFAULT_MARGIN_MARKUP:ST2:-PARTS
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)    %! ATTACH_COLOR_LITERAL_2:DEFAULT_MARGIN_MARKUP_COLOR:ST2:-PARTS
                                 c'4.
                                 ^ \markup {                                                              %! SM11:DEFAULT_MARGIN_MARKUP_ALERT:ST2:-PARTS
                                     \with-color                                                          %! SM11:DEFAULT_MARGIN_MARKUP_ALERT:ST2:-PARTS
                                         #(x11-color 'DarkViolet)                                         %! SM11:DEFAULT_MARGIN_MARKUP_ALERT:ST2:-PARTS
                                         [“I+II”]                                                         %! SM11:DEFAULT_MARGIN_MARKUP_ALERT:ST2:-PARTS
                                     }                                                                    %! SM11:DEFAULT_MARGIN_MARKUP_ALERT:ST2:-PARTS
-                                \override Staff.InstrumentName.color = #(x11-color 'violet)              %! SM6:REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:ST2:-PARTS
-                                \set Staff.instrumentName =                                              %! SM8:REDRAWN_DEFAULT_MARGIN_MARKUP:SM34:ST2:-PARTS
-                                \markup { I+II }                                                         %! SM8:REDRAWN_DEFAULT_MARGIN_MARKUP:SM34:ST2:-PARTS
-                                \set Staff.shortInstrumentName =                                         %! SM8:REDRAWN_DEFAULT_MARGIN_MARKUP:SM34:ST2:-PARTS
-                                \markup { I+II }                                                         %! SM8:REDRAWN_DEFAULT_MARGIN_MARKUP:SM34:ST2:-PARTS
+                                \override Staff.InstrumentName.color = #(x11-color 'violet)              %! ATTACH_COLOR_LITERAL_2:REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:ST2:-PARTS
+                                \set Staff.instrumentName =                                              %! SET_STATUS_TAG:REDRAWN_DEFAULT_MARGIN_MARKUP:SM34:ST2:-PARTS
+                                \markup { I+II }                                                         %! SET_STATUS_TAG:REDRAWN_DEFAULT_MARGIN_MARKUP:SM34:ST2:-PARTS
+                                \set Staff.shortInstrumentName =                                         %! SET_STATUS_TAG:REDRAWN_DEFAULT_MARGIN_MARKUP:SM34:ST2:-PARTS
+                                \markup { I+II }                                                         %! SET_STATUS_TAG:REDRAWN_DEFAULT_MARGIN_MARKUP:SM34:ST2:-PARTS
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -2635,24 +2635,24 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1] %! SM_4
+                            % [GlobalSkips measure 1] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11) %! IC:BREAK
-                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \time 3/8 %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue" %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2] %! SM_4
+                            % [GlobalSkips measure 2] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11) %! IC:BREAK
-                            \break %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \break %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible %! SM_5
-                            \bar "|"               %! SM_5
+                            \baca_bar_line_visible %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"               %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -2663,25 +2663,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1] %! SM_4
-                                \set Staff.instrumentName =      %! SM8:DEFAULT_MARGIN_MARKUP:ST2:-PARTS
-                                \markup { I+II }                 %! SM8:DEFAULT_MARGIN_MARKUP:ST2:-PARTS
-                                \set Staff.shortInstrumentName = %! SM8:DEFAULT_MARGIN_MARKUP:ST2:-PARTS
-                                \markup { I+II }                 %! SM8:DEFAULT_MARGIN_MARKUP:ST2:-PARTS
-                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_MARGIN_MARKUP_COLOR:ST2:-PARTS
+                                % [MusicVoice measure 1] %! COMMENT_MEASURE_NUMBERS
+                                \set Staff.instrumentName =      %! SET_STATUS_TAG:DEFAULT_MARGIN_MARKUP:ST2:-PARTS
+                                \markup { I+II }                 %! SET_STATUS_TAG:DEFAULT_MARGIN_MARKUP:ST2:-PARTS
+                                \set Staff.shortInstrumentName = %! SET_STATUS_TAG:DEFAULT_MARGIN_MARKUP:ST2:-PARTS
+                                \markup { I+II }                 %! SET_STATUS_TAG:DEFAULT_MARGIN_MARKUP:ST2:-PARTS
+                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet) %! ATTACH_COLOR_LITERAL_2:DEFAULT_MARGIN_MARKUP_COLOR:ST2:-PARTS
                                 c'4.
                             %%% ^ \markup {                      %! SM11:DEFAULT_MARGIN_MARKUP_ALERT:ST2:-PARTS
                             %%%     \with-color                  %! SM11:DEFAULT_MARGIN_MARKUP_ALERT:ST2:-PARTS
                             %%%         #(x11-color 'DarkViolet) %! SM11:DEFAULT_MARGIN_MARKUP_ALERT:ST2:-PARTS
                             %%%         [“I+II”]                 %! SM11:DEFAULT_MARGIN_MARKUP_ALERT:ST2:-PARTS
                             %%%     }                            %! SM11:DEFAULT_MARGIN_MARKUP_ALERT:ST2:-PARTS
-                            %%% \override Staff.InstrumentName.color = #(x11-color 'violet) %! SM6:REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:ST2:-PARTS
-                                \set Staff.instrumentName =      %! SM8:REDRAWN_DEFAULT_MARGIN_MARKUP:SM34:ST2:-PARTS
-                                \markup { I+II }                 %! SM8:REDRAWN_DEFAULT_MARGIN_MARKUP:SM34:ST2:-PARTS
-                                \set Staff.shortInstrumentName = %! SM8:REDRAWN_DEFAULT_MARGIN_MARKUP:SM34:ST2:-PARTS
-                                \markup { I+II }                 %! SM8:REDRAWN_DEFAULT_MARGIN_MARKUP:SM34:ST2:-PARTS
+                            %%% \override Staff.InstrumentName.color = #(x11-color 'violet) %! ATTACH_COLOR_LITERAL_2:REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:ST2:-PARTS
+                                \set Staff.instrumentName =      %! SET_STATUS_TAG:REDRAWN_DEFAULT_MARGIN_MARKUP:SM34:ST2:-PARTS
+                                \markup { I+II }                 %! SET_STATUS_TAG:REDRAWN_DEFAULT_MARGIN_MARKUP:SM34:ST2:-PARTS
+                                \set Staff.shortInstrumentName = %! SET_STATUS_TAG:REDRAWN_DEFAULT_MARGIN_MARKUP:SM34:ST2:-PARTS
+                                \markup { I+II }                 %! SET_STATUS_TAG:REDRAWN_DEFAULT_MARGIN_MARKUP:SM34:ST2:-PARTS
                 <BLANKLINE>
-                                % [MusicVoice measure 2] %! SM_4
+                                % [MusicVoice measure 2] %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -2706,24 +2706,24 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1] %! SM_4
+                            % [GlobalSkips measure 1] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11) %! IC:BREAK
-                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \time 3/8 %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue" %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2] %! SM_4
+                            % [GlobalSkips measure 2] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11) %! IC:BREAK
-                            \break %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \break %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible %! SM_5
-                            \bar "|"               %! SM_5
+                            \baca_bar_line_visible %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"               %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -2734,25 +2734,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1] %! SM_4
-                                \set Staff.instrumentName =      %! SM8:DEFAULT_MARGIN_MARKUP:ST2:-PARTS
-                                \markup { I+II }                 %! SM8:DEFAULT_MARGIN_MARKUP:ST2:-PARTS
-                                \set Staff.shortInstrumentName = %! SM8:DEFAULT_MARGIN_MARKUP:ST2:-PARTS
-                                \markup { I+II }                 %! SM8:DEFAULT_MARGIN_MARKUP:ST2:-PARTS
-                                \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet) %! SM6:DEFAULT_MARGIN_MARKUP_COLOR:ST2:-PARTS
+                                % [MusicVoice measure 1] %! COMMENT_MEASURE_NUMBERS
+                                \set Staff.instrumentName =      %! SET_STATUS_TAG:DEFAULT_MARGIN_MARKUP:ST2:-PARTS
+                                \markup { I+II }                 %! SET_STATUS_TAG:DEFAULT_MARGIN_MARKUP:ST2:-PARTS
+                                \set Staff.shortInstrumentName = %! SET_STATUS_TAG:DEFAULT_MARGIN_MARKUP:ST2:-PARTS
+                                \markup { I+II }                 %! SET_STATUS_TAG:DEFAULT_MARGIN_MARKUP:ST2:-PARTS
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet) %! ATTACH_COLOR_LITERAL_2:DEFAULT_MARGIN_MARKUP_COLOR:ST2:-PARTS
                                 c'4.
                                 ^ \markup {                      %! SM11:DEFAULT_MARGIN_MARKUP_ALERT:ST2:-PARTS
                                     \with-color                  %! SM11:DEFAULT_MARGIN_MARKUP_ALERT:ST2:-PARTS
                                         #(x11-color 'DarkViolet) %! SM11:DEFAULT_MARGIN_MARKUP_ALERT:ST2:-PARTS
                                         [“I+II”]                 %! SM11:DEFAULT_MARGIN_MARKUP_ALERT:ST2:-PARTS
                                     }                            %! SM11:DEFAULT_MARGIN_MARKUP_ALERT:ST2:-PARTS
-                                \override Staff.InstrumentName.color = #(x11-color 'violet) %! SM6:REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:ST2:-PARTS
-                                \set Staff.instrumentName =      %! SM8:REDRAWN_DEFAULT_MARGIN_MARKUP:SM34:ST2:-PARTS
-                                \markup { I+II }                 %! SM8:REDRAWN_DEFAULT_MARGIN_MARKUP:SM34:ST2:-PARTS
-                                \set Staff.shortInstrumentName = %! SM8:REDRAWN_DEFAULT_MARGIN_MARKUP:SM34:ST2:-PARTS
-                                \markup { I+II }                 %! SM8:REDRAWN_DEFAULT_MARGIN_MARKUP:SM34:ST2:-PARTS
+                                \override Staff.InstrumentName.color = #(x11-color 'violet) %! ATTACH_COLOR_LITERAL_2:REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:ST2:-PARTS
+                                \set Staff.instrumentName =      %! SET_STATUS_TAG:REDRAWN_DEFAULT_MARGIN_MARKUP:SM34:ST2:-PARTS
+                                \markup { I+II }                 %! SET_STATUS_TAG:REDRAWN_DEFAULT_MARGIN_MARKUP:SM34:ST2:-PARTS
+                                \set Staff.shortInstrumentName = %! SET_STATUS_TAG:REDRAWN_DEFAULT_MARGIN_MARKUP:SM34:ST2:-PARTS
+                                \markup { I+II }                 %! SET_STATUS_TAG:REDRAWN_DEFAULT_MARGIN_MARKUP:SM34:ST2:-PARTS
                 <BLANKLINE>
-                                % [MusicVoice measure 2] %! SM_4
+                                % [MusicVoice measure 2] %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -2794,24 +2794,24 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak                                                                   %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! INDICATOR_COMMAND:BREAK
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak                                                                   %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
-                            \break                                                                       %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! INDICATOR_COMMAND:BREAK
+                            \break                                                                       %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -2822,25 +2822,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
-                                \set Staff.instrumentName =                                              %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \markup { I+II }                                                         %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \set Staff.shortInstrumentName =                                         %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \markup { I+II }                                                         %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! SM6:EXPLICIT_MARGIN_MARKUP_COLOR:IC
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \set Staff.instrumentName =                                              %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \markup { I+II }                                                         %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \set Staff.shortInstrumentName =                                         %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \markup { I+II }                                                         %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! ATTACH_COLOR_LITERAL_2:EXPLICIT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND
                                 c'4.
-                                ^ \markup {                                                              %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                                    \with-color                                                          %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                                        #(x11-color 'blue)                                               %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                                        [“I+II”]                                                         %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                                    }                                                                    %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! SM6:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:IC
-                                \set Staff.instrumentName =                                              %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
-                                \markup { I+II }                                                         %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
-                                \set Staff.shortInstrumentName =                                         %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
-                                \markup { I+II }                                                         %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
+                                ^ \markup {                                                              %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                    \with-color                                                          %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                        #(x11-color 'blue)                                               %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                        [“I+II”]                                                         %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                    }                                                                    %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! ATTACH_COLOR_LITERAL_2:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND
+                                \set Staff.instrumentName =                                              %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \markup { I+II }                                                         %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \set Staff.shortInstrumentName =                                         %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \markup { I+II }                                                         %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -2868,24 +2868,24 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1] %! SM_4
+                            % [GlobalSkips measure 1] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11) %! IC:BREAK
-                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \time 3/8 %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue" %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2] %! SM_4
+                            % [GlobalSkips measure 2] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11) %! IC:BREAK
-                            \break %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \break %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible %! SM_5
-                            \bar "|"               %! SM_5
+                            \baca_bar_line_visible %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"               %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -2896,25 +2896,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1] %! SM_4
-                                \set Staff.instrumentName =      %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \markup { I+II }                 %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \set Staff.shortInstrumentName = %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \markup { I+II }                 %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! SM6:EXPLICIT_MARGIN_MARKUP_COLOR:IC
+                                % [MusicVoice measure 1] %! COMMENT_MEASURE_NUMBERS
+                                \set Staff.instrumentName =      %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \markup { I+II }                 %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \set Staff.shortInstrumentName = %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \markup { I+II }                 %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! ATTACH_COLOR_LITERAL_2:EXPLICIT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND
                                 c'4.
-                            %%% ^ \markup {                %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                            %%%     \with-color            %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                            %%%         #(x11-color 'blue) %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                            %%%         [“I+II”]           %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                            %%%     }                      %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! SM6:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:IC
-                                \set Staff.instrumentName =      %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
-                                \markup { I+II }                 %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
-                                \set Staff.shortInstrumentName = %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
-                                \markup { I+II }                 %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
+                            %%% ^ \markup {                %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                            %%%     \with-color            %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                            %%%         #(x11-color 'blue) %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                            %%%         [“I+II”]           %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                            %%%     }                      %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! ATTACH_COLOR_LITERAL_2:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND
+                                \set Staff.instrumentName =      %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \markup { I+II }                 %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \set Staff.shortInstrumentName = %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \markup { I+II }                 %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2] %! SM_4
+                                % [MusicVoice measure 2] %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -2939,24 +2939,24 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1] %! SM_4
+                            % [GlobalSkips measure 1] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11) %! IC:BREAK
-                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \time 3/8 %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue" %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2] %! SM_4
+                            % [GlobalSkips measure 2] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11) %! IC:BREAK
-                            \break %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \break %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible %! SM_5
-                            \bar "|"               %! SM_5
+                            \baca_bar_line_visible %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"               %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -2967,25 +2967,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1] %! SM_4
-                                \set Staff.instrumentName =      %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \markup { I+II }                 %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \set Staff.shortInstrumentName = %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \markup { I+II }                 %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! SM6:EXPLICIT_MARGIN_MARKUP_COLOR:IC
+                                % [MusicVoice measure 1] %! COMMENT_MEASURE_NUMBERS
+                                \set Staff.instrumentName =      %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \markup { I+II }                 %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \set Staff.shortInstrumentName = %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \markup { I+II }                 %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! ATTACH_COLOR_LITERAL_2:EXPLICIT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND
                                 c'4.
-                                ^ \markup {                %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                                    \with-color            %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                                        #(x11-color 'blue) %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                                        [“I+II”]           %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                                    }                      %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! SM6:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:IC
-                                \set Staff.instrumentName =      %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
-                                \markup { I+II }                 %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
-                                \set Staff.shortInstrumentName = %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
-                                \markup { I+II }                 %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
+                                ^ \markup {                %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                    \with-color            %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                        #(x11-color 'blue) %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                        [“I+II”]           %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                    }                      %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! ATTACH_COLOR_LITERAL_2:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND
+                                \set Staff.instrumentName =      %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \markup { I+II }                 %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \set Staff.shortInstrumentName = %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \markup { I+II }                 %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2] %! SM_4
+                                % [MusicVoice measure 2] %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -3038,25 +3038,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak                                                                   %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! INDICATOR_COMMAND:BREAK
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar ""                                                                      %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak                                                                   %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
-                            \break                                                                       %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! INDICATOR_COMMAND:BREAK
+                            \break                                                                       %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -3067,25 +3067,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
-                                \set Staff.instrumentName =                                              %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \markup { III+IV }                                                       %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \set Staff.shortInstrumentName =                                         %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \markup { III+IV }                                                       %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! SM6:EXPLICIT_MARGIN_MARKUP_COLOR:IC
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \set Staff.instrumentName =                                              %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \markup { III+IV }                                                       %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \set Staff.shortInstrumentName =                                         %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \markup { III+IV }                                                       %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! ATTACH_COLOR_LITERAL_2:EXPLICIT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND
                                 c'4.
-                                ^ \markup {                                                              %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                                    \with-color                                                          %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                                        #(x11-color 'blue)                                               %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                                        [“III+IV”]                                                       %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                                    }                                                                    %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! SM6:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:IC
-                                \set Staff.instrumentName =                                              %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
-                                \markup { III+IV }                                                       %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
-                                \set Staff.shortInstrumentName =                                         %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
-                                \markup { III+IV }                                                       %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
+                                ^ \markup {                                                              %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                    \with-color                                                          %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                        #(x11-color 'blue)                                               %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                        [“III+IV”]                                                       %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                    }                                                                    %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! ATTACH_COLOR_LITERAL_2:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND
+                                \set Staff.instrumentName =                                              %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \markup { III+IV }                                                       %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \set Staff.shortInstrumentName =                                         %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \markup { III+IV }                                                       %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -3113,25 +3113,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1] %! SM_4
+                            % [GlobalSkips measure 1] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11) %! IC:BREAK
-                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \time 3/8 %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar "" %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue" %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2] %! SM_4
+                            % [GlobalSkips measure 2] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11) %! IC:BREAK
-                            \break %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \break %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible %! SM_5
-                            \bar "|"               %! SM_5
+                            \baca_bar_line_visible %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"               %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -3142,25 +3142,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1] %! SM_4
-                                \set Staff.instrumentName =      %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \markup { III+IV }               %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \set Staff.shortInstrumentName = %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \markup { III+IV }               %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! SM6:EXPLICIT_MARGIN_MARKUP_COLOR:IC
+                                % [MusicVoice measure 1] %! COMMENT_MEASURE_NUMBERS
+                                \set Staff.instrumentName =      %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \markup { III+IV }               %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \set Staff.shortInstrumentName = %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \markup { III+IV }               %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! ATTACH_COLOR_LITERAL_2:EXPLICIT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND
                                 c'4.
-                            %%% ^ \markup {                %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                            %%%     \with-color            %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                            %%%         #(x11-color 'blue) %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                            %%%         [“III+IV”]         %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                            %%%     }                      %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! SM6:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:IC
-                                \set Staff.instrumentName =      %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
-                                \markup { III+IV }               %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
-                                \set Staff.shortInstrumentName = %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
-                                \markup { III+IV }               %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
+                            %%% ^ \markup {                %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                            %%%     \with-color            %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                            %%%         #(x11-color 'blue) %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                            %%%         [“III+IV”]         %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                            %%%     }                      %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! ATTACH_COLOR_LITERAL_2:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND
+                                \set Staff.instrumentName =      %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \markup { III+IV }               %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \set Staff.shortInstrumentName = %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \markup { III+IV }               %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2] %! SM_4
+                                % [MusicVoice measure 2] %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -3185,25 +3185,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1] %! SM_4
+                            % [GlobalSkips measure 1] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11) %! IC:BREAK
-                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \time 3/8 %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar "" %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue" %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2] %! SM_4
+                            % [GlobalSkips measure 2] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11) %! IC:BREAK
-                            \break %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \break %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible %! SM_5
-                            \bar "|"               %! SM_5
+                            \baca_bar_line_visible %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"               %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -3214,25 +3214,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1] %! SM_4
-                                \set Staff.instrumentName =      %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \markup { III+IV }               %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \set Staff.shortInstrumentName = %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \markup { III+IV }               %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! SM6:EXPLICIT_MARGIN_MARKUP_COLOR:IC
+                                % [MusicVoice measure 1] %! COMMENT_MEASURE_NUMBERS
+                                \set Staff.instrumentName =      %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \markup { III+IV }               %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \set Staff.shortInstrumentName = %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \markup { III+IV }               %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! ATTACH_COLOR_LITERAL_2:EXPLICIT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND
                                 c'4.
-                                ^ \markup {                %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                                    \with-color            %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                                        #(x11-color 'blue) %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                                        [“III+IV”]         %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                                    }                      %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! SM6:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:IC
-                                \set Staff.instrumentName =      %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
-                                \markup { III+IV }               %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
-                                \set Staff.shortInstrumentName = %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
-                                \markup { III+IV }               %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
+                                ^ \markup {                %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                    \with-color            %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                        #(x11-color 'blue) %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                        [“III+IV”]         %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                    }                      %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! ATTACH_COLOR_LITERAL_2:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND
+                                \set Staff.instrumentName =      %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \markup { III+IV }               %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \set Staff.shortInstrumentName = %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \markup { III+IV }               %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2] %! SM_4
+                                % [MusicVoice measure 2] %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -3286,25 +3286,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak                                                                   %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! INDICATOR_COMMAND:BREAK
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar ""                                                                      %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak                                                                   %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
-                            \break                                                                       %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! INDICATOR_COMMAND:BREAK
+                            \break                                                                       %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -3315,25 +3315,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
-                                \set Staff.instrumentName =                                              %! SM8:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
-                                \markup { I+II }                                                         %! SM8:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
-                                \set Staff.shortInstrumentName =                                         %! SM8:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
-                                \markup { I+II }                                                         %! SM8:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
-                                \once \override Staff.InstrumentName.color = #(x11-color 'green4)        %! SM6:REAPPLIED_MARGIN_MARKUP_COLOR:SM37:-PARTS
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \set Staff.instrumentName =                                              %! SET_STATUS_TAG:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
+                                \markup { I+II }                                                         %! SET_STATUS_TAG:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
+                                \set Staff.shortInstrumentName =                                         %! SET_STATUS_TAG:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
+                                \markup { I+II }                                                         %! SET_STATUS_TAG:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
+                                \once \override Staff.InstrumentName.color = #(x11-color 'green4)        %! ATTACH_COLOR_LITERAL_2:REAPPLIED_MARGIN_MARKUP_COLOR:SM37:-PARTS
                                 c'4.
                                 ^ \markup {                                                              %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37:-PARTS
                                     \with-color                                                          %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37:-PARTS
                                         #(x11-color 'green4)                                             %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37:-PARTS
                                         [“I+II”]                                                         %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37:-PARTS
                                     }                                                                    %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37:-PARTS
-                                \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)           %! SM6:REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:SM37:-PARTS
-                                \set Staff.instrumentName =                                              %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
-                                \markup { I+II }                                                         %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
-                                \set Staff.shortInstrumentName =                                         %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
-                                \markup { I+II }                                                         %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
+                                \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)           %! ATTACH_COLOR_LITERAL_2:REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:SM37:-PARTS
+                                \set Staff.instrumentName =                                              %! SET_STATUS_TAG:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
+                                \markup { I+II }                                                         %! SET_STATUS_TAG:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
+                                \set Staff.shortInstrumentName =                                         %! SET_STATUS_TAG:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
+                                \markup { I+II }                                                         %! SET_STATUS_TAG:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -3361,25 +3361,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1] %! SM_4
+                            % [GlobalSkips measure 1] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11) %! IC:BREAK
-                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \time 3/8 %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar "" %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue" %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2] %! SM_4
+                            % [GlobalSkips measure 2] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11) %! IC:BREAK
-                            \break %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \break %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible %! SM_5
-                            \bar "|"               %! SM_5
+                            \baca_bar_line_visible %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"               %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -3390,25 +3390,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1] %! SM_4
-                                \set Staff.instrumentName =      %! SM8:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
-                                \markup { I+II }                 %! SM8:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
-                                \set Staff.shortInstrumentName = %! SM8:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
-                                \markup { I+II }                 %! SM8:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
-                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'green4) %! SM6:REAPPLIED_MARGIN_MARKUP_COLOR:SM37:-PARTS
+                                % [MusicVoice measure 1] %! COMMENT_MEASURE_NUMBERS
+                                \set Staff.instrumentName =      %! SET_STATUS_TAG:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
+                                \markup { I+II }                 %! SET_STATUS_TAG:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
+                                \set Staff.shortInstrumentName = %! SET_STATUS_TAG:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
+                                \markup { I+II }                 %! SET_STATUS_TAG:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
+                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'green4) %! ATTACH_COLOR_LITERAL_2:REAPPLIED_MARGIN_MARKUP_COLOR:SM37:-PARTS
                                 c'4.
                             %%% ^ \markup {                  %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37:-PARTS
                             %%%     \with-color              %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37:-PARTS
                             %%%         #(x11-color 'green4) %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37:-PARTS
                             %%%         [“I+II”]             %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37:-PARTS
                             %%%     }                        %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37:-PARTS
-                            %%% \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %! SM6:REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:SM37:-PARTS
-                                \set Staff.instrumentName =      %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
-                                \markup { I+II }                 %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
-                                \set Staff.shortInstrumentName = %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
-                                \markup { I+II }                 %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
+                            %%% \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %! ATTACH_COLOR_LITERAL_2:REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:SM37:-PARTS
+                                \set Staff.instrumentName =      %! SET_STATUS_TAG:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
+                                \markup { I+II }                 %! SET_STATUS_TAG:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
+                                \set Staff.shortInstrumentName = %! SET_STATUS_TAG:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
+                                \markup { I+II }                 %! SET_STATUS_TAG:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
                 <BLANKLINE>
-                                % [MusicVoice measure 2] %! SM_4
+                                % [MusicVoice measure 2] %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -3433,25 +3433,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1] %! SM_4
+                            % [GlobalSkips measure 1] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11) %! IC:BREAK
-                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \time 3/8 %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar "" %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue" %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2] %! SM_4
+                            % [GlobalSkips measure 2] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11) %! IC:BREAK
-                            \break %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \break %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible %! SM_5
-                            \bar "|"               %! SM_5
+                            \baca_bar_line_visible %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"               %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -3462,25 +3462,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1] %! SM_4
-                                \set Staff.instrumentName =      %! SM8:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
-                                \markup { I+II }                 %! SM8:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
-                                \set Staff.shortInstrumentName = %! SM8:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
-                                \markup { I+II }                 %! SM8:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
-                                \once \override Staff.InstrumentName.color = #(x11-color 'green4) %! SM6:REAPPLIED_MARGIN_MARKUP_COLOR:SM37:-PARTS
+                                % [MusicVoice measure 1] %! COMMENT_MEASURE_NUMBERS
+                                \set Staff.instrumentName =      %! SET_STATUS_TAG:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
+                                \markup { I+II }                 %! SET_STATUS_TAG:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
+                                \set Staff.shortInstrumentName = %! SET_STATUS_TAG:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
+                                \markup { I+II }                 %! SET_STATUS_TAG:REAPPLIED_MARGIN_MARKUP:SM37:-PARTS
+                                \once \override Staff.InstrumentName.color = #(x11-color 'green4) %! ATTACH_COLOR_LITERAL_2:REAPPLIED_MARGIN_MARKUP_COLOR:SM37:-PARTS
                                 c'4.
                                 ^ \markup {                  %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37:-PARTS
                                     \with-color              %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37:-PARTS
                                         #(x11-color 'green4) %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37:-PARTS
                                         [“I+II”]             %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37:-PARTS
                                     }                        %! SM11:REAPPLIED_MARGIN_MARKUP_ALERT:SM37:-PARTS
-                                \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %! SM6:REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:SM37:-PARTS
-                                \set Staff.instrumentName =      %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
-                                \markup { I+II }                 %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
-                                \set Staff.shortInstrumentName = %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
-                                \markup { I+II }                 %! SM8:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
+                                \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %! ATTACH_COLOR_LITERAL_2:REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:SM37:-PARTS
+                                \set Staff.instrumentName =      %! SET_STATUS_TAG:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
+                                \markup { I+II }                 %! SET_STATUS_TAG:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
+                                \set Staff.shortInstrumentName = %! SET_STATUS_TAG:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
+                                \markup { I+II }                 %! SET_STATUS_TAG:REDRAWN_REAPPLIED_MARGIN_MARKUP:SM34:SM37:-PARTS
                 <BLANKLINE>
-                                % [MusicVoice measure 2] %! SM_4
+                                % [MusicVoice measure 2] %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -3532,29 +3532,29 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak                                                                   %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! INDICATOR_COMMAND:BREAK
+                            \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak                                                                   %! INDICATOR_COMMAND:BREAK
                             s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM_4
+                            % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
-                            \break                                                                       %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! INDICATOR_COMMAND:BREAK
+                            \break                                                                       %! INDICATOR_COMMAND:BREAK
                             s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -3565,43 +3565,43 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
-                                \set Staff.instrumentName =                                              %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \markup { I+II }                                                         %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \set Staff.shortInstrumentName =                                         %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \markup { I+II }                                                         %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! SM6:EXPLICIT_MARGIN_MARKUP_COLOR:IC
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \set Staff.instrumentName =                                              %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \markup { I+II }                                                         %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \set Staff.shortInstrumentName =                                         %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \markup { I+II }                                                         %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! ATTACH_COLOR_LITERAL_2:EXPLICIT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND
                                 c'2
-                                ^ \markup {                                                              %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                                    \with-color                                                          %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                                        #(x11-color 'blue)                                               %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                                        [“I+II”]                                                         %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                                    }                                                                    %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! SM6:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:IC
-                                \set Staff.instrumentName =                                              %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
-                                \markup { I+II }                                                         %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
-                                \set Staff.shortInstrumentName =                                         %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
-                                \markup { I+II }                                                         %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
+                                ^ \markup {                                                              %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                    \with-color                                                          %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                        #(x11-color 'blue)                                               %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                        [“I+II”]                                                         %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                    }                                                                    %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! ATTACH_COLOR_LITERAL_2:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND
+                                \set Staff.instrumentName =                                              %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \markup { I+II }                                                         %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \set Staff.shortInstrumentName =                                         %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \markup { I+II }                                                         %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
-                                \set Staff.instrumentName =                                              %! SM8:REDUNDANT_MARGIN_MARKUP:IC
-                                \markup { I+II }                                                         %! SM8:REDUNDANT_MARGIN_MARKUP:IC
-                                \set Staff.shortInstrumentName =                                         %! SM8:REDUNDANT_MARGIN_MARKUP:IC
-                                \markup { I+II }                                                         %! SM8:REDUNDANT_MARGIN_MARKUP:IC
-                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! SM6:REDUNDANT_MARGIN_MARKUP_COLOR:IC
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \set Staff.instrumentName =                                              %! SET_STATUS_TAG:REDUNDANT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \markup { I+II }                                                         %! SET_STATUS_TAG:REDUNDANT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \set Staff.shortInstrumentName =                                         %! SET_STATUS_TAG:REDUNDANT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \markup { I+II }                                                         %! SET_STATUS_TAG:REDUNDANT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! ATTACH_COLOR_LITERAL_2:REDUNDANT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND
                                 c'2
-                                ^ \markup {                                                              %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
-                                    \with-color                                                          %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
-                                        #(x11-color 'DeepPink1)                                          %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
-                                        [“I+II”]                                                         %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
-                                    }                                                                    %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! SM6:REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:IC
-                                \set Staff.instrumentName =                                              %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
-                                \markup { I+II }                                                         %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
-                                \set Staff.shortInstrumentName =                                         %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
-                                \markup { I+II }                                                         %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
+                                ^ \markup {                                                              %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                    \with-color                                                          %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                        #(x11-color 'DeepPink1)                                          %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                        [“I+II”]                                                         %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                    }                                                                    %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! ATTACH_COLOR_LITERAL_2:REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND
+                                \set Staff.instrumentName =                                              %! SET_STATUS_TAG:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \markup { I+II }                                                         %! SET_STATUS_TAG:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \set Staff.shortInstrumentName =                                         %! SET_STATUS_TAG:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \markup { I+II }                                                         %! SET_STATUS_TAG:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM_4
+                                % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'2
                 <BLANKLINE>
                             }
@@ -3629,29 +3629,29 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1] %! SM_4
+                            % [GlobalSkips measure 1] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11) %! IC:BREAK
-                            \time 4/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \time 4/8 %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue" %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak %! INDICATOR_COMMAND:BREAK
                             s1 * 1/2 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2] %! SM_4
+                            % [GlobalSkips measure 2] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             s1 * 1/2 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 3] %! SM_4
+                            % [GlobalSkips measure 3] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11) %! IC:BREAK
-                            \break %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \break %! INDICATOR_COMMAND:BREAK
                             s1 * 1/2 %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible %! SM_5
-                            \bar "|"               %! SM_5
+                            \baca_bar_line_visible %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"               %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -3662,43 +3662,43 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1] %! SM_4
-                                \set Staff.instrumentName =      %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \markup { I+II }                 %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \set Staff.shortInstrumentName = %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \markup { I+II }                 %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! SM6:EXPLICIT_MARGIN_MARKUP_COLOR:IC
+                                % [MusicVoice measure 1] %! COMMENT_MEASURE_NUMBERS
+                                \set Staff.instrumentName =      %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \markup { I+II }                 %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \set Staff.shortInstrumentName = %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \markup { I+II }                 %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! ATTACH_COLOR_LITERAL_2:EXPLICIT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND
                                 c'2
-                            %%% ^ \markup {                %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                            %%%     \with-color            %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                            %%%         #(x11-color 'blue) %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                            %%%         [“I+II”]           %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                            %%%     }                      %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! SM6:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:IC
-                                \set Staff.instrumentName =      %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
-                                \markup { I+II }                 %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
-                                \set Staff.shortInstrumentName = %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
-                                \markup { I+II }                 %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
+                            %%% ^ \markup {                %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                            %%%     \with-color            %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                            %%%         #(x11-color 'blue) %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                            %%%         [“I+II”]           %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                            %%%     }                      %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! ATTACH_COLOR_LITERAL_2:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND
+                                \set Staff.instrumentName =      %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \markup { I+II }                 %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \set Staff.shortInstrumentName = %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \markup { I+II }                 %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2] %! SM_4
-                                \set Staff.instrumentName =      %! SM8:REDUNDANT_MARGIN_MARKUP:IC
-                                \markup { I+II }                 %! SM8:REDUNDANT_MARGIN_MARKUP:IC
-                                \set Staff.shortInstrumentName = %! SM8:REDUNDANT_MARGIN_MARKUP:IC
-                                \markup { I+II }                 %! SM8:REDUNDANT_MARGIN_MARKUP:IC
-                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_MARGIN_MARKUP_COLOR:IC
+                                % [MusicVoice measure 2] %! COMMENT_MEASURE_NUMBERS
+                                \set Staff.instrumentName =      %! SET_STATUS_TAG:REDUNDANT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \markup { I+II }                 %! SET_STATUS_TAG:REDUNDANT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \set Staff.shortInstrumentName = %! SET_STATUS_TAG:REDUNDANT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \markup { I+II }                 %! SET_STATUS_TAG:REDUNDANT_MARGIN_MARKUP:INDICATOR_COMMAND
+                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! ATTACH_COLOR_LITERAL_2:REDUNDANT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND
                                 c'2
-                            %%% ^ \markup {                     %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
-                            %%%     \with-color                 %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
-                            %%%         #(x11-color 'DeepPink1) %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
-                            %%%         [“I+II”]                %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
-                            %%%     }                           %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
-                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! SM6:REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:IC
-                                \set Staff.instrumentName =      %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
-                                \markup { I+II }                 %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
-                                \set Staff.shortInstrumentName = %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
-                                \markup { I+II }                 %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
+                            %%% ^ \markup {                     %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                            %%%     \with-color                 %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                            %%%         #(x11-color 'DeepPink1) %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                            %%%         [“I+II”]                %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                            %%%     }                           %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! ATTACH_COLOR_LITERAL_2:REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND
+                                \set Staff.instrumentName =      %! SET_STATUS_TAG:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \markup { I+II }                 %! SET_STATUS_TAG:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \set Staff.shortInstrumentName = %! SET_STATUS_TAG:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \markup { I+II }                 %! SET_STATUS_TAG:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 3] %! SM_4
+                                % [MusicVoice measure 3] %! COMMENT_MEASURE_NUMBERS
                                 c'2
                 <BLANKLINE>
                             }
@@ -3723,29 +3723,29 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1] %! SM_4
+                            % [GlobalSkips measure 1] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11) %! IC:BREAK
-                            \time 4/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \time 4/8 %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue" %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak %! INDICATOR_COMMAND:BREAK
                             s1 * 1/2 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2] %! SM_4
+                            % [GlobalSkips measure 2] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             s1 * 1/2 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 3] %! SM_4
+                            % [GlobalSkips measure 3] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11) %! IC:BREAK
-                            \break %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \break %! INDICATOR_COMMAND:BREAK
                             s1 * 1/2 %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible %! SM_5
-                            \bar "|"               %! SM_5
+                            \baca_bar_line_visible %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"               %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -3756,43 +3756,43 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1] %! SM_4
-                                \set Staff.instrumentName =      %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \markup { I+II }                 %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \set Staff.shortInstrumentName = %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \markup { I+II }                 %! SM8:EXPLICIT_MARGIN_MARKUP:IC
-                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! SM6:EXPLICIT_MARGIN_MARKUP_COLOR:IC
+                                % [MusicVoice measure 1] %! COMMENT_MEASURE_NUMBERS
+                                \set Staff.instrumentName =      %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \markup { I+II }                 %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \set Staff.shortInstrumentName = %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \markup { I+II }                 %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! ATTACH_COLOR_LITERAL_2:EXPLICIT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND
                                 c'2
-                                ^ \markup {                %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                                    \with-color            %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                                        #(x11-color 'blue) %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                                        [“I+II”]           %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                                    }                      %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! SM6:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:IC
-                                \set Staff.instrumentName =      %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
-                                \markup { I+II }                 %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
-                                \set Staff.shortInstrumentName = %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
-                                \markup { I+II }                 %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC
+                                ^ \markup {                %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                    \with-color            %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                        #(x11-color 'blue) %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                        [“I+II”]           %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                    }                      %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! ATTACH_COLOR_LITERAL_2:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND
+                                \set Staff.instrumentName =      %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \markup { I+II }                 %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \set Staff.shortInstrumentName = %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \markup { I+II }                 %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2] %! SM_4
-                                \set Staff.instrumentName =      %! SM8:REDUNDANT_MARGIN_MARKUP:IC
-                                \markup { I+II }                 %! SM8:REDUNDANT_MARGIN_MARKUP:IC
-                                \set Staff.shortInstrumentName = %! SM8:REDUNDANT_MARGIN_MARKUP:IC
-                                \markup { I+II }                 %! SM8:REDUNDANT_MARGIN_MARKUP:IC
-                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_MARGIN_MARKUP_COLOR:IC
+                                % [MusicVoice measure 2] %! COMMENT_MEASURE_NUMBERS
+                                \set Staff.instrumentName =      %! SET_STATUS_TAG:REDUNDANT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \markup { I+II }                 %! SET_STATUS_TAG:REDUNDANT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \set Staff.shortInstrumentName = %! SET_STATUS_TAG:REDUNDANT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \markup { I+II }                 %! SET_STATUS_TAG:REDUNDANT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! ATTACH_COLOR_LITERAL_2:REDUNDANT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND
                                 c'2
-                                ^ \markup {                     %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
-                                    \with-color                 %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
-                                        #(x11-color 'DeepPink1) %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
-                                        [“I+II”]                %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
-                                    }                           %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! SM6:REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:IC
-                                \set Staff.instrumentName =      %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
-                                \markup { I+II }                 %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
-                                \set Staff.shortInstrumentName = %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
-                                \markup { I+II }                 %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
+                                ^ \markup {                     %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                    \with-color                 %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                        #(x11-color 'DeepPink1) %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                        [“I+II”]                %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                    }                           %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! ATTACH_COLOR_LITERAL_2:REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND
+                                \set Staff.instrumentName =      %! SET_STATUS_TAG:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \markup { I+II }                 %! SET_STATUS_TAG:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \set Staff.shortInstrumentName = %! SET_STATUS_TAG:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \markup { I+II }                 %! SET_STATUS_TAG:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 3] %! SM_4
+                                % [MusicVoice measure 3] %! COMMENT_MEASURE_NUMBERS
                                 c'2
                 <BLANKLINE>
                             }
@@ -3851,25 +3851,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak                                                                   %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! INDICATOR_COMMAND:BREAK
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar ""                                                                      %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak                                                                   %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
-                            \break                                                                       %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! INDICATOR_COMMAND:BREAK
+                            \break                                                                       %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -3880,25 +3880,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
-                                \set Staff.instrumentName =                                              %! SM8:REDUNDANT_MARGIN_MARKUP:IC
-                                \markup { I+II }                                                         %! SM8:REDUNDANT_MARGIN_MARKUP:IC
-                                \set Staff.shortInstrumentName =                                         %! SM8:REDUNDANT_MARGIN_MARKUP:IC
-                                \markup { I+II }                                                         %! SM8:REDUNDANT_MARGIN_MARKUP:IC
-                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! SM6:REDUNDANT_MARGIN_MARKUP_COLOR:IC
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \set Staff.instrumentName =                                              %! SET_STATUS_TAG:REDUNDANT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \markup { I+II }                                                         %! SET_STATUS_TAG:REDUNDANT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \set Staff.shortInstrumentName =                                         %! SET_STATUS_TAG:REDUNDANT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \markup { I+II }                                                         %! SET_STATUS_TAG:REDUNDANT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! ATTACH_COLOR_LITERAL_2:REDUNDANT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND
                                 c'4.
-                                ^ \markup {                                                              %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
-                                    \with-color                                                          %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
-                                        #(x11-color 'DeepPink1)                                          %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
-                                        [“I+II”]                                                         %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
-                                    }                                                                    %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! SM6:REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:IC
-                                \set Staff.instrumentName =                                              %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
-                                \markup { I+II }                                                         %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
-                                \set Staff.shortInstrumentName =                                         %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
-                                \markup { I+II }                                                         %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
+                                ^ \markup {                                                              %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                    \with-color                                                          %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                        #(x11-color 'DeepPink1)                                          %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                        [“I+II”]                                                         %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                    }                                                                    %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! ATTACH_COLOR_LITERAL_2:REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND
+                                \set Staff.instrumentName =                                              %! SET_STATUS_TAG:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \markup { I+II }                                                         %! SET_STATUS_TAG:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \set Staff.shortInstrumentName =                                         %! SET_STATUS_TAG:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \markup { I+II }                                                         %! SET_STATUS_TAG:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -3926,25 +3926,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1] %! SM_4
+                            % [GlobalSkips measure 1] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11) %! IC:BREAK
-                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \time 3/8 %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar "" %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue" %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2] %! SM_4
+                            % [GlobalSkips measure 2] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11) %! IC:BREAK
-                            \break %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \break %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible %! SM_5
-                            \bar "|"               %! SM_5
+                            \baca_bar_line_visible %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"               %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -3955,25 +3955,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1] %! SM_4
-                                \set Staff.instrumentName =      %! SM8:REDUNDANT_MARGIN_MARKUP:IC
-                                \markup { I+II }                 %! SM8:REDUNDANT_MARGIN_MARKUP:IC
-                                \set Staff.shortInstrumentName = %! SM8:REDUNDANT_MARGIN_MARKUP:IC
-                                \markup { I+II }                 %! SM8:REDUNDANT_MARGIN_MARKUP:IC
-                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_MARGIN_MARKUP_COLOR:IC
+                                % [MusicVoice measure 1] %! COMMENT_MEASURE_NUMBERS
+                                \set Staff.instrumentName =      %! SET_STATUS_TAG:REDUNDANT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \markup { I+II }                 %! SET_STATUS_TAG:REDUNDANT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \set Staff.shortInstrumentName = %! SET_STATUS_TAG:REDUNDANT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \markup { I+II }                 %! SET_STATUS_TAG:REDUNDANT_MARGIN_MARKUP:INDICATOR_COMMAND
+                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! ATTACH_COLOR_LITERAL_2:REDUNDANT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND
                                 c'4.
-                            %%% ^ \markup {                     %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
-                            %%%     \with-color                 %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
-                            %%%         #(x11-color 'DeepPink1) %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
-                            %%%         [“I+II”]                %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
-                            %%%     }                           %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
-                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! SM6:REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:IC
-                                \set Staff.instrumentName =      %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
-                                \markup { I+II }                 %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
-                                \set Staff.shortInstrumentName = %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
-                                \markup { I+II }                 %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
+                            %%% ^ \markup {                     %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                            %%%     \with-color                 %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                            %%%         #(x11-color 'DeepPink1) %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                            %%%         [“I+II”]                %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                            %%%     }                           %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! ATTACH_COLOR_LITERAL_2:REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND
+                                \set Staff.instrumentName =      %! SET_STATUS_TAG:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \markup { I+II }                 %! SET_STATUS_TAG:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \set Staff.shortInstrumentName = %! SET_STATUS_TAG:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \markup { I+II }                 %! SET_STATUS_TAG:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2] %! SM_4
+                                % [MusicVoice measure 2] %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -3998,25 +3998,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1] %! SM_4
+                            % [GlobalSkips measure 1] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \autoPageBreaksOff %! BMM1:BREAK
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11) %! IC:BREAK
-                            \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak %! IC:BREAK
+                            \baca_lbsd #0 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \time 3/8 %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar "" %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue" %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2] %! SM_4
+                            % [GlobalSkips measure 2] %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11) %! IC:BREAK
-                            \break %! IC:BREAK
+                            \baca_lbsd #15 #'(11) %! INDICATOR_COMMAND:BREAK
+                            \break %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible %! SM_5
-                            \bar "|"               %! SM_5
+                            \baca_bar_line_visible %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"               %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -4027,25 +4027,25 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1] %! SM_4
-                                \set Staff.instrumentName =      %! SM8:REDUNDANT_MARGIN_MARKUP:IC
-                                \markup { I+II }                 %! SM8:REDUNDANT_MARGIN_MARKUP:IC
-                                \set Staff.shortInstrumentName = %! SM8:REDUNDANT_MARGIN_MARKUP:IC
-                                \markup { I+II }                 %! SM8:REDUNDANT_MARGIN_MARKUP:IC
-                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! SM6:REDUNDANT_MARGIN_MARKUP_COLOR:IC
+                                % [MusicVoice measure 1] %! COMMENT_MEASURE_NUMBERS
+                                \set Staff.instrumentName =      %! SET_STATUS_TAG:REDUNDANT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \markup { I+II }                 %! SET_STATUS_TAG:REDUNDANT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \set Staff.shortInstrumentName = %! SET_STATUS_TAG:REDUNDANT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \markup { I+II }                 %! SET_STATUS_TAG:REDUNDANT_MARGIN_MARKUP:INDICATOR_COMMAND
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! ATTACH_COLOR_LITERAL_2:REDUNDANT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND
                                 c'4.
-                                ^ \markup {                     %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
-                                    \with-color                 %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
-                                        #(x11-color 'DeepPink1) %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
-                                        [“I+II”]                %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
-                                    }                           %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:IC
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! SM6:REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:IC
-                                \set Staff.instrumentName =      %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
-                                \markup { I+II }                 %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
-                                \set Staff.shortInstrumentName = %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
-                                \markup { I+II }                 %! SM8:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:IC
+                                ^ \markup {                     %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                    \with-color                 %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                        #(x11-color 'DeepPink1) %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                        [“I+II”]                %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                    }                           %! SM11:REDUNDANT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! ATTACH_COLOR_LITERAL_2:REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND
+                                \set Staff.instrumentName =      %! SET_STATUS_TAG:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \markup { I+II }                 %! SET_STATUS_TAG:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \set Staff.shortInstrumentName = %! SET_STATUS_TAG:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
+                                \markup { I+II }                 %! SET_STATUS_TAG:REDRAWN_REDUNDANT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND
                 <BLANKLINE>
-                                % [MusicVoice measure 2] %! SM_4
+                                % [MusicVoice measure 2] %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -4106,29 +4106,29 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #0 #'(11)                                                         %! IC:BREAK
-                            \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak                                                                   %! IC:BREAK
+                            \baca_lbsd #0 #'(11)                                                         %! INDICATOR_COMMAND:BREAK
+                            \time 4/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak                                                                   %! INDICATOR_COMMAND:BREAK
                             s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
-                            \break                                                                       %! IC:BREAK
+                            \baca_lbsd #15 #'(11)                                                        %! INDICATOR_COMMAND:BREAK
+                            \break                                                                       %! INDICATOR_COMMAND:BREAK
                             s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM_4
+                            % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -4139,43 +4139,43 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
-                                \set Staff.instrumentName =                                              %! SM8:EXPLICIT_MARGIN_MARKUP:IC:-PARTS
-                                \markup { I+II }                                                         %! SM8:EXPLICIT_MARGIN_MARKUP:IC:-PARTS
-                                \set Staff.shortInstrumentName =                                         %! SM8:EXPLICIT_MARGIN_MARKUP:IC:-PARTS
-                                \markup { I+II }                                                         %! SM8:EXPLICIT_MARGIN_MARKUP:IC:-PARTS
-                            %@% \set Staff.instrumentName =                                              %! SM8:EXPLICIT_MARGIN_MARKUP:IC:-PARTS
-                            %@% \markup { III+IV }                                                       %! SM8:EXPLICIT_MARGIN_MARKUP:IC:-PARTS
-                            %@% \set Staff.shortInstrumentName =                                         %! SM8:EXPLICIT_MARGIN_MARKUP:IC:-PARTS
-                            %@% \markup { III+IV }                                                       %! SM8:EXPLICIT_MARGIN_MARKUP:IC:-PARTS
-                                \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! SM6:EXPLICIT_MARGIN_MARKUP_COLOR:IC:-PARTS
-                            %@% \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! SM6:EXPLICIT_MARGIN_MARKUP_COLOR:IC:-PARTS
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \set Staff.instrumentName =                                              %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND:-PARTS
+                                \markup { I+II }                                                         %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND:-PARTS
+                                \set Staff.shortInstrumentName =                                         %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND:-PARTS
+                                \markup { I+II }                                                         %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND:-PARTS
+                            %@% \set Staff.instrumentName =                                              %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND:-PARTS
+                            %@% \markup { III+IV }                                                       %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND:-PARTS
+                            %@% \set Staff.shortInstrumentName =                                         %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND:-PARTS
+                            %@% \markup { III+IV }                                                       %! SET_STATUS_TAG:EXPLICIT_MARGIN_MARKUP:INDICATOR_COMMAND:-PARTS
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! ATTACH_COLOR_LITERAL_2:EXPLICIT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND:-PARTS
+                            %@% \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! ATTACH_COLOR_LITERAL_2:EXPLICIT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND:-PARTS
                                 c'2
-                                ^ \markup {                                                              %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
-                                    \with-color                                                          %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
-                                        #(x11-color 'blue)                                               %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
-                                        [“I+II”]                                                         %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
-                                    }                                                                    %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
-                            %@% ^ \markup {                                                              %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
-                            %@%     \with-color                                                          %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
-                            %@%         #(x11-color 'blue)                                               %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
-                            %@%         [“III+IV”]                                                       %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
-                            %@%     }                                                                    %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:IC:-PARTS
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! SM6:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:IC:-PARTS
-                                \set Staff.instrumentName =                                              %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC:-PARTS
-                                \markup { I+II }                                                         %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC:-PARTS
-                                \set Staff.shortInstrumentName =                                         %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC:-PARTS
-                                \markup { I+II }                                                         %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC:-PARTS
-                            %@% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! SM6:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:IC:-PARTS
-                                \set Staff.instrumentName =                                              %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC:-PARTS
-                                \markup { III+IV }                                                       %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC:-PARTS
-                                \set Staff.shortInstrumentName =                                         %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC:-PARTS
-                                \markup { III+IV }                                                       %! SM8:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:IC:-PARTS
+                                ^ \markup {                                                              %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND:-PARTS
+                                    \with-color                                                          %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND:-PARTS
+                                        #(x11-color 'blue)                                               %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND:-PARTS
+                                        [“I+II”]                                                         %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND:-PARTS
+                                    }                                                                    %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND:-PARTS
+                            %@% ^ \markup {                                                              %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND:-PARTS
+                            %@%     \with-color                                                          %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND:-PARTS
+                            %@%         #(x11-color 'blue)                                               %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND:-PARTS
+                            %@%         [“III+IV”]                                                       %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND:-PARTS
+                            %@%     }                                                                    %! SM11:EXPLICIT_MARGIN_MARKUP_ALERT:INDICATOR_COMMAND:-PARTS
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! ATTACH_COLOR_LITERAL_2:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND:-PARTS
+                                \set Staff.instrumentName =                                              %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND:-PARTS
+                                \markup { I+II }                                                         %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND:-PARTS
+                                \set Staff.shortInstrumentName =                                         %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND:-PARTS
+                                \markup { I+II }                                                         %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND:-PARTS
+                            %@% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! ATTACH_COLOR_LITERAL_2:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:INDICATOR_COMMAND:-PARTS
+                                \set Staff.instrumentName =                                              %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND:-PARTS
+                                \markup { III+IV }                                                       %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND:-PARTS
+                                \set Staff.shortInstrumentName =                                         %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND:-PARTS
+                                \markup { III+IV }                                                       %! SET_STATUS_TAG:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM34:INDICATOR_COMMAND:-PARTS
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'2
                 <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM_4
+                                % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'2
                 <BLANKLINE>
                             }
@@ -4235,45 +4235,45 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #25                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #4 #'(8)                                                          %! IC:BREAK
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak                                                                   %! IC:BREAK
+                            \baca_lbsd #4 #'(8)                                                          %! INDICATOR_COMMAND:BREAK
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak                                                                   %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        %@% - \abjad_invisible_line                                                      %! MMI_2
-                        %@% - \tweak bound-details.left.text \markup {                                   %! MMI_2
-                        %@%     \concat                                                                  %! MMI_2
-                        %@%         {                                                                    %! MMI_2
-                        %@%             \abjad-metronome-mark-markup #2 #0 #1 #"112"                     %! MMI_2
-                        %@%             \hspace                                                          %! MMI_2
-                        %@%                 #0.5                                                         %! MMI_2
-                        %@%         }                                                                    %! MMI_2
-                        %@%     }                                                                        %! MMI_2
-                        %@% \startTextSpan                                                               %! MMI_2
-                            - \abjad_invisible_line                                                      %! MMI_3
-                            - \tweak bound-details.left.text \markup {                                   %! MMI_3
-                                \concat                                                                  %! MMI_3
-                                    {                                                                    %! MMI_3
-                                        \with-color                                                      %! MMI_3
-                                            #(x11-color 'blue)                                           %! MMI_3
-                                            \abjad-metronome-mark-markup #2 #0 #1 #"112"                 %! MMI_3
-                                        \hspace                                                          %! MMI_3
-                                            #0.5                                                         %! MMI_3
-                                    }                                                                    %! MMI_3
-                                }                                                                        %! MMI_3
-                            \startTextSpan                                                               %! MMI_3
+                        %@% - \abjad_invisible_line                                                      %! ATTACH_METRONOME_MARKS_2
+                        %@% - \tweak bound-details.left.text \markup {                                   %! ATTACH_METRONOME_MARKS_2
+                        %@%     \concat                                                                  %! ATTACH_METRONOME_MARKS_2
+                        %@%         {                                                                    %! ATTACH_METRONOME_MARKS_2
+                        %@%             \abjad-metronome-mark-markup #2 #0 #1 #"112"                     %! ATTACH_METRONOME_MARKS_2
+                        %@%             \hspace                                                          %! ATTACH_METRONOME_MARKS_2
+                        %@%                 #0.5                                                         %! ATTACH_METRONOME_MARKS_2
+                        %@%         }                                                                    %! ATTACH_METRONOME_MARKS_2
+                        %@%     }                                                                        %! ATTACH_METRONOME_MARKS_2
+                        %@% \startTextSpan                                                               %! ATTACH_METRONOME_MARKS_2
+                            - \abjad_invisible_line                                                      %! ATTACH_METRONOME_MARKS_3
+                            - \tweak bound-details.left.text \markup {                                   %! ATTACH_METRONOME_MARKS_3
+                                \concat                                                                  %! ATTACH_METRONOME_MARKS_3
+                                    {                                                                    %! ATTACH_METRONOME_MARKS_3
+                                        \with-color                                                      %! ATTACH_METRONOME_MARKS_3
+                                            #(x11-color 'blue)                                           %! ATTACH_METRONOME_MARKS_3
+                                            \abjad-metronome-mark-markup #2 #0 #1 #"112"                 %! ATTACH_METRONOME_MARKS_3
+                                        \hspace                                                          %! ATTACH_METRONOME_MARKS_3
+                                            #0.5                                                         %! ATTACH_METRONOME_MARKS_3
+                                    }                                                                    %! ATTACH_METRONOME_MARKS_3
+                                }                                                                        %! ATTACH_METRONOME_MARKS_3
+                            \startTextSpan                                                               %! ATTACH_METRONOME_MARKS_3
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #25                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \stopTextSpan                                                                %! MMI_4
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \stopTextSpan                                                                %! ATTACH_METRONOME_MARKS_4
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -4284,10 +4284,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -4344,48 +4344,48 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \override TextSpanner.staff-padding = #4                                     %! OC1
+                            \override TextSpanner.staff-padding = #4                                     %! OVERRIDE_COMMAND_1
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #4 #'(8)                                                          %! IC:BREAK
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak                                                                   %! IC:BREAK
+                            \baca_lbsd #4 #'(8)                                                          %! INDICATOR_COMMAND:BREAK
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar ""                                                                      %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak                                                                   %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        %@% - \abjad_invisible_line                                                      %! MMI_2
-                        %@% - \tweak bound-details.left.text \markup {                                   %! MMI_2
-                        %@%     \concat                                                                  %! MMI_2
-                        %@%         {                                                                    %! MMI_2
-                        %@%             \abjad-metronome-mark-markup #2 #0 #1 #"112"                     %! MMI_2
-                        %@%             \hspace                                                          %! MMI_2
-                        %@%                 #0.5                                                         %! MMI_2
-                        %@%         }                                                                    %! MMI_2
-                        %@%     }                                                                        %! MMI_2
-                        %@% \startTextSpan                                                               %! MMI_2
-                            - \abjad_invisible_line                                                      %! MMI_3
-                            - \tweak bound-details.left.text \markup {                                   %! MMI_3
-                                \concat                                                                  %! MMI_3
-                                    {                                                                    %! MMI_3
-                                        \with-color                                                      %! MMI_3
-                                            #(x11-color 'blue)                                           %! MMI_3
-                                            \abjad-metronome-mark-markup #2 #0 #1 #"112"                 %! MMI_3
-                                        \hspace                                                          %! MMI_3
-                                            #0.5                                                         %! MMI_3
-                                    }                                                                    %! MMI_3
-                                }                                                                        %! MMI_3
-                            \startTextSpan                                                               %! MMI_3
+                        %@% - \abjad_invisible_line                                                      %! ATTACH_METRONOME_MARKS_2
+                        %@% - \tweak bound-details.left.text \markup {                                   %! ATTACH_METRONOME_MARKS_2
+                        %@%     \concat                                                                  %! ATTACH_METRONOME_MARKS_2
+                        %@%         {                                                                    %! ATTACH_METRONOME_MARKS_2
+                        %@%             \abjad-metronome-mark-markup #2 #0 #1 #"112"                     %! ATTACH_METRONOME_MARKS_2
+                        %@%             \hspace                                                          %! ATTACH_METRONOME_MARKS_2
+                        %@%                 #0.5                                                         %! ATTACH_METRONOME_MARKS_2
+                        %@%         }                                                                    %! ATTACH_METRONOME_MARKS_2
+                        %@%     }                                                                        %! ATTACH_METRONOME_MARKS_2
+                        %@% \startTextSpan                                                               %! ATTACH_METRONOME_MARKS_2
+                            - \abjad_invisible_line                                                      %! ATTACH_METRONOME_MARKS_3
+                            - \tweak bound-details.left.text \markup {                                   %! ATTACH_METRONOME_MARKS_3
+                                \concat                                                                  %! ATTACH_METRONOME_MARKS_3
+                                    {                                                                    %! ATTACH_METRONOME_MARKS_3
+                                        \with-color                                                      %! ATTACH_METRONOME_MARKS_3
+                                            #(x11-color 'blue)                                           %! ATTACH_METRONOME_MARKS_3
+                                            \abjad-metronome-mark-markup #2 #0 #1 #"112"                 %! ATTACH_METRONOME_MARKS_3
+                                        \hspace                                                          %! ATTACH_METRONOME_MARKS_3
+                                            #0.5                                                         %! ATTACH_METRONOME_MARKS_3
+                                    }                                                                    %! ATTACH_METRONOME_MARKS_3
+                                }                                                                        %! ATTACH_METRONOME_MARKS_3
+                            \startTextSpan                                                               %! ATTACH_METRONOME_MARKS_3
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \stopTextSpan                                                                %! MMI_4
-                            \revert TextSpanner.staff-padding                                            %! OC2
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \stopTextSpan                                                                %! ATTACH_METRONOME_MARKS_4
+                            \revert TextSpanner.staff-padding                                            %! OVERRIDE_COMMAND_2
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -4396,10 +4396,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -4457,48 +4457,48 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \override TextSpanner.staff-padding = #4                                     %! OC1
+                            \override TextSpanner.staff-padding = #4                                     %! OVERRIDE_COMMAND_1
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #4 #'(8)                                                          %! IC:BREAK
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak                                                                   %! IC:BREAK
+                            \baca_lbsd #4 #'(8)                                                          %! INDICATOR_COMMAND:BREAK
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar ""                                                                      %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak                                                                   %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        %@% - \abjad_invisible_line                                                      %! MMI_2
-                        %@% - \tweak bound-details.left.text \markup {                                   %! MMI_2
-                        %@%     \concat                                                                  %! MMI_2
-                        %@%         {                                                                    %! MMI_2
-                        %@%             \abjad-metronome-mark-markup #2 #0 #1 #"90"                      %! MMI_2
-                        %@%             \hspace                                                          %! MMI_2
-                        %@%                 #0.5                                                         %! MMI_2
-                        %@%         }                                                                    %! MMI_2
-                        %@%     }                                                                        %! MMI_2
-                        %@% \startTextSpan                                                               %! MMI_2
-                            - \abjad_invisible_line                                                      %! MMI_3
-                            - \tweak bound-details.left.text \markup {                                   %! MMI_3
-                                \concat                                                                  %! MMI_3
-                                    {                                                                    %! MMI_3
-                                        \with-color                                                      %! MMI_3
-                                            #(x11-color 'green4)                                         %! MMI_3
-                                            \abjad-metronome-mark-markup #2 #0 #1 #"90"                  %! MMI_3
-                                        \hspace                                                          %! MMI_3
-                                            #0.5                                                         %! MMI_3
-                                    }                                                                    %! MMI_3
-                                }                                                                        %! MMI_3
-                            \startTextSpan                                                               %! MMI_3
+                        %@% - \abjad_invisible_line                                                      %! ATTACH_METRONOME_MARKS_2
+                        %@% - \tweak bound-details.left.text \markup {                                   %! ATTACH_METRONOME_MARKS_2
+                        %@%     \concat                                                                  %! ATTACH_METRONOME_MARKS_2
+                        %@%         {                                                                    %! ATTACH_METRONOME_MARKS_2
+                        %@%             \abjad-metronome-mark-markup #2 #0 #1 #"90"                      %! ATTACH_METRONOME_MARKS_2
+                        %@%             \hspace                                                          %! ATTACH_METRONOME_MARKS_2
+                        %@%                 #0.5                                                         %! ATTACH_METRONOME_MARKS_2
+                        %@%         }                                                                    %! ATTACH_METRONOME_MARKS_2
+                        %@%     }                                                                        %! ATTACH_METRONOME_MARKS_2
+                        %@% \startTextSpan                                                               %! ATTACH_METRONOME_MARKS_2
+                            - \abjad_invisible_line                                                      %! ATTACH_METRONOME_MARKS_3
+                            - \tweak bound-details.left.text \markup {                                   %! ATTACH_METRONOME_MARKS_3
+                                \concat                                                                  %! ATTACH_METRONOME_MARKS_3
+                                    {                                                                    %! ATTACH_METRONOME_MARKS_3
+                                        \with-color                                                      %! ATTACH_METRONOME_MARKS_3
+                                            #(x11-color 'green4)                                         %! ATTACH_METRONOME_MARKS_3
+                                            \abjad-metronome-mark-markup #2 #0 #1 #"90"                  %! ATTACH_METRONOME_MARKS_3
+                                        \hspace                                                          %! ATTACH_METRONOME_MARKS_3
+                                            #0.5                                                         %! ATTACH_METRONOME_MARKS_3
+                                    }                                                                    %! ATTACH_METRONOME_MARKS_3
+                                }                                                                        %! ATTACH_METRONOME_MARKS_3
+                            \startTextSpan                                                               %! ATTACH_METRONOME_MARKS_3
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \stopTextSpan                                                                %! MMI_4
-                            \revert TextSpanner.staff-padding                                            %! OC2
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \stopTextSpan                                                                %! ATTACH_METRONOME_MARKS_4
+                            \revert TextSpanner.staff-padding                                            %! OVERRIDE_COMMAND_2
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -4509,10 +4509,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -4558,53 +4558,53 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #4 #'(8)                                                          %! IC:BREAK
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak                                                                   %! IC:BREAK
+                            \baca_lbsd #4 #'(8)                                                          %! INDICATOR_COMMAND:BREAK
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak                                                                   %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        %@% - \abjad_invisible_line                                                      %! MMI_2
-                        %@% - \tweak bound-details.left.text \markup {                                   %! MMI_2
-                        %@%     \concat                                                                  %! MMI_2
-                        %@%         {                                                                    %! MMI_2
-                        %@%             \abjad-metronome-mark-markup #2 #0 #1 #"112"                     %! MMI_2
-                        %@%             \hspace                                                          %! MMI_2
-                        %@%                 #0.5                                                         %! MMI_2
-                        %@%         }                                                                    %! MMI_2
-                        %@%     }                                                                        %! MMI_2
-                        %@% - \tweak bound-details.right.text \markup {                                  %! MMI_2
-                        %@%     \abjad-metronome-mark-markup #2 #0 #1 #"112"                             %! MMI_2
-                        %@%     }                                                                        %! MMI_2
-                        %@% \startTextSpan                                                               %! MMI_2
-                            - \abjad_invisible_line                                                      %! MMI_3
-                            - \tweak bound-details.left.text \markup {                                   %! MMI_3
-                                \concat                                                                  %! MMI_3
-                                    {                                                                    %! MMI_3
-                                        \with-color                                                      %! MMI_3
-                                            #(x11-color 'blue)                                           %! MMI_3
-                                            \abjad-metronome-mark-markup #2 #0 #1 #"112"                 %! MMI_3
-                                        \hspace                                                          %! MMI_3
-                                            #0.5                                                         %! MMI_3
-                                    }                                                                    %! MMI_3
-                                }                                                                        %! MMI_3
-                            - \tweak bound-details.right.text \markup {                                  %! MMI_3
-                                \with-color                                                              %! MMI_3
-                                    #(x11-color 'DeepPink1)                                              %! MMI_3
-                                    \abjad-metronome-mark-markup #2 #0 #1 #"112"                         %! MMI_3
-                                }                                                                        %! MMI_3
-                            \startTextSpan                                                               %! MMI_3
+                        %@% - \abjad_invisible_line                                                      %! ATTACH_METRONOME_MARKS_2
+                        %@% - \tweak bound-details.left.text \markup {                                   %! ATTACH_METRONOME_MARKS_2
+                        %@%     \concat                                                                  %! ATTACH_METRONOME_MARKS_2
+                        %@%         {                                                                    %! ATTACH_METRONOME_MARKS_2
+                        %@%             \abjad-metronome-mark-markup #2 #0 #1 #"112"                     %! ATTACH_METRONOME_MARKS_2
+                        %@%             \hspace                                                          %! ATTACH_METRONOME_MARKS_2
+                        %@%                 #0.5                                                         %! ATTACH_METRONOME_MARKS_2
+                        %@%         }                                                                    %! ATTACH_METRONOME_MARKS_2
+                        %@%     }                                                                        %! ATTACH_METRONOME_MARKS_2
+                        %@% - \tweak bound-details.right.text \markup {                                  %! ATTACH_METRONOME_MARKS_2
+                        %@%     \abjad-metronome-mark-markup #2 #0 #1 #"112"                             %! ATTACH_METRONOME_MARKS_2
+                        %@%     }                                                                        %! ATTACH_METRONOME_MARKS_2
+                        %@% \startTextSpan                                                               %! ATTACH_METRONOME_MARKS_2
+                            - \abjad_invisible_line                                                      %! ATTACH_METRONOME_MARKS_3
+                            - \tweak bound-details.left.text \markup {                                   %! ATTACH_METRONOME_MARKS_3
+                                \concat                                                                  %! ATTACH_METRONOME_MARKS_3
+                                    {                                                                    %! ATTACH_METRONOME_MARKS_3
+                                        \with-color                                                      %! ATTACH_METRONOME_MARKS_3
+                                            #(x11-color 'blue)                                           %! ATTACH_METRONOME_MARKS_3
+                                            \abjad-metronome-mark-markup #2 #0 #1 #"112"                 %! ATTACH_METRONOME_MARKS_3
+                                        \hspace                                                          %! ATTACH_METRONOME_MARKS_3
+                                            #0.5                                                         %! ATTACH_METRONOME_MARKS_3
+                                    }                                                                    %! ATTACH_METRONOME_MARKS_3
+                                }                                                                        %! ATTACH_METRONOME_MARKS_3
+                            - \tweak bound-details.right.text \markup {                                  %! ATTACH_METRONOME_MARKS_3
+                                \with-color                                                              %! ATTACH_METRONOME_MARKS_3
+                                    #(x11-color 'DeepPink1)                                              %! ATTACH_METRONOME_MARKS_3
+                                    \abjad-metronome-mark-markup #2 #0 #1 #"112"                         %! ATTACH_METRONOME_MARKS_3
+                                }                                                                        %! ATTACH_METRONOME_MARKS_3
+                            \startTextSpan                                                               %! ATTACH_METRONOME_MARKS_3
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \stopTextSpan                                                                %! MMI_4
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \stopTextSpan                                                                %! ATTACH_METRONOME_MARKS_4
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -4615,10 +4615,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -4675,48 +4675,48 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \override TextSpanner.staff-padding = #4                                     %! OC1
+                            \override TextSpanner.staff-padding = #4                                     %! OVERRIDE_COMMAND_1
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #4 #'(8)                                                          %! IC:BREAK
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak                                                                   %! IC:BREAK
+                            \baca_lbsd #4 #'(8)                                                          %! INDICATOR_COMMAND:BREAK
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar ""                                                                      %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak                                                                   %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        %@% - \abjad_invisible_line                                                      %! MMI_2
-                        %@% - \tweak bound-details.left.text \markup {                                   %! MMI_2
-                        %@%     \concat                                                                  %! MMI_2
-                        %@%         {                                                                    %! MMI_2
-                        %@%             \abjad-metronome-mark-markup #2 #0 #1 #"112"                     %! MMI_2
-                        %@%             \hspace                                                          %! MMI_2
-                        %@%                 #0.5                                                         %! MMI_2
-                        %@%         }                                                                    %! MMI_2
-                        %@%     }                                                                        %! MMI_2
-                        %@% \startTextSpan                                                               %! MMI_2
-                            - \abjad_invisible_line                                                      %! MMI_3
-                            - \tweak bound-details.left.text \markup {                                   %! MMI_3
-                                \concat                                                                  %! MMI_3
-                                    {                                                                    %! MMI_3
-                                        \with-color                                                      %! MMI_3
-                                            #(x11-color 'DeepPink1)                                      %! MMI_3
-                                            \abjad-metronome-mark-markup #2 #0 #1 #"112"                 %! MMI_3
-                                        \hspace                                                          %! MMI_3
-                                            #0.5                                                         %! MMI_3
-                                    }                                                                    %! MMI_3
-                                }                                                                        %! MMI_3
-                            \startTextSpan                                                               %! MMI_3
+                        %@% - \abjad_invisible_line                                                      %! ATTACH_METRONOME_MARKS_2
+                        %@% - \tweak bound-details.left.text \markup {                                   %! ATTACH_METRONOME_MARKS_2
+                        %@%     \concat                                                                  %! ATTACH_METRONOME_MARKS_2
+                        %@%         {                                                                    %! ATTACH_METRONOME_MARKS_2
+                        %@%             \abjad-metronome-mark-markup #2 #0 #1 #"112"                     %! ATTACH_METRONOME_MARKS_2
+                        %@%             \hspace                                                          %! ATTACH_METRONOME_MARKS_2
+                        %@%                 #0.5                                                         %! ATTACH_METRONOME_MARKS_2
+                        %@%         }                                                                    %! ATTACH_METRONOME_MARKS_2
+                        %@%     }                                                                        %! ATTACH_METRONOME_MARKS_2
+                        %@% \startTextSpan                                                               %! ATTACH_METRONOME_MARKS_2
+                            - \abjad_invisible_line                                                      %! ATTACH_METRONOME_MARKS_3
+                            - \tweak bound-details.left.text \markup {                                   %! ATTACH_METRONOME_MARKS_3
+                                \concat                                                                  %! ATTACH_METRONOME_MARKS_3
+                                    {                                                                    %! ATTACH_METRONOME_MARKS_3
+                                        \with-color                                                      %! ATTACH_METRONOME_MARKS_3
+                                            #(x11-color 'DeepPink1)                                      %! ATTACH_METRONOME_MARKS_3
+                                            \abjad-metronome-mark-markup #2 #0 #1 #"112"                 %! ATTACH_METRONOME_MARKS_3
+                                        \hspace                                                          %! ATTACH_METRONOME_MARKS_3
+                                            #0.5                                                         %! ATTACH_METRONOME_MARKS_3
+                                    }                                                                    %! ATTACH_METRONOME_MARKS_3
+                                }                                                                        %! ATTACH_METRONOME_MARKS_3
+                            \startTextSpan                                                               %! ATTACH_METRONOME_MARKS_3
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \stopTextSpan                                                                %! MMI_4
-                            \revert TextSpanner.staff-padding                                            %! OC2
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \stopTextSpan                                                                %! ATTACH_METRONOME_MARKS_4
+                            \revert TextSpanner.staff-padding                                            %! OVERRIDE_COMMAND_2
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -4727,10 +4727,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -4779,17 +4779,17 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -4800,15 +4800,15 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
-                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! SM8:EXPLICIT_PERSISTENT_OVERRIDE:IC
-                                \stopStaff                                                               %! SM8:EXPLICIT_STAFF_LINES:IC
-                                \once \override Staff.StaffSymbol.line-count = 1                         %! SM8:EXPLICIT_STAFF_LINES:IC
-                                \startStaff                                                              %! SM8:EXPLICIT_STAFF_LINES:IC
-                                \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! SM6:EXPLICIT_STAFF_LINES_COLOR:IC
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! SET_STATUS_TAG:EXPLICIT_PERSISTENT_OVERRIDE:INDICATOR_COMMAND
+                                \stopStaff                                                               %! SET_STATUS_TAG:EXPLICIT_STAFF_LINES:INDICATOR_COMMAND
+                                \once \override Staff.StaffSymbol.line-count = 1                         %! SET_STATUS_TAG:EXPLICIT_STAFF_LINES:INDICATOR_COMMAND
+                                \startStaff                                                              %! SET_STATUS_TAG:EXPLICIT_STAFF_LINES:INDICATOR_COMMAND
+                                \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_STAFF_LINES_COLOR:INDICATOR_COMMAND
                                 b'4.
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 b'4.
                 <BLANKLINE>
                             }
@@ -4905,18 +4905,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar ""                                                                      %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -4927,12 +4927,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
-                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! SM8:REAPPLIED_PERSISTENT_OVERRIDE:SM37
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! SET_STATUS_TAG:REAPPLIED_PERSISTENT_OVERRIDE:SM37
                                 \baca_unpitched_music_warning                                            %! SM_24
                                 c'4.
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 \baca_unpitched_music_warning                                            %! SM_24
                                 c'4.
                 <BLANKLINE>
@@ -4977,17 +4977,17 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -4998,16 +4998,16 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
-                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! SM8:EXPLICIT_PERSISTENT_OVERRIDE:IC
-                                \stopStaff                                                               %! SM8:EXPLICIT_STAFF_LINES:IC
-                                \once \override Staff.StaffSymbol.line-count = 1                         %! SM8:EXPLICIT_STAFF_LINES:IC
-                                \startStaff                                                              %! SM8:EXPLICIT_STAFF_LINES:IC
-                                \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! SM6:EXPLICIT_STAFF_LINES_COLOR:IC
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! SET_STATUS_TAG:EXPLICIT_PERSISTENT_OVERRIDE:INDICATOR_COMMAND
+                                \stopStaff                                                               %! SET_STATUS_TAG:EXPLICIT_STAFF_LINES:INDICATOR_COMMAND
+                                \once \override Staff.StaffSymbol.line-count = 1                         %! SET_STATUS_TAG:EXPLICIT_STAFF_LINES:INDICATOR_COMMAND
+                                \startStaff                                                              %! SET_STATUS_TAG:EXPLICIT_STAFF_LINES:INDICATOR_COMMAND
+                                \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_STAFF_LINES_COLOR:INDICATOR_COMMAND
                                 b'4.
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
-                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! SM8:REDUNDANT_PERSISTENT_OVERRIDE:IC
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! SET_STATUS_TAG:REDUNDANT_PERSISTENT_OVERRIDE:INDICATOR_COMMAND
                                 b'4.
                 <BLANKLINE>
                             }
@@ -5063,18 +5063,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar ""                                                                      %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -5085,12 +5085,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
-                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! SM8:REDUNDANT_PERSISTENT_OVERRIDE:IC
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! SET_STATUS_TAG:REDUNDANT_PERSISTENT_OVERRIDE:INDICATOR_COMMAND
                                 \baca_unpitched_music_warning                                            %! SM_24
                                 c'4.
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 \baca_unpitched_music_warning                                            %! SM_24
                                 c'4.
                 <BLANKLINE>
@@ -5139,17 +5139,17 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -5160,14 +5160,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
-                                \stopStaff                                                               %! SM8:EXPLICIT_STAFF_LINES:IC
-                                \once \override Staff.StaffSymbol.line-count = 5                         %! SM8:EXPLICIT_STAFF_LINES:IC
-                                \startStaff                                                              %! SM8:EXPLICIT_STAFF_LINES:IC
-                                \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! SM6:EXPLICIT_STAFF_LINES_COLOR:IC
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \stopStaff                                                               %! SET_STATUS_TAG:EXPLICIT_STAFF_LINES:INDICATOR_COMMAND
+                                \once \override Staff.StaffSymbol.line-count = 5                         %! SET_STATUS_TAG:EXPLICIT_STAFF_LINES:INDICATOR_COMMAND
+                                \startStaff                                                              %! SET_STATUS_TAG:EXPLICIT_STAFF_LINES:INDICATOR_COMMAND
+                                \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_STAFF_LINES_COLOR:INDICATOR_COMMAND
                                 c'4.
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -5218,18 +5218,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar ""                                                                      %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -5240,14 +5240,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
-                                \stopStaff                                                               %! SM8:EXPLICIT_STAFF_LINES:IC
-                                \once \override Staff.StaffSymbol.line-count = 1                         %! SM8:EXPLICIT_STAFF_LINES:IC
-                                \startStaff                                                              %! SM8:EXPLICIT_STAFF_LINES:IC
-                                \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! SM6:EXPLICIT_STAFF_LINES_COLOR:IC
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \stopStaff                                                               %! SET_STATUS_TAG:EXPLICIT_STAFF_LINES:INDICATOR_COMMAND
+                                \once \override Staff.StaffSymbol.line-count = 1                         %! SET_STATUS_TAG:EXPLICIT_STAFF_LINES:INDICATOR_COMMAND
+                                \startStaff                                                              %! SET_STATUS_TAG:EXPLICIT_STAFF_LINES:INDICATOR_COMMAND
+                                \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_STAFF_LINES_COLOR:INDICATOR_COMMAND
                                 c'4.
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -5299,18 +5299,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar ""                                                                      %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -5321,14 +5321,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
-                                \stopStaff                                                               %! SM8:REAPPLIED_STAFF_LINES:SM37
-                                \once \override Staff.StaffSymbol.line-count = 5                         %! SM8:REAPPLIED_STAFF_LINES:SM37
-                                \startStaff                                                              %! SM8:REAPPLIED_STAFF_LINES:SM37
-                                \once \override Staff.StaffSymbol.color = #(x11-color 'green4)           %! SM6:REAPPLIED_STAFF_LINES_COLOR:SM37
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \stopStaff                                                               %! SET_STATUS_TAG:REAPPLIED_STAFF_LINES:SM37
+                                \once \override Staff.StaffSymbol.line-count = 5                         %! SET_STATUS_TAG:REAPPLIED_STAFF_LINES:SM37
+                                \startStaff                                                              %! SET_STATUS_TAG:REAPPLIED_STAFF_LINES:SM37
+                                \once \override Staff.StaffSymbol.color = #(x11-color 'green4)           %! ATTACH_COLOR_LITERAL_2:REAPPLIED_STAFF_LINES_COLOR:SM37
                                 c'4.
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -5369,17 +5369,17 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -5390,18 +5390,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
-                                \stopStaff                                                               %! SM8:EXPLICIT_STAFF_LINES:IC
-                                \once \override Staff.StaffSymbol.line-count = 5                         %! SM8:EXPLICIT_STAFF_LINES:IC
-                                \startStaff                                                              %! SM8:EXPLICIT_STAFF_LINES:IC
-                                \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! SM6:EXPLICIT_STAFF_LINES_COLOR:IC
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \stopStaff                                                               %! SET_STATUS_TAG:EXPLICIT_STAFF_LINES:INDICATOR_COMMAND
+                                \once \override Staff.StaffSymbol.line-count = 5                         %! SET_STATUS_TAG:EXPLICIT_STAFF_LINES:INDICATOR_COMMAND
+                                \startStaff                                                              %! SET_STATUS_TAG:EXPLICIT_STAFF_LINES:INDICATOR_COMMAND
+                                \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! ATTACH_COLOR_LITERAL_2:EXPLICIT_STAFF_LINES_COLOR:INDICATOR_COMMAND
                                 c'4.
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
-                                \stopStaff                                                               %! SM8:REDUNDANT_STAFF_LINES:IC
-                                \once \override Staff.StaffSymbol.line-count = 5                         %! SM8:REDUNDANT_STAFF_LINES:IC
-                                \startStaff                                                              %! SM8:REDUNDANT_STAFF_LINES:IC
-                                \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)        %! SM6:REDUNDANT_STAFF_LINES_COLOR:IC
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \stopStaff                                                               %! SET_STATUS_TAG:REDUNDANT_STAFF_LINES:INDICATOR_COMMAND
+                                \once \override Staff.StaffSymbol.line-count = 5                         %! SET_STATUS_TAG:REDUNDANT_STAFF_LINES:INDICATOR_COMMAND
+                                \startStaff                                                              %! SET_STATUS_TAG:REDUNDANT_STAFF_LINES:INDICATOR_COMMAND
+                                \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)        %! ATTACH_COLOR_LITERAL_2:REDUNDANT_STAFF_LINES_COLOR:INDICATOR_COMMAND
                                 c'4.
                 <BLANKLINE>
                             }
@@ -5452,18 +5452,18 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar ""                                                                      %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -5474,14 +5474,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
-                                \stopStaff                                                               %! SM8:REDUNDANT_STAFF_LINES:IC
-                                \once \override Staff.StaffSymbol.line-count = 5                         %! SM8:REDUNDANT_STAFF_LINES:IC
-                                \startStaff                                                              %! SM8:REDUNDANT_STAFF_LINES:IC
-                                \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)        %! SM6:REDUNDANT_STAFF_LINES_COLOR:IC
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
+                                \stopStaff                                                               %! SET_STATUS_TAG:REDUNDANT_STAFF_LINES:INDICATOR_COMMAND
+                                \once \override Staff.StaffSymbol.line-count = 5                         %! SET_STATUS_TAG:REDUNDANT_STAFF_LINES:INDICATOR_COMMAND
+                                \startStaff                                                              %! SET_STATUS_TAG:REDUNDANT_STAFF_LINES:INDICATOR_COMMAND
+                                \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)        %! ATTACH_COLOR_LITERAL_2:REDUNDANT_STAFF_LINES_COLOR:INDICATOR_COMMAND
                                 c'4.
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -5541,49 +5541,49 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #25                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #4 #'(8)                                                          %! IC:BREAK
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak                                                                   %! IC:BREAK
+                            \baca_lbsd #4 #'(8)                                                          %! INDICATOR_COMMAND:BREAK
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak                                                                   %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        %@% - \abjad_dashed_line_with_arrow                                              %! MMI_2
-                        %@% - \tweak bound-details.left.text \markup {                                   %! MMI_2
-                        %@%     \concat                                                                  %! MMI_2
-                        %@%         {                                                                    %! MMI_2
-                        %@%             \large                                                           %! MMI_2
-                        %@%                 \upright                                                     %! MMI_2
-                        %@%                     accel.                                                   %! MMI_2
-                        %@%             \hspace                                                          %! MMI_2
-                        %@%                 #0.5                                                         %! MMI_2
-                        %@%         }                                                                    %! MMI_2
-                        %@%     }                                                                        %! MMI_2
-                        %@% \startTextSpan                                                               %! MMI_2
-                            - \abjad_dashed_line_with_arrow                                              %! MMI_3
-                            - \tweak bound-details.left.text \markup {                                   %! MMI_3
-                                \concat                                                                  %! MMI_3
-                                    {                                                                    %! MMI_3
-                                        \with-color                                                      %! MMI_3
-                                            #(x11-color 'blue)                                           %! MMI_3
-                                            \large                                                       %! MMI_3
-                                                \upright                                                 %! MMI_3
-                                                    accel.                                               %! MMI_3
-                                        \hspace                                                          %! MMI_3
-                                            #0.5                                                         %! MMI_3
-                                    }                                                                    %! MMI_3
-                                }                                                                        %! MMI_3
-                            \startTextSpan                                                               %! MMI_3
+                        %@% - \abjad_dashed_line_with_arrow                                              %! ATTACH_METRONOME_MARKS_2
+                        %@% - \tweak bound-details.left.text \markup {                                   %! ATTACH_METRONOME_MARKS_2
+                        %@%     \concat                                                                  %! ATTACH_METRONOME_MARKS_2
+                        %@%         {                                                                    %! ATTACH_METRONOME_MARKS_2
+                        %@%             \large                                                           %! ATTACH_METRONOME_MARKS_2
+                        %@%                 \upright                                                     %! ATTACH_METRONOME_MARKS_2
+                        %@%                     accel.                                                   %! ATTACH_METRONOME_MARKS_2
+                        %@%             \hspace                                                          %! ATTACH_METRONOME_MARKS_2
+                        %@%                 #0.5                                                         %! ATTACH_METRONOME_MARKS_2
+                        %@%         }                                                                    %! ATTACH_METRONOME_MARKS_2
+                        %@%     }                                                                        %! ATTACH_METRONOME_MARKS_2
+                        %@% \startTextSpan                                                               %! ATTACH_METRONOME_MARKS_2
+                            - \abjad_dashed_line_with_arrow                                              %! ATTACH_METRONOME_MARKS_3
+                            - \tweak bound-details.left.text \markup {                                   %! ATTACH_METRONOME_MARKS_3
+                                \concat                                                                  %! ATTACH_METRONOME_MARKS_3
+                                    {                                                                    %! ATTACH_METRONOME_MARKS_3
+                                        \with-color                                                      %! ATTACH_METRONOME_MARKS_3
+                                            #(x11-color 'blue)                                           %! ATTACH_METRONOME_MARKS_3
+                                            \large                                                       %! ATTACH_METRONOME_MARKS_3
+                                                \upright                                                 %! ATTACH_METRONOME_MARKS_3
+                                                    accel.                                               %! ATTACH_METRONOME_MARKS_3
+                                        \hspace                                                          %! ATTACH_METRONOME_MARKS_3
+                                            #0.5                                                         %! ATTACH_METRONOME_MARKS_3
+                                    }                                                                    %! ATTACH_METRONOME_MARKS_3
+                                }                                                                        %! ATTACH_METRONOME_MARKS_3
+                            \startTextSpan                                                               %! ATTACH_METRONOME_MARKS_3
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #25                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \stopTextSpan                                                                %! MMI_4
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \stopTextSpan                                                                %! ATTACH_METRONOME_MARKS_4
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -5594,10 +5594,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -5653,52 +5653,52 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \override TextSpanner.staff-padding = #4                                     %! OC1
+                            \override TextSpanner.staff-padding = #4                                     %! OVERRIDE_COMMAND_1
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #4 #'(8)                                                          %! IC:BREAK
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak                                                                   %! IC:BREAK
+                            \baca_lbsd #4 #'(8)                                                          %! INDICATOR_COMMAND:BREAK
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar ""                                                                      %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak                                                                   %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        %@% - \abjad_dashed_line_with_arrow                                              %! MMI_2
-                        %@% - \tweak bound-details.left.text \markup {                                   %! MMI_2
-                        %@%     \concat                                                                  %! MMI_2
-                        %@%         {                                                                    %! MMI_2
-                        %@%             \large                                                           %! MMI_2
-                        %@%                 \upright                                                     %! MMI_2
-                        %@%                     accel.                                                   %! MMI_2
-                        %@%             \hspace                                                          %! MMI_2
-                        %@%                 #0.5                                                         %! MMI_2
-                        %@%         }                                                                    %! MMI_2
-                        %@%     }                                                                        %! MMI_2
-                        %@% \startTextSpan                                                               %! MMI_2
-                            - \abjad_dashed_line_with_arrow                                              %! MMI_3
-                            - \tweak bound-details.left.text \markup {                                   %! MMI_3
-                                \concat                                                                  %! MMI_3
-                                    {                                                                    %! MMI_3
-                                        \with-color                                                      %! MMI_3
-                                            #(x11-color 'blue)                                           %! MMI_3
-                                            \large                                                       %! MMI_3
-                                                \upright                                                 %! MMI_3
-                                                    accel.                                               %! MMI_3
-                                        \hspace                                                          %! MMI_3
-                                            #0.5                                                         %! MMI_3
-                                    }                                                                    %! MMI_3
-                                }                                                                        %! MMI_3
-                            \startTextSpan                                                               %! MMI_3
+                        %@% - \abjad_dashed_line_with_arrow                                              %! ATTACH_METRONOME_MARKS_2
+                        %@% - \tweak bound-details.left.text \markup {                                   %! ATTACH_METRONOME_MARKS_2
+                        %@%     \concat                                                                  %! ATTACH_METRONOME_MARKS_2
+                        %@%         {                                                                    %! ATTACH_METRONOME_MARKS_2
+                        %@%             \large                                                           %! ATTACH_METRONOME_MARKS_2
+                        %@%                 \upright                                                     %! ATTACH_METRONOME_MARKS_2
+                        %@%                     accel.                                                   %! ATTACH_METRONOME_MARKS_2
+                        %@%             \hspace                                                          %! ATTACH_METRONOME_MARKS_2
+                        %@%                 #0.5                                                         %! ATTACH_METRONOME_MARKS_2
+                        %@%         }                                                                    %! ATTACH_METRONOME_MARKS_2
+                        %@%     }                                                                        %! ATTACH_METRONOME_MARKS_2
+                        %@% \startTextSpan                                                               %! ATTACH_METRONOME_MARKS_2
+                            - \abjad_dashed_line_with_arrow                                              %! ATTACH_METRONOME_MARKS_3
+                            - \tweak bound-details.left.text \markup {                                   %! ATTACH_METRONOME_MARKS_3
+                                \concat                                                                  %! ATTACH_METRONOME_MARKS_3
+                                    {                                                                    %! ATTACH_METRONOME_MARKS_3
+                                        \with-color                                                      %! ATTACH_METRONOME_MARKS_3
+                                            #(x11-color 'blue)                                           %! ATTACH_METRONOME_MARKS_3
+                                            \large                                                       %! ATTACH_METRONOME_MARKS_3
+                                                \upright                                                 %! ATTACH_METRONOME_MARKS_3
+                                                    accel.                                               %! ATTACH_METRONOME_MARKS_3
+                                        \hspace                                                          %! ATTACH_METRONOME_MARKS_3
+                                            #0.5                                                         %! ATTACH_METRONOME_MARKS_3
+                                    }                                                                    %! ATTACH_METRONOME_MARKS_3
+                                }                                                                        %! ATTACH_METRONOME_MARKS_3
+                            \startTextSpan                                                               %! ATTACH_METRONOME_MARKS_3
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \stopTextSpan                                                                %! MMI_4
-                            \revert TextSpanner.staff-padding                                            %! OC2
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \stopTextSpan                                                                %! ATTACH_METRONOME_MARKS_4
+                            \revert TextSpanner.staff-padding                                            %! OVERRIDE_COMMAND_2
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -5709,10 +5709,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -5769,52 +5769,52 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \override TextSpanner.staff-padding = #4                                     %! OC1
+                            \override TextSpanner.staff-padding = #4                                     %! OVERRIDE_COMMAND_1
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #4 #'(8)                                                          %! IC:BREAK
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak                                                                   %! IC:BREAK
+                            \baca_lbsd #4 #'(8)                                                          %! INDICATOR_COMMAND:BREAK
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar ""                                                                      %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak                                                                   %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        %@% - \abjad_dashed_line_with_arrow                                              %! MMI_2
-                        %@% - \tweak bound-details.left.text \markup {                                   %! MMI_2
-                        %@%     \concat                                                                  %! MMI_2
-                        %@%         {                                                                    %! MMI_2
-                        %@%             \large                                                           %! MMI_2
-                        %@%                 \upright                                                     %! MMI_2
-                        %@%                     accel.                                                   %! MMI_2
-                        %@%             \hspace                                                          %! MMI_2
-                        %@%                 #0.5                                                         %! MMI_2
-                        %@%         }                                                                    %! MMI_2
-                        %@%     }                                                                        %! MMI_2
-                        %@% \startTextSpan                                                               %! MMI_2
-                            - \abjad_dashed_line_with_arrow                                              %! MMI_3
-                            - \tweak bound-details.left.text \markup {                                   %! MMI_3
-                                \concat                                                                  %! MMI_3
-                                    {                                                                    %! MMI_3
-                                        \with-color                                                      %! MMI_3
-                                            #(x11-color 'green4)                                         %! MMI_3
-                                            \large                                                       %! MMI_3
-                                                \upright                                                 %! MMI_3
-                                                    accel.                                               %! MMI_3
-                                        \hspace                                                          %! MMI_3
-                                            #0.5                                                         %! MMI_3
-                                    }                                                                    %! MMI_3
-                                }                                                                        %! MMI_3
-                            \startTextSpan                                                               %! MMI_3
+                        %@% - \abjad_dashed_line_with_arrow                                              %! ATTACH_METRONOME_MARKS_2
+                        %@% - \tweak bound-details.left.text \markup {                                   %! ATTACH_METRONOME_MARKS_2
+                        %@%     \concat                                                                  %! ATTACH_METRONOME_MARKS_2
+                        %@%         {                                                                    %! ATTACH_METRONOME_MARKS_2
+                        %@%             \large                                                           %! ATTACH_METRONOME_MARKS_2
+                        %@%                 \upright                                                     %! ATTACH_METRONOME_MARKS_2
+                        %@%                     accel.                                                   %! ATTACH_METRONOME_MARKS_2
+                        %@%             \hspace                                                          %! ATTACH_METRONOME_MARKS_2
+                        %@%                 #0.5                                                         %! ATTACH_METRONOME_MARKS_2
+                        %@%         }                                                                    %! ATTACH_METRONOME_MARKS_2
+                        %@%     }                                                                        %! ATTACH_METRONOME_MARKS_2
+                        %@% \startTextSpan                                                               %! ATTACH_METRONOME_MARKS_2
+                            - \abjad_dashed_line_with_arrow                                              %! ATTACH_METRONOME_MARKS_3
+                            - \tweak bound-details.left.text \markup {                                   %! ATTACH_METRONOME_MARKS_3
+                                \concat                                                                  %! ATTACH_METRONOME_MARKS_3
+                                    {                                                                    %! ATTACH_METRONOME_MARKS_3
+                                        \with-color                                                      %! ATTACH_METRONOME_MARKS_3
+                                            #(x11-color 'green4)                                         %! ATTACH_METRONOME_MARKS_3
+                                            \large                                                       %! ATTACH_METRONOME_MARKS_3
+                                                \upright                                                 %! ATTACH_METRONOME_MARKS_3
+                                                    accel.                                               %! ATTACH_METRONOME_MARKS_3
+                                        \hspace                                                          %! ATTACH_METRONOME_MARKS_3
+                                            #0.5                                                         %! ATTACH_METRONOME_MARKS_3
+                                    }                                                                    %! ATTACH_METRONOME_MARKS_3
+                                }                                                                        %! ATTACH_METRONOME_MARKS_3
+                            \startTextSpan                                                               %! ATTACH_METRONOME_MARKS_3
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \stopTextSpan                                                                %! MMI_4
-                            \revert TextSpanner.staff-padding                                            %! OC2
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \stopTextSpan                                                                %! ATTACH_METRONOME_MARKS_4
+                            \revert TextSpanner.staff-padding                                            %! OVERRIDE_COMMAND_2
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -5825,10 +5825,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -5877,81 +5877,81 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #4 #'(8)                                                          %! IC:BREAK
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak                                                                   %! IC:BREAK
+                            \baca_lbsd #4 #'(8)                                                          %! INDICATOR_COMMAND:BREAK
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak                                                                   %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        %@% - \abjad_dashed_line_with_arrow                                              %! MMI_2
-                        %@% - \tweak bound-details.left.text \markup {                                   %! MMI_2
-                        %@%     \concat                                                                  %! MMI_2
-                        %@%         {                                                                    %! MMI_2
-                        %@%             \large                                                           %! MMI_2
-                        %@%                 \upright                                                     %! MMI_2
-                        %@%                     accel.                                                   %! MMI_2
-                        %@%             \hspace                                                          %! MMI_2
-                        %@%                 #0.5                                                         %! MMI_2
-                        %@%         }                                                                    %! MMI_2
-                        %@%     }                                                                        %! MMI_2
-                        %@% \startTextSpan                                                               %! MMI_2
-                            - \abjad_dashed_line_with_arrow                                              %! MMI_3
-                            - \tweak bound-details.left.text \markup {                                   %! MMI_3
-                                \concat                                                                  %! MMI_3
-                                    {                                                                    %! MMI_3
-                                        \with-color                                                      %! MMI_3
-                                            #(x11-color 'blue)                                           %! MMI_3
-                                            \large                                                       %! MMI_3
-                                                \upright                                                 %! MMI_3
-                                                    accel.                                               %! MMI_3
-                                        \hspace                                                          %! MMI_3
-                                            #0.5                                                         %! MMI_3
-                                    }                                                                    %! MMI_3
-                                }                                                                        %! MMI_3
-                            \startTextSpan                                                               %! MMI_3
+                        %@% - \abjad_dashed_line_with_arrow                                              %! ATTACH_METRONOME_MARKS_2
+                        %@% - \tweak bound-details.left.text \markup {                                   %! ATTACH_METRONOME_MARKS_2
+                        %@%     \concat                                                                  %! ATTACH_METRONOME_MARKS_2
+                        %@%         {                                                                    %! ATTACH_METRONOME_MARKS_2
+                        %@%             \large                                                           %! ATTACH_METRONOME_MARKS_2
+                        %@%                 \upright                                                     %! ATTACH_METRONOME_MARKS_2
+                        %@%                     accel.                                                   %! ATTACH_METRONOME_MARKS_2
+                        %@%             \hspace                                                          %! ATTACH_METRONOME_MARKS_2
+                        %@%                 #0.5                                                         %! ATTACH_METRONOME_MARKS_2
+                        %@%         }                                                                    %! ATTACH_METRONOME_MARKS_2
+                        %@%     }                                                                        %! ATTACH_METRONOME_MARKS_2
+                        %@% \startTextSpan                                                               %! ATTACH_METRONOME_MARKS_2
+                            - \abjad_dashed_line_with_arrow                                              %! ATTACH_METRONOME_MARKS_3
+                            - \tweak bound-details.left.text \markup {                                   %! ATTACH_METRONOME_MARKS_3
+                                \concat                                                                  %! ATTACH_METRONOME_MARKS_3
+                                    {                                                                    %! ATTACH_METRONOME_MARKS_3
+                                        \with-color                                                      %! ATTACH_METRONOME_MARKS_3
+                                            #(x11-color 'blue)                                           %! ATTACH_METRONOME_MARKS_3
+                                            \large                                                       %! ATTACH_METRONOME_MARKS_3
+                                                \upright                                                 %! ATTACH_METRONOME_MARKS_3
+                                                    accel.                                               %! ATTACH_METRONOME_MARKS_3
+                                        \hspace                                                          %! ATTACH_METRONOME_MARKS_3
+                                            #0.5                                                         %! ATTACH_METRONOME_MARKS_3
+                                    }                                                                    %! ATTACH_METRONOME_MARKS_3
+                                }                                                                        %! ATTACH_METRONOME_MARKS_3
+                            \startTextSpan                                                               %! ATTACH_METRONOME_MARKS_3
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \stopTextSpan                                                                %! MMI_1
-                        %@% - \abjad_dashed_line_with_arrow                                              %! MMI_2
-                        %@% - \tweak bound-details.left.text \markup {                                   %! MMI_2
-                        %@%     \concat                                                                  %! MMI_2
-                        %@%         {                                                                    %! MMI_2
-                        %@%             \large                                                           %! MMI_2
-                        %@%                 \upright                                                     %! MMI_2
-                        %@%                     accel.                                                   %! MMI_2
-                        %@%             \hspace                                                          %! MMI_2
-                        %@%                 #0.5                                                         %! MMI_2
-                        %@%         }                                                                    %! MMI_2
-                        %@%     }                                                                        %! MMI_2
-                        %@% \startTextSpan                                                               %! MMI_2
-                            - \abjad_dashed_line_with_arrow                                              %! MMI_3
-                            - \tweak bound-details.left.text \markup {                                   %! MMI_3
-                                \concat                                                                  %! MMI_3
-                                    {                                                                    %! MMI_3
-                                        \with-color                                                      %! MMI_3
-                                            #(x11-color 'DeepPink1)                                      %! MMI_3
-                                            \large                                                       %! MMI_3
-                                                \upright                                                 %! MMI_3
-                                                    accel.                                               %! MMI_3
-                                        \hspace                                                          %! MMI_3
-                                            #0.5                                                         %! MMI_3
-                                    }                                                                    %! MMI_3
-                                }                                                                        %! MMI_3
-                            \startTextSpan                                                               %! MMI_3
+                            \stopTextSpan                                                                %! ATTACH_METRONOME_MARKS_1
+                        %@% - \abjad_dashed_line_with_arrow                                              %! ATTACH_METRONOME_MARKS_2
+                        %@% - \tweak bound-details.left.text \markup {                                   %! ATTACH_METRONOME_MARKS_2
+                        %@%     \concat                                                                  %! ATTACH_METRONOME_MARKS_2
+                        %@%         {                                                                    %! ATTACH_METRONOME_MARKS_2
+                        %@%             \large                                                           %! ATTACH_METRONOME_MARKS_2
+                        %@%                 \upright                                                     %! ATTACH_METRONOME_MARKS_2
+                        %@%                     accel.                                                   %! ATTACH_METRONOME_MARKS_2
+                        %@%             \hspace                                                          %! ATTACH_METRONOME_MARKS_2
+                        %@%                 #0.5                                                         %! ATTACH_METRONOME_MARKS_2
+                        %@%         }                                                                    %! ATTACH_METRONOME_MARKS_2
+                        %@%     }                                                                        %! ATTACH_METRONOME_MARKS_2
+                        %@% \startTextSpan                                                               %! ATTACH_METRONOME_MARKS_2
+                            - \abjad_dashed_line_with_arrow                                              %! ATTACH_METRONOME_MARKS_3
+                            - \tweak bound-details.left.text \markup {                                   %! ATTACH_METRONOME_MARKS_3
+                                \concat                                                                  %! ATTACH_METRONOME_MARKS_3
+                                    {                                                                    %! ATTACH_METRONOME_MARKS_3
+                                        \with-color                                                      %! ATTACH_METRONOME_MARKS_3
+                                            #(x11-color 'DeepPink1)                                      %! ATTACH_METRONOME_MARKS_3
+                                            \large                                                       %! ATTACH_METRONOME_MARKS_3
+                                                \upright                                                 %! ATTACH_METRONOME_MARKS_3
+                                                    accel.                                               %! ATTACH_METRONOME_MARKS_3
+                                        \hspace                                                          %! ATTACH_METRONOME_MARKS_3
+                                            #0.5                                                         %! ATTACH_METRONOME_MARKS_3
+                                    }                                                                    %! ATTACH_METRONOME_MARKS_3
+                                }                                                                        %! ATTACH_METRONOME_MARKS_3
+                            \startTextSpan                                                               %! ATTACH_METRONOME_MARKS_3
                 <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! SM_4
+                            % [GlobalSkips measure 3]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \stopTextSpan                                                                %! MMI_4
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \stopTextSpan                                                                %! ATTACH_METRONOME_MARKS_4
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -5962,13 +5962,13 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! SM_4
+                                % [MusicVoice measure 3]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
@@ -6024,52 +6024,52 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips"
                         {
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! SM_4
+                            % [GlobalSkips measure 1]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \override TextSpanner.staff-padding = #4                                     %! OC1
+                            \override TextSpanner.staff-padding = #4                                     %! OVERRIDE_COMMAND_1
                             \autoPageBreaksOff                                                           %! BMM1:BREAK
                             \noBreak                                                                     %! BMM2:BREAK
-                            \baca_lbsd #4 #'(8)                                                          %! IC:BREAK
-                            \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
-                            \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            \pageBreak                                                                   %! IC:BREAK
+                            \baca_lbsd #4 #'(8)                                                          %! INDICATOR_COMMAND:BREAK
+                            \time 3/8                                                                    %! SET_STATUS_TAG:EXPLICIT_TIME_SIGNATURE:MAKE_GLOBAL_SKIPS_2
+                            \bar ""                                                                      %! MAKE_GLOBAL_SKIPS_3:+SEGMENT:EMPTY_START_BAR
+                            \baca_time_signature_color "blue"                                            %! ATTACH_COLOR_LITERAL_2:EXPLICIT_TIME_SIGNATURE_COLOR:MAKE_GLOBAL_SKIPS_2
+                            \pageBreak                                                                   %! INDICATOR_COMMAND:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                        %@% - \abjad_dashed_line_with_arrow                                              %! MMI_2
-                        %@% - \tweak bound-details.left.text \markup {                                   %! MMI_2
-                        %@%     \concat                                                                  %! MMI_2
-                        %@%         {                                                                    %! MMI_2
-                        %@%             \large                                                           %! MMI_2
-                        %@%                 \upright                                                     %! MMI_2
-                        %@%                     accel.                                                   %! MMI_2
-                        %@%             \hspace                                                          %! MMI_2
-                        %@%                 #0.5                                                         %! MMI_2
-                        %@%         }                                                                    %! MMI_2
-                        %@%     }                                                                        %! MMI_2
-                        %@% \startTextSpan                                                               %! MMI_2
-                            - \abjad_dashed_line_with_arrow                                              %! MMI_3
-                            - \tweak bound-details.left.text \markup {                                   %! MMI_3
-                                \concat                                                                  %! MMI_3
-                                    {                                                                    %! MMI_3
-                                        \with-color                                                      %! MMI_3
-                                            #(x11-color 'DeepPink1)                                      %! MMI_3
-                                            \large                                                       %! MMI_3
-                                                \upright                                                 %! MMI_3
-                                                    accel.                                               %! MMI_3
-                                        \hspace                                                          %! MMI_3
-                                            #0.5                                                         %! MMI_3
-                                    }                                                                    %! MMI_3
-                                }                                                                        %! MMI_3
-                            \startTextSpan                                                               %! MMI_3
+                        %@% - \abjad_dashed_line_with_arrow                                              %! ATTACH_METRONOME_MARKS_2
+                        %@% - \tweak bound-details.left.text \markup {                                   %! ATTACH_METRONOME_MARKS_2
+                        %@%     \concat                                                                  %! ATTACH_METRONOME_MARKS_2
+                        %@%         {                                                                    %! ATTACH_METRONOME_MARKS_2
+                        %@%             \large                                                           %! ATTACH_METRONOME_MARKS_2
+                        %@%                 \upright                                                     %! ATTACH_METRONOME_MARKS_2
+                        %@%                     accel.                                                   %! ATTACH_METRONOME_MARKS_2
+                        %@%             \hspace                                                          %! ATTACH_METRONOME_MARKS_2
+                        %@%                 #0.5                                                         %! ATTACH_METRONOME_MARKS_2
+                        %@%         }                                                                    %! ATTACH_METRONOME_MARKS_2
+                        %@%     }                                                                        %! ATTACH_METRONOME_MARKS_2
+                        %@% \startTextSpan                                                               %! ATTACH_METRONOME_MARKS_2
+                            - \abjad_dashed_line_with_arrow                                              %! ATTACH_METRONOME_MARKS_3
+                            - \tweak bound-details.left.text \markup {                                   %! ATTACH_METRONOME_MARKS_3
+                                \concat                                                                  %! ATTACH_METRONOME_MARKS_3
+                                    {                                                                    %! ATTACH_METRONOME_MARKS_3
+                                        \with-color                                                      %! ATTACH_METRONOME_MARKS_3
+                                            #(x11-color 'DeepPink1)                                      %! ATTACH_METRONOME_MARKS_3
+                                            \large                                                       %! ATTACH_METRONOME_MARKS_3
+                                                \upright                                                 %! ATTACH_METRONOME_MARKS_3
+                                                    accel.                                               %! ATTACH_METRONOME_MARKS_3
+                                        \hspace                                                          %! ATTACH_METRONOME_MARKS_3
+                                            #0.5                                                         %! ATTACH_METRONOME_MARKS_3
+                                    }                                                                    %! ATTACH_METRONOME_MARKS_3
+                                }                                                                        %! ATTACH_METRONOME_MARKS_3
+                            \startTextSpan                                                               %! ATTACH_METRONOME_MARKS_3
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! SM_4
+                            % [GlobalSkips measure 2]                                                    %! COMMENT_MEASURE_NUMBERS
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
-                            \stopTextSpan                                                                %! MMI_4
-                            \revert TextSpanner.staff-padding                                            %! OC2
-                            \baca_bar_line_visible                                                       %! SM_5
-                            \bar "|"                                                                     %! SM_5
+                            \stopTextSpan                                                                %! ATTACH_METRONOME_MARKS_4
+                            \revert TextSpanner.staff-padding                                            %! OVERRIDE_COMMAND_2
+                            \baca_bar_line_visible                                                       %! ATTACH_FINAL_BAR_LINE
+                            \bar "|"                                                                     %! ATTACH_FINAL_BAR_LINE
                 <BLANKLINE>
                         }
                     >>
@@ -6080,10 +6080,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \context Voice = "MusicVoice"
                             {
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! SM_4
+                                % [MusicVoice measure 1]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! SM_4
+                                % [MusicVoice measure 2]                                                 %! COMMENT_MEASURE_NUMBERS
                                 c'4.
                 <BLANKLINE>
                             }
