@@ -625,11 +625,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! EXPLICIT_DYNAMIC_COLOR:_attach_color_literal(2)
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                                 \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -703,11 +703,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! EXPLICIT_DYNAMIC_COLOR:_attach_color_literal(2)
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                                 \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -782,11 +782,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 \once \override Voice.DynamicText.color = #(x11-color 'green4)           %! REAPPLIED_DYNAMIC_COLOR:_attach_color_literal(2)
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                                 \f                                                                       %! REAPPLIED_DYNAMIC:_set_status_tag:_reapply_persistent_indicators(3)
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -849,12 +849,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! EXPLICIT_DYNAMIC_COLOR:_attach_color_literal(2)
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                                 \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                                 \once \override Voice.DynamicText.color = #(x11-color 'DeepPink1)        %! REDUNDANT_DYNAMIC_COLOR:_attach_color_literal(2)
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                                 \f                                                                       %! REDUNDANT_DYNAMIC:_set_status_tag:IndicatorCommand
                 <BLANKLINE>
                             }
@@ -929,11 +929,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 \once \override Voice.DynamicText.color = #(x11-color 'DeepPink1)        %! REDUNDANT_DYNAMIC_COLOR:_attach_color_literal(2)
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                                 \f                                                                       %! REDUNDANT_DYNAMIC:_set_status_tag:IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -994,12 +994,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! EXPLICIT_DYNAMIC_COLOR:_attach_color_literal(2)
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                                 \sfz                                                                     %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                                 \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! EXPLICIT_DYNAMIC_COLOR:_attach_color_literal(2)
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                                 \sfz                                                                     %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
                 <BLANKLINE>
                             }
@@ -1074,11 +1074,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! EXPLICIT_DYNAMIC_COLOR:_attach_color_literal(2)
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                                 \sfz                                                                     %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -1142,12 +1142,12 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! EXPLICIT_DYNAMIC_COLOR:_attach_color_literal(2)
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                                 \mf                                                                      %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                                 \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! EXPLICIT_DYNAMIC_COLOR:_attach_color_literal(2)
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                                 \baca_effort_mf                                                          %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
                 <BLANKLINE>
                             }
@@ -1242,11 +1242,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                                 ^ \markup \baca-default-indicator-markup "(“Flute”)"                     %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -1302,11 +1302,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! _comment_measure_numbers
-                                c'4.
+                                c'4. %! baca_make_notes
                             %%% ^ \markup \baca-default-indicator-markup "(“Flute”)" %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
-                                c'4.
+                                c'4. %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -1359,11 +1359,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! _comment_measure_numbers
-                                c'4.
+                                c'4. %! baca_make_notes
                                 ^ \markup \baca-default-indicator-markup "(“Flute”)" %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
-                                c'4.
+                                c'4. %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -1433,11 +1433,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                                 ^ \markup \baca-explicit-indicator-markup "(“Flute”)"                    %! EXPLICIT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -1493,11 +1493,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! _comment_measure_numbers
-                                c'4.
+                                c'4. %! baca_make_notes
                             %%% ^ \markup \baca-explicit-indicator-markup "(“Flute”)" %! EXPLICIT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
-                                c'4.
+                                c'4. %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -1550,11 +1550,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! _comment_measure_numbers
-                                c'4.
+                                c'4. %! baca_make_notes
                                 ^ \markup \baca-explicit-indicator-markup "(“Flute”)" %! EXPLICIT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
-                                c'4.
+                                c'4. %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -1636,11 +1636,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                                 ^ \markup \baca-explicit-indicator-markup "(“Flute”)"                    %! EXPLICIT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -1697,11 +1697,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! _comment_measure_numbers
-                                c'4.
+                                c'4. %! baca_make_notes
                             %%% ^ \markup \baca-explicit-indicator-markup "(“Flute”)" %! EXPLICIT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
-                                c'4.
+                                c'4. %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -1755,11 +1755,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! _comment_measure_numbers
-                                c'4.
+                                c'4. %! baca_make_notes
                                 ^ \markup \baca-explicit-indicator-markup "(“Flute”)" %! EXPLICIT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
-                                c'4.
+                                c'4. %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -1842,11 +1842,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                                 ^ \markup \baca-reapplied-indicator-markup "(“Flute”)"                   %! REAPPLIED_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -1903,11 +1903,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! _comment_measure_numbers
-                                c'4.
+                                c'4. %! baca_make_notes
                             %%% ^ \markup \baca-reapplied-indicator-markup "(“Flute”)" %! REAPPLIED_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
-                                c'4.
+                                c'4. %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -1961,11 +1961,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! _comment_measure_numbers
-                                c'4.
+                                c'4. %! baca_make_notes
                                 ^ \markup \baca-reapplied-indicator-markup "(“Flute”)" %! REAPPLIED_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
-                                c'4.
+                                c'4. %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -2050,15 +2050,15 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                c'2
+                                c'2                                                                      %! baca_make_notes
                                 ^ \markup \baca-explicit-indicator-markup "(“Flute”)"                    %! EXPLICIT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'2
+                                c'2                                                                      %! baca_make_notes
                                 ^ \markup \baca-redundant-indicator-markup "(“Flute”)"                   %! REDUNDANT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                                c'2
+                                c'2                                                                      %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -2119,15 +2119,15 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! _comment_measure_numbers
-                                c'2
+                                c'2 %! baca_make_notes
                             %%% ^ \markup \baca-explicit-indicator-markup "(“Flute”)" %! EXPLICIT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
-                                c'2
+                                c'2 %! baca_make_notes
                             %%% ^ \markup \baca-redundant-indicator-markup "(“Flute”)" %! REDUNDANT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 3] %! _comment_measure_numbers
-                                c'2
+                                c'2 %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -2185,15 +2185,15 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! _comment_measure_numbers
-                                c'2
+                                c'2 %! baca_make_notes
                                 ^ \markup \baca-explicit-indicator-markup "(“Flute”)" %! EXPLICIT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
-                                c'2
+                                c'2 %! baca_make_notes
                                 ^ \markup \baca-redundant-indicator-markup "(“Flute”)" %! REDUNDANT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 3] %! _comment_measure_numbers
-                                c'2
+                                c'2 %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -2281,11 +2281,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                                 ^ \markup \baca-redundant-indicator-markup "(“Flute”)"                   %! REDUNDANT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -2342,11 +2342,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! _comment_measure_numbers
-                                c'4.
+                                c'4. %! baca_make_notes
                             %%% ^ \markup \baca-redundant-indicator-markup "(“Flute”)" %! REDUNDANT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
-                                c'4.
+                                c'4. %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -2400,11 +2400,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! _comment_measure_numbers
-                                c'4.
+                                c'4. %! baca_make_notes
                                 ^ \markup \baca-redundant-indicator-markup "(“Flute”)" %! REDUNDANT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
-                                c'4.
+                                c'4. %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -2509,14 +2509,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName =                                         %! DEFAULT_MARGIN_MARKUP:_set_status_tag:ScoreTemplate(2):-PARTS
                                 \markup { I+II }                                                         %! DEFAULT_MARGIN_MARKUP:_set_status_tag:ScoreTemplate(2):-PARTS
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)    %! DEFAULT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                                 ^ \markup \baca-default-indicator-markup "[“I+II”]"                      %! DEFAULT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'violet)              %! REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName =                                         %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):ScoreTemplate(2):-PARTS
                                 \markup { I+II }                                                         %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):ScoreTemplate(2):-PARTS
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -2575,14 +2575,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = %! DEFAULT_MARGIN_MARKUP:_set_status_tag:ScoreTemplate(2):-PARTS
                                 \markup { I+II }                 %! DEFAULT_MARGIN_MARKUP:_set_status_tag:ScoreTemplate(2):-PARTS
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                c'4.
+                                c'4. %! baca_make_notes
                             %%% ^ \markup \baca-default-indicator-markup "[“I+II”]" %! DEFAULT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                             %%% \override Staff.InstrumentName.color = #(x11-color 'violet) %! REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName = %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):ScoreTemplate(2):-PARTS
                                 \markup { I+II }                 %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):ScoreTemplate(2):-PARTS
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
-                                c'4.
+                                c'4. %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -2638,14 +2638,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = %! DEFAULT_MARGIN_MARKUP:_set_status_tag:ScoreTemplate(2):-PARTS
                                 \markup { I+II }                 %! DEFAULT_MARGIN_MARKUP:_set_status_tag:ScoreTemplate(2):-PARTS
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                c'4.
+                                c'4. %! baca_make_notes
                                 ^ \markup \baca-default-indicator-markup "[“I+II”]" %! DEFAULT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'violet) %! REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName = %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):ScoreTemplate(2):-PARTS
                                 \markup { I+II }                 %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):ScoreTemplate(2):-PARTS
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
-                                c'4.
+                                c'4. %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -2718,14 +2718,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                                 \markup { I+II }                                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                                 ^ \markup \baca-explicit-indicator-markup "[“I+II”]"                     %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                                 \markup { I+II }                                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -2784,14 +2784,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                                 \markup { I+II }                 %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                c'4.
+                                c'4. %! baca_make_notes
                             %%% ^ \markup \baca-explicit-indicator-markup "[“I+II”]" %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName = %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                                 \markup { I+II }                 %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
-                                c'4.
+                                c'4. %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -2847,14 +2847,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                                 \markup { I+II }                 %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                c'4.
+                                c'4. %! baca_make_notes
                                 ^ \markup \baca-explicit-indicator-markup "[“I+II”]" %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName = %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                                 \markup { I+II }                 %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
-                                c'4.
+                                c'4. %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -2939,14 +2939,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                                 \markup { III+IV }                                                       %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                                 ^ \markup \baca-explicit-indicator-markup "[“III+IV”]"                   %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                                 \markup { III+IV }                                                       %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -3006,14 +3006,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                                 \markup { III+IV }               %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                c'4.
+                                c'4. %! baca_make_notes
                             %%% ^ \markup \baca-explicit-indicator-markup "[“III+IV”]" %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName = %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                                 \markup { III+IV }               %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
-                                c'4.
+                                c'4. %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -3070,14 +3070,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                                 \markup { III+IV }               %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                c'4.
+                                c'4. %! baca_make_notes
                                 ^ \markup \baca-explicit-indicator-markup "[“III+IV”]" %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName = %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                                 \markup { III+IV }               %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
-                                c'4.
+                                c'4. %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -3163,14 +3163,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName =                                         %! REAPPLIED_MARGIN_MARKUP:_set_status_tag:_reapply_persistent_indicators(3):-PARTS
                                 \markup { I+II }                                                         %! REAPPLIED_MARGIN_MARKUP:_set_status_tag:_reapply_persistent_indicators(3):-PARTS
                                 \once \override Staff.InstrumentName.color = #(x11-color 'green4)        %! REAPPLIED_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                                 ^ \markup \baca-reapplied-indicator-markup "[“I+II”]"                    %! REAPPLIED_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)           %! REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName =                                         %! REDRAWN_REAPPLIED_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):_reapply_persistent_indicators(3):-PARTS
                                 \markup { I+II }                                                         %! REDRAWN_REAPPLIED_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):_reapply_persistent_indicators(3):-PARTS
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -3230,14 +3230,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = %! REAPPLIED_MARGIN_MARKUP:_set_status_tag:_reapply_persistent_indicators(3):-PARTS
                                 \markup { I+II }                 %! REAPPLIED_MARGIN_MARKUP:_set_status_tag:_reapply_persistent_indicators(3):-PARTS
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'green4) %! REAPPLIED_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                c'4.
+                                c'4. %! baca_make_notes
                             %%% ^ \markup \baca-reapplied-indicator-markup "[“I+II”]" %! REAPPLIED_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                             %%% \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %! REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName = %! REDRAWN_REAPPLIED_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):_reapply_persistent_indicators(3):-PARTS
                                 \markup { I+II }                 %! REDRAWN_REAPPLIED_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):_reapply_persistent_indicators(3):-PARTS
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
-                                c'4.
+                                c'4. %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -3294,14 +3294,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = %! REAPPLIED_MARGIN_MARKUP:_set_status_tag:_reapply_persistent_indicators(3):-PARTS
                                 \markup { I+II }                 %! REAPPLIED_MARGIN_MARKUP:_set_status_tag:_reapply_persistent_indicators(3):-PARTS
                                 \once \override Staff.InstrumentName.color = #(x11-color 'green4) %! REAPPLIED_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                c'4.
+                                c'4. %! baca_make_notes
                                 ^ \markup \baca-reapplied-indicator-markup "[“I+II”]" %! REAPPLIED_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %! REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName = %! REDRAWN_REAPPLIED_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):_reapply_persistent_indicators(3):-PARTS
                                 \markup { I+II }                 %! REDRAWN_REAPPLIED_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):_reapply_persistent_indicators(3):-PARTS
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
-                                c'4.
+                                c'4. %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -3389,7 +3389,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                                 \markup { I+II }                                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                c'2
+                                c'2                                                                      %! baca_make_notes
                                 ^ \markup \baca-explicit-indicator-markup "[“I+II”]"                     %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
@@ -3399,14 +3399,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName =                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                                 \markup { I+II }                                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                c'2
+                                c'2                                                                      %! baca_make_notes
                                 ^ \markup \baca-redundant-indicator-markup "[“I+II”]"                    %! REDUNDANT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName =                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                                 \markup { I+II }                                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                                c'2
+                                c'2                                                                      %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -3470,7 +3470,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                                 \markup { I+II }                 %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                c'2
+                                c'2 %! baca_make_notes
                             %%% ^ \markup \baca-explicit-indicator-markup "[“I+II”]" %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName = %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
@@ -3480,14 +3480,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                                 \markup { I+II }                 %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                c'2
+                                c'2 %! baca_make_notes
                             %%% ^ \markup \baca-redundant-indicator-markup "[“I+II”]" %! REDUNDANT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName = %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                                 \markup { I+II }                 %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 3] %! _comment_measure_numbers
-                                c'2
+                                c'2 %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -3548,7 +3548,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                                 \markup { I+II }                 %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                c'2
+                                c'2 %! baca_make_notes
                                 ^ \markup \baca-explicit-indicator-markup "[“I+II”]" %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName = %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
@@ -3558,14 +3558,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                                 \markup { I+II }                 %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                c'2
+                                c'2 %! baca_make_notes
                                 ^ \markup \baca-redundant-indicator-markup "[“I+II”]" %! REDUNDANT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName = %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                                 \markup { I+II }                 %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 3] %! _comment_measure_numbers
-                                c'2
+                                c'2 %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -3656,14 +3656,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName =                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                                 \markup { I+II }                                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                                 ^ \markup \baca-redundant-indicator-markup "[“I+II”]"                    %! REDUNDANT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName =                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                                 \markup { I+II }                                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -3723,14 +3723,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                                 \markup { I+II }                 %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                c'4.
+                                c'4. %! baca_make_notes
                             %%% ^ \markup \baca-redundant-indicator-markup "[“I+II”]" %! REDUNDANT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName = %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                                 \markup { I+II }                 %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
-                                c'4.
+                                c'4. %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -3787,14 +3787,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \set Staff.shortInstrumentName = %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                                 \markup { I+II }                 %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                c'4.
+                                c'4. %! baca_make_notes
                                 ^ \markup \baca-redundant-indicator-markup "[“I+II”]" %! REDUNDANT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName = %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                                 \markup { I+II }                 %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
-                                c'4.
+                                c'4. %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -3894,7 +3894,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             %@% \markup { III+IV }                                                       %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand:-PARTS
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                             %@% \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                c'2
+                                c'2                                                                      %! baca_make_notes
                                 ^ \markup \baca-explicit-indicator-markup "[“I+II”]"                     %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                             %@% ^ \markup \baca-explicit-indicator-markup "[“III+IV”]"                   %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
@@ -3905,10 +3905,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \markup { III+IV }                                                       %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand:-PARTS
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'2
+                                c'2                                                                      %! baca_make_notes
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                                c'2
+                                c'2                                                                      %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -4017,10 +4017,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -4129,10 +4129,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -4242,10 +4242,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -4348,10 +4348,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -4460,10 +4460,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -4538,10 +4538,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
                                 \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
                                 \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:_attach_color_literal(2)
-                                b'4.
+                                b'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                b'4.
+                                b'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -4662,11 +4662,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! REAPPLIED_PERSISTENT_OVERRIDE:_set_status_tag:_reapply_persistent_indicators(3)
                                 \baca_unpitched_music_warning                                            %! _color_unpitched_notes
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                                 \baca_unpitched_music_warning                                            %! _color_unpitched_notes
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -4736,11 +4736,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
                                 \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
                                 \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:_attach_color_literal(2)
-                                b'4.
+                                b'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                                 \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! REDUNDANT_PERSISTENT_OVERRIDE:_set_status_tag:IndicatorCommand
-                                b'4.
+                                b'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -4820,11 +4820,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! REDUNDANT_PERSISTENT_OVERRIDE:_set_status_tag:IndicatorCommand
                                 \baca_unpitched_music_warning                                            %! _color_unpitched_notes
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                                 \baca_unpitched_music_warning                                            %! _color_unpitched_notes
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -4897,10 +4897,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \once \override Staff.StaffSymbol.line-count = 5                         %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
                                 \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
                                 \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:_attach_color_literal(2)
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -4977,10 +4977,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
                                 \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
                                 \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:_attach_color_literal(2)
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -5058,10 +5058,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \once \override Staff.StaffSymbol.line-count = 5                         %! REAPPLIED_STAFF_LINES:_set_status_tag:_reapply_persistent_indicators(3)
                                 \startStaff                                                              %! REAPPLIED_STAFF_LINES:_set_status_tag:_reapply_persistent_indicators(3)
                                 \once \override Staff.StaffSymbol.color = #(x11-color 'green4)           %! REAPPLIED_STAFF_LINES_COLOR:_attach_color_literal(2)
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -5127,14 +5127,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \once \override Staff.StaffSymbol.line-count = 5                         %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
                                 \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
                                 \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:_attach_color_literal(2)
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                                 \stopStaff                                                               %! REDUNDANT_STAFF_LINES:_set_status_tag:IndicatorCommand
                                 \once \override Staff.StaffSymbol.line-count = 5                         %! REDUNDANT_STAFF_LINES:_set_status_tag:IndicatorCommand
                                 \startStaff                                                              %! REDUNDANT_STAFF_LINES:_set_status_tag:IndicatorCommand
                                 \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)        %! REDUNDANT_STAFF_LINES_COLOR:_attach_color_literal(2)
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -5211,10 +5211,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \once \override Staff.StaffSymbol.line-count = 5                         %! REDUNDANT_STAFF_LINES:_set_status_tag:IndicatorCommand
                                 \startStaff                                                              %! REDUNDANT_STAFF_LINES:_set_status_tag:IndicatorCommand
                                 \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)        %! REDUNDANT_STAFF_LINES_COLOR:_attach_color_literal(2)
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -5327,10 +5327,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -5442,10 +5442,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -5558,10 +5558,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -5695,13 +5695,13 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }
                         }
@@ -5813,10 +5813,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'4.
+                                c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }
                         }

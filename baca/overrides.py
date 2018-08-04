@@ -511,46 +511,46 @@ def bar_extent(
                         {
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                            e'8
-                            [
+                            e'8                                                                      %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            d''8
+                            d''8                                                                     %! baca_make_even_divisions
             <BLANKLINE>
-                            f'8
+                            f'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
-                            e''8
-                            ]
+                            e''8                                                                     %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             \override Staff.BarLine.bar-extent = #'(-4 . 4)                          %! OverrideCommand(1)
-                            g'8
-                            [
+                            g'8                                                                      %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            f''8
+                            f''8                                                                     %! baca_make_even_divisions
             <BLANKLINE>
-                            e'8
-                            ]
+                            e'8                                                                      %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
                             \revert Staff.BarLine.bar-extent                                         %! OverrideCommand(2)
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                            d''8
-                            [
+                            d''8                                                                     %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            f'8
+                            f'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
-                            e''8
+                            e''8                                                                     %! baca_make_even_divisions
             <BLANKLINE>
-                            g'8
-                            ]
+                            g'8                                                                      %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                            f''8
-                            [
+                            f''8                                                                     %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            e'8
+                            e'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
-                            d''8
-                            ]
+                            d''8                                                                     %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
                             \once \override Staff.BarLine.bar-extent = #'(-4 . 4)                    %! OverrideCommand(1)
             <BLANKLINE>
                         }

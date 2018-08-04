@@ -125,46 +125,46 @@ class SpannerCommand(scoping.Command):
                         {
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                            e'8
-                            [
+                            e'8                                                                      %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            d''8
+                            d''8                                                                     %! baca_make_even_divisions
             <BLANKLINE>
-                            f'8
+                            f'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
-                            e''8
-                            ]
+                            e''8                                                                     %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                            g'8
-                            [
+                            g'8                                                                      %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
                             (                                                                        %! SpannerCommand
             <BLANKLINE>
-                            f''8
+                            f''8                                                                     %! baca_make_even_divisions
             <BLANKLINE>
-                            e'8
-                            ]
+                            e'8                                                                      %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
                             )                                                                        %! SpannerCommand
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                            d''8
-                            [
+                            d''8                                                                     %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            f'8
+                            f'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
-                            e''8
+                            e''8                                                                     %! baca_make_even_divisions
             <BLANKLINE>
-                            g'8
-                            ]
+                            g'8                                                                      %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                            f''8
-                            [
+                            f''8                                                                     %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            e'8
+                            e'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
-                            d''8
-                            ]
+                            d''8                                                                     %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                         }
                     }
@@ -511,37 +511,37 @@ def beam(
                         {
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                            c'8
+                            c'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! SpannerCommand
             <BLANKLINE>
-                            c'8
+                            c'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
-                            c'8
+                            c'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
-                            c'8
+                            c'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                            c'8
+                            c'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
-                            c'8
+                            c'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
-                            c'8
+                            c'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                            c'8
+                            c'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
-                            c'8
+                            c'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
-                            c'8
+                            c'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
-                            c'8
+                            c'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                            c'8
+                            c'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
-                            c'8
+                            c'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
-                            c'8
+                            c'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! SpannerCommand
             <BLANKLINE>
                         }
@@ -633,7 +633,7 @@ def finger_pressure_transition(
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \once \override NoteHead.style = #'harmonic                              %! OverrideCommand(1)
-                            c''2
+                            c''2                                                                     %! baca_make_notes
                             - \tweak arrow-length #2                                                 %! SpannerCommand
                             - \tweak arrow-width #0.5                                                %! SpannerCommand
                             - \tweak bound-details.right.arrow ##t                                   %! SpannerCommand
@@ -641,11 +641,11 @@ def finger_pressure_transition(
                             \glissando                                                               %! SpannerCommand
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                            c''4.
+                            c''4.                                                                    %! baca_make_notes
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             \once \override NoteHead.style = #'harmonic                              %! OverrideCommand(1)
-                            c''2
+                            c''2                                                                     %! baca_make_notes
                             - \tweak arrow-length #2                                                 %! SpannerCommand
                             - \tweak arrow-width #0.5                                                %! SpannerCommand
                             - \tweak bound-details.right.arrow ##t                                   %! SpannerCommand
@@ -653,7 +653,7 @@ def finger_pressure_transition(
                             \glissando                                                               %! SpannerCommand
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                            c''4.
+                            c''4.                                                                    %! baca_make_notes
             <BLANKLINE>
                         }
                     }
@@ -744,57 +744,57 @@ def glissando(
                         {
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                            e'8
-                            [
+                            e'8                                                                      %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
                             \glissando                                                               %! SpannerCommand
             <BLANKLINE>
-                            d''8
+                            d''8                                                                     %! baca_make_even_divisions
                             \glissando                                                               %! SpannerCommand
             <BLANKLINE>
-                            f'8
+                            f'8                                                                      %! baca_make_even_divisions
                             \glissando                                                               %! SpannerCommand
             <BLANKLINE>
-                            e''8
-                            ]
+                            e''8                                                                     %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
                             \glissando                                                               %! SpannerCommand
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                            g'8
-                            [
+                            g'8                                                                      %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
                             \glissando                                                               %! SpannerCommand
             <BLANKLINE>
-                            f''8
+                            f''8                                                                     %! baca_make_even_divisions
                             \glissando                                                               %! SpannerCommand
             <BLANKLINE>
-                            e'8
-                            ]
+                            e'8                                                                      %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
                             \glissando                                                               %! SpannerCommand
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                            d''8
-                            [
+                            d''8                                                                     %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
                             \glissando                                                               %! SpannerCommand
             <BLANKLINE>
-                            f'8
+                            f'8                                                                      %! baca_make_even_divisions
                             \glissando                                                               %! SpannerCommand
             <BLANKLINE>
-                            e''8
+                            e''8                                                                     %! baca_make_even_divisions
                             \glissando                                                               %! SpannerCommand
             <BLANKLINE>
-                            g'8
-                            ]
+                            g'8                                                                      %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
                             \glissando                                                               %! SpannerCommand
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                            f''8
-                            [
+                            f''8                                                                     %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
                             \glissando                                                               %! SpannerCommand
             <BLANKLINE>
-                            e'8
+                            e'8                                                                      %! baca_make_even_divisions
                             \glissando                                                               %! SpannerCommand
             <BLANKLINE>
-                            d''8
-                            ]
+                            d''8                                                                     %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                         }
                     }
@@ -863,46 +863,46 @@ def glissando(
                         {
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                            e'8
-                            [
+                            e'8                                                                      %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
                             \glissando                                                               %! SpannerCommand
             <BLANKLINE>
-                            d''8
+                            d''8                                                                     %! baca_make_even_divisions
             <BLANKLINE>
-                            f'8
+                            f'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
-                            e''8
-                            ]
+                            e''8                                                                     %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                            g'8
-                            [
+                            g'8                                                                      %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            f''8
+                            f''8                                                                     %! baca_make_even_divisions
             <BLANKLINE>
-                            e'8
-                            ]
+                            e'8                                                                      %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                            d''8
-                            [
+                            d''8                                                                     %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            f'8
+                            f'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
-                            e''8
+                            e''8                                                                     %! baca_make_even_divisions
             <BLANKLINE>
-                            g'8
-                            ]
+                            g'8                                                                      %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                            f''8
-                            [
+                            f''8                                                                     %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            e'8
+                            e'8                                                                      %! baca_make_even_divisions
                             \glissando                                                               %! SpannerCommand
             <BLANKLINE>
-                            d''8
-                            ]
+                            d''8                                                                     %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                         }
                     }

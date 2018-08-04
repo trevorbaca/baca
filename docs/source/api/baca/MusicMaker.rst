@@ -1069,6 +1069,10 @@ musicmaker
 
       .. autoattribute:: PitchFirstRhythmMaker.state
 
+   .. container:: inherited
+
+      .. autoattribute:: PitchFirstRhythmMaker.tag
+
    .. autoattribute:: PitchFirstRhythmMaker.talea
 
    .. autoattribute:: PitchFirstRhythmMaker.tie_specifier

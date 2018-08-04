@@ -298,46 +298,46 @@ class BCPCommand(scoping.Command):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                e'8
+                                e'8                                                                      %! baca_make_even_divisions
                                 -\downbow                                                                %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad_solid_line_with_arrow                                           %! BowContactPointCommand
                                 - \tweak bound-details.left.text \markup \baca-bcp-left #1 #5            %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
-                                [
+                                [                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
-                                f'8
+                                f'8                                                                      %! baca_make_even_divisions
                                 -\upbow                                                                  %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad_solid_line_with_arrow                                           %! BowContactPointCommand
                                 - \tweak bound-details.left.text \markup \baca-bcp-left #2 #5            %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                 <BLANKLINE>
-                                e'8
+                                e'8                                                                      %! baca_make_even_divisions
                                 -\downbow                                                                %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad_solid_line_with_arrow                                           %! BowContactPointCommand
                                 - \tweak bound-details.left.text \markup \baca-bcp-left #1 #5            %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                 <BLANKLINE>
-                                f'8
+                                f'8                                                                      %! baca_make_even_divisions
                                 -\upbow                                                                  %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
-                                ]
+                                ]                                                                        %! baca_make_even_divisions
                                 - \abjad_solid_line_with_arrow                                           %! BowContactPointCommand
                                 - \tweak bound-details.left.text \markup \baca-bcp-left #2 #5            %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                e'8
+                                e'8                                                                      %! baca_make_even_divisions
                                 -\downbow                                                                %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad_solid_line_with_arrow                                           %! BowContactPointCommand
                                 - \tweak bound-details.left.text \markup \baca-bcp-left #1 #5            %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
-                                [
+                                [                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
-                                f'8
+                                f'8                                                                      %! baca_make_even_divisions
                                 -\upbow                                                                  %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad_solid_line_with_arrow                                           %! BowContactPointCommand
@@ -345,51 +345,51 @@ class BCPCommand(scoping.Command):
                                 - \tweak bound-details.right.text \markup \baca-bcp-right #1 #5          %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                 <BLANKLINE>
-                                e'8
+                                e'8                                                                      %! baca_make_even_divisions
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
-                                ]
+                                ]                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                                f'8
+                                f'8                                                                      %! baca_make_even_divisions
                                 -\downbow                                                                %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad_solid_line_with_arrow                                           %! BowContactPointCommand
                                 - \tweak bound-details.left.text \markup \baca-bcp-left #3 #5            %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
-                                [
+                                [                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
-                                e'8
+                                e'8                                                                      %! baca_make_even_divisions
                                 -\upbow                                                                  %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad_solid_line_with_arrow                                           %! BowContactPointCommand
                                 - \tweak bound-details.left.text \markup \baca-bcp-left #4 #5            %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                 <BLANKLINE>
-                                f'8
+                                f'8                                                                      %! baca_make_even_divisions
                                 -\downbow                                                                %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad_solid_line_with_arrow                                           %! BowContactPointCommand
                                 - \tweak bound-details.left.text \markup \baca-bcp-left #3 #5            %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                 <BLANKLINE>
-                                e'8
+                                e'8                                                                      %! baca_make_even_divisions
                                 -\upbow                                                                  %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
-                                ]
+                                ]                                                                        %! baca_make_even_divisions
                                 - \abjad_solid_line_with_arrow                                           %! BowContactPointCommand
                                 - \tweak bound-details.left.text \markup \baca-bcp-left #4 #5            %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                                f'8
+                                f'8                                                                      %! baca_make_even_divisions
                                 -\downbow                                                                %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad_solid_line_with_arrow                                           %! BowContactPointCommand
                                 - \tweak bound-details.left.text \markup \baca-bcp-left #3 #5            %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
-                                [
+                                [                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
-                                e'8
+                                e'8                                                                      %! baca_make_even_divisions
                                 -\upbow                                                                  %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad_solid_line_with_arrow                                           %! BowContactPointCommand
@@ -397,9 +397,9 @@ class BCPCommand(scoping.Command):
                                 - \tweak bound-details.right.text \markup \baca-bcp-right #3 #5          %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                 <BLANKLINE>
-                                f'8
+                                f'8                                                                      %! baca_make_even_divisions
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
-                                ]
+                                ]                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
                             }
                         }
@@ -603,57 +603,57 @@ class ColorCommand(scoping.Command):
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \abjad_color_music "red"
-                            e'8
-                            [
+                            e'8                                                                      %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             \abjad_color_music "blue"
-                            d''8
+                            d''8                                                                     %! baca_make_even_divisions
             <BLANKLINE>
                             \abjad_color_music "red"
-                            f'8
+                            f'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             \abjad_color_music "blue"
-                            e''8
-                            ]
+                            e''8                                                                     %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             \abjad_color_music "red"
-                            g'8
-                            [
+                            g'8                                                                      %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             \abjad_color_music "blue"
-                            f''8
+                            f''8                                                                     %! baca_make_even_divisions
             <BLANKLINE>
                             \abjad_color_music "red"
-                            e'8
-                            ]
+                            e'8                                                                      %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             \abjad_color_music "blue"
-                            d''8
-                            [
+                            d''8                                                                     %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             \abjad_color_music "red"
-                            f'8
+                            f'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             \abjad_color_music "blue"
-                            e''8
+                            e''8                                                                     %! baca_make_even_divisions
             <BLANKLINE>
                             \abjad_color_music "red"
-                            g'8
-                            ]
+                            g'8                                                                      %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             \abjad_color_music "blue"
-                            f''8
-                            [
+                            f''8                                                                     %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             \abjad_color_music "red"
-                            e'8
+                            e'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             \abjad_color_music "blue"
-                            d''8
-                            ]
+                            d''8                                                                     %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                         }
                     }
@@ -769,18 +769,18 @@ class ContainerCommand(scoping.Command):
                         {   %*% ViolinI
         <BLANKLINE>
                             % [MusicVoice measure 1]                                             %! _comment_measure_numbers
-                            e'2
+                            e'2                                                                  %! baca_make_notes
         <BLANKLINE>
                             % [MusicVoice measure 2]                                             %! _comment_measure_numbers
-                            f'4.
+                            f'4.                                                                 %! baca_make_notes
                         }   %*% ViolinI
                         {   %*% ViolinII
         <BLANKLINE>
                             % [MusicVoice measure 3]                                             %! _comment_measure_numbers
-                            e'2
+                            e'2                                                                  %! baca_make_notes
         <BLANKLINE>
                             % [MusicVoice measure 4]                                             %! _comment_measure_numbers
-                            f'4.
+                            f'4.                                                                 %! baca_make_notes
         <BLANKLINE>
                         }   %*% ViolinII
                     }
@@ -1082,58 +1082,58 @@ class IndicatorCommand(scoping.Command):
                         {
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                            e'8
+                            e'8                                                                      %! baca_make_even_divisions
                             \fermata                                                                 %! IndicatorCommand
-                            [
+                            [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            d''8
-                            \fermata                                                                 %! IndicatorCommand
-            <BLANKLINE>
-                            f'8
+                            d''8                                                                     %! baca_make_even_divisions
                             \fermata                                                                 %! IndicatorCommand
             <BLANKLINE>
-                            e''8
+                            f'8                                                                      %! baca_make_even_divisions
                             \fermata                                                                 %! IndicatorCommand
-                            ]
+            <BLANKLINE>
+                            e''8                                                                     %! baca_make_even_divisions
+                            \fermata                                                                 %! IndicatorCommand
+                            ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                            g'8
+                            g'8                                                                      %! baca_make_even_divisions
                             \fermata                                                                 %! IndicatorCommand
-                            [
+                            [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            f''8
+                            f''8                                                                     %! baca_make_even_divisions
                             \fermata                                                                 %! IndicatorCommand
             <BLANKLINE>
-                            e'8
+                            e'8                                                                      %! baca_make_even_divisions
                             \fermata                                                                 %! IndicatorCommand
-                            ]
+                            ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                            d''8
+                            d''8                                                                     %! baca_make_even_divisions
                             \fermata                                                                 %! IndicatorCommand
-                            [
+                            [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            f'8
-                            \fermata                                                                 %! IndicatorCommand
-            <BLANKLINE>
-                            e''8
+                            f'8                                                                      %! baca_make_even_divisions
                             \fermata                                                                 %! IndicatorCommand
             <BLANKLINE>
-                            g'8
+                            e''8                                                                     %! baca_make_even_divisions
                             \fermata                                                                 %! IndicatorCommand
-                            ]
+            <BLANKLINE>
+                            g'8                                                                      %! baca_make_even_divisions
+                            \fermata                                                                 %! IndicatorCommand
+                            ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                            f''8
+                            f''8                                                                     %! baca_make_even_divisions
                             \fermata                                                                 %! IndicatorCommand
-                            [
+                            [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            e'8
+                            e'8                                                                      %! baca_make_even_divisions
                             \fermata                                                                 %! IndicatorCommand
             <BLANKLINE>
-                            d''8
+                            d''8                                                                     %! baca_make_even_divisions
                             \fermata                                                                 %! IndicatorCommand
-                            ]
+                            ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                         }
                     }
@@ -1538,58 +1538,58 @@ class LabelCommand(scoping.Command):
                         {
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                            e'8
+                            e'8                                                                      %! baca_make_even_divisions
                             ^ \markup { E4 }
-                            [
+                            [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            d''8
+                            d''8                                                                     %! baca_make_even_divisions
                             ^ \markup { D5 }
             <BLANKLINE>
-                            f'8
+                            f'8                                                                      %! baca_make_even_divisions
                             ^ \markup { F4 }
             <BLANKLINE>
-                            e''8
+                            e''8                                                                     %! baca_make_even_divisions
                             ^ \markup { E5 }
-                            ]
+                            ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                            g'8
+                            g'8                                                                      %! baca_make_even_divisions
                             ^ \markup { G4 }
-                            [
+                            [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            f''8
+                            f''8                                                                     %! baca_make_even_divisions
                             ^ \markup { F5 }
             <BLANKLINE>
-                            e'8
+                            e'8                                                                      %! baca_make_even_divisions
                             ^ \markup { E4 }
-                            ]
+                            ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                            d''8
+                            d''8                                                                     %! baca_make_even_divisions
                             ^ \markup { D5 }
-                            [
+                            [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            f'8
+                            f'8                                                                      %! baca_make_even_divisions
                             ^ \markup { F4 }
             <BLANKLINE>
-                            e''8
+                            e''8                                                                     %! baca_make_even_divisions
                             ^ \markup { E5 }
             <BLANKLINE>
-                            g'8
+                            g'8                                                                      %! baca_make_even_divisions
                             ^ \markup { G4 }
-                            ]
+                            ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                            f''8
+                            f''8                                                                     %! baca_make_even_divisions
                             ^ \markup { F5 }
-                            [
+                            [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            e'8
+                            e'8                                                                      %! baca_make_even_divisions
                             ^ \markup { E4 }
             <BLANKLINE>
-                            d''8
+                            d''8                                                                     %! baca_make_even_divisions
                             ^ \markup { D5 }
-                            ]
+                            ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                         }
                     }
@@ -2025,44 +2025,44 @@ def bar_extent_persistent(
                             \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
                             \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
                             \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:_attach_color_literal(2)
-                            b'8
-                            [
+                            b'8                                                                      %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            b'8
+                            b'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
-                            b'8
+                            b'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
-                            b'8
-                            ]
+                            b'8                                                                      %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                            b'8
-                            [
+                            b'8                                                                      %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            b'8
+                            b'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
-                            b'8
-                            ]
+                            b'8                                                                      %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                            b'8
-                            [
+                            b'8                                                                      %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            b'8
+                            b'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
-                            b'8
+                            b'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
-                            b'8
-                            ]
+                            b'8                                                                      %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                            b'8
-                            [
+                            b'8                                                                      %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            b'8
+                            b'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
-                            b'8
-                            ]
+                            b'8                                                                      %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                         }
                     }
@@ -2314,18 +2314,18 @@ def container(
                         {   %*% ViolinI
         <BLANKLINE>
                             % [MusicVoice measure 1]                                             %! _comment_measure_numbers
-                            e'2
+                            e'2                                                                  %! baca_make_notes
         <BLANKLINE>
                             % [MusicVoice measure 2]                                             %! _comment_measure_numbers
-                            f'4.
+                            f'4.                                                                 %! baca_make_notes
                         }   %*% ViolinI
                         {   %*% ViolinII
         <BLANKLINE>
                             % [MusicVoice measure 3]                                             %! _comment_measure_numbers
-                            e'2
+                            e'2                                                                  %! baca_make_notes
         <BLANKLINE>
                             % [MusicVoice measure 4]                                             %! _comment_measure_numbers
-                            f'4.
+                            f'4.                                                                 %! baca_make_notes
         <BLANKLINE>
                         }   %*% ViolinII
                     }
@@ -3638,18 +3638,18 @@ def parts(
                                 \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                             %@% \override ViolinMusicStaff.Clef.color = ##f                      %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
                                 \set ViolinMusicStaff.forceClef = ##t                            %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):ScoreTemplate(3)
-                                e'2
+                                e'2                                                              %! baca_make_notes
                                 ^ \markup \baca-default-indicator-markup "(Violin)"              %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                 \override ViolinMusicStaff.Clef.color = #(x11-color 'violet)     %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
         <BLANKLINE>
                                 % [ViolinMusicVoice measure 2]                                   %! _comment_measure_numbers
-                                e'4.
+                                e'4.                                                             %! baca_make_notes
         <BLANKLINE>
                                 % [ViolinMusicVoice measure 3]                                   %! _comment_measure_numbers
-                                e'2
+                                e'2                                                              %! baca_make_notes
         <BLANKLINE>
                                 % [ViolinMusicVoice measure 4]                                   %! _comment_measure_numbers
-                                e'4.
+                                e'4.                                                             %! baca_make_notes
         <BLANKLINE>
                             }   %*% PartAssignment('Violin')
                         }

@@ -740,7 +740,7 @@ class RhythmCommand(scoping.Command):
                                 \repeatTie
                 <BLANKLINE>
                                 \baca_unpitched_music_warning                                            %! _color_unpitched_notes
-                                c'4
+                                c'4                                                                      %! baca_make_repeat_tied_notes
                                 \repeatTie
                 <BLANKLINE>
                             }
@@ -1023,29 +1023,126 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
 
         >>> divisions = [(1, 4), (3, 16), (5, 8)]
         >>> selections = rhythm_maker(divisions)
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     selections,
-        ...     divisions,
-        ...     )
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Staff])
-            \new RhythmicStaff
+            \context Staff = "MusicStaff"
             {
-                {   % measure
-                    \time 1/4
-                    s1 * 1/4
-                }   % measure
-                {   % measure
-                    \time 3/16
-                    s1 * 3/16
-                }   % measure
-                {   % measure
-                    \time 5/8
-                    s1 * 5/8
-                }   % measure
+                \context Voice = "MusicVoice"
+                {
+            <BLANKLINE>
+                    % [MusicVoice measure 1] %! _comment_measure_numbers
+                    \override TextScript.font-size = #-2 %! OverrideCommand(1)
+                    \override TextScript.staff-padding = #5 %! OverrideCommand(1)
+                    \baca_unpitched_music_warning %! _color_unpitched_notes
+                    c'8.
+                    _ \markup {
+                        \fraction
+                            3
+                            16
+                        }
+            <BLANKLINE>
+                    \baca_unpitched_music_warning %! _color_unpitched_notes
+                    c'4
+                    _ \markup {
+                        \fraction
+                            4
+                            16
+                        }
+            <BLANKLINE>
+                    \baca_unpitched_music_warning %! _color_unpitched_notes
+                    c'16
+                    _ \markup {
+                        \fraction
+                            3
+                            16
+                        }
+                    ~
+            <BLANKLINE>
+                    % [MusicVoice measure 2] %! _comment_measure_numbers
+                    \baca_unpitched_music_warning %! _color_unpitched_notes
+                    c'8
+            <BLANKLINE>
+                    \baca_unpitched_music_warning %! _color_unpitched_notes
+                    c'4
+                    _ \markup {
+                        \fraction
+                            4
+                            16
+                        }
+            <BLANKLINE>
+                    \baca_unpitched_music_warning %! _color_unpitched_notes
+                    c'8
+                    _ \markup {
+                        \fraction
+                            2
+                            16
+                        }
+            <BLANKLINE>
+                    % [MusicVoice measure 3] %! _comment_measure_numbers
+                    r2
+                    _ \markup {
+                        \fraction
+                            8
+                            16
+                        }
+            <BLANKLINE>
+                    % [MusicVoice measure 4] %! _comment_measure_numbers
+                    \baca_unpitched_music_warning %! _color_unpitched_notes
+                    c'16
+                    _ \markup {
+                        \fraction
+                            1
+                            16
+                        }
+            <BLANKLINE>
+                    \baca_unpitched_music_warning %! _color_unpitched_notes
+                    c'4
+                    _ \markup {
+                        \fraction
+                            4
+                            16
+                        }
+            <BLANKLINE>
+                    \baca_unpitched_music_warning %! _color_unpitched_notes
+                    c'8.
+                    _ \markup {
+                        \fraction
+                            3
+                            16
+                        }
+            <BLANKLINE>
+                    % [MusicVoice measure 5] %! _comment_measure_numbers
+                    \baca_unpitched_music_warning %! _color_unpitched_notes
+                    c'4
+                    _ \markup {
+                        \fraction
+                            4
+                            16
+                        }
+            <BLANKLINE>
+                    \baca_unpitched_music_warning %! _color_unpitched_notes
+                    c'8.
+                    _ \markup {
+                        \fraction
+                            3
+                            16
+                        }
+                    [
+            <BLANKLINE>
+                    \baca_unpitched_music_warning %! _color_unpitched_notes
+                    c'16
+                    _ \markup {
+                        \fraction
+                            1
+                            16
+                        }
+                    ]
+                    \revert TextScript.font-size %! OverrideCommand(2)
+                    \revert TextScript.staff-padding %! OverrideCommand(2)
+            <BLANKLINE>
+                }
             }
 
     Usage follows the two-step configure-once / call-repeatedly pattern shown
@@ -1096,17 +1193,21 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
             assert isinstance(division, prototype), repr(division)
             written_duration = abjad.Duration(1)
             multiplied_duration = division
-            skip = self._make_skips(written_duration, [multiplied_duration])
+            skip = self._make_skips(
+                written_duration,
+                [multiplied_duration],
+                tag=self.tag,
+                )
             result.append(skip)
         return result
 
     @staticmethod
-    def _make_skips(written_duration, multiplied_durations):
+    def _make_skips(written_duration, multiplied_durations, tag=None):
         skips = []
         written_duration = abjad.Duration(written_duration)
         for multiplied_duration in multiplied_durations:
             multiplied_duration = abjad.Duration(multiplied_duration)
-            skip = abjad.Skip(written_duration)
+            skip = abjad.Skip(written_duration, tag=tag)
             multiplier = multiplied_duration / written_duration
             abjad.attach(multiplier, skip)
             skips.append(skip)
@@ -1132,29 +1233,126 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
 
             >>> divisions = [(1, 4), (3, 16), (5, 8)]
             >>> selections = rhythm_maker(divisions)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(
-            ...     selections,
-            ...     divisions,
-            ...     )
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Staff])
-                \new RhythmicStaff
+                \context Staff = "MusicStaff"
                 {
-                    {   % measure
-                        \time 1/4
-                        s1 * 1/4
-                    }   % measure
-                    {   % measure
-                        \time 3/16
-                        s1 * 3/16
-                    }   % measure
-                    {   % measure
-                        \time 5/8
-                        s1 * 5/8
-                    }   % measure
+                    \context Voice = "MusicVoice"
+                    {
+                <BLANKLINE>
+                        % [MusicVoice measure 1] %! _comment_measure_numbers
+                        \override TextScript.font-size = #-2 %! OverrideCommand(1)
+                        \override TextScript.staff-padding = #5 %! OverrideCommand(1)
+                        \baca_unpitched_music_warning %! _color_unpitched_notes
+                        c'8.
+                        _ \markup {
+                            \fraction
+                                3
+                                16
+                            }
+                <BLANKLINE>
+                        \baca_unpitched_music_warning %! _color_unpitched_notes
+                        c'4
+                        _ \markup {
+                            \fraction
+                                4
+                                16
+                            }
+                <BLANKLINE>
+                        \baca_unpitched_music_warning %! _color_unpitched_notes
+                        c'16
+                        _ \markup {
+                            \fraction
+                                3
+                                16
+                            }
+                        ~
+                <BLANKLINE>
+                        % [MusicVoice measure 2] %! _comment_measure_numbers
+                        \baca_unpitched_music_warning %! _color_unpitched_notes
+                        c'8
+                <BLANKLINE>
+                        \baca_unpitched_music_warning %! _color_unpitched_notes
+                        c'4
+                        _ \markup {
+                            \fraction
+                                4
+                                16
+                            }
+                <BLANKLINE>
+                        \baca_unpitched_music_warning %! _color_unpitched_notes
+                        c'8
+                        _ \markup {
+                            \fraction
+                                2
+                                16
+                            }
+                <BLANKLINE>
+                        % [MusicVoice measure 3] %! _comment_measure_numbers
+                        r2
+                        _ \markup {
+                            \fraction
+                                8
+                                16
+                            }
+                <BLANKLINE>
+                        % [MusicVoice measure 4] %! _comment_measure_numbers
+                        \baca_unpitched_music_warning %! _color_unpitched_notes
+                        c'16
+                        _ \markup {
+                            \fraction
+                                1
+                                16
+                            }
+                <BLANKLINE>
+                        \baca_unpitched_music_warning %! _color_unpitched_notes
+                        c'4
+                        _ \markup {
+                            \fraction
+                                4
+                                16
+                            }
+                <BLANKLINE>
+                        \baca_unpitched_music_warning %! _color_unpitched_notes
+                        c'8.
+                        _ \markup {
+                            \fraction
+                                3
+                                16
+                            }
+                <BLANKLINE>
+                        % [MusicVoice measure 5] %! _comment_measure_numbers
+                        \baca_unpitched_music_warning %! _color_unpitched_notes
+                        c'4
+                        _ \markup {
+                            \fraction
+                                4
+                                16
+                            }
+                <BLANKLINE>
+                        \baca_unpitched_music_warning %! _color_unpitched_notes
+                        c'8.
+                        _ \markup {
+                            \fraction
+                                3
+                                16
+                            }
+                        [
+                <BLANKLINE>
+                        \baca_unpitched_music_warning %! _color_unpitched_notes
+                        c'16
+                        _ \markup {
+                            \fraction
+                                1
+                                16
+                            }
+                        ]
+                        \revert TextScript.font-size %! OverrideCommand(2)
+                        \revert TextScript.staff-padding %! OverrideCommand(2)
+                <BLANKLINE>
+                    }
                 }
 
         Returns tuplet specifier or none.
@@ -1881,12 +2079,16 @@ def flags() -> rmakers.BeamSpecifier:
         beam_each_division=False,
         )
 
-def make_even_divisions() -> RhythmCommand:
+def make_even_divisions(
+    *,
+    tag: str = 'baca_make_even_divisions',
+    ) -> RhythmCommand:
     """
     Makes even divisions.
     """
     return RhythmCommand(
         rhythm_maker=rmakers.EvenDivisionRhythmMaker(
+            tag=tag,
             tuplet_specifier=rmakers.TupletSpecifier(
                 extract_trivial=True,
                 ),
@@ -1895,6 +2097,7 @@ def make_even_divisions() -> RhythmCommand:
 
 def make_fused_tuplet_monads(
     *,
+    tag: str  = 'baca_make_fused_tuplet_monads',
     tuplet_ratio: typing.Tuple[int] = None,
     ) -> RhythmCommand:
     """
@@ -1910,6 +2113,7 @@ def make_fused_tuplet_monads(
             .sum()
             .sequence(),
         rhythm_maker=rmakers.TupletRhythmMaker(
+            tag=tag,
             tie_specifier=rmakers.TieSpecifier(
                 repeat_ties=True,
                 ),
@@ -1922,7 +2126,9 @@ def make_fused_tuplet_monads(
             ),
         )
 
-def make_multimeasure_rests() -> RhythmCommand:
+def make_multimeasure_rests(
+    tag: str = 'baca_make_multimeasure_rests',
+    ) -> RhythmCommand:
     """
     Makes multimeasure rests.
     """
@@ -1933,6 +2139,7 @@ def make_multimeasure_rests() -> RhythmCommand:
     return RhythmCommand(
         rhythm_maker=rmakers.NoteRhythmMaker(
             division_masks=[mask],
+            tag=tag,
             ),
         )
 
@@ -1940,6 +2147,7 @@ def make_notes(
     *,
     dmask: rmakers.MaskKeyword = None,
     repeat_ties: bool = False,
+    tag: str = 'baca_make_notes',
     ) -> RhythmCommand:
     """
     Makes notes; rewrites meter.
@@ -1951,6 +2159,7 @@ def make_notes(
         rewrite_meter=True,
         rhythm_maker=rmakers.NoteRhythmMaker(
             division_masks=dmask,
+            tag=tag,
             tie_specifier=tie_specifier,
             )
         )
@@ -1959,6 +2168,7 @@ def make_repeat_tied_notes(
     *,
     dmask: rmakers.MaskKeyword = None,
     do_not_rewrite_meter: bool = None,
+    tag: str = 'baca_make_repeat_tied_notes',
     ) -> RhythmCommand:
     """
     Makes repeat-tied notes; rewrites meter.
@@ -1967,6 +2177,7 @@ def make_repeat_tied_notes(
         rewrite_meter=not(do_not_rewrite_meter),
         rhythm_maker=rmakers.NoteRhythmMaker(
             division_masks=dmask,
+            tag=tag,
             tie_specifier=rmakers.TieSpecifier(
                 tie_across_divisions=True,
                 repeat_ties=True,
@@ -1980,6 +2191,7 @@ def make_repeated_duration_notes(
     beam_specifier: rmakers.BeamSpecifier = None,
     dmask: rmakers.MaskKeyword = None,
     do_not_rewrite_meter: bool = None,
+    tag: str = 'baca_make_repeated_duration_notes',
     ) -> RhythmCommand:
     """
     Makes repeated-duration notes; rewrites meter.
@@ -2001,17 +2213,19 @@ def make_repeated_duration_notes(
         rhythm_maker=rmakers.NoteRhythmMaker(
             beam_specifier=beam_specifier,
             division_masks=dmask,
+            tag=tag,
             tie_specifier=tie_specifier,
             ),
         )
 
-def make_rests() -> RhythmCommand:
+def make_rests(tag: str = 'baca_make_rests') -> RhythmCommand:
     """
     Makes rests.
     """
     return RhythmCommand(
         rhythm_maker=rmakers.NoteRhythmMaker(
             division_masks=[rmakers.silence([0], 1)],
+            tag=tag,
             ),
         )
 
@@ -2128,7 +2342,11 @@ def make_rhythm(
         rhythm_maker=argument,
         )
 
-def make_single_attack(duration) -> RhythmCommand:
+def make_single_attack(
+    duration,
+    *,
+    tag: str = 'baca_make_single_attack',
+    ) -> RhythmCommand:
     """
     Makes single attacks with ``duration``.
     """
@@ -2142,12 +2360,13 @@ def make_single_attack(duration) -> RhythmCommand:
             prefix_counts=[1],
             talea_denominator=denominator,
             ),
+        tag=tag,
         )
     return RhythmCommand(
         rhythm_maker=rhythm_maker,
         )
 
-def make_skips() -> RhythmCommand:
+def make_skips(tag: str = 'baca_make_skips') -> RhythmCommand:
     """
     Makes skips.
     """
@@ -2155,13 +2374,14 @@ def make_skips() -> RhythmCommand:
         rhythm_maker=SkipRhythmMaker()
         )
 
-def make_tied_notes() -> RhythmCommand:
+def make_tied_notes(tag: str = 'baca_make_tied_notes') -> RhythmCommand:
     """
     Makes tied notes; rewrites meter.
     """
     return RhythmCommand(
         rewrite_meter=True,
         rhythm_maker=rmakers.NoteRhythmMaker(
+            tag=tag,
             tie_specifier=rmakers.TieSpecifier(
                 tie_across_divisions=True,
                 ),
@@ -2170,11 +2390,13 @@ def make_tied_notes() -> RhythmCommand:
 
 def make_tied_repeated_durations(
     durations: typing.Iterable,
+    *,
+    tag: str = 'baca_make_tied_reepated_durations',
     ) -> RhythmCommand:
     """
     Makes tied repeated durations; does not rewrite meter.
     """
-    command = make_repeated_duration_notes(durations)
+    command = make_repeated_duration_notes(durations, tag=tag)
     return abjad.new(
         command,
         rewrite_meter=False,
@@ -2252,17 +2474,17 @@ def repeat_tie_from(
                         {
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                            c'2
+                            c'2                                                                      %! baca_make_notes
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                            c'4.
+                            c'4.                                                                     %! baca_make_notes
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                            c'2
+                            c'2                                                                      %! baca_make_notes
                             \repeatTie                                                               %! TCC
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                            c'4.
+                            c'4.                                                                     %! baca_make_notes
             <BLANKLINE>
                         }
                     }
@@ -2346,17 +2568,17 @@ def repeat_tie_to(
                         {
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                            c'2
+                            c'2                                                                      %! baca_make_notes
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                            c'4.
+                            c'4.                                                                     %! baca_make_notes
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                            c'2
+                            c'2                                                                      %! baca_make_notes
                             \repeatTie                                                               %! TCC
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                            c'4.
+                            c'4.                                                                     %! baca_make_notes
             <BLANKLINE>
                         }
                     }
@@ -2467,17 +2689,17 @@ def tie_from(
                         {
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                            c'2
+                            c'2                                                                      %! baca_make_notes
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                            c'4.
+                            c'4.                                                                     %! baca_make_notes
                             ~                                                                        %! TCC
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                            c'2
+                            c'2                                                                      %! baca_make_notes
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                            c'4.
+                            c'4.                                                                     %! baca_make_notes
             <BLANKLINE>
                         }
                     }
@@ -2556,17 +2778,17 @@ def tie_to(
                         {
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                            c'2
+                            c'2                                                                      %! baca_make_notes
                             ~                                                                        %! TCC
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                            c'4.
+                            c'4.                                                                     %! baca_make_notes
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                            c'2
+                            c'2                                                                      %! baca_make_notes
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                            c'4.
+                            c'4.                                                                     %! baca_make_notes
             <BLANKLINE>
                         }
                     }
@@ -2646,18 +2868,18 @@ def untie_to(
                         {
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                            c'2
+                            c'2                                                                      %! baca_make_tied_notes
                             ~
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                            c'4.
+                            c'4.                                                                     %! baca_make_tied_notes
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                            c'2
+                            c'2                                                                      %! baca_make_tied_notes
                             ~
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                            c'4.
+                            c'4.                                                                     %! baca_make_tied_notes
             <BLANKLINE>
                         }
                     }

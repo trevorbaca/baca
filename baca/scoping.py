@@ -737,73 +737,73 @@ def apply(
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \baca_unpitched_music_warning                                            %! _color_unpitched_notes
-                            c'8
-                            [
+                            c'8                                                                      %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             \baca_unpitched_music_warning                                            %! _color_unpitched_notes
-                            c'8
+                            c'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             \baca_unpitched_music_warning                                            %! _color_unpitched_notes
-                            c'8
+                            c'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             \baca_unpitched_music_warning                                            %! _color_unpitched_notes
-                            c'8
-                            ]
+                            c'8                                                                      %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             \baca_unpitched_music_warning                                            %! _color_unpitched_notes
-                            c'8
+                            c'8                                                                      %! baca_make_even_divisions
                             -\marcato                                                                %! IndicatorCommand
                             -\staccato                                                               %! IndicatorCommand
-                            [
+                            [                                                                        %! baca_make_even_divisions
                             (                                                                        %! SpannerCommand
             <BLANKLINE>
                             \baca_unpitched_music_warning                                            %! _color_unpitched_notes
-                            c'8
+                            c'8                                                                      %! baca_make_even_divisions
                             -\marcato                                                                %! IndicatorCommand
                             -\staccato                                                               %! IndicatorCommand
             <BLANKLINE>
                             \baca_unpitched_music_warning                                            %! _color_unpitched_notes
-                            c'8
+                            c'8                                                                      %! baca_make_even_divisions
                             -\marcato                                                                %! IndicatorCommand
                             -\staccato                                                               %! IndicatorCommand
-                            ]
+                            ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             \baca_unpitched_music_warning                                            %! _color_unpitched_notes
-                            c'8
+                            c'8                                                                      %! baca_make_even_divisions
                             -\marcato                                                                %! IndicatorCommand
                             -\staccato                                                               %! IndicatorCommand
-                            [
+                            [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             \baca_unpitched_music_warning                                            %! _color_unpitched_notes
-                            c'8
-                            -\marcato                                                                %! IndicatorCommand
-                            -\staccato                                                               %! IndicatorCommand
-            <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
-                            c'8
+                            c'8                                                                      %! baca_make_even_divisions
                             -\marcato                                                                %! IndicatorCommand
                             -\staccato                                                               %! IndicatorCommand
             <BLANKLINE>
                             \baca_unpitched_music_warning                                            %! _color_unpitched_notes
-                            c'8
+                            c'8                                                                      %! baca_make_even_divisions
                             -\marcato                                                                %! IndicatorCommand
                             -\staccato                                                               %! IndicatorCommand
-                            ]
+            <BLANKLINE>
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                            c'8                                                                      %! baca_make_even_divisions
+                            -\marcato                                                                %! IndicatorCommand
+                            -\staccato                                                               %! IndicatorCommand
+                            ]                                                                        %! baca_make_even_divisions
                             )                                                                        %! SpannerCommand
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             \baca_unpitched_music_warning                                            %! _color_unpitched_notes
-                            c'8
-                            [
+                            c'8                                                                      %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             \baca_unpitched_music_warning                                            %! _color_unpitched_notes
-                            c'8
+                            c'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             \baca_unpitched_music_warning                                            %! _color_unpitched_notes
-                            c'8
-                            ]
+                            c'8                                                                      %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                         }
                     }
@@ -881,73 +881,73 @@ def apply(
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \baca_unpitched_music_warning                                            %! _color_unpitched_notes
-                            c'8
-                            [
+                            c'8                                                                      %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             \baca_unpitched_music_warning                                            %! _color_unpitched_notes
-                            c'8
+                            c'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             \baca_unpitched_music_warning                                            %! _color_unpitched_notes
-                            c'8
+                            c'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             \baca_unpitched_music_warning                                            %! _color_unpitched_notes
-                            c'8
-                            ]
+                            c'8                                                                      %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             \baca_unpitched_music_warning                                            %! _color_unpitched_notes
-                            c'8
+                            c'8                                                                      %! baca_make_even_divisions
                             -\marcato                                                                %! IndicatorCommand
                             -\staccato                                                               %! IndicatorCommand
-                            [
+                            [                                                                        %! baca_make_even_divisions
                             (                                                                        %! SpannerCommand
             <BLANKLINE>
                             \baca_unpitched_music_warning                                            %! _color_unpitched_notes
-                            c'8
+                            c'8                                                                      %! baca_make_even_divisions
                             -\marcato                                                                %! IndicatorCommand
                             -\staccato                                                               %! IndicatorCommand
             <BLANKLINE>
                             \baca_unpitched_music_warning                                            %! _color_unpitched_notes
-                            c'8
+                            c'8                                                                      %! baca_make_even_divisions
                             -\marcato                                                                %! IndicatorCommand
                             -\staccato                                                               %! IndicatorCommand
-                            ]
+                            ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             \baca_unpitched_music_warning                                            %! _color_unpitched_notes
-                            c'8
+                            c'8                                                                      %! baca_make_even_divisions
                             -\marcato                                                                %! IndicatorCommand
                             -\staccato                                                               %! IndicatorCommand
-                            [
+                            [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             \baca_unpitched_music_warning                                            %! _color_unpitched_notes
-                            c'8
-                            -\marcato                                                                %! IndicatorCommand
-                            -\staccato                                                               %! IndicatorCommand
-            <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
-                            c'8
+                            c'8                                                                      %! baca_make_even_divisions
                             -\marcato                                                                %! IndicatorCommand
                             -\staccato                                                               %! IndicatorCommand
             <BLANKLINE>
                             \baca_unpitched_music_warning                                            %! _color_unpitched_notes
-                            c'8
+                            c'8                                                                      %! baca_make_even_divisions
                             -\marcato                                                                %! IndicatorCommand
                             -\staccato                                                               %! IndicatorCommand
-                            ]
+            <BLANKLINE>
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                            c'8                                                                      %! baca_make_even_divisions
+                            -\marcato                                                                %! IndicatorCommand
+                            -\staccato                                                               %! IndicatorCommand
+                            ]                                                                        %! baca_make_even_divisions
                             )                                                                        %! SpannerCommand
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             \baca_unpitched_music_warning                                            %! _color_unpitched_notes
-                            c'8
-                            [
+                            c'8                                                                      %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             \baca_unpitched_music_warning                                            %! _color_unpitched_notes
-                            c'8
+                            c'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             \baca_unpitched_music_warning                                            %! _color_unpitched_notes
-                            c'8
-                            ]
+                            c'8                                                                      %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                         }
                     }
@@ -1109,30 +1109,30 @@ def measures(
                         {
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                            e'8
-                            [
+                            e'8                                                                      %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            f'8
+                            f'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
-                            e'8
+                            e'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
-                            f'8
-                            ]
+                            f'8                                                                      %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                            e'8
-                            [
+                            e'8                                                                      %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            f'8
+                            f'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
-                            e'8
-                            ]
+                            e'8                                                                      %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                            f'2
+                            f'2                                                                      %! baca_make_repeat_tied_notes
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                            f'4.
+                            f'4.                                                                     %! baca_make_repeat_tied_notes
                             \repeatTie
             <BLANKLINE>
                         }
