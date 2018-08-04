@@ -49,22 +49,22 @@ class AccidentalAdjustmentCommand(scoping.Command):
                         % [GlobalSkips measure 1]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                         \baca_bar_line_visible                                                       %! SM_5
                         \bar "|"                                                                     %! SM_5
             <BLANKLINE>
@@ -599,22 +599,22 @@ class ClusterCommand(scoping.Command):
                         % [GlobalSkips measure 1]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                         \baca_bar_line_visible                                                       %! SM_5
                         \bar "|"                                                                     %! SM_5
             <BLANKLINE>
@@ -839,22 +839,22 @@ class ClusterCommand(scoping.Command):
                             % [GlobalSkips measure 1]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -985,22 +985,22 @@ class ClusterCommand(scoping.Command):
                             % [GlobalSkips measure 1]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -1121,22 +1121,22 @@ class ClusterCommand(scoping.Command):
                             % [GlobalSkips measure 1]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -1268,22 +1268,22 @@ class ClusterCommand(scoping.Command):
                             % [GlobalSkips measure 1]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -1404,22 +1404,22 @@ class ClusterCommand(scoping.Command):
                             % [GlobalSkips measure 1]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -1541,22 +1541,22 @@ class ClusterCommand(scoping.Command):
                             % [GlobalSkips measure 1]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -1632,22 +1632,22 @@ class ColorFingeringCommand(scoping.Command):
                         % [GlobalSkips measure 1]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                         \baca_bar_line_visible                                                       %! SM_5
                         \bar "|"                                                                     %! SM_5
             <BLANKLINE>
@@ -2048,22 +2048,22 @@ class MicrotoneDeviationCommand(scoping.Command):
                         % [GlobalSkips measure 1]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                         \baca_bar_line_visible                                                       %! SM_5
                         \bar "|"                                                                     %! SM_5
             <BLANKLINE>
@@ -2243,22 +2243,22 @@ class OctaveDisplacementCommand(scoping.Command):
                         % [GlobalSkips measure 1]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                         \baca_bar_line_visible                                                       %! SM_5
                         \bar "|"                                                                     %! SM_5
             <BLANKLINE>
@@ -2444,22 +2444,22 @@ class PitchCommand(scoping.Command):
                         % [GlobalSkips measure 1]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                         \baca_bar_line_visible                                                       %! SM_5
                         \bar "|"                                                                     %! SM_5
             <BLANKLINE>
@@ -2548,22 +2548,22 @@ class PitchCommand(scoping.Command):
                         % [GlobalSkips measure 1]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                         \baca_bar_line_visible                                                       %! SM_5
                         \bar "|"                                                                     %! SM_5
             <BLANKLINE>
@@ -2652,22 +2652,22 @@ class PitchCommand(scoping.Command):
                         % [GlobalSkips measure 1]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                         \baca_bar_line_visible                                                       %! SM_5
                         \bar "|"                                                                     %! SM_5
             <BLANKLINE>
@@ -3285,22 +3285,22 @@ class RegisterCommand(scoping.Command):
                         % [GlobalSkips measure 1]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                         \baca_bar_line_visible                                                       %! SM_5
                         \bar "|"                                                                     %! SM_5
             <BLANKLINE>
@@ -3638,42 +3638,42 @@ class RegisterInterpolationCommand(scoping.Command):
                         % [GlobalSkips measure 1]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 5]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 6]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 7]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 8]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                         \baca_bar_line_visible                                                       %! SM_5
                         \bar "|"                                                                     %! SM_5
             <BLANKLINE>
@@ -3805,42 +3805,42 @@ class RegisterInterpolationCommand(scoping.Command):
                         % [GlobalSkips measure 1]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 5]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 6]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 7]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 8]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                         \baca_bar_line_visible                                                       %! SM_5
                         \bar "|"                                                                     %! SM_5
             <BLANKLINE>
@@ -3972,42 +3972,42 @@ class RegisterInterpolationCommand(scoping.Command):
                         % [GlobalSkips measure 1]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 5]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 6]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 7]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 8]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                         \baca_bar_line_visible                                                       %! SM_5
                         \bar "|"                                                                     %! SM_5
             <BLANKLINE>
@@ -4139,42 +4139,42 @@ class RegisterInterpolationCommand(scoping.Command):
                         % [GlobalSkips measure 1]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 5]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 6]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 7]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 8]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                         \baca_bar_line_visible                                                       %! SM_5
                         \bar "|"                                                                     %! SM_5
             <BLANKLINE>
@@ -4306,42 +4306,42 @@ class RegisterInterpolationCommand(scoping.Command):
                         % [GlobalSkips measure 1]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 5]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 6]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 7]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 8]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                         \baca_bar_line_visible                                                       %! SM_5
                         \bar "|"                                                                     %! SM_5
             <BLANKLINE>
@@ -6527,22 +6527,22 @@ def force_accidental(
                         % [GlobalSkips measure 1]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                         \baca_bar_line_visible                                                       %! SM_5
                         \bar "|"                                                                     %! SM_5
             <BLANKLINE>

@@ -65,14 +65,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -147,14 +147,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -241,14 +241,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -334,14 +334,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -417,19 +417,19 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -525,14 +525,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -606,11 +606,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -684,11 +684,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -763,11 +763,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -830,11 +830,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -910,11 +910,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -975,11 +975,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -1055,11 +1055,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -1123,11 +1123,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -1221,14 +1221,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -1285,14 +1285,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM_4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible %! SM_5
                             \bar "|"               %! SM_5
                 <BLANKLINE>
@@ -1346,14 +1346,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM_4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible %! SM_5
                             \bar "|"               %! SM_5
                 <BLANKLINE>
@@ -1424,14 +1424,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -1488,14 +1488,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM_4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible %! SM_5
                             \bar "|"               %! SM_5
                 <BLANKLINE>
@@ -1549,14 +1549,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM_4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible %! SM_5
                             \bar "|"               %! SM_5
                 <BLANKLINE>
@@ -1639,14 +1639,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -1704,14 +1704,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM_4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible %! SM_5
                             \bar "|"               %! SM_5
                 <BLANKLINE>
@@ -1766,14 +1766,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM_4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible %! SM_5
                             \bar "|"               %! SM_5
                 <BLANKLINE>
@@ -1857,14 +1857,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -1922,14 +1922,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM_4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible %! SM_5
                             \bar "|"               %! SM_5
                 <BLANKLINE>
@@ -1984,14 +1984,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM_4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible %! SM_5
                             \bar "|"               %! SM_5
                 <BLANKLINE>
@@ -2072,19 +2072,19 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -2149,19 +2149,19 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \time 4/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak %! IC:BREAK
-                            s1 * 1/2
+                            s1 * 1/2 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM_4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            s1 * 1/2
+                            s1 * 1/2 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 3] %! SM_4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
-                            s1 * 1/2
+                            s1 * 1/2 %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible %! SM_5
                             \bar "|"               %! SM_5
                 <BLANKLINE>
@@ -2223,19 +2223,19 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \time 4/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak %! IC:BREAK
-                            s1 * 1/2
+                            s1 * 1/2 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM_4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            s1 * 1/2
+                            s1 * 1/2 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 3] %! SM_4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
-                            s1 * 1/2
+                            s1 * 1/2 %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible %! SM_5
                             \bar "|"               %! SM_5
                 <BLANKLINE>
@@ -2332,14 +2332,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -2397,14 +2397,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM_4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible %! SM_5
                             \bar "|"               %! SM_5
                 <BLANKLINE>
@@ -2459,14 +2459,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM_4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible %! SM_5
                             \bar "|"               %! SM_5
                 <BLANKLINE>
@@ -2569,14 +2569,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -2643,14 +2643,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM_4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible %! SM_5
                             \bar "|"               %! SM_5
                 <BLANKLINE>
@@ -2714,14 +2714,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM_4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible %! SM_5
                             \bar "|"               %! SM_5
                 <BLANKLINE>
@@ -2802,14 +2802,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -2876,14 +2876,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM_4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible %! SM_5
                             \bar "|"               %! SM_5
                 <BLANKLINE>
@@ -2947,14 +2947,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \time 3/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM_4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible %! SM_5
                             \bar "|"               %! SM_5
                 <BLANKLINE>
@@ -3047,14 +3047,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -3122,14 +3122,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM_4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible %! SM_5
                             \bar "|"               %! SM_5
                 <BLANKLINE>
@@ -3194,14 +3194,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM_4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible %! SM_5
                             \bar "|"               %! SM_5
                 <BLANKLINE>
@@ -3295,14 +3295,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -3370,14 +3370,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM_4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible %! SM_5
                             \bar "|"               %! SM_5
                 <BLANKLINE>
@@ -3442,14 +3442,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM_4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible %! SM_5
                             \bar "|"               %! SM_5
                 <BLANKLINE>
@@ -3540,19 +3540,19 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -3637,19 +3637,19 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \time 4/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak %! IC:BREAK
-                            s1 * 1/2
+                            s1 * 1/2 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM_4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            s1 * 1/2
+                            s1 * 1/2 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 3] %! SM_4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
-                            s1 * 1/2
+                            s1 * 1/2 %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible %! SM_5
                             \bar "|"               %! SM_5
                 <BLANKLINE>
@@ -3731,19 +3731,19 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \time 4/8 %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak %! IC:BREAK
-                            s1 * 1/2
+                            s1 * 1/2 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM_4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
-                            s1 * 1/2
+                            s1 * 1/2 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 3] %! SM_4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
-                            s1 * 1/2
+                            s1 * 1/2 %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible %! SM_5
                             \bar "|"               %! SM_5
                 <BLANKLINE>
@@ -3860,14 +3860,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -3935,14 +3935,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM_4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible %! SM_5
                             \bar "|"               %! SM_5
                 <BLANKLINE>
@@ -4007,14 +4007,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \bar "" %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue" %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! SM_4
                             \baca_new_spacing_section #1 #24 %! HSS1:SPACING
                             \noBreak %! BMM2:BREAK
                             \baca_lbsd #15 #'(11) %! IC:BREAK
                             \break %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8 %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible %! SM_5
                             \bar "|"               %! SM_5
                 <BLANKLINE>
@@ -4114,19 +4114,19 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IC:BREAK
                             \break                                                                       %! IC:BREAK
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -4243,7 +4243,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                         %@% - \abjad_invisible_line                                                      %! MMI_2
                         %@% - \tweak bound-details.left.text \markup {                                   %! MMI_2
                         %@%     \concat                                                                  %! MMI_2
@@ -4270,7 +4270,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #25                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \stopTextSpan                                                                %! MMI_4
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
@@ -4354,7 +4354,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                         %@% - \abjad_invisible_line                                                      %! MMI_2
                         %@% - \tweak bound-details.left.text \markup {                                   %! MMI_2
                         %@%     \concat                                                                  %! MMI_2
@@ -4381,7 +4381,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \stopTextSpan                                                                %! MMI_4
                             \revert TextSpanner.staff-padding                                            %! OC2
                             \baca_bar_line_visible                                                       %! SM_5
@@ -4467,7 +4467,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                         %@% - \abjad_invisible_line                                                      %! MMI_2
                         %@% - \tweak bound-details.left.text \markup {                                   %! MMI_2
                         %@%     \concat                                                                  %! MMI_2
@@ -4494,7 +4494,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \stopTextSpan                                                                %! MMI_4
                             \revert TextSpanner.staff-padding                                            %! OC2
                             \baca_bar_line_visible                                                       %! SM_5
@@ -4566,7 +4566,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                         %@% - \abjad_invisible_line                                                      %! MMI_2
                         %@% - \tweak bound-details.left.text \markup {                                   %! MMI_2
                         %@%     \concat                                                                  %! MMI_2
@@ -4601,7 +4601,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \stopTextSpan                                                                %! MMI_4
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
@@ -4685,7 +4685,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                         %@% - \abjad_invisible_line                                                      %! MMI_2
                         %@% - \tweak bound-details.left.text \markup {                                   %! MMI_2
                         %@%     \concat                                                                  %! MMI_2
@@ -4712,7 +4712,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \stopTextSpan                                                                %! MMI_4
                             \revert TextSpanner.staff-padding                                            %! OC2
                             \baca_bar_line_visible                                                       %! SM_5
@@ -4783,11 +4783,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -4910,11 +4910,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -4981,11 +4981,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -5068,11 +5068,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -5143,11 +5143,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -5223,11 +5223,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -5304,11 +5304,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -5373,11 +5373,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -5457,11 +5457,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -5549,7 +5549,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                         %@% - \abjad_dashed_line_with_arrow                                              %! MMI_2
                         %@% - \tweak bound-details.left.text \markup {                                   %! MMI_2
                         %@%     \concat                                                                  %! MMI_2
@@ -5580,7 +5580,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #25                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \stopTextSpan                                                                %! MMI_4
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
@@ -5663,7 +5663,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                         %@% - \abjad_dashed_line_with_arrow                                              %! MMI_2
                         %@% - \tweak bound-details.left.text \markup {                                   %! MMI_2
                         %@%     \concat                                                                  %! MMI_2
@@ -5694,7 +5694,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \stopTextSpan                                                                %! MMI_4
                             \revert TextSpanner.staff-padding                                            %! OC2
                             \baca_bar_line_visible                                                       %! SM_5
@@ -5779,7 +5779,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                         %@% - \abjad_dashed_line_with_arrow                                              %! MMI_2
                         %@% - \tweak bound-details.left.text \markup {                                   %! MMI_2
                         %@%     \concat                                                                  %! MMI_2
@@ -5810,7 +5810,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \stopTextSpan                                                                %! MMI_4
                             \revert TextSpanner.staff-padding                                            %! OC2
                             \baca_bar_line_visible                                                       %! SM_5
@@ -5885,7 +5885,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                         %@% - \abjad_dashed_line_with_arrow                                              %! MMI_2
                         %@% - \tweak bound-details.left.text \markup {                                   %! MMI_2
                         %@%     \concat                                                                  %! MMI_2
@@ -5916,7 +5916,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \stopTextSpan                                                                %! MMI_1
                         %@% - \abjad_dashed_line_with_arrow                                              %! MMI_2
                         %@% - \tweak bound-details.left.text \markup {                                   %! MMI_2
@@ -5948,7 +5948,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 3]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \stopTextSpan                                                                %! MMI_4
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
@@ -6034,7 +6034,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
                             \pageBreak                                                                   %! IC:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                         %@% - \abjad_dashed_line_with_arrow                                              %! MMI_2
                         %@% - \tweak bound-details.left.text \markup {                                   %! MMI_2
                         %@%     \concat                                                                  %! MMI_2
@@ -6065,7 +6065,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \noBreak                                                                     %! BMM2:BREAK
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \stopTextSpan                                                                %! MMI_4
                             \revert TextSpanner.staff-padding                                            %! OC2
                             \baca_bar_line_visible                                                       %! SM_5

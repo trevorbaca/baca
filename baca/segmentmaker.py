@@ -54,22 +54,22 @@ class SegmentMaker(abjad.SegmentMaker):
                         % [GlobalSkips measure 1]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! SM_4
                         \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! SM_4
                         \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 3/8
+                        s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                         \baca_bar_line_visible                                                       %! SM_5
                         \bar "|"                                                                     %! SM_5
             <BLANKLINE>
@@ -394,22 +394,22 @@ class SegmentMaker(abjad.SegmentMaker):
                             % [GlobalSkips measure 1]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -529,22 +529,22 @@ class SegmentMaker(abjad.SegmentMaker):
                             % [GlobalSkips measure 1]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -2244,10 +2244,15 @@ class SegmentMaker(abjad.SegmentMaker):
     def _make_global_skips(self):
         context = self.score['GlobalSkips']
         for time_signature in self.time_signatures:
-            skip = abjad.Skip(1)
+            skip = abjad.Skip(1, tag='MAKE_GLOBAL_SKIPS_1')
             multiplier = abjad.Multiplier(time_signature.duration)
             abjad.attach(multiplier, skip, tag=None)
-            abjad.attach(time_signature, skip, context='Score', tag='SM_1')
+            abjad.attach(
+                time_signature,
+                skip,
+                context='Score',
+                tag='SM_1',
+                )
             context.append(skip)
         if self.first_segment:
             return
@@ -3072,11 +3077,11 @@ class SegmentMaker(abjad.SegmentMaker):
                             \baca_new_spacing_section #1 #31                                             %! HSS1:SPACING
                             \time 6/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #31                                             %! HSS1:SPACING
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -3272,25 +3277,25 @@ class SegmentMaker(abjad.SegmentMaker):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 1/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/16
+                            s1 * 1/16                                                                    %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 7/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 7/16
+                            s1 * 7/16                                                                    %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 1/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/16
+                            s1 * 1/16                                                                    %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -3442,25 +3447,25 @@ class SegmentMaker(abjad.SegmentMaker):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 1/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/16
+                            s1 * 1/16                                                                    %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 7/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 7/16
+                            s1 * 7/16                                                                    %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 1/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/16
+                            s1 * 1/16                                                                    %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -3612,22 +3617,22 @@ class SegmentMaker(abjad.SegmentMaker):
                             % [GlobalSkips measure 1]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -3715,22 +3720,22 @@ class SegmentMaker(abjad.SegmentMaker):
                             % [GlobalSkips measure 1]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "||"                                                                    %! SM_5
                 <BLANKLINE>
@@ -3820,22 +3825,22 @@ class SegmentMaker(abjad.SegmentMaker):
                             % [GlobalSkips measure 1]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|."                                                                    %! SM_5
                 <BLANKLINE>
@@ -3927,22 +3932,22 @@ class SegmentMaker(abjad.SegmentMaker):
                             % [GlobalSkips measure 1]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "||"                                                                    %! SM_5
                 <BLANKLINE>
@@ -4042,22 +4047,22 @@ class SegmentMaker(abjad.SegmentMaker):
                             % [GlobalSkips measure 1]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|."                                                                    %! SM_5
                 <BLANKLINE>
@@ -4209,22 +4214,22 @@ class SegmentMaker(abjad.SegmentMaker):
                             % [GlobalSkips measure 1]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -4312,22 +4317,22 @@ class SegmentMaker(abjad.SegmentMaker):
                             % [GlobalSkips measure 1]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -4481,19 +4486,19 @@ class SegmentMaker(abjad.SegmentMaker):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/16
+                            s1 * 3/16                                                                    %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            s1 * 3/16
+                            s1 * 3/16                                                                    %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            s1 * 3/16
+                            s1 * 3/16                                                                    %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            s1 * 3/16
+                            s1 * 3/16                                                                    %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -4644,19 +4649,19 @@ class SegmentMaker(abjad.SegmentMaker):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 3/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/16
+                            s1 * 3/16                                                                    %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            s1 * 3/16
+                            s1 * 3/16                                                                    %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            s1 * 3/16
+                            s1 * 3/16                                                                    %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            s1 * 3/16
+                            s1 * 3/16                                                                    %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -4854,22 +4859,22 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \bar ""                                                                      %! SM2:+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -5050,22 +5055,22 @@ class SegmentMaker(abjad.SegmentMaker):
                             % [GlobalSkips measure 1]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -5121,22 +5126,22 @@ class SegmentMaker(abjad.SegmentMaker):
                             % [GlobalSkips measure 1]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -5232,22 +5237,22 @@ class SegmentMaker(abjad.SegmentMaker):
                             % [GlobalSkips measure 1]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -5346,22 +5351,22 @@ class SegmentMaker(abjad.SegmentMaker):
                             % [GlobalSkips measure 1]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! SM_4
                             \time 4/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/2
+                            s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! SM_4
                             \time 3/8                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 3/8
+                            s1 * 3/8                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>

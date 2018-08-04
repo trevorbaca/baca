@@ -2246,13 +2246,13 @@ class ImbricationCommand(scoping.Command):
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 7/16                                                                   %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 7/16
+                            s1 * 7/16                                                                    %! MAKE_GLOBAL_SKIPS_1
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! SM_4
                             \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                             \time 1/4                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                             \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                            s1 * 1/4
+                            s1 * 1/4                                                                     %! MAKE_GLOBAL_SKIPS_1
                             \baca_bar_line_visible                                                       %! SM_5
                             \bar "|"                                                                     %! SM_5
                 <BLANKLINE>
@@ -8421,13 +8421,13 @@ class NestingCommand(scoping.Command):
                         \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                         \time 1/2                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/2
+                        s1 * 1/2                                                                     %! MAKE_GLOBAL_SKIPS_1
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! SM_4
                         \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
                         \time 1/4                                                                    %! SM8:EXPLICIT_TIME_SIGNATURE:SM_1
                         \baca_time_signature_color "blue"                                            %! SM6:EXPLICIT_TIME_SIGNATURE_COLOR:SM_1
-                        s1 * 1/4
+                        s1 * 1/4                                                                     %! MAKE_GLOBAL_SKIPS_1
                         \baca_bar_line_visible                                                       %! SM_5
                         \bar "|"                                                                     %! SM_5
             <BLANKLINE>
