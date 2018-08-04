@@ -57,25 +57,25 @@ class RhythmCommand(scoping.Command):
                     {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
@@ -92,56 +92,56 @@ class RhythmCommand(scoping.Command):
                         {
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
                             [
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
                             ]
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
                             [
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
                             ]
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
                             [
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
                             ]
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
                             [
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
                             ]
             <BLANKLINE>
@@ -517,25 +517,25 @@ class RhythmCommand(scoping.Command):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
@@ -552,50 +552,50 @@ class RhythmCommand(scoping.Command):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 [
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                 <BLANKLINE>
                                 % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 ]
                 <BLANKLINE>
@@ -711,7 +711,7 @@ class RhythmCommand(scoping.Command):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 10/8                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 5/4                                                                     %! _make_global_skips(1)
@@ -728,18 +728,18 @@ class RhythmCommand(scoping.Command):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'4.
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'4
                                 \repeatTie
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'4.
                                 \repeatTie
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'4
                                 \repeatTie
                 <BLANKLINE>
@@ -816,25 +816,25 @@ class RhythmCommand(scoping.Command):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #16                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #16                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 5]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #16                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -851,7 +851,7 @@ class RhythmCommand(scoping.Command):
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 \override TextScript.font-size = #-2                                     %! OverrideCommand(1)
                                 \override TextScript.staff-padding = #5                                  %! OverrideCommand(1)
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8.
                                 _ \markup {
                                     \fraction
@@ -859,7 +859,7 @@ class RhythmCommand(scoping.Command):
                                         16
                                     }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'4
                                 _ \markup {
                                     \fraction
@@ -867,7 +867,7 @@ class RhythmCommand(scoping.Command):
                                         16
                                     }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'16
                                 _ \markup {
                                     \fraction
@@ -877,10 +877,10 @@ class RhythmCommand(scoping.Command):
                                 ~
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'4
                                 _ \markup {
                                     \fraction
@@ -888,7 +888,7 @@ class RhythmCommand(scoping.Command):
                                         16
                                     }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 _ \markup {
                                     \fraction
@@ -905,7 +905,7 @@ class RhythmCommand(scoping.Command):
                                     }
                 <BLANKLINE>
                                 % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'16
                                 _ \markup {
                                     \fraction
@@ -913,7 +913,7 @@ class RhythmCommand(scoping.Command):
                                         16
                                     }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'4
                                 _ \markup {
                                     \fraction
@@ -921,7 +921,7 @@ class RhythmCommand(scoping.Command):
                                         16
                                     }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8.
                                 _ \markup {
                                     \fraction
@@ -930,7 +930,7 @@ class RhythmCommand(scoping.Command):
                                     }
                 <BLANKLINE>
                                 % [MusicVoice measure 5]                                                 %! _comment_measure_numbers
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'4
                                 _ \markup {
                                     \fraction
@@ -938,7 +938,7 @@ class RhythmCommand(scoping.Command):
                                         16
                                     }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8.
                                 _ \markup {
                                     \fraction
@@ -947,7 +947,7 @@ class RhythmCommand(scoping.Command):
                                     }
                                 [
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'16
                                 _ \markup {
                                     \fraction
@@ -2059,25 +2059,25 @@ def make_rhythm(
                     {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
@@ -2217,25 +2217,25 @@ def repeat_tie_from(
                     {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -2311,25 +2311,25 @@ def repeat_tie_to(
                     {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)

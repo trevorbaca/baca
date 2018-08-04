@@ -46,13 +46,13 @@ class SpannerCommand(scoping.Command):
                         \scaleDurations #'(1 . 1) {
                             fs''16
                             [
-                            (                                                                        %! SC
+                            (                                                                        %! SpannerCommand
                             e''16
                             ef''16
                             af''16
                             g''16
                             ]
-                            )                                                                        %! SC
+                            )                                                                        %! SpannerCommand
                         }
                         \scaleDurations #'(1 . 1) {
                             a'16
@@ -138,13 +138,13 @@ class SpannerCommand(scoping.Command):
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             g'8
                             [
-                            (                                                                        %! SC
+                            (                                                                        %! SpannerCommand
             <BLANKLINE>
                             f''8
             <BLANKLINE>
                             e'8
                             ]
-                            )                                                                        %! SC
+                            )                                                                        %! SpannerCommand
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             d''8
@@ -261,7 +261,7 @@ class SpannerCommand(scoping.Command):
             spanner,
             leaves,
             deactivate=self.deactivate,
-            tag=self.tag.prepend('SC'),
+            tag=self.tag.prepend('SpannerCommand'),
             )
         return spanner
 
@@ -317,7 +317,7 @@ class SpannerCommand(scoping.Command):
                             \scaleDurations #'(1 . 1) {
                                 c'16
                                 [
-                                (                                                                        %! SC
+                                (                                                                        %! SpannerCommand
                                 d'16
                                 bf'16
                                 ]
@@ -333,7 +333,7 @@ class SpannerCommand(scoping.Command):
                             }
                             \scaleDurations #'(1 . 1) {
                                 a'16
-                                )                                                                        %! SC
+                                )                                                                        %! SpannerCommand
                             }
                         }
                     }
@@ -408,15 +408,15 @@ class SpannerCommand(scoping.Command):
                         {
                             \scaleDurations #'(1 . 1) {
                                 d''4
-                                ~                                                                        %! SC
+                                ~                                                                        %! SpannerCommand
                                 d''16
-                                ~                                                                        %! SC
+                                ~                                                                        %! SpannerCommand
                                 d''4
-                                ~                                                                        %! SC
+                                ~                                                                        %! SpannerCommand
                                 d''16
-                                ~                                                                        %! SC
+                                ~                                                                        %! SpannerCommand
                                 d''4
-                                ~                                                                        %! SC
+                                ~                                                                        %! SpannerCommand
                                 d''16
                             }
                         }
@@ -476,25 +476,25 @@ def beam(
                     {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -512,7 +512,7 @@ def beam(
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             c'8
-                            [                                                                        %! SC
+                            [                                                                        %! SpannerCommand
             <BLANKLINE>
                             c'8
             <BLANKLINE>
@@ -542,7 +542,7 @@ def beam(
                             c'8
             <BLANKLINE>
                             c'8
-                            ]                                                                        %! SC
+                            ]                                                                        %! SpannerCommand
             <BLANKLINE>
                         }
                     }
@@ -597,25 +597,25 @@ def finger_pressure_transition(
                     {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -634,11 +634,11 @@ def finger_pressure_transition(
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \once \override NoteHead.style = #'harmonic                              %! OverrideCommand(1)
                             c''2
-                            - \tweak arrow-length #2                                                 %! SC
-                            - \tweak arrow-width #0.5                                                %! SC
-                            - \tweak bound-details.right.arrow ##t                                   %! SC
-                            - \tweak thickness #3                                                    %! SC
-                            \glissando                                                               %! SC
+                            - \tweak arrow-length #2                                                 %! SpannerCommand
+                            - \tweak arrow-width #0.5                                                %! SpannerCommand
+                            - \tweak bound-details.right.arrow ##t                                   %! SpannerCommand
+                            - \tweak thickness #3                                                    %! SpannerCommand
+                            \glissando                                                               %! SpannerCommand
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             c''4.
@@ -646,11 +646,11 @@ def finger_pressure_transition(
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             \once \override NoteHead.style = #'harmonic                              %! OverrideCommand(1)
                             c''2
-                            - \tweak arrow-length #2                                                 %! SC
-                            - \tweak arrow-width #0.5                                                %! SC
-                            - \tweak bound-details.right.arrow ##t                                   %! SC
-                            - \tweak thickness #3                                                    %! SC
-                            \glissando                                                               %! SC
+                            - \tweak arrow-length #2                                                 %! SpannerCommand
+                            - \tweak arrow-width #0.5                                                %! SpannerCommand
+                            - \tweak bound-details.right.arrow ##t                                   %! SpannerCommand
+                            - \tweak thickness #3                                                    %! SpannerCommand
+                            \glissando                                                               %! SpannerCommand
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             c''4.
@@ -746,52 +746,52 @@ def glissando(
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             e'8
                             [
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
             <BLANKLINE>
                             d''8
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
             <BLANKLINE>
                             f'8
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
             <BLANKLINE>
                             e''8
                             ]
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             g'8
                             [
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
             <BLANKLINE>
                             f''8
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
             <BLANKLINE>
                             e'8
                             ]
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             d''8
                             [
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
             <BLANKLINE>
                             f'8
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
             <BLANKLINE>
                             e''8
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
             <BLANKLINE>
                             g'8
                             ]
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             f''8
                             [
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
             <BLANKLINE>
                             e'8
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
             <BLANKLINE>
                             d''8
                             ]
@@ -865,7 +865,7 @@ def glissando(
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             e'8
                             [
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
             <BLANKLINE>
                             d''8
             <BLANKLINE>
@@ -899,7 +899,7 @@ def glissando(
                             [
             <BLANKLINE>
                             e'8
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
             <BLANKLINE>
                             d''8
                             ]
@@ -955,17 +955,17 @@ def glissando(
                         \times 9/10 {
                             fs''16
                             [
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
                             e''16
                             ]
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
                             ef''4
                             ~
                             ef''16
                             r16
                             af''16
                             [
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
                             g''16
                             ]
                         }
@@ -1028,7 +1028,7 @@ def ottava(
                         \times 9/10 {
                             \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
-                            \ottava #1                                                               %! SC
+                            \ottava #1                                                               %! SpannerCommand
                             c'16
                             [
                             d'16
@@ -1055,7 +1055,7 @@ def ottava(
                         }
                         \times 4/5 {
                             a'16
-                            \ottava #0                                                               %! SC
+                            \ottava #0                                                               %! SpannerCommand
                             r4
                             \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
@@ -1106,7 +1106,7 @@ def ottava_bassa(
                         \times 9/10 {
                             \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
-                            \ottava #-1                                                              %! SC
+                            \ottava #-1                                                              %! SpannerCommand
                             c'16
                             [
                             d'16
@@ -1133,7 +1133,7 @@ def ottava_bassa(
                         }
                         \times 4/5 {
                             a'16
-                            \ottava #0                                                               %! SC
+                            \ottava #0                                                               %! SpannerCommand
                             r4
                             \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
@@ -1190,11 +1190,11 @@ def repeat_tie(
                             c'16
                             [
                             c'16
-                            \repeatTie                                                               %! SC
+                            \repeatTie                                                               %! SpannerCommand
                             ]
                             bf'4
                             bf'16
-                            \repeatTie                                                               %! SC
+                            \repeatTie                                                               %! SpannerCommand
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -1204,9 +1204,9 @@ def repeat_tie(
                             e''16
                             ]
                             e''4
-                            \repeatTie                                                               %! SC
+                            \repeatTie                                                               %! SpannerCommand
                             e''16
-                            \repeatTie                                                               %! SC
+                            \repeatTie                                                               %! SpannerCommand
                             r16
                             fs''16
                             [
@@ -1284,7 +1284,7 @@ def slur(
                             r8
                             c'16
                             [
-                            (                                                                        %! SC
+                            (                                                                        %! SpannerCommand
                             d'16
                             ]
                             bf'4
@@ -1309,7 +1309,7 @@ def slur(
                         }
                         \times 4/5 {
                             a'16
-                            )                                                                        %! SC
+                            )                                                                        %! SpannerCommand
                             r4
                             \revert Slur.direction                                                   %! OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
@@ -1366,7 +1366,7 @@ def slur(
                         \times 9/10 {
                             fs''16
                             [
-                            (                                                                        %! SC
+                            (                                                                        %! SpannerCommand
                             e''16
                             ]
                             ef''4
@@ -1377,7 +1377,7 @@ def slur(
                             [
                             g''16
                             ]
-                            )                                                                        %! SC
+                            )                                                                        %! SpannerCommand
                         }
                         \times 4/5 {
                             a'16
@@ -1434,9 +1434,9 @@ def sustain_pedal(
                         \times 9/10 {
                             \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OverrideCommand(1)
                             \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SC
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
                             r8
-                            \sustainOn                                                               %! SC
+                            \sustainOn                                                               %! SpannerCommand
                             c'16
                             [
                             d'16
@@ -1464,7 +1464,7 @@ def sustain_pedal(
                         \times 4/5 {
                             a'16
                             r4
-                            \sustainOff                                                              %! SC
+                            \sustainOff                                                              %! SpannerCommand
                             \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
@@ -1518,10 +1518,10 @@ def sustain_pedal(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SC
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
                             fs''16
                             [
-                            \sustainOn                                                               %! SC
+                            \sustainOn                                                               %! SpannerCommand
                             e''16
                             ]
                             ef''4
@@ -1532,7 +1532,7 @@ def sustain_pedal(
                             [
                             g''16
                             ]
-                            \sustainOff                                                              %! SC
+                            \sustainOff                                                              %! SpannerCommand
                         }
                         \times 4/5 {
                             a'16
@@ -1586,9 +1586,9 @@ def sustain_pedal(
                             bf'4
                             ~
                             bf'16
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SC
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
                             r16
-                            \sustainOn                                                               %! SC
+                            \sustainOn                                                               %! SpannerCommand
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
@@ -1604,7 +1604,7 @@ def sustain_pedal(
                             [
                             g''16
                             ]
-                            \sustainOff                                                              %! SC
+                            \sustainOff                                                              %! SpannerCommand
                         }
                         \times 4/5 {
                             a'16
@@ -1662,10 +1662,10 @@ def sustain_pedal(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SC
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
                             fs''16
                             [
-                            \sustainOn                                                               %! SC
+                            \sustainOn                                                               %! SpannerCommand
                             e''16
                             ]
                             ef''4
@@ -1679,7 +1679,7 @@ def sustain_pedal(
                         }
                         \times 4/5 {
                             a'16
-                            \sustainOff                                                              %! SC
+                            \sustainOff                                                              %! SpannerCommand
                             r4
                             \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
@@ -1730,9 +1730,9 @@ def sustain_pedal(
                             bf'4
                             ~
                             bf'16
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SC
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
                             r16
-                            \sustainOn                                                               %! SC
+                            \sustainOn                                                               %! SpannerCommand
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
@@ -1751,7 +1751,7 @@ def sustain_pedal(
                         }
                         \times 4/5 {
                             a'16
-                            \sustainOff                                                              %! SC
+                            \sustainOff                                                              %! SpannerCommand
                             r4
                             \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
@@ -1794,9 +1794,9 @@ def sustain_pedal(
                         \times 9/10 {
                             \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OverrideCommand(1)
                             \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SC
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
                             r8
-                            \sustainOn                                                               %! SC
+                            \sustainOn                                                               %! SpannerCommand
                             c'16
                             [
                             d'16
@@ -1805,14 +1805,14 @@ def sustain_pedal(
                             ~
                             bf'16
                             r16
-                            \sustainOff                                                              %! SC
+                            \sustainOff                                                              %! SpannerCommand
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SC
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
                             fs''16
                             [
-                            \sustainOn                                                               %! SC
+                            \sustainOn                                                               %! SpannerCommand
                             e''16
                             ]
                             ef''4
@@ -1823,14 +1823,14 @@ def sustain_pedal(
                             [
                             g''16
                             ]
-                            \sustainOff                                                              %! SC
+                            \sustainOff                                                              %! SpannerCommand
                         }
                         \times 4/5 {
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SC
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
                             a'16
-                            \sustainOn                                                               %! SC
+                            \sustainOn                                                               %! SpannerCommand
                             r4
-                            \sustainOff                                                              %! SC
+                            \sustainOff                                                              %! SpannerCommand
                             \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
@@ -1872,9 +1872,9 @@ def sustain_pedal(
                         \times 9/10 {
                             \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OverrideCommand(1)
                             \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SC
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
                             r8
-                            \sustainOn                                                               %! SC
+                            \sustainOn                                                               %! SpannerCommand
                             c'16
                             [
                             d'16
@@ -1882,10 +1882,10 @@ def sustain_pedal(
                             bf'4
                             ~
                             bf'16
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SC
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
                             r16
-                            \sustainOff                                                              %! SC
-                            \sustainOn                                                               %! SC
+                            \sustainOff                                                              %! SpannerCommand
+                            \sustainOn                                                               %! SpannerCommand
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
@@ -1899,16 +1899,16 @@ def sustain_pedal(
                             r16
                             af''16
                             [
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SC
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
                             g''16
                             ]
-                            \sustainOff                                                              %! SC
-                            \sustainOn                                                               %! SC
+                            \sustainOff                                                              %! SpannerCommand
+                            \sustainOn                                                               %! SpannerCommand
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \sustainOff                                                              %! SC
+                            \sustainOff                                                              %! SpannerCommand
                             \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
@@ -1950,9 +1950,9 @@ def sustain_pedal(
                         \times 9/10 {
                             \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OverrideCommand(1)
                             \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SC
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
                             r8
-                            \sustainOn                                                               %! SC
+                            \sustainOn                                                               %! SpannerCommand
                             c'16
                             [
                             d'16
@@ -1964,11 +1964,11 @@ def sustain_pedal(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SC
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
                             fs''16
-                            \sustainOff                                                              %! SC
+                            \sustainOff                                                              %! SpannerCommand
                             [
-                            \sustainOn                                                               %! SC
+                            \sustainOn                                                               %! SpannerCommand
                             e''16
                             ]
                             ef''4
@@ -1981,12 +1981,12 @@ def sustain_pedal(
                             ]
                         }
                         \times 4/5 {
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SC
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
                             a'16
-                            \sustainOff                                                              %! SC
-                            \sustainOn                                                               %! SC
+                            \sustainOff                                                              %! SpannerCommand
+                            \sustainOn                                                               %! SpannerCommand
                             r4
-                            \sustainOff                                                              %! SC
+                            \sustainOff                                                              %! SpannerCommand
                             \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
@@ -2046,12 +2046,12 @@ def tie(
                             \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
-                            ~                                                                        %! SC
+                            ~                                                                        %! SpannerCommand
                             [
                             c'16
                             ]
                             bf'4
-                            ~                                                                        %! SC
+                            ~                                                                        %! SpannerCommand
                             bf'16
                             r16
                         }
@@ -2060,10 +2060,10 @@ def tie(
                             bf'16
                             [
                             e''16
-                            ~                                                                        %! SC
+                            ~                                                                        %! SpannerCommand
                             ]
                             e''4
-                            ~                                                                        %! SC
+                            ~                                                                        %! SpannerCommand
                             e''16
                             r16
                             fs''16
@@ -2114,13 +2114,13 @@ def tie(
                             \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
-                            ~                                                                        %! SC
+                            ~                                                                        %! SpannerCommand
                             [
                             c'16
                             ]
                             bf'4
                             bf'16
-                            \repeatTie                                                               %! SC
+                            \repeatTie                                                               %! SpannerCommand
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -2128,11 +2128,11 @@ def tie(
                             bf'16
                             [
                             e''16
-                            ~                                                                        %! SC
+                            ~                                                                        %! SpannerCommand
                             ]
                             e''4
                             e''16
-                            \repeatTie                                                               %! SC
+                            \repeatTie                                                               %! SpannerCommand
                             r16
                             fs''16
                             [
@@ -2234,7 +2234,7 @@ def trill_spanner(
                         \times 4/5 {
                             a'16
                             r4
-                            \stopTrillSpan                                                           %! SC
+                            \stopTrillSpan                                                           %! SpannerCommand
                             \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
@@ -2280,15 +2280,15 @@ def trill_spanner(
                             \startTrillSpan
                             d'16
                             ]
-                            \stopTrillSpan                                                           %! SC
+                            \stopTrillSpan                                                           %! SpannerCommand
                             \startTrillSpan
                             bf'4
                             ~
-                            \stopTrillSpan                                                           %! SC
+                            \stopTrillSpan                                                           %! SpannerCommand
                             \startTrillSpan
                             bf'16
                             r16
-                            \stopTrillSpan                                                           %! SC
+                            \stopTrillSpan                                                           %! SpannerCommand
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
@@ -2297,29 +2297,29 @@ def trill_spanner(
                             \startTrillSpan
                             e''16
                             ]
-                            \stopTrillSpan                                                           %! SC
+                            \stopTrillSpan                                                           %! SpannerCommand
                             \startTrillSpan
                             ef''4
                             ~
-                            \stopTrillSpan                                                           %! SC
+                            \stopTrillSpan                                                           %! SpannerCommand
                             \startTrillSpan
                             ef''16
                             r16
-                            \stopTrillSpan                                                           %! SC
+                            \stopTrillSpan                                                           %! SpannerCommand
                             af''16
                             [
                             \startTrillSpan
                             g''16
                             ]
-                            \stopTrillSpan                                                           %! SC
+                            \stopTrillSpan                                                           %! SpannerCommand
                             \startTrillSpan
                         }
                         \times 4/5 {
                             a'16
-                            \stopTrillSpan                                                           %! SC
+                            \stopTrillSpan                                                           %! SpannerCommand
                             \startTrillSpan
                             r4
-                            \stopTrillSpan                                                           %! SC
+                            \stopTrillSpan                                                           %! SpannerCommand
                             \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
@@ -2369,7 +2369,7 @@ def trill_spanner(
                             ~
                             bf'16
                             r16
-                            \stopTrillSpan                                                           %! SC
+                            \stopTrillSpan                                                           %! SpannerCommand
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
@@ -2382,7 +2382,7 @@ def trill_spanner(
                             ~
                             ef''16
                             r16
-                            \stopTrillSpan                                                           %! SC
+                            \stopTrillSpan                                                           %! SpannerCommand
                             af''16
                             [
                             \startTrillSpan
@@ -2392,7 +2392,7 @@ def trill_spanner(
                         \times 4/5 {
                             a'16
                             r4
-                            \stopTrillSpan                                                           %! SC
+                            \stopTrillSpan                                                           %! SpannerCommand
                             \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
@@ -2433,13 +2433,13 @@ def trill_spanner(
                         \times 9/10 {
                             \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
-                            \pitchedTrill                                                            %! SC
+                            \pitchedTrill                                                            %! SpannerCommand
                             c'16
                             [
                             \startTrillSpan ef'
                             d'16
                             ]
-                            \stopTrillSpan                                                           %! SC
+                            \stopTrillSpan                                                           %! SpannerCommand
                             bf'4
                             ~
                             bf'16
@@ -2503,60 +2503,60 @@ def trill_spanner(
                         \times 9/10 {
                             \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
-                            \pitchedTrill                                                            %! SC
+                            \pitchedTrill                                                            %! SpannerCommand
                             c'16
                             [
                             \startTrillSpan ef'
-                            \pitchedTrill                                                            %! SC
+                            \pitchedTrill                                                            %! SpannerCommand
                             d'16
                             ]
-                            \stopTrillSpan                                                           %! SC
+                            \stopTrillSpan                                                           %! SpannerCommand
                             \startTrillSpan ef'
-                            \pitchedTrill                                                            %! SC
+                            \pitchedTrill                                                            %! SpannerCommand
                             bf'4
                             ~
-                            \stopTrillSpan                                                           %! SC
+                            \stopTrillSpan                                                           %! SpannerCommand
                             \startTrillSpan ef'
                             bf'16
                             r16
-                            \stopTrillSpan                                                           %! SC
+                            \stopTrillSpan                                                           %! SpannerCommand
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \pitchedTrill                                                            %! SC
+                            \pitchedTrill                                                            %! SpannerCommand
                             fs''16
                             [
                             \startTrillSpan ef'
-                            \pitchedTrill                                                            %! SC
+                            \pitchedTrill                                                            %! SpannerCommand
                             e''16
                             ]
-                            \stopTrillSpan                                                           %! SC
+                            \stopTrillSpan                                                           %! SpannerCommand
                             \startTrillSpan ef'
-                            \pitchedTrill                                                            %! SC
+                            \pitchedTrill                                                            %! SpannerCommand
                             ef''4
                             ~
-                            \stopTrillSpan                                                           %! SC
+                            \stopTrillSpan                                                           %! SpannerCommand
                             \startTrillSpan ef'
                             ef''16
                             r16
-                            \stopTrillSpan                                                           %! SC
-                            \pitchedTrill                                                            %! SC
+                            \stopTrillSpan                                                           %! SpannerCommand
+                            \pitchedTrill                                                            %! SpannerCommand
                             af''16
                             [
                             \startTrillSpan ef'
-                            \pitchedTrill                                                            %! SC
+                            \pitchedTrill                                                            %! SpannerCommand
                             g''16
                             ]
-                            \stopTrillSpan                                                           %! SC
+                            \stopTrillSpan                                                           %! SpannerCommand
                             \startTrillSpan ef'
                         }
                         \times 4/5 {
-                            \pitchedTrill                                                            %! SC
+                            \pitchedTrill                                                            %! SpannerCommand
                             a'16
-                            \stopTrillSpan                                                           %! SC
+                            \stopTrillSpan                                                           %! SpannerCommand
                             \startTrillSpan ef'
                             r4
-                            \stopTrillSpan                                                           %! SC
+                            \stopTrillSpan                                                           %! SpannerCommand
                             \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
@@ -2597,60 +2597,60 @@ def trill_spanner(
                         \times 9/10 {
                             \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
-                            \pitchedTrill                                                            %! SC
+                            \pitchedTrill                                                            %! SpannerCommand
                             c'16
                             [
                             \startTrillSpan d'
-                            \pitchedTrill                                                            %! SC
+                            \pitchedTrill                                                            %! SpannerCommand
                             d'16
                             ]
-                            \stopTrillSpan                                                           %! SC
+                            \stopTrillSpan                                                           %! SpannerCommand
                             \startTrillSpan e'
-                            \pitchedTrill                                                            %! SC
+                            \pitchedTrill                                                            %! SpannerCommand
                             bf'4
                             ~
-                            \stopTrillSpan                                                           %! SC
+                            \stopTrillSpan                                                           %! SpannerCommand
                             \startTrillSpan c''
                             bf'16
                             r16
-                            \stopTrillSpan                                                           %! SC
+                            \stopTrillSpan                                                           %! SpannerCommand
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \pitchedTrill                                                            %! SC
+                            \pitchedTrill                                                            %! SpannerCommand
                             fs''16
                             [
                             \startTrillSpan gs''
-                            \pitchedTrill                                                            %! SC
+                            \pitchedTrill                                                            %! SpannerCommand
                             e''16
                             ]
-                            \stopTrillSpan                                                           %! SC
+                            \stopTrillSpan                                                           %! SpannerCommand
                             \startTrillSpan fs''
-                            \pitchedTrill                                                            %! SC
+                            \pitchedTrill                                                            %! SpannerCommand
                             ef''4
                             ~
-                            \stopTrillSpan                                                           %! SC
+                            \stopTrillSpan                                                           %! SpannerCommand
                             \startTrillSpan f''
                             ef''16
                             r16
-                            \stopTrillSpan                                                           %! SC
-                            \pitchedTrill                                                            %! SC
+                            \stopTrillSpan                                                           %! SpannerCommand
+                            \pitchedTrill                                                            %! SpannerCommand
                             af''16
                             [
                             \startTrillSpan bf''
-                            \pitchedTrill                                                            %! SC
+                            \pitchedTrill                                                            %! SpannerCommand
                             g''16
                             ]
-                            \stopTrillSpan                                                           %! SC
+                            \stopTrillSpan                                                           %! SpannerCommand
                             \startTrillSpan a''
                         }
                         \times 4/5 {
-                            \pitchedTrill                                                            %! SC
+                            \pitchedTrill                                                            %! SpannerCommand
                             a'16
-                            \stopTrillSpan                                                           %! SC
+                            \stopTrillSpan                                                           %! SpannerCommand
                             \startTrillSpan b'
                             r4
-                            \stopTrillSpan                                                           %! SC
+                            \stopTrillSpan                                                           %! SpannerCommand
                             \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }

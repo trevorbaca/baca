@@ -58,9 +58,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \autoPageBreaksOff                                                           %! BMM1:BREAK
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11)                                                         %! IndicatorCommand:BREAK
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -68,8 +68,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IndicatorCommand:BREAK
                             \break                                                                       %! IndicatorCommand:BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -89,7 +89,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \clef "treble"                                                           %! DEFAULT_CLEF:_set_status_tag:ScoreTemplate(3)
                                 \once \override Staff.Clef.color = #(x11-color 'DarkViolet)              %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                             %@% \override Staff.Clef.color = ##f                                         %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
-                                \set Staff.forceClef = ##t                                               %! DEFAULT_CLEF:_set_status_tag:SM33:ScoreTemplate(3)
+                                \set Staff.forceClef = ##t                                               %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):ScoreTemplate(3)
                                 R1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'violet)                        %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
                 <BLANKLINE>
@@ -140,9 +140,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \autoPageBreaksOff                                                           %! BMM1:BREAK
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11)                                                         %! IndicatorCommand:BREAK
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -150,8 +150,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IndicatorCommand:BREAK
                             \break                                                                       %! IndicatorCommand:BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -171,7 +171,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \clef "treble"                                                           %! EXPLICIT_CLEF:_set_status_tag:IndicatorCommand
                                 \once \override Staff.Clef.color = #(x11-color 'blue)                    %! EXPLICIT_CLEF_COLOR:_attach_color_literal(2)
                             %@% \override Staff.Clef.color = ##f                                         %! EXPLICIT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
-                                \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:SM33:IndicatorCommand
+                                \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):IndicatorCommand
                                 R1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
                 <BLANKLINE>
@@ -233,9 +233,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \autoPageBreaksOff                                                           %! BMM1:BREAK
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11)                                                         %! IndicatorCommand:BREAK
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar ""                                                                      %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
@@ -244,8 +244,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IndicatorCommand:BREAK
                             \break                                                                       %! IndicatorCommand:BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -265,7 +265,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \clef "alto"                                                             %! EXPLICIT_CLEF:_set_status_tag:IndicatorCommand
                                 \once \override Staff.Clef.color = #(x11-color 'blue)                    %! EXPLICIT_CLEF_COLOR:_attach_color_literal(2)
                             %@% \override Staff.Clef.color = ##f                                         %! EXPLICIT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
-                                \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:SM33:IndicatorCommand
+                                \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):IndicatorCommand
                                 R1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
                 <BLANKLINE>
@@ -326,9 +326,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \autoPageBreaksOff                                                           %! BMM1:BREAK
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11)                                                         %! IndicatorCommand:BREAK
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar ""                                                                      %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
@@ -337,8 +337,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IndicatorCommand:BREAK
                             \break                                                                       %! IndicatorCommand:BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -358,7 +358,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \clef "treble"                                                           %! REAPPLIED_CLEF:_set_status_tag:_reapply_persistent_indicators(3)
                                 \once \override Staff.Clef.color = #(x11-color 'green4)                  %! REAPPLIED_CLEF_COLOR:_attach_color_literal(2)
                             %@% \override Staff.Clef.color = ##f                                         %! REAPPLIED_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
-                                \set Staff.forceClef = ##t                                               %! REAPPLIED_CLEF:_set_status_tag:SM33:_reapply_persistent_indicators(3)
+                                \set Staff.forceClef = ##t                                               %! REAPPLIED_CLEF:_set_status_tag:_treat_persistent_wrapper(2):_reapply_persistent_indicators(3)
                                 R1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'OliveDrab)                     %! REAPPLIED_CLEF_REDRAW_COLOR:_attach_color_literal(2)
                 <BLANKLINE>
@@ -410,9 +410,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \autoPageBreaksOff                                                           %! BMM1:BREAK
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11)                                                         %! IndicatorCommand:BREAK
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -420,13 +420,13 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IndicatorCommand:BREAK
                             \break                                                                       %! IndicatorCommand:BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -446,7 +446,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \clef "treble"                                                           %! EXPLICIT_CLEF:_set_status_tag:IndicatorCommand
                                 \once \override Staff.Clef.color = #(x11-color 'blue)                    %! EXPLICIT_CLEF_COLOR:_attach_color_literal(2)
                             %@% \override Staff.Clef.color = ##f                                         %! EXPLICIT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
-                                \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:SM33:IndicatorCommand
+                                \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):IndicatorCommand
                                 R1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
                 <BLANKLINE>
@@ -454,7 +454,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \clef "treble"                                                           %! REDUNDANT_CLEF:_set_status_tag:IndicatorCommand
                                 \once \override Staff.Clef.color = #(x11-color 'DeepPink1)               %! REDUNDANT_CLEF_COLOR:_attach_color_literal(2)
                             %@% \override Staff.Clef.color = ##f                                         %! REDUNDANT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
-                                \set Staff.forceClef = ##t                                               %! REDUNDANT_CLEF:_set_status_tag:SM33:IndicatorCommand
+                                \set Staff.forceClef = ##t                                               %! REDUNDANT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):IndicatorCommand
                                 R1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'DeepPink4)                     %! REDUNDANT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
                 <BLANKLINE>
@@ -517,9 +517,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \autoPageBreaksOff                                                           %! BMM1:BREAK
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11)                                                         %! IndicatorCommand:BREAK
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar ""                                                                      %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
@@ -528,8 +528,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IndicatorCommand:BREAK
                             \break                                                                       %! IndicatorCommand:BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -549,7 +549,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \clef "treble"                                                           %! REDUNDANT_CLEF:_set_status_tag:IndicatorCommand
                                 \once \override Staff.Clef.color = #(x11-color 'DeepPink1)               %! REDUNDANT_CLEF_COLOR:_attach_color_literal(2)
                             %@% \override Staff.Clef.color = ##f                                         %! REDUNDANT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
-                                \set Staff.forceClef = ##t                                               %! REDUNDANT_CLEF:_set_status_tag:SM33:IndicatorCommand
+                                \set Staff.forceClef = ##t                                               %! REDUNDANT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):IndicatorCommand
                                 R1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'DeepPink4)                     %! REDUNDANT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
                 <BLANKLINE>
@@ -603,13 +603,13 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -680,14 +680,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar ""                                                                      %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -759,14 +759,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar ""                                                                      %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -827,13 +827,13 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -906,14 +906,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar ""                                                                      %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -972,13 +972,13 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -1051,14 +1051,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar ""                                                                      %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -1120,13 +1120,13 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -1214,9 +1214,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \autoPageBreaksOff                                                           %! BMM1:BREAK
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11)                                                         %! IndicatorCommand:BREAK
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -1224,8 +1224,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IndicatorCommand:BREAK
                             \break                                                                       %! IndicatorCommand:BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -1274,9 +1274,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \autoPageBreaksOff %! BMM1:BREAK
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff %! BreakMeasureMap(1):BREAK
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11) %! IndicatorCommand:BREAK
                             \time 3/8 %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue" %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -1284,8 +1284,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8 %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11) %! IndicatorCommand:BREAK
                             \break %! IndicatorCommand:BREAK
                             s1 * 3/8 %! _make_global_skips(1)
@@ -1331,9 +1331,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \autoPageBreaksOff %! BMM1:BREAK
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff %! BreakMeasureMap(1):BREAK
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11) %! IndicatorCommand:BREAK
                             \time 3/8 %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue" %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -1341,8 +1341,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8 %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11) %! IndicatorCommand:BREAK
                             \break %! IndicatorCommand:BREAK
                             s1 * 3/8 %! _make_global_skips(1)
@@ -1405,9 +1405,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \autoPageBreaksOff                                                           %! BMM1:BREAK
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11)                                                         %! IndicatorCommand:BREAK
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -1415,8 +1415,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IndicatorCommand:BREAK
                             \break                                                                       %! IndicatorCommand:BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -1465,9 +1465,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \autoPageBreaksOff %! BMM1:BREAK
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff %! BreakMeasureMap(1):BREAK
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11) %! IndicatorCommand:BREAK
                             \time 3/8 %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue" %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -1475,8 +1475,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8 %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11) %! IndicatorCommand:BREAK
                             \break %! IndicatorCommand:BREAK
                             s1 * 3/8 %! _make_global_skips(1)
@@ -1522,9 +1522,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \autoPageBreaksOff %! BMM1:BREAK
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff %! BreakMeasureMap(1):BREAK
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11) %! IndicatorCommand:BREAK
                             \time 3/8 %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue" %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -1532,8 +1532,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8 %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11) %! IndicatorCommand:BREAK
                             \break %! IndicatorCommand:BREAK
                             s1 * 3/8 %! _make_global_skips(1)
@@ -1607,9 +1607,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \autoPageBreaksOff                                                           %! BMM1:BREAK
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11)                                                         %! IndicatorCommand:BREAK
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar ""                                                                      %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
@@ -1618,8 +1618,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IndicatorCommand:BREAK
                             \break                                                                       %! IndicatorCommand:BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -1668,9 +1668,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \autoPageBreaksOff %! BMM1:BREAK
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff %! BreakMeasureMap(1):BREAK
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11) %! IndicatorCommand:BREAK
                             \time 3/8 %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar "" %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
@@ -1679,8 +1679,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8 %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11) %! IndicatorCommand:BREAK
                             \break %! IndicatorCommand:BREAK
                             s1 * 3/8 %! _make_global_skips(1)
@@ -1726,9 +1726,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \autoPageBreaksOff %! BMM1:BREAK
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff %! BreakMeasureMap(1):BREAK
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11) %! IndicatorCommand:BREAK
                             \time 3/8 %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar "" %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
@@ -1737,8 +1737,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8 %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11) %! IndicatorCommand:BREAK
                             \break %! IndicatorCommand:BREAK
                             s1 * 3/8 %! _make_global_skips(1)
@@ -1813,9 +1813,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \autoPageBreaksOff                                                           %! BMM1:BREAK
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11)                                                         %! IndicatorCommand:BREAK
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar ""                                                                      %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
@@ -1824,8 +1824,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IndicatorCommand:BREAK
                             \break                                                                       %! IndicatorCommand:BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -1874,9 +1874,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \autoPageBreaksOff %! BMM1:BREAK
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff %! BreakMeasureMap(1):BREAK
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11) %! IndicatorCommand:BREAK
                             \time 3/8 %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar "" %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
@@ -1885,8 +1885,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8 %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11) %! IndicatorCommand:BREAK
                             \break %! IndicatorCommand:BREAK
                             s1 * 3/8 %! _make_global_skips(1)
@@ -1932,9 +1932,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \autoPageBreaksOff %! BMM1:BREAK
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff %! BreakMeasureMap(1):BREAK
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11) %! IndicatorCommand:BREAK
                             \time 3/8 %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar "" %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
@@ -1943,8 +1943,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8 %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11) %! IndicatorCommand:BREAK
                             \break %! IndicatorCommand:BREAK
                             s1 * 3/8 %! _make_global_skips(1)
@@ -2017,9 +2017,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \autoPageBreaksOff                                                           %! BMM1:BREAK
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11)                                                         %! IndicatorCommand:BREAK
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -2027,13 +2027,13 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IndicatorCommand:BREAK
                             \break                                                                       %! IndicatorCommand:BREAK
                             s1 * 1/2                                                                     %! _make_global_skips(1)
@@ -2086,9 +2086,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \autoPageBreaksOff %! BMM1:BREAK
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff %! BreakMeasureMap(1):BREAK
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11) %! IndicatorCommand:BREAK
                             \time 4/8 %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue" %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -2096,13 +2096,13 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 1/2 %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             s1 * 1/2 %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 3] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11) %! IndicatorCommand:BREAK
                             \break %! IndicatorCommand:BREAK
                             s1 * 1/2 %! _make_global_skips(1)
@@ -2152,9 +2152,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \autoPageBreaksOff %! BMM1:BREAK
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff %! BreakMeasureMap(1):BREAK
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11) %! IndicatorCommand:BREAK
                             \time 4/8 %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue" %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -2162,13 +2162,13 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 1/2 %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             s1 * 1/2 %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 3] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11) %! IndicatorCommand:BREAK
                             \break %! IndicatorCommand:BREAK
                             s1 * 1/2 %! _make_global_skips(1)
@@ -2252,9 +2252,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \autoPageBreaksOff                                                           %! BMM1:BREAK
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11)                                                         %! IndicatorCommand:BREAK
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar ""                                                                      %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
@@ -2263,8 +2263,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IndicatorCommand:BREAK
                             \break                                                                       %! IndicatorCommand:BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -2313,9 +2313,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \autoPageBreaksOff %! BMM1:BREAK
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff %! BreakMeasureMap(1):BREAK
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11) %! IndicatorCommand:BREAK
                             \time 3/8 %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar "" %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
@@ -2324,8 +2324,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8 %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11) %! IndicatorCommand:BREAK
                             \break %! IndicatorCommand:BREAK
                             s1 * 3/8 %! _make_global_skips(1)
@@ -2371,9 +2371,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \autoPageBreaksOff %! BMM1:BREAK
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff %! BreakMeasureMap(1):BREAK
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11) %! IndicatorCommand:BREAK
                             \time 3/8 %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar "" %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
@@ -2382,8 +2382,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8 %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11) %! IndicatorCommand:BREAK
                             \break %! IndicatorCommand:BREAK
                             s1 * 3/8 %! _make_global_skips(1)
@@ -2478,9 +2478,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \autoPageBreaksOff                                                           %! BMM1:BREAK
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11)                                                         %! IndicatorCommand:BREAK
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -2488,8 +2488,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IndicatorCommand:BREAK
                             \break                                                                       %! IndicatorCommand:BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -2512,8 +2512,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 c'4.
                                 ^ \markup \baca-default-indicator-markup "[“I+II”]"                      %! DEFAULT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'violet)              %! REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName =                                         %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:SM34:ScoreTemplate(2):-PARTS
-                                \markup { I+II }                                                         %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:SM34:ScoreTemplate(2):-PARTS
+                                \set Staff.shortInstrumentName =                                         %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):ScoreTemplate(2):-PARTS
+                                \markup { I+II }                                                         %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):ScoreTemplate(2):-PARTS
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                                 c'4.
@@ -2544,9 +2544,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \autoPageBreaksOff %! BMM1:BREAK
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff %! BreakMeasureMap(1):BREAK
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11) %! IndicatorCommand:BREAK
                             \time 3/8 %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue" %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -2554,8 +2554,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8 %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11) %! IndicatorCommand:BREAK
                             \break %! IndicatorCommand:BREAK
                             s1 * 3/8 %! _make_global_skips(1)
@@ -2578,8 +2578,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 c'4.
                             %%% ^ \markup \baca-default-indicator-markup "[“I+II”]" %! DEFAULT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                             %%% \override Staff.InstrumentName.color = #(x11-color 'violet) %! REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName = %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:SM34:ScoreTemplate(2):-PARTS
-                                \markup { I+II }                 %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:SM34:ScoreTemplate(2):-PARTS
+                                \set Staff.shortInstrumentName = %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):ScoreTemplate(2):-PARTS
+                                \markup { I+II }                 %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):ScoreTemplate(2):-PARTS
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
                                 c'4.
@@ -2607,9 +2607,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \autoPageBreaksOff %! BMM1:BREAK
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff %! BreakMeasureMap(1):BREAK
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11) %! IndicatorCommand:BREAK
                             \time 3/8 %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue" %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -2617,8 +2617,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8 %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11) %! IndicatorCommand:BREAK
                             \break %! IndicatorCommand:BREAK
                             s1 * 3/8 %! _make_global_skips(1)
@@ -2641,8 +2641,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 c'4.
                                 ^ \markup \baca-default-indicator-markup "[“I+II”]" %! DEFAULT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'violet) %! REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName = %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:SM34:ScoreTemplate(2):-PARTS
-                                \markup { I+II }                 %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:SM34:ScoreTemplate(2):-PARTS
+                                \set Staff.shortInstrumentName = %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):ScoreTemplate(2):-PARTS
+                                \markup { I+II }                 %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):ScoreTemplate(2):-PARTS
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
                                 c'4.
@@ -2687,9 +2687,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \autoPageBreaksOff                                                           %! BMM1:BREAK
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11)                                                         %! IndicatorCommand:BREAK
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -2697,8 +2697,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IndicatorCommand:BREAK
                             \break                                                                       %! IndicatorCommand:BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -2721,8 +2721,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 c'4.
                                 ^ \markup \baca-explicit-indicator-markup "[“I+II”]"                     %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand
-                                \markup { I+II }                                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
+                                \markup { I+II }                                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                                 c'4.
@@ -2753,9 +2753,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \autoPageBreaksOff %! BMM1:BREAK
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff %! BreakMeasureMap(1):BREAK
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11) %! IndicatorCommand:BREAK
                             \time 3/8 %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue" %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -2763,8 +2763,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8 %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11) %! IndicatorCommand:BREAK
                             \break %! IndicatorCommand:BREAK
                             s1 * 3/8 %! _make_global_skips(1)
@@ -2787,8 +2787,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 c'4.
                             %%% ^ \markup \baca-explicit-indicator-markup "[“I+II”]" %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName = %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand
-                                \markup { I+II }                 %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand
+                                \set Staff.shortInstrumentName = %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
+                                \markup { I+II }                 %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
                                 c'4.
@@ -2816,9 +2816,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \autoPageBreaksOff %! BMM1:BREAK
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff %! BreakMeasureMap(1):BREAK
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11) %! IndicatorCommand:BREAK
                             \time 3/8 %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue" %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -2826,8 +2826,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8 %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11) %! IndicatorCommand:BREAK
                             \break %! IndicatorCommand:BREAK
                             s1 * 3/8 %! _make_global_skips(1)
@@ -2850,8 +2850,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 c'4.
                                 ^ \markup \baca-explicit-indicator-markup "[“I+II”]" %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName = %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand
-                                \markup { I+II }                 %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand
+                                \set Staff.shortInstrumentName = %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
+                                \markup { I+II }                 %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
                                 c'4.
@@ -2907,9 +2907,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \autoPageBreaksOff                                                           %! BMM1:BREAK
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11)                                                         %! IndicatorCommand:BREAK
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar ""                                                                      %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
@@ -2918,8 +2918,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IndicatorCommand:BREAK
                             \break                                                                       %! IndicatorCommand:BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -2942,8 +2942,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 c'4.
                                 ^ \markup \baca-explicit-indicator-markup "[“III+IV”]"                   %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand
-                                \markup { III+IV }                                                       %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
+                                \markup { III+IV }                                                       %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                                 c'4.
@@ -2974,9 +2974,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \autoPageBreaksOff %! BMM1:BREAK
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff %! BreakMeasureMap(1):BREAK
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11) %! IndicatorCommand:BREAK
                             \time 3/8 %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar "" %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
@@ -2985,8 +2985,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8 %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11) %! IndicatorCommand:BREAK
                             \break %! IndicatorCommand:BREAK
                             s1 * 3/8 %! _make_global_skips(1)
@@ -3009,8 +3009,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 c'4.
                             %%% ^ \markup \baca-explicit-indicator-markup "[“III+IV”]" %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName = %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand
-                                \markup { III+IV }               %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand
+                                \set Staff.shortInstrumentName = %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
+                                \markup { III+IV }               %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
                                 c'4.
@@ -3038,9 +3038,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \autoPageBreaksOff %! BMM1:BREAK
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff %! BreakMeasureMap(1):BREAK
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11) %! IndicatorCommand:BREAK
                             \time 3/8 %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar "" %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
@@ -3049,8 +3049,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8 %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11) %! IndicatorCommand:BREAK
                             \break %! IndicatorCommand:BREAK
                             s1 * 3/8 %! _make_global_skips(1)
@@ -3073,8 +3073,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 c'4.
                                 ^ \markup \baca-explicit-indicator-markup "[“III+IV”]" %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName = %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand
-                                \markup { III+IV }               %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand
+                                \set Staff.shortInstrumentName = %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
+                                \markup { III+IV }               %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
                                 c'4.
@@ -3131,9 +3131,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \autoPageBreaksOff                                                           %! BMM1:BREAK
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11)                                                         %! IndicatorCommand:BREAK
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar ""                                                                      %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
@@ -3142,8 +3142,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IndicatorCommand:BREAK
                             \break                                                                       %! IndicatorCommand:BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -3166,8 +3166,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 c'4.
                                 ^ \markup \baca-reapplied-indicator-markup "[“I+II”]"                    %! REAPPLIED_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)           %! REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName =                                         %! REDRAWN_REAPPLIED_MARGIN_MARKUP:_set_status_tag:SM34:_reapply_persistent_indicators(3):-PARTS
-                                \markup { I+II }                                                         %! REDRAWN_REAPPLIED_MARGIN_MARKUP:_set_status_tag:SM34:_reapply_persistent_indicators(3):-PARTS
+                                \set Staff.shortInstrumentName =                                         %! REDRAWN_REAPPLIED_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):_reapply_persistent_indicators(3):-PARTS
+                                \markup { I+II }                                                         %! REDRAWN_REAPPLIED_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):_reapply_persistent_indicators(3):-PARTS
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                                 c'4.
@@ -3198,9 +3198,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \autoPageBreaksOff %! BMM1:BREAK
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff %! BreakMeasureMap(1):BREAK
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11) %! IndicatorCommand:BREAK
                             \time 3/8 %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar "" %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
@@ -3209,8 +3209,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8 %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11) %! IndicatorCommand:BREAK
                             \break %! IndicatorCommand:BREAK
                             s1 * 3/8 %! _make_global_skips(1)
@@ -3233,8 +3233,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 c'4.
                             %%% ^ \markup \baca-reapplied-indicator-markup "[“I+II”]" %! REAPPLIED_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                             %%% \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %! REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName = %! REDRAWN_REAPPLIED_MARGIN_MARKUP:_set_status_tag:SM34:_reapply_persistent_indicators(3):-PARTS
-                                \markup { I+II }                 %! REDRAWN_REAPPLIED_MARGIN_MARKUP:_set_status_tag:SM34:_reapply_persistent_indicators(3):-PARTS
+                                \set Staff.shortInstrumentName = %! REDRAWN_REAPPLIED_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):_reapply_persistent_indicators(3):-PARTS
+                                \markup { I+II }                 %! REDRAWN_REAPPLIED_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):_reapply_persistent_indicators(3):-PARTS
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
                                 c'4.
@@ -3262,9 +3262,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \autoPageBreaksOff %! BMM1:BREAK
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff %! BreakMeasureMap(1):BREAK
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11) %! IndicatorCommand:BREAK
                             \time 3/8 %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar "" %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
@@ -3273,8 +3273,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8 %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11) %! IndicatorCommand:BREAK
                             \break %! IndicatorCommand:BREAK
                             s1 * 3/8 %! _make_global_skips(1)
@@ -3297,8 +3297,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 c'4.
                                 ^ \markup \baca-reapplied-indicator-markup "[“I+II”]" %! REAPPLIED_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %! REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName = %! REDRAWN_REAPPLIED_MARGIN_MARKUP:_set_status_tag:SM34:_reapply_persistent_indicators(3):-PARTS
-                                \markup { I+II }                 %! REDRAWN_REAPPLIED_MARGIN_MARKUP:_set_status_tag:SM34:_reapply_persistent_indicators(3):-PARTS
+                                \set Staff.shortInstrumentName = %! REDRAWN_REAPPLIED_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):_reapply_persistent_indicators(3):-PARTS
+                                \markup { I+II }                 %! REDRAWN_REAPPLIED_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):_reapply_persistent_indicators(3):-PARTS
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
                                 c'4.
@@ -3353,9 +3353,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \autoPageBreaksOff                                                           %! BMM1:BREAK
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11)                                                         %! IndicatorCommand:BREAK
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -3363,13 +3363,13 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IndicatorCommand:BREAK
                             \break                                                                       %! IndicatorCommand:BREAK
                             s1 * 1/2                                                                     %! _make_global_skips(1)
@@ -3392,8 +3392,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 c'2
                                 ^ \markup \baca-explicit-indicator-markup "[“I+II”]"                     %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand
-                                \markup { I+II }                                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
+                                \markup { I+II }                                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                                 \set Staff.shortInstrumentName =                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
@@ -3402,8 +3402,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 c'2
                                 ^ \markup \baca-redundant-indicator-markup "[“I+II”]"                    %! REDUNDANT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName =                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand
-                                \markup { I+II }                                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
+                                \markup { I+II }                                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                                 c'2
@@ -3434,9 +3434,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \autoPageBreaksOff %! BMM1:BREAK
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff %! BreakMeasureMap(1):BREAK
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11) %! IndicatorCommand:BREAK
                             \time 4/8 %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue" %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -3444,13 +3444,13 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 1/2 %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             s1 * 1/2 %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 3] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11) %! IndicatorCommand:BREAK
                             \break %! IndicatorCommand:BREAK
                             s1 * 1/2 %! _make_global_skips(1)
@@ -3473,8 +3473,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 c'2
                             %%% ^ \markup \baca-explicit-indicator-markup "[“I+II”]" %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName = %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand
-                                \markup { I+II }                 %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand
+                                \set Staff.shortInstrumentName = %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
+                                \markup { I+II }                 %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
                                 \set Staff.shortInstrumentName = %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
@@ -3483,8 +3483,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 c'2
                             %%% ^ \markup \baca-redundant-indicator-markup "[“I+II”]" %! REDUNDANT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName = %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand
-                                \markup { I+II }                 %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand
+                                \set Staff.shortInstrumentName = %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
+                                \markup { I+II }                 %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 3] %! _comment_measure_numbers
                                 c'2
@@ -3512,9 +3512,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \autoPageBreaksOff %! BMM1:BREAK
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff %! BreakMeasureMap(1):BREAK
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11) %! IndicatorCommand:BREAK
                             \time 4/8 %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue" %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -3522,13 +3522,13 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 1/2 %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             s1 * 1/2 %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 3] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11) %! IndicatorCommand:BREAK
                             \break %! IndicatorCommand:BREAK
                             s1 * 1/2 %! _make_global_skips(1)
@@ -3551,8 +3551,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 c'2
                                 ^ \markup \baca-explicit-indicator-markup "[“I+II”]" %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName = %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand
-                                \markup { I+II }                 %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand
+                                \set Staff.shortInstrumentName = %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
+                                \markup { I+II }                 %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
                                 \set Staff.shortInstrumentName = %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
@@ -3561,8 +3561,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 c'2
                                 ^ \markup \baca-redundant-indicator-markup "[“I+II”]" %! REDUNDANT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName = %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand
-                                \markup { I+II }                 %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand
+                                \set Staff.shortInstrumentName = %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
+                                \markup { I+II }                 %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 3] %! _comment_measure_numbers
                                 c'2
@@ -3624,9 +3624,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \autoPageBreaksOff                                                           %! BMM1:BREAK
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11)                                                         %! IndicatorCommand:BREAK
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar ""                                                                      %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
@@ -3635,8 +3635,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IndicatorCommand:BREAK
                             \break                                                                       %! IndicatorCommand:BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -3659,8 +3659,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 c'4.
                                 ^ \markup \baca-redundant-indicator-markup "[“I+II”]"                    %! REDUNDANT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName =                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand
-                                \markup { I+II }                                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
+                                \markup { I+II }                                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                                 c'4.
@@ -3691,9 +3691,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \autoPageBreaksOff %! BMM1:BREAK
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff %! BreakMeasureMap(1):BREAK
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11) %! IndicatorCommand:BREAK
                             \time 3/8 %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar "" %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
@@ -3702,8 +3702,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8 %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11) %! IndicatorCommand:BREAK
                             \break %! IndicatorCommand:BREAK
                             s1 * 3/8 %! _make_global_skips(1)
@@ -3726,8 +3726,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 c'4.
                             %%% ^ \markup \baca-redundant-indicator-markup "[“I+II”]" %! REDUNDANT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName = %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand
-                                \markup { I+II }                 %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand
+                                \set Staff.shortInstrumentName = %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
+                                \markup { I+II }                 %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
                                 c'4.
@@ -3755,9 +3755,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \autoPageBreaksOff %! BMM1:BREAK
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff %! BreakMeasureMap(1):BREAK
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11) %! IndicatorCommand:BREAK
                             \time 3/8 %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar "" %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
@@ -3766,8 +3766,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8 %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2] %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24 %! HSS1:SPACING
-                            \noBreak %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24 %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11) %! IndicatorCommand:BREAK
                             \break %! IndicatorCommand:BREAK
                             s1 * 3/8 %! _make_global_skips(1)
@@ -3790,8 +3790,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 c'4.
                                 ^ \markup \baca-redundant-indicator-markup "[“I+II”]" %! REDUNDANT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName = %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand
-                                \markup { I+II }                 %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand
+                                \set Staff.shortInstrumentName = %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
+                                \markup { I+II }                 %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
                                 c'4.
@@ -3855,9 +3855,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \autoPageBreaksOff                                                           %! BMM1:BREAK
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #0 #'(11)                                                         %! IndicatorCommand:BREAK
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -3865,15 +3865,15 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #15 #'(11)                                                        %! IndicatorCommand:BREAK
                             \break                                                                       %! IndicatorCommand:BREAK
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -3898,11 +3898,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 ^ \markup \baca-explicit-indicator-markup "[“I+II”]"                     %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                             %@% ^ \markup \baca-explicit-indicator-markup "[“III+IV”]"                   %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand:-PARTS
-                                \markup { I+II }                                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand:-PARTS
+                                \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand:-PARTS
+                                \markup { I+II }                                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand:-PARTS
                             %@% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand:-PARTS
-                                \markup { III+IV }                                                       %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:SM34:IndicatorCommand:-PARTS
+                                \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand:-PARTS
+                                \markup { III+IV }                                                       %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand:-PARTS
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                                 c'2
@@ -3968,9 +3968,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #25                                             %! HSS1:SPACING
-                            \autoPageBreaksOff                                                           %! BMM1:BREAK
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #25                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #4 #'(8)                                                          %! IndicatorCommand:BREAK
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -4000,8 +4000,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \startTextSpan                                                               %! _attach_metronome_marks(3)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #25                                             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #25                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \stopTextSpan                                                                %! _attach_metronome_marks(4)
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
@@ -4077,10 +4077,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \override TextSpanner.staff-padding = #4                                     %! OverrideCommand(1)
-                            \autoPageBreaksOff                                                           %! BMM1:BREAK
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #4 #'(8)                                                          %! IndicatorCommand:BREAK
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar ""                                                                      %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
@@ -4111,8 +4111,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \startTextSpan                                                               %! _attach_metronome_marks(3)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \stopTextSpan                                                                %! _attach_metronome_marks(4)
                             \revert TextSpanner.staff-padding                                            %! OverrideCommand(2)
@@ -4190,10 +4190,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \override TextSpanner.staff-padding = #4                                     %! OverrideCommand(1)
-                            \autoPageBreaksOff                                                           %! BMM1:BREAK
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #4 #'(8)                                                          %! IndicatorCommand:BREAK
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar ""                                                                      %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
@@ -4224,8 +4224,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \startTextSpan                                                               %! _attach_metronome_marks(3)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \stopTextSpan                                                                %! _attach_metronome_marks(4)
                             \revert TextSpanner.staff-padding                                            %! OverrideCommand(2)
@@ -4291,9 +4291,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \autoPageBreaksOff                                                           %! BMM1:BREAK
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #4 #'(8)                                                          %! IndicatorCommand:BREAK
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -4331,8 +4331,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \startTextSpan                                                               %! _attach_metronome_marks(3)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \stopTextSpan                                                                %! _attach_metronome_marks(4)
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
@@ -4408,10 +4408,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \override TextSpanner.staff-padding = #4                                     %! OverrideCommand(1)
-                            \autoPageBreaksOff                                                           %! BMM1:BREAK
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #4 #'(8)                                                          %! IndicatorCommand:BREAK
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar ""                                                                      %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
@@ -4442,8 +4442,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \startTextSpan                                                               %! _attach_metronome_marks(3)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \stopTextSpan                                                                %! _attach_metronome_marks(4)
                             \revert TextSpanner.staff-padding                                            %! OverrideCommand(2)
@@ -4512,13 +4512,13 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -4638,14 +4638,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar ""                                                                      %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -4661,11 +4661,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! REAPPLIED_PERSISTENT_OVERRIDE:_set_status_tag:_reapply_persistent_indicators(3)
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'4.
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'4.
                 <BLANKLINE>
                             }
@@ -4710,13 +4710,13 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -4796,14 +4796,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar ""                                                                      %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -4819,11 +4819,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! REDUNDANT_PERSISTENT_OVERRIDE:_set_status_tag:IndicatorCommand
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'4.
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'4.
                 <BLANKLINE>
                             }
@@ -4872,13 +4872,13 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -4951,14 +4951,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar ""                                                                      %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -5032,14 +5032,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar ""                                                                      %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -5102,13 +5102,13 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -5185,14 +5185,14 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar ""                                                                      %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -5274,9 +5274,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #25                                             %! HSS1:SPACING
-                            \autoPageBreaksOff                                                           %! BMM1:BREAK
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #25                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #4 #'(8)                                                          %! IndicatorCommand:BREAK
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -5310,8 +5310,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \startTextSpan                                                               %! _attach_metronome_marks(3)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #25                                             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #25                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \stopTextSpan                                                                %! _attach_metronome_marks(4)
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
@@ -5386,10 +5386,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \override TextSpanner.staff-padding = #4                                     %! OverrideCommand(1)
-                            \autoPageBreaksOff                                                           %! BMM1:BREAK
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #4 #'(8)                                                          %! IndicatorCommand:BREAK
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar ""                                                                      %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
@@ -5424,8 +5424,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \startTextSpan                                                               %! _attach_metronome_marks(3)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \stopTextSpan                                                                %! _attach_metronome_marks(4)
                             \revert TextSpanner.staff-padding                                            %! OverrideCommand(2)
@@ -5502,10 +5502,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \override TextSpanner.staff-padding = #4                                     %! OverrideCommand(1)
-                            \autoPageBreaksOff                                                           %! BMM1:BREAK
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #4 #'(8)                                                          %! IndicatorCommand:BREAK
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar ""                                                                      %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
@@ -5540,8 +5540,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \startTextSpan                                                               %! _attach_metronome_marks(3)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \stopTextSpan                                                                %! _attach_metronome_marks(4)
                             \revert TextSpanner.staff-padding                                            %! OverrideCommand(2)
@@ -5610,9 +5610,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \autoPageBreaksOff                                                           %! BMM1:BREAK
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #4 #'(8)                                                          %! IndicatorCommand:BREAK
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -5646,8 +5646,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \startTextSpan                                                               %! _attach_metronome_marks(3)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \stopTextSpan                                                                %! _attach_metronome_marks(1)
                         %@% - \abjad_dashed_line_with_arrow                                              %! _attach_metronome_marks(2)
@@ -5678,8 +5678,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \startTextSpan                                                               %! _attach_metronome_marks(3)
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \stopTextSpan                                                                %! _attach_metronome_marks(4)
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
@@ -5757,10 +5757,10 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \override TextSpanner.staff-padding = #4                                     %! OverrideCommand(1)
-                            \autoPageBreaksOff                                                           %! BMM1:BREAK
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca_lbsd #4 #'(8)                                                          %! IndicatorCommand:BREAK
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar ""                                                                      %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
@@ -5795,8 +5795,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             \startTextSpan                                                               %! _attach_metronome_marks(3)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
-                            \noBreak                                                                     %! BMM2:BREAK
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \stopTextSpan                                                                %! _attach_metronome_marks(4)
                             \revert TextSpanner.staff-padding                                            %! OverrideCommand(2)

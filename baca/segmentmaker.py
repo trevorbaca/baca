@@ -430,69 +430,69 @@ class SegmentMaker(abjad.SegmentMaker):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 ^ \markup { 0 }
                                 [
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 ^ \markup { 1 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 ^ \markup { 2 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 ^ \markup { 3 }
                                 ]
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 ^ \markup { 4 }
                                 [
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 ^ \markup { 5 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 ^ \markup { 6 }
                                 ]
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 ^ \markup { 7 }
                                 [
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 ^ \markup { 8 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 ^ \markup { 9 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 ^ \markup { 10 }
                                 ]
                 <BLANKLINE>
                                 % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 ^ \markup { 11 }
                                 [
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 ^ \markup { 12 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 ^ \markup { 13 }
                                 ]
@@ -565,69 +565,69 @@ class SegmentMaker(abjad.SegmentMaker):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 ^ \markup { 0 }
                                 [
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 ^ \markup { 1 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 ^ \markup { 2 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 ^ \markup { 3 }
                                 ]
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 ^ \markup { 4 }
                                 [
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 ^ \markup { 5 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 ^ \markup { 6 }
                                 ]
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 ^ \markup { 7 }
                                 [
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 ^ \markup { 8 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 ^ \markup { 9 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 ^ \markup { 10 }
                                 ]
                 <BLANKLINE>
                                 % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 ^ \markup { 11 }
                                 [
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 ^ \markup { 12 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 ^ \markup { 13 }
                                 ]
@@ -844,7 +844,11 @@ class SegmentMaker(abjad.SegmentMaker):
                         string = abjad.tags.REPEAT_TIE 
                         repeat_ties = inspector.has_indicator(string)
                         tie = abjad.Tie(repeat=repeat_ties)
-                        abjad.attach(tie, leaves, tag='SM_16')
+                        abjad.attach(
+                            tie,
+                            leaves,
+                            tag='_apply_first_and_last_ties(1)',
+                            )
                 abjad.detach(abjad.tags.TIE_TO, current_leaf)
             if abjad.inspect(current_leaf).has_indicator(abjad.tags.TIE_FROM):
                 next_leaf = abjad.inspect(current_leaf).leaf(1)
@@ -861,7 +865,11 @@ class SegmentMaker(abjad.SegmentMaker):
                         string = abjad.tags.REPEAT_TIE
                         repeat_ties = inspector.has_indicator(string)
                         tie = abjad.Tie(repeat=repeat_ties)
-                        abjad.attach(tie, leaves, tag='SM_17')
+                        abjad.attach(
+                            tie,
+                            leaves,
+                            tag='_apply_first_and_last_ties(2)',
+                            )
                 abjad.detach(abjad.tags.TIE_FROM, current_leaf)
 
     def _apply_spacing(self):
@@ -970,8 +978,6 @@ class SegmentMaker(abjad.SegmentMaker):
             prefix=prefix,
             suffix=suffix,
             )
-#        if existing_tag:
-#            tag = existing_tag.prepend(status_tag)
         if isinstance(wrapper.indicator, abjad.TimeSignature):
             string = rf'\baca_time_signature_color "{color}"'
             literal = abjad.LilyPondLiteral(string)
@@ -982,7 +988,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 literal,
                 wrapper.component,
                 deactivate=True,
-                #tag=tag.prepend('_attach_color_literal(1)'),
                 tag=tag,
                 )
         else:
@@ -992,7 +997,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 literal,
                 wrapper.component,
                 deactivate=existing_deactivate,
-                #tag=tag.prepend('_attach_color_literal(2)'),
                 tag=tag,
                 )
 
@@ -1101,8 +1105,6 @@ class SegmentMaker(abjad.SegmentMaker):
             left, right = '[', ']'
         tag = abjad.Tag(tag)
         string = f'{left}{key}{right}'
-
-        # HERE
         markup_function = SegmentMaker._status_to_markup_function[status]
         string = fr'\{markup_function} "{string}"'
         markup = abjad.Markup.from_literal(
@@ -1110,13 +1112,6 @@ class SegmentMaker(abjad.SegmentMaker):
             direction=abjad.Up,
             literal=True
             )
-
-#        markup = abjad.Markup.from_literal(f'{left}{key}{right}')
-#        markup = abjad.new(markup, direction=abjad.Up)
-#        color = SegmentMaker._status_to_color[status]
-#        color = abjad.SchemeColor(color)
-#        markup = markup.with_color(color)
-
         tag = tag.append('_attach_latent_indicator_alert')
         abjad.attach(
             markup,
@@ -1518,10 +1513,10 @@ class SegmentMaker(abjad.SegmentMaker):
                         message = f'{voice.name} out of range {pleaf!r}.'
                         raise Exception(message)
                     if self.color_out_of_range_pitches:
-                        abjad.attach(markup, pleaf, tag='SM_13')
+                        abjad.attach(markup, pleaf, tag='_check_range')
                         string = r'\baca_out_of_range_warning'
                         literal = abjad.LilyPondLiteral(string)
-                        abjad.attach(literal, pleaf, tag='SM_13')
+                        abjad.attach(literal, pleaf, tag='_check_range')
 
     def _check_wellformedness(self):
         if self.skip_wellformedness_checks:
@@ -1688,10 +1683,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 if not color:
                     continue
                 for pleaf in pleaves:
-                    abjad.attach(markup, pleaf, tag='SM_12')
+                    abjad.attach(markup, pleaf, tag='_color_octaves_')
                     string = r'\baca_octave_warning'
                     literal = abjad.LilyPondLiteral(string)
-                    abjad.attach(literal, pleaf, tag='SM_12')
+                    abjad.attach(literal, pleaf, tag='_color_octaves_')
 
     def _color_repeat_pitch_classes_(self):
         if not self.color_repeat_pitch_classes:
@@ -1700,12 +1695,13 @@ class SegmentMaker(abjad.SegmentMaker):
         lts = manager._find_repeat_pitch_classes(self.score)
         markup = abjad.Markup('@', direction=abjad.Up)
         abjad.tweak(markup).color = 'red'
+        tag = '_color_repeat_pitch_classes_'
         for lt in lts:
             for leaf in lt:
-                abjad.attach(markup, leaf, tag='SM_14')
+                abjad.attach(markup, leaf, tag=tag)
                 string = r'\baca_repeat_pitch_class_warning'
                 literal = abjad.LilyPondLiteral(string)
-                abjad.attach(literal, leaf, tag='SM_14')
+                abjad.attach(literal, leaf, tag=tag)
 
     def _color_unpitched_notes(self):
         if self.ignore_unpitched_notes:
@@ -1716,7 +1712,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 continue
             string = r'\baca_unpitched_music_warning'
             literal = abjad.LilyPondLiteral(string)
-            abjad.attach(literal, pleaf, tag='SM_24')
+            abjad.attach(literal, pleaf, tag='_color_unpitched_notes')
 
     def _color_unregistered_pitches(self):
         if self.ignore_unregistered_pitches:
@@ -1727,7 +1723,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 continue
             string = r'\baca_unregistered_pitch_warning'
             literal = abjad.LilyPondLiteral(string)
-            abjad.attach(literal, pleaf, tag='SM_25')
+            abjad.attach(literal, pleaf, tag='_color_unregistered_pitches')
 
     def _comment_measure_numbers(self):
         contexts = []
@@ -1819,7 +1815,7 @@ class SegmentMaker(abjad.SegmentMaker):
         all_leaves = abjad.select(all_leaves)
         assert abjad.inspect(all_leaves).duration() == sum(durations)
         beam = abjad.Beam(beam_rests=True, durations=durations)
-        abjad.attach(beam, all_leaves, tag='SM_35')
+        abjad.attach(beam, all_leaves, tag='_extend_beam')
 
     def _extend_beams(self):
         for leaf in abjad.iterate(self.score).leaves():
@@ -2261,7 +2257,7 @@ class SegmentMaker(abjad.SegmentMaker):
         multiplier = abjad.Multiplier(multiplier)
         numerator, denominator = multiplier.pair
         string = rf'\magnifyStaff #{numerator}/{denominator}'
-        tag = abjad.Tag(tag).prepend('SM41')
+        tag = abjad.Tag(tag).prepend('_magnify_staves_')
         for staff in abjad.iterate(self.score).components(abjad.Staff):
             first_leaf = abjad.inspect(staff).leaf(0)
             assert first_leaf is not None
@@ -2685,7 +2681,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 string = r"\shape #'((2 . 0) (1 . 0) (0.5 . 0) (0 . 0))"
                 string += " RepeatTie"
                 literal = abjad.LilyPondLiteral(string)
-                abjad.attach(literal, leaf, tag='SM_26')
+                abjad.attach(literal, leaf, tag='_shorten_long_repeat_ties')
 
     def _style_fermata_measures(self):
         if self.fermata_measure_staff_line_count is None:
@@ -2715,11 +2711,19 @@ class SegmentMaker(abjad.SegmentMaker):
                         strings.append(string)
                     if strings:
                         literal = abjad.LilyPondLiteral(strings)
-                        abjad.attach(literal, leaf, tag='SM_20')
+                        abjad.attach(
+                            literal,
+                            leaf,
+                            tag='_style_fermata_measures(1)',
+                            )
                 if next_leaf is not None and staff_lines != after:
                     strings = after._get_lilypond_format(context=staff)
                     literal = abjad.LilyPondLiteral(strings)
-                    abjad.attach(literal, next_leaf, tag='SM_21')
+                    abjad.attach(
+                        literal,
+                        next_leaf,
+                        tag='_style_fermata_measures(2)',
+                        )
                 if next_leaf is None and before != staff_lines:
                     before_line_count = getattr(before, 'line_count', 5)
                     before_staff_lines = indicators.StaffLines(
@@ -2729,7 +2733,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     abjad.attach(
                         before_staff_lines,
                         leaf,
-                        tag='SM_23',
+                        tag='_style_fermata_measures(3)',
                         synthetic_offset=1_000_000,
                         )
                 if start_offset in bar_lines_already_styled:
@@ -2756,7 +2760,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     abjad.attach(
                         literal,
                         leaf,
-                        tag=tag.prepend('SM22'),
+                        tag=tag.prepend('_style_fermata_measures(4)'),
                         )
                 bar_lines_already_styled.append(start_offset)
 
@@ -2794,7 +2798,8 @@ class SegmentMaker(abjad.SegmentMaker):
             status = 'explicit'
         if isinstance(wrapper.indicator, abjad.DynamicTrend):
             color = SegmentMaker._status_to_color[status]
-            manager = abjad.tweak(wrapper.indicator, tag='SM_43').color = color
+            string = '_treat_persistent_wrapper(1)'
+            manager = abjad.tweak(wrapper.indicator, tag=string).color = color
             SegmentMaker._set_status_tag(wrapper, status)
             return
         SegmentMaker._attach_color_literal(
@@ -2822,7 +2827,7 @@ class SegmentMaker(abjad.SegmentMaker):
             wrapper_ = abjad.attach(
                 literal,
                 wrapper.component,
-                tag=wrapper.tag.prepend('SM33'),
+                tag=wrapper.tag.prepend('_treat_persistent_wrapper(2)'),
                 wrapper=True,
                 )
             SegmentMaker._set_status_tag(wrapper_, status, stem='CLEF')
@@ -2841,7 +2846,7 @@ class SegmentMaker(abjad.SegmentMaker):
             wrapper_ = abjad.attach(
                 literal,
                 leaf,
-                tag=existing_tag.prepend('SM34'),
+                tag=existing_tag.prepend('_treat_persistent_wrapper(3)'),
                 wrapper=True,
                 )
             SegmentMaker._set_status_tag(
@@ -3109,13 +3114,13 @@ class SegmentMaker(abjad.SegmentMaker):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #31                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #31                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 6/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #31                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #31                                             %! HorizontalSpacingSpecifier(1):SPACING
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -3138,17 +3143,17 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \clef "treble"                                               %! DEFAULT_CLEF:_set_status_tag:ScoreTemplate(3)
                                             \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                                         %@% \override ViolinMusicStaff.Clef.color = ##f                  %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
-                                            \set ViolinMusicStaff.forceClef = ##t                        %! DEFAULT_CLEF:_set_status_tag:SM33:ScoreTemplate(3)
+                                            \set ViolinMusicStaff.forceClef = ##t                        %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):ScoreTemplate(3)
                                             d'16
                                             ^ \markup \baca-default-indicator-markup "(Violin)"          %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                             \override ViolinMusicStaff.Clef.color = #(x11-color 'violet) %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
                 <BLANKLINE>
                                             e'16
                 <BLANKLINE>
-                                            \baca_octave_warning                                         %! SM_12
+                                            \baca_octave_warning                                         %! _color_octaves_
                                             f'16
-                                            - \tweak color #red                                          %! SM_12
-                                            ^ \markup { OCTAVE }                                         %! SM_12
+                                            - \tweak color #red                                          %! _color_octaves_
+                                            ^ \markup { OCTAVE }                                         %! _color_octaves_
                 <BLANKLINE>
                                             g'16
                 <BLANKLINE>
@@ -3173,7 +3178,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \clef "alto"                                                         %! DEFAULT_CLEF:_set_status_tag:ScoreTemplate(3)
                                     \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                                 %@% \override ViolaMusicStaff.Clef.color = ##f                           %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
-                                    \set ViolaMusicStaff.forceClef = ##t                                 %! DEFAULT_CLEF:_set_status_tag:SM33:ScoreTemplate(3)
+                                    \set ViolaMusicStaff.forceClef = ##t                                 %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):ScoreTemplate(3)
                                     R1 * 3/8
                                     ^ \markup \baca-default-indicator-markup "(Viola)"                   %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                     \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
@@ -3195,17 +3200,17 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \clef "bass"                                                 %! DEFAULT_CLEF:_set_status_tag:ScoreTemplate(3)
                                             \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                                         %@% \override CelloMusicStaff.Clef.color = ##f                   %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
-                                            \set CelloMusicStaff.forceClef = ##t                         %! DEFAULT_CLEF:_set_status_tag:SM33:ScoreTemplate(3)
+                                            \set CelloMusicStaff.forceClef = ##t                         %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):ScoreTemplate(3)
                                             a16
                                             ^ \markup \baca-default-indicator-markup "(Cello)"           %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                             \override CelloMusicStaff.Clef.color = #(x11-color 'violet)  %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
                 <BLANKLINE>
                                             g16
                 <BLANKLINE>
-                                            \baca_octave_warning                                         %! SM_12
+                                            \baca_octave_warning                                         %! _color_octaves_
                                             f16
-                                            - \tweak color #red                                          %! SM_12
-                                            ^ \markup { OCTAVE }                                         %! SM_12
+                                            - \tweak color #red                                          %! _color_octaves_
+                                            ^ \markup { OCTAVE }                                         %! _color_octaves_
                 <BLANKLINE>
                                             e16
                 <BLANKLINE>
@@ -3297,25 +3302,25 @@ class SegmentMaker(abjad.SegmentMaker):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 1/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/16                                                                    %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 7/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 7/16                                                                    %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 1/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/16                                                                    %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -3342,10 +3347,10 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % [MusicVoice measure 2]                                         %! _comment_measure_numbers
-                                        \baca_out_of_range_warning                                       %! SM_13
+                                        \baca_out_of_range_warning                                       %! _check_range
                                         c16
-                                        - \tweak color #red                                              %! SM_13
-                                        ^ \markup { * }                                                  %! SM_13
+                                        - \tweak color #red                                              %! _check_range
+                                        ^ \markup { * }                                                  %! _check_range
                 <BLANKLINE>
                                         d'16
                 <BLANKLINE>
@@ -3463,25 +3468,25 @@ class SegmentMaker(abjad.SegmentMaker):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 1/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/16                                                                    %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 7/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 7/16                                                                    %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 1/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/16                                                                    %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -3515,15 +3520,15 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                         f'16
                 <BLANKLINE>
-                                        \baca_repeat_pitch_class_warning                                 %! SM_14
+                                        \baca_repeat_pitch_class_warning                                 %! _color_repeat_pitch_classes_
                                         a'16
-                                        - \tweak color #red                                              %! SM_14
-                                        ^ \markup { @ }                                                  %! SM_14
+                                        - \tweak color #red                                              %! _color_repeat_pitch_classes_
+                                        ^ \markup { @ }                                                  %! _color_repeat_pitch_classes_
                 <BLANKLINE>
-                                        \baca_repeat_pitch_class_warning                                 %! SM_14
+                                        \baca_repeat_pitch_class_warning                                 %! _color_repeat_pitch_classes_
                                         a'16
-                                        - \tweak color #red                                              %! SM_14
-                                        ^ \markup { @ }                                                  %! SM_14
+                                        - \tweak color #red                                              %! _color_repeat_pitch_classes_
+                                        ^ \markup { @ }                                                  %! _color_repeat_pitch_classes_
                 <BLANKLINE>
                                         c'16
                                     }
@@ -3545,15 +3550,15 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                         a'16
                 <BLANKLINE>
-                                        \baca_repeat_pitch_class_warning                                 %! SM_14
+                                        \baca_repeat_pitch_class_warning                                 %! _color_repeat_pitch_classes_
                                         c''16
-                                        - \tweak color #red                                              %! SM_14
-                                        ^ \markup { @ }                                                  %! SM_14
+                                        - \tweak color #red                                              %! _color_repeat_pitch_classes_
+                                        ^ \markup { @ }                                                  %! _color_repeat_pitch_classes_
                 <BLANKLINE>
-                                        \baca_repeat_pitch_class_warning                                 %! SM_14
+                                        \baca_repeat_pitch_class_warning                                 %! _color_repeat_pitch_classes_
                                         c'16
-                                        - \tweak color #red                                              %! SM_14
-                                        ^ \markup { @ }                                                  %! SM_14
+                                        - \tweak color #red                                              %! _color_repeat_pitch_classes_
+                                        ^ \markup { @ }                                                  %! _color_repeat_pitch_classes_
                 <BLANKLINE>
                                         f'16
                 <BLANKLINE>
@@ -4365,56 +4370,56 @@ class SegmentMaker(abjad.SegmentMaker):
                             {
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 [
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 ]
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 [
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 ]
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 [
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 ]
                 <BLANKLINE>
                                 % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 [
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! SM_24
+                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8
                                 ]
                 <BLANKLINE>
@@ -4502,21 +4507,21 @@ class SegmentMaker(abjad.SegmentMaker):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/16                                                                    %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             s1 * 3/16                                                                    %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             s1 * 3/16                                                                    %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             s1 * 3/16                                                                    %! _make_global_skips(1)
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -4665,21 +4670,21 @@ class SegmentMaker(abjad.SegmentMaker):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/16                                                                    %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             s1 * 3/16                                                                    %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             s1 * 3/16                                                                    %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             s1 * 3/16                                                                    %! _make_global_skips(1)
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -4696,7 +4701,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % [MusicVoice measure 1]                                         %! _comment_measure_numbers
-                                        \baca_unregistered_pitch_warning                                 %! SM_25
+                                        \baca_unregistered_pitch_warning                                 %! _color_unregistered_pitches
                                         e'8.
                                     }
                                 }
@@ -4706,28 +4711,28 @@ class SegmentMaker(abjad.SegmentMaker):
                                         % [MusicVoice measure 2]                                         %! _comment_measure_numbers
                                         \acciaccatura {
                 <BLANKLINE>
-                                            \baca_unregistered_pitch_warning                             %! SM_25
+                                            \baca_unregistered_pitch_warning                             %! _color_unregistered_pitches
                                             fs'16
                                             [                                                            %! ACC_1
                 <BLANKLINE>
-                                            \baca_unregistered_pitch_warning                             %! SM_25
+                                            \baca_unregistered_pitch_warning                             %! _color_unregistered_pitches
                                             d'16
                 <BLANKLINE>
-                                            \baca_unregistered_pitch_warning                             %! SM_25
+                                            \baca_unregistered_pitch_warning                             %! _color_unregistered_pitches
                                             ef'16
                 <BLANKLINE>
-                                            \baca_unregistered_pitch_warning                             %! SM_25
+                                            \baca_unregistered_pitch_warning                             %! _color_unregistered_pitches
                                             f'16
                 <BLANKLINE>
-                                            \baca_unregistered_pitch_warning                             %! SM_25
+                                            \baca_unregistered_pitch_warning                             %! _color_unregistered_pitches
                                             a'16
                 <BLANKLINE>
-                                            \baca_unregistered_pitch_warning                             %! SM_25
+                                            \baca_unregistered_pitch_warning                             %! _color_unregistered_pitches
                                             af'16
                                             ]                                                            %! ACC_1
                 <BLANKLINE>
                                         }
-                                        \baca_unregistered_pitch_warning                                 %! SM_25
+                                        \baca_unregistered_pitch_warning                                 %! _color_unregistered_pitches
                                         c'8.
                                     }
                                 }
@@ -4735,7 +4740,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % [MusicVoice measure 3]                                         %! _comment_measure_numbers
-                                        \baca_unregistered_pitch_warning                                 %! SM_25
+                                        \baca_unregistered_pitch_warning                                 %! _color_unregistered_pitches
                                         b'8.
                                     }
                                 }
@@ -4745,25 +4750,25 @@ class SegmentMaker(abjad.SegmentMaker):
                                         % [MusicVoice measure 4]                                         %! _comment_measure_numbers
                                         \acciaccatura {
                 <BLANKLINE>
-                                            \baca_unregistered_pitch_warning                             %! SM_25
+                                            \baca_unregistered_pitch_warning                             %! _color_unregistered_pitches
                                             bf'16
                                             [                                                            %! ACC_1
                 <BLANKLINE>
-                                            \baca_unregistered_pitch_warning                             %! SM_25
+                                            \baca_unregistered_pitch_warning                             %! _color_unregistered_pitches
                                             g'16
                 <BLANKLINE>
-                                            \baca_unregistered_pitch_warning                             %! SM_25
+                                            \baca_unregistered_pitch_warning                             %! _color_unregistered_pitches
                                             a'16
                 <BLANKLINE>
-                                            \baca_unregistered_pitch_warning                             %! SM_25
+                                            \baca_unregistered_pitch_warning                             %! _color_unregistered_pitches
                                             af'16
                 <BLANKLINE>
-                                            \baca_unregistered_pitch_warning                             %! SM_25
+                                            \baca_unregistered_pitch_warning                             %! _color_unregistered_pitches
                                             c'16
                                             ]                                                            %! ACC_1
                 <BLANKLINE>
                                         }
-                                        \baca_unregistered_pitch_warning                                 %! SM_25
+                                        \baca_unregistered_pitch_warning                                 %! _color_unregistered_pitches
                                         f'8.
                 <BLANKLINE>
                                     }
@@ -4910,7 +4915,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \clef "alto"                                                             %! REAPPLIED_CLEF:_set_status_tag:_reapply_persistent_indicators(3)
                                 \once \override Staff.Clef.color = #(x11-color 'green4)                  %! REAPPLIED_CLEF_COLOR:_attach_color_literal(2)
                             %@% \override Staff.Clef.color = ##f                                         %! REAPPLIED_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
-                                \set Staff.forceClef = ##t                                               %! REAPPLIED_CLEF:_set_status_tag:SM33:_reapply_persistent_indicators(3)
+                                \set Staff.forceClef = ##t                                               %! REAPPLIED_CLEF:_set_status_tag:_treat_persistent_wrapper(2):_reapply_persistent_indicators(3)
                                 R1 * 1/2
                                 \override Staff.Clef.color = #(x11-color 'OliveDrab)                     %! REAPPLIED_CLEF_REDRAW_COLOR:_attach_color_literal(2)
                 <BLANKLINE>

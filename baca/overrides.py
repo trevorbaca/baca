@@ -476,25 +476,25 @@ def bar_extent(
                     {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -2881,11 +2881,11 @@ def repeat_tie_down(
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! SC
+                            \repeatTie                                                               %! SpannerCommand
                             ]
                             c''4
                             c''16
-                            \repeatTie                                                               %! SC
+                            \repeatTie                                                               %! SpannerCommand
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -2893,12 +2893,12 @@ def repeat_tie_down(
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! SC
+                            \repeatTie                                                               %! SpannerCommand
                             ]
                             b'4
-                            \repeatTie                                                               %! SC
+                            \repeatTie                                                               %! SpannerCommand
                             b'16
-                            \repeatTie                                                               %! SC
+                            \repeatTie                                                               %! SpannerCommand
                             r16
                         }
                         \times 4/5 {
@@ -2954,11 +2954,11 @@ def repeat_tie_down(
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! SC
+                            \repeatTie                                                               %! SpannerCommand
                             ]
                             c''4
                             c''16
-                            \repeatTie                                                               %! SC
+                            \repeatTie                                                               %! SpannerCommand
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -2967,12 +2967,12 @@ def repeat_tie_down(
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! SC
+                            \repeatTie                                                               %! SpannerCommand
                             ]
                             b'4
-                            \repeatTie                                                               %! SC
+                            \repeatTie                                                               %! SpannerCommand
                             b'16
-                            \repeatTie                                                               %! SC
+                            \repeatTie                                                               %! SpannerCommand
                             \revert RepeatTie.direction                                              %! OverrideCommand(2)
                             r16
                         }
@@ -3069,11 +3069,11 @@ def repeat_tie_up(
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! SC
+                            \repeatTie                                                               %! SpannerCommand
                             ]
                             c''4
                             c''16
-                            \repeatTie                                                               %! SC
+                            \repeatTie                                                               %! SpannerCommand
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -3081,12 +3081,12 @@ def repeat_tie_up(
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! SC
+                            \repeatTie                                                               %! SpannerCommand
                             ]
                             b'4
-                            \repeatTie                                                               %! SC
+                            \repeatTie                                                               %! SpannerCommand
                             b'16
-                            \repeatTie                                                               %! SC
+                            \repeatTie                                                               %! SpannerCommand
                             r16
                         }
                         \times 4/5 {
@@ -3142,11 +3142,11 @@ def repeat_tie_up(
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! SC
+                            \repeatTie                                                               %! SpannerCommand
                             ]
                             c''4
                             c''16
-                            \repeatTie                                                               %! SC
+                            \repeatTie                                                               %! SpannerCommand
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -3155,12 +3155,12 @@ def repeat_tie_up(
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! SC
+                            \repeatTie                                                               %! SpannerCommand
                             ]
                             b'4
-                            \repeatTie                                                               %! SC
+                            \repeatTie                                                               %! SpannerCommand
                             b'16
-                            \repeatTie                                                               %! SC
+                            \repeatTie                                                               %! SpannerCommand
                             \revert RepeatTie.direction                                              %! OverrideCommand(2)
                             r16
                         }
@@ -4540,20 +4540,20 @@ def slur_down(
                             r8
                             c'16
                             [
-                            (                                                                        %! SC
+                            (                                                                        %! SpannerCommand
                             d'16
                             ]
                             bf'4
                             ~
                             bf'16
-                            )                                                                        %! SC
+                            )                                                                        %! SpannerCommand
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
                             [
-                            (                                                                        %! SC
+                            (                                                                        %! SpannerCommand
                             e''16
                             ]
                             ef''4
@@ -4564,7 +4564,7 @@ def slur_down(
                             [
                             g''16
                             ]
-                            )                                                                        %! SC
+                            )                                                                        %! SpannerCommand
                         }
                         \times 4/5 {
                             a'16
@@ -4615,13 +4615,13 @@ def slur_down(
                             r8
                             c'16
                             [
-                            (                                                                        %! SC
+                            (                                                                        %! SpannerCommand
                             d'16
                             ]
                             bf'4
                             ~
                             bf'16
-                            )                                                                        %! SC
+                            )                                                                        %! SpannerCommand
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -4629,7 +4629,7 @@ def slur_down(
                             \override Slur.direction = #down                                         %! OverrideCommand(1)
                             fs''16
                             [
-                            (                                                                        %! SC
+                            (                                                                        %! SpannerCommand
                             e''16
                             ]
                             ef''4
@@ -4640,7 +4640,7 @@ def slur_down(
                             [
                             g''16
                             ]
-                            )                                                                        %! SC
+                            )                                                                        %! SpannerCommand
                             \revert Slur.direction                                                   %! OverrideCommand(2)
                         }
                         \times 4/5 {
@@ -4708,20 +4708,20 @@ def slur_up(
                             \override Stem.direction = #down                                         %! OverrideCommand(1)
                             c'16
                             [
-                            (                                                                        %! SC
+                            (                                                                        %! SpannerCommand
                             d'16
                             ]
                             bf'4
                             ~
                             bf'16
-                            )                                                                        %! SC
+                            )                                                                        %! SpannerCommand
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
                             [
-                            (                                                                        %! SC
+                            (                                                                        %! SpannerCommand
                             e''16
                             ]
                             ef''4
@@ -4732,7 +4732,7 @@ def slur_up(
                             [
                             g''16
                             ]
-                            )                                                                        %! SC
+                            )                                                                        %! SpannerCommand
                         }
                         \times 4/5 {
                             a'16
@@ -4789,13 +4789,13 @@ def slur_up(
                             \override Stem.direction = #down                                         %! OverrideCommand(1)
                             c'16
                             [
-                            (                                                                        %! SC
+                            (                                                                        %! SpannerCommand
                             d'16
                             ]
                             bf'4
                             ~
                             bf'16
-                            )                                                                        %! SC
+                            )                                                                        %! SpannerCommand
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -4803,7 +4803,7 @@ def slur_up(
                             \override Slur.direction = #up                                           %! OverrideCommand(1)
                             fs''16
                             [
-                            (                                                                        %! SC
+                            (                                                                        %! SpannerCommand
                             e''16
                             ]
                             ef''4
@@ -4814,7 +4814,7 @@ def slur_up(
                             [
                             g''16
                             ]
-                            )                                                                        %! SC
+                            )                                                                        %! SpannerCommand
                             \revert Slur.direction                                                   %! OverrideCommand(2)
                         }
                         \times 4/5 {
@@ -5559,9 +5559,9 @@ def sustain_pedal_staff_padding(
                         \times 9/10 {
                             \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OverrideCommand(1)
                             \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SC
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
                             r8
-                            \sustainOn                                                               %! SC
+                            \sustainOn                                                               %! SpannerCommand
                             c'16
                             [
                             d'16
@@ -5573,11 +5573,11 @@ def sustain_pedal_staff_padding(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SC
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
                             fs''16
-                            \sustainOff                                                              %! SC
+                            \sustainOff                                                              %! SpannerCommand
                             [
-                            \sustainOn                                                               %! SC
+                            \sustainOn                                                               %! SpannerCommand
                             e''16
                             ]
                             ef''4
@@ -5590,12 +5590,12 @@ def sustain_pedal_staff_padding(
                             ]
                         }
                         \times 4/5 {
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SC
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
                             a'16
-                            \sustainOff                                                              %! SC
-                            \sustainOn                                                               %! SC
+                            \sustainOff                                                              %! SpannerCommand
+                            \sustainOn                                                               %! SpannerCommand
                             r4
-                            \sustainOff                                                              %! SC
+                            \sustainOff                                                              %! SpannerCommand
                             \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
@@ -5639,9 +5639,9 @@ def sustain_pedal_staff_padding(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SC
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
                             r8
-                            \sustainOn                                                               %! SC
+                            \sustainOn                                                               %! SpannerCommand
                             c'16
                             [
                             d'16
@@ -5650,15 +5650,15 @@ def sustain_pedal_staff_padding(
                             ~
                             bf'16
                             r16
-                            \sustainOff                                                              %! SC
+                            \sustainOff                                                              %! SpannerCommand
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OverrideCommand(1)
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SC
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
                             fs''16
                             [
-                            \sustainOn                                                               %! SC
+                            \sustainOn                                                               %! SpannerCommand
                             e''16
                             ]
                             ef''4
@@ -5669,15 +5669,15 @@ def sustain_pedal_staff_padding(
                             [
                             g''16
                             ]
-                            \sustainOff                                                              %! SC
+                            \sustainOff                                                              %! SpannerCommand
                             \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OverrideCommand(2)
                         }
                         \times 4/5 {
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SC
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
                             a'16
-                            \sustainOn                                                               %! SC
+                            \sustainOn                                                               %! SpannerCommand
                             r4
-                            \sustainOff                                                              %! SC
+                            \sustainOff                                                              %! SpannerCommand
                             \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
                     }
@@ -7105,25 +7105,25 @@ def tie_down(
                             \override Stem.direction = #up                                           %! OverrideCommand(1)
                             \override Tie.direction = #down                                          %! OverrideCommand(1)
                             b'16
-                            ~                                                                        %! SC
+                            ~                                                                        %! SpannerCommand
                             [
                             b'16
                             ]
                             c''4
-                            ~                                                                        %! SC
+                            ~                                                                        %! SpannerCommand
                             c''16
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 7/8 {
                             b'16
-                            ~                                                                        %! SC
+                            ~                                                                        %! SpannerCommand
                             [
                             b'16
-                            ~                                                                        %! SC
+                            ~                                                                        %! SpannerCommand
                             ]
                             b'4
-                            ~                                                                        %! SC
+                            ~                                                                        %! SpannerCommand
                             b'16
                             r16
                         }
@@ -7178,12 +7178,12 @@ def tie_down(
                             r8
                             \override Stem.direction = #up                                           %! OverrideCommand(1)
                             b'16
-                            ~                                                                        %! SC
+                            ~                                                                        %! SpannerCommand
                             [
                             b'16
                             ]
                             c''4
-                            ~                                                                        %! SC
+                            ~                                                                        %! SpannerCommand
                             c''16
                             r16
                         }
@@ -7191,13 +7191,13 @@ def tie_down(
                         \times 7/8 {
                             \override Tie.direction = #down                                          %! OverrideCommand(1)
                             b'16
-                            ~                                                                        %! SC
+                            ~                                                                        %! SpannerCommand
                             [
                             b'16
-                            ~                                                                        %! SC
+                            ~                                                                        %! SpannerCommand
                             ]
                             b'4
-                            ~                                                                        %! SC
+                            ~                                                                        %! SpannerCommand
                             b'16
                             \revert Tie.direction                                                    %! OverrideCommand(2)
                             r16
@@ -7265,25 +7265,25 @@ def tie_up(
                             \override Stem.direction = #down                                         %! OverrideCommand(1)
                             \override Tie.direction = #up                                            %! OverrideCommand(1)
                             b'16
-                            ~                                                                        %! SC
+                            ~                                                                        %! SpannerCommand
                             [
                             b'16
                             ]
                             c''4
-                            ~                                                                        %! SC
+                            ~                                                                        %! SpannerCommand
                             c''16
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 7/8 {
                             b'16
-                            ~                                                                        %! SC
+                            ~                                                                        %! SpannerCommand
                             [
                             b'16
-                            ~                                                                        %! SC
+                            ~                                                                        %! SpannerCommand
                             ]
                             b'4
-                            ~                                                                        %! SC
+                            ~                                                                        %! SpannerCommand
                             b'16
                             r16
                         }
@@ -7338,12 +7338,12 @@ def tie_up(
                             r8
                             \override Stem.direction = #down                                         %! OverrideCommand(1)
                             b'16
-                            ~                                                                        %! SC
+                            ~                                                                        %! SpannerCommand
                             [
                             b'16
                             ]
                             c''4
-                            ~                                                                        %! SC
+                            ~                                                                        %! SpannerCommand
                             c''16
                             r16
                         }
@@ -7351,13 +7351,13 @@ def tie_up(
                         \times 7/8 {
                             \override Tie.direction = #up                                            %! OverrideCommand(1)
                             b'16
-                            ~                                                                        %! SC
+                            ~                                                                        %! SpannerCommand
                             [
                             b'16
-                            ~                                                                        %! SC
+                            ~                                                                        %! SpannerCommand
                             ]
                             b'4
-                            ~                                                                        %! SC
+                            ~                                                                        %! SpannerCommand
                             b'16
                             \revert Tie.direction                                                    %! OverrideCommand(2)
                             r16

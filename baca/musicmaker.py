@@ -2243,13 +2243,13 @@ class ImbricationCommand(scoping.Command):
                         {
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 7/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 7/16                                                                    %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 1/4                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/4                                                                     %! _make_global_skips(1)
@@ -2271,15 +2271,15 @@ class ImbricationCommand(scoping.Command):
                 <BLANKLINE>
                                         % [MusicVoiceOne measure 1]                                      %! _comment_measure_numbers
                                         s16
-                                        [                                                                %! SM_35
+                                        [                                                                %! _extend_beam
                 <BLANKLINE>
-                                        \set stemLeftBeamCount = 2                                       %! SM_35
-                                        \set stemRightBeamCount = 2                                      %! SM_35
+                                        \set stemLeftBeamCount = 2                                       %! _extend_beam
+                                        \set stemRightBeamCount = 2                                      %! _extend_beam
                                         d'16
                                         -\staccato                                                       %! IndicatorCommand
                 <BLANKLINE>
-                                        \set stemLeftBeamCount = 2                                       %! SM_35
-                                        \set stemRightBeamCount = 2                                      %! SM_35
+                                        \set stemLeftBeamCount = 2                                       %! _extend_beam
+                                        \set stemRightBeamCount = 2                                      %! _extend_beam
                                         bf'!16
                                         -\staccato                                                       %! IndicatorCommand
                 <BLANKLINE>
@@ -2304,18 +2304,18 @@ class ImbricationCommand(scoping.Command):
                                         % [MusicVoiceOne measure 2]                                      %! _comment_measure_numbers
                                         s16
                 <BLANKLINE>
-                                        \set stemLeftBeamCount = 2                                       %! SM_35
-                                        \set stemRightBeamCount = 2                                      %! SM_35
+                                        \set stemLeftBeamCount = 2                                       %! _extend_beam
+                                        \set stemRightBeamCount = 2                                      %! _extend_beam
                                         cs''!16
                                         -\staccato                                                       %! IndicatorCommand
                 <BLANKLINE>
-                                        \set stemLeftBeamCount = 2                                       %! SM_35
-                                        \set stemRightBeamCount = 2                                      %! SM_35
+                                        \set stemLeftBeamCount = 2                                       %! _extend_beam
+                                        \set stemRightBeamCount = 2                                      %! _extend_beam
                                         a'16
                                         -\staccato                                                       %! IndicatorCommand
                 <BLANKLINE>
                                         s16
-                                        ]                                                                %! SM_35
+                                        ]                                                                %! _extend_beam
                 <BLANKLINE>
                                     }
                                     \revert TupletBracket.stencil
@@ -7287,7 +7287,7 @@ class MusicMaker(abjad.AbjadObject):
                             \scaleDurations #'(1 . 1) {
                                 c'16
                                 [
-                                (                                                                        %! SC
+                                (                                                                        %! SpannerCommand
                                 d'16
                                 bf'16
                                 fs''16
@@ -7307,7 +7307,7 @@ class MusicMaker(abjad.AbjadObject):
                                 a'16
                                 af'16
                                 ]
-                                )                                                                        %! SC
+                                )                                                                        %! SpannerCommand
                             }
                         }
                     }
@@ -7351,31 +7351,31 @@ class MusicMaker(abjad.AbjadObject):
                             \scaleDurations #'(1 . 1) {
                                 c'16
                                 [
-                                (                                                                        %! SC
+                                (                                                                        %! SpannerCommand
                                 d'16
                                 bf'16
                                 fs''16
                                 ]
-                                )                                                                        %! SC
+                                )                                                                        %! SpannerCommand
                             }
                             \scaleDurations #'(1 . 1) {
                                 e''16
                                 [
-                                (                                                                        %! SC
+                                (                                                                        %! SpannerCommand
                                 ef''16
                                 b''16
                                 ]
-                                )                                                                        %! SC
+                                )                                                                        %! SpannerCommand
                             }
                             \scaleDurations #'(1 . 1) {
                                 g''16
                                 [
-                                (                                                                        %! SC
+                                (                                                                        %! SpannerCommand
                                 cs''16
                                 a'16
                                 af'16
                                 ]
-                                )                                                                        %! SC
+                                )                                                                        %! SpannerCommand
                             }
                         }
                     }
@@ -7421,9 +7421,9 @@ class MusicMaker(abjad.AbjadObject):
                             \scaleDurations #'(1 . 1) {
                                 c'16
                                 [
-                                (                                                                        %! SC
+                                (                                                                        %! SpannerCommand
                                 d'16
-                                )                                                                        %! SC
+                                )                                                                        %! SpannerCommand
                                 bf'16
                                 fs''16
                                 ]
@@ -7431,18 +7431,18 @@ class MusicMaker(abjad.AbjadObject):
                             \scaleDurations #'(1 . 1) {
                                 e''16
                                 [
-                                (                                                                        %! SC
+                                (                                                                        %! SpannerCommand
                                 ef''16
-                                )                                                                        %! SC
+                                )                                                                        %! SpannerCommand
                                 b''16
                                 ]
                             }
                             \scaleDurations #'(1 . 1) {
                                 g''16
                                 [
-                                (                                                                        %! SC
+                                (                                                                        %! SpannerCommand
                                 cs''16
-                                )                                                                        %! SC
+                                )                                                                        %! SpannerCommand
                                 a'16
                                 af'16
                                 ]
@@ -7493,29 +7493,29 @@ class MusicMaker(abjad.AbjadObject):
                                 [
                                 d'16
                                 bf'16
-                                (                                                                        %! SC
+                                (                                                                        %! SpannerCommand
                                 fs''16
                                 ]
-                                )                                                                        %! SC
+                                )                                                                        %! SpannerCommand
                             }
                             \scaleDurations #'(1 . 1) {
                                 e''16
                                 [
                                 ef''16
-                                (                                                                        %! SC
+                                (                                                                        %! SpannerCommand
                                 b''16
                                 ]
-                                )                                                                        %! SC
+                                )                                                                        %! SpannerCommand
                             }
                             \scaleDurations #'(1 . 1) {
                                 g''16
                                 [
                                 cs''16
                                 a'16
-                                (                                                                        %! SC
+                                (                                                                        %! SpannerCommand
                                 af'16
                                 ]
-                                )                                                                        %! SC
+                                )                                                                        %! SpannerCommand
                             }
                         }
                     }
@@ -8418,13 +8418,13 @@ class NestingCommand(scoping.Command):
                     {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 1/2                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #24                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 1/4                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/4                                                                     %! _make_global_skips(1)
@@ -8449,35 +8449,35 @@ class NestingCommand(scoping.Command):
                                     \scaleDurations #'(1 . 1) {
             <BLANKLINE>
                                         % [MusicVoice measure 1]                                     %! _comment_measure_numbers
-                                        \set stemLeftBeamCount = 0                                   %! SM_35
-                                        \set stemRightBeamCount = 2                                  %! SM_35
+                                        \set stemLeftBeamCount = 0                                   %! _extend_beam
+                                        \set stemRightBeamCount = 2                                  %! _extend_beam
                                         c'16
-                                        [                                                            %! SM_35
+                                        [                                                            %! _extend_beam
             <BLANKLINE>
-                                        \set stemLeftBeamCount = 2                                   %! SM_35
-                                        \set stemRightBeamCount = 2                                  %! SM_35
+                                        \set stemLeftBeamCount = 2                                   %! _extend_beam
+                                        \set stemRightBeamCount = 2                                  %! _extend_beam
                                         d'16
             <BLANKLINE>
-                                        \set stemLeftBeamCount = 2                                   %! SM_35
-                                        \set stemRightBeamCount = 2                                  %! SM_35
+                                        \set stemLeftBeamCount = 2                                   %! _extend_beam
+                                        \set stemRightBeamCount = 2                                  %! _extend_beam
                                         bf'!16
             <BLANKLINE>
-                                        \set stemLeftBeamCount = 2                                   %! SM_35
-                                        \set stemRightBeamCount = 1                                  %! SM_35
+                                        \set stemLeftBeamCount = 2                                   %! _extend_beam
+                                        \set stemRightBeamCount = 1                                  %! _extend_beam
                                         fs''!16
                                     }
                                     \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                        \set stemLeftBeamCount = 1                                   %! SM_35
-                                        \set stemRightBeamCount = 2                                  %! SM_35
+                                        \set stemLeftBeamCount = 1                                   %! _extend_beam
+                                        \set stemRightBeamCount = 2                                  %! _extend_beam
                                         e''16
             <BLANKLINE>
-                                        \set stemLeftBeamCount = 2                                   %! SM_35
-                                        \set stemRightBeamCount = 2                                  %! SM_35
+                                        \set stemLeftBeamCount = 2                                   %! _extend_beam
+                                        \set stemRightBeamCount = 2                                  %! _extend_beam
                                         ef''!16
             <BLANKLINE>
-                                        \set stemLeftBeamCount = 2                                   %! SM_35
-                                        \set stemRightBeamCount = 1                                  %! SM_35
+                                        \set stemLeftBeamCount = 2                                   %! _extend_beam
+                                        \set stemRightBeamCount = 1                                  %! _extend_beam
                                         b''16
                                     }
                                 }
@@ -8486,22 +8486,22 @@ class NestingCommand(scoping.Command):
                                 \scaleDurations #'(1 . 1) {
             <BLANKLINE>
                                     % [MusicVoice measure 2]                                         %! _comment_measure_numbers
-                                    \set stemLeftBeamCount = 1                                       %! SM_35
-                                    \set stemRightBeamCount = 2                                      %! SM_35
+                                    \set stemLeftBeamCount = 1                                       %! _extend_beam
+                                    \set stemRightBeamCount = 2                                      %! _extend_beam
                                     g''16
             <BLANKLINE>
-                                    \set stemLeftBeamCount = 2                                       %! SM_35
-                                    \set stemRightBeamCount = 2                                      %! SM_35
+                                    \set stemLeftBeamCount = 2                                       %! _extend_beam
+                                    \set stemRightBeamCount = 2                                      %! _extend_beam
                                     cs''!16
             <BLANKLINE>
-                                    \set stemLeftBeamCount = 2                                       %! SM_35
-                                    \set stemRightBeamCount = 2                                      %! SM_35
+                                    \set stemLeftBeamCount = 2                                       %! _extend_beam
+                                    \set stemRightBeamCount = 2                                      %! _extend_beam
                                     a'16
             <BLANKLINE>
-                                    \set stemLeftBeamCount = 2                                       %! SM_35
-                                    \set stemRightBeamCount = 0                                      %! SM_35
+                                    \set stemLeftBeamCount = 2                                       %! _extend_beam
+                                    \set stemRightBeamCount = 0                                      %! _extend_beam
                                     af'!16
-                                    ]                                                                %! SM_35
+                                    ]                                                                %! _extend_beam
             <BLANKLINE>
                                 }
                             }

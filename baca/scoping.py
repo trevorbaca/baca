@@ -701,25 +701,25 @@ def apply(
                     {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -736,72 +736,72 @@ def apply(
                         {
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
                             [
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
                             ]
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
                             -\marcato                                                                %! IndicatorCommand
                             -\staccato                                                               %! IndicatorCommand
                             [
-                            (                                                                        %! SC
+                            (                                                                        %! SpannerCommand
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
                             -\marcato                                                                %! IndicatorCommand
                             -\staccato                                                               %! IndicatorCommand
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
                             -\marcato                                                                %! IndicatorCommand
                             -\staccato                                                               %! IndicatorCommand
                             ]
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
                             -\marcato                                                                %! IndicatorCommand
                             -\staccato                                                               %! IndicatorCommand
                             [
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
                             -\marcato                                                                %! IndicatorCommand
                             -\staccato                                                               %! IndicatorCommand
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
                             -\marcato                                                                %! IndicatorCommand
                             -\staccato                                                               %! IndicatorCommand
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
                             -\marcato                                                                %! IndicatorCommand
                             -\staccato                                                               %! IndicatorCommand
                             ]
-                            )                                                                        %! SC
+                            )                                                                        %! SpannerCommand
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
                             [
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
                             ]
             <BLANKLINE>
@@ -845,25 +845,25 @@ def apply(
                     {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -880,72 +880,72 @@ def apply(
                         {
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
                             [
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
                             ]
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
                             -\marcato                                                                %! IndicatorCommand
                             -\staccato                                                               %! IndicatorCommand
                             [
-                            (                                                                        %! SC
+                            (                                                                        %! SpannerCommand
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
                             -\marcato                                                                %! IndicatorCommand
                             -\staccato                                                               %! IndicatorCommand
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
                             -\marcato                                                                %! IndicatorCommand
                             -\staccato                                                               %! IndicatorCommand
                             ]
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
                             -\marcato                                                                %! IndicatorCommand
                             -\staccato                                                               %! IndicatorCommand
                             [
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
                             -\marcato                                                                %! IndicatorCommand
                             -\staccato                                                               %! IndicatorCommand
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
                             -\marcato                                                                %! IndicatorCommand
                             -\staccato                                                               %! IndicatorCommand
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
                             -\marcato                                                                %! IndicatorCommand
                             -\staccato                                                               %! IndicatorCommand
                             ]
-                            )                                                                        %! SC
+                            )                                                                        %! SpannerCommand
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
                             [
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
             <BLANKLINE>
-                            \baca_unpitched_music_warning                                            %! SM_24
+                            \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                             c'8
                             ]
             <BLANKLINE>
@@ -1074,25 +1074,25 @@ def measures(
                     {
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #16                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #16                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #16                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #16                                             %! HSS1:SPACING
+                        \baca_new_spacing_section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca_time_signature_color "blue"                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)

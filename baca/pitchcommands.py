@@ -150,7 +150,7 @@ class AccidentalAdjustmentCommand(scoping.Command):
         if self.tag:
             if not self.tag.only_edition() and not self.tag.not_editions():
                 raise Exception(f'tag must have edition: {self.tag!r}.')
-            alternative_tag = self.tag.prepend('AJC')
+            alternative_tag = self.tag.prepend('AccidentalAdjustmentCommand')
             primary_tag = alternative_tag.invert_edition_tags()
         for pleaf in classes.Selection(argument).pleaves():
             if isinstance(pleaf, abjad.Note):
@@ -5566,63 +5566,63 @@ class StaffPositionInterpolationCommand(scoping.Command):
                             \clef "treble"                                                           %! IndicatorCommand
                             ef'16
                             [
-                            \glissando                                                               %! SC
-                            \hide NoteHead                                                           %! SC
-                            \override Accidental.stencil = ##f                                       %! SC
-                            \override NoteColumn.glissando-skip = ##t                                %! SC
-                            \override NoteHead.no-ledgers = ##t                                      %! SC
+                            \glissando                                                               %! SpannerCommand
+                            \hide NoteHead                                                           %! SpannerCommand
+                            \override Accidental.stencil = ##f                                       %! SpannerCommand
+                            \override NoteColumn.glissando-skip = ##t                                %! SpannerCommand
+                            \override NoteHead.no-ledgers = ##t                                      %! SpannerCommand
                             e'16
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
                             f'16
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
                             f'16
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
                             f'16
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
                             g'16
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
                             g'16
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
                             g'16
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
                             a'16
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
                             a'16
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
                             a'16
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
                             b'16
                             ]
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
                         }
                         \scaleDurations #'(1 . 1) {
                             b'16
                             [
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
                             c''16
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
                             c''16
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
                             c''16
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
                             d''16
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
                             d''16
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
                             d''16
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
                             e''16
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
                             e''16
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
                             e''16
-                            \glissando                                                               %! SC
+                            \glissando                                                               %! SpannerCommand
                             f''16
-                            \glissando                                                               %! SC
-                            \revert Accidental.stencil                                               %! SC
-                            \revert NoteColumn.glissando-skip                                        %! SC
-                            \revert NoteHead.no-ledgers                                              %! SC
-                            \undo \hide NoteHead                                                     %! SC
+                            \glissando                                                               %! SpannerCommand
+                            \revert Accidental.stencil                                               %! SpannerCommand
+                            \revert NoteColumn.glissando-skip                                        %! SpannerCommand
+                            \revert NoteHead.no-ledgers                                              %! SpannerCommand
+                            \undo \hide NoteHead                                                     %! SpannerCommand
                             fs''16
                             ]
                             \revert Glissando.thickness                                              %! OverrideCommand(2)
@@ -6556,12 +6556,12 @@ def force_accidental(
                         {
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                            e'2                                                                      %! AJC:+PARTS
-                        %@% e'!2                                                                     %! AJC:-PARTS
+                            e'2                                                                      %! AccidentalAdjustmentCommand:+PARTS
+                        %@% e'!2                                                                     %! AccidentalAdjustmentCommand:-PARTS
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                            f'4.                                                                     %! AJC:+PARTS
-                        %@% f'!4.                                                                    %! AJC:-PARTS
+                            f'4.                                                                     %! AccidentalAdjustmentCommand:+PARTS
+                        %@% f'!4.                                                                    %! AccidentalAdjustmentCommand:-PARTS
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             e'2
