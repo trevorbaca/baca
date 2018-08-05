@@ -159,6 +159,7 @@ class AccidentalAdjustmentCommand(scoping.Command):
                 assert isinstance(pleaf, abjad.Chord)
                 note_heads = pleaf.note_heads
             for note_head in note_heads:
+                assert note_head is not None
                 if not self.tag:
                     if self.cautionary:
                         note_head.is_cautionary = True
