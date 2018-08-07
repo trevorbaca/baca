@@ -83,6 +83,7 @@ baca
    ~cheads
    ~chord
    ~chords
+   ~cmgroups
    ~components
    ~count
    ~enchain
@@ -117,7 +118,6 @@ baca
    ~ltruns
    ~lts
    ~lyparts
-   ~mgroups
    ~mleaves
    ~nontrivial
    ~note
@@ -176,6 +176,8 @@ baca
 .. autofunction:: chord
 
 .. autofunction:: chords
+
+.. autofunction:: cmgroups
 
 .. autofunction:: components
 
@@ -244,8 +246,6 @@ baca
 .. autofunction:: lts
 
 .. autofunction:: lyparts
-
-.. autofunction:: mgroups
 
 .. autofunction:: mleaves
 

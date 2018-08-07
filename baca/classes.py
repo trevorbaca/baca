@@ -1774,7 +1774,7 @@ class Selection(abjad.Selection):
 
     ### PUBLIC METHODS ###
 
-    def chead(self, n):
+    def chead(self, n) -> typing.Union[abjad.Note, abjad.Expression]:
         r"""
         Selects chord head ``n``.
 
@@ -1866,7 +1866,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe(), lone=True)
         return self.cheads()[n]
 
-    def cheads(self):
+    def cheads(self) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects chord heads.
 
@@ -1979,7 +1979,91 @@ class Selection(abjad.Selection):
             grace_notes=False,
             )
 
-    def enchain(self, counts):
+    def cmgroups(
+        self,
+        counts: typing.List[int] = [1],
+        ) -> typing.Union[abjad.Expression, 'Selection']:
+        r"""
+        Partitions measure-grouped leaves (cyclic without overhang).
+
+        ..  container:: example
+
+            Partitiones measure-grouped leaves by pairs (without overhang):
+
+            ..  container:: example
+
+                >>> staff = abjad.Staff("r8 d' e' f' g' a' b' r d''")
+                >>> abjad.setting(staff).auto_beaming = False
+                >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
+                >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
+                >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
+                >>> abjad.show(staff) # doctest: +SKIP
+
+                >>> result = baca.select(staff).cmgroups(counts=[2])
+
+                >>> for item in result:
+                ...     item
+                ...
+                Selection([Rest('r8'), Note("d'8"), Note("e'8"), Note("f'8")])
+                Selection([Note("g'8"), Note("a'8"), Note("b'8"), Rest('r8')])
+
+            ..  container:: example expression
+
+                >>> selector = baca.select().cmgroups(counts=[2])
+                >>> result = selector(staff)
+
+                >>> selector.print(result)
+                Selection([Rest('r8'), Note("d'8"), Note("e'8"), Note("f'8")])
+                Selection([Note("g'8"), Note("a'8"), Note("b'8"), Rest('r8')])
+
+                >>> selector.color(result)
+                >>> abjad.show(staff) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(staff)
+                \new Staff
+                \with
+                {
+                    autoBeaming = ##f
+                }
+                {
+                    \time 2/8
+                    \abjad_color_music "red"
+                    r8
+                    \abjad_color_music "red"
+                    d'8
+                    \abjad_color_music "red"
+                    e'8
+                    \abjad_color_music "red"
+                    f'8
+                    \time 3/8
+                    \abjad_color_music "blue"
+                    g'8
+                    \abjad_color_music "blue"
+                    a'8
+                    \abjad_color_music "blue"
+                    b'8
+                    \time 1/8
+                    \abjad_color_music "blue"
+                    r8
+                    d''8
+                }
+
+        """
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        result = self.leaves()
+        result = result.group_by_measure()
+        result = result.partition_by_counts(counts, cyclic=True)
+        result_ = result.map(_select().flatten())
+        assert isinstance(result_, Selection), repr(result_)
+        return result_
+
+    def enchain(
+        self,
+        counts,
+        ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Enchains items in selection.
 
@@ -2228,7 +2312,7 @@ class Selection(abjad.Selection):
             overhang=True,
             )
 
-    def lleaf(self, n=0):
+    def lleaf(self, n=0) -> typing.Union[abjad.Leaf, abjad.Expression]:
         r"""
         Selects leaf ``n`` from leaves leaked to the left.
 
@@ -2318,7 +2402,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe(), lone=True)
         return self.lleaves()[n]
 
-    def lleak(self):
+    def lleak(self) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Leaks to the left.
 
@@ -2387,7 +2471,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         return self.with_previous_leaf()
 
-    def lleaves(self):
+    def lleaves(self) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects leaves, leaked to the left.
 
@@ -2499,7 +2583,10 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         return self.leaves().with_previous_leaf()
 
-    def lparts(self, counts):
+    def lparts(
+        self,
+        counts,
+        ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects leaves partitioned by ``counts``.
 
@@ -2605,7 +2692,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         return super().leaves().partition_by_counts(counts=counts)
 
-    def lt(self, n):
+    def lt(self, n) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects logical tie ``n``.
 
@@ -2698,7 +2785,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe(), lone=True)
         return self.lts()[n]
 
-    def ltleaf(self, n=0):
+    def ltleaf(self, n=0) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects left-trimmed leaf ``n``.
 
@@ -2789,7 +2876,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe(), lone=True)
         return self.ltleaves()[n]
 
-    def ltleaves(self):
+    def ltleaves(self) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects left-trimmed leaves.
 
@@ -2930,7 +3017,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         return super().leaves(trim=abjad.Left, grace_notes=False)
 
-    def ltqrun(self, n):
+    def ltqrun(self, n) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects logical tie equipitch run ``n``.
 
@@ -3023,7 +3110,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe(), lone=True)
         return self.ltqruns()[n]
 
-    def ltqruns(self):
+    def ltqruns(self) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects logical tie equipitch runs.
 
@@ -3146,7 +3233,7 @@ class Selection(abjad.Selection):
         result = result.map(Selection)
         return result
 
-    def ltrun(self, n):
+    def ltrun(self, n) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects logical tie run ``n``.
 
@@ -3242,7 +3329,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe(), lone=True)
         return self.ltruns()[n]
 
-    def ltruns(self):
+    def ltruns(self) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects logical tie runs.
 
@@ -3355,7 +3442,7 @@ class Selection(abjad.Selection):
         result = self.logical_ties(pitched=True).group_by_contiguity()
         return result.map(Selection)
 
-    def lts(self):
+    def lts(self) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects logical ties.
 
@@ -3494,7 +3581,10 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         return self.logical_ties(grace_notes=None)
 
-    def lyparts(self, counts):
+    def lyparts(
+        self,
+        counts,
+        ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects leaves c[y]clically partitioned by ``counts`` (with overhang).
 
@@ -3619,86 +3709,10 @@ class Selection(abjad.Selection):
             overhang=True,
             )
 
-    def mgroups(
+    def mleaves(
         self,
-        counts: typing.List[int] = [1],
-        ) -> typing.Union[abjad.Expression, 'Selection']:
-        r"""
-        Groups leaves by measures cyclically partitioned by ``counts``.
-
-        ..  container:: example
-
-            Groups leaves by pairs of measures:
-
-            ..  container:: example
-
-                >>> staff = abjad.Staff("r8 d' e' f' g' a' b' r")
-                >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
-                >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
-                >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
-                >>> abjad.show(staff) # doctest: +SKIP
-
-                >>> result = baca.select(staff).mgroups(counts=[2])
-
-                >>> for item in result:
-                ...     item
-                ...
-                Selection([Rest('r8'), Note("d'8"), Note("e'8"), Note("f'8")])
-                Selection([Note("g'8"), Note("a'8"), Note("b'8"), Rest('r8')])
-
-            ..  container:: example expression
-
-                >>> selector = baca.select().mgroups(counts=[2])
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                Selection([Rest('r8'), Note("d'8"), Note("e'8"), Note("f'8")])
-                Selection([Note("g'8"), Note("a'8"), Note("b'8"), Rest('r8')])
-
-                >>> selector.color(result)
-                >>> abjad.show(staff) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(staff)
-                \new Staff
-                \with
-                {
-                    autoBeaming = ##f
-                }
-                {
-                    \time 2/8
-                    \abjad_color_music "red"
-                    r8
-                    \abjad_color_music "red"
-                    d'8
-                    \abjad_color_music "red"
-                    e'8
-                    \abjad_color_music "red"
-                    f'8
-                    \time 3/8
-                    \abjad_color_music "blue"
-                    g'8
-                    \abjad_color_music "blue"
-                    a'8
-                    \abjad_color_music "blue"
-                    b'8
-                    \time 1/8
-                    \abjad_color_music "blue"
-                    r8
-                }
-
-        """
-        if self._expression:
-            return self._update_expression(inspect.currentframe())
-        result = self.leaves()
-        result = result.group_by_measure()
-        result = result.partition_by_counts(counts, cyclic=True)
-        result = result.map(_select().flatten())
-        return result
-
-    def mleaves(self, count: int) -> abjad.Expression:
+        count: int,
+        ) -> typing.Union['Selection', abjad.Expression]:
         r"""
         Selects all leaves in ``count`` measures.
 
@@ -3856,7 +3870,7 @@ class Selection(abjad.Selection):
             raise Exception(count)
         return result
 
-    def ntrun(self, n):
+    def ntrun(self, n: int) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects nontrivial run ``n``.
 
@@ -3952,7 +3966,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe(), lone=True)
         return self.ntruns()[n]
 
-    def ntruns(self):
+    def ntruns(self) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects nontrivial runs.
 
@@ -4064,7 +4078,10 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         return self.runs().nontrivial()
 
-    def phead(self, n):
+    def phead(
+        self,
+        n,
+        ) -> typing.Union[abjad.Note, abjad.Chord, abjad.Expression]:
         r"""
         Selects pitched head ``n``.
 
@@ -4156,7 +4173,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe(), lone=True)
         return self.pheads()[n]
 
-    def pheads(self):
+    def pheads(self) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects pitched heads.
 
@@ -4283,7 +4300,10 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         return self.plts().map(_select()[0])
 
-    def pleaf(self, n):
+    def pleaf(
+        self,
+        n,
+        ) -> typing.Union[abjad.Note, abjad.Chord, abjad.Expression]:
         r"""
         Selects pitched leaf ``n``.
 
@@ -4375,7 +4395,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe(), lone=True)
         return self.pleaves()[n]
 
-    def pleaves(self):
+    def pleaves(self) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects pitched leaves.
 
@@ -4514,7 +4534,7 @@ class Selection(abjad.Selection):
             pitched=True,
             )
 
-    def plt(self, n):
+    def plt(self, n) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects pitched logical tie ``n``.
 
@@ -4607,7 +4627,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe(), lone=True)
         return self.plts()[n]
 
-    def plts(self):
+    def plts(self) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects pitched logical ties.
 
@@ -4737,7 +4757,10 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         return self.logical_ties(pitched=True, grace_notes=None)
 
-    def ptail(self, n):
+    def ptail(
+        self,
+        n,
+        ) -> typing.Union[abjad.Note, abjad.Chord, abjad.Expression]:
         r"""
         Selects pitched tail ``n``.
 
@@ -4829,7 +4852,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe(), lone=True)
         return self.ptails()[n]
 
-    def ptails(self):
+    def ptails(self) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects pitched tails.
 
@@ -4956,7 +4979,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         return self.plts().map(_select()[-1])
 
-    def ptlt(self, n):
+    def ptlt(self, n) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects pitched trivial logical tie ``n``.
 
@@ -5048,7 +5071,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe(), lone=True)
         return self.ptlts()[n]
 
-    def ptlts(self):
+    def ptlts(self) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects pitched trivial logical ties.
 
@@ -5170,7 +5193,7 @@ class Selection(abjad.Selection):
             pitched=True,
             )
 
-    def qrun(self, n):
+    def qrun(self, n) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects equipitch run ``n``.
 
@@ -5263,7 +5286,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe(), lone=True)
         return self.qruns()[n]
 
-    def qruns(self):
+    def qruns(self) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects equipitch runs.
 
@@ -5386,7 +5409,7 @@ class Selection(abjad.Selection):
         result = result.map(Selection)
         return result
 
-    def rleaf(self, n=0):
+    def rleaf(self, n=0) -> typing.Union[abjad.Leaf, abjad.Expression]:
         r"""
         Selects leaf ``n`` from leaves leaked to the right.
 
@@ -5476,7 +5499,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe(), lone=True)
         return self.rleaves()[n]
 
-    def rleak(self):
+    def rleak(self) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Leaks to the right.
 
@@ -5545,7 +5568,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         return self.with_next_leaf()
 
-    def rleaves(self):
+    def rleaves(self) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects leaves, leaked to the right.
 
@@ -5657,7 +5680,10 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         return self.leaves().with_next_leaf()
 
-    def rmleaves(self, count: int) -> abjad.Expression:
+    def rmleaves(
+        self,
+        count: int,
+        ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects all leaves in ``count`` measures, leaked one leaf to the right.
 
@@ -5733,7 +5759,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         return self.mleaves(count).rleak()
 
-    def rrun(self, n):
+    def rrun(self, n) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects run ``n`` (leaked to the right).
 
@@ -5830,7 +5856,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe(), lone=True)
         return self.rruns()[n]
 
-    def rruns(self):
+    def rruns(self) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects runs (leaked to the right).
 
@@ -5945,7 +5971,7 @@ class Selection(abjad.Selection):
         result = self.runs().map(_select().with_next_leaf())
         return result.map(Selection)
 
-    def skip(self, n):
+    def skip(self, n) -> typing.Union[abjad.Skip, abjad.Expression]:
         r"""
         Selects skip ``n``.
 
@@ -6006,7 +6032,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe(), lone=True)
         return self.skips()[n]
 
-    def skips(self):
+    def skips(self) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects skips.
 
@@ -6074,7 +6100,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         return self.components(abjad.Skip)
 
-    def tleaf(self, n=0):
+    def tleaf(self, n=0) -> typing.Union[abjad.Leaf, abjad.Expression]:
         r"""
         Selects trimmed leaf ``n``.
 
@@ -6166,7 +6192,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe(), lone=True)
         return self.tleaves()[n]
 
-    def tleaves(self):
+    def tleaves(self) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects trimmed leaves.
 
@@ -6308,7 +6334,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         return super().leaves(trim=True, grace_notes=False)
 
-    def wleaf(self, n=0):
+    def wleaf(self, n=0) -> typing.Union[abjad.Leaf, abjad.Expression]:
         r"""
         Selects leaf ``n`` from leaves leaked wide.
 
@@ -6481,7 +6507,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe(), lone=True)
         return self.wleaves()[n]
 
-    def wleaves(self):
+    def wleaves(self) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects leaves, leaked "wide" (to both the left and right).
 
