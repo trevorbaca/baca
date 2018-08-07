@@ -44,12 +44,12 @@ class SegmentMaker(abjad.SegmentMaker):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
+            \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+            <<                                                                                       %! SingleStaffScoreTemplate
+                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                <<                                                                                   %! _make_global_context
+                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    {                                                                                %! _make_global_context
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
@@ -73,14 +73,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         \baca_bar_line_visible                                                       %! _attach_final_bar_line
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \context Staff = "MusicStaff"
-                    {
-                        \context Voice = "MusicVoice"
-                        {
+                    }                                                                                %! _make_global_context
+                >>                                                                                   %! _make_global_context
+                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                <<                                                                                   %! SingleStaffScoreTemplate
+                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    {                                                                                %! SingleStaffScoreTemplate
+                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             c'8                                                                      %! baca_make_even_divisions
@@ -122,10 +122,10 @@ class SegmentMaker(abjad.SegmentMaker):
                             c'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                        }
-                    }
-                >>
-            >>
+                        }                                                                            %! SingleStaffScoreTemplate
+                    }                                                                                %! SingleStaffScoreTemplate
+                >>                                                                                   %! SingleStaffScoreTemplate
+            >>                                                                                       %! SingleStaffScoreTemplate
 
     """
     
@@ -391,12 +391,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
-                <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
+                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+                <<                                                                                       %! SingleStaffScoreTemplate
+                    \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                    <<                                                                                   %! _make_global_context
+                        \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                        {                                                                                %! _make_global_context
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
@@ -420,14 +420,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
+                        }                                                                                %! _make_global_context
+                    >>                                                                                   %! _make_global_context
+                    \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                    <<                                                                                   %! SingleStaffScoreTemplate
+                        \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                        {                                                                                %! SingleStaffScoreTemplate
+                            \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                            {                                                                            %! SingleStaffScoreTemplate
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 \baca_unpitched_music_warning                                            %! _color_unpitched_notes
@@ -497,10 +497,10 @@ class SegmentMaker(abjad.SegmentMaker):
                                 ^ \markup { 13 }
                                 ]                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
-                            }
-                        }
-                    >>
-                >>
+                            }                                                                            %! SingleStaffScoreTemplate
+                        }                                                                                %! SingleStaffScoreTemplate
+                    >>                                                                                   %! SingleStaffScoreTemplate
+                >>                                                                                       %! SingleStaffScoreTemplate
 
         ..  container:: example
 
@@ -526,12 +526,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
-                <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
+                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+                <<                                                                                       %! SingleStaffScoreTemplate
+                    \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                    <<                                                                                   %! _make_global_context
+                        \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                        {                                                                                %! _make_global_context
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
@@ -555,14 +555,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
+                        }                                                                                %! _make_global_context
+                    >>                                                                                   %! _make_global_context
+                    \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                    <<                                                                                   %! SingleStaffScoreTemplate
+                        \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                        {                                                                                %! SingleStaffScoreTemplate
+                            \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                            {                                                                            %! SingleStaffScoreTemplate
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 \baca_unpitched_music_warning                                            %! _color_unpitched_notes
@@ -632,10 +632,10 @@ class SegmentMaker(abjad.SegmentMaker):
                                 ^ \markup { 13 }
                                 ]                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
-                            }
-                        }
-                    >>
-                >>
+                            }                                                                            %! SingleStaffScoreTemplate
+                        }                                                                                %! SingleStaffScoreTemplate
+                    >>                                                                                   %! SingleStaffScoreTemplate
+                >>                                                                                       %! SingleStaffScoreTemplate
 
         ..  container:: example
 
@@ -1393,6 +1393,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _call_rhythm_commands(self):
         self._attach_fermatas()
         command_count = 0
+        tag = '_call_rhythm_commands'
         for voice in abjad.iterate(self.score).components(abjad.Voice):
             assert not len(voice), repr(voice)
             voice_metadata = self._voice_metadata.get(
@@ -1402,14 +1403,17 @@ class SegmentMaker(abjad.SegmentMaker):
             commands = self._voice_to_rhythm_commands(voice)
             if not commands:
                 if self.skips_instead_of_rests:
-                    maker = rhythmcommands.SkipRhythmMaker()
+                    maker = rhythmcommands.SkipRhythmMaker(tag=tag)
                 else:
                     mask = rmakers.silence(
                         [0],
                         1,
                         use_multimeasure_rests=True,
                         )
-                    maker = rmakers.NoteRhythmMaker(division_masks=[mask])
+                    maker = rmakers.NoteRhythmMaker(
+                        division_masks=[mask],
+                        tag=tag,
+                        )
                 selections = maker(self.time_signatures)
                 voice.extend(selections)
                 continue
@@ -2301,6 +2305,7 @@ class SegmentMaker(abjad.SegmentMaker):
             music=self.score,
             date_time_token=False,
             includes=includes,
+            tag='_make_lilypond_file',
             use_relative_includes=False,
             )
         block_names = ('layout', 'paper')
@@ -2317,13 +2322,14 @@ class SegmentMaker(abjad.SegmentMaker):
             assert len(lilypond_file.score_block.items) == 1
             score = lilypond_file.score_block.items[0]
             assert isinstance(score, abjad.Score)
-            include = abjad.Container()
+            include = abjad.Container(tag='_make_lilypond_file')
             string = r'\include "layout.ly"'
             literal = abjad.LilyPondLiteral(string, 'opening')
-            abjad.attach(literal, include, tag=None)
+            abjad.attach(literal, include, tag='_make_lilypond_file')
             container = abjad.Container(
                 [include, score],
                 is_simultaneous=True,
+                tag='_make_lilypond_file',
                 )
             lilypond_file.score_block.items[:] = [container]
         self._lilypond_file = lilypond_file
@@ -2339,9 +2345,12 @@ class SegmentMaker(abjad.SegmentMaker):
         for duration in durations:
             multiplier = abjad.Multiplier(duration)
             if self.skips_instead_of_rests:
-                silence = abjad.Skip(1)
+                silence = abjad.Skip(1, tag='_make_measure_silences')
             else:
-                silence = abjad.MultimeasureRest(1)
+                silence = abjad.MultimeasureRest(
+                    1,
+                    tag='_make_measure_silences',
+                    )
             abjad.attach(multiplier, silence, tag=None)
             silences.append(silence)
         return silences
@@ -2431,9 +2440,9 @@ class SegmentMaker(abjad.SegmentMaker):
                     ],
                     'before',
                     )
-            abjad.attach(before, mmrest)
+            abjad.attach(before, mmrest, tag='_parallelize_multimeasure_rests')
             after = abjad.LilyPondLiteral('>>', 'after')
-            abjad.attach(after, mmrest)
+            abjad.attach(after, mmrest, tag='_parallelize_multimeasure_rests')
 
     def _populate_offset_to_measure_number(self):
         measure_number = self._get_first_measure_number()
@@ -3102,16 +3111,16 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
-                \with
-                {
-                    autoBeaming = ##f
-                }
-                <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
+                \context Score = "Score"                                                                 %! StringTrioScoreTemplate
+                \with                                                                                    %! StringTrioScoreTemplate
+                {                                                                                        %! StringTrioScoreTemplate
+                    autoBeaming = ##f                                                                    %! StringTrioScoreTemplate
+                }                                                                                        %! StringTrioScoreTemplate
+                <<                                                                                       %! StringTrioScoreTemplate
+                    \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                    <<                                                                                   %! _make_global_context
+                        \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                        {                                                                                %! _make_global_context
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \baca_new_spacing_section #1 #31                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -3125,25 +3134,25 @@ class SegmentMaker(abjad.SegmentMaker):
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context StringSectionStaffGroup = "String Section Staff Group"
-                        <<
-                            \tag Violin                                                                  %! ST_4
-                            \context ViolinMusicStaff = "ViolinMusicStaff"
-                            {
-                                \context ViolinMusicVoice = "ViolinMusicVoice"
-                                {
+                        }                                                                                %! _make_global_context
+                    >>                                                                                   %! _make_global_context
+                    \context MusicContext = "MusicContext"                                               %! StringTrioScoreTemplate
+                    <<                                                                                   %! StringTrioScoreTemplate
+                        \context StringSectionStaffGroup = "String Section Staff Group"                  %! StringTrioScoreTemplate
+                        <<                                                                               %! StringTrioScoreTemplate
+                            \tag Violin                                                                  %! ScoreTemplate(5)
+                            \context ViolinMusicStaff = "ViolinMusicStaff"                               %! StringTrioScoreTemplate
+                            {                                                                            %! StringTrioScoreTemplate
+                                \context ViolinMusicVoice = "ViolinMusicVoice"                           %! StringTrioScoreTemplate
+                                {                                                                        %! StringTrioScoreTemplate
                                     {
                                         \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                             % [ViolinMusicVoice measure 1]                               %! _comment_measure_numbers
-                                            \clef "treble"                                               %! DEFAULT_CLEF:_set_status_tag:ScoreTemplate(3)
+                                            \clef "treble"                                               %! DEFAULT_CLEF:_set_status_tag:attach_defaults
                                             \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                                         %@% \override ViolinMusicStaff.Clef.color = ##f                  %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
-                                            \set ViolinMusicStaff.forceClef = ##t                        %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):ScoreTemplate(3)
+                                            \set ViolinMusicStaff.forceClef = ##t                        %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):attach_defaults
                                             d'16
                                             ^ \markup \baca-default-indicator-markup "(Violin)"          %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                             \override ViolinMusicStaff.Clef.color = #(x11-color 'violet) %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
@@ -3164,43 +3173,43 @@ class SegmentMaker(abjad.SegmentMaker):
                                     }
                 <BLANKLINE>
                                     % [ViolinMusicVoice measure 2]                                       %! _comment_measure_numbers
-                                    R1 * 3/8
+                                    R1 * 3/8                                                             %! _make_measure_silences
                 <BLANKLINE>
-                                }
-                            }
-                            \tag Viola                                                                   %! ST_4
-                            \context ViolaMusicStaff = "ViolaMusicStaff"
-                            {
-                                \context ViolaMusicVoice = "ViolaMusicVoice"
-                                {
+                                }                                                                        %! StringTrioScoreTemplate
+                            }                                                                            %! StringTrioScoreTemplate
+                            \tag Viola                                                                   %! ScoreTemplate(5)
+                            \context ViolaMusicStaff = "ViolaMusicStaff"                                 %! StringTrioScoreTemplate
+                            {                                                                            %! StringTrioScoreTemplate
+                                \context ViolaMusicVoice = "ViolaMusicVoice"                             %! StringTrioScoreTemplate
+                                {                                                                        %! StringTrioScoreTemplate
                 <BLANKLINE>
                                     % [ViolaMusicVoice measure 1]                                        %! _comment_measure_numbers
-                                    \clef "alto"                                                         %! DEFAULT_CLEF:_set_status_tag:ScoreTemplate(3)
+                                    \clef "alto"                                                         %! DEFAULT_CLEF:_set_status_tag:attach_defaults
                                     \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                                 %@% \override ViolaMusicStaff.Clef.color = ##f                           %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
-                                    \set ViolaMusicStaff.forceClef = ##t                                 %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):ScoreTemplate(3)
-                                    R1 * 3/8
+                                    \set ViolaMusicStaff.forceClef = ##t                                 %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):attach_defaults
+                                    R1 * 3/8                                                             %! _call_rhythm_commands
                                     ^ \markup \baca-default-indicator-markup "(Viola)"                   %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                     \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
                 <BLANKLINE>
                                     % [ViolaMusicVoice measure 2]                                        %! _comment_measure_numbers
-                                    R1 * 3/8
+                                    R1 * 3/8                                                             %! _call_rhythm_commands
                 <BLANKLINE>
-                                }
-                            }
-                            \tag Cello                                                                   %! ST_4
-                            \context CelloMusicStaff = "CelloMusicStaff"
-                            {
-                                \context CelloMusicVoice = "CelloMusicVoice"
-                                {
+                                }                                                                        %! StringTrioScoreTemplate
+                            }                                                                            %! StringTrioScoreTemplate
+                            \tag Cello                                                                   %! ScoreTemplate(5)
+                            \context CelloMusicStaff = "CelloMusicStaff"                                 %! StringTrioScoreTemplate
+                            {                                                                            %! StringTrioScoreTemplate
+                                \context CelloMusicVoice = "CelloMusicVoice"                             %! StringTrioScoreTemplate
+                                {                                                                        %! StringTrioScoreTemplate
                                     {
                                         \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                             % [CelloMusicVoice measure 1]                                %! _comment_measure_numbers
-                                            \clef "bass"                                                 %! DEFAULT_CLEF:_set_status_tag:ScoreTemplate(3)
+                                            \clef "bass"                                                 %! DEFAULT_CLEF:_set_status_tag:attach_defaults
                                             \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                                         %@% \override CelloMusicStaff.Clef.color = ##f                   %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
-                                            \set CelloMusicStaff.forceClef = ##t                         %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):ScoreTemplate(3)
+                                            \set CelloMusicStaff.forceClef = ##t                         %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):attach_defaults
                                             a16
                                             ^ \markup \baca-default-indicator-markup "(Cello)"           %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                             \override CelloMusicStaff.Clef.color = #(x11-color 'violet)  %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
@@ -3221,13 +3230,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                     }
                 <BLANKLINE>
                                     % [CelloMusicVoice measure 2]                                        %! _comment_measure_numbers
-                                    R1 * 3/8
+                                    R1 * 3/8                                                             %! _make_measure_silences
                 <BLANKLINE>
-                                }
-                            }
-                        >>
-                    >>
-                >>
+                                }                                                                        %! StringTrioScoreTemplate
+                            }                                                                            %! StringTrioScoreTemplate
+                        >>                                                                               %! StringTrioScoreTemplate
+                    >>                                                                                   %! StringTrioScoreTemplate
+                >>                                                                                       %! StringTrioScoreTemplate
 
         Defaults to none.
 
@@ -3290,16 +3299,16 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
-                \with
-                {
-                    autoBeaming = ##f
-                }
-                <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
+                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+                \with                                                                                    %! SingleStaffScoreTemplate
+                {                                                                                        %! SingleStaffScoreTemplate
+                    autoBeaming = ##f                                                                    %! SingleStaffScoreTemplate
+                }                                                                                        %! SingleStaffScoreTemplate
+                <<                                                                                       %! SingleStaffScoreTemplate
+                    \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                    <<                                                                                   %! _make_global_context
+                        \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                        {                                                                                %! _make_global_context
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -3327,14 +3336,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
+                        }                                                                                %! _make_global_context
+                    >>                                                                                   %! _make_global_context
+                    \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                    <<                                                                                   %! SingleStaffScoreTemplate
+                        \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                        {                                                                                %! SingleStaffScoreTemplate
+                            \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                            {                                                                            %! SingleStaffScoreTemplate
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
@@ -3390,10 +3399,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                     }
                                 }
-                            }
-                        }
-                    >>
-                >>
+                            }                                                                            %! SingleStaffScoreTemplate
+                        }                                                                                %! SingleStaffScoreTemplate
+                    >>                                                                                   %! SingleStaffScoreTemplate
+                >>                                                                                       %! SingleStaffScoreTemplate
 
         Defaults to none.
 
@@ -3456,16 +3465,16 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
-                \with
-                {
-                    autoBeaming = ##f
-                }
-                <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
+                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+                \with                                                                                    %! SingleStaffScoreTemplate
+                {                                                                                        %! SingleStaffScoreTemplate
+                    autoBeaming = ##f                                                                    %! SingleStaffScoreTemplate
+                }                                                                                        %! SingleStaffScoreTemplate
+                <<                                                                                       %! SingleStaffScoreTemplate
+                    \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                    <<                                                                                   %! _make_global_context
+                        \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                        {                                                                                %! _make_global_context
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -3493,14 +3502,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
+                        }                                                                                %! _make_global_context
+                    >>                                                                                   %! _make_global_context
+                    \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                    <<                                                                                   %! SingleStaffScoreTemplate
+                        \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                        {                                                                                %! SingleStaffScoreTemplate
+                            \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                            {                                                                            %! SingleStaffScoreTemplate
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
@@ -3564,10 +3573,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                     }
                                 }
-                            }
-                        }
-                    >>
-                >>
+                            }                                                                            %! SingleStaffScoreTemplate
+                        }                                                                                %! SingleStaffScoreTemplate
+                    >>                                                                                   %! SingleStaffScoreTemplate
+                >>                                                                                       %! SingleStaffScoreTemplate
 
         Defaults to none.
 
@@ -3631,12 +3640,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
-                <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
+                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+                <<                                                                                       %! SingleStaffScoreTemplate
+                    \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                    <<                                                                                   %! _make_global_context
+                        \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                        {                                                                                %! _make_global_context
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
@@ -3660,14 +3669,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
+                        }                                                                                %! _make_global_context
+                    >>                                                                                   %! _make_global_context
+                    \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                    <<                                                                                   %! SingleStaffScoreTemplate
+                        \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                        {                                                                                %! SingleStaffScoreTemplate
+                            \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                            {                                                                            %! SingleStaffScoreTemplate
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 c'8                                                                      %! baca_make_even_divisions
@@ -3709,10 +3718,10 @@ class SegmentMaker(abjad.SegmentMaker):
                                 c'8                                                                      %! baca_make_even_divisions
                                 ]                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
-                            }
-                        }
-                    >>
-                >>
+                            }                                                                            %! SingleStaffScoreTemplate
+                        }                                                                                %! SingleStaffScoreTemplate
+                    >>                                                                                   %! SingleStaffScoreTemplate
+                >>                                                                                       %! SingleStaffScoreTemplate
 
             Override nonlast segment final bar line like this:
 
@@ -3734,12 +3743,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
-                <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
+                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+                <<                                                                                       %! SingleStaffScoreTemplate
+                    \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                    <<                                                                                   %! _make_global_context
+                        \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                        {                                                                                %! _make_global_context
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
@@ -3763,14 +3772,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "||"                                                                    %! _attach_final_bar_line
                 <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
+                        }                                                                                %! _make_global_context
+                    >>                                                                                   %! _make_global_context
+                    \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                    <<                                                                                   %! SingleStaffScoreTemplate
+                        \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                        {                                                                                %! SingleStaffScoreTemplate
+                            \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                            {                                                                            %! SingleStaffScoreTemplate
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 c'8                                                                      %! baca_make_even_divisions
@@ -3812,10 +3821,10 @@ class SegmentMaker(abjad.SegmentMaker):
                                 c'8                                                                      %! baca_make_even_divisions
                                 ]                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
-                            }
-                        }
-                    >>
-                >>
+                            }                                                                            %! SingleStaffScoreTemplate
+                        }                                                                                %! SingleStaffScoreTemplate
+                    >>                                                                                   %! SingleStaffScoreTemplate
+                >>                                                                                       %! SingleStaffScoreTemplate
 
         ..  container:: example
 
@@ -3839,12 +3848,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
-                <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
+                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+                <<                                                                                       %! SingleStaffScoreTemplate
+                    \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                    <<                                                                                   %! _make_global_context
+                        \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                        {                                                                                %! _make_global_context
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
@@ -3868,14 +3877,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|."                                                                    %! _attach_final_bar_line
                 <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
+                        }                                                                                %! _make_global_context
+                    >>                                                                                   %! _make_global_context
+                    \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                    <<                                                                                   %! SingleStaffScoreTemplate
+                        \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                        {                                                                                %! SingleStaffScoreTemplate
+                            \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                            {                                                                            %! SingleStaffScoreTemplate
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 c'8                                                                      %! baca_make_even_divisions
@@ -3917,10 +3926,10 @@ class SegmentMaker(abjad.SegmentMaker):
                                 c'8                                                                      %! baca_make_even_divisions
                                 ]                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
-                            }
-                        }
-                    >>
-                >>
+                            }                                                                            %! SingleStaffScoreTemplate
+                        }                                                                                %! SingleStaffScoreTemplate
+                    >>                                                                                   %! SingleStaffScoreTemplate
+                >>                                                                                       %! SingleStaffScoreTemplate
 
             Override last segment final bar line like this:
 
@@ -3946,12 +3955,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
-                <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
+                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+                <<                                                                                       %! SingleStaffScoreTemplate
+                    \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                    <<                                                                                   %! _make_global_context
+                        \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                        {                                                                                %! _make_global_context
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
@@ -3975,14 +3984,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "||"                                                                    %! _attach_final_bar_line
                 <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
+                        }                                                                                %! _make_global_context
+                    >>                                                                                   %! _make_global_context
+                    \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                    <<                                                                                   %! SingleStaffScoreTemplate
+                        \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                        {                                                                                %! SingleStaffScoreTemplate
+                            \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                            {                                                                            %! SingleStaffScoreTemplate
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 c'8                                                                      %! baca_make_even_divisions
@@ -4024,10 +4033,10 @@ class SegmentMaker(abjad.SegmentMaker):
                                 c'8                                                                      %! baca_make_even_divisions
                                 ]                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
-                            }
-                        }
-                    >>
-                >>
+                            }                                                                            %! SingleStaffScoreTemplate
+                        }                                                                                %! SingleStaffScoreTemplate
+                    >>                                                                                   %! SingleStaffScoreTemplate
+                >>                                                                                       %! SingleStaffScoreTemplate
 
         """
         return self._final_bar_line
@@ -4061,12 +4070,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
-                <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
+                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+                <<                                                                                       %! SingleStaffScoreTemplate
+                    \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                    <<                                                                                   %! _make_global_context
+                        \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                        {                                                                                %! _make_global_context
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
@@ -4090,14 +4099,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|."                                                                    %! _attach_final_bar_line
                 <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
+                        }                                                                                %! _make_global_context
+                    >>                                                                                   %! _make_global_context
+                    \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                    <<                                                                                   %! SingleStaffScoreTemplate
+                        \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                        {                                                                                %! SingleStaffScoreTemplate
+                            \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                            {                                                                            %! SingleStaffScoreTemplate
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 c'8                                                                      %! baca_make_even_divisions
@@ -4157,10 +4166,10 @@ class SegmentMaker(abjad.SegmentMaker):
                                     }                                                                    %! SCORE_2
                                 ]                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
-                            }
-                        }
-                    >>
-                >>
+                            }                                                                            %! SingleStaffScoreTemplate
+                        }                                                                                %! SingleStaffScoreTemplate
+                    >>                                                                                   %! SingleStaffScoreTemplate
+                >>                                                                                       %! SingleStaffScoreTemplate
 
         """
         return self._final_markup
@@ -4228,12 +4237,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
-                <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
+                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+                <<                                                                                       %! SingleStaffScoreTemplate
+                    \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                    <<                                                                                   %! _make_global_context
+                        \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                        {                                                                                %! _make_global_context
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
@@ -4257,14 +4266,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
+                        }                                                                                %! _make_global_context
+                    >>                                                                                   %! _make_global_context
+                    \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                    <<                                                                                   %! SingleStaffScoreTemplate
+                        \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                        {                                                                                %! SingleStaffScoreTemplate
+                            \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                            {                                                                            %! SingleStaffScoreTemplate
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 c'8                                                                      %! baca_make_even_divisions
@@ -4306,10 +4315,10 @@ class SegmentMaker(abjad.SegmentMaker):
                                 c'8                                                                      %! baca_make_even_divisions
                                 ]                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
-                            }
-                        }
-                    >>
-                >>
+                            }                                                                            %! SingleStaffScoreTemplate
+                        }                                                                                %! SingleStaffScoreTemplate
+                    >>                                                                                   %! SingleStaffScoreTemplate
+                >>                                                                                       %! SingleStaffScoreTemplate
 
         ..  container:: example
 
@@ -4331,12 +4340,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
-                <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
+                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+                <<                                                                                       %! SingleStaffScoreTemplate
+                    \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                    <<                                                                                   %! _make_global_context
+                        \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                        {                                                                                %! _make_global_context
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
@@ -4360,14 +4369,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
+                        }                                                                                %! _make_global_context
+                    >>                                                                                   %! _make_global_context
+                    \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                    <<                                                                                   %! SingleStaffScoreTemplate
+                        \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                        {                                                                                %! SingleStaffScoreTemplate
+                            \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                            {                                                                            %! SingleStaffScoreTemplate
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 \baca_unpitched_music_warning                                            %! _color_unpitched_notes
@@ -4423,10 +4432,10 @@ class SegmentMaker(abjad.SegmentMaker):
                                 c'8                                                                      %! baca_make_even_divisions
                                 ]                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
-                            }
-                        }
-                    >>
-                >>
+                            }                                                                            %! SingleStaffScoreTemplate
+                        }                                                                                %! SingleStaffScoreTemplate
+                    >>                                                                                   %! SingleStaffScoreTemplate
+                >>                                                                                       %! SingleStaffScoreTemplate
 
         """
         return self._ignore_unpitched_notes
@@ -4494,17 +4503,17 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
-                \with
-                {
-                    \override SpacingSpanner.strict-grace-spacing = ##f
-                    \override SpacingSpanner.strict-note-spacing = ##f
-                }
-                <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
+                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+                \with                                                                                    %! SingleStaffScoreTemplate
+                {                                                                                        %! SingleStaffScoreTemplate
+                    \override SpacingSpanner.strict-grace-spacing = ##f                                  %! SingleStaffScoreTemplate
+                    \override SpacingSpanner.strict-note-spacing = ##f                                   %! SingleStaffScoreTemplate
+                }                                                                                        %! SingleStaffScoreTemplate
+                <<                                                                                       %! SingleStaffScoreTemplate
+                    \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                    <<                                                                                   %! _make_global_context
+                        \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                        {                                                                                %! _make_global_context
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -4526,14 +4535,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
+                        }                                                                                %! _make_global_context
+                    >>                                                                                   %! _make_global_context
+                    \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                    <<                                                                                   %! SingleStaffScoreTemplate
+                        \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                        {                                                                                %! SingleStaffScoreTemplate
+                            \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                            {                                                                            %! SingleStaffScoreTemplate
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
@@ -4595,10 +4604,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                     }
                                 }
-                            }
-                        }
-                    >>
-                >>
+                            }                                                                            %! SingleStaffScoreTemplate
+                        }                                                                                %! SingleStaffScoreTemplate
+                    >>                                                                                   %! SingleStaffScoreTemplate
+                >>                                                                                       %! SingleStaffScoreTemplate
 
         ..  container:: example
 
@@ -4657,17 +4666,17 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
-                \with
-                {
-                    \override SpacingSpanner.strict-grace-spacing = ##f
-                    \override SpacingSpanner.strict-note-spacing = ##f
-                }
-                <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
+                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+                \with                                                                                    %! SingleStaffScoreTemplate
+                {                                                                                        %! SingleStaffScoreTemplate
+                    \override SpacingSpanner.strict-grace-spacing = ##f                                  %! SingleStaffScoreTemplate
+                    \override SpacingSpanner.strict-note-spacing = ##f                                   %! SingleStaffScoreTemplate
+                }                                                                                        %! SingleStaffScoreTemplate
+                <<                                                                                       %! SingleStaffScoreTemplate
+                    \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                    <<                                                                                   %! _make_global_context
+                        \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                        {                                                                                %! _make_global_context
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -4689,14 +4698,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
+                        }                                                                                %! _make_global_context
+                    >>                                                                                   %! _make_global_context
+                    \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                    <<                                                                                   %! SingleStaffScoreTemplate
+                        \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                        {                                                                                %! SingleStaffScoreTemplate
+                            \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                            {                                                                            %! SingleStaffScoreTemplate
                                 {
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
@@ -4773,10 +4782,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                     }
                                 }
-                            }
-                        }
-                    >>
-                >>
+                            }                                                                            %! SingleStaffScoreTemplate
+                        }                                                                                %! SingleStaffScoreTemplate
+                    >>                                                                                   %! SingleStaffScoreTemplate
+                >>                                                                                       %! SingleStaffScoreTemplate
 
         """
         return self._ignore_unregistered_pitches
@@ -4872,12 +4881,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
-                <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
+                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+                <<                                                                                       %! SingleStaffScoreTemplate
+                    \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                    <<                                                                                   %! _make_global_context
+                        \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                        {                                                                                %! _make_global_context
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
@@ -4902,36 +4911,36 @@ class SegmentMaker(abjad.SegmentMaker):
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
+                        }                                                                                %! _make_global_context
+                    >>                                                                                   %! _make_global_context
+                    \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                    <<                                                                                   %! SingleStaffScoreTemplate
+                        \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                        {                                                                                %! SingleStaffScoreTemplate
+                            \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                            {                                                                            %! SingleStaffScoreTemplate
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 \clef "alto"                                                             %! REAPPLIED_CLEF:_set_status_tag:_reapply_persistent_indicators(3)
                                 \once \override Staff.Clef.color = #(x11-color 'green4)                  %! REAPPLIED_CLEF_COLOR:_attach_color_literal(2)
                             %@% \override Staff.Clef.color = ##f                                         %! REAPPLIED_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
                                 \set Staff.forceClef = ##t                                               %! REAPPLIED_CLEF:_set_status_tag:_treat_persistent_wrapper(2):_reapply_persistent_indicators(3)
-                                R1 * 1/2
+                                R1 * 1/2                                                                 %! _call_rhythm_commands
                                 \override Staff.Clef.color = #(x11-color 'OliveDrab)                     %! REAPPLIED_CLEF_REDRAW_COLOR:_attach_color_literal(2)
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                R1 * 3/8
+                                R1 * 3/8                                                                 %! _call_rhythm_commands
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                                R1 * 1/2
+                                R1 * 1/2                                                                 %! _call_rhythm_commands
                 <BLANKLINE>
                                 % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                                R1 * 3/8
+                                R1 * 3/8                                                                 %! _call_rhythm_commands
                 <BLANKLINE>
-                            }
-                        }
-                    >>
-                >>
+                            }                                                                            %! SingleStaffScoreTemplate
+                        }                                                                                %! SingleStaffScoreTemplate
+                    >>                                                                                   %! SingleStaffScoreTemplate
+                >>                                                                                       %! SingleStaffScoreTemplate
 
             >>> abjad.f(maker.metadata, strict=89)
             abjad.OrderedDict(
@@ -5069,12 +5078,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
-                <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
+                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+                <<                                                                                       %! SingleStaffScoreTemplate
+                    \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                    <<                                                                                   %! _make_global_context
+                        \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                        {                                                                                %! _make_global_context
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
@@ -5098,31 +5107,31 @@ class SegmentMaker(abjad.SegmentMaker):
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
+                        }                                                                                %! _make_global_context
+                    >>                                                                                   %! _make_global_context
+                    \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                    <<                                                                                   %! SingleStaffScoreTemplate
+                        \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                        {                                                                                %! SingleStaffScoreTemplate
+                            \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                            {                                                                            %! SingleStaffScoreTemplate
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                R1 * 1/2
+                                R1 * 1/2                                                                 %! _call_rhythm_commands
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                R1 * 3/8
+                                R1 * 3/8                                                                 %! _call_rhythm_commands
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                                R1 * 1/2
+                                R1 * 1/2                                                                 %! _call_rhythm_commands
                 <BLANKLINE>
                                 % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                                R1 * 3/8
+                                R1 * 3/8                                                                 %! _call_rhythm_commands
                 <BLANKLINE>
-                            }
-                        }
-                    >>
-                >>
+                            }                                                                            %! SingleStaffScoreTemplate
+                        }                                                                                %! SingleStaffScoreTemplate
+                    >>                                                                                   %! SingleStaffScoreTemplate
+                >>                                                                                       %! SingleStaffScoreTemplate
 
         ..  container:: example
 
@@ -5139,12 +5148,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
-                <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
+                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+                <<                                                                                       %! SingleStaffScoreTemplate
+                    \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                    <<                                                                                   %! _make_global_context
+                        \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                        {                                                                                %! _make_global_context
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
@@ -5168,31 +5177,31 @@ class SegmentMaker(abjad.SegmentMaker):
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
+                        }                                                                                %! _make_global_context
+                    >>                                                                                   %! _make_global_context
+                    \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                    <<                                                                                   %! SingleStaffScoreTemplate
+                        \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                        {                                                                                %! SingleStaffScoreTemplate
+                            \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                            {                                                                            %! SingleStaffScoreTemplate
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                s1 * 1/2
+                                s1 * 1/2                                                                 %! _call_rhythm_commands
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                s1 * 3/8
+                                s1 * 3/8                                                                 %! _call_rhythm_commands
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                                s1 * 1/2
+                                s1 * 1/2                                                                 %! _call_rhythm_commands
                 <BLANKLINE>
                                 % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                                s1 * 3/8
+                                s1 * 3/8                                                                 %! _call_rhythm_commands
                 <BLANKLINE>
-                            }
-                        }
-                    >>
-                >>
+                            }                                                                            %! SingleStaffScoreTemplate
+                        }                                                                                %! SingleStaffScoreTemplate
+                    >>                                                                                   %! SingleStaffScoreTemplate
+                >>                                                                                       %! SingleStaffScoreTemplate
 
         """
         return self._skips_instead_of_rests
@@ -5250,12 +5259,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
-                <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
+                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+                <<                                                                                       %! SingleStaffScoreTemplate
+                    \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                    <<                                                                                   %! _make_global_context
+                        \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                        {                                                                                %! _make_global_context
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
@@ -5279,14 +5288,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
+                        }                                                                                %! _make_global_context
+                    >>                                                                                   %! _make_global_context
+                    \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                    <<                                                                                   %! SingleStaffScoreTemplate
+                        \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                        {                                                                                %! SingleStaffScoreTemplate
+                            \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                            {                                                                            %! SingleStaffScoreTemplate
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 fs'!8                                                                    %! baca_make_even_divisions
@@ -5329,10 +5338,10 @@ class SegmentMaker(abjad.SegmentMaker):
                                 g'8                                                                      %! baca_make_even_divisions
                                 ]                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
-                            }
-                        }
-                    >>
-                >>
+                            }                                                                            %! SingleStaffScoreTemplate
+                        }                                                                                %! SingleStaffScoreTemplate
+                    >>                                                                                   %! SingleStaffScoreTemplate
+                >>                                                                                       %! SingleStaffScoreTemplate
 
         ..  container:: example
 
@@ -5360,12 +5369,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score"
-                <<
-                    \context GlobalContext = "GlobalContext"
-                    <<
-                        \context GlobalSkips = "GlobalSkips"
-                        {
+                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+                <<                                                                                       %! SingleStaffScoreTemplate
+                    \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                    <<                                                                                   %! _make_global_context
+                        \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                        {                                                                                %! _make_global_context
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
@@ -5389,14 +5398,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \baca_bar_line_visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext"
-                    <<
-                        \context Staff = "MusicStaff"
-                        {
-                            \context Voice = "MusicVoice"
-                            {
+                        }                                                                                %! _make_global_context
+                    >>                                                                                   %! _make_global_context
+                    \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                    <<                                                                                   %! SingleStaffScoreTemplate
+                        \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                        {                                                                                %! SingleStaffScoreTemplate
+                            \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                            {                                                                            %! SingleStaffScoreTemplate
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 e'8                                                                      %! baca_make_even_divisions
@@ -5439,10 +5448,10 @@ class SegmentMaker(abjad.SegmentMaker):
                                 f'8                                                                      %! baca_make_even_divisions
                                 ]                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
-                            }
-                        }
-                    >>
-                >>
+                            }                                                                            %! SingleStaffScoreTemplate
+                        }                                                                                %! SingleStaffScoreTemplate
+                    >>                                                                                   %! SingleStaffScoreTemplate
+                >>                                                                                       %! SingleStaffScoreTemplate
 
         """
         return self._transpose_score

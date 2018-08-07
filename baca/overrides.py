@@ -96,12 +96,12 @@ class OverrideCommand(scoping.Command):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
+            \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+            <<                                                                                       %! SingleStaffScoreTemplate
+                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                <<                                                                                   %! _make_global_context
+                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    {                                                                                %! _make_global_context
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
@@ -125,14 +125,14 @@ class OverrideCommand(scoping.Command):
                         \baca_bar_line_visible                                                       %! _attach_final_bar_line
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \context Staff = "MusicStaff"
-                    {
-                        \context Voice = "MusicVoice"
-                        {
+                    }                                                                                %! _make_global_context
+                >>                                                                                   %! _make_global_context
+                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                <<                                                                                   %! SingleStaffScoreTemplate
+                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    {                                                                                %! SingleStaffScoreTemplate
+                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \override Beam.positions = #'(6 . 6)                                     %! OverrideCommand(1)
@@ -180,10 +180,10 @@ class OverrideCommand(scoping.Command):
                             \revert Beam.positions                                                   %! OverrideCommand(2)
                             \revert Stem.direction                                                   %! OverrideCommand(2)
             <BLANKLINE>
-                        }
-                    }
-                >>
-            >>
+                        }                                                                            %! SingleStaffScoreTemplate
+                    }                                                                                %! SingleStaffScoreTemplate
+                >>                                                                                   %! SingleStaffScoreTemplate
+            >>                                                                                       %! SingleStaffScoreTemplate
 
     ..  container:: example
 
@@ -468,12 +468,12 @@ def bar_extent(
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
+            \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+            <<                                                                                       %! SingleStaffScoreTemplate
+                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                <<                                                                                   %! _make_global_context
+                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    {                                                                                %! _make_global_context
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -501,14 +501,14 @@ def bar_extent(
                         \baca_bar_line_visible                                                       %! _attach_final_bar_line
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \context Staff = "MusicStaff"
-                    {
-                        \context Voice = "MusicVoice"
-                        {
+                    }                                                                                %! _make_global_context
+                >>                                                                                   %! _make_global_context
+                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                <<                                                                                   %! SingleStaffScoreTemplate
+                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    {                                                                                %! SingleStaffScoreTemplate
+                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             e'8                                                                      %! baca_make_even_divisions
@@ -553,10 +553,10 @@ def bar_extent(
                             ]                                                                        %! baca_make_even_divisions
                             \once \override Staff.BarLine.bar-extent = #'(-4 . 4)                    %! OverrideCommand(1)
             <BLANKLINE>
-                        }
-                    }
-                >>
-            >>
+                        }                                                                            %! SingleStaffScoreTemplate
+                    }                                                                                %! SingleStaffScoreTemplate
+                >>                                                                                   %! SingleStaffScoreTemplate
+            >>                                                                                       %! SingleStaffScoreTemplate
 
     """
     return OverrideCommand(
@@ -621,12 +621,12 @@ def bar_line_transparent(
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
+            \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+            <<                                                                                       %! SingleStaffScoreTemplate
+                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                <<                                                                                   %! _make_global_context
+                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    {                                                                                %! _make_global_context
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
@@ -650,14 +650,14 @@ def bar_line_transparent(
                         \baca_bar_line_visible                                                       %! _attach_final_bar_line
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \context Staff = "MusicStaff"
-                    {
-                        \context Voice = "MusicVoice"
-                        {
+                    }                                                                                %! _make_global_context
+                >>                                                                                   %! _make_global_context
+                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                <<                                                                                   %! SingleStaffScoreTemplate
+                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    {                                                                                %! SingleStaffScoreTemplate
+                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \override Score.BarLine.transparent = ##t                                %! OverrideCommand(1)
@@ -701,10 +701,10 @@ def bar_line_transparent(
                             ]
                             \revert Score.BarLine.transparent                                        %! OverrideCommand(2)
             <BLANKLINE>
-                        }
-                    }
-                >>
-            >>
+                        }                                                                            %! SingleStaffScoreTemplate
+                    }                                                                                %! SingleStaffScoreTemplate
+                >>                                                                                   %! SingleStaffScoreTemplate
+            >>                                                                                       %! SingleStaffScoreTemplate
 
     ..  container:: example
 
@@ -735,12 +735,12 @@ def bar_line_transparent(
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
+            \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+            <<                                                                                       %! SingleStaffScoreTemplate
+                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                <<                                                                                   %! _make_global_context
+                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    {                                                                                %! _make_global_context
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
@@ -764,14 +764,14 @@ def bar_line_transparent(
                         \baca_bar_line_visible                                                       %! _attach_final_bar_line
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \context Staff = "MusicStaff"
-                    {
-                        \context Voice = "MusicVoice"
-                        {
+                    }                                                                                %! _make_global_context
+                >>                                                                                   %! _make_global_context
+                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                <<                                                                                   %! SingleStaffScoreTemplate
+                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    {                                                                                %! SingleStaffScoreTemplate
+                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             e'8
@@ -815,10 +815,10 @@ def bar_line_transparent(
                             g'8
                             ]
             <BLANKLINE>
-                        }
-                    }
-                >>
-            >>
+                        }                                                                            %! SingleStaffScoreTemplate
+                    }                                                                                %! SingleStaffScoreTemplate
+                >>                                                                                   %! SingleStaffScoreTemplate
+            >>                                                                                       %! SingleStaffScoreTemplate
 
     """
     return OverrideCommand(
@@ -1914,12 +1914,12 @@ def mmrest_text_color(
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
+            \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+            <<                                                                                       %! SingleStaffScoreTemplate
+                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                <<                                                                                   %! _make_global_context
+                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    {                                                                                %! _make_global_context
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
@@ -1943,21 +1943,21 @@ def mmrest_text_color(
                         \baca_bar_line_visible                                                       %! _attach_final_bar_line
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \context Staff = "MusicStaff"
-                    {
-                        \context Voice = "MusicVoice"
-                        {
+                    }                                                                                %! _make_global_context
+                >>                                                                                   %! _make_global_context
+                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                <<                                                                                   %! SingleStaffScoreTemplate
+                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    {                                                                                %! SingleStaffScoreTemplate
+                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \override MultiMeasureRestText.color = #red                              %! OverrideCommand(1)
-                            R1 * 1/2
+                            R1 * 1/2                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                            R1 * 3/8
+                            R1 * 3/8                                                                 %! _call_rhythm_commands
                             ^ \markup {                                                              %! IndicatorCommand
                                 \override                                                            %! IndicatorCommand
                                     #'(box-padding . 0.5)                                            %! IndicatorCommand
@@ -1966,16 +1966,16 @@ def mmrest_text_color(
                                 }                                                                    %! IndicatorCommand
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                            R1 * 1/2
+                            R1 * 1/2                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                            R1 * 3/8
+                            R1 * 3/8                                                                 %! _call_rhythm_commands
                             \revert MultiMeasureRestText.color                                       %! OverrideCommand(2)
             <BLANKLINE>
-                        }
-                    }
-                >>
-            >>
+                        }                                                                            %! SingleStaffScoreTemplate
+                    }                                                                                %! SingleStaffScoreTemplate
+                >>                                                                                   %! SingleStaffScoreTemplate
+            >>                                                                                       %! SingleStaffScoreTemplate
 
     ..  container:: example
 
@@ -2044,12 +2044,12 @@ def mmrest_text_extra_offset(
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
+            \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+            <<                                                                                       %! SingleStaffScoreTemplate
+                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                <<                                                                                   %! _make_global_context
+                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    {                                                                                %! _make_global_context
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
@@ -2073,21 +2073,21 @@ def mmrest_text_extra_offset(
                         \baca_bar_line_visible                                                       %! _attach_final_bar_line
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \context Staff = "MusicStaff"
-                    {
-                        \context Voice = "MusicVoice"
-                        {
+                    }                                                                                %! _make_global_context
+                >>                                                                                   %! _make_global_context
+                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                <<                                                                                   %! SingleStaffScoreTemplate
+                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    {                                                                                %! SingleStaffScoreTemplate
+                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \override MultiMeasureRestText.extra-offset = #'(0 . 2)                  %! OverrideCommand(1)
-                            R1 * 1/2
+                            R1 * 1/2                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                            R1 * 3/8
+                            R1 * 3/8                                                                 %! _call_rhythm_commands
                             ^ \markup {                                                              %! IndicatorCommand
                                 \override                                                            %! IndicatorCommand
                                     #'(box-padding . 0.5)                                            %! IndicatorCommand
@@ -2096,16 +2096,16 @@ def mmrest_text_extra_offset(
                                 }                                                                    %! IndicatorCommand
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                            R1 * 1/2
+                            R1 * 1/2                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                            R1 * 3/8
+                            R1 * 3/8                                                                 %! _call_rhythm_commands
                             \revert MultiMeasureRestText.extra-offset                                %! OverrideCommand(2)
             <BLANKLINE>
-                        }
-                    }
-                >>
-            >>
+                        }                                                                            %! SingleStaffScoreTemplate
+                    }                                                                                %! SingleStaffScoreTemplate
+                >>                                                                                   %! SingleStaffScoreTemplate
+            >>                                                                                       %! SingleStaffScoreTemplate
 
     """
     return OverrideCommand(
@@ -2147,12 +2147,12 @@ def mmrest_text_padding(
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
+            \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+            <<                                                                                       %! SingleStaffScoreTemplate
+                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                <<                                                                                   %! _make_global_context
+                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    {                                                                                %! _make_global_context
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
@@ -2176,21 +2176,21 @@ def mmrest_text_padding(
                         \baca_bar_line_visible                                                       %! _attach_final_bar_line
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \context Staff = "MusicStaff"
-                    {
-                        \context Voice = "MusicVoice"
-                        {
+                    }                                                                                %! _make_global_context
+                >>                                                                                   %! _make_global_context
+                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                <<                                                                                   %! SingleStaffScoreTemplate
+                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    {                                                                                %! SingleStaffScoreTemplate
+                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \override MultiMeasureRestText.padding = #2                              %! OverrideCommand(1)
-                            R1 * 1/2
+                            R1 * 1/2                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                            R1 * 3/8
+                            R1 * 3/8                                                                 %! _call_rhythm_commands
                             ^ \markup {                                                              %! IndicatorCommand
                                 \override                                                            %! IndicatorCommand
                                     #'(box-padding . 0.5)                                            %! IndicatorCommand
@@ -2199,16 +2199,16 @@ def mmrest_text_padding(
                                 }                                                                    %! IndicatorCommand
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                            R1 * 1/2
+                            R1 * 1/2                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                            R1 * 3/8
+                            R1 * 3/8                                                                 %! _call_rhythm_commands
                             \revert MultiMeasureRestText.padding                                     %! OverrideCommand(2)
             <BLANKLINE>
-                        }
-                    }
-                >>
-            >>
+                        }                                                                            %! SingleStaffScoreTemplate
+                    }                                                                                %! SingleStaffScoreTemplate
+                >>                                                                                   %! SingleStaffScoreTemplate
+            >>                                                                                       %! SingleStaffScoreTemplate
 
     """
     return OverrideCommand(
@@ -2249,12 +2249,12 @@ def mmrest_text_parent_center(
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
+            \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+            <<                                                                                       %! SingleStaffScoreTemplate
+                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                <<                                                                                   %! _make_global_context
+                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    {                                                                                %! _make_global_context
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
@@ -2278,21 +2278,21 @@ def mmrest_text_parent_center(
                         \baca_bar_line_visible                                                       %! _attach_final_bar_line
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \context Staff = "MusicStaff"
-                    {
-                        \context Voice = "MusicVoice"
-                        {
+                    }                                                                                %! _make_global_context
+                >>                                                                                   %! _make_global_context
+                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                <<                                                                                   %! SingleStaffScoreTemplate
+                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    {                                                                                %! SingleStaffScoreTemplate
+                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \override MultiMeasureRestText.parent-alignment-X = #0                   %! OverrideCommand(1)
-                            R1 * 1/2
+                            R1 * 1/2                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                            R1 * 3/8
+                            R1 * 3/8                                                                 %! _call_rhythm_commands
                             ^ \markup {                                                              %! IndicatorCommand
                                 \override                                                            %! IndicatorCommand
                                     #'(box-padding . 0.5)                                            %! IndicatorCommand
@@ -2301,16 +2301,16 @@ def mmrest_text_parent_center(
                                 }                                                                    %! IndicatorCommand
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                            R1 * 1/2
+                            R1 * 1/2                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                            R1 * 3/8
+                            R1 * 3/8                                                                 %! _call_rhythm_commands
                             \revert MultiMeasureRestText.parent-alignment-X                          %! OverrideCommand(2)
             <BLANKLINE>
-                        }
-                    }
-                >>
-            >>
+                        }                                                                            %! SingleStaffScoreTemplate
+                    }                                                                                %! SingleStaffScoreTemplate
+                >>                                                                                   %! SingleStaffScoreTemplate
+            >>                                                                                       %! SingleStaffScoreTemplate
 
     """
     return OverrideCommand(
@@ -2352,12 +2352,12 @@ def mmrest_text_staff_padding(
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
+            \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+            <<                                                                                       %! SingleStaffScoreTemplate
+                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                <<                                                                                   %! _make_global_context
+                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    {                                                                                %! _make_global_context
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
@@ -2381,21 +2381,21 @@ def mmrest_text_staff_padding(
                         \baca_bar_line_visible                                                       %! _attach_final_bar_line
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \context Staff = "MusicStaff"
-                    {
-                        \context Voice = "MusicVoice"
-                        {
+                    }                                                                                %! _make_global_context
+                >>                                                                                   %! _make_global_context
+                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                <<                                                                                   %! SingleStaffScoreTemplate
+                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    {                                                                                %! SingleStaffScoreTemplate
+                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \override MultiMeasureRestText.staff-padding = #2                        %! OverrideCommand(1)
-                            R1 * 1/2
+                            R1 * 1/2                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                            R1 * 3/8
+                            R1 * 3/8                                                                 %! _call_rhythm_commands
                             ^ \markup {                                                              %! IndicatorCommand
                                 \override                                                            %! IndicatorCommand
                                     #'(box-padding . 0.5)                                            %! IndicatorCommand
@@ -2404,16 +2404,16 @@ def mmrest_text_staff_padding(
                                 }                                                                    %! IndicatorCommand
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                            R1 * 1/2
+                            R1 * 1/2                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                            R1 * 3/8
+                            R1 * 3/8                                                                 %! _call_rhythm_commands
                             \revert MultiMeasureRestText.staff-padding                               %! OverrideCommand(2)
             <BLANKLINE>
-                        }
-                    }
-                >>
-            >>
+                        }                                                                            %! SingleStaffScoreTemplate
+                    }                                                                                %! SingleStaffScoreTemplate
+                >>                                                                                   %! SingleStaffScoreTemplate
+            >>                                                                                       %! SingleStaffScoreTemplate
 
     """
     return OverrideCommand(

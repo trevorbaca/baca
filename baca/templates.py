@@ -69,7 +69,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
             if part_names and tag_ not in part_names:
                 raise Exception(f'not listed in parts manifest: {tag_!r}.')
         literal = abjad.LilyPondLiteral(fr'\tag {tag}', 'before')
-        abjad.attach(literal, context, tag='ST_4')
+        abjad.attach(literal, context, tag='ScoreTemplate(5)')
 
     @staticmethod
     def _set_square_delimiter(staff_group):
@@ -212,12 +212,12 @@ class SingleStaffScoreTemplate(ScoreTemplate):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
+            \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+            <<                                                                                       %! SingleStaffScoreTemplate
+                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                <<                                                                                   %! _make_global_context
+                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    {                                                                                %! _make_global_context
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
@@ -241,31 +241,31 @@ class SingleStaffScoreTemplate(ScoreTemplate):
                         \baca_bar_line_visible                                                       %! _attach_final_bar_line
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \context Staff = "MusicStaff"
-                    {
-                        \context Voice = "MusicVoice"
-                        {
+                    }                                                                                %! _make_global_context
+                >>                                                                                   %! _make_global_context
+                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                <<                                                                                   %! SingleStaffScoreTemplate
+                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    {                                                                                %! SingleStaffScoreTemplate
+                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                            R1 * 1/2
+                            R1 * 1/2                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                            R1 * 3/8
+                            R1 * 3/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                            R1 * 1/2
+                            R1 * 1/2                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                            R1 * 3/8
+                            R1 * 3/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
-                        }
-                    }
-                >>
-            >>
+                        }                                                                            %! SingleStaffScoreTemplate
+                    }                                                                                %! SingleStaffScoreTemplate
+                >>                                                                                   %! SingleStaffScoreTemplate
+            >>                                                                                       %! SingleStaffScoreTemplate
 
     """
 
@@ -279,10 +279,14 @@ class SingleStaffScoreTemplate(ScoreTemplate):
         global_context = self._make_global_context()
 
         # MUSIC VOICE, MUSIC STAFF
-        music_voice = abjad.Voice(name='MusicVoice')
+        music_voice = abjad.Voice(
+            name='MusicVoice',
+            tag='SingleStaffScoreTemplate',
+            )
         music_staff = abjad.Staff(
             [music_voice],
             name='MusicStaff',
+            tag='SingleStaffScoreTemplate',
             )
 
         # MUSIC CONTEXT
@@ -291,12 +295,14 @@ class SingleStaffScoreTemplate(ScoreTemplate):
             lilypond_type='MusicContext',
             is_simultaneous=True,
             name='MusicContext',
+            tag='SingleStaffScoreTemplate',
             )
 
         # SCORE
         score = abjad.Score(
             [global_context, music_context],
             name='Score',
+            tag='SingleStaffScoreTemplate',
             )
         self._attach_calltime_defaults(score)
         return score
@@ -318,12 +324,12 @@ class StringTrioScoreTemplate(ScoreTemplate):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
+            \context Score = "Score"                                                                 %! StringTrioScoreTemplate
+            <<                                                                                       %! StringTrioScoreTemplate
+                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                <<                                                                                   %! _make_global_context
+                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    {                                                                                %! _make_global_context
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
@@ -347,93 +353,93 @@ class StringTrioScoreTemplate(ScoreTemplate):
                         \baca_bar_line_visible                                                       %! _attach_final_bar_line
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \context StringSectionStaffGroup = "String Section Staff Group"
-                    <<
-                        \tag Violin                                                                  %! ST_4
-                        \context ViolinMusicStaff = "ViolinMusicStaff"
-                        {
-                            \context ViolinMusicVoice = "ViolinMusicVoice"
-                            {
+                    }                                                                                %! _make_global_context
+                >>                                                                                   %! _make_global_context
+                \context MusicContext = "MusicContext"                                               %! StringTrioScoreTemplate
+                <<                                                                                   %! StringTrioScoreTemplate
+                    \context StringSectionStaffGroup = "String Section Staff Group"                  %! StringTrioScoreTemplate
+                    <<                                                                               %! StringTrioScoreTemplate
+                        \tag Violin                                                                  %! ScoreTemplate(5)
+                        \context ViolinMusicStaff = "ViolinMusicStaff"                               %! StringTrioScoreTemplate
+                        {                                                                            %! StringTrioScoreTemplate
+                            \context ViolinMusicVoice = "ViolinMusicVoice"                           %! StringTrioScoreTemplate
+                            {                                                                        %! StringTrioScoreTemplate
             <BLANKLINE>
                                 % [ViolinMusicVoice measure 1]                                       %! _comment_measure_numbers
-                                \clef "treble"                                                       %! DEFAULT_CLEF:_set_status_tag:ScoreTemplate(3)
+                                \clef "treble"                                                       %! DEFAULT_CLEF:_set_status_tag:attach_defaults
                                 \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                             %@% \override ViolinMusicStaff.Clef.color = ##f                          %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
-                                \set ViolinMusicStaff.forceClef = ##t                                %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):ScoreTemplate(3)
-                                R1 * 1/2
+                                \set ViolinMusicStaff.forceClef = ##t                                %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):attach_defaults
+                                R1 * 1/2                                                             %! _call_rhythm_commands
                                 ^ \markup \baca-default-indicator-markup "(Violin)"                  %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                 \override ViolinMusicStaff.Clef.color = #(x11-color 'violet)         %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
                                 % [ViolinMusicVoice measure 2]                                       %! _comment_measure_numbers
-                                R1 * 3/8
+                                R1 * 3/8                                                             %! _call_rhythm_commands
             <BLANKLINE>
                                 % [ViolinMusicVoice measure 3]                                       %! _comment_measure_numbers
-                                R1 * 1/2
+                                R1 * 1/2                                                             %! _call_rhythm_commands
             <BLANKLINE>
                                 % [ViolinMusicVoice measure 4]                                       %! _comment_measure_numbers
-                                R1 * 3/8
+                                R1 * 3/8                                                             %! _call_rhythm_commands
             <BLANKLINE>
-                            }
-                        }
-                        \tag Viola                                                                   %! ST_4
-                        \context ViolaMusicStaff = "ViolaMusicStaff"
-                        {
-                            \context ViolaMusicVoice = "ViolaMusicVoice"
-                            {
+                            }                                                                        %! StringTrioScoreTemplate
+                        }                                                                            %! StringTrioScoreTemplate
+                        \tag Viola                                                                   %! ScoreTemplate(5)
+                        \context ViolaMusicStaff = "ViolaMusicStaff"                                 %! StringTrioScoreTemplate
+                        {                                                                            %! StringTrioScoreTemplate
+                            \context ViolaMusicVoice = "ViolaMusicVoice"                             %! StringTrioScoreTemplate
+                            {                                                                        %! StringTrioScoreTemplate
             <BLANKLINE>
                                 % [ViolaMusicVoice measure 1]                                        %! _comment_measure_numbers
-                                \clef "alto"                                                         %! DEFAULT_CLEF:_set_status_tag:ScoreTemplate(3)
+                                \clef "alto"                                                         %! DEFAULT_CLEF:_set_status_tag:attach_defaults
                                 \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                             %@% \override ViolaMusicStaff.Clef.color = ##f                           %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
-                                \set ViolaMusicStaff.forceClef = ##t                                 %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):ScoreTemplate(3)
-                                R1 * 1/2
+                                \set ViolaMusicStaff.forceClef = ##t                                 %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):attach_defaults
+                                R1 * 1/2                                                             %! _call_rhythm_commands
                                 ^ \markup \baca-default-indicator-markup "(Viola)"                   %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                 \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
                                 % [ViolaMusicVoice measure 2]                                        %! _comment_measure_numbers
-                                R1 * 3/8
+                                R1 * 3/8                                                             %! _call_rhythm_commands
             <BLANKLINE>
                                 % [ViolaMusicVoice measure 3]                                        %! _comment_measure_numbers
-                                R1 * 1/2
+                                R1 * 1/2                                                             %! _call_rhythm_commands
             <BLANKLINE>
                                 % [ViolaMusicVoice measure 4]                                        %! _comment_measure_numbers
-                                R1 * 3/8
+                                R1 * 3/8                                                             %! _call_rhythm_commands
             <BLANKLINE>
-                            }
-                        }
-                        \tag Cello                                                                   %! ST_4
-                        \context CelloMusicStaff = "CelloMusicStaff"
-                        {
-                            \context CelloMusicVoice = "CelloMusicVoice"
-                            {
+                            }                                                                        %! StringTrioScoreTemplate
+                        }                                                                            %! StringTrioScoreTemplate
+                        \tag Cello                                                                   %! ScoreTemplate(5)
+                        \context CelloMusicStaff = "CelloMusicStaff"                                 %! StringTrioScoreTemplate
+                        {                                                                            %! StringTrioScoreTemplate
+                            \context CelloMusicVoice = "CelloMusicVoice"                             %! StringTrioScoreTemplate
+                            {                                                                        %! StringTrioScoreTemplate
             <BLANKLINE>
                                 % [CelloMusicVoice measure 1]                                        %! _comment_measure_numbers
-                                \clef "bass"                                                         %! DEFAULT_CLEF:_set_status_tag:ScoreTemplate(3)
+                                \clef "bass"                                                         %! DEFAULT_CLEF:_set_status_tag:attach_defaults
                                 \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                             %@% \override CelloMusicStaff.Clef.color = ##f                           %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
-                                \set CelloMusicStaff.forceClef = ##t                                 %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):ScoreTemplate(3)
-                                R1 * 1/2
+                                \set CelloMusicStaff.forceClef = ##t                                 %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):attach_defaults
+                                R1 * 1/2                                                             %! _call_rhythm_commands
                                 ^ \markup \baca-default-indicator-markup "(Cello)"                   %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                 \override CelloMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
                                 % [CelloMusicVoice measure 2]                                        %! _comment_measure_numbers
-                                R1 * 3/8
+                                R1 * 3/8                                                             %! _call_rhythm_commands
             <BLANKLINE>
                                 % [CelloMusicVoice measure 3]                                        %! _comment_measure_numbers
-                                R1 * 1/2
+                                R1 * 1/2                                                             %! _call_rhythm_commands
             <BLANKLINE>
                                 % [CelloMusicVoice measure 4]                                        %! _comment_measure_numbers
-                                R1 * 3/8
+                                R1 * 3/8                                                             %! _call_rhythm_commands
             <BLANKLINE>
-                            }
-                        }
-                    >>
-                >>
-            >>
+                            }                                                                        %! StringTrioScoreTemplate
+                        }                                                                            %! StringTrioScoreTemplate
+                    >>                                                                               %! StringTrioScoreTemplate
+                >>                                                                                   %! StringTrioScoreTemplate
+            >>                                                                                       %! StringTrioScoreTemplate
 
     """
 
@@ -458,11 +464,13 @@ class StringTrioScoreTemplate(ScoreTemplate):
         violin_music_voice = abjad.Voice(
             lilypond_type='ViolinMusicVoice',
             name='ViolinMusicVoice',
+            tag='StringTrioScoreTemplate',
             )
         violin_music_staff = abjad.Staff(
             [violin_music_voice],
             lilypond_type='ViolinMusicStaff',
             name='ViolinMusicStaff',
+            tag='StringTrioScoreTemplate',
             )
         violin = abjad.Violin(
             markup=markups.instrument('Violin', hcenter_in=10),
@@ -487,11 +495,13 @@ class StringTrioScoreTemplate(ScoreTemplate):
         viola_music_voice = abjad.Voice(
             lilypond_type='ViolaMusicVoice',
             name='ViolaMusicVoice',
+            tag='StringTrioScoreTemplate',
             )
         viola_music_staff = abjad.Staff(
             [viola_music_voice],
             lilypond_type='ViolaMusicStaff',
             name='ViolaMusicStaff',
+            tag='StringTrioScoreTemplate',
             )
         abjad.annotate(
             viola_music_staff,
@@ -515,11 +525,13 @@ class StringTrioScoreTemplate(ScoreTemplate):
         cello_music_voice = abjad.Voice(
             lilypond_type='CelloMusicVoice',
             name='CelloMusicVoice',
+            tag='StringTrioScoreTemplate',
             )
         cello_music_staff = abjad.Staff(
             [cello_music_voice],
             lilypond_type='CelloMusicStaff',
             name='CelloMusicStaff',
+            tag='StringTrioScoreTemplate',
             )
         abjad.annotate(
             cello_music_staff,
@@ -548,16 +560,19 @@ class StringTrioScoreTemplate(ScoreTemplate):
                 ],
             lilypond_type='StringSectionStaffGroup',
             name='String Section Staff Group',
+            tag='StringTrioScoreTemplate',
             )
         music_context = abjad.Context(
             [string_section_staff_group],
             lilypond_type='MusicContext',
             is_simultaneous=True,
             name='MusicContext',
+            tag='StringTrioScoreTemplate',
             )
         score = abjad.Score(
             [global_context, music_context],
             name='Score',
+            tag='StringTrioScoreTemplate',
             )
         return score
 
@@ -578,12 +593,12 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
+            \context Score = "Score"                                                                 %! TwoVoiceStaffScoreTemplate
+            <<                                                                                       %! TwoVoiceStaffScoreTemplate
+                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                <<                                                                                   %! _make_global_context
+                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    {                                                                                %! _make_global_context
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
@@ -607,47 +622,47 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
                         \baca_bar_line_visible                                                       %! _attach_final_bar_line
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \context MusicStaff = "MusicStaff"
-                    <<
-                        \context MusicVoiceOne = "MusicVoiceOne"
-                        {
+                    }                                                                                %! _make_global_context
+                >>                                                                                   %! _make_global_context
+                \context MusicContext = "MusicContext"                                               %! TwoVoiceStaffScoreTemplate
+                <<                                                                                   %! TwoVoiceStaffScoreTemplate
+                    \context MusicStaff = "MusicStaff"                                               %! TwoVoiceStaffScoreTemplate
+                    <<                                                                               %! TwoVoiceStaffScoreTemplate
+                        \context MusicVoiceOne = "MusicVoiceOne"                                     %! TwoVoiceStaffScoreTemplate
+                        {                                                                            %! TwoVoiceStaffScoreTemplate
             <BLANKLINE>
                             % [MusicVoiceOne measure 1]                                              %! _comment_measure_numbers
-                            R1 * 1/2
+                            R1 * 1/2                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [MusicVoiceOne measure 2]                                              %! _comment_measure_numbers
-                            R1 * 3/8
+                            R1 * 3/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [MusicVoiceOne measure 3]                                              %! _comment_measure_numbers
-                            R1 * 1/2
+                            R1 * 1/2                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [MusicVoiceOne measure 4]                                              %! _comment_measure_numbers
-                            R1 * 3/8
+                            R1 * 3/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
-                        }
-                        \context MusicVoiceTwo = "MusicVoiceTwo"
-                        {
+                        }                                                                            %! TwoVoiceStaffScoreTemplate
+                        \context MusicVoiceTwo = "MusicVoiceTwo"                                     %! TwoVoiceStaffScoreTemplate
+                        {                                                                            %! TwoVoiceStaffScoreTemplate
             <BLANKLINE>
                             % [MusicVoiceTwo measure 1]                                              %! _comment_measure_numbers
-                            R1 * 1/2
+                            R1 * 1/2                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [MusicVoiceTwo measure 2]                                              %! _comment_measure_numbers
-                            R1 * 3/8
+                            R1 * 3/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [MusicVoiceTwo measure 3]                                              %! _comment_measure_numbers
-                            R1 * 1/2
+                            R1 * 1/2                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [MusicVoiceTwo measure 4]                                              %! _comment_measure_numbers
-                            R1 * 3/8
+                            R1 * 3/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
-                        }
-                    >>
-                >>
-            >>
+                        }                                                                            %! TwoVoiceStaffScoreTemplate
+                    >>                                                                               %! TwoVoiceStaffScoreTemplate
+                >>                                                                                   %! TwoVoiceStaffScoreTemplate
+            >>                                                                                       %! TwoVoiceStaffScoreTemplate
 
     """
 
@@ -664,16 +679,19 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
         music_voice_1 = abjad.Voice(
             lilypond_type='MusicVoiceOne',
             name='MusicVoiceOne',
+            tag='TwoVoiceStaffScoreTemplate',
             )
         music_voice_2 = abjad.Voice(
             lilypond_type='MusicVoiceTwo',
             name='MusicVoiceTwo',
+            tag='TwoVoiceStaffScoreTemplate',
             )
         music_staff = abjad.Staff(
             [music_voice_1, music_voice_2],
             lilypond_type='MusicStaff',
             is_simultaneous=True,
             name='MusicStaff',
+            tag='TwoVoiceStaffScoreTemplate',
             )
 
         # MUSIC CONTEXT
@@ -682,12 +700,14 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
             lilypond_type='MusicContext',
             is_simultaneous=True,
             name='MusicContext',
+            tag='TwoVoiceStaffScoreTemplate',
             )
 
         # SCORE
         score = abjad.Score(
             [global_context, music_context],
             name='Score',
+            tag='TwoVoiceStaffScoreTemplate',
             )
         abjad.attach(abjad.tags.TWO_VOICE, score, tag=None)
         return score
@@ -709,12 +729,12 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \context Score = "Score"
-            <<
-                \context GlobalContext = "GlobalContext"
-                <<
-                    \context GlobalSkips = "GlobalSkips"
-                    {
+            \context Score = "Score"                                                                 %! ViolinSoloScoreTemplate
+            <<                                                                                       %! ViolinSoloScoreTemplate
+                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                <<                                                                                   %! _make_global_context
+                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    {                                                                                %! _make_global_context
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
@@ -738,38 +758,38 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                         \baca_bar_line_visible                                                       %! _attach_final_bar_line
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext"
-                <<
-                    \tag Violin                                                                      %! ST_4
-                    \context ViolinMusicStaff = "ViolinMusicStaff"
-                    {
-                        \context ViolinMusicVoice = "ViolinMusicVoice"
-                        {
+                    }                                                                                %! _make_global_context
+                >>                                                                                   %! _make_global_context
+                \context MusicContext = "MusicContext"                                               %! ViolinSoloScoreTemplate
+                <<                                                                                   %! ViolinSoloScoreTemplate
+                    \tag Violin                                                                      %! ScoreTemplate(5)
+                    \context ViolinMusicStaff = "ViolinMusicStaff"                                   %! ViolinSoloScoreTemplate
+                    {                                                                                %! ViolinSoloScoreTemplate
+                        \context ViolinMusicVoice = "ViolinMusicVoice"                               %! ViolinSoloScoreTemplate
+                        {                                                                            %! ViolinSoloScoreTemplate
             <BLANKLINE>
                             % [ViolinMusicVoice measure 1]                                           %! _comment_measure_numbers
-                            \clef "treble"                                                           %! DEFAULT_CLEF:_set_status_tag:ScoreTemplate(3)
+                            \clef "treble"                                                           %! DEFAULT_CLEF:_set_status_tag:attach_defaults
                             \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet)   %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                         %@% \override ViolinMusicStaff.Clef.color = ##f                              %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
-                            \set ViolinMusicStaff.forceClef = ##t                                    %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):ScoreTemplate(3)
-                            R1 * 1/2
+                            \set ViolinMusicStaff.forceClef = ##t                                    %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):attach_defaults
+                            R1 * 1/2                                                                 %! _call_rhythm_commands
                             ^ \markup \baca-default-indicator-markup "(Violin)"                      %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                             \override ViolinMusicStaff.Clef.color = #(x11-color 'violet)             %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
                             % [ViolinMusicVoice measure 2]                                           %! _comment_measure_numbers
-                            R1 * 3/8
+                            R1 * 3/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [ViolinMusicVoice measure 3]                                           %! _comment_measure_numbers
-                            R1 * 1/2
+                            R1 * 1/2                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [ViolinMusicVoice measure 4]                                           %! _comment_measure_numbers
-                            R1 * 3/8
+                            R1 * 3/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
-                        }
-                    }
-                >>
-            >>
+                        }                                                                            %! ViolinSoloScoreTemplate
+                    }                                                                                %! ViolinSoloScoreTemplate
+                >>                                                                                   %! ViolinSoloScoreTemplate
+            >>                                                                                       %! ViolinSoloScoreTemplate
 
     """
 
@@ -786,11 +806,13 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
         violin_music_voice = abjad.Voice(
             lilypond_type='ViolinMusicVoice',
             name='ViolinMusicVoice',
+            tag='ViolinSoloScoreTemplate',
             )
         violin_music_staff = abjad.Staff(
             [violin_music_voice],
             lilypond_type='ViolinMusicStaff',
             name='ViolinMusicStaff',
+            tag='ViolinSoloScoreTemplate',
             )
         violin = abjad.Violin(
             markup=markups.instrument('Violin'),
@@ -814,11 +836,13 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
             lilypond_type='MusicContext',
             is_simultaneous=True,
             name='MusicContext',
+            tag='ViolinSoloScoreTemplate',
             )
 
         # SCORE
         score = abjad.Score(
             [global_context, music_context],
             name='Score',
+            tag='ViolinSoloScoreTemplate',
             )
         return score

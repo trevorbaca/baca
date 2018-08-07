@@ -42,7 +42,7 @@ def _doctest_files(files, globs):
     optionflags = (
         doctest.NORMALIZE_WHITESPACE
         | doctest.ELLIPSIS
-        | doctest.REPORT_ONLY_FIRST_FAILURE
+        #| doctest.REPORT_ONLY_FIRST_FAILURE
         )
     failed_file_paths, error_messages = [], []
     failure_count, test_count = 0, 0
