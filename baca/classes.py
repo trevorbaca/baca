@@ -3709,6 +3709,81 @@ class Selection(abjad.Selection):
             overhang=True,
             )
 
+    def mgroups(
+        self,
+        counts: typing.List[int] = [1],
+        ) -> typing.Union[abjad.Expression, 'Selection']:
+        r"""
+        Partitions measure-grouped leaves (not cyclic; no overhang).
+
+        ..  container:: example
+
+            Partitiones measure-grouped leaves into one part of length 2:
+
+            ..  container:: example
+
+                >>> staff = abjad.Staff("r8 d' e' f' g' a' b' r d''")
+                >>> abjad.setting(staff).auto_beaming = False
+                >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
+                >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
+                >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
+                >>> abjad.show(staff) # doctest: +SKIP
+
+                >>> result = baca.select(staff).mgroups([2])
+
+                >>> for item in result:
+                ...     item
+                ...
+                Selection([Rest('r8'), Note("d'8"), Note("e'8"), Note("f'8")])
+
+            ..  container:: example expression
+
+                >>> selector = baca.select().mgroups([2])
+                >>> result = selector(staff)
+
+                >>> selector.print(result)
+                Selection([Rest('r8'), Note("d'8"), Note("e'8"), Note("f'8")])
+
+                >>> selector.color(result)
+                >>> abjad.show(staff) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(staff)
+                \new Staff
+                \with
+                {
+                    autoBeaming = ##f
+                }
+                {
+                    \time 2/8
+                    \abjad_color_music "red"
+                    r8
+                    \abjad_color_music "red"
+                    d'8
+                    \abjad_color_music "red"
+                    e'8
+                    \abjad_color_music "red"
+                    f'8
+                    \time 3/8
+                    g'8
+                    a'8
+                    b'8
+                    \time 1/8
+                    r8
+                    d''8
+                }
+
+        """
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        result = self.leaves()
+        result = result.group_by_measure()
+        result = result.partition_by_counts(counts)
+        result_ = result.map(_select().flatten())
+        assert isinstance(result_, Selection), repr(result_)
+        return result_
+
     def mleaves(
         self,
         count: int,
