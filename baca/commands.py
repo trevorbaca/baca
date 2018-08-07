@@ -299,7 +299,7 @@ class BCPCommand(scoping.Command):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 e'8                                                                      %! baca_make_even_divisions
-                                -\downbow                                                                %! BowContactPointCommand
+                                - \downbow                                                               %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad_solid_line_with_arrow                                           %! BowContactPointCommand
                                 - \tweak bound-details.left.text \markup \baca-bcp-left #1 #5            %! BowContactPointCommand
@@ -307,21 +307,21 @@ class BCPCommand(scoping.Command):
                                 [                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
                                 f'8                                                                      %! baca_make_even_divisions
-                                -\upbow                                                                  %! BowContactPointCommand
+                                - \upbow                                                                 %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad_solid_line_with_arrow                                           %! BowContactPointCommand
                                 - \tweak bound-details.left.text \markup \baca-bcp-left #2 #5            %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                 <BLANKLINE>
                                 e'8                                                                      %! baca_make_even_divisions
-                                -\downbow                                                                %! BowContactPointCommand
+                                - \downbow                                                               %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad_solid_line_with_arrow                                           %! BowContactPointCommand
                                 - \tweak bound-details.left.text \markup \baca-bcp-left #1 #5            %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                 <BLANKLINE>
                                 f'8                                                                      %! baca_make_even_divisions
-                                -\upbow                                                                  %! BowContactPointCommand
+                                - \upbow                                                                 %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 ]                                                                        %! baca_make_even_divisions
                                 - \abjad_solid_line_with_arrow                                           %! BowContactPointCommand
@@ -330,7 +330,7 @@ class BCPCommand(scoping.Command):
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                                 e'8                                                                      %! baca_make_even_divisions
-                                -\downbow                                                                %! BowContactPointCommand
+                                - \downbow                                                               %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad_solid_line_with_arrow                                           %! BowContactPointCommand
                                 - \tweak bound-details.left.text \markup \baca-bcp-left #1 #5            %! BowContactPointCommand
@@ -338,7 +338,7 @@ class BCPCommand(scoping.Command):
                                 [                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
                                 f'8                                                                      %! baca_make_even_divisions
-                                -\upbow                                                                  %! BowContactPointCommand
+                                - \upbow                                                                 %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad_solid_line_with_arrow                                           %! BowContactPointCommand
                                 - \tweak bound-details.left.text \markup \baca-bcp-left #2 #5            %! BowContactPointCommand
@@ -351,7 +351,7 @@ class BCPCommand(scoping.Command):
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                                 f'8                                                                      %! baca_make_even_divisions
-                                -\downbow                                                                %! BowContactPointCommand
+                                - \downbow                                                               %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad_solid_line_with_arrow                                           %! BowContactPointCommand
                                 - \tweak bound-details.left.text \markup \baca-bcp-left #3 #5            %! BowContactPointCommand
@@ -359,21 +359,21 @@ class BCPCommand(scoping.Command):
                                 [                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
                                 e'8                                                                      %! baca_make_even_divisions
-                                -\upbow                                                                  %! BowContactPointCommand
+                                - \upbow                                                                 %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad_solid_line_with_arrow                                           %! BowContactPointCommand
                                 - \tweak bound-details.left.text \markup \baca-bcp-left #4 #5            %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                 <BLANKLINE>
                                 f'8                                                                      %! baca_make_even_divisions
-                                -\downbow                                                                %! BowContactPointCommand
+                                - \downbow                                                               %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad_solid_line_with_arrow                                           %! BowContactPointCommand
                                 - \tweak bound-details.left.text \markup \baca-bcp-left #3 #5            %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                 <BLANKLINE>
                                 e'8                                                                      %! baca_make_even_divisions
-                                -\upbow                                                                  %! BowContactPointCommand
+                                - \upbow                                                                 %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 ]                                                                        %! baca_make_even_divisions
                                 - \abjad_solid_line_with_arrow                                           %! BowContactPointCommand
@@ -382,7 +382,7 @@ class BCPCommand(scoping.Command):
                 <BLANKLINE>
                                 % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                                 f'8                                                                      %! baca_make_even_divisions
-                                -\downbow                                                                %! BowContactPointCommand
+                                - \downbow                                                               %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad_solid_line_with_arrow                                           %! BowContactPointCommand
                                 - \tweak bound-details.left.text \markup \baca-bcp-left #3 #5            %! BowContactPointCommand
@@ -390,7 +390,7 @@ class BCPCommand(scoping.Command):
                                 [                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
                                 e'8                                                                      %! baca_make_even_divisions
-                                -\upbow                                                                  %! BowContactPointCommand
+                                - \upbow                                                                 %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad_solid_line_with_arrow                                           %! BowContactPointCommand
                                 - \tweak bound-details.left.text \markup \baca-bcp-left #4 #5            %! BowContactPointCommand

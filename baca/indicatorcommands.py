@@ -47,7 +47,7 @@ def accent(
                             \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
-                            -\accent                                                                 %! IndicatorCommand
+                            - \accent                                                                %! IndicatorCommand
                             [
                             d'16
                             ]
@@ -125,21 +125,21 @@ def accent(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\accent                                                                 %! IndicatorCommand
+                            - \accent                                                                %! IndicatorCommand
                             [
                             e''16
-                            -\accent                                                                 %! IndicatorCommand
+                            - \accent                                                                %! IndicatorCommand
                             ]
                             ef''4
-                            -\accent                                                                 %! IndicatorCommand
+                            - \accent                                                                %! IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            -\accent                                                                 %! IndicatorCommand
+                            - \accent                                                                %! IndicatorCommand
                             [
                             g''16
-                            -\accent                                                                 %! IndicatorCommand
+                            - \accent                                                                %! IndicatorCommand
                             ]
                         }
                         \times 4/5 {
@@ -198,13 +198,13 @@ def alternate_bow_strokes(
                             \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
-                            -\downbow                                                                %! IndicatorCommand
+                            - \downbow                                                               %! IndicatorCommand
                             [
                             d'16
-                            -\upbow                                                                  %! IndicatorCommand
+                            - \upbow                                                                 %! IndicatorCommand
                             ]
                             bf'4
-                            -\downbow                                                                %! IndicatorCommand
+                            - \downbow                                                               %! IndicatorCommand
                             ~
                             bf'16
                             r16
@@ -212,26 +212,26 @@ def alternate_bow_strokes(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\upbow                                                                  %! IndicatorCommand
+                            - \upbow                                                                 %! IndicatorCommand
                             [
                             e''16
-                            -\downbow                                                                %! IndicatorCommand
+                            - \downbow                                                               %! IndicatorCommand
                             ]
                             ef''4
-                            -\upbow                                                                  %! IndicatorCommand
+                            - \upbow                                                                 %! IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            -\downbow                                                                %! IndicatorCommand
+                            - \downbow                                                               %! IndicatorCommand
                             [
                             g''16
-                            -\upbow                                                                  %! IndicatorCommand
+                            - \upbow                                                                 %! IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
-                            -\downbow                                                                %! IndicatorCommand
+                            - \downbow                                                               %! IndicatorCommand
                             r4
                             \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
@@ -270,13 +270,13 @@ def alternate_bow_strokes(
                             \override TupletBracket.staff-padding = #6                               %! OverrideCommand(1)
                             r8
                             c'16
-                            -\upbow                                                                  %! IndicatorCommand
+                            - \upbow                                                                 %! IndicatorCommand
                             [
                             d'16
-                            -\downbow                                                                %! IndicatorCommand
+                            - \downbow                                                               %! IndicatorCommand
                             ]
                             bf'4
-                            -\upbow                                                                  %! IndicatorCommand
+                            - \upbow                                                                 %! IndicatorCommand
                             ~
                             bf'16
                             r16
@@ -284,26 +284,26 @@ def alternate_bow_strokes(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\downbow                                                                %! IndicatorCommand
+                            - \downbow                                                               %! IndicatorCommand
                             [
                             e''16
-                            -\upbow                                                                  %! IndicatorCommand
+                            - \upbow                                                                 %! IndicatorCommand
                             ]
                             ef''4
-                            -\downbow                                                                %! IndicatorCommand
+                            - \downbow                                                               %! IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            -\upbow                                                                  %! IndicatorCommand
+                            - \upbow                                                                 %! IndicatorCommand
                             [
                             g''16
-                            -\downbow                                                                %! IndicatorCommand
+                            - \downbow                                                               %! IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
-                            -\upbow                                                                  %! IndicatorCommand
+                            - \upbow                                                                 %! IndicatorCommand
                             r4
                             \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
                         }
@@ -356,21 +356,21 @@ def alternate_bow_strokes(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\downbow                                                                %! IndicatorCommand
+                            - \downbow                                                               %! IndicatorCommand
                             [
                             e''16
-                            -\upbow                                                                  %! IndicatorCommand
+                            - \upbow                                                                 %! IndicatorCommand
                             ]
                             ef''4
-                            -\downbow                                                                %! IndicatorCommand
+                            - \downbow                                                               %! IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            -\upbow                                                                  %! IndicatorCommand
+                            - \upbow                                                                 %! IndicatorCommand
                             [
                             g''16
-                            -\downbow                                                                %! IndicatorCommand
+                            - \downbow                                                               %! IndicatorCommand
                             ]
                         }
                         \times 4/5 {
@@ -426,7 +426,7 @@ def arpeggio(
                     {
                         \scaleDurations #'(1 . 1) {
                             <c' d' bf'>8
-                            -\arpeggio                                                               %! IndicatorCommand
+                            - \arpeggio                                                              %! IndicatorCommand
                             ~
                             [
                             <c' d' bf'>32
@@ -511,7 +511,7 @@ def arpeggio(
                         }
                         \scaleDurations #'(1 . 1) {
                             <ef'' e'' fs'''>8
-                            -\arpeggio                                                               %! IndicatorCommand
+                            - \arpeggio                                                              %! IndicatorCommand
                             ~
                             [
                             <ef'' e'' fs'''>32
@@ -520,7 +520,7 @@ def arpeggio(
                         }
                         \scaleDurations #'(1 . 1) {
                             <g' af''>8
-                            -\arpeggio                                                               %! IndicatorCommand
+                            - \arpeggio                                                              %! IndicatorCommand
                             ~
                             [
                             <g' af''>32
@@ -771,7 +771,7 @@ def double_staccato(
                             \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
-                            -\baca_staccati #2                                                       %! IndicatorCommand
+                            - \baca_staccati #2                                                      %! IndicatorCommand
                             [
                             d'16
                             ]
@@ -849,21 +849,21 @@ def double_staccato(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\baca_staccati #2                                                       %! IndicatorCommand
+                            - \baca_staccati #2                                                      %! IndicatorCommand
                             [
                             e''16
-                            -\baca_staccati #2                                                       %! IndicatorCommand
+                            - \baca_staccati #2                                                      %! IndicatorCommand
                             ]
                             ef''4
-                            -\baca_staccati #2                                                       %! IndicatorCommand
+                            - \baca_staccati #2                                                      %! IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            -\baca_staccati #2                                                       %! IndicatorCommand
+                            - \baca_staccati #2                                                      %! IndicatorCommand
                             [
                             g''16
-                            -\baca_staccati #2                                                       %! IndicatorCommand
+                            - \baca_staccati #2                                                      %! IndicatorCommand
                             ]
                         }
                         \times 4/5 {
@@ -1074,7 +1074,7 @@ def down_bow(
                             \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
-                            -\downbow                                                                %! IndicatorCommand
+                            - \downbow                                                               %! IndicatorCommand
                             [
                             d'16
                             ]
@@ -1152,21 +1152,21 @@ def down_bow(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\downbow                                                                %! IndicatorCommand
+                            - \downbow                                                               %! IndicatorCommand
                             [
                             e''16
-                            -\downbow                                                                %! IndicatorCommand
+                            - \downbow                                                               %! IndicatorCommand
                             ]
                             ef''4
-                            -\downbow                                                                %! IndicatorCommand
+                            - \downbow                                                               %! IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            -\downbow                                                                %! IndicatorCommand
+                            - \downbow                                                               %! IndicatorCommand
                             [
                             g''16
-                            -\downbow                                                                %! IndicatorCommand
+                            - \downbow                                                               %! IndicatorCommand
                             ]
                         }
                         \times 4/5 {
@@ -1222,7 +1222,7 @@ def espressivo(
                             \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
-                            -\espressivo                                                             %! IndicatorCommand
+                            - \espressivo                                                            %! IndicatorCommand
                             [
                             d'16
                             ]
@@ -1300,21 +1300,21 @@ def espressivo(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\espressivo                                                             %! IndicatorCommand
+                            - \espressivo                                                            %! IndicatorCommand
                             [
                             e''16
-                            -\espressivo                                                             %! IndicatorCommand
+                            - \espressivo                                                            %! IndicatorCommand
                             ]
                             ef''4
-                            -\espressivo                                                             %! IndicatorCommand
+                            - \espressivo                                                            %! IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            -\espressivo                                                             %! IndicatorCommand
+                            - \espressivo                                                            %! IndicatorCommand
                             [
                             g''16
-                            -\espressivo                                                             %! IndicatorCommand
+                            - \espressivo                                                            %! IndicatorCommand
                             ]
                         }
                         \times 4/5 {
@@ -1369,7 +1369,7 @@ def fermata(
                         \times 9/10 {
                             \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
-                            -\fermata                                                                %! IndicatorCommand
+                            - \fermata                                                               %! IndicatorCommand
                             c'16
                             [
                             d'16
@@ -1445,7 +1445,7 @@ def fermata(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\fermata                                                                %! IndicatorCommand
+                            - \fermata                                                               %! IndicatorCommand
                             [
                             e''16
                             ]
@@ -1511,7 +1511,7 @@ def flageolet(
                             \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
-                            -\flageolet                                                              %! IndicatorCommand
+                            - \flageolet                                                             %! IndicatorCommand
                             [
                             d'16
                             ]
@@ -1589,21 +1589,21 @@ def flageolet(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\flageolet                                                              %! IndicatorCommand
+                            - \flageolet                                                             %! IndicatorCommand
                             [
                             e''16
-                            -\flageolet                                                              %! IndicatorCommand
+                            - \flageolet                                                             %! IndicatorCommand
                             ]
                             ef''4
-                            -\flageolet                                                              %! IndicatorCommand
+                            - \flageolet                                                             %! IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            -\flageolet                                                              %! IndicatorCommand
+                            - \flageolet                                                             %! IndicatorCommand
                             [
                             g''16
-                            -\flageolet                                                              %! IndicatorCommand
+                            - \flageolet                                                             %! IndicatorCommand
                             ]
                         }
                         \times 4/5 {
@@ -1755,7 +1755,7 @@ def laissez_vibrer(
                             \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
-                            -\laissezVibrer                                                          %! IndicatorCommand
+                            - \laissezVibrer                                                         %! IndicatorCommand
                             [
                             d'16
                             ]
@@ -1833,21 +1833,21 @@ def laissez_vibrer(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\laissezVibrer                                                          %! IndicatorCommand
+                            - \laissezVibrer                                                         %! IndicatorCommand
                             [
                             e''16
-                            -\laissezVibrer                                                          %! IndicatorCommand
+                            - \laissezVibrer                                                         %! IndicatorCommand
                             ]
                             ef''4
                             ~
                             ef''16
-                            -\laissezVibrer                                                          %! IndicatorCommand
+                            - \laissezVibrer                                                         %! IndicatorCommand
                             r16
                             af''16
-                            -\laissezVibrer                                                          %! IndicatorCommand
+                            - \laissezVibrer                                                         %! IndicatorCommand
                             [
                             g''16
-                            -\laissezVibrer                                                          %! IndicatorCommand
+                            - \laissezVibrer                                                         %! IndicatorCommand
                             ]
                         }
                         \times 4/5 {
@@ -1917,7 +1917,7 @@ def long_fermata(
                         \times 9/10 {
                             \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
-                            -\longfermata                                                            %! IndicatorCommand
+                            - \longfermata                                                           %! IndicatorCommand
                             c'16
                             [
                             d'16
@@ -1993,7 +1993,7 @@ def long_fermata(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\longfermata                                                            %! IndicatorCommand
+                            - \longfermata                                                           %! IndicatorCommand
                             [
                             e''16
                             ]
@@ -2059,7 +2059,7 @@ def marcato(
                             \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
-                            -\marcato                                                                %! IndicatorCommand
+                            - \marcato                                                               %! IndicatorCommand
                             [
                             d'16
                             ]
@@ -2137,21 +2137,21 @@ def marcato(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\marcato                                                                %! IndicatorCommand
+                            - \marcato                                                               %! IndicatorCommand
                             [
                             e''16
-                            -\marcato                                                                %! IndicatorCommand
+                            - \marcato                                                               %! IndicatorCommand
                             ]
                             ef''4
-                            -\marcato                                                                %! IndicatorCommand
+                            - \marcato                                                               %! IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            -\marcato                                                                %! IndicatorCommand
+                            - \marcato                                                               %! IndicatorCommand
                             [
                             g''16
-                            -\marcato                                                                %! IndicatorCommand
+                            - \marcato                                                               %! IndicatorCommand
                             ]
                         }
                         \times 4/5 {
@@ -2342,7 +2342,7 @@ def short_fermata(
                         \times 9/10 {
                             \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
-                            -\shortfermata                                                           %! IndicatorCommand
+                            - \shortfermata                                                          %! IndicatorCommand
                             c'16
                             [
                             d'16
@@ -2420,7 +2420,7 @@ def short_fermata(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\shortfermata                                                           %! IndicatorCommand
+                            - \shortfermata                                                          %! IndicatorCommand
                             [
                             e''16
                             ]
@@ -2486,7 +2486,7 @@ def staccatissimo(
                             \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
-                            -\staccatissimo                                                          %! IndicatorCommand
+                            - \staccatissimo                                                         %! IndicatorCommand
                             [
                             d'16
                             ]
@@ -2564,21 +2564,21 @@ def staccatissimo(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\staccatissimo                                                          %! IndicatorCommand
+                            - \staccatissimo                                                         %! IndicatorCommand
                             [
                             e''16
-                            -\staccatissimo                                                          %! IndicatorCommand
+                            - \staccatissimo                                                         %! IndicatorCommand
                             ]
                             ef''4
-                            -\staccatissimo                                                          %! IndicatorCommand
+                            - \staccatissimo                                                         %! IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            -\staccatissimo                                                          %! IndicatorCommand
+                            - \staccatissimo                                                         %! IndicatorCommand
                             [
                             g''16
-                            -\staccatissimo                                                          %! IndicatorCommand
+                            - \staccatissimo                                                         %! IndicatorCommand
                             ]
                         }
                         \times 4/5 {
@@ -2634,7 +2634,7 @@ def staccato(
                             \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
-                            -\staccato                                                               %! IndicatorCommand
+                            - \staccato                                                              %! IndicatorCommand
                             [
                             d'16
                             ]
@@ -2712,21 +2712,21 @@ def staccato(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\staccato                                                               %! IndicatorCommand
+                            - \staccato                                                              %! IndicatorCommand
                             [
                             e''16
-                            -\staccato                                                               %! IndicatorCommand
+                            - \staccato                                                              %! IndicatorCommand
                             ]
                             ef''4
-                            -\staccato                                                               %! IndicatorCommand
+                            - \staccato                                                              %! IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            -\staccato                                                               %! IndicatorCommand
+                            - \staccato                                                              %! IndicatorCommand
                             [
                             g''16
-                            -\staccato                                                               %! IndicatorCommand
+                            - \staccato                                                              %! IndicatorCommand
                             ]
                         }
                         \times 4/5 {
@@ -3559,7 +3559,7 @@ def stopped(
                             \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
-                            -\stopped                                                                %! IndicatorCommand
+                            - \stopped                                                               %! IndicatorCommand
                             [
                             d'16
                             ]
@@ -3636,7 +3636,7 @@ def tenuto(
                             \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
-                            -\tenuto                                                                 %! IndicatorCommand
+                            - \tenuto                                                                %! IndicatorCommand
                             [
                             d'16
                             ]
@@ -3714,21 +3714,21 @@ def tenuto(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\tenuto                                                                 %! IndicatorCommand
+                            - \tenuto                                                                %! IndicatorCommand
                             [
                             e''16
-                            -\tenuto                                                                 %! IndicatorCommand
+                            - \tenuto                                                                %! IndicatorCommand
                             ]
                             ef''4
-                            -\tenuto                                                                 %! IndicatorCommand
+                            - \tenuto                                                                %! IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            -\tenuto                                                                 %! IndicatorCommand
+                            - \tenuto                                                                %! IndicatorCommand
                             [
                             g''16
-                            -\tenuto                                                                 %! IndicatorCommand
+                            - \tenuto                                                                %! IndicatorCommand
                             ]
                         }
                         \times 4/5 {
@@ -3941,7 +3941,7 @@ def up_bow(
                             \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
                             c'16
-                            -\upbow                                                                  %! IndicatorCommand
+                            - \upbow                                                                 %! IndicatorCommand
                             [
                             d'16
                             ]
@@ -4019,21 +4019,21 @@ def up_bow(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\upbow                                                                  %! IndicatorCommand
+                            - \upbow                                                                 %! IndicatorCommand
                             [
                             e''16
-                            -\upbow                                                                  %! IndicatorCommand
+                            - \upbow                                                                 %! IndicatorCommand
                             ]
                             ef''4
-                            -\upbow                                                                  %! IndicatorCommand
+                            - \upbow                                                                 %! IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            -\upbow                                                                  %! IndicatorCommand
+                            - \upbow                                                                 %! IndicatorCommand
                             [
                             g''16
-                            -\upbow                                                                  %! IndicatorCommand
+                            - \upbow                                                                 %! IndicatorCommand
                             ]
                         }
                         \times 4/5 {
@@ -4088,7 +4088,7 @@ def very_long_fermata(
                         \times 9/10 {
                             \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
                             r8
-                            -\verylongfermata                                                        %! IndicatorCommand
+                            - \verylongfermata                                                       %! IndicatorCommand
                             c'16
                             [
                             d'16
@@ -4166,7 +4166,7 @@ def very_long_fermata(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\verylongfermata                                                        %! IndicatorCommand
+                            - \verylongfermata                                                       %! IndicatorCommand
                             [
                             e''16
                             ]
