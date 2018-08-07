@@ -38,12 +38,18 @@ def _get_globs():
         pass
     return globs
 
-def _doctest_files(files, globs):
-    optionflags = (
-        doctest.NORMALIZE_WHITESPACE
-        | doctest.ELLIPSIS
-        #| doctest.REPORT_ONLY_FIRST_FAILURE
-        )
+def _doctest_files(files, globs, report_only_first_failure=False):
+    if report_only_first_failure:
+        optionflags = (
+            doctest.NORMALIZE_WHITESPACE
+            | doctest.ELLIPSIS
+            | doctest.REPORT_ONLY_FIRST_FAILURE
+            )
+    else:
+        optionflags = (
+            doctest.NORMALIZE_WHITESPACE
+            | doctest.ELLIPSIS
+            )
     failed_file_paths, error_messages = [], []
     failure_count, test_count = 0, 0
     current_directory = pathlib.Path('.').absolute()
@@ -100,8 +106,13 @@ if __name__ == '__main__':
     if len(sys.argv) <= 1:
         print(f'Must specify one or more files ...')
         sys.exit()
-    globs = _get_globs()
     names = sys.argv[1:]
+    if names[0] == '--report-only-first-failure':
+        report_only_first_failure = True
+        names = names[1:]
+    else:
+        report_only_first_failure = False
+    globs = _get_globs()
     current_directory = pathlib.Path('.').absolute()
     files = []
     for name in names:
@@ -114,4 +125,8 @@ if __name__ == '__main__':
             if path_.is_file():
                 files.append(path_)
     files.sort()
-    _doctest_files(files, globs)
+    _doctest_files(
+        files,
+        globs,
+        report_only_first_failure=report_only_first_failure,
+        )
