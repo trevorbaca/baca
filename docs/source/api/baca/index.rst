@@ -125,6 +125,7 @@ baca
    ~notes
    ~ntrun
    ~ntruns
+   ~omgroups
    ~partition_by_counts
    ~partition_by_durations
    ~partition_by_ratio
@@ -261,6 +262,8 @@ baca
 .. autofunction:: ntrun
 
 .. autofunction:: ntruns
+
+.. autofunction:: omgroups
 
 .. autofunction:: partition_by_counts
 

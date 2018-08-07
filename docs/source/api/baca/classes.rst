@@ -548,6 +548,7 @@ classes
       mleaves
       ntrun
       ntruns
+      omgroups
       phead
       pheads
       pleaf
@@ -796,6 +797,8 @@ classes
    .. automethod:: Selection.ntrun
 
    .. automethod:: Selection.ntruns
+
+   .. automethod:: Selection.omgroups
 
    .. container:: inherited
 
