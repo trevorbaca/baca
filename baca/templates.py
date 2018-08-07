@@ -138,6 +138,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
             lilypond_type='MusicContext',
             is_simultaneous=True,
             name='MusicContext',
+            tag='make_music_context',
             )
 
     def make_piano_staff(
@@ -174,7 +175,11 @@ class ScoreTemplate(abjad.ScoreTemplate):
             result = contexts[0]
         elif 1 < len(contexts):
             name = f'{stem}SquareStaffGroup'
-            staff_group = abjad.StaffGroup(contexts, name=name)
+            staff_group = abjad.StaffGroup(
+                contexts,
+                name=name,
+                tag='make_square_staff_group',
+                )
             self._set_square_delimiter(staff_group)
             result = staff_group
         return result
@@ -191,7 +196,11 @@ class ScoreTemplate(abjad.ScoreTemplate):
             raise Exception(f'stem must be string: {stem!r}.')
         contexts = tuple(_ for _ in contexts if _ is not None)
         if contexts:
-            return abjad.StaffGroup(contexts, name=f'{stem}StaffGroup')
+            return abjad.StaffGroup(
+                contexts,
+                name=f'{stem}StaffGroup',
+                tag='make_staff_group',
+                )
         else:
             return None
 
