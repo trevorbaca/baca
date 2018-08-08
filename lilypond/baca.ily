@@ -253,7 +253,7 @@ baca_damp_markup = \markup {
 
 baca_damp = #(make-articulation "bacadamp")
 
-%%% MARKUP: DIAMONDS %%%
+%%% DIAMOND MARKUP %%%
 
 baca_black_diamond_markup = \markup
 {
@@ -312,6 +312,18 @@ baca_triple_diamond_markup = \markup
         \musicglyph #"noteheads.s0harmonic"
     }
 }
+
+%%% FERMATA MARKUP %%%
+
+baca_fermata_markup = \markup { \musicglyph #"scripts.ufermata" }
+
+baca_long_fermata_markup = \markup { \musicglyph #"scripts.ulongfermata" }
+
+baca_short_fermata_markup = \markup { \musicglyph #"scripts.ushortfermata" }
+
+baca_very_long_fermata_markup = \markup {
+    \musicglyph #"scripts.uverylongfermata"
+    }
 
 %%% NOTE-HEADS: SHAPED %%%
 

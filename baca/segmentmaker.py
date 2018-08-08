@@ -3154,7 +3154,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         %@% \override ViolinMusicStaff.Clef.color = ##f                  %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
                                             \set ViolinMusicStaff.forceClef = ##t                        %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):attach_defaults
                                             d'16
-                                            ^ \markup \baca-default-indicator-markup "(Violin)"          %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                                            ^ \baca-default-indicator-markup "(Violin)"                  %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                             \override ViolinMusicStaff.Clef.color = #(x11-color 'violet) %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
                 <BLANKLINE>
                                             e'16
@@ -3189,7 +3189,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 %@% \override ViolaMusicStaff.Clef.color = ##f                           %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
                                     \set ViolaMusicStaff.forceClef = ##t                                 %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):attach_defaults
                                     R1 * 3/8                                                             %! _call_rhythm_commands
-                                    ^ \markup \baca-default-indicator-markup "(Viola)"                   %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                                    ^ \baca-default-indicator-markup "(Viola)"                           %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                     \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
                 <BLANKLINE>
                                     % [ViolaMusicVoice measure 2]                                        %! _comment_measure_numbers
@@ -3211,7 +3211,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         %@% \override CelloMusicStaff.Clef.color = ##f                   %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
                                             \set CelloMusicStaff.forceClef = ##t                         %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):attach_defaults
                                             a16
-                                            ^ \markup \baca-default-indicator-markup "(Cello)"           %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                                            ^ \baca-default-indicator-markup "(Cello)"                   %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                             \override CelloMusicStaff.Clef.color = #(x11-color 'violet)  %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
                 <BLANKLINE>
                                             g16
@@ -3349,7 +3349,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                         % [MusicVoice measure 1]                                         %! _comment_measure_numbers
                                         e'16
-                                        ^ \markup \baca-explicit-indicator-markup "(Violin)"             %! EXPLICIT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                                        ^ \baca-explicit-indicator-markup "(Violin)"                     %! EXPLICIT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                     }
                                 }
                                 {
@@ -5299,7 +5299,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 fs'!8                                                                    %! baca_make_even_divisions
-                                ^ \markup \baca-explicit-indicator-markup "(“clarinet”)"                 %! EXPLICIT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                                ^ \baca-explicit-indicator-markup "(“clarinet”)"                         %! EXPLICIT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                 [                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
                                 g'8                                                                      %! baca_make_even_divisions
@@ -5409,7 +5409,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 e'8                                                                      %! baca_make_even_divisions
-                                ^ \markup \baca-explicit-indicator-markup "(“clarinet”)"                 %! EXPLICIT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                                ^ \baca-explicit-indicator-markup "(“clarinet”)"                         %! EXPLICIT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                 [                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
                                 f'8                                                                      %! baca_make_even_divisions

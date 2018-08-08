@@ -1115,23 +1115,18 @@ class GlobalFermataCommand(scoping.Command):
             return
         if self.selector is not None:
             argument = self.selector(argument)
-        if isinstance(self.description, str):
-            command = self.description_to_command.get(self.description)
+        if isinstance(self.description, str) and self.description != 'fermata':
+            command = f'{self.description}_fermata'
         else:
             command = 'fermata'
         for leaf in abjad.iterate(argument).leaves():
             assert isinstance(leaf, abjad.MultimeasureRest)
-            string = f'scripts.u{command}'
-            directive = abjad.Markup.musicglyph(string)
-            directive = abjad.new(directive, direction=abjad.Up)
-            abjad.attach(directive, leaf, tag='GlobalFermataCommand(1)')
-            strings = []
-            string = r'\once \override'
-            string += ' Score.MultiMeasureRest.transparent = ##t'
-            strings.append(string)
+            string = rf'\baca_{command}_markup'
+            markup = abjad.Markup.from_literal(string, literal=True)
+            markup = abjad.new(markup, direction=abjad.Up)
+            abjad.attach(markup, leaf, tag='GlobalFermataCommand(1)')
             string = r'\once \override Score.TimeSignature.stencil = ##f'
-            strings.append(string)
-            literal = abjad.LilyPondLiteral(strings)
+            literal = abjad.LilyPondLiteral(string)
             abjad.attach(literal, leaf, tag='GlobalFermataCommand(2)')
             abjad.attach(
                 abjad.tags.FERMATA_MEASURE,
@@ -2650,7 +2645,7 @@ def cross_staff(
                                     %@% \override ViolinMusicStaff.Clef.color = ##f                  %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
                                         \set ViolinMusicStaff.forceClef = ##t                        %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):attach_defaults
                                         a'8
-                                        ^ \markup \baca-default-indicator-markup "(Violin)"          %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                                        ^ \baca-default-indicator-markup "(Violin)"                  %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                         \override ViolinMusicStaff.Clef.color = #(x11-color 'violet) %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
                                         b'8
@@ -2689,7 +2684,7 @@ def cross_staff(
                                     %@% \override ViolaMusicStaff.Clef.color = ##f                   %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
                                         \set ViolaMusicStaff.forceClef = ##t                         %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):attach_defaults
                                         c'8
-                                        ^ \markup \baca-default-indicator-markup "(Viola)"           %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                                        ^ \baca-default-indicator-markup "(Viola)"                   %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                         \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)  %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
                                         d'8
@@ -2720,7 +2715,7 @@ def cross_staff(
                             %@% \override CelloMusicStaff.Clef.color = ##f                           %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
                                 \set CelloMusicStaff.forceClef = ##t                                 %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):attach_defaults
                                 R1 * 5/8                                                             %! _call_rhythm_commands
-                                ^ \markup \baca-default-indicator-markup "(Cello)"                   %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                                ^ \baca-default-indicator-markup "(Cello)"                           %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                 \override CelloMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
                                 % [CelloMusicVoice measure 2]                                        %! _comment_measure_numbers
@@ -2827,7 +2822,7 @@ def cross_staff(
                                     %@% \override ViolinMusicStaff.Clef.color = ##f                  %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
                                         \set ViolinMusicStaff.forceClef = ##t                        %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):attach_defaults
                                         a'8
-                                        ^ \markup \baca-default-indicator-markup "(Violin)"          %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                                        ^ \baca-default-indicator-markup "(Violin)"                  %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                         \override ViolinMusicStaff.Clef.color = #(x11-color 'violet) %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
                                         b'8
@@ -2865,7 +2860,7 @@ def cross_staff(
                                     %@% \override ViolaMusicStaff.Clef.color = ##f                   %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
                                         \set ViolaMusicStaff.forceClef = ##t                         %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):attach_defaults
                                         c'8
-                                        ^ \markup \baca-default-indicator-markup "(Viola)"           %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                                        ^ \baca-default-indicator-markup "(Viola)"                   %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                         \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)  %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
                                         d'8
@@ -2898,7 +2893,7 @@ def cross_staff(
                             %@% \override CelloMusicStaff.Clef.color = ##f                           %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
                                 \set CelloMusicStaff.forceClef = ##t                                 %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):attach_defaults
                                 R1 * 5/8                                                             %! _call_rhythm_commands
-                                ^ \markup \baca-default-indicator-markup "(Cello)"                   %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                                ^ \baca-default-indicator-markup "(Cello)"                           %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                 \override CelloMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
                                 % [CelloMusicVoice measure 2]                                        %! _comment_measure_numbers
@@ -3844,7 +3839,7 @@ def parts(
                             %@% \override ViolinMusicStaff.Clef.color = ##f                      %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
                                 \set ViolinMusicStaff.forceClef = ##t                            %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):attach_defaults
                                 e'2                                                              %! baca_make_notes
-                                ^ \markup \baca-default-indicator-markup "(Violin)"              %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                                ^ \baca-default-indicator-markup "(Violin)"                      %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                 \override ViolinMusicStaff.Clef.color = #(x11-color 'violet)     %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
         <BLANKLINE>
                                 % [ViolinMusicVoice measure 2]                                   %! _comment_measure_numbers
@@ -3871,7 +3866,7 @@ def parts(
                         %@% \override ViolaMusicStaff.Clef.color = ##f                           %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
                             \set ViolaMusicStaff.forceClef = ##t                                 %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):attach_defaults
                             R1 * 1/2                                                             %! _call_rhythm_commands
-                            ^ \markup \baca-default-indicator-markup "(Viola)"                   %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                            ^ \baca-default-indicator-markup "(Viola)"                           %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                             \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
         <BLANKLINE>
                             % [ViolaMusicVoice measure 2]                                        %! _comment_measure_numbers
@@ -3897,7 +3892,7 @@ def parts(
                         %@% \override CelloMusicStaff.Clef.color = ##f                           %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
                             \set CelloMusicStaff.forceClef = ##t                                 %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):attach_defaults
                             R1 * 1/2                                                             %! _call_rhythm_commands
-                            ^ \markup \baca-default-indicator-markup "(Cello)"                   %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                            ^ \baca-default-indicator-markup "(Cello)"                           %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                             \override CelloMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
         <BLANKLINE>
                             % [CelloMusicVoice measure 2]                                        %! _comment_measure_numbers

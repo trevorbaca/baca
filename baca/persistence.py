@@ -1243,7 +1243,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
-                                ^ \markup \baca-default-indicator-markup "(“Flute”)"                     %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                                ^ \baca-default-indicator-markup "(“Flute”)"                             %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -1303,7 +1303,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! _comment_measure_numbers
                                 c'4. %! baca_make_notes
-                            %%% ^ \markup \baca-default-indicator-markup "(“Flute”)" %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                            %%% ^ \baca-default-indicator-markup "(“Flute”)" %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
                                 c'4. %! baca_make_notes
@@ -1360,7 +1360,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! _comment_measure_numbers
                                 c'4. %! baca_make_notes
-                                ^ \markup \baca-default-indicator-markup "(“Flute”)" %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                                ^ \baca-default-indicator-markup "(“Flute”)" %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
                                 c'4. %! baca_make_notes
@@ -1434,7 +1434,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
-                                ^ \markup \baca-explicit-indicator-markup "(“Flute”)"                    %! EXPLICIT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                                ^ \baca-explicit-indicator-markup "(“Flute”)"                            %! EXPLICIT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -1494,7 +1494,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! _comment_measure_numbers
                                 c'4. %! baca_make_notes
-                            %%% ^ \markup \baca-explicit-indicator-markup "(“Flute”)" %! EXPLICIT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                            %%% ^ \baca-explicit-indicator-markup "(“Flute”)" %! EXPLICIT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
                                 c'4. %! baca_make_notes
@@ -1551,7 +1551,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! _comment_measure_numbers
                                 c'4. %! baca_make_notes
-                                ^ \markup \baca-explicit-indicator-markup "(“Flute”)" %! EXPLICIT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                                ^ \baca-explicit-indicator-markup "(“Flute”)" %! EXPLICIT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
                                 c'4. %! baca_make_notes
@@ -1637,7 +1637,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
-                                ^ \markup \baca-explicit-indicator-markup "(“Flute”)"                    %! EXPLICIT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                                ^ \baca-explicit-indicator-markup "(“Flute”)"                            %! EXPLICIT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -1698,7 +1698,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! _comment_measure_numbers
                                 c'4. %! baca_make_notes
-                            %%% ^ \markup \baca-explicit-indicator-markup "(“Flute”)" %! EXPLICIT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                            %%% ^ \baca-explicit-indicator-markup "(“Flute”)" %! EXPLICIT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
                                 c'4. %! baca_make_notes
@@ -1756,7 +1756,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! _comment_measure_numbers
                                 c'4. %! baca_make_notes
-                                ^ \markup \baca-explicit-indicator-markup "(“Flute”)" %! EXPLICIT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                                ^ \baca-explicit-indicator-markup "(“Flute”)" %! EXPLICIT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
                                 c'4. %! baca_make_notes
@@ -1843,7 +1843,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
-                                ^ \markup \baca-reapplied-indicator-markup "(“Flute”)"                   %! REAPPLIED_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                                ^ \baca-reapplied-indicator-markup "(“Flute”)"                           %! REAPPLIED_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -1904,7 +1904,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! _comment_measure_numbers
                                 c'4. %! baca_make_notes
-                            %%% ^ \markup \baca-reapplied-indicator-markup "(“Flute”)" %! REAPPLIED_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                            %%% ^ \baca-reapplied-indicator-markup "(“Flute”)" %! REAPPLIED_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
                                 c'4. %! baca_make_notes
@@ -1962,7 +1962,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! _comment_measure_numbers
                                 c'4. %! baca_make_notes
-                                ^ \markup \baca-reapplied-indicator-markup "(“Flute”)" %! REAPPLIED_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                                ^ \baca-reapplied-indicator-markup "(“Flute”)" %! REAPPLIED_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
                                 c'4. %! baca_make_notes
@@ -2051,11 +2051,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 c'2                                                                      %! baca_make_notes
-                                ^ \markup \baca-explicit-indicator-markup "(“Flute”)"                    %! EXPLICIT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                                ^ \baca-explicit-indicator-markup "(“Flute”)"                            %! EXPLICIT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                                 c'2                                                                      %! baca_make_notes
-                                ^ \markup \baca-redundant-indicator-markup "(“Flute”)"                   %! REDUNDANT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                                ^ \baca-redundant-indicator-markup "(“Flute”)"                           %! REDUNDANT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                                 c'2                                                                      %! baca_make_notes
@@ -2120,11 +2120,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! _comment_measure_numbers
                                 c'2 %! baca_make_notes
-                            %%% ^ \markup \baca-explicit-indicator-markup "(“Flute”)" %! EXPLICIT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                            %%% ^ \baca-explicit-indicator-markup "(“Flute”)" %! EXPLICIT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
                                 c'2 %! baca_make_notes
-                            %%% ^ \markup \baca-redundant-indicator-markup "(“Flute”)" %! REDUNDANT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                            %%% ^ \baca-redundant-indicator-markup "(“Flute”)" %! REDUNDANT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 3] %! _comment_measure_numbers
                                 c'2 %! baca_make_notes
@@ -2186,11 +2186,11 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! _comment_measure_numbers
                                 c'2 %! baca_make_notes
-                                ^ \markup \baca-explicit-indicator-markup "(“Flute”)" %! EXPLICIT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                                ^ \baca-explicit-indicator-markup "(“Flute”)" %! EXPLICIT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
                                 c'2 %! baca_make_notes
-                                ^ \markup \baca-redundant-indicator-markup "(“Flute”)" %! REDUNDANT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                                ^ \baca-redundant-indicator-markup "(“Flute”)" %! REDUNDANT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 3] %! _comment_measure_numbers
                                 c'2 %! baca_make_notes
@@ -2282,7 +2282,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
-                                ^ \markup \baca-redundant-indicator-markup "(“Flute”)"                   %! REDUNDANT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                                ^ \baca-redundant-indicator-markup "(“Flute”)"                           %! REDUNDANT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -2343,7 +2343,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! _comment_measure_numbers
                                 c'4. %! baca_make_notes
-                            %%% ^ \markup \baca-redundant-indicator-markup "(“Flute”)" %! REDUNDANT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                            %%% ^ \baca-redundant-indicator-markup "(“Flute”)" %! REDUNDANT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
                                 c'4. %! baca_make_notes
@@ -2401,7 +2401,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1] %! _comment_measure_numbers
                                 c'4. %! baca_make_notes
-                                ^ \markup \baca-redundant-indicator-markup "(“Flute”)" %! REDUNDANT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
+                                ^ \baca-redundant-indicator-markup "(“Flute”)" %! REDUNDANT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
                                 % [MusicVoice measure 2] %! _comment_measure_numbers
                                 c'4. %! baca_make_notes
@@ -2510,7 +2510,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \markup { I+II }                                                         %! DEFAULT_MARGIN_MARKUP:_set_status_tag:attach_defaults:-PARTS
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)    %! DEFAULT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'4.                                                                     %! baca_make_notes
-                                ^ \markup \baca-default-indicator-markup "[“I+II”]"                      %! DEFAULT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
+                                ^ \baca-default-indicator-markup "[“I+II”]"                              %! DEFAULT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'violet)              %! REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName =                                         %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):attach_defaults:-PARTS
                                 \markup { I+II }                                                         %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):attach_defaults:-PARTS
@@ -2576,7 +2576,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \markup { I+II }                 %! DEFAULT_MARGIN_MARKUP:_set_status_tag:attach_defaults:-PARTS
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'4. %! baca_make_notes
-                            %%% ^ \markup \baca-default-indicator-markup "[“I+II”]" %! DEFAULT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
+                            %%% ^ \baca-default-indicator-markup "[“I+II”]" %! DEFAULT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                             %%% \override Staff.InstrumentName.color = #(x11-color 'violet) %! REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName = %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):attach_defaults:-PARTS
                                 \markup { I+II }                 %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):attach_defaults:-PARTS
@@ -2639,7 +2639,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \markup { I+II }                 %! DEFAULT_MARGIN_MARKUP:_set_status_tag:attach_defaults:-PARTS
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'4. %! baca_make_notes
-                                ^ \markup \baca-default-indicator-markup "[“I+II”]" %! DEFAULT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
+                                ^ \baca-default-indicator-markup "[“I+II”]" %! DEFAULT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'violet) %! REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName = %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):attach_defaults:-PARTS
                                 \markup { I+II }                 %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):attach_defaults:-PARTS
@@ -2719,7 +2719,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \markup { I+II }                                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'4.                                                                     %! baca_make_notes
-                                ^ \markup \baca-explicit-indicator-markup "[“I+II”]"                     %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
+                                ^ \baca-explicit-indicator-markup "[“I+II”]"                             %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                                 \markup { I+II }                                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
@@ -2785,7 +2785,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \markup { I+II }                 %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'4. %! baca_make_notes
-                            %%% ^ \markup \baca-explicit-indicator-markup "[“I+II”]" %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
+                            %%% ^ \baca-explicit-indicator-markup "[“I+II”]" %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName = %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                                 \markup { I+II }                 %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
@@ -2848,7 +2848,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \markup { I+II }                 %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'4. %! baca_make_notes
-                                ^ \markup \baca-explicit-indicator-markup "[“I+II”]" %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
+                                ^ \baca-explicit-indicator-markup "[“I+II”]" %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName = %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                                 \markup { I+II }                 %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
@@ -2940,7 +2940,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \markup { III+IV }                                                       %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'4.                                                                     %! baca_make_notes
-                                ^ \markup \baca-explicit-indicator-markup "[“III+IV”]"                   %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
+                                ^ \baca-explicit-indicator-markup "[“III+IV”]"                           %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                                 \markup { III+IV }                                                       %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
@@ -3007,7 +3007,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \markup { III+IV }               %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'4. %! baca_make_notes
-                            %%% ^ \markup \baca-explicit-indicator-markup "[“III+IV”]" %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
+                            %%% ^ \baca-explicit-indicator-markup "[“III+IV”]" %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName = %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                                 \markup { III+IV }               %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
@@ -3071,7 +3071,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \markup { III+IV }               %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'4. %! baca_make_notes
-                                ^ \markup \baca-explicit-indicator-markup "[“III+IV”]" %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
+                                ^ \baca-explicit-indicator-markup "[“III+IV”]" %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName = %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                                 \markup { III+IV }               %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
@@ -3164,7 +3164,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \markup { I+II }                                                         %! REAPPLIED_MARGIN_MARKUP:_set_status_tag:_reapply_persistent_indicators(3):-PARTS
                                 \once \override Staff.InstrumentName.color = #(x11-color 'green4)        %! REAPPLIED_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'4.                                                                     %! baca_make_notes
-                                ^ \markup \baca-reapplied-indicator-markup "[“I+II”]"                    %! REAPPLIED_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
+                                ^ \baca-reapplied-indicator-markup "[“I+II”]"                            %! REAPPLIED_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)           %! REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName =                                         %! REDRAWN_REAPPLIED_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):_reapply_persistent_indicators(3):-PARTS
                                 \markup { I+II }                                                         %! REDRAWN_REAPPLIED_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):_reapply_persistent_indicators(3):-PARTS
@@ -3231,7 +3231,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \markup { I+II }                 %! REAPPLIED_MARGIN_MARKUP:_set_status_tag:_reapply_persistent_indicators(3):-PARTS
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'green4) %! REAPPLIED_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'4. %! baca_make_notes
-                            %%% ^ \markup \baca-reapplied-indicator-markup "[“I+II”]" %! REAPPLIED_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
+                            %%% ^ \baca-reapplied-indicator-markup "[“I+II”]" %! REAPPLIED_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                             %%% \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %! REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName = %! REDRAWN_REAPPLIED_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):_reapply_persistent_indicators(3):-PARTS
                                 \markup { I+II }                 %! REDRAWN_REAPPLIED_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):_reapply_persistent_indicators(3):-PARTS
@@ -3295,7 +3295,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \markup { I+II }                 %! REAPPLIED_MARGIN_MARKUP:_set_status_tag:_reapply_persistent_indicators(3):-PARTS
                                 \once \override Staff.InstrumentName.color = #(x11-color 'green4) %! REAPPLIED_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'4. %! baca_make_notes
-                                ^ \markup \baca-reapplied-indicator-markup "[“I+II”]" %! REAPPLIED_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
+                                ^ \baca-reapplied-indicator-markup "[“I+II”]" %! REAPPLIED_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %! REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName = %! REDRAWN_REAPPLIED_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):_reapply_persistent_indicators(3):-PARTS
                                 \markup { I+II }                 %! REDRAWN_REAPPLIED_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):_reapply_persistent_indicators(3):-PARTS
@@ -3390,7 +3390,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \markup { I+II }                                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'2                                                                      %! baca_make_notes
-                                ^ \markup \baca-explicit-indicator-markup "[“I+II”]"                     %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
+                                ^ \baca-explicit-indicator-markup "[“I+II”]"                             %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                                 \markup { I+II }                                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
@@ -3400,7 +3400,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \markup { I+II }                                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'2                                                                      %! baca_make_notes
-                                ^ \markup \baca-redundant-indicator-markup "[“I+II”]"                    %! REDUNDANT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
+                                ^ \baca-redundant-indicator-markup "[“I+II”]"                            %! REDUNDANT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName =                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                                 \markup { I+II }                                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
@@ -3471,7 +3471,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \markup { I+II }                 %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'2 %! baca_make_notes
-                            %%% ^ \markup \baca-explicit-indicator-markup "[“I+II”]" %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
+                            %%% ^ \baca-explicit-indicator-markup "[“I+II”]" %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName = %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                                 \markup { I+II }                 %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
@@ -3481,7 +3481,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \markup { I+II }                 %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'2 %! baca_make_notes
-                            %%% ^ \markup \baca-redundant-indicator-markup "[“I+II”]" %! REDUNDANT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
+                            %%% ^ \baca-redundant-indicator-markup "[“I+II”]" %! REDUNDANT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName = %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                                 \markup { I+II }                 %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
@@ -3549,7 +3549,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \markup { I+II }                 %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'2 %! baca_make_notes
-                                ^ \markup \baca-explicit-indicator-markup "[“I+II”]" %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
+                                ^ \baca-explicit-indicator-markup "[“I+II”]" %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName = %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                                 \markup { I+II }                 %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
@@ -3559,7 +3559,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \markup { I+II }                 %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'2 %! baca_make_notes
-                                ^ \markup \baca-redundant-indicator-markup "[“I+II”]" %! REDUNDANT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
+                                ^ \baca-redundant-indicator-markup "[“I+II”]" %! REDUNDANT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName = %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                                 \markup { I+II }                 %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
@@ -3657,7 +3657,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \markup { I+II }                                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'4.                                                                     %! baca_make_notes
-                                ^ \markup \baca-redundant-indicator-markup "[“I+II”]"                    %! REDUNDANT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
+                                ^ \baca-redundant-indicator-markup "[“I+II”]"                            %! REDUNDANT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName =                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                                 \markup { I+II }                                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
@@ -3724,7 +3724,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \markup { I+II }                 %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'4. %! baca_make_notes
-                            %%% ^ \markup \baca-redundant-indicator-markup "[“I+II”]" %! REDUNDANT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
+                            %%% ^ \baca-redundant-indicator-markup "[“I+II”]" %! REDUNDANT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName = %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                                 \markup { I+II }                 %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
@@ -3788,7 +3788,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \markup { I+II }                 %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'4. %! baca_make_notes
-                                ^ \markup \baca-redundant-indicator-markup "[“I+II”]" %! REDUNDANT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
+                                ^ \baca-redundant-indicator-markup "[“I+II”]" %! REDUNDANT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName = %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                                 \markup { I+II }                 %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
@@ -3895,8 +3895,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                             %@% \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'2                                                                      %! baca_make_notes
-                                ^ \markup \baca-explicit-indicator-markup "[“I+II”]"                     %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
-                            %@% ^ \markup \baca-explicit-indicator-markup "[“III+IV”]"                   %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
+                                ^ \baca-explicit-indicator-markup "[“I+II”]"                             %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
+                            %@% ^ \baca-explicit-indicator-markup "[“III+IV”]"                           %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand:-PARTS
                                 \markup { I+II }                                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand:-PARTS

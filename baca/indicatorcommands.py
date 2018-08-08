@@ -2242,7 +2242,7 @@ def margin_markup(
                             \markup { Fl. }                                                          %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
                             \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                             e'2                                                                      %! baca_make_notes
-                            ^ \markup \baca-explicit-indicator-markup "[MarginMarkup]"               %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
+                            ^ \baca-explicit-indicator-markup "[MarginMarkup]"                       %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                             \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
                             \markup { Fl. }                                                          %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand

@@ -1,57 +1,49 @@
-%%% COLOR: MARKUP %%%
+%%% PERSISTENT INDICATOR MARKUP %%%
 
-#(define-markup-command (baca-explicit-indicator-markup layout props text) (markup?)
-    "Blue markup for explicit status."
-    (interpret-markup layout props
-        #{
-        \markup \with-color #(x11-color 'blue) { #text }
-        #}
-        )
+baca-explicit-indicator-markup = #(define-music-function string (string?)
+    #{
+    - \markup \with-color #(x11-color 'blue) { #string }
+    #}
     )
 
-#(define-markup-command (baca-dark-cyan-markup layout props text) (markup?)
-    "Dark cyan with font size 3."
-    (interpret-markup layout props
-        #{
-        \markup \fontsize #3 \with-color #(x11-color 'DarkCyan) { #text }
-        #}
-        )
+baca-default-indicator-markup = #(define-music-function string (string?)
+    #{
+    - \markup \with-color #(x11-color 'DarkViolet) { #string }
+    #}
     )
 
-#(define-markup-command (baca-default-indicator-markup layout props text) (markup?)
-    "Dark violet for default indicators."
-    (interpret-markup layout props
-        #{
-        \markup \with-color #(x11-color 'DarkViolet) { #text }
-        #}
-        )
+baca-redundant-indicator-markup = #(define-music-function string (string?)
+    #{
+    - \markup \with-color #(x11-color 'DeepPink1) { #string }
+    #}
     )
 
-#(define-markup-command (baca-redundant-indicator-markup layout props text) (markup?)
-    "DeepPink1 for redundant indicators."
-    (interpret-markup layout props
-        #{
-        \markup \with-color #(x11-color 'DeepPink1) { #text }
-        #}
-        )
+baca-reapplied-indicator-markup = #(define-music-function string (string?)
+    #{
+    - \markup \with-color #(x11-color 'green4) { #string }
+    #}
     )
 
-#(define-markup-command (baca-forest-green-markup layout props text) (markup?)
-    "Forest green with font size 3."
-    (interpret-markup layout props
-        #{
-        \markup \fontsize #3 \with-color #(x11-color 'ForestGreen) { #text }
-        #}
-        )
+% NOTE: this works:
+%zebra = #(define-music-function (color) (color?)
+%    #{
+%    - \tweak color #color
+%    - \markup { FOO }
+%    #}
+%    )
+
+%%% COLOR MARKUP %%%
+
+baca-dark-cyan-markup = #(define-music-function string (string?)
+    #{
+    - \markup \fontsize #3 \with-color #(x11-color 'DarkCyan) { #string }
+    #}
     )
 
-#(define-markup-command (baca-reapplied-indicator-markup layout props text) (markup?)
-    "Green4 markup for reapplied indicators."
-    (interpret-markup layout props
-        #{
-        \markup \with-color #(x11-color 'green4) { #text }
-        #}
-        )
+baca-forest-green-markup = #(define-music-function string (string?)
+    #{
+    - \markup \fontsize #3 \with-color #(x11-color 'ForestGreen) { #string }
+    #}
     )
 
 %%% COLOR: MUSIC %%%
