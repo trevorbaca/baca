@@ -632,7 +632,7 @@ def finger_pressure_transition(
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                            \once \override NoteHead.style = #'harmonic                              %! OverrideCommand(1)
+                            \once \override NoteHead.style = #'harmonic                              %! baca_note_head_style_harmonic:OverrideCommand(1)
                             c''2                                                                     %! baca_make_notes
                             - \tweak arrow-length #2                                                 %! SpannerCommand
                             - \tweak arrow-width #0.5                                                %! SpannerCommand
@@ -644,7 +644,7 @@ def finger_pressure_transition(
                             c''4.                                                                    %! baca_make_notes
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                            \once \override NoteHead.style = #'harmonic                              %! OverrideCommand(1)
+                            \once \override NoteHead.style = #'harmonic                              %! baca_note_head_style_harmonic:OverrideCommand(1)
                             c''2                                                                     %! baca_make_notes
                             - \tweak arrow-length #2                                                 %! SpannerCommand
                             - \tweak arrow-width #0.5                                                %! SpannerCommand
@@ -940,7 +940,7 @@ def glissando(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -972,7 +972,7 @@ def glissando(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -1026,7 +1026,7 @@ def ottava(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             \ottava #1                                                               %! SpannerCommand
                             c'16
@@ -1057,7 +1057,7 @@ def ottava(
                             a'16
                             \ottava #0                                                               %! SpannerCommand
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -1104,7 +1104,7 @@ def ottava_bassa(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             \ottava #-1                                                              %! SpannerCommand
                             c'16
@@ -1135,7 +1135,7 @@ def ottava_bassa(
                             a'16
                             \ottava #0                                                               %! SpannerCommand
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -1185,7 +1185,7 @@ def repeat_tie(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -1216,7 +1216,7 @@ def repeat_tie(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -1279,8 +1279,8 @@ def slur(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Slur.direction = #down                                         %! OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
+                            \override Slur.direction = #down                                         %! baca_slur_down:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -1311,8 +1311,8 @@ def slur(
                             a'16
                             )                                                                        %! SpannerCommand
                             r4
-                            \revert Slur.direction                                                   %! OverrideCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
+                            \revert Slur.direction                                                   %! baca_slur_down:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -1350,8 +1350,8 @@ def slur(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Slur.direction = #down                                         %! OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
+                            \override Slur.direction = #down                                         %! baca_slur_down:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -1382,8 +1382,8 @@ def slur(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert Slur.direction                                                   %! OverrideCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
+                            \revert Slur.direction                                                   %! baca_slur_down:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -1432,8 +1432,8 @@ def sustain_pedal(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
+                            \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! baca_sustain_pedal_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
                             r8
                             \sustainOn                                                               %! SpannerCommand
@@ -1465,8 +1465,8 @@ def sustain_pedal(
                             a'16
                             r4
                             \sustainOff                                                              %! SpannerCommand
-                            \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OverrideCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
+                            \revert Staff.SustainPedalLineSpanner.staff-padding                      %! baca_sustain_pedal_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -1504,8 +1504,8 @@ def sustain_pedal(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
+                            \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! baca_sustain_pedal_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -1537,8 +1537,8 @@ def sustain_pedal(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OverrideCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
+                            \revert Staff.SustainPedalLineSpanner.staff-padding                      %! baca_sustain_pedal_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -1576,8 +1576,8 @@ def sustain_pedal(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
+                            \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! baca_sustain_pedal_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -1609,8 +1609,8 @@ def sustain_pedal(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OverrideCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
+                            \revert Staff.SustainPedalLineSpanner.staff-padding                      %! baca_sustain_pedal_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -1648,8 +1648,8 @@ def sustain_pedal(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
+                            \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! baca_sustain_pedal_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -1681,8 +1681,8 @@ def sustain_pedal(
                             a'16
                             \sustainOff                                                              %! SpannerCommand
                             r4
-                            \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OverrideCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
+                            \revert Staff.SustainPedalLineSpanner.staff-padding                      %! baca_sustain_pedal_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -1720,8 +1720,8 @@ def sustain_pedal(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
+                            \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! baca_sustain_pedal_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -1753,8 +1753,8 @@ def sustain_pedal(
                             a'16
                             \sustainOff                                                              %! SpannerCommand
                             r4
-                            \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OverrideCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
+                            \revert Staff.SustainPedalLineSpanner.staff-padding                      %! baca_sustain_pedal_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -1792,8 +1792,8 @@ def sustain_pedal(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
+                            \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! baca_sustain_pedal_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
                             r8
                             \sustainOn                                                               %! SpannerCommand
@@ -1831,8 +1831,8 @@ def sustain_pedal(
                             \sustainOn                                                               %! SpannerCommand
                             r4
                             \sustainOff                                                              %! SpannerCommand
-                            \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OverrideCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
+                            \revert Staff.SustainPedalLineSpanner.staff-padding                      %! baca_sustain_pedal_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -1870,8 +1870,8 @@ def sustain_pedal(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
+                            \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! baca_sustain_pedal_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
                             r8
                             \sustainOn                                                               %! SpannerCommand
@@ -1909,8 +1909,8 @@ def sustain_pedal(
                             a'16
                             r4
                             \sustainOff                                                              %! SpannerCommand
-                            \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OverrideCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
+                            \revert Staff.SustainPedalLineSpanner.staff-padding                      %! baca_sustain_pedal_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -1948,8 +1948,8 @@ def sustain_pedal(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
+                            \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! baca_sustain_pedal_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
                             r8
                             \sustainOn                                                               %! SpannerCommand
@@ -1987,8 +1987,8 @@ def sustain_pedal(
                             \sustainOn                                                               %! SpannerCommand
                             r4
                             \sustainOff                                                              %! SpannerCommand
-                            \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OverrideCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
+                            \revert Staff.SustainPedalLineSpanner.staff-padding                      %! baca_sustain_pedal_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -2043,7 +2043,7 @@ def tie(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             ~                                                                        %! SpannerCommand
@@ -2074,7 +2074,7 @@ def tie(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -2111,7 +2111,7 @@ def tie(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             ~                                                                        %! SpannerCommand
@@ -2142,7 +2142,7 @@ def tie(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -2204,7 +2204,7 @@ def trill_spanner(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -2235,7 +2235,7 @@ def trill_spanner(
                             a'16
                             r4
                             \stopTrillSpan                                                           %! SpannerCommand
-                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -2273,7 +2273,7 @@ def trill_spanner(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -2320,7 +2320,7 @@ def trill_spanner(
                             \startTrillSpan
                             r4
                             \stopTrillSpan                                                           %! SpannerCommand
-                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -2358,7 +2358,7 @@ def trill_spanner(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -2393,7 +2393,7 @@ def trill_spanner(
                             a'16
                             r4
                             \stopTrillSpan                                                           %! SpannerCommand
-                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -2431,7 +2431,7 @@ def trill_spanner(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             \pitchedTrill                                                            %! SpannerCommand
                             c'16
@@ -2463,7 +2463,7 @@ def trill_spanner(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -2501,7 +2501,7 @@ def trill_spanner(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             \pitchedTrill                                                            %! SpannerCommand
                             c'16
@@ -2557,7 +2557,7 @@ def trill_spanner(
                             \startTrillSpan ef'
                             r4
                             \stopTrillSpan                                                           %! SpannerCommand
-                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -2595,7 +2595,7 @@ def trill_spanner(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             \pitchedTrill                                                            %! SpannerCommand
                             c'16
@@ -2651,7 +2651,7 @@ def trill_spanner(
                             \startTrillSpan b'
                             r4
                             \stopTrillSpan                                                           %! SpannerCommand
-                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }

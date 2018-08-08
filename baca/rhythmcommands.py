@@ -849,8 +849,8 @@ class RhythmCommand(scoping.Command):
                             {                                                                            %! SingleStaffScoreTemplate
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                \override TextScript.font-size = #-2                                     %! OverrideCommand(1)
-                                \override TextScript.staff-padding = #5                                  %! OverrideCommand(1)
+                                \override TextScript.font-size = #-2                                     %! baca_text_script_font_size:OverrideCommand(1)
+                                \override TextScript.staff-padding = #5                                  %! baca_script_staff_padding:OverrideCommand(1)
                                 \baca_unpitched_music_warning                                            %! _color_unpitched_notes
                                 c'8.
                                 _ \markup {
@@ -955,8 +955,8 @@ class RhythmCommand(scoping.Command):
                                         16
                                     }
                                 ]
-                                \revert TextScript.font-size                                             %! OverrideCommand(2)
-                                \revert TextScript.staff-padding                                         %! OverrideCommand(2)
+                                \revert TextScript.font-size                                             %! baca_text_script_font_size:OverrideCommand(2)
+                                \revert TextScript.staff-padding                                         %! baca_script_staff_padding:OverrideCommand(2)
                 <BLANKLINE>
                             }                                                                            %! SingleStaffScoreTemplate
                         }                                                                                %! SingleStaffScoreTemplate
@@ -1033,8 +1033,8 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
                 {                             %! SingleStaffScoreTemplate
             <BLANKLINE>
                     % [MusicVoice measure 1] %! _comment_measure_numbers
-                    \override TextScript.font-size = #-2 %! OverrideCommand(1)
-                    \override TextScript.staff-padding = #5 %! OverrideCommand(1)
+                    \override TextScript.font-size = #-2 %! baca_text_script_font_size:OverrideCommand(1)
+                    \override TextScript.staff-padding = #5 %! baca_script_staff_padding:OverrideCommand(1)
                     \baca_unpitched_music_warning %! _color_unpitched_notes
                     c'8.
                     _ \markup {
@@ -1139,8 +1139,8 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
                             16
                         }
                     ]
-                    \revert TextScript.font-size %! OverrideCommand(2)
-                    \revert TextScript.staff-padding %! OverrideCommand(2)
+                    \revert TextScript.font-size %! baca_text_script_font_size:OverrideCommand(2)
+                    \revert TextScript.staff-padding %! baca_script_staff_padding:OverrideCommand(2)
             <BLANKLINE>
                 } %! SingleStaffScoreTemplate
             } %! SingleStaffScoreTemplate
@@ -1243,8 +1243,8 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
                     {                             %! SingleStaffScoreTemplate
                 <BLANKLINE>
                         % [MusicVoice measure 1] %! _comment_measure_numbers
-                        \override TextScript.font-size = #-2 %! OverrideCommand(1)
-                        \override TextScript.staff-padding = #5 %! OverrideCommand(1)
+                        \override TextScript.font-size = #-2 %! baca_text_script_font_size:OverrideCommand(1)
+                        \override TextScript.staff-padding = #5 %! baca_script_staff_padding:OverrideCommand(1)
                         \baca_unpitched_music_warning %! _color_unpitched_notes
                         c'8.
                         _ \markup {
@@ -1349,8 +1349,8 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
                                 16
                             }
                         ]
-                        \revert TextScript.font-size %! OverrideCommand(2)
-                        \revert TextScript.staff-padding %! OverrideCommand(2)
+                        \revert TextScript.font-size %! baca_text_script_font_size:OverrideCommand(2)
+                        \revert TextScript.staff-padding %! baca_script_staff_padding:OverrideCommand(2)
                 <BLANKLINE>
                     } %! SingleStaffScoreTemplate
                 } %! SingleStaffScoreTemplate
@@ -1884,7 +1884,7 @@ def beam_runs(*, hide_nibs: bool = False) -> rmakers.BeamSpecifier:
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             \set stemLeftBeamCount = 2
                             \set stemRightBeamCount = 2
@@ -1935,7 +1935,7 @@ def beam_runs(*, hide_nibs: bool = False) -> rmakers.BeamSpecifier:
                             a'16
                             ]
                             r8
-                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -1969,7 +1969,7 @@ def beam_runs(*, hide_nibs: bool = False) -> rmakers.BeamSpecifier:
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -1998,7 +1998,7 @@ def beam_runs(*, hide_nibs: bool = False) -> rmakers.BeamSpecifier:
                             a'16
                             ]
                             r8
-                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -2044,7 +2044,7 @@ def flags() -> rmakers.BeamSpecifier:
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             d'16
@@ -2067,7 +2067,7 @@ def flags() -> rmakers.BeamSpecifier:
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
