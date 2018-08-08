@@ -4500,7 +4500,7 @@ def text_spanner(
             style=style,
             )
         if tweaks:
-            scoping.Command._apply_tweaks(start_text_span, tweaks)
+            PiecewiseIndicatorCommand._apply_tweaks(start_text_span, tweaks)
         # kerns bookended hook
         if 'hook' in style:
             assert isinstance(right_markup, abjad.Markup)
