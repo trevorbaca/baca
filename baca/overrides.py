@@ -252,11 +252,22 @@ class OverrideCommand(scoping.Command):
         if grob is not None:
             assert isinstance(grob, str), repr(grob)
         self._grob = grob
+        tags_ = []
         if tags is not None:
-            tags = [_ for _ in tags if _ is not None]
-        tags = tags or []
-        assert self._validate_tags(tags), repr(tags)
-        self._tags = tags
+            for tag in tags:
+                if tag is None:
+                    continue
+                assert isinstance(tag, str)
+                tags_.append(tag)
+        else:
+            tags_ = []
+        assert self._validate_tags(tags_), repr(tags_)
+        if tags_:
+            real_tag = abjad.Tag.from_words(tags_)
+            result = [real_tag]
+        else:
+            result = []
+        self._tags = result
         self._value = value
         if whitelist is not None:
             assert isinstance(whitelist, tuple), repr(whitelist)
