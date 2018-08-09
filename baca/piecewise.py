@@ -4196,7 +4196,7 @@ def text_spanner(
                             \override TextSpanner.staff-padding = #4.5                               %! baca_text_spanner_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
                             - \abjad_dashed_line_with_hook                                           %! PiecewiseIndicatorCommand(1)
-                            - \tweak bound-details.left.text \markup \baca-left \baca_damp_markup    %! PiecewiseIndicatorCommand(1)
+                            - \baca_text_spanner_left_markup \baca_damp_markup                       %! PiecewiseIndicatorCommand(1)
                             \startTextSpan                                                           %! PiecewiseIndicatorCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -4450,15 +4450,14 @@ def text_spanner(
         if item in shape_to_style:
             continue
         if isinstance(item, str) and item.startswith('\\'):
-            string = rf'\markup \baca-left {item}'
-            item_markup = abjad.LilyPondLiteral(string)
+            item_markup = rf'- \baca_text_spanner_left_markup {item}'
         elif isinstance(item, str):
             item_markup = rf'- \baca_text_spanner_left_text "{item}"'
         else:
             item_markup = item
             assert isinstance(item_markup, abjad.Markup)
             item_markup = item_markup.upright()
-        prototype = (str, abjad.LilyPondLiteral, abjad.Markup)
+        prototype = (str, abjad.Markup)
         assert isinstance(item_markup, prototype)
         style = 'invisible_line'
         if cyclic_items[i + 1] in shape_to_style:

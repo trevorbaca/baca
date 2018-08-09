@@ -402,6 +402,14 @@ bacaStopTextSpanBCP =
     #})
     )
 
+baca_bcp_spanner_left_text = #(
+    define-music-function
+    (parser location n d music) (number? number? ly:music?)
+    #{
+    \tweak bound-details.left.text \markup \baca-bcp-left #n #d
+    $music
+    #})
+
 #(define-markup-command
     (baca-bcp-right layout props n d) (number? number?)
     (interpret-markup layout props
@@ -417,6 +425,15 @@ bacaStopTextSpanBCP =
     \markup \concat { \upright #text \hspace #0.5 }
     #})
     )
+
+baca_text_spanner_left_markup = #(
+    define-music-function (parser location markup music) (markup? ly:music?)
+    #{
+    \tweak bound-details.left.text \markup \concat {
+        \upright #markup \hspace #0.5
+        }
+    $music
+    #})
 
 baca_text_spanner_left_text = #(
     define-music-function (parser location string music) (string? ly:music?)
