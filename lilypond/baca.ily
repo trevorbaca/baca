@@ -418,6 +418,15 @@ bacaStopTextSpanBCP =
     #})
     )
 
+baca_text_spanner_left_text = #(
+    define-music-function (parser location string music) (string? ly:music?)
+    #{
+    \tweak bound-details.left.text \markup \concat {
+        \upright #string \hspace #0.5
+        }
+    $music
+    #})
+
 #(define-markup-command
     (baca-right layout props text) (markup?)
     (interpret-markup layout props
