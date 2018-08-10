@@ -1007,31 +1007,6 @@ def map(
         result.append(command)
     return result
 
-# TODO: change to baca.scope()
-def match(
-    pattern,
-    *commands: typing.Union[Command, Suite],
-    ) -> Suite:
-    """
-    Applies each scope that matches ``pattern`` to each command in
-    ``commands``.
-    """
-    if pattern is not None:
-        assert isinstance(pattern, (int, tuple, list)), repr(pattern)
-    result: typing.List[typing.Union[Command, Suite]] = []
-    for command in commands:
-        if isinstance(command, Command):
-            command_ = abjad.new(command, match=pattern)
-        else:
-            assert isinstance(command, Suite), repr(command)
-            commands_ = []
-            for command_ in command:
-                command_ = abjad.new(command_, match=pattern)
-                commands_.append(command_)
-            command_ = Suite(*commands_)
-        result.append(command_)
-    return suite(*result)
-
 def measures(
     measures: typing.Optional[typings.Slice],
     *commands: typing.Union[Command, Suite],
@@ -1197,6 +1172,29 @@ def only_segment(command: Command) -> _command_typing:
     Returns ``command``.
     """
     return tag('+SEGMENT', command)
+
+def scope(
+    match,
+    *commands: typing.Union[Command, Suite],
+    ) -> Suite:
+    """
+    Sets ``command.match`` to ``match`` for each command in ``commands``.
+    """
+    if match is not None:
+        assert isinstance(match, (int, tuple, list)), repr(match)
+    result: typing.List[typing.Union[Command, Suite]] = []
+    for command in commands:
+        if isinstance(command, Command):
+            command_ = abjad.new(command, match=match)
+        else:
+            assert isinstance(command, Suite), repr(command)
+            commands_ = []
+            for command_ in command:
+                command_ = abjad.new(command_, match=match)
+                commands_.append(command_)
+            command_ = Suite(*commands_)
+        result.append(command_)
+    return suite(*result)
 
 def suite(
     *commands: typing.Union[Command, Suite],

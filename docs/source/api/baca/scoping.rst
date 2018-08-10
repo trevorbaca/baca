@@ -266,7 +266,6 @@ scoping
 
    ~apply
    ~map
-   ~match
    ~measures
    ~not_parts
    ~not_score
@@ -274,6 +273,7 @@ scoping
    ~only_parts
    ~only_score
    ~only_segment
+   ~scope
    ~suite
    ~tag
    ~timeline
@@ -281,8 +281,6 @@ scoping
 .. autofunction:: apply
 
 .. autofunction:: map
-
-.. autofunction:: match
 
 .. autofunction:: measures
 
@@ -297,6 +295,8 @@ scoping
 .. autofunction:: only_score
 
 .. autofunction:: only_segment
+
+.. autofunction:: scope
 
 .. autofunction:: suite
 
