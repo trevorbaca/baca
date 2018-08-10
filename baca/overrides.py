@@ -264,6 +264,7 @@ class OverrideCommand(scoping.Command):
                     tags_.append(tag)
         else:
             tags_ = []
+        tags_ = self._preprocess_tags(tags_)
         assert self._validate_tags(tags_), repr(tags_)
         if tags_:
             real_tag = abjad.Tag.from_words(tags_)

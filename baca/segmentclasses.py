@@ -234,7 +234,7 @@ class BreakMeasureMap(abjad.AbjadObject):
         partial_score: int = None,
         tags: typing.List[str] = None,
         ) -> None:
-        tags = tags or []
+        tags = scoping.Command._preprocess_tags(tags)
         assert scoping.Command._validate_tags(tags), repr(tags)
         if abjad.tags.BREAK not in tags:
             tags.append(abjad.tags.BREAK)

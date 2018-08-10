@@ -306,6 +306,22 @@ class Command(abjad.AbjadObject):
         return scope_
 
     @staticmethod
+    def _preprocess_tags(tags) -> typing.List:
+        if tags is None:
+            return []
+        if isinstance(tags, str):
+            tags = tags.split(':')
+        assert isinstance(tags, list), repr(tags)
+        tags_: typing.List[typing.Union[str, abjad.Tag]] = []
+        for item in tags:
+            if isinstance(item, abjad.Tag):
+                tags_.append(item)
+            else:
+                assert isinstance(item, str), repr(item)
+                tags_.extend(item.split(':'))
+        return tags_
+
+    @staticmethod
     def _remove_reapplied_wrappers(leaf, indicator):
         if not getattr(indicator, 'persistent', False):
             return

@@ -225,7 +225,10 @@ class SpannerCommand(scoping.Command):
             right_broken = bool(right_broken)
         self._right_broken = right_broken
         self._spanner = spanner
-        tags = tags or []
+        if isinstance(tags, str):
+            tags = tags.split(':')
+        else:
+            tags = tags or []
         assert self._validate_tags(tags), repr(tags)
         self._tags = tags
         self._validate_tweaks(tweaks)

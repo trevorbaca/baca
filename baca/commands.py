@@ -1399,7 +1399,7 @@ class IndicatorCommand(scoping.Command):
         self._redundant = redundant
         self._validate_tweaks(tweaks)
         self._tweaks = tweaks
-        tags = tags or []
+        tags = self._preprocess_tags(tags)
         assert self._validate_tags(tags), repr(tags)
         tags_ = []
         for tag in tags:
@@ -1977,7 +1977,7 @@ class MetronomeMarkCommand(scoping.Command):
         if redundant is not None:
             redundant = bool(redundant)
         self._redundant = redundant
-        tags = tags or []
+        tags = self._preprocess_tags(tags)
         assert self._validate_tags(tags), repr(tags)
         self._tags = tags
 
