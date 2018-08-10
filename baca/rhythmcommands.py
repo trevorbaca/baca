@@ -1157,7 +1157,7 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
 
     def __call__(
         self,
-        divisions: typing.List[typing.Tuple[int, int]],
+        divisions: typing.List[typings.IntegerPair],
         previous_state: abjad.OrderedDict = None,
         ) -> typing.List[abjad.Selection]:
         """

@@ -2940,7 +2940,7 @@ class SegmentMaker(abjad.SegmentMaker):
             voice_names = scopes[0]
         assert isinstance(voice_names, list), repr(voice_names)
         assert all(isinstance(_, str) for _ in voice_names)
-        token_type = typing.Union[int, typing.Tuple[int, int]]
+        token_type = typing.Union[int, typings.IntegerPair]
         measure_tokens: typing.List[token_type] = []
         if isinstance(scopes[1], int):
             measure_tokens.append(scopes[1])

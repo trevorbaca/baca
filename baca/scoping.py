@@ -42,7 +42,7 @@ class Scope(abjad.AbjadObject):
     def __init__(
         self,
         *,
-        measures: typing.Union[int, typing.Tuple[int, int]] = (1, -1),
+        measures: typings.Slice = (1, -1),
         voice_name: str = None,
         ) -> None:
         if isinstance(measures, int):
@@ -62,7 +62,7 @@ class Scope(abjad.AbjadObject):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def measures(self) -> typing.Tuple[int, int]:
+    def measures(self) -> typings.IntegerPair:
         """
         Gets measures.
         """

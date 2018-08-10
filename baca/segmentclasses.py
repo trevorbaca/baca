@@ -1549,7 +1549,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
     def override(
         self,
         measures: typing.Union[int, tuple, list],
-        pair: typing.Union[typing.Tuple[int, int], str],
+        pair: typing.Union[typings.IntegerPair, str],
         ) -> None:
         r"""
         Overrides ``measures`` with spacing ``pair``.
@@ -2235,9 +2235,9 @@ def page(
 
 def scorewide_spacing(
     path: typing.Union[abjad.Path, typing.Tuple[int, int, list]],
-    fallback_duration: typing.Tuple[int, int],
+    fallback_duration: typings.IntegerPair,
     breaks: BreakMeasureMap = None,
-    fermata_measure_duration: typing.Tuple[int, int] = (1, 4),
+    fermata_measure_duration: typings.IntegerPair = (1, 4),
     ) -> HorizontalSpacingSpecifier:
     r"""
     Makes scorewide spacing.

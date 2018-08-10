@@ -28,7 +28,7 @@ class BCPCommand(scoping.Command):
     def __init__(
         self,
         *tweaks: abjad.LilyPondTweakManager,
-        bcps: typing.Iterable[typing.Tuple[int, int]] = None,
+        bcps: typing.Iterable[typings.IntegerPair] = None,
         final_spanner: bool = None,
         helper: typing.Callable = None,
         map: typings.Selector = None,
@@ -2295,7 +2295,7 @@ def bar_extent_persistent(
         )
 
 def bcps(
-    bcps: typing.Iterable[typing.Tuple[int, int]],
+    bcps: typing.Iterable[typings.IntegerPair],
     *tweaks: abjad.LilyPondTweakManager,
     final_spanner: bool = None,
     helper: typing.Callable = None,
