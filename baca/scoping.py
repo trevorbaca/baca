@@ -1216,9 +1216,9 @@ def new(
             >>                                                                                       %! SingleStaffScoreTemplate
 
     """
-    commands_: typing.List[Command] = []
+    commands_: typing.List[typing.Union[Command, Suite]] = []
     for command in commands:
-        assert isinstance(command, Command), repr(command)
+        assert isinstance(command, (Command, Suite)), repr(command)
         command_ = abjad.new(command, **keywords)
         commands_.append(command_)
     return suite(*commands_)
