@@ -265,7 +265,6 @@ scoping
    :nosignatures:
 
    ~map
-   ~measures
    ~new
    ~not_parts
    ~not_score
@@ -279,8 +278,6 @@ scoping
    ~timeline
 
 .. autofunction:: map
-
-.. autofunction:: measures
 
 .. autofunction:: new
 

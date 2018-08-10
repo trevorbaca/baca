@@ -1019,7 +1019,6 @@ Rhythm library.
    :nosignatures:
 
    ~baca.scoping.map
-   ~baca.scoping.measures
    ~baca.scoping.new
    ~baca.scoping.not_parts
    ~baca.scoping.not_score

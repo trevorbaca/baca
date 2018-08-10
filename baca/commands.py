@@ -243,13 +243,13 @@ class BCPCommand(scoping.Command):
             >>> maker(
             ...     'MusicVoice',
             ...     baca.make_even_divisions(),
-            ...     baca.measures(
-            ...         (1, 2),
+            ...     baca.new(
             ...         baca.bcps(bcps=[(1, 5), (2, 5)]),
+            ...         measures=(1, 2),
             ...         ),
-            ...     baca.measures(
-            ...         (3, 4),
+            ...     baca.new(
             ...         baca.bcps(bcps=[(3, 5), (4, 5)]),
+            ...         measures=(3, 4),
             ...         ),
             ...     baca.pitches('E4 F4'),
             ...     baca.script_staff_padding(5.5),
