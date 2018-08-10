@@ -1035,7 +1035,7 @@ def match(
 def measures(
     measures: typing.Optional[typings.Slice],
     *commands: typing.Union[Command, Suite],
-    ) -> typing.List[typing.Union[Command, Suite]]:
+    ) -> Suite:
     r"""
     Wraps each command in ``commands`` with ``measures``.
 
@@ -1146,7 +1146,7 @@ def measures(
         assert isinstance(command, (Command, Suite)), repr(command)
         command.measures = copy.copy(measures)
         commands_.append(command)
-    return commands_
+    return suite(*commands_)
 
 _command_typing = typing.Union[Command, Suite]
 
