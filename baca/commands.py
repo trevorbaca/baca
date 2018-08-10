@@ -1372,7 +1372,7 @@ class IndicatorCommand(scoping.Command):
         redundant: bool = None,
         scope: scoping.scope_typing = None,
         selector: typings.Selector = 'baca.pheads()',
-        tags: typing.List[abjad.Tag] = None,
+        tags: typing.List[typing.Union[str, abjad.Tag]] = None,
         ) -> None:
         scoping.Command.__init__(
             self,
@@ -1401,7 +1401,15 @@ class IndicatorCommand(scoping.Command):
         self._tweaks = tweaks
         tags = tags or []
         assert self._validate_tags(tags), repr(tags)
-        self._tags = tags
+        tags_ = []
+        for tag in tags:
+            if isinstance(tag, abjad.Tag):
+                tags_.append(tag)
+            else:
+                assert isinstance(tag, str), repr(tag)
+                tag_ = abjad.Tag(tag)
+                tags_.append(tag_)
+        self._tags = tags_
 
     ### SPECIAL METHODS ###
 
