@@ -418,6 +418,14 @@ baca_bcp_spanner_left_text = #(
     #})
     )
 
+baca_bcp_spanner_right_text = #(
+    define-music-function
+    (parser location n d music) (number? number? ly:music?)
+    #{
+    \tweak bound-details.right.text \markup \baca-bcp-right #n #d
+    $music
+    #})
+
 baca_text_spanner_left_markup = #(
     define-music-function (parser location markup music) (markup? ly:music?)
     #{
@@ -436,13 +444,27 @@ baca_text_spanner_left_text = #(
     $music
     #})
 
-#(define-markup-command
-    (baca-right layout props text) (markup?)
-    (interpret-markup layout props
+%#(define-markup-command
+%    (baca-right layout props text) (markup?)
+%    (interpret-markup layout props
+%    #{
+%    \markup \upright #text
+%    #})
+%    )
+
+baca_text_spanner_right_markup = #(
+    define-music-function (parser location markup music) (markup? ly:music?)
     #{
-    \markup \upright #text
+    \tweak bound-details.right.text \markup \upright #markup
+    $music
     #})
-    )
+
+baca_text_spanner_right_text = #(
+    define-music-function (parser location string music) (string? ly:music?)
+    #{
+    \tweak bound-details.right.text \markup \upright #string
+    $music
+    #})
 
 %%% SPACING COMMANDS %%%
 

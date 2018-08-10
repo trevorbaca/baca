@@ -138,15 +138,17 @@ class BCPCommand(scoping.Command):
                 style = 'solid_line_with_arrow'
             else:
                 style = 'invisible_line'
-            right_literal = None
+            right_text = None
             if lt.head is add_right_text_to_me:
                 numerator, denominator = next_bcp
-                string = rf'\markup \baca-bcp-right #{numerator} #{denominator}'
-                right_literal = abjad.LilyPondLiteral(string)
+                #string = rf'\markup \baca-bcp-right #{numerator} #{denominator}'
+                #right_literal = abjad.LilyPondLiteral(string)
+                right_text = r'- \baca_bcp_spanner_right_text'
+                right_text += rf' #{numerator} #{denominator}'
             start_text_span = abjad.StartTextSpan(
                 command=self.start_command,
                 left_text=left_text,
-                right_text=right_literal,
+                right_text=right_text,
                 style=style,
                 )
             if self.tweaks:
@@ -349,7 +351,7 @@ class BCPCommand(scoping.Command):
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad_solid_line_with_arrow                                           %! BowContactPointCommand
                                 - \baca_bcp_spanner_left_text #2 #5                                      %! BowContactPointCommand
-                                - \tweak bound-details.right.text \markup \baca-bcp-right #1 #5          %! BowContactPointCommand
+                                - \baca_bcp_spanner_right_text #1 #5                                     %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                 <BLANKLINE>
                                 e'8                                                                      %! baca_make_even_divisions
@@ -401,7 +403,7 @@ class BCPCommand(scoping.Command):
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad_solid_line_with_arrow                                           %! BowContactPointCommand
                                 - \baca_bcp_spanner_left_text #4 #5                                      %! BowContactPointCommand
-                                - \tweak bound-details.right.text \markup \baca-bcp-right #3 #5          %! BowContactPointCommand
+                                - \baca_bcp_spanner_right_text #3 #5                                     %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                 <BLANKLINE>
                                 f'8                                                                      %! baca_make_even_divisions
@@ -646,7 +648,7 @@ class BCPCommand(scoping.Command):
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad_solid_line_with_arrow                                           %! BowContactPointCommand
                                 - \baca_bcp_spanner_left_text #1 #5                                      %! BowContactPointCommand
-                                - \tweak bound-details.right.text \markup \baca-bcp-right #2 #5          %! BowContactPointCommand
+                                - \baca_bcp_spanner_right_text #2 #5                                     %! BowContactPointCommand
                                 - \tweak color #red                                                      %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                 <BLANKLINE>

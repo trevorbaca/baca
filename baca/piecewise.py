@@ -2997,7 +2997,7 @@ def text_spanner(
                             e'8                                                                      %! baca_make_even_divisions
                             - \abjad_dashed_line_with_arrow                                          %! PiecewiseIndicatorCommand(1)
                             - \baca_text_spanner_left_text "pont."                                   %! PiecewiseIndicatorCommand(1)
-                            - \tweak bound-details.right.text \markup \baca-right "ord."             %! PiecewiseIndicatorCommand(1)
+                            - \baca_text_spanner_right_text "ord."                                   %! PiecewiseIndicatorCommand(1)
                             - \tweak bound-details.right.padding #0.5                                %! PiecewiseIndicatorCommand(1)
                             - \tweak bound-details.right.stencil-align-dir-y #center                 %! PiecewiseIndicatorCommand(1)
                             \startTextSpan                                                           %! PiecewiseIndicatorCommand(1)
@@ -3248,7 +3248,7 @@ def text_spanner(
                             e'8                                                                      %! baca_make_even_divisions
                             - \abjad_solid_line_with_arrow                                           %! PiecewiseIndicatorCommand(1)
                             - \baca_text_spanner_left_text "pont."                                   %! PiecewiseIndicatorCommand(1)
-                            - \tweak bound-details.right.text \markup \baca-right "ord."             %! PiecewiseIndicatorCommand(1)
+                            - \baca_text_spanner_right_text "ord."                                   %! PiecewiseIndicatorCommand(1)
                             - \tweak bound-details.right.padding #0.5                                %! PiecewiseIndicatorCommand(1)
                             - \tweak bound-details.right.stencil-align-dir-y #center                 %! PiecewiseIndicatorCommand(1)
                             \startTextSpan                                                           %! PiecewiseIndicatorCommand(1)
@@ -3499,7 +3499,7 @@ def text_spanner(
                             e'8                                                                      %! baca_make_even_divisions
                             - \abjad_invisible_line                                                  %! PiecewiseIndicatorCommand(1)
                             - \baca_text_spanner_left_text "pont."                                   %! PiecewiseIndicatorCommand(1)
-                            - \tweak bound-details.right.text \markup \baca-right "ord."             %! PiecewiseIndicatorCommand(1)
+                            - \baca_text_spanner_right_text "ord."                                   %! PiecewiseIndicatorCommand(1)
                             - \tweak bound-details.right.padding #0.5                                %! PiecewiseIndicatorCommand(1)
                             - \tweak bound-details.right.stencil-align-dir-y #center                 %! PiecewiseIndicatorCommand(1)
                             \startTextSpan                                                           %! PiecewiseIndicatorCommand(1)
@@ -3667,7 +3667,7 @@ def text_spanner(
                             \stopTextSpan                                                            %! PiecewiseIndicatorCommand(1)
                             - \abjad_invisible_line                                                  %! PiecewiseIndicatorCommand(1)
                             - \baca_text_spanner_left_text "B"                                       %! PiecewiseIndicatorCommand(1)
-                            - \tweak bound-details.right.text \markup \baca-right "A"                %! PiecewiseIndicatorCommand(1)
+                            - \baca_text_spanner_right_text "A"                                      %! PiecewiseIndicatorCommand(1)
                             - \tweak bound-details.right.padding #0.5                                %! PiecewiseIndicatorCommand(1)
                             - \tweak bound-details.right.stencil-align-dir-y #center                 %! PiecewiseIndicatorCommand(1)
                             \startTextSpan                                                           %! PiecewiseIndicatorCommand(1)
@@ -3803,7 +3803,7 @@ def text_spanner(
                             \stopTextSpan                                                            %! PiecewiseIndicatorCommand(1)
                             - \abjad_solid_line_with_arrow                                           %! PiecewiseIndicatorCommand(1)
                             - \baca_text_spanner_left_text "B"                                       %! PiecewiseIndicatorCommand(1)
-                            - \tweak bound-details.right.text \markup \baca-right "A"                %! PiecewiseIndicatorCommand(1)
+                            - \baca_text_spanner_right_text "A"                                      %! PiecewiseIndicatorCommand(1)
                             - \tweak bound-details.right.padding #0.5                                %! PiecewiseIndicatorCommand(1)
                             - \tweak bound-details.right.stencil-align-dir-y #center                 %! PiecewiseIndicatorCommand(1)
                             \startTextSpan                                                           %! PiecewiseIndicatorCommand(1)
@@ -3897,7 +3897,7 @@ def text_spanner(
                             e'8                                                                      %! baca_make_even_divisions
                             - \abjad_invisible_line                                                  %! PiecewiseIndicatorCommand(1)
                             - \baca_text_spanner_left_text "A"                                       %! PiecewiseIndicatorCommand(1)
-                            - \tweak bound-details.right.text \markup \baca-right "B"                %! PiecewiseIndicatorCommand(1)
+                            - \baca_text_spanner_right_text "B"                                      %! PiecewiseIndicatorCommand(1)
                             - \tweak bound-details.right.padding #0.5                                %! PiecewiseIndicatorCommand(1)
                             - \tweak bound-details.right.stencil-align-dir-y #center                 %! PiecewiseIndicatorCommand(1)
                             \startTextSpan                                                           %! PiecewiseIndicatorCommand(1)
@@ -3916,7 +3916,7 @@ def text_spanner(
                             \stopTextSpan                                                            %! PiecewiseIndicatorCommand(1)
                             - \abjad_invisible_line                                                  %! PiecewiseIndicatorCommand(1)
                             - \baca_text_spanner_left_text "B"                                       %! PiecewiseIndicatorCommand(1)
-                            - \tweak bound-details.right.text \markup \baca-right "A"                %! PiecewiseIndicatorCommand(1)
+                            - \baca_text_spanner_right_text "A"                                      %! PiecewiseIndicatorCommand(1)
                             - \tweak bound-details.right.padding #0.5                                %! PiecewiseIndicatorCommand(1)
                             - \tweak bound-details.right.stencil-align-dir-y #center                 %! PiecewiseIndicatorCommand(1)
                             \startTextSpan                                                           %! PiecewiseIndicatorCommand(1)
@@ -3933,7 +3933,7 @@ def text_spanner(
                             \stopTextSpan                                                            %! PiecewiseIndicatorCommand(1)
                             - \abjad_invisible_line                                                  %! PiecewiseIndicatorCommand(1)
                             - \baca_text_spanner_left_text "A"                                       %! PiecewiseIndicatorCommand(1)
-                            - \tweak bound-details.right.text \markup \baca-right "B"                %! PiecewiseIndicatorCommand(1)
+                            - \baca_text_spanner_right_text "B"                                      %! PiecewiseIndicatorCommand(1)
                             - \tweak bound-details.right.padding #0.5                                %! PiecewiseIndicatorCommand(1)
                             - \tweak bound-details.right.stencil-align-dir-y #center                 %! PiecewiseIndicatorCommand(1)
                             \startTextSpan                                                           %! PiecewiseIndicatorCommand(1)
@@ -3952,7 +3952,7 @@ def text_spanner(
                             \stopTextSpan                                                            %! PiecewiseIndicatorCommand(1)
                             - \abjad_invisible_line                                                  %! PiecewiseIndicatorCommand(1)
                             - \baca_text_spanner_left_text "B"                                       %! PiecewiseIndicatorCommand(1)
-                            - \tweak bound-details.right.text \markup \baca-right "A"                %! PiecewiseIndicatorCommand(1)
+                            - \baca_text_spanner_right_text "A"                                      %! PiecewiseIndicatorCommand(1)
                             - \tweak bound-details.right.padding #0.5                                %! PiecewiseIndicatorCommand(1)
                             - \tweak bound-details.right.stencil-align-dir-y #center                 %! PiecewiseIndicatorCommand(1)
                             \startTextSpan                                                           %! PiecewiseIndicatorCommand(1)
@@ -4046,7 +4046,7 @@ def text_spanner(
                             e'8                                                                      %! baca_make_even_divisions
                             - \abjad_solid_line_with_arrow                                           %! PiecewiseIndicatorCommand(1)
                             - \baca_text_spanner_left_text "A"                                       %! PiecewiseIndicatorCommand(1)
-                            - \tweak bound-details.right.text \markup \baca-right "B"                %! PiecewiseIndicatorCommand(1)
+                            - \baca_text_spanner_right_text "B"                                      %! PiecewiseIndicatorCommand(1)
                             - \tweak bound-details.right.padding #0.5                                %! PiecewiseIndicatorCommand(1)
                             - \tweak bound-details.right.stencil-align-dir-y #center                 %! PiecewiseIndicatorCommand(1)
                             \startTextSpan                                                           %! PiecewiseIndicatorCommand(1)
@@ -4065,7 +4065,7 @@ def text_spanner(
                             \stopTextSpan                                                            %! PiecewiseIndicatorCommand(1)
                             - \abjad_solid_line_with_arrow                                           %! PiecewiseIndicatorCommand(1)
                             - \baca_text_spanner_left_text "B"                                       %! PiecewiseIndicatorCommand(1)
-                            - \tweak bound-details.right.text \markup \baca-right "A"                %! PiecewiseIndicatorCommand(1)
+                            - \baca_text_spanner_right_text "A"                                      %! PiecewiseIndicatorCommand(1)
                             - \tweak bound-details.right.padding #0.5                                %! PiecewiseIndicatorCommand(1)
                             - \tweak bound-details.right.stencil-align-dir-y #center                 %! PiecewiseIndicatorCommand(1)
                             \startTextSpan                                                           %! PiecewiseIndicatorCommand(1)
@@ -4082,7 +4082,7 @@ def text_spanner(
                             \stopTextSpan                                                            %! PiecewiseIndicatorCommand(1)
                             - \abjad_solid_line_with_arrow                                           %! PiecewiseIndicatorCommand(1)
                             - \baca_text_spanner_left_text "A"                                       %! PiecewiseIndicatorCommand(1)
-                            - \tweak bound-details.right.text \markup \baca-right "B"                %! PiecewiseIndicatorCommand(1)
+                            - \baca_text_spanner_right_text "B"                                      %! PiecewiseIndicatorCommand(1)
                             - \tweak bound-details.right.padding #0.5                                %! PiecewiseIndicatorCommand(1)
                             - \tweak bound-details.right.stencil-align-dir-y #center                 %! PiecewiseIndicatorCommand(1)
                             \startTextSpan                                                           %! PiecewiseIndicatorCommand(1)
@@ -4101,7 +4101,7 @@ def text_spanner(
                             \stopTextSpan                                                            %! PiecewiseIndicatorCommand(1)
                             - \abjad_solid_line_with_arrow                                           %! PiecewiseIndicatorCommand(1)
                             - \baca_text_spanner_left_text "B"                                       %! PiecewiseIndicatorCommand(1)
-                            - \tweak bound-details.right.text \markup \baca-right "A"                %! PiecewiseIndicatorCommand(1)
+                            - \baca_text_spanner_right_text "A"                                      %! PiecewiseIndicatorCommand(1)
                             - \tweak bound-details.right.padding #0.5                                %! PiecewiseIndicatorCommand(1)
                             - \tweak bound-details.right.stencil-align-dir-y #center                 %! PiecewiseIndicatorCommand(1)
                             \startTextSpan                                                           %! PiecewiseIndicatorCommand(1)
@@ -4469,10 +4469,14 @@ def text_spanner(
         if isinstance(right_text, str):
             if 'hook' not in style:
                 if right_text.startswith('\\'):
-                    string = rf'\markup \baca-right {right_text}'
+                    #string = rf'\markup \baca-right {right_text}'
+                    right_markup = rf'- \baca_text_spanner_right_markup'
+                    right_markup += rf' {right_text}'
                 else:
-                    string = rf'\markup \baca-right "{right_text}"'
-                right_markup = abjad.LilyPondLiteral(string)
+                    #string = rf'\markup \baca-right "{right_text}"'
+                    right_markup = rf'- \baca_text_spanner_right_text'
+                    right_markup += rf' "{right_text}"'
+                #right_markup = abjad.LilyPondLiteral(string)
             else:
                 right_markup = abjad.Markup.from_literal(right_text)
                 assert isinstance(right_markup, abjad.Markup)
