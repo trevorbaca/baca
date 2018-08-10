@@ -257,8 +257,11 @@ class OverrideCommand(scoping.Command):
             for tag in tags:
                 if tag is None:
                     continue
-                assert isinstance(tag, str)
-                tags_.append(tag)
+                if isinstance(tag, abjad.Tag):
+                    tags_.append(str(tag))
+                else:
+                    assert isinstance(tag, str)
+                    tags_.append(tag)
         else:
             tags_ = []
         assert self._validate_tags(tags_), repr(tags_)
