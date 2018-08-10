@@ -264,9 +264,9 @@ scoping
 .. autosummary::
    :nosignatures:
 
-   ~apply
    ~map
    ~measures
+   ~new
    ~not_parts
    ~not_score
    ~not_segment
@@ -278,11 +278,11 @@ scoping
    ~tag
    ~timeline
 
-.. autofunction:: apply
-
 .. autofunction:: map
 
 .. autofunction:: measures
+
+.. autofunction:: new
 
 .. autofunction:: not_parts
 

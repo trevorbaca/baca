@@ -1018,9 +1018,9 @@ Rhythm library.
 .. autosummary::
    :nosignatures:
 
-   ~baca.scoping.apply
    ~baca.scoping.map
    ~baca.scoping.measures
+   ~baca.scoping.new
    ~baca.scoping.not_parts
    ~baca.scoping.not_score
    ~baca.scoping.not_segment
