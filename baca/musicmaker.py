@@ -7050,9 +7050,9 @@ class MusicMaker(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10, 18], [15, 23], [19, 13, 9, 8]],
-            ...     baca.map(
-            ...         baca.runs(),
+            ...     baca.new(
             ...         baca.hairpin('p < f'),
+            ...         map=baca.runs(),
             ...         ),
             ...     baca.RestAffixSpecifier(
             ...         pattern=abjad.Pattern(
@@ -7121,13 +7121,13 @@ class MusicMaker(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10, 18], [16, 15, 23], [19, 13, 9, 8]],
-            ...     baca.map(
-            ...         baca.tuplet(0),
+            ...     baca.new(
             ...         baca.hairpin('p < f'),
+            ...         map=baca.tuplet(0),
             ...         ),
-            ...     baca.map(
-            ...         baca.tuplet(-1),
+            ...     baca.new(
             ...         baca.hairpin('f > p'),
+            ...         map=baca.tuplet(-1),
             ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
@@ -7189,13 +7189,13 @@ class MusicMaker(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10, 18], [16, 15, 23], [19, 13, 9, 8]],
-            ...     baca.map(
-            ...         baca.tuplets()[:2],
+            ...     baca.new(
             ...         baca.hairpin('p < f'),
+            ...         map=baca.tuplets()[:2],
             ...         ),
-            ...     baca.map(
-            ...         baca.tuplet(-1),
+            ...     baca.new(
             ...         baca.hairpin('f > p'),
+            ...         map=baca.tuplet(-1),
             ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
@@ -7318,9 +7318,9 @@ class MusicMaker(abjad.AbjadObject):
             Slur specifier selects leaves in each tuplet:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.map(
-            ...         baca.tuplets(),
+            ...     baca.new(
             ...         baca.slur(),
+            ...         map=baca.tuplets(),
             ...         ),
             ...     )
 
@@ -7388,9 +7388,9 @@ class MusicMaker(abjad.AbjadObject):
             >>> getter = baca.pleaves()[:2]
             >>> selector = baca.tuplets().map(getter)
             >>> music_maker = baca.MusicMaker(
-            ...     baca.map(
-            ...         selector,
+            ...     baca.new(
             ...         baca.slur(),
+            ...         map=selector,
             ...         ),
             ...     )
 
@@ -7458,9 +7458,9 @@ class MusicMaker(abjad.AbjadObject):
             >>> getter = baca.pleaves()[-2:]
             >>> selector = baca.tuplets().map(getter)
             >>> music_maker = baca.MusicMaker(
-            ...     baca.map(
-            ...         selector,
+            ...     baca.new(
             ...         baca.slur(),
+            ...         map=selector,
             ...         ),
             ...     )
 

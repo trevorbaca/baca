@@ -920,9 +920,9 @@ def glissando(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.map(
-        ...         baca.tuplets()[1:2].runs(),
+        ...     baca.new(
         ...         baca.glissando(),
+        ...         map=baca.tuplets()[1:2].runs(),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -1165,9 +1165,9 @@ def repeat_tie(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-        ...     baca.map(
-        ...         baca.qruns(),
+        ...     baca.new(
         ...         baca.repeat_tie(),
+        ...         map=baca.qruns(),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -1329,9 +1329,9 @@ def slur(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.slur(),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.slur_down(),
         ...     baca.rests_around([2], [4]),
@@ -1484,9 +1484,9 @@ def sustain_pedal(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.rests_around([2], [4]),
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.sustain_pedal(),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.sustain_pedal_staff_padding(4),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -1556,9 +1556,9 @@ def sustain_pedal(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.rests_around([2], [4]),
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.sustain_pedal(selector=baca.lleaves()),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.sustain_pedal_staff_padding(4),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -1628,9 +1628,9 @@ def sustain_pedal(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.rests_around([2], [4]),
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.sustain_pedal(selector=baca.rleaves()),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.sustain_pedal_staff_padding(4),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -1700,9 +1700,9 @@ def sustain_pedal(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.rests_around([2], [4]),
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.sustain_pedal(selector=baca.wleaves()),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.sustain_pedal_staff_padding(4),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -1772,9 +1772,9 @@ def sustain_pedal(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.rests_around([2], [4]),
-        ...     baca.map(
-        ...         baca.tuplets(),
+        ...     baca.new(
         ...         baca.sustain_pedal(),
+        ...         map=baca.tuplets(),
         ...         ),
         ...     baca.sustain_pedal_staff_padding(4),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -1850,9 +1850,9 @@ def sustain_pedal(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.rests_around([2], [4]),
-        ...     baca.map(
-        ...         baca.tuplets(),
+        ...     baca.new(
         ...         baca.sustain_pedal(selector=baca.lleaves()),
+        ...         map=baca.tuplets(),
         ...         ),
         ...     baca.sustain_pedal_staff_padding(4),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -1928,9 +1928,9 @@ def sustain_pedal(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.rests_around([2], [4]),
-        ...     baca.map(
-        ...         baca.tuplets(),
+        ...     baca.new(
         ...         baca.sustain_pedal(selector=baca.rleaves()),
+        ...         map=baca.tuplets(),
         ...         ),
         ...     baca.sustain_pedal_staff_padding(4),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -2023,9 +2023,9 @@ def tie(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-        ...     baca.map(
-        ...         baca.qruns(),
+        ...     baca.new(
         ...         baca.tie(),
+        ...         map=baca.qruns(),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -2091,9 +2091,9 @@ def tie(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-        ...     baca.map(
-        ...         baca.qruns(),
+        ...     baca.new(
         ...         baca.tie(repeat=(1, 8)),
+        ...         map=baca.qruns(),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -2253,9 +2253,9 @@ def trill_spanner(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.map(
-        ...         baca.qruns(),
+        ...     baca.new(
         ...         baca.trill_spanner(),
+        ...         map=baca.qruns(),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -2338,9 +2338,9 @@ def trill_spanner(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.map(
-        ...         baca.runs(),
+        ...     baca.new(
         ...         baca.trill_spanner(),
+        ...         map=baca.runs(),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -2412,9 +2412,9 @@ def trill_spanner(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.rests_around([2], [4]),
-        ...     baca.map(
-        ...         baca.qrun(0),
+        ...     baca.new(
         ...         baca.trill_spanner(string='Eb4'),
+        ...         map=baca.qrun(0),
         ...         ),
         ...     baca.tuplet_bracket_staff_padding(5),
         ...     counts=[1, 1, 5, -1],
@@ -2481,9 +2481,9 @@ def trill_spanner(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.map(
-        ...         baca.qruns(),
+        ...     baca.new(
         ...         baca.trill_spanner(string='Eb4'),
+        ...         map=baca.qruns(),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -2575,9 +2575,9 @@ def trill_spanner(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.map(
-        ...         baca.qruns(),
+        ...     baca.new(
         ...         baca.trill_spanner(string='M2'),
+        ...         map=baca.qruns(),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),

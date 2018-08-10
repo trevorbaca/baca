@@ -1999,9 +1999,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> maker(
             ...     'MusicVoice',
             ...     baca.instrument(instruments['Flute']),
-            ...     baca.map(
-            ...         baca.leaves()[1],
+            ...     baca.new(
             ...         baca.instrument(instruments['Flute']),
+            ...         map=baca.leaves()[1],
             ...         ),
             ...     baca.make_notes(),
             ...     )
@@ -3341,9 +3341,9 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> maker(
             ...     'MusicVoice',
             ...     baca.margin_markup(margin_markups['I+II']),
-            ...     baca.map(
-            ...         baca.leaves()[1],
+            ...     baca.new(
             ...         baca.margin_markup(margin_markups['I+II']),
+            ...         map=baca.leaves()[1],
             ...         ),
             ...     baca.make_notes(),
             ...     )

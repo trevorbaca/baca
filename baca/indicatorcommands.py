@@ -88,9 +88,9 @@ def accent(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.accent(selector=baca.pheads()),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -319,9 +319,9 @@ def alternate_bow_strokes(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.alternate_bow_strokes(),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(6),
@@ -812,9 +812,9 @@ def double_staccato(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.double_staccato(selector=baca.pheads()),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -1115,9 +1115,9 @@ def down_bow(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.down_bow(selector=baca.pheads()),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -1263,9 +1263,9 @@ def espressivo(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.espressivo(selector=baca.pheads()),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -1552,9 +1552,9 @@ def flageolet(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.flageolet(selector=baca.pheads()),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -1796,9 +1796,9 @@ def laissez_vibrer(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.laissez_vibrer(selector=baca.ptails()),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -2100,9 +2100,9 @@ def marcato(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.marcato(selector=baca.pheads()),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -2527,9 +2527,9 @@ def staccatissimo(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.staccatissimo(selector=baca.pheads()),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -2675,9 +2675,9 @@ def staccato(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.staccato(selector=baca.pheads()),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -3347,9 +3347,9 @@ def stem_tremolo(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.rests_around([2], [4]),
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.stem_tremolo(selector=baca.pleaves()),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.tuplet_bracket_staff_padding(5),
         ...     counts=[1, 1, 5, -1],
@@ -3677,9 +3677,9 @@ def tenuto(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.tenuto(selector=baca.pheads()),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -3982,9 +3982,9 @@ def up_bow(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.up_bow(selector=baca.pheads()),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),

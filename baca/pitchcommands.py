@@ -4678,9 +4678,9 @@ class RegisterInterpolationCommand(scoping.Command):
             ...     'Voice 1',
             ...     collections,
             ...     baca.color(selector=baca.tuplets()),
-            ...     baca.map(
-            ...         baca.tuplets(),
+            ...     baca.new(
             ...         baca.register(0, 24),
+            ...         map=baca.tuplets(),
             ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
@@ -5826,9 +5826,9 @@ def bass_to_octave(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-        ...     baca.map(
-        ...         baca.plts(),
+        ...     baca.new(
         ...         baca.bass_to_octave(3),
+        ...         map=baca.plts(),
         ...         ),
         ...     baca.color(selector=baca.plts()),
         ...     counts=[5, -3],
@@ -5909,9 +5909,9 @@ def bass_to_octave(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-        ...     baca.map(
-        ...         baca.plts()[-2:],
+        ...     baca.new(
         ...         baca.bass_to_octave(3),
+        ...         map=baca.plts()[-2:],
         ...         ),
         ...     baca.color(selector=baca.plts()[-2:]),
         ...     counts=[5, -3],
@@ -6081,9 +6081,9 @@ def center_to_octave(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-        ...     baca.map(
-        ...         baca.plts(),
+        ...     baca.new(
         ...         baca.center_to_octave(3),
+        ...         map=baca.plts(),
         ...         ),
         ...     baca.color(selector=baca.plts()),
         ...     counts=[5, -3],
@@ -6164,9 +6164,9 @@ def center_to_octave(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-        ...     baca.map(
-        ...         baca.plts()[-2:],
+        ...     baca.new(
         ...         baca.center_to_octave(3),
+        ...         map=baca.plts()[-2:],
         ...         ),
         ...     baca.color(selector=baca.plts()[-2:]),
         ...     counts=[5, -3],
@@ -7077,9 +7077,9 @@ def soprano_to_octave(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-        ...     baca.map(
-        ...         baca.plts(),
+        ...     baca.new(
         ...         baca.soprano_to_octave(3),
+        ...         map=baca.plts(),
         ...         ),
         ...     baca.color(selector=baca.plts()),
         ...     counts=[5, -3],
@@ -7160,9 +7160,9 @@ def soprano_to_octave(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-        ...     baca.map(
-        ...         baca.plts()[-2:],
+        ...     baca.new(
         ...         baca.soprano_to_octave(3),
+        ...         map=baca.plts()[-2:],
         ...         ),
         ...     baca.color(selector=baca.plts()[-2:]),
         ...     counts=[5, -3],
