@@ -1011,7 +1011,7 @@ def map(
 def match(
     pattern,
     *commands: typing.Union[Command, Suite],
-    ) -> typing.List[typing.Union[Command, Suite]]:
+    ) -> Suite:
     """
     Applies each scope that matches ``pattern`` to each command in
     ``commands``.
@@ -1030,14 +1030,14 @@ def match(
                 commands_.append(command_)
             command_ = Suite(*commands_)
         result.append(command_)
-    return result
+    return suite(*result)
 
 def measures(
     measures: typing.Optional[typings.Slice],
     *commands: typing.Union[Command, Suite],
     ) -> Suite:
     r"""
-    Wraps each command in ``commands`` with ``measures``.
+    Sets ``command.measures`` to ``measures`` for each command in ``commands``.
 
     ..  container:: example
 
