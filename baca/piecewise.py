@@ -4465,18 +4465,15 @@ def text_spanner(
             right_text = cyclic_items[i + 2]
         else:
             right_text = cyclic_items[i + 1]
-        right_markup: typing.Union[abjad.LilyPondLiteral, abjad.Markup]
+        right_markup: typing.Union[str, abjad.Markup]
         if isinstance(right_text, str):
             if 'hook' not in style:
                 if right_text.startswith('\\'):
-                    #string = rf'\markup \baca-right {right_text}'
                     right_markup = rf'- \baca_text_spanner_right_markup'
                     right_markup += rf' {right_text}'
                 else:
-                    #string = rf'\markup \baca-right "{right_text}"'
                     right_markup = rf'- \baca_text_spanner_right_text'
                     right_markup += rf' "{right_text}"'
-                #right_markup = abjad.LilyPondLiteral(string)
             else:
                 right_markup = abjad.Markup.from_literal(right_text)
                 assert isinstance(right_markup, abjad.Markup)
