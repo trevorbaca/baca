@@ -2282,7 +2282,7 @@ def margin_markup(
         )
     if bool(alert):
         assert isinstance(alert, commands.IndicatorCommand), repr(alert)
-        return scoping.Suite(command, alert)
+        return scoping.suite(command, alert)
     else:
         return command
 

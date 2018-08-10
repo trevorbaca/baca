@@ -3236,7 +3236,7 @@ def edition(
         only_parts = markup(only_parts)
     assert isinstance(only_parts, IndicatorCommand)
     only_parts_ = scoping.only_parts(only_parts)
-    return scoping.Suite(
+    return scoping.suite(
         not_parts_,
         only_parts_,
         )

@@ -1110,13 +1110,13 @@ def dls_staff_padding(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.dls_staff_padding(4),
-        ...     baca.map(
-        ...         baca.tuplets(),
+        ...     baca.new(
         ...         baca.hairpin(
         ...             'p < f',
         ...             remove_length_1_spanner_start=True,
         ...             selector=baca.tleaves(),
         ...             ),
+        ...         map=baca.tuplets(),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -1190,13 +1190,13 @@ def dls_staff_padding(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.dls_staff_padding(4, selector=baca.tuplet(1)),
-        ...     baca.map(
-        ...         baca.tuplets(),
+        ...     baca.new(
         ...         baca.hairpin(
         ...             'p < f',
         ...             remove_length_1_spanner_start=True,
         ...             selector=baca.tleaves(),
         ...             ),
+        ...         map=baca.tuplets(),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -1287,13 +1287,13 @@ def dls_up(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.dls_up(),
-        ...     baca.map(
-        ...         baca.tuplets(),
+        ...     baca.new(
         ...         baca.hairpin(
         ...             'p < f',
         ...             remove_length_1_spanner_start=True,
         ...             selector=baca.tleaves(),
         ...             ),
+        ...         map=baca.tuplets(),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -1367,13 +1367,13 @@ def dls_up(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.dls_up(selector=baca.tuplet(1)),
-        ...     baca.map(
-        ...         baca.tuplets(),
+        ...     baca.new(
         ...         baca.hairpin(
         ...             'p < f',
         ...             remove_length_1_spanner_start=True,
         ...             selector=baca.tleaves(),
         ...             ),
+        ...         map=baca.tuplets(),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -2969,9 +2969,9 @@ def repeat_tie_down(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[11, 11, 12], [11, 11, 11], [11]],
-        ...     baca.map(
-        ...         baca.qruns(),
+        ...     baca.new(
         ...         baca.repeat_tie(),
+        ...         map=baca.qruns(),
         ...         ),
         ...     baca.repeat_tie_down(),
         ...     baca.rests_around([2], [4]),
@@ -3040,13 +3040,13 @@ def repeat_tie_down(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[11, 11, 12], [11, 11, 11], [11]],
-        ...     baca.map(
-        ...         baca.qruns(),
+        ...     baca.new(
         ...         baca.repeat_tie(),
+        ...         map=baca.qruns(),
         ...         ),
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.repeat_tie_down(),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.stem_up(),
@@ -3163,9 +3163,9 @@ def repeat_tie_up(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[11, 11, 12], [11, 11, 11], [11]],
-        ...     baca.map(
-        ...         baca.qruns(),
+        ...     baca.new(
         ...         baca.repeat_tie(),
+        ...         map=baca.qruns(),
         ...         ),
         ...     baca.repeat_tie_up(),
         ...     baca.rests_around([2], [4]),
@@ -3234,13 +3234,13 @@ def repeat_tie_up(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[11, 11, 12], [11, 11, 11], [11]],
-        ...     baca.map(
-        ...         baca.qruns(),
+        ...     baca.new(
         ...         baca.repeat_tie(),
+        ...         map=baca.qruns(),
         ...         ),
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.repeat_tie_up(),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.stem_down(),
@@ -3390,9 +3390,9 @@ def rest_down(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.rest_down(),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -3565,9 +3565,9 @@ def rest_position(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.rest_position(-6),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -3715,9 +3715,9 @@ def rest_transparent(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.rests_around([2], [4]),
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.rest_transparent(),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.tuplet_bracket_staff_padding(5),
         ...     counts=[1, 1, 5, -1],
@@ -3863,9 +3863,9 @@ def rest_up(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.rest_up(),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -4025,9 +4025,9 @@ def script_color(
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.accent(selector=baca.pheads()),
         ...     baca.rests_around([2], [4]),
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.script_color('red'),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.tuplet_bracket_staff_padding(5),
         ...     counts=[1, 1, 5, -1],
@@ -4195,9 +4195,9 @@ def script_down(
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.accent(selector=baca.pheads()),
         ...     baca.rests_around([2], [4]),
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.script_down(),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.tuplet_bracket_staff_padding(5),
         ...     counts=[1, 1, 5, -1],
@@ -4365,9 +4365,9 @@ def script_extra_offset(
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.accent(selector=baca.pheads()),
         ...     baca.rests_around([2], [4]),
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.script_extra_offset((-1.5, 0), selector=baca.leaf(0)),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.tuplet_bracket_staff_padding(5),
         ...     counts=[1, 1, 5, -1],
@@ -4568,9 +4568,9 @@ def script_up(
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.accent(selector=baca.pheads()),
         ...     baca.rests_around([2], [4]),
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.script_up(),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.tuplet_bracket_staff_padding(5),
         ...     counts=[1, 1, 5, -1],
@@ -4661,9 +4661,9 @@ def slur_down(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.map(
-        ...         baca.tuplets().map(baca.tleaves()).nontrivial(),
+        ...     baca.new(
         ...         baca.slur(),
+        ...         map=baca.tuplets().map(baca.tleaves()).nontrivial(),
         ...         ),
         ...     baca.slur_down(),
         ...     baca.rests_around([2], [4]),
@@ -4734,13 +4734,13 @@ def slur_down(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.map(
-        ...         baca.tuplets().map(baca.tleaves()).nontrivial(),
+        ...     baca.new(
         ...         baca.slur(),
+        ...         map=baca.tuplets().map(baca.tleaves()).nontrivial(),
         ...         ),
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.slur_down(),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -4827,9 +4827,9 @@ def slur_up(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.map(
-        ...         baca.tuplets().map(baca.tleaves()).nontrivial(),
+        ...     baca.new(
         ...         baca.slur(),
+        ...         map=baca.tuplets().map(baca.tleaves()).nontrivial(),
         ...         ),
         ...     baca.slur_up(),
         ...     baca.stem_down(),
@@ -4906,13 +4906,13 @@ def slur_up(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.map(
-        ...         baca.tuplets().map(baca.tleaves()).nontrivial(),
+        ...     baca.new(
         ...         baca.slur(),
+        ...         map=baca.tuplets().map(baca.tleaves()).nontrivial(),
         ...         ),
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.slur_up(),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.stem_down(),
         ...     baca.rests_around([2], [4]),
@@ -5196,9 +5196,9 @@ def stem_color(
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.stem_color('red'),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -5348,9 +5348,9 @@ def stem_down(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.rests_around([2], [4]),
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.stem_down(),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.stem_up(),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -5534,9 +5534,9 @@ def stem_up(
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [10]],
         ...     baca.rests_around([2], [4]),
         ...     baca.stem_down(),
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.stem_up(),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.tuplet_bracket_staff_padding(5),
         ...     counts=[1, 1, 5, -1],
@@ -5706,9 +5706,9 @@ def sustain_pedal_staff_padding(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.rests_around([2], [4]),
-        ...     baca.map(
-        ...         baca.tuplets(),
+        ...     baca.new(
         ...         baca.sustain_pedal(selector=baca.rleaves()),
+        ...         map=baca.tuplets(),
         ...         ),
         ...     baca.sustain_pedal_staff_padding(4),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -5784,13 +5784,13 @@ def sustain_pedal_staff_padding(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.rests_around([2], [4]),
-        ...     baca.map(
-        ...         baca.tuplets(),
+        ...     baca.new(
         ...         baca.sustain_pedal(),
+        ...         map=baca.tuplets(),
         ...         ),
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.sustain_pedal_staff_padding(4),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.tuplet_bracket_staff_padding(5),
         ...     counts=[1, 1, 5, -1],
@@ -5962,9 +5962,9 @@ def text_script_color(
         ...         selector=baca.tuplets()[1:2].phead(0),
         ...         ),
         ...     baca.rests_around([2], [4]),
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.text_script_color('red'),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.tuplet_bracket_staff_padding(5),
         ...     counts=[1, 1, 5, -1],
@@ -6156,9 +6156,9 @@ def text_script_down(
         ...         selector=baca.tuplets()[1:2].phead(0),
         ...         ),
         ...     baca.rests_around([2], [4]),
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.text_script_down(),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.tuplet_bracket_staff_padding(5),
         ...     counts=[1, 1, 5, -1],
@@ -6422,9 +6422,9 @@ def text_script_padding(
         ...         selector=baca.tuplets()[1:2].phead(0),
         ...         ),
         ...     baca.rests_around([2], [4]),
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.text_script_padding(4),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.tuplet_bracket_staff_padding(5),
         ...     counts=[1, 1, 5, -1],
@@ -6664,9 +6664,9 @@ def text_script_staff_padding(
         ...         selector=baca.tuplets()[1:2].phead(0),
         ...         ),
         ...     baca.rests_around([2], [4]),
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.text_script_staff_padding(4),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.tuplet_bracket_staff_padding(5),
         ...     counts=[1, 1, 5, -1],
@@ -6858,9 +6858,9 @@ def text_script_up(
         ...         selector=baca.tuplets()[1:2].phead(0),
         ...         ),
         ...     baca.rests_around([2], [4]),
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.text_script_up(),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.tuplet_bracket_staff_padding(5),
         ...     counts=[1, 1, 5, -1],
@@ -7134,9 +7134,9 @@ def text_spanner_staff_padding(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.rests_around([2], [4]),
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.text_spanner_staff_padding(6),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.text_script_staff_padding(6),
         ...     baca.text_spanner(
@@ -7283,9 +7283,9 @@ def tie_down(
         ...     [[11, 11, 12], [11, 11, 11], [11]],
         ...     baca.rests_around([2], [4]),
         ...     baca.stem_up(),
-        ...     baca.map(
-        ...         baca.qruns(),
+        ...     baca.new(
         ...         baca.tie(),
+        ...         map=baca.qruns(),
         ...         ),
         ...     baca.tie_down(),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -7354,13 +7354,13 @@ def tie_down(
         ...     [[11, 11, 12], [11, 11, 11], [11]],
         ...     baca.rests_around([2], [4]),
         ...     baca.stem_up(),
-        ...     baca.map(
-        ...         baca.qruns(),
+        ...     baca.new(
         ...         baca.tie(),
+        ...         map=baca.qruns(),
         ...         ),
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.tie_down(),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.tuplet_bracket_staff_padding(5),
         ...     counts=[1, 1, 5, -1],
@@ -7445,9 +7445,9 @@ def tie_up(
         ...     [[11, 11, 12], [11, 11, 11], [11]],
         ...     baca.rests_around([2], [4]),
         ...     baca.stem_down(),
-        ...     baca.map(
-        ...         baca.qruns(),
+        ...     baca.new(
         ...         baca.tie(),
+        ...         map=baca.qruns(),
         ...         ),
         ...     baca.tie_up(),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -7516,13 +7516,13 @@ def tie_up(
         ...     [[11, 11, 12], [11, 11, 11], [11]],
         ...     baca.rests_around([2], [4]),
         ...     baca.stem_down(),
-        ...     baca.map(
-        ...         baca.qruns(),
+        ...     baca.new(
         ...         baca.tie(),
+        ...         map=baca.qruns(),
         ...         ),
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.tie_up(),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.tuplet_bracket_staff_padding(5),
         ...     counts=[1, 1, 5, -1],
@@ -7874,9 +7874,9 @@ def tuplet_bracket_down(
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.tuplet_bracket_down(),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     counts=[1, 1, 5, -1],
         ...     time_treatments=[-1],
@@ -8023,9 +8023,9 @@ def tuplet_bracket_extra_offset(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.rests_around([2], [4]),
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.tuplet_bracket_extra_offset((-1, 0)),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     baca.tuplet_bracket_staff_padding(5),
         ...     counts=[1, 1, 5, -1],
@@ -8221,9 +8221,9 @@ def tuplet_bracket_staff_padding(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.rests_around([2], [4]),
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.tuplet_bracket_staff_padding(5),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     counts=[1, 1, 5, -1],
         ...     time_treatments=[-1],
@@ -8369,9 +8369,9 @@ def tuplet_bracket_up(
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.tuplet_bracket_up(),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     counts=[1, 1, 5, -1],
         ...     time_treatments=[-1],
@@ -8535,9 +8535,9 @@ def tuplet_number_extra_offset(
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
-        ...     baca.map(
-        ...         baca.tuplet(1),
+        ...     baca.new(
         ...         baca.tuplet_number_extra_offset((-1, 0)),
+        ...         map=baca.tuplet(1),
         ...         ),
         ...     counts=[1, 1, 5, -1],
         ...     time_treatments=[-1],

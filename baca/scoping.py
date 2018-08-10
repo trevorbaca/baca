@@ -658,7 +658,7 @@ class Suite(abjad.AbjadObject):
         **keywords,
         ) -> None:
         commands_: typing.List[typing.Union[Command, Suite]] = []
-        for command in commands:
+        for command in commands or []:
             if isinstance(command, (Command, Suite)):
                 command_ = abjad.new(command, **keywords)
                 commands_.append(command_)
@@ -798,7 +798,7 @@ def map(
 def new(
     *commands: typing.Iterable[Command],
     **keywords,
-    ) -> Suite:
+    ) -> typing.Union[Command, Suite]:
     r"""
     Makes new ``commands`` with ``keywords``.
 
@@ -1096,7 +1096,10 @@ def new(
         assert isinstance(command, (Command, Suite)), repr(command)
         command_ = abjad.new(command, **keywords)
         commands_.append(command_)
-    return suite(*commands_)
+    if len(commands_) == 1:
+        return commands_[0]
+    else:
+        return suite(*commands_)
 
 _command_typing = typing.Union[Command, Suite]
 
