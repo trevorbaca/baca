@@ -418,14 +418,6 @@ baca_bcp_spanner_left_text = #(
     #})
     )
 
-#(define-markup-command
-    (baca-left layout props text) (markup?)
-    (interpret-markup layout props
-    #{
-    \markup \concat { \upright #text \hspace #0.5 }
-    #})
-    )
-
 baca_text_spanner_left_markup = #(
     define-music-function (parser location markup music) (markup? ly:music?)
     #{
