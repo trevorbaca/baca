@@ -264,7 +264,6 @@ scoping
 .. autosummary::
    :nosignatures:
 
-   ~map
    ~new
    ~not_parts
    ~not_score
@@ -276,8 +275,6 @@ scoping
    ~suite
    ~tag
    ~timeline
-
-.. autofunction:: map
 
 .. autofunction:: new
 

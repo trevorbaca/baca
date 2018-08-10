@@ -1235,14 +1235,13 @@ def repeat_tie_repeat_pitches() -> SpannerCommand:
     """
     Repeat-ties repeat pitches.
     """
-    result = scoping.map(
-        classes.selector().ltqruns().nontrivial(),
+    command = scoping.new(
         SpannerCommand(
             selector='baca.qrun(0)',
             spanner=abjad.Tie(repeat=True),
             ),
+        map=classes.selector().ltqruns().nontrivial(),
         )
-    command = result[0]
     assert isinstance(command, SpannerCommand)
     return command
 

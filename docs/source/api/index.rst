@@ -1018,7 +1018,6 @@ Rhythm library.
 .. autosummary::
    :nosignatures:
 
-   ~baca.scoping.map
    ~baca.scoping.new
    ~baca.scoping.not_parts
    ~baca.scoping.not_score
