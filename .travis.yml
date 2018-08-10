@@ -53,7 +53,7 @@ before_install:
     - ls
     - ls /tmp
     - pwd
-    - which doctest
+    - which baca-doctest
     - which mypy
 
 install:
