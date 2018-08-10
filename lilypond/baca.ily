@@ -389,6 +389,33 @@ bacaStartTextSpanBCP =
 bacaStopTextSpanBCP =
 #(make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "BCP")
 
+%%% METRONOME MARK SPANNERS %%%
+
+baca_metronome_mark_spanner_colored_left_text = #(
+    define-music-function
+    (parser location log dots stem string color music)
+    (number? number? number? string? symbol? ly:music?)
+    #{
+    \tweak bound-details.left.text \markup \concat {
+        \with-color #(x11-color color)
+        \abjad-metronome-mark-markup #log #dots #stem #string
+        \hspace #0.5
+        }
+    $music
+    #})
+
+baca_metronome_mark_spanner_left_text = #(
+    define-music-function
+    (parser location log dots stem string music)
+    (number? number? number? string? ly:music?)
+    #{
+    \tweak bound-details.left.text \markup \concat {
+        \abjad-metronome-mark-markup #log #dots #stem #string
+        \hspace #0.5
+        }
+    $music
+    #})
+
 %%% TEXT SPANNERS: EMBEDDED MARKUP %%%
 
 #(define-markup-command
@@ -443,14 +470,6 @@ baca_text_spanner_left_text = #(
         }
     $music
     #})
-
-%#(define-markup-command
-%    (baca-right layout props text) (markup?)
-%    (interpret-markup layout props
-%    #{
-%    \markup \upright #text
-%    #})
-%    )
 
 baca_text_spanner_right_markup = #(
     define-music-function (parser location markup music) (markup? ly:music?)

@@ -1180,8 +1180,8 @@ class SegmentMaker(abjad.SegmentMaker):
             indicator_count += 1
             tag = wrapper.tag
             if metronome_mark is not None:
-                left_text = metronome_mark._get_markup()
                 if metric_modulation is not None:
+                    left_text = metronome_mark._get_markup()
                     markups = []
                     markups.append(left_text)
                     markups.append(abjad.Markup.hspace(2))
@@ -1192,6 +1192,11 @@ class SegmentMaker(abjad.SegmentMaker):
                     markups.append(abjad.Markup.hspace(0.5))
                     markups.append(abjad.Markup(']').upright())
                     left_text = abjad.Markup.concat(markups)
+                else:
+                    arguments = metronome_mark._get_markup_arguments()
+                    log, dots, stem, value = arguments
+                    left_text = r'- \baca_metronome_mark_spanner_left_text'
+                    left_text += f' {log} {dots} {stem} "{value}"'
             elif accelerando is not None:
                 left_text = accelerando._get_markup()
             elif ritardando is not None:
@@ -1237,9 +1242,18 @@ class SegmentMaker(abjad.SegmentMaker):
             color = self._status_to_color[status]
             tag = f'{status.upper()}_METRONOME_MARK_WITH_COLOR'
             tag = abjad.Tag(tag)
-            color = abjad.SchemeColor(color)
-            left_text_with_color = left_text.with_color(color)
-
+            #color = abjad.SchemeColor(color)
+            if isinstance(left_text, str):
+                string = left_text.replace(
+                    'baca_metronome_mark_spanner_left_text',
+                    'baca_metronome_mark_spanner_colored_left_text',
+                    )
+                left_text_with_color = f"{string} #'{color}"
+                #markup = metronome_mark._get_markup()
+                #left_text_with_color = markup.with_color(color)
+            else:
+                color = abjad.SchemeColor(color)
+                left_text_with_color = left_text.with_color(color)
             if right_text:
                 wrapper = abjad.inspect(skips[-1]).wrapper(abjad.MetronomeMark)
                 tag = wrapper.tag
