@@ -1192,6 +1192,8 @@ class SegmentMaker(abjad.SegmentMaker):
                     markups.append(abjad.Markup.hspace(0.5))
                     markups.append(abjad.Markup(']').upright())
                     left_text = abjad.Markup.concat(markups)
+                elif metronome_mark.custom_markup is not None:
+                    left_text = metronome_mark._get_markup()
                 else:
                     arguments = metronome_mark._get_markup_arguments()
                     log, dots, stem, value = arguments
