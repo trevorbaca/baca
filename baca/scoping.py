@@ -229,7 +229,7 @@ class Command(abjad.AbjadObject):
         self._deactivate = deactivate
         self._map = map
         self._match = match
-        self._measures: typings.Slice = None
+        self._measures: typings.Slice = measures
         self._runtime = abjad.OrderedDict()
         self.scope = scope
         if isinstance(selector, str):
@@ -798,12 +798,21 @@ def measures(
             >>                                                                                       %! SingleStaffScoreTemplate
 
     """
-    commands_ = []
-    for command in classes.Sequence(commands).flatten(depth=-1):
-        assert isinstance(command, (Command, Suite)), repr(command)
-        command.measures = copy.copy(measures)
-        commands_.append(command)
-    return suite(*commands_)
+    if measures is not None:
+        assert isinstance(measures, (int, tuple)), repr(measures)
+    result: typing.List[typing.Union[Command, Suite]] = []
+    for command in commands:
+        if isinstance(command, Command):
+            command_ = abjad.new(command, measures=measures)
+        else:
+            assert isinstance(command, Suite), repr(command)
+            commands_ = []
+            for command_ in command:
+                command_ = abjad.new(command_, measures=measures)
+                commands_.append(command_)
+            command_ = Suite(*commands_)
+        result.append(command_)
+    return suite(*result)
 
 def new(
     *commands: typing.Iterable[Command],
