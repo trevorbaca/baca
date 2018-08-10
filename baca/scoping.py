@@ -546,8 +546,94 @@ class Suite(abjad.AbjadObject):
 
     ..  container:: example
 
-        >>> baca.Suite()
-        Suite()
+        >>> suite = baca.suite(
+        ...     baca.accent(),
+        ...     baca.tenuto(),
+        ...     measures=(1, 2),
+        ...     selector=baca.pleaves(),
+        ...     )
+
+        >>> abjad.f(suite)
+        baca.Suite(
+            baca.IndicatorCommand(
+                indicators=abjad.CyclicTuple(
+                    [
+                        abjad.Articulation('>'),
+                        ]
+                    ),
+                measures=(1, 2),
+                selector=baca.pleaves(),
+                tags=[],
+                ),
+            baca.IndicatorCommand(
+                indicators=abjad.CyclicTuple(
+                    [
+                        abjad.Articulation('tenuto'),
+                        ]
+                    ),
+                measures=(1, 2),
+                selector=baca.pleaves(),
+                tags=[],
+                )
+            )
+
+    ..  container:: example
+
+        REGRESSION. Works with ``abjad.new()``:
+
+        >>> suite = baca.suite(
+        ...     baca.accent(),
+        ...     baca.tenuto(),
+        ...     measures=(1, 2),
+        ...     )
+        >>> abjad.f(suite)
+        baca.Suite(
+            baca.IndicatorCommand(
+                indicators=abjad.CyclicTuple(
+                    [
+                        abjad.Articulation('>'),
+                        ]
+                    ),
+                measures=(1, 2),
+                selector=baca.phead(0),
+                tags=[],
+                ),
+            baca.IndicatorCommand(
+                indicators=abjad.CyclicTuple(
+                    [
+                        abjad.Articulation('tenuto'),
+                        ]
+                    ),
+                measures=(1, 2),
+                selector=baca.phead(0),
+                tags=[],
+                )
+            )
+
+        >>> new_suite = abjad.new(suite, measures=(3, 4))
+        >>> abjad.f(new_suite)
+        baca.Suite(
+            baca.IndicatorCommand(
+                indicators=abjad.CyclicTuple(
+                    [
+                        abjad.Articulation('>'),
+                        ]
+                    ),
+                measures=(3, 4),
+                selector=baca.phead(0),
+                tags=[],
+                ),
+            baca.IndicatorCommand(
+                indicators=abjad.CyclicTuple(
+                    [
+                        abjad.Articulation('tenuto'),
+                        ]
+                    ),
+                measures=(3, 4),
+                selector=baca.phead(0),
+                tags=[],
+                )
+            )
 
     """
 
@@ -562,21 +648,26 @@ class Suite(abjad.AbjadObject):
         '_runtime',
         )
 
+    _publish_storage_format = True
+
     ### INITIALIZER ###
 
     def __init__(
         self,
-        *commands: typing.Union[Command, 'Suite'],
+        commands: typing.Sequence[typing.Union[Command, 'Suite']] = None,
+        **keywords,
         ) -> None:
-        command_list: typing.List[typing.Union[Command, Suite]] = []
+        commands_: typing.List[typing.Union[Command, Suite]] = []
         for command in commands:
             if isinstance(command, (Command, Suite)):
-                command_list.append(command)
+                command_ = abjad.new(command, **keywords)
+                commands_.append(command_)
                 continue
             message = '\n  Must contain only commands, maps, suites.'
             message += f'\n  Not {type(command).__name__}: {command!r}.'
             raise Exception(message)
-        self._commands = tuple(command_list)
+        self._commands = tuple(commands_)
+        # TODO: remove because unused?:
         self._measures: typings.Slice = None
         self._runtime = abjad.OrderedDict()
 
@@ -584,7 +675,7 @@ class Suite(abjad.AbjadObject):
 
     def __call__(self, argument=None) -> None:
         """
-        Applies commands to ``argument``.
+        Applies each command in ``commands`` to ``argument``.
         """
         if argument is None:
             return
@@ -599,6 +690,17 @@ class Suite(abjad.AbjadObject):
         """
         return iter(self.commands)
 
+    ### PRIVATE METHODS ###
+
+    def _get_format_specification(self):
+        agent = abjad.StorageFormatManager(self)
+        names = list(agent.signature_keyword_names)
+        return abjad.FormatSpecification(
+            self,
+            storage_format_args_values=self.commands,
+            storage_format_kwargs_names=names,
+            )
+
     ### PUBLIC PROPERTIES ###
 
     @property
@@ -608,6 +710,7 @@ class Suite(abjad.AbjadObject):
         """
         return self._commands
 
+    # TODO: remove
     @property
     def map(self) -> None:
         """
@@ -615,6 +718,7 @@ class Suite(abjad.AbjadObject):
         """
         pass
 
+    # TODO: remove
     @map.setter
     def map(self, argument):
         """
@@ -624,6 +728,7 @@ class Suite(abjad.AbjadObject):
         for command in self.commands:
             command.map = argument
 
+    # TODO: remove
     @property
     def measures(self) -> typing.Optional[typings.Slice]:
         """
@@ -631,6 +736,7 @@ class Suite(abjad.AbjadObject):
         """
         return self._measures
 
+    # TODO: remove
     @measures.setter
     def measures(self, argument):
         """
@@ -810,7 +916,7 @@ def measures(
             for command_ in command:
                 command_ = abjad.new(command_, measures=measures)
                 commands_.append(command_)
-            command_ = Suite(*commands_)
+            command_ = Suite(commands_)
         result.append(command_)
     return suite(*result)
 
@@ -1301,12 +1407,13 @@ def scope(
             for command_ in command:
                 command_ = abjad.new(command_, match=match)
                 commands_.append(command_)
-            command_ = Suite(*commands_)
+            command_ = Suite(commands_)
         result.append(command_)
     return suite(*result)
 
 def suite(
     *commands: typing.Union[Command, Suite],
+    **keywords,
     ) -> Suite:
     """
     Makes suite.
@@ -1337,7 +1444,7 @@ def suite(
         message += f'\n  Not {type(command).__name__}:'
         message += f'\n  {format(command)}'
         raise Exception(message)
-    return Suite(*commands_)
+    return Suite(commands_, **keywords)
 
 def tag(
     tags: typing.Union[str, typing.List[str]],
