@@ -47,7 +47,7 @@ class Scope(abjad.AbjadObject):
         ) -> None:
         if isinstance(measures, int):
             measures = (measures, measures)
-        assert isinstance(measures, tuple), repr(measures)
+        assert isinstance(measures, (list, tuple)), repr(measures)
         assert len(measures) == 2, repr(measures)
         start, stop = measures
         assert isinstance(start, int), repr(start)
@@ -297,7 +297,7 @@ class Command(abjad.AbjadObject):
         if isinstance(self.measures, int):
             measures = (self.measures, self.measures)
         else:
-            assert isinstance(self.measures, tuple), repr(self.measures)
+            assert isinstance(self.measures, (list, tuple)), repr(self.measures)
             measures = self.measures
         scope_ = abjad.new(
             scope,

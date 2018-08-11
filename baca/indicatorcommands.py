@@ -3479,7 +3479,7 @@ def stop_on_string(
                         }
                         \times 4/5 {
                             a'16
-                            \baca_stop_on_string                                                     %! IndicatorCommand
+                            \baca-stop-on-string                                                     %! IndicatorCommand
                             r4
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
@@ -3489,7 +3489,7 @@ def stop_on_string(
 
     """
     literal = abjad.LilyPondLiteral(
-        r'\baca_stop_on_string',
+        r'\baca-stop-on-string',
         format_slot='after',
         )
     return commands.IndicatorCommand(

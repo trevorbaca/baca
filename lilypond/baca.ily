@@ -8,7 +8,7 @@
 
 %%% BOWSTROKES: MARKUP & ARTICULATIONS %%%
 
-baca_full_downbow_markup = \markup {
+baca-full-downbow-markup = \markup {
     \combine
         \musicglyph #"scripts.downbow"
         \path #0.15 
@@ -19,7 +19,7 @@ baca_full_downbow_markup = \markup {
             )
     }
 
-baca_full_upbow_markup = \markup {
+baca-full-upbow-markup = \markup {
     \combine
         \musicglyph #"scripts.upbow"
         \path #0.15 
@@ -30,7 +30,7 @@ baca_full_upbow_markup = \markup {
             )
     }
 
-baca_stop_on_string_markup = \markup {
+baca-stop-on-string-markup = \markup {
     \path #0.15 
     #'(
         (moveto 0 0)
@@ -42,7 +42,7 @@ baca_stop_on_string_markup = \markup {
         )
     }
 
-baca_stop_on_string_full_downbow_markup = \markup {
+baca-stop-on-string-full-downbow-markup = \markup {
     \combine
         \musicglyph #"scripts.downbow"
         \path #0.15 
@@ -56,7 +56,7 @@ baca_stop_on_string_full_downbow_markup = \markup {
             )
     }
 
-baca_stop_on_string_full_upbow_markup = \markup {
+baca-stop-on-string-full-upbow-markup = \markup {
     \combine
         \musicglyph #"scripts.upbow"
         \path #0.15 
@@ -75,7 +75,7 @@ baca_stop_on_string_full_upbow_markup = \markup {
     `("bacafulldownbow"
        . (
            (stencil . ,ly:text-interface::print)
-           (text . ,baca_full_downbow_markup)
+           (text . ,baca-full-downbow-markup)
            (avoid-slur . around)
            (direction . ,UP)
            (padding . 0.20)
@@ -84,14 +84,14 @@ baca_stop_on_string_full_upbow_markup = \markup {
            (toward-stem-shift . 0.5)
            ))))
 
-baca_full_downbow = #(make-articulation "bacafulldownbow")
+baca-full-downbow = #(make-articulation "bacafulldownbow")
 
 #(append! default-script-alist
    (list
     `("bacastoponstringfulldownbow"
        . (
            (stencil . ,ly:text-interface::print)
-           (text . ,baca_stop_on_string_full_downbow_markup)
+           (text . ,baca-stop-on-string-full-downbow-markup)
            (avoid-slur . around)
            (direction . ,UP)
            (padding . 0.20)
@@ -100,7 +100,7 @@ baca_full_downbow = #(make-articulation "bacafulldownbow")
            (toward-stem-shift . 0.6)
            ))))
 
-baca_stop_on_string_full_downbow = #(
+baca-stop-on-string-full-downbow = #(
     make-articulation "bacastoponstringfulldownbow")
 
 #(append! default-script-alist
@@ -108,7 +108,7 @@ baca_stop_on_string_full_downbow = #(
     `("bacafullupbow"
        . (
            (stencil . ,ly:text-interface::print)
-           (text . ,baca_full_upbow_markup)
+           (text . ,baca-full-upbow-markup)
            (avoid-slur . around)
            (direction . ,UP)
            (padding . 0.20)
@@ -117,14 +117,14 @@ baca_stop_on_string_full_downbow = #(
            (toward-stem-shift . 0.5)
            ))))
 
-baca_full_upbow = #(make-articulation "bacafullupbow")
+baca-full-upbow = #(make-articulation "bacafullupbow")
 
 #(append! default-script-alist
    (list
     `("bacastoponstringfullupbow"
        . (
            (stencil . ,ly:text-interface::print)
-           (text . ,baca_stop_on_string_full_upbow_markup)
+           (text . ,baca-stop-on-string-full-upbow-markup)
            (avoid-slur . around)
            (direction . ,UP)
            (padding . 0.20)
@@ -133,7 +133,7 @@ baca_full_upbow = #(make-articulation "bacafullupbow")
            (toward-stem-shift . 0.6)
            ))))
 
-baca_stop_on_string_full_upbow = #(
+baca-stop-on-string-full-upbow = #(
     make-articulation "bacastoponstringfullupbow")
 
 #(append! default-script-alist
@@ -141,7 +141,7 @@ baca_stop_on_string_full_upbow = #(
     `("bacastoponstring"
        . (
            (stencil . ,ly:text-interface::print)
-           (text . ,baca_stop_on_string_markup)
+           (text . ,baca-stop-on-string-markup)
            (avoid-slur . around)
            (direction . ,UP)
            (padding . 0.20)
@@ -150,7 +150,7 @@ baca_stop_on_string_full_upbow = #(
            (toward-stem-shift . 0.4)
            ))))
 
-baca_stop_on_string = #(make-articulation "bacastoponstring")
+baca-stop-on-string = #(make-articulation "bacastoponstring")
 
 \layout {
     \context {
