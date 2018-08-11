@@ -2336,6 +2336,8 @@ class SegmentMaker(abjad.SegmentMaker):
             score = lilypond_file.score_block.items[0]
             assert isinstance(score, abjad.Score)
             include = abjad.Container(tag='_make_lilypond_file')
+            literal = abjad.LilyPondLiteral('', 'absolute_before')
+            abjad.attach(literal, include, tag=None)
             string = r'\include "layout.ly"'
             literal = abjad.LilyPondLiteral(string, 'opening')
             abjad.attach(literal, include, tag='_make_lilypond_file')
@@ -2344,7 +2346,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 is_simultaneous=True,
                 tag='_make_lilypond_file',
                 )
+            literal = abjad.LilyPondLiteral('', 'absolute_before')
+            abjad.attach(literal, container, tag=None)
+            literal = abjad.LilyPondLiteral('', 'closing')
+            abjad.attach(literal, container, tag=None)
             lilypond_file.score_block.items[:] = [container]
+            lilypond_file.score_block.items.append('')
         self._lilypond_file = lilypond_file
 
     def _make_measure_silences(self, start, stop, measure_start_offsets):
@@ -3051,9 +3058,11 @@ class SegmentMaker(abjad.SegmentMaker):
         for leaf in abjad.iterate(self.score).leaves():
             literal = abjad.LilyPondLiteral('', 'absolute_before')
             abjad.attach(literal, leaf, tag=None)
-            if abjad.inspect(leaf).leaf(1) is None:
-                literal = abjad.LilyPondLiteral('', 'absolute_after')
-                abjad.attach(literal, leaf, tag=None)
+        for container in abjad.iterate(self.score).components(abjad.Container):
+            literal = abjad.LilyPondLiteral('', 'absolute_before')
+            abjad.attach(literal, container, tag=None)
+            literal = abjad.LilyPondLiteral('', 'closing')
+            abjad.attach(literal, container, tag=None)
 
     ### PUBLIC PROPERTIES ###
 
