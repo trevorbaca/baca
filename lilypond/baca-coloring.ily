@@ -66,59 +66,59 @@ baca-forest-green-markup = #(
 
 %%% COLOR: MUSIC %%%
 
-baca_octave_warning = #(
+baca-octave-warning = #(
     define-music-function
     (parser location music)
     (ly:music?)
     #{
-    \abjad_color_music red
+    \abjad-color-music #'red
     $music
     #}
     )
 
-baca_out_of_range_warning = #(
+baca-out-of-range-warning = #(
     define-music-function
     (parser location music)
     (ly:music?)
     #{
-    \abjad_color_music red
+    \abjad-color-music #'red
     $music
     #}
     )
 
-baca_repeat_pitch_class_warning = #(
+baca-repeat-pitch-class-warning = #(
     define-music-function
     (parser location music)
     (ly:music?)
     #{
-    \abjad_color_music red
+    \abjad-color-music #'red
     $music
     #}
     )
 
-baca_unpitched_music_warning = #(
+baca-unpitched-music-warning = #(
     define-music-function
     (parser location music)
     (ly:music?)
     #{
-    \abjad_color_music goldenrod
+    \abjad-color-music #'goldenrod
     $music
     #}
     )
 
-baca_unregistered_pitch_warning = #(
+baca-unregistered-pitch-warning = #(
     define-music-function
     (parser location music)
     (ly:music?)
     #{
-    \abjad_color_music magenta
+    \abjad-color-music #'magenta
     $music
     #}
     )
 
 %%% COLOR: TIME SIGNATURE %%%
 
-baca_time_signature_color = #(
+baca-time-signature-color = #(
     define-music-function
     (parser location color music)
     (symbol? ly:music?)

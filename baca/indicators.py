@@ -686,7 +686,7 @@ class SpacingSection(abjad.AbjadObject):
             >>> abjad.f(staff)
             \new Staff
             {
-                \baca_new_spacing_section #2 #24
+                \baca-new-spacing-section #2 #24
                 c'4
                 d'4
                 e'4
@@ -782,7 +782,7 @@ class SpacingSection(abjad.AbjadObject):
     def _get_lilypond_format_bundle(self, leaf=None):
         bundle = abjad.LilyPondFormatBundle()
         numerator, denominator = self.duration.pair
-        string = rf'\baca_new_spacing_section #{numerator} #{denominator}'
+        string = rf'\baca-new-spacing-section #{numerator} #{denominator}'
         bundle.before.commands.append(string)
         return bundle
 

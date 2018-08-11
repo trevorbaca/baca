@@ -53,24 +53,24 @@ class SegmentMaker(abjad.SegmentMaker):
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
-                        \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                        \baca-bar-line-visible                                                       %! _attach_final_bar_line
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
@@ -400,24 +400,24 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                            \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
                         }                                                                                %! _make_global_context
@@ -430,69 +430,69 @@ class SegmentMaker(abjad.SegmentMaker):
                             {                                                                            %! SingleStaffScoreTemplate
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 ^ \markup { 0 }
                                 [                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 ^ \markup { 1 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 ^ \markup { 2 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 ^ \markup { 3 }
                                 ]                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 ^ \markup { 4 }
                                 [                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 ^ \markup { 5 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 ^ \markup { 6 }
                                 ]                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 ^ \markup { 7 }
                                 [                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 ^ \markup { 8 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 ^ \markup { 9 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 ^ \markup { 10 }
                                 ]                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
                                 % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 ^ \markup { 11 }
                                 [                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 ^ \markup { 12 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 ^ \markup { 13 }
                                 ]                                                                        %! baca_make_even_divisions
@@ -535,24 +535,24 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                            \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
                         }                                                                                %! _make_global_context
@@ -565,69 +565,69 @@ class SegmentMaker(abjad.SegmentMaker):
                             {                                                                            %! SingleStaffScoreTemplate
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 ^ \markup { 0 }
                                 [                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 ^ \markup { 1 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 ^ \markup { 2 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 ^ \markup { 3 }
                                 ]                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 ^ \markup { 4 }
                                 [                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 ^ \markup { 5 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 ^ \markup { 6 }
                                 ]                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 ^ \markup { 7 }
                                 [                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 ^ \markup { 8 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 ^ \markup { 9 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 ^ \markup { 10 }
                                 ]                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
                                 % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 ^ \markup { 11 }
                                 [                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 ^ \markup { 12 }
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 ^ \markup { 13 }
                                 ]                                                                        %! baca_make_even_divisions
@@ -725,7 +725,7 @@ class SegmentMaker(abjad.SegmentMaker):
             abbreviation = '|.'
         if isinstance(self.final_bar_line, str):
             abbreviation = self.final_bar_line
-        strings.append(r'\baca_bar_line_visible')
+        strings.append(r'\baca-bar-line-visible')
         strings.append(rf'\bar "{abbreviation}"')
         literal = abjad.LilyPondLiteral(strings, 'after')
         last_skip = classes.Selection(self.score['GlobalSkips']).skip(-1)
@@ -979,7 +979,7 @@ class SegmentMaker(abjad.SegmentMaker):
             suffix=suffix,
             )
         if isinstance(wrapper.indicator, abjad.TimeSignature):
-            string = rf"\baca_time_signature_color #'{color}"
+            string = rf"\baca-time-signature-color #'{color}"
             literal = abjad.LilyPondLiteral(string)
         if cancelation is True:
             tag = abjad.Tag('_attach_color_literal(1)')
@@ -1197,7 +1197,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 else:
                     arguments = metronome_mark._get_markup_arguments()
                     log, dots, stem, value = arguments
-                    left_text = r'- \baca_metronome_mark_spanner_left_text'
+                    left_text = r'- \baca-metronome-mark-spanner-left-text'
                     left_text += f' {log} {dots} {stem} "{value}"'
             elif accelerando is not None:
                 left_text = accelerando._get_markup()
@@ -1246,8 +1246,8 @@ class SegmentMaker(abjad.SegmentMaker):
             tag = abjad.Tag(tag)
             if isinstance(left_text, str):
                 string = left_text.replace(
-                    'baca_metronome_mark_spanner_left_text',
-                    'baca_metronome_mark_spanner_colored_left_text',
+                    'baca-metronome-mark-spanner-left-text',
+                    'baca-metronome-mark-spanner-colored-left-text',
                     )
                 left_text_with_color = f"{string} #'{color}"
             else:
@@ -1531,7 +1531,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         raise Exception(message)
                     if self.color_out_of_range_pitches:
                         abjad.attach(markup, pleaf, tag='_check_range')
-                        string = r'\baca_out_of_range_warning'
+                        string = r'\baca-out-of-range-warning'
                         literal = abjad.LilyPondLiteral(string)
                         abjad.attach(literal, pleaf, tag='_check_range')
 
@@ -1701,7 +1701,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     continue
                 for pleaf in pleaves:
                     abjad.attach(markup, pleaf, tag='_color_octaves_')
-                    string = r'\baca_octave_warning'
+                    string = r'\baca-octave-warning'
                     literal = abjad.LilyPondLiteral(string)
                     abjad.attach(literal, pleaf, tag='_color_octaves_')
 
@@ -1716,7 +1716,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for lt in lts:
             for leaf in lt:
                 abjad.attach(markup, leaf, tag=tag)
-                string = r'\baca_repeat_pitch_class_warning'
+                string = r'\baca-repeat-pitch-class-warning'
                 literal = abjad.LilyPondLiteral(string)
                 abjad.attach(literal, leaf, tag=tag)
 
@@ -1727,7 +1727,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for pleaf in abjad.iterate(self.score).leaves(pitched=True):
             if not abjad.inspect(pleaf).has_indicator(tag):
                 continue
-            string = r'\baca_unpitched_music_warning'
+            string = r'\baca-unpitched-music-warning'
             literal = abjad.LilyPondLiteral(string)
             abjad.attach(literal, pleaf, tag='_color_unpitched_notes')
 
@@ -1738,7 +1738,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for pleaf in abjad.iterate(self.score).leaves(pitched=True):
             if not abjad.inspect(pleaf).has_indicator(tag):
                 continue
-            string = r'\baca_unregistered_pitch_warning'
+            string = r'\baca-unregistered-pitch-warning'
             literal = abjad.LilyPondLiteral(string)
             abjad.attach(literal, pleaf, tag='_color_unregistered_pitches')
 
@@ -3136,15 +3136,15 @@ class SegmentMaker(abjad.SegmentMaker):
                         {                                                                                %! _make_global_context
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #31                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #31                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 6/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #31                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #31                                             %! HorizontalSpacingSpecifier(1):SPACING
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                            \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
                         }                                                                                %! _make_global_context
@@ -3172,7 +3172,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                             e'16
                 <BLANKLINE>
-                                            \baca_octave_warning                                         %! _color_octaves_
+                                            \baca-octave-warning                                         %! _color_octaves_
                                             f'16
                                             - \tweak color #red                                          %! _color_octaves_
                                             ^ \markup { OCTAVE }                                         %! _color_octaves_
@@ -3229,7 +3229,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                             g16
                 <BLANKLINE>
-                                            \baca_octave_warning                                         %! _color_octaves_
+                                            \baca-octave-warning                                         %! _color_octaves_
                                             f16
                                             - \tweak color #red                                          %! _color_octaves_
                                             ^ \markup { OCTAVE }                                         %! _color_octaves_
@@ -3324,29 +3324,29 @@ class SegmentMaker(abjad.SegmentMaker):
                         {                                                                                %! _make_global_context
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 1/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/16                                                                    %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 7/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 7/16                                                                    %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 1/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/16                                                                    %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                            \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
                         }                                                                                %! _make_global_context
@@ -3369,7 +3369,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % [MusicVoice measure 2]                                         %! _comment_measure_numbers
-                                        \baca_out_of_range_warning                                       %! _check_range
+                                        \baca-out-of-range-warning                                       %! _check_range
                                         c16
                                         - \tweak color #red                                              %! _check_range
                                         ^ \markup { * }                                                  %! _check_range
@@ -3490,29 +3490,29 @@ class SegmentMaker(abjad.SegmentMaker):
                         {                                                                                %! _make_global_context
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 1/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/16                                                                    %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 7/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 7/16                                                                    %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 1/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/16                                                                    %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                            \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
                         }                                                                                %! _make_global_context
@@ -3542,12 +3542,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                         f'16
                 <BLANKLINE>
-                                        \baca_repeat_pitch_class_warning                                 %! _color_repeat_pitch_classes_
+                                        \baca-repeat-pitch-class-warning                                 %! _color_repeat_pitch_classes_
                                         a'16
                                         - \tweak color #red                                              %! _color_repeat_pitch_classes_
                                         ^ \markup { @ }                                                  %! _color_repeat_pitch_classes_
                 <BLANKLINE>
-                                        \baca_repeat_pitch_class_warning                                 %! _color_repeat_pitch_classes_
+                                        \baca-repeat-pitch-class-warning                                 %! _color_repeat_pitch_classes_
                                         a'16
                                         - \tweak color #red                                              %! _color_repeat_pitch_classes_
                                         ^ \markup { @ }                                                  %! _color_repeat_pitch_classes_
@@ -3572,12 +3572,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                         a'16
                 <BLANKLINE>
-                                        \baca_repeat_pitch_class_warning                                 %! _color_repeat_pitch_classes_
+                                        \baca-repeat-pitch-class-warning                                 %! _color_repeat_pitch_classes_
                                         c''16
                                         - \tweak color #red                                              %! _color_repeat_pitch_classes_
                                         ^ \markup { @ }                                                  %! _color_repeat_pitch_classes_
                 <BLANKLINE>
-                                        \baca_repeat_pitch_class_warning                                 %! _color_repeat_pitch_classes_
+                                        \baca-repeat-pitch-class-warning                                 %! _color_repeat_pitch_classes_
                                         c'16
                                         - \tweak color #red                                              %! _color_repeat_pitch_classes_
                                         ^ \markup { @ }                                                  %! _color_repeat_pitch_classes_
@@ -3662,24 +3662,24 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                            \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
                         }                                                                                %! _make_global_context
@@ -3765,24 +3765,24 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                            \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "||"                                                                    %! _attach_final_bar_line
                 <BLANKLINE>
                         }                                                                                %! _make_global_context
@@ -3870,24 +3870,24 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                            \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|."                                                                    %! _attach_final_bar_line
                 <BLANKLINE>
                         }                                                                                %! _make_global_context
@@ -3977,24 +3977,24 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                            \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "||"                                                                    %! _attach_final_bar_line
                 <BLANKLINE>
                         }                                                                                %! _make_global_context
@@ -4092,24 +4092,24 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                            \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|."                                                                    %! _attach_final_bar_line
                 <BLANKLINE>
                         }                                                                                %! _make_global_context
@@ -4259,24 +4259,24 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                            \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
                         }                                                                                %! _make_global_context
@@ -4362,24 +4362,24 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                            \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
                         }                                                                                %! _make_global_context
@@ -4392,56 +4392,56 @@ class SegmentMaker(abjad.SegmentMaker):
                             {                                                                            %! SingleStaffScoreTemplate
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 [                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 ]                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 [                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 ]                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 [                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 ]                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
                                 % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 [                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                 <BLANKLINE>
-                                \baca_unpitched_music_warning                                            %! _color_unpitched_notes
+                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8                                                                      %! baca_make_even_divisions
                                 ]                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
@@ -4529,23 +4529,23 @@ class SegmentMaker(abjad.SegmentMaker):
                         {                                                                                %! _make_global_context
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/16                                                                    %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             s1 * 3/16                                                                    %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             s1 * 3/16                                                                    %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             s1 * 3/16                                                                    %! _make_global_skips(1)
-                            \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                            \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
                         }                                                                                %! _make_global_context
@@ -4692,23 +4692,23 @@ class SegmentMaker(abjad.SegmentMaker):
                         {                                                                                %! _make_global_context
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/16                                                                    %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             s1 * 3/16                                                                    %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             s1 * 3/16                                                                    %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             s1 * 3/16                                                                    %! _make_global_skips(1)
-                            \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                            \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
                         }                                                                                %! _make_global_context
@@ -4723,7 +4723,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % [MusicVoice measure 1]                                         %! _comment_measure_numbers
-                                        \baca_unregistered_pitch_warning                                 %! _color_unregistered_pitches
+                                        \baca-unregistered-pitch-warning                                 %! _color_unregistered_pitches
                                         e'8.
                                     }
                                 }
@@ -4733,28 +4733,28 @@ class SegmentMaker(abjad.SegmentMaker):
                                         % [MusicVoice measure 2]                                         %! _comment_measure_numbers
                                         \acciaccatura {
                 <BLANKLINE>
-                                            \baca_unregistered_pitch_warning                             %! _color_unregistered_pitches
+                                            \baca-unregistered-pitch-warning                             %! _color_unregistered_pitches
                                             fs'16
                                             [                                                            %! ACC_1
                 <BLANKLINE>
-                                            \baca_unregistered_pitch_warning                             %! _color_unregistered_pitches
+                                            \baca-unregistered-pitch-warning                             %! _color_unregistered_pitches
                                             d'16
                 <BLANKLINE>
-                                            \baca_unregistered_pitch_warning                             %! _color_unregistered_pitches
+                                            \baca-unregistered-pitch-warning                             %! _color_unregistered_pitches
                                             ef'16
                 <BLANKLINE>
-                                            \baca_unregistered_pitch_warning                             %! _color_unregistered_pitches
+                                            \baca-unregistered-pitch-warning                             %! _color_unregistered_pitches
                                             f'16
                 <BLANKLINE>
-                                            \baca_unregistered_pitch_warning                             %! _color_unregistered_pitches
+                                            \baca-unregistered-pitch-warning                             %! _color_unregistered_pitches
                                             a'16
                 <BLANKLINE>
-                                            \baca_unregistered_pitch_warning                             %! _color_unregistered_pitches
+                                            \baca-unregistered-pitch-warning                             %! _color_unregistered_pitches
                                             af'16
                                             ]                                                            %! ACC_1
                 <BLANKLINE>
                                         }
-                                        \baca_unregistered_pitch_warning                                 %! _color_unregistered_pitches
+                                        \baca-unregistered-pitch-warning                                 %! _color_unregistered_pitches
                                         c'8.
                                     }
                                 }
@@ -4762,7 +4762,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % [MusicVoice measure 3]                                         %! _comment_measure_numbers
-                                        \baca_unregistered_pitch_warning                                 %! _color_unregistered_pitches
+                                        \baca-unregistered-pitch-warning                                 %! _color_unregistered_pitches
                                         b'8.
                                     }
                                 }
@@ -4772,25 +4772,25 @@ class SegmentMaker(abjad.SegmentMaker):
                                         % [MusicVoice measure 4]                                         %! _comment_measure_numbers
                                         \acciaccatura {
                 <BLANKLINE>
-                                            \baca_unregistered_pitch_warning                             %! _color_unregistered_pitches
+                                            \baca-unregistered-pitch-warning                             %! _color_unregistered_pitches
                                             bf'16
                                             [                                                            %! ACC_1
                 <BLANKLINE>
-                                            \baca_unregistered_pitch_warning                             %! _color_unregistered_pitches
+                                            \baca-unregistered-pitch-warning                             %! _color_unregistered_pitches
                                             g'16
                 <BLANKLINE>
-                                            \baca_unregistered_pitch_warning                             %! _color_unregistered_pitches
+                                            \baca-unregistered-pitch-warning                             %! _color_unregistered_pitches
                                             a'16
                 <BLANKLINE>
-                                            \baca_unregistered_pitch_warning                             %! _color_unregistered_pitches
+                                            \baca-unregistered-pitch-warning                             %! _color_unregistered_pitches
                                             af'16
                 <BLANKLINE>
-                                            \baca_unregistered_pitch_warning                             %! _color_unregistered_pitches
+                                            \baca-unregistered-pitch-warning                             %! _color_unregistered_pitches
                                             c'16
                                             ]                                                            %! ACC_1
                 <BLANKLINE>
                                         }
-                                        \baca_unregistered_pitch_warning                                 %! _color_unregistered_pitches
+                                        \baca-unregistered-pitch-warning                                 %! _color_unregistered_pitches
                                         f'8.
                 <BLANKLINE>
                                     }
@@ -4904,24 +4904,24 @@ class SegmentMaker(abjad.SegmentMaker):
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar ""                                                                      %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                            \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
                         }                                                                                %! _make_global_context
@@ -5100,24 +5100,24 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                            \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
                         }                                                                                %! _make_global_context
@@ -5170,24 +5170,24 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                            \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
                         }                                                                                %! _make_global_context
@@ -5281,24 +5281,24 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                            \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
                         }                                                                                %! _make_global_context
@@ -5391,24 +5391,24 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                            \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
                         }                                                                                %! _make_global_context

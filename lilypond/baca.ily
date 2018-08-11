@@ -161,7 +161,7 @@ baca-stop-on-string = #(make-articulation "bacastoponstring")
 
 %%% ARTICULATIONS: MULTIPLE STACCATI %%%
 
-baca_staccati =
+baca-staccati =
 #(define-music-function (parser location dots) (integer?)
    (let ((script (make-music 'ArticulationEvent
                              'articulation-type "staccato")))
@@ -179,7 +179,7 @@ baca_staccati =
 
 %%% BAR LINES %%%
 
-baca_bar_line_visible = #(define-music-function
+baca-bar-line-visible = #(define-music-function
     (parser location music) (ly:music?)
     #{
     \once \override Score.BarLine.transparent = ##f
@@ -206,7 +206,7 @@ baca_bar_line_visible = #(define-music-function
 
 %%% BREAKS %%%
 
-baca_lbsd = #(define-music-function
+baca-lbsd = #(define-music-function
     (parser location y-offset distances)
     (number? list?)
     #{
@@ -223,7 +223,7 @@ baca_lbsd = #(define-music-function
 
 %%% DAMP %%%
 
-baca_damp_markup = \markup {
+baca-damp-markup = \markup {
     \scale #'(0.75 . 0.75)
     \combine
     \bold \override #'(font-name . "Times") "O"
@@ -242,7 +242,7 @@ baca_damp_markup = \markup {
     `("bacadamp"
        . (
            (stencil . ,ly:text-interface::print)
-           (text . ,baca_damp_markup)
+           (text . ,baca-damp-markup)
            (avoid-slur . around)
            (direction . ,UP)
            (padding . 0.20)
@@ -251,23 +251,23 @@ baca_damp_markup = \markup {
            ;;(toward-stem-shift . 0.5)
            ))))
 
-baca_damp = #(make-articulation "bacadamp")
+baca-damp = #(make-articulation "bacadamp")
 
 %%% DIAMOND MARKUP %%%
 
-baca_black_diamond_markup = \markup
+baca-black-diamond-markup = \markup
 {
     \scale #'(0.75 . 0.75)
     \musicglyph #"noteheads.s2harmonic"
 }
 
-baca_diamond_markup = \markup
+baca-diamond-markup = \markup
 {
     \scale #'(0.75 . 0.75)
     \musicglyph #"noteheads.s0harmonic"
 }
 
-baca_double_black_diamond_markup = \markup
+baca-double-black-diamond-markup = \markup
 {
     \override #'(baseline-skip . 1.75)
     \scale #'(0.75 . 0.75)
@@ -278,7 +278,7 @@ baca_double_black_diamond_markup = \markup
     }
 }
 
-baca_double_diamond_markup = \markup
+baca-double-diamond-markup = \markup
 {
     \override #'(baseline-skip . 1.75)
     \scale #'(0.75 . 0.75)
@@ -289,7 +289,7 @@ baca_double_diamond_markup = \markup
     }
 }
 
-baca_triple_black_diamond_markup = \markup
+baca-triple-black-diamond-markup = \markup
 {
     \override #'(baseline-skip . 1.75)
     \scale #'(0.75 . 0.75)
@@ -301,7 +301,7 @@ baca_triple_black_diamond_markup = \markup
     }
 }
 
-baca_triple_diamond_markup = \markup
+baca-triple-diamond-markup = \markup
 {
     \override #'(baseline-skip . 1.75)
     \scale #'(0.75 . 0.75)
@@ -315,19 +315,19 @@ baca_triple_diamond_markup = \markup
 
 %%% FERMATA MARKUP %%%
 
-baca_fermata_markup = \markup { \musicglyph #"scripts.ufermata" }
+baca-fermata-markup = \markup { \musicglyph #"scripts.ufermata" }
 
-baca_long_fermata_markup = \markup { \musicglyph #"scripts.ulongfermata" }
+baca-long-fermata-markup = \markup { \musicglyph #"scripts.ulongfermata" }
 
-baca_short_fermata_markup = \markup { \musicglyph #"scripts.ushortfermata" }
+baca-short-fermata-markup = \markup { \musicglyph #"scripts.ushortfermata" }
 
-baca_very_long_fermata_markup = \markup {
+baca-very-long-fermata-markup = \markup {
     \musicglyph #"scripts.uverylongfermata"
     }
 
 %%% NOTE-HEADS: SHAPED %%%
 
-baca_black_diamond_note_head = #(
+baca-black-diamond-note-head = #(
     define-music-function (parser location music) (ly:music?)
     #{
     \once \override NoteHead.style = #'harmonic-black
@@ -335,7 +335,7 @@ baca_black_diamond_note_head = #(
     #}
     )
 
-baca_diamond_note_head = #(
+baca-diamond-note-head = #(
     define-music-function (parser location music) (ly:music?)
     #{
     \once \override NoteHead.style = #'harmonic
@@ -343,7 +343,7 @@ baca_diamond_note_head = #(
     #}
     )
 
-baca_semicircle_note_head = #(
+baca-semicircle-note-head = #(
     define-music-function (parser location music) (ly:music?)
     #{
     \once \set shapeNoteStyles = ##(re re re re re re re)
@@ -351,7 +351,7 @@ baca_semicircle_note_head = #(
     #}
     )
 
-baca_square_note_head = #(
+baca-square-note-head = #(
     define-music-function (parser location music) (ly:music?)
     #{
     \once \set shapeNoteStyles = ##(la la la la la la la)
@@ -359,7 +359,7 @@ baca_square_note_head = #(
     #}
     )
 
-baca_triangle_note_head = #(
+baca-triangle-note-head = #(
     define-music-function (parser location music) (ly:music?)
     #{
     \once \set shapeNoteStyles = ##(do do do do do do do)
@@ -369,7 +369,7 @@ baca_triangle_note_head = #(
 
 %%% NOTE-HEAD: SLAP-TONGUE %%%
 
-baca_slap_tongue_note_head =
+baca-slap-tongue-note-head =
 #(define-music-function (parser location music) (ly:music?)
 #{
   \override NoteHead #'stencil = #(lambda (grob)
@@ -391,7 +391,7 @@ bacaStopTextSpanBCP =
 
 %%% METRONOME MARK SPANNERS %%%
 
-baca_metronome_mark_spanner_colored_left_text = #(
+baca-metronome-mark-spanner-colored-left-text = #(
     define-music-function
     (parser location log dots stem string color music)
     (number? number? number? string? symbol? ly:music?)
@@ -404,7 +404,7 @@ baca_metronome_mark_spanner_colored_left_text = #(
     $music
     #})
 
-baca_metronome_mark_spanner_left_text = #(
+baca-metronome-mark-spanner-left-text = #(
     define-music-function
     (parser location log dots stem string music)
     (number? number? number? string? ly:music?)
@@ -429,7 +429,7 @@ baca_metronome_mark_spanner_left_text = #(
     #})
     )
 
-baca_bcp_spanner_left_text = #(
+baca-bcp-spanner-left-text = #(
     define-music-function
     (parser location n d music) (number? number? ly:music?)
     #{
@@ -445,7 +445,7 @@ baca_bcp_spanner_left_text = #(
     #})
     )
 
-baca_bcp_spanner_right_text = #(
+baca-bcp-spanner-right-text = #(
     define-music-function
     (parser location n d music) (number? number? ly:music?)
     #{
@@ -453,7 +453,7 @@ baca_bcp_spanner_right_text = #(
     $music
     #})
 
-baca_text_spanner_left_markup = #(
+baca-text-spanner-left-markup = #(
     define-music-function (parser location markup music) (markup? ly:music?)
     #{
     \tweak bound-details.left.text \markup \concat {
@@ -462,7 +462,7 @@ baca_text_spanner_left_markup = #(
     $music
     #})
 
-baca_text_spanner_left_text = #(
+baca-text-spanner-left-text = #(
     define-music-function (parser location string music) (string? ly:music?)
     #{
     \tweak bound-details.left.text \markup \concat {
@@ -471,14 +471,14 @@ baca_text_spanner_left_text = #(
     $music
     #})
 
-baca_text_spanner_right_markup = #(
+baca-text-spanner-right-markup = #(
     define-music-function (parser location markup music) (markup? ly:music?)
     #{
     \tweak bound-details.right.text \markup \upright #markup
     $music
     #})
 
-baca_text_spanner_right_text = #(
+baca-text-spanner-right-text = #(
     define-music-function (parser location string music) (string? ly:music?)
     #{
     \tweak bound-details.right.text \markup \upright #string
@@ -487,7 +487,7 @@ baca_text_spanner_right_text = #(
 
 %%% SPACING COMMANDS %%%
 
-baca_new_spacing_section = #(define-music-function
+baca-new-spacing-section = #(define-music-function
     (parser location n d music) (number? number? ly:music?)
     #{
     \set Score.proportionalNotationDuration = #(ly:make-moment n d)

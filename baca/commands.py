@@ -127,7 +127,7 @@ class BCPCommand(scoping.Command):
                 next_bcp = bcps[i]
             #string = rf'\markup \baca-bcp-left #{numerator} #{denominator}'
             #left_literal = abjad.LilyPondLiteral(string)
-            left_text = r'- \baca_bcp_spanner_left_text'
+            left_text = r'- \baca-bcp-spanner-left-text'
             left_text += rf' #{numerator} #{denominator}'
             if lt is lts[-1]:
                 if self.final_spanner:
@@ -143,7 +143,7 @@ class BCPCommand(scoping.Command):
                 numerator, denominator = next_bcp
                 #string = rf'\markup \baca-bcp-right #{numerator} #{denominator}'
                 #right_literal = abjad.LilyPondLiteral(string)
-                right_text = r'- \baca_bcp_spanner_right_text'
+                right_text = r'- \baca-bcp-spanner-right-text'
                 right_text += rf' #{numerator} #{denominator}'
             start_text_span = abjad.StartTextSpan(
                 command=self.start_command,
@@ -257,6 +257,7 @@ class BCPCommand(scoping.Command):
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
@@ -269,29 +270,29 @@ class BCPCommand(scoping.Command):
                         {                                                                                %! _make_global_context
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                            \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
                         }                                                                                %! _make_global_context
@@ -310,7 +311,7 @@ class BCPCommand(scoping.Command):
                                 - \downbow                                                               %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca_bcp_spanner_left_text #1 #5                                      %! BowContactPointCommand
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                                 [                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
@@ -318,14 +319,14 @@ class BCPCommand(scoping.Command):
                                 - \upbow                                                                 %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca_bcp_spanner_left_text #2 #5                                      %! BowContactPointCommand
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                 <BLANKLINE>
                                 e'8                                                                      %! baca_make_even_divisions
                                 - \downbow                                                               %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca_bcp_spanner_left_text #1 #5                                      %! BowContactPointCommand
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                 <BLANKLINE>
                                 f'8                                                                      %! baca_make_even_divisions
@@ -333,7 +334,7 @@ class BCPCommand(scoping.Command):
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 ]                                                                        %! baca_make_even_divisions
                                 - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca_bcp_spanner_left_text #2 #5                                      %! BowContactPointCommand
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
@@ -341,7 +342,7 @@ class BCPCommand(scoping.Command):
                                 - \downbow                                                               %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca_bcp_spanner_left_text #1 #5                                      %! BowContactPointCommand
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                                 [                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
@@ -349,8 +350,8 @@ class BCPCommand(scoping.Command):
                                 - \upbow                                                                 %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca_bcp_spanner_left_text #2 #5                                      %! BowContactPointCommand
-                                - \baca_bcp_spanner_right_text #1 #5                                     %! BowContactPointCommand
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! BowContactPointCommand
+                                - \baca-bcp-spanner-right-text #1 #5                                     %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                 <BLANKLINE>
                                 e'8                                                                      %! baca_make_even_divisions
@@ -362,7 +363,7 @@ class BCPCommand(scoping.Command):
                                 - \downbow                                                               %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca_bcp_spanner_left_text #3 #5                                      %! BowContactPointCommand
+                                - \baca-bcp-spanner-left-text #3 #5                                      %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                                 [                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
@@ -370,14 +371,14 @@ class BCPCommand(scoping.Command):
                                 - \upbow                                                                 %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca_bcp_spanner_left_text #4 #5                                      %! BowContactPointCommand
+                                - \baca-bcp-spanner-left-text #4 #5                                      %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                 <BLANKLINE>
                                 f'8                                                                      %! baca_make_even_divisions
                                 - \downbow                                                               %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca_bcp_spanner_left_text #3 #5                                      %! BowContactPointCommand
+                                - \baca-bcp-spanner-left-text #3 #5                                      %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                 <BLANKLINE>
                                 e'8                                                                      %! baca_make_even_divisions
@@ -385,7 +386,7 @@ class BCPCommand(scoping.Command):
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 ]                                                                        %! baca_make_even_divisions
                                 - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca_bcp_spanner_left_text #4 #5                                      %! BowContactPointCommand
+                                - \baca-bcp-spanner-left-text #4 #5                                      %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
@@ -393,7 +394,7 @@ class BCPCommand(scoping.Command):
                                 - \downbow                                                               %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca_bcp_spanner_left_text #3 #5                                      %! BowContactPointCommand
+                                - \baca-bcp-spanner-left-text #3 #5                                      %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                                 [                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
@@ -401,8 +402,8 @@ class BCPCommand(scoping.Command):
                                 - \upbow                                                                 %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca_bcp_spanner_left_text #4 #5                                      %! BowContactPointCommand
-                                - \baca_bcp_spanner_right_text #3 #5                                     %! BowContactPointCommand
+                                - \baca-bcp-spanner-left-text #4 #5                                      %! BowContactPointCommand
+                                - \baca-bcp-spanner-right-text #3 #5                                     %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                 <BLANKLINE>
                                 f'8                                                                      %! baca_make_even_divisions
@@ -498,29 +499,29 @@ class BCPCommand(scoping.Command):
                         {                                                                                %! _make_global_context
                 <BLANKLINE>
                             % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
-                            \baca_new_spacing_section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                            \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
                         }                                                                                %! _make_global_context
@@ -539,7 +540,7 @@ class BCPCommand(scoping.Command):
                                 - \downbow                                                               %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca_bcp_spanner_left_text #1 #5                                      %! BowContactPointCommand
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! BowContactPointCommand
                                 - \tweak color #red                                                      %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                                 [                                                                        %! baca_make_even_divisions
@@ -548,7 +549,7 @@ class BCPCommand(scoping.Command):
                                 - \upbow                                                                 %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca_bcp_spanner_left_text #2 #5                                      %! BowContactPointCommand
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! BowContactPointCommand
                                 - \tweak color #red                                                      %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                 <BLANKLINE>
@@ -556,7 +557,7 @@ class BCPCommand(scoping.Command):
                                 - \downbow                                                               %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca_bcp_spanner_left_text #1 #5                                      %! BowContactPointCommand
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! BowContactPointCommand
                                 - \tweak color #red                                                      %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                 <BLANKLINE>
@@ -565,7 +566,7 @@ class BCPCommand(scoping.Command):
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 ]                                                                        %! baca_make_even_divisions
                                 - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca_bcp_spanner_left_text #2 #5                                      %! BowContactPointCommand
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! BowContactPointCommand
                                 - \tweak color #red                                                      %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                 <BLANKLINE>
@@ -574,7 +575,7 @@ class BCPCommand(scoping.Command):
                                 - \downbow                                                               %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca_bcp_spanner_left_text #1 #5                                      %! BowContactPointCommand
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! BowContactPointCommand
                                 - \tweak color #red                                                      %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                                 [                                                                        %! baca_make_even_divisions
@@ -583,7 +584,7 @@ class BCPCommand(scoping.Command):
                                 - \upbow                                                                 %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca_bcp_spanner_left_text #2 #5                                      %! BowContactPointCommand
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! BowContactPointCommand
                                 - \tweak color #red                                                      %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                 <BLANKLINE>
@@ -592,7 +593,7 @@ class BCPCommand(scoping.Command):
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 ]                                                                        %! baca_make_even_divisions
                                 - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca_bcp_spanner_left_text #1 #5                                      %! BowContactPointCommand
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! BowContactPointCommand
                                 - \tweak color #red                                                      %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                 <BLANKLINE>
@@ -601,7 +602,7 @@ class BCPCommand(scoping.Command):
                                 - \upbow                                                                 %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca_bcp_spanner_left_text #2 #5                                      %! BowContactPointCommand
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! BowContactPointCommand
                                 - \tweak color #red                                                      %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                                 [                                                                        %! baca_make_even_divisions
@@ -610,7 +611,7 @@ class BCPCommand(scoping.Command):
                                 - \downbow                                                               %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca_bcp_spanner_left_text #1 #5                                      %! BowContactPointCommand
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! BowContactPointCommand
                                 - \tweak color #red                                                      %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                 <BLANKLINE>
@@ -618,7 +619,7 @@ class BCPCommand(scoping.Command):
                                 - \upbow                                                                 %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca_bcp_spanner_left_text #2 #5                                      %! BowContactPointCommand
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! BowContactPointCommand
                                 - \tweak color #red                                                      %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                 <BLANKLINE>
@@ -627,7 +628,7 @@ class BCPCommand(scoping.Command):
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 ]                                                                        %! baca_make_even_divisions
                                 - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca_bcp_spanner_left_text #1 #5                                      %! BowContactPointCommand
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! BowContactPointCommand
                                 - \tweak color #red                                                      %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                 <BLANKLINE>
@@ -636,7 +637,7 @@ class BCPCommand(scoping.Command):
                                 - \upbow                                                                 %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca_bcp_spanner_left_text #2 #5                                      %! BowContactPointCommand
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! BowContactPointCommand
                                 - \tweak color #red                                                      %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                                 [                                                                        %! baca_make_even_divisions
@@ -645,8 +646,8 @@ class BCPCommand(scoping.Command):
                                 - \downbow                                                               %! BowContactPointCommand
                                 \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
                                 - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca_bcp_spanner_left_text #1 #5                                      %! BowContactPointCommand
-                                - \baca_bcp_spanner_right_text #2 #5                                     %! BowContactPointCommand
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! BowContactPointCommand
+                                - \baca-bcp-spanner-right-text #2 #5                                     %! BowContactPointCommand
                                 - \tweak color #red                                                      %! BowContactPointCommand
                                 \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
                 <BLANKLINE>
@@ -779,24 +780,24 @@ class ColorCommand(scoping.Command):
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
-                        \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                        \baca-bar-line-visible                                                       %! _attach_final_bar_line
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
@@ -945,24 +946,24 @@ class ContainerCommand(scoping.Command):
         <BLANKLINE>
                     % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                     \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                    \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                    \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                     s1 * 1/2                                                                     %! _make_global_skips(1)
         <BLANKLINE>
                     % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                     \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                    \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                    \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                     s1 * 3/8                                                                     %! _make_global_skips(1)
         <BLANKLINE>
                     % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                     \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                    \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                    \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                     s1 * 1/2                                                                     %! _make_global_skips(1)
         <BLANKLINE>
                     % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                     \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                    \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                    \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                     s1 * 3/8                                                                     %! _make_global_skips(1)
-                    \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                    \baca-bar-line-visible                                                       %! _attach_final_bar_line
                     \bar "|"                                                                     %! _attach_final_bar_line
         <BLANKLINE>
                 }                                                                                %! _make_global_context
@@ -1118,12 +1119,13 @@ class GlobalFermataCommand(scoping.Command):
         if self.selector is not None:
             argument = self.selector(argument)
         if isinstance(self.description, str) and self.description != 'fermata':
-            command = f'{self.description}_fermata'
+            description = self.description.replace('_', '-')
+            command = f'{description}-fermata'
         else:
             command = 'fermata'
         for leaf in abjad.iterate(argument).leaves():
             assert isinstance(leaf, abjad.MultimeasureRest)
-            string = rf'\baca_{command}_markup'
+            string = rf'\baca-{command}-markup'
             markup = abjad.Markup.from_literal(string, literal=True)
             markup = abjad.new(markup, direction=abjad.Up)
             abjad.attach(markup, leaf, tag='GlobalFermataCommand(1)')
@@ -1254,24 +1256,24 @@ class IndicatorCommand(scoping.Command):
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
-                        \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                        \baca-bar-line-visible                                                       %! _attach_final_bar_line
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
@@ -1718,24 +1720,24 @@ class LabelCommand(scoping.Command):
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
-                        \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                        \baca-bar-line-visible                                                       %! _attach_final_bar_line
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
@@ -2195,29 +2197,29 @@ def bar_extent_persistent(
                     {                                                                                %! _make_global_context
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
-                        \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                        \baca-bar-line-visible                                                       %! _attach_final_bar_line
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
@@ -2493,24 +2495,24 @@ def container(
         <BLANKLINE>
                     % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                     \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                    \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                    \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                     s1 * 1/2                                                                     %! _make_global_skips(1)
         <BLANKLINE>
                     % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                     \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                    \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                    \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                     s1 * 3/8                                                                     %! _make_global_skips(1)
         <BLANKLINE>
                     % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                     \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                    \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                    \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                     s1 * 1/2                                                                     %! _make_global_skips(1)
         <BLANKLINE>
                     % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                     \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                    \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                    \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                     s1 * 3/8                                                                     %! _make_global_skips(1)
-                    \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                    \baca-bar-line-visible                                                       %! _attach_final_bar_line
                     \bar "|"                                                                     %! _attach_final_bar_line
         <BLANKLINE>
                 }                                                                                %! _make_global_context
@@ -2621,17 +2623,17 @@ def cross_staff(
                     {                                                                                %! _make_global_context
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 5/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 5/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 2/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/8                                                                     %! _make_global_skips(1)
-                        \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                        \baca-bar-line-visible                                                       %! _attach_final_bar_line
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
@@ -2798,17 +2800,17 @@ def cross_staff(
                     {                                                                                %! _make_global_context
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 5/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 5/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                        \baca_new_spacing_section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 2/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/8                                                                     %! _make_global_skips(1)
-                        \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                        \baca-bar-line-visible                                                       %! _attach_final_bar_line
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
@@ -3654,7 +3656,7 @@ def markup(
         ...     'Voice 1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.markup(
-        ...         r'\baca_triple_diamond_markup',
+        ...         r'\baca-triple-diamond-markup',
         ...         literal=True,
         ...         ),
         ...     baca.rests_around([2], [4]),
@@ -3681,7 +3683,7 @@ def markup(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            ^ \markup { \baca_triple_diamond_markup }                                %! baca_markup:IndicatorCommand
+                            ^ \markup { \baca-triple-diamond-markup }                                %! baca_markup:IndicatorCommand
                             [
                             d'16
                             ]
@@ -3812,24 +3814,24 @@ def parts(
         <BLANKLINE>
                     % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                     \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                    \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                    \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                     s1 * 1/2                                                                     %! _make_global_skips(1)
         <BLANKLINE>
                     % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
                     \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                    \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                    \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                     s1 * 3/8                                                                     %! _make_global_skips(1)
         <BLANKLINE>
                     % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
                     \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                    \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                    \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                     s1 * 1/2                                                                     %! _make_global_skips(1)
         <BLANKLINE>
                     % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                     \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                    \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                    \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                     s1 * 3/8                                                                     %! _make_global_skips(1)
-                    \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                    \baca-bar-line-visible                                                       %! _attach_final_bar_line
                     \bar "|"                                                                     %! _attach_final_bar_line
         <BLANKLINE>
                 }                                                                                %! _make_global_context
@@ -4092,27 +4094,27 @@ def volta(
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
                         \repeat volta 2
                         {
             <BLANKLINE>
                             % [GlobalSkips measure 2]                                                %! _comment_measure_numbers
                             \time 3/8                                                                %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                        %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                        %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                 %! _make_global_skips(1)
             <BLANKLINE>
                             % [GlobalSkips measure 3]                                                %! _comment_measure_numbers
                             \time 4/8                                                                %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                        %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                        %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                 %! _make_global_skips(1)
                         }
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
-                        \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                        \baca-bar-line-visible                                                       %! _attach_final_bar_line
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
@@ -4211,27 +4213,27 @@ def volta(
             <BLANKLINE>
                         % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
                         \repeat volta 2
                         {
             <BLANKLINE>
                             % [GlobalSkips measure 2]                                                %! _comment_measure_numbers
                             \time 3/8                                                                %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                        %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                        %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                 %! _make_global_skips(1)
             <BLANKLINE>
                             % [GlobalSkips measure 3]                                                %! _comment_measure_numbers
                             \time 4/8                                                                %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca_time_signature_color #'blue                                        %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            \baca-time-signature-color #'blue                                        %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                 %! _make_global_skips(1)
                         }
             <BLANKLINE>
                         % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca_time_signature_color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
-                        \baca_bar_line_visible                                                       %! _attach_final_bar_line
+                        \baca-bar-line-visible                                                       %! _attach_final_bar_line
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
