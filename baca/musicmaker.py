@@ -2235,10 +2235,13 @@ class ImbricationCommand(scoping.Command):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                <BLANKLINE>
                 \context Score = "Score"                                                                 %! TwoVoiceStaffScoreTemplate
                 <<                                                                                       %! TwoVoiceStaffScoreTemplate
+                <BLANKLINE>
                     \context GlobalContext = "GlobalContext"                                             %! _make_global_context
                     <<                                                                                   %! _make_global_context
+                <BLANKLINE>
                         \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
                         {                                                                                %! _make_global_context
                 <BLANKLINE>
@@ -2257,16 +2260,22 @@ class ImbricationCommand(scoping.Command):
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
                         }                                                                                %! _make_global_context
+                <BLANKLINE>
                     >>                                                                                   %! _make_global_context
+                <BLANKLINE>
                     \context MusicContext = "MusicContext"                                               %! TwoVoiceStaffScoreTemplate
                     <<                                                                                   %! TwoVoiceStaffScoreTemplate
+                <BLANKLINE>
                         \context MusicStaff = "MusicStaff"                                               %! TwoVoiceStaffScoreTemplate
                         <<                                                                               %! TwoVoiceStaffScoreTemplate
+                <BLANKLINE>
                             \context MusicVoiceOne = "MusicVoiceOne"                                     %! TwoVoiceStaffScoreTemplate
                             {                                                                            %! TwoVoiceStaffScoreTemplate
+                <BLANKLINE>
                                 {
                                     \override TupletBracket.stencil = ##f
                                     \override TupletNumber.stencil = ##f
+                <BLANKLINE>
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % [MusicVoiceOne measure 1]                                      %! _comment_measure_numbers
@@ -2284,7 +2293,9 @@ class ImbricationCommand(scoping.Command):
                                         - \staccato                                                      %! IndicatorCommand
                 <BLANKLINE>
                                         s16
+                <BLANKLINE>
                                     }
+                <BLANKLINE>
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         s16
@@ -2292,13 +2303,17 @@ class ImbricationCommand(scoping.Command):
                                         s16
                 <BLANKLINE>
                                         s16
+                <BLANKLINE>
                                     }
                                     \revert TupletBracket.stencil
                                     \revert TupletNumber.stencil
+                <BLANKLINE>
                                 }
+                <BLANKLINE>
                                 {
                                     \override TupletBracket.stencil = ##f
                                     \override TupletNumber.stencil = ##f
+                <BLANKLINE>
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % [MusicVoiceOne measure 2]                                      %! _comment_measure_numbers
@@ -2320,11 +2335,16 @@ class ImbricationCommand(scoping.Command):
                                     }
                                     \revert TupletBracket.stencil
                                     \revert TupletNumber.stencil
+                <BLANKLINE>
                                 }
+                <BLANKLINE>
                             }                                                                            %! TwoVoiceStaffScoreTemplate
+                <BLANKLINE>
                             \context MusicVoiceTwo = "MusicVoiceTwo"                                     %! TwoVoiceStaffScoreTemplate
                             {                                                                            %! TwoVoiceStaffScoreTemplate
+                <BLANKLINE>
                                 {
+                <BLANKLINE>
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % [MusicVoiceTwo measure 1]                                      %! _comment_measure_numbers
@@ -2344,7 +2364,9 @@ class ImbricationCommand(scoping.Command):
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 1
                                         fs''!16
+                <BLANKLINE>
                                     }
+                <BLANKLINE>
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 1
@@ -2359,9 +2381,13 @@ class ImbricationCommand(scoping.Command):
                                         \set stemRightBeamCount = 0
                                         b''16
                                         ]
+                <BLANKLINE>
                                     }
+                <BLANKLINE>
                                 }
+                <BLANKLINE>
                                 {
+                <BLANKLINE>
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % [MusicVoiceTwo measure 2]                                      %! _comment_measure_numbers
@@ -2384,10 +2410,15 @@ class ImbricationCommand(scoping.Command):
                                         ]
                 <BLANKLINE>
                                     }
+                <BLANKLINE>
                                 }
+                <BLANKLINE>
                             }                                                                            %! TwoVoiceStaffScoreTemplate
+                <BLANKLINE>
                         >>                                                                               %! TwoVoiceStaffScoreTemplate
+                <BLANKLINE>
                     >>                                                                                   %! TwoVoiceStaffScoreTemplate
+                <BLANKLINE>
                 >>                                                                                       %! TwoVoiceStaffScoreTemplate
 
         ..  container:: example
@@ -8410,10 +8441,13 @@ class NestingCommand(scoping.Command):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 \context GlobalContext = "GlobalContext"                                             %! _make_global_context
                 <<                                                                                   %! _make_global_context
+            <BLANKLINE>
                     \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
@@ -8432,20 +8466,27 @@ class NestingCommand(scoping.Command):
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
+            <BLANKLINE>
                 >>                                                                                   %! _make_global_context
+            <BLANKLINE>
                 \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
                     \with                                                                            %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
                         \override Beam.positions = #'(-5.5 . -5.5)                                   %! SingleStaffScoreTemplate
                     }                                                                                %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                         \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
                             {
+            <BLANKLINE>
                                 \tweak text #tuplet-number::calc-fraction-text
                                 \times 8/7 {
+            <BLANKLINE>
                                     \scaleDurations #'(1 . 1) {
             <BLANKLINE>
                                         % [MusicVoice measure 1]                                     %! _comment_measure_numbers
@@ -8465,7 +8506,9 @@ class NestingCommand(scoping.Command):
                                         \set stemLeftBeamCount = 2                                   %! _extend_beam
                                         \set stemRightBeamCount = 1                                  %! _extend_beam
                                         fs''!16
+            <BLANKLINE>
                                     }
+            <BLANKLINE>
                                     \scaleDurations #'(1 . 1) {
             <BLANKLINE>
                                         \set stemLeftBeamCount = 1                                   %! _extend_beam
@@ -8479,10 +8522,15 @@ class NestingCommand(scoping.Command):
                                         \set stemLeftBeamCount = 2                                   %! _extend_beam
                                         \set stemRightBeamCount = 1                                  %! _extend_beam
                                         b''16
+            <BLANKLINE>
                                     }
+            <BLANKLINE>
                                 }
+            <BLANKLINE>
                             }
+            <BLANKLINE>
                             {
+            <BLANKLINE>
                                 \scaleDurations #'(1 . 1) {
             <BLANKLINE>
                                     % [MusicVoice measure 2]                                         %! _comment_measure_numbers
@@ -8504,10 +8552,15 @@ class NestingCommand(scoping.Command):
                                     ]                                                                %! _extend_beam
             <BLANKLINE>
                                 }
+            <BLANKLINE>
                             }
+            <BLANKLINE>
                         }                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     }                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 >>                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
             >>                                                                                       %! SingleStaffScoreTemplate
 
     """

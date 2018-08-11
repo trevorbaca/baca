@@ -39,10 +39,13 @@ class AccidentalAdjustmentCommand(scoping.Command):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 \context GlobalContext = "GlobalContext"                                             %! _make_global_context
                 <<                                                                                   %! _make_global_context
+            <BLANKLINE>
                     \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
@@ -69,11 +72,15 @@ class AccidentalAdjustmentCommand(scoping.Command):
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
+            <BLANKLINE>
                 >>                                                                                   %! _make_global_context
+            <BLANKLINE>
                 \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                         \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
@@ -90,8 +97,11 @@ class AccidentalAdjustmentCommand(scoping.Command):
                             f'4.                                                                     %! baca_make_notes
             <BLANKLINE>
                         }                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     }                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 >>                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
             >>                                                                                       %! SingleStaffScoreTemplate
 
     """
@@ -590,10 +600,13 @@ class ClusterCommand(scoping.Command):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 \context GlobalContext = "GlobalContext"                                             %! _make_global_context
                 <<                                                                                   %! _make_global_context
+            <BLANKLINE>
                     \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
@@ -620,11 +633,15 @@ class ClusterCommand(scoping.Command):
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
+            <BLANKLINE>
                 >>                                                                                   %! _make_global_context
+            <BLANKLINE>
                 \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                         \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
@@ -701,8 +718,11 @@ class ClusterCommand(scoping.Command):
                                 }
             <BLANKLINE>
                         }                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     }                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 >>                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
             >>                                                                                       %! SingleStaffScoreTemplate
 
     """
@@ -830,10 +850,13 @@ class ClusterCommand(scoping.Command):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                <BLANKLINE>
                 \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
                 <<                                                                                       %! SingleStaffScoreTemplate
+                <BLANKLINE>
                     \context GlobalContext = "GlobalContext"                                             %! _make_global_context
                     <<                                                                                   %! _make_global_context
+                <BLANKLINE>
                         \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
                         {                                                                                %! _make_global_context
                 <BLANKLINE>
@@ -860,11 +883,15 @@ class ClusterCommand(scoping.Command):
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
                         }                                                                                %! _make_global_context
+                <BLANKLINE>
                     >>                                                                                   %! _make_global_context
+                <BLANKLINE>
                     \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
                     <<                                                                                   %! SingleStaffScoreTemplate
+                <BLANKLINE>
                         \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
                         {                                                                                %! SingleStaffScoreTemplate
+                <BLANKLINE>
                             \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
                             {                                                                            %! SingleStaffScoreTemplate
                 <BLANKLINE>
@@ -925,8 +952,11 @@ class ClusterCommand(scoping.Command):
                                     }
                 <BLANKLINE>
                             }                                                                            %! SingleStaffScoreTemplate
+                <BLANKLINE>
                         }                                                                                %! SingleStaffScoreTemplate
+                <BLANKLINE>
                     >>                                                                                   %! SingleStaffScoreTemplate
+                <BLANKLINE>
                 >>                                                                                       %! SingleStaffScoreTemplate
 
         Set to true, false or none.
@@ -976,10 +1006,13 @@ class ClusterCommand(scoping.Command):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                <BLANKLINE>
                 \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
                 <<                                                                                       %! SingleStaffScoreTemplate
+                <BLANKLINE>
                     \context GlobalContext = "GlobalContext"                                             %! _make_global_context
                     <<                                                                                   %! _make_global_context
+                <BLANKLINE>
                         \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
                         {                                                                                %! _make_global_context
                 <BLANKLINE>
@@ -1006,11 +1039,15 @@ class ClusterCommand(scoping.Command):
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
                         }                                                                                %! _make_global_context
+                <BLANKLINE>
                     >>                                                                                   %! _make_global_context
+                <BLANKLINE>
                     \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
                     <<                                                                                   %! SingleStaffScoreTemplate
+                <BLANKLINE>
                         \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
                         {                                                                                %! SingleStaffScoreTemplate
+                <BLANKLINE>
                             \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
                             {                                                                            %! SingleStaffScoreTemplate
                 <BLANKLINE>
@@ -1087,8 +1124,11 @@ class ClusterCommand(scoping.Command):
                                     }
                 <BLANKLINE>
                             }                                                                            %! SingleStaffScoreTemplate
+                <BLANKLINE>
                         }                                                                                %! SingleStaffScoreTemplate
+                <BLANKLINE>
                     >>                                                                                   %! SingleStaffScoreTemplate
+                <BLANKLINE>
                 >>                                                                                       %! SingleStaffScoreTemplate
 
         ..  container:: example
@@ -1112,10 +1152,13 @@ class ClusterCommand(scoping.Command):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                <BLANKLINE>
                 \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
                 <<                                                                                       %! SingleStaffScoreTemplate
+                <BLANKLINE>
                     \context GlobalContext = "GlobalContext"                                             %! _make_global_context
                     <<                                                                                   %! _make_global_context
+                <BLANKLINE>
                         \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
                         {                                                                                %! _make_global_context
                 <BLANKLINE>
@@ -1142,11 +1185,15 @@ class ClusterCommand(scoping.Command):
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
                         }                                                                                %! _make_global_context
+                <BLANKLINE>
                     >>                                                                                   %! _make_global_context
+                <BLANKLINE>
                     \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
                     <<                                                                                   %! SingleStaffScoreTemplate
+                <BLANKLINE>
                         \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
                         {                                                                                %! SingleStaffScoreTemplate
+                <BLANKLINE>
                             \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
                             {                                                                            %! SingleStaffScoreTemplate
                 <BLANKLINE>
@@ -1223,8 +1270,11 @@ class ClusterCommand(scoping.Command):
                                     }
                 <BLANKLINE>
                             }                                                                            %! SingleStaffScoreTemplate
+                <BLANKLINE>
                         }                                                                                %! SingleStaffScoreTemplate
+                <BLANKLINE>
                     >>                                                                                   %! SingleStaffScoreTemplate
+                <BLANKLINE>
                 >>                                                                                       %! SingleStaffScoreTemplate
 
         Set to named pitch or none.
@@ -1259,10 +1309,13 @@ class ClusterCommand(scoping.Command):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                <BLANKLINE>
                 \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
                 <<                                                                                       %! SingleStaffScoreTemplate
+                <BLANKLINE>
                     \context GlobalContext = "GlobalContext"                                             %! _make_global_context
                     <<                                                                                   %! _make_global_context
+                <BLANKLINE>
                         \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
                         {                                                                                %! _make_global_context
                 <BLANKLINE>
@@ -1289,11 +1342,15 @@ class ClusterCommand(scoping.Command):
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
                         }                                                                                %! _make_global_context
+                <BLANKLINE>
                     >>                                                                                   %! _make_global_context
+                <BLANKLINE>
                     \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
                     <<                                                                                   %! SingleStaffScoreTemplate
+                <BLANKLINE>
                         \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
                         {                                                                                %! SingleStaffScoreTemplate
+                <BLANKLINE>
                             \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
                             {                                                                            %! SingleStaffScoreTemplate
                 <BLANKLINE>
@@ -1370,8 +1427,11 @@ class ClusterCommand(scoping.Command):
                                     }
                 <BLANKLINE>
                             }                                                                            %! SingleStaffScoreTemplate
+                <BLANKLINE>
                         }                                                                                %! SingleStaffScoreTemplate
+                <BLANKLINE>
                     >>                                                                                   %! SingleStaffScoreTemplate
+                <BLANKLINE>
                 >>                                                                                       %! SingleStaffScoreTemplate
 
         ..  container:: example
@@ -1395,10 +1455,13 @@ class ClusterCommand(scoping.Command):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                <BLANKLINE>
                 \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
                 <<                                                                                       %! SingleStaffScoreTemplate
+                <BLANKLINE>
                     \context GlobalContext = "GlobalContext"                                             %! _make_global_context
                     <<                                                                                   %! _make_global_context
+                <BLANKLINE>
                         \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
                         {                                                                                %! _make_global_context
                 <BLANKLINE>
@@ -1425,11 +1488,15 @@ class ClusterCommand(scoping.Command):
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
                         }                                                                                %! _make_global_context
+                <BLANKLINE>
                     >>                                                                                   %! _make_global_context
+                <BLANKLINE>
                     \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
                     <<                                                                                   %! SingleStaffScoreTemplate
+                <BLANKLINE>
                         \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
                         {                                                                                %! SingleStaffScoreTemplate
+                <BLANKLINE>
                             \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
                             {                                                                            %! SingleStaffScoreTemplate
                 <BLANKLINE>
@@ -1506,8 +1573,11 @@ class ClusterCommand(scoping.Command):
                                     }
                 <BLANKLINE>
                             }                                                                            %! SingleStaffScoreTemplate
+                <BLANKLINE>
                         }                                                                                %! SingleStaffScoreTemplate
+                <BLANKLINE>
                     >>                                                                                   %! SingleStaffScoreTemplate
+                <BLANKLINE>
                 >>                                                                                       %! SingleStaffScoreTemplate
 
         ..  container:: example
@@ -1532,10 +1602,13 @@ class ClusterCommand(scoping.Command):
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                <BLANKLINE>
                 \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
                 <<                                                                                       %! SingleStaffScoreTemplate
+                <BLANKLINE>
                     \context GlobalContext = "GlobalContext"                                             %! _make_global_context
                     <<                                                                                   %! _make_global_context
+                <BLANKLINE>
                         \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
                         {                                                                                %! _make_global_context
                 <BLANKLINE>
@@ -1562,11 +1635,15 @@ class ClusterCommand(scoping.Command):
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
                         }                                                                                %! _make_global_context
+                <BLANKLINE>
                     >>                                                                                   %! _make_global_context
+                <BLANKLINE>
                     \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
                     <<                                                                                   %! SingleStaffScoreTemplate
+                <BLANKLINE>
                         \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
                         {                                                                                %! SingleStaffScoreTemplate
+                <BLANKLINE>
                             \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
                             {                                                                            %! SingleStaffScoreTemplate
                 <BLANKLINE>
@@ -1583,8 +1660,11 @@ class ClusterCommand(scoping.Command):
                                 e'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }                                                                            %! SingleStaffScoreTemplate
+                <BLANKLINE>
                         }                                                                                %! SingleStaffScoreTemplate
+                <BLANKLINE>
                     >>                                                                                   %! SingleStaffScoreTemplate
+                <BLANKLINE>
                 >>                                                                                       %! SingleStaffScoreTemplate
 
         Inteprets positive integers as widths in thirds.
@@ -1623,10 +1703,13 @@ class ColorFingeringCommand(scoping.Command):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 \context GlobalContext = "GlobalContext"                                             %! _make_global_context
                 <<                                                                                   %! _make_global_context
+            <BLANKLINE>
                     \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
@@ -1653,11 +1736,15 @@ class ColorFingeringCommand(scoping.Command):
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
+            <BLANKLINE>
                 >>                                                                                   %! _make_global_context
+            <BLANKLINE>
                 \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                         \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
@@ -1695,8 +1782,11 @@ class ColorFingeringCommand(scoping.Command):
                                 }
             <BLANKLINE>
                         }                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     }                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 >>                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
             >>                                                                                       %! SingleStaffScoreTemplate
 
     """
@@ -2039,10 +2129,13 @@ class MicrotoneDeviationCommand(scoping.Command):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 \context GlobalContext = "GlobalContext"                                             %! _make_global_context
                 <<                                                                                   %! _make_global_context
+            <BLANKLINE>
                     \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
@@ -2069,11 +2162,15 @@ class MicrotoneDeviationCommand(scoping.Command):
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
+            <BLANKLINE>
                 >>                                                                                   %! _make_global_context
+            <BLANKLINE>
                 \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                         \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
@@ -2118,8 +2215,11 @@ class MicrotoneDeviationCommand(scoping.Command):
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                         }                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     }                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 >>                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
             >>                                                                                       %! SingleStaffScoreTemplate
 
     """
@@ -2234,10 +2334,13 @@ class OctaveDisplacementCommand(scoping.Command):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 \context GlobalContext = "GlobalContext"                                             %! _make_global_context
                 <<                                                                                   %! _make_global_context
+            <BLANKLINE>
                     \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
@@ -2264,11 +2367,15 @@ class OctaveDisplacementCommand(scoping.Command):
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
+            <BLANKLINE>
                 >>                                                                                   %! _make_global_context
+            <BLANKLINE>
                 \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                         \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
@@ -2313,8 +2420,11 @@ class OctaveDisplacementCommand(scoping.Command):
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                         }                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     }                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 >>                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
             >>                                                                                       %! SingleStaffScoreTemplate
 
     """
@@ -2435,10 +2545,13 @@ class PitchCommand(scoping.Command):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 \context GlobalContext = "GlobalContext"                                             %! _make_global_context
                 <<                                                                                   %! _make_global_context
+            <BLANKLINE>
                     \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
@@ -2465,11 +2578,15 @@ class PitchCommand(scoping.Command):
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
+            <BLANKLINE>
                 >>                                                                                   %! _make_global_context
+            <BLANKLINE>
                 \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                         \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
@@ -2514,8 +2631,11 @@ class PitchCommand(scoping.Command):
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                         }                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     }                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 >>                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
             >>                                                                                       %! SingleStaffScoreTemplate
 
     ..  container:: example
@@ -2539,10 +2659,13 @@ class PitchCommand(scoping.Command):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 \context GlobalContext = "GlobalContext"                                             %! _make_global_context
                 <<                                                                                   %! _make_global_context
+            <BLANKLINE>
                     \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
@@ -2569,11 +2692,15 @@ class PitchCommand(scoping.Command):
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
+            <BLANKLINE>
                 >>                                                                                   %! _make_global_context
+            <BLANKLINE>
                 \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                         \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
@@ -2618,8 +2745,11 @@ class PitchCommand(scoping.Command):
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                         }                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     }                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 >>                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
             >>                                                                                       %! SingleStaffScoreTemplate
 
     ..  container:: example
@@ -2643,10 +2773,13 @@ class PitchCommand(scoping.Command):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 \context GlobalContext = "GlobalContext"                                             %! _make_global_context
                 <<                                                                                   %! _make_global_context
+            <BLANKLINE>
                     \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
@@ -2673,11 +2806,15 @@ class PitchCommand(scoping.Command):
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
+            <BLANKLINE>
                 >>                                                                                   %! _make_global_context
+            <BLANKLINE>
                 \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                         \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
@@ -2722,8 +2859,11 @@ class PitchCommand(scoping.Command):
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                         }                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     }                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 >>                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
             >>                                                                                       %! SingleStaffScoreTemplate
 
     ..  container:: example
@@ -3276,10 +3416,13 @@ class RegisterCommand(scoping.Command):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 \context GlobalContext = "GlobalContext"                                             %! _make_global_context
                 <<                                                                                   %! _make_global_context
+            <BLANKLINE>
                     \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
@@ -3306,11 +3449,15 @@ class RegisterCommand(scoping.Command):
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
+            <BLANKLINE>
                 >>                                                                                   %! _make_global_context
+            <BLANKLINE>
                 \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                         \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
@@ -3355,8 +3502,11 @@ class RegisterCommand(scoping.Command):
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                         }                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     }                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 >>                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
             >>                                                                                       %! SingleStaffScoreTemplate
 
     ..  container:: example
@@ -3629,10 +3779,13 @@ class RegisterInterpolationCommand(scoping.Command):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 \context GlobalContext = "GlobalContext"                                             %! _make_global_context
                 <<                                                                                   %! _make_global_context
+            <BLANKLINE>
                     \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
@@ -3679,11 +3832,15 @@ class RegisterInterpolationCommand(scoping.Command):
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
+            <BLANKLINE>
                 >>                                                                                   %! _make_global_context
+            <BLANKLINE>
                 \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                         \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
@@ -3768,8 +3925,11 @@ class RegisterInterpolationCommand(scoping.Command):
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                         }                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     }                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 >>                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
             >>                                                                                       %! SingleStaffScoreTemplate
 
     ..  container:: example
@@ -3796,10 +3956,13 @@ class RegisterInterpolationCommand(scoping.Command):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 \context GlobalContext = "GlobalContext"                                             %! _make_global_context
                 <<                                                                                   %! _make_global_context
+            <BLANKLINE>
                     \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
@@ -3846,11 +4009,15 @@ class RegisterInterpolationCommand(scoping.Command):
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
+            <BLANKLINE>
                 >>                                                                                   %! _make_global_context
+            <BLANKLINE>
                 \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                         \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
@@ -3935,8 +4102,11 @@ class RegisterInterpolationCommand(scoping.Command):
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                         }                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     }                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 >>                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
             >>                                                                                       %! SingleStaffScoreTemplate
 
     ..  container:: example
@@ -3963,10 +4133,13 @@ class RegisterInterpolationCommand(scoping.Command):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 \context GlobalContext = "GlobalContext"                                             %! _make_global_context
                 <<                                                                                   %! _make_global_context
+            <BLANKLINE>
                     \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
@@ -4013,11 +4186,15 @@ class RegisterInterpolationCommand(scoping.Command):
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
+            <BLANKLINE>
                 >>                                                                                   %! _make_global_context
+            <BLANKLINE>
                 \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                         \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
@@ -4102,8 +4279,11 @@ class RegisterInterpolationCommand(scoping.Command):
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                         }                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     }                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 >>                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
             >>                                                                                       %! SingleStaffScoreTemplate
 
     ..  container:: example
@@ -4130,10 +4310,13 @@ class RegisterInterpolationCommand(scoping.Command):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 \context GlobalContext = "GlobalContext"                                             %! _make_global_context
                 <<                                                                                   %! _make_global_context
+            <BLANKLINE>
                     \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
@@ -4180,11 +4363,15 @@ class RegisterInterpolationCommand(scoping.Command):
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
+            <BLANKLINE>
                 >>                                                                                   %! _make_global_context
+            <BLANKLINE>
                 \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                         \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
@@ -4269,8 +4456,11 @@ class RegisterInterpolationCommand(scoping.Command):
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                         }                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     }                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 >>                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
             >>                                                                                       %! SingleStaffScoreTemplate
 
     ..  container:: example
@@ -4297,10 +4487,13 @@ class RegisterInterpolationCommand(scoping.Command):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 \context GlobalContext = "GlobalContext"                                             %! _make_global_context
                 <<                                                                                   %! _make_global_context
+            <BLANKLINE>
                     \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
@@ -4347,11 +4540,15 @@ class RegisterInterpolationCommand(scoping.Command):
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
+            <BLANKLINE>
                 >>                                                                                   %! _make_global_context
+            <BLANKLINE>
                 \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                         \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
@@ -4436,8 +4633,11 @@ class RegisterInterpolationCommand(scoping.Command):
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                         }                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     }                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 >>                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
             >>                                                                                       %! SingleStaffScoreTemplate
 
     """
@@ -6518,10 +6718,13 @@ def force_accidental(
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 \context GlobalContext = "GlobalContext"                                             %! _make_global_context
                 <<                                                                                   %! _make_global_context
+            <BLANKLINE>
                     \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
@@ -6548,11 +6751,15 @@ def force_accidental(
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
+            <BLANKLINE>
                 >>                                                                                   %! _make_global_context
+            <BLANKLINE>
                 \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                         \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
@@ -6571,8 +6778,11 @@ def force_accidental(
                             f'4.                                                                     %! baca_make_notes
             <BLANKLINE>
                         }                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     }                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 >>                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
             >>                                                                                       %! SingleStaffScoreTemplate
 
     """

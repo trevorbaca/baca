@@ -33,10 +33,13 @@ class BreakMeasureMap(abjad.AbjadObject):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
             \context Score = "Score"                                                                 %! StringTrioScoreTemplate
             <<                                                                                       %! StringTrioScoreTemplate
+            <BLANKLINE>
                 \context GlobalContext = "GlobalContext"                                             %! _make_global_context
                 <<                                                                                   %! _make_global_context
+            <BLANKLINE>
                     \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
@@ -76,14 +79,19 @@ class BreakMeasureMap(abjad.AbjadObject):
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
+            <BLANKLINE>
                 >>                                                                                   %! _make_global_context
+            <BLANKLINE>
                 \context MusicContext = "MusicContext"                                               %! StringTrioScoreTemplate
                 <<                                                                                   %! StringTrioScoreTemplate
+            <BLANKLINE>
                     \context StringSectionStaffGroup = "String Section Staff Group"                  %! StringTrioScoreTemplate
                     <<                                                                               %! StringTrioScoreTemplate
+            <BLANKLINE>
                         \tag Violin                                                                  %! ScoreTemplate(5)
                         \context ViolinMusicStaff = "ViolinMusicStaff"                               %! StringTrioScoreTemplate
                         {                                                                            %! StringTrioScoreTemplate
+            <BLANKLINE>
                             \context ViolinMusicVoice = "ViolinMusicVoice"                           %! StringTrioScoreTemplate
                             {                                                                        %! StringTrioScoreTemplate
             <BLANKLINE>
@@ -145,10 +153,13 @@ class BreakMeasureMap(abjad.AbjadObject):
                                 ]                                                                    %! baca_make_even_divisions
             <BLANKLINE>
                             }                                                                        %! StringTrioScoreTemplate
+            <BLANKLINE>
                         }                                                                            %! StringTrioScoreTemplate
+            <BLANKLINE>
                         \tag Viola                                                                   %! ScoreTemplate(5)
                         \context ViolaMusicStaff = "ViolaMusicStaff"                                 %! StringTrioScoreTemplate
                         {                                                                            %! StringTrioScoreTemplate
+            <BLANKLINE>
                             \context ViolaMusicVoice = "ViolaMusicVoice"                             %! StringTrioScoreTemplate
                             {                                                                        %! StringTrioScoreTemplate
             <BLANKLINE>
@@ -174,10 +185,13 @@ class BreakMeasureMap(abjad.AbjadObject):
                                 R1 * 1/2                                                             %! _call_rhythm_commands
             <BLANKLINE>
                             }                                                                        %! StringTrioScoreTemplate
+            <BLANKLINE>
                         }                                                                            %! StringTrioScoreTemplate
+            <BLANKLINE>
                         \tag Cello                                                                   %! ScoreTemplate(5)
                         \context CelloMusicStaff = "CelloMusicStaff"                                 %! StringTrioScoreTemplate
                         {                                                                            %! StringTrioScoreTemplate
+            <BLANKLINE>
                             \context CelloMusicVoice = "CelloMusicVoice"                             %! StringTrioScoreTemplate
                             {                                                                        %! StringTrioScoreTemplate
             <BLANKLINE>
@@ -203,9 +217,13 @@ class BreakMeasureMap(abjad.AbjadObject):
                                 R1 * 1/2                                                             %! _call_rhythm_commands
             <BLANKLINE>
                             }                                                                        %! StringTrioScoreTemplate
+            <BLANKLINE>
                         }                                                                            %! StringTrioScoreTemplate
+            <BLANKLINE>
                     >>                                                                               %! StringTrioScoreTemplate
+            <BLANKLINE>
                 >>                                                                                   %! StringTrioScoreTemplate
+            <BLANKLINE>
             >>                                                                                       %! StringTrioScoreTemplate
 
     """
@@ -392,10 +410,13 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 \context GlobalContext = "GlobalContext"                                             %! _make_global_context
                 <<                                                                                   %! _make_global_context
+            <BLANKLINE>
                     \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
@@ -422,11 +443,15 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
+            <BLANKLINE>
                 >>                                                                                   %! _make_global_context
+            <BLANKLINE>
                 \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                         \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
@@ -475,8 +500,11 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                         }                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     }                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 >>                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
             >>                                                                                       %! SingleStaffScoreTemplate
 
     ..  container:: example
@@ -501,10 +529,13 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 \context GlobalContext = "GlobalContext"                                             %! _make_global_context
                 <<                                                                                   %! _make_global_context
+            <BLANKLINE>
                     \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
@@ -535,11 +566,15 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
+            <BLANKLINE>
                 >>                                                                                   %! _make_global_context
+            <BLANKLINE>
                 \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                         \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
@@ -588,8 +623,11 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                         }                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     }                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 >>                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
             >>                                                                                       %! SingleStaffScoreTemplate
 
     ..  container:: example
@@ -616,10 +654,13 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 \context GlobalContext = "GlobalContext"                                             %! _make_global_context
                 <<                                                                                   %! _make_global_context
+            <BLANKLINE>
                     \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
@@ -650,11 +691,15 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
+            <BLANKLINE>
                 >>                                                                                   %! _make_global_context
+            <BLANKLINE>
                 \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                         \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
@@ -703,8 +748,11 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                         }                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     }                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 >>                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
             >>                                                                                       %! SingleStaffScoreTemplate
 
     ..  container:: example
@@ -732,10 +780,13 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 \context GlobalContext = "GlobalContext"                                             %! _make_global_context
                 <<                                                                                   %! _make_global_context
+            <BLANKLINE>
                     \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
@@ -766,11 +817,15 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
+            <BLANKLINE>
                 >>                                                                                   %! _make_global_context
+            <BLANKLINE>
                 \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                         \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
@@ -819,8 +874,11 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                         }                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     }                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 >>                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
             >>                                                                                       %! SingleStaffScoreTemplate
 
     ..  container:: example
@@ -849,10 +907,13 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 \context GlobalContext = "GlobalContext"                                             %! _make_global_context
                 <<                                                                                   %! _make_global_context
+            <BLANKLINE>
                     \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
@@ -883,11 +944,15 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
+            <BLANKLINE>
                 >>                                                                                   %! _make_global_context
+            <BLANKLINE>
                 \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                         \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
@@ -936,8 +1001,11 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                         }                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     }                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 >>                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
             >>                                                                                       %! SingleStaffScoreTemplate
 
     ..  container:: example
@@ -978,10 +1046,13 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 \context GlobalContext = "GlobalContext"                                             %! _make_global_context
                 <<                                                                                   %! _make_global_context
+            <BLANKLINE>
                     \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
@@ -1000,13 +1071,18 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
+            <BLANKLINE>
                 >>                                                                                   %! _make_global_context
+            <BLANKLINE>
                 \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                         \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
                             \override TupletNumber.text = \markup {
                                 \scale
                                     #'(0.75 . 0.75)
@@ -1063,8 +1139,10 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             <BLANKLINE>
                                 f'16 * 13/16
                                 ]
+            <BLANKLINE>
                             }
                             \revert TupletNumber.text
+            <BLANKLINE>
                             \override TupletNumber.text = \markup {
                                 \scale
                                     #'(0.75 . 0.75)
@@ -1122,9 +1200,13 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             <BLANKLINE>
                             }
                             \revert TupletNumber.text
+            <BLANKLINE>
                         }                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     }                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 >>                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
             >>                                                                                       %! SingleStaffScoreTemplate
 
         Minimum duration in each measure is taken from the **nonmultiplied**

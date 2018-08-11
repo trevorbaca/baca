@@ -3985,57 +3985,62 @@ class HarmonicSeries(abjad.AbjadObject):
             }
             {
                 \clef "bass"
-                c,4 _ \markup { 1 }
-                c4 _ \markup { 2 }
+                c,4
+                _ \markup { 1 }
+                c4
+                _ \markup { 2 }
                 g4
-                    ^ \markup { +2 }
-                    _ \markup { 3 }
+                ^ \markup { +2 }
+                _ \markup { 3 }
                 \clef "treble"
-                c'4 _ \markup { 4 }
+                c'4
+                _ \markup { 4 }
                 e'4
-                    ^ \markup { -14 }
-                    _ \markup { 5 }
+                ^ \markup { -14 }
+                _ \markup { 5 }
                 g'4
-                    ^ \markup { +2 }
-                    _ \markup { 6 }
+                ^ \markup { +2 }
+                _ \markup { 6 }
                 bf'4
-                    ^ \markup { -31 }
-                    _ \markup { 7 }
-                c''4 _ \markup { 8 }
+                ^ \markup { -31 }
+                _ \markup { 7 }
+                c''4
+                _ \markup { 8 }
                 d''4
-                    ^ \markup { +4 }
-                    _ \markup { 9 }
+                ^ \markup { +4 }
+                _ \markup { 9 }
                 e''4
-                    ^ \markup { -14 }
-                    _ \markup { 10 }
+                ^ \markup { -14 }
+                _ \markup { 10 }
                 fqs''4
-                    ^ \markup { +1 }
-                    _ \markup { 11 }
+                ^ \markup { +1 }
+                _ \markup { 11 }
                 g''4
-                    ^ \markup { +2 }
-                    _ \markup { 12 }
+                ^ \markup { +2 }
+                _ \markup { 12 }
                 aqf''4
-                    ^ \markup { -9 }
-                    _ \markup { 13 }
+                ^ \markup { -9 }
+                _ \markup { 13 }
                 bf''4
-                    ^ \markup { -31 }
-                    _ \markup { 14 }
+                ^ \markup { -31 }
+                _ \markup { 14 }
                 b''4
-                    ^ \markup { -12 }
-                    _ \markup { 15 }
-                c'''4 _ \markup { 16 }
+                ^ \markup { -12 }
+                _ \markup { 15 }
+                c'''4
+                _ \markup { 16 }
                 cs'''4
-                    ^ \markup { +5 }
-                    _ \markup { 17 }
+                ^ \markup { +5 }
+                _ \markup { 17 }
                 d'''4
-                    ^ \markup { +4 }
-                    _ \markup { 18 }
+                ^ \markup { +4 }
+                _ \markup { 18 }
                 ef'''4
-                    ^ \markup { -2 }
-                    _ \markup { 19 }
+                ^ \markup { -2 }
+                _ \markup { 19 }
                 e'''4
-                    ^ \markup { -14 }
-                    _ \markup { 20 }
+                ^ \markup { -14 }
+                _ \markup { 20 }
             }
 
     """
@@ -4081,57 +4086,62 @@ class HarmonicSeries(abjad.AbjadObject):
                 }
                 {
                     \clef "bass"
-                    a,,4 _ \markup { 1 }
-                    a,4 _ \markup { 2 }
+                    a,,4
+                    _ \markup { 1 }
+                    a,4
+                    _ \markup { 2 }
                     e4
-                        ^ \markup { +2 }
-                        _ \markup { 3 }
-                    a4 _ \markup { 4 }
+                    ^ \markup { +2 }
+                    _ \markup { 3 }
+                    a4
+                    _ \markup { 4 }
                     \clef "treble"
                     cs'4
-                        ^ \markup { -14 }
-                        _ \markup { 5 }
+                    ^ \markup { -14 }
+                    _ \markup { 5 }
                     e'4
-                        ^ \markup { +2 }
-                        _ \markup { 6 }
+                    ^ \markup { +2 }
+                    _ \markup { 6 }
                     g'4
-                        ^ \markup { -31 }
-                        _ \markup { 7 }
-                    a'4 _ \markup { 8 }
+                    ^ \markup { -31 }
+                    _ \markup { 7 }
+                    a'4
+                    _ \markup { 8 }
                     b'4
-                        ^ \markup { +4 }
-                        _ \markup { 9 }
+                    ^ \markup { +4 }
+                    _ \markup { 9 }
                     cs''4
-                        ^ \markup { -14 }
-                        _ \markup { 10 }
+                    ^ \markup { -14 }
+                    _ \markup { 10 }
                     dqs''4
-                        ^ \markup { +1 }
-                        _ \markup { 11 }
+                    ^ \markup { +1 }
+                    _ \markup { 11 }
                     e''4
-                        ^ \markup { +2 }
-                        _ \markup { 12 }
+                    ^ \markup { +2 }
+                    _ \markup { 12 }
                     fqs''4
-                        ^ \markup { -9 }
-                        _ \markup { 13 }
+                    ^ \markup { -9 }
+                    _ \markup { 13 }
                     g''4
-                        ^ \markup { -31 }
-                        _ \markup { 14 }
+                    ^ \markup { -31 }
+                    _ \markup { 14 }
                     af''4
-                        ^ \markup { -12 }
-                        _ \markup { 15 }
-                    a''4 _ \markup { 16 }
+                    ^ \markup { -12 }
+                    _ \markup { 15 }
+                    a''4
+                    _ \markup { 16 }
                     bf''4
-                        ^ \markup { +5 }
-                        _ \markup { 17 }
+                    ^ \markup { +5 }
+                    _ \markup { 17 }
                     b''4
-                        ^ \markup { +4 }
-                        _ \markup { 18 }
+                    ^ \markup { +4 }
+                    _ \markup { 18 }
                     c'''4
-                        ^ \markup { -2 }
-                        _ \markup { 19 }
+                    ^ \markup { -2 }
+                    _ \markup { 19 }
                     cs'''4
-                        ^ \markup { -14 }
-                        _ \markup { 20 }
+                    ^ \markup { -14 }
+                    _ \markup { 20 }
                 }
 
         """

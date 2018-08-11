@@ -221,10 +221,13 @@ class SingleStaffScoreTemplate(ScoreTemplate):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 \context GlobalContext = "GlobalContext"                                             %! _make_global_context
                 <<                                                                                   %! _make_global_context
+            <BLANKLINE>
                     \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
@@ -251,11 +254,15 @@ class SingleStaffScoreTemplate(ScoreTemplate):
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
+            <BLANKLINE>
                 >>                                                                                   %! _make_global_context
+            <BLANKLINE>
                 \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                         \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
@@ -272,8 +279,11 @@ class SingleStaffScoreTemplate(ScoreTemplate):
                             R1 * 3/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                         }                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
                     }                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
                 >>                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
             >>                                                                                       %! SingleStaffScoreTemplate
 
     """
@@ -333,10 +343,13 @@ class StringTrioScoreTemplate(ScoreTemplate):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
             \context Score = "Score"                                                                 %! StringTrioScoreTemplate
             <<                                                                                       %! StringTrioScoreTemplate
+            <BLANKLINE>
                 \context GlobalContext = "GlobalContext"                                             %! _make_global_context
                 <<                                                                                   %! _make_global_context
+            <BLANKLINE>
                     \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
@@ -363,14 +376,19 @@ class StringTrioScoreTemplate(ScoreTemplate):
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
+            <BLANKLINE>
                 >>                                                                                   %! _make_global_context
+            <BLANKLINE>
                 \context MusicContext = "MusicContext"                                               %! StringTrioScoreTemplate
                 <<                                                                                   %! StringTrioScoreTemplate
+            <BLANKLINE>
                     \context StringSectionStaffGroup = "String Section Staff Group"                  %! StringTrioScoreTemplate
                     <<                                                                               %! StringTrioScoreTemplate
+            <BLANKLINE>
                         \tag Violin                                                                  %! ScoreTemplate(5)
                         \context ViolinMusicStaff = "ViolinMusicStaff"                               %! StringTrioScoreTemplate
                         {                                                                            %! StringTrioScoreTemplate
+            <BLANKLINE>
                             \context ViolinMusicVoice = "ViolinMusicVoice"                           %! StringTrioScoreTemplate
                             {                                                                        %! StringTrioScoreTemplate
             <BLANKLINE>
@@ -393,10 +411,13 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                 R1 * 3/8                                                             %! _call_rhythm_commands
             <BLANKLINE>
                             }                                                                        %! StringTrioScoreTemplate
+            <BLANKLINE>
                         }                                                                            %! StringTrioScoreTemplate
+            <BLANKLINE>
                         \tag Viola                                                                   %! ScoreTemplate(5)
                         \context ViolaMusicStaff = "ViolaMusicStaff"                                 %! StringTrioScoreTemplate
                         {                                                                            %! StringTrioScoreTemplate
+            <BLANKLINE>
                             \context ViolaMusicVoice = "ViolaMusicVoice"                             %! StringTrioScoreTemplate
                             {                                                                        %! StringTrioScoreTemplate
             <BLANKLINE>
@@ -419,10 +440,13 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                 R1 * 3/8                                                             %! _call_rhythm_commands
             <BLANKLINE>
                             }                                                                        %! StringTrioScoreTemplate
+            <BLANKLINE>
                         }                                                                            %! StringTrioScoreTemplate
+            <BLANKLINE>
                         \tag Cello                                                                   %! ScoreTemplate(5)
                         \context CelloMusicStaff = "CelloMusicStaff"                                 %! StringTrioScoreTemplate
                         {                                                                            %! StringTrioScoreTemplate
+            <BLANKLINE>
                             \context CelloMusicVoice = "CelloMusicVoice"                             %! StringTrioScoreTemplate
                             {                                                                        %! StringTrioScoreTemplate
             <BLANKLINE>
@@ -445,9 +469,13 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                 R1 * 3/8                                                             %! _call_rhythm_commands
             <BLANKLINE>
                             }                                                                        %! StringTrioScoreTemplate
+            <BLANKLINE>
                         }                                                                            %! StringTrioScoreTemplate
+            <BLANKLINE>
                     >>                                                                               %! StringTrioScoreTemplate
+            <BLANKLINE>
                 >>                                                                                   %! StringTrioScoreTemplate
+            <BLANKLINE>
             >>                                                                                       %! StringTrioScoreTemplate
 
     """
@@ -602,10 +630,13 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
             \context Score = "Score"                                                                 %! TwoVoiceStaffScoreTemplate
             <<                                                                                       %! TwoVoiceStaffScoreTemplate
+            <BLANKLINE>
                 \context GlobalContext = "GlobalContext"                                             %! _make_global_context
                 <<                                                                                   %! _make_global_context
+            <BLANKLINE>
                     \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
@@ -632,11 +663,15 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
+            <BLANKLINE>
                 >>                                                                                   %! _make_global_context
+            <BLANKLINE>
                 \context MusicContext = "MusicContext"                                               %! TwoVoiceStaffScoreTemplate
                 <<                                                                                   %! TwoVoiceStaffScoreTemplate
+            <BLANKLINE>
                     \context MusicStaff = "MusicStaff"                                               %! TwoVoiceStaffScoreTemplate
                     <<                                                                               %! TwoVoiceStaffScoreTemplate
+            <BLANKLINE>
                         \context MusicVoiceOne = "MusicVoiceOne"                                     %! TwoVoiceStaffScoreTemplate
                         {                                                                            %! TwoVoiceStaffScoreTemplate
             <BLANKLINE>
@@ -653,6 +688,7 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
                             R1 * 3/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                         }                                                                            %! TwoVoiceStaffScoreTemplate
+            <BLANKLINE>
                         \context MusicVoiceTwo = "MusicVoiceTwo"                                     %! TwoVoiceStaffScoreTemplate
                         {                                                                            %! TwoVoiceStaffScoreTemplate
             <BLANKLINE>
@@ -669,8 +705,11 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
                             R1 * 3/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                         }                                                                            %! TwoVoiceStaffScoreTemplate
+            <BLANKLINE>
                     >>                                                                               %! TwoVoiceStaffScoreTemplate
+            <BLANKLINE>
                 >>                                                                                   %! TwoVoiceStaffScoreTemplate
+            <BLANKLINE>
             >>                                                                                       %! TwoVoiceStaffScoreTemplate
 
     """
@@ -738,10 +777,13 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
             \context Score = "Score"                                                                 %! ViolinSoloScoreTemplate
             <<                                                                                       %! ViolinSoloScoreTemplate
+            <BLANKLINE>
                 \context GlobalContext = "GlobalContext"                                             %! _make_global_context
                 <<                                                                                   %! _make_global_context
+            <BLANKLINE>
                     \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
@@ -768,12 +810,16 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                     }                                                                                %! _make_global_context
+            <BLANKLINE>
                 >>                                                                                   %! _make_global_context
+            <BLANKLINE>
                 \context MusicContext = "MusicContext"                                               %! ViolinSoloScoreTemplate
                 <<                                                                                   %! ViolinSoloScoreTemplate
+            <BLANKLINE>
                     \tag Violin                                                                      %! ScoreTemplate(5)
                     \context ViolinMusicStaff = "ViolinMusicStaff"                                   %! ViolinSoloScoreTemplate
                     {                                                                                %! ViolinSoloScoreTemplate
+            <BLANKLINE>
                         \context ViolinMusicVoice = "ViolinMusicVoice"                               %! ViolinSoloScoreTemplate
                         {                                                                            %! ViolinSoloScoreTemplate
             <BLANKLINE>
@@ -796,8 +842,11 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                             R1 * 3/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                         }                                                                            %! ViolinSoloScoreTemplate
+            <BLANKLINE>
                     }                                                                                %! ViolinSoloScoreTemplate
+            <BLANKLINE>
                 >>                                                                                   %! ViolinSoloScoreTemplate
+            <BLANKLINE>
             >>                                                                                       %! ViolinSoloScoreTemplate
 
     """
