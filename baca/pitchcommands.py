@@ -4547,30 +4547,30 @@ class RegisterInterpolationCommand(scoping.Command):
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
-                                \abjad_color_music "green"
+                                \abjad-color-music #'green
                                 fs'16
                                 [
-                                \abjad_color_music "green"
+                                \abjad-color-music #'green
                                 e'16
-                                \abjad_color_music "green"
+                                \abjad-color-music #'green
                                 ef''16
-                                \abjad_color_music "green"
+                                \abjad-color-music #'green
                                 f''16
-                                \abjad_color_music "green"
+                                \abjad-color-music #'green
                                 a'16
-                                \abjad_color_music "green"
+                                \abjad-color-music #'green
                                 bf'16
-                                \abjad_color_music "green"
+                                \abjad-color-music #'green
                                 c''16
-                                \abjad_color_music "green"
+                                \abjad-color-music #'green
                                 b''16
-                                \abjad_color_music "green"
+                                \abjad-color-music #'green
                                 af''16
-                                \abjad_color_music "green"
+                                \abjad-color-music #'green
                                 g''16
-                                \abjad_color_music "green"
+                                \abjad-color-music #'green
                                 cs'''16
-                                \abjad_color_music "green"
+                                \abjad-color-music #'green
                                 d'''16
                                 ]
                             }
@@ -4636,30 +4636,30 @@ class RegisterInterpolationCommand(scoping.Command):
                                 ]
                             }
                             \scaleDurations #'(1 . 1) {
-                                \abjad_color_music "green"
+                                \abjad-color-music #'green
                                 fs'16
                                 [
-                                \abjad_color_music "green"
+                                \abjad-color-music #'green
                                 e'16
-                                \abjad_color_music "green"
+                                \abjad-color-music #'green
                                 ef''16
-                                \abjad_color_music "green"
+                                \abjad-color-music #'green
                                 f''16
-                                \abjad_color_music "green"
+                                \abjad-color-music #'green
                                 a'16
-                                \abjad_color_music "green"
+                                \abjad-color-music #'green
                                 bf'16
-                                \abjad_color_music "green"
+                                \abjad-color-music #'green
                                 c''16
-                                \abjad_color_music "green"
+                                \abjad-color-music #'green
                                 b''16
-                                \abjad_color_music "green"
+                                \abjad-color-music #'green
                                 af''16
-                                \abjad_color_music "green"
+                                \abjad-color-music #'green
                                 g''16
-                                \abjad_color_music "green"
+                                \abjad-color-music #'green
                                 cs'''16
-                                \abjad_color_music "green"
+                                \abjad-color-music #'green
                                 d'''16
                                 ]
                             }
@@ -4696,58 +4696,58 @@ class RegisterInterpolationCommand(scoping.Command):
                         \voiceOne
                         {
                             \scaleDurations #'(1 . 1) {
-                                \abjad_color_music "red"
+                                \abjad-color-music #'red
                                 fs'16
                                 [
-                                \abjad_color_music "red"
+                                \abjad-color-music #'red
                                 e'16
-                                \abjad_color_music "red"
+                                \abjad-color-music #'red
                                 ef''16
-                                \abjad_color_music "red"
+                                \abjad-color-music #'red
                                 f''16
-                                \abjad_color_music "red"
+                                \abjad-color-music #'red
                                 a'16
-                                \abjad_color_music "red"
+                                \abjad-color-music #'red
                                 bf'16
-                                \abjad_color_music "red"
+                                \abjad-color-music #'red
                                 c''16
-                                \abjad_color_music "red"
+                                \abjad-color-music #'red
                                 b''16
-                                \abjad_color_music "red"
+                                \abjad-color-music #'red
                                 af''16
-                                \abjad_color_music "red"
+                                \abjad-color-music #'red
                                 g''16
-                                \abjad_color_music "red"
+                                \abjad-color-music #'red
                                 cs'''16
-                                \abjad_color_music "red"
+                                \abjad-color-music #'red
                                 d'''16
                                 ]
                             }
                             \scaleDurations #'(1 . 1) {
-                                \abjad_color_music "blue"
+                                \abjad-color-music #'blue
                                 fs'16
                                 [
-                                \abjad_color_music "blue"
+                                \abjad-color-music #'blue
                                 e'16
-                                \abjad_color_music "blue"
+                                \abjad-color-music #'blue
                                 ef''16
-                                \abjad_color_music "blue"
+                                \abjad-color-music #'blue
                                 f''16
-                                \abjad_color_music "blue"
+                                \abjad-color-music #'blue
                                 a'16
-                                \abjad_color_music "blue"
+                                \abjad-color-music #'blue
                                 bf'16
-                                \abjad_color_music "blue"
+                                \abjad-color-music #'blue
                                 c''16
-                                \abjad_color_music "blue"
+                                \abjad-color-music #'blue
                                 b''16
-                                \abjad_color_music "blue"
+                                \abjad-color-music #'blue
                                 af''16
-                                \abjad_color_music "blue"
+                                \abjad-color-music #'blue
                                 g''16
-                                \abjad_color_music "blue"
+                                \abjad-color-music #'blue
                                 cs'''16
-                                \abjad_color_music "blue"
+                                \abjad-color-music #'blue
                                 d'''16
                                 ]
                             }
@@ -5764,51 +5764,51 @@ def bass_to_octave(
                     \voiceOne
                     {
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             <c d bf>8
                             ~
                             [
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             <c d bf>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             f'8
                             ~
                             [
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             f'32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             <ef' e' fs''>8
                             ~
                             [
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             <ef' e' fs''>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             <g af'>8
                             ~
                             [
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             <g af'>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             a8
                             ~
                             [
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             a32
                             ]
                             r16.
@@ -5847,51 +5847,51 @@ def bass_to_octave(
                     \voiceOne
                     {
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "red"
+                            \abjad-color-music #'red
                             <c d bf>8
                             ~
                             [
-                            \abjad_color_music "red"
+                            \abjad-color-music #'red
                             <c d bf>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "blue"
+                            \abjad-color-music #'blue
                             f8
                             ~
                             [
-                            \abjad_color_music "blue"
+                            \abjad-color-music #'blue
                             f32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "red"
+                            \abjad-color-music #'red
                             <ef e fs'>8
                             ~
                             [
-                            \abjad_color_music "red"
+                            \abjad-color-music #'red
                             <ef e fs'>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "blue"
+                            \abjad-color-music #'blue
                             <g af'>8
                             ~
                             [
-                            \abjad_color_music "blue"
+                            \abjad-color-music #'blue
                             <g af'>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "red"
+                            \abjad-color-music #'red
                             a8
                             ~
                             [
-                            \abjad_color_music "red"
+                            \abjad-color-music #'red
                             a32
                             ]
                             r16.
@@ -5954,21 +5954,21 @@ def bass_to_octave(
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "red"
+                            \abjad-color-music #'red
                             <g af'>8
                             ~
                             [
-                            \abjad_color_music "red"
+                            \abjad-color-music #'red
                             <g af'>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "blue"
+                            \abjad-color-music #'blue
                             a8
                             ~
                             [
-                            \abjad_color_music "blue"
+                            \abjad-color-music #'blue
                             a32
                             ]
                             r16.
@@ -6019,51 +6019,51 @@ def center_to_octave(
                     \voiceOne
                     {
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             <c, d, bf,>8
                             ~
                             [
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             <c, d, bf,>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             f8
                             ~
                             [
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             f32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             <ef e fs'>8
                             ~
                             [
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             <ef e fs'>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             <g, af>8
                             ~
                             [
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             <g, af>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             a,8
                             ~
                             [
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             a,32
                             ]
                             r16.
@@ -6102,51 +6102,51 @@ def center_to_octave(
                     \voiceOne
                     {
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "red"
+                            \abjad-color-music #'red
                             <c d bf>8
                             ~
                             [
-                            \abjad_color_music "red"
+                            \abjad-color-music #'red
                             <c d bf>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "blue"
+                            \abjad-color-music #'blue
                             f8
                             ~
                             [
-                            \abjad_color_music "blue"
+                            \abjad-color-music #'blue
                             f32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "red"
+                            \abjad-color-music #'red
                             <ef e fs'>8
                             ~
                             [
-                            \abjad_color_music "red"
+                            \abjad-color-music #'red
                             <ef e fs'>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "blue"
+                            \abjad-color-music #'blue
                             <g, af>8
                             ~
                             [
-                            \abjad_color_music "blue"
+                            \abjad-color-music #'blue
                             <g, af>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "red"
+                            \abjad-color-music #'red
                             a8
                             ~
                             [
-                            \abjad_color_music "red"
+                            \abjad-color-music #'red
                             a32
                             ]
                             r16.
@@ -6209,21 +6209,21 @@ def center_to_octave(
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "red"
+                            \abjad-color-music #'red
                             <g, af>8
                             ~
                             [
-                            \abjad_color_music "red"
+                            \abjad-color-music #'red
                             <g, af>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "blue"
+                            \abjad-color-music #'blue
                             a8
                             ~
                             [
-                            \abjad_color_music "blue"
+                            \abjad-color-music #'blue
                             a32
                             ]
                             r16.
@@ -6806,23 +6806,23 @@ def register(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             fs16
                             [
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             e'16
                             ]
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             ef'4
                             ~
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             ef'16
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             r16
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             af16
                             [
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             g16
                             ]
                         }
@@ -6939,23 +6939,23 @@ def register(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             fs16
                             [
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             e'16
                             ]
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             ef'4
                             ~
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             ef'16
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             r16
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             af'16
                             [
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             g''16
                             ]
                         }
@@ -7015,51 +7015,51 @@ def soprano_to_octave(
                     \voiceOne
                     {
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             <c,, d,, bf,,>8
                             ~
                             [
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             <c,, d,, bf,,>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             f,8
                             ~
                             [
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             f,32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             <ef, e, fs>8
                             ~
                             [
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             <ef, e, fs>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             <g,, af,>8
                             ~
                             [
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             <g,, af,>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             a,,8
                             ~
                             [
-                            \abjad_color_music "green"
+                            \abjad-color-music #'green
                             a,,32
                             ]
                             r16.
@@ -7098,51 +7098,51 @@ def soprano_to_octave(
                     \voiceOne
                     {
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "red"
+                            \abjad-color-music #'red
                             <c d bf>8
                             ~
                             [
-                            \abjad_color_music "red"
+                            \abjad-color-music #'red
                             <c d bf>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "blue"
+                            \abjad-color-music #'blue
                             f8
                             ~
                             [
-                            \abjad_color_music "blue"
+                            \abjad-color-music #'blue
                             f32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "red"
+                            \abjad-color-music #'red
                             <ef, e, fs>8
                             ~
                             [
-                            \abjad_color_music "red"
+                            \abjad-color-music #'red
                             <ef, e, fs>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "blue"
+                            \abjad-color-music #'blue
                             <g, af>8
                             ~
                             [
-                            \abjad_color_music "blue"
+                            \abjad-color-music #'blue
                             <g, af>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "red"
+                            \abjad-color-music #'red
                             a8
                             ~
                             [
-                            \abjad_color_music "red"
+                            \abjad-color-music #'red
                             a32
                             ]
                             r16.
@@ -7205,21 +7205,21 @@ def soprano_to_octave(
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "red"
+                            \abjad-color-music #'red
                             <g, af>8
                             ~
                             [
-                            \abjad_color_music "red"
+                            \abjad-color-music #'red
                             <g, af>32
                             ]
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \abjad_color_music "blue"
+                            \abjad-color-music #'blue
                             a8
                             ~
                             [
-                            \abjad_color_music "blue"
+                            \abjad-color-music #'blue
                             a32
                             ]
                             r16.

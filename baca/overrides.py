@@ -7085,7 +7085,7 @@ def text_spanner_staff_padding(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \abjad_dashed_line_with_arrow                                          %! PiecewiseIndicatorCommand(1)
+                            - \abjad-dashed-line-with-arrow                                          %! PiecewiseIndicatorCommand(1)
                             - \baca_text_spanner_left_text "pont."                                   %! PiecewiseIndicatorCommand(1)
                             - \baca_text_spanner_right_text "ord."                                   %! PiecewiseIndicatorCommand(1)
                             - \tweak bound-details.right.padding #0.5                                %! PiecewiseIndicatorCommand(1)
@@ -7178,7 +7178,7 @@ def text_spanner_staff_padding(
                         \times 9/10 {
                             \override TextSpanner.staff-padding = #6                                 %! baca_text_spanner_staff_padding:OverrideCommand(1)
                             fs''16
-                            - \abjad_dashed_line_with_arrow                                          %! PiecewiseIndicatorCommand(1)
+                            - \abjad-dashed-line-with-arrow                                          %! PiecewiseIndicatorCommand(1)
                             - \baca_text_spanner_left_text "pont."                                   %! PiecewiseIndicatorCommand(1)
                             - \baca_text_spanner_right_text "ord."                                   %! PiecewiseIndicatorCommand(1)
                             - \tweak bound-details.right.padding #0.5                                %! PiecewiseIndicatorCommand(1)

@@ -1204,9 +1204,9 @@ class SegmentMaker(abjad.SegmentMaker):
             elif ritardando is not None:
                 left_text = ritardando._get_markup()
             if has_trend:
-                style = 'dashed_line_with_arrow'
+                style = 'dashed-line-with-arrow'
             else:
-                style = 'invisible_line'
+                style = 'invisible-line'
             if 0 < i:
                 stop_text_span = abjad.StopTextSpan()
                 abjad.attach(

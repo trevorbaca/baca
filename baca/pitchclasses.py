@@ -7962,7 +7962,7 @@ class PitchTree(classes.Tree):
                         }
                         {
                             \time 1/8
-                            \abjad_color_music "red"
+                            \abjad-color-music #'red
                             e'8
                             ^ \markup { 0 }
                             \startGroup
@@ -7977,19 +7977,19 @@ class PitchTree(classes.Tree):
                             af'8
                             b'8
                             a'8
-                            \abjad_color_music "red"
+                            \abjad-color-music #'red
                             cs'8
                             \stopGroup
                             s8
-                            \abjad_color_music "red"
+                            \abjad-color-music #'red
                             cs'8
                             ^ \markup { 2 }
                             \startGroup
-                            \abjad_color_music "blue"
+                            \abjad-color-music #'blue
                             d'8
-                            \abjad_color_music "blue"
+                            \abjad-color-music #'blue
                             d'8
-                            \abjad_color_music "red"
+                            \abjad-color-music #'red
                             e'8
                             \stopGroup
                             s8
