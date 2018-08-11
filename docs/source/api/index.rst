@@ -1025,7 +1025,6 @@ Rhythm library.
    ~baca.scoping.only_parts
    ~baca.scoping.only_score
    ~baca.scoping.only_segment
-   ~baca.scoping.scope
    ~baca.scoping.suite
    ~baca.scoping.tag
    ~baca.scoping.timeline

@@ -1235,15 +1235,11 @@ def repeat_tie_repeat_pitches() -> SpannerCommand:
     """
     Repeat-ties repeat pitches.
     """
-    command = scoping.new(
-        SpannerCommand(
-            selector='baca.qrun(0)',
-            spanner=abjad.Tie(repeat=True),
-            ),
+    return SpannerCommand(
         map=classes.selector().ltqruns().nontrivial(),
+        selector='baca.qrun(0)',
+        spanner=abjad.Tie(repeat=True),
         )
-    assert isinstance(command, SpannerCommand)
-    return command
 
 def slur(
     *tweaks: abjad.LilyPondTweakManager,
