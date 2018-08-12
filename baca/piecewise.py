@@ -946,7 +946,7 @@ def dynamic(
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
                             \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -1232,7 +1232,7 @@ def hairpin(
                             e'8                                                                      %! baca_make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             \baca-effort-ff                                                          %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             - \tweak to-barline ##t                                                  %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             - \tweak circled-tip ##t                                                 %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             \>                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
@@ -1768,7 +1768,7 @@ def hairpin(
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -1781,7 +1781,7 @@ def hairpin(
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -1792,7 +1792,7 @@ def hairpin(
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -1805,14 +1805,14 @@ def hairpin(
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
                             \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
                             ]                                                                        %! baca_make_even_divisions
                             \revert DynamicLineSpanner.staff-padding                                 %! baca_dls_staff_padding:OverrideCommand(2)
@@ -1902,9 +1902,9 @@ def hairpin(
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             \<                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -1917,9 +1917,9 @@ def hairpin(
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             \>                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -1930,9 +1930,9 @@ def hairpin(
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             \<                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -1945,16 +1945,16 @@ def hairpin(
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             \>                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
                             \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
                             ]                                                                        %! baca_make_even_divisions
                             \revert DynamicLineSpanner.staff-padding                                 %! baca_dls_staff_padding:OverrideCommand(2)
@@ -2045,7 +2045,7 @@ def hairpin(
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -2054,26 +2054,26 @@ def hairpin(
                             f'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             e''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'DeepPink1)                                   %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
+                            - \tweak color #(x11-color 'DeepPink1)                                   %! REDUNDANT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
                             \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'DeepPink1)                                   %! REDUNDANT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
+                            - \tweak color #(x11-color 'DeepPink1)                                   %! REDUNDANT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! REDUNDANT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             \f                                                                       %! REDUNDANT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             f''8                                                                     %! baca_make_even_divisions
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
                             \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! REDUNDANT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! REDUNDANT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             \p                                                                       %! REDUNDANT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -2082,20 +2082,20 @@ def hairpin(
                             e''8                                                                     %! baca_make_even_divisions
             <BLANKLINE>
                             g'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'DeepPink1)                                   %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
+                            - \tweak color #(x11-color 'DeepPink1)                                   %! REDUNDANT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
                             \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'DeepPink1)                                   %! REDUNDANT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
+                            - \tweak color #(x11-color 'DeepPink1)                                   %! REDUNDANT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! REDUNDANT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             \f                                                                       %! REDUNDANT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
                             \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
                             ]                                                                        %! baca_make_even_divisions
                             \revert DynamicLineSpanner.staff-padding                                 %! baca_dls_staff_padding:OverrideCommand(2)
@@ -2186,9 +2186,9 @@ def hairpin(
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             - \tweak stencil #constante-hairpin                                      %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             \<                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             [                                                                        %! baca_make_even_divisions
@@ -2198,30 +2198,30 @@ def hairpin(
                             f'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             e''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
                             \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             \>                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             f''8                                                                     %! baca_make_even_divisions
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
                             \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             - \tweak stencil #constante-hairpin                                      %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             \<                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             [                                                                        %! baca_make_even_divisions
@@ -2231,22 +2231,22 @@ def hairpin(
                             e''8                                                                     %! baca_make_even_divisions
             <BLANKLINE>
                             g'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
                             \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             \>                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
                             \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
                             ]                                                                        %! baca_make_even_divisions
                             \revert DynamicLineSpanner.staff-padding                                 %! baca_dls_staff_padding:OverrideCommand(2)
@@ -2472,7 +2472,7 @@ def hairpin(
                             e'8                                                                      %! baca_make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             - \tweak to-barline ##t                                                  %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             - \tweak circled-tip ##t                                                 %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             \>                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
