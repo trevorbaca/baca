@@ -2864,7 +2864,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 ]
             tag_ = abjad.Tag.from_words(words)
             string = f"#(x11-color '{color})"
-            # HERE: why does tweak tag go missing only sometimes?
             abjad.tweak(wrapper.indicator, tag=tag_).color = string
             SegmentMaker._set_status_tag(wrapper, status)
             return
@@ -2923,6 +2922,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
 
     def _treat_untreated_persistent_wrappers(self):
+        dynamic_prototype = (
+            abjad.Dynamic,
+            abjad.DynamicTrend,
+            )
         tempo_prototype = (
             indicators.Accelerando,
             abjad.MetronomeMark,
@@ -2936,11 +2939,12 @@ class SegmentMaker(abjad.SegmentMaker):
                     continue
                 if isinstance(wrapper.indicator, abjad.Instrument):
                     prototype = abjad.Instrument
+                elif isinstance(wrapper.indicator, dynamic_prototype):
+                    prototype = dynamic_prototype
                 elif isinstance(wrapper.indicator, tempo_prototype):
                     prototype = tempo_prototype
                 else:
                     prototype = type(wrapper.indicator)
-
                 previous_indicator = abjad.inspect(leaf).effective(
                     prototype,
                     n=-1,
