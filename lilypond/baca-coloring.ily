@@ -36,15 +36,7 @@ baca-reapplied-indicator-markup = #(
     #}
     )
 
-% NOTE: this works:
-%zebra = #(define-music-function (color) (color?)
-%    #{
-%    - \tweak color #color
-%    - \markup { FOO }
-%    #}
-%    )
-
-%%% COLOR MARKUP %%%
+%%% COLORED MARKUP %%%
 
 baca-dark-cyan-markup = #(
     define-music-function
@@ -64,7 +56,7 @@ baca-forest-green-markup = #(
     #}
     )
 
-%%% COLOR: MUSIC %%%
+%%% COLORED MUSIC %%%
 
 baca-octave-warning = #(
     define-music-function
@@ -116,7 +108,7 @@ baca-unregistered-pitch-warning = #(
     #}
     )
 
-%%% COLOR: TIME SIGNATURE %%%
+%%% COLORED TIME SIGNATURES %%%
 
 baca-time-signature-color = #(
     define-music-function
@@ -127,3 +119,11 @@ baca-time-signature-color = #(
     $music
     #}
     )
+
+% NOTE: this works:
+%zebra = #(define-music-function (color) (color?)
+%    #{
+%    - \tweak color #color
+%    - \markup { FOO }
+%    #}
+%    )
