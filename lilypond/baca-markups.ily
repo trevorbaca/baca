@@ -62,6 +62,29 @@ baca-stop-on-string-full-upbow-markup = \markup {
             )
     }
 
+%%% CIRCLE BOWING MARKUP %%%
+
+baca-circle-bowing-markup = \markup
+    \translate #'(0.6 . 0)
+    \scale #'(0.35 . 0.35)
+    \concat {
+        \draw-circle #2 #0.4 ##f
+        \hspace #-4.5
+        \raise #0.75
+        \with-color #white
+        \scale #'(0.35 . 0.35)
+        \draw-circle #1 #1 ##t
+        \hspace #-1.5
+        \raise #-0.75
+        \scale #'(0.75 . 0.75)
+        \triangle ##t
+        \hspace #-1
+        \raise #1.35
+        \with-color #white
+        \rotate #45
+        \filled-box #'(-0.35 . 0.35) #'(-0.35 . 0.35) #0
+    }
+
 %%% DAMP MARKUP %%%
 
 baca-damp-markup = \markup {

@@ -91,6 +91,24 @@ baca-stop-on-string = #(make-articulation "bacastoponstring")
     }
 }
 
+%%% CIRCLE BOWING ARTICULATIONS %%%
+
+#(append! default-script-alist
+   (list
+    `("bacacirclebowing"
+       . (
+           (stencil . ,ly:text-interface::print)
+           (text . ,baca-circle-bowing-markup)
+           (avoid-slur . around)
+           (direction . ,UP)
+           (padding . 0.50)
+           (script-priority . 125)
+           (skyline-horizontal-padding . 0.20)
+           (toward-stem-shift . -0.75)
+           ))))
+
+baca-circle-bowing = #(make-articulation "bacacirclebowing")
+
 %%% DAMP ARTICULATIONS %%%
 
 #(append! default-script-alist
