@@ -17,6 +17,7 @@ from . import scoping
 from . import segmentclasses
 from . import templates
 from . import typings
+abjad_tags = abjad.Tags()
 
 
 class SegmentMaker(abjad.SegmentMaker):
@@ -2855,10 +2856,16 @@ class SegmentMaker(abjad.SegmentMaker):
         if (isinstance(wrapper.indicator, abjad.Dynamic) and
             abjad.inspect(leaf).indicators(abjad.DynamicTrend)):
             status = 'explicit'
-        if isinstance(wrapper.indicator, abjad.DynamicTrend):
+        if isinstance(wrapper.indicator, (abjad.Dynamic, abjad.DynamicTrend)):
             color = SegmentMaker._status_to_color[status]
-            string = '_treat_persistent_wrapper(1)'
-            manager = abjad.tweak(wrapper.indicator, tag=string).color = color
+            words = [
+                f'{status.upper()}_DYNAMIC_COLOR',
+                '_treat_persistent_wrapper(1)',
+                ]
+            tag_ = abjad.Tag.from_words(words)
+            string = f"#(x11-color '{color})"
+            # HERE: why does tweak tag go missing only sometimes?
+            abjad.tweak(wrapper.indicator, tag=tag_).color = string
             SegmentMaker._set_status_tag(wrapper, status)
             return
         SegmentMaker._attach_color_literal(
