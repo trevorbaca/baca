@@ -706,7 +706,7 @@ def dynamic(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            \baca_effort_f                                                           %! IndicatorCommand
+                            \baca-effort-f                                                           %! IndicatorCommand
                             [
                             d'16
                             ]
@@ -1232,7 +1232,7 @@ def hairpin(
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! EXPLICIT_DYNAMIC_COLOR:_attach_color_literal(2)
                             e'8                                                                      %! baca_make_even_divisions
-                            \baca_effort_ff                                                          %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
+                            \baca-effort-ff                                                          %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             - \tweak color #blue                                                     %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             - \tweak to-barline ##t                                                  %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             - \tweak circled-tip ##t                                                 %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
@@ -1404,7 +1404,7 @@ def hairpin(
             <BLANKLINE>
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! EXPLICIT_DYNAMIC_COLOR:_attach_color_literal(2)
                             d''8                                                                     %! baca_make_even_divisions
-                            \baca_effort_ff                                                          %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
+                            \baca-effort-ff                                                          %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
                             ]                                                                        %! baca_make_even_divisions
                             \revert DynamicLineSpanner.staff-padding                                 %! baca_dls_staff_padding:OverrideCommand(2)
             <BLANKLINE>
@@ -1493,7 +1493,7 @@ def hairpin(
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! EXPLICIT_DYNAMIC_COLOR:_attach_color_literal(2)
                             e'8                                                                      %! baca_make_even_divisions
-                            \baca_effort_p                                                           %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
+                            \baca-effort-p                                                           %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             - \tweak color #blue                                                     %! _treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             - \tweak stencil #constante-hairpin                                      %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             \<                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
@@ -1630,7 +1630,7 @@ def hairpin(
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! EXPLICIT_DYNAMIC_COLOR:_attach_color_literal(2)
                             e'8                                                                      %! baca_make_even_divisions
-                            \baca_effort_mp                                                          %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
+                            \baca-effort-mp                                                          %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             - \tweak color #blue                                                     %! _treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             - \tweak stencil #abjad-flared-hairpin                                   %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             \<                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
@@ -1651,13 +1651,13 @@ def hairpin(
             <BLANKLINE>
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! EXPLICIT_DYNAMIC_COLOR:_attach_color_literal(2)
                             e'8                                                                      %! baca_make_even_divisions
-                            \baca_effort_f                                                           %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
+                            \baca-effort-f                                                           %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! EXPLICIT_DYNAMIC_COLOR:_attach_color_literal(2)
                             d''8                                                                     %! baca_make_even_divisions
-                            \baca_effort_mf                                                          %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
+                            \baca-effort-mf                                                          %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             - \tweak color #blue                                                     %! _treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             - \tweak stencil #abjad-flared-hairpin                                   %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
                             \>                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(1)
@@ -1678,7 +1678,7 @@ def hairpin(
             <BLANKLINE>
                             \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! EXPLICIT_DYNAMIC_COLOR:_attach_color_literal(2)
                             d''8                                                                     %! baca_make_even_divisions
-                            \baca_effort_p                                                           %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
+                            \baca-effort-p                                                           %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseIndicatorCommand(2)
                             ]                                                                        %! baca_make_even_divisions
                             \revert DynamicLineSpanner.staff-padding                                 %! baca_dls_staff_padding:OverrideCommand(2)
             <BLANKLINE>
@@ -2829,7 +2829,7 @@ def make_dynamic(string: str) -> typing.Union[
         Dynamic('p')
 
         >>> baca.make_dynamic('sffz')
-        Dynamic('ff', command='\\baca_sffz', name_is_textual=False, sforzando=True)
+        Dynamic('ff', command='\\baca-sffz', name_is_textual=False, sforzando=True)
 
         >>> baca.make_dynamic('niente')
         Dynamic('niente', command='\\!', direction=Down, name_is_textual=True)
@@ -2840,58 +2840,58 @@ def make_dynamic(string: str) -> typing.Union[
         >>> baca.make_dynamic('o<|')
         DynamicTrend(shape='o<|')
 
-        >>> baca.make_dynamic('appena_udibile')
-        Dynamic('appena udibile', command='\\baca_appena_udibile', name_is_textual=True, sforzando=False)
+        >>> baca.make_dynamic('appena-udibile')
+        Dynamic('appena udibile', command='\\baca-appena-udibile', name_is_textual=True, sforzando=False)
 
     ..  container:: example
 
         Ancora dynamics:
 
-        >>> baca.make_dynamic('p_ancora')
-        Dynamic('p', command='\\baca_p_ancora')
+        >>> baca.make_dynamic('p-ancora')
+        Dynamic('p', command='\\baca-p-ancora')
 
-        >>> baca.make_dynamic('f_ancora')
-        Dynamic('f', command='\\baca_f_ancora')
+        >>> baca.make_dynamic('f-ancora')
+        Dynamic('f', command='\\baca-f-ancora')
 
     ..  container:: example
 
         Effort dynamics:
 
         >>> baca.make_dynamic('"p"')
-        Dynamic('"p"', command='\\baca_effort_p', direction=Down)
+        Dynamic('"p"', command='\\baca-effort-p', direction=Down)
 
         >>> baca.make_dynamic('"f"')
-        Dynamic('"f"', command='\\baca_effort_f', direction=Down)
+        Dynamic('"f"', command='\\baca-effort-f', direction=Down)
 
     ..  container:: example
 
         Possibile dynamics:
 
-        >>> baca.make_dynamic('p_poss')
-        Dynamic('p', command='\\baca_p_poss')
+        >>> baca.make_dynamic('p-poss')
+        Dynamic('p', command='\\baca-p-poss')
 
-        >>> baca.make_dynamic('f_poss')
-        Dynamic('f', command='\\baca_f_poss')
+        >>> baca.make_dynamic('f-poss')
+        Dynamic('f', command='\\baca-f-poss')
 
     ..  container:: example
 
         Sempre dynamics:
 
-        >>> baca.make_dynamic('p_sempre')
-        Dynamic('p', command='\\baca_p_sempre')
+        >>> baca.make_dynamic('p-sempre')
+        Dynamic('p', command='\\baca-p-sempre')
 
-        >>> baca.make_dynamic('f_sempre')
-        Dynamic('f', command='\\baca_f_sempre')
+        >>> baca.make_dynamic('f-sempre')
+        Dynamic('f', command='\\baca-f-sempre')
 
     ..  container:: example
 
         Subito dynamics:
 
-        >>> baca.make_dynamic('p_sub')
-        Dynamic('p', command='\\baca_p_sub')
+        >>> baca.make_dynamic('p-sub')
+        Dynamic('p', command='\\baca-p-sub')
 
-        >>> baca.make_dynamic('f_sub')
-        Dynamic('f', command='\\baca_f_sub')
+        >>> baca.make_dynamic('f-sub')
+        Dynamic('f', command='\\baca-f-sub')
 
     ..  container:: example
 
@@ -2908,28 +2908,30 @@ def make_dynamic(string: str) -> typing.Union[
     scheme_manifest = classes.SchemeManifest()
     known_shapes = abjad.DynamicTrend('<').known_shapes
     indicator: typing.Union[abjad.Dynamic, abjad.DynamicTrend]
+    if '_' in string:
+        raise Exception(f'use hyphens instead of underscores ({string!r}).')
     if string == 'niente':
         indicator = abjad.Dynamic('niente', command=r'\!')
-    elif string.endswith('_ancora'):
-        dynamic = string.split('_')[0]
-        command = rf'\baca_{dynamic}_ancora'
+    elif string.endswith('-ancora'):
+        dynamic = string.split('-')[0]
+        command = rf'\baca-{dynamic}-ancora'
         indicator = abjad.Dynamic(dynamic, command=command)
-    elif string.endswith('_poss'):
-        dynamic = string.split('_')[0]
-        command = rf'\baca_{dynamic}_poss'
+    elif string.endswith('-poss'):
+        dynamic = string.split('-')[0]
+        command = rf'\baca-{dynamic}-poss'
         indicator = abjad.Dynamic(dynamic, command=command)
-    elif string.endswith('_sempre'):
-        dynamic = string.split('_')[0]
-        command = rf'\baca_{dynamic}_sempre'
+    elif string.endswith('-sempre'):
+        dynamic = string.split('-')[0]
+        command = rf'\baca-{dynamic}-sempre'
         indicator = abjad.Dynamic(dynamic, command=command)
-    elif string.endswith('_sub'):
-        dynamic = string.split('_')[0]
-        command = rf'\baca_{dynamic}_sub'
+    elif string.endswith('-sub'):
+        dynamic = string.split('-')[0]
+        command = rf'\baca-{dynamic}-sub'
         indicator = abjad.Dynamic(dynamic, command=command)
-    elif 'baca_' + string in scheme_manifest.dynamics:
+    elif 'baca-' + string in scheme_manifest.dynamics:
         name = scheme_manifest.dynamic_to_steady_state(string)
-        command = '\\baca_' + string
-        pieces = string.split('_')
+        command = '\\baca-' + string
+        pieces = string.split('-')
         if pieces[0] in ('sfz', 'sffz', 'sfffz'):
             sforzando = True
         else:
@@ -2944,7 +2946,7 @@ def make_dynamic(string: str) -> typing.Union[
     elif string.startswith('"'):
         assert string.endswith('"')
         stripped_string = string.strip('"')
-        command = rf'\baca_effort_{stripped_string}'
+        command = rf'\baca-effort-{stripped_string}'
         indicator = abjad.Dynamic(f'{string}', command=command)
     elif string in known_shapes:
         indicator = abjad.DynamicTrend(string)
@@ -2968,7 +2970,7 @@ def parse_hairpin_descriptor(
 
         >>> for item in baca.parse_hairpin_descriptor('"f"'):
         ...     item
-        IndicatorBundle(Dynamic('"f"', command='\\baca_effort_f', direction=Down))
+        IndicatorBundle(Dynamic('"f"', command='\\baca-effort-f', direction=Down))
 
         >>> for item in baca.parse_hairpin_descriptor('niente'):
         ...     item

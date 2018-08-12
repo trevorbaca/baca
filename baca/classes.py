@@ -1683,21 +1683,21 @@ class SchemeManifest(abjad.AbjadObject):
     __documentation_section__ = 'Classes'
 
     _dynamics = (
-        ('baca_appena_udibile', 'appena udibile'),
-        ('baca_f_but_accents_sffz', 'f'),
-        ('baca_f_sub_but_accents_continue_sffz', 'f'),
-        ('baca_ffp', 'p'),
-        ('baca_fffp', 'p'),
+        ('baca-appena-udibile', 'appena udibile'),
+        ('baca-f-but-accents-sffz', 'f'),
+        ('baca-f-sub-but-accents-continue-sffz', 'f'),
+        ('baca-ffp', 'p'),
+        ('baca-fffp', 'p'),
         ('niente', 'niente'),
-        ('baca_p_sub_but_accents_continue_sffz', 'p'),
-        ('baca_sff', 'ff'),
-        ('baca_sffp', 'p'),
-        ('baca_sffpp', 'pp'),
-        ('baca_sfffz', 'fff'),
-        ('baca_sffz', 'ff'),
-        ('baca_sfpp', 'pp'),
-        ('baca_sfz_f', 'f'),
-        ('baca_sfz_p', 'p'),
+        ('baca-p-sub-but-accents-continue-sffz', 'p'),
+        ('baca-sff', 'ff'),
+        ('baca-sffp', 'p'),
+        ('baca-sffpp', 'pp'),
+        ('baca-sfffz', 'fff'),
+        ('baca-sffz', 'ff'),
+        ('baca-sfpp', 'pp'),
+        ('baca-sfz-f', 'f'),
+        ('baca-sfz-p', 'p'),
         )
 
     ### PUBLIC PROPERTIES ###
@@ -1713,21 +1713,21 @@ class SchemeManifest(abjad.AbjadObject):
             >>> for dynamic in scheme_manifest.dynamics:
             ...     dynamic
             ...
-            'baca_appena_udibile'
-            'baca_f_but_accents_sffz'
-            'baca_f_sub_but_accents_continue_sffz'
-            'baca_ffp'
-            'baca_fffp'
+            'baca-appena-udibile'
+            'baca-f-but-accents-sffz'
+            'baca-f-sub-but-accents-continue-sffz'
+            'baca-ffp'
+            'baca-fffp'
             'niente'
-            'baca_p_sub_but_accents_continue_sffz'
-            'baca_sff'
-            'baca_sffp'
-            'baca_sffpp'
-            'baca_sfffz'
-            'baca_sffz'
-            'baca_sfpp'
-            'baca_sfz_f'
-            'baca_sfz_p'
+            'baca-p-sub-but-accents-continue-sffz'
+            'baca-sff'
+            'baca-sffp'
+            'baca-sffpp'
+            'baca-sfffz'
+            'baca-sffz'
+            'baca-sfpp'
+            'baca-sfz-f'
+            'baca-sfz-p'
 
         Returns list.
         """
@@ -1742,7 +1742,7 @@ class SchemeManifest(abjad.AbjadObject):
         ..  container:: example
 
             >>> scheme_manifest = baca.SchemeManifest()
-            >>> scheme_manifest.dynamic_to_steady_state('sfz_p')
+            >>> scheme_manifest.dynamic_to_steady_state('sfz-p')
             'p'
 
         Returns string.
@@ -1750,7 +1750,7 @@ class SchemeManifest(abjad.AbjadObject):
         for dynamic_, steady_state in self._dynamics:
             if dynamic_ == dynamic:
                 return steady_state
-            if dynamic_ == 'baca_' + dynamic:
+            if dynamic_ == 'baca-' + dynamic:
                 return steady_state
         raise KeyError(dynamic)
 

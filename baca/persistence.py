@@ -1285,7 +1285,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                                 \once \override Voice.DynamicText.color = #(x11-color 'blue)             %! EXPLICIT_DYNAMIC_COLOR:_attach_color_literal(2)
                                 c'4.                                                                     %! baca_make_notes
-                                \baca_effort_mf                                                          %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
+                                \baca-effort-mf                                                          %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
                 <BLANKLINE>
                             }                                                                            %! SingleStaffScoreTemplate
                 <BLANKLINE>
