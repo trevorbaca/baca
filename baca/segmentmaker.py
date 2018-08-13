@@ -2469,7 +2469,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 existing_tag = wrapper.tag
                 abjad.detach(wrapper, mmrest)
                 new_indicator = abjad.new(wrapper.indicator, leak=True)
-                string = '_parallelize_multimeasure_rests(2)'
+                string = '_parallelize_multimeasure_rests(1)'
                 abjad.attach(
                     new_indicator,
                     previous,
@@ -2484,29 +2484,58 @@ class SegmentMaker(abjad.SegmentMaker):
             parentage = abjad.inspect(previous).parentage()
             voice = parentage.get_first(abjad.Voice)
             multiplier = abjad.inspect(mmrest).indicator(abjad.Multiplier)
-            before = abjad.LilyPondLiteral(
-                [
-                    rf'\voices "{voice.name}", "MultimeasureRestVoice"',
-                    '<<',
-                    r'    \tweak NoteHead.no-ledgers ##t',
-                    r'    \tweak NoteHead.transparent ##t',
-                    r'    \tweak Dots.transparent ##t',
-                    rf"    c'1 * {multiplier!s}",
-                    r'\\',
-                    ],
-                    'before',
+            container = abjad.Container(
+                is_simultaneous=True,
+                tag='_parallelize_multimeasure_rests(2)',
+                )
+            literal = abjad.LilyPondLiteral('', format_slot='absolute_before')
+            abjad.attach(literal, container, tag=None)
+            string = rf'\voices "{voice.name}", "MultimeasureRestVoice"'
+            literal = abjad.LilyPondLiteral(string, format_slot='before')
+            abjad.attach(
+                literal,
+                container,
+                tag='_parallelize_multimeasure_rests(3)',
+                )
+            literal = abjad.LilyPondLiteral('', format_slot='closing')
+            abjad.attach(literal, container, tag=None)
+            note = abjad.Note(
+                "c'1",
+                tag='_parallelize_multimeasure_rests(4)',
+                )
+            literal = abjad.LilyPondLiteral('', format_slot='absolute_before')
+            abjad.attach(literal, note, tag=None)
+            literal = abjad.LilyPondLiteral(r'\baca-invisible-music')
+            abjad.attach(
+                literal,
+                note,
+                tag='_parallelize_multimeasure_rests(5)',
+                )
+            separator = r'\\'
+            rest = f'R1 * {str(multiplier)}'
+            lines = abjad.LilyPondLiteral(
+                [separator, rest],
+                format_slot='absolute_after',
+                )
+            abjad.attach(
+                lines,
+                note,
+                tag='_parallelize_multimeasure_rests(6)',
+                )
+            container.append(note)
+            abjad.mutate([mmrest]).replace([container])
+            tag = '_parallelize_multimeasure_rests(7)'
+            for wrapper in abjad.inspect(mmrest).wrappers():
+                existing_tag = wrapper.tag
+                abjad.detach(wrapper, mmrest)
+                if (isinstance(wrapper.indicator, abjad.LilyPondLiteral) and
+                    wrapper.indicator.argument == ''):
+                    continue
+                abjad.attach(
+                    wrapper,
+                    note,
+                    tag=existing_tag.append(tag),
                     )
-            abjad.attach(
-                before,
-                mmrest,
-                tag='_parallelize_multimeasure_rests(1)',
-                )
-            after = abjad.LilyPondLiteral('>>', 'after')
-            abjad.attach(
-                after,
-                mmrest,
-                tag='_parallelize_multimeasure_rests(1)',
-                )
 
     def _populate_offset_to_measure_number(self):
         measure_number = self._get_first_measure_number()
@@ -5913,7 +5942,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._whitespace_leaves()
                 self._comment_measure_numbers()
                 self._apply_breaks()
-                self._parallelize_multimeasure_rests()
                 self._style_fermata_measures()
                 self._shift_clefs_into_fermata_measures()
                 self._deactivate_tags(deactivate or [])
@@ -5922,6 +5950,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._check_all_music_in_part_containers()
                 self._check_duplicate_part_assignments()
                 self._collect_metadata()
+                self._parallelize_multimeasure_rests()
 
         count = int(timer.elapsed_time)
         seconds = abjad.String('second').pluralize(count)

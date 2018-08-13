@@ -120,6 +120,18 @@ baca-time-signature-color = #(
     #}
     )
 
+baca-invisible-music = #(
+    define-music-function
+    (parser location music)
+    (ly:music?)
+    #{
+    \once \override Dots.transparent = ##t
+    \once \override NoteHead.no-ledgers = ##t
+    \once \override NoteHead.transparent = ##t
+    $music
+    #}
+    )
+
 % NOTE: this works:
 %zebra = #(define-music-function (color) (color?)
 %    #{
@@ -127,3 +139,4 @@ baca-time-signature-color = #(
 %    - \markup { FOO }
 %    #}
 %    )
+
