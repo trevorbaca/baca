@@ -36,6 +36,7 @@ class BCPCommand(scoping.Command):
         measures: typings.Slice = None,
         scope: scoping.scope_typing = None,
         selector: typings.Selector = None,
+        tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
         ) -> None:
         scoping.Command.__init__(
             self,
@@ -44,6 +45,7 @@ class BCPCommand(scoping.Command):
             measures=measures,
             scope=scope,
             selector=selector,
+            tags=tags,
             )
         if bcps is None:
             self._validate_bcps(bcps)
@@ -54,7 +56,6 @@ class BCPCommand(scoping.Command):
         if helper is not None:
             assert callable(helper), repr(helper)
         self._helper = helper
-        self._tags = [abjad.Tag('BowContactPointCommand')]
         self._validate_tweaks(tweaks)
         self._tweaks = tweaks
 
@@ -109,7 +110,7 @@ class BCPCommand(scoping.Command):
                 abjad.attach(
                     stop_text_span,
                     lt.head,
-                    tag=self.tag,
+                    tag=self.tag.append('BCPCommand(1)'),
                     )
                 break
             previous_leaf = abjad.inspect(lt.head).leaf(-1)
@@ -125,8 +126,6 @@ class BCPCommand(scoping.Command):
                 numerator, denominator = bcp
                 i += 1
                 next_bcp = bcps[i]
-            #string = rf'\markup \baca-bcp-left #{numerator} #{denominator}'
-            #left_literal = abjad.LilyPondLiteral(string)
             left_text = r'- \baca-bcp-spanner-left-text'
             left_text += rf' #{numerator} #{denominator}'
             if lt is lts[-1]:
@@ -141,8 +140,6 @@ class BCPCommand(scoping.Command):
             right_text = None
             if lt.head is add_right_text_to_me:
                 numerator, denominator = next_bcp
-                #string = rf'\markup \baca-bcp-right #{numerator} #{denominator}'
-                #right_literal = abjad.LilyPondLiteral(string)
                 right_text = r'- \baca-bcp-spanner-right-text'
                 right_text += rf' #{numerator} #{denominator}'
             start_text_span = abjad.StartTextSpan(
@@ -156,19 +153,19 @@ class BCPCommand(scoping.Command):
             abjad.attach(
                 start_text_span,
                 lt.head,
-                tag=self.tag,
+                tag=self.tag.append('BCPCommand(2)'),
                 )
             if 0 < i:
                 abjad.attach(
                     stop_text_span,
                     lt.head,
-                    tag=self.tag,
+                    tag=self.tag.append('BCPCommand(3)'),
                     )
             if lt is lts[-1] and self.final_spanner:
                 abjad.attach(
                     stop_text_span,
                     next_leaf_after_argument,
-                    tag=self.tag,
+                    tag=self.tag.append('BCPCommand(4)'),
                     )
             bcp_fraction = abjad.Fraction(*bcp)
             next_bcp_fraction = abjad.Fraction(*bcps[i])
@@ -179,13 +176,13 @@ class BCPCommand(scoping.Command):
                     abjad.attach(
                         abjad.Articulation('upbow'),
                         lt.head,
-                        tag=self.tag,
+                        tag=self.tag.append('BCPCommand(5)'),
                         )
                 elif bcp_fraction < next_bcp_fraction:
                     abjad.attach(
                         abjad.Articulation('downbow'),
                         lt.head,
-                        tag=self.tag,
+                        tag=self.tag.append('BCPCommand(6)'),
                         )
             else:
                 previous_bcp_fraction = abjad.Fraction(*previous_bcp)
@@ -193,13 +190,13 @@ class BCPCommand(scoping.Command):
                     abjad.attach(
                         abjad.Articulation('upbow'),
                         lt.head,
-                        tag=self.tag,
+                        tag=self.tag.append('BCPCommand(7)'),
                         )
                 elif previous_bcp_fraction > bcp_fraction < next_bcp_fraction:
                     abjad.attach(
                         abjad.Articulation('downbow'),
                         lt.head,
-                        tag=self.tag,
+                        tag=self.tag.append('BCPCommand(8)'),
                         )
             previous_bcp = bcp
 
@@ -315,106 +312,106 @@ class BCPCommand(scoping.Command):
                                 \override Script.staff-padding = #5.5                                    %! baca_script_staff_padding:OverrideCommand(1)
                                 \override TextSpanner.staff-padding = #2.5                               %! baca_text_spanner_staff_padding:OverrideCommand(1)
                                 e'8                                                                      %! baca_make_even_divisions
-                                - \downbow                                                               %! BowContactPointCommand
-                                \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
-                                - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca-bcp-spanner-left-text #1 #5                                      %! BowContactPointCommand
-                                \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
+                                - \downbow                                                               %! BCPCommand(6)
+                                \bacaStopTextSpanBCP                                                     %! BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! BCPCommand(2)
                                 [                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
                                 f'8                                                                      %! baca_make_even_divisions
-                                - \upbow                                                                 %! BowContactPointCommand
-                                \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
-                                - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca-bcp-spanner-left-text #2 #5                                      %! BowContactPointCommand
-                                \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
+                                - \upbow                                                                 %! BCPCommand(7)
+                                \bacaStopTextSpanBCP                                                     %! BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! BCPCommand(2)
                 <BLANKLINE>
                                 e'8                                                                      %! baca_make_even_divisions
-                                - \downbow                                                               %! BowContactPointCommand
-                                \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
-                                - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca-bcp-spanner-left-text #1 #5                                      %! BowContactPointCommand
-                                \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
+                                - \downbow                                                               %! BCPCommand(8)
+                                \bacaStopTextSpanBCP                                                     %! BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! BCPCommand(2)
                 <BLANKLINE>
                                 f'8                                                                      %! baca_make_even_divisions
-                                - \upbow                                                                 %! BowContactPointCommand
-                                \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
+                                - \upbow                                                                 %! BCPCommand(7)
+                                \bacaStopTextSpanBCP                                                     %! BCPCommand(3)
                                 ]                                                                        %! baca_make_even_divisions
-                                - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca-bcp-spanner-left-text #2 #5                                      %! BowContactPointCommand
-                                \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
+                                - \abjad-solid-line-with-arrow                                           %! BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! BCPCommand(2)
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                                 e'8                                                                      %! baca_make_even_divisions
-                                - \downbow                                                               %! BowContactPointCommand
-                                \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
-                                - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca-bcp-spanner-left-text #1 #5                                      %! BowContactPointCommand
-                                \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
+                                - \downbow                                                               %! BCPCommand(8)
+                                \bacaStopTextSpanBCP                                                     %! BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! BCPCommand(2)
                                 [                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
                                 f'8                                                                      %! baca_make_even_divisions
-                                - \upbow                                                                 %! BowContactPointCommand
-                                \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
-                                - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca-bcp-spanner-left-text #2 #5                                      %! BowContactPointCommand
-                                - \baca-bcp-spanner-right-text #1 #5                                     %! BowContactPointCommand
-                                \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
+                                - \upbow                                                                 %! BCPCommand(7)
+                                \bacaStopTextSpanBCP                                                     %! BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! BCPCommand(2)
+                                - \baca-bcp-spanner-right-text #1 #5                                     %! BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! BCPCommand(2)
                 <BLANKLINE>
                                 e'8                                                                      %! baca_make_even_divisions
-                                \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
+                                \bacaStopTextSpanBCP                                                     %! BCPCommand(1)
                                 ]                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                                 f'8                                                                      %! baca_make_even_divisions
-                                - \downbow                                                               %! BowContactPointCommand
-                                \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
-                                - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca-bcp-spanner-left-text #3 #5                                      %! BowContactPointCommand
-                                \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
+                                - \downbow                                                               %! BCPCommand(6)
+                                \bacaStopTextSpanBCP                                                     %! BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #3 #5                                      %! BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! BCPCommand(2)
                                 [                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
                                 e'8                                                                      %! baca_make_even_divisions
-                                - \upbow                                                                 %! BowContactPointCommand
-                                \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
-                                - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca-bcp-spanner-left-text #4 #5                                      %! BowContactPointCommand
-                                \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
+                                - \upbow                                                                 %! BCPCommand(7)
+                                \bacaStopTextSpanBCP                                                     %! BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #4 #5                                      %! BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! BCPCommand(2)
                 <BLANKLINE>
                                 f'8                                                                      %! baca_make_even_divisions
-                                - \downbow                                                               %! BowContactPointCommand
-                                \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
-                                - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca-bcp-spanner-left-text #3 #5                                      %! BowContactPointCommand
-                                \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
+                                - \downbow                                                               %! BCPCommand(8)
+                                \bacaStopTextSpanBCP                                                     %! BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #3 #5                                      %! BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! BCPCommand(2)
                 <BLANKLINE>
                                 e'8                                                                      %! baca_make_even_divisions
-                                - \upbow                                                                 %! BowContactPointCommand
-                                \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
+                                - \upbow                                                                 %! BCPCommand(7)
+                                \bacaStopTextSpanBCP                                                     %! BCPCommand(3)
                                 ]                                                                        %! baca_make_even_divisions
-                                - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca-bcp-spanner-left-text #4 #5                                      %! BowContactPointCommand
-                                \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
+                                - \abjad-solid-line-with-arrow                                           %! BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #4 #5                                      %! BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! BCPCommand(2)
                 <BLANKLINE>
                                 % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                                 f'8                                                                      %! baca_make_even_divisions
-                                - \downbow                                                               %! BowContactPointCommand
-                                \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
-                                - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca-bcp-spanner-left-text #3 #5                                      %! BowContactPointCommand
-                                \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
+                                - \downbow                                                               %! BCPCommand(8)
+                                \bacaStopTextSpanBCP                                                     %! BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #3 #5                                      %! BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! BCPCommand(2)
                                 [                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
                                 e'8                                                                      %! baca_make_even_divisions
-                                - \upbow                                                                 %! BowContactPointCommand
-                                \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
-                                - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca-bcp-spanner-left-text #4 #5                                      %! BowContactPointCommand
-                                - \baca-bcp-spanner-right-text #3 #5                                     %! BowContactPointCommand
-                                \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
+                                - \upbow                                                                 %! BCPCommand(7)
+                                \bacaStopTextSpanBCP                                                     %! BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #4 #5                                      %! BCPCommand(2)
+                                - \baca-bcp-spanner-right-text #3 #5                                     %! BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! BCPCommand(2)
                 <BLANKLINE>
                                 f'8                                                                      %! baca_make_even_divisions
-                                \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
+                                \bacaStopTextSpanBCP                                                     %! BCPCommand(1)
                                 ]                                                                        %! baca_make_even_divisions
                                 \revert Script.staff-padding                                             %! baca_script_staff_padding:OverrideCommand(2)
                                 \revert TextSpanner.staff-padding                                        %! baca_text_spanner_staff_padding:OverrideCommand(2)
@@ -466,7 +463,7 @@ class BCPCommand(scoping.Command):
         ..  container:: example
 
             >>> baca.BCPCommand().tag
-            Tag('BowContactPointCommand')
+            Tag()
 
         """
         return super().tag
@@ -554,122 +551,122 @@ class BCPCommand(scoping.Command):
                                 \override Script.staff-padding = #5.5                                    %! baca_script_staff_padding:OverrideCommand(1)
                                 \override TextSpanner.staff-padding = #2.5                               %! baca_text_spanner_staff_padding:OverrideCommand(1)
                                 e'8                                                                      %! baca_make_even_divisions
-                                - \downbow                                                               %! BowContactPointCommand
-                                \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
-                                - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca-bcp-spanner-left-text #1 #5                                      %! BowContactPointCommand
-                                - \tweak color #red                                                      %! BowContactPointCommand
-                                \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
+                                - \downbow                                                               %! BCPCommand(6)
+                                \bacaStopTextSpanBCP                                                     %! BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! BCPCommand(2)
+                                - \tweak color #red                                                      %! BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! BCPCommand(2)
                                 [                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
                                 f'8                                                                      %! baca_make_even_divisions
-                                - \upbow                                                                 %! BowContactPointCommand
-                                \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
-                                - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca-bcp-spanner-left-text #2 #5                                      %! BowContactPointCommand
-                                - \tweak color #red                                                      %! BowContactPointCommand
-                                \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
+                                - \upbow                                                                 %! BCPCommand(7)
+                                \bacaStopTextSpanBCP                                                     %! BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! BCPCommand(2)
+                                - \tweak color #red                                                      %! BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! BCPCommand(2)
                 <BLANKLINE>
                                 e'8                                                                      %! baca_make_even_divisions
-                                - \downbow                                                               %! BowContactPointCommand
-                                \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
-                                - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca-bcp-spanner-left-text #1 #5                                      %! BowContactPointCommand
-                                - \tweak color #red                                                      %! BowContactPointCommand
-                                \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
+                                - \downbow                                                               %! BCPCommand(8)
+                                \bacaStopTextSpanBCP                                                     %! BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! BCPCommand(2)
+                                - \tweak color #red                                                      %! BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! BCPCommand(2)
                 <BLANKLINE>
                                 f'8                                                                      %! baca_make_even_divisions
-                                - \upbow                                                                 %! BowContactPointCommand
-                                \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
+                                - \upbow                                                                 %! BCPCommand(7)
+                                \bacaStopTextSpanBCP                                                     %! BCPCommand(3)
                                 ]                                                                        %! baca_make_even_divisions
-                                - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca-bcp-spanner-left-text #2 #5                                      %! BowContactPointCommand
-                                - \tweak color #red                                                      %! BowContactPointCommand
-                                \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
+                                - \abjad-solid-line-with-arrow                                           %! BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! BCPCommand(2)
+                                - \tweak color #red                                                      %! BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! BCPCommand(2)
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                                 e'8                                                                      %! baca_make_even_divisions
-                                - \downbow                                                               %! BowContactPointCommand
-                                \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
-                                - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca-bcp-spanner-left-text #1 #5                                      %! BowContactPointCommand
-                                - \tweak color #red                                                      %! BowContactPointCommand
-                                \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
+                                - \downbow                                                               %! BCPCommand(8)
+                                \bacaStopTextSpanBCP                                                     %! BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! BCPCommand(2)
+                                - \tweak color #red                                                      %! BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! BCPCommand(2)
                                 [                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
                                 f'8                                                                      %! baca_make_even_divisions
-                                - \upbow                                                                 %! BowContactPointCommand
-                                \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
-                                - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca-bcp-spanner-left-text #2 #5                                      %! BowContactPointCommand
-                                - \tweak color #red                                                      %! BowContactPointCommand
-                                \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
+                                - \upbow                                                                 %! BCPCommand(7)
+                                \bacaStopTextSpanBCP                                                     %! BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! BCPCommand(2)
+                                - \tweak color #red                                                      %! BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! BCPCommand(2)
                 <BLANKLINE>
                                 e'8                                                                      %! baca_make_even_divisions
-                                - \downbow                                                               %! BowContactPointCommand
-                                \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
+                                - \downbow                                                               %! BCPCommand(8)
+                                \bacaStopTextSpanBCP                                                     %! BCPCommand(3)
                                 ]                                                                        %! baca_make_even_divisions
-                                - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca-bcp-spanner-left-text #1 #5                                      %! BowContactPointCommand
-                                - \tweak color #red                                                      %! BowContactPointCommand
-                                \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
+                                - \abjad-solid-line-with-arrow                                           %! BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! BCPCommand(2)
+                                - \tweak color #red                                                      %! BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! BCPCommand(2)
                 <BLANKLINE>
                                 % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                                 f'8                                                                      %! baca_make_even_divisions
-                                - \upbow                                                                 %! BowContactPointCommand
-                                \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
-                                - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca-bcp-spanner-left-text #2 #5                                      %! BowContactPointCommand
-                                - \tweak color #red                                                      %! BowContactPointCommand
-                                \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
+                                - \upbow                                                                 %! BCPCommand(7)
+                                \bacaStopTextSpanBCP                                                     %! BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! BCPCommand(2)
+                                - \tweak color #red                                                      %! BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! BCPCommand(2)
                                 [                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
                                 e'8                                                                      %! baca_make_even_divisions
-                                - \downbow                                                               %! BowContactPointCommand
-                                \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
-                                - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca-bcp-spanner-left-text #1 #5                                      %! BowContactPointCommand
-                                - \tweak color #red                                                      %! BowContactPointCommand
-                                \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
+                                - \downbow                                                               %! BCPCommand(8)
+                                \bacaStopTextSpanBCP                                                     %! BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! BCPCommand(2)
+                                - \tweak color #red                                                      %! BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! BCPCommand(2)
                 <BLANKLINE>
                                 f'8                                                                      %! baca_make_even_divisions
-                                - \upbow                                                                 %! BowContactPointCommand
-                                \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
-                                - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca-bcp-spanner-left-text #2 #5                                      %! BowContactPointCommand
-                                - \tweak color #red                                                      %! BowContactPointCommand
-                                \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
+                                - \upbow                                                                 %! BCPCommand(7)
+                                \bacaStopTextSpanBCP                                                     %! BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! BCPCommand(2)
+                                - \tweak color #red                                                      %! BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! BCPCommand(2)
                 <BLANKLINE>
                                 e'8                                                                      %! baca_make_even_divisions
-                                - \downbow                                                               %! BowContactPointCommand
-                                \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
+                                - \downbow                                                               %! BCPCommand(8)
+                                \bacaStopTextSpanBCP                                                     %! BCPCommand(3)
                                 ]                                                                        %! baca_make_even_divisions
-                                - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca-bcp-spanner-left-text #1 #5                                      %! BowContactPointCommand
-                                - \tweak color #red                                                      %! BowContactPointCommand
-                                \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
+                                - \abjad-solid-line-with-arrow                                           %! BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! BCPCommand(2)
+                                - \tweak color #red                                                      %! BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! BCPCommand(2)
                 <BLANKLINE>
                                 % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                                 f'8                                                                      %! baca_make_even_divisions
-                                - \upbow                                                                 %! BowContactPointCommand
-                                \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
-                                - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca-bcp-spanner-left-text #2 #5                                      %! BowContactPointCommand
-                                - \tweak color #red                                                      %! BowContactPointCommand
-                                \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
+                                - \upbow                                                                 %! BCPCommand(7)
+                                \bacaStopTextSpanBCP                                                     %! BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! BCPCommand(2)
+                                - \tweak color #red                                                      %! BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! BCPCommand(2)
                                 [                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
                                 e'8                                                                      %! baca_make_even_divisions
-                                - \downbow                                                               %! BowContactPointCommand
-                                \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
-                                - \abjad-solid-line-with-arrow                                           %! BowContactPointCommand
-                                - \baca-bcp-spanner-left-text #1 #5                                      %! BowContactPointCommand
-                                - \baca-bcp-spanner-right-text #2 #5                                     %! BowContactPointCommand
-                                - \tweak color #red                                                      %! BowContactPointCommand
-                                \bacaStartTextSpanBCP                                                    %! BowContactPointCommand
+                                - \downbow                                                               %! BCPCommand(8)
+                                \bacaStopTextSpanBCP                                                     %! BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! BCPCommand(2)
+                                - \baca-bcp-spanner-right-text #2 #5                                     %! BCPCommand(2)
+                                - \tweak color #red                                                      %! BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! BCPCommand(2)
                 <BLANKLINE>
                                 f'8                                                                      %! baca_make_even_divisions
-                                \bacaStopTextSpanBCP                                                     %! BowContactPointCommand
+                                \bacaStopTextSpanBCP                                                     %! BCPCommand(1)
                                 ]                                                                        %! baca_make_even_divisions
                                 \revert Script.staff-padding                                             %! baca_script_staff_padding:OverrideCommand(2)
                                 \revert TextSpanner.staff-padding                                        %! baca_text_spanner_staff_padding:OverrideCommand(2)
@@ -1426,7 +1423,7 @@ class IndicatorCommand(scoping.Command):
         redundant: bool = None,
         scope: scoping.scope_typing = None,
         selector: typings.Selector = 'baca.pheads()',
-        tags: typing.List[typing.Union[str, abjad.Tag]] = None,
+        tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
         ) -> None:
         scoping.Command.__init__(
             self,
@@ -1436,6 +1433,7 @@ class IndicatorCommand(scoping.Command):
             measures=measures,
             scope=scope,
             selector=selector,
+            tags=tags,
             )
         if context is not None:
             assert isinstance(context, str), repr(context)
@@ -1453,17 +1451,6 @@ class IndicatorCommand(scoping.Command):
         self._redundant = redundant
         self._validate_tweaks(tweaks)
         self._tweaks = tweaks
-        tags = self._preprocess_tags(tags)
-        assert self._validate_tags(tags), repr(tags)
-        tags_ = []
-        for tag in tags:
-            if isinstance(tag, abjad.Tag):
-                tags_.append(tag)
-            else:
-                assert isinstance(tag, str), repr(tag)
-                tag_ = abjad.Tag(tag)
-                tags_.append(tag_)
-        self._tags = tags_
 
     ### SPECIAL METHODS ###
 
@@ -2023,7 +2010,7 @@ class MetronomeMarkCommand(scoping.Command):
         redundant: bool = None,
         scope: scoping.scope_typing = None,
         selector: typings.Selector = 'baca.leaf(0)',
-        tags: typing.List[abjad.Tag] = None,
+        tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
         ) -> None:
         scoping.Command.__init__(
             self,
@@ -2033,6 +2020,7 @@ class MetronomeMarkCommand(scoping.Command):
             measures=measures,
             scope=scope,
             selector=selector,
+            tags=tags,
             )
         prototype = (str, indicators.Accelerando, indicators.Ritardando)
         if key is not None:
@@ -2041,9 +2029,6 @@ class MetronomeMarkCommand(scoping.Command):
         if redundant is not None:
             redundant = bool(redundant)
         self._redundant = redundant
-        tags = self._preprocess_tags(tags)
-        assert self._validate_tags(tags), repr(tags)
-        self._tags = tags
 
     ### SPECIAL METHODS ###
 
@@ -2185,7 +2170,7 @@ class VoltaCommand(scoping.Command):
     ..  container:: example
 
         >>> baca.VoltaCommand()
-        VoltaCommand()
+        VoltaCommand(tags=[])
 
     """
 

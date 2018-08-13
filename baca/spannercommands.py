@@ -214,7 +214,7 @@ class SpannerCommand(scoping.Command):
         scope: scoping.scope_typing = None,
         selector: typings.Selector = 'baca.leaves()',
         spanner: abjad.Spanner = None,
-        tags: typing.List[abjad.Tag] = None,
+        tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
         ) -> None:
         scoping.Command.__init__(
             self,
@@ -224,6 +224,7 @@ class SpannerCommand(scoping.Command):
             measures=measures,
             scope=scope,
             selector=selector,
+            tags=tags,
             )
         if detach_first is not None:
             detach_first = bool(detach_first)
@@ -235,12 +236,6 @@ class SpannerCommand(scoping.Command):
             right_broken = bool(right_broken)
         self._right_broken = right_broken
         self._spanner = spanner
-        if isinstance(tags, str):
-            tags = tags.split(':')
-        else:
-            tags = tags or []
-        assert self._validate_tags(tags), repr(tags)
-        self._tags = tags
         self._validate_tweaks(tweaks)
         self._tweaks = tweaks
 

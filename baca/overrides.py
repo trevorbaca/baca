@@ -232,7 +232,7 @@ class OverrideCommand(scoping.Command):
         scope: scoping.scope_typing = None,
         selector: typings.Selector = 'baca.leaves()',
         tag_measure_number: bool = None,
-        tags: typing.List[typing.Optional[str]] = None,
+        tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
         value: typing.Any = None,
         whitelist: typing.Tuple[type] = None,
         ) -> None:
@@ -245,6 +245,7 @@ class OverrideCommand(scoping.Command):
             scope=scope,
             selector=selector,
             tag_measure_number=tag_measure_number,
+            tags=tags,
             )
         if after is not None:
             after = bool(after)
@@ -262,26 +263,6 @@ class OverrideCommand(scoping.Command):
         if grob is not None:
             assert isinstance(grob, str), repr(grob)
         self._grob = grob
-        tags_ = []
-        if tags is not None:
-            for tag in tags:
-                if tag is None:
-                    continue
-                if isinstance(tag, abjad.Tag):
-                    tags_.append(str(tag))
-                else:
-                    assert isinstance(tag, str)
-                    tags_.append(tag)
-        else:
-            tags_ = []
-        tags_ = self._preprocess_tags(tags_)
-        assert self._validate_tags(tags_), repr(tags_)
-        if tags_:
-            real_tag = abjad.Tag.from_words(tags_)
-            result = [real_tag]
-        else:
-            result = []
-        self._tags = result
         self._value = value
         if whitelist is not None:
             assert isinstance(whitelist, tuple), repr(whitelist)

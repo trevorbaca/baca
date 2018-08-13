@@ -17,7 +17,7 @@ class AccidentalAdjustmentCommand(scoping.Command):
     ..  container:: example
 
         >>> baca.AccidentalAdjustmentCommand()
-        AccidentalAdjustmentCommand(selector=baca.pleaf(0))
+        AccidentalAdjustmentCommand(selector=baca.pleaf(0), tags=[])
 
     ..  container:: example
 
@@ -127,6 +127,7 @@ class AccidentalAdjustmentCommand(scoping.Command):
         parenthesized: bool = None,
         scope: scoping.scope_typing = None,
         selector: typings.Selector = 'baca.pleaf(0)',
+        tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
         ) -> None:
         scoping.Command.__init__(
             self,
@@ -135,6 +136,7 @@ class AccidentalAdjustmentCommand(scoping.Command):
             measures=measures,
             scope=scope,
             selector=selector,
+            tags=tags,
             )
         if cautionary is not None:
             cautionary = bool(cautionary)
@@ -145,7 +147,6 @@ class AccidentalAdjustmentCommand(scoping.Command):
         if parenthesized is not None:
             parenthesized = bool(parenthesized)
         self._parenthesized = parenthesized
-        self._tags = []
 
     ### SPECIAL METHODS ###
 

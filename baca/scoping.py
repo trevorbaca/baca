@@ -223,6 +223,7 @@ class Command(abjad.AbjadObject):
         scope: scope_typing = None,
         selector: typings.Selector = None,
         tag_measure_number: bool = None,
+        tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
         ) -> None:
         # for selector evaluation
         import baca
@@ -239,8 +240,8 @@ class Command(abjad.AbjadObject):
         if selector_ is not None:
             assert isinstance(selector_, abjad.Expression), repr(selector_)
         self._selector = selector_
-        self._tags: typing.Optional[typing.List[abjad.Tag]] = None
         self.tag_measure_number = tag_measure_number
+        self._initialize_tags(tags)
 
     ### SPECIAL METHODS ###
 
@@ -272,6 +273,22 @@ class Command(abjad.AbjadObject):
 
     def _call(self, argument=None):
         pass
+
+    def _initialize_tags(self, tags):
+        tags_ = []
+        for tag in tags or []:
+            if tag in (None, ''):
+                continue
+            elif isinstance(tag, str):
+                for word in tag.split(':'):
+                    tag_ = abjad.Tag(word)
+                    tags_.append(tag_)
+            elif isinstance(tag, abjad.Tag):
+                tags_.append(tag)
+            else:
+                raise TypeError(tag)
+        assert all(isinstance(_, abjad.Tag) for _ in tags_)
+        self._tags = tags_
 
     def _matches_scope_index(self, scope_count, i):
         if isinstance(self.match, int):

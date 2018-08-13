@@ -295,6 +295,7 @@ class PiecewiseCommand(scoping.Command):
         right_broken: typing.Any = None,
         scope: scoping.scope_typing = None,
         selector: typings.Selector = 'baca.leaves()',
+        tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
         ) -> None:
         # for selector evaluation
         import baca
@@ -305,6 +306,7 @@ class PiecewiseCommand(scoping.Command):
             measures=measures,
             scope=scope,
             selector=selector,
+            tags=tags,
             )
         if bookend is not None:
             assert isinstance(bookend, (int, bool)), repr(bookend)
@@ -329,7 +331,6 @@ class PiecewiseCommand(scoping.Command):
             remove_length_1_spanner_start = bool(remove_length_1_spanner_start)
         self._remove_length_1_spanner_start = remove_length_1_spanner_start
         self._right_broken = right_broken
-        self._tags: typing.List[abjad.Tag] = []
 
     ### SPECIAL METHODS ###
 
@@ -1020,7 +1021,7 @@ def hairpin(
     piece_selector: typings.Selector = 'baca.group()',
     remove_length_1_spanner_start: bool = None,
     right_broken: bool = None,
-    selector: typings.Selector = 'baca.leaves()'
+    selector: typings.Selector = 'baca.leaves()',
     ) -> PiecewiseCommand:
     r"""
     Attaches hairpin.
