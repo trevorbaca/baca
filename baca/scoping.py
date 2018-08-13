@@ -810,6 +810,20 @@ class Suite(abjad.AbjadObject):
 
 ### FACTORY FUNCTIONS ###
 
+def compare_persistent_indicators(indicator_1, indicator_2) -> bool:
+    """
+    Compares persistent indicators.
+    """
+    if type(indicator_1) is not type(indicator_2):
+        return False
+    if not isinstance(indicator_1, abjad.Dynamic):
+        return indicator_1 == indicator_2
+    if indicator_1.sforzando or indicator_2.sforzando:
+        return False
+    if indicator_1.name == indicator_2.name:
+        return indicator_1.command == indicator_2.command
+    return False
+
 def new(
     *commands: typing.Iterable[Command],
     **keywords,

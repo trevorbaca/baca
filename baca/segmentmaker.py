@@ -813,16 +813,15 @@ class SegmentMaker(abjad.SegmentMaker):
         status = None
         if indicator is None:
             status = 'reapplied'
-        elif previous_indicator == indicator:
-            if isinstance(previous_indicator, abjad.TimeSignature):
-                status = 'reapplied'
-            elif isinstance(previous_indicator, abjad.Dynamic):
-                if previous_indicator.sforzando:
-                    status = 'explicit'
-                else:
-                    status = 'redundant'
-            else:
-                status = 'redundant'
+        elif not scoping.compare_persistent_indicators(
+            previous_indicator,
+            indicator,
+            ):
+            status = 'explicit'
+        elif isinstance(previous_indicator, abjad.TimeSignature):
+            status = 'reapplied'
+        else:
+            status = 'redundant'
         edition = momento.edition or abjad.Tag()
         return leaf, previous_indicator, status, edition
 
@@ -2577,7 +2576,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     continue
                 leaf, previous_indicator, status, edition = result
                 if isinstance(previous_indicator, abjad.TimeSignature):
-                    if status is None:
+                    if status in (None, 'explicit'):
                         continue
                     assert status == 'reapplied', repr(status)
                     wrapper = abjad.inspect(leaf).wrapper(abjad.TimeSignature)
@@ -2991,13 +2990,13 @@ class SegmentMaker(abjad.SegmentMaker):
                     prototype,
                     n=-1,
                     )
-                if previous_indicator != wrapper.indicator:
-                    status = 'explicit'
-                elif (isinstance(previous_indicator, abjad.Dynamic) and
-                    previous_indicator.sforzando):
-                    status = 'explicit'
-                else:
+                if scoping.compare_persistent_indicators(
+                    previous_indicator,
+                    wrapper.indicator,
+                    ):
                     status = 'redundant'
+                else:
+                    status = 'explicit'
                 self._treat_persistent_wrapper(
                     self.manifests,
                     wrapper,

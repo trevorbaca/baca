@@ -457,12 +457,11 @@ class PiecewiseCommand(scoping.Command):
                 tag=self.tag.append(tag),
                 wrapper=True,
                 )
-            if indicator == reapplied:
-                if (isinstance(indicator, abjad.Dynamic) and
-                    indicator.sforzando):
-                    status = 'explicit'
-                else:
-                    status = 'redundant'
+            if scoping.compare_persistent_indicators(
+                indicator,
+                reapplied,
+                ):
+                status = 'redundant'
                 SegmentMaker._treat_persistent_wrapper(
                     self.runtime['manifests'],
                     wrapper,

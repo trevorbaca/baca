@@ -264,6 +264,7 @@ scoping
 .. autosummary::
    :nosignatures:
 
+   ~compare_persistent_indicators
    ~new
    ~not_parts
    ~not_score
@@ -274,6 +275,8 @@ scoping
    ~suite
    ~tag
    ~timeline
+
+.. autofunction:: compare_persistent_indicators
 
 .. autofunction:: new
 
