@@ -4045,13 +4045,13 @@ def script_color(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             [
                             d'16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ]
                             bf'4
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ~
                             bf'16
                             r16
@@ -4059,26 +4059,26 @@ def script_color(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             [
                             e''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ]
                             ef''4
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             [
                             g''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             r4
                             \revert Script.color                                                     %! baca_script_color:OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
@@ -4122,13 +4122,13 @@ def script_color(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             [
                             d'16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ]
                             bf'4
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ~
                             bf'16
                             r16
@@ -4137,27 +4137,27 @@ def script_color(
                         \times 9/10 {
                             \override Script.color = #red                                            %! baca_script_color:OverrideCommand(1)
                             fs''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             [
                             e''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ]
                             ef''4
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             [
                             g''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ]
                             \revert Script.color                                                     %! baca_script_color:OverrideCommand(2)
                         }
                         \times 4/5 {
                             a'16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             r4
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
@@ -4215,13 +4215,13 @@ def script_down(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             [
                             d'16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ]
                             bf'4
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ~
                             bf'16
                             r16
@@ -4229,26 +4229,26 @@ def script_down(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             [
                             e''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ]
                             ef''4
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             [
                             g''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             r4
                             \revert Script.direction                                                 %! baca_script_down:OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
@@ -4292,13 +4292,13 @@ def script_down(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             [
                             d'16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ]
                             bf'4
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ~
                             bf'16
                             r16
@@ -4307,27 +4307,27 @@ def script_down(
                         \times 9/10 {
                             \override Script.direction = #down                                       %! baca_script_down:OverrideCommand(1)
                             fs''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             [
                             e''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ]
                             ef''4
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             [
                             g''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ]
                             \revert Script.direction                                                 %! baca_script_down:OverrideCommand(2)
                         }
                         \times 4/5 {
                             a'16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             r4
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
@@ -4386,13 +4386,13 @@ def script_extra_offset(
                             r8
                             \once \override Script.extra-offset = #'(-1.5 . 0)                       %! baca_script_extra_offset:OverrideCommand(1)
                             c'16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             [
                             d'16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ]
                             bf'4
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ~
                             bf'16
                             r16
@@ -4400,26 +4400,26 @@ def script_extra_offset(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             [
                             e''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ]
                             ef''4
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             [
                             g''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             r4
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
@@ -4462,13 +4462,13 @@ def script_extra_offset(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             [
                             d'16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ]
                             bf'4
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ~
                             bf'16
                             r16
@@ -4477,26 +4477,26 @@ def script_extra_offset(
                         \times 9/10 {
                             \once \override Script.extra-offset = #'(-1.5 . 0)                       %! baca_script_extra_offset:OverrideCommand(1)
                             fs''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             [
                             e''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ]
                             ef''4
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             [
                             g''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             r4
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
@@ -4588,13 +4588,13 @@ def script_up(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             [
                             d'16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ]
                             bf'4
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ~
                             bf'16
                             r16
@@ -4602,26 +4602,26 @@ def script_up(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             [
                             e''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ]
                             ef''4
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             [
                             g''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             r4
                             \revert Script.direction                                                 %! baca_script_up:OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
@@ -4665,13 +4665,13 @@ def script_up(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             [
                             d'16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ]
                             bf'4
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ~
                             bf'16
                             r16
@@ -4680,27 +4680,27 @@ def script_up(
                         \times 9/10 {
                             \override Script.direction = #up                                         %! baca_script_up:OverrideCommand(1)
                             fs''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             [
                             e''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ]
                             ef''4
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             [
                             g''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ]
                             \revert Script.direction                                                 %! baca_script_up:OverrideCommand(2)
                         }
                         \times 4/5 {
                             a'16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             r4
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }

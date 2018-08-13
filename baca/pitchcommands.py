@@ -5702,7 +5702,7 @@ class StaffPositionInterpolationCommand(scoping.Command):
                     \voiceOne
                     {
                         \scaleDurations #'(1 . 1) {
-                            \clef "treble"                                                           %! IndicatorCommand
+                            \clef "treble"                                                           %! baca_clef:IndicatorCommand
                             ef'16
                             [
                             e'16
@@ -5765,7 +5765,7 @@ class StaffPositionInterpolationCommand(scoping.Command):
                     {
                         \scaleDurations #'(1 . 1) {
                             \override Glissando.thickness = #'3                                      %! baca_glissando_thickness:OverrideCommand(1)
-                            \clef "treble"                                                           %! IndicatorCommand
+                            \clef "treble"                                                           %! baca_clef:IndicatorCommand
                             ef'16
                             [
                             \glissando                                                               %! baca_glissando:SpannerCommand

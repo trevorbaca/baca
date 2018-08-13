@@ -596,7 +596,9 @@ class Suite(abjad.AbjadObject):
                     ),
                 measures=(1, 2),
                 selector=baca.pleaves(),
-                tags=[],
+                tags=[
+                    abjad.Tag('baca_accent'),
+                    ],
                 ),
             baca.IndicatorCommand(
                 indicators=abjad.CyclicTuple(
@@ -606,7 +608,9 @@ class Suite(abjad.AbjadObject):
                     ),
                 measures=(1, 2),
                 selector=baca.pleaves(),
-                tags=[],
+                tags=[
+                    abjad.Tag('baca_tenuto'),
+                    ],
                 )
             )
 
@@ -629,7 +633,9 @@ class Suite(abjad.AbjadObject):
                     ),
                 measures=(1, 2),
                 selector=baca.phead(0),
-                tags=[],
+                tags=[
+                    abjad.Tag('baca_accent'),
+                    ],
                 ),
             baca.IndicatorCommand(
                 indicators=abjad.CyclicTuple(
@@ -639,7 +645,9 @@ class Suite(abjad.AbjadObject):
                     ),
                 measures=(1, 2),
                 selector=baca.phead(0),
-                tags=[],
+                tags=[
+                    abjad.Tag('baca_tenuto'),
+                    ],
                 )
             )
 
@@ -654,7 +662,9 @@ class Suite(abjad.AbjadObject):
                     ),
                 measures=(3, 4),
                 selector=baca.phead(0),
-                tags=[],
+                tags=[
+                    abjad.Tag('baca_accent'),
+                    ],
                 ),
             baca.IndicatorCommand(
                 indicators=abjad.CyclicTuple(
@@ -664,7 +674,9 @@ class Suite(abjad.AbjadObject):
                     ),
                 measures=(3, 4),
                 selector=baca.phead(0),
-                tags=[],
+                tags=[
+                    abjad.Tag('baca_tenuto'),
+                    ],
                 )
             )
 
@@ -899,43 +911,43 @@ def new(
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                             c'8                                                                      %! baca_make_even_divisions
-                            - \marcato                                                               %! IndicatorCommand
-                            - \staccato                                                              %! IndicatorCommand
+                            - \marcato                                                               %! baca_marcato:IndicatorCommand
+                            - \staccato                                                              %! baca_staccato:IndicatorCommand
                             [                                                                        %! baca_make_even_divisions
                             (                                                                        %! baca_slur:SpannerCommand
             <BLANKLINE>
                             \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                             c'8                                                                      %! baca_make_even_divisions
-                            - \marcato                                                               %! IndicatorCommand
-                            - \staccato                                                              %! IndicatorCommand
+                            - \marcato                                                               %! baca_marcato:IndicatorCommand
+                            - \staccato                                                              %! baca_staccato:IndicatorCommand
             <BLANKLINE>
                             \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                             c'8                                                                      %! baca_make_even_divisions
-                            - \marcato                                                               %! IndicatorCommand
-                            - \staccato                                                              %! IndicatorCommand
+                            - \marcato                                                               %! baca_marcato:IndicatorCommand
+                            - \staccato                                                              %! baca_staccato:IndicatorCommand
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                             c'8                                                                      %! baca_make_even_divisions
-                            - \marcato                                                               %! IndicatorCommand
-                            - \staccato                                                              %! IndicatorCommand
+                            - \marcato                                                               %! baca_marcato:IndicatorCommand
+                            - \staccato                                                              %! baca_staccato:IndicatorCommand
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                             c'8                                                                      %! baca_make_even_divisions
-                            - \marcato                                                               %! IndicatorCommand
-                            - \staccato                                                              %! IndicatorCommand
+                            - \marcato                                                               %! baca_marcato:IndicatorCommand
+                            - \staccato                                                              %! baca_staccato:IndicatorCommand
             <BLANKLINE>
                             \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                             c'8                                                                      %! baca_make_even_divisions
-                            - \marcato                                                               %! IndicatorCommand
-                            - \staccato                                                              %! IndicatorCommand
+                            - \marcato                                                               %! baca_marcato:IndicatorCommand
+                            - \staccato                                                              %! baca_staccato:IndicatorCommand
             <BLANKLINE>
                             \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                             c'8                                                                      %! baca_make_even_divisions
-                            - \marcato                                                               %! IndicatorCommand
-                            - \staccato                                                              %! IndicatorCommand
+                            - \marcato                                                               %! baca_marcato:IndicatorCommand
+                            - \staccato                                                              %! baca_staccato:IndicatorCommand
                             ]                                                                        %! baca_make_even_divisions
                             )                                                                        %! baca_slur:SpannerCommand
             <BLANKLINE>
@@ -1053,43 +1065,43 @@ def new(
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                             c'8                                                                      %! baca_make_even_divisions
-                            - \marcato                                                               %! IndicatorCommand
-                            - \staccato                                                              %! IndicatorCommand
+                            - \marcato                                                               %! baca_marcato:IndicatorCommand
+                            - \staccato                                                              %! baca_staccato:IndicatorCommand
                             [                                                                        %! baca_make_even_divisions
                             (                                                                        %! baca_slur:SpannerCommand
             <BLANKLINE>
                             \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                             c'8                                                                      %! baca_make_even_divisions
-                            - \marcato                                                               %! IndicatorCommand
-                            - \staccato                                                              %! IndicatorCommand
+                            - \marcato                                                               %! baca_marcato:IndicatorCommand
+                            - \staccato                                                              %! baca_staccato:IndicatorCommand
             <BLANKLINE>
                             \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                             c'8                                                                      %! baca_make_even_divisions
-                            - \marcato                                                               %! IndicatorCommand
-                            - \staccato                                                              %! IndicatorCommand
+                            - \marcato                                                               %! baca_marcato:IndicatorCommand
+                            - \staccato                                                              %! baca_staccato:IndicatorCommand
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                             c'8                                                                      %! baca_make_even_divisions
-                            - \marcato                                                               %! IndicatorCommand
-                            - \staccato                                                              %! IndicatorCommand
+                            - \marcato                                                               %! baca_marcato:IndicatorCommand
+                            - \staccato                                                              %! baca_staccato:IndicatorCommand
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                             c'8                                                                      %! baca_make_even_divisions
-                            - \marcato                                                               %! IndicatorCommand
-                            - \staccato                                                              %! IndicatorCommand
+                            - \marcato                                                               %! baca_marcato:IndicatorCommand
+                            - \staccato                                                              %! baca_staccato:IndicatorCommand
             <BLANKLINE>
                             \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                             c'8                                                                      %! baca_make_even_divisions
-                            - \marcato                                                               %! IndicatorCommand
-                            - \staccato                                                              %! IndicatorCommand
+                            - \marcato                                                               %! baca_marcato:IndicatorCommand
+                            - \staccato                                                              %! baca_staccato:IndicatorCommand
             <BLANKLINE>
                             \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                             c'8                                                                      %! baca_make_even_divisions
-                            - \marcato                                                               %! IndicatorCommand
-                            - \staccato                                                              %! IndicatorCommand
+                            - \marcato                                                               %! baca_marcato:IndicatorCommand
+                            - \staccato                                                              %! baca_staccato:IndicatorCommand
                             ]                                                                        %! baca_make_even_divisions
                             )                                                                        %! baca_slur:SpannerCommand
             <BLANKLINE>

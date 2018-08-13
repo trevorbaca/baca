@@ -12,6 +12,7 @@ from . import typings
 def accent(
     *,
     selector: typings.Selector = 'baca.phead(0)',
+    tag: typing.Optional[str] = 'baca_accent',
     ) -> commands.IndicatorCommand:
     r"""
     Attaches accent.
@@ -47,7 +48,7 @@ def accent(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             [
                             d'16
                             ]
@@ -125,21 +126,21 @@ def accent(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             [
                             e''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ]
                             ef''4
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             [
                             g''16
-                            - \accent                                                                %! IndicatorCommand
+                            - \accent                                                                %! baca_accent:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
@@ -155,12 +156,14 @@ def accent(
     return commands.IndicatorCommand(
         indicators=[abjad.Articulation('>')],
         selector=selector,
+        tags=[tag],
         )
 
 def alternate_bow_strokes(
     *,
     downbow_first: bool = True,
     selector: typings.Selector = 'baca.pheads()',
+    tag: typing.Optional[str] = 'baca_alternate_bow_strokes',
     ) -> commands.IndicatorCommand:
     r"""
     Attaches alternate bow strokes.
@@ -198,13 +201,13 @@ def alternate_bow_strokes(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \downbow                                                               %! IndicatorCommand
+                            - \downbow                                                               %! baca_alternate_bow_strokes:IndicatorCommand
                             [
                             d'16
-                            - \upbow                                                                 %! IndicatorCommand
+                            - \upbow                                                                 %! baca_alternate_bow_strokes:IndicatorCommand
                             ]
                             bf'4
-                            - \downbow                                                               %! IndicatorCommand
+                            - \downbow                                                               %! baca_alternate_bow_strokes:IndicatorCommand
                             ~
                             bf'16
                             r16
@@ -212,26 +215,26 @@ def alternate_bow_strokes(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \upbow                                                                 %! IndicatorCommand
+                            - \upbow                                                                 %! baca_alternate_bow_strokes:IndicatorCommand
                             [
                             e''16
-                            - \downbow                                                               %! IndicatorCommand
+                            - \downbow                                                               %! baca_alternate_bow_strokes:IndicatorCommand
                             ]
                             ef''4
-                            - \upbow                                                                 %! IndicatorCommand
+                            - \upbow                                                                 %! baca_alternate_bow_strokes:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \downbow                                                               %! IndicatorCommand
+                            - \downbow                                                               %! baca_alternate_bow_strokes:IndicatorCommand
                             [
                             g''16
-                            - \upbow                                                                 %! IndicatorCommand
+                            - \upbow                                                                 %! baca_alternate_bow_strokes:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
-                            - \downbow                                                               %! IndicatorCommand
+                            - \downbow                                                               %! baca_alternate_bow_strokes:IndicatorCommand
                             r4
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
@@ -270,13 +273,13 @@ def alternate_bow_strokes(
                             \override TupletBracket.staff-padding = #6                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \upbow                                                                 %! IndicatorCommand
+                            - \upbow                                                                 %! baca_alternate_bow_strokes:IndicatorCommand
                             [
                             d'16
-                            - \downbow                                                               %! IndicatorCommand
+                            - \downbow                                                               %! baca_alternate_bow_strokes:IndicatorCommand
                             ]
                             bf'4
-                            - \upbow                                                                 %! IndicatorCommand
+                            - \upbow                                                                 %! baca_alternate_bow_strokes:IndicatorCommand
                             ~
                             bf'16
                             r16
@@ -284,26 +287,26 @@ def alternate_bow_strokes(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \downbow                                                               %! IndicatorCommand
+                            - \downbow                                                               %! baca_alternate_bow_strokes:IndicatorCommand
                             [
                             e''16
-                            - \upbow                                                                 %! IndicatorCommand
+                            - \upbow                                                                 %! baca_alternate_bow_strokes:IndicatorCommand
                             ]
                             ef''4
-                            - \downbow                                                               %! IndicatorCommand
+                            - \downbow                                                               %! baca_alternate_bow_strokes:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \upbow                                                                 %! IndicatorCommand
+                            - \upbow                                                                 %! baca_alternate_bow_strokes:IndicatorCommand
                             [
                             g''16
-                            - \downbow                                                               %! IndicatorCommand
+                            - \downbow                                                               %! baca_alternate_bow_strokes:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
-                            - \upbow                                                                 %! IndicatorCommand
+                            - \upbow                                                                 %! baca_alternate_bow_strokes:IndicatorCommand
                             r4
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
@@ -356,21 +359,21 @@ def alternate_bow_strokes(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \downbow                                                               %! IndicatorCommand
+                            - \downbow                                                               %! baca_alternate_bow_strokes:IndicatorCommand
                             [
                             e''16
-                            - \upbow                                                                 %! IndicatorCommand
+                            - \upbow                                                                 %! baca_alternate_bow_strokes:IndicatorCommand
                             ]
                             ef''4
-                            - \downbow                                                               %! IndicatorCommand
+                            - \downbow                                                               %! baca_alternate_bow_strokes:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \upbow                                                                 %! IndicatorCommand
+                            - \upbow                                                                 %! baca_alternate_bow_strokes:IndicatorCommand
                             [
                             g''16
-                            - \downbow                                                               %! IndicatorCommand
+                            - \downbow                                                               %! baca_alternate_bow_strokes:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
@@ -391,11 +394,13 @@ def alternate_bow_strokes(
     return commands.IndicatorCommand(
         indicators=indicators,
         selector=selector,
+        tags=[tag],
         )
 
 def arpeggio(
     *,
     selector: typings.Selector = 'baca.chead(0)',
+    tag: typing.Optional[str] = 'baca_arpeggio',
     ) -> commands.IndicatorCommand:
     r"""
     Attaches arpeggio.
@@ -426,7 +431,7 @@ def arpeggio(
                     {
                         \scaleDurations #'(1 . 1) {
                             <c' d' bf'>8
-                            - \arpeggio                                                              %! IndicatorCommand
+                            - \arpeggio                                                              %! baca_arpeggio:IndicatorCommand
                             ~
                             [
                             <c' d' bf'>32
@@ -511,7 +516,7 @@ def arpeggio(
                         }
                         \scaleDurations #'(1 . 1) {
                             <ef'' e'' fs'''>8
-                            - \arpeggio                                                              %! IndicatorCommand
+                            - \arpeggio                                                              %! baca_arpeggio:IndicatorCommand
                             ~
                             [
                             <ef'' e'' fs'''>32
@@ -520,7 +525,7 @@ def arpeggio(
                         }
                         \scaleDurations #'(1 . 1) {
                             <g' af''>8
-                            - \arpeggio                                                              %! IndicatorCommand
+                            - \arpeggio                                                              %! baca_arpeggio:IndicatorCommand
                             ~
                             [
                             <g' af''>32
@@ -543,12 +548,14 @@ def arpeggio(
     return commands.IndicatorCommand(
         indicators=[abjad.Articulation('arpeggio')],
         selector=selector,
+        tags=[tag],
         )
 
 def articulation(
     articulation: str,
     *,
     selector: typings.Selector = 'baca.phead(0)',
+    tag: typing.Optional[str] = 'baca_articulation',
     ) -> commands.IndicatorCommand:
     """
     Attaches articulation.
@@ -557,12 +564,14 @@ def articulation(
     return commands.IndicatorCommand(
         indicators=[articulation_],
         selector=selector,
+        tags=[tag],
         )
 
 def articulations(
     articulations: typing.List,
     *,
     selector: typings.Selector = 'baca.pheads()',
+    tag: typing.Optional[str] = 'baca_articulations',
     ) -> commands.IndicatorCommand:
     """
     Attaches articulations.
@@ -570,11 +579,13 @@ def articulations(
     return commands.IndicatorCommand(
         indicators=articulations,
         selector=selector,
+        tags=[tag],
         )
 
 def breathe(
     *,
     selector: typings.Selector = 'baca.pleaf(-1)',
+    tag: typing.Optional[str] = 'baca_breathe',
     ) -> commands.IndicatorCommand:
     """
     Attaches breathe command.
@@ -583,6 +594,7 @@ def breathe(
     return commands.IndicatorCommand(
         indicators=[breathe],
         selector=selector,
+        tags=[tag],
         )
 
 def clef(
@@ -590,6 +602,7 @@ def clef(
     *,
     selector: typings.Selector = 'baca.leaf(0)',
     redundant: bool = None,
+    tag: typing.Optional[str] = 'baca_clef',
     ) -> commands.IndicatorCommand:
     r"""
     Attaches clef.
@@ -623,7 +636,7 @@ def clef(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             \override TupletBracket.staff-padding = #7                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
-                            \clef "alto"                                                             %! IndicatorCommand
+                            \clef "alto"                                                             %! baca_clef:IndicatorCommand
                             r8
                             c'16
                             [
@@ -702,7 +715,7 @@ def clef(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \clef "alto"                                                             %! IndicatorCommand
+                            \clef "alto"                                                             %! baca_clef:IndicatorCommand
                             fs''16
                             [
                             e''16
@@ -731,11 +744,13 @@ def clef(
         indicators=[indicator],
         redundant=redundant,
         selector=selector,
+        tags=[tag],
         )
 
 def double_staccato(
     *,
     selector: typings.Selector = 'baca.phead(0)',
+    tag: typing.Optional[str] = 'baca_double_staccato',
     ) -> commands.IndicatorCommand:
     r"""
     Attaches double-staccato.
@@ -771,7 +786,7 @@ def double_staccato(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \baca-staccati #2                                                      %! IndicatorCommand
+                            - \baca-staccati #2                                                      %! baca_double_staccato:IndicatorCommand
                             [
                             d'16
                             ]
@@ -849,21 +864,21 @@ def double_staccato(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \baca-staccati #2                                                      %! IndicatorCommand
+                            - \baca-staccati #2                                                      %! baca_double_staccato:IndicatorCommand
                             [
                             e''16
-                            - \baca-staccati #2                                                      %! IndicatorCommand
+                            - \baca-staccati #2                                                      %! baca_double_staccato:IndicatorCommand
                             ]
                             ef''4
-                            - \baca-staccati #2                                                      %! IndicatorCommand
+                            - \baca-staccati #2                                                      %! baca_double_staccato:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \baca-staccati #2                                                      %! IndicatorCommand
+                            - \baca-staccati #2                                                      %! baca_double_staccato:IndicatorCommand
                             [
                             g''16
-                            - \baca-staccati #2                                                      %! IndicatorCommand
+                            - \baca-staccati #2                                                      %! baca_double_staccato:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
@@ -879,11 +894,13 @@ def double_staccato(
     return commands.IndicatorCommand(
         indicators=[abjad.Articulation('baca-staccati #2')],
         selector=selector,
+        tags=[tag],
         )
 
 def down_arpeggio(
     *,
     selector: typings.Selector = 'baca.chead(0)',
+    tag: typing.Optional[str] = 'baca_down_arpeggio',
     ) -> commands.IndicatorCommand:
     r"""
     Attaches down-arpeggio.
@@ -913,9 +930,9 @@ def down_arpeggio(
                     \voiceOne
                     {
                         \scaleDurations #'(1 . 1) {
-                            \arpeggioArrowDown                                                       %! IndicatorCommand
+                            \arpeggioArrowDown                                                       %! baca_down_arpeggio:IndicatorCommand
                             <c' d' bf'>8
-                            \arpeggio                                                                %! IndicatorCommand
+                            \arpeggio                                                                %! baca_down_arpeggio:IndicatorCommand
                             ~
                             [
                             <c' d' bf'>32
@@ -999,9 +1016,9 @@ def down_arpeggio(
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \arpeggioArrowDown                                                       %! IndicatorCommand
+                            \arpeggioArrowDown                                                       %! baca_down_arpeggio:IndicatorCommand
                             <ef'' e'' fs'''>8
-                            \arpeggio                                                                %! IndicatorCommand
+                            \arpeggio                                                                %! baca_down_arpeggio:IndicatorCommand
                             ~
                             [
                             <ef'' e'' fs'''>32
@@ -1009,9 +1026,9 @@ def down_arpeggio(
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \arpeggioArrowDown                                                       %! IndicatorCommand
+                            \arpeggioArrowDown                                                       %! baca_down_arpeggio:IndicatorCommand
                             <g' af''>8
-                            \arpeggio                                                                %! IndicatorCommand
+                            \arpeggio                                                                %! baca_down_arpeggio:IndicatorCommand
                             ~
                             [
                             <g' af''>32
@@ -1034,11 +1051,13 @@ def down_arpeggio(
     return commands.IndicatorCommand(
         indicators=[abjad.Arpeggio(direction=abjad.Down)],
         selector=selector,
+        tags=[tag],
         )
 
 def down_bow(
     *,
     selector: typings.Selector = 'baca.phead(0)',
+    tag: typing.Optional[str] = 'baca_down_bow',
     ) -> commands.IndicatorCommand:
     r"""
     Attaches down-bow.
@@ -1074,7 +1093,7 @@ def down_bow(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \downbow                                                               %! IndicatorCommand
+                            - \downbow                                                               %! baca_down_bow:IndicatorCommand
                             [
                             d'16
                             ]
@@ -1152,21 +1171,21 @@ def down_bow(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \downbow                                                               %! IndicatorCommand
+                            - \downbow                                                               %! baca_down_bow:IndicatorCommand
                             [
                             e''16
-                            - \downbow                                                               %! IndicatorCommand
+                            - \downbow                                                               %! baca_down_bow:IndicatorCommand
                             ]
                             ef''4
-                            - \downbow                                                               %! IndicatorCommand
+                            - \downbow                                                               %! baca_down_bow:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \downbow                                                               %! IndicatorCommand
+                            - \downbow                                                               %! baca_down_bow:IndicatorCommand
                             [
                             g''16
-                            - \downbow                                                               %! IndicatorCommand
+                            - \downbow                                                               %! baca_down_bow:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
@@ -1182,11 +1201,13 @@ def down_bow(
     return commands.IndicatorCommand(
         indicators=[abjad.Articulation('downbow')],
         selector=selector,
+        tags=[tag],
         )
 
 def espressivo(
     *,
     selector: typings.Selector = 'baca.phead(0)',
+    tag: typing.Optional[str] = 'baca_espressivo',
     ) -> commands.IndicatorCommand:
     r"""
     Attaches espressivo.
@@ -1222,7 +1243,7 @@ def espressivo(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \espressivo                                                            %! IndicatorCommand
+                            - \espressivo                                                            %! baca_espressivo:IndicatorCommand
                             [
                             d'16
                             ]
@@ -1300,21 +1321,21 @@ def espressivo(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \espressivo                                                            %! IndicatorCommand
+                            - \espressivo                                                            %! baca_espressivo:IndicatorCommand
                             [
                             e''16
-                            - \espressivo                                                            %! IndicatorCommand
+                            - \espressivo                                                            %! baca_espressivo:IndicatorCommand
                             ]
                             ef''4
-                            - \espressivo                                                            %! IndicatorCommand
+                            - \espressivo                                                            %! baca_espressivo:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \espressivo                                                            %! IndicatorCommand
+                            - \espressivo                                                            %! baca_espressivo:IndicatorCommand
                             [
                             g''16
-                            - \espressivo                                                            %! IndicatorCommand
+                            - \espressivo                                                            %! baca_espressivo:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
@@ -1330,11 +1351,13 @@ def espressivo(
     return commands.IndicatorCommand(
         indicators=[abjad.Articulation('espressivo')],
         selector=selector,
+        tags=[tag],
         )
 
 def fermata(
     *,
     selector: typings.Selector = 'baca.leaf(0)',
+    tag: typing.Optional[str] = 'baca_fermata',
     ) -> commands.IndicatorCommand:
     r"""
     Attaches fermata.
@@ -1369,7 +1392,7 @@ def fermata(
                         \times 9/10 {
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            - \fermata                                                               %! IndicatorCommand
+                            - \fermata                                                               %! baca_fermata:IndicatorCommand
                             c'16
                             [
                             d'16
@@ -1445,7 +1468,7 @@ def fermata(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \fermata                                                               %! IndicatorCommand
+                            - \fermata                                                               %! baca_fermata:IndicatorCommand
                             [
                             e''16
                             ]
@@ -1471,11 +1494,13 @@ def fermata(
     return commands.IndicatorCommand(
         indicators=[abjad.Articulation('fermata')],
         selector=selector,
+        tags=[tag],
         )
 
 def flageolet(
     *,
     selector: typings.Selector = 'baca.phead(0)',
+    tag: typing.Optional[str] = 'baca_flageolet',
     ) -> commands.IndicatorCommand:
     r"""
     Attaches flageolet.
@@ -1511,7 +1536,7 @@ def flageolet(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \flageolet                                                             %! IndicatorCommand
+                            - \flageolet                                                             %! baca_flageolet:IndicatorCommand
                             [
                             d'16
                             ]
@@ -1589,21 +1614,21 @@ def flageolet(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \flageolet                                                             %! IndicatorCommand
+                            - \flageolet                                                             %! baca_flageolet:IndicatorCommand
                             [
                             e''16
-                            - \flageolet                                                             %! IndicatorCommand
+                            - \flageolet                                                             %! baca_flageolet:IndicatorCommand
                             ]
                             ef''4
-                            - \flageolet                                                             %! IndicatorCommand
+                            - \flageolet                                                             %! baca_flageolet:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \flageolet                                                             %! IndicatorCommand
+                            - \flageolet                                                             %! baca_flageolet:IndicatorCommand
                             [
                             g''16
-                            - \flageolet                                                             %! IndicatorCommand
+                            - \flageolet                                                             %! baca_flageolet:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
@@ -1619,13 +1644,15 @@ def flageolet(
     return commands.IndicatorCommand(
         indicators=[abjad.Articulation('flageolet')],
         selector=selector,
+        tags=[tag],
         )
 
 def hide_black_note_heads(
     *,
     selector: typings.Selector = 'baca.leaves()',
+    tag: typing.Optional[str] = 'hide_black_note_heads',
     ) -> commands.IndicatorCommand:
-    """
+    r"""
     Attaches note-head stencil false to black note-heads.
 
     ..  container:: example
@@ -1697,7 +1724,7 @@ def hide_black_note_heads(
                             c'2                                                                      %! baca_make_notes
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                            \once \override NoteHead.transparent = ##t                               %! IndicatorCommand
+                            \once \override NoteHead.transparent = ##t                               %! hide_black_note_heads:IndicatorCommand
                             \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                             c'4.                                                                     %! baca_make_notes
             <BLANKLINE>
@@ -1706,7 +1733,7 @@ def hide_black_note_heads(
                             c'2                                                                      %! baca_make_notes
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                            \once \override NoteHead.transparent = ##t                               %! IndicatorCommand
+                            \once \override NoteHead.transparent = ##t                               %! hide_black_note_heads:IndicatorCommand
                             \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                             c'4.                                                                     %! baca_make_notes
             <BLANKLINE>
@@ -1725,11 +1752,13 @@ def hide_black_note_heads(
         indicators=[literal],
         predicate=lambda _: _.written_duration < abjad.Duration(1, 2),
         selector=selector,
+        tags=[tag],
         )
 
 def laissez_vibrer(
     *,
     selector: typings.Selector  = 'baca.ptail(0)',
+    tag: typing.Optional[str] = 'baca_laissez_vibrer',
     ) -> commands.IndicatorCommand:
     r"""
     Attaches laissez vibrer.
@@ -1765,7 +1794,7 @@ def laissez_vibrer(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \laissezVibrer                                                         %! IndicatorCommand
+                            - \laissezVibrer                                                         %! baca_laissez_vibrer:IndicatorCommand
                             [
                             d'16
                             ]
@@ -1843,21 +1872,21 @@ def laissez_vibrer(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \laissezVibrer                                                         %! IndicatorCommand
+                            - \laissezVibrer                                                         %! baca_laissez_vibrer:IndicatorCommand
                             [
                             e''16
-                            - \laissezVibrer                                                         %! IndicatorCommand
+                            - \laissezVibrer                                                         %! baca_laissez_vibrer:IndicatorCommand
                             ]
                             ef''4
                             ~
                             ef''16
-                            - \laissezVibrer                                                         %! IndicatorCommand
+                            - \laissezVibrer                                                         %! baca_laissez_vibrer:IndicatorCommand
                             r16
                             af''16
-                            - \laissezVibrer                                                         %! IndicatorCommand
+                            - \laissezVibrer                                                         %! baca_laissez_vibrer:IndicatorCommand
                             [
                             g''16
-                            - \laissezVibrer                                                         %! IndicatorCommand
+                            - \laissezVibrer                                                         %! baca_laissez_vibrer:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
@@ -1873,6 +1902,7 @@ def laissez_vibrer(
     return commands.IndicatorCommand(
         indicators=[abjad.Articulation('laissezVibrer')],
         selector=selector,
+        tags=[tag],
         )
 
 def literal(
@@ -1880,6 +1910,7 @@ def literal(
     *,
     format_slot: str = 'before',
     selector: typings.Selector = 'baca.leaf(0)',
+    tag: typing.Optional[str] = 'baca_literal',
     ) -> commands.IndicatorCommand:
     """
     Attaches LilyPond literal.
@@ -1888,11 +1919,13 @@ def literal(
     return commands.IndicatorCommand(
         indicators=[literal],
         selector=selector,
+        tags=[tag],
         )
 
 def long_fermata(
     *,
     selector: typings.Selector = 'baca.leaf(0)',
+    tag: typing.Optional[str] = 'baca_long_fermata',
     ) -> commands.IndicatorCommand:
     r"""
     Attaches long fermata.
@@ -1927,7 +1960,7 @@ def long_fermata(
                         \times 9/10 {
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            - \longfermata                                                           %! IndicatorCommand
+                            - \longfermata                                                           %! baca_long_fermata:IndicatorCommand
                             c'16
                             [
                             d'16
@@ -2003,7 +2036,7 @@ def long_fermata(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \longfermata                                                           %! IndicatorCommand
+                            - \longfermata                                                           %! baca_long_fermata:IndicatorCommand
                             [
                             e''16
                             ]
@@ -2029,11 +2062,13 @@ def long_fermata(
     return commands.IndicatorCommand(
         indicators=[abjad.Articulation('longfermata')],
         selector=selector,
+        tags=[tag],
         )
 
 def marcato(
     *,
     selector: typings.Selector = 'baca.phead(0)',
+    tag: typing.Optional[str] = 'baca_marcato',
     ) -> commands.IndicatorCommand:
     r"""
     Attaches marcato.
@@ -2069,7 +2104,7 @@ def marcato(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \marcato                                                               %! IndicatorCommand
+                            - \marcato                                                               %! baca_marcato:IndicatorCommand
                             [
                             d'16
                             ]
@@ -2147,21 +2182,21 @@ def marcato(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \marcato                                                               %! IndicatorCommand
+                            - \marcato                                                               %! baca_marcato:IndicatorCommand
                             [
                             e''16
-                            - \marcato                                                               %! IndicatorCommand
+                            - \marcato                                                               %! baca_marcato:IndicatorCommand
                             ]
                             ef''4
-                            - \marcato                                                               %! IndicatorCommand
+                            - \marcato                                                               %! baca_marcato:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \marcato                                                               %! IndicatorCommand
+                            - \marcato                                                               %! baca_marcato:IndicatorCommand
                             [
                             g''16
-                            - \marcato                                                               %! IndicatorCommand
+                            - \marcato                                                               %! baca_marcato:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
@@ -2177,6 +2212,7 @@ def marcato(
     return commands.IndicatorCommand(
         indicators=[abjad.Articulation('marcato')],
         selector=selector,
+        tags=[tag],
         )
 
 def margin_markup(
@@ -2185,6 +2221,7 @@ def margin_markup(
     alert: commands.IndicatorCommand = None,
     context: str = 'Staff',
     selector: typings.Selector = 'baca.leaf(0)',
+    tag: typing.Optional[str] = 'baca_margin_markup',
     ) -> typing.Union[commands.IndicatorCommand, scoping.Suite]:
     r"""
     Attaches margin markup.
@@ -2255,14 +2292,14 @@ def margin_markup(
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                            \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
-                            \markup { Fl. }                                                          %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:IndicatorCommand
+                            \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
+                            \markup { Fl. }                                                          %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
                             \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                             e'2                                                                      %! baca_make_notes
                             ^ \baca-explicit-indicator-markup "[MarginMarkup]"                       %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                            \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
-                            \markup { Fl. }                                                          %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):IndicatorCommand
+                            \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:IndicatorCommand
+                            \markup { Fl. }                                                          %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:IndicatorCommand
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             f'4.                                                                     %! baca_make_notes
@@ -2299,6 +2336,7 @@ def margin_markup(
     command = commands.IndicatorCommand(
         indicators=[margin_markup],
         selector=selector,
+        tags=[tag],
         )
     if bool(alert):
         assert isinstance(alert, commands.IndicatorCommand), repr(alert)
@@ -2310,6 +2348,7 @@ def rehearsal_mark(
     argument: typing.Union[int, str],
     *tweaks: abjad.LilyPondTweakManager,
     selector: typings.Selector = 'baca.leaf(0)',
+    tag: typing.Optional[str] = 'baca_rehearsal_mark',
     ) -> commands.IndicatorCommand:
     """
     Attaches rehearsal mark.
@@ -2323,11 +2362,13 @@ def rehearsal_mark(
         *tweaks,
         indicators=[mark],
         selector=selector,
+        tags=[tag],
         )
 
 def short_fermata(
     *,
     selector: typings.Selector = 'baca.leaf(0)',
+    tag: typing.Optional[str] = 'short_fermata',
     ) -> commands.IndicatorCommand:
     r"""
     Attaches short fermata.
@@ -2362,7 +2403,7 @@ def short_fermata(
                         \times 9/10 {
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            - \shortfermata                                                          %! IndicatorCommand
+                            - \shortfermata                                                          %! short_fermata:IndicatorCommand
                             c'16
                             [
                             d'16
@@ -2440,7 +2481,7 @@ def short_fermata(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \shortfermata                                                          %! IndicatorCommand
+                            - \shortfermata                                                          %! short_fermata:IndicatorCommand
                             [
                             e''16
                             ]
@@ -2466,11 +2507,13 @@ def short_fermata(
     return commands.IndicatorCommand(
         indicators=[abjad.Articulation('shortfermata')],
         selector=selector,
+        tags=[tag],
         )
 
 def staccatissimo(
     *,
     selector: typings.Selector = 'baca.phead(0)',
+    tag: typing.Optional[str] = 'baca_staccatissimo',
     ) -> commands.IndicatorCommand:
     r"""
     Attaches staccatissimo.
@@ -2506,7 +2549,7 @@ def staccatissimo(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \staccatissimo                                                         %! IndicatorCommand
+                            - \staccatissimo                                                         %! baca_staccatissimo:IndicatorCommand
                             [
                             d'16
                             ]
@@ -2584,21 +2627,21 @@ def staccatissimo(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \staccatissimo                                                         %! IndicatorCommand
+                            - \staccatissimo                                                         %! baca_staccatissimo:IndicatorCommand
                             [
                             e''16
-                            - \staccatissimo                                                         %! IndicatorCommand
+                            - \staccatissimo                                                         %! baca_staccatissimo:IndicatorCommand
                             ]
                             ef''4
-                            - \staccatissimo                                                         %! IndicatorCommand
+                            - \staccatissimo                                                         %! baca_staccatissimo:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \staccatissimo                                                         %! IndicatorCommand
+                            - \staccatissimo                                                         %! baca_staccatissimo:IndicatorCommand
                             [
                             g''16
-                            - \staccatissimo                                                         %! IndicatorCommand
+                            - \staccatissimo                                                         %! baca_staccatissimo:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
@@ -2614,11 +2657,13 @@ def staccatissimo(
     return commands.IndicatorCommand(
         indicators=[abjad.Articulation('staccatissimo')],
         selector=selector,
+        tags=[tag],
         )
 
 def staccato(
     *,
     selector: typings.Selector = 'baca.phead(0)',
+    tag: typing.Optional[str] = 'baca_staccato',
     ) -> commands.IndicatorCommand:
     r"""
     Attaches staccato.
@@ -2654,7 +2699,7 @@ def staccato(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \staccato                                                              %! IndicatorCommand
+                            - \staccato                                                              %! baca_staccato:IndicatorCommand
                             [
                             d'16
                             ]
@@ -2732,21 +2777,21 @@ def staccato(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \staccato                                                              %! IndicatorCommand
+                            - \staccato                                                              %! baca_staccato:IndicatorCommand
                             [
                             e''16
-                            - \staccato                                                              %! IndicatorCommand
+                            - \staccato                                                              %! baca_staccato:IndicatorCommand
                             ]
                             ef''4
-                            - \staccato                                                              %! IndicatorCommand
+                            - \staccato                                                              %! baca_staccato:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \staccato                                                              %! IndicatorCommand
+                            - \staccato                                                              %! baca_staccato:IndicatorCommand
                             [
                             g''16
-                            - \staccato                                                              %! IndicatorCommand
+                            - \staccato                                                              %! baca_staccato:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
@@ -2762,12 +2807,14 @@ def staccato(
     return commands.IndicatorCommand(
         indicators=[abjad.Articulation('staccato')],
         selector=selector,
+        tags=[tag],
         )
 
 def staff_lines(
     n: int,
     *,
     selector: typings.Selector = 'baca.leaf(0)',
+    tag: typing.Optional[str] = 'baca_staff_lines',
     ) -> commands.IndicatorCommand:
     r"""
     Makes staff line command.
@@ -2844,13 +2891,13 @@ def staff_lines(
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
-                            \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
-                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
-                            \clef "percussion"                                                       %! EXPLICIT_CLEF:_set_status_tag:IndicatorCommand
+                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
+                            \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
+                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
+                            \clef "percussion"                                                       %! EXPLICIT_CLEF:_set_status_tag:baca_clef:IndicatorCommand
                             \once \override Staff.Clef.color = #(x11-color 'blue)                    %! EXPLICIT_CLEF_COLOR:_attach_color_literal(2)
                         %@% \override Staff.Clef.color = ##f                                         %! EXPLICIT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
-                            \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):IndicatorCommand
+                            \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):baca_clef:IndicatorCommand
                             \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:_attach_color_literal(2)
                             a4.                                                                      %! baca_make_notes
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
@@ -2946,13 +2993,13 @@ def staff_lines(
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
-                            \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
-                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
-                            \clef "bass"                                                             %! EXPLICIT_CLEF:_set_status_tag:IndicatorCommand
+                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
+                            \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
+                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
+                            \clef "bass"                                                             %! EXPLICIT_CLEF:_set_status_tag:baca_clef:IndicatorCommand
                             \once \override Staff.Clef.color = #(x11-color 'blue)                    %! EXPLICIT_CLEF_COLOR:_attach_color_literal(2)
                         %@% \override Staff.Clef.color = ##f                                         %! EXPLICIT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
-                            \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):IndicatorCommand
+                            \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):baca_clef:IndicatorCommand
                             \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:_attach_color_literal(2)
                             b,4.                                                                     %! baca_make_notes
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
@@ -3049,13 +3096,13 @@ def staff_lines(
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
-                            \once \override Staff.StaffSymbol.line-count = 2                         %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
-                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
-                            \clef "percussion"                                                       %! EXPLICIT_CLEF:_set_status_tag:IndicatorCommand
+                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
+                            \once \override Staff.StaffSymbol.line-count = 2                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
+                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
+                            \clef "percussion"                                                       %! EXPLICIT_CLEF:_set_status_tag:baca_clef:IndicatorCommand
                             \once \override Staff.Clef.color = #(x11-color 'blue)                    %! EXPLICIT_CLEF_COLOR:_attach_color_literal(2)
                         %@% \override Staff.Clef.color = ##f                                         %! EXPLICIT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
-                            \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):IndicatorCommand
+                            \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):baca_clef:IndicatorCommand
                             \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:_attach_color_literal(2)
                             a4.                                                                      %! baca_make_notes
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
@@ -3150,13 +3197,13 @@ def staff_lines(
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
-                            \once \override Staff.StaffSymbol.line-count = 2                         %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
-                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
-                            \clef "bass"                                                             %! EXPLICIT_CLEF:_set_status_tag:IndicatorCommand
+                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
+                            \once \override Staff.StaffSymbol.line-count = 2                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
+                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
+                            \clef "bass"                                                             %! EXPLICIT_CLEF:_set_status_tag:baca_clef:IndicatorCommand
                             \once \override Staff.Clef.color = #(x11-color 'blue)                    %! EXPLICIT_CLEF_COLOR:_attach_color_literal(2)
                         %@% \override Staff.Clef.color = ##f                                         %! EXPLICIT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
-                            \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):IndicatorCommand
+                            \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):baca_clef:IndicatorCommand
                             \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:_attach_color_literal(2)
                             b,4.                                                                     %! baca_make_notes
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
@@ -3257,14 +3304,14 @@ def staff_lines(
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
-                            \once \override Staff.StaffSymbol.line-count = 2                         %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
-                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
-                            \clef "bass"                                                             %! EXPLICIT_CLEF:_set_status_tag:IndicatorCommand
+                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
+                            \once \override Staff.StaffSymbol.line-count = 2                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
+                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
+                            \clef "bass"                                                             %! EXPLICIT_CLEF:_set_status_tag:baca_clef:IndicatorCommand
                             \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:_attach_color_literal(2)
                             \once \override Staff.Clef.color = #(x11-color 'blue)                    %! EXPLICIT_CLEF_COLOR:_attach_color_literal(2)
                         %@% \override Staff.Clef.color = ##f                                         %! EXPLICIT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
-                            \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):IndicatorCommand
+                            \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):baca_clef:IndicatorCommand
                             g'4.                                                                     %! baca_make_notes
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
@@ -3292,6 +3339,7 @@ def staff_lines(
     return commands.IndicatorCommand(
         indicators=[indicators.StaffLines(line_count=n)],
         selector=selector,
+        tags=[tag],
         )
 
 def start_markup(
@@ -3301,6 +3349,7 @@ def start_markup(
     hcenter_in: typings.Number = None,
     literal: bool = None,
     selector: typings.Selector = 'baca.leaf(0)',
+    tag: typing.Optional[str] = 'baca_start_markup',
     ) -> commands.IndicatorCommand:
     """
     Attaches start markup.
@@ -3332,13 +3381,14 @@ def start_markup(
     command = commands.IndicatorCommand(
         indicators=[start_markup],
         selector=selector,
-        tags=[abjad.Tag('baca_start_markup'), abjad.Tag('-PARTS')],
+        tags=[tag, abjad.Tag('baca_start_markup'), abjad.Tag('-PARTS')],
         )
     return command
 
 def stem_tremolo(
     *,
     selector: typings.Selector = 'baca.pleaf(0)',
+    tag: typing.Optional[str] = 'baca_stem_tremolo',
     tremolo_flags:int = 32,
     ) -> commands.IndicatorCommand:
     r"""
@@ -3375,7 +3425,7 @@ def stem_tremolo(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            :32                                                                      %! IndicatorCommand
+                            :32                                                                      %! baca_stem_tremolo:IndicatorCommand
                             [
                             d'16
                             ]
@@ -3453,22 +3503,22 @@ def stem_tremolo(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            :32                                                                      %! IndicatorCommand
+                            :32                                                                      %! baca_stem_tremolo:IndicatorCommand
                             [
                             e''16
-                            :32                                                                      %! IndicatorCommand
+                            :32                                                                      %! baca_stem_tremolo:IndicatorCommand
                             ]
                             ef''4
-                            :32                                                                      %! IndicatorCommand
+                            :32                                                                      %! baca_stem_tremolo:IndicatorCommand
                             ~
                             ef''16
-                            :32                                                                      %! IndicatorCommand
+                            :32                                                                      %! baca_stem_tremolo:IndicatorCommand
                             r16
                             af''16
-                            :32                                                                      %! IndicatorCommand
+                            :32                                                                      %! baca_stem_tremolo:IndicatorCommand
                             [
                             g''16
-                            :32                                                                      %! IndicatorCommand
+                            :32                                                                      %! baca_stem_tremolo:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
@@ -3484,11 +3534,13 @@ def stem_tremolo(
     return commands.IndicatorCommand(
         indicators=[abjad.StemTremolo(tremolo_flags=tremolo_flags)],
         selector=selector,
+        tags=[tag],
         )
 
 def stop_on_string(
     *,
     selector: typings.Selector = 'baca.phead(0)',
+    tag: typing.Optional[str] = 'baca_stop_on_string',
     ) -> commands.IndicatorCommand:
     r"""
     Attaches stop-on-string.
@@ -3549,7 +3601,7 @@ def stop_on_string(
                         }
                         \times 4/5 {
                             a'16
-                            \baca-stop-on-string                                                     %! IndicatorCommand
+                            \baca-stop-on-string                                                     %! baca_stop_on_string:IndicatorCommand
                             r4
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
@@ -3565,11 +3617,13 @@ def stop_on_string(
     return commands.IndicatorCommand(
         indicators=[literal],
         selector=selector,
+        tags=[tag],
         )
 
 def stop_trill(
     *,
     selector: typings.Selector = 'baca.leaf(0)',
+    tag: typing.Optional[str] = 'baca_stop_trill',
     ) -> commands.IndicatorCommand:
     """
     Attaches stop trill to closing-slot.
@@ -3589,11 +3643,13 @@ def stop_trill(
         r'\stopTrillSpan',
         format_slot='closing',
         selector=selector,
+        tag=tag,
         )
 
 def stopped(
     *,
     selector: typings.Selector = 'baca.phead(0)',
+    tag: typing.Optional[str] = 'baca_stoppped',
     ) -> commands.IndicatorCommand:
     r"""
     Attaches stopped +-sign.
@@ -3629,7 +3685,7 @@ def stopped(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \stopped                                                               %! IndicatorCommand
+                            - \stopped                                                               %! baca_stoppped:IndicatorCommand
                             [
                             d'16
                             ]
@@ -3666,11 +3722,13 @@ def stopped(
     return commands.IndicatorCommand(
         indicators=[abjad.Articulation('stopped')],
         selector=selector,
+        tags=[tag],
         )
 
 def tenuto(
     *,
     selector: typings.Selector = 'baca.phead(0)',
+    tag: typing.Optional[str] = 'baca_tenuto',
     ) -> commands.IndicatorCommand:
     r"""
     Attaches tenuto.
@@ -3706,7 +3764,7 @@ def tenuto(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \tenuto                                                                %! IndicatorCommand
+                            - \tenuto                                                                %! baca_tenuto:IndicatorCommand
                             [
                             d'16
                             ]
@@ -3784,21 +3842,21 @@ def tenuto(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \tenuto                                                                %! IndicatorCommand
+                            - \tenuto                                                                %! baca_tenuto:IndicatorCommand
                             [
                             e''16
-                            - \tenuto                                                                %! IndicatorCommand
+                            - \tenuto                                                                %! baca_tenuto:IndicatorCommand
                             ]
                             ef''4
-                            - \tenuto                                                                %! IndicatorCommand
+                            - \tenuto                                                                %! baca_tenuto:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \tenuto                                                                %! IndicatorCommand
+                            - \tenuto                                                                %! baca_tenuto:IndicatorCommand
                             [
                             g''16
-                            - \tenuto                                                                %! IndicatorCommand
+                            - \tenuto                                                                %! baca_tenuto:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
@@ -3814,11 +3872,13 @@ def tenuto(
     return commands.IndicatorCommand(
         indicators=[abjad.Articulation('tenuto')],
         selector=selector,
+        tags=[tag],
         )
 
 def up_arpeggio(
     *,
     selector: typings.Selector = 'baca.chead(0)',
+    tag: typing.Optional[str] = 'baca_up_arpeggio',
     ) -> commands.IndicatorCommand:
     r"""
     Attaches up-arpeggio.
@@ -3850,9 +3910,9 @@ def up_arpeggio(
                     \voiceOne
                     {
                         \scaleDurations #'(1 . 1) {
-                            \arpeggioArrowUp                                                         %! IndicatorCommand
+                            \arpeggioArrowUp                                                         %! baca_up_arpeggio:IndicatorCommand
                             <c' d' bf'>8
-                            \arpeggio                                                                %! IndicatorCommand
+                            \arpeggio                                                                %! baca_up_arpeggio:IndicatorCommand
                             ~
                             [
                             <c' d' bf'>32
@@ -3936,9 +3996,9 @@ def up_arpeggio(
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \arpeggioArrowUp                                                         %! IndicatorCommand
+                            \arpeggioArrowUp                                                         %! baca_up_arpeggio:IndicatorCommand
                             <ef'' e'' fs'''>8
-                            \arpeggio                                                                %! IndicatorCommand
+                            \arpeggio                                                                %! baca_up_arpeggio:IndicatorCommand
                             ~
                             [
                             <ef'' e'' fs'''>32
@@ -3946,9 +4006,9 @@ def up_arpeggio(
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \arpeggioArrowUp                                                         %! IndicatorCommand
+                            \arpeggioArrowUp                                                         %! baca_up_arpeggio:IndicatorCommand
                             <g' af''>8
-                            \arpeggio                                                                %! IndicatorCommand
+                            \arpeggio                                                                %! baca_up_arpeggio:IndicatorCommand
                             ~
                             [
                             <g' af''>32
@@ -3971,11 +4031,13 @@ def up_arpeggio(
     return commands.IndicatorCommand(
         indicators=[abjad.Arpeggio(direction=abjad.Up)],
         selector=selector,
+        tags=[tag],
         )
 
 def up_bow(
     *,
     selector: typings.Selector = 'baca.phead(0)',
+    tag: typing.Optional[str] = 'baca_up_bow',
     ) -> commands.IndicatorCommand:
     r"""
     Attaches up-bow.
@@ -4011,7 +4073,7 @@ def up_bow(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \upbow                                                                 %! IndicatorCommand
+                            - \upbow                                                                 %! baca_up_bow:IndicatorCommand
                             [
                             d'16
                             ]
@@ -4089,21 +4151,21 @@ def up_bow(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \upbow                                                                 %! IndicatorCommand
+                            - \upbow                                                                 %! baca_up_bow:IndicatorCommand
                             [
                             e''16
-                            - \upbow                                                                 %! IndicatorCommand
+                            - \upbow                                                                 %! baca_up_bow:IndicatorCommand
                             ]
                             ef''4
-                            - \upbow                                                                 %! IndicatorCommand
+                            - \upbow                                                                 %! baca_up_bow:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \upbow                                                                 %! IndicatorCommand
+                            - \upbow                                                                 %! baca_up_bow:IndicatorCommand
                             [
                             g''16
-                            - \upbow                                                                 %! IndicatorCommand
+                            - \upbow                                                                 %! baca_up_bow:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
@@ -4119,11 +4181,13 @@ def up_bow(
     return commands.IndicatorCommand(
         indicators=[abjad.Articulation('upbow')],
         selector=selector,
+        tags=[tag],
         )
 
 def very_long_fermata(
     *,
     selector: typings.Selector = 'baca.leaf(0)',
+    tag: typing.Optional[str] = 'baca_very_long_fermata',
     ) -> commands.IndicatorCommand:
     r"""
     Attaches very long fermata.
@@ -4158,7 +4222,7 @@ def very_long_fermata(
                         \times 9/10 {
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            - \verylongfermata                                                       %! IndicatorCommand
+                            - \verylongfermata                                                       %! baca_very_long_fermata:IndicatorCommand
                             c'16
                             [
                             d'16
@@ -4236,7 +4300,7 @@ def very_long_fermata(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \verylongfermata                                                       %! IndicatorCommand
+                            - \verylongfermata                                                       %! baca_very_long_fermata:IndicatorCommand
                             [
                             e''16
                             ]
@@ -4262,4 +4326,5 @@ def very_long_fermata(
     return commands.IndicatorCommand(
         indicators=[abjad.Articulation('verylongfermata')],
         selector=selector,
+        tags=[tag],
         )
