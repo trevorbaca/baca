@@ -2464,10 +2464,17 @@ class SegmentMaker(abjad.SegmentMaker):
             if isinstance(previous, prototype):
                 continue
             should_parallelize = False
-            spanners = abjad.inspect(previous).spanners(abjad.TextSpanner)
-            for spanner in spanners:
-                if getattr(spanner, 'leak', False) is True:
-                    should_parallelize = True
+            for wrapper in abjad.inspect(mmrest).wrappers(
+                abjad.StopTextSpan):
+                existing_tag = wrapper.tag
+                abjad.detach(wrapper, mmrest)
+                new_indicator = abjad.new(wrapper.indicator, leak=True)
+                string = '_parallelize_multimeasure_rests(2)'
+                abjad.attach(
+                    new_indicator,
+                    previous,
+                    tag=abjad.Tag(string).append(existing_tag),
+                    )
             for indicator in abjad.inspect(previous).indicators(
                 abjad.StopTextSpan):
                 if indicator.leak is True:
@@ -2476,9 +2483,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 continue
             parentage = abjad.inspect(previous).parentage()
             voice = parentage.get_first(abjad.Voice)
-            multiplier = abjad.inspect(mmrest).indicator(
-                abjad.Multiplier,
-                )
+            multiplier = abjad.inspect(mmrest).indicator(abjad.Multiplier)
             before = abjad.LilyPondLiteral(
                 [
                     rf'\voices "{voice.name}", "MultimeasureRestVoice"',
@@ -2491,9 +2496,17 @@ class SegmentMaker(abjad.SegmentMaker):
                     ],
                     'before',
                     )
-            abjad.attach(before, mmrest, tag='_parallelize_multimeasure_rests')
+            abjad.attach(
+                before,
+                mmrest,
+                tag='_parallelize_multimeasure_rests(1)',
+                )
             after = abjad.LilyPondLiteral('>>', 'after')
-            abjad.attach(after, mmrest, tag='_parallelize_multimeasure_rests')
+            abjad.attach(
+                after,
+                mmrest,
+                tag='_parallelize_multimeasure_rests(1)',
+                )
 
     def _populate_offset_to_measure_number(self):
         measure_number = self._get_first_measure_number()
