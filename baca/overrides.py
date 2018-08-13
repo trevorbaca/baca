@@ -1182,22 +1182,22 @@ def dls_staff_padding(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            \p                                                                       %! PiecewiseIndicatorCommand(1)
-                            \<                                                                       %! PiecewiseIndicatorCommand(1)
+                            \p                                                                       %! PiecewiseCommand(1)
+                            \<                                                                       %! PiecewiseCommand(1)
                             [
                             d'16
                             ]
                             bf'4
                             ~
                             bf'16
-                            \f                                                                       %! PiecewiseIndicatorCommand(2)
+                            \f                                                                       %! PiecewiseCommand(2)
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            \p                                                                       %! PiecewiseIndicatorCommand(1)
-                            \<                                                                       %! PiecewiseIndicatorCommand(1)
+                            \p                                                                       %! PiecewiseCommand(1)
+                            \<                                                                       %! PiecewiseCommand(1)
                             [
                             e''16
                             ]
@@ -1208,12 +1208,12 @@ def dls_staff_padding(
                             af''16
                             [
                             g''16
-                            \f                                                                       %! PiecewiseIndicatorCommand(2)
+                            \f                                                                       %! PiecewiseCommand(2)
                             ]
                         }
                         \times 4/5 {
                             a'16
-                            \p                                                                       %! PiecewiseIndicatorCommand(1)
+                            \p                                                                       %! PiecewiseCommand(1)
                             r4
                             \revert DynamicLineSpanner.staff-padding                                 %! baca_dls_staff_padding:OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
@@ -1261,23 +1261,23 @@ def dls_staff_padding(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            \p                                                                       %! PiecewiseIndicatorCommand(1)
-                            \<                                                                       %! PiecewiseIndicatorCommand(1)
+                            \p                                                                       %! PiecewiseCommand(1)
+                            \<                                                                       %! PiecewiseCommand(1)
                             [
                             d'16
                             ]
                             bf'4
                             ~
                             bf'16
-                            \f                                                                       %! PiecewiseIndicatorCommand(2)
+                            \f                                                                       %! PiecewiseCommand(2)
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             \override DynamicLineSpanner.staff-padding = #'4                         %! baca_dls_staff_padding:OverrideCommand(1)
                             fs''16
-                            \p                                                                       %! PiecewiseIndicatorCommand(1)
-                            \<                                                                       %! PiecewiseIndicatorCommand(1)
+                            \p                                                                       %! PiecewiseCommand(1)
+                            \<                                                                       %! PiecewiseCommand(1)
                             [
                             e''16
                             ]
@@ -1288,13 +1288,13 @@ def dls_staff_padding(
                             af''16
                             [
                             g''16
-                            \f                                                                       %! PiecewiseIndicatorCommand(2)
+                            \f                                                                       %! PiecewiseCommand(2)
                             ]
                             \revert DynamicLineSpanner.staff-padding                                 %! baca_dls_staff_padding:OverrideCommand(2)
                         }
                         \times 4/5 {
                             a'16
-                            \p                                                                       %! PiecewiseIndicatorCommand(1)
+                            \p                                                                       %! PiecewiseCommand(1)
                             r4
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
@@ -1359,22 +1359,22 @@ def dls_up(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            \p                                                                       %! PiecewiseIndicatorCommand(1)
-                            \<                                                                       %! PiecewiseIndicatorCommand(1)
+                            \p                                                                       %! PiecewiseCommand(1)
+                            \<                                                                       %! PiecewiseCommand(1)
                             [
                             d'16
                             ]
                             bf'4
                             ~
                             bf'16
-                            \f                                                                       %! PiecewiseIndicatorCommand(2)
+                            \f                                                                       %! PiecewiseCommand(2)
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            \p                                                                       %! PiecewiseIndicatorCommand(1)
-                            \<                                                                       %! PiecewiseIndicatorCommand(1)
+                            \p                                                                       %! PiecewiseCommand(1)
+                            \<                                                                       %! PiecewiseCommand(1)
                             [
                             e''16
                             ]
@@ -1385,12 +1385,12 @@ def dls_up(
                             af''16
                             [
                             g''16
-                            \f                                                                       %! PiecewiseIndicatorCommand(2)
+                            \f                                                                       %! PiecewiseCommand(2)
                             ]
                         }
                         \times 4/5 {
                             a'16
-                            \p                                                                       %! PiecewiseIndicatorCommand(1)
+                            \p                                                                       %! PiecewiseCommand(1)
                             r4
                             \revert DynamicLineSpanner.direction                                     %! baca_dls_up:OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
@@ -1438,23 +1438,23 @@ def dls_up(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            \p                                                                       %! PiecewiseIndicatorCommand(1)
-                            \<                                                                       %! PiecewiseIndicatorCommand(1)
+                            \p                                                                       %! PiecewiseCommand(1)
+                            \<                                                                       %! PiecewiseCommand(1)
                             [
                             d'16
                             ]
                             bf'4
                             ~
                             bf'16
-                            \f                                                                       %! PiecewiseIndicatorCommand(2)
+                            \f                                                                       %! PiecewiseCommand(2)
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             \override DynamicLineSpanner.direction = #up                             %! baca_dls_up:OverrideCommand(1)
                             fs''16
-                            \p                                                                       %! PiecewiseIndicatorCommand(1)
-                            \<                                                                       %! PiecewiseIndicatorCommand(1)
+                            \p                                                                       %! PiecewiseCommand(1)
+                            \<                                                                       %! PiecewiseCommand(1)
                             [
                             e''16
                             ]
@@ -1465,13 +1465,13 @@ def dls_up(
                             af''16
                             [
                             g''16
-                            \f                                                                       %! PiecewiseIndicatorCommand(2)
+                            \f                                                                       %! PiecewiseCommand(2)
                             ]
                             \revert DynamicLineSpanner.direction                                     %! baca_dls_up:OverrideCommand(2)
                         }
                         \times 4/5 {
                             a'16
-                            \p                                                                       %! PiecewiseIndicatorCommand(1)
+                            \p                                                                       %! PiecewiseCommand(1)
                             r4
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
@@ -7175,12 +7175,12 @@ def text_spanner_staff_padding(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \abjad-dashed-line-with-arrow                                          %! PiecewiseIndicatorCommand(1)
-                            - \baca-text-spanner-left-text "pont."                                   %! PiecewiseIndicatorCommand(1)
-                            - \baca-text-spanner-right-text "ord."                                   %! PiecewiseIndicatorCommand(1)
-                            - \tweak bound-details.right.padding #0.5                                %! PiecewiseIndicatorCommand(1)
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PiecewiseIndicatorCommand(1)
-                            \startTextSpan                                                           %! PiecewiseIndicatorCommand(1)
+                            - \abjad-dashed-line-with-arrow                                          %! PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "pont."                                   %! PiecewiseCommand(1)
+                            - \baca-text-spanner-right-text "ord."                                   %! PiecewiseCommand(1)
+                            - \tweak bound-details.right.padding #0.5                                %! PiecewiseCommand(1)
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PiecewiseCommand(1)
+                            \startTextSpan                                                           %! PiecewiseCommand(1)
                             [
                             d'16
                             ]
@@ -7206,7 +7206,7 @@ def text_spanner_staff_padding(
                         }
                         \times 4/5 {
                             a'16
-                            \stopTextSpan                                                            %! PiecewiseIndicatorCommand(2)
+                            \stopTextSpan                                                            %! PiecewiseCommand(2)
                             r4
                             \revert TextSpanner.staff-padding                                        %! baca_text_spanner_staff_padding:OverrideCommand(2)
                             \revert TextScript.staff-padding                                         %! baca_script_staff_padding:OverrideCommand(2)
@@ -7268,12 +7268,12 @@ def text_spanner_staff_padding(
                         \times 9/10 {
                             \override TextSpanner.staff-padding = #6                                 %! baca_text_spanner_staff_padding:OverrideCommand(1)
                             fs''16
-                            - \abjad-dashed-line-with-arrow                                          %! PiecewiseIndicatorCommand(1)
-                            - \baca-text-spanner-left-text "pont."                                   %! PiecewiseIndicatorCommand(1)
-                            - \baca-text-spanner-right-text "ord."                                   %! PiecewiseIndicatorCommand(1)
-                            - \tweak bound-details.right.padding #0.5                                %! PiecewiseIndicatorCommand(1)
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PiecewiseIndicatorCommand(1)
-                            \startTextSpan                                                           %! PiecewiseIndicatorCommand(1)
+                            - \abjad-dashed-line-with-arrow                                          %! PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "pont."                                   %! PiecewiseCommand(1)
+                            - \baca-text-spanner-right-text "ord."                                   %! PiecewiseCommand(1)
+                            - \tweak bound-details.right.padding #0.5                                %! PiecewiseCommand(1)
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PiecewiseCommand(1)
+                            \startTextSpan                                                           %! PiecewiseCommand(1)
                             [
                             e''16
                             ]
@@ -7284,7 +7284,7 @@ def text_spanner_staff_padding(
                             af''16
                             [
                             g''16
-                            \stopTextSpan                                                            %! PiecewiseIndicatorCommand(2)
+                            \stopTextSpan                                                            %! PiecewiseCommand(2)
                             ]
                             \revert TextSpanner.staff-padding                                        %! baca_text_spanner_staff_padding:OverrideCommand(2)
                         }

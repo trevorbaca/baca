@@ -23,7 +23,7 @@ piecewise
    :nosignatures:
 
    ~IndicatorBundle
-   ~PiecewiseIndicatorCommand
+   ~PiecewiseCommand
 
 .. autoclass:: IndicatorBundle
 
@@ -111,7 +111,7 @@ piecewise
 
    .. autoattribute:: IndicatorBundle.spanner_stop
 
-.. autoclass:: PiecewiseIndicatorCommand
+.. autoclass:: PiecewiseCommand
 
    .. raw:: html
 
@@ -141,15 +141,15 @@ piecewise
 
    .. container:: inherited
 
-      .. automethod:: PiecewiseIndicatorCommand.__call__
+      .. automethod:: PiecewiseCommand.__call__
 
    .. container:: inherited
 
-      .. automethod:: PiecewiseIndicatorCommand.__format__
+      .. automethod:: PiecewiseCommand.__format__
 
    .. container:: inherited
 
-      .. automethod:: PiecewiseIndicatorCommand.__repr__
+      .. automethod:: PiecewiseCommand.__repr__
 
    .. raw:: html
 
@@ -160,7 +160,7 @@ piecewise
 
    .. container:: inherited
 
-      .. automethod:: PiecewiseIndicatorCommand.get_tag
+      .. automethod:: PiecewiseCommand.get_tag
 
    .. raw:: html
 
@@ -171,23 +171,23 @@ piecewise
 
    .. container:: inherited
 
-      .. autoattribute:: PiecewiseIndicatorCommand.map
+      .. autoattribute:: PiecewiseCommand.map
 
    .. container:: inherited
 
-      .. autoattribute:: PiecewiseIndicatorCommand.measures
+      .. autoattribute:: PiecewiseCommand.measures
 
    .. container:: inherited
 
-      .. autoattribute:: PiecewiseIndicatorCommand.runtime
+      .. autoattribute:: PiecewiseCommand.runtime
 
    .. container:: inherited
 
-      .. autoattribute:: PiecewiseIndicatorCommand.scope
+      .. autoattribute:: PiecewiseCommand.scope
 
    .. container:: inherited
 
-      .. autoattribute:: PiecewiseIndicatorCommand.tag_measure_number
+      .. autoattribute:: PiecewiseCommand.tag_measure_number
 
    .. raw:: html
 
@@ -196,37 +196,37 @@ piecewise
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: PiecewiseIndicatorCommand.bookend
+   .. autoattribute:: PiecewiseCommand.bookend
 
-   .. autoattribute:: PiecewiseIndicatorCommand.bundles
-
-   .. container:: inherited
-
-      .. autoattribute:: PiecewiseIndicatorCommand.deactivate
-
-   .. autoattribute:: PiecewiseIndicatorCommand.final_piece_spanner
-
-   .. autoattribute:: PiecewiseIndicatorCommand.leak
+   .. autoattribute:: PiecewiseCommand.bundles
 
    .. container:: inherited
 
-      .. autoattribute:: PiecewiseIndicatorCommand.match
+      .. autoattribute:: PiecewiseCommand.deactivate
 
-   .. autoattribute:: PiecewiseIndicatorCommand.piece_selector
+   .. autoattribute:: PiecewiseCommand.final_piece_spanner
 
-   .. autoattribute:: PiecewiseIndicatorCommand.remove_length_1_spanner_start
-
-   .. autoattribute:: PiecewiseIndicatorCommand.right_broken
-
-   .. autoattribute:: PiecewiseIndicatorCommand.selector
+   .. autoattribute:: PiecewiseCommand.leak
 
    .. container:: inherited
 
-      .. autoattribute:: PiecewiseIndicatorCommand.tag
+      .. autoattribute:: PiecewiseCommand.match
+
+   .. autoattribute:: PiecewiseCommand.piece_selector
+
+   .. autoattribute:: PiecewiseCommand.remove_length_1_spanner_start
+
+   .. autoattribute:: PiecewiseCommand.right_broken
+
+   .. autoattribute:: PiecewiseCommand.selector
 
    .. container:: inherited
 
-      .. autoattribute:: PiecewiseIndicatorCommand.tags
+      .. autoattribute:: PiecewiseCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: PiecewiseCommand.tags
 
 .. raw:: html
 

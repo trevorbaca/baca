@@ -780,7 +780,7 @@ Piecewise library.
    :nosignatures:
 
    ~baca.piecewise.IndicatorBundle
-   ~baca.piecewise.PiecewiseIndicatorCommand
+   ~baca.piecewise.PiecewiseCommand
 
 .. raw:: html
 

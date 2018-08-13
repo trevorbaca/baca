@@ -7045,8 +7045,8 @@ class MusicMaker(abjad.AbjadObject):
                         {
                             \scaleDurations #'(1 . 1) {
                                 c'16
-                                \p                                                                       %! PiecewiseIndicatorCommand(1)
-                                \<                                                                       %! PiecewiseIndicatorCommand(1)
+                                \p                                                                       %! PiecewiseCommand(1)
+                                \<                                                                       %! PiecewiseCommand(1)
                                 [
                                 d'16
                                 bf'16
@@ -7066,7 +7066,7 @@ class MusicMaker(abjad.AbjadObject):
                                 cs''16
                                 a'16
                                 af'16
-                                \f                                                                       %! PiecewiseIndicatorCommand(2)
+                                \f                                                                       %! PiecewiseCommand(2)
                                 ]
                             }
                         }
@@ -7113,20 +7113,20 @@ class MusicMaker(abjad.AbjadObject):
                         {
                             \scaleDurations #'(1 . 1) {
                                 c'16
-                                \p                                                                       %! PiecewiseIndicatorCommand(1)
-                                \<                                                                       %! PiecewiseIndicatorCommand(1)
+                                \p                                                                       %! PiecewiseCommand(1)
+                                \<                                                                       %! PiecewiseCommand(1)
                                 [
                                 d'16
                                 bf'16
                                 fs''16
-                                \f                                                                       %! PiecewiseIndicatorCommand(2)
+                                \f                                                                       %! PiecewiseCommand(2)
                                 ]
                             }
                             \scaleDurations #'(1 . 1) {
                                 r16
                                 ef''16
-                                \p                                                                       %! PiecewiseIndicatorCommand(1)
-                                \<                                                                       %! PiecewiseIndicatorCommand(1)
+                                \p                                                                       %! PiecewiseCommand(1)
+                                \<                                                                       %! PiecewiseCommand(1)
                                 [
                                 b''16
                                 ]
@@ -7137,7 +7137,7 @@ class MusicMaker(abjad.AbjadObject):
                                 cs''16
                                 a'16
                                 af'16
-                                \f                                                                       %! PiecewiseIndicatorCommand(2)
+                                \f                                                                       %! PiecewiseCommand(2)
                                 ]
                             }
                         }
@@ -7181,13 +7181,13 @@ class MusicMaker(abjad.AbjadObject):
                         {
                             \scaleDurations #'(1 . 1) {
                                 c'16
-                                \p                                                                       %! PiecewiseIndicatorCommand(1)
-                                \<                                                                       %! PiecewiseIndicatorCommand(1)
+                                \p                                                                       %! PiecewiseCommand(1)
+                                \<                                                                       %! PiecewiseCommand(1)
                                 [
                                 d'16
                                 bf'16
                                 fs''16
-                                \f                                                                       %! PiecewiseIndicatorCommand(2)
+                                \f                                                                       %! PiecewiseCommand(2)
                                 ]
                             }
                             \scaleDurations #'(1 . 1) {
@@ -7199,13 +7199,13 @@ class MusicMaker(abjad.AbjadObject):
                             }
                             \scaleDurations #'(1 . 1) {
                                 g''16
-                                \f                                                                       %! PiecewiseIndicatorCommand(1)
-                                \>                                                                       %! PiecewiseIndicatorCommand(1)
+                                \f                                                                       %! PiecewiseCommand(1)
+                                \>                                                                       %! PiecewiseCommand(1)
                                 [
                                 cs''16
                                 a'16
                                 af'16
-                                \p                                                                       %! PiecewiseIndicatorCommand(2)
+                                \p                                                                       %! PiecewiseCommand(2)
                                 ]
                             }
                         }
@@ -7249,34 +7249,34 @@ class MusicMaker(abjad.AbjadObject):
                         {
                             \scaleDurations #'(1 . 1) {
                                 c'16
-                                \p                                                                       %! PiecewiseIndicatorCommand(1)
-                                \<                                                                       %! PiecewiseIndicatorCommand(1)
+                                \p                                                                       %! PiecewiseCommand(1)
+                                \<                                                                       %! PiecewiseCommand(1)
                                 [
                                 d'16
                                 bf'16
                                 fs''16
-                                \f                                                                       %! PiecewiseIndicatorCommand(2)
+                                \f                                                                       %! PiecewiseCommand(2)
                                 ]
                             }
                             \scaleDurations #'(1 . 1) {
                                 e''16
-                                \p                                                                       %! PiecewiseIndicatorCommand(1)
-                                \<                                                                       %! PiecewiseIndicatorCommand(1)
+                                \p                                                                       %! PiecewiseCommand(1)
+                                \<                                                                       %! PiecewiseCommand(1)
                                 [
                                 ef''16
                                 b''16
-                                \f                                                                       %! PiecewiseIndicatorCommand(2)
+                                \f                                                                       %! PiecewiseCommand(2)
                                 ]
                             }
                             \scaleDurations #'(1 . 1) {
                                 g''16
-                                \f                                                                       %! PiecewiseIndicatorCommand(1)
-                                \>                                                                       %! PiecewiseIndicatorCommand(1)
+                                \f                                                                       %! PiecewiseCommand(1)
+                                \>                                                                       %! PiecewiseCommand(1)
                                 [
                                 cs''16
                                 a'16
                                 af'16
-                                \p                                                                       %! PiecewiseIndicatorCommand(2)
+                                \p                                                                       %! PiecewiseCommand(2)
                                 ]
                             }
                         }
