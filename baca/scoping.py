@@ -902,7 +902,7 @@ def new(
                             - \marcato                                                               %! IndicatorCommand
                             - \staccato                                                              %! IndicatorCommand
                             [                                                                        %! baca_make_even_divisions
-                            (                                                                        %! SpannerCommand
+                            (                                                                        %! baca_slur:SpannerCommand
             <BLANKLINE>
                             \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                             c'8                                                                      %! baca_make_even_divisions
@@ -937,7 +937,7 @@ def new(
                             - \marcato                                                               %! IndicatorCommand
                             - \staccato                                                              %! IndicatorCommand
                             ]                                                                        %! baca_make_even_divisions
-                            )                                                                        %! SpannerCommand
+                            )                                                                        %! baca_slur:SpannerCommand
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             \baca-unpitched-music-warning                                            %! _color_unpitched_notes
@@ -1056,7 +1056,7 @@ def new(
                             - \marcato                                                               %! IndicatorCommand
                             - \staccato                                                              %! IndicatorCommand
                             [                                                                        %! baca_make_even_divisions
-                            (                                                                        %! SpannerCommand
+                            (                                                                        %! baca_slur:SpannerCommand
             <BLANKLINE>
                             \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                             c'8                                                                      %! baca_make_even_divisions
@@ -1091,7 +1091,7 @@ def new(
                             - \marcato                                                               %! IndicatorCommand
                             - \staccato                                                              %! IndicatorCommand
                             ]                                                                        %! baca_make_even_divisions
-                            )                                                                        %! SpannerCommand
+                            )                                                                        %! baca_slur:SpannerCommand
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             \baca-unpitched-music-warning                                            %! _color_unpitched_notes

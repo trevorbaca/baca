@@ -7045,8 +7045,8 @@ class MusicMaker(abjad.AbjadObject):
                         {
                             \scaleDurations #'(1 . 1) {
                                 c'16
-                                \p                                                                       %! PiecewiseCommand(1)
-                                \<                                                                       %! PiecewiseCommand(1)
+                                \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
+                                \<                                                                       %! baca_hairpin:PiecewiseCommand(1)
                                 [
                                 d'16
                                 bf'16
@@ -7066,7 +7066,7 @@ class MusicMaker(abjad.AbjadObject):
                                 cs''16
                                 a'16
                                 af'16
-                                \f                                                                       %! PiecewiseCommand(2)
+                                \f                                                                       %! baca_hairpin:PiecewiseCommand(2)
                                 ]
                             }
                         }
@@ -7113,20 +7113,20 @@ class MusicMaker(abjad.AbjadObject):
                         {
                             \scaleDurations #'(1 . 1) {
                                 c'16
-                                \p                                                                       %! PiecewiseCommand(1)
-                                \<                                                                       %! PiecewiseCommand(1)
+                                \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
+                                \<                                                                       %! baca_hairpin:PiecewiseCommand(1)
                                 [
                                 d'16
                                 bf'16
                                 fs''16
-                                \f                                                                       %! PiecewiseCommand(2)
+                                \f                                                                       %! baca_hairpin:PiecewiseCommand(2)
                                 ]
                             }
                             \scaleDurations #'(1 . 1) {
                                 r16
                                 ef''16
-                                \p                                                                       %! PiecewiseCommand(1)
-                                \<                                                                       %! PiecewiseCommand(1)
+                                \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
+                                \<                                                                       %! baca_hairpin:PiecewiseCommand(1)
                                 [
                                 b''16
                                 ]
@@ -7137,7 +7137,7 @@ class MusicMaker(abjad.AbjadObject):
                                 cs''16
                                 a'16
                                 af'16
-                                \f                                                                       %! PiecewiseCommand(2)
+                                \f                                                                       %! baca_hairpin:PiecewiseCommand(2)
                                 ]
                             }
                         }
@@ -7181,13 +7181,13 @@ class MusicMaker(abjad.AbjadObject):
                         {
                             \scaleDurations #'(1 . 1) {
                                 c'16
-                                \p                                                                       %! PiecewiseCommand(1)
-                                \<                                                                       %! PiecewiseCommand(1)
+                                \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
+                                \<                                                                       %! baca_hairpin:PiecewiseCommand(1)
                                 [
                                 d'16
                                 bf'16
                                 fs''16
-                                \f                                                                       %! PiecewiseCommand(2)
+                                \f                                                                       %! baca_hairpin:PiecewiseCommand(2)
                                 ]
                             }
                             \scaleDurations #'(1 . 1) {
@@ -7199,13 +7199,13 @@ class MusicMaker(abjad.AbjadObject):
                             }
                             \scaleDurations #'(1 . 1) {
                                 g''16
-                                \f                                                                       %! PiecewiseCommand(1)
-                                \>                                                                       %! PiecewiseCommand(1)
+                                \f                                                                       %! baca_hairpin:PiecewiseCommand(1)
+                                \>                                                                       %! baca_hairpin:PiecewiseCommand(1)
                                 [
                                 cs''16
                                 a'16
                                 af'16
-                                \p                                                                       %! PiecewiseCommand(2)
+                                \p                                                                       %! baca_hairpin:PiecewiseCommand(2)
                                 ]
                             }
                         }
@@ -7249,34 +7249,34 @@ class MusicMaker(abjad.AbjadObject):
                         {
                             \scaleDurations #'(1 . 1) {
                                 c'16
-                                \p                                                                       %! PiecewiseCommand(1)
-                                \<                                                                       %! PiecewiseCommand(1)
+                                \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
+                                \<                                                                       %! baca_hairpin:PiecewiseCommand(1)
                                 [
                                 d'16
                                 bf'16
                                 fs''16
-                                \f                                                                       %! PiecewiseCommand(2)
+                                \f                                                                       %! baca_hairpin:PiecewiseCommand(2)
                                 ]
                             }
                             \scaleDurations #'(1 . 1) {
                                 e''16
-                                \p                                                                       %! PiecewiseCommand(1)
-                                \<                                                                       %! PiecewiseCommand(1)
+                                \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
+                                \<                                                                       %! baca_hairpin:PiecewiseCommand(1)
                                 [
                                 ef''16
                                 b''16
-                                \f                                                                       %! PiecewiseCommand(2)
+                                \f                                                                       %! baca_hairpin:PiecewiseCommand(2)
                                 ]
                             }
                             \scaleDurations #'(1 . 1) {
                                 g''16
-                                \f                                                                       %! PiecewiseCommand(1)
-                                \>                                                                       %! PiecewiseCommand(1)
+                                \f                                                                       %! baca_hairpin:PiecewiseCommand(1)
+                                \>                                                                       %! baca_hairpin:PiecewiseCommand(1)
                                 [
                                 cs''16
                                 a'16
                                 af'16
-                                \p                                                                       %! PiecewiseCommand(2)
+                                \p                                                                       %! baca_hairpin:PiecewiseCommand(2)
                                 ]
                             }
                         }
@@ -7318,7 +7318,7 @@ class MusicMaker(abjad.AbjadObject):
                             \scaleDurations #'(1 . 1) {
                                 c'16
                                 [
-                                (                                                                        %! SpannerCommand
+                                (                                                                        %! baca_slur:SpannerCommand
                                 d'16
                                 bf'16
                                 fs''16
@@ -7338,7 +7338,7 @@ class MusicMaker(abjad.AbjadObject):
                                 a'16
                                 af'16
                                 ]
-                                )                                                                        %! SpannerCommand
+                                )                                                                        %! baca_slur:SpannerCommand
                             }
                         }
                     }
@@ -7382,31 +7382,31 @@ class MusicMaker(abjad.AbjadObject):
                             \scaleDurations #'(1 . 1) {
                                 c'16
                                 [
-                                (                                                                        %! SpannerCommand
+                                (                                                                        %! baca_slur:SpannerCommand
                                 d'16
                                 bf'16
                                 fs''16
                                 ]
-                                )                                                                        %! SpannerCommand
+                                )                                                                        %! baca_slur:SpannerCommand
                             }
                             \scaleDurations #'(1 . 1) {
                                 e''16
                                 [
-                                (                                                                        %! SpannerCommand
+                                (                                                                        %! baca_slur:SpannerCommand
                                 ef''16
                                 b''16
                                 ]
-                                )                                                                        %! SpannerCommand
+                                )                                                                        %! baca_slur:SpannerCommand
                             }
                             \scaleDurations #'(1 . 1) {
                                 g''16
                                 [
-                                (                                                                        %! SpannerCommand
+                                (                                                                        %! baca_slur:SpannerCommand
                                 cs''16
                                 a'16
                                 af'16
                                 ]
-                                )                                                                        %! SpannerCommand
+                                )                                                                        %! baca_slur:SpannerCommand
                             }
                         }
                     }
@@ -7452,9 +7452,9 @@ class MusicMaker(abjad.AbjadObject):
                             \scaleDurations #'(1 . 1) {
                                 c'16
                                 [
-                                (                                                                        %! SpannerCommand
+                                (                                                                        %! baca_slur:SpannerCommand
                                 d'16
-                                )                                                                        %! SpannerCommand
+                                )                                                                        %! baca_slur:SpannerCommand
                                 bf'16
                                 fs''16
                                 ]
@@ -7462,18 +7462,18 @@ class MusicMaker(abjad.AbjadObject):
                             \scaleDurations #'(1 . 1) {
                                 e''16
                                 [
-                                (                                                                        %! SpannerCommand
+                                (                                                                        %! baca_slur:SpannerCommand
                                 ef''16
-                                )                                                                        %! SpannerCommand
+                                )                                                                        %! baca_slur:SpannerCommand
                                 b''16
                                 ]
                             }
                             \scaleDurations #'(1 . 1) {
                                 g''16
                                 [
-                                (                                                                        %! SpannerCommand
+                                (                                                                        %! baca_slur:SpannerCommand
                                 cs''16
-                                )                                                                        %! SpannerCommand
+                                )                                                                        %! baca_slur:SpannerCommand
                                 a'16
                                 af'16
                                 ]
@@ -7524,29 +7524,29 @@ class MusicMaker(abjad.AbjadObject):
                                 [
                                 d'16
                                 bf'16
-                                (                                                                        %! SpannerCommand
+                                (                                                                        %! baca_slur:SpannerCommand
                                 fs''16
                                 ]
-                                )                                                                        %! SpannerCommand
+                                )                                                                        %! baca_slur:SpannerCommand
                             }
                             \scaleDurations #'(1 . 1) {
                                 e''16
                                 [
                                 ef''16
-                                (                                                                        %! SpannerCommand
+                                (                                                                        %! baca_slur:SpannerCommand
                                 b''16
                                 ]
-                                )                                                                        %! SpannerCommand
+                                )                                                                        %! baca_slur:SpannerCommand
                             }
                             \scaleDurations #'(1 . 1) {
                                 g''16
                                 [
                                 cs''16
                                 a'16
-                                (                                                                        %! SpannerCommand
+                                (                                                                        %! baca_slur:SpannerCommand
                                 af'16
                                 ]
-                                )                                                                        %! SpannerCommand
+                                )                                                                        %! baca_slur:SpannerCommand
                             }
                         }
                     }

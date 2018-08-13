@@ -692,8 +692,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
-                                - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
-                                \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
+                                - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
+                                \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -780,8 +780,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
-                                - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
-                                \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
+                                - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
+                                \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -946,13 +946,13 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
-                                - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
-                                \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
+                                - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
+                                \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
-                                - \tweak color #(x11-color 'DeepPink1)                                   %! REDUNDANT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! REDUNDANT_DYNAMIC:_set_status_tag:IndicatorCommand
-                                \f                                                                       %! REDUNDANT_DYNAMIC:_set_status_tag:IndicatorCommand
+                                - \tweak color #(x11-color 'DeepPink1)                                   %! REDUNDANT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! REDUNDANT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
+                                \f                                                                       %! REDUNDANT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
                 <BLANKLINE>
                             }                                                                            %! SingleStaffScoreTemplate
                 <BLANKLINE>
@@ -1036,8 +1036,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
-                                - \tweak color #(x11-color 'DeepPink1)                                   %! REDUNDANT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! REDUNDANT_DYNAMIC:_set_status_tag:IndicatorCommand
-                                \f                                                                       %! REDUNDANT_DYNAMIC:_set_status_tag:IndicatorCommand
+                                - \tweak color #(x11-color 'DeepPink1)                                   %! REDUNDANT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! REDUNDANT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
+                                \f                                                                       %! REDUNDANT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -1111,13 +1111,13 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
-                                - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
-                                \sfz                                                                     %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
+                                - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
+                                \sfz                                                                     %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
-                                - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
-                                \sfz                                                                     %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
+                                - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
+                                \sfz                                                                     %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
                 <BLANKLINE>
                             }                                                                            %! SingleStaffScoreTemplate
                 <BLANKLINE>
@@ -1201,8 +1201,8 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
-                                - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
-                                \sfz                                                                     %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
+                                - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
+                                \sfz                                                                     %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -1279,13 +1279,13 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
-                                - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
-                                \mf                                                                      %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
+                                - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
+                                \mf                                                                      %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
-                                - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
-                                \baca-effort-mf                                                          %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
+                                - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
+                                \baca-effort-mf                                                          %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
                 <BLANKLINE>
                             }                                                                            %! SingleStaffScoreTemplate
                 <BLANKLINE>
@@ -5034,7 +5034,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {                                                                            %! SingleStaffScoreTemplate
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! EXPLICIT_PERSISTENT_OVERRIDE:_set_status_tag:IndicatorCommand
+                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! EXPLICIT_PERSISTENT_OVERRIDE:_set_status_tag:baca_bar_extent_persistent:IndicatorCommand
                                 \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
                                 \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
                                 \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
@@ -5252,7 +5252,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {                                                                            %! SingleStaffScoreTemplate
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! EXPLICIT_PERSISTENT_OVERRIDE:_set_status_tag:IndicatorCommand
+                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! EXPLICIT_PERSISTENT_OVERRIDE:_set_status_tag:baca_bar_extent_persistent:IndicatorCommand
                                 \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
                                 \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
                                 \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:IndicatorCommand
@@ -5260,7 +5260,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                 b'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                                 % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! REDUNDANT_PERSISTENT_OVERRIDE:_set_status_tag:IndicatorCommand
+                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! REDUNDANT_PERSISTENT_OVERRIDE:_set_status_tag:baca_bar_extent_persistent:IndicatorCommand
                                 b'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                             }                                                                            %! SingleStaffScoreTemplate
@@ -5349,7 +5349,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             {                                                                            %! SingleStaffScoreTemplate
                 <BLANKLINE>
                                 % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! REDUNDANT_PERSISTENT_OVERRIDE:_set_status_tag:IndicatorCommand
+                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! REDUNDANT_PERSISTENT_OVERRIDE:_set_status_tag:baca_bar_extent_persistent:IndicatorCommand
                                 \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>

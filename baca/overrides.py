@@ -1163,22 +1163,22 @@ def dls_staff_padding(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            \p                                                                       %! PiecewiseCommand(1)
-                            \<                                                                       %! PiecewiseCommand(1)
+                            \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
+                            \<                                                                       %! baca_hairpin:PiecewiseCommand(1)
                             [
                             d'16
                             ]
                             bf'4
                             ~
                             bf'16
-                            \f                                                                       %! PiecewiseCommand(2)
+                            \f                                                                       %! baca_hairpin:PiecewiseCommand(2)
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            \p                                                                       %! PiecewiseCommand(1)
-                            \<                                                                       %! PiecewiseCommand(1)
+                            \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
+                            \<                                                                       %! baca_hairpin:PiecewiseCommand(1)
                             [
                             e''16
                             ]
@@ -1189,12 +1189,12 @@ def dls_staff_padding(
                             af''16
                             [
                             g''16
-                            \f                                                                       %! PiecewiseCommand(2)
+                            \f                                                                       %! baca_hairpin:PiecewiseCommand(2)
                             ]
                         }
                         \times 4/5 {
                             a'16
-                            \p                                                                       %! PiecewiseCommand(1)
+                            \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
                             r4
                             \revert DynamicLineSpanner.staff-padding                                 %! baca_dls_staff_padding:OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
@@ -1242,23 +1242,23 @@ def dls_staff_padding(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            \p                                                                       %! PiecewiseCommand(1)
-                            \<                                                                       %! PiecewiseCommand(1)
+                            \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
+                            \<                                                                       %! baca_hairpin:PiecewiseCommand(1)
                             [
                             d'16
                             ]
                             bf'4
                             ~
                             bf'16
-                            \f                                                                       %! PiecewiseCommand(2)
+                            \f                                                                       %! baca_hairpin:PiecewiseCommand(2)
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             \override DynamicLineSpanner.staff-padding = #'4                         %! baca_dls_staff_padding:OverrideCommand(1)
                             fs''16
-                            \p                                                                       %! PiecewiseCommand(1)
-                            \<                                                                       %! PiecewiseCommand(1)
+                            \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
+                            \<                                                                       %! baca_hairpin:PiecewiseCommand(1)
                             [
                             e''16
                             ]
@@ -1269,13 +1269,13 @@ def dls_staff_padding(
                             af''16
                             [
                             g''16
-                            \f                                                                       %! PiecewiseCommand(2)
+                            \f                                                                       %! baca_hairpin:PiecewiseCommand(2)
                             ]
                             \revert DynamicLineSpanner.staff-padding                                 %! baca_dls_staff_padding:OverrideCommand(2)
                         }
                         \times 4/5 {
                             a'16
-                            \p                                                                       %! PiecewiseCommand(1)
+                            \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
                             r4
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
@@ -1340,22 +1340,22 @@ def dls_up(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            \p                                                                       %! PiecewiseCommand(1)
-                            \<                                                                       %! PiecewiseCommand(1)
+                            \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
+                            \<                                                                       %! baca_hairpin:PiecewiseCommand(1)
                             [
                             d'16
                             ]
                             bf'4
                             ~
                             bf'16
-                            \f                                                                       %! PiecewiseCommand(2)
+                            \f                                                                       %! baca_hairpin:PiecewiseCommand(2)
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            \p                                                                       %! PiecewiseCommand(1)
-                            \<                                                                       %! PiecewiseCommand(1)
+                            \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
+                            \<                                                                       %! baca_hairpin:PiecewiseCommand(1)
                             [
                             e''16
                             ]
@@ -1366,12 +1366,12 @@ def dls_up(
                             af''16
                             [
                             g''16
-                            \f                                                                       %! PiecewiseCommand(2)
+                            \f                                                                       %! baca_hairpin:PiecewiseCommand(2)
                             ]
                         }
                         \times 4/5 {
                             a'16
-                            \p                                                                       %! PiecewiseCommand(1)
+                            \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
                             r4
                             \revert DynamicLineSpanner.direction                                     %! baca_dls_up:OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
@@ -1419,23 +1419,23 @@ def dls_up(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            \p                                                                       %! PiecewiseCommand(1)
-                            \<                                                                       %! PiecewiseCommand(1)
+                            \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
+                            \<                                                                       %! baca_hairpin:PiecewiseCommand(1)
                             [
                             d'16
                             ]
                             bf'4
                             ~
                             bf'16
-                            \f                                                                       %! PiecewiseCommand(2)
+                            \f                                                                       %! baca_hairpin:PiecewiseCommand(2)
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             \override DynamicLineSpanner.direction = #up                             %! baca_dls_up:OverrideCommand(1)
                             fs''16
-                            \p                                                                       %! PiecewiseCommand(1)
-                            \<                                                                       %! PiecewiseCommand(1)
+                            \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
+                            \<                                                                       %! baca_hairpin:PiecewiseCommand(1)
                             [
                             e''16
                             ]
@@ -1446,13 +1446,13 @@ def dls_up(
                             af''16
                             [
                             g''16
-                            \f                                                                       %! PiecewiseCommand(2)
+                            \f                                                                       %! baca_hairpin:PiecewiseCommand(2)
                             ]
                             \revert DynamicLineSpanner.direction                                     %! baca_dls_up:OverrideCommand(2)
                         }
                         \times 4/5 {
                             a'16
-                            \p                                                                       %! PiecewiseCommand(1)
+                            \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
                             r4
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
@@ -1594,7 +1594,7 @@ def dynamic_text_extra_offset(
                             r8
                             \once \override DynamicText.extra-offset = #'(-3 . 0)                    %! baca_dynamic_text_extra_offset:OverrideCommand(1)
                             c'16
-                            \p                                                                       %! IndicatorCommand
+                            \p                                                                       %! baca_dynamic:IndicatorCommand
                             [
                             d'16
                             ]
@@ -1606,7 +1606,7 @@ def dynamic_text_extra_offset(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            \f                                                                       %! IndicatorCommand
+                            \f                                                                       %! baca_dynamic:IndicatorCommand
                             [
                             e''16
                             ]
@@ -1665,7 +1665,7 @@ def dynamic_text_extra_offset(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            \p                                                                       %! IndicatorCommand
+                            \p                                                                       %! baca_dynamic:IndicatorCommand
                             [
                             d'16
                             ]
@@ -1678,7 +1678,7 @@ def dynamic_text_extra_offset(
                         \times 9/10 {
                             \once \override DynamicText.extra-offset = #'(-3 . 0)                    %! baca_dynamic_text_extra_offset:OverrideCommand(1)
                             fs''16
-                            \f                                                                       %! IndicatorCommand
+                            \f                                                                       %! baca_dynamic:IndicatorCommand
                             [
                             e''16
                             ]
@@ -3073,11 +3073,11 @@ def repeat_tie_down(
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
                             ]
                             c''4
                             c''16
-                            \repeatTie                                                               %! SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -3085,12 +3085,12 @@ def repeat_tie_down(
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
                             ]
                             b'4
-                            \repeatTie                                                               %! SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
                             b'16
-                            \repeatTie                                                               %! SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
                             r16
                         }
                         \times 4/5 {
@@ -3146,11 +3146,11 @@ def repeat_tie_down(
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
                             ]
                             c''4
                             c''16
-                            \repeatTie                                                               %! SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -3159,12 +3159,12 @@ def repeat_tie_down(
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
                             ]
                             b'4
-                            \repeatTie                                                               %! SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
                             b'16
-                            \repeatTie                                                               %! SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
                             \revert RepeatTie.direction                                              %! baca_repeat_tie_down:OverrideCommand(2)
                             r16
                         }
@@ -3267,11 +3267,11 @@ def repeat_tie_up(
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
                             ]
                             c''4
                             c''16
-                            \repeatTie                                                               %! SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -3279,12 +3279,12 @@ def repeat_tie_up(
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
                             ]
                             b'4
-                            \repeatTie                                                               %! SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
                             b'16
-                            \repeatTie                                                               %! SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
                             r16
                         }
                         \times 4/5 {
@@ -3340,11 +3340,11 @@ def repeat_tie_up(
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
                             ]
                             c''4
                             c''16
-                            \repeatTie                                                               %! SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -3353,12 +3353,12 @@ def repeat_tie_up(
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
                             ]
                             b'4
-                            \repeatTie                                                               %! SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
                             b'16
-                            \repeatTie                                                               %! SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
                             \revert RepeatTie.direction                                              %! baca_repeat_tie_up:OverrideCommand(2)
                             r16
                         }
@@ -4762,20 +4762,20 @@ def slur_down(
                             r8
                             c'16
                             [
-                            (                                                                        %! SpannerCommand
+                            (                                                                        %! baca_slur:SpannerCommand
                             d'16
                             ]
                             bf'4
                             ~
                             bf'16
-                            )                                                                        %! SpannerCommand
+                            )                                                                        %! baca_slur:SpannerCommand
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
                             [
-                            (                                                                        %! SpannerCommand
+                            (                                                                        %! baca_slur:SpannerCommand
                             e''16
                             ]
                             ef''4
@@ -4786,7 +4786,7 @@ def slur_down(
                             [
                             g''16
                             ]
-                            )                                                                        %! SpannerCommand
+                            )                                                                        %! baca_slur:SpannerCommand
                         }
                         \times 4/5 {
                             a'16
@@ -4837,13 +4837,13 @@ def slur_down(
                             r8
                             c'16
                             [
-                            (                                                                        %! SpannerCommand
+                            (                                                                        %! baca_slur:SpannerCommand
                             d'16
                             ]
                             bf'4
                             ~
                             bf'16
-                            )                                                                        %! SpannerCommand
+                            )                                                                        %! baca_slur:SpannerCommand
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -4851,7 +4851,7 @@ def slur_down(
                             \override Slur.direction = #down                                         %! baca_slur_down:OverrideCommand(1)
                             fs''16
                             [
-                            (                                                                        %! SpannerCommand
+                            (                                                                        %! baca_slur:SpannerCommand
                             e''16
                             ]
                             ef''4
@@ -4862,7 +4862,7 @@ def slur_down(
                             [
                             g''16
                             ]
-                            )                                                                        %! SpannerCommand
+                            )                                                                        %! baca_slur:SpannerCommand
                             \revert Slur.direction                                                   %! baca_slur_down:OverrideCommand(2)
                         }
                         \times 4/5 {
@@ -4932,20 +4932,20 @@ def slur_up(
                             \override Stem.direction = #down                                         %! baca_stem_down:OverrideCommand(1)
                             c'16
                             [
-                            (                                                                        %! SpannerCommand
+                            (                                                                        %! baca_slur:SpannerCommand
                             d'16
                             ]
                             bf'4
                             ~
                             bf'16
-                            )                                                                        %! SpannerCommand
+                            )                                                                        %! baca_slur:SpannerCommand
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
                             [
-                            (                                                                        %! SpannerCommand
+                            (                                                                        %! baca_slur:SpannerCommand
                             e''16
                             ]
                             ef''4
@@ -4956,7 +4956,7 @@ def slur_up(
                             [
                             g''16
                             ]
-                            )                                                                        %! SpannerCommand
+                            )                                                                        %! baca_slur:SpannerCommand
                         }
                         \times 4/5 {
                             a'16
@@ -5013,13 +5013,13 @@ def slur_up(
                             \override Stem.direction = #down                                         %! baca_stem_down:OverrideCommand(1)
                             c'16
                             [
-                            (                                                                        %! SpannerCommand
+                            (                                                                        %! baca_slur:SpannerCommand
                             d'16
                             ]
                             bf'4
                             ~
                             bf'16
-                            )                                                                        %! SpannerCommand
+                            )                                                                        %! baca_slur:SpannerCommand
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -5027,7 +5027,7 @@ def slur_up(
                             \override Slur.direction = #up                                           %! baca_slur_up:OverrideCommand(1)
                             fs''16
                             [
-                            (                                                                        %! SpannerCommand
+                            (                                                                        %! baca_slur:SpannerCommand
                             e''16
                             ]
                             ef''4
@@ -5038,7 +5038,7 @@ def slur_up(
                             [
                             g''16
                             ]
-                            )                                                                        %! SpannerCommand
+                            )                                                                        %! baca_slur:SpannerCommand
                             \revert Slur.direction                                                   %! baca_slur_up:OverrideCommand(2)
                         }
                         \times 4/5 {
@@ -5803,9 +5803,9 @@ def sustain_pedal_staff_padding(
                         \times 9/10 {
                             \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! baca_sustain_pedal_staff_padding:OverrideCommand(1)
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
                             r8
-                            \sustainOn                                                               %! SpannerCommand
+                            \sustainOn                                                               %! baca_sustain_pedal:SpannerCommand
                             c'16
                             [
                             d'16
@@ -5817,11 +5817,11 @@ def sustain_pedal_staff_padding(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
                             fs''16
-                            \sustainOff                                                              %! SpannerCommand
+                            \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
                             [
-                            \sustainOn                                                               %! SpannerCommand
+                            \sustainOn                                                               %! baca_sustain_pedal:SpannerCommand
                             e''16
                             ]
                             ef''4
@@ -5834,12 +5834,12 @@ def sustain_pedal_staff_padding(
                             ]
                         }
                         \times 4/5 {
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
                             a'16
-                            \sustainOff                                                              %! SpannerCommand
-                            \sustainOn                                                               %! SpannerCommand
+                            \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
+                            \sustainOn                                                               %! baca_sustain_pedal:SpannerCommand
                             r4
-                            \sustainOff                                                              %! SpannerCommand
+                            \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
                             \revert Staff.SustainPedalLineSpanner.staff-padding                      %! baca_sustain_pedal_staff_padding:OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
@@ -5883,9 +5883,9 @@ def sustain_pedal_staff_padding(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
                             r8
-                            \sustainOn                                                               %! SpannerCommand
+                            \sustainOn                                                               %! baca_sustain_pedal:SpannerCommand
                             c'16
                             [
                             d'16
@@ -5894,15 +5894,15 @@ def sustain_pedal_staff_padding(
                             ~
                             bf'16
                             r16
-                            \sustainOff                                                              %! SpannerCommand
+                            \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! baca_sustain_pedal_staff_padding:OverrideCommand(1)
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
                             fs''16
                             [
-                            \sustainOn                                                               %! SpannerCommand
+                            \sustainOn                                                               %! baca_sustain_pedal:SpannerCommand
                             e''16
                             ]
                             ef''4
@@ -5913,15 +5913,15 @@ def sustain_pedal_staff_padding(
                             [
                             g''16
                             ]
-                            \sustainOff                                                              %! SpannerCommand
+                            \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
                             \revert Staff.SustainPedalLineSpanner.staff-padding                      %! baca_sustain_pedal_staff_padding:OverrideCommand(2)
                         }
                         \times 4/5 {
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
                             a'16
-                            \sustainOn                                                               %! SpannerCommand
+                            \sustainOn                                                               %! baca_sustain_pedal:SpannerCommand
                             r4
-                            \sustainOff                                                              %! SpannerCommand
+                            \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
@@ -7156,12 +7156,12 @@ def text_spanner_staff_padding(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \abjad-dashed-line-with-arrow                                          %! PiecewiseCommand(1)
-                            - \baca-text-spanner-left-text "pont."                                   %! PiecewiseCommand(1)
-                            - \baca-text-spanner-right-text "ord."                                   %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.padding #0.5                                %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PiecewiseCommand(1)
-                            \startTextSpan                                                           %! PiecewiseCommand(1)
+                            - \abjad-dashed-line-with-arrow                                          %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "pont."                                   %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-right-text "ord."                                   %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.padding #0.5                                %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! baca_text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
                             [
                             d'16
                             ]
@@ -7187,7 +7187,7 @@ def text_spanner_staff_padding(
                         }
                         \times 4/5 {
                             a'16
-                            \stopTextSpan                                                            %! PiecewiseCommand(2)
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(2)
                             r4
                             \revert TextSpanner.staff-padding                                        %! baca_text_spanner_staff_padding:OverrideCommand(2)
                             \revert TextScript.staff-padding                                         %! baca_script_staff_padding:OverrideCommand(2)
@@ -7249,12 +7249,12 @@ def text_spanner_staff_padding(
                         \times 9/10 {
                             \override TextSpanner.staff-padding = #6                                 %! baca_text_spanner_staff_padding:OverrideCommand(1)
                             fs''16
-                            - \abjad-dashed-line-with-arrow                                          %! PiecewiseCommand(1)
-                            - \baca-text-spanner-left-text "pont."                                   %! PiecewiseCommand(1)
-                            - \baca-text-spanner-right-text "ord."                                   %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.padding #0.5                                %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PiecewiseCommand(1)
-                            \startTextSpan                                                           %! PiecewiseCommand(1)
+                            - \abjad-dashed-line-with-arrow                                          %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "pont."                                   %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-right-text "ord."                                   %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.padding #0.5                                %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! baca_text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
                             [
                             e''16
                             ]
@@ -7265,7 +7265,7 @@ def text_spanner_staff_padding(
                             af''16
                             [
                             g''16
-                            \stopTextSpan                                                            %! PiecewiseCommand(2)
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(2)
                             ]
                             \revert TextSpanner.staff-padding                                        %! baca_text_spanner_staff_padding:OverrideCommand(2)
                         }
@@ -7383,25 +7383,25 @@ def tie_down(
                             \override Stem.direction = #up                                           %! baca_stem_up:OverrideCommand(1)
                             \override Tie.direction = #down                                          %! baca_tie_down:OverrideCommand(1)
                             b'16
-                            ~                                                                        %! SpannerCommand
+                            ~                                                                        %! baca_tie:SpannerCommand
                             [
                             b'16
                             ]
                             c''4
-                            ~                                                                        %! SpannerCommand
+                            ~                                                                        %! baca_tie:SpannerCommand
                             c''16
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 7/8 {
                             b'16
-                            ~                                                                        %! SpannerCommand
+                            ~                                                                        %! baca_tie:SpannerCommand
                             [
                             b'16
-                            ~                                                                        %! SpannerCommand
+                            ~                                                                        %! baca_tie:SpannerCommand
                             ]
                             b'4
-                            ~                                                                        %! SpannerCommand
+                            ~                                                                        %! baca_tie:SpannerCommand
                             b'16
                             r16
                         }
@@ -7456,12 +7456,12 @@ def tie_down(
                             r8
                             \override Stem.direction = #up                                           %! baca_stem_up:OverrideCommand(1)
                             b'16
-                            ~                                                                        %! SpannerCommand
+                            ~                                                                        %! baca_tie:SpannerCommand
                             [
                             b'16
                             ]
                             c''4
-                            ~                                                                        %! SpannerCommand
+                            ~                                                                        %! baca_tie:SpannerCommand
                             c''16
                             r16
                         }
@@ -7469,13 +7469,13 @@ def tie_down(
                         \times 7/8 {
                             \override Tie.direction = #down                                          %! baca_tie_down:OverrideCommand(1)
                             b'16
-                            ~                                                                        %! SpannerCommand
+                            ~                                                                        %! baca_tie:SpannerCommand
                             [
                             b'16
-                            ~                                                                        %! SpannerCommand
+                            ~                                                                        %! baca_tie:SpannerCommand
                             ]
                             b'4
-                            ~                                                                        %! SpannerCommand
+                            ~                                                                        %! baca_tie:SpannerCommand
                             b'16
                             \revert Tie.direction                                                    %! baca_tie_down:OverrideCommand(2)
                             r16
@@ -7545,25 +7545,25 @@ def tie_up(
                             \override Stem.direction = #down                                         %! baca_stem_down:OverrideCommand(1)
                             \override Tie.direction = #up                                            %! baca_tie_up:OverrideCommand(1)
                             b'16
-                            ~                                                                        %! SpannerCommand
+                            ~                                                                        %! baca_tie:SpannerCommand
                             [
                             b'16
                             ]
                             c''4
-                            ~                                                                        %! SpannerCommand
+                            ~                                                                        %! baca_tie:SpannerCommand
                             c''16
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 7/8 {
                             b'16
-                            ~                                                                        %! SpannerCommand
+                            ~                                                                        %! baca_tie:SpannerCommand
                             [
                             b'16
-                            ~                                                                        %! SpannerCommand
+                            ~                                                                        %! baca_tie:SpannerCommand
                             ]
                             b'4
-                            ~                                                                        %! SpannerCommand
+                            ~                                                                        %! baca_tie:SpannerCommand
                             b'16
                             r16
                         }
@@ -7618,12 +7618,12 @@ def tie_up(
                             r8
                             \override Stem.direction = #down                                         %! baca_stem_down:OverrideCommand(1)
                             b'16
-                            ~                                                                        %! SpannerCommand
+                            ~                                                                        %! baca_tie:SpannerCommand
                             [
                             b'16
                             ]
                             c''4
-                            ~                                                                        %! SpannerCommand
+                            ~                                                                        %! baca_tie:SpannerCommand
                             c''16
                             r16
                         }
@@ -7631,13 +7631,13 @@ def tie_up(
                         \times 7/8 {
                             \override Tie.direction = #up                                            %! baca_tie_up:OverrideCommand(1)
                             b'16
-                            ~                                                                        %! SpannerCommand
+                            ~                                                                        %! baca_tie:SpannerCommand
                             [
                             b'16
-                            ~                                                                        %! SpannerCommand
+                            ~                                                                        %! baca_tie:SpannerCommand
                             ]
                             b'4
-                            ~                                                                        %! SpannerCommand
+                            ~                                                                        %! baca_tie:SpannerCommand
                             b'16
                             \revert Tie.direction                                                    %! baca_tie_up:OverrideCommand(2)
                             r16

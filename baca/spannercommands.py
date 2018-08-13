@@ -269,7 +269,7 @@ class SpannerCommand(scoping.Command):
             spanner,
             leaves,
             deactivate=self.deactivate,
-            tag=self.tag.prepend('SpannerCommand'),
+            tag=self.tag.append('SpannerCommand'),
             )
         return spanner
 
@@ -325,7 +325,7 @@ class SpannerCommand(scoping.Command):
                             \scaleDurations #'(1 . 1) {
                                 c'16
                                 [
-                                (                                                                        %! SpannerCommand
+                                (                                                                        %! baca_slur:SpannerCommand
                                 d'16
                                 bf'16
                                 ]
@@ -341,7 +341,7 @@ class SpannerCommand(scoping.Command):
                             }
                             \scaleDurations #'(1 . 1) {
                                 a'16
-                                )                                                                        %! SpannerCommand
+                                )                                                                        %! baca_slur:SpannerCommand
                             }
                         }
                     }
@@ -449,6 +449,7 @@ class SpannerCommand(scoping.Command):
 def beam(
     *tweaks: abjad.LilyPondTweakManager,
     selector: typings.Selector = 'baca.tleaves()',
+    tag: typing.Optional[str] = 'baca_beam',
     ) -> SpannerCommand:
     r"""
     Attaches beam.
@@ -527,7 +528,7 @@ def beam(
             <BLANKLINE>
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             c'8                                                                      %! baca_make_even_divisions
-                            [                                                                        %! SpannerCommand
+                            [                                                                        %! baca_beam:SpannerCommand
             <BLANKLINE>
                             c'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
@@ -557,7 +558,7 @@ def beam(
                             c'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             c'8                                                                      %! baca_make_even_divisions
-                            ]                                                                        %! SpannerCommand
+                            ]                                                                        %! baca_beam:SpannerCommand
             <BLANKLINE>
                         }                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
@@ -573,12 +574,14 @@ def beam(
         detach_first=True,
         selector=selector,
         spanner=abjad.Beam(),
+        tags=[tag],
         )
 
 def finger_pressure_transition(
     *,
     selector: typings.Selector = 'baca.tleaves()',
     right_broken: bool = None,
+    tag: typing.Optional[str] = 'baca_finger_pressure_transition',
     ) -> SpannerCommand:
     r"""
     Makes finger pressure transition glissando.
@@ -659,11 +662,11 @@ def finger_pressure_transition(
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \once \override NoteHead.style = #'harmonic                              %! baca_note_head_style_harmonic:OverrideCommand(1)
                             c''2                                                                     %! baca_make_notes
-                            - \tweak arrow-length #2                                                 %! SpannerCommand
-                            - \tweak arrow-width #0.5                                                %! SpannerCommand
-                            - \tweak bound-details.right.arrow ##t                                   %! SpannerCommand
-                            - \tweak thickness #3                                                    %! SpannerCommand
-                            \glissando                                                               %! SpannerCommand
+                            - \tweak arrow-length #2                                                 %! baca_finger_pressure_transition:SpannerCommand
+                            - \tweak arrow-width #0.5                                                %! baca_finger_pressure_transition:SpannerCommand
+                            - \tweak bound-details.right.arrow ##t                                   %! baca_finger_pressure_transition:SpannerCommand
+                            - \tweak thickness #3                                                    %! baca_finger_pressure_transition:SpannerCommand
+                            \glissando                                                               %! baca_finger_pressure_transition:SpannerCommand
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             c''4.                                                                    %! baca_make_notes
@@ -671,11 +674,11 @@ def finger_pressure_transition(
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             \once \override NoteHead.style = #'harmonic                              %! baca_note_head_style_harmonic:OverrideCommand(1)
                             c''2                                                                     %! baca_make_notes
-                            - \tweak arrow-length #2                                                 %! SpannerCommand
-                            - \tweak arrow-width #0.5                                                %! SpannerCommand
-                            - \tweak bound-details.right.arrow ##t                                   %! SpannerCommand
-                            - \tweak thickness #3                                                    %! SpannerCommand
-                            \glissando                                                               %! SpannerCommand
+                            - \tweak arrow-length #2                                                 %! baca_finger_pressure_transition:SpannerCommand
+                            - \tweak arrow-width #0.5                                                %! baca_finger_pressure_transition:SpannerCommand
+                            - \tweak bound-details.right.arrow ##t                                   %! baca_finger_pressure_transition:SpannerCommand
+                            - \tweak thickness #3                                                    %! baca_finger_pressure_transition:SpannerCommand
+                            \glissando                                                               %! baca_finger_pressure_transition:SpannerCommand
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             c''4.                                                                    %! baca_make_notes
@@ -697,6 +700,7 @@ def finger_pressure_transition(
         right_broken=right_broken,
         selector=selector,
         spanner=abjad.Glissando(allow_repeats=True),
+        tags=[tag],
         )
 
 def glissando(
@@ -707,6 +711,7 @@ def glissando(
     selector: typings.Selector = 'baca.tleaves()',
     stems: bool = None,
     style: str = None,
+    tag: typing.Optional[str] = 'baca_glissando',
     ) -> SpannerCommand:
     r"""
     Attaches glissando.
@@ -781,52 +786,52 @@ def glissando(
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             e'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
-                            \glissando                                                               %! SpannerCommand
+                            \glissando                                                               %! baca_glissando:SpannerCommand
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
-                            \glissando                                                               %! SpannerCommand
+                            \glissando                                                               %! baca_glissando:SpannerCommand
             <BLANKLINE>
                             f'8                                                                      %! baca_make_even_divisions
-                            \glissando                                                               %! SpannerCommand
+                            \glissando                                                               %! baca_glissando:SpannerCommand
             <BLANKLINE>
                             e''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
-                            \glissando                                                               %! SpannerCommand
+                            \glissando                                                               %! baca_glissando:SpannerCommand
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
-                            \glissando                                                               %! SpannerCommand
+                            \glissando                                                               %! baca_glissando:SpannerCommand
             <BLANKLINE>
                             f''8                                                                     %! baca_make_even_divisions
-                            \glissando                                                               %! SpannerCommand
+                            \glissando                                                               %! baca_glissando:SpannerCommand
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
-                            \glissando                                                               %! SpannerCommand
+                            \glissando                                                               %! baca_glissando:SpannerCommand
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
-                            \glissando                                                               %! SpannerCommand
+                            \glissando                                                               %! baca_glissando:SpannerCommand
             <BLANKLINE>
                             f'8                                                                      %! baca_make_even_divisions
-                            \glissando                                                               %! SpannerCommand
+                            \glissando                                                               %! baca_glissando:SpannerCommand
             <BLANKLINE>
                             e''8                                                                     %! baca_make_even_divisions
-                            \glissando                                                               %! SpannerCommand
+                            \glissando                                                               %! baca_glissando:SpannerCommand
             <BLANKLINE>
                             g'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
-                            \glissando                                                               %! SpannerCommand
+                            \glissando                                                               %! baca_glissando:SpannerCommand
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
-                            \glissando                                                               %! SpannerCommand
+                            \glissando                                                               %! baca_glissando:SpannerCommand
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
-                            \glissando                                                               %! SpannerCommand
+                            \glissando                                                               %! baca_glissando:SpannerCommand
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
@@ -910,7 +915,7 @@ def glissando(
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             e'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
-                            \glissando                                                               %! SpannerCommand
+                            \glissando                                                               %! baca_glissando:SpannerCommand
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
             <BLANKLINE>
@@ -944,7 +949,7 @@ def glissando(
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
-                            \glissando                                                               %! SpannerCommand
+                            \glissando                                                               %! baca_glissando:SpannerCommand
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
@@ -1003,17 +1008,17 @@ def glissando(
                         \times 9/10 {
                             fs''16
                             [
-                            \glissando                                                               %! SpannerCommand
+                            \glissando                                                               %! baca_glissando:SpannerCommand
                             e''16
                             ]
-                            \glissando                                                               %! SpannerCommand
+                            \glissando                                                               %! baca_glissando:SpannerCommand
                             ef''4
                             ~
                             ef''16
                             r16
                             af''16
                             [
-                            \glissando                                                               %! SpannerCommand
+                            \glissando                                                               %! baca_glissando:SpannerCommand
                             g''16
                             ]
                         }
@@ -1037,11 +1042,13 @@ def glissando(
         right_broken=right_broken,
         selector=selector,
         spanner=glissando,
+        tags=[tag],
         )
 
 def ottava(
     *,
     selector: typings.Selector = 'baca.tleaves()',
+    tag: typing.Optional[str] = 'baca_ottava',
     ) -> SpannerCommand:
     r"""
     Attaches ottava spanner.
@@ -1076,7 +1083,7 @@ def ottava(
                         \times 9/10 {
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            \ottava #1                                                               %! SpannerCommand
+                            \ottava #1                                                               %! baca_ottava:SpannerCommand
                             c'16
                             [
                             d'16
@@ -1103,7 +1110,7 @@ def ottava(
                         }
                         \times 4/5 {
                             a'16
-                            \ottava #0                                                               %! SpannerCommand
+                            \ottava #0                                                               %! baca_ottava:SpannerCommand
                             r4
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
@@ -1115,11 +1122,13 @@ def ottava(
     return SpannerCommand(
         selector=selector,
         spanner=abjad.OctavationSpanner(start=1, stop=0),
+        tags=[tag],
         )
 
 def ottava_bassa(
     *,
     selector: typings.Selector = 'baca.tleaves()',
+    tag: typing.Optional[str] = 'baca_ottava_bassa',
     ) -> SpannerCommand:
     r"""
     Attaches ottava bassa spanner.
@@ -1154,7 +1163,7 @@ def ottava_bassa(
                         \times 9/10 {
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            \ottava #-1                                                              %! SpannerCommand
+                            \ottava #-1                                                              %! baca_ottava_bassa:SpannerCommand
                             c'16
                             [
                             d'16
@@ -1181,7 +1190,7 @@ def ottava_bassa(
                         }
                         \times 4/5 {
                             a'16
-                            \ottava #0                                                               %! SpannerCommand
+                            \ottava #0                                                               %! baca_ottava_bassa:SpannerCommand
                             r4
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
@@ -1193,11 +1202,13 @@ def ottava_bassa(
     return SpannerCommand(
         selector=selector,
         spanner=abjad.OctavationSpanner(start=-1, stop=0),
+        tags=[tag],
         )
 
 def repeat_tie(
     *,
     selector: typings.Selector = 'baca.qrun(0)',
+    tag: typing.Optional[str] = 'baca_repeat_tie',
     ) -> SpannerCommand:
     r"""
     Attaches repeat tie.
@@ -1238,11 +1249,11 @@ def repeat_tie(
                             c'16
                             [
                             c'16
-                            \repeatTie                                                               %! SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
                             ]
                             bf'4
                             bf'16
-                            \repeatTie                                                               %! SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -1252,9 +1263,9 @@ def repeat_tie(
                             e''16
                             ]
                             e''4
-                            \repeatTie                                                               %! SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
                             e''16
-                            \repeatTie                                                               %! SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
                             r16
                             fs''16
                             [
@@ -1274,9 +1285,13 @@ def repeat_tie(
     return SpannerCommand(
         selector=selector,
         spanner=abjad.Tie(repeat=True),
+        tags=[tag],
         )
 
-def repeat_tie_repeat_pitches() -> SpannerCommand:
+def repeat_tie_repeat_pitches(
+    *,
+    tag: typing.Optional[str] = 'baca_repeat_tie_repeat_pitches',
+    ) -> SpannerCommand:
     """
     Repeat-ties repeat pitches.
     """
@@ -1284,11 +1299,13 @@ def repeat_tie_repeat_pitches() -> SpannerCommand:
         map=classes.selector().ltqruns().nontrivial(),
         selector='baca.qrun(0)',
         spanner=abjad.Tie(repeat=True),
+        tags=[tag],
         )
 
 def slur(
     *tweaks: abjad.LilyPondTweakManager,
     selector: typings.Selector = 'baca.tleaves()',
+    tag: typing.Optional[str] = 'baca_slur',
     ) -> SpannerCommand:
     r"""
     Attaches slur.
@@ -1327,7 +1344,7 @@ def slur(
                             r8
                             c'16
                             [
-                            (                                                                        %! SpannerCommand
+                            (                                                                        %! baca_slur:SpannerCommand
                             d'16
                             ]
                             bf'4
@@ -1352,7 +1369,7 @@ def slur(
                         }
                         \times 4/5 {
                             a'16
-                            )                                                                        %! SpannerCommand
+                            )                                                                        %! baca_slur:SpannerCommand
                             r4
                             \revert Slur.direction                                                   %! baca_slur_down:OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
@@ -1409,7 +1426,7 @@ def slur(
                         \times 9/10 {
                             fs''16
                             [
-                            (                                                                        %! SpannerCommand
+                            (                                                                        %! baca_slur:SpannerCommand
                             e''16
                             ]
                             ef''4
@@ -1420,7 +1437,7 @@ def slur(
                             [
                             g''16
                             ]
-                            )                                                                        %! SpannerCommand
+                            )                                                                        %! baca_slur:SpannerCommand
                         }
                         \times 4/5 {
                             a'16
@@ -1437,11 +1454,13 @@ def slur(
         *tweaks,
         selector=selector,
         spanner=abjad.Slur(),
+        tags=[tag],
         )
 
 def sustain_pedal(
     *,
     selector: typings.Selector = 'baca.leaves()',
+    tag: typing.Optional[str] = 'baca_sustain_pedal',
     ) -> SpannerCommand:
     r"""
     Attaches sustain pedal.
@@ -1477,9 +1496,9 @@ def sustain_pedal(
                         \times 9/10 {
                             \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! baca_sustain_pedal_staff_padding:OverrideCommand(1)
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
                             r8
-                            \sustainOn                                                               %! SpannerCommand
+                            \sustainOn                                                               %! baca_sustain_pedal:SpannerCommand
                             c'16
                             [
                             d'16
@@ -1507,7 +1526,7 @@ def sustain_pedal(
                         \times 4/5 {
                             a'16
                             r4
-                            \sustainOff                                                              %! SpannerCommand
+                            \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
                             \revert Staff.SustainPedalLineSpanner.staff-padding                      %! baca_sustain_pedal_staff_padding:OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
@@ -1561,10 +1580,10 @@ def sustain_pedal(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
                             fs''16
                             [
-                            \sustainOn                                                               %! SpannerCommand
+                            \sustainOn                                                               %! baca_sustain_pedal:SpannerCommand
                             e''16
                             ]
                             ef''4
@@ -1575,7 +1594,7 @@ def sustain_pedal(
                             [
                             g''16
                             ]
-                            \sustainOff                                                              %! SpannerCommand
+                            \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
                         }
                         \times 4/5 {
                             a'16
@@ -1629,9 +1648,9 @@ def sustain_pedal(
                             bf'4
                             ~
                             bf'16
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
                             r16
-                            \sustainOn                                                               %! SpannerCommand
+                            \sustainOn                                                               %! baca_sustain_pedal:SpannerCommand
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
@@ -1647,7 +1666,7 @@ def sustain_pedal(
                             [
                             g''16
                             ]
-                            \sustainOff                                                              %! SpannerCommand
+                            \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
                         }
                         \times 4/5 {
                             a'16
@@ -1705,10 +1724,10 @@ def sustain_pedal(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
                             fs''16
                             [
-                            \sustainOn                                                               %! SpannerCommand
+                            \sustainOn                                                               %! baca_sustain_pedal:SpannerCommand
                             e''16
                             ]
                             ef''4
@@ -1722,7 +1741,7 @@ def sustain_pedal(
                         }
                         \times 4/5 {
                             a'16
-                            \sustainOff                                                              %! SpannerCommand
+                            \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
                             r4
                             \revert Staff.SustainPedalLineSpanner.staff-padding                      %! baca_sustain_pedal_staff_padding:OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
@@ -1773,9 +1792,9 @@ def sustain_pedal(
                             bf'4
                             ~
                             bf'16
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
                             r16
-                            \sustainOn                                                               %! SpannerCommand
+                            \sustainOn                                                               %! baca_sustain_pedal:SpannerCommand
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
@@ -1794,7 +1813,7 @@ def sustain_pedal(
                         }
                         \times 4/5 {
                             a'16
-                            \sustainOff                                                              %! SpannerCommand
+                            \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
                             r4
                             \revert Staff.SustainPedalLineSpanner.staff-padding                      %! baca_sustain_pedal_staff_padding:OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
@@ -1837,9 +1856,9 @@ def sustain_pedal(
                         \times 9/10 {
                             \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! baca_sustain_pedal_staff_padding:OverrideCommand(1)
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
                             r8
-                            \sustainOn                                                               %! SpannerCommand
+                            \sustainOn                                                               %! baca_sustain_pedal:SpannerCommand
                             c'16
                             [
                             d'16
@@ -1848,14 +1867,14 @@ def sustain_pedal(
                             ~
                             bf'16
                             r16
-                            \sustainOff                                                              %! SpannerCommand
+                            \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
                             fs''16
                             [
-                            \sustainOn                                                               %! SpannerCommand
+                            \sustainOn                                                               %! baca_sustain_pedal:SpannerCommand
                             e''16
                             ]
                             ef''4
@@ -1866,14 +1885,14 @@ def sustain_pedal(
                             [
                             g''16
                             ]
-                            \sustainOff                                                              %! SpannerCommand
+                            \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
                         }
                         \times 4/5 {
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
                             a'16
-                            \sustainOn                                                               %! SpannerCommand
+                            \sustainOn                                                               %! baca_sustain_pedal:SpannerCommand
                             r4
-                            \sustainOff                                                              %! SpannerCommand
+                            \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
                             \revert Staff.SustainPedalLineSpanner.staff-padding                      %! baca_sustain_pedal_staff_padding:OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
@@ -1915,9 +1934,9 @@ def sustain_pedal(
                         \times 9/10 {
                             \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! baca_sustain_pedal_staff_padding:OverrideCommand(1)
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
                             r8
-                            \sustainOn                                                               %! SpannerCommand
+                            \sustainOn                                                               %! baca_sustain_pedal:SpannerCommand
                             c'16
                             [
                             d'16
@@ -1925,10 +1944,10 @@ def sustain_pedal(
                             bf'4
                             ~
                             bf'16
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
                             r16
-                            \sustainOff                                                              %! SpannerCommand
-                            \sustainOn                                                               %! SpannerCommand
+                            \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
+                            \sustainOn                                                               %! baca_sustain_pedal:SpannerCommand
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
@@ -1942,16 +1961,16 @@ def sustain_pedal(
                             r16
                             af''16
                             [
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
                             g''16
                             ]
-                            \sustainOff                                                              %! SpannerCommand
-                            \sustainOn                                                               %! SpannerCommand
+                            \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
+                            \sustainOn                                                               %! baca_sustain_pedal:SpannerCommand
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \sustainOff                                                              %! SpannerCommand
+                            \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
                             \revert Staff.SustainPedalLineSpanner.staff-padding                      %! baca_sustain_pedal_staff_padding:OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
@@ -1993,9 +2012,9 @@ def sustain_pedal(
                         \times 9/10 {
                             \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! baca_sustain_pedal_staff_padding:OverrideCommand(1)
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
                             r8
-                            \sustainOn                                                               %! SpannerCommand
+                            \sustainOn                                                               %! baca_sustain_pedal:SpannerCommand
                             c'16
                             [
                             d'16
@@ -2007,11 +2026,11 @@ def sustain_pedal(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
                             fs''16
-                            \sustainOff                                                              %! SpannerCommand
+                            \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
                             [
-                            \sustainOn                                                               %! SpannerCommand
+                            \sustainOn                                                               %! baca_sustain_pedal:SpannerCommand
                             e''16
                             ]
                             ef''4
@@ -2024,12 +2043,12 @@ def sustain_pedal(
                             ]
                         }
                         \times 4/5 {
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! SpannerCommand
+                            \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
                             a'16
-                            \sustainOff                                                              %! SpannerCommand
-                            \sustainOn                                                               %! SpannerCommand
+                            \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
+                            \sustainOn                                                               %! baca_sustain_pedal:SpannerCommand
                             r4
-                            \sustainOff                                                              %! SpannerCommand
+                            \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
                             \revert Staff.SustainPedalLineSpanner.staff-padding                      %! baca_sustain_pedal_staff_padding:OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
@@ -2041,6 +2060,7 @@ def sustain_pedal(
     return SpannerCommand(
         selector=selector,
         spanner=abjad.PianoPedalSpanner(style='bracket'),
+        tags=[tag],
         )
 
 def tie(
@@ -2051,6 +2071,7 @@ def tie(
         abjad.DurationInequality,
         ] = None,
     selector: typings.Selector = 'baca.qrun(0)',
+    tag: typing.Optional[str] = 'baca_tie',
     ) -> SpannerCommand:
     r"""
     Attaches tie.
@@ -2089,12 +2110,12 @@ def tie(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            ~                                                                        %! SpannerCommand
+                            ~                                                                        %! baca_tie:SpannerCommand
                             [
                             c'16
                             ]
                             bf'4
-                            ~                                                                        %! SpannerCommand
+                            ~                                                                        %! baca_tie:SpannerCommand
                             bf'16
                             r16
                         }
@@ -2103,10 +2124,10 @@ def tie(
                             bf'16
                             [
                             e''16
-                            ~                                                                        %! SpannerCommand
+                            ~                                                                        %! baca_tie:SpannerCommand
                             ]
                             e''4
-                            ~                                                                        %! SpannerCommand
+                            ~                                                                        %! baca_tie:SpannerCommand
                             e''16
                             r16
                             fs''16
@@ -2157,13 +2178,13 @@ def tie(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            ~                                                                        %! SpannerCommand
+                            ~                                                                        %! baca_tie:SpannerCommand
                             [
                             c'16
                             ]
                             bf'4
                             bf'16
-                            \repeatTie                                                               %! SpannerCommand
+                            \repeatTie                                                               %! baca_tie:SpannerCommand
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -2171,11 +2192,11 @@ def tie(
                             bf'16
                             [
                             e''16
-                            ~                                                                        %! SpannerCommand
+                            ~                                                                        %! baca_tie:SpannerCommand
                             ]
                             e''4
                             e''16
-                            \repeatTie                                                               %! SpannerCommand
+                            \repeatTie                                                               %! baca_tie:SpannerCommand
                             r16
                             fs''16
                             [
@@ -2198,13 +2219,17 @@ def tie(
     return SpannerCommand(
         selector=selector,
         spanner=tie,
+        tags=[tag],
         )
 
-def tie_repeat_pitches() -> SpannerCommand:
+def tie_repeat_pitches(
+    *,
+    tag: typing.Optional[str] = 'baca_tie_repeat_pitches',
+    ) -> SpannerCommand:
     """
     Ties repeat pitches.
     """
-    command = tie()
+    command = tie(tag=tag)
     command.map = classes.selector().ltqruns().nontrivial()
     return command
 
@@ -2215,6 +2240,7 @@ def trill_spanner(
     left_broken: bool = None,
     right_broken: bool = None,
     selector: typings.Selector = 'baca.tleaves().with_next_leaf()',
+    tag: typing.Optional[str] = 'baca_trill_spanner',
     ) -> SpannerCommand:
     r"""
     Attaches trill spanner.
@@ -2277,7 +2303,7 @@ def trill_spanner(
                         \times 4/5 {
                             a'16
                             r4
-                            \stopTrillSpan                                                           %! SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
@@ -2323,15 +2349,15 @@ def trill_spanner(
                             \startTrillSpan
                             d'16
                             ]
-                            \stopTrillSpan                                                           %! SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
                             \startTrillSpan
                             bf'4
                             ~
-                            \stopTrillSpan                                                           %! SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
                             \startTrillSpan
                             bf'16
                             r16
-                            \stopTrillSpan                                                           %! SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
@@ -2340,29 +2366,29 @@ def trill_spanner(
                             \startTrillSpan
                             e''16
                             ]
-                            \stopTrillSpan                                                           %! SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
                             \startTrillSpan
                             ef''4
                             ~
-                            \stopTrillSpan                                                           %! SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
                             \startTrillSpan
                             ef''16
                             r16
-                            \stopTrillSpan                                                           %! SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
                             af''16
                             [
                             \startTrillSpan
                             g''16
                             ]
-                            \stopTrillSpan                                                           %! SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
                             \startTrillSpan
                         }
                         \times 4/5 {
                             a'16
-                            \stopTrillSpan                                                           %! SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
                             \startTrillSpan
                             r4
-                            \stopTrillSpan                                                           %! SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
@@ -2412,7 +2438,7 @@ def trill_spanner(
                             ~
                             bf'16
                             r16
-                            \stopTrillSpan                                                           %! SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
@@ -2425,7 +2451,7 @@ def trill_spanner(
                             ~
                             ef''16
                             r16
-                            \stopTrillSpan                                                           %! SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
                             af''16
                             [
                             \startTrillSpan
@@ -2435,7 +2461,7 @@ def trill_spanner(
                         \times 4/5 {
                             a'16
                             r4
-                            \stopTrillSpan                                                           %! SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
@@ -2476,13 +2502,13 @@ def trill_spanner(
                         \times 9/10 {
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            \pitchedTrill                                                            %! SpannerCommand
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
                             c'16
                             [
                             \startTrillSpan ef'
                             d'16
                             ]
-                            \stopTrillSpan                                                           %! SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
                             bf'4
                             ~
                             bf'16
@@ -2546,60 +2572,60 @@ def trill_spanner(
                         \times 9/10 {
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            \pitchedTrill                                                            %! SpannerCommand
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
                             c'16
                             [
                             \startTrillSpan ef'
-                            \pitchedTrill                                                            %! SpannerCommand
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
                             d'16
                             ]
-                            \stopTrillSpan                                                           %! SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
                             \startTrillSpan ef'
-                            \pitchedTrill                                                            %! SpannerCommand
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
                             bf'4
                             ~
-                            \stopTrillSpan                                                           %! SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
                             \startTrillSpan ef'
                             bf'16
                             r16
-                            \stopTrillSpan                                                           %! SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \pitchedTrill                                                            %! SpannerCommand
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
                             fs''16
                             [
                             \startTrillSpan ef'
-                            \pitchedTrill                                                            %! SpannerCommand
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
                             e''16
                             ]
-                            \stopTrillSpan                                                           %! SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
                             \startTrillSpan ef'
-                            \pitchedTrill                                                            %! SpannerCommand
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
                             ef''4
                             ~
-                            \stopTrillSpan                                                           %! SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
                             \startTrillSpan ef'
                             ef''16
                             r16
-                            \stopTrillSpan                                                           %! SpannerCommand
-                            \pitchedTrill                                                            %! SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
                             af''16
                             [
                             \startTrillSpan ef'
-                            \pitchedTrill                                                            %! SpannerCommand
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
                             g''16
                             ]
-                            \stopTrillSpan                                                           %! SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
                             \startTrillSpan ef'
                         }
                         \times 4/5 {
-                            \pitchedTrill                                                            %! SpannerCommand
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
                             a'16
-                            \stopTrillSpan                                                           %! SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
                             \startTrillSpan ef'
                             r4
-                            \stopTrillSpan                                                           %! SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
@@ -2640,60 +2666,60 @@ def trill_spanner(
                         \times 9/10 {
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            \pitchedTrill                                                            %! SpannerCommand
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
                             c'16
                             [
                             \startTrillSpan d'
-                            \pitchedTrill                                                            %! SpannerCommand
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
                             d'16
                             ]
-                            \stopTrillSpan                                                           %! SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
                             \startTrillSpan e'
-                            \pitchedTrill                                                            %! SpannerCommand
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
                             bf'4
                             ~
-                            \stopTrillSpan                                                           %! SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
                             \startTrillSpan c''
                             bf'16
                             r16
-                            \stopTrillSpan                                                           %! SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \pitchedTrill                                                            %! SpannerCommand
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
                             fs''16
                             [
                             \startTrillSpan gs''
-                            \pitchedTrill                                                            %! SpannerCommand
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
                             e''16
                             ]
-                            \stopTrillSpan                                                           %! SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
                             \startTrillSpan fs''
-                            \pitchedTrill                                                            %! SpannerCommand
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
                             ef''4
                             ~
-                            \stopTrillSpan                                                           %! SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
                             \startTrillSpan f''
                             ef''16
                             r16
-                            \stopTrillSpan                                                           %! SpannerCommand
-                            \pitchedTrill                                                            %! SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
                             af''16
                             [
                             \startTrillSpan bf''
-                            \pitchedTrill                                                            %! SpannerCommand
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
                             g''16
                             ]
-                            \stopTrillSpan                                                           %! SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
                             \startTrillSpan a''
                         }
                         \times 4/5 {
-                            \pitchedTrill                                                            %! SpannerCommand
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
                             a'16
-                            \stopTrillSpan                                                           %! SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
                             \startTrillSpan b'
                             r4
-                            \stopTrillSpan                                                           %! SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
@@ -2720,4 +2746,5 @@ def trill_spanner(
             pitch=pitch,
             ),
         selector=selector,
+        tags=[tag],
         )

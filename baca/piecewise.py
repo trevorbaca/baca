@@ -454,7 +454,7 @@ class PiecewiseCommand(scoping.Command):
             wrapper = abjad.attach(
                 indicator,
                 leaf,
-                tag=self.tag.prepend(tag),
+                tag=self.tag.append(tag),
                 wrapper=True,
                 )
             if indicator == reapplied:
@@ -544,6 +544,7 @@ def dynamic(
     *tweaks: abjad.LilyPondTweakManager,
     selector: typings.Selector = 'baca.phead(0)',
     redundant: bool = None,
+    tag: typing.Optional[str] = 'baca_dynamic',
     ) -> commands.IndicatorCommand:
     r"""
     Attaches dynamic.
@@ -579,7 +580,7 @@ def dynamic(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            \f                                                                       %! IndicatorCommand
+                            \f                                                                       %! baca_dynamic:IndicatorCommand
                             [
                             d'16
                             ]
@@ -654,7 +655,7 @@ def dynamic(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            \f                                                                       %! IndicatorCommand
+                            \f                                                                       %! baca_dynamic:IndicatorCommand
                             [
                             e''16
                             ]
@@ -707,7 +708,7 @@ def dynamic(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            \baca-effort-f                                                           %! IndicatorCommand
+                            \baca-effort-f                                                           %! baca_dynamic:IndicatorCommand
                             [
                             d'16
                             ]
@@ -818,10 +819,10 @@ def dynamic(
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
-                            \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
-                            \<                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
+                            \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
+                            \<                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
@@ -858,8 +859,8 @@ def dynamic(
                             e'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
-                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
+                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
                             ]                                                                        %! baca_make_even_divisions
                             \revert DynamicLineSpanner.staff-padding                                 %! baca_dls_staff_padding:OverrideCommand(2)
             <BLANKLINE>
@@ -947,8 +948,8 @@ def dynamic(
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
-                            \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
+                            \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
@@ -1009,6 +1010,7 @@ def dynamic(
         indicators=[indicator],
         redundant=redundant,
         selector=selector,
+        tags=[tag],
         )
 
 def hairpin(
@@ -1022,6 +1024,7 @@ def hairpin(
     remove_length_1_spanner_start: bool = None,
     right_broken: bool = None,
     selector: typings.Selector = 'baca.leaves()',
+    tag: typing.Optional[str] = 'baca_hairpin',
     ) -> PiecewiseCommand:
     r"""
     Attaches hairpin.
@@ -1102,10 +1105,10 @@ def hairpin(
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \<                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \<                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
@@ -1142,8 +1145,8 @@ def hairpin(
                             e'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
-                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
+                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
                             \revert DynamicLineSpanner.staff-padding                                 %! baca_dls_staff_padding:OverrideCommand(2)
             <BLANKLINE>
@@ -1231,12 +1234,12 @@ def hairpin(
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \baca-effort-ff                                                          %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            - \tweak to-barline ##t                                                  %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            - \tweak circled-tip ##t                                                 %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \>                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \baca-effort-ff                                                          %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            - \tweak to-barline ##t                                                  %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            - \tweak circled-tip ##t                                                 %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \>                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
@@ -1273,8 +1276,8 @@ def hairpin(
                             e'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
-                            \!                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
+                            \!                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
                             \revert DynamicLineSpanner.staff-padding                                 %! baca_dls_staff_padding:OverrideCommand(2)
             <BLANKLINE>
@@ -1362,11 +1365,11 @@ def hairpin(
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \!                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            - \tweak circled-tip ##t                                                 %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \<                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \!                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            - \tweak circled-tip ##t                                                 %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \<                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
@@ -1403,8 +1406,8 @@ def hairpin(
                             e'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
-                            \baca-effort-ff                                                          %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
+                            \baca-effort-ff                                                          %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
                             \revert DynamicLineSpanner.staff-padding                                 %! baca_dls_staff_padding:OverrideCommand(2)
             <BLANKLINE>
@@ -1492,11 +1495,11 @@ def hairpin(
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \baca-effort-p                                                           %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            - \tweak stencil #constante-hairpin                                      %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \<                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \baca-effort-p                                                           %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            - \tweak stencil #constante-hairpin                                      %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \<                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
@@ -1533,8 +1536,8 @@ def hairpin(
                             e'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
-                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
+                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
                             \revert DynamicLineSpanner.staff-padding                                 %! baca_dls_staff_padding:OverrideCommand(2)
             <BLANKLINE>
@@ -1629,11 +1632,11 @@ def hairpin(
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \baca-effort-mp                                                          %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            - \tweak stencil #abjad-flared-hairpin                                   %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \<                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \baca-effort-mp                                                          %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            - \tweak stencil #abjad-flared-hairpin                                   %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \<                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
@@ -1650,17 +1653,17 @@ def hairpin(
                             f''8                                                                     %! baca_make_even_divisions
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
-                            \baca-effort-f                                                           %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
+                            \baca-effort-f                                                           %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \baca-effort-mf                                                          %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            - \tweak stencil #abjad-flared-hairpin                                   %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \>                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \baca-effort-mf                                                          %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            - \tweak stencil #abjad-flared-hairpin                                   %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \>                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             f'8                                                                      %! baca_make_even_divisions
@@ -1677,8 +1680,8 @@ def hairpin(
                             e'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
-                            \baca-effort-p                                                           %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
+                            \baca-effort-p                                                           %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
                             \revert DynamicLineSpanner.staff-padding                                 %! baca_dls_staff_padding:OverrideCommand(2)
             <BLANKLINE>
@@ -1769,8 +1772,8 @@ def hairpin(
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
@@ -1782,8 +1785,8 @@ def hairpin(
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             f''8                                                                     %! baca_make_even_divisions
@@ -1793,8 +1796,8 @@ def hairpin(
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             f'8                                                                      %! baca_make_even_divisions
@@ -1806,15 +1809,15 @@ def hairpin(
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
-                            \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
+                            \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
                             \revert DynamicLineSpanner.staff-padding                                 %! baca_dls_staff_padding:OverrideCommand(2)
             <BLANKLINE>
@@ -1903,10 +1906,10 @@ def hairpin(
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \<                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \<                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
@@ -1918,10 +1921,10 @@ def hairpin(
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \>                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \>                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             f''8                                                                     %! baca_make_even_divisions
@@ -1931,10 +1934,10 @@ def hairpin(
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \<                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \<                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             f'8                                                                      %! baca_make_even_divisions
@@ -1946,17 +1949,17 @@ def hairpin(
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \>                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \>                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
-                            \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
+                            \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
                             \revert DynamicLineSpanner.staff-padding                                 %! baca_dls_staff_padding:OverrideCommand(2)
             <BLANKLINE>
@@ -2046,8 +2049,8 @@ def hairpin(
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
@@ -2055,27 +2058,27 @@ def hairpin(
                             f'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             e''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'DeepPink1)                                   %! REDUNDANT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
-                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
+                            - \tweak color #(x11-color 'DeepPink1)                                   %! REDUNDANT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
+                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'DeepPink1)                                   %! REDUNDANT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! REDUNDANT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \f                                                                       %! REDUNDANT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'DeepPink1)                                   %! REDUNDANT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! REDUNDANT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \f                                                                       %! REDUNDANT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             f''8                                                                     %! baca_make_even_divisions
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
-                            \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
+                            \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! REDUNDANT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \p                                                                       %! REDUNDANT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! REDUNDANT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \p                                                                       %! REDUNDANT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             f'8                                                                      %! baca_make_even_divisions
@@ -2083,21 +2086,21 @@ def hairpin(
                             e''8                                                                     %! baca_make_even_divisions
             <BLANKLINE>
                             g'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'DeepPink1)                                   %! REDUNDANT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
-                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
+                            - \tweak color #(x11-color 'DeepPink1)                                   %! REDUNDANT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
+                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'DeepPink1)                                   %! REDUNDANT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! REDUNDANT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \f                                                                       %! REDUNDANT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'DeepPink1)                                   %! REDUNDANT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! REDUNDANT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \f                                                                       %! REDUNDANT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
-                            \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
+                            \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
                             \revert DynamicLineSpanner.staff-padding                                 %! baca_dls_staff_padding:OverrideCommand(2)
             <BLANKLINE>
@@ -2187,11 +2190,11 @@ def hairpin(
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            - \tweak stencil #constante-hairpin                                      %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \<                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            - \tweak stencil #constante-hairpin                                      %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \<                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
@@ -2199,32 +2202,32 @@ def hairpin(
                             f'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             e''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
-                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
+                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \>                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \>                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             f''8                                                                     %! baca_make_even_divisions
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
-                            \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
+                            \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            - \tweak stencil #constante-hairpin                                      %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \<                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            - \tweak stencil #constante-hairpin                                      %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \<                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             f'8                                                                      %! baca_make_even_divisions
@@ -2232,23 +2235,23 @@ def hairpin(
                             e''8                                                                     %! baca_make_even_divisions
             <BLANKLINE>
                             g'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
-                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
+                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \>                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \>                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
-                            \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
+                            \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
                             \revert DynamicLineSpanner.staff-padding                                 %! baca_dls_staff_padding:OverrideCommand(2)
             <BLANKLINE>
@@ -2340,10 +2343,10 @@ def hairpin(
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \>                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \>                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
@@ -2361,8 +2364,8 @@ def hairpin(
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
-                            <> \p                                                                    %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
+                            <> \p                                                                    %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
@@ -2471,12 +2474,12 @@ def hairpin(
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            - \tweak to-barline ##t                                                  %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            - \tweak circled-tip ##t                                                 %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \>                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            - \tweak to-barline ##t                                                  %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            - \tweak circled-tip ##t                                                 %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \>                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
@@ -2494,8 +2497,8 @@ def hairpin(
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
-                            <> \!                                                                    %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(2)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
+                            <> \!                                                                    %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
@@ -2602,8 +2605,8 @@ def hairpin(
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
@@ -2730,8 +2733,8 @@ def hairpin(
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
-                            \<                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            \<                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
@@ -2768,8 +2771,8 @@ def hairpin(
                             e'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
-                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:IndicatorCommand
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1) %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
+                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
                             ]                                                                        %! baca_make_even_divisions
                             \revert DynamicLineSpanner.staff-padding                                 %! baca_dls_staff_padding:OverrideCommand(2)
             <BLANKLINE>
@@ -2815,6 +2818,7 @@ def hairpin(
         remove_length_1_spanner_start=remove_length_1_spanner_start,
         right_broken=right_broken_,
         selector=selector,
+        tags=[tag],
         )
 
 def make_dynamic(string: str) -> typing.Union[
@@ -3072,6 +3076,7 @@ def text_spanner(
     lilypond_id: int = None,
     piece_selector: typings.Selector = 'baca.group()',
     selector: typings.Selector = 'baca.leaves()',
+    tag: typing.Optional[str] = 'baca_text_spanner',
     ) -> PiecewiseCommand:
     r"""
     Attaches text span indicators.
@@ -3154,12 +3159,12 @@ def text_spanner(
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \override TextSpanner.staff-padding = #4.5                               %! baca_text_spanner_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
-                            - \abjad-dashed-line-with-arrow                                          %! PiecewiseCommand(1)
-                            - \baca-text-spanner-left-text "pont."                                   %! PiecewiseCommand(1)
-                            - \baca-text-spanner-right-text "ord."                                   %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.padding #0.5                                %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PiecewiseCommand(1)
-                            \startTextSpan                                                           %! PiecewiseCommand(1)
+                            - \abjad-dashed-line-with-arrow                                          %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "pont."                                   %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-right-text "ord."                                   %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.padding #0.5                                %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! baca_text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
@@ -3196,7 +3201,7 @@ def text_spanner(
                             e'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! PiecewiseCommand(2)
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
                             \revert TextSpanner.staff-padding                                        %! baca_text_spanner_staff_padding:OverrideCommand(2)
             <BLANKLINE>
@@ -3282,27 +3287,27 @@ def text_spanner(
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \override TextSpanner.staff-padding = #4.5                               %! baca_text_spanner_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
-                            - \abjad-dashed-line-with-hook                                           %! PiecewiseCommand(1)
-                            - \baca-text-spanner-left-text "pont."                                   %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.text \markup {                              %! PiecewiseCommand(1)
-                                \concat                                                              %! PiecewiseCommand(1)
-                                    {                                                                %! PiecewiseCommand(1)
-                                        \raise                                                       %! PiecewiseCommand(1)
-                                            #-1                                                      %! PiecewiseCommand(1)
-                                            \draw-line                                               %! PiecewiseCommand(1)
-                                                #'(0 . -1)                                           %! PiecewiseCommand(1)
-                                        \hspace                                                      %! PiecewiseCommand(1)
-                                            #0.75                                                    %! PiecewiseCommand(1)
-                                        \general-align                                               %! PiecewiseCommand(1)
-                                            #Y                                                       %! PiecewiseCommand(1)
-                                            #1                                                       %! PiecewiseCommand(1)
-                                            \upright                                                 %! PiecewiseCommand(1)
-                                                ord.                                                 %! PiecewiseCommand(1)
-                                    }                                                                %! PiecewiseCommand(1)
-                                }                                                                    %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.padding #1.25                               %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PiecewiseCommand(1)
-                            \startTextSpan                                                           %! PiecewiseCommand(1)
+                            - \abjad-dashed-line-with-hook                                           %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "pont."                                   %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.text \markup {                              %! baca_text_spanner:PiecewiseCommand(1)
+                                \concat                                                              %! baca_text_spanner:PiecewiseCommand(1)
+                                    {                                                                %! baca_text_spanner:PiecewiseCommand(1)
+                                        \raise                                                       %! baca_text_spanner:PiecewiseCommand(1)
+                                            #-1                                                      %! baca_text_spanner:PiecewiseCommand(1)
+                                            \draw-line                                               %! baca_text_spanner:PiecewiseCommand(1)
+                                                #'(0 . -1)                                           %! baca_text_spanner:PiecewiseCommand(1)
+                                        \hspace                                                      %! baca_text_spanner:PiecewiseCommand(1)
+                                            #0.75                                                    %! baca_text_spanner:PiecewiseCommand(1)
+                                        \general-align                                               %! baca_text_spanner:PiecewiseCommand(1)
+                                            #Y                                                       %! baca_text_spanner:PiecewiseCommand(1)
+                                            #1                                                       %! baca_text_spanner:PiecewiseCommand(1)
+                                            \upright                                                 %! baca_text_spanner:PiecewiseCommand(1)
+                                                ord.                                                 %! baca_text_spanner:PiecewiseCommand(1)
+                                    }                                                                %! baca_text_spanner:PiecewiseCommand(1)
+                                }                                                                    %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.padding #1.25                               %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! baca_text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
@@ -3339,7 +3344,7 @@ def text_spanner(
                             e'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! PiecewiseCommand(2)
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
                             \revert TextSpanner.staff-padding                                        %! baca_text_spanner_staff_padding:OverrideCommand(2)
             <BLANKLINE>
@@ -3425,12 +3430,12 @@ def text_spanner(
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \override TextSpanner.staff-padding = #4.5                               %! baca_text_spanner_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
-                            - \abjad-solid-line-with-arrow                                           %! PiecewiseCommand(1)
-                            - \baca-text-spanner-left-text "pont."                                   %! PiecewiseCommand(1)
-                            - \baca-text-spanner-right-text "ord."                                   %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.padding #0.5                                %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PiecewiseCommand(1)
-                            \startTextSpan                                                           %! PiecewiseCommand(1)
+                            - \abjad-solid-line-with-arrow                                           %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "pont."                                   %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-right-text "ord."                                   %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.padding #0.5                                %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! baca_text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
@@ -3467,7 +3472,7 @@ def text_spanner(
                             e'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! PiecewiseCommand(2)
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
                             \revert TextSpanner.staff-padding                                        %! baca_text_spanner_staff_padding:OverrideCommand(2)
             <BLANKLINE>
@@ -3553,27 +3558,27 @@ def text_spanner(
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \override TextSpanner.staff-padding = #4.5                               %! baca_text_spanner_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
-                            - \abjad-solid-line-with-hook                                            %! PiecewiseCommand(1)
-                            - \baca-text-spanner-left-text "pont."                                   %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.text \markup {                              %! PiecewiseCommand(1)
-                                \concat                                                              %! PiecewiseCommand(1)
-                                    {                                                                %! PiecewiseCommand(1)
-                                        \raise                                                       %! PiecewiseCommand(1)
-                                            #-1                                                      %! PiecewiseCommand(1)
-                                            \draw-line                                               %! PiecewiseCommand(1)
-                                                #'(0 . -1)                                           %! PiecewiseCommand(1)
-                                        \hspace                                                      %! PiecewiseCommand(1)
-                                            #0.75                                                    %! PiecewiseCommand(1)
-                                        \general-align                                               %! PiecewiseCommand(1)
-                                            #Y                                                       %! PiecewiseCommand(1)
-                                            #1                                                       %! PiecewiseCommand(1)
-                                            \upright                                                 %! PiecewiseCommand(1)
-                                                ord.                                                 %! PiecewiseCommand(1)
-                                    }                                                                %! PiecewiseCommand(1)
-                                }                                                                    %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.padding #1.25                               %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PiecewiseCommand(1)
-                            \startTextSpan                                                           %! PiecewiseCommand(1)
+                            - \abjad-solid-line-with-hook                                            %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "pont."                                   %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.text \markup {                              %! baca_text_spanner:PiecewiseCommand(1)
+                                \concat                                                              %! baca_text_spanner:PiecewiseCommand(1)
+                                    {                                                                %! baca_text_spanner:PiecewiseCommand(1)
+                                        \raise                                                       %! baca_text_spanner:PiecewiseCommand(1)
+                                            #-1                                                      %! baca_text_spanner:PiecewiseCommand(1)
+                                            \draw-line                                               %! baca_text_spanner:PiecewiseCommand(1)
+                                                #'(0 . -1)                                           %! baca_text_spanner:PiecewiseCommand(1)
+                                        \hspace                                                      %! baca_text_spanner:PiecewiseCommand(1)
+                                            #0.75                                                    %! baca_text_spanner:PiecewiseCommand(1)
+                                        \general-align                                               %! baca_text_spanner:PiecewiseCommand(1)
+                                            #Y                                                       %! baca_text_spanner:PiecewiseCommand(1)
+                                            #1                                                       %! baca_text_spanner:PiecewiseCommand(1)
+                                            \upright                                                 %! baca_text_spanner:PiecewiseCommand(1)
+                                                ord.                                                 %! baca_text_spanner:PiecewiseCommand(1)
+                                    }                                                                %! baca_text_spanner:PiecewiseCommand(1)
+                                }                                                                    %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.padding #1.25                               %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! baca_text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
@@ -3610,7 +3615,7 @@ def text_spanner(
                             e'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! PiecewiseCommand(2)
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
                             \revert TextSpanner.staff-padding                                        %! baca_text_spanner_staff_padding:OverrideCommand(2)
             <BLANKLINE>
@@ -3696,12 +3701,12 @@ def text_spanner(
                             % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
                             \override TextSpanner.staff-padding = #4.5                               %! baca_text_spanner_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
-                            - \abjad-invisible-line                                                  %! PiecewiseCommand(1)
-                            - \baca-text-spanner-left-text "pont."                                   %! PiecewiseCommand(1)
-                            - \baca-text-spanner-right-text "ord."                                   %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.padding #0.5                                %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PiecewiseCommand(1)
-                            \startTextSpan                                                           %! PiecewiseCommand(1)
+                            - \abjad-invisible-line                                                  %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "pont."                                   %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-right-text "ord."                                   %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.padding #0.5                                %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! baca_text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
@@ -3738,7 +3743,7 @@ def text_spanner(
                             e'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! PiecewiseCommand(2)
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
                             \revert TextSpanner.staff-padding                                        %! baca_text_spanner_staff_padding:OverrideCommand(2)
             <BLANKLINE>
@@ -3831,9 +3836,9 @@ def text_spanner(
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             \override TextSpanner.staff-padding = #4.5                               %! baca_text_spanner_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
-                            - \abjad-invisible-line                                                  %! PiecewiseCommand(1)
-                            - \baca-text-spanner-left-text "A"                                       %! PiecewiseCommand(1)
-                            \startTextSpan                                                           %! PiecewiseCommand(1)
+                            - \abjad-invisible-line                                                  %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "A"                                       %! baca_text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
@@ -3845,10 +3850,10 @@ def text_spanner(
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! PiecewiseCommand(1)
-                            - \abjad-invisible-line                                                  %! PiecewiseCommand(1)
-                            - \baca-text-spanner-left-text "B"                                       %! PiecewiseCommand(1)
-                            \startTextSpan                                                           %! PiecewiseCommand(1)
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
+                            - \abjad-invisible-line                                                  %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "B"                                       %! baca_text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             f''8                                                                     %! baca_make_even_divisions
@@ -3858,10 +3863,10 @@ def text_spanner(
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! PiecewiseCommand(1)
-                            - \abjad-invisible-line                                                  %! PiecewiseCommand(1)
-                            - \baca-text-spanner-left-text "A"                                       %! PiecewiseCommand(1)
-                            \startTextSpan                                                           %! PiecewiseCommand(1)
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
+                            - \abjad-invisible-line                                                  %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "A"                                       %! baca_text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             f'8                                                                      %! baca_make_even_divisions
@@ -3873,19 +3878,19 @@ def text_spanner(
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! PiecewiseCommand(1)
-                            - \abjad-invisible-line                                                  %! PiecewiseCommand(1)
-                            - \baca-text-spanner-left-text "B"                                       %! PiecewiseCommand(1)
-                            - \baca-text-spanner-right-text "A"                                      %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.padding #0.5                                %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PiecewiseCommand(1)
-                            \startTextSpan                                                           %! PiecewiseCommand(1)
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
+                            - \abjad-invisible-line                                                  %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "B"                                       %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-right-text "A"                                      %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.padding #0.5                                %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! baca_text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! PiecewiseCommand(2)
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
                             \revert DynamicLineSpanner.staff-padding                                 %! baca_dls_staff_padding:OverrideCommand(2)
                             \revert TextSpanner.staff-padding                                        %! baca_text_spanner_staff_padding:OverrideCommand(2)
@@ -3977,9 +3982,9 @@ def text_spanner(
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             \override TextSpanner.staff-padding = #4.5                               %! baca_text_spanner_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
-                            - \abjad-solid-line-with-arrow                                           %! PiecewiseCommand(1)
-                            - \baca-text-spanner-left-text "A"                                       %! PiecewiseCommand(1)
-                            \startTextSpan                                                           %! PiecewiseCommand(1)
+                            - \abjad-solid-line-with-arrow                                           %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "A"                                       %! baca_text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
@@ -3991,10 +3996,10 @@ def text_spanner(
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! PiecewiseCommand(1)
-                            - \abjad-solid-line-with-arrow                                           %! PiecewiseCommand(1)
-                            - \baca-text-spanner-left-text "B"                                       %! PiecewiseCommand(1)
-                            \startTextSpan                                                           %! PiecewiseCommand(1)
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
+                            - \abjad-solid-line-with-arrow                                           %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "B"                                       %! baca_text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             f''8                                                                     %! baca_make_even_divisions
@@ -4004,10 +4009,10 @@ def text_spanner(
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! PiecewiseCommand(1)
-                            - \abjad-solid-line-with-arrow                                           %! PiecewiseCommand(1)
-                            - \baca-text-spanner-left-text "A"                                       %! PiecewiseCommand(1)
-                            \startTextSpan                                                           %! PiecewiseCommand(1)
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
+                            - \abjad-solid-line-with-arrow                                           %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "A"                                       %! baca_text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             f'8                                                                      %! baca_make_even_divisions
@@ -4019,19 +4024,19 @@ def text_spanner(
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! PiecewiseCommand(1)
-                            - \abjad-solid-line-with-arrow                                           %! PiecewiseCommand(1)
-                            - \baca-text-spanner-left-text "B"                                       %! PiecewiseCommand(1)
-                            - \baca-text-spanner-right-text "A"                                      %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.padding #0.5                                %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PiecewiseCommand(1)
-                            \startTextSpan                                                           %! PiecewiseCommand(1)
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
+                            - \abjad-solid-line-with-arrow                                           %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "B"                                       %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-right-text "A"                                      %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.padding #0.5                                %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! baca_text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! PiecewiseCommand(2)
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
                             \revert DynamicLineSpanner.staff-padding                                 %! baca_dls_staff_padding:OverrideCommand(2)
                             \revert TextSpanner.staff-padding                                        %! baca_text_spanner_staff_padding:OverrideCommand(2)
@@ -4124,12 +4129,12 @@ def text_spanner(
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             \override TextSpanner.staff-padding = #4.5                               %! baca_text_spanner_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
-                            - \abjad-invisible-line                                                  %! PiecewiseCommand(1)
-                            - \baca-text-spanner-left-text "A"                                       %! PiecewiseCommand(1)
-                            - \baca-text-spanner-right-text "B"                                      %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.padding #0.5                                %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PiecewiseCommand(1)
-                            \startTextSpan                                                           %! PiecewiseCommand(1)
+                            - \abjad-invisible-line                                                  %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "A"                                       %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-right-text "B"                                      %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.padding #0.5                                %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! baca_text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
@@ -4137,35 +4142,35 @@ def text_spanner(
                             f'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             e''8                                                                     %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! PiecewiseCommand(2)
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! PiecewiseCommand(1)
-                            - \abjad-invisible-line                                                  %! PiecewiseCommand(1)
-                            - \baca-text-spanner-left-text "B"                                       %! PiecewiseCommand(1)
-                            - \baca-text-spanner-right-text "A"                                      %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.padding #0.5                                %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PiecewiseCommand(1)
-                            \startTextSpan                                                           %! PiecewiseCommand(1)
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
+                            - \abjad-invisible-line                                                  %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "B"                                       %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-right-text "A"                                      %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.padding #0.5                                %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! baca_text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             f''8                                                                     %! baca_make_even_divisions
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! PiecewiseCommand(2)
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! PiecewiseCommand(1)
-                            - \abjad-invisible-line                                                  %! PiecewiseCommand(1)
-                            - \baca-text-spanner-left-text "A"                                       %! PiecewiseCommand(1)
-                            - \baca-text-spanner-right-text "B"                                      %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.padding #0.5                                %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PiecewiseCommand(1)
-                            \startTextSpan                                                           %! PiecewiseCommand(1)
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
+                            - \abjad-invisible-line                                                  %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "A"                                       %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-right-text "B"                                      %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.padding #0.5                                %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! baca_text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             f'8                                                                      %! baca_make_even_divisions
@@ -4173,24 +4178,24 @@ def text_spanner(
                             e''8                                                                     %! baca_make_even_divisions
             <BLANKLINE>
                             g'8                                                                      %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! PiecewiseCommand(2)
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! PiecewiseCommand(1)
-                            - \abjad-invisible-line                                                  %! PiecewiseCommand(1)
-                            - \baca-text-spanner-left-text "B"                                       %! PiecewiseCommand(1)
-                            - \baca-text-spanner-right-text "A"                                      %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.padding #0.5                                %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PiecewiseCommand(1)
-                            \startTextSpan                                                           %! PiecewiseCommand(1)
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
+                            - \abjad-invisible-line                                                  %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "B"                                       %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-right-text "A"                                      %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.padding #0.5                                %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! baca_text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! PiecewiseCommand(2)
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
                             \revert DynamicLineSpanner.staff-padding                                 %! baca_dls_staff_padding:OverrideCommand(2)
                             \revert TextSpanner.staff-padding                                        %! baca_text_spanner_staff_padding:OverrideCommand(2)
@@ -4283,12 +4288,12 @@ def text_spanner(
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             \override TextSpanner.staff-padding = #4.5                               %! baca_text_spanner_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
-                            - \abjad-solid-line-with-arrow                                           %! PiecewiseCommand(1)
-                            - \baca-text-spanner-left-text "A"                                       %! PiecewiseCommand(1)
-                            - \baca-text-spanner-right-text "B"                                      %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.padding #0.5                                %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PiecewiseCommand(1)
-                            \startTextSpan                                                           %! PiecewiseCommand(1)
+                            - \abjad-solid-line-with-arrow                                           %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "A"                                       %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-right-text "B"                                      %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.padding #0.5                                %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! baca_text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
@@ -4296,35 +4301,35 @@ def text_spanner(
                             f'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             e''8                                                                     %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! PiecewiseCommand(2)
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! PiecewiseCommand(1)
-                            - \abjad-solid-line-with-arrow                                           %! PiecewiseCommand(1)
-                            - \baca-text-spanner-left-text "B"                                       %! PiecewiseCommand(1)
-                            - \baca-text-spanner-right-text "A"                                      %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.padding #0.5                                %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PiecewiseCommand(1)
-                            \startTextSpan                                                           %! PiecewiseCommand(1)
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
+                            - \abjad-solid-line-with-arrow                                           %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "B"                                       %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-right-text "A"                                      %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.padding #0.5                                %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! baca_text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             f''8                                                                     %! baca_make_even_divisions
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! PiecewiseCommand(2)
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! PiecewiseCommand(1)
-                            - \abjad-solid-line-with-arrow                                           %! PiecewiseCommand(1)
-                            - \baca-text-spanner-left-text "A"                                       %! PiecewiseCommand(1)
-                            - \baca-text-spanner-right-text "B"                                      %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.padding #0.5                                %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PiecewiseCommand(1)
-                            \startTextSpan                                                           %! PiecewiseCommand(1)
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
+                            - \abjad-solid-line-with-arrow                                           %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "A"                                       %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-right-text "B"                                      %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.padding #0.5                                %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! baca_text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             f'8                                                                      %! baca_make_even_divisions
@@ -4332,24 +4337,24 @@ def text_spanner(
                             e''8                                                                     %! baca_make_even_divisions
             <BLANKLINE>
                             g'8                                                                      %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! PiecewiseCommand(2)
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! PiecewiseCommand(1)
-                            - \abjad-solid-line-with-arrow                                           %! PiecewiseCommand(1)
-                            - \baca-text-spanner-left-text "B"                                       %! PiecewiseCommand(1)
-                            - \baca-text-spanner-right-text "A"                                      %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.padding #0.5                                %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PiecewiseCommand(1)
-                            \startTextSpan                                                           %! PiecewiseCommand(1)
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
+                            - \abjad-solid-line-with-arrow                                           %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "B"                                       %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-right-text "A"                                      %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.padding #0.5                                %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! baca_text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! PiecewiseCommand(2)
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
                             \revert DynamicLineSpanner.staff-padding                                 %! baca_dls_staff_padding:OverrideCommand(2)
                             \revert TextSpanner.staff-padding                                        %! baca_text_spanner_staff_padding:OverrideCommand(2)
@@ -4444,9 +4449,9 @@ def text_spanner(
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             \override TextSpanner.staff-padding = #4.5                               %! baca_text_spanner_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
-                            - \abjad-dashed-line-with-hook                                           %! PiecewiseCommand(1)
-                            - \baca-text-spanner-left-markup \baca-damp-markup                       %! PiecewiseCommand(1)
-                            \startTextSpan                                                           %! PiecewiseCommand(1)
+                            - \abjad-dashed-line-with-hook                                           %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-markup \baca-damp-markup                       %! baca_text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
@@ -4467,7 +4472,7 @@ def text_spanner(
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! PiecewiseCommand(3)
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(3)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             f'8                                                                      %! baca_make_even_divisions
@@ -4577,9 +4582,9 @@ def text_spanner(
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             \override TextSpanner.staff-padding = #4.5                               %! baca_text_spanner_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
-                            - \abjad-solid-line-with-hook                                            %! PiecewiseCommand(1)
-                            - \baca-text-spanner-left-text "A"                                       %! PiecewiseCommand(1)
-                            \startTextSpan                                                           %! PiecewiseCommand(1)
+                            - \abjad-solid-line-with-hook                                            %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "A"                                       %! baca_text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
@@ -4591,10 +4596,10 @@ def text_spanner(
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! PiecewiseCommand(1)
-                            - \abjad-solid-line-with-hook                                            %! PiecewiseCommand(1)
-                            - \baca-text-spanner-left-text "B"                                       %! PiecewiseCommand(1)
-                            \startTextSpan                                                           %! PiecewiseCommand(1)
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
+                            - \abjad-solid-line-with-hook                                            %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "B"                                       %! baca_text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             f''8                                                                     %! baca_make_even_divisions
@@ -4604,10 +4609,10 @@ def text_spanner(
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! PiecewiseCommand(1)
-                            - \abjad-solid-line-with-hook                                            %! PiecewiseCommand(1)
-                            - \baca-text-spanner-left-text "A"                                       %! PiecewiseCommand(1)
-                            \startTextSpan                                                           %! PiecewiseCommand(1)
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
+                            - \abjad-solid-line-with-hook                                            %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "A"                                       %! baca_text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             f'8                                                                      %! baca_make_even_divisions
@@ -4619,34 +4624,34 @@ def text_spanner(
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! PiecewiseCommand(1)
-                            - \abjad-solid-line-with-hook                                            %! PiecewiseCommand(1)
-                            - \baca-text-spanner-left-text "B"                                       %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.text \markup {                              %! PiecewiseCommand(1)
-                                \concat                                                              %! PiecewiseCommand(1)
-                                    {                                                                %! PiecewiseCommand(1)
-                                        \raise                                                       %! PiecewiseCommand(1)
-                                            #-1                                                      %! PiecewiseCommand(1)
-                                            \draw-line                                               %! PiecewiseCommand(1)
-                                                #'(0 . -1)                                           %! PiecewiseCommand(1)
-                                        \hspace                                                      %! PiecewiseCommand(1)
-                                            #0.75                                                    %! PiecewiseCommand(1)
-                                        \general-align                                               %! PiecewiseCommand(1)
-                                            #Y                                                       %! PiecewiseCommand(1)
-                                            #1                                                       %! PiecewiseCommand(1)
-                                            \upright                                                 %! PiecewiseCommand(1)
-                                                A                                                    %! PiecewiseCommand(1)
-                                    }                                                                %! PiecewiseCommand(1)
-                                }                                                                    %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.padding #1.25                               %! PiecewiseCommand(1)
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! PiecewiseCommand(1)
-                            \startTextSpan                                                           %! PiecewiseCommand(1)
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
+                            - \abjad-solid-line-with-hook                                            %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "B"                                       %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.text \markup {                              %! baca_text_spanner:PiecewiseCommand(1)
+                                \concat                                                              %! baca_text_spanner:PiecewiseCommand(1)
+                                    {                                                                %! baca_text_spanner:PiecewiseCommand(1)
+                                        \raise                                                       %! baca_text_spanner:PiecewiseCommand(1)
+                                            #-1                                                      %! baca_text_spanner:PiecewiseCommand(1)
+                                            \draw-line                                               %! baca_text_spanner:PiecewiseCommand(1)
+                                                #'(0 . -1)                                           %! baca_text_spanner:PiecewiseCommand(1)
+                                        \hspace                                                      %! baca_text_spanner:PiecewiseCommand(1)
+                                            #0.75                                                    %! baca_text_spanner:PiecewiseCommand(1)
+                                        \general-align                                               %! baca_text_spanner:PiecewiseCommand(1)
+                                            #Y                                                       %! baca_text_spanner:PiecewiseCommand(1)
+                                            #1                                                       %! baca_text_spanner:PiecewiseCommand(1)
+                                            \upright                                                 %! baca_text_spanner:PiecewiseCommand(1)
+                                                A                                                    %! baca_text_spanner:PiecewiseCommand(1)
+                                    }                                                                %! baca_text_spanner:PiecewiseCommand(1)
+                                }                                                                    %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.padding #1.25                               %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! baca_text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! PiecewiseCommand(2)
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
                             \revert DynamicLineSpanner.staff-padding                                 %! baca_dls_staff_padding:OverrideCommand(2)
                             \revert TextSpanner.staff-padding                                        %! baca_text_spanner_staff_padding:OverrideCommand(2)
@@ -4792,4 +4797,5 @@ def text_spanner(
         leak=leak,
         piece_selector=piece_selector,
         selector=selector,
+        tags=[tag],
         )
