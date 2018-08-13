@@ -165,6 +165,7 @@ class RhythmCommand(scoping.Command):
     ### CLASS ATTRIBUTES ###
 
     __slots__ = (
+        '_annotate_unpitched_music',
         '_division_maker',
         '_division_expression',
         '_left_broken',
@@ -187,6 +188,7 @@ class RhythmCommand(scoping.Command):
     def __init__(
         self,
         *,
+        annotate_unpitched_music: bool = None,
         division_maker: baca_divisions.DivisionMaker = None,
         division_expression: abjad.Expression = None,
         left_broken: bool = None,
@@ -208,6 +210,9 @@ class RhythmCommand(scoping.Command):
             measures=measures,
             scope=scope,
             )
+        if annotate_unpitched_music is not None:
+            annotate_unpitched_music = bool(annotate_unpitched_music)
+        self._annotate_unpitched_music = annotate_unpitched_music
         if division_expression is not None and division_maker is not None:
             message = 'can not set both division expression and division-maker'
             message += f':\n{division_expression} {division_maker}.'
@@ -272,7 +277,7 @@ class RhythmCommand(scoping.Command):
     ### PRIVATE METHODS ###
 
     @staticmethod
-    def _annotate_unpitched_notes(argument):
+    def _annotate_unpitched_music_(argument):
         rest_prototype = (
             abjad.MultimeasureRest,
             abjad.Rest,
@@ -451,8 +456,8 @@ class RhythmCommand(scoping.Command):
                 multimeasure_rests=self.multimeasure_rests,
                 )
         self._tag_broken_ties(selections)
-        if not literal_selections:
-            self._annotate_unpitched_notes(selections)
+        if self.annotate_unpitched_music or not literal_selections:
+            self._annotate_unpitched_music_(selections)
         return selections, start_offset
 
     def _previous_segment_stop_state(self):
@@ -483,6 +488,13 @@ class RhythmCommand(scoping.Command):
                 abjad.attach(abjad.tags.RIGHT_BROKEN_TIE_FROM, last_leaf)
 
     ### PUBLIC PROPERTIES ###
+
+    @property
+    def annotate_unpitched_music(self) -> typing.Optional[bool]:
+        """
+        Is true when command annotates unpitched music.
+        """
+        return self._annotate_unpitched_music
 
     @property
     def division_expression(self) -> typing.Optional[abjad.Expression]:
@@ -2671,6 +2683,7 @@ def repeat_tie_to(
 def rhythm(
     rhythm_maker: typings.RhythmMakerTyping,
     *,
+    annotate_unpitched_music: bool = None,
     division_maker: baca_divisions.DivisionMaker = None,
     division_expression: abjad.Expression = None,
     left_broken: bool = None,
@@ -2685,7 +2698,11 @@ def rhythm(
     """
     Makes rhythm command.
     """
+    if isinstance(rhythm_maker, str):
+        components = abjad.parse(rhythm_maker)
+        rhythm_maker = abjad.select(components)
     return RhythmCommand(
+        annotate_unpitched_music=annotate_unpitched_music,
         division_maker=division_maker,
         division_expression=division_expression,
         left_broken=left_broken,

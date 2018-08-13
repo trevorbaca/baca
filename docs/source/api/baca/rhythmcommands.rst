@@ -38,6 +38,7 @@ rhythmcommands
       :nosignatures:
 
       __call__
+      annotate_unpitched_music
       division_expression
       division_maker
       left_broken
@@ -115,6 +116,8 @@ rhythmcommands
 
    .. rubric:: Read-only properties
       :class: class-header
+
+   .. autoattribute:: RhythmCommand.annotate_unpitched_music
 
    .. container:: inherited
 
