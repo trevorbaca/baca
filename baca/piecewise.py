@@ -86,6 +86,7 @@ class IndicatorBundle(abjad.AbjadObject):
         """
         return self._bookended_spanner_start
 
+    # TODO: remove because unused
     @property
     def enchained(self) -> typing.Optional[bool]:
         """
@@ -360,6 +361,7 @@ class PiecewiseCommand(scoping.Command):
         else:
             assert isinstance(self.bookend, int), repr(self.bookend)
             bookend_pattern = abjad.index([self.bookend], period=piece_count)
+        just_bookended_leaf = None
         previous_had_bookend = None
         for i, piece in enumerate(pieces):
             start_leaf = classes.Selection(piece).leaf(0)
@@ -409,6 +411,7 @@ class PiecewiseCommand(scoping.Command):
             self._attach_indicators(
                 bundle,
                 start_leaf,
+                just_bookended_leaf=just_bookended_leaf,
                 tag=tag,
                 )
             next_bundle = self.bundles[i + 1]
@@ -428,6 +431,7 @@ class PiecewiseCommand(scoping.Command):
                     stop_leaf,
                     tag='PiecewiseCommand(2)',
                     )
+                just_bookended_leaf = stop_leaf
             elif is_final_piece and next_bundle.spanner_stop:
                 spanner_stop = next_bundle.spanner_stop
                 if self.leak:
@@ -446,12 +450,16 @@ class PiecewiseCommand(scoping.Command):
         self,
         bundle,
         leaf,
+        just_bookended_leaf=None,
         tag=None,
         ):
         # TODO: factor out late import
         from .segmentmaker import SegmentMaker
         assert isinstance(tag, str), repr(tag)
         for indicator in bundle:
+            if (not getattr(indicator, 'trend', False) and
+                leaf is just_bookended_leaf):
+                continue
             reapplied = scoping.Command._remove_reapplied_wrappers(
                 leaf,
                 indicator,

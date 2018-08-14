@@ -1522,6 +1522,15 @@ class SegmentMaker(abjad.SegmentMaker):
                 message += ' outside part container.'
                 raise Exception(message)
 
+    def _check_doubled_dynamics(self):
+        for leaf in abjad.iterate(self.score).leaves():
+            dynamics = abjad.inspect(leaf).wrappers(abjad.Dynamic)
+            if 1 < len(dynamics):
+                voice = abjad.inspect(leaf).parentage().get_first(abjad.Voice)
+                message = f'leaf {str(leaf)} in {voice.name} has'
+                message += f' {len(dynamics)} dynamics attached.'
+                raise Exception(message)
+
     def _check_persistent_indicators(self):
         if self.do_not_check_persistence:
             return
@@ -5973,6 +5982,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._color_unregistered_pitches()
                 self._color_unpitched_notes()
                 self._check_wellformedness()
+                self._check_doubled_dynamics()
                 self._check_range()
                 self._check_persistent_indicators()
                 self._color_repeat_pitch_classes_()
