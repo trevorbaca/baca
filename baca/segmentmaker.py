@@ -5878,6 +5878,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def run(
         self,
         deactivate: typing.List[str] = None,
+        do_not_print_timing: bool = None,
         environment: str = None,
         metadata: abjad.OrderedDict = None,
         midi: bool = None,
@@ -5921,7 +5922,7 @@ class SegmentMaker(abjad.SegmentMaker):
             self._label_stage_numbers()
         count = int(timer.elapsed_time)
         seconds = abjad.String('second').pluralize(count)
-        if self.environment != 'docs':
+        if not do_not_print_timing and self.environment != 'docs':
             print(f'  Score initialization {count} {seconds} ...')
 
         with abjad.Timer() as timer:
@@ -5929,7 +5930,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 command_count = self._call_rhythm_commands()
         count = int(timer.elapsed_time)
         seconds = abjad.String('second').pluralize(count)
-        if self.environment != 'docs':
+        if not do_not_print_timing and self.environment != 'docs':
             message = f'  Rhythm commands {count} {seconds}'
             message += f' [for {command_count} commands] ...'
             print(message)
@@ -5944,7 +5945,7 @@ class SegmentMaker(abjad.SegmentMaker):
             self._apply_spacing()
         count = int(timer.elapsed_time)
         seconds = abjad.String('second').pluralize(count)
-        if self.environment != 'docs':
+        if not do_not_print_timing and self.environment != 'docs':
             print(f'  After-rhythm commands {count} {seconds} ...')
 
         with abjad.Timer() as timer:
@@ -5952,7 +5953,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 command_count = self._call_commands()
         count = int(timer.elapsed_time)
         seconds = abjad.String('second').pluralize(count)
-        if self.environment != 'docs':
+        if not do_not_print_timing and self.environment != 'docs':
             message = f'  Nonrhythm commands {count} {seconds}'
             message += f' [for {command_count} commands] ...'
             print(message)
@@ -5993,7 +5994,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
         count = int(timer.elapsed_time)
         seconds = abjad.String('second').pluralize(count)
-        if self.environment != 'docs':
+        if not do_not_print_timing and self.environment != 'docs':
             print(f'  Postprocessing {count} {seconds} ...')
 
         with abjad.Timer() as timer:
@@ -6001,14 +6002,14 @@ class SegmentMaker(abjad.SegmentMaker):
             method(offsets_in_seconds=True)
         count = int(timer.elapsed_time)
         seconds = abjad.String('second').pluralize(count)
-        if self.environment != 'docs':
+        if not do_not_print_timing and self.environment != 'docs':
             print(f'  Offsets-in-seconds update {count} {seconds} ...')
 
         with abjad.Timer() as timer:
             self._label_clock_time()
         count = int(timer.elapsed_time)
         seconds = abjad.String('second').pluralize(count)
-        if self.environment != 'docs':
+        if not do_not_print_timing and self.environment != 'docs':
             print(f'  Clocktime markup {count} {seconds} ...')
 
         assert isinstance(self.lilypond_file, abjad.LilyPondFile)
