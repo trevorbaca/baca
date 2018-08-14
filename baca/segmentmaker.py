@@ -153,7 +153,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_color_octaves',
         '_do_not_check_out_of_range_pitches',
         '_do_not_check_persistence',
-        '_do_no_check_wellformedness',
+        '_do_not_check_wellformedness',
         '_do_not_color_out_of_range_pitches',
         '_do_not_color_repeat_pitch_classes',
         '_do_not_color_unpitched_music',
@@ -270,7 +270,7 @@ class SegmentMaker(abjad.SegmentMaker):
         color_octaves: bool = None,
         do_not_check_out_of_range_pitches: bool = None,
         do_not_check_persistence: bool = None,
-        do_no_check_wellformedness: bool = None,
+        do_not_check_wellformedness: bool = None,
         do_not_color_out_of_range_pitches: bool = None,
         do_not_color_repeat_pitch_classes: bool = None,
         do_not_color_unpitched_music: bool = None,
@@ -316,7 +316,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._do_not_check_out_of_range_pitches = \
             do_not_check_out_of_range_pitches
         self._do_not_check_persistence = do_not_check_persistence
-        self._do_no_check_wellformedness = do_no_check_wellformedness
+        self._do_not_check_wellformedness = do_not_check_wellformedness
         self._do_not_color_out_of_range_pitches = \
             do_not_color_out_of_range_pitches
         self._do_not_color_repeat_pitch_classes = \
@@ -1578,7 +1578,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         abjad.attach(literal, pleaf, tag='_check_range')
 
     def _check_wellformedness(self):
-        if self.do_no_check_wellformedness:
+        if self.do_not_check_wellformedness:
             return
         if not abjad.inspect(self.score).is_wellformed(
             allow_percussion_clef=True,
@@ -3449,11 +3449,11 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._do_not_check_persistence
 
     @property
-    def do_no_check_wellformedness(self) -> typing.Optional[bool]:
+    def do_not_check_wellformedness(self) -> typing.Optional[bool]:
         """
         Is true when segment does not check wellformedness.
         """
-        return self._do_no_check_wellformedness
+        return self._do_not_check_wellformedness
 
     @property
     def do_not_color_out_of_range_pitches(self) -> typing.Optional[bool]:

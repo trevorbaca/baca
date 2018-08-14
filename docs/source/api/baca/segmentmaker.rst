@@ -42,9 +42,9 @@ segmentmaker
       clock_time_override
       color_octaves
       commands
-      do_no_check_wellformedness
       do_not_check_out_of_range_pitches
       do_not_check_persistence
+      do_not_check_wellformedness
       do_not_color_out_of_range_pitches
       do_not_color_repeat_pitch_classes
       do_not_color_unpitched_music
@@ -145,11 +145,11 @@ segmentmaker
 
    .. autoattribute:: SegmentMaker.commands
 
-   .. autoattribute:: SegmentMaker.do_no_check_wellformedness
-
    .. autoattribute:: SegmentMaker.do_not_check_out_of_range_pitches
 
    .. autoattribute:: SegmentMaker.do_not_check_persistence
+
+   .. autoattribute:: SegmentMaker.do_not_check_wellformedness
 
    .. autoattribute:: SegmentMaker.do_not_color_out_of_range_pitches
 
