@@ -1092,7 +1092,6 @@ Rhythm library.
    :nosignatures:
 
    ~baca.segmentmaker.SegmentMaker
-   ~baca.segmentmaker.Wellformedness
 
 .. raw:: html
 

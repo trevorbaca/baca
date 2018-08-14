@@ -403,10 +403,13 @@ class PiecewiseCommand(scoping.Command):
                     bundle = bundle.with_spanner_start(None)
             if is_first_piece or previous_had_bookend:
                 bundle = bundle.with_spanner_stop(None)
+            tag = 'PiecewiseCommand(1)'
+            if is_final_piece and self.right_broken:
+                tag = f'{tag}:right_broken'
             self._attach_indicators(
                 bundle,
                 start_leaf,
-                tag='PiecewiseCommand(1)',
+                tag=tag,
                 )
             next_bundle = self.bundles[i + 1]
             if should_bookend:

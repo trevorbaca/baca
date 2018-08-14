@@ -23,7 +23,6 @@ segmentmaker
    :nosignatures:
 
    ~SegmentMaker
-   ~Wellformedness
 
 .. autoclass:: SegmentMaker
 
@@ -42,11 +41,13 @@ segmentmaker
       breaks
       clock_time_override
       color_octaves
-      color_out_of_range_pitches
-      color_repeat_pitch_classes
       commands
       do_not_check_out_of_range_pitches
       do_not_check_persistence
+      do_not_color_out_of_range_pitches
+      do_not_color_repeat_pitch_classes
+      do_not_color_unpitched_music
+      do_not_color_unregistered_pitches
       do_not_include_layout_ly
       fermata_measure_staff_line_count
       final_bar_line
@@ -55,8 +56,6 @@ segmentmaker
       first_measure_number
       first_segment
       ignore_repeat_pitch_classes
-      ignore_unpitched_notes
-      ignore_unregistered_pitches
       instruments
       last_segment
       lilypond_file
@@ -144,15 +143,19 @@ segmentmaker
 
    .. autoattribute:: SegmentMaker.color_octaves
 
-   .. autoattribute:: SegmentMaker.color_out_of_range_pitches
-
-   .. autoattribute:: SegmentMaker.color_repeat_pitch_classes
-
    .. autoattribute:: SegmentMaker.commands
 
    .. autoattribute:: SegmentMaker.do_not_check_out_of_range_pitches
 
    .. autoattribute:: SegmentMaker.do_not_check_persistence
+
+   .. autoattribute:: SegmentMaker.do_not_color_out_of_range_pitches
+
+   .. autoattribute:: SegmentMaker.do_not_color_repeat_pitch_classes
+
+   .. autoattribute:: SegmentMaker.do_not_color_unpitched_music
+
+   .. autoattribute:: SegmentMaker.do_not_color_unregistered_pitches
 
    .. autoattribute:: SegmentMaker.do_not_include_layout_ly
 
@@ -173,10 +176,6 @@ segmentmaker
    .. autoattribute:: SegmentMaker.first_segment
 
    .. autoattribute:: SegmentMaker.ignore_repeat_pitch_classes
-
-   .. autoattribute:: SegmentMaker.ignore_unpitched_notes
-
-   .. autoattribute:: SegmentMaker.ignore_unregistered_pitches
 
    .. autoattribute:: SegmentMaker.instruments
 
@@ -231,140 +230,3 @@ segmentmaker
    .. autoattribute:: SegmentMaker.validate_measure_count
 
    .. autoattribute:: SegmentMaker.voice_metadata
-
-.. autoclass:: Wellformedness
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Attributes Summary
-      :class: class-header
-
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-      check_repeat_pitch_classes
-      is_wellformed
-      tabulate_wellformedness
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. automethod:: Wellformedness.__call__
-
-   .. container:: inherited
-
-      .. automethod:: Wellformedness.__format__
-
-   .. container:: inherited
-
-      .. automethod:: Wellformedness.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Methods
-      :class: class-header
-
-   .. container:: inherited
-
-      .. automethod:: Wellformedness.check_discontiguous_spanners
-
-   .. container:: inherited
-
-      .. automethod:: Wellformedness.check_duplicate_ids
-
-   .. container:: inherited
-
-      .. automethod:: Wellformedness.check_empty_containers
-
-   .. container:: inherited
-
-      .. automethod:: Wellformedness.check_misdurated_measures
-
-   .. container:: inherited
-
-      .. automethod:: Wellformedness.check_misfilled_measures
-
-   .. container:: inherited
-
-      .. automethod:: Wellformedness.check_mispitched_ties
-
-   .. container:: inherited
-
-      .. automethod:: Wellformedness.check_misrepresented_flags
-
-   .. container:: inherited
-
-      .. automethod:: Wellformedness.check_missing_parents
-
-   .. container:: inherited
-
-      .. automethod:: Wellformedness.check_nested_measures
-
-   .. container:: inherited
-
-      .. automethod:: Wellformedness.check_notes_on_wrong_clef
-
-   .. container:: inherited
-
-      .. automethod:: Wellformedness.check_out_of_range_pitches
-
-   .. container:: inherited
-
-      .. automethod:: Wellformedness.check_overlapping_beams
-
-   .. container:: inherited
-
-      .. automethod:: Wellformedness.check_overlapping_glissandi
-
-   .. container:: inherited
-
-      .. automethod:: Wellformedness.check_overlapping_octavation_spanners
-
-   .. container:: inherited
-
-      .. automethod:: Wellformedness.check_overlapping_trill_spanners
-
-   .. container:: inherited
-
-      .. automethod:: Wellformedness.check_unmatched_stop_text_spans
-
-   .. container:: inherited
-
-      .. automethod:: Wellformedness.check_unterminated_hairpins
-
-   .. container:: inherited
-
-      .. automethod:: Wellformedness.check_unterminated_text_spanners
-
-   .. automethod:: Wellformedness.is_wellformed
-
-   .. automethod:: Wellformedness.tabulate_wellformedness
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Class & static methods
-      :class: class-header
-
-   .. automethod:: Wellformedness.check_repeat_pitch_classes
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read-only properties
-      :class: class-header
-
-   .. container:: inherited
-
-      .. autoattribute:: Wellformedness.allow_percussion_clef

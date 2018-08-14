@@ -2481,7 +2481,7 @@ def repeat_tie_from(
     ..  container:: example
 
         >>> maker = baca.SegmentMaker(
-        ...     ignore_unpitched_notes=True,
+        ...     do_not_color_unpitched_music=True,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -2585,7 +2585,7 @@ def repeat_tie_to(
     ..  container:: example
 
         >>> maker = baca.SegmentMaker(
-        ...     ignore_unpitched_notes=True,
+        ...     do_not_color_unpitched_music=True,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -2774,7 +2774,7 @@ def tie_from(
     ..  container:: example
 
         >>> maker = baca.SegmentMaker(
-        ...     ignore_unpitched_notes=True,
+        ...     do_not_color_unpitched_music=True,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -2873,7 +2873,7 @@ def tie_to(
     ..  container:: example
 
         >>> maker = baca.SegmentMaker(
-        ...     ignore_unpitched_notes=True,
+        ...     do_not_color_unpitched_music=True,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -2973,7 +2973,7 @@ def untie_to(
     ..  container:: example
 
         >>> maker = baca.SegmentMaker(
-        ...     ignore_unpitched_notes=True,
+        ...     do_not_color_unpitched_music=True,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )

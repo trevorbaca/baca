@@ -29,7 +29,7 @@ class SegmentMaker(abjad.SegmentMaker):
     ..  container:: example
 
         >>> maker = baca.SegmentMaker(
-        ...     ignore_unpitched_notes=True,
+        ...     do_not_color_unpitched_music=True,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -151,10 +151,12 @@ class SegmentMaker(abjad.SegmentMaker):
         '_cached_time_signatures',
         '_clock_time_override',
         '_color_octaves',
-        '_color_out_of_range_pitches',
-        '_color_repeat_pitch_classes',
         '_do_not_check_out_of_range_pitches',
         '_do_not_check_persistence',
+        '_do_not_color_out_of_range_pitches',
+        '_do_not_color_repeat_pitch_classes',
+        '_do_not_color_unpitched_music',
+        '_do_not_color_unregistered_pitches',
         '_do_not_include_layout_ly',
         '_duration',
         '_environment',
@@ -168,8 +170,6 @@ class SegmentMaker(abjad.SegmentMaker):
         '_first_measure_number',
         '_first_segment',
         '_ignore_repeat_pitch_classes',
-        '_ignore_unpitched_notes',
-        '_ignore_unregistered_pitches',
         '_instruments',
         '_last_measure_is_fermata',
         '_last_segment',
@@ -268,10 +268,12 @@ class SegmentMaker(abjad.SegmentMaker):
         breaks: segmentclasses.BreakMeasureMap = None,
         clock_time_override: abjad.MetronomeMark = None,
         color_octaves: bool = None,
-        color_out_of_range_pitches: bool = True,
-        color_repeat_pitch_classes: bool = True,
         do_not_check_out_of_range_pitches: bool = None,
         do_not_check_persistence: bool = None,
+        do_not_color_out_of_range_pitches: bool = None,
+        do_not_color_repeat_pitch_classes: bool = None,
+        do_not_color_unpitched_music: bool = None,
+        do_not_color_unregistered_pitches: bool = None,
         do_not_include_layout_ly: bool = None,
         fermata_measure_staff_line_count: int = None,
         final_bar_line: typing.Union[bool, str] = None,
@@ -280,8 +282,6 @@ class SegmentMaker(abjad.SegmentMaker):
         first_measure_number: int = None,
         first_segment: bool = None,
         ignore_repeat_pitch_classes: bool = None,
-        ignore_unpitched_notes: bool = None,
-        ignore_unregistered_pitches: bool = None,
         nonfirst_segment_lilypond_include: bool = None,
         instruments: abjad.OrderedDict = None,
         last_segment: bool = None,
@@ -308,8 +308,6 @@ class SegmentMaker(abjad.SegmentMaker):
             assert isinstance(clock_time_override, abjad.MetronomeMark)
         self._clock_time_override = clock_time_override
         self._color_octaves = color_octaves
-        self._color_out_of_range_pitches = color_out_of_range_pitches
-        self._color_repeat_pitch_classes = color_repeat_pitch_classes
         self._cache = None
         self._cached_time_signatures: typing.List[abjad.TimeSignature] = []
         if do_not_check_out_of_range_pitches is not None:
@@ -318,6 +316,12 @@ class SegmentMaker(abjad.SegmentMaker):
         self._do_not_check_out_of_range_pitches = \
             do_not_check_out_of_range_pitches
         self._do_not_check_persistence = do_not_check_persistence
+        self._do_not_color_out_of_range_pitches = \
+            do_not_color_out_of_range_pitches
+        self._do_not_color_repeat_pitch_classes = \
+            do_not_color_repeat_pitch_classes
+        self._do_not_color_unpitched_music = do_not_color_unpitched_music
+        self._do_not_color_unregistered_pitches = do_not_color_unregistered_pitches
         self._do_not_include_layout_ly = do_not_include_layout_ly
         self._duration: typing.Optional[abjad.Duration] = None
         self._fermata_measure_numbers: typing.List = []
@@ -335,8 +339,6 @@ class SegmentMaker(abjad.SegmentMaker):
             first_segment = bool(first_segment)
         self._first_segment = first_segment
         self._ignore_repeat_pitch_classes = ignore_repeat_pitch_classes
-        self._ignore_unpitched_notes = ignore_unpitched_notes
-        self._ignore_unregistered_pitches = ignore_unregistered_pitches
         self._nonfirst_segment_lilypond_include = \
             nonfirst_segment_lilypond_include
         self._instruments = instruments
@@ -753,21 +755,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
     ### PRIVATE METHODS ###
 
-    def _attach_final_bar_line(self):
-        if self.final_bar_line is False:
-            return
-        strings = []
-        abbreviation = '|'
-        if self.last_segment:
-            abbreviation = '|.'
-        if isinstance(self.final_bar_line, str):
-            abbreviation = self.final_bar_line
-        strings.append(r'\baca-bar-line-visible')
-        strings.append(rf'\bar "{abbreviation}"')
-        literal = abjad.LilyPondLiteral(strings, 'after')
-        last_skip = classes.Selection(self.score['GlobalSkips']).skip(-1)
-        abjad.attach(literal, last_skip, tag='_attach_final_bar_line')
-
     def _add_final_markup(self):
         if self.final_markup is None:
             return
@@ -1067,6 +1054,21 @@ class SegmentMaker(abjad.SegmentMaker):
         context = self.score['GlobalRests']
         rests = self._make_global_rests()
         context.extend(rests)
+
+    def _attach_final_bar_line(self):
+        if self.final_bar_line is False:
+            return
+        strings = []
+        abbreviation = '|'
+        if self.last_segment:
+            abbreviation = '|.'
+        if isinstance(self.final_bar_line, str):
+            abbreviation = self.final_bar_line
+        strings.append(r'\baca-bar-line-visible')
+        strings.append(rf'\bar "{abbreviation}"')
+        literal = abjad.LilyPondLiteral(strings, 'after')
+        last_skip = classes.Selection(self.score['GlobalSkips']).skip(-1)
+        abjad.attach(literal, last_skip, tag='_attach_final_bar_line')
 
     def _attach_first_appearance_score_template_defaults(self):
         if self.first_segment:
@@ -1569,7 +1571,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 if pleaf not in instrument.pitch_range:
                     if abjad.inspect(pleaf).has_indicator(tag):
                         continue
-                    if self.color_out_of_range_pitches:
+                    if not self.do_not_color_out_of_range_pitches:
                         abjad.attach(markup, pleaf, tag='_check_range')
                         string = r'\baca-out-of-range-warning'
                         literal = abjad.LilyPondLiteral(string)
@@ -1749,10 +1751,9 @@ class SegmentMaker(abjad.SegmentMaker):
                     abjad.attach(literal, pleaf, tag='_color_octaves_')
 
     def _color_repeat_pitch_classes_(self):
-        if not self.color_repeat_pitch_classes:
+        if self.do_not_color_repeat_pitch_classes:
             return
-        manager = Wellformedness
-        lts = manager._find_repeat_pitch_classes(self.score)
+        lts = self._find_repeat_pitch_classes(self.score)
         markup = abjad.Markup('@', direction=abjad.Up)
         abjad.tweak(markup).color = 'red'
         tag = '_color_repeat_pitch_classes_'
@@ -1764,7 +1765,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 abjad.attach(literal, leaf, tag=tag)
 
     def _color_unpitched_notes(self):
-        if self.ignore_unpitched_notes:
+        if self.do_not_color_unpitched_music:
             return
         tag = abjad.tags.NOT_YET_PITCHED
         for pleaf in abjad.iterate(self.score).leaves(pitched=True):
@@ -1775,7 +1776,7 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.attach(literal, pleaf, tag='_color_unpitched_notes')
 
     def _color_unregistered_pitches(self):
-        if self.ignore_unregistered_pitches:
+        if self.do_not_color_unregistered_pitches:
             return
         tag = abjad.tags.NOT_YET_REGISTERED
         for pleaf in abjad.iterate(self.score).leaves(pitched=True):
@@ -1881,6 +1882,32 @@ class SegmentMaker(abjad.SegmentMaker):
         for leaf in abjad.iterate(self.score).leaves():
             if abjad.inspect(leaf).indicator(abjad.tags.RIGHT_BROKEN_BEAM):
                 self._extend_beam(leaf)
+
+    @staticmethod
+    def _find_repeat_pitch_classes(argument):
+        violators = []
+        for voice in abjad.iterate(argument).components(abjad.Voice):
+            previous_lt, previous_pcs = None, []
+            for lt in abjad.iterate(voice).logical_ties():
+                if isinstance(lt.head, abjad.Note):
+                    written_pitches = [lt.head.written_pitch]
+                elif isinstance(lt.head, abjad.Chord):
+                    written_pitches = lt.head.written_pitches
+                else:
+                    written_pitches = []
+                pcs = [_.pitch_class for _ in written_pitches]
+                inspection = abjad.inspect(lt.head)
+                if (inspection.has_indicator(abjad.tags.NOT_YET_PITCHED) or
+                    inspection.has_indicator(abjad.tags.ALLOW_REPEAT_PITCH)):
+                    pass
+                elif set(pcs) & set(previous_pcs):
+                    if previous_lt not in violators:
+                        violators.append(previous_lt)
+                    if lt not in violators:
+                        violators.append(lt)
+                previous_lt = lt
+                previous_pcs = pcs
+        return violators
 
     def _force_nonnatural_accidentals(self):
         natural = abjad.Accidental('natural')
@@ -2328,6 +2355,18 @@ class SegmentMaker(abjad.SegmentMaker):
                 tag=tag,
                 )
 
+    def _make_global_rests(self):
+        rests = []
+        for time_signature in self.time_signatures:
+            rest = abjad.MultimeasureRest(
+                abjad.Duration(1),
+                tag='_make_global_rests',
+                )
+            multiplier = abjad.Multiplier(time_signature.duration)
+            abjad.attach(multiplier, rest, tag=None)
+            rests.append(rest)
+        return rests
+
     def _make_global_skips(self):
         context = self.score['GlobalSkips']
         for time_signature in self.time_signatures:
@@ -2417,18 +2456,6 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.attach(multiplier, silence, tag=None)
             silences.append(silence)
         return silences
-
-    def _make_global_rests(self):
-        rests = []
-        for time_signature in self.time_signatures:
-            rest = abjad.MultimeasureRest(
-                abjad.Duration(1),
-                tag='_make_global_rests',
-                )
-            multiplier = abjad.Multiplier(time_signature.duration)
-            abjad.attach(multiplier, rest, tag=None)
-            rests.append(rest)
-        return rests
 
     def _make_score(self):
         score = self.score_template()
@@ -3401,9 +3428,30 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._color_octaves
 
     @property
-    def color_out_of_range_pitches(self) -> typing.Optional[bool]:
+    def commands(self) -> typing.List[scoping.Command]:
+        """
+        Gets commands.
+        """
+        return self._commands
+
+    @property
+    def do_not_check_out_of_range_pitches(self) -> typing.Optional[bool]:
+        """
+        Is true when segment does not check out-of-range pitches.
+        """
+        return self._do_not_check_out_of_range_pitches
+
+    @property
+    def do_not_check_persistence(self) -> typing.Optional[bool]:
+        """
+        Is true when segment-maker does not check persistent indicators.
+        """
+        return self._do_not_check_persistence
+
+    @property
+    def do_not_color_out_of_range_pitches(self) -> typing.Optional[bool]:
         r"""
-        Is true when segment-maker colors out-of-range pitches.
+        Is true when segment-maker does not color out-of-range pitches.
 
         ..  container:: example
 
@@ -3434,7 +3482,6 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> figures = abjad.select(figures_)
 
             >>> maker = baca.SegmentMaker(
-            ...     color_out_of_range_pitches=True,
             ...     do_not_check_out_of_range_pitches=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
@@ -3584,18 +3631,13 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                 >>                                                                                       %! SingleStaffScoreTemplate
 
-        Defaults to none.
-
-        Set to true, false or none.
-
-        Returns true, false or none.
         """
-        return self._color_out_of_range_pitches
+        return self._do_not_color_out_of_range_pitches
 
     @property
-    def color_repeat_pitch_classes(self) -> typing.Optional[bool]:
+    def do_not_color_repeat_pitch_classes(self) -> typing.Optional[bool]:
         r"""
-        Is true when segment-maker colors repeat pitch-classes.
+        Is true when segment-maker does not color repeat pitch-classes.
 
         ..  container:: example
 
@@ -3626,7 +3668,6 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> figures = abjad.select(figures_)
 
             >>> maker = baca.SegmentMaker(
-            ...     color_repeat_pitch_classes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.HorizontalSpacingSpecifier(
             ...         minimum_duration=abjad.Duration(1, 24),
@@ -3784,691 +3825,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                 >>                                                                                       %! SingleStaffScoreTemplate
 
-        Defaults to none.
-
-        Set to true, false or none.
-
-        Returns true, false or none.
         """
-        return self._color_repeat_pitch_classes
+        return self._do_not_color_repeat_pitch_classes
 
     @property
-    def commands(self) -> typing.List[scoping.Command]:
-        """
-        Gets commands.
-        """
-        return self._commands
-
-    @property
-    def do_not_check_out_of_range_pitches(self) -> typing.Optional[bool]:
-        """
-        Is true when segment does not check out-of-range pitches.
-        """
-        return self._do_not_check_out_of_range_pitches
-
-    @property
-    def do_not_check_persistence(self) -> typing.Optional[bool]:
-        """
-        Is true when segment-maker does not check persistent indicators.
-        """
-        return self._do_not_check_persistence
-
-    @property
-    def do_not_include_layout_ly(self) -> typing.Optional[bool]:
-        """
-        Is true when segment-maker does not include layout.ly.
-        """
-        return self._do_not_include_layout_ly
-
-    @property
-    def fermata_measure_staff_line_count(self) -> typing.Optional[int]:
-        """
-        Gets fermata measure staff lines.
-        """
-        return self._fermata_measure_staff_line_count
-
-    @property
-    def final_bar_line(self) -> typing.Union[bool, str, None]:
-        r"""
-        Gets final bar line.
-
-        ..  container:: example
-
-            Nonlast segment sets final bar line to ``'|'`` by default:
-
-            >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
-
-            >>> maker(
-            ...     'MusicVoice',
-            ...     baca.make_even_divisions(),
-            ...     )
-
-            >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
-                <BLANKLINE>
-                    \context GlobalContext = "GlobalContext"                                             %! _make_global_context
-                    <<                                                                                   %! _make_global_context
-                <BLANKLINE>
-                        \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
-                        {                                                                                %! _make_global_context
-                <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
-                            s1 * 1/2                                                                     %! _make_global_skips(1)
-                <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
-                            s1 * 3/8                                                                     %! _make_global_skips(1)
-                <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
-                            s1 * 1/2                                                                     %! _make_global_skips(1)
-                <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
-                            s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \baca-bar-line-visible                                                       %! _attach_final_bar_line
-                            \bar "|"                                                                     %! _attach_final_bar_line
-                <BLANKLINE>
-                        }                                                                                %! _make_global_context
-                <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
-                <BLANKLINE>
-                    \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
-                <BLANKLINE>
-                        \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
-                <BLANKLINE>
-                            \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
-                <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                c'8                                                                      %! baca_make_even_divisions
-                                [                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                                ]                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'8                                                                      %! baca_make_even_divisions
-                                [                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                                ]                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                                c'8                                                                      %! baca_make_even_divisions
-                                [                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                                ]                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                                c'8                                                                      %! baca_make_even_divisions
-                                [                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                                ]                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
-                <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
-                <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
-                <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
-
-            Override nonlast segment final bar line like this:
-
-            >>> maker = baca.SegmentMaker(
-            ...     final_bar_line='||',
-            ...     ignore_unpitched_notes=True,
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
-
-            >>> maker(
-            ...     'MusicVoice',
-            ...     baca.make_even_divisions(),
-            ...     )
-
-            >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
-                <BLANKLINE>
-                    \context GlobalContext = "GlobalContext"                                             %! _make_global_context
-                    <<                                                                                   %! _make_global_context
-                <BLANKLINE>
-                        \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
-                        {                                                                                %! _make_global_context
-                <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
-                            s1 * 1/2                                                                     %! _make_global_skips(1)
-                <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
-                            s1 * 3/8                                                                     %! _make_global_skips(1)
-                <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
-                            s1 * 1/2                                                                     %! _make_global_skips(1)
-                <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
-                            s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \baca-bar-line-visible                                                       %! _attach_final_bar_line
-                            \bar "||"                                                                    %! _attach_final_bar_line
-                <BLANKLINE>
-                        }                                                                                %! _make_global_context
-                <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
-                <BLANKLINE>
-                    \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
-                <BLANKLINE>
-                        \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
-                <BLANKLINE>
-                            \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
-                <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                c'8                                                                      %! baca_make_even_divisions
-                                [                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                                ]                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'8                                                                      %! baca_make_even_divisions
-                                [                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                                ]                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                                c'8                                                                      %! baca_make_even_divisions
-                                [                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                                ]                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                                c'8                                                                      %! baca_make_even_divisions
-                                [                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                                ]                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
-                <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
-                <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
-                <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
-
-        ..  container:: example
-
-            Last segment in score sets final bar line to ``'|.'`` by default:
-
-            >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
-            ...     last_segment=True,
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
-
-            >>> maker(
-            ...     'MusicVoice',
-            ...     baca.make_even_divisions(),
-            ...     )
-
-            >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
-                <BLANKLINE>
-                    \context GlobalContext = "GlobalContext"                                             %! _make_global_context
-                    <<                                                                                   %! _make_global_context
-                <BLANKLINE>
-                        \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
-                        {                                                                                %! _make_global_context
-                <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
-                            s1 * 1/2                                                                     %! _make_global_skips(1)
-                <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
-                            s1 * 3/8                                                                     %! _make_global_skips(1)
-                <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
-                            s1 * 1/2                                                                     %! _make_global_skips(1)
-                <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
-                            s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \baca-bar-line-visible                                                       %! _attach_final_bar_line
-                            \bar "|."                                                                    %! _attach_final_bar_line
-                <BLANKLINE>
-                        }                                                                                %! _make_global_context
-                <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
-                <BLANKLINE>
-                    \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
-                <BLANKLINE>
-                        \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
-                <BLANKLINE>
-                            \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
-                <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                c'8                                                                      %! baca_make_even_divisions
-                                [                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                                ]                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'8                                                                      %! baca_make_even_divisions
-                                [                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                                ]                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                                c'8                                                                      %! baca_make_even_divisions
-                                [                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                                ]                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                                c'8                                                                      %! baca_make_even_divisions
-                                [                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                                ]                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
-                <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
-                <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
-                <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
-
-            Override last segment final bar line like this:
-
-            >>> maker = baca.SegmentMaker(
-            ...     final_bar_line='||',
-            ...     ignore_unpitched_notes=True,
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
-
-            >>> maker(
-            ...     'MusicVoice',
-            ...     baca.make_even_divisions(),
-            ...     )
-
-            >>> metadata = {'segment_count': 1}
-            >>> lilypond_file = maker.run(
-            ...     environment='docs',
-            ...     metadata=metadata,
-            ...     )
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
-                <BLANKLINE>
-                    \context GlobalContext = "GlobalContext"                                             %! _make_global_context
-                    <<                                                                                   %! _make_global_context
-                <BLANKLINE>
-                        \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
-                        {                                                                                %! _make_global_context
-                <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
-                            s1 * 1/2                                                                     %! _make_global_skips(1)
-                <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
-                            s1 * 3/8                                                                     %! _make_global_skips(1)
-                <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
-                            s1 * 1/2                                                                     %! _make_global_skips(1)
-                <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
-                            s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \baca-bar-line-visible                                                       %! _attach_final_bar_line
-                            \bar "||"                                                                    %! _attach_final_bar_line
-                <BLANKLINE>
-                        }                                                                                %! _make_global_context
-                <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
-                <BLANKLINE>
-                    \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
-                <BLANKLINE>
-                        \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
-                <BLANKLINE>
-                            \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
-                <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                c'8                                                                      %! baca_make_even_divisions
-                                [                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                                ]                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'8                                                                      %! baca_make_even_divisions
-                                [                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                                ]                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                                c'8                                                                      %! baca_make_even_divisions
-                                [                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                                ]                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                                c'8                                                                      %! baca_make_even_divisions
-                                [                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                                ]                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
-                <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
-                <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
-                <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
-
-        """
-        return self._final_bar_line
-
-    @property
-    def final_markup(self) -> typing.Optional[tuple]:
-        r"""
-        Gets final markup.
-
-        ..  container:: example
-
-            Sets final markup:
-
-            >>> maker = baca.SegmentMaker(
-            ...     final_bar_line='|.',
-            ...     final_markup=(['Madison, WI'], ['October 2016']),
-            ...     final_markup_extra_offset=(-9, -2),
-            ...     ignore_unpitched_notes=True,
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
-
-            >>> maker(
-            ...     'MusicVoice',
-            ...     baca.make_even_divisions(),
-            ...     )
-
-            >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
-                <BLANKLINE>
-                    \context GlobalContext = "GlobalContext"                                             %! _make_global_context
-                    <<                                                                                   %! _make_global_context
-                <BLANKLINE>
-                        \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
-                        {                                                                                %! _make_global_context
-                <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
-                            s1 * 1/2                                                                     %! _make_global_skips(1)
-                <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
-                            s1 * 3/8                                                                     %! _make_global_skips(1)
-                <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
-                            s1 * 1/2                                                                     %! _make_global_skips(1)
-                <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
-                            s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \baca-bar-line-visible                                                       %! _attach_final_bar_line
-                            \bar "|."                                                                    %! _attach_final_bar_line
-                <BLANKLINE>
-                        }                                                                                %! _make_global_context
-                <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
-                <BLANKLINE>
-                    \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
-                <BLANKLINE>
-                        \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
-                <BLANKLINE>
-                            \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
-                <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
-                                c'8                                                                      %! baca_make_even_divisions
-                                [                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                                ]                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
-                                c'8                                                                      %! baca_make_even_divisions
-                                [                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                                ]                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
-                                c'8                                                                      %! baca_make_even_divisions
-                                [                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                                ]                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
-                                c'8                                                                      %! baca_make_even_divisions
-                                [                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                                c'8                                                                      %! baca_make_even_divisions
-                <BLANKLINE>
-                                \once \override TextScript.extra-offset = #'(-9 . -2)
-                                c'8                                                                      %! baca_make_even_divisions
-                                _ \markup {                                                              %! SCORE_2
-                                    \override                                                            %! SCORE_2
-                                        #'(font-name . "Palatino")                                       %! SCORE_2
-                                        \with-color                                                      %! SCORE_2
-                                            #black                                                       %! SCORE_2
-                                            \right-column                                                %! SCORE_2
-                                                {                                                        %! SCORE_2
-                                                    \line                                                %! SCORE_2
-                                                        {                                                %! SCORE_2
-                                                            "Madison, WI"                                %! SCORE_2
-                                                        }                                                %! SCORE_2
-                                                    \line                                                %! SCORE_2
-                                                        {                                                %! SCORE_2
-                                                            "October 2016"                               %! SCORE_2
-                                                        }                                                %! SCORE_2
-                                                }                                                        %! SCORE_2
-                                    }                                                                    %! SCORE_2
-                                ]                                                                        %! baca_make_even_divisions
-                <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
-                <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
-                <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
-                <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
-
-        """
-        return self._final_markup
-
-    @property
-    def final_markup_extra_offset(self) -> typing.Optional[typings.NumberPair]:
-        """
-        Gets final markup extra offset.
-        """
-        return self._final_markup_extra_offset
-
-    @property
-    def first_measure_number(self) -> typing.Optional[int]:
-        """
-        Gets user-defined first measure number.
-        """
-        return self._first_measure_number
-
-    @property
-    def first_segment(self) -> typing.Optional[bool]:
-        """
-        Is true when segment is first in score.
-        """
-        if self._first_segment is not None:
-            return self._first_segment
-        return self._get_segment_number() == 1
-        
-    @property
-    def ignore_repeat_pitch_classes(self) -> typing.Optional[bool]:
-        """
-        Is true when segment ignores repeat pitch-classes.
-        """
-        return self._ignore_repeat_pitch_classes
-
-    @property
-    def ignore_unpitched_notes(self) -> typing.Optional[bool]:
+    def do_not_color_unpitched_music(self) -> typing.Optional[bool]:
         r"""
         Is true when segment ignores unpitched notes.
 
@@ -4477,7 +3838,7 @@ class SegmentMaker(abjad.SegmentMaker):
             Ignores unpitched notes:
 
             >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
@@ -4714,10 +4075,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>                                                                                       %! SingleStaffScoreTemplate
 
         """
-        return self._ignore_unpitched_notes
+        return self._do_not_color_unpitched_music
 
     @property
-    def ignore_unregistered_pitches(self) -> typing.Optional[bool]:
+    def do_not_color_unregistered_pitches(self) -> typing.Optional[bool]:
         r"""
         Is true when segment ignores unregistered pitches.
 
@@ -4760,7 +4121,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> figures = abjad.select(figures_)
 
             >>> maker = baca.SegmentMaker(
-            ...     ignore_unregistered_pitches=True,
+            ...     do_not_color_unregistered_pitches=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=time_signatures,
@@ -5112,7 +4473,661 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>                                                                                       %! SingleStaffScoreTemplate
 
         """
-        return self._ignore_unregistered_pitches
+        return self._do_not_color_unregistered_pitches
+
+    @property
+    def do_not_include_layout_ly(self) -> typing.Optional[bool]:
+        """
+        Is true when segment-maker does not include layout.ly.
+        """
+        return self._do_not_include_layout_ly
+
+    @property
+    def fermata_measure_staff_line_count(self) -> typing.Optional[int]:
+        """
+        Gets fermata measure staff lines.
+        """
+        return self._fermata_measure_staff_line_count
+
+    @property
+    def final_bar_line(self) -> typing.Union[bool, str, None]:
+        r"""
+        Gets final bar line.
+
+        ..  container:: example
+
+            Nonlast segment sets final bar line to ``'|'`` by default:
+
+            >>> maker = baca.SegmentMaker(
+            ...     do_not_color_unpitched_music=True,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     'MusicVoice',
+            ...     baca.make_even_divisions(),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                <BLANKLINE>
+                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+                <<                                                                                       %! SingleStaffScoreTemplate
+                <BLANKLINE>
+                    \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                    <<                                                                                   %! _make_global_context
+                <BLANKLINE>
+                        \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                        {                                                                                %! _make_global_context
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            s1 * 1/2                                                                     %! _make_global_skips(1)
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            s1 * 3/8                                                                     %! _make_global_skips(1)
+                <BLANKLINE>
+                            % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            s1 * 1/2                                                                     %! _make_global_skips(1)
+                <BLANKLINE>
+                            % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            s1 * 3/8                                                                     %! _make_global_skips(1)
+                            \baca-bar-line-visible                                                       %! _attach_final_bar_line
+                            \bar "|"                                                                     %! _attach_final_bar_line
+                <BLANKLINE>
+                        }                                                                                %! _make_global_context
+                <BLANKLINE>
+                    >>                                                                                   %! _make_global_context
+                <BLANKLINE>
+                    \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                    <<                                                                                   %! SingleStaffScoreTemplate
+                <BLANKLINE>
+                        \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                        {                                                                                %! SingleStaffScoreTemplate
+                <BLANKLINE>
+                            \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                            {                                                                            %! SingleStaffScoreTemplate
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                                c'8                                                                      %! baca_make_even_divisions
+                                [                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                                ]                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                                c'8                                                                      %! baca_make_even_divisions
+                                [                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                                ]                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                                % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                                c'8                                                                      %! baca_make_even_divisions
+                                [                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                                ]                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                                % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                                c'8                                                                      %! baca_make_even_divisions
+                                [                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                                ]                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                            }                                                                            %! SingleStaffScoreTemplate
+                <BLANKLINE>
+                        }                                                                                %! SingleStaffScoreTemplate
+                <BLANKLINE>
+                    >>                                                                                   %! SingleStaffScoreTemplate
+                <BLANKLINE>
+                >>                                                                                       %! SingleStaffScoreTemplate
+
+            Override nonlast segment final bar line like this:
+
+            >>> maker = baca.SegmentMaker(
+            ...     do_not_color_unpitched_music=True,
+            ...     final_bar_line='||',
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     'MusicVoice',
+            ...     baca.make_even_divisions(),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                <BLANKLINE>
+                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+                <<                                                                                       %! SingleStaffScoreTemplate
+                <BLANKLINE>
+                    \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                    <<                                                                                   %! _make_global_context
+                <BLANKLINE>
+                        \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                        {                                                                                %! _make_global_context
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            s1 * 1/2                                                                     %! _make_global_skips(1)
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            s1 * 3/8                                                                     %! _make_global_skips(1)
+                <BLANKLINE>
+                            % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            s1 * 1/2                                                                     %! _make_global_skips(1)
+                <BLANKLINE>
+                            % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            s1 * 3/8                                                                     %! _make_global_skips(1)
+                            \baca-bar-line-visible                                                       %! _attach_final_bar_line
+                            \bar "||"                                                                    %! _attach_final_bar_line
+                <BLANKLINE>
+                        }                                                                                %! _make_global_context
+                <BLANKLINE>
+                    >>                                                                                   %! _make_global_context
+                <BLANKLINE>
+                    \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                    <<                                                                                   %! SingleStaffScoreTemplate
+                <BLANKLINE>
+                        \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                        {                                                                                %! SingleStaffScoreTemplate
+                <BLANKLINE>
+                            \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                            {                                                                            %! SingleStaffScoreTemplate
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                                c'8                                                                      %! baca_make_even_divisions
+                                [                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                                ]                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                                c'8                                                                      %! baca_make_even_divisions
+                                [                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                                ]                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                                % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                                c'8                                                                      %! baca_make_even_divisions
+                                [                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                                ]                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                                % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                                c'8                                                                      %! baca_make_even_divisions
+                                [                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                                ]                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                            }                                                                            %! SingleStaffScoreTemplate
+                <BLANKLINE>
+                        }                                                                                %! SingleStaffScoreTemplate
+                <BLANKLINE>
+                    >>                                                                                   %! SingleStaffScoreTemplate
+                <BLANKLINE>
+                >>                                                                                       %! SingleStaffScoreTemplate
+
+        ..  container:: example
+
+            Last segment in score sets final bar line to ``'|.'`` by default:
+
+            >>> maker = baca.SegmentMaker(
+            ...     do_not_color_unpitched_music=True,
+            ...     last_segment=True,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     'MusicVoice',
+            ...     baca.make_even_divisions(),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                <BLANKLINE>
+                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+                <<                                                                                       %! SingleStaffScoreTemplate
+                <BLANKLINE>
+                    \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                    <<                                                                                   %! _make_global_context
+                <BLANKLINE>
+                        \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                        {                                                                                %! _make_global_context
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            s1 * 1/2                                                                     %! _make_global_skips(1)
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            s1 * 3/8                                                                     %! _make_global_skips(1)
+                <BLANKLINE>
+                            % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            s1 * 1/2                                                                     %! _make_global_skips(1)
+                <BLANKLINE>
+                            % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            s1 * 3/8                                                                     %! _make_global_skips(1)
+                            \baca-bar-line-visible                                                       %! _attach_final_bar_line
+                            \bar "|."                                                                    %! _attach_final_bar_line
+                <BLANKLINE>
+                        }                                                                                %! _make_global_context
+                <BLANKLINE>
+                    >>                                                                                   %! _make_global_context
+                <BLANKLINE>
+                    \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                    <<                                                                                   %! SingleStaffScoreTemplate
+                <BLANKLINE>
+                        \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                        {                                                                                %! SingleStaffScoreTemplate
+                <BLANKLINE>
+                            \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                            {                                                                            %! SingleStaffScoreTemplate
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                                c'8                                                                      %! baca_make_even_divisions
+                                [                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                                ]                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                                c'8                                                                      %! baca_make_even_divisions
+                                [                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                                ]                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                                % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                                c'8                                                                      %! baca_make_even_divisions
+                                [                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                                ]                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                                % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                                c'8                                                                      %! baca_make_even_divisions
+                                [                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                                ]                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                            }                                                                            %! SingleStaffScoreTemplate
+                <BLANKLINE>
+                        }                                                                                %! SingleStaffScoreTemplate
+                <BLANKLINE>
+                    >>                                                                                   %! SingleStaffScoreTemplate
+                <BLANKLINE>
+                >>                                                                                       %! SingleStaffScoreTemplate
+
+            Override last segment final bar line like this:
+
+            >>> maker = baca.SegmentMaker(
+            ...     do_not_color_unpitched_music=True,
+            ...     final_bar_line='||',
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     'MusicVoice',
+            ...     baca.make_even_divisions(),
+            ...     )
+
+            >>> metadata = {'segment_count': 1}
+            >>> lilypond_file = maker.run(
+            ...     environment='docs',
+            ...     metadata=metadata,
+            ...     )
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                <BLANKLINE>
+                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+                <<                                                                                       %! SingleStaffScoreTemplate
+                <BLANKLINE>
+                    \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                    <<                                                                                   %! _make_global_context
+                <BLANKLINE>
+                        \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                        {                                                                                %! _make_global_context
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            s1 * 1/2                                                                     %! _make_global_skips(1)
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            s1 * 3/8                                                                     %! _make_global_skips(1)
+                <BLANKLINE>
+                            % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            s1 * 1/2                                                                     %! _make_global_skips(1)
+                <BLANKLINE>
+                            % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            s1 * 3/8                                                                     %! _make_global_skips(1)
+                            \baca-bar-line-visible                                                       %! _attach_final_bar_line
+                            \bar "||"                                                                    %! _attach_final_bar_line
+                <BLANKLINE>
+                        }                                                                                %! _make_global_context
+                <BLANKLINE>
+                    >>                                                                                   %! _make_global_context
+                <BLANKLINE>
+                    \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                    <<                                                                                   %! SingleStaffScoreTemplate
+                <BLANKLINE>
+                        \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                        {                                                                                %! SingleStaffScoreTemplate
+                <BLANKLINE>
+                            \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                            {                                                                            %! SingleStaffScoreTemplate
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                                c'8                                                                      %! baca_make_even_divisions
+                                [                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                                ]                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                                c'8                                                                      %! baca_make_even_divisions
+                                [                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                                ]                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                                % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                                c'8                                                                      %! baca_make_even_divisions
+                                [                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                                ]                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                                % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                                c'8                                                                      %! baca_make_even_divisions
+                                [                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                                ]                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                            }                                                                            %! SingleStaffScoreTemplate
+                <BLANKLINE>
+                        }                                                                                %! SingleStaffScoreTemplate
+                <BLANKLINE>
+                    >>                                                                                   %! SingleStaffScoreTemplate
+                <BLANKLINE>
+                >>                                                                                       %! SingleStaffScoreTemplate
+
+        """
+        return self._final_bar_line
+
+    @property
+    def final_markup(self) -> typing.Optional[tuple]:
+        r"""
+        Gets final markup.
+
+        ..  container:: example
+
+            Sets final markup:
+
+            >>> maker = baca.SegmentMaker(
+            ...     do_not_color_unpitched_music=True,
+            ...     final_bar_line='|.',
+            ...     final_markup=(['Madison, WI'], ['October 2016']),
+            ...     final_markup_extra_offset=(-9, -2),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     'MusicVoice',
+            ...     baca.make_even_divisions(),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                <BLANKLINE>
+                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+                <<                                                                                       %! SingleStaffScoreTemplate
+                <BLANKLINE>
+                    \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                    <<                                                                                   %! _make_global_context
+                <BLANKLINE>
+                        \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                        {                                                                                %! _make_global_context
+                <BLANKLINE>
+                            % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            s1 * 1/2                                                                     %! _make_global_skips(1)
+                <BLANKLINE>
+                            % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            s1 * 3/8                                                                     %! _make_global_skips(1)
+                <BLANKLINE>
+                            % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            s1 * 1/2                                                                     %! _make_global_skips(1)
+                <BLANKLINE>
+                            % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                            s1 * 3/8                                                                     %! _make_global_skips(1)
+                            \baca-bar-line-visible                                                       %! _attach_final_bar_line
+                            \bar "|."                                                                    %! _attach_final_bar_line
+                <BLANKLINE>
+                        }                                                                                %! _make_global_context
+                <BLANKLINE>
+                    >>                                                                                   %! _make_global_context
+                <BLANKLINE>
+                    \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                    <<                                                                                   %! SingleStaffScoreTemplate
+                <BLANKLINE>
+                        \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                        {                                                                                %! SingleStaffScoreTemplate
+                <BLANKLINE>
+                            \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                            {                                                                            %! SingleStaffScoreTemplate
+                <BLANKLINE>
+                                % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                                c'8                                                                      %! baca_make_even_divisions
+                                [                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                                ]                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                                % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                                c'8                                                                      %! baca_make_even_divisions
+                                [                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                                ]                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                                % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                                c'8                                                                      %! baca_make_even_divisions
+                                [                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                                ]                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                                % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                                c'8                                                                      %! baca_make_even_divisions
+                                [                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                                c'8                                                                      %! baca_make_even_divisions
+                <BLANKLINE>
+                                \once \override TextScript.extra-offset = #'(-9 . -2)
+                                c'8                                                                      %! baca_make_even_divisions
+                                _ \markup {                                                              %! SCORE_2
+                                    \override                                                            %! SCORE_2
+                                        #'(font-name . "Palatino")                                       %! SCORE_2
+                                        \with-color                                                      %! SCORE_2
+                                            #black                                                       %! SCORE_2
+                                            \right-column                                                %! SCORE_2
+                                                {                                                        %! SCORE_2
+                                                    \line                                                %! SCORE_2
+                                                        {                                                %! SCORE_2
+                                                            "Madison, WI"                                %! SCORE_2
+                                                        }                                                %! SCORE_2
+                                                    \line                                                %! SCORE_2
+                                                        {                                                %! SCORE_2
+                                                            "October 2016"                               %! SCORE_2
+                                                        }                                                %! SCORE_2
+                                                }                                                        %! SCORE_2
+                                    }                                                                    %! SCORE_2
+                                ]                                                                        %! baca_make_even_divisions
+                <BLANKLINE>
+                            }                                                                            %! SingleStaffScoreTemplate
+                <BLANKLINE>
+                        }                                                                                %! SingleStaffScoreTemplate
+                <BLANKLINE>
+                    >>                                                                                   %! SingleStaffScoreTemplate
+                <BLANKLINE>
+                >>                                                                                       %! SingleStaffScoreTemplate
+
+        """
+        return self._final_markup
+
+    @property
+    def final_markup_extra_offset(self) -> typing.Optional[typings.NumberPair]:
+        """
+        Gets final markup extra offset.
+        """
+        return self._final_markup_extra_offset
+
+    @property
+    def first_measure_number(self) -> typing.Optional[int]:
+        """
+        Gets user-defined first measure number.
+        """
+        return self._first_measure_number
+
+    @property
+    def first_segment(self) -> typing.Optional[bool]:
+        """
+        Is true when segment is first in score.
+        """
+        if self._first_segment is not None:
+            return self._first_segment
+        return self._get_segment_number() == 1
+        
+    @property
+    def ignore_repeat_pitch_classes(self) -> typing.Optional[bool]:
+        """
+        Is true when segment ignores repeat pitch-classes.
+        """
+        return self._ignore_repeat_pitch_classes
 
     @property
     def instruments(self) -> typing.Optional[abjad.OrderedDict]:
@@ -5998,317 +6013,3 @@ class SegmentMaker(abjad.SegmentMaker):
 
         assert isinstance(self.lilypond_file, abjad.LilyPondFile)
         return self.lilypond_file
-
-class Wellformedness(abjad.Wellformedness):
-    """
-    Wellformedness manager.
-
-    ..  container:: example
-
-        >>> baca.Wellformedness()
-        Wellformedness()
-
-    """
-
-    ### CLASS VARIABLES ###
-
-    __documentation_section__ = 'Classes'
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        allow_percussion_clef=None,
-        ):
-        abjad.Wellformedness.__init__(
-            self,
-            allow_percussion_clef=allow_percussion_clef,
-            )
-
-    ### SPECIAL METHODS ###
-
-    def __call__(
-        self,
-        argument: typing.Union[abjad.Score, None] = None,
-        ) -> typing.List[typing.Tuple[list, int, str]]:
-        r"""
-        Calls wellformedness checks on ``argument``.
-
-        :param argument: input score.
-
-        ..  container:: example
-
-            >>> voice = abjad.Voice("c'4 c' d' d'")
-            >>> manager = baca.Wellformedness()
-            >>> result = manager(voice)
-            >>> for violators, total, check in result:
-            ...     print(check)
-            ...     print(total)
-            ...     print(violators)
-            ...     print()
-            ...
-            check_discontiguous_spanners
-            0
-            []
-            <BLANKLINE>
-            check_duplicate_ids
-            5
-            []
-            <BLANKLINE>
-            check_empty_containers
-            1
-            []
-            <BLANKLINE>
-            check_misdurated_measures
-            0
-            []
-            <BLANKLINE>
-            check_misfilled_measures
-            0
-            []
-            <BLANKLINE>
-            check_mispitched_ties
-            0
-            []
-            <BLANKLINE>
-            check_misrepresented_flags
-            4
-            []
-            <BLANKLINE>
-            check_missing_parents
-            5
-            []
-            <BLANKLINE>
-            check_nested_measures
-            0
-            []
-            <BLANKLINE>
-            check_notes_on_wrong_clef
-            4
-            []
-            <BLANKLINE>
-            check_out_of_range_pitches
-            4
-            []
-            <BLANKLINE>
-            check_overlapping_beams
-            0
-            []
-            <BLANKLINE>
-            check_overlapping_glissandi
-            0
-            set()
-            <BLANKLINE>
-            check_overlapping_octavation_spanners
-            0
-            []
-            <BLANKLINE>
-            check_overlapping_trill_spanners
-            0
-            set()
-            <BLANKLINE>
-            check_repeat_pitch_classes
-            4
-            [LogicalTie([Note("c'4")]), LogicalTie([Note("c'4")]), LogicalTie([Note("d'4")]), LogicalTie([Note("d'4")])]
-            <BLANKLINE>
-            check_unmatched_stop_text_spans
-            0
-            []
-            <BLANKLINE>
-            check_unterminated_hairpins
-            0
-            []
-            <BLANKLINE>
-            check_unterminated_text_spanners
-            0
-            []
-            <BLANKLINE>
-
-        Returns (violators, total, check) triples.
-        """
-        triples: list = []
-        if argument is None:
-            return triples
-        names = [_ for _ in dir(self) if _.startswith('check_')]
-        for name in sorted(names):
-            check = getattr(self, name)
-            violators, total = check(argument=argument)
-            triples.append((violators, total, name))
-        return triples
-
-    ### PRIVATE METHODS ###
-
-    @staticmethod
-    def _find_repeat_pitch_classes(argument):
-        violators = []
-        for voice in abjad.iterate(argument).components(abjad.Voice):
-            previous_lt, previous_pcs = None, []
-            for lt in abjad.iterate(voice).logical_ties():
-                if isinstance(lt.head, abjad.Note):
-                    written_pitches = [lt.head.written_pitch]
-                elif isinstance(lt.head, abjad.Chord):
-                    written_pitches = lt.head.written_pitches
-                else:
-                    written_pitches = []
-                pcs = [_.pitch_class for _ in written_pitches]
-                inspection = abjad.inspect(lt.head)
-                if (inspection.has_indicator(abjad.tags.NOT_YET_PITCHED) or
-                    inspection.has_indicator(abjad.tags.ALLOW_REPEAT_PITCH)):
-                    pass
-                elif set(pcs) & set(previous_pcs):
-                    if previous_lt not in violators:
-                        violators.append(previous_lt)
-                    if lt not in violators:
-                        violators.append(lt)
-                previous_lt = lt
-                previous_pcs = pcs
-        return violators
-
-    ### PUBLIC METHODS ###
-
-    @staticmethod
-    def check_repeat_pitch_classes(argument=None):
-        r"""
-        Checks repeat pitch-classes by voice.
-
-        ..  container:: example
-
-            Finds no repeats:
-
-            >>> voice = abjad.Voice("c'4 d' e' f'")
-            >>> abjad.show(voice, strict=89) # doctest: +SKIP
-
-            >>> manager = baca.Wellformedness
-            >>> manager.check_repeat_pitch_classes(voice)
-            ([], 4)
-
-        ..  container:: example
-
-            Finds repeat pitches:
-
-            >>> voice = abjad.Voice("c'4 c' d' d'")
-            >>> abjad.show(voice, strict=89) # doctest: +SKIP
-
-            >>> manager = baca.Wellformedness
-            >>> manager.check_repeat_pitch_classes(voice)
-            ([LogicalTie([Note("c'4")]), LogicalTie([Note("c'4")]), LogicalTie([Note("d'4")]), LogicalTie([Note("d'4")])], 4)
-
-        ..  container:: example
-
-            Finds repeat pitch-classes:
-
-            >>> voice = abjad.Voice("c'4 d' e' e''")
-            >>> abjad.show(voice, strict=89) # doctest: +SKIP
-
-            >>> manager = baca.Wellformedness
-            >>> manager.check_repeat_pitch_classes(voice)
-            ([LogicalTie([Note("e'4")]), LogicalTie([Note("e''4")])], 4)
-
-        Returns violators and total.
-        """
-        total = len(classes.Selection(argument).plts())
-        violators = Wellformedness._find_repeat_pitch_classes(argument)
-        return violators, total
-
-    def is_wellformed(self, argument=None):
-        r"""
-        Is true when ``argument`` is wellformed.
-
-        ..  container:: example
-
-            Is wellformed:
-
-            >>> voice = abjad.Voice("c'4 d' e' f'")
-            >>> manager = baca.Wellformedness()
-            >>> manager.is_wellformed(voice)
-            True
-
-        ..  container:: example
-
-            Repeat pitches are not wellformed:
-
-            >>> voice = abjad.Voice("c'4 c' d' d'")
-            >>> manager = baca.Wellformedness()
-            >>> manager.is_wellformed(voice)
-            False
-
-        Returns true or false.
-        """
-        triples = self(argument)
-        for violators, total, check_name in triples:
-            if violators:
-                return False
-        return True
-
-    def tabulate_wellformedness(self, argument=None):
-        """
-        Tabulates wellformedness violations.
-
-        ..  container:: example
-
-            Is wellformed:
-
-            >>> voice = abjad.Voice("c'4 d' e' f'")
-            >>> manager = baca.Wellformedness()
-            >>> string = manager.tabulate_wellformedness(voice)
-            >>> print(string)
-            0 /	0 discontiguous spanners
-            0 /	5 duplicate ids
-            0 /	1 empty containers
-            0 /	0 misdurated measures
-            0 /	0 misfilled measures
-            0 /	0 mispitched ties
-            0 /	4 misrepresented flags
-            0 /	5 missing parents
-            0 /	0 nested measures
-            0 /	4 notes on wrong clef
-            0 /	4 out of range pitches
-            0 /	0 overlapping beams
-            0 /	0 overlapping glissandi
-            0 /	0 overlapping octavation spanners
-            0 /	0 overlapping trill spanners
-            0 /	4 repeat pitch classes
-            0 /	0 unmatched stop text spans
-            0 /	0 unterminated hairpins
-            0 /	0 unterminated text spanners
-
-        ..  container:: example
-
-            Repeat pitches are not wellformed:
-
-            >>> voice = abjad.Voice("c'4 c' d' d'")
-            >>> manager = baca.Wellformedness()
-            >>> string = manager.tabulate_wellformedness(voice)
-            >>> print(string)
-            0 /	0 discontiguous spanners
-            0 /	5 duplicate ids
-            0 /	1 empty containers
-            0 /	0 misdurated measures
-            0 /	0 misfilled measures
-            0 /	0 mispitched ties
-            0 /	4 misrepresented flags
-            0 /	5 missing parents
-            0 /	0 nested measures
-            0 /	4 notes on wrong clef
-            0 /	4 out of range pitches
-            0 /	0 overlapping beams
-            0 /	0 overlapping glissandi
-            0 /	0 overlapping octavation spanners
-            0 /	0 overlapping trill spanners
-            4 /	4 repeat pitch classes
-            0 /	0 unmatched stop text spans
-            0 /	0 unterminated hairpins
-            0 /	0 unterminated text spanners
-
-        Returns string.
-        """
-        triples = self(argument)
-        strings = []
-        for violators, total, check_name in triples:
-            count = len(violators)
-            check_name = check_name.replace('check_', '')
-            check_name = check_name.replace('_', ' ')
-            string = f'{count} /\t{total} {check_name}'
-            strings.append(string)
-        return '\n'.join(strings)

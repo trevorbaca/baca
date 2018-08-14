@@ -35,7 +35,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> score_template.defaults.append(triple)
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     score_template=score_template,
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -123,7 +123,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     )
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -213,7 +213,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     )
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -319,7 +319,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     )
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -422,7 +422,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     )
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
@@ -526,7 +526,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     )
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -635,7 +635,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             Explicit dynamics color blue:
 
             >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -709,7 +709,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             Even after a previous dynamic:
 
             >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -799,7 +799,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             Reapplied dynamics color green:
 
             >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -888,7 +888,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             Redundant dynamics color pink:
 
             >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -965,7 +965,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             Even at the beginning of a segment:
 
             >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -1053,7 +1053,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             Sforzando dynamics do not count as redundant:
 
             >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -1130,7 +1130,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             Even at the beginning of a segment:
 
             >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -1221,7 +1221,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             nonredundantly:
 
             >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -1326,7 +1326,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> score_template.defaults.append(triple)
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     instruments=instruments,
             ...     score_template=score_template,
             ...     spacing=baca.minimum_duration((1, 24)),
@@ -1547,7 +1547,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
 
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     instruments=instruments,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
@@ -1768,7 +1768,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
 
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     instruments=instruments,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
@@ -2006,7 +2006,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
 
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     instruments=instruments,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
@@ -2250,7 +2250,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     )
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     instruments=instruments,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
@@ -2507,7 +2507,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     )
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     instruments=instruments,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
@@ -2778,7 +2778,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             >>> score_template.defaults.append(triple)
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     margin_markups=margin_markups,
             ...     score_template=score_template,
             ...     spacing=baca.minimum_duration((1, 24)),
@@ -3017,7 +3017,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
 
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     margin_markups=margin_markups,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
@@ -3255,7 +3255,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
 
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     margin_markups=margin_markups,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
@@ -3511,7 +3511,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
 
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     margin_markups=margin_markups,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
@@ -3772,7 +3772,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     )
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     margin_markups=margin_markups,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
@@ -4065,7 +4065,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     )
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     margin_markups=margin_markups,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
@@ -4327,7 +4327,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             ...     )
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     margin_markups=margin_markups,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
@@ -4459,7 +4459,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             Explicit metronome marks color blue:
 
             >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
@@ -4548,7 +4548,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             Even after a previous metronome mark:
 
             >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
@@ -4656,7 +4656,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             Reapplied metronome marks color green:
 
             >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
@@ -4763,7 +4763,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             Redundant metronome marks color pink:
 
             >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
@@ -4861,7 +4861,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             Even at the beginning of a segment:
 
             >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
@@ -5193,7 +5193,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             warning:
 
             >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -5378,7 +5378,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             Explicit staff lines color blue:
 
             >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -5454,7 +5454,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             Even after previous staff lines:
 
             >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -5546,7 +5546,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             Reapplied staff lines color green:
 
             >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -5637,7 +5637,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             Redundant staff lines color pink:
 
             >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -5718,7 +5718,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             Even at the beginning of a segment:
 
             >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -5825,7 +5825,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             Explicit tempo trends color blue:
 
             >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
@@ -5934,7 +5934,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             Even after a previous tempo trend:
 
             >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
@@ -6061,7 +6061,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             Reapplied tempo trends color green:
 
             >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
@@ -6187,7 +6187,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             Redundant tempo trends color pink:
 
             >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
@@ -6335,7 +6335,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
             Even at the beginning of a segment:
 
             >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
+            ...     do_not_color_unpitched_music=True,
             ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
