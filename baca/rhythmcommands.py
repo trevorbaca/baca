@@ -2716,6 +2716,54 @@ def rhythm(
         split_at_measure_boundaries=split_at_measure_boundaries,
         )
 
+def silence_first() -> rmakers.SilenceMask:
+    """
+    Makes silence mask.
+    
+    ..  container::
+
+        >>> abjad.f(baca.silence_first())
+        abjadext.rmakers.silence([0])
+
+    """
+    return rmakers.silence([0])
+
+def silence_last() -> rmakers.SilenceMask:
+    """
+    Makes silence mask.
+
+    ..  container::
+
+        >>> abjad.f(baca.silence_last())
+        abjadext.rmakers.silence([-1])
+
+    """
+    return rmakers.silence([-1])
+
+def sustain_first() -> rmakers.SustainMask:
+    """
+    Makes sustain mask.
+    
+    ..  container::
+
+        >>> abjad.f(baca.sustain_first())
+        abjadext.rmakers.sustain([0])
+
+    """
+    return rmakers.sustain([0])
+
+def sustain_last() -> rmakers.SustainMask:
+    """
+    Makes sustain mask.
+
+    ..  container::
+
+        >>> abjad.f(baca.sustain_last())
+        abjadext.rmakers.sustain([-1])
+
+    """
+    return rmakers.sustain([-1])
+
 def tie_from(
     *,
     selector: typings.Selector = 'baca.pleaf(-1)',

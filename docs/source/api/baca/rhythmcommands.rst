@@ -304,6 +304,10 @@ rhythmcommands
    ~repeat_tie_from
    ~repeat_tie_to
    ~rhythm
+   ~silence_first
+   ~silence_last
+   ~sustain_first
+   ~sustain_last
    ~tie_from
    ~tie_to
    ~untie_to
@@ -345,6 +349,14 @@ rhythmcommands
 .. autofunction:: repeat_tie_to
 
 .. autofunction:: rhythm
+
+.. autofunction:: silence_first
+
+.. autofunction:: silence_last
+
+.. autofunction:: sustain_first
+
+.. autofunction:: sustain_last
 
 .. autofunction:: tie_from
 
