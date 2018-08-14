@@ -153,6 +153,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_color_octaves',
         '_color_out_of_range_pitches',
         '_color_repeat_pitch_classes',
+        '_do_not_check_out_of_range_pitches',
         '_do_not_check_persistence',
         '_do_not_include_layout_ly',
         '_duration',
@@ -166,7 +167,6 @@ class SegmentMaker(abjad.SegmentMaker):
         '_final_markup_extra_offset',
         '_first_measure_number',
         '_first_segment',
-        '_ignore_out_of_range_pitches',
         '_ignore_repeat_pitch_classes',
         '_ignore_unpitched_notes',
         '_ignore_unregistered_pitches',
@@ -270,6 +270,7 @@ class SegmentMaker(abjad.SegmentMaker):
         color_octaves: bool = None,
         color_out_of_range_pitches: bool = True,
         color_repeat_pitch_classes: bool = True,
+        do_not_check_out_of_range_pitches: bool = None,
         do_not_check_persistence: bool = None,
         do_not_include_layout_ly: bool = None,
         fermata_measure_staff_line_count: int = None,
@@ -278,7 +279,6 @@ class SegmentMaker(abjad.SegmentMaker):
         final_markup_extra_offset: typings.NumberPair = None,
         first_measure_number: int = None,
         first_segment: bool = None,
-        ignore_out_of_range_pitches: bool = None,
         ignore_repeat_pitch_classes: bool = None,
         ignore_unpitched_notes: bool = None,
         ignore_unregistered_pitches: bool = None,
@@ -312,6 +312,11 @@ class SegmentMaker(abjad.SegmentMaker):
         self._color_repeat_pitch_classes = color_repeat_pitch_classes
         self._cache = None
         self._cached_time_signatures: typing.List[abjad.TimeSignature] = []
+        if do_not_check_out_of_range_pitches is not None:
+            do_not_check_out_of_range_pitches = bool(
+                do_not_check_out_of_range_pitches)
+        self._do_not_check_out_of_range_pitches = \
+            do_not_check_out_of_range_pitches
         self._do_not_check_persistence = do_not_check_persistence
         self._do_not_include_layout_ly = do_not_include_layout_ly
         self._duration: typing.Optional[abjad.Duration] = None
@@ -329,9 +334,6 @@ class SegmentMaker(abjad.SegmentMaker):
         if first_segment is not None:
             first_segment = bool(first_segment)
         self._first_segment = first_segment
-        if ignore_out_of_range_pitches is not None:
-            ignore_out_of_range_pitches = bool(ignore_out_of_range_pitches)
-        self._ignore_out_of_range_pitches = ignore_out_of_range_pitches
         self._ignore_repeat_pitch_classes = ignore_repeat_pitch_classes
         self._ignore_unpitched_notes = ignore_unpitched_notes
         self._ignore_unregistered_pitches = ignore_unregistered_pitches
@@ -1551,8 +1553,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 raise Exception(message)
         clef = abjad.inspect(leaf).effective(abjad.Clef)
         if clef is None:
-            message = f'{voice} leaf {i} ({leaf!s}) missing clef.'
-            raise Exception(message)
+            raise Exception(f'{voice} leaf {i} ({leaf!s}) missing clef.')
 
     def _check_range(self):
         markup = abjad.Markup('*', direction=abjad.Up)
@@ -1568,9 +1569,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 if pleaf not in instrument.pitch_range:
                     if abjad.inspect(pleaf).has_indicator(tag):
                         continue
-                    if not self.ignore_out_of_range_pitches:
-                        message = f'{voice.name} out of range {pleaf!r}.'
-                        raise Exception(message)
                     if self.color_out_of_range_pitches:
                         abjad.attach(markup, pleaf, tag='_check_range')
                         string = r'\baca-out-of-range-warning'
@@ -1580,13 +1578,16 @@ class SegmentMaker(abjad.SegmentMaker):
     def _check_wellformedness(self):
         if self.skip_wellformedness_checks:
             return
-        if (self.color_octaves or
-            self.color_repeat_pitch_classes or
-            self.ignore_repeat_pitch_classes):
-            return
-        manager = Wellformedness(allow_percussion_clef=True)
-        if not manager.is_wellformed(self.score):
-            message = manager.tabulate_wellformedness(self.score)
+        if not abjad.inspect(self.score).is_wellformed(
+            allow_percussion_clef=True,
+            check_out_of_range_pitches=not(
+                self.do_not_check_out_of_range_pitches),
+            ):
+            message = abjad.inspect(self.score).tabulate_wellformedness(
+                allow_percussion_clef=True,
+                check_out_of_range_pitches=not(
+                    self.do_not_check_out_of_range_pitches),
+                )
             raise Exception('\n' + message)
 
     def _collect_alive_during_segment(self):
@@ -3434,7 +3435,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker = baca.SegmentMaker(
             ...     color_out_of_range_pitches=True,
-            ...     ignore_out_of_range_pitches=True,
+            ...     do_not_check_out_of_range_pitches=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=time_signatures,
@@ -3797,6 +3798,13 @@ class SegmentMaker(abjad.SegmentMaker):
         Gets commands.
         """
         return self._commands
+
+    @property
+    def do_not_check_out_of_range_pitches(self) -> typing.Optional[bool]:
+        """
+        Is true when segment does not check out-of-range pitches.
+        """
+        return self._do_not_check_out_of_range_pitches
 
     @property
     def do_not_check_persistence(self) -> typing.Optional[bool]:
@@ -4452,13 +4460,6 @@ class SegmentMaker(abjad.SegmentMaker):
             return self._first_segment
         return self._get_segment_number() == 1
         
-    @property
-    def ignore_out_of_range_pitches(self) -> typing.Optional[bool]:
-        """
-        Is true when segment ignores out-of-range pitches.
-        """
-        return self._ignore_out_of_range_pitches
-
     @property
     def ignore_repeat_pitch_classes(self) -> typing.Optional[bool]:
         """
@@ -6087,7 +6088,7 @@ class Wellformedness(abjad.Wellformedness):
             4
             []
             <BLANKLINE>
-            check_out_of_range_notes
+            check_out_of_range_pitches
             4
             []
             <BLANKLINE>
@@ -6110,6 +6111,10 @@ class Wellformedness(abjad.Wellformedness):
             check_repeat_pitch_classes
             4
             [LogicalTie([Note("c'4")]), LogicalTie([Note("c'4")]), LogicalTie([Note("d'4")]), LogicalTie([Note("d'4")])]
+            <BLANKLINE>
+            check_unmatched_stop_text_spans
+            0
+            []
             <BLANKLINE>
             check_unterminated_hairpins
             0
@@ -6258,12 +6263,13 @@ class Wellformedness(abjad.Wellformedness):
             0 /	5 missing parents
             0 /	0 nested measures
             0 /	4 notes on wrong clef
-            0 /	4 out of range notes
+            0 /	4 out of range pitches
             0 /	0 overlapping beams
             0 /	0 overlapping glissandi
             0 /	0 overlapping octavation spanners
             0 /	0 overlapping trill spanners
             0 /	4 repeat pitch classes
+            0 /	0 unmatched stop text spans
             0 /	0 unterminated hairpins
             0 /	0 unterminated text spanners
 
@@ -6285,12 +6291,13 @@ class Wellformedness(abjad.Wellformedness):
             0 /	5 missing parents
             0 /	0 nested measures
             0 /	4 notes on wrong clef
-            0 /	4 out of range notes
+            0 /	4 out of range pitches
             0 /	0 overlapping beams
             0 /	0 overlapping glissandi
             0 /	0 overlapping octavation spanners
             0 /	0 overlapping trill spanners
             4 /	4 repeat pitch classes
+            0 /	0 unmatched stop text spans
             0 /	0 unterminated hairpins
             0 /	0 unterminated text spanners
 

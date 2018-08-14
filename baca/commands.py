@@ -94,10 +94,9 @@ class BCPCommand(scoping.Command):
             len(lts[-1]) == 1):
             next_leaf_after_argument = abjad.inspect(lts[-1][-1]).leaf(1)
             if next_leaf_after_argument is None:
-                raise Exception(
-                    'can not attach final spanner:'
-                    ' argument includes end of score.'
-                    )
+                message = 'can not attach final spanner:'
+                message += ' argument includes end of score.'
+                raise Exception(message)
         previous_bcp = None
         i = 0
         for lt in lts:
@@ -155,7 +154,7 @@ class BCPCommand(scoping.Command):
                 lt.head,
                 tag=self.tag.append('BCPCommand(2)'),
                 )
-            if 0 < i:
+            if 0 < i - 1:
                 abjad.attach(
                     stop_text_span,
                     lt.head,
@@ -313,7 +312,6 @@ class BCPCommand(scoping.Command):
                                 \override TextSpanner.staff-padding = #2.5                               %! baca_text_spanner_staff_padding:OverrideCommand(1)
                                 e'8                                                                      %! baca_make_even_divisions
                                 - \downbow                                                               %! baca_bcps:BCPCommand(6)
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
                                 - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
                                 - \baca-bcp-spanner-left-text #1 #5                                      %! baca_bcps:BCPCommand(2)
                                 \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
@@ -365,7 +363,6 @@ class BCPCommand(scoping.Command):
                                 % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                                 f'8                                                                      %! baca_make_even_divisions
                                 - \downbow                                                               %! baca_bcps:BCPCommand(6)
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
                                 - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
                                 - \baca-bcp-spanner-left-text #3 #5                                      %! baca_bcps:BCPCommand(2)
                                 \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
@@ -552,7 +549,6 @@ class BCPCommand(scoping.Command):
                                 \override TextSpanner.staff-padding = #2.5                               %! baca_text_spanner_staff_padding:OverrideCommand(1)
                                 e'8                                                                      %! baca_make_even_divisions
                                 - \downbow                                                               %! baca_bcps:BCPCommand(6)
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
                                 - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
                                 - \baca-bcp-spanner-left-text #1 #5                                      %! baca_bcps:BCPCommand(2)
                                 - \tweak color #red                                                      %! baca_bcps:BCPCommand(2)

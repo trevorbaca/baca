@@ -360,6 +360,7 @@ class PiecewiseCommand(scoping.Command):
         else:
             assert isinstance(self.bookend, int), repr(self.bookend)
             bookend_pattern = abjad.index([self.bookend], period=piece_count)
+        previous_had_bookend = None
         for i, piece in enumerate(pieces):
             start_leaf = classes.Selection(piece).leaf(0)
             stop_leaf = classes.Selection(piece).leaf(-1)
@@ -400,7 +401,7 @@ class PiecewiseCommand(scoping.Command):
                         self.final_piece_spanner)
                 elif self.final_piece_spanner is False:
                     bundle = bundle.with_spanner_start(None)
-            if is_first_piece:
+            if is_first_piece or previous_had_bookend:
                 bundle = bundle.with_spanner_stop(None)
             self._attach_indicators(
                 bundle,
@@ -434,6 +435,7 @@ class PiecewiseCommand(scoping.Command):
                     stop_leaf,
                     tag='PiecewiseCommand(3)',
                     )
+            previous_had_bookend = should_bookend
 
     ### PRIVATE METHODS ###
 
@@ -4146,7 +4148,6 @@ def text_spanner(
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
                             - \abjad-invisible-line                                                  %! baca_text_spanner:PiecewiseCommand(1)
                             - \baca-text-spanner-left-text "B"                                       %! baca_text_spanner:PiecewiseCommand(1)
                             - \baca-text-spanner-right-text "A"                                      %! baca_text_spanner:PiecewiseCommand(1)
@@ -4163,7 +4164,6 @@ def text_spanner(
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
                             - \abjad-invisible-line                                                  %! baca_text_spanner:PiecewiseCommand(1)
                             - \baca-text-spanner-left-text "A"                                       %! baca_text_spanner:PiecewiseCommand(1)
                             - \baca-text-spanner-right-text "B"                                      %! baca_text_spanner:PiecewiseCommand(1)
@@ -4182,7 +4182,6 @@ def text_spanner(
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
                             - \abjad-invisible-line                                                  %! baca_text_spanner:PiecewiseCommand(1)
                             - \baca-text-spanner-left-text "B"                                       %! baca_text_spanner:PiecewiseCommand(1)
                             - \baca-text-spanner-right-text "A"                                      %! baca_text_spanner:PiecewiseCommand(1)
@@ -4305,7 +4304,6 @@ def text_spanner(
             <BLANKLINE>
                             % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
                             - \abjad-solid-line-with-arrow                                           %! baca_text_spanner:PiecewiseCommand(1)
                             - \baca-text-spanner-left-text "B"                                       %! baca_text_spanner:PiecewiseCommand(1)
                             - \baca-text-spanner-right-text "A"                                      %! baca_text_spanner:PiecewiseCommand(1)
@@ -4322,7 +4320,6 @@ def text_spanner(
             <BLANKLINE>
                             % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
                             - \abjad-solid-line-with-arrow                                           %! baca_text_spanner:PiecewiseCommand(1)
                             - \baca-text-spanner-left-text "A"                                       %! baca_text_spanner:PiecewiseCommand(1)
                             - \baca-text-spanner-right-text "B"                                      %! baca_text_spanner:PiecewiseCommand(1)
@@ -4341,7 +4338,6 @@ def text_spanner(
             <BLANKLINE>
                             % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
-                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
                             - \abjad-solid-line-with-arrow                                           %! baca_text_spanner:PiecewiseCommand(1)
                             - \baca-text-spanner-left-text "B"                                       %! baca_text_spanner:PiecewiseCommand(1)
                             - \baca-text-spanner-right-text "A"                                      %! baca_text_spanner:PiecewiseCommand(1)

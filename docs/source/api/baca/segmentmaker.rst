@@ -45,6 +45,7 @@ segmentmaker
       color_out_of_range_pitches
       color_repeat_pitch_classes
       commands
+      do_not_check_out_of_range_pitches
       do_not_check_persistence
       do_not_include_layout_ly
       fermata_measure_staff_line_count
@@ -53,7 +54,6 @@ segmentmaker
       final_markup_extra_offset
       first_measure_number
       first_segment
-      ignore_out_of_range_pitches
       ignore_repeat_pitch_classes
       ignore_unpitched_notes
       ignore_unregistered_pitches
@@ -150,6 +150,8 @@ segmentmaker
 
    .. autoattribute:: SegmentMaker.commands
 
+   .. autoattribute:: SegmentMaker.do_not_check_out_of_range_pitches
+
    .. autoattribute:: SegmentMaker.do_not_check_persistence
 
    .. autoattribute:: SegmentMaker.do_not_include_layout_ly
@@ -169,8 +171,6 @@ segmentmaker
    .. autoattribute:: SegmentMaker.first_measure_number
 
    .. autoattribute:: SegmentMaker.first_segment
-
-   .. autoattribute:: SegmentMaker.ignore_out_of_range_pitches
 
    .. autoattribute:: SegmentMaker.ignore_repeat_pitch_classes
 
@@ -315,7 +315,7 @@ segmentmaker
 
    .. container:: inherited
 
-      .. automethod:: Wellformedness.check_out_of_range_notes
+      .. automethod:: Wellformedness.check_out_of_range_pitches
 
    .. container:: inherited
 
@@ -332,6 +332,10 @@ segmentmaker
    .. container:: inherited
 
       .. automethod:: Wellformedness.check_overlapping_trill_spanners
+
+   .. container:: inherited
+
+      .. automethod:: Wellformedness.check_unmatched_stop_text_spans
 
    .. container:: inherited
 
