@@ -6477,9 +6477,9 @@ class MusicMaker(abjad.AbjadObject):
     @staticmethod
     def _check_wellformedness(selections):
         for component in abjad.iterate(selections).components():
-            inspector = abjad.inspect(component)
-            if not inspector.is_wellformed():
-                report = inspector.tabulate_wellformedness()
+            inspection = abjad.inspect(component)
+            if not inspection.is_wellformed():
+                report = inspection.tabulate_wellformedness()
                 report = repr(component) + '\n' + report
                 raise Exception(report)
 

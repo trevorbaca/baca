@@ -712,6 +712,8 @@ class SegmentMaker(abjad.SegmentMaker):
         scope_type = (scoping.Scope, scoping.TimelineScope)
         assert all(isinstance(_, scope_type) for _ in scopes_), repr(scopes_)
         for command in commands:
+            if command is None:
+                continue
             if isinstance(command, list):
                 raise Exception('use baca.suite().')
             if not isinstance(command, scoping.Command):
@@ -730,6 +732,8 @@ class SegmentMaker(abjad.SegmentMaker):
                         voice_name = abbreviations[scope_.voice_name]
                         scope_._voice_name = voice_name
             for command in commands:
+                if command is None:
+                    continue
                 assert isinstance(command, scoping.Command), repr(command)
                 if not command._matches_scope_index(scope_count, i):
                     continue
@@ -870,9 +874,9 @@ class SegmentMaker(abjad.SegmentMaker):
                         leaves = previous_logical_tie + current_logical_tie
                         abjad.detach(abjad.Tie, previous_leaf)
                         abjad.detach(abjad.Tie, current_leaf)
-                        inspector = abjad.inspect(current_leaf)
+                        inspection = abjad.inspect(current_leaf)
                         string = abjad.tags.REPEAT_TIE 
-                        repeat_ties = inspector.has_indicator(string)
+                        repeat_ties = inspection.has_indicator(string)
                         tie = abjad.Tie(repeat=repeat_ties)
                         abjad.attach(
                             tie,
@@ -891,9 +895,9 @@ class SegmentMaker(abjad.SegmentMaker):
                         leaves = current_logical_tie + next_logical_tie
                         abjad.detach(abjad.Tie, current_leaf)
                         abjad.detach(abjad.Tie, next_leaf)
-                        inspector = abjad.inspect(current_leaf)
+                        inspection = abjad.inspect(current_leaf)
                         string = abjad.tags.REPEAT_TIE
-                        repeat_ties = inspector.has_indicator(string)
+                        repeat_ties = inspection.has_indicator(string)
                         tie = abjad.Tie(repeat=repeat_ties)
                         abjad.attach(
                             tie,
@@ -1168,26 +1172,14 @@ class SegmentMaker(abjad.SegmentMaker):
                     add_right_text_to_me = skip
                     break
         for i, skip in enumerate(skips):
-            inspector = abjad.inspect(skip)
-            metronome_mark = inspector.indicator(
-                abjad.MetronomeMark,
-                default=None,
-                )
-            metric_modulation = inspector.indicator(
-                abjad.MetricModulation,
-                default=None,
-                )
-            accelerando = inspector.indicator(
-                indicators.Accelerando,
-                default=None,
-                )
-            ritardando = inspector.indicator(
-                indicators.Ritardando,
-                default=None,
-                )
+            inspection = abjad.inspect(skip)
+            metronome_mark = inspection.indicator(abjad.MetronomeMark)
+            metric_modulation = inspection.indicator(abjad.MetricModulation)
+            accelerando = inspection.indicator(indicators.Accelerando)
+            ritardando = inspection.indicator(indicators.Ritardando)
             if metronome_mark is not None:
                 metronome_mark._hide = True
-                wrapper = inspector.wrapper(abjad.MetronomeMark)
+                wrapper = inspection.wrapper(abjad.MetronomeMark)
             if metric_modulation is not None:
                 metric_modulation._hide = True
             if accelerando is not None:
@@ -1197,11 +1189,11 @@ class SegmentMaker(abjad.SegmentMaker):
             if skip is skips[-1]:
                 break
             if metronome_mark is None and metric_modulation is not None:
-                wrapper = inspector.wrapper(abjad.MetricModulation)
+                wrapper = inspection.wrapper(abjad.MetricModulation)
             if metronome_mark is None and accelerando is not None:
-                wrapper = inspector.wrapper(indicators.Accelerando)
+                wrapper = inspection.wrapper(indicators.Accelerando)
             if metronome_mark is None and ritardando is not None:
-                wrapper = inspector.wrapper(indicators.Ritardando)
+                wrapper = inspection.wrapper(indicators.Ritardando)
             has_trend = accelerando is not None or ritardando is not None
             if (metronome_mark is None and
                 metric_modulation is None and
@@ -1253,6 +1245,26 @@ class SegmentMaker(abjad.SegmentMaker):
                 right_text=right_text,
                 style=style,
                 )
+            assert 'METRONOME_MARK' in str(tag), repr(tag)
+            if (isinstance(wrapper.indicator, abjad.MetronomeMark) and
+                has_trend and
+                'EXPLICIT' not in str(tag)):
+                words = []
+                for word in str(tag).split(':'):
+                    if 'METRONOME_MARK' in word:
+                        word = word.replace('DEFAULT', 'EXPLICIT')
+                        word = word.replace('REAPPLIED', 'EXPLICIT')
+                        word = word.replace('REDUNDANT', 'EXPLICIT')
+                    words.append(word)
+                new_tag = abjad.Tag.from_words(words)
+                indicator = wrapper.indicator
+                abjad.detach(wrapper, skip)
+                abjad.attach(
+                    indicator,
+                    skip,
+                    tag=new_tag.append('_attach_metronome_marks(5)'),
+                    )
+                tag = new_tag
             abjad.attach(
                 start_text_span,
                 skip,
@@ -1264,9 +1276,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 status = 'default'
             elif 'EXPLICIT' in string:
                 status = 'explicit'
-            elif 'REAPPLIED' in str(tag):
+            elif 'REAPPLIED' in string:
                 status = 'reapplied'
-            elif 'REDUNDANT' in str(tag):
+            elif 'REDUNDANT' in string:
                 status = 'redundant'
             else:
                 status = None
@@ -2558,6 +2570,17 @@ class SegmentMaker(abjad.SegmentMaker):
         if parts[-1] != class_.__name__:
             parts.append(class_.__name__)
         return f'{parts[0]}.{parts[-1]}'
+
+    def _reanalyze_trending_dynamics(self):
+        for leaf in abjad.iterate(self.score).leaves():
+            for wrapper in abjad.inspect(leaf).wrappers():
+                if (isinstance(wrapper.indicator, abjad.Dynamic) and
+                    abjad.inspect(leaf).indicators(abjad.DynamicTrend)):
+                    self._treat_persistent_wrapper(
+                        self.manifests,
+                        wrapper,
+                        'explicit',
+                        )
 
     def _reapply_persistent_indicators(self):
         if self.first_segment:
@@ -5926,6 +5949,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._shorten_long_repeat_ties()
                 self._treat_untreated_persistent_wrappers()
                 self._attach_metronome_marks()
+                self._reanalyze_trending_dynamics()
                 self._transpose_score_()
                 self._attach_final_bar_line()
                 self._add_final_markup()
