@@ -42,6 +42,7 @@ segmentmaker
       clock_time_override
       color_octaves
       commands
+      do_no_check_wellformedness
       do_not_check_out_of_range_pitches
       do_not_check_persistence
       do_not_color_out_of_range_pitches
@@ -70,7 +71,6 @@ segmentmaker
       previous_metadata
       run
       score_template
-      skip_wellformedness_checks
       skips_instead_of_rests
       spacing
       test_container_identifiers
@@ -145,6 +145,8 @@ segmentmaker
 
    .. autoattribute:: SegmentMaker.commands
 
+   .. autoattribute:: SegmentMaker.do_no_check_wellformedness
+
    .. autoattribute:: SegmentMaker.do_not_check_out_of_range_pitches
 
    .. autoattribute:: SegmentMaker.do_not_check_persistence
@@ -214,8 +216,6 @@ segmentmaker
    .. container:: inherited
 
       .. autoattribute:: SegmentMaker.segment_name
-
-   .. autoattribute:: SegmentMaker.skip_wellformedness_checks
 
    .. autoattribute:: SegmentMaker.skips_instead_of_rests
 

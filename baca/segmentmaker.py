@@ -153,6 +153,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_color_octaves',
         '_do_not_check_out_of_range_pitches',
         '_do_not_check_persistence',
+        '_do_no_check_wellformedness',
         '_do_not_color_out_of_range_pitches',
         '_do_not_color_repeat_pitch_classes',
         '_do_not_color_unpitched_music',
@@ -185,7 +186,6 @@ class SegmentMaker(abjad.SegmentMaker):
         '_segment_bol_measure_numbers',
         '_segment_directory',
         '_segment_duration',
-        '_skip_wellformedness_checks',
         '_skips_instead_of_rests',
         '_sounds_during_segment',
         '_spacing',
@@ -270,6 +270,7 @@ class SegmentMaker(abjad.SegmentMaker):
         color_octaves: bool = None,
         do_not_check_out_of_range_pitches: bool = None,
         do_not_check_persistence: bool = None,
+        do_no_check_wellformedness: bool = None,
         do_not_color_out_of_range_pitches: bool = None,
         do_not_color_repeat_pitch_classes: bool = None,
         do_not_color_unpitched_music: bool = None,
@@ -294,7 +295,6 @@ class SegmentMaker(abjad.SegmentMaker):
         score_template: templates.ScoreTemplate = None,
         segment_directory: abjad.Path = None,
         spacing: segmentclasses.HorizontalSpacingSpecifier = None,
-        skip_wellformedness_checks: bool = None,
         skips_instead_of_rests: bool = None,
         test_container_identifiers: bool = None,
         time_signatures: typing.List[tuple] = None,
@@ -316,6 +316,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._do_not_check_out_of_range_pitches = \
             do_not_check_out_of_range_pitches
         self._do_not_check_persistence = do_not_check_persistence
+        self._do_no_check_wellformedness = do_no_check_wellformedness
         self._do_not_color_out_of_range_pitches = \
             do_not_color_out_of_range_pitches
         self._do_not_color_repeat_pitch_classes = \
@@ -359,7 +360,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
         self._segment_directory: typing.Optional[abjad.Path] = segment_directory
         self._segment_duration: typing.Optional[abjad.Duration] = None
-        self._skip_wellformedness_checks = skip_wellformedness_checks
         self._skips_instead_of_rests = skips_instead_of_rests
         self._spacing = spacing
         self._sounds_during_segment: abjad.OrderedDict = abjad.OrderedDict()
@@ -1578,7 +1578,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         abjad.attach(literal, pleaf, tag='_check_range')
 
     def _check_wellformedness(self):
-        if self.skip_wellformedness_checks:
+        if self.do_no_check_wellformedness:
             return
         if not abjad.inspect(self.score).is_wellformed(
             allow_percussion_clef=True,
@@ -3447,6 +3447,13 @@ class SegmentMaker(abjad.SegmentMaker):
         Is true when segment-maker does not check persistent indicators.
         """
         return self._do_not_check_persistence
+
+    @property
+    def do_no_check_wellformedness(self) -> typing.Optional[bool]:
+        """
+        Is true when segment does not check wellformedness.
+        """
+        return self._do_no_check_wellformedness
 
     @property
     def do_not_color_out_of_range_pitches(self) -> typing.Optional[bool]:
@@ -5399,13 +5406,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
         """
         return self._score_template
-
-    @property
-    def skip_wellformedness_checks(self) -> typing.Optional[bool]:
-        """
-        Is true when segment skips wellformedness checks.
-        """
-        return self._skip_wellformedness_checks
 
     @property
     def skips_instead_of_rests(self) -> typing.Optional[bool]:
