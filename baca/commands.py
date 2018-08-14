@@ -71,6 +71,7 @@ class BCPCommand(scoping.Command):
         leaves = classes.Selection(argument).leaves()
         bcps_ = classes.Sequence(self.bcps)
         if self.helper:
+            raise Exception('DEPRECATED')
             bcps_ = self.helper(bcps_, argument)
         bcps = abjad.CyclicTuple(bcps_)
         lts = classes.Selection(argument).lts()
@@ -105,7 +106,8 @@ class BCPCommand(scoping.Command):
                 )
             if (not self.final_spanner and
                 lt is lts[-1] and
-                not self._is_rest(lt.head)):
+                not self._is_rest(lt.head)
+                ):
                 abjad.attach(
                     stop_text_span,
                     lt.head,
@@ -113,6 +115,7 @@ class BCPCommand(scoping.Command):
                     )
                 break
             previous_leaf = abjad.inspect(lt.head).leaf(-1)
+            next_leaf = abjad.inspect(lt.head).leaf(1)
             if (self._is_rest(lt.head) and
                 (self._is_rest(previous_leaf) or previous_leaf is None)):
                 continue
@@ -149,11 +152,15 @@ class BCPCommand(scoping.Command):
                 )
             if self.tweaks:
                 self._apply_tweaks(start_text_span, self.tweaks)
-            abjad.attach(
-                start_text_span,
-                lt.head,
-                tag=self.tag.append('BCPCommand(2)'),
-                )
+            if (self._is_rest(lt.head) and
+                (self._is_rest(next_leaf) or next_leaf is None)):
+                pass
+            else:
+                abjad.attach(
+                    start_text_span,
+                    lt.head,
+                    tag=self.tag.append('BCPCommand(2)'),
+                    )
             if 0 < i - 1:
                 abjad.attach(
                     stop_text_span,
