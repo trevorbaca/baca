@@ -71,7 +71,6 @@ class BCPCommand(scoping.Command):
         leaves = classes.Selection(argument).leaves()
         bcps_ = classes.Sequence(self.bcps)
         if self.helper:
-            raise Exception('DEPRECATED')
             bcps_ = self.helper(bcps_, argument)
         bcps = abjad.CyclicTuple(bcps_)
         lts = classes.Selection(argument).lts()
