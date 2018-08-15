@@ -529,6 +529,7 @@ classes
 
       chead
       cheads
+      clparts
       cmgroups
       enchain
       lleaf
@@ -543,7 +544,6 @@ classes
       ltrun
       ltruns
       lts
-      lyparts
       mgroups
       mleaves
       ntrun
@@ -668,6 +668,8 @@ classes
 
       .. automethod:: Selection.chords
 
+   .. automethod:: Selection.clparts
+
    .. automethod:: Selection.cmgroups
 
    .. container:: inherited
@@ -771,8 +773,6 @@ classes
    .. automethod:: Selection.ltruns
 
    .. automethod:: Selection.lts
-
-   .. automethod:: Selection.lyparts
 
    .. container:: inherited
 

@@ -31,6 +31,7 @@ Bača API
    ~baca.cheads
    ~baca.chord
    ~baca.chords
+   ~baca.clparts
    ~baca.cmgroups
    ~baca.components
    ~baca.count
@@ -65,7 +66,6 @@ Bača API
    ~baca.ltrun
    ~baca.ltruns
    ~baca.lts
-   ~baca.lyparts
    ~baca.mgroups
    ~baca.mleaves
    ~baca.nontrivial
