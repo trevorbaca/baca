@@ -564,7 +564,7 @@ divisions
 
    .. container:: inherited
 
-      .. automethod:: DivisionSequence.replace
+      .. automethod:: DivisionSequence.replace_at
 
    .. container:: inherited
 
