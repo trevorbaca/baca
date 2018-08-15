@@ -36,7 +36,7 @@ class BCPCommand(scoping.Command):
         scope: scoping.scope_typing = None,
         selector: typings.Selector = None,
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
-        tweaks: typing.Sequence[abjad.LilyPondTweakManager] = None,
+        tweaks: typing.Tuple[abjad.LilyPondTweakManager, ...] = None,
         ) -> None:
         scoping.Command.__init__(
             self,
@@ -472,7 +472,8 @@ class BCPCommand(scoping.Command):
         return super().tag
 
     @property
-    def tweaks(self) -> typing.Tuple[abjad.LilyPondTweakManager, ...]:
+    def tweaks(self) -> typing.Optional[
+        typing.Tuple[abjad.LilyPondTweakManager, ...]]:
         r"""
         Gets tweaks.
 
@@ -1501,7 +1502,7 @@ class IndicatorCommand(scoping.Command):
         scope: scoping.scope_typing = None,
         selector: typings.Selector = 'baca.pheads()',
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
-        tweaks: abjad.LilyPondTweakManager = None,
+        tweaks: typing.Tuple[abjad.LilyPondTweakManager, ...] = None,
         ) -> None:
         scoping.Command.__init__(
             self,
@@ -1765,7 +1766,8 @@ class IndicatorCommand(scoping.Command):
         return self._redundant
 
     @property
-    def tweaks(self) -> typing.Tuple[abjad.LilyPondTweakManager, ...]:
+    def tweaks(self) -> typing.Optional[
+        typing.Tuple[abjad.LilyPondTweakManager, ...]]:
         """
         Gets tweaks.
         """

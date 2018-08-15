@@ -215,7 +215,7 @@ class SpannerCommand(scoping.Command):
         selector: typings.Selector = 'baca.leaves()',
         spanner: abjad.Spanner = None,
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
-        tweaks: abjad.LilyPondTweakManager = None,
+        tweaks: typing.Tuple[abjad.LilyPondTweakManager, ...] = None,
         ) -> None:
         scoping.Command.__init__(
             self,
@@ -439,7 +439,8 @@ class SpannerCommand(scoping.Command):
         return self._spanner
 
     @property
-    def tweaks(self) -> typing.Tuple[abjad.LilyPondTweakManager, ...]:
+    def tweaks(self) -> typing.Optional[
+        typing.Tuple[abjad.LilyPondTweakManager, ...]]:
         """
         Gets tweaks.
         """
