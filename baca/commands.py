@@ -27,7 +27,6 @@ class BCPCommand(scoping.Command):
 
     def __init__(
         self,
-        *tweaks: abjad.LilyPondTweakManager,
         bcps: typing.Iterable[typings.IntegerPair] = None,
         final_spanner: bool = None,
         helper: typing.Callable = None,
@@ -37,6 +36,7 @@ class BCPCommand(scoping.Command):
         scope: scoping.scope_typing = None,
         selector: typings.Selector = None,
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
+        tweaks: typing.Sequence[abjad.LilyPondTweakManager] = None,
         ) -> None:
         scoping.Command.__init__(
             self,
@@ -696,6 +696,45 @@ class BCPCommand(scoping.Command):
                     >>                                                                                   %! SingleStaffScoreTemplate
                 <BLANKLINE>
                 >>                                                                                       %! SingleStaffScoreTemplate
+
+        ..  container:: example
+
+            REGRESSION. Tweaks survive copy:
+
+            >>> command = baca.bcps(
+            ...     [(1, 2), (1, 4)],
+            ...     abjad.tweak('red').color,
+            ...     )
+            >>> abjad.f(command)
+            baca.BCPCommand(
+                bcps=[
+                    (1, 2),
+                    (1, 4),
+                    ],
+                selector=baca.leaves(),
+                tags=[
+                    abjad.Tag('baca_bcps'),
+                    ],
+                tweaks=(
+                    LilyPondTweakManager(('color', 'red')),
+                    ),
+                )
+
+            >>> new_command = abjad.new(command)
+            >>> abjad.f(new_command)
+            baca.BCPCommand(
+                bcps=[
+                    (1, 2),
+                    (1, 4),
+                    ],
+                selector=baca.leaves(),
+                tags=[
+                    abjad.Tag('baca_bcps'),
+                    ],
+                tweaks=(
+                    LilyPondTweakManager(('color', 'red')),
+                    ),
+                )
 
         """
         return self._tweaks
@@ -1450,7 +1489,7 @@ class IndicatorCommand(scoping.Command):
 
     def __init__(
         self,
-        *tweaks: abjad.LilyPondTweakManager,
+        *,
         context: str = None,
         deactivate: bool = None,
         indicators: typing.List[typing.Any] = None,
@@ -1462,6 +1501,7 @@ class IndicatorCommand(scoping.Command):
         scope: scoping.scope_typing = None,
         selector: typings.Selector = 'baca.pheads()',
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
+        tweaks: abjad.LilyPondTweakManager = None,
         ) -> None:
         scoping.Command.__init__(
             self,
@@ -2608,12 +2648,12 @@ def bcps(
     if final_spanner is not None:
         final_spanner = bool(final_spanner)
     return BCPCommand(
-        *tweaks,
         bcps=bcps,
         final_spanner=final_spanner,
         helper=helper,
         selector=selector,
         tags=[tag],
+        tweaks=tweaks,
         )
 
 def color(
@@ -4147,10 +4187,10 @@ def markup(
         raise Exception(message)
     selector = selector or 'baca.phead(0)'
     return IndicatorCommand(
-        *tweaks,
         indicators=[markup],
         selector=selector,
         tags=[tag],
+        tweaks=tweaks,
         )
 
 def metronome_mark(

@@ -2359,10 +2359,10 @@ def rehearsal_mark(
         assert isinstance(argument, int)
         mark = abjad.RehearsalMark(number=argument)
     return commands.IndicatorCommand(
-        *tweaks,
         indicators=[mark],
         selector=selector,
         tags=[tag],
+        tweaks=tweaks,
         )
 
 def short_fermata(

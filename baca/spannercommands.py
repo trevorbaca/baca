@@ -203,7 +203,7 @@ class SpannerCommand(scoping.Command):
 
     def __init__(
         self,
-        *tweaks: abjad.LilyPondTweakManager,
+        *,
         deactivate: bool = None,
         detach_first: bool = None,
         left_broken: bool = None,
@@ -215,6 +215,7 @@ class SpannerCommand(scoping.Command):
         selector: typings.Selector = 'baca.leaves()',
         spanner: abjad.Spanner = None,
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
+        tweaks: abjad.LilyPondTweakManager = None,
         ) -> None:
         scoping.Command.__init__(
             self,
@@ -570,11 +571,11 @@ def beam(
 
     """
     return SpannerCommand(
-        *tweaks,
         detach_first=True,
         selector=selector,
         spanner=abjad.Beam(),
         tags=[tag],
+        tweaks=tweaks,
         )
 
 def finger_pressure_transition(
@@ -693,14 +694,16 @@ def finger_pressure_transition(
 
     """
     return SpannerCommand(
-        abjad.tweak(2).arrow_length,
-        abjad.tweak(0.5).arrow_width,
-        abjad.tweak(True).bound_details__right__arrow,
-        abjad.tweak(3).thickness,
         right_broken=right_broken,
         selector=selector,
         spanner=abjad.Glissando(allow_repeats=True),
         tags=[tag],
+        tweaks=(
+            abjad.tweak(2).arrow_length,
+            abjad.tweak(0.5).arrow_width,
+            abjad.tweak(True).bound_details__right__arrow,
+            abjad.tweak(3).thickness,
+            ),
         )
 
 def glissando(
@@ -1451,10 +1454,10 @@ def slur(
 
     """
     return SpannerCommand(
-        *tweaks,
         selector=selector,
         spanner=abjad.Slur(),
         tags=[tag],
+        tweaks=tweaks,
         )
 
 def sustain_pedal(

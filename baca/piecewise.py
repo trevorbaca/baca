@@ -1017,12 +1017,12 @@ def dynamic(
     prototype = (abjad.Dynamic, abjad.DynamicTrend)
     assert isinstance(indicator, prototype), repr(indicator)
     return commands.IndicatorCommand(
-        *tweaks,
         context='Voice',
         indicators=[indicator],
         redundant=redundant,
         selector=selector,
         tags=[tag],
+        tweaks=tweaks,
         )
 
 def hairpin(
