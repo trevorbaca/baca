@@ -2178,7 +2178,8 @@ class PartAssignmentCommand(scoping.Command):
     ### PRIVATE METHODS ###
 
     def _mutates_score(self):
-        return True
+        #return True
+        return False
 
     ### PUBLIC PROPERTIES ###
 
