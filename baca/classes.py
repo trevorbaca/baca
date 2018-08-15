@@ -3581,7 +3581,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         return self.logical_ties(grace_notes=None)
 
-    def lyparts(
+    def clparts(
         self,
         counts,
         ) -> typing.Union[abjad.Selection, abjad.Expression]:
@@ -3609,7 +3609,7 @@ class Selection(abjad.Selection):
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
-                >>> result = baca.select(staff).lyparts([2, 3, 4])
+                >>> result = baca.select(staff).clparts([2, 3, 4])
 
                 >>> for item in result:
                 ...     item
@@ -3623,7 +3623,7 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.lyparts([2, 3, 4])
+                >>> selector = baca.clparts([2, 3, 4])
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
