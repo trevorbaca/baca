@@ -1094,6 +1094,11 @@ class ContainerCommand(scoping.Command):
         components = classes.Selection(argument).leaves().top()
         abjad.mutate(components).wrap(container)
 
+    ### PRIVATE METHODS ###
+
+    def _mutates_score(self):
+        return True
+
     ### PUBLIC PROPERTIES ###
 
     @property
@@ -2170,6 +2175,11 @@ class PartAssignmentCommand(scoping.Command):
         components = classes.Selection(argument).leaves().top()
         abjad.mutate(components).wrap(container)
 
+    ### PRIVATE METHODS ###
+
+    def _mutates_score(self):
+        return True
+
     ### PUBLIC PROPERTIES ###
 
     @property
@@ -2209,6 +2219,11 @@ class VoltaCommand(scoping.Command):
         container = abjad.Container()
         abjad.mutate(leaves).wrap(container)
         abjad.attach(abjad.Repeat(), container)
+
+    ### PRIVATE METHODS ###
+
+    def _mutates_score(self):
+        return True
 
 ### FACTORY FUNCTIONS ###
 

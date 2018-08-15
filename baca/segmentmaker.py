@@ -2571,7 +2571,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 tag='_parallelize_multimeasure_rests(6)',
                 )
             container.append(note)
-            abjad.mutate([mmrest]).replace([container])
             tag = '_parallelize_multimeasure_rests(7)'
             for wrapper in abjad.inspect(mmrest).wrappers():
                 existing_tag = wrapper.tag
@@ -2584,6 +2583,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     note,
                     tag=existing_tag.append(tag),
                     )
+            abjad.mutate([mmrest]).replace([container])
 
     def _populate_offset_to_measure_number(self):
         measure_number = self._get_first_measure_number()
