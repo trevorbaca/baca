@@ -590,6 +590,7 @@ def breathe(
     """
     Attaches breathe command.
     """
+    # TODO: change to abjad.Articulation('breath', format_slot='after')?
     breathe = abjad.LilyPondLiteral(r'\breathe', format_slot='after')
     return commands.IndicatorCommand(
         indicators=[breathe],
@@ -3601,7 +3602,7 @@ def stop_on_string(
                         }
                         \times 4/5 {
                             a'16
-                            \baca-stop-on-string                                                     %! baca_stop_on_string:IndicatorCommand
+                            - \baca-stop-on-string                                                   %! baca_stop_on_string:IndicatorCommand
                             r4
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
@@ -3610,10 +3611,7 @@ def stop_on_string(
             >>
 
     """
-    literal = abjad.LilyPondLiteral(
-        r'\baca-stop-on-string',
-        format_slot='after',
-        )
+    literal = abjad.Articulation('baca-stop-on-string')
     return commands.IndicatorCommand(
         indicators=[literal],
         selector=selector,
