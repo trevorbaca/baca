@@ -686,7 +686,6 @@ class Suite(abjad.AbjadObject):
 
     __slots__ = (
         '_commands',
-        '_measures',
         '_offset_to_measure_number',
         '_previous_segment_voice_metadata',
         '_score_template',
@@ -712,8 +711,6 @@ class Suite(abjad.AbjadObject):
             message += f'\n  Not {type(command).__name__}: {command!r}.'
             raise Exception(message)
         self._commands = tuple(commands_)
-        # TODO: remove because unused?:
-        self._measures: typings.Slice = None
         self._runtime = abjad.OrderedDict()
 
     ### SPECIAL METHODS ###
@@ -754,43 +751,6 @@ class Suite(abjad.AbjadObject):
         Gets commands.
         """
         return self._commands
-
-    # TODO: remove
-    @property
-    def map(self) -> None:
-        """
-        Gets precondition map.
-        """
-        pass
-
-    # TODO: remove
-    @map.setter
-    def map(self, argument):
-        """
-        Gets precondition map.
-        """
-        assert isinstance(argument, (str, abjad.Expression)), repr(argument)
-        for command in self.commands:
-            command.map = argument
-
-    # TODO: remove
-    @property
-    def measures(self) -> typing.Optional[typings.Slice]:
-        """
-        Gets measures.
-        """
-        return self._measures
-
-    # TODO: remove
-    @measures.setter
-    def measures(self, argument):
-        """
-        Gets measures.
-        """
-        if argument is not None:
-            assert isinstance(argument, (int, tuple, list)), repr(argument)
-        for command in self.commands:
-            command.measures = argument
 
     @property
     def runtime(self) -> abjad.OrderedDict:

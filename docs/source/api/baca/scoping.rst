@@ -168,8 +168,6 @@ scoping
       __call__
       __iter__
       commands
-      map
-      measures
       runtime
 
    .. raw:: html
@@ -197,10 +195,6 @@ scoping
 
    .. rubric:: Read/write properties
       :class: class-header
-
-   .. autoattribute:: Suite.map
-
-   .. autoattribute:: Suite.measures
 
    .. autoattribute:: Suite.runtime
 
