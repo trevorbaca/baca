@@ -1180,6 +1180,109 @@ def only_parts(command: Command) -> _command_typing:
     """
     Tags ``command`` with ``+PARTS``.
 
+    ..  container:: example
+
+        REGRESSION. Dynamic status color tweaks copy dynamic edition tags:
+
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     spacing=baca.minimum_duration((1, 12)),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'MusicVoice',
+        ...     baca.make_notes(),
+        ...     baca.only_parts(
+        ...         baca.hairpin('p < f'),
+        ...         ),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
+            \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+            <<                                                                                       %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                <<                                                                                   %! _make_global_context
+            <BLANKLINE>
+                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    {                                                                                %! _make_global_context
+            <BLANKLINE>
+                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+                        \baca-bar-line-visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
+            <BLANKLINE>
+                    }                                                                                %! _make_global_context
+            <BLANKLINE>
+                >>                                                                                   %! _make_global_context
+            <BLANKLINE>
+                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                <<                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    {                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        {                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            \baca-unpitched-music-warning                                            %! _color_unpitched_notes
+                            c'2                                                                      %! baca_make_notes
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1):+PARTS
+                            \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:+PARTS:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1):+PARTS
+                            \<                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:+PARTS:PiecewiseCommand(1)
+            <BLANKLINE>
+                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            \baca-unpitched-music-warning                                            %! _color_unpitched_notes
+                            c'4.                                                                     %! baca_make_notes
+            <BLANKLINE>
+                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            \baca-unpitched-music-warning                                            %! _color_unpitched_notes
+                            c'2                                                                      %! baca_make_notes
+            <BLANKLINE>
+                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            \baca-unpitched-music-warning                                            %! _color_unpitched_notes
+                            c'4.                                                                     %! baca_make_notes
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1):+PARTS
+                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:+PARTS:PiecewiseCommand(2)
+            <BLANKLINE>
+                        }                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                    }                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                >>                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
+            >>                                                                                       %! SingleStaffScoreTemplate
+
     Returns ``command``.
     """
     return tag('+PARTS', command)

@@ -2963,6 +2963,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 f'{status.upper()}_DYNAMIC_COLOR',
                 '_treat_persistent_wrapper(1)',
                 ]
+            words.extend(existing_tag.editions())
             tag_ = abjad.Tag.from_words(words)
             string = f"#(x11-color '{color})"
             abjad.tweak(wrapper.indicator, tag=tag_).color = string

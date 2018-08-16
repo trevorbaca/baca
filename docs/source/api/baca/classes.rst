@@ -1097,6 +1097,10 @@ classes
 
    .. container:: inherited
 
+      .. automethod:: Sequence.replace
+
+   .. container:: inherited
+
       .. automethod:: Sequence.replace_at
 
    .. container:: inherited
