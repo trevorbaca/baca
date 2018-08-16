@@ -716,6 +716,7 @@ def glissando(
     stems: bool = None,
     style: str = None,
     tag: typing.Optional[str] = 'baca_glissando',
+    zero_padding: bool = None,
     ) -> SpannerCommand:
     r"""
     Attaches glissando.
@@ -1041,6 +1042,7 @@ def glissando(
         allow_ties=allow_ties,
         stems=stems,
         style=style,
+        zero_padding=zero_padding,
         )
     return SpannerCommand(
         right_broken=right_broken,
