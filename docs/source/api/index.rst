@@ -679,6 +679,7 @@ Override library.
    ~baca.overrides.note_head_style_cross
    ~baca.overrides.note_head_style_harmonic
    ~baca.overrides.note_head_transparent
+   ~baca.overrides.note_head_x_extent_false
    ~baca.overrides.ottava_bracket_staff_padding
    ~baca.overrides.rehearsal_mark_extra_offset
    ~baca.overrides.rehearsal_mark_y_offset

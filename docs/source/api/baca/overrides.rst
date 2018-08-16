@@ -199,6 +199,7 @@ overrides
    ~note_head_style_cross
    ~note_head_style_harmonic
    ~note_head_transparent
+   ~note_head_x_extent_false
    ~ottava_bracket_staff_padding
    ~rehearsal_mark_extra_offset
    ~rehearsal_mark_y_offset
@@ -354,6 +355,8 @@ overrides
 .. autofunction:: note_head_style_harmonic
 
 .. autofunction:: note_head_transparent
+
+.. autofunction:: note_head_x_extent_false
 
 .. autofunction:: ottava_bracket_staff_padding
 

@@ -2971,6 +2971,22 @@ def note_head_transparent(
         tags=[tag],
         )
 
+def note_head_x_extent_false(
+    *,
+    selector: typings.Selector = 'baca.leaf(0)',
+    tag: typing.Optional[str] = 'baca_note_head_x_extent_false',
+    ) -> OverrideCommand:
+    """
+    Overrides note-head x-extent.
+    """
+    return OverrideCommand(
+        attribute='X_extent',
+        grob='note_head',
+        selector=selector,
+        tags=[tag],
+        value=False,
+        )
+
 def ottava_bracket_staff_padding(
     n: typings.Number,
     *,
