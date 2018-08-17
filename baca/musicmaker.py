@@ -9562,7 +9562,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         talea = self._get_talea()
         leaves = []
         specifier = self._get_duration_specifier()
-        decrease_durations = specifier.decrease_monotonic
+        decrease_durations = not(specifier.increase_monotonic)
         current_selection = self._next_segment - 1
         time_treatment = self._get_time_treatments()[current_selection]
         if time_treatment is None:
@@ -10507,7 +10507,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     duration_specifier=rmakers.DurationSpecifier(
-            ...         decrease_monotonic=False,
+            ...         increase_monotonic=True,
             ...         ),
             ...     talea=rmakers.Talea(
             ...         counts=[4, 4, 5],
