@@ -9285,12 +9285,12 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         rest_prefix,
         rest_suffix,
         affix_skips_instead_of_rests,
-        decrease_durations,
+        increase_durations,
         ):
         if rest_prefix:
             durations = [(_, talea.denominator) for _ in rest_prefix]
             maker = abjad.LeafMaker(
-                increase_monotonic=not(decrease_durations),
+                increase_monotonic=increase_durations,
                 skips_instead_of_rests=affix_skips_instead_of_rests,
                 )
             leaves_ = maker([None], durations)
@@ -9298,7 +9298,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         if rest_suffix:
             durations = [(_, talea.denominator) for _ in rest_suffix]
             maker = abjad.LeafMaker(
-                increase_monotonic=not(decrease_durations),
+                increase_monotonic=increase_durations,
                 skips_instead_of_rests=affix_skips_instead_of_rests,
                 )
             leaves_ = maker([None], durations)
@@ -9562,7 +9562,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         talea = self._get_talea()
         leaves = []
         specifier = self._get_duration_specifier()
-        decrease_durations = not(specifier.increase_monotonic)
+        increase_durations = specifier.increase_monotonic
         current_selection = self._next_segment - 1
         time_treatment = self._get_time_treatments()[current_selection]
         if time_treatment is None:
@@ -9580,7 +9580,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                 self._next_attack += 1
                 duration = -talea[count]
                 maker = abjad.LeafMaker(
-                    increase_monotonic=not(decrease_durations),
+                    increase_monotonic=increase_durations,
                     )
                 leaves_ = maker([None], [duration])
                 leaves.extend(leaves_)
@@ -9599,7 +9599,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                     skips_instead_of_rests = True
                 pitch_expression = None
             maker = abjad.LeafMaker(
-                increase_monotonic=not(decrease_durations),
+                increase_monotonic=increase_durations,
                 skips_instead_of_rests=skips_instead_of_rests,
                 )
             leaves_ = maker([pitch_expression], [duration])
@@ -9609,7 +9609,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                 self._next_attack += 1
                 duration = -talea[count]
                 maker = abjad.LeafMaker(
-                    increase_monotonic=not(decrease_durations),
+                    increase_monotonic=increase_durations,
                     )
                 leaves_ = maker([None], [duration])
                 leaves.extend(leaves_)
@@ -9620,7 +9620,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             rest_prefix,
             rest_suffix,
             affix_skips_instead_of_rests,
-            decrease_durations,
+            increase_durations,
             )
         leaf_selection = abjad.select(leaves)
         if isinstance(time_treatment, int):
