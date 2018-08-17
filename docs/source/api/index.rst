@@ -640,6 +640,7 @@ Override library.
    ~baca.overrides.bar_line_color
    ~baca.overrides.bar_line_extra_offset
    ~baca.overrides.bar_line_transparent
+   ~baca.overrides.bar_line_x_extent
    ~baca.overrides.beam_positions
    ~baca.overrides.beam_stencil_false
    ~baca.overrides.beam_transparent

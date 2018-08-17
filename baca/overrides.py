@@ -924,6 +924,27 @@ def bar_line_transparent(
         tags=[tag],
         )
 
+def bar_line_x_extent(
+    pair: typings.NumberPair,
+    *,
+    after: bool = None,
+    context: str = 'Score',
+    selector: typings.Selector = 'baca.leaf(0)',
+    tag: typing.Optional[str] = 'baca_bar_line_x_extent',
+    ) -> OverrideCommand:
+    """
+    Overrides bar line X extent.
+    """
+    return OverrideCommand(
+        after=after,
+        attribute='X_extent',
+        value=pair,
+        context=context,
+        grob='bar_line',
+        selector=selector,
+        tags=[tag],
+        )
+
 def beam_positions(
     n: typings.Number,
     *,

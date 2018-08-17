@@ -160,6 +160,7 @@ overrides
    ~bar_line_color
    ~bar_line_extra_offset
    ~bar_line_transparent
+   ~bar_line_x_extent
    ~beam_positions
    ~beam_stencil_false
    ~beam_transparent
@@ -279,6 +280,8 @@ overrides
 .. autofunction:: bar_line_extra_offset
 
 .. autofunction:: bar_line_transparent
+
+.. autofunction:: bar_line_x_extent
 
 .. autofunction:: beam_positions
 
