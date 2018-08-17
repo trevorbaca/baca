@@ -616,6 +616,48 @@ def bar_extent_zero(
             ),
         )
 
+def bar_line_color(
+    color: str,
+    *,
+    after: bool = None,
+    context: str = 'Score',
+    selector: typings.Selector = 'baca.leaf(0)',
+    tag: typing.Optional[str] = 'baca_bar_line_color',
+    ) -> OverrideCommand:
+    """
+    Overrides bar line color.
+    """
+    return OverrideCommand(
+        after=after,
+        attribute='color',
+        value=color,
+        context=context,
+        grob='bar_line',
+        selector=selector,
+        tags=[tag],
+        )
+
+def bar_line_extra_offset(
+    pair: typings.NumberPair,
+    *,
+    after: bool = None,
+    context: str = 'Score',
+    selector: typings.Selector = 'baca.leaf(0)',
+    tag: typing.Optional[str] = 'baca_bar_line_extra_offset',
+    ) -> OverrideCommand:
+    """
+    Overrides bar line extra offset.
+    """
+    return OverrideCommand(
+        after=after,
+        attribute='extra_offset',
+        value=pair,
+        context=context,
+        grob='bar_line',
+        selector=selector,
+        tags=[tag],
+        )
+
 def bar_line_transparent(
     *,
     selector: typings.Selector = 'baca.leaves()',

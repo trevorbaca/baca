@@ -157,6 +157,8 @@ overrides
    ~accidental_x_extent_false
    ~bar_extent
    ~bar_extent_zero
+   ~bar_line_color
+   ~bar_line_extra_offset
    ~bar_line_transparent
    ~beam_positions
    ~beam_stencil_false
@@ -271,6 +273,10 @@ overrides
 .. autofunction:: bar_extent
 
 .. autofunction:: bar_extent_zero
+
+.. autofunction:: bar_line_color
+
+.. autofunction:: bar_line_extra_offset
 
 .. autofunction:: bar_line_transparent
 

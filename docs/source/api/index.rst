@@ -637,6 +637,8 @@ Override library.
    ~baca.overrides.accidental_x_extent_false
    ~baca.overrides.bar_extent
    ~baca.overrides.bar_extent_zero
+   ~baca.overrides.bar_line_color
+   ~baca.overrides.bar_line_extra_offset
    ~baca.overrides.bar_line_transparent
    ~baca.overrides.beam_positions
    ~baca.overrides.beam_stencil_false
