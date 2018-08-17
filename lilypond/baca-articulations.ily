@@ -75,21 +75,14 @@ baca-stop-on-string-full-upbow = #(
            (stencil . ,ly:text-interface::print)
            (text . ,baca-stop-on-string-markup)
            (avoid-slur . around)
-           (direction . ,UP)
            (padding . 0.20)
            (script-priority . 150)
+           (side-relative-direction . ,DOWN)
            (skyline-horizontal-padding . 0.20)
            (toward-stem-shift . 0.4)
            ))))
 
 baca-stop-on-string = #(make-articulation "bacastoponstring")
-
-\layout {
-    \context {
-        \Score
-        scriptDefinitions = #default-script-alist
-    }
-}
 
 %%% CIRCLE BOWING ARTICULATIONS %%%
 
@@ -118,9 +111,9 @@ baca-circle-bowing = #(make-articulation "bacacirclebowing")
            (stencil . ,ly:text-interface::print)
            (text . ,baca-damp-markup)
            (avoid-slur . around)
-           (direction . ,UP)
            (padding . 0.20)
            (script-priority . 125)
+           (side-relative-direction . ,DOWN)
            (skyline-horizontal-padding . 0.20)
            ;;(toward-stem-shift . 0.5)
            ))))
@@ -144,3 +137,12 @@ baca-staccati =
                             (ly:stencil-aligned-to new-stil X CENTER)))))
                   (ly:music-property script 'tweaks)))
      script))
+
+%%% LEAVE FILE-FINAL: %%%
+
+\layout {
+    \context {
+        \Score
+        scriptDefinitions = #default-script-alist
+    }
+}
