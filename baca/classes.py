@@ -1826,39 +1826,37 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            c'16
-                            <d' e'>4
-                            ~
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            d'16
-                            <e' fs'>4
-                            ~
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            e'16
-                            \abjad-color-music #'green
-                            <fs' gs'>4
-                            ~
-                            <fs' gs'>16
-                        }
-                    }   % measure
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        c'16
+                        <d' e'>4
+                        ~
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        d'16
+                        <e' fs'>4
+                        ~
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        e'16
+                        \abjad-color-music #'green
+                        <fs' gs'>4
+                        ~
+                        <fs' gs'>16
+                    }
                 }
 
         """
@@ -1930,44 +1928,42 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            bf'16
-                            \abjad-color-music #'red
-                            <a'' b''>16
-                            c'16
-                            \abjad-color-music #'blue
-                            <d' e'>4
-                            ~
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            r16
-                            bf'16
-                            \abjad-color-music #'red
-                            <a'' b''>16
-                            d'16
-                            \abjad-color-music #'blue
-                            <e' fs'>4
-                            ~
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            bf'16
-                            \abjad-color-music #'red
-                            <a'' b''>16
-                            e'16
-                            \abjad-color-music #'blue
-                            <fs' gs'>4
-                            ~
-                            <fs' gs'>16
-                        }
-                    }   % measure
+                        r16
+                        bf'16
+                        \abjad-color-music #'red
+                        <a'' b''>16
+                        c'16
+                        \abjad-color-music #'blue
+                        <d' e'>4
+                        ~
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        r16
+                        bf'16
+                        \abjad-color-music #'red
+                        <a'' b''>16
+                        d'16
+                        \abjad-color-music #'blue
+                        <e' fs'>4
+                        ~
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        r16
+                        bf'16
+                        \abjad-color-music #'red
+                        <a'' b''>16
+                        e'16
+                        \abjad-color-music #'blue
+                        <fs' gs'>4
+                        ~
+                        <fs' gs'>16
+                    }
                 }
 
         """
@@ -2135,170 +2131,168 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            ^ \markup {
-                                \bold
-                                    \with-color
-                                        #red
-                                        *
-                                }
-                            bf'16
-                            ^ \markup {
-                                \bold
-                                    \with-color
-                                        #red
-                                        *
-                                }
-                            <a'' b''>16
-                            ^ \markup {
-                                \bold
-                                    \with-color
-                                        #red
-                                        *
-                                }
-                            c'16
-                            ^ \markup {
-                                \bold
-                                    \with-color
-                                        #red
-                                        *
-                                }
-                            <d' e'>4
-                            ^ \markup {
-                                \bold
-                                    \with-color
-                                        #red
-                                        *
-                                }
-                            _ \markup {
-                                \bold
-                                    \with-color
-                                        #blue
-                                        *
-                                }
-                            ~
-                            <d' e'>16
-                            _ \markup {
-                                \bold
-                                    \with-color
-                                        #blue
-                                        *
-                                }
-                        }
-                        \times 8/9 {
-                            r16
-                            _ \markup {
-                                \bold
-                                    \with-color
-                                        #blue
-                                        *
-                                }
-                            bf'16
-                            _ \markup {
-                                \bold
-                                    \with-color
-                                        #blue
-                                        *
-                                }
-                            <a'' b''>16
-                            ^ \markup {
-                                \bold
-                                    \with-color
-                                        #red
-                                        *
-                                }
-                            _ \markup {
-                                \bold
-                                    \with-color
-                                        #blue
-                                        *
-                                }
-                            d'16
-                            ^ \markup {
-                                \bold
-                                    \with-color
-                                        #red
-                                        *
-                                }
-                            <e' fs'>4
-                            ^ \markup {
-                                \bold
-                                    \with-color
-                                        #red
-                                        *
-                                }
-                            ~
-                            <e' fs'>16
-                            ^ \markup {
-                                \bold
-                                    \with-color
-                                        #red
-                                        *
-                                }
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            ^ \markup {
-                                \bold
-                                    \with-color
-                                        #red
-                                        *
-                                }
-                            _ \markup {
-                                \bold
-                                    \with-color
-                                        #blue
-                                        *
-                                }
-                            bf'16
-                            _ \markup {
-                                \bold
-                                    \with-color
-                                        #blue
-                                        *
-                                }
-                            <a'' b''>16
-                            _ \markup {
-                                \bold
-                                    \with-color
-                                        #blue
-                                        *
-                                }
-                            e'16
-                            _ \markup {
-                                \bold
-                                    \with-color
-                                        #blue
-                                        *
-                                }
-                            <fs' gs'>4
-                            ^ \markup {
-                                \bold
-                                    \with-color
-                                        #red
-                                        *
-                                }
-                            _ \markup {
-                                \bold
-                                    \with-color
-                                        #blue
-                                        *
-                                }
-                            ~
-                            <fs' gs'>16
-                            ^ \markup {
-                                \bold
-                                    \with-color
-                                        #red
-                                        *
-                                }
-                        }
-                    }   % measure
+                        r16
+                        ^ \markup {
+                            \bold
+                                \with-color
+                                    #red
+                                    *
+                            }
+                        bf'16
+                        ^ \markup {
+                            \bold
+                                \with-color
+                                    #red
+                                    *
+                            }
+                        <a'' b''>16
+                        ^ \markup {
+                            \bold
+                                \with-color
+                                    #red
+                                    *
+                            }
+                        c'16
+                        ^ \markup {
+                            \bold
+                                \with-color
+                                    #red
+                                    *
+                            }
+                        <d' e'>4
+                        ^ \markup {
+                            \bold
+                                \with-color
+                                    #red
+                                    *
+                            }
+                        _ \markup {
+                            \bold
+                                \with-color
+                                    #blue
+                                    *
+                            }
+                        ~
+                        <d' e'>16
+                        _ \markup {
+                            \bold
+                                \with-color
+                                    #blue
+                                    *
+                            }
+                    }
+                    \times 8/9 {
+                        r16
+                        _ \markup {
+                            \bold
+                                \with-color
+                                    #blue
+                                    *
+                            }
+                        bf'16
+                        _ \markup {
+                            \bold
+                                \with-color
+                                    #blue
+                                    *
+                            }
+                        <a'' b''>16
+                        ^ \markup {
+                            \bold
+                                \with-color
+                                    #red
+                                    *
+                            }
+                        _ \markup {
+                            \bold
+                                \with-color
+                                    #blue
+                                    *
+                            }
+                        d'16
+                        ^ \markup {
+                            \bold
+                                \with-color
+                                    #red
+                                    *
+                            }
+                        <e' fs'>4
+                        ^ \markup {
+                            \bold
+                                \with-color
+                                    #red
+                                    *
+                            }
+                        ~
+                        <e' fs'>16
+                        ^ \markup {
+                            \bold
+                                \with-color
+                                    #red
+                                    *
+                            }
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        r16
+                        ^ \markup {
+                            \bold
+                                \with-color
+                                    #red
+                                    *
+                            }
+                        _ \markup {
+                            \bold
+                                \with-color
+                                    #blue
+                                    *
+                            }
+                        bf'16
+                        _ \markup {
+                            \bold
+                                \with-color
+                                    #blue
+                                    *
+                            }
+                        <a'' b''>16
+                        _ \markup {
+                            \bold
+                                \with-color
+                                    #blue
+                                    *
+                            }
+                        e'16
+                        _ \markup {
+                            \bold
+                                \with-color
+                                    #blue
+                                    *
+                            }
+                        <fs' gs'>4
+                        ^ \markup {
+                            \bold
+                                \with-color
+                                    #red
+                                    *
+                            }
+                        _ \markup {
+                            \bold
+                                \with-color
+                                    #blue
+                                    *
+                            }
+                        ~
+                        <fs' gs'>16
+                        ^ \markup {
+                            \bold
+                                \with-color
+                                    #red
+                                    *
+                            }
+                    }
                 }
 
         Returns new selection (or expression).
@@ -2362,39 +2356,37 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            c'16
-                            <d' e'>4
-                            ~
-                            \abjad-color-music #'green
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            d'16
-                            <e' fs'>4
-                            ~
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            e'16
-                            <fs' gs'>4
-                            ~
-                            <fs' gs'>16
-                        }
-                    }   % measure
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        c'16
+                        <d' e'>4
+                        ~
+                        \abjad-color-music #'green
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        d'16
+                        <e' fs'>4
+                        ~
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        e'16
+                        <fs' gs'>4
+                        ~
+                        <fs' gs'>16
+                    }
                 }
 
         """
@@ -2537,45 +2529,43 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            c'16
-                            <d' e'>4
-                            ~
-                            \abjad-color-music #'red
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            \abjad-color-music #'blue
-                            r16
-                            \abjad-color-music #'red
-                            bf'16
-                            \abjad-color-music #'blue
-                            <a'' b''>16
-                            \abjad-color-music #'red
-                            d'16
-                            \abjad-color-music #'blue
-                            <e' fs'>4
-                            ~
-                            \abjad-color-music #'red
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            e'16
-                            <fs' gs'>4
-                            ~
-                            <fs' gs'>16
-                        }
-                    }   % measure
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        c'16
+                        <d' e'>4
+                        ~
+                        \abjad-color-music #'red
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        \abjad-color-music #'blue
+                        r16
+                        \abjad-color-music #'red
+                        bf'16
+                        \abjad-color-music #'blue
+                        <a'' b''>16
+                        \abjad-color-music #'red
+                        d'16
+                        \abjad-color-music #'blue
+                        <e' fs'>4
+                        ~
+                        \abjad-color-music #'red
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        e'16
+                        <fs' gs'>4
+                        ~
+                        <fs' gs'>16
+                    }
                 }
 
         """
@@ -2644,47 +2634,45 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            \abjad-color-music #'red
-                            r16
-                            \abjad-color-music #'red
-                            bf'16
-                            \abjad-color-music #'blue
-                            <a'' b''>16
-                            \abjad-color-music #'blue
-                            c'16
-                            \abjad-color-music #'blue
-                            <d' e'>4
-                            ~
-                            \abjad-color-music #'red
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            \abjad-color-music #'red
-                            r16
-                            \abjad-color-music #'red
-                            bf'16
-                            \abjad-color-music #'red
-                            <a'' b''>16
-                            d'16
-                            <e' fs'>4
-                            ~
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            e'16
-                            <fs' gs'>4
-                            ~
-                            <fs' gs'>16
-                        }
-                    }   % measure
+                        \abjad-color-music #'red
+                        r16
+                        \abjad-color-music #'red
+                        bf'16
+                        \abjad-color-music #'blue
+                        <a'' b''>16
+                        \abjad-color-music #'blue
+                        c'16
+                        \abjad-color-music #'blue
+                        <d' e'>4
+                        ~
+                        \abjad-color-music #'red
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        \abjad-color-music #'red
+                        r16
+                        \abjad-color-music #'red
+                        bf'16
+                        \abjad-color-music #'red
+                        <a'' b''>16
+                        d'16
+                        <e' fs'>4
+                        ~
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        e'16
+                        <fs' gs'>4
+                        ~
+                        <fs' gs'>16
+                    }
                 }
 
         """
@@ -2744,40 +2732,38 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            c'16
-                            <d' e'>4
-                            ~
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            d'16
-                            <e' fs'>4
-                            ~
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            e'16
-                            \abjad-color-music #'green
-                            <fs' gs'>4
-                            ~
-                            \abjad-color-music #'green
-                            <fs' gs'>16
-                        }
-                    }   % measure
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        c'16
+                        <d' e'>4
+                        ~
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        d'16
+                        <e' fs'>4
+                        ~
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        e'16
+                        \abjad-color-music #'green
+                        <fs' gs'>4
+                        ~
+                        \abjad-color-music #'green
+                        <fs' gs'>16
+                    }
                 }
 
         """
@@ -2837,38 +2823,36 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            \abjad-color-music #'green
-                            bf'16
-                            <a'' b''>16
-                            c'16
-                            <d' e'>4
-                            ~
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            d'16
-                            <e' fs'>4
-                            ~
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            e'16
-                            r4
-                            r16
-                        }
-                    }   % measure
+                        r16
+                        \abjad-color-music #'green
+                        bf'16
+                        <a'' b''>16
+                        c'16
+                        <d' e'>4
+                        ~
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        d'16
+                        <e' fs'>4
+                        ~
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        e'16
+                        r4
+                        r16
+                    }
                 }
 
         """
@@ -2962,54 +2946,52 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            \abjad-color-music #'red
-                            bf'16
-                            \abjad-color-music #'blue
-                            <a'' b''>16
-                            \abjad-color-music #'red
-                            c'16
-                            \abjad-color-music #'blue
-                            <d' e'>4
-                            ~
-                            \abjad-color-music #'red
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            \abjad-color-music #'blue
-                            r16
-                            \abjad-color-music #'red
-                            bf'16
-                            \abjad-color-music #'blue
-                            <a'' b''>16
-                            \abjad-color-music #'red
-                            d'16
-                            \abjad-color-music #'blue
-                            <e' fs'>4
-                            ~
-                            \abjad-color-music #'red
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            \abjad-color-music #'blue
-                            r16
-                            \abjad-color-music #'red
-                            bf'16
-                            \abjad-color-music #'blue
-                            <a'' b''>16
-                            \abjad-color-music #'red
-                            e'16
-                            \abjad-color-music #'blue
-                            r4
-                            \abjad-color-music #'red
-                            r16
-                        }
-                    }   % measure
+                        r16
+                        \abjad-color-music #'red
+                        bf'16
+                        \abjad-color-music #'blue
+                        <a'' b''>16
+                        \abjad-color-music #'red
+                        c'16
+                        \abjad-color-music #'blue
+                        <d' e'>4
+                        ~
+                        \abjad-color-music #'red
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        \abjad-color-music #'blue
+                        r16
+                        \abjad-color-music #'red
+                        bf'16
+                        \abjad-color-music #'blue
+                        <a'' b''>16
+                        \abjad-color-music #'red
+                        d'16
+                        \abjad-color-music #'blue
+                        <e' fs'>4
+                        ~
+                        \abjad-color-music #'red
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        \abjad-color-music #'blue
+                        r16
+                        \abjad-color-music #'red
+                        bf'16
+                        \abjad-color-music #'blue
+                        <a'' b''>16
+                        \abjad-color-music #'red
+                        e'16
+                        \abjad-color-music #'blue
+                        r4
+                        \abjad-color-music #'red
+                        r16
+                    }
                 }
 
         """
@@ -3069,40 +3051,38 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            c'16
-                            c'16
-                            c'16
-                            <d' e'>4
-                            ~
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            r16
-                            d'16
-                            d'16
-                            d'16
-                            <e' fs'>4
-                            ~
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            e'16
-                            e'16
-                            e'16
-                            \abjad-color-music #'green
-                            <fs' gs'>4
-                            ~
-                            \abjad-color-music #'green
-                            <fs' gs'>16
-                        }
-                    }   % measure
+                        r16
+                        c'16
+                        c'16
+                        c'16
+                        <d' e'>4
+                        ~
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        r16
+                        d'16
+                        d'16
+                        d'16
+                        <e' fs'>4
+                        ~
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        r16
+                        e'16
+                        e'16
+                        e'16
+                        \abjad-color-music #'green
+                        <fs' gs'>4
+                        ~
+                        \abjad-color-music #'green
+                        <fs' gs'>16
+                    }
                 }
 
         """
@@ -3174,53 +3154,51 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            \abjad-color-music #'red
-                            c'16
-                            \abjad-color-music #'red
-                            c'16
-                            \abjad-color-music #'red
-                            c'16
-                            \abjad-color-music #'blue
-                            <d' e'>4
-                            ~
-                            \abjad-color-music #'blue
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            r16
-                            \abjad-color-music #'red
-                            d'16
-                            \abjad-color-music #'red
-                            d'16
-                            \abjad-color-music #'red
-                            d'16
-                            \abjad-color-music #'blue
-                            <e' fs'>4
-                            ~
-                            \abjad-color-music #'blue
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            \abjad-color-music #'red
-                            e'16
-                            \abjad-color-music #'red
-                            e'16
-                            \abjad-color-music #'red
-                            e'16
-                            \abjad-color-music #'blue
-                            <fs' gs'>4
-                            ~
-                            \abjad-color-music #'blue
-                            <fs' gs'>16
-                        }
-                    }   % measure
+                        r16
+                        \abjad-color-music #'red
+                        c'16
+                        \abjad-color-music #'red
+                        c'16
+                        \abjad-color-music #'red
+                        c'16
+                        \abjad-color-music #'blue
+                        <d' e'>4
+                        ~
+                        \abjad-color-music #'blue
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        r16
+                        \abjad-color-music #'red
+                        d'16
+                        \abjad-color-music #'red
+                        d'16
+                        \abjad-color-music #'red
+                        d'16
+                        \abjad-color-music #'blue
+                        <e' fs'>4
+                        ~
+                        \abjad-color-music #'blue
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        r16
+                        \abjad-color-music #'red
+                        e'16
+                        \abjad-color-music #'red
+                        e'16
+                        \abjad-color-music #'red
+                        e'16
+                        \abjad-color-music #'blue
+                        <fs' gs'>4
+                        ~
+                        \abjad-color-music #'blue
+                        <fs' gs'>16
+                    }
                 }
 
         """
@@ -3285,43 +3263,41 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            c'16
-                            c'16
-                            c'16
-                            <d' e'>4
-                            ~
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            r16
-                            d'16
-                            d'16
-                            d'16
-                            <e' fs'>4
-                            ~
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            \abjad-color-music #'green
-                            e'16
-                            \abjad-color-music #'green
-                            e'16
-                            \abjad-color-music #'green
-                            e'16
-                            \abjad-color-music #'green
-                            <fs' gs'>4
-                            ~
-                            \abjad-color-music #'green
-                            <fs' gs'>16
-                        }
-                    }   % measure
+                        r16
+                        c'16
+                        c'16
+                        c'16
+                        <d' e'>4
+                        ~
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        r16
+                        d'16
+                        d'16
+                        d'16
+                        <e' fs'>4
+                        ~
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        r16
+                        \abjad-color-music #'green
+                        e'16
+                        \abjad-color-music #'green
+                        e'16
+                        \abjad-color-music #'green
+                        e'16
+                        \abjad-color-music #'green
+                        <fs' gs'>4
+                        ~
+                        \abjad-color-music #'green
+                        <fs' gs'>16
+                    }
                 }
 
         """
@@ -3387,53 +3363,51 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            \abjad-color-music #'red
-                            c'16
-                            \abjad-color-music #'red
-                            c'16
-                            \abjad-color-music #'red
-                            c'16
-                            \abjad-color-music #'red
-                            <d' e'>4
-                            ~
-                            \abjad-color-music #'red
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            r16
-                            \abjad-color-music #'blue
-                            d'16
-                            \abjad-color-music #'blue
-                            d'16
-                            \abjad-color-music #'blue
-                            d'16
-                            \abjad-color-music #'blue
-                            <e' fs'>4
-                            ~
-                            \abjad-color-music #'blue
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            \abjad-color-music #'red
-                            e'16
-                            \abjad-color-music #'red
-                            e'16
-                            \abjad-color-music #'red
-                            e'16
-                            \abjad-color-music #'red
-                            <fs' gs'>4
-                            ~
-                            \abjad-color-music #'red
-                            <fs' gs'>16
-                        }
-                    }   % measure
+                        r16
+                        \abjad-color-music #'red
+                        c'16
+                        \abjad-color-music #'red
+                        c'16
+                        \abjad-color-music #'red
+                        c'16
+                        \abjad-color-music #'red
+                        <d' e'>4
+                        ~
+                        \abjad-color-music #'red
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        r16
+                        \abjad-color-music #'blue
+                        d'16
+                        \abjad-color-music #'blue
+                        d'16
+                        \abjad-color-music #'blue
+                        d'16
+                        \abjad-color-music #'blue
+                        <e' fs'>4
+                        ~
+                        \abjad-color-music #'blue
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        r16
+                        \abjad-color-music #'red
+                        e'16
+                        \abjad-color-music #'red
+                        e'16
+                        \abjad-color-music #'red
+                        e'16
+                        \abjad-color-music #'red
+                        <fs' gs'>4
+                        ~
+                        \abjad-color-music #'red
+                        <fs' gs'>16
+                    }
                 }
 
         """
@@ -3524,56 +3498,54 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            \abjad-color-music #'red
-                            r16
-                            \abjad-color-music #'blue
-                            bf'16
-                            \abjad-color-music #'red
-                            <a'' b''>16
-                            \abjad-color-music #'blue
-                            c'16
-                            \abjad-color-music #'red
-                            <d' e'>4
-                            ~
-                            \abjad-color-music #'red
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            \abjad-color-music #'blue
-                            r16
-                            \abjad-color-music #'red
-                            bf'16
-                            \abjad-color-music #'blue
-                            <a'' b''>16
-                            \abjad-color-music #'red
-                            d'16
-                            \abjad-color-music #'blue
-                            <e' fs'>4
-                            ~
-                            \abjad-color-music #'blue
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            \abjad-color-music #'red
-                            r16
-                            \abjad-color-music #'blue
-                            bf'16
-                            \abjad-color-music #'red
-                            <a'' b''>16
-                            \abjad-color-music #'blue
-                            e'16
-                            \abjad-color-music #'red
-                            <fs' gs'>4
-                            ~
-                            \abjad-color-music #'red
-                            <fs' gs'>16
-                        }
-                    }   % measure
+                        \abjad-color-music #'red
+                        r16
+                        \abjad-color-music #'blue
+                        bf'16
+                        \abjad-color-music #'red
+                        <a'' b''>16
+                        \abjad-color-music #'blue
+                        c'16
+                        \abjad-color-music #'red
+                        <d' e'>4
+                        ~
+                        \abjad-color-music #'red
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        \abjad-color-music #'blue
+                        r16
+                        \abjad-color-music #'red
+                        bf'16
+                        \abjad-color-music #'blue
+                        <a'' b''>16
+                        \abjad-color-music #'red
+                        d'16
+                        \abjad-color-music #'blue
+                        <e' fs'>4
+                        ~
+                        \abjad-color-music #'blue
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        \abjad-color-music #'red
+                        r16
+                        \abjad-color-music #'blue
+                        bf'16
+                        \abjad-color-music #'red
+                        <a'' b''>16
+                        \abjad-color-music #'blue
+                        e'16
+                        \abjad-color-music #'red
+                        <fs' gs'>4
+                        ~
+                        \abjad-color-music #'red
+                        <fs' gs'>16
+                    }
                 }
 
         """
@@ -3648,56 +3620,54 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            \abjad-color-music #'red
-                            r16
-                            \abjad-color-music #'red
-                            bf'16
-                            \abjad-color-music #'blue
-                            <a'' b''>16
-                            \abjad-color-music #'blue
-                            c'16
-                            \abjad-color-music #'blue
-                            <d' e'>4
-                            ~
-                            \abjad-color-music #'red
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            \abjad-color-music #'red
-                            r16
-                            \abjad-color-music #'red
-                            bf'16
-                            \abjad-color-music #'red
-                            <a'' b''>16
-                            \abjad-color-music #'blue
-                            d'16
-                            \abjad-color-music #'blue
-                            <e' fs'>4
-                            ~
-                            \abjad-color-music #'red
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            \abjad-color-music #'red
-                            r16
-                            \abjad-color-music #'red
-                            bf'16
-                            \abjad-color-music #'blue
-                            <a'' b''>16
-                            \abjad-color-music #'blue
-                            e'16
-                            \abjad-color-music #'blue
-                            <fs' gs'>4
-                            ~
-                            \abjad-color-music #'blue
-                            <fs' gs'>16
-                        }
-                    }   % measure
+                        \abjad-color-music #'red
+                        r16
+                        \abjad-color-music #'red
+                        bf'16
+                        \abjad-color-music #'blue
+                        <a'' b''>16
+                        \abjad-color-music #'blue
+                        c'16
+                        \abjad-color-music #'blue
+                        <d' e'>4
+                        ~
+                        \abjad-color-music #'red
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        \abjad-color-music #'red
+                        r16
+                        \abjad-color-music #'red
+                        bf'16
+                        \abjad-color-music #'red
+                        <a'' b''>16
+                        \abjad-color-music #'blue
+                        d'16
+                        \abjad-color-music #'blue
+                        <e' fs'>4
+                        ~
+                        \abjad-color-music #'red
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        \abjad-color-music #'red
+                        r16
+                        \abjad-color-music #'red
+                        bf'16
+                        \abjad-color-music #'blue
+                        <a'' b''>16
+                        \abjad-color-music #'blue
+                        e'16
+                        \abjad-color-music #'blue
+                        <fs' gs'>4
+                        ~
+                        \abjad-color-music #'blue
+                        <fs' gs'>16
+                    }
                 }
 
         """
@@ -3997,43 +3967,41 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            c'16
-                            c'16
-                            c'16
-                            <d' e'>4
-                            ~
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            r16
-                            d'16
-                            d'16
-                            d'16
-                            <e' fs'>4
-                            ~
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            \abjad-color-music #'green
-                            e'16
-                            \abjad-color-music #'green
-                            e'16
-                            \abjad-color-music #'green
-                            e'16
-                            \abjad-color-music #'green
-                            <fs' gs'>4
-                            ~
-                            \abjad-color-music #'green
-                            <fs' gs'>16
-                        }
-                    }   % measure
+                        r16
+                        c'16
+                        c'16
+                        c'16
+                        <d' e'>4
+                        ~
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        r16
+                        d'16
+                        d'16
+                        d'16
+                        <e' fs'>4
+                        ~
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        r16
+                        \abjad-color-music #'green
+                        e'16
+                        \abjad-color-music #'green
+                        e'16
+                        \abjad-color-music #'green
+                        e'16
+                        \abjad-color-music #'green
+                        <fs' gs'>4
+                        ~
+                        \abjad-color-music #'green
+                        <fs' gs'>16
+                    }
                 }
 
         """
@@ -4099,53 +4067,51 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            \abjad-color-music #'red
-                            c'16
-                            \abjad-color-music #'red
-                            c'16
-                            \abjad-color-music #'red
-                            c'16
-                            \abjad-color-music #'red
-                            <d' e'>4
-                            ~
-                            \abjad-color-music #'red
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            r16
-                            \abjad-color-music #'blue
-                            d'16
-                            \abjad-color-music #'blue
-                            d'16
-                            \abjad-color-music #'blue
-                            d'16
-                            \abjad-color-music #'blue
-                            <e' fs'>4
-                            ~
-                            \abjad-color-music #'blue
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            \abjad-color-music #'red
-                            e'16
-                            \abjad-color-music #'red
-                            e'16
-                            \abjad-color-music #'red
-                            e'16
-                            \abjad-color-music #'red
-                            <fs' gs'>4
-                            ~
-                            \abjad-color-music #'red
-                            <fs' gs'>16
-                        }
-                    }   % measure
+                        r16
+                        \abjad-color-music #'red
+                        c'16
+                        \abjad-color-music #'red
+                        c'16
+                        \abjad-color-music #'red
+                        c'16
+                        \abjad-color-music #'red
+                        <d' e'>4
+                        ~
+                        \abjad-color-music #'red
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        r16
+                        \abjad-color-music #'blue
+                        d'16
+                        \abjad-color-music #'blue
+                        d'16
+                        \abjad-color-music #'blue
+                        d'16
+                        \abjad-color-music #'blue
+                        <e' fs'>4
+                        ~
+                        \abjad-color-music #'blue
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        r16
+                        \abjad-color-music #'red
+                        e'16
+                        \abjad-color-music #'red
+                        e'16
+                        \abjad-color-music #'red
+                        e'16
+                        \abjad-color-music #'red
+                        <fs' gs'>4
+                        ~
+                        \abjad-color-music #'red
+                        <fs' gs'>16
+                    }
                 }
 
         """
@@ -4291,39 +4257,37 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            c'16
-                            <d' e'>4
-                            ~
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            d'16
-                            <e' fs'>4
-                            ~
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            e'16
-                            \abjad-color-music #'green
-                            <fs' gs'>4
-                            ~
-                            <fs' gs'>16
-                        }
-                    }   % measure
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        c'16
+                        <d' e'>4
+                        ~
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        d'16
+                        <e' fs'>4
+                        ~
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        e'16
+                        \abjad-color-music #'green
+                        <fs' gs'>4
+                        ~
+                        <fs' gs'>16
+                    }
                 }
 
         """
@@ -4407,50 +4371,48 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            \abjad-color-music #'red
-                            bf'16
-                            \abjad-color-music #'blue
-                            <a'' b''>16
-                            \abjad-color-music #'red
-                            c'16
-                            \abjad-color-music #'blue
-                            <d' e'>4
-                            ~
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            r16
-                            \abjad-color-music #'red
-                            bf'16
-                            \abjad-color-music #'blue
-                            <a'' b''>16
-                            \abjad-color-music #'red
-                            d'16
-                            \abjad-color-music #'blue
-                            <e' fs'>4
-                            ~
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            \abjad-color-music #'red
-                            bf'16
-                            \abjad-color-music #'blue
-                            <a'' b''>16
-                            \abjad-color-music #'red
-                            e'16
-                            \abjad-color-music #'blue
-                            <fs' gs'>4
-                            ~
-                            <fs' gs'>16
-                        }
-                    }   % measure
+                        r16
+                        \abjad-color-music #'red
+                        bf'16
+                        \abjad-color-music #'blue
+                        <a'' b''>16
+                        \abjad-color-music #'red
+                        c'16
+                        \abjad-color-music #'blue
+                        <d' e'>4
+                        ~
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        r16
+                        \abjad-color-music #'red
+                        bf'16
+                        \abjad-color-music #'blue
+                        <a'' b''>16
+                        \abjad-color-music #'red
+                        d'16
+                        \abjad-color-music #'blue
+                        <e' fs'>4
+                        ~
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        r16
+                        \abjad-color-music #'red
+                        bf'16
+                        \abjad-color-music #'blue
+                        <a'' b''>16
+                        \abjad-color-music #'red
+                        e'16
+                        \abjad-color-music #'blue
+                        <fs' gs'>4
+                        ~
+                        <fs' gs'>16
+                    }
                 }
 
         """
@@ -4513,39 +4475,37 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            c'16
-                            <d' e'>4
-                            ~
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            d'16
-                            <e' fs'>4
-                            ~
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            e'16
-                            <fs' gs'>4
-                            ~
-                            \abjad-color-music #'green
-                            <fs' gs'>16
-                        }
-                    }   % measure
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        c'16
+                        <d' e'>4
+                        ~
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        d'16
+                        <e' fs'>4
+                        ~
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        e'16
+                        <fs' gs'>4
+                        ~
+                        \abjad-color-music #'green
+                        <fs' gs'>16
+                    }
                 }
 
         """
@@ -4635,53 +4595,51 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            \abjad-color-music #'red
-                            bf'16
-                            \abjad-color-music #'blue
-                            <a'' b''>16
-                            \abjad-color-music #'red
-                            c'16
-                            \abjad-color-music #'blue
-                            <d' e'>4
-                            ~
-                            \abjad-color-music #'red
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            r16
-                            \abjad-color-music #'blue
-                            bf'16
-                            \abjad-color-music #'red
-                            <a'' b''>16
-                            \abjad-color-music #'blue
-                            d'16
-                            \abjad-color-music #'red
-                            <e' fs'>4
-                            ~
-                            \abjad-color-music #'blue
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            \abjad-color-music #'red
-                            bf'16
-                            \abjad-color-music #'blue
-                            <a'' b''>16
-                            \abjad-color-music #'red
-                            e'16
-                            \abjad-color-music #'blue
-                            <fs' gs'>4
-                            ~
-                            \abjad-color-music #'red
-                            <fs' gs'>16
-                        }
-                    }   % measure
+                        r16
+                        \abjad-color-music #'red
+                        bf'16
+                        \abjad-color-music #'blue
+                        <a'' b''>16
+                        \abjad-color-music #'red
+                        c'16
+                        \abjad-color-music #'blue
+                        <d' e'>4
+                        ~
+                        \abjad-color-music #'red
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        r16
+                        \abjad-color-music #'blue
+                        bf'16
+                        \abjad-color-music #'red
+                        <a'' b''>16
+                        \abjad-color-music #'blue
+                        d'16
+                        \abjad-color-music #'red
+                        <e' fs'>4
+                        ~
+                        \abjad-color-music #'blue
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        r16
+                        \abjad-color-music #'red
+                        bf'16
+                        \abjad-color-music #'blue
+                        <a'' b''>16
+                        \abjad-color-music #'red
+                        e'16
+                        \abjad-color-music #'blue
+                        <fs' gs'>4
+                        ~
+                        \abjad-color-music #'red
+                        <fs' gs'>16
+                    }
                 }
 
         """
@@ -4744,40 +4702,38 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            c'16
-                            <d' e'>4
-                            ~
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            d'16
-                            <e' fs'>4
-                            ~
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            e'16
-                            \abjad-color-music #'green
-                            <fs' gs'>4
-                            ~
-                            \abjad-color-music #'green
-                            <fs' gs'>16
-                        }
-                    }   % measure
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        c'16
+                        <d' e'>4
+                        ~
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        d'16
+                        <e' fs'>4
+                        ~
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        e'16
+                        \abjad-color-music #'green
+                        <fs' gs'>4
+                        ~
+                        \abjad-color-music #'green
+                        <fs' gs'>16
+                    }
                 }
 
         """
@@ -4861,53 +4817,51 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            \abjad-color-music #'red
-                            bf'16
-                            \abjad-color-music #'blue
-                            <a'' b''>16
-                            \abjad-color-music #'red
-                            c'16
-                            \abjad-color-music #'blue
-                            <d' e'>4
-                            ~
-                            \abjad-color-music #'blue
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            r16
-                            \abjad-color-music #'red
-                            bf'16
-                            \abjad-color-music #'blue
-                            <a'' b''>16
-                            \abjad-color-music #'red
-                            d'16
-                            \abjad-color-music #'blue
-                            <e' fs'>4
-                            ~
-                            \abjad-color-music #'blue
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            \abjad-color-music #'red
-                            bf'16
-                            \abjad-color-music #'blue
-                            <a'' b''>16
-                            \abjad-color-music #'red
-                            e'16
-                            \abjad-color-music #'blue
-                            <fs' gs'>4
-                            ~
-                            \abjad-color-music #'blue
-                            <fs' gs'>16
-                        }
-                    }   % measure
+                        r16
+                        \abjad-color-music #'red
+                        bf'16
+                        \abjad-color-music #'blue
+                        <a'' b''>16
+                        \abjad-color-music #'red
+                        c'16
+                        \abjad-color-music #'blue
+                        <d' e'>4
+                        ~
+                        \abjad-color-music #'blue
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        r16
+                        \abjad-color-music #'red
+                        bf'16
+                        \abjad-color-music #'blue
+                        <a'' b''>16
+                        \abjad-color-music #'red
+                        d'16
+                        \abjad-color-music #'blue
+                        <e' fs'>4
+                        ~
+                        \abjad-color-music #'blue
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        r16
+                        \abjad-color-music #'red
+                        bf'16
+                        \abjad-color-music #'blue
+                        <a'' b''>16
+                        \abjad-color-music #'red
+                        e'16
+                        \abjad-color-music #'blue
+                        <fs' gs'>4
+                        ~
+                        \abjad-color-music #'blue
+                        <fs' gs'>16
+                    }
                 }
 
         """
@@ -4970,39 +4924,37 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            c'16
-                            <d' e'>4
-                            ~
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            d'16
-                            <e' fs'>4
-                            ~
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            e'16
-                            <fs' gs'>4
-                            ~
-                            \abjad-color-music #'green
-                            <fs' gs'>16
-                        }
-                    }   % measure
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        c'16
+                        <d' e'>4
+                        ~
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        d'16
+                        <e' fs'>4
+                        ~
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        e'16
+                        <fs' gs'>4
+                        ~
+                        \abjad-color-music #'green
+                        <fs' gs'>16
+                    }
                 }
 
         """
@@ -5086,50 +5038,48 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            \abjad-color-music #'red
-                            bf'16
-                            \abjad-color-music #'blue
-                            <a'' b''>16
-                            \abjad-color-music #'red
-                            c'16
-                            <d' e'>4
-                            ~
-                            \abjad-color-music #'blue
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            r16
-                            \abjad-color-music #'red
-                            bf'16
-                            \abjad-color-music #'blue
-                            <a'' b''>16
-                            \abjad-color-music #'red
-                            d'16
-                            <e' fs'>4
-                            ~
-                            \abjad-color-music #'blue
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            \abjad-color-music #'red
-                            bf'16
-                            \abjad-color-music #'blue
-                            <a'' b''>16
-                            \abjad-color-music #'red
-                            e'16
-                            <fs' gs'>4
-                            ~
-                            \abjad-color-music #'blue
-                            <fs' gs'>16
-                        }
-                    }   % measure
+                        r16
+                        \abjad-color-music #'red
+                        bf'16
+                        \abjad-color-music #'blue
+                        <a'' b''>16
+                        \abjad-color-music #'red
+                        c'16
+                        <d' e'>4
+                        ~
+                        \abjad-color-music #'blue
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        r16
+                        \abjad-color-music #'red
+                        bf'16
+                        \abjad-color-music #'blue
+                        <a'' b''>16
+                        \abjad-color-music #'red
+                        d'16
+                        <e' fs'>4
+                        ~
+                        \abjad-color-music #'blue
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        r16
+                        \abjad-color-music #'red
+                        bf'16
+                        \abjad-color-music #'blue
+                        <a'' b''>16
+                        \abjad-color-music #'red
+                        e'16
+                        <fs' gs'>4
+                        ~
+                        \abjad-color-music #'blue
+                        <fs' gs'>16
+                    }
                 }
 
         """
@@ -5189,39 +5139,37 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            c'16
-                            <d' e'>4
-                            ~
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            d'16
-                            <e' fs'>4
-                            ~
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            \abjad-color-music #'green
-                            e'16
-                            <fs' gs'>4
-                            ~
-                            <fs' gs'>16
-                        }
-                    }   % measure
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        c'16
+                        <d' e'>4
+                        ~
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        d'16
+                        <e' fs'>4
+                        ~
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        \abjad-color-music #'green
+                        e'16
+                        <fs' gs'>4
+                        ~
+                        <fs' gs'>16
+                    }
                 }
 
         """
@@ -5299,47 +5247,45 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            \abjad-color-music #'red
-                            bf'16
-                            \abjad-color-music #'blue
-                            <a'' b''>16
-                            \abjad-color-music #'red
-                            c'16
-                            <d' e'>4
-                            ~
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            r16
-                            \abjad-color-music #'blue
-                            bf'16
-                            \abjad-color-music #'red
-                            <a'' b''>16
-                            \abjad-color-music #'blue
-                            d'16
-                            <e' fs'>4
-                            ~
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            \abjad-color-music #'red
-                            bf'16
-                            \abjad-color-music #'blue
-                            <a'' b''>16
-                            \abjad-color-music #'red
-                            e'16
-                            <fs' gs'>4
-                            ~
-                            <fs' gs'>16
-                        }
-                    }   % measure
+                        r16
+                        \abjad-color-music #'red
+                        bf'16
+                        \abjad-color-music #'blue
+                        <a'' b''>16
+                        \abjad-color-music #'red
+                        c'16
+                        <d' e'>4
+                        ~
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        r16
+                        \abjad-color-music #'blue
+                        bf'16
+                        \abjad-color-music #'red
+                        <a'' b''>16
+                        \abjad-color-music #'blue
+                        d'16
+                        <e' fs'>4
+                        ~
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        r16
+                        \abjad-color-music #'red
+                        bf'16
+                        \abjad-color-music #'blue
+                        <a'' b''>16
+                        \abjad-color-music #'red
+                        e'16
+                        <fs' gs'>4
+                        ~
+                        <fs' gs'>16
+                    }
                 }
 
         """
@@ -5403,40 +5349,38 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            c'16
-                            c'16
-                            c'16
-                            <d' e'>4
-                            ~
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            r16
-                            d'16
-                            d'16
-                            d'16
-                            <e' fs'>4
-                            ~
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            e'16
-                            e'16
-                            e'16
-                            \abjad-color-music #'green
-                            <fs' gs'>4
-                            ~
-                            \abjad-color-music #'green
-                            <fs' gs'>16
-                        }
-                    }   % measure
+                        r16
+                        c'16
+                        c'16
+                        c'16
+                        <d' e'>4
+                        ~
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        r16
+                        d'16
+                        d'16
+                        d'16
+                        <e' fs'>4
+                        ~
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        r16
+                        e'16
+                        e'16
+                        e'16
+                        \abjad-color-music #'green
+                        <fs' gs'>4
+                        ~
+                        \abjad-color-music #'green
+                        <fs' gs'>16
+                    }
                 }
 
         """
@@ -5508,53 +5452,51 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            \abjad-color-music #'red
-                            c'16
-                            \abjad-color-music #'red
-                            c'16
-                            \abjad-color-music #'red
-                            c'16
-                            \abjad-color-music #'blue
-                            <d' e'>4
-                            ~
-                            \abjad-color-music #'blue
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            r16
-                            \abjad-color-music #'red
-                            d'16
-                            \abjad-color-music #'red
-                            d'16
-                            \abjad-color-music #'red
-                            d'16
-                            \abjad-color-music #'blue
-                            <e' fs'>4
-                            ~
-                            \abjad-color-music #'blue
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            \abjad-color-music #'red
-                            e'16
-                            \abjad-color-music #'red
-                            e'16
-                            \abjad-color-music #'red
-                            e'16
-                            \abjad-color-music #'blue
-                            <fs' gs'>4
-                            ~
-                            \abjad-color-music #'blue
-                            <fs' gs'>16
-                        }
-                    }   % measure
+                        r16
+                        \abjad-color-music #'red
+                        c'16
+                        \abjad-color-music #'red
+                        c'16
+                        \abjad-color-music #'red
+                        c'16
+                        \abjad-color-music #'blue
+                        <d' e'>4
+                        ~
+                        \abjad-color-music #'blue
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        r16
+                        \abjad-color-music #'red
+                        d'16
+                        \abjad-color-music #'red
+                        d'16
+                        \abjad-color-music #'red
+                        d'16
+                        \abjad-color-music #'blue
+                        <e' fs'>4
+                        ~
+                        \abjad-color-music #'blue
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        r16
+                        \abjad-color-music #'red
+                        e'16
+                        \abjad-color-music #'red
+                        e'16
+                        \abjad-color-music #'red
+                        e'16
+                        \abjad-color-music #'blue
+                        <fs' gs'>4
+                        ~
+                        \abjad-color-music #'blue
+                        <fs' gs'>16
+                    }
                 }
 
         """
@@ -5617,39 +5559,37 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            c'16
-                            <d' e'>4
-                            ~
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            d'16
-                            <e' fs'>4
-                            ~
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            \abjad-color-music #'green
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            e'16
-                            <fs' gs'>4
-                            ~
-                            <fs' gs'>16
-                        }
-                    }   % measure
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        c'16
+                        <d' e'>4
+                        ~
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        d'16
+                        <e' fs'>4
+                        ~
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        \abjad-color-music #'green
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        e'16
+                        <fs' gs'>4
+                        ~
+                        <fs' gs'>16
+                    }
                 }
 
         """
@@ -5792,45 +5732,43 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            c'16
-                            <d' e'>4
-                            ~
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            \abjad-color-music #'red
-                            r16
-                            \abjad-color-music #'blue
-                            bf'16
-                            \abjad-color-music #'red
-                            <a'' b''>16
-                            \abjad-color-music #'blue
-                            d'16
-                            \abjad-color-music #'red
-                            <e' fs'>4
-                            ~
-                            \abjad-color-music #'blue
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            \abjad-color-music #'red
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            e'16
-                            <fs' gs'>4
-                            ~
-                            <fs' gs'>16
-                        }
-                    }   % measure
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        c'16
+                        <d' e'>4
+                        ~
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        \abjad-color-music #'red
+                        r16
+                        \abjad-color-music #'blue
+                        bf'16
+                        \abjad-color-music #'red
+                        <a'' b''>16
+                        \abjad-color-music #'blue
+                        d'16
+                        \abjad-color-music #'red
+                        <e' fs'>4
+                        ~
+                        \abjad-color-music #'blue
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        \abjad-color-music #'red
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        e'16
+                        <fs' gs'>4
+                        ~
+                        <fs' gs'>16
+                    }
                 }
 
         """
@@ -5969,44 +5907,42 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            c'16
-                            c'16
-                            c'16
-                            <d' e'>4
-                            ~
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            r16
-                            \abjad-color-music #'green
-                            d'16
-                            \abjad-color-music #'green
-                            d'16
-                            \abjad-color-music #'green
-                            d'16
-                            \abjad-color-music #'green
-                            <e' fs'>4
-                            ~
-                            \abjad-color-music #'green
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            \abjad-color-music #'green
-                            r16
-                            e'16
-                            e'16
-                            e'16
-                            <fs' gs'>4
-                            ~
-                            <fs' gs'>16
-                        }
-                    }   % measure
+                        r16
+                        c'16
+                        c'16
+                        c'16
+                        <d' e'>4
+                        ~
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        r16
+                        \abjad-color-music #'green
+                        d'16
+                        \abjad-color-music #'green
+                        d'16
+                        \abjad-color-music #'green
+                        d'16
+                        \abjad-color-music #'green
+                        <e' fs'>4
+                        ~
+                        \abjad-color-music #'green
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        \abjad-color-music #'green
+                        r16
+                        e'16
+                        e'16
+                        e'16
+                        <fs' gs'>4
+                        ~
+                        <fs' gs'>16
+                    }
                 }
 
         """
@@ -6072,55 +6008,53 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            \abjad-color-music #'red
-                            c'16
-                            \abjad-color-music #'red
-                            c'16
-                            \abjad-color-music #'red
-                            c'16
-                            \abjad-color-music #'red
-                            <d' e'>4
-                            ~
-                            \abjad-color-music #'red
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            \abjad-color-music #'red
-                            r16
-                            \abjad-color-music #'blue
-                            d'16
-                            \abjad-color-music #'blue
-                            d'16
-                            \abjad-color-music #'blue
-                            d'16
-                            \abjad-color-music #'blue
-                            <e' fs'>4
-                            ~
-                            \abjad-color-music #'blue
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            \abjad-color-music #'blue
-                            r16
-                            \abjad-color-music #'red
-                            e'16
-                            \abjad-color-music #'red
-                            e'16
-                            \abjad-color-music #'red
-                            e'16
-                            \abjad-color-music #'red
-                            <fs' gs'>4
-                            ~
-                            \abjad-color-music #'red
-                            <fs' gs'>16
-                        }
-                    }   % measure
+                        r16
+                        \abjad-color-music #'red
+                        c'16
+                        \abjad-color-music #'red
+                        c'16
+                        \abjad-color-music #'red
+                        c'16
+                        \abjad-color-music #'red
+                        <d' e'>4
+                        ~
+                        \abjad-color-music #'red
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        \abjad-color-music #'red
+                        r16
+                        \abjad-color-music #'blue
+                        d'16
+                        \abjad-color-music #'blue
+                        d'16
+                        \abjad-color-music #'blue
+                        d'16
+                        \abjad-color-music #'blue
+                        <e' fs'>4
+                        ~
+                        \abjad-color-music #'blue
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        \abjad-color-music #'blue
+                        r16
+                        \abjad-color-music #'red
+                        e'16
+                        \abjad-color-music #'red
+                        e'16
+                        \abjad-color-music #'red
+                        e'16
+                        \abjad-color-music #'red
+                        <fs' gs'>4
+                        ~
+                        \abjad-color-music #'red
+                        <fs' gs'>16
+                    }
                 }
 
         """
@@ -6310,39 +6244,37 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            \abjad-color-music #'green
-                            bf'16
-                            <a'' b''>16
-                            c'16
-                            <d' e'>4
-                            ~
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            d'16
-                            <e' fs'>4
-                            ~
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            e'16
-                            <fs' gs'>4
-                            ~
-                            <fs' gs'>16
-                        }
-                    }   % measure
+                        r16
+                        \abjad-color-music #'green
+                        bf'16
+                        <a'' b''>16
+                        c'16
+                        <d' e'>4
+                        ~
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        d'16
+                        <e' fs'>4
+                        ~
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        e'16
+                        <fs' gs'>4
+                        ~
+                        <fs' gs'>16
+                    }
                 }
 
         """
@@ -6436,55 +6368,53 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            \abjad-color-music #'red
-                            bf'16
-                            \abjad-color-music #'blue
-                            <a'' b''>16
-                            \abjad-color-music #'red
-                            c'16
-                            \abjad-color-music #'blue
-                            <d' e'>4
-                            ~
-                            \abjad-color-music #'red
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            \abjad-color-music #'blue
-                            r16
-                            \abjad-color-music #'red
-                            bf'16
-                            \abjad-color-music #'blue
-                            <a'' b''>16
-                            \abjad-color-music #'red
-                            d'16
-                            \abjad-color-music #'blue
-                            <e' fs'>4
-                            ~
-                            \abjad-color-music #'red
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            \abjad-color-music #'blue
-                            r16
-                            \abjad-color-music #'red
-                            bf'16
-                            \abjad-color-music #'blue
-                            <a'' b''>16
-                            \abjad-color-music #'red
-                            e'16
-                            \abjad-color-music #'blue
-                            <fs' gs'>4
-                            ~
-                            \abjad-color-music #'red
-                            <fs' gs'>16
-                        }
-                    }   % measure
+                        r16
+                        \abjad-color-music #'red
+                        bf'16
+                        \abjad-color-music #'blue
+                        <a'' b''>16
+                        \abjad-color-music #'red
+                        c'16
+                        \abjad-color-music #'blue
+                        <d' e'>4
+                        ~
+                        \abjad-color-music #'red
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        \abjad-color-music #'blue
+                        r16
+                        \abjad-color-music #'red
+                        bf'16
+                        \abjad-color-music #'blue
+                        <a'' b''>16
+                        \abjad-color-music #'red
+                        d'16
+                        \abjad-color-music #'blue
+                        <e' fs'>4
+                        ~
+                        \abjad-color-music #'red
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        \abjad-color-music #'blue
+                        r16
+                        \abjad-color-music #'red
+                        bf'16
+                        \abjad-color-music #'blue
+                        <a'' b''>16
+                        \abjad-color-music #'red
+                        e'16
+                        \abjad-color-music #'blue
+                        <fs' gs'>4
+                        ~
+                        \abjad-color-music #'red
+                        <fs' gs'>16
+                    }
                 }
 
         """
@@ -6543,39 +6473,37 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            c'16
-                            <d' e'>4
-                            ~
-                            \abjad-color-music #'green
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            d'16
-                            <e' fs'>4
-                            ~
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            e'16
-                            <fs' gs'>4
-                            ~
-                            <fs' gs'>16
-                        }
-                    }   % measure
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        c'16
+                        <d' e'>4
+                        ~
+                        \abjad-color-music #'green
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        d'16
+                        <e' fs'>4
+                        ~
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        e'16
+                        <fs' gs'>4
+                        ~
+                        <fs' gs'>16
+                    }
                 }
 
         ..  container:: example
@@ -6625,39 +6553,37 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            c'16
-                            <d' e'>4
-                            ~
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            d'16
-                            <e' fs'>4
-                            ~
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            \abjad-color-music #'green
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            e'16
-                            <fs' gs'>4
-                            ~
-                            <fs' gs'>16
-                        }
-                    }   % measure
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        c'16
+                        <d' e'>4
+                        ~
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        d'16
+                        <e' fs'>4
+                        ~
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        \abjad-color-music #'green
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        e'16
+                        <fs' gs'>4
+                        ~
+                        <fs' gs'>16
+                    }
                 }
 
         """
@@ -6733,46 +6659,44 @@ class Selection(abjad.Selection):
                     autoBeaming = ##f
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
                         \time 7/4
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            c'16
-                            <d' e'>4
-                            ~
-                            \abjad-color-music #'red
-                            <d' e'>16
-                        }
-                        \times 8/9 {
-                            \abjad-color-music #'blue
-                            r16
-                            \abjad-color-music #'red
-                            bf'16
-                            \abjad-color-music #'blue
-                            <a'' b''>16
-                            \abjad-color-music #'red
-                            d'16
-                            \abjad-color-music #'blue
-                            <e' fs'>4
-                            ~
-                            \abjad-color-music #'red
-                            <e' fs'>16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 10/9 {
-                            \abjad-color-music #'blue
-                            r16
-                            bf'16
-                            <a'' b''>16
-                            e'16
-                            <fs' gs'>4
-                            ~
-                            <fs' gs'>16
-                        }
-                    }   % measure
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        c'16
+                        <d' e'>4
+                        ~
+                        \abjad-color-music #'red
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        \abjad-color-music #'blue
+                        r16
+                        \abjad-color-music #'red
+                        bf'16
+                        \abjad-color-music #'blue
+                        <a'' b''>16
+                        \abjad-color-music #'red
+                        d'16
+                        \abjad-color-music #'blue
+                        <e' fs'>4
+                        ~
+                        \abjad-color-music #'red
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        \abjad-color-music #'blue
+                        r16
+                        bf'16
+                        <a'' b''>16
+                        e'16
+                        <fs' gs'>4
+                        ~
+                        <fs' gs'>16
+                    }
                 }
 
         """

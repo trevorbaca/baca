@@ -56,60 +56,58 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff
             {
-                {   % measure
+                \scaleDurations #'(1 . 1) {
                     \time 3/4
-                    \scaleDurations #'(1 . 1) {
-                        c'8
+                    c'8
+                }
+                \scaleDurations #'(1 . 1) {
+                    \acciaccatura {
+                        d'16
                     }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            d'16
-                        }
-                        bf'8
+                    bf'8
+                }
+                \scaleDurations #'(1 . 1) {
+                    \acciaccatura {
+                        fs''16
+                        [                                                                            %! ACC_1
+                        e''16
+                        ]                                                                            %! ACC_1
                     }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            fs''16
-                            [                                                                        %! ACC_1
-                            e''16
-                            ]                                                                        %! ACC_1
-                        }
-                        ef''8
+                    ef''8
+                }
+                \scaleDurations #'(1 . 1) {
+                    \acciaccatura {
+                        af''16
+                        [                                                                            %! ACC_1
+                        g''16
+                        a'16
+                        ]                                                                            %! ACC_1
                     }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            af''16
-                            [                                                                        %! ACC_1
-                            g''16
-                            a'16
-                            ]                                                                        %! ACC_1
-                        }
-                        c'8
+                    c'8
+                }
+                \scaleDurations #'(1 . 1) {
+                    \acciaccatura {
+                        d'16
+                        [                                                                            %! ACC_1
+                        bf'16
+                        fs''16
+                        e''16
+                        ]                                                                            %! ACC_1
                     }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            d'16
-                            [                                                                        %! ACC_1
-                            bf'16
-                            fs''16
-                            e''16
-                            ]                                                                        %! ACC_1
-                        }
-                        ef''8
+                    ef''8
+                }
+                \scaleDurations #'(1 . 1) {
+                    \acciaccatura {
+                        af''16
+                        [                                                                            %! ACC_1
+                        g''16
+                        a'16
+                        c'16
+                        d'16
+                        ]                                                                            %! ACC_1
                     }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            af''16
-                            [                                                                        %! ACC_1
-                            g''16
-                            a'16
-                            c'16
-                            d'16
-                            ]                                                                        %! ACC_1
-                        }
-                        bf'8
-                    }
-                }   % measure
+                    bf'8
+                }
             }
 
     """
@@ -231,60 +229,58 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff
                 {
-                    {   % measure
+                    \scaleDurations #'(1 . 1) {
                         \time 3/4
-                        \scaleDurations #'(1 . 1) {
-                            c'8
+                        c'8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            d'16
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                d'16
-                            }
-                            bf'8
+                        bf'8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            fs''16
+                            [                                                                            %! ACC_1
+                            e''16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                fs''16
-                                [                                                                        %! ACC_1
-                                e''16
-                                ]                                                                        %! ACC_1
-                            }
-                            ef''8
+                        ef''8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            af''16
+                            [                                                                            %! ACC_1
+                            g''16
+                            a'16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                af''16
-                                [                                                                        %! ACC_1
-                                g''16
-                                a'16
-                                ]                                                                        %! ACC_1
-                            }
-                            c'8
+                        c'8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            d'16
+                            [                                                                            %! ACC_1
+                            bf'16
+                            fs''16
+                            e''16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                d'16
-                                [                                                                        %! ACC_1
-                                bf'16
-                                fs''16
-                                e''16
-                                ]                                                                        %! ACC_1
-                            }
-                            ef''8
+                        ef''8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            af''16
+                            [                                                                            %! ACC_1
+                            g''16
+                            a'16
+                            c'16
+                            d'16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                af''16
-                                [                                                                        %! ACC_1
-                                g''16
-                                a'16
-                                c'16
-                                d'16
-                                ]                                                                        %! ACC_1
-                            }
-                            bf'8
-                        }
-                    }   % measure
+                        bf'8
+                    }
                 }
 
         ..  container:: example
@@ -323,60 +319,58 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff
                 {
-                    {   % measure
+                    \scaleDurations #'(1 . 1) {
                         \time 3/4
-                        \scaleDurations #'(1 . 1) {
-                            c'8
+                        c'8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            d'8
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                d'8
-                            }
+                        bf'8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            fs''8
+                            [                                                                            %! ACC_1
+                            e''8
+                            ]                                                                            %! ACC_1
+                        }
+                        ef''8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            af''8
+                            [                                                                            %! ACC_1
+                            g''8
+                            a'8
+                            ]                                                                            %! ACC_1
+                        }
+                        c'8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            d'8
+                            [                                                                            %! ACC_1
                             bf'8
+                            fs''8
+                            e''8
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                fs''8
-                                [                                                                        %! ACC_1
-                                e''8
-                                ]                                                                        %! ACC_1
-                            }
-                            ef''8
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                af''8
-                                [                                                                        %! ACC_1
-                                g''8
-                                a'8
-                                ]                                                                        %! ACC_1
-                            }
+                        ef''8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            af''8
+                            [                                                                            %! ACC_1
+                            g''8
+                            a'8
                             c'8
+                            d'8
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                d'8
-                                [                                                                        %! ACC_1
-                                bf'8
-                                fs''8
-                                e''8
-                                ]                                                                        %! ACC_1
-                            }
-                            ef''8
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                af''8
-                                [                                                                        %! ACC_1
-                                g''8
-                                a'8
-                                c'8
-                                d'8
-                                ]                                                                        %! ACC_1
-                            }
-                            bf'8
-                        }
-                    }   % measure
+                        bf'8
+                    }
                 }
 
         Defaults to none.
@@ -426,60 +420,58 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff
                 {
-                    {   % measure
+                    \scaleDurations #'(1 . 1) {
                         \time 3/4
-                        \scaleDurations #'(1 . 1) {
-                            c'8
+                        c'8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            d'16
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                d'16
-                            }
-                            bf'8
+                        bf'8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            fs''16
+                            [                                                                            %! ACC_1
+                            e''16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                fs''16
-                                [                                                                        %! ACC_1
-                                e''16
-                                ]                                                                        %! ACC_1
-                            }
-                            ef''8
+                        ef''8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            af''16
+                            [                                                                            %! ACC_1
+                            g''16
+                            a'16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                af''16
-                                [                                                                        %! ACC_1
-                                g''16
-                                a'16
-                                ]                                                                        %! ACC_1
-                            }
-                            c'8
+                        c'8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            d'16
+                            [                                                                            %! ACC_1
+                            bf'16
+                            fs''16
+                            e''16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                d'16
-                                [                                                                        %! ACC_1
-                                bf'16
-                                fs''16
-                                e''16
-                                ]                                                                        %! ACC_1
-                            }
-                            ef''8
+                        ef''8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            af''16
+                            [                                                                            %! ACC_1
+                            g''16
+                            a'16
+                            c'16
+                            d'16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                af''16
-                                [                                                                        %! ACC_1
-                                g''16
-                                a'16
-                                c'16
-                                d'16
-                                ]                                                                        %! ACC_1
-                            }
-                            bf'8
-                        }
-                    }   % measure
+                        bf'8
+                    }
                 }
 
 
@@ -523,66 +515,64 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff
                 {
-                    {   % measure
+                    \scaleDurations #'(1 . 1) {
                         \time 3/2
-                        \scaleDurations #'(1 . 1) {
-                            c'8
+                        c'8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            d'16
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                d'16
-                            }
-                            bf'8
+                        bf'8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            fs''16
+                            [                                                                            %! ACC_1
+                            e''16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                fs''16
-                                [                                                                        %! ACC_1
-                                e''16
-                                ]                                                                        %! ACC_1
-                            }
-                            ef''8
+                        ef''8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            af''16
+                            [                                                                            %! ACC_1
+                            g''16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                af''16
-                                [                                                                        %! ACC_1
-                                g''16
-                                ]                                                                        %! ACC_1
-                            }
-                            a'8
-                            [
-                            c'8
-                            ]
+                        a'8
+                        [
+                        c'8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            d'16
+                            [                                                                            %! ACC_1
+                            bf'16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                d'16
-                                [                                                                        %! ACC_1
-                                bf'16
-                                ]                                                                        %! ACC_1
-                            }
-                            fs''8
-                            [
-                            e''8
-                            ef''8
-                            ]
+                        fs''8
+                        [
+                        e''8
+                        ef''8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            af''16
+                            [                                                                            %! ACC_1
+                            g''16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                af''16
-                                [                                                                        %! ACC_1
-                                g''16
-                                ]                                                                        %! ACC_1
-                            }
-                            a'8
-                            [
-                            c'8
-                            d'8
-                            bf'8
-                            ]
-                        }
-                    }   % measure
+                        a'8
+                        [
+                        c'8
+                        d'8
+                        bf'8
+                        ]
+                    }
                 }
 
         ..  container:: example
@@ -625,66 +615,64 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff
                 {
-                    {   % measure
+                    \scaleDurations #'(1 . 1) {
                         \time 3/2
-                        \scaleDurations #'(1 . 1) {
-                            c'8
+                        c'8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            d'16
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                d'16
-                            }
-                            bf'8
+                        bf'8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            fs''16
+                            [                                                                            %! ACC_1
+                            e''16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                fs''16
-                                [                                                                        %! ACC_1
-                                e''16
-                                ]                                                                        %! ACC_1
-                            }
-                            ef''8
+                        ef''8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        af''8
+                        [
+                        \acciaccatura {
+                            g''16
+                            [                                                                            %! ACC_1
+                            a'16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            af''8
-                            [
-                            \acciaccatura {
-                                g''16
-                                [                                                                        %! ACC_1
-                                a'16
-                                ]                                                                        %! ACC_1
-                            }
-                            c'8
-                            ]
+                        c'8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        d'8
+                        [
+                        bf'8
+                        \acciaccatura {
+                            fs''16
+                            [                                                                            %! ACC_1
+                            e''16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            d'8
-                            [
-                            bf'8
-                            \acciaccatura {
-                                fs''16
-                                [                                                                        %! ACC_1
-                                e''16
-                                ]                                                                        %! ACC_1
-                            }
-                            ef''8
-                            ]
+                        ef''8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        af''8
+                        [
+                        g''8
+                        a'8
+                        \acciaccatura {
+                            c'16
+                            [                                                                            %! ACC_1
+                            d'16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            af''8
-                            [
-                            g''8
-                            a'8
-                            \acciaccatura {
-                                c'16
-                                [                                                                        %! ACC_1
-                                d'16
-                                ]                                                                        %! ACC_1
-                            }
-                            bf'8
-                            ]
-                        }
-                    }   % measure
+                        bf'8
+                        ]
+                    }
                 }
 
         ..  container:: example
@@ -729,72 +717,70 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff
                 {
-                    {   % measure
+                    \scaleDurations #'(1 . 1) {
                         \time 9/8
-                        \scaleDurations #'(1 . 1) {
-                            c'8
+                        c'8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            d'16
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                d'16
-                            }
-                            bf'8
+                        bf'8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            fs''16
+                            [                                                                            %! ACC_1
+                            e''16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                fs''16
-                                [                                                                        %! ACC_1
-                                e''16
-                                ]                                                                        %! ACC_1
-                            }
-                            ef''8
+                        ef''8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            af''16
+                            [                                                                            %! ACC_1
+                            g''16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                af''16
-                                [                                                                        %! ACC_1
-                                g''16
-                                ]                                                                        %! ACC_1
-                            }
-                            a'8
-                            [
-                            c'8
-                            ]
+                        a'8
+                        [
+                        c'8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            d'16
+                            [                                                                            %! ACC_1
+                            bf'16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                d'16
-                                [                                                                        %! ACC_1
-                                bf'16
-                                ]                                                                        %! ACC_1
-                            }
-                            fs''8
-                            [
-                            \acciaccatura {
-                                e''16
-                            }
-                            ef''8
-                            ]
+                        fs''8
+                        [
+                        \acciaccatura {
+                            e''16
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                af''16
-                                [                                                                        %! ACC_1
-                                g''16
-                                ]                                                                        %! ACC_1
-                            }
-                            a'8
-                            [
-                            \acciaccatura {
-                                c'16
-                                [                                                                        %! ACC_1
-                                d'16
-                                ]                                                                        %! ACC_1
-                            }
-                            bf'8
-                            ]
+                        ef''8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            af''16
+                            [                                                                            %! ACC_1
+                            g''16
+                            ]                                                                            %! ACC_1
                         }
-                    }   % measure
+                        a'8
+                        [
+                        \acciaccatura {
+                            c'16
+                            [                                                                            %! ACC_1
+                            d'16
+                            ]                                                                            %! ACC_1
+                        }
+                        bf'8
+                        ]
+                    }
                 }
 
         ..  container:: example
@@ -835,66 +821,64 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff
                 {
-                    {   % measure
+                    \scaleDurations #'(1 . 1) {
                         \time 11/8
-                        \scaleDurations #'(1 . 1) {
-                            c'8
+                        c'8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        d'8
+                        [
+                        bf'8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        fs''8
+                        [
+                        \acciaccatura {
+                            e''16
                         }
-                        \scaleDurations #'(1 . 1) {
-                            d'8
-                            [
-                            bf'8
-                            ]
+                        ef''8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        af''8
+                        [
+                        \acciaccatura {
+                            g''16
+                            [                                                                            %! ACC_1
+                            a'16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            fs''8
-                            [
-                            \acciaccatura {
-                                e''16
-                            }
-                            ef''8
-                            ]
+                        c'8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        d'8
+                        [
+                        \acciaccatura {
+                            bf'16
+                            [                                                                            %! ACC_1
+                            fs''16
+                            e''16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            af''8
-                            [
-                            \acciaccatura {
-                                g''16
-                                [                                                                        %! ACC_1
-                                a'16
-                                ]                                                                        %! ACC_1
-                            }
-                            c'8
-                            ]
+                        ef''8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        af''8
+                        [
+                        \acciaccatura {
+                            g''16
+                            [                                                                            %! ACC_1
+                            a'16
+                            c'16
+                            d'16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            d'8
-                            [
-                            \acciaccatura {
-                                bf'16
-                                [                                                                        %! ACC_1
-                                fs''16
-                                e''16
-                                ]                                                                        %! ACC_1
-                            }
-                            ef''8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            af''8
-                            [
-                            \acciaccatura {
-                                g''16
-                                [                                                                        %! ACC_1
-                                a'16
-                                c'16
-                                d'16
-                                ]                                                                        %! ACC_1
-                            }
-                            bf'8
-                            ]
-                        }
-                    }   % measure
+                        bf'8
+                        ]
+                    }
                 }
 
         Defaults to none.
@@ -944,60 +928,58 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff
                 {
-                    {   % measure
+                    \scaleDurations #'(1 . 1) {
                         \time 3/4
-                        \scaleDurations #'(1 . 1) {
-                            c'8
+                        c'8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            d'16
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                d'16
-                            }
-                            bf'8
+                        bf'8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            fs''16
+                            [                                                                            %! ACC_1
+                            e''16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                fs''16
-                                [                                                                        %! ACC_1
-                                e''16
-                                ]                                                                        %! ACC_1
-                            }
-                            ef''8
+                        ef''8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            af''16
+                            [                                                                            %! ACC_1
+                            g''16
+                            a'16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                af''16
-                                [                                                                        %! ACC_1
-                                g''16
-                                a'16
-                                ]                                                                        %! ACC_1
-                            }
-                            c'8
+                        c'8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            d'16
+                            [                                                                            %! ACC_1
+                            bf'16
+                            fs''16
+                            e''16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                d'16
-                                [                                                                        %! ACC_1
-                                bf'16
-                                fs''16
-                                e''16
-                                ]                                                                        %! ACC_1
-                            }
-                            ef''8
+                        ef''8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            af''16
+                            [                                                                            %! ACC_1
+                            g''16
+                            a'16
+                            c'16
+                            d'16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                af''16
-                                [                                                                        %! ACC_1
-                                g''16
-                                a'16
-                                c'16
-                                d'16
-                                ]                                                                        %! ACC_1
-                            }
-                            bf'8
-                        }
-                    }   % measure
+                        bf'8
+                    }
                 }
 
         ..  container:: example
@@ -1036,54 +1018,52 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff
                 {
-                    {   % measure
+                    \scaleDurations #'(1 . 1) {
                         \time 2/1
-                        \scaleDurations #'(1 . 1) {
-                            c'8
+                        c'8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        d'8
+                        [
+                        bf'8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        fs''8
+                        [
+                        e''8
+                        ef''8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        af''8
+                        [
+                        g''8
+                        a'8
+                        c'8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        d'8
+                        [
+                        bf'8
+                        fs''8
+                        e''8
+                        ef''8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            af''16
+                            [                                                                            %! ACC_1
+                            g''16
+                            a'16
+                            c'16
+                            d'16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            d'8
-                            [
-                            bf'8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            fs''8
-                            [
-                            e''8
-                            ef''8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            af''8
-                            [
-                            g''8
-                            a'8
-                            c'8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            d'8
-                            [
-                            bf'8
-                            fs''8
-                            e''8
-                            ef''8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                af''16
-                                [                                                                        %! ACC_1
-                                g''16
-                                a'16
-                                c'16
-                                d'16
-                                ]                                                                        %! ACC_1
-                            }
-                            bf'8
-                        }
-                    }   % measure
+                        bf'8
+                    }
                 }
 
         ..  container:: example
@@ -1122,56 +1102,54 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff
                 {
-                    {   % measure
+                    \scaleDurations #'(1 . 1) {
                         \time 3/2
-                        \scaleDurations #'(1 . 1) {
-                            c'8
+                        c'8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            d'16
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                d'16
-                            }
-                            bf'8
+                        bf'8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        fs''8
+                        [
+                        e''8
+                        ef''8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            af''16
+                            [                                                                            %! ACC_1
+                            g''16
+                            a'16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            fs''8
-                            [
-                            e''8
-                            ef''8
-                            ]
+                        c'8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        d'8
+                        [
+                        bf'8
+                        fs''8
+                        e''8
+                        ef''8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            af''16
+                            [                                                                            %! ACC_1
+                            g''16
+                            a'16
+                            c'16
+                            d'16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                af''16
-                                [                                                                        %! ACC_1
-                                g''16
-                                a'16
-                                ]                                                                        %! ACC_1
-                            }
-                            c'8
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            d'8
-                            [
-                            bf'8
-                            fs''8
-                            e''8
-                            ef''8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                af''16
-                                [                                                                        %! ACC_1
-                                g''16
-                                a'16
-                                c'16
-                                d'16
-                                ]                                                                        %! ACC_1
-                            }
-                            bf'8
-                        }
-                    }   % measure
+                        bf'8
+                    }
                 }
 
         Defaults to none.
@@ -8989,17 +8967,15 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff
             {
-                {   % measure
+                \scaleDurations #'(1 . 1) {
                     \time 5/16
-                    \scaleDurations #'(1 . 1) {
-                        c'16
-                        [
-                        d'16
-                        bf'8
-                        af'16
-                        ]
-                    }
-                }   % measure
+                    c'16
+                    [
+                    d'16
+                    bf'8
+                    af'16
+                    ]
+                }
             }
 
         >>> collections = [[18, 16, 15, 20, 19]]
@@ -9012,18 +8988,16 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff
             {
-                {   % measure
+                \scaleDurations #'(1 . 1) {
                     \time 3/8
-                    \scaleDurations #'(1 . 1) {
-                        fs''16
-                        [
-                        e''16
-                        ef''8
-                        af''16
-                        g''16
-                        ]
-                    }
-                }   % measure
+                    fs''16
+                    [
+                    e''16
+                    ef''8
+                    af''16
+                    g''16
+                    ]
+                }
             }
 
         >>> collections = [[9]]
@@ -9036,12 +9010,10 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff
             {
-                {   % measure
+                \scaleDurations #'(1 . 1) {
                     \time 1/16
-                    \scaleDurations #'(1 . 1) {
-                        a'16
-                    }
-                }   % measure
+                    a'16
+                }
             }
 
         >>> collections = [[0, 2, 10, 8], [18, 16, 15, 20, 19], [9]]
@@ -9054,29 +9026,27 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff
             {
-                {   % measure
+                \scaleDurations #'(1 . 1) {
                     \time 13/16
-                    \scaleDurations #'(1 . 1) {
-                        c'16
-                        [
-                        d'16
-                        bf'8
-                        af'16
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        fs''16
-                        [
-                        e''8
-                        ef''16
-                        af''16
-                        g''8
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        a'16
-                    }
-                }   % measure
+                    c'16
+                    [
+                    d'16
+                    bf'8
+                    af'16
+                    ]
+                }
+                \scaleDurations #'(1 . 1) {
+                    fs''16
+                    [
+                    e''8
+                    ef''16
+                    af''16
+                    g''8
+                    ]
+                }
+                \scaleDurations #'(1 . 1) {
+                    a'16
+                }
             }
 
     """
@@ -9172,28 +9142,26 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff
                 {
-                    {   % measure
+                    \scaleDurations #'(1 . 1) {
                         \time 3/4
-                        \scaleDurations #'(1 . 1) {
-                            c'16
-                            [
-                            d'16
-                            bf'8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            fs''16
-                            [
-                            e''16
-                            ef''8
-                            af''16
-                            g''16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            a'8
-                        }
-                    }   % measure
+                        c'16
+                        [
+                        d'16
+                        bf'8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        fs''16
+                        [
+                        e''16
+                        ef''8
+                        af''16
+                        g''16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        a'8
+                    }
                 }
 
             >>> abjad.f(rhythm_maker._make_state())
@@ -9229,28 +9197,26 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff
                 {
-                    {   % measure
+                    \scaleDurations #'(1 . 1) {
                         \time 3/4
-                        \scaleDurations #'(1 . 1) {
-                            c'8
-                            [
-                            d'16
-                            bf'16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            fs''8
-                            [
-                            e''16
-                            ef''16
-                            af''8
-                            g''16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            a'16
-                        }
-                    }   % measure
+                        c'8
+                        [
+                        d'16
+                        bf'16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        fs''8
+                        [
+                        e''16
+                        ef''16
+                        af''8
+                        g''16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        a'16
+                    }
                 }
 
             >>> abjad.f(rhythm_maker._make_state())
@@ -9747,60 +9713,58 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff
                 {
-                    {   % measure
+                    \scaleDurations #'(1 . 1) {
                         \time 3/2
-                        \scaleDurations #'(1 . 1) {
-                            c'4
+                        c'4
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            d'16
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                d'16
-                            }
-                            bf'4
+                        bf'4
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            fs''16
+                            [                                                                            %! ACC_1
+                            e''16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                fs''16
-                                [                                                                        %! ACC_1
-                                e''16
-                                ]                                                                        %! ACC_1
-                            }
-                            ef''4
+                        ef''4
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            af''16
+                            [                                                                            %! ACC_1
+                            g''16
+                            a'16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                af''16
-                                [                                                                        %! ACC_1
-                                g''16
-                                a'16
-                                ]                                                                        %! ACC_1
-                            }
-                            c'4
+                        c'4
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            d'16
+                            [                                                                            %! ACC_1
+                            bf'16
+                            fs''16
+                            e''16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                d'16
-                                [                                                                        %! ACC_1
-                                bf'16
-                                fs''16
-                                e''16
-                                ]                                                                        %! ACC_1
-                            }
-                            ef''4
+                        ef''4
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            af''16
+                            [                                                                            %! ACC_1
+                            g''16
+                            a'16
+                            c'16
+                            d'16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                af''16
-                                [                                                                        %! ACC_1
-                                g''16
-                                a'16
-                                c'16
-                                d'16
-                                ]                                                                        %! ACC_1
-                            }
-                            bf'4
-                        }
-                    }   % measure
+                        bf'4
+                    }
                 }
 
         ..  container:: example
@@ -9840,73 +9804,71 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff
                 {
-                    {   % measure
+                    \scaleDurations #'(1 . 1) {
                         \time 7/4
-                        \scaleDurations #'(1 . 1) {
-                            r4
+                        r4
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            c'16
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                c'16
-                            }
-                            r4
+                        r4
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            d'16
+                            [                                                                            %! ACC_1
+                            bf'16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                d'16
-                                [                                                                        %! ACC_1
-                                bf'16
-                                ]                                                                        %! ACC_1
-                            }
-                            r4
+                        r4
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            fs''16
+                            [                                                                            %! ACC_1
+                            e''16
+                            ef''16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                fs''16
-                                [                                                                        %! ACC_1
-                                e''16
-                                ef''16
-                                ]                                                                        %! ACC_1
-                            }
-                            r4
+                        r4
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            af''16
+                            [                                                                            %! ACC_1
+                            g''16
+                            a'16
+                            c'16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                af''16
-                                [                                                                        %! ACC_1
-                                g''16
-                                a'16
-                                c'16
-                                ]                                                                        %! ACC_1
-                            }
-                            r4
+                        r4
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            d'16
+                            [                                                                            %! ACC_1
+                            bf'16
+                            fs''16
+                            e''16
+                            ef''16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                d'16
-                                [                                                                        %! ACC_1
-                                bf'16
-                                fs''16
-                                e''16
-                                ef''16
-                                ]                                                                        %! ACC_1
-                            }
-                            r4
+                        r4
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            af''16
+                            [                                                                            %! ACC_1
+                            g''16
+                            a'16
+                            c'16
+                            d'16
+                            bf'16
+                            ]                                                                            %! ACC_1
                         }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                af''16
-                                [                                                                        %! ACC_1
-                                g''16
-                                a'16
-                                c'16
-                                d'16
-                                bf'16
-                                ]                                                                        %! ACC_1
-                            }
-                            r4
-                        }
-                    }   % measure
+                        r4
+                    }
                 }
 
         ..  container:: example
@@ -9956,31 +9918,29 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                     \override TupletBracket.staff-padding = #1.5
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 5/4 {
                         \time 15/16
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 5/4 {
-                            c'16
-                            [
-                            d'16
-                            bf'8
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 7/6 {
-                            fs''16
-                            [
-                            e''16
-                            ef''8
-                            af''16
-                            g''16
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 3/2 {
-                            a'8
-                        }
-                    }   % measure
+                        c'16
+                        [
+                        d'16
+                        bf'8
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 7/6 {
+                        fs''16
+                        [
+                        e''16
+                        ef''8
+                        af''16
+                        g''16
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 3/2 {
+                        a'8
+                    }
                 }
 
         ..  container:: example
@@ -10014,47 +9974,45 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                     \override Beam.positions = #'(-5.5 . -5.5)
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 5/4 {
+                        \set stemLeftBeamCount = 0
+                        \set stemRightBeamCount = 2
                         \time 15/16
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 5/4 {
-                            \set stemLeftBeamCount = 0
-                            \set stemRightBeamCount = 2
-                            c'16
-                            [
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 1
-                            d'16
-                            \set stemLeftBeamCount = 1
-                            \set stemRightBeamCount = 1
-                            bf'8
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 7/6 {
-                            \set stemLeftBeamCount = 1
-                            \set stemRightBeamCount = 2
-                            fs''16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 1
-                            e''16
-                            \set stemLeftBeamCount = 1
-                            \set stemRightBeamCount = 1
-                            ef''8
-                            \set stemLeftBeamCount = 1
-                            \set stemRightBeamCount = 2
-                            af''16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 1
-                            g''16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 3/2 {
-                            \set stemLeftBeamCount = 1
-                            \set stemRightBeamCount = 0
-                            a'8
-                            ]
-                        }
-                    }   % measure
+                        c'16
+                        [
+                        \set stemLeftBeamCount = 2
+                        \set stemRightBeamCount = 1
+                        d'16
+                        \set stemLeftBeamCount = 1
+                        \set stemRightBeamCount = 1
+                        bf'8
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 7/6 {
+                        \set stemLeftBeamCount = 1
+                        \set stemRightBeamCount = 2
+                        fs''16
+                        \set stemLeftBeamCount = 2
+                        \set stemRightBeamCount = 1
+                        e''16
+                        \set stemLeftBeamCount = 1
+                        \set stemRightBeamCount = 1
+                        ef''8
+                        \set stemLeftBeamCount = 1
+                        \set stemRightBeamCount = 2
+                        af''16
+                        \set stemLeftBeamCount = 2
+                        \set stemRightBeamCount = 1
+                        g''16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 3/2 {
+                        \set stemLeftBeamCount = 1
+                        \set stemRightBeamCount = 0
+                        a'8
+                        ]
+                    }
                 }
 
         ..  container:: example
@@ -10082,27 +10040,25 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 5/4 {
                         \time 15/16
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 5/4 {
-                            c'16
-                            d'16
-                            bf'8
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 7/6 {
-                            fs''16
-                            e''16
-                            ef''8
-                            af''16
-                            g''16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 3/2 {
-                            a'8
-                        }
-                    }   % measure
+                        c'16
+                        d'16
+                        bf'8
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 7/6 {
+                        fs''16
+                        e''16
+                        ef''8
+                        af''16
+                        g''16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 3/2 {
+                        a'8
+                    }
                 }
 
         ..  container:: example
@@ -10133,31 +10089,29 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                     \override TupletBracket.staff-padding = #1.5
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 5/4 {
                         \time 15/16
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 5/4 {
-                            r16
-                            d'16
-                            [
-                            bf'8
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 7/6 {
-                            fs''16
-                            [
-                            e''16
-                            ef''8
-                            af''16
-                            ]
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 3/2 {
-                            a'8
-                        }
-                    }   % measure
+                        r16
+                        d'16
+                        [
+                        bf'8
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 7/6 {
+                        fs''16
+                        [
+                        e''16
+                        ef''8
+                        af''16
+                        ]
+                        r16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 3/2 {
+                        a'8
+                    }
                 }
 
         ..  container:: example
@@ -10191,31 +10145,29 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                     \override TupletBracket.staff-padding = #1.5
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 5/4 {
                         \time 15/16
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 5/4 {
-                            r16
-                            [
-                            d'16
-                            bf'8
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 7/6 {
-                            fs''16
-                            [
-                            e''16
-                            ef''8
-                            af''16
-                            r16
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 3/2 {
-                            a'8
-                        }
-                    }   % measure
+                        r16
+                        [
+                        d'16
+                        bf'8
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 7/6 {
+                        fs''16
+                        [
+                        e''16
+                        ef''8
+                        af''16
+                        r16
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 3/2 {
+                        a'8
+                    }
                 }
 
         ..  container:: example
@@ -10250,37 +10202,35 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                     \override TupletBracket.staff-padding = #1.5
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 5/4 {
+                        \override Staff.Stem.stemlet-length = 0.75
                         \time 15/16
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 5/4 {
-                            \override Staff.Stem.stemlet-length = 0.75
-                            r16
-                            [
-                            d'16
-                            \revert Staff.Stem.stemlet-length
-                            bf'8
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 7/6 {
-                            \override Staff.Stem.stemlet-length = 0.75
-                            fs''16
-                            [
-                            e''16
-                            ef''8
-                            af''16
-                            \revert Staff.Stem.stemlet-length
-                            r16
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 3/2 {
-                            \override Staff.Stem.stemlet-length = 0.75
-                            \revert Staff.Stem.stemlet-length
-                            a'8
-                        }
-                    }   % measure
+                        r16
+                        [
+                        d'16
+                        \revert Staff.Stem.stemlet-length
+                        bf'8
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 7/6 {
+                        \override Staff.Stem.stemlet-length = 0.75
+                        fs''16
+                        [
+                        e''16
+                        ef''8
+                        af''16
+                        \revert Staff.Stem.stemlet-length
+                        r16
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 3/2 {
+                        \override Staff.Stem.stemlet-length = 0.75
+                        \revert Staff.Stem.stemlet-length
+                        a'8
+                    }
                 }
 
         ..  container:: example
@@ -10323,28 +10273,26 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff
                 {
-                    {   % measure
+                    \scaleDurations #'(1 . 1) {
                         \time 3/4
-                        \scaleDurations #'(1 . 1) {
-                            c'16
-                            [
-                            d'16
-                            bf'8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            fs''16
-                            [
-                            e''16
-                            ef''8
-                            af''16
-                            g''16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            a'8
-                        }
-                    }   % measure
+                        c'16
+                        [
+                        d'16
+                        bf'8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        fs''16
+                        [
+                        e''16
+                        ef''8
+                        af''16
+                        g''16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        a'8
+                    }
                 }
 
         ..  container:: example
@@ -10371,20 +10319,18 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff
                 {
-                    {   % measure
+                    \scaleDurations #'(1 . 1) {
                         \time 3/4
-                        \scaleDurations #'(1 . 1) {
-                            c'16
-                            [
-                            d'16
-                            bf'8
-                            ]
-                        }
-                        r4.
-                        \scaleDurations #'(1 . 1) {
-                            a'8
-                        }
-                    }   % measure
+                        c'16
+                        [
+                        d'16
+                        bf'8
+                        ]
+                    }
+                    r4.
+                    \scaleDurations #'(1 . 1) {
+                        a'8
+                    }
                 }
 
         ..  container:: example
@@ -10411,20 +10357,18 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff
                 {
-                    {   % measure
+                    \scaleDurations #'(1 . 1) {
                         \time 3/4
-                        \scaleDurations #'(1 . 1) {
-                            c'16
-                            [
-                            d'16
-                            bf'8
-                            ]
-                        }
-                        c'4.
-                        \scaleDurations #'(1 . 1) {
-                            a'8
-                        }
-                    }   % measure
+                        c'16
+                        [
+                        d'16
+                        bf'8
+                        ]
+                    }
+                    c'4.
+                    \scaleDurations #'(1 . 1) {
+                        a'8
+                    }
                 }
 
         ..  container:: example
@@ -10468,36 +10412,34 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff
                 {
-                    {   % measure
+                    \scaleDurations #'(1 . 1) {
                         \time 39/32
-                        \scaleDurations #'(1 . 1) {
-                            c'8
-                            [
-                            d'8
-                            bf'8
-                            ~
-                            bf'32
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            fs''8
-                            [
-                            e''8
-                            ef''8
-                            ~
-                            ef''32
-                            af''8
-                            g''8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            a'8
-                            ~
-                            [
-                            a'32
-                            ]
-                        }
-                    }   % measure
+                        c'8
+                        [
+                        d'8
+                        bf'8
+                        ~
+                        bf'32
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        fs''8
+                        [
+                        e''8
+                        ef''8
+                        ~
+                        ef''32
+                        af''8
+                        g''8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        a'8
+                        ~
+                        [
+                        a'32
+                        ]
+                    }
                 }
 
         ..  container:: example
@@ -10525,36 +10467,34 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff
                 {
-                    {   % measure
+                    \scaleDurations #'(1 . 1) {
                         \time 39/32
-                        \scaleDurations #'(1 . 1) {
-                            c'8
-                            [
-                            d'8
-                            bf'32
-                            ~
-                            bf'8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            fs''8
-                            [
-                            e''8
-                            ef''32
-                            ~
-                            ef''8
-                            af''8
-                            g''8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            a'32
-                            ~
-                            [
-                            a'8
-                            ]
-                        }
-                    }   % measure
+                        c'8
+                        [
+                        d'8
+                        bf'32
+                        ~
+                        bf'8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        fs''8
+                        [
+                        e''8
+                        ef''32
+                        ~
+                        ef''8
+                        af''8
+                        g''8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        a'32
+                        ~
+                        [
+                        a'8
+                        ]
+                    }
                 }
 
         ..  container:: example
@@ -10600,30 +10540,28 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff
                 {
-                    {   % measure
+                    \scaleDurations #'(1 . 1) {
                         \time 3/4
-                        \scaleDurations #'(1 . 1) {
-                            c'16
-                            [
-                            d'16
-                            ]
-                            r8
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            fs''16
-                            [
-                            e''16
-                            ]
-                            r8
-                            af''16
-                            [
-                            g''16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            r8
-                        }
-                    }   % measure
+                        c'16
+                        [
+                        d'16
+                        ]
+                        r8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        fs''16
+                        [
+                        e''16
+                        ]
+                        r8
+                        af''16
+                        [
+                        g''16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        r8
+                    }
                 }
 
         ..  container:: example
@@ -10651,28 +10589,26 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff
                 {
-                    {   % measure
+                    \scaleDurations #'(1 . 1) {
                         \time 3/4
-                        \scaleDurations #'(1 . 1) {
-                            r16
-                            d'16
-                            [
-                            bf'8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            fs''16
-                            [
-                            e''16
-                            ef''8
-                            af''16
-                            g''16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            r8
-                        }
-                    }   % measure
+                        r16
+                        d'16
+                        [
+                        bf'8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        fs''16
+                        [
+                        e''16
+                        ef''8
+                        af''16
+                        g''16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        r8
+                    }
                 }
 
         ..  container:: example
@@ -10719,37 +10655,35 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff
                 {
-                    {   % measure
+                    \scaleDurations #'(1 . 1) {
+                        \override Staff.Stem.stemlet-length = 1.5
                         \time 3/2
-                        \scaleDurations #'(1 . 1) {
-                            \override Staff.Stem.stemlet-length = 1.5
-                            c'8.
-                            [
-                            r16
-                            d'8
-                            \revert Staff.Stem.stemlet-length
-                            bf'8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            \override Staff.Stem.stemlet-length = 1.5
-                            fs''8.
-                            [
-                            r16
-                            e''8
-                            ef''8
-                            af''8.
-                            r16
-                            \revert Staff.Stem.stemlet-length
-                            g''8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            \override Staff.Stem.stemlet-length = 1.5
-                            \revert Staff.Stem.stemlet-length
-                            a'8
-                        }
-                    }   % measure
+                        c'8.
+                        [
+                        r16
+                        d'8
+                        \revert Staff.Stem.stemlet-length
+                        bf'8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \override Staff.Stem.stemlet-length = 1.5
+                        fs''8.
+                        [
+                        r16
+                        e''8
+                        ef''8
+                        af''8.
+                        r16
+                        \revert Staff.Stem.stemlet-length
+                        g''8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \override Staff.Stem.stemlet-length = 1.5
+                        \revert Staff.Stem.stemlet-length
+                        a'8
+                    }
                 }
 
         ..  container:: example
@@ -10776,17 +10710,15 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff
                 {
-                    {   % measure
+                    \scaleDurations #'(1 . 1) {
                         \time 29/32
-                        \scaleDurations #'(1 . 1) {
-                            c'4..
-                            c'64
-                            \repeatTie
-                            d'4..
-                            d'64
-                            \repeatTie
-                        }
-                    }   % measure
+                        c'4..
+                        c'64
+                        \repeatTie
+                        d'4..
+                        d'64
+                        \repeatTie
+                    }
                 }
 
         ..  container:: example
@@ -10832,29 +10764,27 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff
                 {
-                    {   % measure
+                    \scaleDurations #'(1 . 1) {
                         \time 3/4
-                        \scaleDurations #'(1 . 1) {
-                            c'16
-                            [
-                            d'16
-                            bf'8
-                            ~
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            bf'16
-                            [
-                            e''16
-                            ef''8
-                            af''16
-                            g''16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            a'8
-                        }
-                    }   % measure
+                        c'16
+                        [
+                        d'16
+                        bf'8
+                        ~
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        bf'16
+                        [
+                        e''16
+                        ef''8
+                        af''16
+                        g''16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        a'8
+                    }
                 }
 
         ..  container:: example
@@ -10881,32 +10811,30 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff
                 {
-                    {   % measure
+                    \scaleDurations #'(1 . 1) {
                         \time 3/4
-                        \scaleDurations #'(1 . 1) {
-                            c'16
-                            [
-                            d'16
-                            bf'8
-                            ~
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            bf'16
-                            [
-                            e''16
-                            ~
-                            e''8
-                            g''16
-                            ~
-                            g''16
-                            ~
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            g''8
-                        }
-                    }   % measure
+                        c'16
+                        [
+                        d'16
+                        bf'8
+                        ~
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        bf'16
+                        [
+                        e''16
+                        ~
+                        e''8
+                        g''16
+                        ~
+                        g''16
+                        ~
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        g''8
+                    }
                 }
 
         ..  container:: example
@@ -10950,31 +10878,29 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 5/4 {
                         \time 15/16
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 5/4 {
-                            c'16
-                            [
-                            d'16
-                            bf'8
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 7/6 {
-                            fs''16
-                            [
-                            e''16
-                            ef''8
-                            af''16
-                            g''16
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 3/2 {
-                            a'8
-                        }
-                    }   % measure
+                        c'16
+                        [
+                        d'16
+                        bf'8
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 7/6 {
+                        fs''16
+                        [
+                        e''16
+                        ef''8
+                        af''16
+                        g''16
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 3/2 {
+                        a'8
+                    }
                 }
 
         ..  container:: example
@@ -10999,30 +10925,28 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 3/4 {
                         \time 5/8
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 3/4 {
-                            c'16
-                            [
-                            d'16
-                            bf'8
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 5/6 {
-                            fs''16
-                            [
-                            e''16
-                            ef''8
-                            af''16
-                            g''16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            a'8
-                        }
-                    }   % measure
+                        c'16
+                        [
+                        d'16
+                        bf'8
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 5/6 {
+                        fs''16
+                        [
+                        e''16
+                        ef''8
+                        af''16
+                        g''16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        a'8
+                    }
                 }
 
         ..  container:: example
@@ -11052,30 +10976,28 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 3/4 {
                         \time 5/8
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 3/4 {
-                            c'16
-                            [
-                            d'16
-                            bf'8
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 5/6 {
-                            fs''16
-                            [
-                            e''16
-                            ef''8
-                            af''16
-                            g''16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            a'8
-                        }
-                    }   % measure
+                        c'16
+                        [
+                        d'16
+                        bf'8
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 5/6 {
+                        fs''16
+                        [
+                        e''16
+                        ef''8
+                        af''16
+                        g''16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        a'8
+                    }
                 }
 
         ..  container:: example
@@ -11105,30 +11027,28 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 3/4 {
                         \time 5/8
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 3/4 {
-                            c'16
-                            [
-                            d'16
-                            bf'8
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 5/6 {
-                            fs''16
-                            [
-                            e''16
-                            ef''8
-                            af''16
-                            g''16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            a'8
-                        }
-                    }   % measure
+                        c'16
+                        [
+                        d'16
+                        bf'8
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 5/6 {
+                        fs''16
+                        [
+                        e''16
+                        ef''8
+                        af''16
+                        g''16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        a'8
+                    }
                 }
 
         ..  container:: example
@@ -11156,30 +11076,28 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 3/4 {
                         \time 5/8
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 3/4 {
-                            c'16
-                            [
-                            d'16
-                            bf'8
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 5/6 {
-                            fs''16
-                            [
-                            e''16
-                            ef''8
-                            af''16
-                            g''16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            a'8
-                        }
-                    }   % measure
+                        c'16
+                        [
+                        d'16
+                        bf'8
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 5/6 {
+                        fs''16
+                        [
+                        e''16
+                        ef''8
+                        af''16
+                        g''16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        a'8
+                    }
                 }
 
         ..  container:: example
@@ -11209,30 +11127,28 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 3/4 {
                         \time 5/8
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 3/4 {
-                            c'16
-                            [
-                            d'16
-                            bf'8
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 5/6 {
-                            fs''16
-                            [
-                            e''16
-                            ef''8
-                            af''16
-                            g''16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            a'8
-                        }
-                    }   % measure
+                        c'16
+                        [
+                        d'16
+                        bf'8
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 5/6 {
+                        fs''16
+                        [
+                        e''16
+                        ef''8
+                        af''16
+                        g''16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        a'8
+                    }
                 }
 
         ..  container:: example
@@ -11272,56 +11188,54 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                     \override Stem.direction = #down
                 }
                 {
-                    {   % measure
+                    \tweak edge-height #'(0.7 . 0)
+                    \times 2/3 {
                         \time 7/4
-                        \tweak edge-height #'(0.7 . 0)
-                        \times 2/3 {
-                            c'8
-                        }
-                        \tweak edge-height #'(0.7 . 0)
-                        \times 2/3 {
-                            d'8
-                            [
-                            bf'8
-                            ]
-                        }
-                        \times 2/3 {
-                            fs''8
-                            [
-                            e''8
-                            ef''8
-                            ]
-                        }
-                        \tweak edge-height #'(0.7 . 0)
-                        \times 2/3 {
-                            af''8
-                            [
-                            g''8
-                            a'8
-                            c'8
-                            ]
-                        }
-                        \tweak edge-height #'(0.7 . 0)
-                        \times 2/3 {
-                            d'8
-                            [
-                            bf'8
-                            fs''8
-                            e''8
-                            ef''8
-                            ]
-                        }
-                        \times 2/3 {
-                            af''8
-                            [
-                            g''8
-                            a'8
-                            c'8
-                            d'8
-                            bf'8
-                            ]
-                        }
-                    }   % measure
+                        c'8
+                    }
+                    \tweak edge-height #'(0.7 . 0)
+                    \times 2/3 {
+                        d'8
+                        [
+                        bf'8
+                        ]
+                    }
+                    \times 2/3 {
+                        fs''8
+                        [
+                        e''8
+                        ef''8
+                        ]
+                    }
+                    \tweak edge-height #'(0.7 . 0)
+                    \times 2/3 {
+                        af''8
+                        [
+                        g''8
+                        a'8
+                        c'8
+                        ]
+                    }
+                    \tweak edge-height #'(0.7 . 0)
+                    \times 2/3 {
+                        d'8
+                        [
+                        bf'8
+                        fs''8
+                        e''8
+                        ef''8
+                        ]
+                    }
+                    \times 2/3 {
+                        af''8
+                        [
+                        g''8
+                        a'8
+                        c'8
+                        d'8
+                        bf'8
+                        ]
+                    }
                 }
 
         ..  container:: example
@@ -11364,52 +11278,50 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                     \override Stem.direction = #down
                 }
                 {
-                    {   % measure
+                    \scaleDurations #'(1 . 1) {
                         \time 3/2
-                        \scaleDurations #'(1 . 1) {
-                            c'4
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            d'8
-                            [
-                            bf'8
-                            ]
-                        }
-                        \times 4/6 {
-                            fs''8
-                            [
-                            e''8
-                            ef''8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            af''16
-                            [
-                            g''16
-                            a'16
-                            c'16
-                            ]
-                        }
-                        \times 4/5 {
-                            d'16
-                            [
-                            bf'16
-                            fs''16
-                            e''16
-                            ef''16
-                            ]
-                        }
-                        \times 4/6 {
-                            af''16
-                            [
-                            g''16
-                            a'16
-                            c'16
-                            d'16
-                            bf'16
-                            ]
-                        }
-                    }   % measure
+                        c'4
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        d'8
+                        [
+                        bf'8
+                        ]
+                    }
+                    \times 4/6 {
+                        fs''8
+                        [
+                        e''8
+                        ef''8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        af''16
+                        [
+                        g''16
+                        a'16
+                        c'16
+                        ]
+                    }
+                    \times 4/5 {
+                        d'16
+                        [
+                        bf'16
+                        fs''16
+                        e''16
+                        ef''16
+                        ]
+                    }
+                    \times 4/6 {
+                        af''16
+                        [
+                        g''16
+                        a'16
+                        c'16
+                        d'16
+                        bf'16
+                        ]
+                    }
                 }
 
         ..  container:: example
@@ -11453,65 +11365,63 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                     \override Stem.direction = #down
                 }
                 {
-                    {   % measure
+                    \times 4/6 {
                         \time 15/8
-                        \times 4/6 {
-                            c'16
-                            [
-                            d'16
-                            bf'8
-                            fs''16
-                            e''16
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 6/7 {
-                            ef''8
-                            [
-                            af''16
-                            g''16
-                            a'8
-                            c'16
-                            ]
-                        }
-                        \times 4/7 {
-                            d'16
-                            [
-                            bf'8
-                            fs''16
-                            e''16
-                            ef''8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            af''16
-                            [
-                            g''16
-                            a'8
-                            c'16
-                            d'16
-                            ]
-                        }
-                        \times 4/7 {
-                            bf'8
-                            [
-                            fs''16
-                            e''16
-                            ef''8
-                            af''16
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 6/7 {
-                            g''16
-                            [
-                            a'8
-                            c'16
-                            d'16
-                            bf'8
-                            ]
-                        }
-                    }   % measure
+                        c'16
+                        [
+                        d'16
+                        bf'8
+                        fs''16
+                        e''16
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 6/7 {
+                        ef''8
+                        [
+                        af''16
+                        g''16
+                        a'8
+                        c'16
+                        ]
+                    }
+                    \times 4/7 {
+                        d'16
+                        [
+                        bf'8
+                        fs''16
+                        e''16
+                        ef''8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        af''16
+                        [
+                        g''16
+                        a'8
+                        c'16
+                        d'16
+                        ]
+                    }
+                    \times 4/7 {
+                        bf'8
+                        [
+                        fs''16
+                        e''16
+                        ef''8
+                        af''16
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 6/7 {
+                        g''16
+                        [
+                        a'8
+                        c'16
+                        d'16
+                        bf'8
+                        ]
+                    }
                 }
 
         ..  container:: example
@@ -11564,37 +11474,35 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                     \override TupletBracket.staff-padding = #1.5
                 }
                 {
-                    {   % measure
+                    \times 2/3 {
                         \time 11/8
-                        \times 2/3 {
-                            c'8.
-                            [
-                            d'8.
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 7/9 {
-                            bf'8.
-                            [
-                            fs''8.
-                            e''8.
-                            ]
-                        }
-                        \times 2/3 {
-                            ef''8.
-                            [
-                            af''8.
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 7/9 {
-                            g''8.
-                            [
-                            a'8.
-                            ]
-                            r8.
-                        }
-                    }   % measure
+                        c'8.
+                        [
+                        d'8.
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 7/9 {
+                        bf'8.
+                        [
+                        fs''8.
+                        e''8.
+                        ]
+                    }
+                    \times 2/3 {
+                        ef''8.
+                        [
+                        af''8.
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 7/9 {
+                        g''8.
+                        [
+                        a'8.
+                        ]
+                        r8.
+                    }
                 }
 
         ..  container:: example
@@ -11628,39 +11536,37 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                     \override TupletBracket.staff-padding = #1.5
                 }
                 {
-                    {   % measure
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 1/1 {
                         \time 11/8
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 1/1 {
-                            c'8
-                            [
-                            d'8
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 7/9 {
-                            bf'8.
-                            [
-                            fs''8.
-                            e''8.
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 1/1 {
-                            ef''8
-                            [
-                            af''8
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 7/9 {
-                            g''8.
-                            [
-                            a'8.
-                            ]
-                            r8.
-                        }
-                    }   % measure
+                        c'8
+                        [
+                        d'8
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 7/9 {
+                        bf'8.
+                        [
+                        fs''8.
+                        e''8.
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 1/1 {
+                        ef''8
+                        [
+                        af''8
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 7/9 {
+                        g''8.
+                        [
+                        a'8.
+                        ]
+                        r8.
+                    }
                 }
 
         ..  container:: example
