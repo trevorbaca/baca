@@ -3013,7 +3013,8 @@ class PitchArrayRow(abjad.AbjadObject):
         pair = (self.width, cell_duration_denominator)
         time_signature = abjad.TimeSignature(pair)
         basic_cell_duration = abjad.Duration(1, cell_duration_denominator)
-        measure_pitches, measure_durations = [], []
+        measure_pitches: typing.List[typing.Optional[int]] = []
+        measure_durations = []
         for cell in self.cells:
             cell_pitches = cell.pitches
             if not cell_pitches:
