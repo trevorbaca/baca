@@ -1271,9 +1271,10 @@ class Expression(abjad.Expression):
             ..  container:: example
 
                 >>> staff = abjad.Staff()
-                >>> staff.append(abjad.Measure((2, 8), "<c' bf'>8 <g' a'>8"))
-                >>> staff.append(abjad.Measure((2, 8), "af'8 r8"))
-                >>> staff.append(abjad.Measure((2, 8), "r8 gf'8"))
+                >>> staff.extend("<c' bf'>8 <g' a'>8")
+                >>> staff.extend("af'8 r8")
+                >>> staff.extend("r8 gf'8")
+                >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
                 >>> abjad.show(staff, strict=89) # doctest: +SKIP
 
                 ..  docs::
@@ -1281,19 +1282,13 @@ class Expression(abjad.Expression):
                     >>> abjad.f(staff, strict=89)
                     \new Staff
                     {
-                        {   % measure
-                            \time 2/8
-                            <c' bf'>8
-                            <g' a'>8
-                        }   % measure
-                        {   % measure
-                            af'8
-                            r8
-                        }   % measure
-                        {   % measure
-                            r8
-                            gf'8
-                        }   % measure
+                        \time 2/8
+                        <c' bf'>8
+                        <g' a'>8
+                        af'8
+                        r8
+                        r8
+                        gf'8
                     }
 
             ..  container:: example expression

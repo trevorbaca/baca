@@ -4,6 +4,7 @@ Pitch array library.
 import abjad
 import copy
 import numbers
+import typing
 from . import classes
 
 
@@ -853,7 +854,10 @@ class PitchArray(abjad.AbjadObject):
         self._rows.remove(row)
         row._parent_array = None
 
-    def to_measures(self, cell_duration_denominator=8):
+    def to_measures(
+        self,
+        cell_duration_denominator=8,
+        ) -> typing.List[abjad.Container]:
         r"""
         Changes pitch array  to measures.
 
@@ -883,26 +887,26 @@ class PitchArray(abjad.AbjadObject):
                 >>> abjad.f(staff, strict=89)
                 \new Staff
                 {
-                    {   % measure
+                    {
                         \time 4/8
                         r8
                         d'8
                         <bf bqf>4
-                    }   % measure
-                    {   % measure
+                    }
+                    {
+                        \time 4/8
                         g'4
                         fs'8
                         r8
-                    }   % measure
+                    }
                 }
 
-        Returns list of measures.
         """
-        measures = []
+        containers = []
         for row in self.rows:
-            measure = row.to_measure(cell_duration_denominator)
-            measures.append(measure)
-        return measures
+            container = row.to_measure(cell_duration_denominator)
+            containers.append(container)
+        return containers
 
 class PitchArrayCell(abjad.AbjadObject):
     """
@@ -2201,7 +2205,7 @@ class PitchArrayList(abjad.TypedList):
 
     ### PUBLIC METHODS ###
 
-    def to_score(self):
+    def to_score(self) -> abjad.Score:
         r"""
         Makes score from pitch arrays.
 
@@ -2230,40 +2234,38 @@ class PitchArrayList(abjad.TypedList):
                     <<
                         \new Staff
                         {
-                            {   % measure
+                            {
                                 \time 4/8
                                 r8
                                 d'8
                                 <bf bqf>4
-                            }   % measure
-                            {   % measure
+                            }
+                            {
                                 \time 3/8
                                 r8
                                 r8
                                 r8
-                            }   % measure
+                            }
                         }
                         \new Staff
                         {
-                            {   % measure
+                            {
                                 \time 4/8
                                 g'4
                                 fs'8
                                 r8
-                            }   % measure
-                            {   % measure
+                            }
+                            {
                                 \time 3/8
                                 r8
                                 r8
                                 r8
-                            }   % measure
+                            }
                         }
                     >>
                 >>
 
         Creates one staff per pitch-array row.
-
-        Returns score.
         """
         score = abjad.Score([])
         staff_group = abjad.StaffGroup([])
@@ -2971,7 +2973,7 @@ class PitchArrayRow(abjad.AbjadObject):
                 break
         cell._parent_row = None
 
-    def to_measure(self, cell_duration_denominator=8):
+    def to_measure(self, cell_duration_denominator=8) -> typing.Container:
         r"""
         Changes pitch array row to measures.
 
@@ -2991,23 +2993,25 @@ class PitchArrayRow(abjad.AbjadObject):
             [g'     ] [fs'   ] [ ]
 
             >>> measure = array.rows[0].to_measure()
-            >>> abjad.show(measure, strict=89) # doctest: +SKIP
+            >>> staff = abjad.Staff([measure])
+            >>> abjad.show(staff, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(measure, strict=89)
-                {   % measure
-                    \time 4/8
-                    r8
-                    d'8
-                    <bf bqf>4
-                }   % measure
+                >>> abjad.f(staff, strict=89)
+                \new Staff
+                {
+                    {
+                        \time 4/8
+                        r8
+                        d'8
+                        <bf bqf>4
+                    }
+                }
 
-        Returns measure.
         """
         pair = (self.width, cell_duration_denominator)
         time_signature = abjad.TimeSignature(pair)
-        measure = abjad.Measure(time_signature, [])
         basic_cell_duration = abjad.Duration(1, cell_duration_denominator)
         measure_pitches, measure_durations = [], []
         for cell in self.cells:
@@ -3022,8 +3026,9 @@ class PitchArrayRow(abjad.AbjadObject):
             measure_durations.append(measure_duration)
         maker = abjad.LeafMaker()
         leaves = maker(measure_pitches, measure_durations)
-        measure.extend(leaves)
-        return measure
+        abjad.attach(time_signature, leaves[0])
+        container = abjad.Container(leaves)
+        return container
 
     def withdraw(self):
         r"""Withdraws pitch array row from parent pitch array.
