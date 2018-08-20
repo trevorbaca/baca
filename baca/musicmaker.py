@@ -1338,10 +1338,7 @@ class ImbricationCommand(scoping.Command):
             <<
                 \new GlobalContext
                 {
-                    {   % measure
-                        \time 15/16
-                        s1 * 15/16
-                    }   % measure
+                    s1 * 15/16
                 }
                 \new Staff
                 <<
@@ -1483,10 +1480,7 @@ class ImbricationCommand(scoping.Command):
             <<
                 \new GlobalContext
                 {
-                    {   % measure
-                        \time 15/16
-                        s1 * 15/16
-                    }   % measure
+                    s1 * 15/16
                 }
                 \new Staff
                 <<
@@ -1682,10 +1676,7 @@ class ImbricationCommand(scoping.Command):
             <<
                 \new GlobalContext
                 {
-                    {   % measure
-                        \time 9/8
-                        s1 * 9/8
-                    }   % measure
+                    s1 * 9/8
                 }
                 \new Staff
                 <<
@@ -1923,10 +1914,7 @@ class ImbricationCommand(scoping.Command):
                 <<
                     \new GlobalContext
                     {
-                        {   % measure
-                            \time 27/16
-                            s1 * 27/16
-                        }   % measure
+                        s1 * 27/16
                     }
                     \new Staff
                     <<
@@ -2033,10 +2021,7 @@ class ImbricationCommand(scoping.Command):
                 <<
                     \new GlobalContext
                     {
-                        {   % measure
-                            \time 9/8
-                            s1 * 9/8
-                        }   % measure
+                        s1 * 9/8
                     }
                     \new Staff
                     <<
@@ -2432,10 +2417,7 @@ class ImbricationCommand(scoping.Command):
                 <<
                     \new GlobalContext
                     {
-                        {   % measure
-                            \time 11/16
-                            s1 * 11/16
-                        }   % measure
+                        s1 * 11/16
                     }
                     \new Staff
                     <<
@@ -2554,10 +2536,7 @@ class ImbricationCommand(scoping.Command):
                 <<
                     \new GlobalContext
                     {
-                        {   % measure
-                            \time 19/16
-                            s1 * 19/16
-                        }   % measure
+                        s1 * 19/16
                     }
                     \new Staff
                     <<
@@ -2850,10 +2829,7 @@ class ImbricationCommand(scoping.Command):
                 <<
                     \new GlobalContext
                     {
-                        {   % measure
-                            \time 5/8
-                            s1 * 5/8
-                        }   % measure
+                        s1 * 5/8
                     }
                     \new Staff
                     <<
@@ -3060,10 +3036,7 @@ class ImbricationCommand(scoping.Command):
                 <<
                     \new GlobalContext
                     {
-                        {   % measure
-                            \time 15/16
-                            s1 * 15/16
-                        }   % measure
+                        s1 * 15/16
                     }
                     \new Staff
                     <<
@@ -3242,10 +3215,7 @@ class ImbricationCommand(scoping.Command):
                 <<
                     \new GlobalContext
                     {
-                        {   % measure
-                            \time 9/8
-                            s1 * 9/8
-                        }   % measure
+                        s1 * 9/8
                     }
                     \new Staff
                     <<
@@ -3445,10 +3415,7 @@ class ImbricationCommand(scoping.Command):
                 <<
                     \new GlobalContext
                     {
-                        {   % measure
-                            \time 15/16
-                            s1 * 15/16
-                        }   % measure
+                        s1 * 15/16
                     }
                     \new Staff
                     <<
@@ -3581,10 +3548,7 @@ class ImbricationCommand(scoping.Command):
                 <<
                     \new GlobalContext
                     {
-                        {   % measure
-                            \time 15/16
-                            s1 * 15/16
-                        }   % measure
+                        s1 * 15/16
                     }
                     \new Staff
                     <<
@@ -3731,10 +3695,7 @@ class ImbricationCommand(scoping.Command):
                 <<
                     \new GlobalContext
                     {
-                        {   % measure
-                            \time 15/16
-                            s1 * 15/16
-                        }   % measure
+                        s1 * 15/16
                     }
                     \new Staff
                     <<
@@ -3879,10 +3840,7 @@ class ImbricationCommand(scoping.Command):
                 <<
                     \new GlobalContext
                     {
-                        {   % measure
-                            \time 15/16
-                            s1 * 15/16
-                        }   % measure
+                        s1 * 15/16
                     }
                     \new Staff
                     <<
@@ -4030,10 +3988,7 @@ class ImbricationCommand(scoping.Command):
                 <<
                     \new GlobalContext
                     {
-                        {   % measure
-                            \time 45/32
-                            s1 * 45/32
-                        }   % measure
+                        s1 * 45/32
                     }
                     \new Staff
                     <<
