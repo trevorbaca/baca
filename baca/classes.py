@@ -1823,7 +1823,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         r16
                         bf'16
                         <a'' b''>16
@@ -1925,7 +1924,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         r16
                         bf'16
                         \abjad-color-music #'red
@@ -2128,7 +2126,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         r16
                         ^ \markup {
                             \bold
@@ -2353,7 +2350,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         r16
                         bf'16
                         <a'' b''>16
@@ -2526,7 +2522,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         r16
                         bf'16
                         <a'' b''>16
@@ -2631,7 +2626,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         \abjad-color-music #'red
                         r16
                         \abjad-color-music #'red
@@ -2729,7 +2723,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         r16
                         bf'16
                         <a'' b''>16
@@ -2820,7 +2813,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         r16
                         \abjad-color-music #'green
                         bf'16
@@ -2943,7 +2935,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         r16
                         \abjad-color-music #'red
                         bf'16
@@ -3048,7 +3039,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         r16
                         c'16
                         c'16
@@ -3151,7 +3141,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         r16
                         \abjad-color-music #'red
                         c'16
@@ -3260,7 +3249,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         r16
                         c'16
                         c'16
@@ -3360,7 +3348,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         r16
                         \abjad-color-music #'red
                         c'16
@@ -3495,7 +3482,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         \abjad-color-music #'red
                         r16
                         \abjad-color-music #'blue
@@ -3617,7 +3603,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         \abjad-color-music #'red
                         r16
                         \abjad-color-music #'red
@@ -3964,7 +3949,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         r16
                         c'16
                         c'16
@@ -4064,7 +4048,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         r16
                         \abjad-color-music #'red
                         c'16
@@ -4254,7 +4237,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         r16
                         bf'16
                         <a'' b''>16
@@ -4368,7 +4350,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         r16
                         \abjad-color-music #'red
                         bf'16
@@ -4472,7 +4453,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         r16
                         bf'16
                         <a'' b''>16
@@ -4592,7 +4572,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         r16
                         \abjad-color-music #'red
                         bf'16
@@ -4699,7 +4678,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         r16
                         bf'16
                         <a'' b''>16
@@ -4814,7 +4792,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         r16
                         \abjad-color-music #'red
                         bf'16
@@ -4921,7 +4898,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         r16
                         bf'16
                         <a'' b''>16
@@ -5035,7 +5011,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         r16
                         \abjad-color-music #'red
                         bf'16
@@ -5136,7 +5111,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         r16
                         bf'16
                         <a'' b''>16
@@ -5244,7 +5218,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         r16
                         \abjad-color-music #'red
                         bf'16
@@ -5346,7 +5319,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         r16
                         c'16
                         c'16
@@ -5449,7 +5421,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         r16
                         \abjad-color-music #'red
                         c'16
@@ -5556,7 +5527,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         r16
                         bf'16
                         <a'' b''>16
@@ -5729,7 +5699,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         r16
                         bf'16
                         <a'' b''>16
@@ -5904,7 +5873,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         r16
                         c'16
                         c'16
@@ -6005,7 +5973,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         r16
                         \abjad-color-music #'red
                         c'16
@@ -6241,7 +6208,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         r16
                         \abjad-color-music #'green
                         bf'16
@@ -6365,7 +6331,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         r16
                         \abjad-color-music #'red
                         bf'16
@@ -6470,7 +6435,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         r16
                         bf'16
                         <a'' b''>16
@@ -6550,7 +6514,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         r16
                         bf'16
                         <a'' b''>16
@@ -6656,7 +6619,6 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
-                        \time 7/4
                         r16
                         bf'16
                         <a'' b''>16

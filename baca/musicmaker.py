@@ -53,62 +53,74 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
+            \with
             {
-                \scaleDurations #'(1 . 1) {
-                    \time 3/4
-                    c'8
-                }
-                \scaleDurations #'(1 . 1) {
-                    \acciaccatura {
-                        d'16
-                    }
-                    bf'8
-                }
-                \scaleDurations #'(1 . 1) {
-                    \acciaccatura {
-                        fs''16
-                        [                                                                            %! ACC_1
-                        e''16
-                        ]                                                                            %! ACC_1
-                    }
-                    ef''8
-                }
-                \scaleDurations #'(1 . 1) {
-                    \acciaccatura {
-                        af''16
-                        [                                                                            %! ACC_1
-                        g''16
-                        a'16
-                        ]                                                                            %! ACC_1
-                    }
-                    c'8
-                }
-                \scaleDurations #'(1 . 1) {
-                    \acciaccatura {
-                        d'16
-                        [                                                                            %! ACC_1
-                        bf'16
-                        fs''16
-                        e''16
-                        ]                                                                            %! ACC_1
-                    }
-                    ef''8
-                }
-                \scaleDurations #'(1 . 1) {
-                    \acciaccatura {
-                        af''16
-                        [                                                                            %! ACC_1
-                        g''16
-                        a'16
-                        c'16
-                        d'16
-                        ]                                                                            %! ACC_1
-                    }
-                    bf'8
-                }
+                \override SpacingSpanner.strict-grace-spacing = ##f
+                \override SpacingSpanner.strict-note-spacing = ##f
             }
+            <<
+                \new GlobalContext
+                {
+                    \time 3/4
+                    s1 * 3/4
+                }
+                \new Staff
+                {
+                    \scaleDurations #'(1 . 1) {
+                        c'8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            d'16
+                        }
+                        bf'8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            fs''16
+                            [                                                                        %! ACC_1
+                            e''16
+                            ]                                                                        %! ACC_1
+                        }
+                        ef''8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            af''16
+                            [                                                                        %! ACC_1
+                            g''16
+                            a'16
+                            ]                                                                        %! ACC_1
+                        }
+                        c'8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            d'16
+                            [                                                                        %! ACC_1
+                            bf'16
+                            fs''16
+                            e''16
+                            ]                                                                        %! ACC_1
+                        }
+                        ef''8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \acciaccatura {
+                            af''16
+                            [                                                                        %! ACC_1
+                            g''16
+                            a'16
+                            c'16
+                            d'16
+                            ]                                                                        %! ACC_1
+                        }
+                        bf'8
+                    }
+                }
+            >>
 
     """
 
@@ -226,62 +238,74 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                \with
                 {
-                    \scaleDurations #'(1 . 1) {
-                        \time 3/4
-                        c'8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            d'16
-                        }
-                        bf'8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            fs''16
-                            [                                                                            %! ACC_1
-                            e''16
-                            ]                                                                            %! ACC_1
-                        }
-                        ef''8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            af''16
-                            [                                                                            %! ACC_1
-                            g''16
-                            a'16
-                            ]                                                                            %! ACC_1
-                        }
-                        c'8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            d'16
-                            [                                                                            %! ACC_1
-                            bf'16
-                            fs''16
-                            e''16
-                            ]                                                                            %! ACC_1
-                        }
-                        ef''8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            af''16
-                            [                                                                            %! ACC_1
-                            g''16
-                            a'16
-                            c'16
-                            d'16
-                            ]                                                                            %! ACC_1
-                        }
-                        bf'8
-                    }
+                    \override SpacingSpanner.strict-grace-spacing = ##f
+                    \override SpacingSpanner.strict-note-spacing = ##f
                 }
+                <<
+                    \new GlobalContext
+                    {
+                        \time 3/4
+                        s1 * 3/4
+                    }
+                    \new Staff
+                    {
+                        \scaleDurations #'(1 . 1) {
+                            c'8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                d'16
+                            }
+                            bf'8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                fs''16
+                                [                                                                        %! ACC_1
+                                e''16
+                                ]                                                                        %! ACC_1
+                            }
+                            ef''8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                af''16
+                                [                                                                        %! ACC_1
+                                g''16
+                                a'16
+                                ]                                                                        %! ACC_1
+                            }
+                            c'8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                d'16
+                                [                                                                        %! ACC_1
+                                bf'16
+                                fs''16
+                                e''16
+                                ]                                                                        %! ACC_1
+                            }
+                            ef''8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                af''16
+                                [                                                                        %! ACC_1
+                                g''16
+                                a'16
+                                c'16
+                                d'16
+                                ]                                                                        %! ACC_1
+                            }
+                            bf'8
+                        }
+                    }
+                >>
 
         ..  container:: example
 
@@ -316,62 +340,74 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                \with
                 {
-                    \scaleDurations #'(1 . 1) {
-                        \time 3/4
-                        c'8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            d'8
-                        }
-                        bf'8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            fs''8
-                            [                                                                            %! ACC_1
-                            e''8
-                            ]                                                                            %! ACC_1
-                        }
-                        ef''8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            af''8
-                            [                                                                            %! ACC_1
-                            g''8
-                            a'8
-                            ]                                                                            %! ACC_1
-                        }
-                        c'8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            d'8
-                            [                                                                            %! ACC_1
-                            bf'8
-                            fs''8
-                            e''8
-                            ]                                                                            %! ACC_1
-                        }
-                        ef''8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            af''8
-                            [                                                                            %! ACC_1
-                            g''8
-                            a'8
-                            c'8
-                            d'8
-                            ]                                                                            %! ACC_1
-                        }
-                        bf'8
-                    }
+                    \override SpacingSpanner.strict-grace-spacing = ##f
+                    \override SpacingSpanner.strict-note-spacing = ##f
                 }
+                <<
+                    \new GlobalContext
+                    {
+                        \time 3/4
+                        s1 * 3/4
+                    }
+                    \new Staff
+                    {
+                        \scaleDurations #'(1 . 1) {
+                            c'8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                d'8
+                            }
+                            bf'8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                fs''8
+                                [                                                                        %! ACC_1
+                                e''8
+                                ]                                                                        %! ACC_1
+                            }
+                            ef''8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                af''8
+                                [                                                                        %! ACC_1
+                                g''8
+                                a'8
+                                ]                                                                        %! ACC_1
+                            }
+                            c'8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                d'8
+                                [                                                                        %! ACC_1
+                                bf'8
+                                fs''8
+                                e''8
+                                ]                                                                        %! ACC_1
+                            }
+                            ef''8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                af''8
+                                [                                                                        %! ACC_1
+                                g''8
+                                a'8
+                                c'8
+                                d'8
+                                ]                                                                        %! ACC_1
+                            }
+                            bf'8
+                        }
+                    }
+                >>
 
         Defaults to none.
 
@@ -417,62 +453,74 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                \with
                 {
-                    \scaleDurations #'(1 . 1) {
-                        \time 3/4
-                        c'8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            d'16
-                        }
-                        bf'8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            fs''16
-                            [                                                                            %! ACC_1
-                            e''16
-                            ]                                                                            %! ACC_1
-                        }
-                        ef''8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            af''16
-                            [                                                                            %! ACC_1
-                            g''16
-                            a'16
-                            ]                                                                            %! ACC_1
-                        }
-                        c'8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            d'16
-                            [                                                                            %! ACC_1
-                            bf'16
-                            fs''16
-                            e''16
-                            ]                                                                            %! ACC_1
-                        }
-                        ef''8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            af''16
-                            [                                                                            %! ACC_1
-                            g''16
-                            a'16
-                            c'16
-                            d'16
-                            ]                                                                            %! ACC_1
-                        }
-                        bf'8
-                    }
+                    \override SpacingSpanner.strict-grace-spacing = ##f
+                    \override SpacingSpanner.strict-note-spacing = ##f
                 }
+                <<
+                    \new GlobalContext
+                    {
+                        \time 3/4
+                        s1 * 3/4
+                    }
+                    \new Staff
+                    {
+                        \scaleDurations #'(1 . 1) {
+                            c'8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                d'16
+                            }
+                            bf'8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                fs''16
+                                [                                                                        %! ACC_1
+                                e''16
+                                ]                                                                        %! ACC_1
+                            }
+                            ef''8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                af''16
+                                [                                                                        %! ACC_1
+                                g''16
+                                a'16
+                                ]                                                                        %! ACC_1
+                            }
+                            c'8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                d'16
+                                [                                                                        %! ACC_1
+                                bf'16
+                                fs''16
+                                e''16
+                                ]                                                                        %! ACC_1
+                            }
+                            ef''8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                af''16
+                                [                                                                        %! ACC_1
+                                g''16
+                                a'16
+                                c'16
+                                d'16
+                                ]                                                                        %! ACC_1
+                            }
+                            bf'8
+                        }
+                    }
+                >>
 
 
         ..  container:: example
@@ -512,68 +560,80 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                \with
                 {
-                    \scaleDurations #'(1 . 1) {
-                        \time 3/2
-                        c'8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            d'16
-                        }
-                        bf'8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            fs''16
-                            [                                                                            %! ACC_1
-                            e''16
-                            ]                                                                            %! ACC_1
-                        }
-                        ef''8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            af''16
-                            [                                                                            %! ACC_1
-                            g''16
-                            ]                                                                            %! ACC_1
-                        }
-                        a'8
-                        [
-                        c'8
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            d'16
-                            [                                                                            %! ACC_1
-                            bf'16
-                            ]                                                                            %! ACC_1
-                        }
-                        fs''8
-                        [
-                        e''8
-                        ef''8
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            af''16
-                            [                                                                            %! ACC_1
-                            g''16
-                            ]                                                                            %! ACC_1
-                        }
-                        a'8
-                        [
-                        c'8
-                        d'8
-                        bf'8
-                        ]
-                    }
+                    \override SpacingSpanner.strict-grace-spacing = ##f
+                    \override SpacingSpanner.strict-note-spacing = ##f
                 }
+                <<
+                    \new GlobalContext
+                    {
+                        \time 3/2
+                        s1 * 3/2
+                    }
+                    \new Staff
+                    {
+                        \scaleDurations #'(1 . 1) {
+                            c'8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                d'16
+                            }
+                            bf'8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                fs''16
+                                [                                                                        %! ACC_1
+                                e''16
+                                ]                                                                        %! ACC_1
+                            }
+                            ef''8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                af''16
+                                [                                                                        %! ACC_1
+                                g''16
+                                ]                                                                        %! ACC_1
+                            }
+                            a'8
+                            [
+                            c'8
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                d'16
+                                [                                                                        %! ACC_1
+                                bf'16
+                                ]                                                                        %! ACC_1
+                            }
+                            fs''8
+                            [
+                            e''8
+                            ef''8
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                af''16
+                                [                                                                        %! ACC_1
+                                g''16
+                                ]                                                                        %! ACC_1
+                            }
+                            a'8
+                            [
+                            c'8
+                            d'8
+                            bf'8
+                            ]
+                        }
+                    }
+                >>
 
         ..  container:: example
 
@@ -612,68 +672,80 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                \with
                 {
-                    \scaleDurations #'(1 . 1) {
-                        \time 3/2
-                        c'8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            d'16
-                        }
-                        bf'8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            fs''16
-                            [                                                                            %! ACC_1
-                            e''16
-                            ]                                                                            %! ACC_1
-                        }
-                        ef''8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        af''8
-                        [
-                        \acciaccatura {
-                            g''16
-                            [                                                                            %! ACC_1
-                            a'16
-                            ]                                                                            %! ACC_1
-                        }
-                        c'8
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        d'8
-                        [
-                        bf'8
-                        \acciaccatura {
-                            fs''16
-                            [                                                                            %! ACC_1
-                            e''16
-                            ]                                                                            %! ACC_1
-                        }
-                        ef''8
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        af''8
-                        [
-                        g''8
-                        a'8
-                        \acciaccatura {
-                            c'16
-                            [                                                                            %! ACC_1
-                            d'16
-                            ]                                                                            %! ACC_1
-                        }
-                        bf'8
-                        ]
-                    }
+                    \override SpacingSpanner.strict-grace-spacing = ##f
+                    \override SpacingSpanner.strict-note-spacing = ##f
                 }
+                <<
+                    \new GlobalContext
+                    {
+                        \time 3/2
+                        s1 * 3/2
+                    }
+                    \new Staff
+                    {
+                        \scaleDurations #'(1 . 1) {
+                            c'8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                d'16
+                            }
+                            bf'8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                fs''16
+                                [                                                                        %! ACC_1
+                                e''16
+                                ]                                                                        %! ACC_1
+                            }
+                            ef''8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            af''8
+                            [
+                            \acciaccatura {
+                                g''16
+                                [                                                                        %! ACC_1
+                                a'16
+                                ]                                                                        %! ACC_1
+                            }
+                            c'8
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            d'8
+                            [
+                            bf'8
+                            \acciaccatura {
+                                fs''16
+                                [                                                                        %! ACC_1
+                                e''16
+                                ]                                                                        %! ACC_1
+                            }
+                            ef''8
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            af''8
+                            [
+                            g''8
+                            a'8
+                            \acciaccatura {
+                                c'16
+                                [                                                                        %! ACC_1
+                                d'16
+                                ]                                                                        %! ACC_1
+                            }
+                            bf'8
+                            ]
+                        }
+                    }
+                >>
 
         ..  container:: example
 
@@ -714,74 +786,86 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                \with
                 {
-                    \scaleDurations #'(1 . 1) {
-                        \time 9/8
-                        c'8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            d'16
-                        }
-                        bf'8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            fs''16
-                            [                                                                            %! ACC_1
-                            e''16
-                            ]                                                                            %! ACC_1
-                        }
-                        ef''8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            af''16
-                            [                                                                            %! ACC_1
-                            g''16
-                            ]                                                                            %! ACC_1
-                        }
-                        a'8
-                        [
-                        c'8
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            d'16
-                            [                                                                            %! ACC_1
-                            bf'16
-                            ]                                                                            %! ACC_1
-                        }
-                        fs''8
-                        [
-                        \acciaccatura {
-                            e''16
-                        }
-                        ef''8
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            af''16
-                            [                                                                            %! ACC_1
-                            g''16
-                            ]                                                                            %! ACC_1
-                        }
-                        a'8
-                        [
-                        \acciaccatura {
-                            c'16
-                            [                                                                            %! ACC_1
-                            d'16
-                            ]                                                                            %! ACC_1
-                        }
-                        bf'8
-                        ]
-                    }
+                    \override SpacingSpanner.strict-grace-spacing = ##f
+                    \override SpacingSpanner.strict-note-spacing = ##f
                 }
+                <<
+                    \new GlobalContext
+                    {
+                        \time 9/8
+                        s1 * 9/8
+                    }
+                    \new Staff
+                    {
+                        \scaleDurations #'(1 . 1) {
+                            c'8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                d'16
+                            }
+                            bf'8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                fs''16
+                                [                                                                        %! ACC_1
+                                e''16
+                                ]                                                                        %! ACC_1
+                            }
+                            ef''8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                af''16
+                                [                                                                        %! ACC_1
+                                g''16
+                                ]                                                                        %! ACC_1
+                            }
+                            a'8
+                            [
+                            c'8
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                d'16
+                                [                                                                        %! ACC_1
+                                bf'16
+                                ]                                                                        %! ACC_1
+                            }
+                            fs''8
+                            [
+                            \acciaccatura {
+                                e''16
+                            }
+                            ef''8
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                af''16
+                                [                                                                        %! ACC_1
+                                g''16
+                                ]                                                                        %! ACC_1
+                            }
+                            a'8
+                            [
+                            \acciaccatura {
+                                c'16
+                                [                                                                        %! ACC_1
+                                d'16
+                                ]                                                                        %! ACC_1
+                            }
+                            bf'8
+                            ]
+                        }
+                    }
+                >>
 
         ..  container:: example
 
@@ -818,68 +902,80 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                \with
                 {
-                    \scaleDurations #'(1 . 1) {
-                        \time 11/8
-                        c'8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        d'8
-                        [
-                        bf'8
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        fs''8
-                        [
-                        \acciaccatura {
-                            e''16
-                        }
-                        ef''8
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        af''8
-                        [
-                        \acciaccatura {
-                            g''16
-                            [                                                                            %! ACC_1
-                            a'16
-                            ]                                                                            %! ACC_1
-                        }
-                        c'8
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        d'8
-                        [
-                        \acciaccatura {
-                            bf'16
-                            [                                                                            %! ACC_1
-                            fs''16
-                            e''16
-                            ]                                                                            %! ACC_1
-                        }
-                        ef''8
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        af''8
-                        [
-                        \acciaccatura {
-                            g''16
-                            [                                                                            %! ACC_1
-                            a'16
-                            c'16
-                            d'16
-                            ]                                                                            %! ACC_1
-                        }
-                        bf'8
-                        ]
-                    }
+                    \override SpacingSpanner.strict-grace-spacing = ##f
+                    \override SpacingSpanner.strict-note-spacing = ##f
                 }
+                <<
+                    \new GlobalContext
+                    {
+                        \time 11/8
+                        s1 * 11/8
+                    }
+                    \new Staff
+                    {
+                        \scaleDurations #'(1 . 1) {
+                            c'8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            d'8
+                            [
+                            bf'8
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            fs''8
+                            [
+                            \acciaccatura {
+                                e''16
+                            }
+                            ef''8
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            af''8
+                            [
+                            \acciaccatura {
+                                g''16
+                                [                                                                        %! ACC_1
+                                a'16
+                                ]                                                                        %! ACC_1
+                            }
+                            c'8
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            d'8
+                            [
+                            \acciaccatura {
+                                bf'16
+                                [                                                                        %! ACC_1
+                                fs''16
+                                e''16
+                                ]                                                                        %! ACC_1
+                            }
+                            ef''8
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            af''8
+                            [
+                            \acciaccatura {
+                                g''16
+                                [                                                                        %! ACC_1
+                                a'16
+                                c'16
+                                d'16
+                                ]                                                                        %! ACC_1
+                            }
+                            bf'8
+                            ]
+                        }
+                    }
+                >>
 
         Defaults to none.
 
@@ -925,62 +1021,74 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                \with
                 {
-                    \scaleDurations #'(1 . 1) {
-                        \time 3/4
-                        c'8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            d'16
-                        }
-                        bf'8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            fs''16
-                            [                                                                            %! ACC_1
-                            e''16
-                            ]                                                                            %! ACC_1
-                        }
-                        ef''8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            af''16
-                            [                                                                            %! ACC_1
-                            g''16
-                            a'16
-                            ]                                                                            %! ACC_1
-                        }
-                        c'8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            d'16
-                            [                                                                            %! ACC_1
-                            bf'16
-                            fs''16
-                            e''16
-                            ]                                                                            %! ACC_1
-                        }
-                        ef''8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            af''16
-                            [                                                                            %! ACC_1
-                            g''16
-                            a'16
-                            c'16
-                            d'16
-                            ]                                                                            %! ACC_1
-                        }
-                        bf'8
-                    }
+                    \override SpacingSpanner.strict-grace-spacing = ##f
+                    \override SpacingSpanner.strict-note-spacing = ##f
                 }
+                <<
+                    \new GlobalContext
+                    {
+                        \time 3/4
+                        s1 * 3/4
+                    }
+                    \new Staff
+                    {
+                        \scaleDurations #'(1 . 1) {
+                            c'8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                d'16
+                            }
+                            bf'8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                fs''16
+                                [                                                                        %! ACC_1
+                                e''16
+                                ]                                                                        %! ACC_1
+                            }
+                            ef''8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                af''16
+                                [                                                                        %! ACC_1
+                                g''16
+                                a'16
+                                ]                                                                        %! ACC_1
+                            }
+                            c'8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                d'16
+                                [                                                                        %! ACC_1
+                                bf'16
+                                fs''16
+                                e''16
+                                ]                                                                        %! ACC_1
+                            }
+                            ef''8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                af''16
+                                [                                                                        %! ACC_1
+                                g''16
+                                a'16
+                                c'16
+                                d'16
+                                ]                                                                        %! ACC_1
+                            }
+                            bf'8
+                        }
+                    }
+                >>
 
         ..  container:: example
 
@@ -1015,56 +1123,68 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                \with
                 {
-                    \scaleDurations #'(1 . 1) {
-                        \time 2/1
-                        c'8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        d'8
-                        [
-                        bf'8
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        fs''8
-                        [
-                        e''8
-                        ef''8
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        af''8
-                        [
-                        g''8
-                        a'8
-                        c'8
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        d'8
-                        [
-                        bf'8
-                        fs''8
-                        e''8
-                        ef''8
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            af''16
-                            [                                                                            %! ACC_1
-                            g''16
-                            a'16
-                            c'16
-                            d'16
-                            ]                                                                            %! ACC_1
-                        }
-                        bf'8
-                    }
+                    \override SpacingSpanner.strict-grace-spacing = ##f
+                    \override SpacingSpanner.strict-note-spacing = ##f
                 }
+                <<
+                    \new GlobalContext
+                    {
+                        \time 2/1
+                        s1 * 2
+                    }
+                    \new Staff
+                    {
+                        \scaleDurations #'(1 . 1) {
+                            c'8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            d'8
+                            [
+                            bf'8
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            fs''8
+                            [
+                            e''8
+                            ef''8
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            af''8
+                            [
+                            g''8
+                            a'8
+                            c'8
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            d'8
+                            [
+                            bf'8
+                            fs''8
+                            e''8
+                            ef''8
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                af''16
+                                [                                                                        %! ACC_1
+                                g''16
+                                a'16
+                                c'16
+                                d'16
+                                ]                                                                        %! ACC_1
+                            }
+                            bf'8
+                        }
+                    }
+                >>
 
         ..  container:: example
 
@@ -1099,58 +1219,70 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                \with
                 {
-                    \scaleDurations #'(1 . 1) {
-                        \time 3/2
-                        c'8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            d'16
-                        }
-                        bf'8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        fs''8
-                        [
-                        e''8
-                        ef''8
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            af''16
-                            [                                                                            %! ACC_1
-                            g''16
-                            a'16
-                            ]                                                                            %! ACC_1
-                        }
-                        c'8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        d'8
-                        [
-                        bf'8
-                        fs''8
-                        e''8
-                        ef''8
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            af''16
-                            [                                                                            %! ACC_1
-                            g''16
-                            a'16
-                            c'16
-                            d'16
-                            ]                                                                            %! ACC_1
-                        }
-                        bf'8
-                    }
+                    \override SpacingSpanner.strict-grace-spacing = ##f
+                    \override SpacingSpanner.strict-note-spacing = ##f
                 }
+                <<
+                    \new GlobalContext
+                    {
+                        \time 3/2
+                        s1 * 3/2
+                    }
+                    \new Staff
+                    {
+                        \scaleDurations #'(1 . 1) {
+                            c'8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                d'16
+                            }
+                            bf'8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            fs''8
+                            [
+                            e''8
+                            ef''8
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                af''16
+                                [                                                                        %! ACC_1
+                                g''16
+                                a'16
+                                ]                                                                        %! ACC_1
+                            }
+                            c'8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            d'8
+                            [
+                            bf'8
+                            fs''8
+                            e''8
+                            ef''8
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                af''16
+                                [                                                                        %! ACC_1
+                                g''16
+                                a'16
+                                c'16
+                                d'16
+                                ]                                                                        %! ACC_1
+                            }
+                            bf'8
+                        }
+                    }
+                >>
 
         Defaults to none.
 
@@ -5552,34 +5684,41 @@ class MusicMaker(abjad.AbjadObject):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice 1"
+                \new GlobalContext
                 {
-                    \voiceOne
+                    s1 * 9/16
+                }
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
                     {
-                        \scaleDurations #'(1 . 1) {
-                            c'16
-                            [
-                            d'16
-                            bf'16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            fs''16
-                            [
-                            e''16
-                            ef''16
-                            af''16
-                            g''16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            a'16
+                        \voiceOne
+                        {
+                            \scaleDurations #'(1 . 1) {
+                                c'16
+                                [
+                                d'16
+                                bf'16
+                                ]
+                            }
+                            \scaleDurations #'(1 . 1) {
+                                fs''16
+                                [
+                                e''16
+                                ef''16
+                                af''16
+                                g''16
+                                ]
+                            }
+                            \scaleDurations #'(1 . 1) {
+                                a'16
+                            }
                         }
                     }
-                }
+                >>
             >>
 
     """
@@ -5678,34 +5817,41 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 9/16
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \scaleDurations #'(1 . 1) {
-                                c'16
-                                [
-                                d'16
-                                bf'16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                fs''16
-                                [
-                                e''16
-                                ef''16
-                                af''16
-                                g''16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                a'16
+                            \voiceOne
+                            {
+                                \scaleDurations #'(1 . 1) {
+                                    c'16
+                                    [
+                                    d'16
+                                    bf'16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    fs''16
+                                    [
+                                    e''16
+                                    ef''16
+                                    af''16
+                                    g''16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    a'16
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         ..  container:: example
@@ -5725,34 +5871,41 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 3/4
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \scaleDurations #'(1 . 1) {
-                                c'16
-                                [
-                                d'8
-                                bf'16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                fs''16
-                                [
-                                e''8
-                                ef''16
-                                af''8
-                                g''16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                a'16
+                            \voiceOne
+                            {
+                                \scaleDurations #'(1 . 1) {
+                                    c'16
+                                    [
+                                    d'8
+                                    bf'16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    fs''16
+                                    [
+                                    e''8
+                                    ef''16
+                                    af''8
+                                    g''16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    a'16
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         ..  container:: example
@@ -5772,34 +5925,41 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 9/32
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \scaleDurations #'(1 . 1) {
-                                c'32
-                                [
-                                d'32
-                                bf'32
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                fs''32
-                                [
-                                e''32
-                                ef''32
-                                af''32
-                                g''32
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                a'32
+                            \voiceOne
+                            {
+                                \scaleDurations #'(1 . 1) {
+                                    c'32
+                                    [
+                                    d'32
+                                    bf'32
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    fs''32
+                                    [
+                                    e''32
+                                    ef''32
+                                    af''32
+                                    g''32
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    a'32
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         ..  container:: example
@@ -5819,36 +5979,43 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 11/16
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 4/3 {
-                                c'16
-                                [
-                                d'16
-                                bf'16
-                                ]
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 6/5 {
-                                fs''16
-                                [
-                                e''16
-                                ef''16
-                                af''16
-                                g''16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                a'16
+                            \voiceOne
+                            {
+                                \tweak text #tuplet-number::calc-fraction-text
+                                \times 4/3 {
+                                    c'16
+                                    [
+                                    d'16
+                                    bf'16
+                                    ]
+                                }
+                                \tweak text #tuplet-number::calc-fraction-text
+                                \times 6/5 {
+                                    fs''16
+                                    [
+                                    e''16
+                                    ef''16
+                                    af''16
+                                    g''16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    a'16
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         ..  container:: example
@@ -5868,22 +6035,29 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 7/8
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 7/6 {
-                                \scaleDurations #'(1 . 1) {
-                                    r4.
-                                    r4.
+                            \voiceOne
+                            {
+                                \tweak text #tuplet-number::calc-fraction-text
+                                \times 7/6 {
+                                    \scaleDurations #'(1 . 1) {
+                                        r4.
+                                        r4.
+                                    }
                                 }
                             }
                         }
-                    }
+                    >>
                 >>
 
         ..  container:: example
@@ -5902,27 +6076,34 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 15/16
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \scaleDurations #'(1 . 1) {
-                                fs''8
-                                r16
-                                e''8
-                                r16
-                                ef''8
-                                r16
-                                af''8
-                                r16
-                                g''8
-                                r16
+                            \voiceOne
+                            {
+                                \scaleDurations #'(1 . 1) {
+                                    fs''8
+                                    r16
+                                    e''8
+                                    r16
+                                    ef''8
+                                    r16
+                                    af''8
+                                    r16
+                                    g''8
+                                    r16
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
             >>> contribution = music_maker(
@@ -5935,32 +6116,39 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 5/4
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \scaleDurations #'(1 . 1) {
-                                fs''8
-                                r16
-                                r16
-                                e''8
-                                r16
-                                r16
-                                ef''8
-                                r16
-                                r16
-                                af''8
-                                r16
-                                r16
-                                g''8
-                                r16
-                                r16
+                            \voiceOne
+                            {
+                                \scaleDurations #'(1 . 1) {
+                                    fs''8
+                                    r16
+                                    r16
+                                    e''8
+                                    r16
+                                    r16
+                                    ef''8
+                                    r16
+                                    r16
+                                    af''8
+                                    r16
+                                    r16
+                                    g''8
+                                    r16
+                                    r16
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
             >>> contribution = music_maker(
@@ -5973,27 +6161,34 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 15/16
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \scaleDurations #'(1 . 1) {
-                                r16
-                                fs''8
-                                r16
-                                e''8
-                                r16
-                                ef''8
-                                r16
-                                af''8
-                                r16
-                                g''8
+                            \voiceOne
+                            {
+                                \scaleDurations #'(1 . 1) {
+                                    r16
+                                    fs''8
+                                    r16
+                                    e''8
+                                    r16
+                                    ef''8
+                                    r16
+                                    af''8
+                                    r16
+                                    g''8
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
             >>> contribution = music_maker(
@@ -6006,32 +6201,39 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 5/4
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \scaleDurations #'(1 . 1) {
-                                r16
-                                r16
-                                fs''8
-                                r16
-                                r16
-                                e''8
-                                r16
-                                r16
-                                ef''8
-                                r16
-                                r16
-                                af''8
-                                r16
-                                r16
-                                g''8
+                            \voiceOne
+                            {
+                                \scaleDurations #'(1 . 1) {
+                                    r16
+                                    r16
+                                    fs''8
+                                    r16
+                                    r16
+                                    e''8
+                                    r16
+                                    r16
+                                    ef''8
+                                    r16
+                                    r16
+                                    af''8
+                                    r16
+                                    r16
+                                    g''8
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
             >>> contribution = music_maker(
@@ -6044,42 +6246,49 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 5/2
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \scaleDurations #'(1 . 1) {
-                                r16
-                                r16
-                                fs''8
-                                r8
-                                r8
-                                r16
-                                r16
-                                e''8
-                                r8
-                                r8
-                                r16
-                                r16
-                                ef''8
-                                r8
-                                r8
-                                r16
-                                r16
-                                af''8
-                                r8
-                                r8
-                                r16
-                                r16
-                                g''8
-                                r8
-                                r8
+                            \voiceOne
+                            {
+                                \scaleDurations #'(1 . 1) {
+                                    r16
+                                    r16
+                                    fs''8
+                                    r8
+                                    r8
+                                    r16
+                                    r16
+                                    e''8
+                                    r8
+                                    r8
+                                    r16
+                                    r16
+                                    ef''8
+                                    r8
+                                    r8
+                                    r16
+                                    r16
+                                    af''8
+                                    r8
+                                    r8
+                                    r16
+                                    r16
+                                    g''8
+                                    r8
+                                    r8
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         ..  note:: Write hide_time_signature calltime examples.
@@ -6102,30 +6311,37 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 7/16
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \scaleDurations #'(1 . 1) {
-                                <c' d' bf'>16
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                fs''16
-                                [
-                                e''16
-                                ef''16
-                                af''16
-                                g''16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                a'16
+                            \voiceOne
+                            {
+                                \scaleDurations #'(1 . 1) {
+                                    <c' d' bf'>16
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    fs''16
+                                    [
+                                    e''16
+                                    ef''16
+                                    af''16
+                                    g''16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    a'16
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         Returns selection, time signature, state manifest.
@@ -6632,39 +6848,46 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 3/4
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \scaleDurations #'(1 . 1) {
-                                c'16
-                                [
-                                d'16
-                                bf'16
-                                fs''16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                e''16
-                                [
-                                ef''16
-                                b''16
-                                f''16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                g''16
-                                [
-                                cs''16
-                                a'16
-                                af'16
-                                ]
+                            \voiceOne
+                            {
+                                \scaleDurations #'(1 . 1) {
+                                    c'16
+                                    [
+                                    d'16
+                                    bf'16
+                                    fs''16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    e''16
+                                    [
+                                    ef''16
+                                    b''16
+                                    f''16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    g''16
+                                    [
+                                    cs''16
+                                    a'16
+                                    af'16
+                                    ]
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         ..  container:: example
@@ -6689,39 +6912,47 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        \time 12/16
+                        s1 * 3/4
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \scaleDurations #'(1 . 1) {
-                                c'16
-                                [
-                                d'16
-                                bf'16
-                                fs''16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                e''16
-                                [
-                                ef''16
-                                b''16
-                                f''16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                g''16
-                                [
-                                cs''16
-                                a'16
-                                af'16
-                                ]
+                            \voiceOne
+                            {
+                                \scaleDurations #'(1 . 1) {
+                                    c'16
+                                    [
+                                    d'16
+                                    bf'16
+                                    fs''16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    e''16
+                                    [
+                                    ef''16
+                                    b''16
+                                    f''16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    g''16
+                                    [
+                                    cs''16
+                                    a'16
+                                    af'16
+                                    ]
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         ..  container:: example
@@ -6748,39 +6979,47 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        \time 6/8
+                        s1 * 3/4
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \scaleDurations #'(1 . 1) {
-                                c'16
-                                [
-                                d'16
-                                bf'16
-                                fs''16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                e''16
-                                [
-                                ef''16
-                                b''16
-                                f''16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                g''16
-                                [
-                                cs''16
-                                a'16
-                                af'16
-                                ]
+                            \voiceOne
+                            {
+                                \scaleDurations #'(1 . 1) {
+                                    c'16
+                                    [
+                                    d'16
+                                    bf'16
+                                    fs''16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    e''16
+                                    [
+                                    ef''16
+                                    b''16
+                                    f''16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    g''16
+                                    [
+                                    cs''16
+                                    a'16
+                                    af'16
+                                    ]
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         ..  container:: example
@@ -6810,39 +7049,47 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        \time 6/8
+                        s1 * 3/4
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \scaleDurations #'(1 . 1) {
-                                c'16
-                                [
-                                d'16
-                                bf'16
-                                fs''16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                e''16
-                                [
-                                ef''16
-                                b''16
-                                f''16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                g''16
-                                [
-                                cs''16
-                                a'16
-                                af'16
-                                ]
+                            \voiceOne
+                            {
+                                \scaleDurations #'(1 . 1) {
+                                    c'16
+                                    [
+                                    d'16
+                                    bf'16
+                                    fs''16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    e''16
+                                    [
+                                    ef''16
+                                    b''16
+                                    f''16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    g''16
+                                    [
+                                    cs''16
+                                    a'16
+                                    af'16
+                                    ]
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         Defaults to none.
@@ -6871,34 +7118,41 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 9/16
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \scaleDurations #'(1 . 1) {
-                                c'16
-                                [
-                                d'16
-                                bf16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                fs16
-                                [
-                                e'16
-                                ef'16
-                                af16
-                                g16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                a16
+                            \voiceOne
+                            {
+                                \scaleDurations #'(1 . 1) {
+                                    c'16
+                                    [
+                                    d'16
+                                    bf16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    fs16
+                                    [
+                                    e'16
+                                    ef'16
+                                    af16
+                                    g16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    a16
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         ..  container:: example
@@ -6914,34 +7168,41 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 9/16
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \scaleDurations #'(1 . 1) {
-                                c'16
-                                [
-                                d'16
-                                bf'16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                fs'16
-                                [
-                                e''16
-                                ef''16
-                                af'16
-                                g''16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                a''16
+                            \voiceOne
+                            {
+                                \scaleDurations #'(1 . 1) {
+                                    c'16
+                                    [
+                                    d'16
+                                    bf'16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    fs'16
+                                    [
+                                    e''16
+                                    ef''16
+                                    af'16
+                                    g''16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    a''16
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         ..  container:: example
@@ -6959,51 +7220,58 @@ class MusicMaker(abjad.AbjadObject):
             ...     ]
             >>> contribution = music_maker('Voice 1', collections)
             >>> lilypond_file = music_maker.show(contribution)
-            >>> staff = lilypond_file[abjad.Staff]
+            >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).dynamic_line_spanner.staff_padding = 4.5
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 \with
                 {
                     \override DynamicLineSpanner.staff-padding = #4.5
                 }
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 11/16
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \scaleDurations #'(1 . 1) {
-                                c'16
-                                \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
-                                \<                                                                       %! baca_hairpin:PiecewiseCommand(1)
-                                [
-                                d'16
-                                bf'16
-                                fs''16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                e''16
-                                [
-                                ef''16
-                                b''16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                g''16
-                                [
-                                cs''16
-                                a'16
-                                af'16
-                                \f                                                                       %! baca_hairpin:PiecewiseCommand(2)
-                                ]
+                            \voiceOne
+                            {
+                                \scaleDurations #'(1 . 1) {
+                                    c'16
+                                    \p                                                                   %! baca_hairpin:PiecewiseCommand(1)
+                                    \<                                                                   %! baca_hairpin:PiecewiseCommand(1)
+                                    [
+                                    d'16
+                                    bf'16
+                                    fs''16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    e''16
+                                    [
+                                    ef''16
+                                    b''16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    g''16
+                                    [
+                                    cs''16
+                                    a'16
+                                    af'16
+                                    \f                                                                   %! baca_hairpin:PiecewiseCommand(2)
+                                    ]
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         ..  container:: example
@@ -7027,54 +7295,61 @@ class MusicMaker(abjad.AbjadObject):
             ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> staff = lilypond_file[abjad.Staff]
+            >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).dynamic_line_spanner.staff_padding = 4.5
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 \with
                 {
                     \override DynamicLineSpanner.staff-padding = #4.5
                 }
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 11/16
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \scaleDurations #'(1 . 1) {
-                                c'16
-                                \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
-                                \<                                                                       %! baca_hairpin:PiecewiseCommand(1)
-                                [
-                                d'16
-                                bf'16
-                                fs''16
-                                \f                                                                       %! baca_hairpin:PiecewiseCommand(2)
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                r16
-                                ef''16
-                                \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
-                                \<                                                                       %! baca_hairpin:PiecewiseCommand(1)
-                                [
-                                b''16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                g''16
-                                [
-                                cs''16
-                                a'16
-                                af'16
-                                \f                                                                       %! baca_hairpin:PiecewiseCommand(2)
-                                ]
+                            \voiceOne
+                            {
+                                \scaleDurations #'(1 . 1) {
+                                    c'16
+                                    \p                                                                   %! baca_hairpin:PiecewiseCommand(1)
+                                    \<                                                                   %! baca_hairpin:PiecewiseCommand(1)
+                                    [
+                                    d'16
+                                    bf'16
+                                    fs''16
+                                    \f                                                                   %! baca_hairpin:PiecewiseCommand(2)
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    r16
+                                    ef''16
+                                    \p                                                                   %! baca_hairpin:PiecewiseCommand(1)
+                                    \<                                                                   %! baca_hairpin:PiecewiseCommand(1)
+                                    [
+                                    b''16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    g''16
+                                    [
+                                    cs''16
+                                    a'16
+                                    af'16
+                                    \f                                                                   %! baca_hairpin:PiecewiseCommand(2)
+                                    ]
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         ..  container:: example
@@ -7095,54 +7370,61 @@ class MusicMaker(abjad.AbjadObject):
             ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> staff = lilypond_file[abjad.Staff]
+            >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).dynamic_line_spanner.staff_padding = 4.5
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 \with
                 {
                     \override DynamicLineSpanner.staff-padding = #4.5
                 }
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 11/16
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \scaleDurations #'(1 . 1) {
-                                c'16
-                                \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
-                                \<                                                                       %! baca_hairpin:PiecewiseCommand(1)
-                                [
-                                d'16
-                                bf'16
-                                fs''16
-                                \f                                                                       %! baca_hairpin:PiecewiseCommand(2)
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                e''16
-                                [
-                                ef''16
-                                b''16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                g''16
-                                \f                                                                       %! baca_hairpin:PiecewiseCommand(1)
-                                \>                                                                       %! baca_hairpin:PiecewiseCommand(1)
-                                [
-                                cs''16
-                                a'16
-                                af'16
-                                \p                                                                       %! baca_hairpin:PiecewiseCommand(2)
-                                ]
+                            \voiceOne
+                            {
+                                \scaleDurations #'(1 . 1) {
+                                    c'16
+                                    \p                                                                   %! baca_hairpin:PiecewiseCommand(1)
+                                    \<                                                                   %! baca_hairpin:PiecewiseCommand(1)
+                                    [
+                                    d'16
+                                    bf'16
+                                    fs''16
+                                    \f                                                                   %! baca_hairpin:PiecewiseCommand(2)
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    e''16
+                                    [
+                                    ef''16
+                                    b''16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    g''16
+                                    \f                                                                   %! baca_hairpin:PiecewiseCommand(1)
+                                    \>                                                                   %! baca_hairpin:PiecewiseCommand(1)
+                                    [
+                                    cs''16
+                                    a'16
+                                    af'16
+                                    \p                                                                   %! baca_hairpin:PiecewiseCommand(2)
+                                    ]
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         ..  container:: example
@@ -7163,57 +7445,64 @@ class MusicMaker(abjad.AbjadObject):
             ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> staff = lilypond_file[abjad.Staff]
+            >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).dynamic_line_spanner.staff_padding = 6
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 \with
                 {
                     \override DynamicLineSpanner.staff-padding = #6
                 }
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 11/16
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \scaleDurations #'(1 . 1) {
-                                c'16
-                                \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
-                                \<                                                                       %! baca_hairpin:PiecewiseCommand(1)
-                                [
-                                d'16
-                                bf'16
-                                fs''16
-                                \f                                                                       %! baca_hairpin:PiecewiseCommand(2)
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                e''16
-                                \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
-                                \<                                                                       %! baca_hairpin:PiecewiseCommand(1)
-                                [
-                                ef''16
-                                b''16
-                                \f                                                                       %! baca_hairpin:PiecewiseCommand(2)
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                g''16
-                                \f                                                                       %! baca_hairpin:PiecewiseCommand(1)
-                                \>                                                                       %! baca_hairpin:PiecewiseCommand(1)
-                                [
-                                cs''16
-                                a'16
-                                af'16
-                                \p                                                                       %! baca_hairpin:PiecewiseCommand(2)
-                                ]
+                            \voiceOne
+                            {
+                                \scaleDurations #'(1 . 1) {
+                                    c'16
+                                    \p                                                                   %! baca_hairpin:PiecewiseCommand(1)
+                                    \<                                                                   %! baca_hairpin:PiecewiseCommand(1)
+                                    [
+                                    d'16
+                                    bf'16
+                                    fs''16
+                                    \f                                                                   %! baca_hairpin:PiecewiseCommand(2)
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    e''16
+                                    \p                                                                   %! baca_hairpin:PiecewiseCommand(1)
+                                    \<                                                                   %! baca_hairpin:PiecewiseCommand(1)
+                                    [
+                                    ef''16
+                                    b''16
+                                    \f                                                                   %! baca_hairpin:PiecewiseCommand(2)
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    g''16
+                                    \f                                                                   %! baca_hairpin:PiecewiseCommand(1)
+                                    \>                                                                   %! baca_hairpin:PiecewiseCommand(1)
+                                    [
+                                    cs''16
+                                    a'16
+                                    af'16
+                                    \p                                                                   %! baca_hairpin:PiecewiseCommand(2)
+                                    ]
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         ..  container:: example
@@ -7231,50 +7520,57 @@ class MusicMaker(abjad.AbjadObject):
             ...     ]
             >>> contribution = music_maker('Voice 1', collections)
             >>> lilypond_file = music_maker.show(contribution)
-            >>> staff = lilypond_file[abjad.Staff]
+            >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).stem.direction = Down
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 \with
                 {
                     \override Stem.direction = #down
                 }
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 11/16
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \scaleDurations #'(1 . 1) {
-                                c'16
-                                [
-                                (                                                                        %! baca_slur:SpannerCommand
-                                d'16
-                                bf'16
-                                fs''16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                e''16
-                                [
-                                ef''16
-                                b''16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                g''16
-                                [
-                                cs''16
-                                a'16
-                                af'16
-                                ]
-                                )                                                                        %! baca_slur:SpannerCommand
+                            \voiceOne
+                            {
+                                \scaleDurations #'(1 . 1) {
+                                    c'16
+                                    [
+                                    (                                                                    %! baca_slur:SpannerCommand
+                                    d'16
+                                    bf'16
+                                    fs''16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    e''16
+                                    [
+                                    ef''16
+                                    b''16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    g''16
+                                    [
+                                    cs''16
+                                    a'16
+                                    af'16
+                                    ]
+                                    )                                                                    %! baca_slur:SpannerCommand
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         ..  container:: example
@@ -7295,54 +7591,61 @@ class MusicMaker(abjad.AbjadObject):
             ...     ]
             >>> contribution = music_maker('Voice 1', collections)
             >>> lilypond_file = music_maker.show(contribution)
-            >>> staff = lilypond_file[abjad.Staff]
+            >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).stem.direction = Down
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 \with
                 {
                     \override Stem.direction = #down
                 }
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 11/16
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \scaleDurations #'(1 . 1) {
-                                c'16
-                                [
-                                (                                                                        %! baca_slur:SpannerCommand
-                                d'16
-                                bf'16
-                                fs''16
-                                ]
-                                )                                                                        %! baca_slur:SpannerCommand
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                e''16
-                                [
-                                (                                                                        %! baca_slur:SpannerCommand
-                                ef''16
-                                b''16
-                                ]
-                                )                                                                        %! baca_slur:SpannerCommand
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                g''16
-                                [
-                                (                                                                        %! baca_slur:SpannerCommand
-                                cs''16
-                                a'16
-                                af'16
-                                ]
-                                )                                                                        %! baca_slur:SpannerCommand
+                            \voiceOne
+                            {
+                                \scaleDurations #'(1 . 1) {
+                                    c'16
+                                    [
+                                    (                                                                    %! baca_slur:SpannerCommand
+                                    d'16
+                                    bf'16
+                                    fs''16
+                                    ]
+                                    )                                                                    %! baca_slur:SpannerCommand
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    e''16
+                                    [
+                                    (                                                                    %! baca_slur:SpannerCommand
+                                    ef''16
+                                    b''16
+                                    ]
+                                    )                                                                    %! baca_slur:SpannerCommand
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    g''16
+                                    [
+                                    (                                                                    %! baca_slur:SpannerCommand
+                                    cs''16
+                                    a'16
+                                    af'16
+                                    ]
+                                    )                                                                    %! baca_slur:SpannerCommand
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         ..  container:: example
@@ -7365,54 +7668,61 @@ class MusicMaker(abjad.AbjadObject):
             ...     ]
             >>> contribution = music_maker('Voice 1', collections)
             >>> lilypond_file = music_maker.show(contribution)
-            >>> staff = lilypond_file[abjad.Staff]
+            >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).stem.direction = Down
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 \with
                 {
                     \override Stem.direction = #down
                 }
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 11/16
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \scaleDurations #'(1 . 1) {
-                                c'16
-                                [
-                                (                                                                        %! baca_slur:SpannerCommand
-                                d'16
-                                )                                                                        %! baca_slur:SpannerCommand
-                                bf'16
-                                fs''16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                e''16
-                                [
-                                (                                                                        %! baca_slur:SpannerCommand
-                                ef''16
-                                )                                                                        %! baca_slur:SpannerCommand
-                                b''16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                g''16
-                                [
-                                (                                                                        %! baca_slur:SpannerCommand
-                                cs''16
-                                )                                                                        %! baca_slur:SpannerCommand
-                                a'16
-                                af'16
-                                ]
+                            \voiceOne
+                            {
+                                \scaleDurations #'(1 . 1) {
+                                    c'16
+                                    [
+                                    (                                                                    %! baca_slur:SpannerCommand
+                                    d'16
+                                    )                                                                    %! baca_slur:SpannerCommand
+                                    bf'16
+                                    fs''16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    e''16
+                                    [
+                                    (                                                                    %! baca_slur:SpannerCommand
+                                    ef''16
+                                    )                                                                    %! baca_slur:SpannerCommand
+                                    b''16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    g''16
+                                    [
+                                    (                                                                    %! baca_slur:SpannerCommand
+                                    cs''16
+                                    )                                                                    %! baca_slur:SpannerCommand
+                                    a'16
+                                    af'16
+                                    ]
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         ..  container:: example
@@ -7435,54 +7745,61 @@ class MusicMaker(abjad.AbjadObject):
             ...     ]
             >>> contribution = music_maker('Voice 1', collections)
             >>> lilypond_file = music_maker.show(contribution)
-            >>> staff = lilypond_file[abjad.Staff]
+            >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).stem.direction = Down
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 \with
                 {
                     \override Stem.direction = #down
                 }
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 11/16
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \scaleDurations #'(1 . 1) {
-                                c'16
-                                [
-                                d'16
-                                bf'16
-                                (                                                                        %! baca_slur:SpannerCommand
-                                fs''16
-                                ]
-                                )                                                                        %! baca_slur:SpannerCommand
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                e''16
-                                [
-                                ef''16
-                                (                                                                        %! baca_slur:SpannerCommand
-                                b''16
-                                ]
-                                )                                                                        %! baca_slur:SpannerCommand
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                g''16
-                                [
-                                cs''16
-                                a'16
-                                (                                                                        %! baca_slur:SpannerCommand
-                                af'16
-                                ]
-                                )                                                                        %! baca_slur:SpannerCommand
+                            \voiceOne
+                            {
+                                \scaleDurations #'(1 . 1) {
+                                    c'16
+                                    [
+                                    d'16
+                                    bf'16
+                                    (                                                                    %! baca_slur:SpannerCommand
+                                    fs''16
+                                    ]
+                                    )                                                                    %! baca_slur:SpannerCommand
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    e''16
+                                    [
+                                    ef''16
+                                    (                                                                    %! baca_slur:SpannerCommand
+                                    b''16
+                                    ]
+                                    )                                                                    %! baca_slur:SpannerCommand
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    g''16
+                                    [
+                                    cs''16
+                                    a'16
+                                    (                                                                    %! baca_slur:SpannerCommand
+                                    af'16
+                                    ]
+                                    )                                                                    %! baca_slur:SpannerCommand
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         ..  container:: example
@@ -7502,156 +7819,29 @@ class MusicMaker(abjad.AbjadObject):
             ...     ]
             >>> contribution = music_maker('Voice 1', collections)
             >>> lilypond_file = music_maker.show(contribution)
-            >>> staff = lilypond_file[abjad.Staff]
+            >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).beam.positions = (-6, -6)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 \with
                 {
                     \override Beam.positions = #'(-6 . -6)
                 }
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
-                        {
-                            \scaleDurations #'(1 . 1) {
-                                \set stemLeftBeamCount = 0
-                                \set stemRightBeamCount = 2
-                                c'16
-                                [
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 2
-                                d'16
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 2
-                                bf'16
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 1
-                                fs''16
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                \set stemLeftBeamCount = 1
-                                \set stemRightBeamCount = 2
-                                e''16
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 2
-                                ef''16
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 1
-                                b''16
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                \set stemLeftBeamCount = 1
-                                \set stemRightBeamCount = 2
-                                g''16
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 2
-                                cs''16
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 2
-                                a'16
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 0
-                                af'16
-                                ]
-                            }
-                        }
+                        s1 * 11/16
                     }
-                >>
-
-        ..  container:: example
-
-            Beam specifier beams nothing:
-
-            >>> music_maker = baca.MusicMaker(
-            ...     rmakers.BeamSpecifier(
-            ...         beam_each_division=False,
-            ...         ),
-            ...     )
-
-            >>> collections = [
-            ...     [0, 2, 10, 18],
-            ...     [16, 15, 23],
-            ...     [19, 13, 9, 8],
-            ...     ]
-            >>> contribution = music_maker('Voice 1', collections)
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice 1"
-                    {
-                        \voiceOne
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \scaleDurations #'(1 . 1) {
-                                c'16
-                                d'16
-                                bf'16
-                                fs''16
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                e''16
-                                ef''16
-                                b''16
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                g''16
-                                cs''16
-                                a'16
-                                af'16
-                            }
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Nesting specifier augments one sixteenth:
-
-            >>> music_maker = baca.MusicMaker(
-            ...     baca.NestingCommand(
-            ...         time_treatments=['+1/16'],
-            ...         ),
-            ...     rmakers.BeamSpecifier(
-            ...         beam_divisions_together=True,
-            ...         ),
-            ...     )
-
-            >>> collections = [
-            ...     [0, 2, 10, 18],
-            ...     [16, 15, 23],
-            ...     [19, 13, 9, 8],
-            ...     ]
-            >>> contribution = music_maker('Voice 1', collections)
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                \with
-                {
-                    \override Beam.positions = #'(-5.5 . -5.5)
-                }
-                <<
-                    \context Voice = "Voice 1"
-                    {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 12/11 {
+                            \voiceOne
+                            {
                                 \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
@@ -7695,7 +7885,155 @@ class MusicMaker(abjad.AbjadObject):
                                 }
                             }
                         }
+                    >>
+                >>
+
+        ..  container:: example
+
+            Beam specifier beams nothing:
+
+            >>> music_maker = baca.MusicMaker(
+            ...     rmakers.BeamSpecifier(
+            ...         beam_each_division=False,
+            ...         ),
+            ...     )
+
+            >>> collections = [
+            ...     [0, 2, 10, 18],
+            ...     [16, 15, 23],
+            ...     [19, 13, 9, 8],
+            ...     ]
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        s1 * 11/16
                     }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
+                        {
+                            \voiceOne
+                            {
+                                \scaleDurations #'(1 . 1) {
+                                    c'16
+                                    d'16
+                                    bf'16
+                                    fs''16
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    e''16
+                                    ef''16
+                                    b''16
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    g''16
+                                    cs''16
+                                    a'16
+                                    af'16
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+        ..  container:: example
+
+            Nesting specifier augments one sixteenth:
+
+            >>> music_maker = baca.MusicMaker(
+            ...     baca.NestingCommand(
+            ...         time_treatments=['+1/16'],
+            ...         ),
+            ...     rmakers.BeamSpecifier(
+            ...         beam_divisions_together=True,
+            ...         ),
+            ...     )
+
+            >>> collections = [
+            ...     [0, 2, 10, 18],
+            ...     [16, 15, 23],
+            ...     [19, 13, 9, 8],
+            ...     ]
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> staff = lilypond_file[abjad.Score]
+            >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                \with
+                {
+                    \override Beam.positions = #'(-5.5 . -5.5)
+                }
+                <<
+                    \new GlobalContext
+                    {
+                        s1 * 3/4
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
+                        {
+                            \voiceOne
+                            {
+                                \tweak text #tuplet-number::calc-fraction-text
+                                \times 12/11 {
+                                    \scaleDurations #'(1 . 1) {
+                                        \set stemLeftBeamCount = 0
+                                        \set stemRightBeamCount = 2
+                                        c'16
+                                        [
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 2
+                                        d'16
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 2
+                                        bf'16
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 1
+                                        fs''16
+                                    }
+                                    \scaleDurations #'(1 . 1) {
+                                        \set stemLeftBeamCount = 1
+                                        \set stemRightBeamCount = 2
+                                        e''16
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 2
+                                        ef''16
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 1
+                                        b''16
+                                    }
+                                    \scaleDurations #'(1 . 1) {
+                                        \set stemLeftBeamCount = 1
+                                        \set stemRightBeamCount = 2
+                                        g''16
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 2
+                                        cs''16
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 2
+                                        a'16
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 0
+                                        af'16
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    >>
                 >>
 
         ..  container:: example
@@ -7721,69 +8059,76 @@ class MusicMaker(abjad.AbjadObject):
             ...     ]
             >>> contribution = music_maker('Voice 1', collections)
             >>> lilypond_file = music_maker.show(contribution)
-            >>> staff = lilypond_file[abjad.Staff]
+            >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 \with
                 {
                     \override Beam.positions = #'(-5.5 . -5.5)
                 }
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 3/4
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 8/7 {
-                                \scaleDurations #'(1 . 1) {
-                                    \set stemLeftBeamCount = 0
-                                    \set stemRightBeamCount = 2
-                                    c'16
-                                    [
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    d'16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    bf'16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 1
-                                    fs''16
+                            \voiceOne
+                            {
+                                \tweak text #tuplet-number::calc-fraction-text
+                                \times 8/7 {
+                                    \scaleDurations #'(1 . 1) {
+                                        \set stemLeftBeamCount = 0
+                                        \set stemRightBeamCount = 2
+                                        c'16
+                                        [
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 2
+                                        d'16
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 2
+                                        bf'16
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 1
+                                        fs''16
+                                    }
+                                    \scaleDurations #'(1 . 1) {
+                                        \set stemLeftBeamCount = 1
+                                        \set stemRightBeamCount = 2
+                                        e''16
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 2
+                                        ef''16
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 1
+                                        b''16
+                                    }
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
-                                    e''16
+                                    g''16
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
-                                    ef''16
+                                    cs''16
                                     \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 1
-                                    b''16
+                                    \set stemRightBeamCount = 2
+                                    a'16
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 0
+                                    af'16
+                                    ]
                                 }
                             }
-                            \scaleDurations #'(1 . 1) {
-                                \set stemLeftBeamCount = 1
-                                \set stemRightBeamCount = 2
-                                g''16
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 2
-                                cs''16
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 2
-                                a'16
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 0
-                                af'16
-                                ]
-                            }
                         }
-                    }
+                    >>
                 >>
 
         ..  container:: example
@@ -7817,34 +8162,41 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 15/16
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \scaleDurations #'(1 . 1) {
-                                c'16
-                                [
-                                d'16
-                                bf'16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                fs''8
-                                [
-                                e''8
-                                ef''8
-                                af''8
-                                g''8
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                a'8
+                            \voiceOne
+                            {
+                                \scaleDurations #'(1 . 1) {
+                                    c'16
+                                    [
+                                    d'16
+                                    bf'16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    fs''8
+                                    [
+                                    e''8
+                                    ef''8
+                                    af''8
+                                    g''8
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    a'8
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         ..  container:: example
@@ -7878,34 +8230,41 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 19/16
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \scaleDurations #'(1 . 1) {
-                                c'16
-                                [
-                                d'16
-                                bf'16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                fs''8.
-                                [
-                                e''8.
-                                ef''8.
-                                af''8.
-                                g''8.
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                a'16
+                            \voiceOne
+                            {
+                                \scaleDurations #'(1 . 1) {
+                                    c'16
+                                    [
+                                    d'16
+                                    bf'16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    fs''8.
+                                    [
+                                    e''8.
+                                    ef''8.
+                                    af''8.
+                                    g''8.
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    a'16
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         ..  container:: example
@@ -7940,35 +8299,42 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 5/4
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \scaleDurations #'(1 . 1) {
-                                c'16
-                                [
-                                d'16
-                                bf'16
-                                ]
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 16/15 {
-                                fs''8.
-                                [
-                                e''8.
-                                ef''8.
-                                af''8.
-                                g''8.
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                a'16
+                            \voiceOne
+                            {
+                                \scaleDurations #'(1 . 1) {
+                                    c'16
+                                    [
+                                    d'16
+                                    bf'16
+                                    ]
+                                }
+                                \tweak text #tuplet-number::calc-fraction-text
+                                \times 16/15 {
+                                    fs''8.
+                                    [
+                                    e''8.
+                                    ef''8.
+                                    af''8.
+                                    g''8.
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    a'16
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         ..  container:: example
@@ -8003,35 +8369,42 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 5/4
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 4/3 {
-                                c'16
-                                [
-                                d'16
-                                bf'16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                fs''8.
-                                [
-                                e''8.
-                                ef''8.
-                                af''8.
-                                g''8.
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                a'16
+                            \voiceOne
+                            {
+                                \tweak text #tuplet-number::calc-fraction-text
+                                \times 4/3 {
+                                    c'16
+                                    [
+                                    d'16
+                                    bf'16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    fs''8.
+                                    [
+                                    e''8.
+                                    ef''8.
+                                    af''8.
+                                    g''8.
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    a'16
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         ..  container:: example
@@ -8066,34 +8439,41 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 9/8
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \times 2/3 {
-                                c'16
-                                [
-                                d'16
-                                bf'16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                fs''8.
-                                [
-                                e''8.
-                                ef''8.
-                                af''8.
-                                g''8.
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                a'16
+                            \voiceOne
+                            {
+                                \times 2/3 {
+                                    c'16
+                                    [
+                                    d'16
+                                    bf'16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    fs''8.
+                                    [
+                                    e''8.
+                                    ef''8.
+                                    af''8.
+                                    g''8.
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    a'16
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         Defaults to none.
@@ -8126,34 +8506,41 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 1
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \scaleDurations #'(1 . 1) {
-                                c'16
-                                [
-                                d'8
-                                bf'8.
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                fs''16
-                                [
-                                e''8
-                                ef''8.
-                                af''16
-                                g''8
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                a'16
+                            \voiceOne
+                            {
+                                \scaleDurations #'(1 . 1) {
+                                    c'16
+                                    [
+                                    d'8
+                                    bf'8.
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    fs''16
+                                    [
+                                    e''8
+                                    ef''8.
+                                    af''16
+                                    g''8
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    a'16
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
             Does thread rhythm-maker over collections:
@@ -8170,34 +8557,41 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 9/8
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \scaleDurations #'(1 . 1) {
-                                c'16
-                                [
-                                d'8
-                                bf'8.
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                fs''16
-                                [
-                                e''8
-                                ef''8.
-                                af''16
-                                g''8
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                a'8.
+                            \voiceOne
+                            {
+                                \scaleDurations #'(1 . 1) {
+                                    c'16
+                                    [
+                                    d'8
+                                    bf'8.
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    fs''16
+                                    [
+                                    e''8
+                                    ef''8.
+                                    af''16
+                                    g''8
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    a'8.
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         Set to true, false or none.
@@ -8270,59 +8664,66 @@ class NestingCommand(scoping.Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice 1"
+                \new GlobalContext
                 {
-                    \voiceOne
+                    s1 * 3/4
+                }
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
                     {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 12/11 {
-                            \scaleDurations #'(1 . 1) {
-                                \set stemLeftBeamCount = 0
-                                \set stemRightBeamCount = 2
-                                c'16
-                                [
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 2
-                                d'16
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 2
-                                bf'16
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 1
-                                fs''16
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                \set stemLeftBeamCount = 1
-                                \set stemRightBeamCount = 2
-                                e''16
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 2
-                                ef''16
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 1
-                                b''16
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                \set stemLeftBeamCount = 1
-                                \set stemRightBeamCount = 2
-                                g''16
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 2
-                                cs''16
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 2
-                                a'16
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 0
-                                af'16
-                                ]
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 12/11 {
+                                \scaleDurations #'(1 . 1) {
+                                    \set stemLeftBeamCount = 0
+                                    \set stemRightBeamCount = 2
+                                    c'16
+                                    [
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    d'16
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    bf'16
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
+                                    fs''16
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
+                                    e''16
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    ef''16
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
+                                    b''16
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
+                                    g''16
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    cs''16
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    a'16
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 0
+                                    af'16
+                                    ]
+                                }
                             }
                         }
                     }
-                }
+                >>
             >>
 
     ..  container:: example
@@ -8367,7 +8768,7 @@ class NestingCommand(scoping.Command):
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> staff = lilypond_file[abjad.Staff]
+        >>> staff = lilypond_file[abjad.Score]
         >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -8376,6 +8777,10 @@ class NestingCommand(scoping.Command):
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+            \with                                                                                    %! SingleStaffScoreTemplate
+            {                                                                                        %! SingleStaffScoreTemplate
+                \override Beam.positions = #'(-5.5 . -5.5)                                           %! SingleStaffScoreTemplate
+            }                                                                                        %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
                 \context GlobalContext = "GlobalContext"                                             %! _make_global_context
@@ -8406,10 +8811,6 @@ class NestingCommand(scoping.Command):
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
                     \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
-                    \with                                                                            %! SingleStaffScoreTemplate
-                    {                                                                                %! SingleStaffScoreTemplate
-                        \override Beam.positions = #'(-5.5 . -5.5)                                   %! SingleStaffScoreTemplate
-                    }                                                                                %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
                         \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
@@ -8556,61 +8957,68 @@ class NestingCommand(scoping.Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 17/16
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 17/16 {
-                                \scaleDurations #'(1 . 1) {
-                                    r8
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    c'16
-                                    [
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    d'16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    bf'16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 1
-                                    fs''16
-                                }
-                                \scaleDurations #'(1 . 1) {
-                                    \set stemLeftBeamCount = 1
-                                    \set stemRightBeamCount = 2
-                                    e''16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    ef''16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 1
-                                    b''16
-                                }
-                                \scaleDurations #'(1 . 1) {
-                                    \set stemLeftBeamCount = 1
-                                    \set stemRightBeamCount = 2
-                                    g''16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    cs''16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    a'16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    af'16
-                                    ]
-                                    r8.
+                            \voiceOne
+                            {
+                                \tweak text #tuplet-number::calc-fraction-text
+                                \times 17/16 {
+                                    \scaleDurations #'(1 . 1) {
+                                        r8
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 2
+                                        c'16
+                                        [
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 2
+                                        d'16
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 2
+                                        bf'16
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 1
+                                        fs''16
+                                    }
+                                    \scaleDurations #'(1 . 1) {
+                                        \set stemLeftBeamCount = 1
+                                        \set stemRightBeamCount = 2
+                                        e''16
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 2
+                                        ef''16
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 1
+                                        b''16
+                                    }
+                                    \scaleDurations #'(1 . 1) {
+                                        \set stemLeftBeamCount = 1
+                                        \set stemRightBeamCount = 2
+                                        g''16
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 2
+                                        cs''16
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 2
+                                        a'16
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 2
+                                        af'16
+                                        ]
+                                        r8.
+                                    }
                                 }
                             }
                         }
-                    }
+                    >>
                 >>
 
         Returns new selections.
@@ -8919,19 +9327,26 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
-            {
-                \scaleDurations #'(1 . 1) {
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
+            <<
+                \new GlobalContext
+                {
                     \time 5/16
-                    c'16
-                    [
-                    d'16
-                    bf'8
-                    af'16
-                    ]
+                    s1 * 5/16
                 }
-            }
+                \new Staff
+                {
+                    \scaleDurations #'(1 . 1) {
+                        c'16
+                        [
+                        d'16
+                        bf'8
+                        af'16
+                        ]
+                    }
+                }
+            >>
 
         >>> collections = [[18, 16, 15, 20, 19]]
         >>> selections, state = rhythm_maker(collections)
@@ -8940,20 +9355,27 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
-            {
-                \scaleDurations #'(1 . 1) {
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
+            <<
+                \new GlobalContext
+                {
                     \time 3/8
-                    fs''16
-                    [
-                    e''16
-                    ef''8
-                    af''16
-                    g''16
-                    ]
+                    s1 * 3/8
                 }
-            }
+                \new Staff
+                {
+                    \scaleDurations #'(1 . 1) {
+                        fs''16
+                        [
+                        e''16
+                        ef''8
+                        af''16
+                        g''16
+                        ]
+                    }
+                }
+            >>
 
         >>> collections = [[9]]
         >>> selections, state = rhythm_maker(collections)
@@ -8962,14 +9384,21 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
-            {
-                \scaleDurations #'(1 . 1) {
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
+            <<
+                \new GlobalContext
+                {
                     \time 1/16
-                    a'16
+                    s1 * 1/16
                 }
-            }
+                \new Staff
+                {
+                    \scaleDurations #'(1 . 1) {
+                        a'16
+                    }
+                }
+            >>
 
         >>> collections = [[0, 2, 10, 8], [18, 16, 15, 20, 19], [9]]
         >>> selections, state = rhythm_maker(collections)
@@ -8978,31 +9407,38 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
-            {
-                \scaleDurations #'(1 . 1) {
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
+            <<
+                \new GlobalContext
+                {
                     \time 13/16
-                    c'16
-                    [
-                    d'16
-                    bf'8
-                    af'16
-                    ]
+                    s1 * 13/16
                 }
-                \scaleDurations #'(1 . 1) {
-                    fs''16
-                    [
-                    e''8
-                    ef''16
-                    af''16
-                    g''8
-                    ]
+                \new Staff
+                {
+                    \scaleDurations #'(1 . 1) {
+                        c'16
+                        [
+                        d'16
+                        bf'8
+                        af'16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        fs''16
+                        [
+                        e''8
+                        ef''16
+                        af''16
+                        g''8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        a'16
+                    }
                 }
-                \scaleDurations #'(1 . 1) {
-                    a'16
-                }
-            }
+            >>
 
     """
 
@@ -9094,30 +9530,37 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                {
-                    \scaleDurations #'(1 . 1) {
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
                         \time 3/4
-                        c'16
-                        [
-                        d'16
-                        bf'8
-                        ]
+                        s1 * 3/4
                     }
-                    \scaleDurations #'(1 . 1) {
-                        fs''16
-                        [
-                        e''16
-                        ef''8
-                        af''16
-                        g''16
-                        ]
+                    \new Staff
+                    {
+                        \scaleDurations #'(1 . 1) {
+                            c'16
+                            [
+                            d'16
+                            bf'8
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            fs''16
+                            [
+                            e''16
+                            ef''8
+                            af''16
+                            g''16
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            a'8
+                        }
                     }
-                    \scaleDurations #'(1 . 1) {
-                        a'8
-                    }
-                }
+                >>
 
             >>> abjad.f(rhythm_maker._make_state())
             abjad.OrderedDict(
@@ -9149,30 +9592,37 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                {
-                    \scaleDurations #'(1 . 1) {
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
                         \time 3/4
-                        c'8
-                        [
-                        d'16
-                        bf'16
-                        ]
+                        s1 * 3/4
                     }
-                    \scaleDurations #'(1 . 1) {
-                        fs''8
-                        [
-                        e''16
-                        ef''16
-                        af''8
-                        g''16
-                        ]
+                    \new Staff
+                    {
+                        \scaleDurations #'(1 . 1) {
+                            c'8
+                            [
+                            d'16
+                            bf'16
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            fs''8
+                            [
+                            e''16
+                            ef''16
+                            af''8
+                            g''16
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            a'16
+                        }
                     }
-                    \scaleDurations #'(1 . 1) {
-                        a'16
-                    }
-                }
+                >>
 
             >>> abjad.f(rhythm_maker._make_state())
             abjad.OrderedDict(
@@ -9665,62 +10115,74 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                \with
                 {
-                    \scaleDurations #'(1 . 1) {
-                        \time 3/2
-                        c'4
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            d'16
-                        }
-                        bf'4
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            fs''16
-                            [                                                                            %! ACC_1
-                            e''16
-                            ]                                                                            %! ACC_1
-                        }
-                        ef''4
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            af''16
-                            [                                                                            %! ACC_1
-                            g''16
-                            a'16
-                            ]                                                                            %! ACC_1
-                        }
-                        c'4
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            d'16
-                            [                                                                            %! ACC_1
-                            bf'16
-                            fs''16
-                            e''16
-                            ]                                                                            %! ACC_1
-                        }
-                        ef''4
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            af''16
-                            [                                                                            %! ACC_1
-                            g''16
-                            a'16
-                            c'16
-                            d'16
-                            ]                                                                            %! ACC_1
-                        }
-                        bf'4
-                    }
+                    \override SpacingSpanner.strict-grace-spacing = ##f
+                    \override SpacingSpanner.strict-note-spacing = ##f
                 }
+                <<
+                    \new GlobalContext
+                    {
+                        \time 3/2
+                        s1 * 3/2
+                    }
+                    \new Staff
+                    {
+                        \scaleDurations #'(1 . 1) {
+                            c'4
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                d'16
+                            }
+                            bf'4
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                fs''16
+                                [                                                                        %! ACC_1
+                                e''16
+                                ]                                                                        %! ACC_1
+                            }
+                            ef''4
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                af''16
+                                [                                                                        %! ACC_1
+                                g''16
+                                a'16
+                                ]                                                                        %! ACC_1
+                            }
+                            c'4
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                d'16
+                                [                                                                        %! ACC_1
+                                bf'16
+                                fs''16
+                                e''16
+                                ]                                                                        %! ACC_1
+                            }
+                            ef''4
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                af''16
+                                [                                                                        %! ACC_1
+                                g''16
+                                a'16
+                                c'16
+                                d'16
+                                ]                                                                        %! ACC_1
+                            }
+                            bf'4
+                        }
+                    }
+                >>
 
         ..  container:: example
 
@@ -9756,75 +10218,87 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                \with
                 {
-                    \scaleDurations #'(1 . 1) {
-                        \time 7/4
-                        r4
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            c'16
-                        }
-                        r4
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            d'16
-                            [                                                                            %! ACC_1
-                            bf'16
-                            ]                                                                            %! ACC_1
-                        }
-                        r4
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            fs''16
-                            [                                                                            %! ACC_1
-                            e''16
-                            ef''16
-                            ]                                                                            %! ACC_1
-                        }
-                        r4
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            af''16
-                            [                                                                            %! ACC_1
-                            g''16
-                            a'16
-                            c'16
-                            ]                                                                            %! ACC_1
-                        }
-                        r4
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            d'16
-                            [                                                                            %! ACC_1
-                            bf'16
-                            fs''16
-                            e''16
-                            ef''16
-                            ]                                                                            %! ACC_1
-                        }
-                        r4
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            af''16
-                            [                                                                            %! ACC_1
-                            g''16
-                            a'16
-                            c'16
-                            d'16
-                            bf'16
-                            ]                                                                            %! ACC_1
-                        }
-                        r4
-                    }
+                    \override SpacingSpanner.strict-grace-spacing = ##f
+                    \override SpacingSpanner.strict-note-spacing = ##f
                 }
+                <<
+                    \new GlobalContext
+                    {
+                        \time 7/4
+                        s1 * 7/4
+                    }
+                    \new Staff
+                    {
+                        \scaleDurations #'(1 . 1) {
+                            r4
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                c'16
+                            }
+                            r4
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                d'16
+                                [                                                                        %! ACC_1
+                                bf'16
+                                ]                                                                        %! ACC_1
+                            }
+                            r4
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                fs''16
+                                [                                                                        %! ACC_1
+                                e''16
+                                ef''16
+                                ]                                                                        %! ACC_1
+                            }
+                            r4
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                af''16
+                                [                                                                        %! ACC_1
+                                g''16
+                                a'16
+                                c'16
+                                ]                                                                        %! ACC_1
+                            }
+                            r4
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                d'16
+                                [                                                                        %! ACC_1
+                                bf'16
+                                fs''16
+                                e''16
+                                ef''16
+                                ]                                                                        %! ACC_1
+                            }
+                            r4
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                af''16
+                                [                                                                        %! ACC_1
+                                g''16
+                                a'16
+                                c'16
+                                d'16
+                                bf'16
+                                ]                                                                        %! ACC_1
+                            }
+                            r4
+                        }
+                    }
+                >>
 
         ..  container:: example
 
@@ -9860,43 +10334,50 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
-            >>> staff = lilypond_file[abjad.Staff]
+            >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 \with
                 {
                     \override TupletBracket.staff-padding = #1.5
                 }
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 5/4 {
+                <<
+                    \new GlobalContext
+                    {
                         \time 15/16
-                        c'16
-                        [
-                        d'16
-                        bf'8
-                        ]
+                        s1 * 15/16
                     }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 7/6 {
-                        fs''16
-                        [
-                        e''16
-                        ef''8
-                        af''16
-                        g''16
-                        ]
+                    \new Staff
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 5/4 {
+                            c'16
+                            [
+                            d'16
+                            bf'8
+                            ]
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 7/6 {
+                            fs''16
+                            [
+                            e''16
+                            ef''8
+                            af''16
+                            g''16
+                            ]
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 3/2 {
+                            a'8
+                        }
                     }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 3/2 {
-                        a'8
-                    }
-                }
+                >>
 
         ..  container:: example
 
@@ -9916,59 +10397,66 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
-            >>> staff = lilypond_file[abjad.Staff]
+            >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 \with
                 {
                     \override Beam.positions = #'(-5.5 . -5.5)
                 }
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 5/4 {
-                        \set stemLeftBeamCount = 0
-                        \set stemRightBeamCount = 2
+                <<
+                    \new GlobalContext
+                    {
                         \time 15/16
-                        c'16
-                        [
-                        \set stemLeftBeamCount = 2
-                        \set stemRightBeamCount = 1
-                        d'16
-                        \set stemLeftBeamCount = 1
-                        \set stemRightBeamCount = 1
-                        bf'8
+                        s1 * 15/16
                     }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 7/6 {
-                        \set stemLeftBeamCount = 1
-                        \set stemRightBeamCount = 2
-                        fs''16
-                        \set stemLeftBeamCount = 2
-                        \set stemRightBeamCount = 1
-                        e''16
-                        \set stemLeftBeamCount = 1
-                        \set stemRightBeamCount = 1
-                        ef''8
-                        \set stemLeftBeamCount = 1
-                        \set stemRightBeamCount = 2
-                        af''16
-                        \set stemLeftBeamCount = 2
-                        \set stemRightBeamCount = 1
-                        g''16
+                    \new Staff
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 5/4 {
+                            \set stemLeftBeamCount = 0
+                            \set stemRightBeamCount = 2
+                            c'16
+                            [
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 1
+                            d'16
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 1
+                            bf'8
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 7/6 {
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 2
+                            fs''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 1
+                            e''16
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 1
+                            ef''8
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 2
+                            af''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 1
+                            g''16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 3/2 {
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 0
+                            a'8
+                            ]
+                        }
                     }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 3/2 {
-                        \set stemLeftBeamCount = 1
-                        \set stemRightBeamCount = 0
-                        a'8
-                        ]
-                    }
-                }
+                >>
 
         ..  container:: example
 
@@ -9992,29 +10480,36 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 5/4 {
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
                         \time 15/16
-                        c'16
-                        d'16
-                        bf'8
+                        s1 * 15/16
                     }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 7/6 {
-                        fs''16
-                        e''16
-                        ef''8
-                        af''16
-                        g''16
+                    \new Staff
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 5/4 {
+                            c'16
+                            d'16
+                            bf'8
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 7/6 {
+                            fs''16
+                            e''16
+                            ef''8
+                            af''16
+                            g''16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 3/2 {
+                            a'8
+                        }
                     }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 3/2 {
-                        a'8
-                    }
-                }
+                >>
 
         ..  container:: example
 
@@ -10031,43 +10526,50 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             >>> collections = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
             >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
-            >>> staff = lilypond_file[abjad.Staff]
+            >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 \with
                 {
                     \override TupletBracket.staff-padding = #1.5
                 }
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 5/4 {
+                <<
+                    \new GlobalContext
+                    {
                         \time 15/16
-                        r16
-                        d'16
-                        [
-                        bf'8
-                        ]
+                        s1 * 15/16
                     }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 7/6 {
-                        fs''16
-                        [
-                        e''16
-                        ef''8
-                        af''16
-                        ]
-                        r16
+                    \new Staff
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 5/4 {
+                            r16
+                            d'16
+                            [
+                            bf'8
+                            ]
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 7/6 {
+                            fs''16
+                            [
+                            e''16
+                            ef''8
+                            af''16
+                            ]
+                            r16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 3/2 {
+                            a'8
+                        }
                     }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 3/2 {
-                        a'8
-                    }
-                }
+                >>
 
         ..  container:: example
 
@@ -10087,43 +10589,50 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             >>> collections = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
             >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
-            >>> staff = lilypond_file[abjad.Staff]
+            >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 \with
                 {
                     \override TupletBracket.staff-padding = #1.5
                 }
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 5/4 {
+                <<
+                    \new GlobalContext
+                    {
                         \time 15/16
-                        r16
-                        [
-                        d'16
-                        bf'8
-                        ]
+                        s1 * 15/16
                     }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 7/6 {
-                        fs''16
-                        [
-                        e''16
-                        ef''8
-                        af''16
-                        r16
-                        ]
+                    \new Staff
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 5/4 {
+                            r16
+                            [
+                            d'16
+                            bf'8
+                            ]
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 7/6 {
+                            fs''16
+                            [
+                            e''16
+                            ef''8
+                            af''16
+                            r16
+                            ]
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 3/2 {
+                            a'8
+                        }
                     }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 3/2 {
-                        a'8
-                    }
-                }
+                >>
 
         ..  container:: example
 
@@ -10144,49 +10653,56 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             >>> collections = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
             >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
-            >>> staff = lilypond_file[abjad.Staff]
+            >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 \with
                 {
                     \override TupletBracket.staff-padding = #1.5
                 }
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 5/4 {
-                        \override Staff.Stem.stemlet-length = 0.75
+                <<
+                    \new GlobalContext
+                    {
                         \time 15/16
-                        r16
-                        [
-                        d'16
-                        \revert Staff.Stem.stemlet-length
-                        bf'8
-                        ]
+                        s1 * 15/16
                     }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 7/6 {
-                        \override Staff.Stem.stemlet-length = 0.75
-                        fs''16
-                        [
-                        e''16
-                        ef''8
-                        af''16
-                        \revert Staff.Stem.stemlet-length
-                        r16
-                        ]
+                    \new Staff
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 5/4 {
+                            \override Staff.Stem.stemlet-length = 0.75
+                            r16
+                            [
+                            d'16
+                            \revert Staff.Stem.stemlet-length
+                            bf'8
+                            ]
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 7/6 {
+                            \override Staff.Stem.stemlet-length = 0.75
+                            fs''16
+                            [
+                            e''16
+                            ef''8
+                            af''16
+                            \revert Staff.Stem.stemlet-length
+                            r16
+                            ]
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 3/2 {
+                            \override Staff.Stem.stemlet-length = 0.75
+                            \revert Staff.Stem.stemlet-length
+                            a'8
+                        }
                     }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 3/2 {
-                        \override Staff.Stem.stemlet-length = 0.75
-                        \revert Staff.Stem.stemlet-length
-                        a'8
-                    }
-                }
+                >>
 
         ..  container:: example
 
@@ -10225,30 +10741,37 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                {
-                    \scaleDurations #'(1 . 1) {
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
                         \time 3/4
-                        c'16
-                        [
-                        d'16
-                        bf'8
-                        ]
+                        s1 * 3/4
                     }
-                    \scaleDurations #'(1 . 1) {
-                        fs''16
-                        [
-                        e''16
-                        ef''8
-                        af''16
-                        g''16
-                        ]
+                    \new Staff
+                    {
+                        \scaleDurations #'(1 . 1) {
+                            c'16
+                            [
+                            d'16
+                            bf'8
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            fs''16
+                            [
+                            e''16
+                            ef''8
+                            af''16
+                            g''16
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            a'8
+                        }
                     }
-                    \scaleDurations #'(1 . 1) {
-                        a'8
-                    }
-                }
+                >>
 
         ..  container:: example
 
@@ -10271,22 +10794,29 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                {
-                    \scaleDurations #'(1 . 1) {
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
                         \time 3/4
-                        c'16
-                        [
-                        d'16
-                        bf'8
-                        ]
+                        s1 * 3/4
                     }
-                    r4.
-                    \scaleDurations #'(1 . 1) {
-                        a'8
+                    \new Staff
+                    {
+                        \scaleDurations #'(1 . 1) {
+                            c'16
+                            [
+                            d'16
+                            bf'8
+                            ]
+                        }
+                        r4.
+                        \scaleDurations #'(1 . 1) {
+                            a'8
+                        }
                     }
-                }
+                >>
 
         ..  container:: example
 
@@ -10309,22 +10839,29 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                {
-                    \scaleDurations #'(1 . 1) {
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
                         \time 3/4
-                        c'16
-                        [
-                        d'16
-                        bf'8
-                        ]
+                        s1 * 3/4
                     }
-                    c'4.
-                    \scaleDurations #'(1 . 1) {
-                        a'8
+                    \new Staff
+                    {
+                        \scaleDurations #'(1 . 1) {
+                            c'16
+                            [
+                            d'16
+                            bf'8
+                            ]
+                        }
+                        c'4.
+                        \scaleDurations #'(1 . 1) {
+                            a'8
+                        }
                     }
-                }
+                >>
 
         ..  container:: example
 
@@ -10364,38 +10901,45 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                {
-                    \scaleDurations #'(1 . 1) {
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
                         \time 39/32
-                        c'8
-                        [
-                        d'8
-                        bf'8
-                        ~
-                        bf'32
-                        ]
+                        s1 * 39/32
                     }
-                    \scaleDurations #'(1 . 1) {
-                        fs''8
-                        [
-                        e''8
-                        ef''8
-                        ~
-                        ef''32
-                        af''8
-                        g''8
-                        ]
+                    \new Staff
+                    {
+                        \scaleDurations #'(1 . 1) {
+                            c'8
+                            [
+                            d'8
+                            bf'8
+                            ~
+                            bf'32
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            fs''8
+                            [
+                            e''8
+                            ef''8
+                            ~
+                            ef''32
+                            af''8
+                            g''8
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            a'8
+                            ~
+                            [
+                            a'32
+                            ]
+                        }
                     }
-                    \scaleDurations #'(1 . 1) {
-                        a'8
-                        ~
-                        [
-                        a'32
-                        ]
-                    }
-                }
+                >>
 
         ..  container:: example
 
@@ -10419,38 +10963,45 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                {
-                    \scaleDurations #'(1 . 1) {
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
                         \time 39/32
-                        c'8
-                        [
-                        d'8
-                        bf'32
-                        ~
-                        bf'8
-                        ]
+                        s1 * 39/32
                     }
-                    \scaleDurations #'(1 . 1) {
-                        fs''8
-                        [
-                        e''8
-                        ef''32
-                        ~
-                        ef''8
-                        af''8
-                        g''8
-                        ]
+                    \new Staff
+                    {
+                        \scaleDurations #'(1 . 1) {
+                            c'8
+                            [
+                            d'8
+                            bf'32
+                            ~
+                            bf'8
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            fs''8
+                            [
+                            e''8
+                            ef''32
+                            ~
+                            ef''8
+                            af''8
+                            g''8
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            a'32
+                            ~
+                            [
+                            a'8
+                            ]
+                        }
                     }
-                    \scaleDurations #'(1 . 1) {
-                        a'32
-                        ~
-                        [
-                        a'8
-                        ]
-                    }
-                }
+                >>
 
         ..  container:: example
 
@@ -10492,32 +11043,39 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                {
-                    \scaleDurations #'(1 . 1) {
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
                         \time 3/4
-                        c'16
-                        [
-                        d'16
-                        ]
-                        r8
+                        s1 * 3/4
                     }
-                    \scaleDurations #'(1 . 1) {
-                        fs''16
-                        [
-                        e''16
-                        ]
-                        r8
-                        af''16
-                        [
-                        g''16
-                        ]
+                    \new Staff
+                    {
+                        \scaleDurations #'(1 . 1) {
+                            c'16
+                            [
+                            d'16
+                            ]
+                            r8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            fs''16
+                            [
+                            e''16
+                            ]
+                            r8
+                            af''16
+                            [
+                            g''16
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            r8
+                        }
                     }
-                    \scaleDurations #'(1 . 1) {
-                        r8
-                    }
-                }
+                >>
 
         ..  container:: example
 
@@ -10541,30 +11099,37 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                {
-                    \scaleDurations #'(1 . 1) {
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
                         \time 3/4
-                        r16
-                        d'16
-                        [
-                        bf'8
-                        ]
+                        s1 * 3/4
                     }
-                    \scaleDurations #'(1 . 1) {
-                        fs''16
-                        [
-                        e''16
-                        ef''8
-                        af''16
-                        g''16
-                        ]
+                    \new Staff
+                    {
+                        \scaleDurations #'(1 . 1) {
+                            r16
+                            d'16
+                            [
+                            bf'8
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            fs''16
+                            [
+                            e''16
+                            ef''8
+                            af''16
+                            g''16
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            r8
+                        }
                     }
-                    \scaleDurations #'(1 . 1) {
-                        r8
-                    }
-                }
+                >>
 
         ..  container:: example
 
@@ -10607,39 +11172,46 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                {
-                    \scaleDurations #'(1 . 1) {
-                        \override Staff.Stem.stemlet-length = 1.5
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
                         \time 3/2
-                        c'8.
-                        [
-                        r16
-                        d'8
-                        \revert Staff.Stem.stemlet-length
-                        bf'8
-                        ]
+                        s1 * 3/2
                     }
-                    \scaleDurations #'(1 . 1) {
-                        \override Staff.Stem.stemlet-length = 1.5
-                        fs''8.
-                        [
-                        r16
-                        e''8
-                        ef''8
-                        af''8.
-                        r16
-                        \revert Staff.Stem.stemlet-length
-                        g''8
-                        ]
+                    \new Staff
+                    {
+                        \scaleDurations #'(1 . 1) {
+                            \override Staff.Stem.stemlet-length = 1.5
+                            c'8.
+                            [
+                            r16
+                            d'8
+                            \revert Staff.Stem.stemlet-length
+                            bf'8
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \override Staff.Stem.stemlet-length = 1.5
+                            fs''8.
+                            [
+                            r16
+                            e''8
+                            ef''8
+                            af''8.
+                            r16
+                            \revert Staff.Stem.stemlet-length
+                            g''8
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \override Staff.Stem.stemlet-length = 1.5
+                            \revert Staff.Stem.stemlet-length
+                            a'8
+                        }
                     }
-                    \scaleDurations #'(1 . 1) {
-                        \override Staff.Stem.stemlet-length = 1.5
-                        \revert Staff.Stem.stemlet-length
-                        a'8
-                    }
-                }
+                >>
 
         ..  container:: example
 
@@ -10662,19 +11234,26 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                {
-                    \scaleDurations #'(1 . 1) {
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
                         \time 29/32
-                        c'4..
-                        c'64
-                        \repeatTie
-                        d'4..
-                        d'64
-                        \repeatTie
+                        s1 * 29/32
                     }
-                }
+                    \new Staff
+                    {
+                        \scaleDurations #'(1 . 1) {
+                            c'4..
+                            c'64
+                            \repeatTie
+                            d'4..
+                            d'64
+                            \repeatTie
+                        }
+                    }
+                >>
 
         ..  container:: example
 
@@ -10716,31 +11295,38 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                {
-                    \scaleDurations #'(1 . 1) {
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
                         \time 3/4
-                        c'16
-                        [
-                        d'16
-                        bf'8
-                        ~
-                        ]
+                        s1 * 3/4
                     }
-                    \scaleDurations #'(1 . 1) {
-                        bf'16
-                        [
-                        e''16
-                        ef''8
-                        af''16
-                        g''16
-                        ]
+                    \new Staff
+                    {
+                        \scaleDurations #'(1 . 1) {
+                            c'16
+                            [
+                            d'16
+                            bf'8
+                            ~
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            bf'16
+                            [
+                            e''16
+                            ef''8
+                            af''16
+                            g''16
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            a'8
+                        }
                     }
-                    \scaleDurations #'(1 . 1) {
-                        a'8
-                    }
-                }
+                >>
 
         ..  container:: example
 
@@ -10763,34 +11349,41 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                {
-                    \scaleDurations #'(1 . 1) {
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
                         \time 3/4
-                        c'16
-                        [
-                        d'16
-                        bf'8
-                        ~
-                        ]
+                        s1 * 3/4
                     }
-                    \scaleDurations #'(1 . 1) {
-                        bf'16
-                        [
-                        e''16
-                        ~
-                        e''8
-                        g''16
-                        ~
-                        g''16
-                        ~
-                        ]
+                    \new Staff
+                    {
+                        \scaleDurations #'(1 . 1) {
+                            c'16
+                            [
+                            d'16
+                            bf'8
+                            ~
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            bf'16
+                            [
+                            e''16
+                            ~
+                            e''8
+                            g''16
+                            ~
+                            g''16
+                            ~
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            g''8
+                        }
                     }
-                    \scaleDurations #'(1 . 1) {
-                        g''8
-                    }
-                }
+                >>
 
         ..  container:: example
 
@@ -10830,33 +11423,40 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 5/4 {
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
                         \time 15/16
-                        c'16
-                        [
-                        d'16
-                        bf'8
-                        ]
+                        s1 * 15/16
                     }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 7/6 {
-                        fs''16
-                        [
-                        e''16
-                        ef''8
-                        af''16
-                        g''16
-                        ]
+                    \new Staff
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 5/4 {
+                            c'16
+                            [
+                            d'16
+                            bf'8
+                            ]
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 7/6 {
+                            fs''16
+                            [
+                            e''16
+                            ef''8
+                            af''16
+                            g''16
+                            ]
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 3/2 {
+                            a'8
+                        }
                     }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 3/2 {
-                        a'8
-                    }
-                }
+                >>
 
         ..  container:: example
 
@@ -10877,32 +11477,39 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 3/4 {
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
                         \time 5/8
-                        c'16
-                        [
-                        d'16
-                        bf'8
-                        ]
+                        s1 * 5/8
                     }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 5/6 {
-                        fs''16
-                        [
-                        e''16
-                        ef''8
-                        af''16
-                        g''16
-                        ]
+                    \new Staff
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 3/4 {
+                            c'16
+                            [
+                            d'16
+                            bf'8
+                            ]
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 5/6 {
+                            fs''16
+                            [
+                            e''16
+                            ef''8
+                            af''16
+                            g''16
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            a'8
+                        }
                     }
-                    \scaleDurations #'(1 . 1) {
-                        a'8
-                    }
-                }
+                >>
 
         ..  container:: example
 
@@ -10928,32 +11535,39 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 3/4 {
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
                         \time 5/8
-                        c'16
-                        [
-                        d'16
-                        bf'8
-                        ]
+                        s1 * 5/8
                     }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 5/6 {
-                        fs''16
-                        [
-                        e''16
-                        ef''8
-                        af''16
-                        g''16
-                        ]
+                    \new Staff
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 3/4 {
+                            c'16
+                            [
+                            d'16
+                            bf'8
+                            ]
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 5/6 {
+                            fs''16
+                            [
+                            e''16
+                            ef''8
+                            af''16
+                            g''16
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            a'8
+                        }
                     }
-                    \scaleDurations #'(1 . 1) {
-                        a'8
-                    }
-                }
+                >>
 
         ..  container:: example
 
@@ -10979,32 +11593,39 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 3/4 {
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
                         \time 5/8
-                        c'16
-                        [
-                        d'16
-                        bf'8
-                        ]
+                        s1 * 5/8
                     }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 5/6 {
-                        fs''16
-                        [
-                        e''16
-                        ef''8
-                        af''16
-                        g''16
-                        ]
+                    \new Staff
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 3/4 {
+                            c'16
+                            [
+                            d'16
+                            bf'8
+                            ]
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 5/6 {
+                            fs''16
+                            [
+                            e''16
+                            ef''8
+                            af''16
+                            g''16
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            a'8
+                        }
                     }
-                    \scaleDurations #'(1 . 1) {
-                        a'8
-                    }
-                }
+                >>
 
         ..  container:: example
 
@@ -11028,32 +11649,39 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 3/4 {
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
                         \time 5/8
-                        c'16
-                        [
-                        d'16
-                        bf'8
-                        ]
+                        s1 * 5/8
                     }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 5/6 {
-                        fs''16
-                        [
-                        e''16
-                        ef''8
-                        af''16
-                        g''16
-                        ]
+                    \new Staff
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 3/4 {
+                            c'16
+                            [
+                            d'16
+                            bf'8
+                            ]
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 5/6 {
+                            fs''16
+                            [
+                            e''16
+                            ef''8
+                            af''16
+                            g''16
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            a'8
+                        }
                     }
-                    \scaleDurations #'(1 . 1) {
-                        a'8
-                    }
-                }
+                >>
 
         ..  container:: example
 
@@ -11079,32 +11707,39 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 3/4 {
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
                         \time 5/8
-                        c'16
-                        [
-                        d'16
-                        bf'8
-                        ]
+                        s1 * 5/8
                     }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 5/6 {
-                        fs''16
-                        [
-                        e''16
-                        ef''8
-                        af''16
-                        g''16
-                        ]
+                    \new Staff
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 3/4 {
+                            c'16
+                            [
+                            d'16
+                            bf'8
+                            ]
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 5/6 {
+                            fs''16
+                            [
+                            e''16
+                            ef''8
+                            af''16
+                            g''16
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            a'8
+                        }
                     }
-                    \scaleDurations #'(1 . 1) {
-                        a'8
-                    }
-                }
+                >>
 
         ..  container:: example
 
@@ -11128,70 +11763,77 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             ...     ]
             >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
-            >>> staff = lilypond_file[abjad.Staff]
+            >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).beam.positions = (-6, -6)
             >>> abjad.override(staff).stem.direction = Down
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 \with
                 {
                     \override Beam.positions = #'(-6 . -6)
                     \override Stem.direction = #down
                 }
-                {
-                    \tweak edge-height #'(0.7 . 0)
-                    \times 2/3 {
+                <<
+                    \new GlobalContext
+                    {
                         \time 7/4
-                        c'8
+                        s1 * 7/4
                     }
-                    \tweak edge-height #'(0.7 . 0)
-                    \times 2/3 {
-                        d'8
-                        [
-                        bf'8
-                        ]
+                    \new Staff
+                    {
+                        \tweak edge-height #'(0.7 . 0)
+                        \times 2/3 {
+                            c'8
+                        }
+                        \tweak edge-height #'(0.7 . 0)
+                        \times 2/3 {
+                            d'8
+                            [
+                            bf'8
+                            ]
+                        }
+                        \times 2/3 {
+                            fs''8
+                            [
+                            e''8
+                            ef''8
+                            ]
+                        }
+                        \tweak edge-height #'(0.7 . 0)
+                        \times 2/3 {
+                            af''8
+                            [
+                            g''8
+                            a'8
+                            c'8
+                            ]
+                        }
+                        \tweak edge-height #'(0.7 . 0)
+                        \times 2/3 {
+                            d'8
+                            [
+                            bf'8
+                            fs''8
+                            e''8
+                            ef''8
+                            ]
+                        }
+                        \times 2/3 {
+                            af''8
+                            [
+                            g''8
+                            a'8
+                            c'8
+                            d'8
+                            bf'8
+                            ]
+                        }
                     }
-                    \times 2/3 {
-                        fs''8
-                        [
-                        e''8
-                        ef''8
-                        ]
-                    }
-                    \tweak edge-height #'(0.7 . 0)
-                    \times 2/3 {
-                        af''8
-                        [
-                        g''8
-                        a'8
-                        c'8
-                        ]
-                    }
-                    \tweak edge-height #'(0.7 . 0)
-                    \times 2/3 {
-                        d'8
-                        [
-                        bf'8
-                        fs''8
-                        e''8
-                        ef''8
-                        ]
-                    }
-                    \times 2/3 {
-                        af''8
-                        [
-                        g''8
-                        a'8
-                        c'8
-                        d'8
-                        bf'8
-                        ]
-                    }
-                }
+                >>
 
         ..  container:: example
 
@@ -11218,66 +11860,73 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             ...     ]
             >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
-            >>> staff = lilypond_file[abjad.Staff]
+            >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).beam.positions = (-6, -6)
             >>> abjad.override(staff).stem.direction = Down
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 \with
                 {
                     \override Beam.positions = #'(-6 . -6)
                     \override Stem.direction = #down
                 }
-                {
-                    \scaleDurations #'(1 . 1) {
+                <<
+                    \new GlobalContext
+                    {
                         \time 3/2
-                        c'4
+                        s1 * 3/2
                     }
-                    \scaleDurations #'(1 . 1) {
-                        d'8
-                        [
-                        bf'8
-                        ]
+                    \new Staff
+                    {
+                        \scaleDurations #'(1 . 1) {
+                            c'4
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            d'8
+                            [
+                            bf'8
+                            ]
+                        }
+                        \times 4/6 {
+                            fs''8
+                            [
+                            e''8
+                            ef''8
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            af''16
+                            [
+                            g''16
+                            a'16
+                            c'16
+                            ]
+                        }
+                        \times 4/5 {
+                            d'16
+                            [
+                            bf'16
+                            fs''16
+                            e''16
+                            ef''16
+                            ]
+                        }
+                        \times 4/6 {
+                            af''16
+                            [
+                            g''16
+                            a'16
+                            c'16
+                            d'16
+                            bf'16
+                            ]
+                        }
                     }
-                    \times 4/6 {
-                        fs''8
-                        [
-                        e''8
-                        ef''8
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        af''16
-                        [
-                        g''16
-                        a'16
-                        c'16
-                        ]
-                    }
-                    \times 4/5 {
-                        d'16
-                        [
-                        bf'16
-                        fs''16
-                        e''16
-                        ef''16
-                        ]
-                    }
-                    \times 4/6 {
-                        af''16
-                        [
-                        g''16
-                        a'16
-                        c'16
-                        d'16
-                        bf'16
-                        ]
-                    }
-                }
+                >>
 
         ..  container:: example
 
@@ -11305,79 +11954,86 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             ...     ]
             >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
-            >>> staff = lilypond_file[abjad.Staff]
+            >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).beam.positions = (-6, -6)
             >>> abjad.override(staff).stem.direction = Down
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 \with
                 {
                     \override Beam.positions = #'(-6 . -6)
                     \override Stem.direction = #down
                 }
-                {
-                    \times 4/6 {
+                <<
+                    \new GlobalContext
+                    {
                         \time 15/8
-                        c'16
-                        [
-                        d'16
-                        bf'8
-                        fs''16
-                        e''16
-                        ]
+                        s1 * 15/8
                     }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 6/7 {
-                        ef''8
-                        [
-                        af''16
-                        g''16
-                        a'8
-                        c'16
-                        ]
+                    \new Staff
+                    {
+                        \times 4/6 {
+                            c'16
+                            [
+                            d'16
+                            bf'8
+                            fs''16
+                            e''16
+                            ]
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 6/7 {
+                            ef''8
+                            [
+                            af''16
+                            g''16
+                            a'8
+                            c'16
+                            ]
+                        }
+                        \times 4/7 {
+                            d'16
+                            [
+                            bf'8
+                            fs''16
+                            e''16
+                            ef''8
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            af''16
+                            [
+                            g''16
+                            a'8
+                            c'16
+                            d'16
+                            ]
+                        }
+                        \times 4/7 {
+                            bf'8
+                            [
+                            fs''16
+                            e''16
+                            ef''8
+                            af''16
+                            ]
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 6/7 {
+                            g''16
+                            [
+                            a'8
+                            c'16
+                            d'16
+                            bf'8
+                            ]
+                        }
                     }
-                    \times 4/7 {
-                        d'16
-                        [
-                        bf'8
-                        fs''16
-                        e''16
-                        ef''8
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        af''16
-                        [
-                        g''16
-                        a'8
-                        c'16
-                        d'16
-                        ]
-                    }
-                    \times 4/7 {
-                        bf'8
-                        [
-                        fs''16
-                        e''16
-                        ef''8
-                        af''16
-                        ]
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 6/7 {
-                        g''16
-                        [
-                        a'8
-                        c'16
-                        d'16
-                        bf'8
-                        ]
-                    }
-                }
+                >>
 
         ..  container:: example
 
@@ -11416,49 +12072,56 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             >>> collections = [[0, 2], [10, 18, 16], [15, 20], [19, 9, None]]
             >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
-            >>> staff = lilypond_file[abjad.Staff]
+            >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 \with
                 {
                     \override TupletBracket.staff-padding = #1.5
                 }
-                {
-                    \times 2/3 {
+                <<
+                    \new GlobalContext
+                    {
                         \time 11/8
-                        c'8.
-                        [
-                        d'8.
-                        ]
+                        s1 * 11/8
                     }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 7/9 {
-                        bf'8.
-                        [
-                        fs''8.
-                        e''8.
-                        ]
+                    \new Staff
+                    {
+                        \times 2/3 {
+                            c'8.
+                            [
+                            d'8.
+                            ]
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 7/9 {
+                            bf'8.
+                            [
+                            fs''8.
+                            e''8.
+                            ]
+                        }
+                        \times 2/3 {
+                            ef''8.
+                            [
+                            af''8.
+                            ]
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 7/9 {
+                            g''8.
+                            [
+                            a'8.
+                            ]
+                            r8.
+                        }
                     }
-                    \times 2/3 {
-                        ef''8.
-                        [
-                        af''8.
-                        ]
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 7/9 {
-                        g''8.
-                        [
-                        a'8.
-                        ]
-                        r8.
-                    }
-                }
+                >>
 
         ..  container:: example
 
@@ -11478,51 +12141,58 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             >>> collections = [[0, 2], [10, 18, 16], [15, 20], [19, 9, None]]
             >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
-            >>> staff = lilypond_file[abjad.Staff]
+            >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 \with
                 {
                     \override TupletBracket.staff-padding = #1.5
                 }
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 1/1 {
+                <<
+                    \new GlobalContext
+                    {
                         \time 11/8
-                        c'8
-                        [
-                        d'8
-                        ]
+                        s1 * 11/8
                     }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 7/9 {
-                        bf'8.
-                        [
-                        fs''8.
-                        e''8.
-                        ]
+                    \new Staff
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 1/1 {
+                            c'8
+                            [
+                            d'8
+                            ]
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 7/9 {
+                            bf'8.
+                            [
+                            fs''8.
+                            e''8.
+                            ]
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 1/1 {
+                            ef''8
+                            [
+                            af''8
+                            ]
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 7/9 {
+                            g''8.
+                            [
+                            a'8.
+                            ]
+                            r8.
+                        }
                     }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 1/1 {
-                        ef''8
-                        [
-                        af''8
-                        ]
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 7/9 {
-                        g''8.
-                        [
-                        a'8.
-                        ]
-                        r8.
-                    }
-                }
+                >>
 
         ..  container:: example
 
@@ -11578,91 +12248,98 @@ class PitchSpecifier(abjad.AbjadObject):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice 1"
+                \new GlobalContext
                 {
-                    \voiceOne
+                    s1 * 9/4
+                }
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
                     {
-                        \scaleDurations #'(1 . 1) {
-                            c'16
-                            [
-                            d'16
-                            bf'16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            fs'16
-                            [
-                            e'16
-                            ef'16
-                            af'16
-                            g'16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            a'16
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            ef'16
-                            [
-                            f'16
-                            cs'16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            a'16
-                            [
-                            g'16
-                            fs'16
-                            b'16
-                            bf'16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            c'16
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            fs'16
-                            [
-                            af'16
-                            e'16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            c'16
-                            [
-                            bf'16
-                            a'16
-                            d'16
-                            cs'16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            ef'16
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            a'16
-                            [
-                            b'16
-                            g'16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            ef'16
-                            [
-                            cs'16
-                            c'16
-                            f'16
-                            e'16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            fs'16
+                        \voiceOne
+                        {
+                            \scaleDurations #'(1 . 1) {
+                                c'16
+                                [
+                                d'16
+                                bf'16
+                                ]
+                            }
+                            \scaleDurations #'(1 . 1) {
+                                fs'16
+                                [
+                                e'16
+                                ef'16
+                                af'16
+                                g'16
+                                ]
+                            }
+                            \scaleDurations #'(1 . 1) {
+                                a'16
+                            }
+                            \scaleDurations #'(1 . 1) {
+                                ef'16
+                                [
+                                f'16
+                                cs'16
+                                ]
+                            }
+                            \scaleDurations #'(1 . 1) {
+                                a'16
+                                [
+                                g'16
+                                fs'16
+                                b'16
+                                bf'16
+                                ]
+                            }
+                            \scaleDurations #'(1 . 1) {
+                                c'16
+                            }
+                            \scaleDurations #'(1 . 1) {
+                                fs'16
+                                [
+                                af'16
+                                e'16
+                                ]
+                            }
+                            \scaleDurations #'(1 . 1) {
+                                c'16
+                                [
+                                bf'16
+                                a'16
+                                d'16
+                                cs'16
+                                ]
+                            }
+                            \scaleDurations #'(1 . 1) {
+                                ef'16
+                            }
+                            \scaleDurations #'(1 . 1) {
+                                a'16
+                                [
+                                b'16
+                                g'16
+                                ]
+                            }
+                            \scaleDurations #'(1 . 1) {
+                                ef'16
+                                [
+                                cs'16
+                                c'16
+                                f'16
+                                e'16
+                                ]
+                            }
+                            \scaleDurations #'(1 . 1) {
+                                fs'16
+                            }
                         }
                     }
-                }
+                >>
             >>
 
     """
@@ -11796,34 +12473,41 @@ class PitchSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 9/16
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \scaleDurations #'(1 . 1) {
-                                ef'16
-                                [
-                                f'16
-                                cs'16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                a'16
-                                [
-                                g'16
-                                fs'16
-                                b'16
-                                bf'16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                c'16
+                            \voiceOne
+                            {
+                                \scaleDurations #'(1 . 1) {
+                                    ef'16
+                                    [
+                                    f'16
+                                    cs'16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    a'16
+                                    [
+                                    g'16
+                                    fs'16
+                                    b'16
+                                    bf'16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    c'16
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         ..  container:: example
@@ -11905,34 +12589,41 @@ class PitchSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 9/16
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \scaleDurations #'(1 . 1) {
-                                c'16
-                                [
-                                d'16
-                                bf'16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                fs''16
-                                [
-                                e''16
-                                ef''16
-                                af''16
-                                g''16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                a'16
+                            \voiceOne
+                            {
+                                \scaleDurations #'(1 . 1) {
+                                    c'16
+                                    [
+                                    d'16
+                                    bf'16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    fs''16
+                                    [
+                                    e''16
+                                    ef''16
+                                    af''16
+                                    g''16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    a'16
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         ..  container:: example
@@ -11952,34 +12643,41 @@ class PitchSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 9/16
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \scaleDurations #'(1 . 1) {
-                                c'16
-                                [
-                                d'16
-                                bf'16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                fs'16
-                                [
-                                e'16
-                                ef'16
-                                af'16
-                                g'16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                a'16
+                            \voiceOne
+                            {
+                                \scaleDurations #'(1 . 1) {
+                                    c'16
+                                    [
+                                    d'16
+                                    bf'16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    fs'16
+                                    [
+                                    e'16
+                                    ef'16
+                                    af'16
+                                    g'16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    a'16
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         ..  container:: example
@@ -12045,54 +12743,61 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
         ...     time_treatments=[1],
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
-        >>> staff = lilypond_file[abjad.Staff]
+        >>> staff = lilypond_file[abjad.Score]
         >>> abjad.override(staff).tuplet_bracket.staff_padding = 4
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             \with
             {
                 \override TupletBracket.staff-padding = #4
             }
             <<
-                \context Voice = "Voice 1"
+                \new GlobalContext
                 {
-                    \voiceOne
+                    s1 * 13/8
+                }
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
                     {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/8 {
-                            r8
-                            c'16
-                            r16
-                            d'16
-                            r16
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 11/10 {
-                            fs''16
-                            r16
-                            e''16
-                            r16
-                            ef''16
-                            r16
-                            af''16
-                            r16
-                            g''16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 6/5 {
-                            a'16
-                            r16
-                            r8.
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/8 {
+                                r8
+                                c'16
+                                r16
+                                d'16
+                                r16
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 11/10 {
+                                fs''16
+                                r16
+                                e''16
+                                r16
+                                ef''16
+                                r16
+                                af''16
+                                r16
+                                g''16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 6/5 {
+                                a'16
+                                r16
+                                r8.
+                            }
                         }
                     }
-                }
+                >>
             >>
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -12107,54 +12812,61 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
         ...     time_treatments=[1],
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
-        >>> staff = lilypond_file[abjad.Staff]
+        >>> staff = lilypond_file[abjad.Score]
         >>> abjad.override(staff).tuplet_bracket.staff_padding = 4
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             \with
             {
                 \override TupletBracket.staff-padding = #4
             }
             <<
-                \context Voice = "Voice 1"
+                \new GlobalContext
                 {
-                    \voiceOne
+                    s1 * 13/8
+                }
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
                     {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/8 {
-                            r8
-                            r16
-                            c'16
-                            r16
-                            d'16
-                            r16
-                            bf'16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 11/10 {
-                            r16
-                            fs''16
-                            r16
-                            e''16
-                            r16
-                            ef''16
-                            r16
-                            af''16
-                            r16
-                            g''16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 6/5 {
-                            r16
-                            a'16
-                            r8.
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/8 {
+                                r8
+                                r16
+                                c'16
+                                r16
+                                d'16
+                                r16
+                                bf'16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 11/10 {
+                                r16
+                                fs''16
+                                r16
+                                e''16
+                                r16
+                                ef''16
+                                r16
+                                af''16
+                                r16
+                                g''16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 6/5 {
+                                r16
+                                a'16
+                                r8.
+                            }
                         }
                     }
-                }
+                >>
             >>
 
     ..  container:: example
@@ -12223,37 +12935,44 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 9/16
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 3/4 {
-                                r16
-                                c'16
-                                [
-                                d'16
-                                bf'16
-                                ]
-                            }
-                            \times 4/5 {
-                                fs''16
-                                [
-                                e''16
-                                ef''16
-                                af''16
-                                g''16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                a'16
-                                r16
+                            \voiceOne
+                            {
+                                \tweak text #tuplet-number::calc-fraction-text
+                                \times 3/4 {
+                                    r16
+                                    c'16
+                                    [
+                                    d'16
+                                    bf'16
+                                    ]
+                                }
+                                \times 4/5 {
+                                    fs''16
+                                    [
+                                    e''16
+                                    ef''16
+                                    af''16
+                                    g''16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    a'16
+                                    r16
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         Returns prefix, suffix pair.
@@ -12297,39 +13016,46 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 15/16
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 5/4 {
-                                r16
-                                c'16
-                                [
-                                d'16
-                                bf'16
-                                ]
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 6/5 {
-                                fs''16
-                                [
-                                e''16
-                                ef''16
-                                af''16
-                                g''16
-                                ]
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 4/3 {
-                                a'16
-                                r8
+                            \voiceOne
+                            {
+                                \tweak text #tuplet-number::calc-fraction-text
+                                \times 5/4 {
+                                    r16
+                                    c'16
+                                    [
+                                    d'16
+                                    bf'16
+                                    ]
+                                }
+                                \tweak text #tuplet-number::calc-fraction-text
+                                \times 6/5 {
+                                    fs''16
+                                    [
+                                    e''16
+                                    ef''16
+                                    af''16
+                                    g''16
+                                    ]
+                                }
+                                \tweak text #tuplet-number::calc-fraction-text
+                                \times 4/3 {
+                                    a'16
+                                    r8
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         ..  container:: example
@@ -12353,27 +13079,34 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 9/16
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/8 {
-                                r16
-                                fs''16
-                                [
-                                e''16
-                                ef''16
-                                af''16
-                                g''16
-                                ]
-                                r8
+                            \voiceOne
+                            {
+                                \tweak text #tuplet-number::calc-fraction-text
+                                \times 9/8 {
+                                    r16
+                                    fs''16
+                                    [
+                                    e''16
+                                    ef''16
+                                    af''16
+                                    g''16
+                                    ]
+                                    r8
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         ..  container:: example
@@ -12398,41 +13131,48 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 9/8
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 7/6 {
-                                r16
-                                c'16
-                                [
-                                d'16
-                                bf'16
-                                ]
-                                r8
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 6/5 {
-                                fs''16
-                                [
-                                e''16
-                                ef''16
-                                af''16
-                                g''16
-                                ]
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 5/4 {
-                                r16
-                                a'16
-                                r8
+                            \voiceOne
+                            {
+                                \tweak text #tuplet-number::calc-fraction-text
+                                \times 7/6 {
+                                    r16
+                                    c'16
+                                    [
+                                    d'16
+                                    bf'16
+                                    ]
+                                    r8
+                                }
+                                \tweak text #tuplet-number::calc-fraction-text
+                                \times 6/5 {
+                                    fs''16
+                                    [
+                                    e''16
+                                    ef''16
+                                    af''16
+                                    g''16
+                                    ]
+                                }
+                                \tweak text #tuplet-number::calc-fraction-text
+                                \times 5/4 {
+                                    r16
+                                    a'16
+                                    r8
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         ..  container:: example
@@ -12457,43 +13197,50 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 21/16
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 7/6 {
-                                r16
-                                c'16
-                                [
-                                d'16
-                                bf'16
-                                ]
-                                r8
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/8 {
-                                r16
-                                fs''16
-                                [
-                                e''16
-                                ef''16
-                                af''16
-                                g''16
-                                ]
-                                r8
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 5/4 {
-                                r16
-                                a'16
-                                r8
+                            \voiceOne
+                            {
+                                \tweak text #tuplet-number::calc-fraction-text
+                                \times 7/6 {
+                                    r16
+                                    c'16
+                                    [
+                                    d'16
+                                    bf'16
+                                    ]
+                                    r8
+                                }
+                                \tweak text #tuplet-number::calc-fraction-text
+                                \times 9/8 {
+                                    r16
+                                    fs''16
+                                    [
+                                    e''16
+                                    ef''16
+                                    af''16
+                                    g''16
+                                    ]
+                                    r8
+                                }
+                                \tweak text #tuplet-number::calc-fraction-text
+                                \times 5/4 {
+                                    r16
+                                    a'16
+                                    r8
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         Set to pattern or none.
@@ -12524,35 +13271,42 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 3/4
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \scaleDurations #'(1 . 1) {
-                                r8.
-                                c'16
-                                [
-                                d'16
-                                bf'16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                fs''16
-                                [
-                                e''16
-                                ef''16
-                                af''16
-                                g''16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                a'16
+                            \voiceOne
+                            {
+                                \scaleDurations #'(1 . 1) {
+                                    r8.
+                                    c'16
+                                    [
+                                    d'16
+                                    bf'16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    fs''16
+                                    [
+                                    e''16
+                                    ef''16
+                                    af''16
+                                    g''16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    a'16
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         Set to list of positive integers or none.
@@ -12596,35 +13350,42 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice 1"
+                    \new GlobalContext
                     {
-                        \voiceOne
+                        s1 * 3/4
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice 1"
                         {
-                            \scaleDurations #'(1 . 1) {
-                                c'16
-                                [
-                                d'16
-                                bf'16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                fs''16
-                                [
-                                e''16
-                                ef''16
-                                af''16
-                                g''16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                a'16
-                                r8.
+                            \voiceOne
+                            {
+                                \scaleDurations #'(1 . 1) {
+                                    c'16
+                                    [
+                                    d'16
+                                    bf'16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    fs''16
+                                    [
+                                    e''16
+                                    ef''16
+                                    af''16
+                                    g''16
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1) {
+                                    a'16
+                                    r8.
+                                }
                             }
                         }
-                    }
+                    >>
                 >>
 
         Set to list of positive integers or none.
@@ -12715,69 +13476,76 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice 1"
+                \new GlobalContext
                 {
-                    \voiceOne
+                    s1 * 3/4
+                }
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
                     {
-                        \times 4/5 {
-                            r8
-                            c'16
-                            [
-                            d'16
-                            bf'16
-                            ]
-                        }
-                        \times 2/3 {
-                            c'16
-                            [
-                            d'16
-                            bf'16
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 6/7 {
-                            c'16
-                            [
-                            d'16
-                            bf'16
-                            ]
-                            r4
+                        \voiceOne
+                        {
+                            \times 4/5 {
+                                r8
+                                c'16
+                                [
+                                d'16
+                                bf'16
+                                ]
+                            }
+                            \times 2/3 {
+                                c'16
+                                [
+                                d'16
+                                bf'16
+                                ]
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 6/7 {
+                                c'16
+                                [
+                                d'16
+                                bf'16
+                                ]
+                                r4
+                            }
                         }
                     }
-                }
-                \context Voice = "Voice 2"
-                {
-                    \voiceTwo
+                    \context Voice = "Voice 2"
                     {
-                        \override TupletBracket.stencil = ##f
-                        \override TupletNumber.stencil = ##f
-                        \times 4/5 {
-                            s8
-                            s16
-                            s16
-                            bf'16
+                        \voiceTwo
+                        {
+                            \override TupletBracket.stencil = ##f
+                            \override TupletNumber.stencil = ##f
+                            \times 4/5 {
+                                s8
+                                s16
+                                s16
+                                bf'16
+                            }
+                            \times 2/3 {
+                                c'16
+                                [
+                                d'16
+                                ]
+                                s16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 6/7 {
+                                s16
+                                s16
+                                s16
+                                s4
+                            }
+                            \revert TupletBracket.stencil
+                            \revert TupletNumber.stencil
                         }
-                        \times 2/3 {
-                            c'16
-                            [
-                            d'16
-                            ]
-                            s16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 6/7 {
-                            s16
-                            s16
-                            s16
-                            s4
-                        }
-                        \revert TupletBracket.stencil
-                        \revert TupletNumber.stencil
                     }
-                }
+                >>
             >>
 
     """
@@ -12816,84 +13584,91 @@ def imbricate(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice 1"
+                \new GlobalContext
                 {
-                    \voiceOne
+                    s1 * 11/8
+                }
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
                     {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
-                            c'16
-                            [
-                            d'16
-                            ]
-                            bf'4
-                            ~
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
-                            [
-                            e''16
-                            ]
-                            ef''4
-                            ~
-                            ef''16
-                            r16
-                            af''16
-                            [
-                            g''16
-                            ]
-                        }
-                        \times 4/5 {
-                            a'16
-                            r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5                           %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                                r8
+                                c'16
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
+                                ef''16
+                                r16
+                                af''16
+                                [
+                                g''16
+                                ]
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4
+                                \revert TupletBracket.staff-padding                                  %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            }
                         }
                     }
-                }
-                \context Voice = "Voice 2"
-                {
-                    \voiceTwo
+                    \context Voice = "Voice 2"
                     {
-                        \override TupletBracket.stencil = ##f
-                        \override TupletNumber.stencil = ##f
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            s8
-                            s16
-                            s16
-                            bf'4
-                            ~
-                            bf'16
-                            s16
+                        \voiceTwo
+                        {
+                            \override TupletBracket.stencil = ##f
+                            \override TupletNumber.stencil = ##f
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                s8
+                                s16
+                                s16
+                                bf'4
+                                ~
+                                bf'16
+                                s16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                s16
+                                s16
+                                s4
+                                s16
+                                s16
+                                af''16
+                                [
+                                g''16
+                                ]
+                            }
+                            \times 4/5 {
+                                s16
+                                s4
+                            }
+                            \revert TupletBracket.stencil
+                            \revert TupletNumber.stencil
                         }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            s16
-                            s16
-                            s4
-                            s16
-                            s16
-                            af''16
-                            [
-                            g''16
-                            ]
-                        }
-                        \times 4/5 {
-                            s16
-                            s4
-                        }
-                        \revert TupletBracket.stencil
-                        \revert TupletNumber.stencil
                     }
-                }
+                >>
             >>
 
     """
@@ -12932,51 +13707,58 @@ def nest(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice 1"
+                \new GlobalContext
                 {
-                    \voiceOne
+                    s1 * 13/8
+                }
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
                     {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 13/11 {
+                        \voiceOne
+                        {
                             \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                           %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
-                                r8
-                                c'16
-                                [
-                                d'16
-                                ]
-                                bf'4
-                                ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16
-                                [
-                                e''16
-                                ]
-                                ef''4
-                                ~
-                                ef''16
-                                r16
-                                af''16
-                                [
-                                g''16
-                                ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TupletBracket.staff-padding                                  %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \times 13/11 {
+                                \tweak text #tuplet-number::calc-fraction-text
+                                \times 9/10 {
+                                    \override TupletBracket.staff-padding = #5                       %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                                    r8
+                                    c'16
+                                    [
+                                    d'16
+                                    ]
+                                    bf'4
+                                    ~
+                                    bf'16
+                                    r16
+                                }
+                                \tweak text #tuplet-number::calc-fraction-text
+                                \times 9/10 {
+                                    fs''16
+                                    [
+                                    e''16
+                                    ]
+                                    ef''4
+                                    ~
+                                    ef''16
+                                    r16
+                                    af''16
+                                    [
+                                    g''16
+                                    ]
+                                }
+                                \times 4/5 {
+                                    a'16
+                                    r4
+                                    \revert TupletBracket.staff-padding                              %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                                }
                             }
                         }
                     }
-                }
+                >>
             >>
 
     """
@@ -13007,47 +13789,54 @@ def rests_after(counts: typing.Iterable[int]) -> RestAffixSpecifier:
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice 1"
+                \new GlobalContext
                 {
-                    \voiceOne
+                    s1 * 9/8
+                }
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
                     {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 7/8 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
-                            c'16
-                            [
-                            d'16
-                            ]
-                            bf'4
-                            ~
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
-                            [
-                            e''16
-                            ]
-                            ef''4
-                            ~
-                            ef''16
-                            r16
-                            af''16
-                            [
-                            g''16
-                            ]
-                        }
-                        \times 2/3 {
-                            a'16
-                            r8
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 7/8 {
+                                \override TupletBracket.staff-padding = #5                           %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                                c'16
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
+                                ef''16
+                                r16
+                                af''16
+                                [
+                                g''16
+                                ]
+                            }
+                            \times 2/3 {
+                                a'16
+                                r8
+                                \revert TupletBracket.staff-padding                                  %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            }
                         }
                     }
-                }
+                >>
             >>
 
     """
@@ -13078,48 +13867,55 @@ def rests_around(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice 1"
+                \new GlobalContext
                 {
-                    \voiceOne
+                    s1 * 5/4
+                }
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
                     {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
-                            c'16
-                            [
-                            d'16
-                            ]
-                            bf'4
-                            ~
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
-                            [
-                            e''16
-                            ]
-                            ef''4
-                            ~
-                            ef''16
-                            r16
-                            af''16
-                            [
-                            g''16
-                            ]
-                        }
-                        \times 2/3 {
-                            a'16
-                            r8
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5                           %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                                r8
+                                c'16
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
+                                ef''16
+                                r16
+                                af''16
+                                [
+                                g''16
+                                ]
+                            }
+                            \times 2/3 {
+                                a'16
+                                r8
+                                \revert TupletBracket.staff-padding                                  %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            }
                         }
                     }
-                }
+                >>
             >>
 
     """
@@ -13148,47 +13944,54 @@ def rests_before(counts: typing.List[int]) -> RestAffixSpecifier:
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice 1"
+                \new GlobalContext
                 {
-                    \voiceOne
+                    s1 * 19/16
+                }
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
                     {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
-                            c'16
-                            [
-                            d'16
-                            ]
-                            bf'4
-                            ~
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
-                            [
-                            e''16
-                            ]
-                            ef''4
-                            ~
-                            ef''16
-                            r16
-                            af''16
-                            [
-                            g''16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            a'16
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5                           %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                                r8
+                                c'16
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
+                                ef''16
+                                r16
+                                af''16
+                                [
+                                g''16
+                                ]
+                            }
+                            \scaleDurations #'(1 . 1) {
+                                a'16
+                                \revert TupletBracket.staff-padding                                  %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            }
                         }
                     }
-                }
+                >>
             >>
 
     """
@@ -13232,47 +14035,54 @@ def skips_after(counts: typing.List[int]) -> RestAffixSpecifier:
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice 1"
+                \new GlobalContext
                 {
-                    \voiceOne
+                    s1 * 9/8
+                }
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
                     {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 7/8 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
-                            c'16
-                            [
-                            d'16
-                            ]
-                            bf'4
-                            ~
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
-                            [
-                            e''16
-                            ]
-                            ef''4
-                            ~
-                            ef''16
-                            r16
-                            af''16
-                            [
-                            g''16
-                            ]
-                        }
-                        \times 2/3 {
-                            a'16
-                            s8
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 7/8 {
+                                \override TupletBracket.staff-padding = #5                           %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                                c'16
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
+                                ef''16
+                                r16
+                                af''16
+                                [
+                                g''16
+                                ]
+                            }
+                            \times 2/3 {
+                                a'16
+                                s8
+                                \revert TupletBracket.staff-padding                                  %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            }
                         }
                     }
-                }
+                >>
             >>
 
     """
@@ -13304,48 +14114,55 @@ def skips_around(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice 1"
+                \new GlobalContext
                 {
-                    \voiceOne
+                    s1 * 5/4
+                }
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
                     {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
-                            s8
-                            c'16
-                            [
-                            d'16
-                            ]
-                            bf'4
-                            ~
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
-                            [
-                            e''16
-                            ]
-                            ef''4
-                            ~
-                            ef''16
-                            r16
-                            af''16
-                            [
-                            g''16
-                            ]
-                        }
-                        \times 2/3 {
-                            a'16
-                            s8
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5                           %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                                s8
+                                c'16
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
+                                ef''16
+                                r16
+                                af''16
+                                [
+                                g''16
+                                ]
+                            }
+                            \times 2/3 {
+                                a'16
+                                s8
+                                \revert TupletBracket.staff-padding                                  %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            }
                         }
                     }
-                }
+                >>
             >>
 
     """
@@ -13377,47 +14194,54 @@ def skips_before(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice 1"
+                \new GlobalContext
                 {
-                    \voiceOne
+                    s1 * 19/16
+                }
+                \new Staff
+                <<
+                    \context Voice = "Voice 1"
                     {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
-                            s8
-                            c'16
-                            [
-                            d'16
-                            ]
-                            bf'4
-                            ~
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
-                            [
-                            e''16
-                            ]
-                            ef''4
-                            ~
-                            ef''16
-                            r16
-                            af''16
-                            [
-                            g''16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            a'16
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5                           %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                                s8
+                                c'16
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
+                                ef''16
+                                r16
+                                af''16
+                                [
+                                g''16
+                                ]
+                            }
+                            \scaleDurations #'(1 . 1) {
+                                a'16
+                                \revert TupletBracket.staff-padding                                  %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            }
                         }
                     }
-                }
+                >>
             >>
 
     """

@@ -929,22 +929,31 @@ class DivisionMaker(abjad.AbjadValueObject):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new RhythmicStaff
-            {
-                \time 7/8
-                c'4
-                c'4
-                c'4
-                c'8
-                \time 3/8
-                c'4
-                c'8
-                \time 5/8
-                c'4
-                c'4
-                c'8
-            }
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
+            <<
+                \new GlobalContext
+                {
+                    \time 7/8
+                    s1 * 7/8
+                    \time 3/8
+                    s1 * 3/8
+                    \time 5/8
+                    s1 * 5/8
+                }
+                \new RhythmicStaff
+                {
+                    c'4
+                    c'4
+                    c'4
+                    c'8
+                    c'4
+                    c'8
+                    c'4
+                    c'4
+                    c'8
+                }
+            >>
 
     ..  container:: example
 
@@ -968,12 +977,19 @@ class DivisionMaker(abjad.AbjadValueObject):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new RhythmicStaff
-            {
-                \time 15/8
-                c'1...
-            }
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
+            <<
+                \new GlobalContext
+                {
+                    \time 15/8
+                    s1 * 15/8
+                }
+                \new RhythmicStaff
+                {
+                    c'1...
+                }
+            >>
 
         Fuses divisions and then splits by ``1/4`` with remainder on right:
 
@@ -1000,19 +1016,26 @@ class DivisionMaker(abjad.AbjadValueObject):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new RhythmicStaff
-            {
-                \time 15/8
-                c'4
-                c'4
-                c'4
-                c'4
-                c'4
-                c'4
-                c'4
-                c'8
-            }
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
+            <<
+                \new GlobalContext
+                {
+                    \time 15/8
+                    s1 * 15/8
+                }
+                \new RhythmicStaff
+                {
+                    c'4
+                    c'4
+                    c'4
+                    c'4
+                    c'4
+                    c'4
+                    c'4
+                    c'8
+                }
+            >>
 
     ..  container:: example
 
@@ -1039,19 +1062,28 @@ class DivisionMaker(abjad.AbjadValueObject):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new RhythmicStaff
-            {
-                \time 7/8
-                c'4.
-                c'4.
-                c'8
-                \time 3/8
-                c'4.
-                \time 5/8
-                c'4.
-                c'4
-            }
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
+            <<
+                \new GlobalContext
+                {
+                    \time 7/8
+                    s1 * 7/8
+                    \time 3/8
+                    s1 * 3/8
+                    \time 5/8
+                    s1 * 5/8
+                }
+                \new RhythmicStaff
+                {
+                    c'4.
+                    c'4.
+                    c'8
+                    c'4.
+                    c'4.
+                    c'4
+                }
+            >>
 
         Splits every division by ``3/8`` and then fuses flattened divisions
         into differently sized groups:
@@ -1077,14 +1109,21 @@ class DivisionMaker(abjad.AbjadValueObject):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new RhythmicStaff
-            {
-                \time 15/8
-                c'2.
-                c'2..
-                c'4
-            }
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
+            <<
+                \new GlobalContext
+                {
+                    \time 15/8
+                    s1 * 15/8
+                }
+                \new RhythmicStaff
+                {
+                    c'2.
+                    c'2..
+                    c'4
+                }
+            >>
 
     ..  container:: example
 
@@ -1117,14 +1156,21 @@ class DivisionMaker(abjad.AbjadValueObject):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new RhythmicStaff
-            {
-                \time 15/8
-                c'2.
-                c'2..
-                c'4
-            }
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
+            <<
+                \new GlobalContext
+                {
+                    \time 15/8
+                    s1 * 15/8
+                }
+                \new RhythmicStaff
+                {
+                    c'2.
+                    c'2..
+                    c'4
+                }
+            >>
 
     Division-makers object-model a sequence of partially evaluated functions
     taken together in functional composition.
@@ -1303,13 +1349,20 @@ class DivisionMaker(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff
-                {
-                    \time 35/16
-                    c'1..
-                    c'4..
-                }
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 35/16
+                        s1 * 35/16
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'1..
+                        c'4..
+                    }
+                >>
 
         """
         callback = FuseByCountsDivisionCallback(
@@ -1546,23 +1599,32 @@ class DivisionMaker(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff
-                {
-                    \time 7/8
-                    c'4
-                    c'4
-                    c'4
-                    c'8
-                    \time 7/8
-                    c'4
-                    c'4
-                    c'4
-                    c'8
-                    \time 7/16
-                    c'4
-                    c'8.
-                }
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 7/8
+                        s1 * 7/8
+                        \time 7/8
+                        s1 * 7/8
+                        \time 7/16
+                        s1 * 7/16
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'4
+                        c'4
+                        c'4
+                        c'8
+                        c'4
+                        c'4
+                        c'4
+                        c'8
+                        c'4
+                        c'8.
+                    }
+                >>
 
         ..  container:: example
 
@@ -1590,23 +1652,32 @@ class DivisionMaker(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff
-                {
-                    \time 7/8
-                    c'8
-                    c'4
-                    c'4
-                    c'4
-                    \time 7/8
-                    c'8
-                    c'4
-                    c'4
-                    c'4
-                    \time 7/16
-                    c'8.
-                    c'4
-                }
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 7/8
+                        s1 * 7/8
+                        \time 7/8
+                        s1 * 7/8
+                        \time 7/16
+                        s1 * 7/16
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'8
+                        c'4
+                        c'4
+                        c'4
+                        c'8
+                        c'4
+                        c'4
+                        c'4
+                        c'8.
+                        c'4
+                    }
+                >>
 
         Returns new division-maker.
         """
@@ -1651,16 +1722,24 @@ class DivisionMaker(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff
-                {
-                    \time 5/8
-                    c'4.
-                    c'4
-                    \time 6/8
-                    c'2
-                    c'4
-                }
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 5/8
+                        s1 * 5/8
+                        \time 6/8
+                        s1 * 3/4
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'4.
+                        c'4
+                        c'2
+                        c'4
+                    }
+                >>
 
         ..  container:: example
 
@@ -1689,17 +1768,25 @@ class DivisionMaker(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff
-                {
-                    \time 5/8
-                    c'4.
-                    c'4
-                    \time 6/8
-                    c'4
-                    c'4
-                    c'4
-                }
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 5/8
+                        s1 * 5/8
+                        \time 6/8
+                        s1 * 3/4
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'4.
+                        c'4
+                        c'4
+                        c'4
+                        c'4
+                    }
+                >>
 
         Returns new division-maker.
         """
@@ -2138,14 +2225,21 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new RhythmicStaff
-            {
-                \time 2/1
-                c'2
-                c'1
-                c'2
-            }
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
+            <<
+                \new GlobalContext
+                {
+                    \time 2/1
+                    s1 * 2
+                }
+                \new RhythmicStaff
+                {
+                    c'2
+                    c'1
+                    c'2
+                }
+            >>
 
     ..  container:: example
 
@@ -2178,23 +2272,30 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new RhythmicStaff
-            {
-                \time 2/1
-                c'8.
-                c'8.
-                c'8
-                c'8.
-                c'8.
-                c'8.
-                c'8.
-                c'8.
-                c'16
-                c'8.
-                c'8.
-                c'8
-            }
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
+            <<
+                \new GlobalContext
+                {
+                    \time 2/1
+                    s1 * 2
+                }
+                \new RhythmicStaff
+                {
+                    c'8.
+                    c'8.
+                    c'8
+                    c'8.
+                    c'8.
+                    c'8.
+                    c'8.
+                    c'8.
+                    c'16
+                    c'8.
+                    c'8.
+                    c'8
+                }
+            >>
 
     Object model of a partially evaluated function that accepts a (possibly
     empty) list of divisions as input and returns a (possibly empty) nested
@@ -2262,20 +2363,31 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff
-                {
-                    \time 2/8
-                    c'4
-                    \time 2/8
-                    c'4
-                    \time 4/8
-                    c'2
-                    \time 4/8
-                    c'2
-                    \time 2/4
-                    c'2
-                }
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 2/8
+                        s1 * 1/4
+                        \time 2/8
+                        s1 * 1/4
+                        \time 4/8
+                        s1 * 1/2
+                        \time 4/8
+                        s1 * 1/2
+                        \time 2/4
+                        s1 * 1/2
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'4
+                        c'4
+                        c'2
+                        c'2
+                        c'2
+                    }
+                >>
 
         ..  container:: example
 
@@ -2298,14 +2410,21 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff
-                {
-                    \time 2/1
-                    c'2
-                    c'1
-                    c'2
-                }
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 2/1
+                        s1 * 2
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'2
+                        c'1
+                        c'2
+                    }
+                >>
 
         ..  container:: example
 
@@ -2339,23 +2458,30 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff
-                {
-                    \time 2/1
-                    c'8.
-                    c'8.
-                    c'8
-                    c'8.
-                    c'8.
-                    c'8.
-                    c'8.
-                    c'8.
-                    c'16
-                    c'8.
-                    c'8.
-                    c'8
-                }
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 2/1
+                        s1 * 2
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'8.
+                        c'8.
+                        c'8
+                        c'8.
+                        c'8.
+                        c'8.
+                        c'8.
+                        c'8.
+                        c'16
+                        c'8.
+                        c'8.
+                        c'8
+                    }
+                >>
 
             Remainders to the left:
 
@@ -2384,23 +2510,30 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff
-                {
-                    \time 2/1
-                    c'8
-                    c'8.
-                    c'8.
-                    c'16
-                    c'8.
-                    c'8.
-                    c'8.
-                    c'8.
-                    c'8.
-                    c'8
-                    c'8.
-                    c'8.
-                }
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 2/1
+                        s1 * 2
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'8
+                        c'8.
+                        c'8.
+                        c'16
+                        c'8.
+                        c'8.
+                        c'8.
+                        c'8.
+                        c'8.
+                        c'8
+                        c'8.
+                        c'8.
+                    }
+                >>
 
         ..  container:: example
 
@@ -2423,12 +2556,19 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff
-                {
-                    \time 2/1
-                    c'\breve
-                }
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 2/1
+                        s1 * 2
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'\breve
+                    }
+                >>
 
         ..  container:: example
 
@@ -2460,22 +2600,29 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff
-                {
-                    \time 2/1
-                    c'8.
-                    c'8.
-                    c'8.
-                    c'8.
-                    c'8.
-                    c'8.
-                    c'8.
-                    c'8.
-                    c'8.
-                    c'8.
-                    c'8
-                }
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 2/1
+                        s1 * 2
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'8.
+                        c'8.
+                        c'8.
+                        c'8.
+                        c'8.
+                        c'8.
+                        c'8.
+                        c'8.
+                        c'8.
+                        c'8.
+                        c'8
+                    }
+                >>
 
             Remainder at left:
 
@@ -2502,22 +2649,29 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff
-                {
-                    \time 2/1
-                    c'8
-                    c'8.
-                    c'8.
-                    c'8.
-                    c'8.
-                    c'8.
-                    c'8.
-                    c'8.
-                    c'8.
-                    c'8.
-                    c'8.
-                }
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 2/1
+                        s1 * 2
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'8
+                        c'8.
+                        c'8.
+                        c'8.
+                        c'8.
+                        c'8.
+                        c'8.
+                        c'8.
+                        c'8.
+                        c'8.
+                        c'8.
+                    }
+                >>
 
         ..  container:: example
 
@@ -3346,23 +3500,32 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new RhythmicStaff
-            {
-                \time 7/8
-                c'4
-                c'4
-                c'4
-                c'8
-                \time 7/8
-                c'4
-                c'4
-                c'4
-                c'8
-                \time 7/16
-                c'4
-                c'8.
-            }
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
+            <<
+                \new GlobalContext
+                {
+                    \time 7/8
+                    s1 * 7/8
+                    \time 7/8
+                    s1 * 7/8
+                    \time 7/16
+                    s1 * 7/16
+                }
+                \new RhythmicStaff
+                {
+                    c'4
+                    c'4
+                    c'4
+                    c'8
+                    c'4
+                    c'4
+                    c'4
+                    c'8
+                    c'4
+                    c'8.
+                }
+            >>
 
     ..  container:: example
 
@@ -3390,23 +3553,32 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new RhythmicStaff
-            {
-                \time 7/8
-                c'8
-                c'4
-                c'4
-                c'4
-                \time 7/8
-                c'8
-                c'4
-                c'4
-                c'4
-                \time 7/16
-                c'8.
-                c'4
-            }
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
+            <<
+                \new GlobalContext
+                {
+                    \time 7/8
+                    s1 * 7/8
+                    \time 7/8
+                    s1 * 7/8
+                    \time 7/16
+                    s1 * 7/16
+                }
+                \new RhythmicStaff
+                {
+                    c'8
+                    c'4
+                    c'4
+                    c'4
+                    c'8
+                    c'4
+                    c'4
+                    c'4
+                    c'8.
+                    c'4
+                }
+            >>
 
     Object model of a partially evaluated function that accepts a (possibly
     empty) list of divisions as input and returns a (possibly empty) nested
@@ -3491,14 +3663,21 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff
-                {
-                    \time 3/4
-                    c'4
-                    c'4
-                    c'4
-                }
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 3/4
+                        s1 * 3/4
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'4
+                        c'4
+                        c'4
+                    }
+                >>
 
         ..  container:: example
 
@@ -3523,15 +3702,22 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff
-                {
-                    \time 7/8
-                    c'4
-                    c'4
-                    c'4
-                    c'8
-                }
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 7/8
+                        s1 * 7/8
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'4
+                        c'4
+                        c'4
+                        c'8
+                    }
+                >>
 
             Positions remainder at right of output because divison-maker
             ``remainder`` defaults to right.
@@ -3561,17 +3747,25 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff
-                {
-                    \time 2/4
-                    c'4
-                    c'4
-                    \time 3/4
-                    c'4
-                    c'4
-                    c'4
-                }
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 2/4
+                        s1 * 1/2
+                        \time 3/4
+                        s1 * 3/4
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'4
+                        c'4
+                        c'4
+                        c'4
+                        c'4
+                    }
+                >>
 
         ..  container:: example
 
@@ -3594,12 +3788,19 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff
-                {
-                    \time 6/32
-                    c'8.
-                }
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 6/32
+                        s1 * 3/16
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'8.
+                    }
+                >>
 
             Returns input division unchanged.
 
@@ -3796,18 +3997,26 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff
-                {
-                    \time 3/4
-                    c'4
-                    c'4
-                    c'4
-                    \time 6/8
-                    c'4
-                    c'4
-                    c'4
-                }
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 3/4
+                        s1 * 3/4
+                        \time 6/8
+                        s1 * 3/4
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'4
+                        c'4
+                        c'4
+                        c'4
+                        c'4
+                        c'4
+                    }
+                >>
 
         ..  container:: example
 
@@ -3835,17 +4044,25 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff
-                {
-                    \time 3/4
-                    c'4
-                    c'4
-                    c'4
-                    \time 6/8
-                    c'4.
-                    c'4.
-                }
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 3/4
+                        s1 * 3/4
+                        \time 6/8
+                        s1 * 3/4
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'4
+                        c'4
+                        c'4
+                        c'4.
+                        c'4.
+                    }
+                >>
 
         Defaults to ``1``.
 
@@ -3889,23 +4106,32 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff
-                {
-                    \time 7/8
-                    c'4
-                    c'4
-                    c'4
-                    c'8
-                    \time 7/8
-                    c'4
-                    c'4
-                    c'4
-                    c'8
-                    \time 7/16
-                    c'4
-                    c'8.
-                }
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 7/8
+                        s1 * 7/8
+                        \time 7/8
+                        s1 * 7/8
+                        \time 7/16
+                        s1 * 7/16
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'4
+                        c'4
+                        c'4
+                        c'8
+                        c'4
+                        c'4
+                        c'4
+                        c'8
+                        c'4
+                        c'8.
+                    }
+                >>
 
         ..  container:: example
 
@@ -3933,23 +4159,32 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff
-                {
-                    \time 7/8
-                    c'4
-                    c'2
-                    ~
-                    c'8
-                    \time 7/8
-                    c'4
-                    c'2
-                    ~
-                    c'8
-                    \time 7/16
-                    c'4
-                    c'8.
-                }
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 7/8
+                        s1 * 7/8
+                        \time 7/8
+                        s1 * 7/8
+                        \time 7/16
+                        s1 * 7/16
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'4
+                        c'2
+                        ~
+                        c'8
+                        c'4
+                        c'2
+                        ~
+                        c'8
+                        c'4
+                        c'8.
+                    }
+                >>
 
         Defaults to true.
 
@@ -3987,16 +4222,25 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff
-                {
-                    \time 7/8
-                    c'2..
-                    \time 7/8
-                    c'2..
-                    \time 7/16
-                    c'4..
-                }
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 7/8
+                        s1 * 7/8
+                        \time 7/8
+                        s1 * 7/8
+                        \time 7/16
+                        s1 * 7/16
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'2..
+                        c'2..
+                        c'4..
+                    }
+                >>
 
         ..  container:: example
 
@@ -4023,23 +4267,32 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff
-                {
-                    \time 7/8
-                    c'4
-                    c'4
-                    c'4
-                    c'8
-                    \time 7/8
-                    c'4
-                    c'4
-                    c'4
-                    c'8
-                    \time 7/16
-                    c'4
-                    c'8.
-                }
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 7/8
+                        s1 * 7/8
+                        \time 7/8
+                        s1 * 7/8
+                        \time 7/16
+                        s1 * 7/16
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'4
+                        c'4
+                        c'4
+                        c'8
+                        c'4
+                        c'4
+                        c'4
+                        c'8
+                        c'4
+                        c'8.
+                    }
+                >>
 
         Defaults to none.
 
@@ -4080,22 +4333,31 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff
-                {
-                    \time 7/16
-                    c'16
-                    c'8
-                    c'4
-                    \time 7/16
-                    c'16
-                    c'8
-                    c'4
-                    \time 7/16
-                    c'16
-                    c'8
-                    c'4
-                }
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 7/16
+                        s1 * 7/16
+                        \time 7/16
+                        s1 * 7/16
+                        \time 7/16
+                        s1 * 7/16
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'16
+                        c'8
+                        c'4
+                        c'16
+                        c'8
+                        c'4
+                        c'16
+                        c'8
+                        c'4
+                    }
+                >>
 
         ..  container:: example
 
@@ -4125,22 +4387,31 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff
-                {
-                    \time 7/16
-                    c'16
-                    c'8
-                    c'4
-                    \time 7/16
-                    c'8
-                    c'4
-                    c'16
-                    \time 7/16
-                    c'4
-                    c'16
-                    c'8
-                }
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 7/16
+                        s1 * 7/16
+                        \time 7/16
+                        s1 * 7/16
+                        \time 7/16
+                        s1 * 7/16
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'16
+                        c'8
+                        c'4
+                        c'8
+                        c'4
+                        c'16
+                        c'4
+                        c'16
+                        c'8
+                    }
+                >>
 
         ..  container:: example
 
@@ -4170,22 +4441,31 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff
-                {
-                    \time 7/16
-                    c'16
-                    c'8
-                    c'4
-                    \time 7/16
-                    c'4
-                    c'16
-                    c'8
-                    \time 7/16
-                    c'8
-                    c'4
-                    c'16
-                }
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 7/16
+                        s1 * 7/16
+                        \time 7/16
+                        s1 * 7/16
+                        \time 7/16
+                        s1 * 7/16
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'16
+                        c'8
+                        c'4
+                        c'4
+                        c'16
+                        c'8
+                        c'8
+                        c'4
+                        c'16
+                    }
+                >>
 
         Defaults to 0.
 
@@ -4224,14 +4504,21 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff
-                {
-                    \time 3/4
-                    c'4
-                    c'16
-                    c'4..
-                }
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 3/4
+                        s1 * 3/4
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'4
+                        c'16
+                        c'4..
+                    }
+                >>
 
         ..  container:: example
 
@@ -4256,16 +4543,23 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff
-                {
-                    \time 3/4
-                    c'4
-                    c'16
-                    c'4
-                    c'16
-                    c'8
-                }
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 3/4
+                        s1 * 3/4
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'4
+                        c'16
+                        c'4
+                        c'16
+                        c'8
+                    }
+                >>
 
         ..  container:: example
 
@@ -4292,14 +4586,21 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff
-                {
-                    \time 3/4
-                    c'4..
-                    c'4
-                    c'16
-                }
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 3/4
+                        s1 * 3/4
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'4..
+                        c'4
+                        c'16
+                    }
+                >>
 
         ..  container:: example
 
@@ -4326,16 +4627,23 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff
-                {
-                    \time 3/4
-                    c'8
-                    c'4
-                    c'16
-                    c'4
-                    c'16
-                }
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 3/4
+                        s1 * 3/4
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'8
+                        c'4
+                        c'16
+                        c'4
+                        c'16
+                    }
+                >>
 
         Defaults to right.
 
@@ -4374,14 +4682,21 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff
-                {
-                    \time 5/8
-                    c'4
-                    c'4
-                    c'8
-                }
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 5/8
+                        s1 * 5/8
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'4
+                        c'4
+                        c'8
+                    }
+                >>
 
         ..  container:: example
 
@@ -4407,13 +4722,20 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff
-                {
-                    \time 5/8
-                    c'4
-                    c'4.
-                }
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 5/8
+                        s1 * 5/8
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'4
+                        c'4.
+                    }
+                >>
 
         ..  container:: example
 
@@ -4441,14 +4763,21 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff
-                {
-                    \time 5/8
-                    c'8
-                    c'4
-                    c'4
-                }
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 5/8
+                        s1 * 5/8
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'8
+                        c'4
+                        c'4
+                    }
+                >>
 
         ..  container:: example
 
@@ -4476,13 +4805,20 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new RhythmicStaff
-                {
-                    \time 5/8
-                    c'4.
-                    c'4
-                }
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 5/8
+                        s1 * 5/8
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'4.
+                        c'4
+                    }
+                >>
 
         Defaults to none.
 
