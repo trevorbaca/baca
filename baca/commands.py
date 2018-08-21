@@ -4456,7 +4456,7 @@ def voice_four(
     r"""
     Makes LilyPond ``\voiceFour`` command.
     """
-    literal = abjad.LilyPondLiteral(r'\voiceFour')
+    literal = abjad.LilyPondLiteral(r'\voiceFour', context='Voice')
     return IndicatorCommand(
         indicators=[literal],
         selector=selector,
@@ -4471,7 +4471,7 @@ def voice_one(
     r"""
     Makes LilyPond ``\voiceOne`` command.
     """
-    literal = abjad.LilyPondLiteral(r'\voiceOne')
+    literal = abjad.LilyPondLiteral(r'\voiceOne', context='Voice')
     return IndicatorCommand(
         indicators=[literal],
         selector=selector,
@@ -4486,7 +4486,7 @@ def voice_three(
     r"""
     Makes LilyPond ``\voiceThree`` command.
     """
-    literal = abjad.LilyPondLiteral(r'\voiceThree')
+    literal = abjad.LilyPondLiteral(r'\voiceThree', context='Voice')
     return IndicatorCommand(
         indicators=[literal],
         selector=selector,
@@ -4501,7 +4501,7 @@ def voice_two(
     r"""
     Makes LilyPond ``\voiceTwo`` command.
     """
-    literal = abjad.LilyPondLiteral(r'\voiceTwo')
+    literal = abjad.LilyPondLiteral(r'\voiceTwo', context='Voice')
     return IndicatorCommand(
         indicators=[literal],
         selector=selector,
