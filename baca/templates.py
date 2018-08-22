@@ -140,7 +140,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
             contexts,
             lilypond_type='MusicContext',
             is_simultaneous=True,
-            name='MusicContext',
+            name='Music_Context',
             tag='make_music_context',
             )
 
@@ -228,28 +228,28 @@ class SingleStaffScoreTemplate(ScoreTemplate):
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -260,25 +260,25 @@ class SingleStaffScoreTemplate(ScoreTemplate):
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             R1 * 1/2                                                                 %! _call_rhythm_commands
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             R1 * 1/2                                                                 %! _call_rhythm_commands
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                         }                                                                            %! SingleStaffScoreTemplate
@@ -302,12 +302,12 @@ class SingleStaffScoreTemplate(ScoreTemplate):
 
         # MUSIC VOICE, MUSIC STAFF
         music_voice = abjad.Voice(
-            name='MusicVoice',
+            name='Music_Voice',
             tag='SingleStaffScoreTemplate',
             )
         music_staff = abjad.Staff(
             [music_voice],
-            name='MusicStaff',
+            name='Music_Staff',
             tag='SingleStaffScoreTemplate',
             )
 
@@ -316,7 +316,7 @@ class SingleStaffScoreTemplate(ScoreTemplate):
             [music_staff],
             lilypond_type='MusicContext',
             is_simultaneous=True,
-            name='MusicContext',
+            name='Music_Context',
             tag='SingleStaffScoreTemplate',
             )
 
@@ -350,28 +350,28 @@ class StringTrioScoreTemplate(ScoreTemplate):
             \context Score = "Score"                                                                 %! StringTrioScoreTemplate
             <<                                                                                       %! StringTrioScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -382,20 +382,20 @@ class StringTrioScoreTemplate(ScoreTemplate):
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! StringTrioScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! StringTrioScoreTemplate
                 <<                                                                                   %! StringTrioScoreTemplate
             <BLANKLINE>
-                    \context StringSectionStaffGroup = "String Section Staff Group"                  %! StringTrioScoreTemplate
+                    \context StringSectionStaffGroup = "String_Section_Staff_Group"                  %! StringTrioScoreTemplate
                     <<                                                                               %! StringTrioScoreTemplate
             <BLANKLINE>
                         \tag Violin                                                                  %! ScoreTemplate(5)
-                        \context ViolinMusicStaff = "ViolinMusicStaff"                               %! StringTrioScoreTemplate
+                        \context ViolinMusicStaff = "Violin_Music_Staff"                             %! StringTrioScoreTemplate
                         {                                                                            %! StringTrioScoreTemplate
             <BLANKLINE>
-                            \context ViolinMusicVoice = "ViolinMusicVoice"                           %! StringTrioScoreTemplate
+                            \context ViolinMusicVoice = "Violin_Music_Voice"                         %! StringTrioScoreTemplate
                             {                                                                        %! StringTrioScoreTemplate
             <BLANKLINE>
-                                % [ViolinMusicVoice measure 1]                                       %! _comment_measure_numbers
+                                % [Violin_Music_Voice measure 1]                                     %! _comment_measure_numbers
                                 \clef "treble"                                                       %! DEFAULT_CLEF:_set_status_tag:attach_defaults
                                 \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                             %@% \override ViolinMusicStaff.Clef.color = ##f                          %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
@@ -404,13 +404,13 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                 ^ \baca-default-indicator-markup "(Violin)"                          %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                 \override ViolinMusicStaff.Clef.color = #(x11-color 'violet)         %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
-                                % [ViolinMusicVoice measure 2]                                       %! _comment_measure_numbers
+                                % [Violin_Music_Voice measure 2]                                     %! _comment_measure_numbers
                                 R1 * 3/8                                                             %! _call_rhythm_commands
             <BLANKLINE>
-                                % [ViolinMusicVoice measure 3]                                       %! _comment_measure_numbers
+                                % [Violin_Music_Voice measure 3]                                     %! _comment_measure_numbers
                                 R1 * 1/2                                                             %! _call_rhythm_commands
             <BLANKLINE>
-                                % [ViolinMusicVoice measure 4]                                       %! _comment_measure_numbers
+                                % [Violin_Music_Voice measure 4]                                     %! _comment_measure_numbers
                                 R1 * 3/8                                                             %! _call_rhythm_commands
             <BLANKLINE>
                             }                                                                        %! StringTrioScoreTemplate
@@ -418,13 +418,13 @@ class StringTrioScoreTemplate(ScoreTemplate):
                         }                                                                            %! StringTrioScoreTemplate
             <BLANKLINE>
                         \tag Viola                                                                   %! ScoreTemplate(5)
-                        \context ViolaMusicStaff = "ViolaMusicStaff"                                 %! StringTrioScoreTemplate
+                        \context ViolaMusicStaff = "Viola_Music_Staff"                               %! StringTrioScoreTemplate
                         {                                                                            %! StringTrioScoreTemplate
             <BLANKLINE>
-                            \context ViolaMusicVoice = "ViolaMusicVoice"                             %! StringTrioScoreTemplate
+                            \context ViolaMusicVoice = "Viola_Music_Voice"                           %! StringTrioScoreTemplate
                             {                                                                        %! StringTrioScoreTemplate
             <BLANKLINE>
-                                % [ViolaMusicVoice measure 1]                                        %! _comment_measure_numbers
+                                % [Viola_Music_Voice measure 1]                                      %! _comment_measure_numbers
                                 \clef "alto"                                                         %! DEFAULT_CLEF:_set_status_tag:attach_defaults
                                 \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                             %@% \override ViolaMusicStaff.Clef.color = ##f                           %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
@@ -433,13 +433,13 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                 ^ \baca-default-indicator-markup "(Viola)"                           %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                 \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
-                                % [ViolaMusicVoice measure 2]                                        %! _comment_measure_numbers
+                                % [Viola_Music_Voice measure 2]                                      %! _comment_measure_numbers
                                 R1 * 3/8                                                             %! _call_rhythm_commands
             <BLANKLINE>
-                                % [ViolaMusicVoice measure 3]                                        %! _comment_measure_numbers
+                                % [Viola_Music_Voice measure 3]                                      %! _comment_measure_numbers
                                 R1 * 1/2                                                             %! _call_rhythm_commands
             <BLANKLINE>
-                                % [ViolaMusicVoice measure 4]                                        %! _comment_measure_numbers
+                                % [Viola_Music_Voice measure 4]                                      %! _comment_measure_numbers
                                 R1 * 3/8                                                             %! _call_rhythm_commands
             <BLANKLINE>
                             }                                                                        %! StringTrioScoreTemplate
@@ -447,13 +447,13 @@ class StringTrioScoreTemplate(ScoreTemplate):
                         }                                                                            %! StringTrioScoreTemplate
             <BLANKLINE>
                         \tag Cello                                                                   %! ScoreTemplate(5)
-                        \context CelloMusicStaff = "CelloMusicStaff"                                 %! StringTrioScoreTemplate
+                        \context CelloMusicStaff = "Cello_Music_Staff"                               %! StringTrioScoreTemplate
                         {                                                                            %! StringTrioScoreTemplate
             <BLANKLINE>
-                            \context CelloMusicVoice = "CelloMusicVoice"                             %! StringTrioScoreTemplate
+                            \context CelloMusicVoice = "Cello_Music_Voice"                           %! StringTrioScoreTemplate
                             {                                                                        %! StringTrioScoreTemplate
             <BLANKLINE>
-                                % [CelloMusicVoice measure 1]                                        %! _comment_measure_numbers
+                                % [Cello_Music_Voice measure 1]                                      %! _comment_measure_numbers
                                 \clef "bass"                                                         %! DEFAULT_CLEF:_set_status_tag:attach_defaults
                                 \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                             %@% \override CelloMusicStaff.Clef.color = ##f                           %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
@@ -462,13 +462,13 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                 ^ \baca-default-indicator-markup "(Cello)"                           %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                 \override CelloMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
-                                % [CelloMusicVoice measure 2]                                        %! _comment_measure_numbers
+                                % [Cello_Music_Voice measure 2]                                      %! _comment_measure_numbers
                                 R1 * 3/8                                                             %! _call_rhythm_commands
             <BLANKLINE>
-                                % [CelloMusicVoice measure 3]                                        %! _comment_measure_numbers
+                                % [Cello_Music_Voice measure 3]                                      %! _comment_measure_numbers
                                 R1 * 1/2                                                             %! _call_rhythm_commands
             <BLANKLINE>
-                                % [CelloMusicVoice measure 4]                                        %! _comment_measure_numbers
+                                % [Cello_Music_Voice measure 4]                                      %! _comment_measure_numbers
                                 R1 * 3/8                                                             %! _call_rhythm_commands
             <BLANKLINE>
                             }                                                                        %! StringTrioScoreTemplate
@@ -503,13 +503,13 @@ class StringTrioScoreTemplate(ScoreTemplate):
         # VIOLIN
         violin_music_voice = abjad.Voice(
             lilypond_type='ViolinMusicVoice',
-            name='ViolinMusicVoice',
+            name='Violin_Music_Voice',
             tag='StringTrioScoreTemplate',
             )
         violin_music_staff = abjad.Staff(
             [violin_music_voice],
             lilypond_type='ViolinMusicStaff',
-            name='ViolinMusicStaff',
+            name='Violin_Music_Staff',
             tag='StringTrioScoreTemplate',
             )
         violin = abjad.Violin(
@@ -534,13 +534,13 @@ class StringTrioScoreTemplate(ScoreTemplate):
         # VIOLA
         viola_music_voice = abjad.Voice(
             lilypond_type='ViolaMusicVoice',
-            name='ViolaMusicVoice',
+            name='Viola_Music_Voice',
             tag='StringTrioScoreTemplate',
             )
         viola_music_staff = abjad.Staff(
             [viola_music_voice],
             lilypond_type='ViolaMusicStaff',
-            name='ViolaMusicStaff',
+            name='Viola_Music_Staff',
             tag='StringTrioScoreTemplate',
             )
         abjad.annotate(
@@ -564,13 +564,13 @@ class StringTrioScoreTemplate(ScoreTemplate):
         # CELLO
         cello_music_voice = abjad.Voice(
             lilypond_type='CelloMusicVoice',
-            name='CelloMusicVoice',
+            name='Cello_Music_Voice',
             tag='StringTrioScoreTemplate',
             )
         cello_music_staff = abjad.Staff(
             [cello_music_voice],
             lilypond_type='CelloMusicStaff',
-            name='CelloMusicStaff',
+            name='Cello_Music_Staff',
             tag='StringTrioScoreTemplate',
             )
         abjad.annotate(
@@ -599,14 +599,14 @@ class StringTrioScoreTemplate(ScoreTemplate):
                 cello_music_staff,
                 ],
             lilypond_type='StringSectionStaffGroup',
-            name='String Section Staff Group',
+            name='String_Section_Staff_Group',
             tag='StringTrioScoreTemplate',
             )
         music_context = abjad.Context(
             [string_section_staff_group],
             lilypond_type='MusicContext',
             is_simultaneous=True,
-            name='MusicContext',
+            name='Music_Context',
             tag='StringTrioScoreTemplate',
             )
         score = abjad.Score(
@@ -637,28 +637,28 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
             \context Score = "Score"                                                                 %! TwoVoiceStaffScoreTemplate
             <<                                                                                       %! TwoVoiceStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -669,42 +669,42 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! TwoVoiceStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! TwoVoiceStaffScoreTemplate
                 <<                                                                                   %! TwoVoiceStaffScoreTemplate
             <BLANKLINE>
-                    \context MusicStaff = "MusicStaff"                                               %! TwoVoiceStaffScoreTemplate
+                    \context MusicStaff = "Music_Staff"                                              %! TwoVoiceStaffScoreTemplate
                     <<                                                                               %! TwoVoiceStaffScoreTemplate
             <BLANKLINE>
-                        \context MusicVoiceOne = "MusicVoiceOne"                                     %! TwoVoiceStaffScoreTemplate
+                        \context MusicVoiceOne = "Music_Voice_One"                                   %! TwoVoiceStaffScoreTemplate
                         {                                                                            %! TwoVoiceStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoiceOne measure 1]                                              %! _comment_measure_numbers
+                            % [Music_Voice_One measure 1]                                            %! _comment_measure_numbers
                             R1 * 1/2                                                                 %! _call_rhythm_commands
             <BLANKLINE>
-                            % [MusicVoiceOne measure 2]                                              %! _comment_measure_numbers
+                            % [Music_Voice_One measure 2]                                            %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
-                            % [MusicVoiceOne measure 3]                                              %! _comment_measure_numbers
+                            % [Music_Voice_One measure 3]                                            %! _comment_measure_numbers
                             R1 * 1/2                                                                 %! _call_rhythm_commands
             <BLANKLINE>
-                            % [MusicVoiceOne measure 4]                                              %! _comment_measure_numbers
+                            % [Music_Voice_One measure 4]                                            %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                         }                                                                            %! TwoVoiceStaffScoreTemplate
             <BLANKLINE>
-                        \context MusicVoiceTwo = "MusicVoiceTwo"                                     %! TwoVoiceStaffScoreTemplate
+                        \context MusicVoiceTwo = "Music_Voice_Two"                                   %! TwoVoiceStaffScoreTemplate
                         {                                                                            %! TwoVoiceStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoiceTwo measure 1]                                              %! _comment_measure_numbers
+                            % [Music_Voice_Two measure 1]                                            %! _comment_measure_numbers
                             R1 * 1/2                                                                 %! _call_rhythm_commands
             <BLANKLINE>
-                            % [MusicVoiceTwo measure 2]                                              %! _comment_measure_numbers
+                            % [Music_Voice_Two measure 2]                                            %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
-                            % [MusicVoiceTwo measure 3]                                              %! _comment_measure_numbers
+                            % [Music_Voice_Two measure 3]                                            %! _comment_measure_numbers
                             R1 * 1/2                                                                 %! _call_rhythm_commands
             <BLANKLINE>
-                            % [MusicVoiceTwo measure 4]                                              %! _comment_measure_numbers
+                            % [Music_Voice_Two measure 4]                                            %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                         }                                                                            %! TwoVoiceStaffScoreTemplate
@@ -729,19 +729,19 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
         # MUSIC STAFF
         music_voice_1 = abjad.Voice(
             lilypond_type='MusicVoiceOne',
-            name='MusicVoiceOne',
+            name='Music_Voice_One',
             tag='TwoVoiceStaffScoreTemplate',
             )
         music_voice_2 = abjad.Voice(
             lilypond_type='MusicVoiceTwo',
-            name='MusicVoiceTwo',
+            name='Music_Voice_Two',
             tag='TwoVoiceStaffScoreTemplate',
             )
         music_staff = abjad.Staff(
             [music_voice_1, music_voice_2],
             lilypond_type='MusicStaff',
             is_simultaneous=True,
-            name='MusicStaff',
+            name='Music_Staff',
             tag='TwoVoiceStaffScoreTemplate',
             )
 
@@ -750,7 +750,7 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
             [music_staff],
             lilypond_type='MusicContext',
             is_simultaneous=True,
-            name='MusicContext',
+            name='Music_Context',
             tag='TwoVoiceStaffScoreTemplate',
             )
 
@@ -784,28 +784,28 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
             \context Score = "Score"                                                                 %! ViolinSoloScoreTemplate
             <<                                                                                       %! ViolinSoloScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -816,17 +816,17 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! ViolinSoloScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! ViolinSoloScoreTemplate
                 <<                                                                                   %! ViolinSoloScoreTemplate
             <BLANKLINE>
                     \tag Violin                                                                      %! ScoreTemplate(5)
-                    \context ViolinMusicStaff = "ViolinMusicStaff"                                   %! ViolinSoloScoreTemplate
+                    \context ViolinMusicStaff = "Violin_Music_Staff"                                 %! ViolinSoloScoreTemplate
                     {                                                                                %! ViolinSoloScoreTemplate
             <BLANKLINE>
-                        \context ViolinMusicVoice = "ViolinMusicVoice"                               %! ViolinSoloScoreTemplate
+                        \context ViolinMusicVoice = "Violin_Music_Voice"                             %! ViolinSoloScoreTemplate
                         {                                                                            %! ViolinSoloScoreTemplate
             <BLANKLINE>
-                            % [ViolinMusicVoice measure 1]                                           %! _comment_measure_numbers
+                            % [Violin_Music_Voice measure 1]                                         %! _comment_measure_numbers
                             \clef "treble"                                                           %! DEFAULT_CLEF:_set_status_tag:attach_defaults
                             \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet)   %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                         %@% \override ViolinMusicStaff.Clef.color = ##f                              %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
@@ -835,13 +835,13 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                             ^ \baca-default-indicator-markup "(Violin)"                              %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                             \override ViolinMusicStaff.Clef.color = #(x11-color 'violet)             %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
-                            % [ViolinMusicVoice measure 2]                                           %! _comment_measure_numbers
+                            % [Violin_Music_Voice measure 2]                                         %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
-                            % [ViolinMusicVoice measure 3]                                           %! _comment_measure_numbers
+                            % [Violin_Music_Voice measure 3]                                         %! _comment_measure_numbers
                             R1 * 1/2                                                                 %! _call_rhythm_commands
             <BLANKLINE>
-                            % [ViolinMusicVoice measure 4]                                           %! _comment_measure_numbers
+                            % [Violin_Music_Voice measure 4]                                         %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                         }                                                                            %! ViolinSoloScoreTemplate
@@ -866,13 +866,13 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
         # VIOLIN
         violin_music_voice = abjad.Voice(
             lilypond_type='ViolinMusicVoice',
-            name='ViolinMusicVoice',
+            name='Violin_Music_Voice',
             tag='ViolinSoloScoreTemplate',
             )
         violin_music_staff = abjad.Staff(
             [violin_music_voice],
             lilypond_type='ViolinMusicStaff',
-            name='ViolinMusicStaff',
+            name='Violin_Music_Staff',
             tag='ViolinSoloScoreTemplate',
             )
         violin = abjad.Violin(
@@ -896,7 +896,7 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
             [violin_music_staff],
             lilypond_type='MusicContext',
             is_simultaneous=True,
-            name='MusicContext',
+            name='Music_Context',
             tag='ViolinSoloScoreTemplate',
             )
 

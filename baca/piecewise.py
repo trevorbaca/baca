@@ -764,7 +764,7 @@ def dynamic(
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.dls_staff_padding(5),
         ...     baca.make_even_divisions(),
         ...     baca.dynamic('p'),
@@ -783,31 +783,31 @@ def dynamic(
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #13                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #13                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #13                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #13                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -819,16 +819,16 @@ def dynamic(
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
@@ -844,7 +844,7 @@ def dynamic(
                             c''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -853,7 +853,7 @@ def dynamic(
                             e'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -864,7 +864,7 @@ def dynamic(
                             g'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -895,7 +895,7 @@ def dynamic(
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.dls_staff_padding(5),
         ...     baca.make_even_divisions(),
         ...     baca.dynamic('p', abjad.tweak('red').color),
@@ -912,31 +912,31 @@ def dynamic(
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -948,16 +948,16 @@ def dynamic(
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
@@ -971,7 +971,7 @@ def dynamic(
                             c''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -980,7 +980,7 @@ def dynamic(
                             e'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -991,7 +991,7 @@ def dynamic(
                             g'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -1052,7 +1052,7 @@ def hairpin(
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.dls_staff_padding(5),
         ...     baca.hairpin('p < f', bookend=-1),
         ...     baca.make_even_divisions(),
@@ -1069,31 +1069,31 @@ def hairpin(
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -1105,16 +1105,16 @@ def hairpin(
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
@@ -1130,7 +1130,7 @@ def hairpin(
                             e''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -1139,7 +1139,7 @@ def hairpin(
                             e'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -1150,7 +1150,7 @@ def hairpin(
                             g'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -1181,7 +1181,7 @@ def hairpin(
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.dls_staff_padding(5),
         ...     baca.make_even_divisions(),
         ...     baca.hairpin('"ff" >o niente'),
@@ -1198,31 +1198,31 @@ def hairpin(
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -1234,16 +1234,16 @@ def hairpin(
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
@@ -1261,7 +1261,7 @@ def hairpin(
                             c''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -1270,7 +1270,7 @@ def hairpin(
                             e'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -1281,7 +1281,7 @@ def hairpin(
                             g'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -1312,7 +1312,7 @@ def hairpin(
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.dls_staff_padding(5),
         ...     baca.make_even_divisions(),
         ...     baca.hairpin('niente o< "ff"'),
@@ -1329,31 +1329,31 @@ def hairpin(
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -1365,16 +1365,16 @@ def hairpin(
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
@@ -1391,7 +1391,7 @@ def hairpin(
                             c''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -1400,7 +1400,7 @@ def hairpin(
                             e'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -1411,7 +1411,7 @@ def hairpin(
                             g'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -1442,7 +1442,7 @@ def hairpin(
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.dls_staff_padding(5),
         ...     baca.make_even_divisions(),
         ...     baca.hairpin('"p" -- f'),
@@ -1459,31 +1459,31 @@ def hairpin(
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -1495,16 +1495,16 @@ def hairpin(
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
@@ -1521,7 +1521,7 @@ def hairpin(
                             c''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -1530,7 +1530,7 @@ def hairpin(
                             e'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -1541,7 +1541,7 @@ def hairpin(
                             g'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -1572,7 +1572,7 @@ def hairpin(
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.dls_staff_padding(5),
         ...     baca.make_even_divisions(),
         ...     baca.hairpin(
@@ -1596,31 +1596,31 @@ def hairpin(
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -1632,16 +1632,16 @@ def hairpin(
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
@@ -1658,7 +1658,7 @@ def hairpin(
                             c''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -1669,7 +1669,7 @@ def hairpin(
                             \baca-effort-f                                                           %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \baca-effort-mf                                                          %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
@@ -1685,7 +1685,7 @@ def hairpin(
                             g'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -1716,7 +1716,7 @@ def hairpin(
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.dls_staff_padding(5),
         ...     baca.hairpin(
         ...         'p f',
@@ -1736,31 +1736,31 @@ def hairpin(
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -1772,16 +1772,16 @@ def hairpin(
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
@@ -1795,7 +1795,7 @@ def hairpin(
                             e''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
@@ -1806,7 +1806,7 @@ def hairpin(
                             e'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
@@ -1819,7 +1819,7 @@ def hairpin(
                             g'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
@@ -1850,7 +1850,7 @@ def hairpin(
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.dls_staff_padding(5),
         ...     baca.hairpin(
         ...         'p < f >',
@@ -1870,31 +1870,31 @@ def hairpin(
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -1906,16 +1906,16 @@ def hairpin(
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
@@ -1931,7 +1931,7 @@ def hairpin(
                             e''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
@@ -1944,7 +1944,7 @@ def hairpin(
                             e'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
@@ -1959,7 +1959,7 @@ def hairpin(
                             g'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
@@ -1992,7 +1992,7 @@ def hairpin(
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.dls_staff_padding(5),
         ...     baca.hairpin(
         ...         'p f',
@@ -2013,31 +2013,31 @@ def hairpin(
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -2049,16 +2049,16 @@ def hairpin(
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
@@ -2074,7 +2074,7 @@ def hairpin(
                             \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
                             - \tweak color #(x11-color 'DeepPink1)                                   %! REDUNDANT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \f                                                                       %! REDUNDANT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
@@ -2087,7 +2087,7 @@ def hairpin(
                             \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \p                                                                       %! REDUNDANT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
@@ -2102,7 +2102,7 @@ def hairpin(
                             \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
                             - \tweak color #(x11-color 'DeepPink1)                                   %! REDUNDANT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \f                                                                       %! REDUNDANT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
@@ -2133,7 +2133,7 @@ def hairpin(
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.dls_staff_padding(5),
         ...     baca.hairpin(
         ...         'p -- f >',
@@ -2154,31 +2154,31 @@ def hairpin(
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -2190,16 +2190,16 @@ def hairpin(
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
@@ -2218,7 +2218,7 @@ def hairpin(
                             \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
@@ -2233,7 +2233,7 @@ def hairpin(
                             \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
@@ -2251,7 +2251,7 @@ def hairpin(
                             \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
@@ -2286,7 +2286,7 @@ def hairpin(
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.dls_staff_padding(5),
         ...     baca.hairpin(
         ...         'f > p',
@@ -2307,31 +2307,31 @@ def hairpin(
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -2343,16 +2343,16 @@ def hairpin(
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
@@ -2368,7 +2368,7 @@ def hairpin(
                             e''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -2380,7 +2380,7 @@ def hairpin(
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -2391,7 +2391,7 @@ def hairpin(
                             g'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -2418,7 +2418,7 @@ def hairpin(
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.dls_staff_padding(5),
         ...     baca.hairpin(
         ...         'f >o niente',
@@ -2439,31 +2439,31 @@ def hairpin(
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -2475,16 +2475,16 @@ def hairpin(
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
@@ -2502,7 +2502,7 @@ def hairpin(
                             e''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -2514,7 +2514,7 @@ def hairpin(
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \!                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -2525,7 +2525,7 @@ def hairpin(
                             g'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -2554,7 +2554,7 @@ def hairpin(
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.dls_staff_padding(5),
         ...     baca.make_even_divisions(),
         ...     baca.hairpin('f', bookend=False),
@@ -2571,31 +2571,31 @@ def hairpin(
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -2607,16 +2607,16 @@ def hairpin(
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
@@ -2630,7 +2630,7 @@ def hairpin(
                             c''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -2639,7 +2639,7 @@ def hairpin(
                             e'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -2650,7 +2650,7 @@ def hairpin(
                             g'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -2679,7 +2679,7 @@ def hairpin(
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.dls_staff_padding(5),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
@@ -2699,31 +2699,31 @@ def hairpin(
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -2735,16 +2735,16 @@ def hairpin(
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
@@ -2758,7 +2758,7 @@ def hairpin(
                             c''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -2767,7 +2767,7 @@ def hairpin(
                             e'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -2778,7 +2778,7 @@ def hairpin(
                             g'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -3108,7 +3108,7 @@ def text_spanner(
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.text_spanner('pont. => ord.'),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -3125,31 +3125,31 @@ def text_spanner(
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -3161,16 +3161,16 @@ def text_spanner(
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \override TextSpanner.staff-padding = #4.5                               %! baca_text_spanner_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
                             - \abjad-dashed-line-with-arrow                                          %! baca_text_spanner:PiecewiseCommand(1)
@@ -3188,7 +3188,7 @@ def text_spanner(
                             e''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -3197,7 +3197,7 @@ def text_spanner(
                             e'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -3208,7 +3208,7 @@ def text_spanner(
                             g'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -3236,7 +3236,7 @@ def text_spanner(
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.text_spanner('pont. =| ord.'),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -3253,31 +3253,31 @@ def text_spanner(
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -3289,16 +3289,16 @@ def text_spanner(
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \override TextSpanner.staff-padding = #4.5                               %! baca_text_spanner_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
                             - \abjad-dashed-line-with-hook                                           %! baca_text_spanner:PiecewiseCommand(1)
@@ -3331,7 +3331,7 @@ def text_spanner(
                             e''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -3340,7 +3340,7 @@ def text_spanner(
                             e'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -3351,7 +3351,7 @@ def text_spanner(
                             g'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -3379,7 +3379,7 @@ def text_spanner(
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.text_spanner('pont. -> ord.'),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -3396,31 +3396,31 @@ def text_spanner(
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -3432,16 +3432,16 @@ def text_spanner(
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \override TextSpanner.staff-padding = #4.5                               %! baca_text_spanner_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
                             - \abjad-solid-line-with-arrow                                           %! baca_text_spanner:PiecewiseCommand(1)
@@ -3459,7 +3459,7 @@ def text_spanner(
                             e''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -3468,7 +3468,7 @@ def text_spanner(
                             e'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -3479,7 +3479,7 @@ def text_spanner(
                             g'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -3507,7 +3507,7 @@ def text_spanner(
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.text_spanner('pont. -| ord.'),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -3524,31 +3524,31 @@ def text_spanner(
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -3560,16 +3560,16 @@ def text_spanner(
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \override TextSpanner.staff-padding = #4.5                               %! baca_text_spanner_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
                             - \abjad-solid-line-with-hook                                            %! baca_text_spanner:PiecewiseCommand(1)
@@ -3602,7 +3602,7 @@ def text_spanner(
                             e''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -3611,7 +3611,7 @@ def text_spanner(
                             e'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -3622,7 +3622,7 @@ def text_spanner(
                             g'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -3650,7 +3650,7 @@ def text_spanner(
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.text_spanner('pont. || ord.'),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -3667,31 +3667,31 @@ def text_spanner(
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -3703,16 +3703,16 @@ def text_spanner(
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \override TextSpanner.staff-padding = #4.5                               %! baca_text_spanner_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
                             - \abjad-invisible-line                                                  %! baca_text_spanner:PiecewiseCommand(1)
@@ -3730,7 +3730,7 @@ def text_spanner(
                             e''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -3739,7 +3739,7 @@ def text_spanner(
                             e'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -3750,7 +3750,7 @@ def text_spanner(
                             g'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -3780,7 +3780,7 @@ def text_spanner(
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.dls_staff_padding(5),
         ...     baca.text_spanner(
         ...         'A || B',
@@ -3801,31 +3801,31 @@ def text_spanner(
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -3837,16 +3837,16 @@ def text_spanner(
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             \override TextSpanner.staff-padding = #4.5                               %! baca_text_spanner_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
@@ -3862,7 +3862,7 @@ def text_spanner(
                             e''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
                             \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
                             - \abjad-invisible-line                                                  %! baca_text_spanner:PiecewiseCommand(1)
@@ -3875,7 +3875,7 @@ def text_spanner(
                             e'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
                             \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
                             - \abjad-invisible-line                                                  %! baca_text_spanner:PiecewiseCommand(1)
@@ -3890,7 +3890,7 @@ def text_spanner(
                             g'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
                             \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
                             - \abjad-invisible-line                                                  %! baca_text_spanner:PiecewiseCommand(1)
@@ -3926,7 +3926,7 @@ def text_spanner(
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.dls_staff_padding(5),
         ...     baca.text_spanner(
         ...         'A -> B ->',
@@ -3947,31 +3947,31 @@ def text_spanner(
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -3983,16 +3983,16 @@ def text_spanner(
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             \override TextSpanner.staff-padding = #4.5                               %! baca_text_spanner_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
@@ -4008,7 +4008,7 @@ def text_spanner(
                             e''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
                             \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
                             - \abjad-solid-line-with-arrow                                           %! baca_text_spanner:PiecewiseCommand(1)
@@ -4021,7 +4021,7 @@ def text_spanner(
                             e'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
                             \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
                             - \abjad-solid-line-with-arrow                                           %! baca_text_spanner:PiecewiseCommand(1)
@@ -4036,7 +4036,7 @@ def text_spanner(
                             g'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
                             \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
                             - \abjad-solid-line-with-arrow                                           %! baca_text_spanner:PiecewiseCommand(1)
@@ -4072,7 +4072,7 @@ def text_spanner(
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.dls_staff_padding(5),
         ...     baca.text_spanner(
         ...         'A || B',
@@ -4094,31 +4094,31 @@ def text_spanner(
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -4130,16 +4130,16 @@ def text_spanner(
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             \override TextSpanner.staff-padding = #4.5                               %! baca_text_spanner_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
@@ -4159,7 +4159,7 @@ def text_spanner(
                             \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
                             - \abjad-invisible-line                                                  %! baca_text_spanner:PiecewiseCommand(1)
                             - \baca-text-spanner-left-text "B"                                       %! baca_text_spanner:PiecewiseCommand(1)
@@ -4175,7 +4175,7 @@ def text_spanner(
                             \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
                             - \abjad-invisible-line                                                  %! baca_text_spanner:PiecewiseCommand(1)
                             - \baca-text-spanner-left-text "A"                                       %! baca_text_spanner:PiecewiseCommand(1)
@@ -4193,7 +4193,7 @@ def text_spanner(
                             \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
                             - \abjad-invisible-line                                                  %! baca_text_spanner:PiecewiseCommand(1)
                             - \baca-text-spanner-left-text "B"                                       %! baca_text_spanner:PiecewiseCommand(1)
@@ -4228,7 +4228,7 @@ def text_spanner(
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.dls_staff_padding(5),
         ...     baca.text_spanner(
         ...         'A -> B ->',
@@ -4250,31 +4250,31 @@ def text_spanner(
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -4286,16 +4286,16 @@ def text_spanner(
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             \override TextSpanner.staff-padding = #4.5                               %! baca_text_spanner_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
@@ -4315,7 +4315,7 @@ def text_spanner(
                             \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
                             - \abjad-solid-line-with-arrow                                           %! baca_text_spanner:PiecewiseCommand(1)
                             - \baca-text-spanner-left-text "B"                                       %! baca_text_spanner:PiecewiseCommand(1)
@@ -4331,7 +4331,7 @@ def text_spanner(
                             \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
                             - \abjad-solid-line-with-arrow                                           %! baca_text_spanner:PiecewiseCommand(1)
                             - \baca-text-spanner-left-text "A"                                       %! baca_text_spanner:PiecewiseCommand(1)
@@ -4349,7 +4349,7 @@ def text_spanner(
                             \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
                             - \abjad-solid-line-with-arrow                                           %! baca_text_spanner:PiecewiseCommand(1)
                             - \baca-text-spanner-left-text "B"                                       %! baca_text_spanner:PiecewiseCommand(1)
@@ -4386,7 +4386,7 @@ def text_spanner(
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.dls_staff_padding(5),
         ...     baca.text_spanner(
         ...         r'\baca-damp-markup =|',
@@ -4408,31 +4408,31 @@ def text_spanner(
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -4444,16 +4444,16 @@ def text_spanner(
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             \override TextSpanner.staff-padding = #4.5                               %! baca_text_spanner_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
@@ -4469,7 +4469,7 @@ def text_spanner(
                             e''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -4478,7 +4478,7 @@ def text_spanner(
                             e'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
                             \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(3)
                             [                                                                        %! baca_make_even_divisions
@@ -4490,7 +4490,7 @@ def text_spanner(
                             g'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -4520,7 +4520,7 @@ def text_spanner(
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.dls_staff_padding(5),
         ...     baca.text_spanner(
         ...         'A -| B -|',
@@ -4541,31 +4541,31 @@ def text_spanner(
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -4577,16 +4577,16 @@ def text_spanner(
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             \override TextSpanner.staff-padding = #4.5                               %! baca_text_spanner_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
@@ -4602,7 +4602,7 @@ def text_spanner(
                             e''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
                             \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
                             - \abjad-solid-line-with-hook                                            %! baca_text_spanner:PiecewiseCommand(1)
@@ -4615,7 +4615,7 @@ def text_spanner(
                             e'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
                             \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
                             - \abjad-solid-line-with-hook                                            %! baca_text_spanner:PiecewiseCommand(1)
@@ -4630,7 +4630,7 @@ def text_spanner(
                             g'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
                             \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
                             - \abjad-solid-line-with-hook                                            %! baca_text_spanner:PiecewiseCommand(1)

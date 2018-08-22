@@ -243,7 +243,7 @@ class BCPCommand(scoping.Command):
             ...     )
 
             >>> maker(
-            ...     'MusicVoice',
+            ...     'Music_Voice',
             ...     baca.make_even_divisions(),
             ...     baca.new(
             ...         baca.bcps(bcps=[(1, 5), (2, 5)]),
@@ -268,31 +268,31 @@ class BCPCommand(scoping.Command):
                 \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
                 <<                                                                                       %! SingleStaffScoreTemplate
                 <BLANKLINE>
-                    \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
                     <<                                                                                   %! _make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                         {                                                                                %! _make_global_context
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                            % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                            % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                            % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                            % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -304,16 +304,16 @@ class BCPCommand(scoping.Command):
                 <BLANKLINE>
                     >>                                                                                   %! _make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                     <<                                                                                   %! SingleStaffScoreTemplate
                 <BLANKLINE>
-                        \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                         {                                                                                %! SingleStaffScoreTemplate
                 <BLANKLINE>
-                            \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                             {                                                                            %! SingleStaffScoreTemplate
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                                % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \override Script.staff-padding = #5.5                                    %! baca_script_staff_padding:OverrideCommand(1)
                                 \override TextSpanner.staff-padding = #2.5                               %! baca_text_spanner_staff_padding:OverrideCommand(1)
                                 e'8                                                                      %! baca_make_even_divisions
@@ -345,7 +345,7 @@ class BCPCommand(scoping.Command):
                                 - \baca-bcp-spanner-left-text #2 #5                                      %! baca_bcps:BCPCommand(2)
                                 \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                                % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 e'8                                                                      %! baca_make_even_divisions
                                 - \downbow                                                               %! baca_bcps:BCPCommand(8)
                                 \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
@@ -366,7 +366,7 @@ class BCPCommand(scoping.Command):
                                 \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(1)
                                 ]                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                                % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                                 f'8                                                                      %! baca_make_even_divisions
                                 - \downbow                                                               %! baca_bcps:BCPCommand(6)
                                 - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
@@ -396,7 +396,7 @@ class BCPCommand(scoping.Command):
                                 - \baca-bcp-spanner-left-text #4 #5                                      %! baca_bcps:BCPCommand(2)
                                 \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
                 <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                                % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                                 f'8                                                                      %! baca_make_even_divisions
                                 - \downbow                                                               %! baca_bcps:BCPCommand(8)
                                 \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
@@ -488,7 +488,7 @@ class BCPCommand(scoping.Command):
             ...     )
 
             >>> maker(
-            ...     'MusicVoice',
+            ...     'Music_Voice',
             ...     baca.make_even_divisions(),
             ...     baca.bcps(
             ...         [(1, 5), (2, 5)],
@@ -511,31 +511,31 @@ class BCPCommand(scoping.Command):
                 \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
                 <<                                                                                       %! SingleStaffScoreTemplate
                 <BLANKLINE>
-                    \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
                     <<                                                                                   %! _make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                         {                                                                                %! _make_global_context
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                            % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                            % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                            % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                            % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -547,16 +547,16 @@ class BCPCommand(scoping.Command):
                 <BLANKLINE>
                     >>                                                                                   %! _make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                     <<                                                                                   %! SingleStaffScoreTemplate
                 <BLANKLINE>
-                        \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                         {                                                                                %! SingleStaffScoreTemplate
                 <BLANKLINE>
-                            \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                             {                                                                            %! SingleStaffScoreTemplate
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                                % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \override Script.staff-padding = #5                                      %! baca_script_staff_padding:OverrideCommand(1)
                                 e'8                                                                      %! baca_make_even_divisions
                                 - \downbow                                                               %! baca_bcps:BCPCommand(6)
@@ -595,7 +595,7 @@ class BCPCommand(scoping.Command):
                                 - \tweak staff-padding #2.5                                              %! baca_bcps:BCPCommand(2)
                                 \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                                % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 e'8                                                                      %! baca_make_even_divisions
                                 - \downbow                                                               %! baca_bcps:BCPCommand(8)
                                 \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
@@ -625,7 +625,7 @@ class BCPCommand(scoping.Command):
                                 - \tweak staff-padding #2.5                                              %! baca_bcps:BCPCommand(2)
                                 \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
                 <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                                % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                                 f'8                                                                      %! baca_make_even_divisions
                                 - \upbow                                                                 %! baca_bcps:BCPCommand(7)
                                 \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
@@ -664,7 +664,7 @@ class BCPCommand(scoping.Command):
                                 - \tweak staff-padding #2.5                                              %! baca_bcps:BCPCommand(2)
                                 \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
                 <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                                % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                                 f'8                                                                      %! baca_make_even_divisions
                                 - \upbow                                                                 %! baca_bcps:BCPCommand(7)
                                 \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
@@ -834,7 +834,7 @@ class ColorCommand(scoping.Command):
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.color(),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -850,28 +850,28 @@ class ColorCommand(scoping.Command):
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -882,16 +882,16 @@ class ColorCommand(scoping.Command):
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \abjad-color-music #'red
                             e'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
@@ -906,7 +906,7 @@ class ColorCommand(scoping.Command):
                             e''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             \abjad-color-music #'red
                             g'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
@@ -918,7 +918,7 @@ class ColorCommand(scoping.Command):
                             e'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             \abjad-color-music #'blue
                             d''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
@@ -933,7 +933,7 @@ class ColorCommand(scoping.Command):
                             g'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             \abjad-color-music #'blue
                             f''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
@@ -1012,7 +1012,7 @@ class ContainerCommand(scoping.Command):
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.make_notes(repeat_ties=True),
         ...     baca.container('ViolinI', selector=baca.leaves()[:2]),
         ...     baca.container('ViolinII', selector=baca.leaves()[2:]),
@@ -1026,28 +1026,28 @@ class ContainerCommand(scoping.Command):
         \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
         <<                                                                                       %! SingleStaffScoreTemplate
         <BLANKLINE>
-            \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+            \context GlobalContext = "Global_Context"                                            %! _make_global_context
             <<                                                                                   %! _make_global_context
         <BLANKLINE>
-                \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                 {                                                                                %! _make_global_context
         <BLANKLINE>
-                    % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                    % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                     \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                     \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                     s1 * 1/2                                                                     %! _make_global_skips(1)
         <BLANKLINE>
-                    % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                    % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                     \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                     \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                     s1 * 3/8                                                                     %! _make_global_skips(1)
         <BLANKLINE>
-                    % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                    % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                     \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                     \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                     s1 * 1/2                                                                     %! _make_global_skips(1)
         <BLANKLINE>
-                    % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                    % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                     \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                     \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                     s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -1058,31 +1058,31 @@ class ContainerCommand(scoping.Command):
         <BLANKLINE>
             >>                                                                                   %! _make_global_context
         <BLANKLINE>
-            \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+            \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
             <<                                                                                   %! SingleStaffScoreTemplate
         <BLANKLINE>
-                \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                 {                                                                                %! SingleStaffScoreTemplate
         <BLANKLINE>
-                    \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                    \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                     {                                                                            %! SingleStaffScoreTemplate
         <BLANKLINE>
                         {   %*% ViolinI
         <BLANKLINE>
-                            % [MusicVoice measure 1]                                             %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                            %! _comment_measure_numbers
                             e'2                                                                  %! baca_make_notes
         <BLANKLINE>
-                            % [MusicVoice measure 2]                                             %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                            %! _comment_measure_numbers
                             f'4.                                                                 %! baca_make_notes
         <BLANKLINE>
                         }   %*% ViolinI
         <BLANKLINE>
                         {   %*% ViolinII
         <BLANKLINE>
-                            % [MusicVoice measure 3]                                             %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                            %! _comment_measure_numbers
                             e'2                                                                  %! baca_make_notes
         <BLANKLINE>
-                            % [MusicVoice measure 4]                                             %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                            %! _comment_measure_numbers
                             f'4.                                                                 %! baca_make_notes
         <BLANKLINE>
                         }   %*% ViolinII
@@ -1354,7 +1354,7 @@ class IndicatorCommand(scoping.Command):
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.IndicatorCommand(indicators=[abjad.Fermata()]),
@@ -1370,28 +1370,28 @@ class IndicatorCommand(scoping.Command):
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -1402,16 +1402,16 @@ class IndicatorCommand(scoping.Command):
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             e'8                                                                      %! baca_make_even_divisions
                             \fermata                                                                 %! IndicatorCommand
                             [                                                                        %! baca_make_even_divisions
@@ -1426,7 +1426,7 @@ class IndicatorCommand(scoping.Command):
                             \fermata                                                                 %! IndicatorCommand
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
                             \fermata                                                                 %! IndicatorCommand
                             [                                                                        %! baca_make_even_divisions
@@ -1438,7 +1438,7 @@ class IndicatorCommand(scoping.Command):
                             \fermata                                                                 %! IndicatorCommand
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
                             \fermata                                                                 %! IndicatorCommand
                             [                                                                        %! baca_make_even_divisions
@@ -1453,7 +1453,7 @@ class IndicatorCommand(scoping.Command):
                             \fermata                                                                 %! IndicatorCommand
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
                             \fermata                                                                 %! IndicatorCommand
                             [                                                                        %! baca_make_even_divisions
@@ -1819,7 +1819,7 @@ class LabelCommand(scoping.Command):
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.label(abjad.label().with_pitches(locale='us')),
@@ -1835,28 +1835,28 @@ class LabelCommand(scoping.Command):
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -1867,16 +1867,16 @@ class LabelCommand(scoping.Command):
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             e'8                                                                      %! baca_make_even_divisions
                             ^ \markup { E4 }
                             [                                                                        %! baca_make_even_divisions
@@ -1891,7 +1891,7 @@ class LabelCommand(scoping.Command):
                             ^ \markup { E5 }
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
                             ^ \markup { G4 }
                             [                                                                        %! baca_make_even_divisions
@@ -1903,7 +1903,7 @@ class LabelCommand(scoping.Command):
                             ^ \markup { E4 }
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
                             ^ \markup { D5 }
                             [                                                                        %! baca_make_even_divisions
@@ -1918,7 +1918,7 @@ class LabelCommand(scoping.Command):
                             ^ \markup { G4 }
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
                             ^ \markup { F5 }
                             [                                                                        %! baca_make_even_divisions
@@ -2316,7 +2316,7 @@ def bar_extent_persistent(
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.bar_extent_persistent((0, 0)),
         ...     baca.make_even_divisions(),
         ...     baca.staff_lines(1),
@@ -2333,31 +2333,31 @@ def bar_extent_persistent(
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -2369,16 +2369,16 @@ def bar_extent_persistent(
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! EXPLICIT_PERSISTENT_OVERRIDE:_set_status_tag:baca_bar_extent_persistent:IndicatorCommand
                             \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
                             \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
@@ -2394,7 +2394,7 @@ def bar_extent_persistent(
                             b'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             b'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -2403,7 +2403,7 @@ def bar_extent_persistent(
                             b'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             b'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -2414,7 +2414,7 @@ def bar_extent_persistent(
                             b'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             b'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -2465,7 +2465,7 @@ def bcps(
             ...     )
 
             >>> maker(
-            ...     'MusicVoice',
+            ...     'Music_Voice',
             ...     baca.make_even_divisions(),
             ...     baca.bcps(
             ...         [(1, 5), (3, 5), (2, 5), (4, 5), (5, 5)],
@@ -2485,31 +2485,31 @@ def bcps(
                 \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
                 <<                                                                                       %! SingleStaffScoreTemplate
                 <BLANKLINE>
-                    \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
                     <<                                                                                   %! _make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                         {                                                                                %! _make_global_context
                 <BLANKLINE>
-                            % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                            % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                            % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                            % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
-                            % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                            % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -2521,16 +2521,16 @@ def bcps(
                 <BLANKLINE>
                     >>                                                                                   %! _make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                     <<                                                                                   %! SingleStaffScoreTemplate
                 <BLANKLINE>
-                        \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                         {                                                                                %! SingleStaffScoreTemplate
                 <BLANKLINE>
-                            \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                             {                                                                            %! SingleStaffScoreTemplate
                 <BLANKLINE>
-                                % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                                % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \override Script.staff-padding = #5.5                                    %! baca_script_staff_padding:OverrideCommand(1)
                                 \override TextSpanner.staff-padding = #2.5                               %! baca_text_spanner_staff_padding:OverrideCommand(1)
                                 e'8                                                                      %! baca_make_even_divisions
@@ -2561,7 +2561,7 @@ def bcps(
                                 - \baca-bcp-spanner-left-text #4 #5                                      %! baca_bcps:BCPCommand(2)
                                 \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
                 <BLANKLINE>
-                                % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                                % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 e'8                                                                      %! baca_make_even_divisions
                                 - \upbow                                                                 %! baca_bcps:BCPCommand(7)
                                 \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
@@ -2585,7 +2585,7 @@ def bcps(
                                 - \baca-bcp-spanner-left-text #3 #5                                      %! baca_bcps:BCPCommand(2)
                                 \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
                 <BLANKLINE>
-                                % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                                % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                                 f'8                                                                      %! baca_make_even_divisions
                                 - \downbow                                                               %! baca_bcps:BCPCommand(8)
                                 \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
@@ -2615,7 +2615,7 @@ def bcps(
                                 - \baca-bcp-spanner-left-text #1 #5                                      %! baca_bcps:BCPCommand(2)
                                 \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
                 <BLANKLINE>
-                                % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                                % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                                 f'8                                                                      %! baca_make_even_divisions
                                 - \upbow                                                                 %! baca_bcps:BCPCommand(7)
                                 \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
@@ -2825,7 +2825,7 @@ def container(
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.container('ViolinI', selector=baca.leaves()[:2]),
         ...     baca.container('ViolinII', selector=baca.leaves()[2:]),
         ...     baca.make_notes(repeat_ties=True),
@@ -2839,28 +2839,28 @@ def container(
         \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
         <<                                                                                       %! SingleStaffScoreTemplate
         <BLANKLINE>
-            \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+            \context GlobalContext = "Global_Context"                                            %! _make_global_context
             <<                                                                                   %! _make_global_context
         <BLANKLINE>
-                \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                 {                                                                                %! _make_global_context
         <BLANKLINE>
-                    % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                    % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                     \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                     \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                     s1 * 1/2                                                                     %! _make_global_skips(1)
         <BLANKLINE>
-                    % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                    % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                     \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                     \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                     s1 * 3/8                                                                     %! _make_global_skips(1)
         <BLANKLINE>
-                    % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                    % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                     \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                     \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                     s1 * 1/2                                                                     %! _make_global_skips(1)
         <BLANKLINE>
-                    % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                    % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                     \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                     \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                     s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -2871,31 +2871,31 @@ def container(
         <BLANKLINE>
             >>                                                                                   %! _make_global_context
         <BLANKLINE>
-            \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+            \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
             <<                                                                                   %! SingleStaffScoreTemplate
         <BLANKLINE>
-                \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                 {                                                                                %! SingleStaffScoreTemplate
         <BLANKLINE>
-                    \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                    \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                     {                                                                            %! SingleStaffScoreTemplate
         <BLANKLINE>
                         {   %*% ViolinI
         <BLANKLINE>
-                            % [MusicVoice measure 1]                                             %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                            %! _comment_measure_numbers
                             e'2                                                                  %! baca_make_notes
         <BLANKLINE>
-                            % [MusicVoice measure 2]                                             %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                            %! _comment_measure_numbers
                             f'4.                                                                 %! baca_make_notes
         <BLANKLINE>
                         }   %*% ViolinI
         <BLANKLINE>
                         {   %*% ViolinII
         <BLANKLINE>
-                            % [MusicVoice measure 3]                                             %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                            %! _comment_measure_numbers
                             e'2                                                                  %! baca_make_notes
         <BLANKLINE>
-                            % [MusicVoice measure 4]                                             %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                            %! _comment_measure_numbers
                             f'4.                                                                 %! baca_make_notes
         <BLANKLINE>
                         }   %*% ViolinII
@@ -2934,7 +2934,7 @@ def cross_staff(
         >>> accumulator = baca.MusicAccumulator(score_template=score_template)
         >>> accumulator(
         ...     accumulator.music_maker(
-        ...         'ViolinMusicVoice',
+        ...         'Violin_Music_Voice',
         ...         [[9, 11, 12, 14, 16]],
         ...         baca.flags(),
         ...         baca.stem_up(),
@@ -2945,9 +2945,9 @@ def cross_staff(
         ...     )
         >>> accumulator(
         ...     accumulator.music_maker(
-        ...         'ViolaMusicVoice',
+        ...         'Viola_Music_Voice',
         ...         [[0, 2, 4, 5, 7]],
-        ...         baca.anchor('ViolinMusicVoice'),
+        ...         baca.anchor('Violin_Music_Voice'),
         ...         baca.cross_staff(),
         ...         baca.flags(),
         ...         baca.stem_up(),
@@ -2957,7 +2957,7 @@ def cross_staff(
         ...     )
         >>> accumulator(
         ...     accumulator.music_maker(
-        ...         'ViolinMusicVoice',
+        ...         'Violin_Music_Voice',
         ...         [[15]],
         ...         baca.flags(),
         ...         figure_name='vn.2',
@@ -2983,19 +2983,19 @@ def cross_staff(
             \context Score = "Score"                                                                 %! StringTrioScoreTemplate
             <<                                                                                       %! StringTrioScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 5/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 5/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 2/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -3007,24 +3007,24 @@ def cross_staff(
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! StringTrioScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! StringTrioScoreTemplate
                 <<                                                                                   %! StringTrioScoreTemplate
             <BLANKLINE>
-                    \context StringSectionStaffGroup = "String Section Staff Group"                  %! StringTrioScoreTemplate
+                    \context StringSectionStaffGroup = "String_Section_Staff_Group"                  %! StringTrioScoreTemplate
                     <<                                                                               %! StringTrioScoreTemplate
             <BLANKLINE>
                         \tag Violin                                                                  %! ScoreTemplate(5)
-                        \context ViolinMusicStaff = "ViolinMusicStaff"                               %! StringTrioScoreTemplate
+                        \context ViolinMusicStaff = "Violin_Music_Staff"                             %! StringTrioScoreTemplate
                         {                                                                            %! StringTrioScoreTemplate
             <BLANKLINE>
-                            \context ViolinMusicVoice = "ViolinMusicVoice"                           %! StringTrioScoreTemplate
+                            \context ViolinMusicVoice = "Violin_Music_Voice"                         %! StringTrioScoreTemplate
                             {                                                                        %! StringTrioScoreTemplate
             <BLANKLINE>
                                 {
             <BLANKLINE>
                                     \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                        % [ViolinMusicVoice measure 1]                               %! _comment_measure_numbers
+                                        % [Violin_Music_Voice measure 1]                             %! _comment_measure_numbers
                                         \override Stem.direction = #up                               %! baca_stem_up:OverrideCommand(1)
                                         \clef "treble"                                               %! DEFAULT_CLEF:_set_status_tag:attach_defaults
                                         \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
@@ -3051,7 +3051,7 @@ def cross_staff(
             <BLANKLINE>
                                     \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                        % [ViolinMusicVoice measure 2]                               %! _comment_measure_numbers
+                                        % [Violin_Music_Voice measure 2]                             %! _comment_measure_numbers
                                         ef''!8
             <BLANKLINE>
                                     }
@@ -3063,17 +3063,17 @@ def cross_staff(
                         }                                                                            %! StringTrioScoreTemplate
             <BLANKLINE>
                         \tag Viola                                                                   %! ScoreTemplate(5)
-                        \context ViolaMusicStaff = "ViolaMusicStaff"                                 %! StringTrioScoreTemplate
+                        \context ViolaMusicStaff = "Viola_Music_Staff"                               %! StringTrioScoreTemplate
                         {                                                                            %! StringTrioScoreTemplate
             <BLANKLINE>
-                            \context ViolaMusicVoice = "ViolaMusicVoice"                             %! StringTrioScoreTemplate
+                            \context ViolaMusicVoice = "Viola_Music_Voice"                           %! StringTrioScoreTemplate
                             {                                                                        %! StringTrioScoreTemplate
             <BLANKLINE>
                                 {
             <BLANKLINE>
                                     \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                        % [ViolaMusicVoice measure 1]                                %! _comment_measure_numbers
+                                        % [Viola_Music_Voice measure 1]                              %! _comment_measure_numbers
                                         \override Stem.direction = #up                               %! baca_stem_up:OverrideCommand(1)
                                         \clef "alto"                                                 %! DEFAULT_CLEF:_set_status_tag:attach_defaults
                                         \crossStaff                                                  %! baca_cross_staff:IndicatorCommand
@@ -3097,7 +3097,7 @@ def cross_staff(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                % [ViolaMusicVoice measure 2]                                        %! _comment_measure_numbers
+                                % [Viola_Music_Voice measure 2]                                      %! _comment_measure_numbers
                                 R1 * 1/8                                                             %! _make_measure_silences
             <BLANKLINE>
                             }                                                                        %! StringTrioScoreTemplate
@@ -3105,13 +3105,13 @@ def cross_staff(
                         }                                                                            %! StringTrioScoreTemplate
             <BLANKLINE>
                         \tag Cello                                                                   %! ScoreTemplate(5)
-                        \context CelloMusicStaff = "CelloMusicStaff"                                 %! StringTrioScoreTemplate
+                        \context CelloMusicStaff = "Cello_Music_Staff"                               %! StringTrioScoreTemplate
                         {                                                                            %! StringTrioScoreTemplate
             <BLANKLINE>
-                            \context CelloMusicVoice = "CelloMusicVoice"                             %! StringTrioScoreTemplate
+                            \context CelloMusicVoice = "Cello_Music_Voice"                           %! StringTrioScoreTemplate
                             {                                                                        %! StringTrioScoreTemplate
             <BLANKLINE>
-                                % [CelloMusicVoice measure 1]                                        %! _comment_measure_numbers
+                                % [Cello_Music_Voice measure 1]                                      %! _comment_measure_numbers
                                 \clef "bass"                                                         %! DEFAULT_CLEF:_set_status_tag:attach_defaults
                                 \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                             %@% \override CelloMusicStaff.Clef.color = ##f                           %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
@@ -3120,7 +3120,7 @@ def cross_staff(
                                 ^ \baca-default-indicator-markup "(Cello)"                           %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                 \override CelloMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
-                                % [CelloMusicVoice measure 2]                                        %! _comment_measure_numbers
+                                % [Cello_Music_Voice measure 2]                                      %! _comment_measure_numbers
                                 R1 * 1/8                                                             %! _call_rhythm_commands
             <BLANKLINE>
                             }                                                                        %! StringTrioScoreTemplate
@@ -3141,7 +3141,7 @@ def cross_staff(
         >>> accumulator = baca.MusicAccumulator(score_template=score_template)
         >>> accumulator(
         ...     accumulator.music_maker(
-        ...         'ViolinMusicVoice',
+        ...         'Violin_Music_Voice',
         ...         [[9, 11, 12, 14, 16]],
         ...         baca.flags(),
         ...         baca.stem_up(),
@@ -3152,9 +3152,9 @@ def cross_staff(
         ...     )
         >>> accumulator(
         ...     accumulator.music_maker(
-        ...         'ViolaMusicVoice',
+        ...         'Viola_Music_Voice',
         ...         [[0, 2, 4, 5, 7]],
-        ...         baca.anchor('ViolinMusicVoice'),
+        ...         baca.anchor('Violin_Music_Voice'),
         ...         baca.cross_staff(selector=baca.pleaves()[-2:]),
         ...         baca.flags(),
         ...         baca.stem_up(),
@@ -3164,7 +3164,7 @@ def cross_staff(
         ...     )
         >>> accumulator(
         ...     accumulator.music_maker(
-        ...         'ViolinMusicVoice',
+        ...         'Violin_Music_Voice',
         ...         [[15]],
         ...         baca.flags(),
         ...         figure_name='vn.2',
@@ -3190,19 +3190,19 @@ def cross_staff(
             \context Score = "Score"                                                                 %! StringTrioScoreTemplate
             <<                                                                                       %! StringTrioScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 5/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 5/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 2/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -3214,24 +3214,24 @@ def cross_staff(
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! StringTrioScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! StringTrioScoreTemplate
                 <<                                                                                   %! StringTrioScoreTemplate
             <BLANKLINE>
-                    \context StringSectionStaffGroup = "String Section Staff Group"                  %! StringTrioScoreTemplate
+                    \context StringSectionStaffGroup = "String_Section_Staff_Group"                  %! StringTrioScoreTemplate
                     <<                                                                               %! StringTrioScoreTemplate
             <BLANKLINE>
                         \tag Violin                                                                  %! ScoreTemplate(5)
-                        \context ViolinMusicStaff = "ViolinMusicStaff"                               %! StringTrioScoreTemplate
+                        \context ViolinMusicStaff = "Violin_Music_Staff"                             %! StringTrioScoreTemplate
                         {                                                                            %! StringTrioScoreTemplate
             <BLANKLINE>
-                            \context ViolinMusicVoice = "ViolinMusicVoice"                           %! StringTrioScoreTemplate
+                            \context ViolinMusicVoice = "Violin_Music_Voice"                         %! StringTrioScoreTemplate
                             {                                                                        %! StringTrioScoreTemplate
             <BLANKLINE>
                                 {
             <BLANKLINE>
                                     \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                        % [ViolinMusicVoice measure 1]                               %! _comment_measure_numbers
+                                        % [Violin_Music_Voice measure 1]                             %! _comment_measure_numbers
                                         \override Stem.direction = #up                               %! baca_stem_up:OverrideCommand(1)
                                         \clef "treble"                                               %! DEFAULT_CLEF:_set_status_tag:attach_defaults
                                         \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
@@ -3258,7 +3258,7 @@ def cross_staff(
             <BLANKLINE>
                                     \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                        % [ViolinMusicVoice measure 2]                               %! _comment_measure_numbers
+                                        % [Violin_Music_Voice measure 2]                             %! _comment_measure_numbers
                                         ef''!8
             <BLANKLINE>
                                     }
@@ -3270,17 +3270,17 @@ def cross_staff(
                         }                                                                            %! StringTrioScoreTemplate
             <BLANKLINE>
                         \tag Viola                                                                   %! ScoreTemplate(5)
-                        \context ViolaMusicStaff = "ViolaMusicStaff"                                 %! StringTrioScoreTemplate
+                        \context ViolaMusicStaff = "Viola_Music_Staff"                               %! StringTrioScoreTemplate
                         {                                                                            %! StringTrioScoreTemplate
             <BLANKLINE>
-                            \context ViolaMusicVoice = "ViolaMusicVoice"                             %! StringTrioScoreTemplate
+                            \context ViolaMusicVoice = "Viola_Music_Voice"                           %! StringTrioScoreTemplate
                             {                                                                        %! StringTrioScoreTemplate
             <BLANKLINE>
                                 {
             <BLANKLINE>
                                     \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                        % [ViolaMusicVoice measure 1]                                %! _comment_measure_numbers
+                                        % [Viola_Music_Voice measure 1]                              %! _comment_measure_numbers
                                         \override Stem.direction = #up                               %! baca_stem_up:OverrideCommand(1)
                                         \clef "alto"                                                 %! DEFAULT_CLEF:_set_status_tag:attach_defaults
                                         \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
@@ -3305,7 +3305,7 @@ def cross_staff(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                % [ViolaMusicVoice measure 2]                                        %! _comment_measure_numbers
+                                % [Viola_Music_Voice measure 2]                                      %! _comment_measure_numbers
                                 R1 * 1/8                                                             %! _make_measure_silences
             <BLANKLINE>
                             }                                                                        %! StringTrioScoreTemplate
@@ -3313,13 +3313,13 @@ def cross_staff(
                         }                                                                            %! StringTrioScoreTemplate
             <BLANKLINE>
                         \tag Cello                                                                   %! ScoreTemplate(5)
-                        \context CelloMusicStaff = "CelloMusicStaff"                                 %! StringTrioScoreTemplate
+                        \context CelloMusicStaff = "Cello_Music_Staff"                               %! StringTrioScoreTemplate
                         {                                                                            %! StringTrioScoreTemplate
             <BLANKLINE>
-                            \context CelloMusicVoice = "CelloMusicVoice"                             %! StringTrioScoreTemplate
+                            \context CelloMusicVoice = "Cello_Music_Voice"                           %! StringTrioScoreTemplate
                             {                                                                        %! StringTrioScoreTemplate
             <BLANKLINE>
-                                % [CelloMusicVoice measure 1]                                        %! _comment_measure_numbers
+                                % [Cello_Music_Voice measure 1]                                      %! _comment_measure_numbers
                                 \clef "bass"                                                         %! DEFAULT_CLEF:_set_status_tag:attach_defaults
                                 \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                             %@% \override CelloMusicStaff.Clef.color = ##f                           %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
@@ -3328,7 +3328,7 @@ def cross_staff(
                                 ^ \baca-default-indicator-markup "(Cello)"                           %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                 \override CelloMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
-                                % [CelloMusicVoice measure 2]                                        %! _comment_measure_numbers
+                                % [Cello_Music_Voice measure 2]                                      %! _comment_measure_numbers
                                 R1 * 1/8                                                             %! _call_rhythm_commands
             <BLANKLINE>
                             }                                                                        %! StringTrioScoreTemplate
@@ -4228,7 +4228,7 @@ def parts(
         ...     )
 
         >>> maker(
-        ...     'ViolinMusicVoice',
+        ...     'Violin_Music_Voice',
         ...     baca.make_notes(),
         ...     baca.parts(abjad.PartAssignment('Violin')),
         ...     baca.pitch('E4'),
@@ -4242,28 +4242,28 @@ def parts(
         \context Score = "Score"                                                                 %! StringTrioScoreTemplate
         <<                                                                                       %! StringTrioScoreTemplate
         <BLANKLINE>
-            \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+            \context GlobalContext = "Global_Context"                                            %! _make_global_context
             <<                                                                                   %! _make_global_context
         <BLANKLINE>
-                \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                 {                                                                                %! _make_global_context
         <BLANKLINE>
-                    % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                    % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                     \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                     \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                     s1 * 1/2                                                                     %! _make_global_skips(1)
         <BLANKLINE>
-                    % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                    % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                     \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                     \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                     s1 * 3/8                                                                     %! _make_global_skips(1)
         <BLANKLINE>
-                    % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                    % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                     \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                     \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                     s1 * 1/2                                                                     %! _make_global_skips(1)
         <BLANKLINE>
-                    % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                    % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                     \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                     \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                     s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -4274,22 +4274,22 @@ def parts(
         <BLANKLINE>
             >>                                                                                   %! _make_global_context
         <BLANKLINE>
-            \context MusicContext = "MusicContext"                                               %! StringTrioScoreTemplate
+            \context MusicContext = "Music_Context"                                              %! StringTrioScoreTemplate
             <<                                                                                   %! StringTrioScoreTemplate
         <BLANKLINE>
-                \context StringSectionStaffGroup = "String Section Staff Group"                  %! StringTrioScoreTemplate
+                \context StringSectionStaffGroup = "String_Section_Staff_Group"                  %! StringTrioScoreTemplate
                 <<                                                                               %! StringTrioScoreTemplate
         <BLANKLINE>
                     \tag Violin                                                                  %! ScoreTemplate(5)
-                    \context ViolinMusicStaff = "ViolinMusicStaff"                               %! StringTrioScoreTemplate
+                    \context ViolinMusicStaff = "Violin_Music_Staff"                             %! StringTrioScoreTemplate
                     {                                                                            %! StringTrioScoreTemplate
         <BLANKLINE>
-                        \context ViolinMusicVoice = "ViolinMusicVoice"                           %! StringTrioScoreTemplate
+                        \context ViolinMusicVoice = "Violin_Music_Voice"                         %! StringTrioScoreTemplate
                         {                                                                        %! StringTrioScoreTemplate
         <BLANKLINE>
                             {   %*% PartAssignment('Violin')
         <BLANKLINE>
-                                % [ViolinMusicVoice measure 1]                                   %! _comment_measure_numbers
+                                % [Violin_Music_Voice measure 1]                                 %! _comment_measure_numbers
                                 \clef "treble"                                                   %! DEFAULT_CLEF:_set_status_tag:attach_defaults
                                 \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                             %@% \override ViolinMusicStaff.Clef.color = ##f                      %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
@@ -4298,13 +4298,13 @@ def parts(
                                 ^ \baca-default-indicator-markup "(Violin)"                      %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                 \override ViolinMusicStaff.Clef.color = #(x11-color 'violet)     %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
         <BLANKLINE>
-                                % [ViolinMusicVoice measure 2]                                   %! _comment_measure_numbers
+                                % [Violin_Music_Voice measure 2]                                 %! _comment_measure_numbers
                                 e'4.                                                             %! baca_make_notes
         <BLANKLINE>
-                                % [ViolinMusicVoice measure 3]                                   %! _comment_measure_numbers
+                                % [Violin_Music_Voice measure 3]                                 %! _comment_measure_numbers
                                 e'2                                                              %! baca_make_notes
         <BLANKLINE>
-                                % [ViolinMusicVoice measure 4]                                   %! _comment_measure_numbers
+                                % [Violin_Music_Voice measure 4]                                 %! _comment_measure_numbers
                                 e'4.                                                             %! baca_make_notes
         <BLANKLINE>
                             }   %*% PartAssignment('Violin')
@@ -4314,13 +4314,13 @@ def parts(
                     }                                                                            %! StringTrioScoreTemplate
         <BLANKLINE>
                     \tag Viola                                                                   %! ScoreTemplate(5)
-                    \context ViolaMusicStaff = "ViolaMusicStaff"                                 %! StringTrioScoreTemplate
+                    \context ViolaMusicStaff = "Viola_Music_Staff"                               %! StringTrioScoreTemplate
                     {                                                                            %! StringTrioScoreTemplate
         <BLANKLINE>
-                        \context ViolaMusicVoice = "ViolaMusicVoice"                             %! StringTrioScoreTemplate
+                        \context ViolaMusicVoice = "Viola_Music_Voice"                           %! StringTrioScoreTemplate
                         {                                                                        %! StringTrioScoreTemplate
         <BLANKLINE>
-                            % [ViolaMusicVoice measure 1]                                        %! _comment_measure_numbers
+                            % [Viola_Music_Voice measure 1]                                      %! _comment_measure_numbers
                             \clef "alto"                                                         %! DEFAULT_CLEF:_set_status_tag:attach_defaults
                             \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                         %@% \override ViolaMusicStaff.Clef.color = ##f                           %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
@@ -4329,13 +4329,13 @@ def parts(
                             ^ \baca-default-indicator-markup "(Viola)"                           %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                             \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
         <BLANKLINE>
-                            % [ViolaMusicVoice measure 2]                                        %! _comment_measure_numbers
+                            % [Viola_Music_Voice measure 2]                                      %! _comment_measure_numbers
                             R1 * 3/8                                                             %! _call_rhythm_commands
         <BLANKLINE>
-                            % [ViolaMusicVoice measure 3]                                        %! _comment_measure_numbers
+                            % [Viola_Music_Voice measure 3]                                      %! _comment_measure_numbers
                             R1 * 1/2                                                             %! _call_rhythm_commands
         <BLANKLINE>
-                            % [ViolaMusicVoice measure 4]                                        %! _comment_measure_numbers
+                            % [Viola_Music_Voice measure 4]                                      %! _comment_measure_numbers
                             R1 * 3/8                                                             %! _call_rhythm_commands
         <BLANKLINE>
                         }                                                                        %! StringTrioScoreTemplate
@@ -4343,13 +4343,13 @@ def parts(
                     }                                                                            %! StringTrioScoreTemplate
         <BLANKLINE>
                     \tag Cello                                                                   %! ScoreTemplate(5)
-                    \context CelloMusicStaff = "CelloMusicStaff"                                 %! StringTrioScoreTemplate
+                    \context CelloMusicStaff = "Cello_Music_Staff"                               %! StringTrioScoreTemplate
                     {                                                                            %! StringTrioScoreTemplate
         <BLANKLINE>
-                        \context CelloMusicVoice = "CelloMusicVoice"                             %! StringTrioScoreTemplate
+                        \context CelloMusicVoice = "Cello_Music_Voice"                           %! StringTrioScoreTemplate
                         {                                                                        %! StringTrioScoreTemplate
         <BLANKLINE>
-                            % [CelloMusicVoice measure 1]                                        %! _comment_measure_numbers
+                            % [Cello_Music_Voice measure 1]                                      %! _comment_measure_numbers
                             \clef "bass"                                                         %! DEFAULT_CLEF:_set_status_tag:attach_defaults
                             \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                         %@% \override CelloMusicStaff.Clef.color = ##f                           %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
@@ -4358,13 +4358,13 @@ def parts(
                             ^ \baca-default-indicator-markup "(Cello)"                           %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                             \override CelloMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
         <BLANKLINE>
-                            % [CelloMusicVoice measure 2]                                        %! _comment_measure_numbers
+                            % [Cello_Music_Voice measure 2]                                      %! _comment_measure_numbers
                             R1 * 3/8                                                             %! _call_rhythm_commands
         <BLANKLINE>
-                            % [CelloMusicVoice measure 3]                                        %! _comment_measure_numbers
+                            % [Cello_Music_Voice measure 3]                                      %! _comment_measure_numbers
                             R1 * 1/2                                                             %! _call_rhythm_commands
         <BLANKLINE>
-                            % [CelloMusicVoice measure 4]                                        %! _comment_measure_numbers
+                            % [Cello_Music_Voice measure 4]                                      %! _comment_measure_numbers
                             R1 * 3/8                                                             %! _call_rhythm_commands
         <BLANKLINE>
                         }                                                                        %! StringTrioScoreTemplate
@@ -4390,7 +4390,7 @@ def parts(
         >>> part_assignment = abjad.PartAssignment('Flute')
 
         >>> maker(
-        ...     'ViolinMusicVoice',
+        ...     'Violin_Music_Voice',
         ...     baca.make_notes(),
         ...     baca.parts(part_assignment),
         ...     baca.pitches('E4 F4'),
@@ -4399,7 +4399,7 @@ def parts(
         >>> lilypond_file = maker.run(environment='docs')
         Traceback (most recent call last):
             ...
-        Exception: ViolinMusicVoice does not allow Flute part assignment:
+        Exception: Violin_Music_Voice does not allow Flute part assignment:
             abjad.PartAssignment('Flute')
 
     """
@@ -4525,7 +4525,7 @@ def volta(
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.RhythmCommand(
         ...         rhythm_maker=rmakers.TaleaRhythmMaker(
@@ -4538,7 +4538,7 @@ def volta(
         ...     )
 
         >>> maker(
-        ...     'GlobalSkips',
+        ...     'Global_Skips',
         ...     baca.volta(selector=baca.skips()[1:3]),
         ...     )
 
@@ -4552,13 +4552,13 @@ def volta(
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
@@ -4566,19 +4566,19 @@ def volta(
                         \repeat volta 2
                         {
             <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                %! _comment_measure_numbers
+                            % [Global_Skips measure 2]                                               %! _comment_measure_numbers
                             \time 3/8                                                                %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca-time-signature-color #'blue                                        %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                 %! _make_global_skips(1)
             <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                %! _comment_measure_numbers
+                            % [Global_Skips measure 3]                                               %! _comment_measure_numbers
                             \time 4/8                                                                %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca-time-signature-color #'blue                                        %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                 %! _make_global_skips(1)
             <BLANKLINE>
                         }
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -4589,16 +4589,16 @@ def volta(
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             e'8
                             [
             <BLANKLINE>
@@ -4609,7 +4609,7 @@ def volta(
             <BLANKLINE>
                             r8
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             e''8
                             [
             <BLANKLINE>
@@ -4618,7 +4618,7 @@ def volta(
                             f''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             r8
             <BLANKLINE>
                             e'8
@@ -4629,7 +4629,7 @@ def volta(
                             f'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             r8
             <BLANKLINE>
                             e''8
@@ -4656,7 +4656,7 @@ def volta(
         ...     )
 
         >>> maker(
-        ...     ('MusicVoice', (1, 3)),
+        ...     ('Music_Voice', (1, 3)),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.RhythmCommand(
         ...         rhythm_maker=rmakers.TaleaRhythmMaker(
@@ -4669,7 +4669,7 @@ def volta(
         ...     )
 
         >>> maker(
-        ...     ('GlobalSkips', (2, 3)),
+        ...     ('Global_Skips', (2, 3)),
         ...     baca.volta(),
         ...     )
 
@@ -4683,13 +4683,13 @@ def volta(
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
@@ -4697,19 +4697,19 @@ def volta(
                         \repeat volta 2
                         {
             <BLANKLINE>
-                            % [GlobalSkips measure 2]                                                %! _comment_measure_numbers
+                            % [Global_Skips measure 2]                                               %! _comment_measure_numbers
                             \time 3/8                                                                %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca-time-signature-color #'blue                                        %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                 %! _make_global_skips(1)
             <BLANKLINE>
-                            % [GlobalSkips measure 3]                                                %! _comment_measure_numbers
+                            % [Global_Skips measure 3]                                               %! _comment_measure_numbers
                             \time 4/8                                                                %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca-time-signature-color #'blue                                        %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 1/2                                                                 %! _make_global_skips(1)
             <BLANKLINE>
                         }
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -4720,16 +4720,16 @@ def volta(
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             e'8
                             [
             <BLANKLINE>
@@ -4740,7 +4740,7 @@ def volta(
             <BLANKLINE>
                             r8
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             e''8
                             [
             <BLANKLINE>
@@ -4749,7 +4749,7 @@ def volta(
                             f''8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             r8
             <BLANKLINE>
                             e'8
@@ -4760,7 +4760,7 @@ def volta(
                             f'8
                             ]
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _make_measure_silences
             <BLANKLINE>
                         }                                                                            %! SingleStaffScoreTemplate

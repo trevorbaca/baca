@@ -23,7 +23,7 @@ class BreakMeasureMap(abjad.AbjadObject):
         ...     )
 
         >>> maker(
-        ...     'ViolinMusicVoice',
+        ...     'Violin_Music_Voice',
         ...     baca.make_even_divisions(),
         ...     baca.pitch('E4'),
         ...     )
@@ -37,13 +37,13 @@ class BreakMeasureMap(abjad.AbjadObject):
             \context Score = "Score"                                                                 %! StringTrioScoreTemplate
             <<                                                                                       %! StringTrioScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                         \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                         \baca-lbsd #0 #'(10 20)                                                      %! BREAK:IndicatorCommand
@@ -52,25 +52,25 @@ class BreakMeasureMap(abjad.AbjadObject):
                         \pageBreak                                                                   %! BREAK:IndicatorCommand
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 5]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 5]                                                   %! _comment_measure_numbers
                         \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -82,20 +82,20 @@ class BreakMeasureMap(abjad.AbjadObject):
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! StringTrioScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! StringTrioScoreTemplate
                 <<                                                                                   %! StringTrioScoreTemplate
             <BLANKLINE>
-                    \context StringSectionStaffGroup = "String Section Staff Group"                  %! StringTrioScoreTemplate
+                    \context StringSectionStaffGroup = "String_Section_Staff_Group"                  %! StringTrioScoreTemplate
                     <<                                                                               %! StringTrioScoreTemplate
             <BLANKLINE>
                         \tag Violin                                                                  %! ScoreTemplate(5)
-                        \context ViolinMusicStaff = "ViolinMusicStaff"                               %! StringTrioScoreTemplate
+                        \context ViolinMusicStaff = "Violin_Music_Staff"                             %! StringTrioScoreTemplate
                         {                                                                            %! StringTrioScoreTemplate
             <BLANKLINE>
-                            \context ViolinMusicVoice = "ViolinMusicVoice"                           %! StringTrioScoreTemplate
+                            \context ViolinMusicVoice = "Violin_Music_Voice"                         %! StringTrioScoreTemplate
                             {                                                                        %! StringTrioScoreTemplate
             <BLANKLINE>
-                                % [ViolinMusicVoice measure 1]                                       %! _comment_measure_numbers
+                                % [Violin_Music_Voice measure 1]                                     %! _comment_measure_numbers
                                 \clef "treble"                                                       %! DEFAULT_CLEF:_set_status_tag:attach_defaults
                                 \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                             %@% \override ViolinMusicStaff.Clef.color = ##f                          %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
@@ -112,7 +112,7 @@ class BreakMeasureMap(abjad.AbjadObject):
                                 e'8                                                                  %! baca_make_even_divisions
                                 ]                                                                    %! baca_make_even_divisions
             <BLANKLINE>
-                                % [ViolinMusicVoice measure 2]                                       %! _comment_measure_numbers
+                                % [Violin_Music_Voice measure 2]                                     %! _comment_measure_numbers
                                 e'8                                                                  %! baca_make_even_divisions
                                 [                                                                    %! baca_make_even_divisions
             <BLANKLINE>
@@ -121,7 +121,7 @@ class BreakMeasureMap(abjad.AbjadObject):
                                 e'8                                                                  %! baca_make_even_divisions
                                 ]                                                                    %! baca_make_even_divisions
             <BLANKLINE>
-                                % [ViolinMusicVoice measure 3]                                       %! _comment_measure_numbers
+                                % [Violin_Music_Voice measure 3]                                     %! _comment_measure_numbers
                                 e'8                                                                  %! baca_make_even_divisions
                                 [                                                                    %! baca_make_even_divisions
             <BLANKLINE>
@@ -132,7 +132,7 @@ class BreakMeasureMap(abjad.AbjadObject):
                                 e'8                                                                  %! baca_make_even_divisions
                                 ]                                                                    %! baca_make_even_divisions
             <BLANKLINE>
-                                % [ViolinMusicVoice measure 4]                                       %! _comment_measure_numbers
+                                % [Violin_Music_Voice measure 4]                                     %! _comment_measure_numbers
                                 e'8                                                                  %! baca_make_even_divisions
                                 [                                                                    %! baca_make_even_divisions
             <BLANKLINE>
@@ -141,7 +141,7 @@ class BreakMeasureMap(abjad.AbjadObject):
                                 e'8                                                                  %! baca_make_even_divisions
                                 ]                                                                    %! baca_make_even_divisions
             <BLANKLINE>
-                                % [ViolinMusicVoice measure 5]                                       %! _comment_measure_numbers
+                                % [Violin_Music_Voice measure 5]                                     %! _comment_measure_numbers
                                 e'8                                                                  %! baca_make_even_divisions
                                 [                                                                    %! baca_make_even_divisions
             <BLANKLINE>
@@ -157,13 +157,13 @@ class BreakMeasureMap(abjad.AbjadObject):
                         }                                                                            %! StringTrioScoreTemplate
             <BLANKLINE>
                         \tag Viola                                                                   %! ScoreTemplate(5)
-                        \context ViolaMusicStaff = "ViolaMusicStaff"                                 %! StringTrioScoreTemplate
+                        \context ViolaMusicStaff = "Viola_Music_Staff"                               %! StringTrioScoreTemplate
                         {                                                                            %! StringTrioScoreTemplate
             <BLANKLINE>
-                            \context ViolaMusicVoice = "ViolaMusicVoice"                             %! StringTrioScoreTemplate
+                            \context ViolaMusicVoice = "Viola_Music_Voice"                           %! StringTrioScoreTemplate
                             {                                                                        %! StringTrioScoreTemplate
             <BLANKLINE>
-                                % [ViolaMusicVoice measure 1]                                        %! _comment_measure_numbers
+                                % [Viola_Music_Voice measure 1]                                      %! _comment_measure_numbers
                                 \clef "alto"                                                         %! DEFAULT_CLEF:_set_status_tag:attach_defaults
                                 \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                             %@% \override ViolaMusicStaff.Clef.color = ##f                           %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
@@ -172,16 +172,16 @@ class BreakMeasureMap(abjad.AbjadObject):
                                 ^ \baca-default-indicator-markup "(Viola)"                           %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                 \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
-                                % [ViolaMusicVoice measure 2]                                        %! _comment_measure_numbers
+                                % [Viola_Music_Voice measure 2]                                      %! _comment_measure_numbers
                                 R1 * 3/8                                                             %! _call_rhythm_commands
             <BLANKLINE>
-                                % [ViolaMusicVoice measure 3]                                        %! _comment_measure_numbers
+                                % [Viola_Music_Voice measure 3]                                      %! _comment_measure_numbers
                                 R1 * 1/2                                                             %! _call_rhythm_commands
             <BLANKLINE>
-                                % [ViolaMusicVoice measure 4]                                        %! _comment_measure_numbers
+                                % [Viola_Music_Voice measure 4]                                      %! _comment_measure_numbers
                                 R1 * 3/8                                                             %! _call_rhythm_commands
             <BLANKLINE>
-                                % [ViolaMusicVoice measure 5]                                        %! _comment_measure_numbers
+                                % [Viola_Music_Voice measure 5]                                      %! _comment_measure_numbers
                                 R1 * 1/2                                                             %! _call_rhythm_commands
             <BLANKLINE>
                             }                                                                        %! StringTrioScoreTemplate
@@ -189,13 +189,13 @@ class BreakMeasureMap(abjad.AbjadObject):
                         }                                                                            %! StringTrioScoreTemplate
             <BLANKLINE>
                         \tag Cello                                                                   %! ScoreTemplate(5)
-                        \context CelloMusicStaff = "CelloMusicStaff"                                 %! StringTrioScoreTemplate
+                        \context CelloMusicStaff = "Cello_Music_Staff"                               %! StringTrioScoreTemplate
                         {                                                                            %! StringTrioScoreTemplate
             <BLANKLINE>
-                            \context CelloMusicVoice = "CelloMusicVoice"                             %! StringTrioScoreTemplate
+                            \context CelloMusicVoice = "Cello_Music_Voice"                           %! StringTrioScoreTemplate
                             {                                                                        %! StringTrioScoreTemplate
             <BLANKLINE>
-                                % [CelloMusicVoice measure 1]                                        %! _comment_measure_numbers
+                                % [Cello_Music_Voice measure 1]                                      %! _comment_measure_numbers
                                 \clef "bass"                                                         %! DEFAULT_CLEF:_set_status_tag:attach_defaults
                                 \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                             %@% \override CelloMusicStaff.Clef.color = ##f                           %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
@@ -204,16 +204,16 @@ class BreakMeasureMap(abjad.AbjadObject):
                                 ^ \baca-default-indicator-markup "(Cello)"                           %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                 \override CelloMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
-                                % [CelloMusicVoice measure 2]                                        %! _comment_measure_numbers
+                                % [Cello_Music_Voice measure 2]                                      %! _comment_measure_numbers
                                 R1 * 3/8                                                             %! _call_rhythm_commands
             <BLANKLINE>
-                                % [CelloMusicVoice measure 3]                                        %! _comment_measure_numbers
+                                % [Cello_Music_Voice measure 3]                                      %! _comment_measure_numbers
                                 R1 * 1/2                                                             %! _call_rhythm_commands
             <BLANKLINE>
-                                % [CelloMusicVoice measure 4]                                        %! _comment_measure_numbers
+                                % [Cello_Music_Voice measure 4]                                      %! _comment_measure_numbers
                                 R1 * 3/8                                                             %! _call_rhythm_commands
             <BLANKLINE>
-                                % [CelloMusicVoice measure 5]                                        %! _comment_measure_numbers
+                                % [Cello_Music_Voice measure 5]                                      %! _comment_measure_numbers
                                 R1 * 1/2                                                             %! _call_rhythm_commands
             <BLANKLINE>
                             }                                                                        %! StringTrioScoreTemplate
@@ -399,7 +399,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 F4'),
         ...     )
@@ -414,28 +414,28 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \time 8/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \time 2/4                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \time 1/2                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
@@ -446,16 +446,16 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             e'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -466,7 +466,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             f'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             e'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -477,7 +477,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             f'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             e'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -488,7 +488,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             f'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             e'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -518,7 +518,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 F4'),
         ...     )
@@ -533,31 +533,31 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #8                                              %! HorizontalSpacingSpecifier(1):SPACING
                         \time 8/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #8                                              %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #8                                              %! HorizontalSpacingSpecifier(1):SPACING
                         \time 2/4                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #8                                              %! HorizontalSpacingSpecifier(1):SPACING
                         \time 1/2                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -569,16 +569,16 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             e'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -589,7 +589,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             f'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             e'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -600,7 +600,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             f'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             e'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -611,7 +611,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             f'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             e'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -643,7 +643,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 F4'),
         ...     )
@@ -658,31 +658,31 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #8                                              %! HorizontalSpacingSpecifier(1):SPACING
                         \time 8/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #8                                              %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #8                                              %! HorizontalSpacingSpecifier(1):SPACING
                         \time 2/4                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #8                                              %! HorizontalSpacingSpecifier(1):SPACING
                         \time 1/2                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -694,16 +694,16 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             e'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -714,7 +714,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             f'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             e'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -725,7 +725,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             f'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             e'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -736,7 +736,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             f'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             e'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -769,7 +769,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 F4'),
         ...     )
@@ -784,31 +784,31 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 8/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 2/4                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 1/2                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -820,16 +820,16 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             e'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -840,7 +840,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             f'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             e'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -851,7 +851,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             f'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             e'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -862,7 +862,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             f'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             e'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -896,7 +896,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 F4'),
         ...     )
@@ -911,31 +911,31 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 8/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 3]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 2/4                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 4]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 1/2                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -947,16 +947,16 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
-                            % [MusicVoice measure 1]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             e'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -967,7 +967,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             f'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 2]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             e'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -978,7 +978,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             f'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 3]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             e'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -989,7 +989,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             f'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
-                            % [MusicVoice measure 4]                                                 %! _comment_measure_numbers
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             e'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -1021,7 +1021,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ...     )
 
         >>> maker(
-        ...     'MusicVoice',
+        ...     'Music_Voice',
         ...     baca.pitches('E4 F4'),
         ...     baca.RhythmCommand(
         ...         rhythm_maker=rmakers.AccelerandoRhythmMaker(
@@ -1050,19 +1050,19 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
             <<                                                                                       %! SingleStaffScoreTemplate
             <BLANKLINE>
-                \context GlobalContext = "GlobalContext"                                             %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
                 <<                                                                                   %! _make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "GlobalSkips"                                             %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
                     {                                                                                %! _make_global_context
             <BLANKLINE>
-                        % [GlobalSkips measure 1]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
-                        % [GlobalSkips measure 2]                                                    %! _comment_measure_numbers
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
@@ -1074,13 +1074,13 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             <BLANKLINE>
                 >>                                                                                   %! _make_global_context
             <BLANKLINE>
-                \context MusicContext = "MusicContext"                                               %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
                 <<                                                                                   %! SingleStaffScoreTemplate
             <BLANKLINE>
-                    \context Staff = "MusicStaff"                                                    %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
                     {                                                                                %! SingleStaffScoreTemplate
             <BLANKLINE>
-                        \context Voice = "MusicVoice"                                                %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
                         {                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
                             \override TupletNumber.text = \markup {
@@ -1124,7 +1124,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 }
                             \times 1/1 {
             <BLANKLINE>
-                                % [MusicVoice measure 1]                                             %! _comment_measure_numbers
+                                % [Music_Voice measure 1]                                            %! _comment_measure_numbers
                                 \once \override Beam.grow-direction = #right
                                 e'16 * 63/32
                                 [
@@ -1184,7 +1184,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 }
                             \times 1/1 {
             <BLANKLINE>
-                                % [MusicVoice measure 2]                                             %! _comment_measure_numbers
+                                % [Music_Voice measure 2]                                            %! _comment_measure_numbers
                                 \once \override Beam.grow-direction = #right
                                 e'16 * 117/64
                                 [
@@ -1288,7 +1288,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         Calls command on ``segment_maker``.
         """
         score = segment_maker.score
-        skips = classes.Selection(score['GlobalSkips']).skips()
+        skips = classes.Selection(score['Global_Skips']).skips()
         programmatic = True
         if self.measures and len(self.measures) == len(skips):
             programmatic = False
@@ -2204,7 +2204,7 @@ def breaks(
         ...     )
 
         >>> maker(
-        ...     'ViolinMusicVoice',
+        ...     'Violin_Music_Voice',
         ...     baca.make_even_divisions(),
         ...     baca.pitch('E4'),
         ...     )
