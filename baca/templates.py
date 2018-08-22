@@ -43,10 +43,13 @@ class ScoreTemplate(abjad.ScoreTemplate):
         for context in abjad.iterate(score).components(abjad.Context):
             if context.lilypond_type in abjad.Context.lilypond_types:
                 continue
-            if context.name != context.lilypond_type:
-                message = f'context {context.lilypond_type}'
-                message += f' has name {context.name!r}.'
-                raise Exception(message)
+            if context.name == context.lilypond_type:
+                continue
+            if context.name.replace('_', '') == context.lilypond_type:
+                continue
+            message = f'context {context.lilypond_type}'
+            message += f' has name {context.name!r}.'
+            raise Exception(message)
 
     @staticmethod
     def _assert_unique_context_names(score):
@@ -153,7 +156,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
             raise Exception(f'stem must be string: {stem!r}.')
         contexts = tuple(_ for _ in contexts if _ is not None)
         if contexts:
-            return abjad.StaffGroup(contexts, name=f'{stem}PianoStaff')
+            return abjad.StaffGroup(contexts, name=f'{stem}_Piano_Staff')
         else:
             return None
 
@@ -174,7 +177,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
             assert isinstance(contexts[0], prototype), repr(contexts[0])
             result = contexts[0]
         elif 1 < len(contexts):
-            name = f'{stem}SquareStaffGroup'
+            name = f'{stem}_Square_Staff_Group'
             staff_group = abjad.StaffGroup(
                 contexts,
                 name=name,
@@ -198,7 +201,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
         if contexts:
             return abjad.StaffGroup(
                 contexts,
-                name=f'{stem}StaffGroup',
+                name=f'{stem}_Staff_Group',
                 tag='make_staff_group',
                 )
         else:
