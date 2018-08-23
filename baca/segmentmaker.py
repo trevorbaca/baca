@@ -1381,22 +1381,22 @@ class SegmentMaker(abjad.SegmentMaker):
             measure_timespan = self._get_measure_timespan(measure_number)
             measure_timespans.append(measure_timespan)
         self._cache = abjad.OrderedDict()
-        contexts = [self.score['Global_Skips']]
-        if 'Global_Rests' in self.score:
-            contexts.append(self.score['Global_Rests'])
-        contexts.extend(abjad.select(self.score).components(abjad.Voice))
-        for context in contexts:
-            leaves_by_measure_number = abjad.OrderedDict()
-            self._cache[context.name] = leaves_by_measure_number
-            for measure_index in range(self.measure_count):
-                measure_number = measure_index + 1
-                leaves_by_measure_number[measure_number] = []
-            for leaf in abjad.iterate(context).leaves():
-                leaf_timespan = abjad.inspect(leaf).timespan()
-                for i, measure_timespan in enumerate(measure_timespans):
-                    measure_number = i + 1
-                    if leaf_timespan.starts_during_timespan(measure_timespan):
-                        leaves_by_measure_number[measure_number].append(leaf)
+        for leaf in abjad.select(self.score).leaves():
+            context = abjad.inspect(leaf).parentage().get(abjad.Context)
+            leaves_by_measure_number = self._cache.setdefault(
+                context.name,
+                abjad.OrderedDict()
+                )
+            leaf_timespan = abjad.inspect(leaf).timespan()
+            # TODO: replace loop with bisection:
+            for i, measure_timespan in enumerate(measure_timespans):
+                measure_number = i + 1
+                if leaf_timespan.starts_during_timespan(measure_timespan):
+                    cached_leaves = leaves_by_measure_number.setdefault(
+                        measure_number,
+                        [],
+                        )
+                    cached_leaves.append(leaf)
 
     def _cache_previously_alive_contexts(self) -> None:
         if self.segment_directory is None:
@@ -2779,7 +2779,8 @@ class SegmentMaker(abjad.SegmentMaker):
             if stop < 0:
                 stop = self.measure_count - abs(stop) + 1
             for measure_number in range(start, stop):
-                leaves.extend(leaves_by_measure_number[measure_number])
+                leaves_ = leaves_by_measure_number.get(measure_number, [])
+                leaves.extend(leaves_)
             leaf_selections.append(abjad.select(leaves))
         return leaf_selections
 
