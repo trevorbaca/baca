@@ -567,7 +567,7 @@ def dynamic(
 
         >>> music_maker = baca.MusicMaker()
         >>> contribution = music_maker(
-        ...     'Voice 1',
+        ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.dynamic('f'),
         ...     baca.rests_around([2], [4]),
@@ -583,7 +583,7 @@ def dynamic(
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff
             <<
-                \context Voice = "Voice 1"
+                \context Voice = "Voice_1"
                 {
                     \voiceOne
                     {
@@ -631,7 +631,7 @@ def dynamic(
 
         >>> music_maker = baca.MusicMaker()
         >>> contribution = music_maker(
-        ...     'Voice 1',
+        ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.dynamic('f', selector=baca.tuplets()[1:2].phead(0)),
         ...     baca.rests_around([2], [4]),
@@ -647,7 +647,7 @@ def dynamic(
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff
             <<
-                \context Voice = "Voice 1"
+                \context Voice = "Voice_1"
                 {
                     \voiceOne
                     {
@@ -695,7 +695,7 @@ def dynamic(
 
         >>> music_maker = baca.MusicMaker()
         >>> contribution = music_maker(
-        ...     'Voice 1',
+        ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.dynamic('"f"'),
         ...     baca.rests_around([2], [4]),
@@ -711,7 +711,7 @@ def dynamic(
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff
             <<
-                \context Voice = "Voice 1"
+                \context Voice = "Voice_1"
                 {
                     \voiceOne
                     {

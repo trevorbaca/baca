@@ -23,7 +23,7 @@ class SpannerCommand(scoping.Command):
         ...     )
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> contribution = music_maker('Voice 1', collections)
+        >>> contribution = music_maker('Voice_1', collections)
         >>> lilypond_file = music_maker.show(contribution)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -32,7 +32,7 @@ class SpannerCommand(scoping.Command):
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff
             <<
-                \context Voice = "Voice 1"
+                \context Voice = "Voice_1"
                 {
                     \voiceOne
                     {
@@ -310,7 +310,7 @@ class SpannerCommand(scoping.Command):
             >>> music_maker = baca.MusicMaker(baca.slur())
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> contribution = music_maker('Voice 1', collections)
+            >>> contribution = music_maker('Voice_1', collections)
             >>> lilypond_file = music_maker.show(contribution)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -319,7 +319,7 @@ class SpannerCommand(scoping.Command):
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff
                 <<
-                    \context Voice = "Voice 1"
+                    \context Voice = "Voice_1"
                     {
                         \voiceOne
                         {
@@ -366,7 +366,7 @@ class SpannerCommand(scoping.Command):
             >>> music_maker = baca.MusicMaker()
 
             >>> contribution = music_maker(
-            ...     'Voice 1',
+            ...     'Voice_1',
             ...     [[14, 14, 14]],
             ...     counts=[5],
             ...     )
@@ -378,7 +378,7 @@ class SpannerCommand(scoping.Command):
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff
                 <<
-                    \context Voice = "Voice 1"
+                    \context Voice = "Voice_1"
                     {
                         \voiceOne
                         {
@@ -398,7 +398,7 @@ class SpannerCommand(scoping.Command):
                 >>
 
             >>> contribution = music_maker(
-            ...     'Voice 1',
+            ...     'Voice_1',
             ...     [[14, 14, 14]],
             ...     baca.SpannerCommand(spanner=abjad.Tie()),
             ...     counts=[5],
@@ -411,7 +411,7 @@ class SpannerCommand(scoping.Command):
                 >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff
                 <<
-                    \context Voice = "Voice 1"
+                    \context Voice = "Voice_1"
                     {
                         \voiceOne
                         {
@@ -973,7 +973,7 @@ def glissando(
 
         >>> music_maker = baca.MusicMaker()
         >>> contribution = music_maker(
-        ...     'Voice 1',
+        ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.new(
         ...         baca.glissando(),
@@ -992,7 +992,7 @@ def glissando(
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff
             <<
-                \context Voice = "Voice 1"
+                \context Voice = "Voice_1"
                 {
                     \voiceOne
                     {
@@ -1065,7 +1065,7 @@ def ottava(
 
         >>> music_maker = baca.MusicMaker()
         >>> contribution = music_maker(
-        ...     'Voice 1',
+        ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.ottava(),
         ...     baca.rests_around([2], [4]),
@@ -1081,7 +1081,7 @@ def ottava(
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff
             <<
-                \context Voice = "Voice 1"
+                \context Voice = "Voice_1"
                 {
                     \voiceOne
                     {
@@ -1145,7 +1145,7 @@ def ottava_bassa(
 
         >>> music_maker = baca.MusicMaker()
         >>> contribution = music_maker(
-        ...     'Voice 1',
+        ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.ottava_bassa(),
         ...     baca.rests_around([2], [4]),
@@ -1161,7 +1161,7 @@ def ottava_bassa(
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff
             <<
-                \context Voice = "Voice 1"
+                \context Voice = "Voice_1"
                 {
                     \voiceOne
                     {
@@ -1225,7 +1225,7 @@ def repeat_tie(
 
         >>> music_maker = baca.MusicMaker()
         >>> contribution = music_maker(
-        ...     'Voice 1',
+        ...     'Voice_1',
         ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
         ...     baca.new(
         ...         baca.repeat_tie(),
@@ -1244,7 +1244,7 @@ def repeat_tie(
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff
             <<
-                \context Voice = "Voice 1"
+                \context Voice = "Voice_1"
                 {
                     \voiceOne
                     {
@@ -1322,7 +1322,7 @@ def slur(
 
         >>> music_maker = baca.MusicMaker()
         >>> contribution = music_maker(
-        ...     'Voice 1',
+        ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.slur(),
         ...     baca.slur_down(),
@@ -1339,7 +1339,7 @@ def slur(
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff
             <<
-                \context Voice = "Voice 1"
+                \context Voice = "Voice_1"
                 {
                     \voiceOne
                     {
@@ -1390,7 +1390,7 @@ def slur(
 
         >>> music_maker = baca.MusicMaker()
         >>> contribution = music_maker(
-        ...     'Voice 1',
+        ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.new(
         ...         baca.slur(),
@@ -1410,7 +1410,7 @@ def slur(
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff
             <<
-                \context Voice = "Voice 1"
+                \context Voice = "Voice_1"
                 {
                     \voiceOne
                     {
@@ -1477,7 +1477,7 @@ def sustain_pedal(
 
         >>> music_maker = baca.MusicMaker()
         >>> contribution = music_maker(
-        ...     'Voice 1',
+        ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.rests_around([2], [4]),
         ...     baca.sustain_pedal(),
@@ -1494,7 +1494,7 @@ def sustain_pedal(
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff
             <<
-                \context Voice = "Voice 1"
+                \context Voice = "Voice_1"
                 {
                     \voiceOne
                     {
@@ -1546,7 +1546,7 @@ def sustain_pedal(
 
         >>> music_maker = baca.MusicMaker()
         >>> contribution = music_maker(
-        ...     'Voice 1',
+        ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.rests_around([2], [4]),
         ...     baca.new(
@@ -1566,7 +1566,7 @@ def sustain_pedal(
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff
             <<
-                \context Voice = "Voice 1"
+                \context Voice = "Voice_1"
                 {
                     \voiceOne
                     {
@@ -1618,7 +1618,7 @@ def sustain_pedal(
 
         >>> music_maker = baca.MusicMaker()
         >>> contribution = music_maker(
-        ...     'Voice 1',
+        ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.rests_around([2], [4]),
         ...     baca.new(
@@ -1638,7 +1638,7 @@ def sustain_pedal(
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff
             <<
-                \context Voice = "Voice 1"
+                \context Voice = "Voice_1"
                 {
                     \voiceOne
                     {
@@ -1690,7 +1690,7 @@ def sustain_pedal(
 
         >>> music_maker = baca.MusicMaker()
         >>> contribution = music_maker(
-        ...     'Voice 1',
+        ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.rests_around([2], [4]),
         ...     baca.new(
@@ -1710,7 +1710,7 @@ def sustain_pedal(
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff
             <<
-                \context Voice = "Voice 1"
+                \context Voice = "Voice_1"
                 {
                     \voiceOne
                     {
@@ -1762,7 +1762,7 @@ def sustain_pedal(
 
         >>> music_maker = baca.MusicMaker()
         >>> contribution = music_maker(
-        ...     'Voice 1',
+        ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.rests_around([2], [4]),
         ...     baca.new(
@@ -1782,7 +1782,7 @@ def sustain_pedal(
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff
             <<
-                \context Voice = "Voice 1"
+                \context Voice = "Voice_1"
                 {
                     \voiceOne
                     {
@@ -1834,7 +1834,7 @@ def sustain_pedal(
 
         >>> music_maker = baca.MusicMaker()
         >>> contribution = music_maker(
-        ...     'Voice 1',
+        ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.rests_around([2], [4]),
         ...     baca.new(
@@ -1854,7 +1854,7 @@ def sustain_pedal(
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff
             <<
-                \context Voice = "Voice 1"
+                \context Voice = "Voice_1"
                 {
                     \voiceOne
                     {
@@ -1912,7 +1912,7 @@ def sustain_pedal(
 
         >>> music_maker = baca.MusicMaker()
         >>> contribution = music_maker(
-        ...     'Voice 1',
+        ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.rests_around([2], [4]),
         ...     baca.new(
@@ -1932,7 +1932,7 @@ def sustain_pedal(
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff
             <<
-                \context Voice = "Voice 1"
+                \context Voice = "Voice_1"
                 {
                     \voiceOne
                     {
@@ -1990,7 +1990,7 @@ def sustain_pedal(
 
         >>> music_maker = baca.MusicMaker()
         >>> contribution = music_maker(
-        ...     'Voice 1',
+        ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.rests_around([2], [4]),
         ...     baca.new(
@@ -2010,7 +2010,7 @@ def sustain_pedal(
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff
             <<
-                \context Voice = "Voice 1"
+                \context Voice = "Voice_1"
                 {
                     \voiceOne
                     {
@@ -2088,7 +2088,7 @@ def tie(
 
         >>> music_maker = baca.MusicMaker()
         >>> contribution = music_maker(
-        ...     'Voice 1',
+        ...     'Voice_1',
         ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
         ...     baca.new(
         ...         baca.tie(),
@@ -2107,7 +2107,7 @@ def tie(
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff
             <<
-                \context Voice = "Voice 1"
+                \context Voice = "Voice_1"
                 {
                     \voiceOne
                     {
@@ -2156,7 +2156,7 @@ def tie(
 
         >>> music_maker = baca.MusicMaker()
         >>> contribution = music_maker(
-        ...     'Voice 1',
+        ...     'Voice_1',
         ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
         ...     baca.new(
         ...         baca.tie(repeat=(1, 8)),
@@ -2175,7 +2175,7 @@ def tie(
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff
             <<
-                \context Voice = "Voice 1"
+                \context Voice = "Voice_1"
                 {
                     \voiceOne
                     {
@@ -2257,7 +2257,7 @@ def trill_spanner(
 
         >>> music_maker = baca.MusicMaker()
         >>> contribution = music_maker(
-        ...     'Voice 1',
+        ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.rests_around([2], [4]),
         ...     baca.trill_spanner(),
@@ -2273,7 +2273,7 @@ def trill_spanner(
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff
             <<
-                \context Voice = "Voice 1"
+                \context Voice = "Voice_1"
                 {
                     \voiceOne
                     {
@@ -2323,7 +2323,7 @@ def trill_spanner(
 
         >>> music_maker = baca.MusicMaker()
         >>> contribution = music_maker(
-        ...     'Voice 1',
+        ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.new(
         ...         baca.trill_spanner(),
@@ -2342,7 +2342,7 @@ def trill_spanner(
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff
             <<
-                \context Voice = "Voice 1"
+                \context Voice = "Voice_1"
                 {
                     \voiceOne
                     {
@@ -2408,7 +2408,7 @@ def trill_spanner(
 
         >>> music_maker = baca.MusicMaker()
         >>> contribution = music_maker(
-        ...     'Voice 1',
+        ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.new(
         ...         baca.trill_spanner(),
@@ -2427,7 +2427,7 @@ def trill_spanner(
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff
             <<
-                \context Voice = "Voice 1"
+                \context Voice = "Voice_1"
                 {
                     \voiceOne
                     {
@@ -2481,7 +2481,7 @@ def trill_spanner(
 
         >>> music_maker = baca.MusicMaker()
         >>> contribution = music_maker(
-        ...     'Voice 1',
+        ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.rests_around([2], [4]),
         ...     baca.new(
@@ -2500,7 +2500,7 @@ def trill_spanner(
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff
             <<
-                \context Voice = "Voice 1"
+                \context Voice = "Voice_1"
                 {
                     \voiceOne
                     {
@@ -2551,7 +2551,7 @@ def trill_spanner(
 
         >>> music_maker = baca.MusicMaker()
         >>> contribution = music_maker(
-        ...     'Voice 1',
+        ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.new(
         ...         baca.trill_spanner(string='Eb4'),
@@ -2570,7 +2570,7 @@ def trill_spanner(
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff
             <<
-                \context Voice = "Voice 1"
+                \context Voice = "Voice_1"
                 {
                     \voiceOne
                     {
@@ -2645,7 +2645,7 @@ def trill_spanner(
 
         >>> music_maker = baca.MusicMaker()
         >>> contribution = music_maker(
-        ...     'Voice 1',
+        ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.new(
         ...         baca.trill_spanner(string='M2'),
@@ -2664,7 +2664,7 @@ def trill_spanner(
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff
             <<
-                \context Voice = "Voice 1"
+                \context Voice = "Voice_1"
                 {
                     \voiceOne
                     {
