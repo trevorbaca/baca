@@ -155,8 +155,8 @@ class TimelineScope(abjad.AbjadObject):
                 return -1
             if start_offset_2 < start_offset_1:
                 return 1
-            index_1 = abjad.inspect(leaf_1).parentage().score_index
-            index_2 = abjad.inspect(leaf_2).parentage().score_index
+            index_1 = abjad.inspect(leaf_1).parentage().score_index()
+            index_2 = abjad.inspect(leaf_2).parentage().score_index()
             if index_1 < index_2:
                 return -1
             if index_2 < index_1:
