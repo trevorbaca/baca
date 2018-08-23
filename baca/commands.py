@@ -1792,8 +1792,7 @@ class InstrumentChangeCommand(IndicatorCommand):
             return
         first_leaf = abjad.inspect(argument).leaf(0)
         if first_leaf is not None:
-            parentage = abjad.inspect(first_leaf).parentage()
-            staff = parentage.get_first(abjad.Staff)
+            staff = abjad.inspect(first_leaf).parentage().get(abjad.Staff)
             instrument = self.indicators[0]
             assert isinstance(instrument, abjad.Instrument), repr(instrument)
             if not self.runtime['score_template'].allows_instrument(
@@ -2217,8 +2216,7 @@ class PartAssignmentCommand(scoping.Command):
         first_leaf = abjad.inspect(argument).leaf(0)
         if first_leaf is None:
             return
-        parentage = abjad.inspect(first_leaf).parentage()
-        voice = parentage.get_first(abjad.Voice)
+        voice = abjad.inspect(first_leaf).parentage().get(abjad.Voice)
         if voice is not None and self.part_assignment is not None:
             if not self.runtime['score_template'].allows_part_assignment(
                 voice.name,

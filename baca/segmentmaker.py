@@ -1526,7 +1526,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for leaf in abjad.iterate(self.score).leaves():
             dynamics = abjad.inspect(leaf).wrappers(abjad.Dynamic)
             if 1 < len(dynamics):
-                voice = abjad.inspect(leaf).parentage().get_first(abjad.Voice)
+                voice = abjad.inspect(leaf).parentage().get(abjad.Voice)
                 message = f'leaf {str(leaf)} in {voice.name} has'
                 message += f' {len(dynamics)} dynamics attached.'
                 raise Exception(message)
@@ -1677,8 +1677,7 @@ class SegmentMaker(abjad.SegmentMaker):
             dictionary = context._get_persistent_wrappers()
             for wrapper in dictionary.values():
                 leaf = wrapper.component
-                parentage = abjad.inspect(leaf).parentage()
-                first_context = parentage.get_first(abjad.Context)
+                first_context = abjad.inspect(leaf).parentage().get(abjad.Context)
                 indicator = wrapper.indicator
                 if isinstance(indicator, abjad.StopTextSpan):
                     continue
@@ -2529,8 +2528,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     should_parallelize = True
             if not should_parallelize:
                 continue
-            parentage = abjad.inspect(previous).parentage()
-            voice = parentage.get_first(abjad.Voice)
+            voice = abjad.inspect(previous).parentage().get(abjad.Voice)
             multiplier = abjad.inspect(mmrest).indicator(abjad.Multiplier)
             container = abjad.Container(
                 is_simultaneous=True,
