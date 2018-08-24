@@ -938,17 +938,14 @@ class SegmentMaker(abjad.SegmentMaker):
             wrapper,
             status,
             existing_deactivate=wrapper.deactivate,
-            existing_tag=existing_tag,
             cancelation=True,
             )
 
-    # TODO: remove existing_tag
     @staticmethod
     def _attach_color_literal(
         wrapper,
         status,
         existing_deactivate=None,
-        existing_tag=None,
         redraw=False,
         cancelation=False,
         ):
@@ -963,8 +960,6 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         if isinstance(wrapper.indicator, abjad.PersistentOverride):
             return
-        if existing_tag is not None:
-            assert isinstance(existing_tag, abjad.Tag), repr(existing_tag)
         stem = abjad.String.to_indicator_stem(wrapper.indicator)
         grob = SegmentMaker._indicator_to_grob(wrapper.indicator)
         context = wrapper._find_correct_effective_context()
@@ -1043,7 +1038,6 @@ class SegmentMaker(abjad.SegmentMaker):
             wrapper,
             status,
             existing_deactivate=wrapper.deactivate,
-            existing_tag=existing_tag,
             redraw=True,
             )
 
@@ -1100,19 +1094,15 @@ class SegmentMaker(abjad.SegmentMaker):
                 'default',
                 )
 
-    # TODO: remove existing_tag
     @staticmethod
     def _attach_latent_indicator_alert(
         manifests,
         wrapper,
         status,
         existing_deactivate=None,
-        existing_tag=None,
         ):
         if not getattr(wrapper.indicator, 'latent', False):
             return
-        if existing_tag is not None:
-            assert isinstance(existing_tag, abjad.Tag), repr(existing_tag)
         leaf = wrapper.component
         indicator = wrapper.indicator
         assert indicator.latent, repr(indicator)
@@ -2959,14 +2949,12 @@ class SegmentMaker(abjad.SegmentMaker):
             wrapper,
             status,
             existing_deactivate=wrapper.deactivate,
-            existing_tag=existing_tag,
             )
         SegmentMaker._attach_latent_indicator_alert(
             manifests,
             wrapper,
             status,
             existing_deactivate=wrapper.deactivate,
-            existing_tag=existing_tag,
             )
         SegmentMaker._attach_color_cancelation_literal(
             wrapper,
