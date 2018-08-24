@@ -125,6 +125,7 @@ baca-invisible-music = #(
     (parser location music)
     (ly:music?)
     #{
+    \once \override Accidental.transparent = ##t
     \once \override Dots.transparent = ##t
     \once \override NoteHead.no-ledgers = ##t
     \once \override NoteHead.transparent = ##t

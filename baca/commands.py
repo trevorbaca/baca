@@ -2216,7 +2216,7 @@ class PartAssignmentCommand(scoping.Command):
         first_leaf = abjad.inspect(argument).leaf(0)
         if first_leaf is None:
             return
-        voice = abjad.inspect(first_leaf).parentage().get(abjad.Voice)
+        voice = abjad.inspect(first_leaf).parentage().get(abjad.Voice, -1)
         if voice is not None and self.part_assignment is not None:
             if not self.runtime['score_template'].allows_part_assignment(
                 voice.name,
@@ -3095,8 +3095,26 @@ def cross_staff(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                % [Viola_Music_Voice measure 2]                                      %! _comment_measure_numbers
-                                R1 * 1/8                                                             %! _make_measure_silences
+                                <<                                                                   %! _make_multimeasure_rest_container
+            <BLANKLINE>
+                                    \context Voice = "Viola_Music_Voice"                             %! _make_multimeasure_rest_container
+                                    {                                                                %! _make_multimeasure_rest_container
+            <BLANKLINE>
+                                        % [Viola_Music_Voice measure 2]                              %! _comment_measure_numbers
+                                        \baca-invisible-music                                        %! _make_multimeasure_rest_container
+                                        c'1 * 1/8                                                    %! _make_multimeasure_rest_container
+            <BLANKLINE>
+                                    }                                                                %! _make_multimeasure_rest_container
+            <BLANKLINE>
+                                    \context Voice = "Viola_Rest_Voice"                              %! _make_multimeasure_rest_container
+                                    {                                                                %! _make_multimeasure_rest_container
+            <BLANKLINE>
+                                        % [Viola_Rest_Voice measure 2]                               %! _comment_measure_numbers
+                                        R1 * 1/8                                                     %! _make_multimeasure_rest_container
+            <BLANKLINE>
+                                    }                                                                %! _make_multimeasure_rest_container
+            <BLANKLINE>
+                                >>                                                                   %! _make_multimeasure_rest_container
             <BLANKLINE>
                             }                                                                        %! StringTrioScoreTemplate
             <BLANKLINE>
@@ -3303,8 +3321,26 @@ def cross_staff(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                % [Viola_Music_Voice measure 2]                                      %! _comment_measure_numbers
-                                R1 * 1/8                                                             %! _make_measure_silences
+                                <<                                                                   %! _make_multimeasure_rest_container
+            <BLANKLINE>
+                                    \context Voice = "Viola_Music_Voice"                             %! _make_multimeasure_rest_container
+                                    {                                                                %! _make_multimeasure_rest_container
+            <BLANKLINE>
+                                        % [Viola_Music_Voice measure 2]                              %! _comment_measure_numbers
+                                        \baca-invisible-music                                        %! _make_multimeasure_rest_container
+                                        c'1 * 1/8                                                    %! _make_multimeasure_rest_container
+            <BLANKLINE>
+                                    }                                                                %! _make_multimeasure_rest_container
+            <BLANKLINE>
+                                    \context Voice = "Viola_Rest_Voice"                              %! _make_multimeasure_rest_container
+                                    {                                                                %! _make_multimeasure_rest_container
+            <BLANKLINE>
+                                        % [Viola_Rest_Voice measure 2]                               %! _comment_measure_numbers
+                                        R1 * 1/8                                                     %! _make_multimeasure_rest_container
+            <BLANKLINE>
+                                    }                                                                %! _make_multimeasure_rest_container
+            <BLANKLINE>
+                                >>                                                                   %! _make_multimeasure_rest_container
             <BLANKLINE>
                             }                                                                        %! StringTrioScoreTemplate
             <BLANKLINE>
@@ -4407,6 +4443,7 @@ def parts(
         raise Exception(message)
     return PartAssignmentCommand(
         part_assignment=part_assignment,
+        selector=selector,
         )
 
 def one_voice(
@@ -4758,8 +4795,26 @@ def volta(
                             f'8
                             ]
             <BLANKLINE>
-                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
-                            R1 * 3/8                                                                 %! _make_measure_silences
+                            <<                                                                       %! _make_multimeasure_rest_container
+            <BLANKLINE>
+                                \context Voice = "Music_Voice"                                       %! _make_multimeasure_rest_container
+                                {                                                                    %! _make_multimeasure_rest_container
+            <BLANKLINE>
+                                    % [Music_Voice measure 4]                                        %! _comment_measure_numbers
+                                    \baca-invisible-music                                            %! _make_multimeasure_rest_container
+                                    c'1 * 3/8                                                        %! _make_multimeasure_rest_container
+            <BLANKLINE>
+                                }                                                                    %! _make_multimeasure_rest_container
+            <BLANKLINE>
+                                \context Voice = "Rest_Voice"                                        %! _make_multimeasure_rest_container
+                                {                                                                    %! _make_multimeasure_rest_container
+            <BLANKLINE>
+                                    % [Rest_Voice measure 4]                                         %! _comment_measure_numbers
+                                    R1 * 3/8                                                         %! _make_multimeasure_rest_container
+            <BLANKLINE>
+                                }                                                                    %! _make_multimeasure_rest_container
+            <BLANKLINE>
+                            >>                                                                       %! _make_multimeasure_rest_container
             <BLANKLINE>
                         }                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>

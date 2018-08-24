@@ -8,6 +8,7 @@ import typing
 from abjadext import rmakers
 from . import classes
 from . import commands as baca_commands
+from . import enums
 from . import indicators
 from . import markups
 from . import overrides as baca_overrides
@@ -793,7 +794,11 @@ class SegmentMaker(abjad.SegmentMaker):
         if isinstance(previous_indicator, indicators.SpacingSection):
             return
         if momento.context in self.score:
-            momento_context = self.score[momento.context]
+            #momento_context = self.score[momento.context]
+            for context in abjad.iterate(self.score).components(abjad.Context):
+                if context.name == momento.context:
+                    momento_context = context
+                    break
         else:
             # context alive in previous segment doesn't exist in this segment
             return
@@ -1420,6 +1425,11 @@ class SegmentMaker(abjad.SegmentMaker):
         for voice in abjad.iterate(score).components(abjad.Voice):
             if voice.name is not None:
                 voice_names.append(voice.name)
+                if 'Music_Voice' in voice.name:
+                    name = voice.name.replace('Music_Voice', 'Rest_Voice')
+                else:
+                    name = voice.name.replace('Voice', 'Rest_Voice')
+                    voice_names.append(name)
         voice_names_ = tuple(voice_names)
         self._voice_names = voice_names_
 
@@ -1453,7 +1463,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._attach_fermatas()
         command_count = 0
         tag = '_call_rhythm_commands'
-        for voice in abjad.iterate(self.score).components(abjad.Voice):
+        for voice in abjad.select(self.score).components(abjad.Voice):
             assert not len(voice), repr(voice)
             voice_metadata = self._voice_metadata.get(
                 voice.name,
@@ -1501,7 +1511,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._voice_metadata[voice.name] = voice_metadata
             rhythms.sort()
             self._assert_nonoverlapping_rhythms(rhythms, voice.name)
-            rhythms = self._intercalate_silences(rhythms)
+            rhythms = self._intercalate_silences(rhythms, voice.name)
             voice.extend(rhythms)
             self._apply_first_and_last_ties(voice)
         return command_count
@@ -1510,9 +1520,14 @@ class SegmentMaker(abjad.SegmentMaker):
         name = 'all_music_in_part_containers'
         if getattr(self.score_template, name, None) is not True:
             return
+        annotation = enums.MULTIMEASURE_REST_CONTAINER
         for voice in abjad.iterate(self.score).components(abjad.Voice):
             for component in voice:
                 if isinstance(component, (abjad.MultimeasureRest, abjad.Skip)):
+                    continue
+                if abjad.inspect(component).annotation(enums.HIDDEN) is True:
+                    continue
+                if abjad.inspect(component).annotation(annotation) is True:
                     continue
                 if (type(component) is abjad.Container and
                     component.identifier and
@@ -1572,6 +1587,8 @@ class SegmentMaker(abjad.SegmentMaker):
         tag = abjad.tags.ALLOW_OUT_OF_RANGE
         for voice in abjad.iterate(self.score).components(abjad.Voice):
             for pleaf in abjad.iterate(voice).leaves(pitched=True):
+                if abjad.inspect(pleaf).annotation(enums.HIDDEN):
+                    continue
                 instrument = abjad.inspect(pleaf).effective(
                     abjad.Instrument
                     )
@@ -1604,7 +1621,8 @@ class SegmentMaker(abjad.SegmentMaker):
     def _collect_alive_during_segment(self):
         result = []
         for context in abjad.iterate(self.score).components(abjad.Context):
-            result.append(context.name)
+            if context.name not in result:
+                result.append(context.name)
         return result
 
     def _collect_first_appearance_margin_markup(self):
@@ -1633,8 +1651,8 @@ class SegmentMaker(abjad.SegmentMaker):
         metadata = abjad.OrderedDict()
         metadata['alive_during_segment'] = self._collect_alive_during_segment()
         if self._container_to_part_assignment:
-            metadata['container_to_part_assignment'] = \
-                self._container_to_part_assignment
+            value = self._container_to_part_assignment
+            metadata['container_to_part_assignment'] = value
         if self._duration is not None:
             metadata['duration'] = self._duration
         if self._fermata_measure_numbers:
@@ -1646,8 +1664,8 @@ class SegmentMaker(abjad.SegmentMaker):
         metadata['last_measure_number'] = self._get_last_measure_number()
         if self._last_measure_is_fermata:
             metadata['last_measure_is_fermata'] = True
-        metadata['persistent_indicators'] = \
-            self._collect_persistent_indicators()
+        value = self._collect_persistent_indicators()
+        metadata['persistent_indicators'] = value
         if self.segment_name is not None:
             metadata['segment_name'] = self.segment_name
         metadata['segment_number'] = self._get_segment_number()
@@ -1731,6 +1749,8 @@ class SegmentMaker(abjad.SegmentMaker):
         for vertical_moment in vertical_moments:
             pleaves, pitches = [], []
             for leaf in vertical_moment.leaves:
+                if abjad.inspect(leaf).annotation(enums.HIDDEN) is True:
+                    continue
                 if abjad.inspect(leaf).has_indicator(
                     abjad.tags.STAFF_POSITION,
                     ):
@@ -1795,34 +1815,31 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.attach(literal, pleaf, tag='_color_unregistered_pitches')
 
     def _comment_measure_numbers(self):
-        contexts = []
-        contexts.extend(self.score['Global_Context'])
-        contexts.extend(abjad.iterate(self.score).components(abjad.Voice))
         first_measure_number = self._get_first_measure_number()
-        for context in contexts:
-            for leaf in abjad.iterate(context).leaves():
-                offset = abjad.inspect(leaf).timespan().start_offset
-                measure_number = self._offset_to_measure_number.get(
-                    offset,
-                    None,
-                    )
-                if measure_number is None:
-                    continue
-                local_measure_number = measure_number - first_measure_number
-                local_measure_number += 1
-                if self.segment_name :
-                    name = self.segment_name + ' '
-                else:
-                    name = ''
-                if self.first_segment or self.environment == 'docs':
-                    string = f'% [{name}{context.name}'
-                    string += f' measure {measure_number}]'
-                else:
-                    string = f'% [{name}{context.name}'
-                    string += f' measure {measure_number} /'
-                    string += f' measure {local_measure_number}]'
-                literal = abjad.LilyPondLiteral(string, 'absolute_before')
-                abjad.attach(literal, leaf, tag='_comment_measure_numbers')
+        for leaf in abjad.iterate(self.score).leaves():
+            offset = abjad.inspect(leaf).timespan().start_offset
+            measure_number = self._offset_to_measure_number.get(
+                offset,
+                None,
+                )
+            if measure_number is None:
+                continue
+            local_measure_number = measure_number - first_measure_number
+            local_measure_number += 1
+            if self.segment_name :
+                name = self.segment_name + ' '
+            else:
+                name = ''
+            context = abjad.inspect(leaf).parentage().get(abjad.Context)
+            if self.first_segment or self.environment == 'docs':
+                string = f'% [{name}{context.name}'
+                string += f' measure {measure_number}]'
+            else:
+                string = f'% [{name}{context.name}'
+                string += f' measure {measure_number} /'
+                string += f' measure {local_measure_number}]'
+            literal = abjad.LilyPondLiteral(string, 'absolute_before')
+            abjad.attach(literal, leaf, tag='_comment_measure_numbers')
 
     def _deactivate_tags(self, tags):
         if not tags:
@@ -1895,9 +1912,14 @@ class SegmentMaker(abjad.SegmentMaker):
     def _find_repeat_pitch_classes(argument):
         violators = []
         for voice in abjad.iterate(argument).components(abjad.Voice):
+            if abjad.inspect(voice).annotation(enums.INTERMITTENT) is True:
+                continue
             previous_lt, previous_pcs = None, []
             for lt in abjad.iterate(voice).logical_ties():
-                if isinstance(lt.head, abjad.Note):
+                inspection = abjad.inspect(lt.head)
+                if inspection.annotation(enums.HIDDEN) is True:
+                    written_pitches = []
+                elif isinstance(lt.head, abjad.Note):
                     written_pitches = [lt.head.written_pitch]
                 elif isinstance(lt.head, abjad.Chord):
                     written_pitches = lt.head.written_pitches
@@ -2180,7 +2202,7 @@ class SegmentMaker(abjad.SegmentMaker):
             time_signatures_ = None
         self._time_signatures = time_signatures_
 
-    def _intercalate_silences(self, rhythms):
+    def _intercalate_silences(self, rhythms, voice_name):
         result = []
         durations = [_.duration for _ in self.time_signatures]
         measure_start_offsets = abjad.mathtools.cumulative_sums(durations)
@@ -2196,6 +2218,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     previous_stop_offset,
                     start_offset,
                     measure_start_offsets,
+                    voice_name,
                     )
                 result.extend(silences)
             result.extend(rhythm.annotation)
@@ -2206,6 +2229,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 previous_stop_offset,
                 segment_duration,
                 measure_start_offsets,
+                voice_name,
                 )
             result.extend(silences)
         return result
@@ -2444,7 +2468,13 @@ class SegmentMaker(abjad.SegmentMaker):
             lilypond_file.score_block.items.append('')
         self._lilypond_file = lilypond_file
 
-    def _make_measure_silences(self, start, stop, measure_start_offsets):
+    def _make_measure_silences(
+        self,
+        start,
+        stop,
+        measure_start_offsets,
+        voice_name,
+        ):
         offsets = [start]
         for measure_start_offset in measure_start_offsets:
             if start < measure_start_offset < stop:
@@ -2452,16 +2482,22 @@ class SegmentMaker(abjad.SegmentMaker):
         offsets.append(stop)
         silences = []
         durations = abjad.mathtools.difference_series(offsets)
-        for duration in durations:
-            multiplier = abjad.Multiplier(duration)
-            if self.skips_instead_of_rests:
-                silence = abjad.Skip(1, tag='_make_measure_silences')
-            else:
-                silence = abjad.MultimeasureRest(
-                    1,
-                    tag='_make_measure_silences',
+        for i, duration in enumerate(durations):
+            if i == 0:
+                silence = self._make_multimeasure_rest_container(
+                    voice_name,
+                    duration,
                     )
-            abjad.attach(multiplier, silence, tag=None)
+            else:
+                multiplier = abjad.Multiplier(duration)
+                if self.skips_instead_of_rests:
+                    silence = abjad.Skip(1, tag='_make_measure_silences')
+                else:
+                    silence = abjad.MultimeasureRest(
+                        1,
+                        tag='_make_measure_silences',
+                        )
+                abjad.attach(multiplier, silence, tag=None)
             silences.append(silence)
         return silences
 
@@ -2472,6 +2508,36 @@ class SegmentMaker(abjad.SegmentMaker):
             first_measure_number = self._get_first_measure_number()
             if first_measure_number != 1:
                 abjad.setting(score).current_bar_number = first_measure_number
+
+    def _make_multimeasure_rest_container(self, voice_name, duration):
+        tag = '_make_multimeasure_rest_container'
+        multiplier = abjad.Multiplier(duration)
+        note = abjad.Note("c'1", tag=tag)
+        abjad.attach(multiplier, note, tag=None)
+        literal = abjad.LilyPondLiteral(r'\baca-invisible-music')
+        abjad.attach(literal, note, tag=tag)
+        abjad.annotate(note, enums.HIDDEN, True)
+        hidden_note_voice = abjad.Voice([note], name=voice_name, tag=tag)
+        abjad.annotate(hidden_note_voice, enums.HIDDEN_NOTE_VOICE, True)
+        abjad.annotate(hidden_note_voice, enums.INTERMITTENT, True)
+        if self.skips_instead_of_rests:
+            rest = abjad.Skip(1, tag=tag)
+        else:
+            rest = abjad.MultimeasureRest(1, tag=tag)
+        abjad.attach(multiplier, rest, tag=None)
+        if 'Music_Voice' in voice_name:
+            name = voice_name.replace('Music_Voice', 'Rest_Voice')
+        else:
+            name = voice_name.replace('Voice', 'Rest_Voice')
+        multimeasure_rest_voice = abjad.Voice([rest], name=name, tag=tag)
+        abjad.annotate(multimeasure_rest_voice, enums.INTERMITTENT, True)
+        container = abjad.Container(
+            [hidden_note_voice, multimeasure_rest_voice],
+            is_simultaneous=True,
+            tag=tag,
+            )
+        abjad.annotate(container, enums.MULTIMEASURE_REST_CONTAINER, True)
+        return container
 
     def _momento_to_indicator(self, momento):
         # for selector evaluation:
@@ -2500,88 +2566,6 @@ class SegmentMaker(abjad.SegmentMaker):
             except:
                 raise Exception(format(momento))
         return indicator
-
-    def _parallelize_multimeasure_rests(self):
-        prototype = abjad.MultimeasureRest
-        context = self.score['Music_Context']
-        for mmrest in abjad.iterate(context).components(prototype):
-            previous = abjad.inspect(mmrest).leaf(-1)
-            if previous is None:
-                continue
-            if isinstance(previous, prototype):
-                continue
-            should_parallelize = False
-            for wrapper in abjad.inspect(mmrest).wrappers(
-                abjad.StopTextSpan):
-                existing_tag = wrapper.tag
-                abjad.detach(wrapper, mmrest)
-                new_indicator = abjad.new(wrapper.indicator, leak=True)
-                string = '_parallelize_multimeasure_rests(1)'
-                abjad.attach(
-                    new_indicator,
-                    previous,
-                    tag=abjad.Tag(string).append(existing_tag),
-                    )
-            for indicator in abjad.inspect(previous).indicators(
-                abjad.StopTextSpan):
-                if indicator.leak is True:
-                    should_parallelize = True
-            if not should_parallelize:
-                continue
-            voice = abjad.inspect(previous).parentage().get(abjad.Voice)
-            multiplier = abjad.inspect(mmrest).indicator(abjad.Multiplier)
-            container = abjad.Container(
-                is_simultaneous=True,
-                tag='_parallelize_multimeasure_rests(2)',
-                )
-            literal = abjad.LilyPondLiteral('', format_slot='absolute_before')
-            abjad.attach(literal, container, tag=None)
-            string = rf'\voices "{voice.name}", "MultimeasureRestVoice"'
-            literal = abjad.LilyPondLiteral(string, format_slot='before')
-            abjad.attach(
-                literal,
-                container,
-                tag='_parallelize_multimeasure_rests(3)',
-                )
-            literal = abjad.LilyPondLiteral('', format_slot='closing')
-            abjad.attach(literal, container, tag=None)
-            note = abjad.Note(
-                "c'1",
-                tag='_parallelize_multimeasure_rests(4)',
-                )
-            literal = abjad.LilyPondLiteral('', format_slot='absolute_before')
-            abjad.attach(literal, note, tag=None)
-            literal = abjad.LilyPondLiteral(r'\baca-invisible-music')
-            abjad.attach(
-                literal,
-                note,
-                tag='_parallelize_multimeasure_rests(5)',
-                )
-            separator = r'\\'
-            rest = f'R1 * {str(multiplier)}'
-            lines = abjad.LilyPondLiteral(
-                [separator, rest],
-                format_slot='absolute_after',
-                )
-            abjad.attach(
-                lines,
-                note,
-                tag='_parallelize_multimeasure_rests(6)',
-                )
-            container.append(note)
-            tag = '_parallelize_multimeasure_rests(7)'
-            for wrapper in abjad.inspect(mmrest).wrappers():
-                existing_tag = wrapper.tag
-                abjad.detach(wrapper, mmrest)
-                if (isinstance(wrapper.indicator, abjad.LilyPondLiteral) and
-                    wrapper.indicator.argument == ''):
-                    continue
-                abjad.attach(
-                    wrapper,
-                    note,
-                    tag=existing_tag.append(tag),
-                    )
-            abjad.mutate([mmrest]).replace([container])
 
     def _populate_offset_to_measure_number(self):
         measure_number = self._get_first_measure_number()
@@ -2857,6 +2841,9 @@ class SegmentMaker(abjad.SegmentMaker):
             for leaf in abjad.iterate(staff).leaves():
                 start_offset = abjad.inspect(leaf).timespan().start_offset
                 if start_offset not in self._fermata_start_offsets:
+                    continue
+                voice = abjad.inspect(leaf).parentage().get(abjad.Voice)
+                if 'Rest_Voice' in voice.name:
                     continue
                 before = abjad.inspect(leaf).effective(prototype)
                 next_leaf = abjad.inspect(leaf).leaf(1)
@@ -3348,8 +3335,26 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
-                                    % [Violin_Music_Voice measure 2]                                     %! _comment_measure_numbers
-                                    R1 * 3/8                                                             %! _make_measure_silences
+                                    <<                                                                   %! _make_multimeasure_rest_container
+                <BLANKLINE>
+                                        \context Voice = "Violin_Music_Voice"                            %! _make_multimeasure_rest_container
+                                        {                                                                %! _make_multimeasure_rest_container
+                <BLANKLINE>
+                                            % [Violin_Music_Voice measure 2]                             %! _comment_measure_numbers
+                                            \baca-invisible-music                                        %! _make_multimeasure_rest_container
+                                            c'1 * 3/8                                                    %! _make_multimeasure_rest_container
+                <BLANKLINE>
+                                        }                                                                %! _make_multimeasure_rest_container
+                <BLANKLINE>
+                                        \context Voice = "Violin_Rest_Voice"                             %! _make_multimeasure_rest_container
+                                        {                                                                %! _make_multimeasure_rest_container
+                <BLANKLINE>
+                                            % [Violin_Rest_Voice measure 2]                              %! _comment_measure_numbers
+                                            R1 * 3/8                                                     %! _make_multimeasure_rest_container
+                <BLANKLINE>
+                                        }                                                                %! _make_multimeasure_rest_container
+                <BLANKLINE>
+                                    >>                                                                   %! _make_multimeasure_rest_container
                 <BLANKLINE>
                                 }                                                                        %! StringTrioScoreTemplate
                 <BLANKLINE>
@@ -3415,8 +3420,26 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
-                                    % [Cello_Music_Voice measure 2]                                      %! _comment_measure_numbers
-                                    R1 * 3/8                                                             %! _make_measure_silences
+                                    <<                                                                   %! _make_multimeasure_rest_container
+                <BLANKLINE>
+                                        \context Voice = "Cello_Music_Voice"                             %! _make_multimeasure_rest_container
+                                        {                                                                %! _make_multimeasure_rest_container
+                <BLANKLINE>
+                                            % [Cello_Music_Voice measure 2]                              %! _comment_measure_numbers
+                                            \baca-invisible-music                                        %! _make_multimeasure_rest_container
+                                            c'1 * 3/8                                                    %! _make_multimeasure_rest_container
+                <BLANKLINE>
+                                        }                                                                %! _make_multimeasure_rest_container
+                <BLANKLINE>
+                                        \context Voice = "Cello_Rest_Voice"                              %! _make_multimeasure_rest_container
+                                        {                                                                %! _make_multimeasure_rest_container
+                <BLANKLINE>
+                                            % [Cello_Rest_Voice measure 2]                               %! _comment_measure_numbers
+                                            R1 * 3/8                                                     %! _make_multimeasure_rest_container
+                <BLANKLINE>
+                                        }                                                                %! _make_multimeasure_rest_container
+                <BLANKLINE>
+                                    >>                                                                   %! _make_multimeasure_rest_container
                 <BLANKLINE>
                                 }                                                                        %! StringTrioScoreTemplate
                 <BLANKLINE>
@@ -3484,11 +3507,11 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> figures, time_signatures = [], []
             >>> for i, collections in enumerate(collection_lists):
             ...     contribution = music_maker(
-            ...         'Voice 1',
+            ...         'Voice_1',
             ...         collections,
             ...         baca.flags(),
             ...         )
-            ...     figures.append(contribution['Voice 1'])
+            ...     figures.append(contribution['Voice_1'])
             ...     time_signatures.append(contribution.time_signature)
             ...
             >>> figures_ = []
@@ -3670,11 +3693,11 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> figures, time_signatures = [], []
             >>> for i, collections in enumerate(collection_lists):
             ...     contribution = music_maker(
-            ...         'Voice 1',
+            ...         'Voice_1',
             ...         collections,
             ...         baca.flags(),
             ...         )
-            ...     figures.append(contribution['Voice 1'])
+            ...     figures.append(contribution['Voice_1'])
             ...     time_signatures.append(contribution.time_signature)
             ...
             >>> figures_ = []
@@ -4126,8 +4149,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     ]
             >>> figures, time_signatures = [], []
             >>> for collections in collection_lists:
-            ...     contribution = music_maker('Voice 1', collections)
-            ...     figures.append(contribution['Voice 1'])
+            ...     contribution = music_maker('Voice_1', collections)
+            ...     figures.append(contribution['Voice_1'])
             ...     time_signatures.append(contribution.time_signature)
             ...
             >>> figures_ = []
@@ -4314,8 +4337,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     ]
             >>> figures, time_signatures = [], []
             >>> for collections in collection_lists:
-            ...     contribution = music_maker('Voice 1', collections)
-            ...     figures.append(contribution['Voice 1'])
+            ...     contribution = music_maker('Voice_1', collections)
+            ...     figures.append(contribution['Voice_1'])
             ...     time_signatures.append(contribution.time_signature)
             ...
             >>> figures_ = []
@@ -5995,7 +6018,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._check_all_music_in_part_containers()
                 self._check_duplicate_part_assignments()
                 self._collect_metadata()
-                self._parallelize_multimeasure_rests()
+                #self._parallelize_multimeasure_rests()
 
         count = int(timer.elapsed_time)
         seconds = abjad.String('second').pluralize(count)

@@ -3052,6 +3052,24 @@ def note_head_x_extent_zero(
         value=(0, 0),
         )
 
+def ottava_bracket_shorten_pair(
+    pair: typings.NumberPair = (-0.8, -0.6),
+    *,
+    selector: typings.Selector = 'baca.leaves()',
+    tag: typing.Optional[str] = 'baca_ottava_bracket_shorten_pair',
+    ) -> OverrideCommand:
+    """
+    Overrides ottava bracket shorten pair.
+    """
+    return OverrideCommand(
+        attribute='shorten_pair',
+        context='Staff',
+        value=pair,
+        grob='ottava_bracket',
+        selector=selector,
+        tags=[tag],
+        )
+
 def ottava_bracket_staff_padding(
     n: typings.Number,
     *,
@@ -3082,7 +3100,7 @@ def rehearsal_mark_extra_offset(
     return OverrideCommand(
         attribute='extra_offset',
         value=pair,
-        context='Global_Context',
+        context='GlobalContext',
         grob='rehearsal_mark',
         selector=selector,
         tags=[tag],
@@ -3100,7 +3118,7 @@ def rehearsal_mark_y_offset(
     return OverrideCommand(
         attribute='Y_offset',
         value=n,
-        context='Global_Context',
+        context='GlobalContext',
         grob='rehearsal_mark',
         selector=selector,
         tags=[tag],

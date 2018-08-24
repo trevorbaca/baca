@@ -2027,7 +2027,7 @@ class Loop(abjad.CyclicTuple):
                     [1]
                     ),
                 ),
-            selector=baca.pleaves(),
+            selector=baca.plts(),
             )
 
     """
@@ -6811,12 +6811,14 @@ def interpolate_staff_positions(
 def loop(
     items: typing.Iterable,
     intervals: typing.Iterable,
+    *,
+    selector: typings.Selector = 'baca.plts()',
     ) -> PitchCommand:
     """
     Loops ``items`` at ``intervals``.
     """
     loop = Loop(items=items, intervals=intervals)
-    return pitches(loop)
+    return pitches(loop, selector=selector)
 
 def natural_clusters(
     widths: typing.Iterable[int],
@@ -6840,6 +6842,7 @@ def pitch(
     allow_out_of_range: bool = None,
     do_not_transpose: bool = None,
     persist: str = None,
+    # TODO: change to baca.plts() and rerender scores
     selector: typings.Selector = 'baca.pleaves()',
     ) -> PitchCommand:
     """
@@ -6874,6 +6877,7 @@ def pitches(
     exact: bool = None,
     ignore_incomplete: bool = None,
     persist: str = None,
+    # TODO: change to baca.plts() and rerender scores
     selector: typings.Selector = 'baca.pleaves()',
     ) -> PitchCommand:
     """

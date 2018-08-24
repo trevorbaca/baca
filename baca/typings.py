@@ -34,3 +34,5 @@ RhythmMakerTyping = typing.Union[
 Selector = typing.Union[str, abjad.Expression]
 
 Slice = typing.Union[int, IntegerPair, None]
+
+Strings = typing.Union[str, typing.Sequence[str]]
