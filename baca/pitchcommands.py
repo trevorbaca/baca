@@ -2243,13 +2243,13 @@ class MicrotoneDeviationCommand(scoping.Command):
         scope: scoping.scope_typing = None,
         selector='baca.plts()',
         ) -> None:
-        # TODO: pass selector to Command.__init__(); rebuild Krummzeit
         scoping.Command.__init__(
             self,
             map=map,
             match=match,
             measures=measures,
             scope=scope,
+            selector=selector,
             )
         if deviations is not None:
             assert isinstance(deviations, collections.Iterable)
@@ -6842,8 +6842,7 @@ def pitch(
     allow_out_of_range: bool = None,
     do_not_transpose: bool = None,
     persist: str = None,
-    # TODO: change to baca.plts() and rerender scores
-    selector: typings.Selector = 'baca.pleaves()',
+    selector: typings.Selector = 'baca.plts()',
     ) -> PitchCommand:
     """
     Makes pitch command.
@@ -6877,8 +6876,7 @@ def pitches(
     exact: bool = None,
     ignore_incomplete: bool = None,
     persist: str = None,
-    # TODO: change to baca.plts() and rerender scores
-    selector: typings.Selector = 'baca.pleaves()',
+    selector: typings.Selector = 'baca.plts()',
     ) -> PitchCommand:
     """
     Makes pitch command.
