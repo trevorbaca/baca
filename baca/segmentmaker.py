@@ -2291,7 +2291,7 @@ class SegmentMaker(abjad.SegmentMaker):
         first_measure_number = self._get_first_measure_number()
         for measure_index, skip in enumerate(skips):
             measure_number = first_measure_number + measure_index
-            string = rf'\baca-dark-cyan-markup ({measure_number})'
+            string = rf'\baca-dark-cyan-markup "({measure_number})"'
             markup = abjad.Markup.from_literal(
                 string,
                 direction=abjad.Up,
@@ -2304,7 +2304,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 deactivate=True,
                 tag=tag.append('_label_measure_indices(1)'),
                 )
-            string = rf'\baca-dark-cyan-markup <{measure_index}>'
+            string = rf'\baca-dark-cyan-markup "<{measure_index}>"'
             markup = abjad.Markup.from_literal(
                 string,
                 direction=abjad.Up,
@@ -2318,7 +2318,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 tag=tag.append('_label_measure_indices(2)'),
                 )
             local_measure_number = measure_index + 1
-            string = rf'\baca-dark-cyan-markup (({local_measure_number}))'
+            string = rf'\baca-dark-cyan-markup "(({local_measure_number}))"'
             markup = abjad.Markup.from_literal(
                 string,
                 direction=abjad.Up,
@@ -2341,7 +2341,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 string = f'[{name}.{measure_number}]'
             else:
                 string = f'[{measure_number}]'
-            string = rf'\baca-dark-cyan-markup {string}'
+            string = rf'\baca-dark-cyan-markup "{string}"'
             markup = abjad.Markup.from_literal(
                 string,
                 direction=abjad.Up,

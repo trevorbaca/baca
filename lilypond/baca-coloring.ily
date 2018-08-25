@@ -43,7 +43,7 @@ baca-dark-cyan-markup = #(
     string
     (string?)
     #{
-    - \markup \fontsize #3 \with-color #(x11-color 'DarkCyan) { #string }
+    - \markup \with-dimensions-from \null \with-color #(x11-color 'DarkCyan) { #string }
     #}
     )
 
@@ -52,7 +52,7 @@ baca-forest-green-markup = #(
     string
     (string?)
     #{
-    - \markup \fontsize #3 \with-color #(x11-color 'ForestGreen) { #string }
+    - \markup \with-color #(x11-color 'ForestGreen) { #string }
     #}
     )
 
