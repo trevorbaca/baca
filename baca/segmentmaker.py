@@ -2275,7 +2275,7 @@ class SegmentMaker(abjad.SegmentMaker):
             brackets=True,
             clock_time=True,
             global_offset=segment_start_offset,
-            markup_command=r'\baca-dark-cyan-markup',
+            markup_command=r'\baca-clock-time-markup',
             )
         segment_stop_offset = abjad.Offset(segment_stop_duration)
         self._stop_clock_time = segment_stop_offset.to_clock_string()
@@ -2291,7 +2291,7 @@ class SegmentMaker(abjad.SegmentMaker):
         first_measure_number = self._get_first_measure_number()
         for measure_index, skip in enumerate(skips):
             measure_number = first_measure_number + measure_index
-            string = rf'\baca-dark-cyan-markup "({measure_number})"'
+            string = rf'\baca-measure-number-markup "({measure_number})"'
             markup = abjad.Markup.from_literal(
                 string,
                 direction=abjad.Up,
@@ -2304,7 +2304,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 deactivate=True,
                 tag=tag.append('_label_measure_indices(1)'),
                 )
-            string = rf'\baca-dark-cyan-markup "<{measure_index}>"'
+            string = rf'\baca-local-measure-index-markup "<{measure_index}>"'
             markup = abjad.Markup.from_literal(
                 string,
                 direction=abjad.Up,
@@ -2318,7 +2318,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 tag=tag.append('_label_measure_indices(2)'),
                 )
             local_measure_number = measure_index + 1
-            string = rf'\baca-dark-cyan-markup "(({local_measure_number}))"'
+            string = rf'\baca-local-measure-number-markup'
+            string += f' "(({local_measure_number}))"'
             markup = abjad.Markup.from_literal(
                 string,
                 direction=abjad.Up,
@@ -2341,7 +2342,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 string = f'[{name}.{measure_number}]'
             else:
                 string = f'[{measure_number}]'
-            string = rf'\baca-dark-cyan-markup "{string}"'
+            string = rf'\baca-stage-number-markup "{string}"'
             markup = abjad.Markup.from_literal(
                 string,
                 direction=abjad.Up,

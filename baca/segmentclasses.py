@@ -1336,8 +1336,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             if programmatic:
                 command = 'baca-dark-cyan-markup'
             else:
-                command = 'baca-forest-green-markup'
-            string = fr'^ \markup {{ \{command} "{string}" }}'
+                command = 'baca-spacing-markup'
+            string = fr'^ \{command} "{string}"'
             literal = abjad.LilyPondLiteral(string, format_slot='after')
             string = 'HorizontalSpacingSpecifier(2)'
             tag = abjad.Tag(abjad.tags.SPACING_MARKUP).prepend(string)

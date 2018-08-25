@@ -38,21 +38,87 @@ baca-reapplied-indicator-markup = #(
 
 %%% COLORED MARKUP %%%
 
-baca-dark-cyan-markup = #(
+baca-clock-time-markup = #(
     define-music-function
     string
     (string?)
     #{
-    - \markup \with-dimensions-from \null \with-color #(x11-color 'DarkCyan) { #string }
+    - \tweak extra-offset #'(0 . 14)
+    - \tweak font-size #2
+    - \markup
+    \with-dimensions-from \null
+    \with-color #(x11-color 'DarkCyan)
+    { #string }
     #}
     )
 
-baca-forest-green-markup = #(
+baca-local-measure-index-markup = #(
     define-music-function
     string
     (string?)
     #{
-    - \markup \with-color #(x11-color 'ForestGreen) { #string }
+    - \tweak extra-offset #'(0 . 6)
+    - \tweak font-size #2
+    - \markup
+    \with-dimensions-from \null
+    \with-color #(x11-color 'DarkCyan)
+    { #string }
+    #}
+    )
+
+baca-local-measure-number-markup = #(
+    define-music-function
+    string
+    (string?)
+    #{
+    - \tweak extra-offset #'(0 . 6)
+    - \tweak font-size #2
+    - \markup
+    \with-dimensions-from \null
+    \with-color #(x11-color 'DarkCyan)
+    { #string }
+    #}
+    )
+
+baca-measure-number-markup = #(
+    define-music-function
+    string
+    (string?)
+    #{
+    - \tweak extra-offset #'(0 . 10)
+    - \tweak font-size #2
+    - \markup
+    \with-dimensions-from \null
+    \with-color #(x11-color 'DarkCyan)
+    { #string }
+    #}
+    )
+
+baca-spacing-markup = #(
+    define-music-function
+    string
+    (string?)
+    #{
+    - \tweak extra-offset #'(0 . 14)
+    - \tweak font-size #2
+    - \markup
+    \with-dimensions-from \null
+    \with-color #(x11-color 'ForestGreen)
+    { #string }
+    #}
+    )
+
+baca-stage-number-markup = #(
+    define-music-function
+    string
+    (string?)
+    #{
+    - \tweak extra-offset #'(0 . 14)
+    - \tweak font-size #2
+    - \markup
+    \with-dimensions-from \null
+    \with-color #(x11-color 'DarkCyan)
+    { #string }
     #}
     )
 
