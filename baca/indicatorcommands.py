@@ -2354,13 +2354,15 @@ def rehearsal_mark(
     """
     Attaches rehearsal mark.
     """
-    if isinstance(argument, str):
-        mark = abjad.RehearsalMark.from_string(argument)
-    else:
-        assert isinstance(argument, int)
-        mark = abjad.RehearsalMark(number=argument)
+    assert isinstance(argument, str), repr(argument)
+    string = rf'\baca-rehearsal-mark-markup "{argument}"'
+    markup = abjad.Markup.from_literal(
+        string,
+        direction=abjad.Center,
+        literal=True,
+        )
     return commands.IndicatorCommand(
-        indicators=[mark],
+        indicators=[markup],
         selector=selector,
         tags=[tag],
         tweaks=tweaks,

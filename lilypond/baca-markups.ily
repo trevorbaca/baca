@@ -185,3 +185,22 @@ baca-very-long-fermata-markup =
     \markup
     \with-dimensions-from \null
     \musicglyph #"scripts.uverylongfermata"
+
+%%% REHEARSAL MARKS %%%
+
+% IMPORTANT: markup attach direction must be neutral or down (- or _);
+%            markup attach direction of up (^) negatively impacts global
+%            skips context vertical spacing
+baca-rehearsal-mark-markup = #(
+    define-music-function
+    string
+    (string?)
+    #{
+    - \tweak font-size #10
+    - \markup
+    \with-dimensions-from \null
+    \override #'(box-padding . 0.5)
+    \box
+    { #string }
+    #}
+    )
