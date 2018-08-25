@@ -43,6 +43,17 @@ baca-lbsd = #(
     #}
     )
 
+%%% FERMATA MEASURES %%%
+
+baca-fermata-measure = #(define-music-function
+    (parser location music) (ly:music?)
+    #{
+    \once \override Score.MultiMeasureRest.transparent = ##t
+    \once \override Score.TimeSignature.stencil = ##f
+    $music
+    #}
+    )
+
 %%% SPACING SECTIONS %%%
 
 baca-new-spacing-section = #(

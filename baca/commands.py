@@ -1239,8 +1239,7 @@ class GlobalFermataCommand(scoping.Command):
                 leaf,
                 tag=self.tag.append('GlobalFermataCommand(1)'),
                 )
-            string = r'\once \override Score.TimeSignature.stencil = ##f'
-            literal = abjad.LilyPondLiteral(string)
+            literal = abjad.LilyPondLiteral(r'\baca-fermata-measure')
             abjad.attach(
                 literal,
                 leaf,
