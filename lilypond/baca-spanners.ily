@@ -59,46 +59,75 @@ bacaStopTextSpanLMI = #(
     )
 
 #(define-markup-command
-    (baca-lmi-left layout props lmi)
-    (number?)
+    (baca-lmi-left-markup layout props lmi)
+    (string?)
     (interpret-markup layout props
         #{
-        \markup \upright \concat {
-            "<"  #lmi ">" \hspace #0.5
-            }
+        \markup
+        \with-color #(x11-color 'DarkCyan)
+        \fontsize #-3
+        \upright
+        \concat { "<"  #lmi ">" \hspace #0.5 }
         #}
         )
     )
 
-baca-lmi-spanner-left-text = #(
+baca-lmi-left-text-tweak = #(
     define-music-function
-    (parser location lmi music)
-    (number? ly:music?)
+    (parser location left music)
+    (string? ly:music?)
     #{
-    \tweak bound-details.left.text \markup \baca-lmi-left #lmi
+    \tweak bound-details.left.text \markup \baca-lmi-left-markup #left
     $music
     #}
     )
 
 #(define-markup-command
-    (baca-lmi-right layout props lmi)
-    (number? number?)
+    (baca-lmi-right-markup layout props lmi)
+    (string?)
     (interpret-markup layout props
         #{
-        \markup \upright \concat { "<" #lmi ">" }
+        \markup 
+        \with-color #(x11-color 'DarkCyan)
+        \fontsize #-3
+        \upright
+        \concat { "<" #lmi ">" }
         #}
         )
     )
 
-baca-lmi-spanner-right-text = #(
+baca-lmi-right-text-tweak = #(
     define-music-function
-    (parser location lmi music)
-    (number? ly:music?)
+    (parser location right music)
+    (string? ly:music?)
     #{
-    \tweak bound-details.right.text \markup \baca-lmi-right #lmi
+    \tweak bound-details.right.text \markup \baca-lmi-right-markup #right
     $music
     #}
     ) 
+
+baca-start-lmi-left-only = #(
+    define-music-function
+    (parser location left music)
+    (string? ly:music?)
+    #{
+    - \abjad-invisible-line
+    - \baca-lmi-left-text-tweak #left
+    $music
+    #}
+    )
+
+baca-start-lmi-both = #(
+    define-music-function
+    (parser location left right music)
+    (string? string? ly:music?)
+    #{
+    - \abjad-invisible-line
+    - \baca-lmi-left-text-tweak #left
+    - \baca-lmi-right-text-tweak #right
+    $music
+    #}
+    )
 
 %%% METRONOME MARK SPANNER %%%
 
