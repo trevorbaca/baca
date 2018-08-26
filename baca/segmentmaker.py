@@ -2293,21 +2293,6 @@ class SegmentMaker(abjad.SegmentMaker):
         for measure_index, skip in enumerate(skips):
             local_measure_number = measure_index + 1
             measure_number = first_measure_number + measure_index
-
-#            string = rf'\baca-measure-number-markup "({measure_number})"'
-#            markup = abjad.Markup.from_literal(
-#                string,
-#                direction=abjad.Up,
-#                literal=True
-#                )
-#            tag = abjad.Tag(abjad.tags.MEASURE_NUMBER_MARKUP)
-#            abjad.attach(
-#                markup,
-#                skip,
-#                deactivate=True,
-#                tag=tag.append('_label_measure_indices(1)'),
-#                )
-
             if measure_index < total - 1:
                 tag = abjad.Tag(abjad.tags.LOCAL_MEASURE_INDEX_MARKUP)
                 if measure_index == total - 2:
@@ -2325,7 +2310,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     skip,
                     context='GlobalSkips',
                     deactivate=True,
-                    tag=tag.append('_label_measure_indices(1)'),
+                    tag=tag,
                     )
                 tag = abjad.Tag(abjad.tags.LOCAL_MEASURE_NUMBER_MARKUP)
                 if measure_index == total - 2:
@@ -2344,7 +2329,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     skip,
                     context='GlobalSkips',
                     deactivate=True,
-                    tag=tag.append('_label_measure_indices(2)'),
+                    tag=tag,
                     )
                 tag = abjad.Tag(abjad.tags.MEASURE_NUMBER_MARKUP)
                 if measure_index == total - 2:
@@ -2363,7 +2348,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     skip,
                     context='GlobalSkips',
                     deactivate=True,
-                    tag=tag.append('_label_measure_indices(3)'),
+                    tag=tag,
                     )
             if 0 < measure_index:
                 tag = abjad.Tag(abjad.tags.LOCAL_MEASURE_INDEX_MARKUP)
@@ -2375,7 +2360,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     skip,
                     context='GlobalSkips',
                     deactivate=True,
-                    tag=tag.append('_label_measure_indices(4)'),
+                    tag=tag,
                     )
                 tag = abjad.Tag(abjad.tags.LOCAL_MEASURE_NUMBER_MARKUP)
                 stop_text_span = abjad.StopTextSpan(
@@ -2386,7 +2371,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     skip,
                     context='GlobalSkips',
                     deactivate=True,
-                    tag=tag.append('_label_measure_indices(5)'),
+                    tag=tag,
                     )
                 tag = abjad.Tag(abjad.tags.MEASURE_NUMBER_MARKUP)
                 stop_text_span = abjad.StopTextSpan(
@@ -2397,25 +2382,8 @@ class SegmentMaker(abjad.SegmentMaker):
                     skip,
                     context='GlobalSkips',
                     deactivate=True,
-                    tag=tag.append('_label_measure_indices(6)'),
+                    tag=tag,
                     )
-
-#            #
-#            local_measure_number = measure_index + 1
-#            string = rf'\baca-local-measure-number-markup'
-#            string += f' "(({local_measure_number}))"'
-#            markup = abjad.Markup.from_literal(
-#                string,
-#                direction=abjad.Up,
-#                literal=True,
-#                )
-#            tag = abjad.Tag(abjad.tags.LOCAL_MEASURE_NUMBER_MARKUP)
-#            abjad.attach(
-#                markup,
-#                skip,
-#                deactivate=True,
-#                tag=tag.append('_label_measure_indices(3)'),
-#                )
 
     def _label_stage_numbers(self):
         skips = classes.Selection(self.score['Global_Skips']).skips()

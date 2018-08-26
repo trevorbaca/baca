@@ -1296,29 +1296,20 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             leaves = abjad.iterate(score).leaves(grace_notes=False)
             method = self._get_minimum_durations_by_measure
             minimum_durations_by_measure = method(skips, leaves)
+        else:
+            minimum_durations_by_measure = []
         string = '_fermata_start_offsets'
         self._fermata_start_offsets = getattr(segment_maker, string, [])
         first_measure_number = self.first_measure_number or 1
+        total = len(skips)
         for measure_index, skip in enumerate(skips):
             measure_number = first_measure_number + measure_index
-            if (self.fermata_measure_duration is not None and
-                self._is_fermata_measure(measure_number, skip)):
-                duration = self.fermata_measure_duration
-            elif self.measures and measure_number in self.measures:
-                duration = self.measures[measure_number]
-                duration = abjad.NonreducedFraction(duration)
-            else:
-                duration = minimum_durations_by_measure[measure_index]
-                if self.minimum_duration is not None:
-                    if self.minimum_duration < duration:
-                        duration = self.minimum_duration
-                if self.multiplier is not None:
-                    duration = duration / self.multiplier
-            eol_adjusted = False
-            if measure_number in self.eol_measure_numbers:
-                duration_ = duration
-                duration *= self._magic_lilypond_eol_adjustment
-                eol_adjusted = True
+            duration, eol_adjusted, duration_ = self._calculate_duration(
+                measure_index,
+                measure_number,
+                skip,
+                minimum_durations_by_measure,
+                )
             spacing_section = indicators.SpacingSection(duration=duration)
             tag = abjad.Tag(abjad.tags.SPACING)
             abjad.attach(
@@ -1326,24 +1317,77 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                 skip,
                 tag=tag.prepend('HorizontalSpacingSpecifier(1)'),
                 )
-            if eol_adjusted:
-                multiplier = self._magic_lilypond_eol_adjustment
-                string = f'[[{duration_!s} * {multiplier!s}]]'
-                markup = abjad.Markup(string)
-            else:
-                string = f'[{duration!s}]'
-                markup = abjad.Markup(string)
-            if programmatic:
-                command = 'baca-dark-cyan-markup'
-            else:
-                command = 'baca-spacing-markup'
-            string = fr'^ \{command} "{string}"'
-            literal = abjad.LilyPondLiteral(string, format_slot='after')
-            string = 'HorizontalSpacingSpecifier(2)'
-            tag = abjad.Tag(abjad.tags.SPACING_MARKUP).prepend(string)
-            abjad.attach(literal, skip, deactivate=True, tag=tag)
+            string_ = self._make_annotation(duration, eol_adjusted, duration_)
+            if measure_index < total - 1:
+                tag = abjad.Tag(abjad.tags.SPACING_MARKUP)
+                if measure_index == total - 2:
+                    next_skip = skips[measure_index + 1]
+                    next_measure_index = measure_index + 1
+                    next_measure_number = measure_number + 1
+                    result = self._calculate_duration(
+                        next_measure_index,
+                        next_measure_number,
+                        next_skip,
+                        minimum_durations_by_measure,
+                        )
+                    next_string = self._make_annotation(*result)
+                    string = r'- \baca-start-spm-both'
+                    string += f' "{string_}" "{next_string}"'
+                else:
+                    string = r'- \baca-start-spm-left-only'
+                    string += f' "{string_}"'
+                start_text_span = abjad.StartTextSpan(
+                    command=r'\bacaStartTextSpanSPM',
+                    left_text=string,
+                    )
+                abjad.attach(
+                    start_text_span,
+                    skip,
+                    context='GlobalSkips',
+                    deactivate=True,
+                    tag=tag,
+                    )
+            if 0 < measure_index:
+                tag = abjad.Tag(abjad.tags.SPACING_MARKUP)
+                stop_text_span = abjad.StopTextSpan(
+                    command=r'\bacaStopTextSpanSPM',
+                    )
+                abjad.attach(
+                    stop_text_span,
+                    skip,
+                    context='GlobalSkips',
+                    deactivate=True,
+                    tag=tag,
+                    )
 
     ### PRIVATE METHODS ###
+
+    def _calculate_duration(
+        self,
+        measure_index,
+        measure_number,
+        skip,
+        minimum_durations_by_measure,
+        ):
+        if (self.fermata_measure_duration is not None and
+            self._is_fermata_measure(measure_number, skip)):
+            duration = self.fermata_measure_duration
+        elif self.measures and measure_number in self.measures:
+            duration = self.measures[measure_number]
+            duration = abjad.NonreducedFraction(duration)
+        else:
+            duration = minimum_durations_by_measure[measure_index]
+            if self.minimum_duration is not None:
+                if self.minimum_duration < duration:
+                    duration = self.minimum_duration
+            if self.multiplier is not None:
+                duration = duration / self.multiplier
+        eol_adjusted, duration_ = False, None
+        if measure_number in self.eol_measure_numbers:
+            duration_ = duration
+            duration *= self._magic_lilypond_eol_adjustment
+            eol_adjusted = True
+        return duration, eol_adjusted, duration_
 
     def _coerce_measure_number(self, measure_number):
         if measure_number == 0:
@@ -1403,6 +1447,14 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             return True
         measure_timespan = abjad.inspect(skip).timespan()
         return measure_timespan.start_offset in self._fermata_start_offsets
+
+    def _make_annotation(self, duration, eol_adjusted, duration_):
+        if eol_adjusted:
+            multiplier = self._magic_lilypond_eol_adjustment
+            string = f'[[{duration_!s} * {multiplier!s}]]'
+        else:
+            string = f'[{duration!s}]'
+        return string
 
     ### PUBLIC PROPERTIES ###
 
