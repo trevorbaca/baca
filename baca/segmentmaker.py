@@ -2310,7 +2310,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 direction=abjad.Up,
                 literal=True
                 )
-            tag = abjad.Tag(abjad.tags.MEASURE_INDEX_MARKUP)
+            tag = abjad.Tag(abjad.tags.LOCAL_MEASURE_INDEX_MARKUP)
             abjad.attach(
                 markup,
                 skip,
