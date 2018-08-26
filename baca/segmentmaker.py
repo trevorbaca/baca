@@ -2288,8 +2288,11 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _label_measure_indices(self):
         skips = classes.Selection(self.score['Global_Skips']).skips()
+        total = len(skips)
+        pairs = classes.Sequence(skips).nwise()
         first_measure_number = self._get_first_measure_number()
-        for measure_index, skip in enumerate(skips):
+        for measure_index, pair in enumerate(pairs):
+            skip, next_skip = pair
             measure_number = first_measure_number + measure_index
             string = rf'\baca-measure-number-markup "({measure_number})"'
             markup = abjad.Markup.from_literal(
@@ -2304,6 +2307,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 deactivate=True,
                 tag=tag.append('_label_measure_indices(1)'),
                 )
+
             string = rf'\baca-local-measure-index-markup "<{measure_index}>"'
             markup = abjad.Markup.from_literal(
                 string,
@@ -2317,6 +2321,35 @@ class SegmentMaker(abjad.SegmentMaker):
                 deactivate=True,
                 tag=tag.append('_label_measure_indices(2)'),
                 )
+
+    # TODO:
+#            if measure_index < total - 1:
+#                left_text = rf'- \baca-lmi-spanner-left-text #{measure_index}'
+#                right_text = None
+#                if measure_index == total:
+#                    right_text = r'- \baca-lmi-spanner-right-text'
+#                    right_text += f' #{measure_index + 1}'
+#                start_text_span = abjad.StartTextSpan(
+#                    command=r'\bacaStartTextSpanLMI',
+#                    left_text=left_text,
+#                    right_text=right_text,
+#                    style='invisible-line',
+#                    )
+#                abjad.attach(
+#                    start_text_span,
+#                    skip,
+#                    tag=tag.append('_label_measure_indices(1)'),
+#                    )
+#            if 0 < measure_index:
+#                stop_text_span = abjad.StopTextSpan(
+#                    command=r'\bacaStopTextSpanLMI',
+#                    )
+#                abjad.attach(
+#                    stop_text_span,
+#                    skip,
+#                    tag=tag.append('_label_measure_indices(2)'),
+#                    )
+
             local_measure_number = measure_index + 1
             string = rf'\baca-local-measure-number-markup'
             string += f' "(({local_measure_number}))"'

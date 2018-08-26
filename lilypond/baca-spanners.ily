@@ -48,6 +48,58 @@ baca-bcp-spanner-right-text = #(
     #}
     ) 
 
+%%% LOCAL MEASURE INDEX SPANNER %%%
+
+bacaStartTextSpanLMI = #(
+    make-music 'TextSpanEvent 'span-direction START 'spanner-id "LMI"
+    )
+
+bacaStopTextSpanLMI = #(
+    make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "LMI"
+    )
+
+#(define-markup-command
+    (baca-lmi-left layout props lmi)
+    (number?)
+    (interpret-markup layout props
+        #{
+        \markup \upright \concat {
+            "<"  #lmi ">" \hspace #0.5
+            }
+        #}
+        )
+    )
+
+baca-lmi-spanner-left-text = #(
+    define-music-function
+    (parser location lmi music)
+    (number? ly:music?)
+    #{
+    \tweak bound-details.left.text \markup \baca-lmi-left #lmi
+    $music
+    #}
+    )
+
+#(define-markup-command
+    (baca-lmi-right layout props lmi)
+    (number? number?)
+    (interpret-markup layout props
+        #{
+        \markup \upright \concat { "<" #lmi ">" }
+        #}
+        )
+    )
+
+baca-lmi-spanner-right-text = #(
+    define-music-function
+    (parser location lmi music)
+    (number? ly:music?)
+    #{
+    \tweak bound-details.right.text \markup \baca-lmi-right #lmi
+    $music
+    #}
+    ) 
+
 %%% METRONOME MARK SPANNER %%%
 
 baca-metronome-mark-spanner-colored-left-text = #(
