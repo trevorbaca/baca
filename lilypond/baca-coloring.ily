@@ -52,48 +52,6 @@ baca-clock-time-markup = #(
     #}
     )
 
-baca-local-measure-index-markup = #(
-    define-music-function
-    string
-    (string?)
-    #{
-    - \tweak extra-offset #'(0 . 6)
-    - \tweak font-size #2
-    - \markup
-    \with-dimensions-from \null
-    \with-color #(x11-color 'DarkCyan)
-    { #string }
-    #}
-    )
-
-baca-local-measure-number-markup = #(
-    define-music-function
-    string
-    (string?)
-    #{
-    - \tweak extra-offset #'(0 . 6)
-    - \tweak font-size #2
-    - \markup
-    \with-dimensions-from \null
-    \with-color #(x11-color 'DarkCyan)
-    { #string }
-    #}
-    )
-
-baca-measure-number-markup = #(
-    define-music-function
-    string
-    (string?)
-    #{
-    - \tweak extra-offset #'(0 . 10)
-    - \tweak font-size #2
-    - \markup
-    \with-dimensions-from \null
-    \with-color #(x11-color 'DarkCyan)
-    { #string }
-    #}
-    )
-
 baca-spacing-markup = #(
     define-music-function
     string

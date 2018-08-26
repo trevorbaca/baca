@@ -2291,21 +2291,23 @@ class SegmentMaker(abjad.SegmentMaker):
         total = len(skips)
         first_measure_number = self._get_first_measure_number()
         for measure_index, skip in enumerate(skips):
+            local_measure_number = measure_index + 1
             measure_number = first_measure_number + measure_index
-            string = rf'\baca-measure-number-markup "({measure_number})"'
-            markup = abjad.Markup.from_literal(
-                string,
-                direction=abjad.Up,
-                literal=True
-                )
-            tag = abjad.Tag(abjad.tags.MEASURE_NUMBER_MARKUP)
-            abjad.attach(
-                markup,
-                skip,
-                deactivate=True,
-                tag=tag.append('_label_measure_indices(1)'),
-                )
-            #
+
+#            string = rf'\baca-measure-number-markup "({measure_number})"'
+#            markup = abjad.Markup.from_literal(
+#                string,
+#                direction=abjad.Up,
+#                literal=True
+#                )
+#            tag = abjad.Tag(abjad.tags.MEASURE_NUMBER_MARKUP)
+#            abjad.attach(
+#                markup,
+#                skip,
+#                deactivate=True,
+#                tag=tag.append('_label_measure_indices(1)'),
+#                )
+
             if measure_index < total - 1:
                 tag = abjad.Tag(abjad.tags.LOCAL_MEASURE_INDEX_MARKUP)
                 if measure_index == total - 2:
@@ -2325,6 +2327,44 @@ class SegmentMaker(abjad.SegmentMaker):
                     deactivate=True,
                     tag=tag.append('_label_measure_indices(1)'),
                     )
+                tag = abjad.Tag(abjad.tags.LOCAL_MEASURE_NUMBER_MARKUP)
+                if measure_index == total - 2:
+                    string = r'- \baca-start-lmn-both'
+                    string += f' "{local_measure_number}"'
+                    string += f' "{local_measure_number + 1}"'
+                else:
+                    string = r'- \baca-start-lmn-left-only'
+                    string += f' "{local_measure_number}"'
+                start_text_span = abjad.StartTextSpan(
+                    command=r'\bacaStartTextSpanLMN',
+                    left_text=string,
+                    )
+                abjad.attach(
+                    start_text_span,
+                    skip,
+                    context='GlobalSkips',
+                    deactivate=True,
+                    tag=tag.append('_label_measure_indices(2)'),
+                    )
+                tag = abjad.Tag(abjad.tags.MEASURE_NUMBER_MARKUP)
+                if measure_index == total - 2:
+                    string = r'- \baca-start-mn-both'
+                    string += f' "{measure_number}"'
+                    string += f' "{measure_number + 1}"'
+                else:
+                    string = r'- \baca-start-mn-left-only'
+                    string += f' "{measure_number}"'
+                start_text_span = abjad.StartTextSpan(
+                    command=r'\bacaStartTextSpanMN',
+                    left_text=string,
+                    )
+                abjad.attach(
+                    start_text_span,
+                    skip,
+                    context='GlobalSkips',
+                    deactivate=True,
+                    tag=tag.append('_label_measure_indices(3)'),
+                    )
             if 0 < measure_index:
                 tag = abjad.Tag(abjad.tags.LOCAL_MEASURE_INDEX_MARKUP)
                 stop_text_span = abjad.StopTextSpan(
@@ -2335,24 +2375,47 @@ class SegmentMaker(abjad.SegmentMaker):
                     skip,
                     context='GlobalSkips',
                     deactivate=True,
-                    tag=tag.append('_label_measure_indices(2)'),
+                    tag=tag.append('_label_measure_indices(4)'),
                     )
-            #
-            local_measure_number = measure_index + 1
-            string = rf'\baca-local-measure-number-markup'
-            string += f' "(({local_measure_number}))"'
-            markup = abjad.Markup.from_literal(
-                string,
-                direction=abjad.Up,
-                literal=True,
-                )
-            tag = abjad.Tag(abjad.tags.LOCAL_MEASURE_NUMBER_MARKUP)
-            abjad.attach(
-                markup,
-                skip,
-                deactivate=True,
-                tag=tag.append('_label_measure_indices(3)'),
-                )
+                tag = abjad.Tag(abjad.tags.LOCAL_MEASURE_NUMBER_MARKUP)
+                stop_text_span = abjad.StopTextSpan(
+                    command=r'\bacaStopTextSpanLMN',
+                    )
+                abjad.attach(
+                    stop_text_span,
+                    skip,
+                    context='GlobalSkips',
+                    deactivate=True,
+                    tag=tag.append('_label_measure_indices(5)'),
+                    )
+                tag = abjad.Tag(abjad.tags.MEASURE_NUMBER_MARKUP)
+                stop_text_span = abjad.StopTextSpan(
+                    command=r'\bacaStopTextSpanMN',
+                    )
+                abjad.attach(
+                    stop_text_span,
+                    skip,
+                    context='GlobalSkips',
+                    deactivate=True,
+                    tag=tag.append('_label_measure_indices(6)'),
+                    )
+
+#            #
+#            local_measure_number = measure_index + 1
+#            string = rf'\baca-local-measure-number-markup'
+#            string += f' "(({local_measure_number}))"'
+#            markup = abjad.Markup.from_literal(
+#                string,
+#                direction=abjad.Up,
+#                literal=True,
+#                )
+#            tag = abjad.Tag(abjad.tags.LOCAL_MEASURE_NUMBER_MARKUP)
+#            abjad.attach(
+#                markup,
+#                skip,
+#                deactivate=True,
+#                tag=tag.append('_label_measure_indices(3)'),
+#                )
 
     def _label_stage_numbers(self):
         skips = classes.Selection(self.score['Global_Skips']).skips()
