@@ -230,7 +230,7 @@ class Command(abjad.AbjadObject):
         self._deactivate = deactivate
         self._map = map
         self._match = match
-        self._measures: typings.Slice = measures
+        self._measures: typing.Optional[typings.Slice] = measures
         self._runtime = abjad.OrderedDict()
         self.scope = scope
         if isinstance(selector, str):
@@ -457,6 +457,7 @@ class Command(abjad.AbjadObject):
         """
         return self._match
 
+    # TODO: should be read-only?
     @property
     def measures(self) -> typing.Optional[typings.Slice]:
         """
