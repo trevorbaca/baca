@@ -82,17 +82,6 @@ scoping
 
       <hr/>
 
-   .. rubric:: Read/write properties
-      :class: class-header
-
-   .. autoattribute:: Command.runtime
-
-   .. autoattribute:: Command.tag_measure_number
-
-   .. raw:: html
-
-      <hr/>
-
    .. rubric:: Read-only properties
       :class: class-header
 
@@ -104,11 +93,15 @@ scoping
 
    .. autoattribute:: Command.measures
 
+   .. autoattribute:: Command.runtime
+
    .. autoattribute:: Command.scope
 
    .. autoattribute:: Command.selector
 
    .. autoattribute:: Command.tag
+
+   .. autoattribute:: Command.tag_measure_number
 
    .. autoattribute:: Command.tags
 
@@ -168,7 +161,6 @@ scoping
       __call__
       __iter__
       commands
-      runtime
 
    .. raw:: html
 
@@ -188,15 +180,6 @@ scoping
    .. container:: inherited
 
       .. automethod:: Suite.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read/write properties
-      :class: class-header
-
-   .. autoattribute:: Suite.runtime
 
    .. raw:: html
 

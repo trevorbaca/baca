@@ -87,21 +87,6 @@ rhythmcommands
 
       <hr/>
 
-   .. rubric:: Read/write properties
-      :class: class-header
-
-   .. container:: inherited
-
-      .. autoattribute:: RhythmCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: RhythmCommand.tag_measure_number
-
-   .. raw:: html
-
-      <hr/>
-
    .. rubric:: Read-only properties
       :class: class-header
 
@@ -151,6 +136,10 @@ rhythmcommands
 
    .. container:: inherited
 
+      .. autoattribute:: RhythmCommand.runtime
+
+   .. container:: inherited
+
       .. autoattribute:: RhythmCommand.scope
 
    .. container:: inherited
@@ -164,6 +153,10 @@ rhythmcommands
    .. container:: inherited
 
       .. autoattribute:: RhythmCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: RhythmCommand.tag_measure_number
 
    .. container:: inherited
 
@@ -219,21 +212,6 @@ rhythmcommands
 
       <hr/>
 
-   .. rubric:: Read/write properties
-      :class: class-header
-
-   .. container:: inherited
-
-      .. autoattribute:: TieCorrectionCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: TieCorrectionCommand.tag_measure_number
-
-   .. raw:: html
-
-      <hr/>
-
    .. rubric:: Read-only properties
       :class: class-header
 
@@ -259,6 +237,10 @@ rhythmcommands
 
    .. container:: inherited
 
+      .. autoattribute:: TieCorrectionCommand.runtime
+
+   .. container:: inherited
+
       .. autoattribute:: TieCorrectionCommand.scope
 
    .. container:: inherited
@@ -268,6 +250,10 @@ rhythmcommands
    .. container:: inherited
 
       .. autoattribute:: TieCorrectionCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: TieCorrectionCommand.tag_measure_number
 
    .. container:: inherited
 

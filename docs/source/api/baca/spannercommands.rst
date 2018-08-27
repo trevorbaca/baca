@@ -77,21 +77,6 @@ spannercommands
 
       <hr/>
 
-   .. rubric:: Read/write properties
-      :class: class-header
-
-   .. container:: inherited
-
-      .. autoattribute:: SpannerCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: SpannerCommand.tag_measure_number
-
-   .. raw:: html
-
-      <hr/>
-
    .. rubric:: Read-only properties
       :class: class-header
 
@@ -119,6 +104,10 @@ spannercommands
 
    .. container:: inherited
 
+      .. autoattribute:: SpannerCommand.runtime
+
+   .. container:: inherited
+
       .. autoattribute:: SpannerCommand.scope
 
    .. autoattribute:: SpannerCommand.selector
@@ -128,6 +117,10 @@ spannercommands
    .. container:: inherited
 
       .. autoattribute:: SpannerCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: SpannerCommand.tag_measure_number
 
    .. container:: inherited
 

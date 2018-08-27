@@ -240,15 +240,16 @@ class Command(abjad.AbjadObject):
         if selector_ is not None:
             assert isinstance(selector_, abjad.Expression), repr(selector_)
         self._selector = selector_
-        self.tag_measure_number = tag_measure_number
+        self._tag_measure_number = tag_measure_number
         self._initialize_tags(tags)
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None) -> None:
+    def __call__(self, argument=None, runtime=None) -> None:
         """
         Calls command on ``argument``.
         """
+        self._runtime = runtime or abjad.OrderedDict()
         if self.map is not None:
             assert isinstance(self.map, abjad.Expression)
             argument = self.map(argument)
@@ -446,14 +447,6 @@ class Command(abjad.AbjadObject):
         """
         return self._runtime
 
-    @runtime.setter
-    def runtime(self, argument):
-        """
-        Gets segment-maker runtime dictionary.
-        """
-        assert isinstance(argument, abjad.OrderedDict), repr(argument)
-        self._runtime = argument
-
     @property
     def scope(self) -> scope_typing:
         """
@@ -488,13 +481,6 @@ class Command(abjad.AbjadObject):
         Is true when command tags measure number.
         """
         return self._tag_measure_number
-
-    @tag_measure_number.setter
-    def tag_measure_number(self, argument):
-        assert argument in (True, False, None), repr(argument)
-        self._tag_measure_number = argument
-        for command in getattr(self, 'commands', []):
-            command._tag_measure_number = argument
 
     @property
     def tags(self) -> typing.List[abjad.Tag]:
@@ -646,7 +632,6 @@ class Suite(abjad.AbjadObject):
         '_offset_to_measure_number',
         '_previous_segment_voice_metadata',
         '_score_template',
-        '_runtime',
         )
 
     _publish_storage_format = True
@@ -668,11 +653,10 @@ class Suite(abjad.AbjadObject):
             message += f'\n  Not {type(command).__name__}: {command!r}.'
             raise Exception(message)
         self._commands = tuple(commands_)
-        self._runtime = abjad.OrderedDict()
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None) -> None:
+    def __call__(self, argument=None, runtime=None) -> None:
         """
         Applies each command in ``commands`` to ``argument``.
         """
@@ -681,7 +665,7 @@ class Suite(abjad.AbjadObject):
         if not self.commands:
             return
         for command in self.commands:
-            command(argument)
+            command(argument, runtime=runtime)
 
     def __iter__(self):
         """
@@ -708,22 +692,6 @@ class Suite(abjad.AbjadObject):
         Gets commands.
         """
         return self._commands
-
-    @property
-    def runtime(self) -> abjad.OrderedDict:
-        """
-        Gets segment-maker runtime dictionary.
-        """
-        return self._runtime
-
-    @runtime.setter
-    def runtime(self, argument):
-        """
-        Gets segment-maker runtime dictionary.
-        """
-        assert isinstance(argument, abjad.OrderedDict), repr(argument)
-        for command in self.commands:
-            command.runtime = argument
 
 ### FACTORY FUNCTIONS ###
 
@@ -1291,9 +1259,10 @@ def tag(
         assert command._tags is not None
         tags.sort()
         tags_ = [abjad.Tag(_) for _ in tags]
+        # TODO: maybe use abjad.new() here?
         command._tags.extend(tags_)
         command._deactivate = deactivate
-        command.tag_measure_number = tag_measure_number
+        command._tag_measure_number = tag_measure_number
     return command
 
 def timeline(scopes) -> TimelineScope:

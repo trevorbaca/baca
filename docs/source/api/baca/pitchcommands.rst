@@ -86,21 +86,6 @@ pitchcommands
 
       <hr/>
 
-   .. rubric:: Read/write properties
-      :class: class-header
-
-   .. container:: inherited
-
-      .. autoattribute:: AccidentalAdjustmentCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: AccidentalAdjustmentCommand.tag_measure_number
-
-   .. raw:: html
-
-      <hr/>
-
    .. rubric:: Read-only properties
       :class: class-header
 
@@ -128,6 +113,10 @@ pitchcommands
 
    .. container:: inherited
 
+      .. autoattribute:: AccidentalAdjustmentCommand.runtime
+
+   .. container:: inherited
+
       .. autoattribute:: AccidentalAdjustmentCommand.scope
 
    .. container:: inherited
@@ -137,6 +126,10 @@ pitchcommands
    .. container:: inherited
 
       .. autoattribute:: AccidentalAdjustmentCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: AccidentalAdjustmentCommand.tag_measure_number
 
    .. container:: inherited
 
@@ -193,21 +186,6 @@ pitchcommands
 
       <hr/>
 
-   .. rubric:: Read/write properties
-      :class: class-header
-
-   .. container:: inherited
-
-      .. autoattribute:: ClusterCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: ClusterCommand.tag_measure_number
-
-   .. raw:: html
-
-      <hr/>
-
    .. rubric:: Read-only properties
       :class: class-header
 
@@ -231,6 +209,10 @@ pitchcommands
 
    .. container:: inherited
 
+      .. autoattribute:: ClusterCommand.runtime
+
+   .. container:: inherited
+
       .. autoattribute:: ClusterCommand.scope
 
    .. autoattribute:: ClusterCommand.selector
@@ -240,6 +222,10 @@ pitchcommands
    .. container:: inherited
 
       .. autoattribute:: ClusterCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: ClusterCommand.tag_measure_number
 
    .. container:: inherited
 
@@ -295,21 +281,6 @@ pitchcommands
 
       <hr/>
 
-   .. rubric:: Read/write properties
-      :class: class-header
-
-   .. container:: inherited
-
-      .. autoattribute:: ColorFingeringCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: ColorFingeringCommand.tag_measure_number
-
-   .. raw:: html
-
-      <hr/>
-
    .. rubric:: Read-only properties
       :class: class-header
 
@@ -333,6 +304,10 @@ pitchcommands
 
    .. container:: inherited
 
+      .. autoattribute:: ColorFingeringCommand.runtime
+
+   .. container:: inherited
+
       .. autoattribute:: ColorFingeringCommand.scope
 
    .. container:: inherited
@@ -342,6 +317,10 @@ pitchcommands
    .. container:: inherited
 
       .. autoattribute:: ColorFingeringCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: ColorFingeringCommand.tag_measure_number
 
    .. container:: inherited
 
@@ -395,21 +374,6 @@ pitchcommands
 
       <hr/>
 
-   .. rubric:: Read/write properties
-      :class: class-header
-
-   .. container:: inherited
-
-      .. autoattribute:: DiatonicClusterCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: DiatonicClusterCommand.tag_measure_number
-
-   .. raw:: html
-
-      <hr/>
-
    .. rubric:: Read-only properties
       :class: class-header
 
@@ -431,6 +395,10 @@ pitchcommands
 
    .. container:: inherited
 
+      .. autoattribute:: DiatonicClusterCommand.runtime
+
+   .. container:: inherited
+
       .. autoattribute:: DiatonicClusterCommand.scope
 
    .. container:: inherited
@@ -440,6 +408,10 @@ pitchcommands
    .. container:: inherited
 
       .. autoattribute:: DiatonicClusterCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: DiatonicClusterCommand.tag_measure_number
 
    .. container:: inherited
 
@@ -563,21 +535,6 @@ pitchcommands
 
       <hr/>
 
-   .. rubric:: Read/write properties
-      :class: class-header
-
-   .. container:: inherited
-
-      .. autoattribute:: MicrotoneDeviationCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: MicrotoneDeviationCommand.tag_measure_number
-
-   .. raw:: html
-
-      <hr/>
-
    .. rubric:: Read-only properties
       :class: class-header
 
@@ -601,6 +558,10 @@ pitchcommands
 
    .. container:: inherited
 
+      .. autoattribute:: MicrotoneDeviationCommand.runtime
+
+   .. container:: inherited
+
       .. autoattribute:: MicrotoneDeviationCommand.scope
 
    .. container:: inherited
@@ -610,6 +571,10 @@ pitchcommands
    .. container:: inherited
 
       .. autoattribute:: MicrotoneDeviationCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: MicrotoneDeviationCommand.tag_measure_number
 
    .. container:: inherited
 
@@ -663,21 +628,6 @@ pitchcommands
 
       <hr/>
 
-   .. rubric:: Read/write properties
-      :class: class-header
-
-   .. container:: inherited
-
-      .. autoattribute:: OctaveDisplacementCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: OctaveDisplacementCommand.tag_measure_number
-
-   .. raw:: html
-
-      <hr/>
-
    .. rubric:: Read-only properties
       :class: class-header
 
@@ -701,6 +651,10 @@ pitchcommands
 
    .. container:: inherited
 
+      .. autoattribute:: OctaveDisplacementCommand.runtime
+
+   .. container:: inherited
+
       .. autoattribute:: OctaveDisplacementCommand.scope
 
    .. container:: inherited
@@ -710,6 +664,10 @@ pitchcommands
    .. container:: inherited
 
       .. autoattribute:: OctaveDisplacementCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: OctaveDisplacementCommand.tag_measure_number
 
    .. container:: inherited
 
@@ -772,21 +730,6 @@ pitchcommands
 
       <hr/>
 
-   .. rubric:: Read/write properties
-      :class: class-header
-
-   .. container:: inherited
-
-      .. autoattribute:: PitchCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: PitchCommand.tag_measure_number
-
-   .. raw:: html
-
-      <hr/>
-
    .. rubric:: Read-only properties
       :class: class-header
 
@@ -826,6 +769,10 @@ pitchcommands
 
    .. container:: inherited
 
+      .. autoattribute:: PitchCommand.runtime
+
+   .. container:: inherited
+
       .. autoattribute:: PitchCommand.scope
 
    .. container:: inherited
@@ -837,6 +784,10 @@ pitchcommands
    .. container:: inherited
 
       .. autoattribute:: PitchCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchCommand.tag_measure_number
 
    .. container:: inherited
 
@@ -890,21 +841,6 @@ pitchcommands
 
       <hr/>
 
-   .. rubric:: Read/write properties
-      :class: class-header
-
-   .. container:: inherited
-
-      .. autoattribute:: RegisterCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: RegisterCommand.tag_measure_number
-
-   .. raw:: html
-
-      <hr/>
-
    .. rubric:: Read-only properties
       :class: class-header
 
@@ -928,6 +864,10 @@ pitchcommands
 
    .. container:: inherited
 
+      .. autoattribute:: RegisterCommand.runtime
+
+   .. container:: inherited
+
       .. autoattribute:: RegisterCommand.scope
 
    .. container:: inherited
@@ -937,6 +877,10 @@ pitchcommands
    .. container:: inherited
 
       .. autoattribute:: RegisterCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: RegisterCommand.tag_measure_number
 
    .. container:: inherited
 
@@ -992,21 +936,6 @@ pitchcommands
 
       <hr/>
 
-   .. rubric:: Read/write properties
-      :class: class-header
-
-   .. container:: inherited
-
-      .. autoattribute:: RegisterInterpolationCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: RegisterInterpolationCommand.tag_measure_number
-
-   .. raw:: html
-
-      <hr/>
-
    .. rubric:: Read-only properties
       :class: class-header
 
@@ -1028,6 +957,10 @@ pitchcommands
 
    .. container:: inherited
 
+      .. autoattribute:: RegisterInterpolationCommand.runtime
+
+   .. container:: inherited
+
       .. autoattribute:: RegisterInterpolationCommand.scope
 
    .. autoattribute:: RegisterInterpolationCommand.selector
@@ -1039,6 +972,10 @@ pitchcommands
    .. container:: inherited
 
       .. autoattribute:: RegisterInterpolationCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: RegisterInterpolationCommand.tag_measure_number
 
    .. container:: inherited
 
@@ -1093,21 +1030,6 @@ pitchcommands
 
       <hr/>
 
-   .. rubric:: Read/write properties
-      :class: class-header
-
-   .. container:: inherited
-
-      .. autoattribute:: RegisterToOctaveCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: RegisterToOctaveCommand.tag_measure_number
-
-   .. raw:: html
-
-      <hr/>
-
    .. rubric:: Read-only properties
       :class: class-header
 
@@ -1133,6 +1055,10 @@ pitchcommands
 
    .. container:: inherited
 
+      .. autoattribute:: RegisterToOctaveCommand.runtime
+
+   .. container:: inherited
+
       .. autoattribute:: RegisterToOctaveCommand.scope
 
    .. container:: inherited
@@ -1142,6 +1068,10 @@ pitchcommands
    .. container:: inherited
 
       .. autoattribute:: RegisterToOctaveCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: RegisterToOctaveCommand.tag_measure_number
 
    .. container:: inherited
 
@@ -1197,21 +1127,6 @@ pitchcommands
 
       <hr/>
 
-   .. rubric:: Read/write properties
-      :class: class-header
-
-   .. container:: inherited
-
-      .. autoattribute:: StaffPositionCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: StaffPositionCommand.tag_measure_number
-
-   .. raw:: html
-
-      <hr/>
-
    .. rubric:: Read-only properties
       :class: class-header
 
@@ -1239,6 +1154,10 @@ pitchcommands
 
    .. container:: inherited
 
+      .. autoattribute:: StaffPositionCommand.runtime
+
+   .. container:: inherited
+
       .. autoattribute:: StaffPositionCommand.scope
 
    .. container:: inherited
@@ -1248,6 +1167,10 @@ pitchcommands
    .. container:: inherited
 
       .. autoattribute:: StaffPositionCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: StaffPositionCommand.tag_measure_number
 
    .. container:: inherited
 
@@ -1302,21 +1225,6 @@ pitchcommands
 
       <hr/>
 
-   .. rubric:: Read/write properties
-      :class: class-header
-
-   .. container:: inherited
-
-      .. autoattribute:: StaffPositionInterpolationCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: StaffPositionInterpolationCommand.tag_measure_number
-
-   .. raw:: html
-
-      <hr/>
-
    .. rubric:: Read-only properties
       :class: class-header
 
@@ -1338,6 +1246,10 @@ pitchcommands
 
    .. container:: inherited
 
+      .. autoattribute:: StaffPositionInterpolationCommand.runtime
+
+   .. container:: inherited
+
       .. autoattribute:: StaffPositionInterpolationCommand.scope
 
    .. container:: inherited
@@ -1351,6 +1263,10 @@ pitchcommands
    .. container:: inherited
 
       .. autoattribute:: StaffPositionInterpolationCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: StaffPositionInterpolationCommand.tag_measure_number
 
    .. container:: inherited
 

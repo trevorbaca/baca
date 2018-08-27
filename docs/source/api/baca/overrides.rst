@@ -78,21 +78,6 @@ overrides
 
       <hr/>
 
-   .. rubric:: Read/write properties
-      :class: class-header
-
-   .. container:: inherited
-
-      .. autoattribute:: OverrideCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: OverrideCommand.tag_measure_number
-
-   .. raw:: html
-
-      <hr/>
-
    .. rubric:: Read-only properties
       :class: class-header
 
@@ -124,6 +109,10 @@ overrides
 
    .. container:: inherited
 
+      .. autoattribute:: OverrideCommand.runtime
+
+   .. container:: inherited
+
       .. autoattribute:: OverrideCommand.scope
 
    .. container:: inherited
@@ -133,6 +122,10 @@ overrides
    .. container:: inherited
 
       .. autoattribute:: OverrideCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: OverrideCommand.tag_measure_number
 
    .. container:: inherited
 

@@ -1472,9 +1472,9 @@ class SegmentMaker(abjad.SegmentMaker):
             command_count += 1
             selection = self._scope_to_leaf_selection(command)
             voice_name = command.scope.voice_name
-            command.runtime = self._bundle_manifests(voice_name)
+            runtime = self._bundle_manifests(voice_name)
             try:
-                command(selection)
+                command(selection, runtime)
             except:
                 print(f'Interpreting ...\n\n{format(command)}\n')
                 raise
@@ -1523,9 +1523,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 measures = command.scope.measures
                 result = self._get_measure_time_signatures(*measures)
                 start_offset, time_signatures = result
-                command.runtime = self._bundle_manifests(voice.name)
+                runtime = self._bundle_manifests(voice.name)
                 try:
-                    command(start_offset, time_signatures)
+                    command(runtime, start_offset, time_signatures)
                 except:
                     print(f'Interpreting ...\n\n{format(command)}\n')
                     raise
@@ -2955,12 +2955,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 if measure_number is None:
                     continue
                 clef = wrapper.indicator
-                command = baca_overrides.clef_shift(
+                suite = baca_overrides.clef_shift(
                     clef,
                     selector='baca.leaf(0)',
                     )
-                command.runtime = self._bundle_manifests()
-                command(leaf)
+                runtime = self._bundle_manifests()
+                suite(leaf, runtime=runtime)
 
     def _shorten_long_repeat_ties(self):
         leaves = abjad.iterate(self.score).leaves()

@@ -163,21 +163,6 @@ piecewise
 
       <hr/>
 
-   .. rubric:: Read/write properties
-      :class: class-header
-
-   .. container:: inherited
-
-      .. autoattribute:: PiecewiseCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: PiecewiseCommand.tag_measure_number
-
-   .. raw:: html
-
-      <hr/>
-
    .. rubric:: Read-only properties
       :class: class-header
 
@@ -213,6 +198,10 @@ piecewise
 
    .. container:: inherited
 
+      .. autoattribute:: PiecewiseCommand.runtime
+
+   .. container:: inherited
+
       .. autoattribute:: PiecewiseCommand.scope
 
    .. autoattribute:: PiecewiseCommand.selector
@@ -220,6 +209,10 @@ piecewise
    .. container:: inherited
 
       .. autoattribute:: PiecewiseCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: PiecewiseCommand.tag_measure_number
 
    .. container:: inherited
 

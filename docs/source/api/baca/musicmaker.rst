@@ -237,21 +237,6 @@ musicmaker
 
       <hr/>
 
-   .. rubric:: Read/write properties
-      :class: class-header
-
-   .. container:: inherited
-
-      .. autoattribute:: ImbricationCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: ImbricationCommand.tag_measure_number
-
-   .. raw:: html
-
-      <hr/>
-
    .. rubric:: Read-only properties
       :class: class-header
 
@@ -281,6 +266,10 @@ musicmaker
 
    .. container:: inherited
 
+      .. autoattribute:: ImbricationCommand.runtime
+
+   .. container:: inherited
+
       .. autoattribute:: ImbricationCommand.scope
 
    .. autoattribute:: ImbricationCommand.segment
@@ -292,6 +281,10 @@ musicmaker
    .. container:: inherited
 
       .. autoattribute:: ImbricationCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: ImbricationCommand.tag_measure_number
 
    .. container:: inherited
 
@@ -646,21 +639,6 @@ musicmaker
 
       <hr/>
 
-   .. rubric:: Read/write properties
-      :class: class-header
-
-   .. container:: inherited
-
-      .. autoattribute:: NestingCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: NestingCommand.tag_measure_number
-
-   .. raw:: html
-
-      <hr/>
-
    .. rubric:: Read-only properties
       :class: class-header
 
@@ -684,6 +662,10 @@ musicmaker
 
    .. container:: inherited
 
+      .. autoattribute:: NestingCommand.runtime
+
+   .. container:: inherited
+
       .. autoattribute:: NestingCommand.scope
 
    .. container:: inherited
@@ -693,6 +675,10 @@ musicmaker
    .. container:: inherited
 
       .. autoattribute:: NestingCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: NestingCommand.tag_measure_number
 
    .. container:: inherited
 
@@ -748,21 +734,6 @@ musicmaker
 
       <hr/>
 
-   .. rubric:: Read/write properties
-      :class: class-header
-
-   .. container:: inherited
-
-      .. autoattribute:: PitchFirstRhythmCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: PitchFirstRhythmCommand.tag_measure_number
-
-   .. raw:: html
-
-      <hr/>
-
    .. rubric:: Read-only properties
       :class: class-header
 
@@ -788,6 +759,10 @@ musicmaker
 
    .. container:: inherited
 
+      .. autoattribute:: PitchFirstRhythmCommand.runtime
+
+   .. container:: inherited
+
       .. autoattribute:: PitchFirstRhythmCommand.scope
 
    .. container:: inherited
@@ -797,6 +772,10 @@ musicmaker
    .. container:: inherited
 
       .. autoattribute:: PitchFirstRhythmCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchFirstRhythmCommand.tag_measure_number
 
    .. container:: inherited
 

@@ -257,12 +257,14 @@ class RhythmCommand(scoping.Command):
 
     def __call__(
         self,
+        runtime: abjad.OrderedDict = None,
         start_offset: abjad.Offset = None,
         time_signatures: typing.Iterable[abjad.TimeSignature] = None,
         ) -> None:
         """
         Calls command on ``start_offset`` and ``time_signatures``.
         """
+        self._runtime = runtime or abjad.OrderedDict()
         music, start_offset = self._make_rhythm(start_offset, time_signatures)
         assert isinstance(music, (tuple, list, abjad.Voice))
         first_leaf = abjad.inspect(music).leaf(0)
