@@ -190,6 +190,7 @@ overrides
    ~hairpin_start_shift
    ~hairpin_stencil_false
    ~hairpin_transparent
+   ~mmrest_color
    ~mmrest_text_color
    ~mmrest_text_extra_offset
    ~mmrest_text_padding
@@ -341,6 +342,8 @@ overrides
 .. autofunction:: hairpin_stencil_false
 
 .. autofunction:: hairpin_transparent
+
+.. autofunction:: mmrest_color
 
 .. autofunction:: mmrest_text_color
 

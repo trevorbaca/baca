@@ -2056,6 +2056,24 @@ def hairpin_transparent(
         tags=[tag],
         )
 
+def mmrest_color(
+    color: str = 'red',
+    *,
+    selector: typings.Selector = 'baca.leaves()',
+    tag: typing.Optional[str] = 'baca_mmrest_text_color',
+    ) -> OverrideCommand:
+    r"""
+    Overrides multimeasure rest color.
+    """
+    return OverrideCommand(
+        attribute='color',
+        value=color,
+        grob='multi_measure_rest',
+        selector=selector,
+        tags=[tag],
+        whitelist=(abjad.MultimeasureRest,),
+        )
+
 def mmrest_text_color(
     color: str = 'red',
     *,

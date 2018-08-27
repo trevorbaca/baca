@@ -120,6 +120,8 @@ baca
    ~lts
    ~mgroups
    ~mleaves
+   ~mmrest
+   ~mmrests
    ~nontrivial
    ~note
    ~notes
@@ -252,6 +254,10 @@ baca
 .. autofunction:: mgroups
 
 .. autofunction:: mleaves
+
+.. autofunction:: mmrest
+
+.. autofunction:: mmrests
 
 .. autofunction:: nontrivial
 

@@ -68,6 +68,8 @@ Bača API
    ~baca.lts
    ~baca.mgroups
    ~baca.mleaves
+   ~baca.mmrest
+   ~baca.mmrests
    ~baca.nontrivial
    ~baca.note
    ~baca.notes
@@ -670,6 +672,7 @@ Override library.
    ~baca.overrides.hairpin_start_shift
    ~baca.overrides.hairpin_stencil_false
    ~baca.overrides.hairpin_transparent
+   ~baca.overrides.mmrest_color
    ~baca.overrides.mmrest_text_color
    ~baca.overrides.mmrest_text_extra_offset
    ~baca.overrides.mmrest_text_padding

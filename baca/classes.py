@@ -3967,6 +3967,127 @@ class Selection(abjad.Selection):
             raise Exception(count)
         return result
 
+    def mmrest(
+        self,
+        n: int,
+        *,
+        exclude: typings.Strings = None,
+        ) -> typing.Union[abjad.Note, abjad.Expression]:
+        r"""
+        Selects multimeasure rest ``n``.
+
+        ..  container:: example
+
+            Selects multimeasure rest -1:
+
+            ..  container:: example
+
+                >>> staff = abjad.Staff("R1 R1 R1")
+                >>> abjad.setting(staff).auto_beaming = False
+                >>> abjad.show(staff) # doctest: +SKIP
+
+                >>> result = baca.select(staff).mmrest(-1)
+
+                >>> result
+                MultimeasureRest('R1')
+
+            ..  container:: example expression
+
+                >>> selector = baca.select().mmrest(-1)
+                >>> result = selector(staff)
+
+                >>> selector.print(result)
+                MultimeasureRest('R1')
+
+                >>> selector.color(result)
+                >>> abjad.show(staff) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(staff, strict=89)
+                \new Staff
+                \with
+                {
+                    autoBeaming = ##f
+                }
+                {
+                    R1
+                    R1
+                    \abjad-color-music #'green
+                    R1
+                }
+
+        """
+        if self._expression:
+            return self._update_expression(inspect.currentframe(), lone=True)
+        return self.mmrests(exclude=exclude)[n]
+
+    def mmrests(
+        self,
+        *,
+        exclude: typings.Strings = None,
+        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        r"""
+        Selects multimeasure rests.
+
+        ..  container:: example
+
+            Selects multimeasure rests:
+
+            ..  container:: example
+
+                >>> staff = abjad.Staff("R1 R1 R1")
+                >>> abjad.setting(staff).auto_beaming = False
+                >>> abjad.show(staff) # doctest: +SKIP
+
+                >>> result = baca.select(staff).mmrests()
+
+                >>> for item in result:
+                ...     item
+                ...
+                MultimeasureRest('R1')
+                MultimeasureRest('R1')
+                MultimeasureRest('R1')
+
+            ..  container:: example expression
+
+                >>> selector = baca.select().mmrests()
+                >>> result = selector(staff)
+
+                >>> selector.print(result)
+                MultimeasureRest('R1')
+                MultimeasureRest('R1')
+                MultimeasureRest('R1')
+
+                >>> selector.color(result)
+                >>> abjad.show(staff) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(staff, strict=89)
+                \new Staff
+                \with
+                {
+                    autoBeaming = ##f
+                }
+                {
+                    \abjad-color-music #'red
+                    R1
+                    \abjad-color-music #'blue
+                    R1
+                    \abjad-color-music #'red
+                    R1
+                }
+
+        """
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        return super().leaves(
+            abjad.MultimeasureRest,
+            exclude=exclude,
+            grace_notes=False,
+            )
+
     def ntrun(
         self, n: int,
         *,

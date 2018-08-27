@@ -1452,7 +1452,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     name = voice.name.replace('Music_Voice', 'Rest_Voice')
                 else:
                     name = voice.name.replace('Voice', 'Rest_Voice')
-                    voice_names.append(name)
+                voice_names.append(name)
         voice_names_ = tuple(voice_names)
         self._voice_names = voice_names_
 

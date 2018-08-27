@@ -546,6 +546,8 @@ classes
       lts
       mgroups
       mleaves
+      mmrest
+      mmrests
       ntrun
       ntruns
       omgroups
@@ -781,6 +783,10 @@ classes
    .. automethod:: Selection.mgroups
 
    .. automethod:: Selection.mleaves
+
+   .. automethod:: Selection.mmrest
+
+   .. automethod:: Selection.mmrests
 
    .. container:: inherited
 
