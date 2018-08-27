@@ -21,7 +21,6 @@ class IndicatorBundle(abjad.AbjadObject):
 
     __slots__ = (
         '_bookended_spanner_start',
-        '_enchained',
         '_indicator',
         '_spanner_start',
         '_spanner_stop',
@@ -35,7 +34,6 @@ class IndicatorBundle(abjad.AbjadObject):
         self,
         *arguments: typing.Any,
         bookended_spanner_start: typing.Any = None,
-        enchained: bool = None,
         ) -> None:
         assert len(arguments) <= 3, repr(arguments)
         self._indicator = None
@@ -51,9 +49,6 @@ class IndicatorBundle(abjad.AbjadObject):
             else:
                 self._indicator = argument
         self._bookended_spanner_start = bookended_spanner_start
-        if enchained is not None:
-            enchained = bool(enchained)
-        self._enchained = enchained
 
     ### SPECIAL METHODS ###
 
@@ -85,14 +80,6 @@ class IndicatorBundle(abjad.AbjadObject):
         Gets bookended start text span indicator.
         """
         return self._bookended_spanner_start
-
-    # TODO: remove because unused
-    @property
-    def enchained(self) -> typing.Optional[bool]:
-        """
-        Is true when bundle contributes to enchained spanner.
-        """
-        return self._enchained
 
     @property
     def indicator(self) -> typing.Optional[typing.Any]:
@@ -184,7 +171,6 @@ class IndicatorBundle(abjad.AbjadObject):
             indicator,
             self.spanner_start,
             bookended_spanner_start=self.bookended_spanner_start,
-            enchained=self.enchained,
             )
 
     def with_spanner_start(self, spanner_start) -> 'IndicatorBundle':
@@ -228,7 +214,6 @@ class IndicatorBundle(abjad.AbjadObject):
             self.indicator,
             spanner_start,
             bookended_spanner_start=self.bookended_spanner_start,
-            enchained=self.enchained,
             )
 
     def with_spanner_stop(self, spanner_stop) -> 'IndicatorBundle':
@@ -258,7 +243,6 @@ class IndicatorBundle(abjad.AbjadObject):
             self.indicator,
             self.spanner_start,
             bookended_spanner_start=self.bookended_spanner_start,
-            enchained=self.enchained,
             )
 
 class PiecewiseCommand(scoping.Command):
@@ -4848,7 +4832,6 @@ def text_spanner(
             stop_text_span,
             start_text_span,
             bookended_spanner_start=bookended_spanner_start,
-            enchained=True,
             )
         bundles.append(bundle)
     return PiecewiseCommand(

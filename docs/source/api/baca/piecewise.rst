@@ -42,7 +42,6 @@ piecewise
       __repr__
       bookended_spanner_start
       compound
-      enchained
       indicator
       indicator_only
       indicators
@@ -100,8 +99,6 @@ piecewise
       :class: class-header
 
    .. autoattribute:: IndicatorBundle.bookended_spanner_start
-
-   .. autoattribute:: IndicatorBundle.enchained
 
    .. autoattribute:: IndicatorBundle.indicator
 
