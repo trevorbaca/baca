@@ -73,6 +73,7 @@ segmentmaker
       score_template
       skips_instead_of_rests
       spacing
+      stage_markup
       test_container_identifiers
       time_signatures
       transpose_score
@@ -220,6 +221,8 @@ segmentmaker
    .. autoattribute:: SegmentMaker.skips_instead_of_rests
 
    .. autoattribute:: SegmentMaker.spacing
+
+   .. autoattribute:: SegmentMaker.stage_markup
 
    .. autoattribute:: SegmentMaker.test_container_identifiers
 

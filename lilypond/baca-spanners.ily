@@ -454,3 +454,86 @@ baca-start-spm-both = #(
     $music
     #}
     )
+
+%%% STAGE NUMBER SPANNER %%%
+
+bacaStartTextSpanSNM = #(
+    make-music 'TextSpanEvent 'span-direction START 'spanner-id "SNM"
+    )
+
+bacaStopTextSpanSNM = #(
+    make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "SNM"
+    )
+
+#(define-markup-command
+    (baca-snm-left-markup layout props snm)
+    (string?)
+    (interpret-markup layout props
+        #{
+        \markup
+        \with-color #(x11-color 'ForestGreen)
+        \fontsize #-3
+        \upright
+        \concat { #snm \hspace #0.5 }
+        #}
+        )
+    )
+
+baca-snm-left-text-tweak = #(
+    define-music-function
+    (parser location left music)
+    (string? ly:music?)
+    #{
+    \tweak bound-details.left.text \markup \baca-snm-left-markup #left
+    $music
+    #}
+    )
+
+#(define-markup-command
+    (baca-snm-right-markup layout props snm)
+    (string?)
+    (interpret-markup layout props
+        #{
+        \markup 
+        \with-color #(x11-color 'ForestGreen)
+        \fontsize #-3
+        \upright
+        #snm
+        #}
+        )
+    )
+
+baca-snm-right-text-tweak = #(
+    define-music-function
+    (parser location right music)
+    (string? ly:music?)
+    #{
+    \tweak bound-details.right.text \markup \baca-snm-right-markup #right
+    $music
+    #}
+    ) 
+
+baca-start-snm-left-only = #(
+    define-music-function
+    (parser location left music)
+    (string? ly:music?)
+    #{
+    - \abjad-invisible-line
+    - \baca-snm-left-text-tweak #left
+    - \tweak extra-offset #'(0 . 15)
+    $music
+    #}
+    )
+
+baca-start-snm-both = #(
+    define-music-function
+    (parser location left right music)
+    (string? string? ly:music?)
+    #{
+    - \abjad-invisible-line
+    - \baca-snm-left-text-tweak #left
+    - \baca-snm-right-text-tweak #right
+    - \tweak extra-offset #'(0 . 15)
+    $music
+    #}
+    )

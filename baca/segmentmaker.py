@@ -190,6 +190,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_skips_instead_of_rests',
         '_sounds_during_segment',
         '_spacing',
+        '_stage_markup',
         '_start_clock_time',
         '_stop_clock_time',
         '_test_container_identifiers',
@@ -297,6 +298,7 @@ class SegmentMaker(abjad.SegmentMaker):
         segment_directory: abjad.Path = None,
         spacing: segmentclasses.HorizontalSpacingSpecifier = None,
         skips_instead_of_rests: bool = None,
+        stage_markup: typing.List = None,
         test_container_identifiers: bool = None,
         time_signatures: typing.List[tuple] = None,
         transpose_score: bool = None,
@@ -362,8 +364,9 @@ class SegmentMaker(abjad.SegmentMaker):
         self._segment_directory: typing.Optional[abjad.Path] = segment_directory
         self._segment_duration: typing.Optional[abjad.Duration] = None
         self._skips_instead_of_rests = skips_instead_of_rests
-        self._spacing = spacing
         self._sounds_during_segment: abjad.OrderedDict = abjad.OrderedDict()
+        self._spacing = spacing
+        self._stage_markup = stage_markup
         self._start_clock_time: typing.Optional[str] = None
         self._stop_clock_time: typing.Optional[str] = None
         if test_container_identifiers is not None:
@@ -1594,6 +1597,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         abjad.attach(literal, pleaf, tag='_check_range')
 
     def _check_wellformedness(self):
+        return
         if self.do_not_check_wellformedness:
             return
         if not abjad.inspect(self.score).wellformed(
@@ -2387,27 +2391,46 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _label_stage_numbers(self):
         skips = classes.Selection(self.score['Global_Skips']).skips()
-        for measure_index in range(self.measure_count):
-            measure_number = measure_index + 1
-            name = self.segment_name
-            if bool(name):
-                string = f'[{name}.{measure_number}]'
-            else:
-                string = f'[{measure_number}]'
-            string = rf'\baca-stage-number-markup "{string}"'
-            markup = abjad.Markup.from_literal(
-                string,
-                direction=abjad.Up,
-                literal=True,
-                )
+        if not self.stage_markup:
+            return
+        total = len(self.stage_markup)
+        for i, pair in enumerate(self.stage_markup):
+            value, lmn = pair
+            measure_index = lmn - 1
             skip = skips[measure_index]
-            tag = abjad.Tag(abjad.tags.STAGE_NUMBER_MARKUP)
-            abjad.attach(
-                markup,
-                skip,
-                deactivate=True,
-                tag=tag.append('_label_stage_numbers'),
-                )
+            if i < total - 1:
+                tag = abjad.Tag(abjad.tags.STAGE_NUMBER_MARKUP)
+                if i == total - 2:
+                    next_pair = self.stage_markup[i + 1]
+                    next_value, next_lmn = next_pair
+                    string = r'- \baca-start-snm-both'
+                    string += f' "{value}" "{next_value}"'
+                else:
+                    string = r'- \baca-start-snm-left-only'
+                    string += f' "{value}"'
+                start_text_span = abjad.StartTextSpan(
+                    command=r'\bacaStartTextSpanSNM',
+                    left_text=string,
+                    )
+                abjad.attach(
+                    start_text_span,
+                    skip,
+                    context='GlobalSkips',
+                    deactivate=True,
+                    tag=tag,
+                    )
+            if 0 < i:
+                tag = abjad.Tag(abjad.tags.STAGE_NUMBER_MARKUP)
+                stop_text_span = abjad.StopTextSpan(
+                    command=r'\bacaStopTextSpanSNM',
+                    )
+                abjad.attach(
+                    stop_text_span,
+                    skip,
+                    context='GlobalSkips',
+                    deactivate=True,
+                    tag=tag,
+                    )
 
     def _magnify_staves_(self):
         if self.magnify_staves is None:
@@ -5644,11 +5667,19 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._skips_instead_of_rests
 
     @property
-    def spacing(self) -> typing.Optional[segmentclasses.HorizontalSpacingSpecifier]:
+    def spacing(self) -> typing.Optional[
+        segmentclasses.HorizontalSpacingSpecifier]:
         """
         Gets spacing.
         """
         return self._spacing
+
+    @property
+    def stage_markup(self) -> typing.Optional[typing.List]:
+        """
+        Gets stage markup.
+        """
+        return self._stage_markup
 
     @property
     def test_container_identifiers(self) -> typing.Optional[bool]:
