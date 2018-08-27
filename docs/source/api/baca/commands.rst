@@ -92,19 +92,7 @@ commands
 
    .. container:: inherited
 
-      .. autoattribute:: BCPCommand.map
-
-   .. container:: inherited
-
-      .. autoattribute:: BCPCommand.measures
-
-   .. container:: inherited
-
       .. autoattribute:: BCPCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: BCPCommand.scope
 
    .. container:: inherited
 
@@ -129,7 +117,19 @@ commands
 
    .. container:: inherited
 
+      .. autoattribute:: BCPCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: BCPCommand.match
+
+   .. container:: inherited
+
+      .. autoattribute:: BCPCommand.measures
+
+   .. container:: inherited
+
+      .. autoattribute:: BCPCommand.scope
 
    .. container:: inherited
 
@@ -188,19 +188,7 @@ commands
 
    .. container:: inherited
 
-      .. autoattribute:: ColorCommand.map
-
-   .. container:: inherited
-
-      .. autoattribute:: ColorCommand.measures
-
-   .. container:: inherited
-
       .. autoattribute:: ColorCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: ColorCommand.scope
 
    .. container:: inherited
 
@@ -219,7 +207,19 @@ commands
 
    .. container:: inherited
 
+      .. autoattribute:: ColorCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: ColorCommand.match
+
+   .. container:: inherited
+
+      .. autoattribute:: ColorCommand.measures
+
+   .. container:: inherited
+
+      .. autoattribute:: ColorCommand.scope
 
    .. container:: inherited
 
@@ -286,19 +286,7 @@ commands
 
    .. container:: inherited
 
-      .. autoattribute:: ContainerCommand.map
-
-   .. container:: inherited
-
-      .. autoattribute:: ContainerCommand.measures
-
-   .. container:: inherited
-
       .. autoattribute:: ContainerCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: ContainerCommand.scope
 
    .. container:: inherited
 
@@ -319,7 +307,19 @@ commands
 
    .. container:: inherited
 
+      .. autoattribute:: ContainerCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: ContainerCommand.match
+
+   .. container:: inherited
+
+      .. autoattribute:: ContainerCommand.measures
+
+   .. container:: inherited
+
+      .. autoattribute:: ContainerCommand.scope
 
    .. container:: inherited
 
@@ -387,19 +387,7 @@ commands
 
    .. container:: inherited
 
-      .. autoattribute:: GlobalFermataCommand.map
-
-   .. container:: inherited
-
-      .. autoattribute:: GlobalFermataCommand.measures
-
-   .. container:: inherited
-
       .. autoattribute:: GlobalFermataCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: GlobalFermataCommand.scope
 
    .. container:: inherited
 
@@ -420,7 +408,19 @@ commands
 
    .. container:: inherited
 
+      .. autoattribute:: GlobalFermataCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: GlobalFermataCommand.match
+
+   .. container:: inherited
+
+      .. autoattribute:: GlobalFermataCommand.measures
+
+   .. container:: inherited
+
+      .. autoattribute:: GlobalFermataCommand.scope
 
    .. container:: inherited
 
@@ -491,19 +491,7 @@ commands
 
    .. container:: inherited
 
-      .. autoattribute:: IndicatorCommand.map
-
-   .. container:: inherited
-
-      .. autoattribute:: IndicatorCommand.measures
-
-   .. container:: inherited
-
       .. autoattribute:: IndicatorCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: IndicatorCommand.scope
 
    .. container:: inherited
 
@@ -526,11 +514,23 @@ commands
 
    .. container:: inherited
 
+      .. autoattribute:: IndicatorCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: IndicatorCommand.match
+
+   .. container:: inherited
+
+      .. autoattribute:: IndicatorCommand.measures
 
    .. autoattribute:: IndicatorCommand.predicate
 
    .. autoattribute:: IndicatorCommand.redundant
+
+   .. container:: inherited
+
+      .. autoattribute:: IndicatorCommand.scope
 
    .. container:: inherited
 
@@ -587,19 +587,7 @@ commands
 
    .. container:: inherited
 
-      .. autoattribute:: InstrumentChangeCommand.map
-
-   .. container:: inherited
-
-      .. autoattribute:: InstrumentChangeCommand.measures
-
-   .. container:: inherited
-
       .. autoattribute:: InstrumentChangeCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: InstrumentChangeCommand.scope
 
    .. container:: inherited
 
@@ -626,7 +614,15 @@ commands
 
    .. container:: inherited
 
+      .. autoattribute:: InstrumentChangeCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: InstrumentChangeCommand.match
+
+   .. container:: inherited
+
+      .. autoattribute:: InstrumentChangeCommand.measures
 
    .. container:: inherited
 
@@ -635,6 +631,10 @@ commands
    .. container:: inherited
 
       .. autoattribute:: InstrumentChangeCommand.redundant
+
+   .. container:: inherited
+
+      .. autoattribute:: InstrumentChangeCommand.scope
 
    .. container:: inherited
 
@@ -705,19 +705,7 @@ commands
 
    .. container:: inherited
 
-      .. autoattribute:: LabelCommand.map
-
-   .. container:: inherited
-
-      .. autoattribute:: LabelCommand.measures
-
-   .. container:: inherited
-
       .. autoattribute:: LabelCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: LabelCommand.scope
 
    .. container:: inherited
 
@@ -738,7 +726,19 @@ commands
 
    .. container:: inherited
 
+      .. autoattribute:: LabelCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: LabelCommand.match
+
+   .. container:: inherited
+
+      .. autoattribute:: LabelCommand.measures
+
+   .. container:: inherited
+
+      .. autoattribute:: LabelCommand.scope
 
    .. container:: inherited
 
@@ -806,19 +806,7 @@ commands
 
    .. container:: inherited
 
-      .. autoattribute:: MetronomeMarkCommand.map
-
-   .. container:: inherited
-
-      .. autoattribute:: MetronomeMarkCommand.measures
-
-   .. container:: inherited
-
       .. autoattribute:: MetronomeMarkCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: MetronomeMarkCommand.scope
 
    .. container:: inherited
 
@@ -839,9 +827,21 @@ commands
 
    .. container:: inherited
 
+      .. autoattribute:: MetronomeMarkCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: MetronomeMarkCommand.match
 
+   .. container:: inherited
+
+      .. autoattribute:: MetronomeMarkCommand.measures
+
    .. autoattribute:: MetronomeMarkCommand.redundant
+
+   .. container:: inherited
+
+      .. autoattribute:: MetronomeMarkCommand.scope
 
    .. container:: inherited
 
@@ -908,19 +908,7 @@ commands
 
    .. container:: inherited
 
-      .. autoattribute:: PartAssignmentCommand.map
-
-   .. container:: inherited
-
-      .. autoattribute:: PartAssignmentCommand.measures
-
-   .. container:: inherited
-
       .. autoattribute:: PartAssignmentCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: PartAssignmentCommand.scope
 
    .. container:: inherited
 
@@ -939,9 +927,21 @@ commands
 
    .. container:: inherited
 
+      .. autoattribute:: PartAssignmentCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: PartAssignmentCommand.match
 
+   .. container:: inherited
+
+      .. autoattribute:: PartAssignmentCommand.measures
+
    .. autoattribute:: PartAssignmentCommand.part_assignment
+
+   .. container:: inherited
+
+      .. autoattribute:: PartAssignmentCommand.scope
 
    .. container:: inherited
 
@@ -996,19 +996,7 @@ commands
 
    .. container:: inherited
 
-      .. autoattribute:: VoltaCommand.map
-
-   .. container:: inherited
-
-      .. autoattribute:: VoltaCommand.measures
-
-   .. container:: inherited
-
       .. autoattribute:: VoltaCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: VoltaCommand.scope
 
    .. container:: inherited
 
@@ -1027,7 +1015,19 @@ commands
 
    .. container:: inherited
 
+      .. autoattribute:: VoltaCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: VoltaCommand.match
+
+   .. container:: inherited
+
+      .. autoattribute:: VoltaCommand.measures
+
+   .. container:: inherited
+
+      .. autoattribute:: VoltaCommand.scope
 
    .. container:: inherited
 

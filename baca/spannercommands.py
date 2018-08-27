@@ -2071,6 +2071,7 @@ def sustain_pedal(
 
 def tie(
     *,
+    map: typings.Selector = None,
     repeat: typing.Union[
         bool,
         typings.IntegerPair,
@@ -2223,6 +2224,7 @@ def tie(
         repeat=repeat,
         )
     return SpannerCommand(
+        map=map,
         selector=selector,
         spanner=tie,
         tags=[tag],
@@ -2235,8 +2237,11 @@ def tie_repeat_pitches(
     """
     Ties repeat pitches.
     """
-    command = tie(tag=tag)
-    command.map = classes.selector().ltqruns().nontrivial()
+    map = classes.selector().ltqruns().nontrivial()
+    command = tie(
+        map=map,
+        tag=tag,
+        )
     return command
 
 def trill_spanner(

@@ -82,19 +82,7 @@ spannercommands
 
    .. container:: inherited
 
-      .. autoattribute:: SpannerCommand.map
-
-   .. container:: inherited
-
-      .. autoattribute:: SpannerCommand.measures
-
-   .. container:: inherited
-
       .. autoattribute:: SpannerCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: SpannerCommand.scope
 
    .. container:: inherited
 
@@ -117,9 +105,21 @@ spannercommands
 
    .. container:: inherited
 
+      .. autoattribute:: SpannerCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: SpannerCommand.match
 
+   .. container:: inherited
+
+      .. autoattribute:: SpannerCommand.measures
+
    .. autoattribute:: SpannerCommand.right_broken
+
+   .. container:: inherited
+
+      .. autoattribute:: SpannerCommand.scope
 
    .. autoattribute:: SpannerCommand.selector
 

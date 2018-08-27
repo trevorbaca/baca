@@ -92,19 +92,7 @@ rhythmcommands
 
    .. container:: inherited
 
-      .. autoattribute:: RhythmCommand.map
-
-   .. container:: inherited
-
-      .. autoattribute:: RhythmCommand.measures
-
-   .. container:: inherited
-
       .. autoattribute:: RhythmCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: RhythmCommand.scope
 
    .. container:: inherited
 
@@ -131,7 +119,15 @@ rhythmcommands
 
    .. container:: inherited
 
+      .. autoattribute:: RhythmCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: RhythmCommand.match
+
+   .. container:: inherited
+
+      .. autoattribute:: RhythmCommand.measures
 
    .. autoattribute:: RhythmCommand.multimeasure_rests
 
@@ -152,6 +148,10 @@ rhythmcommands
    .. autoattribute:: RhythmCommand.rhythm_maker
 
    .. autoattribute:: RhythmCommand.right_broken
+
+   .. container:: inherited
+
+      .. autoattribute:: RhythmCommand.scope
 
    .. container:: inherited
 
@@ -224,19 +224,7 @@ rhythmcommands
 
    .. container:: inherited
 
-      .. autoattribute:: TieCorrectionCommand.map
-
-   .. container:: inherited
-
-      .. autoattribute:: TieCorrectionCommand.measures
-
-   .. container:: inherited
-
       .. autoattribute:: TieCorrectionCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: TieCorrectionCommand.scope
 
    .. container:: inherited
 
@@ -257,9 +245,21 @@ rhythmcommands
 
    .. container:: inherited
 
+      .. autoattribute:: TieCorrectionCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: TieCorrectionCommand.match
 
+   .. container:: inherited
+
+      .. autoattribute:: TieCorrectionCommand.measures
+
    .. autoattribute:: TieCorrectionCommand.repeat
+
+   .. container:: inherited
+
+      .. autoattribute:: TieCorrectionCommand.scope
 
    .. container:: inherited
 

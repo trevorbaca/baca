@@ -242,19 +242,7 @@ musicmaker
 
    .. container:: inherited
 
-      .. autoattribute:: ImbricationCommand.map
-
-   .. container:: inherited
-
-      .. autoattribute:: ImbricationCommand.measures
-
-   .. container:: inherited
-
       .. autoattribute:: ImbricationCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: ImbricationCommand.scope
 
    .. container:: inherited
 
@@ -281,7 +269,19 @@ musicmaker
 
    .. container:: inherited
 
+      .. autoattribute:: ImbricationCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: ImbricationCommand.match
+
+   .. container:: inherited
+
+      .. autoattribute:: ImbricationCommand.measures
+
+   .. container:: inherited
+
+      .. autoattribute:: ImbricationCommand.scope
 
    .. autoattribute:: ImbricationCommand.segment
 
@@ -651,19 +651,7 @@ musicmaker
 
    .. container:: inherited
 
-      .. autoattribute:: NestingCommand.map
-
-   .. container:: inherited
-
-      .. autoattribute:: NestingCommand.measures
-
-   .. container:: inherited
-
       .. autoattribute:: NestingCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: NestingCommand.scope
 
    .. container:: inherited
 
@@ -684,7 +672,19 @@ musicmaker
 
    .. container:: inherited
 
+      .. autoattribute:: NestingCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: NestingCommand.match
+
+   .. container:: inherited
+
+      .. autoattribute:: NestingCommand.measures
+
+   .. container:: inherited
+
+      .. autoattribute:: NestingCommand.scope
 
    .. container:: inherited
 
@@ -753,19 +753,7 @@ musicmaker
 
    .. container:: inherited
 
-      .. autoattribute:: PitchFirstRhythmCommand.map
-
-   .. container:: inherited
-
-      .. autoattribute:: PitchFirstRhythmCommand.measures
-
-   .. container:: inherited
-
       .. autoattribute:: PitchFirstRhythmCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: PitchFirstRhythmCommand.scope
 
    .. container:: inherited
 
@@ -784,11 +772,23 @@ musicmaker
 
    .. container:: inherited
 
+      .. autoattribute:: PitchFirstRhythmCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: PitchFirstRhythmCommand.match
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchFirstRhythmCommand.measures
 
    .. autoattribute:: PitchFirstRhythmCommand.pattern
 
    .. autoattribute:: PitchFirstRhythmCommand.rhythm_maker
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchFirstRhythmCommand.scope
 
    .. container:: inherited
 

@@ -83,19 +83,7 @@ overrides
 
    .. container:: inherited
 
-      .. autoattribute:: OverrideCommand.map
-
-   .. container:: inherited
-
-      .. autoattribute:: OverrideCommand.measures
-
-   .. container:: inherited
-
       .. autoattribute:: OverrideCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: OverrideCommand.scope
 
    .. container:: inherited
 
@@ -124,7 +112,19 @@ overrides
 
    .. container:: inherited
 
+      .. autoattribute:: OverrideCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: OverrideCommand.match
+
+   .. container:: inherited
+
+      .. autoattribute:: OverrideCommand.measures
+
+   .. container:: inherited
+
+      .. autoattribute:: OverrideCommand.scope
 
    .. container:: inherited
 

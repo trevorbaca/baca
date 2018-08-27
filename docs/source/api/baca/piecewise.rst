@@ -168,19 +168,7 @@ piecewise
 
    .. container:: inherited
 
-      .. autoattribute:: PiecewiseCommand.map
-
-   .. container:: inherited
-
-      .. autoattribute:: PiecewiseCommand.measures
-
-   .. container:: inherited
-
       .. autoattribute:: PiecewiseCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: PiecewiseCommand.scope
 
    .. container:: inherited
 
@@ -207,13 +195,25 @@ piecewise
 
    .. container:: inherited
 
+      .. autoattribute:: PiecewiseCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: PiecewiseCommand.match
+
+   .. container:: inherited
+
+      .. autoattribute:: PiecewiseCommand.measures
 
    .. autoattribute:: PiecewiseCommand.piece_selector
 
    .. autoattribute:: PiecewiseCommand.remove_length_1_spanner_start
 
    .. autoattribute:: PiecewiseCommand.right_broken
+
+   .. container:: inherited
+
+      .. autoattribute:: PiecewiseCommand.scope
 
    .. autoattribute:: PiecewiseCommand.selector
 

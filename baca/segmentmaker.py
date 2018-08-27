@@ -757,10 +757,17 @@ class SegmentMaker(abjad.SegmentMaker):
                     commands_ = command
                 for command_ in commands_:
                     assert isinstance(command_, scoping.Command), repr(command_)
-                    scope_ = command_._override_scope(current_scope)
-                    scope_ = copy.copy(scope_)
-                    command_ = copy.copy(command_)
-                    command_.scope = scope_
+                    measures = command_.measures
+                    if isinstance(measures, int):
+                        measures = (measures, measures)
+                    if measures is not None:
+                        scope_ = abjad.new(current_scope, measures=measures)
+                    else:
+                        scope_ = abjad.new(current_scope)
+                    command_ = abjad.new(
+                        command_,
+                        scope=scope_,
+                        )
                     self.commands.append(command_)
 
     ### PRIVATE METHODS ###

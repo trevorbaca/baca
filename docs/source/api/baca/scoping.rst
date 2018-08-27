@@ -85,13 +85,7 @@ scoping
    .. rubric:: Read/write properties
       :class: class-header
 
-   .. autoattribute:: Command.map
-
-   .. autoattribute:: Command.measures
-
    .. autoattribute:: Command.runtime
-
-   .. autoattribute:: Command.scope
 
    .. autoattribute:: Command.tag_measure_number
 
@@ -104,7 +98,13 @@ scoping
 
    .. autoattribute:: Command.deactivate
 
+   .. autoattribute:: Command.map
+
    .. autoattribute:: Command.match
+
+   .. autoattribute:: Command.measures
+
+   .. autoattribute:: Command.scope
 
    .. autoattribute:: Command.selector
 

@@ -232,7 +232,7 @@ class Command(abjad.AbjadObject):
         self._match = match
         self._measures: typing.Optional[typings.Slice] = measures
         self._runtime = abjad.OrderedDict()
-        self.scope = scope
+        self._scope = scope
         if isinstance(selector, str):
             selector_ = eval(selector)
         else:
@@ -306,21 +306,6 @@ class Command(abjad.AbjadObject):
             if i not in self.match:
                 return False
         return True
-
-    def _override_scope(self, scope):
-        assert isinstance(scope, (Scope, TimelineScope)), repr(scope)
-        if not self.measures:
-            return scope
-        if isinstance(self.measures, int):
-            measures = (self.measures, self.measures)
-        else:
-            assert isinstance(self.measures, (list, tuple)), repr(self.measures)
-            measures = self.measures
-        scope_ = abjad.new(
-            scope,
-            measures=measures,
-            )
-        return scope_
 
     @staticmethod
     def _preprocess_tags(tags) -> typing.List:
@@ -440,14 +425,6 @@ class Command(abjad.AbjadObject):
         """
         return self._map
 
-    @map.setter
-    def map(self, argument):
-        """
-        Gets precondition map.
-        """
-        assert isinstance(argument, (str, abjad.Expression)), repr(argument)
-        self._map = argument
-
     @property
     def match(self) -> typing.Optional[typings.Indices]:
         """
@@ -455,22 +432,12 @@ class Command(abjad.AbjadObject):
         """
         return self._match
 
-    # TODO: should be read-only?
     @property
     def measures(self) -> typing.Optional[typings.Slice]:
         """
         Gets measures.
         """
         return self._measures
-
-    @measures.setter
-    def measures(self, argument):
-        """
-        Gets measures.
-        """
-        if argument is not None:
-            assert isinstance(argument, (int, tuple, list)), repr(argument)
-        self._measures = argument
 
     @property
     def runtime(self) -> abjad.OrderedDict:
@@ -493,15 +460,6 @@ class Command(abjad.AbjadObject):
         Gets scope.
         """
         return self._scope
-
-    @scope.setter
-    def scope(self, argument):
-        """
-        Gets scope.
-        """
-        if argument is not None:
-            assert isinstance(argument, (Scope, TimelineScope))
-        self._scope = argument
 
     @property
     def selector(self) -> typing.Optional[abjad.Expression]:
