@@ -126,6 +126,62 @@ baca-effort-sffz = #(
 baca-ffp = #(make-dynamic-script "ffp")
 baca-fffp = #(make-dynamic-script "fffp")
 
+%%% POCO SCR. DYNAMICS %%%
+
+#(define-markup-command
+    (baca-poco-scr-dynamic layout props dynamic)
+    (string?)
+    (interpret-markup layout props
+    #{
+    \markup
+    \line {
+        \dynamic #dynamic
+        \hspace #0.25
+        \normal-text poco
+        \normal-text scr.
+        }
+    #}))
+
+baca-ppp-poco-scr = #(
+    make-dynamic-script
+    (markup #:baca-poco-scr-dynamic "ppp")
+    )
+
+baca-pp-poco-scr = #(
+    make-dynamic-script
+    (markup #:baca-poco-scr-dynamic "pp")
+    )
+
+baca-p-poco-scr = #(
+    make-dynamic-script
+    (markup #:baca-poco-scr-dynamic "p")
+    )
+
+baca-mp-poco-scr = #(
+    make-dynamic-script
+    (markup #:baca-poco-scr-dynamic "mp")
+    )
+
+baca-mf-poco-scr = #(
+    make-dynamic-script
+    (markup #:baca-poco-scr-dynamic "mf")
+    )
+
+baca-f-poco-scr = #(
+    make-dynamic-script
+    (markup #:baca-poco-scr-dynamic "f")
+    )
+
+baca-ff-poco-scr = #(
+    make-dynamic-script
+    (markup #:baca-poco-scr-dynamic "ff")
+    )
+
+baca-fff-poco-scr = #(
+    make-dynamic-script
+    (markup #:baca-poco-scr-dynamic "fff")
+    )
+
 %%% POSS. DYNAMICS %%%
 
 #(define-markup-command
