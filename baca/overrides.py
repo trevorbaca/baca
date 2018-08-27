@@ -263,6 +263,8 @@ class OverrideCommand(scoping.Command):
         if grob is not None:
             assert isinstance(grob, str), repr(grob)
         self._grob = grob
+        if attribute == 'color' and value not in abjad.ly.colors:
+            raise Exception(f'{repr(value)} is not a LilyPond color.')
         self._value = value
         if whitelist is not None:
             assert isinstance(whitelist, tuple), repr(whitelist)
@@ -306,6 +308,8 @@ class OverrideCommand(scoping.Command):
         grob = self.grob
         attribute = self.attribute
         value = self.value
+        if attribute == 'color' and value not in abjad.ly.normal_colors:
+            value = f"#(x11-color '{value})"
         once = bool(len(leaves) == 1)
         string = abjad.LilyPondFormatManager.make_lilypond_override_string(
             grob,
@@ -2064,6 +2068,95 @@ def mmrest_color(
     ) -> OverrideCommand:
     r"""
     Overrides multimeasure rest color.
+
+
+    ..  container:: example
+
+        REGRESSION. Coerces X11 color names:
+
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'Music_Voice',
+        ...     baca.mmrest_color('DarkOrchid'),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
+            \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+            <<                                                                                       %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
+                <<                                                                                   %! _make_global_context
+            <BLANKLINE>
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
+                    {                                                                                %! _make_global_context
+            <BLANKLINE>
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+                        \baca-bar-line-visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
+            <BLANKLINE>
+                    }                                                                                %! _make_global_context
+            <BLANKLINE>
+                >>                                                                                   %! _make_global_context
+            <BLANKLINE>
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
+                <<                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
+                    {                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
+                        {                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
+                            \override MultiMeasureRest.color = #(x11-color 'DarkOrchid)              %! baca_mmrest_text_color:OverrideCommand(1)
+                            R1 * 1/2                                                                 %! _call_rhythm_commands
+            <BLANKLINE>
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
+                            R1 * 3/8                                                                 %! _call_rhythm_commands
+            <BLANKLINE>
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
+                            R1 * 1/2                                                                 %! _call_rhythm_commands
+            <BLANKLINE>
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
+                            R1 * 3/8                                                                 %! _call_rhythm_commands
+                            \revert MultiMeasureRest.color                                           %! baca_mmrest_text_color:OverrideCommand(2)
+            <BLANKLINE>
+                        }                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                    }                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                >>                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
+            >>                                                                                       %! SingleStaffScoreTemplate
+
     """
     return OverrideCommand(
         attribute='color',
