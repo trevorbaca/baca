@@ -33,9 +33,9 @@ baca-mp-ancora = #(
     (markup #:baca-ancora-dynamic "mp")
     )
 
-baca-mm-ancora = #(
+baca-mf-ancora = #(
     make-dynamic-script
-    (markup #:baca-ancora-dynamic "mm")
+    (markup #:baca-ancora-dynamic "mf")
     )
 
 baca-f-ancora = #(
@@ -98,27 +98,27 @@ baca-effort-mf = #(
 
 baca-effort-f = #(
     make-dynamic-script
-    (markup #:baca-effort-dynamic -0.4 "mf" -0.2)
+    (markup #:baca-effort-dynamic -0.4 "f" -0.2)
     )
 
 baca-effort-ff = #(
     make-dynamic-script
-    (markup #:baca-effort-dynamic -0.4 "mf" -0.2)
+    (markup #:baca-effort-dynamic -0.4 "ff" -0.2)
     )
 
 baca-effort-fff = #(
     make-dynamic-script
-    (markup #:baca-effort-dynamic -0.4 "mf" -0.2)
+    (markup #:baca-effort-dynamic -0.4 "fff" -0.2)
     )
 
 baca-effort-sfz = #(
     make-dynamic-script
-    (markup #:baca-effort-dynamic -0.3 "mf" -0.2)
+    (markup #:baca-effort-dynamic -0.3 "sfz" -0.2)
     )
 
 baca-effort-sffz = #(
     make-dynamic-script
-    (markup #:baca-effort-dynamic -0.3 "mf" -0.2)
+    (markup #:baca-effort-dynamic -0.3 "sffz" -0.2)
     )
 
 %%% FP DYNAMICS %%%
