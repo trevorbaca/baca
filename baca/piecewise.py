@@ -2883,6 +2883,16 @@ def make_dynamic(string: str) -> typing.Union[
 
     ..  container:: example
 
+        Sub. effort dynamics:
+
+        >>> baca.make_dynamic('p-effort-sub')
+        Dynamic('p', command='\\baca-p-effort-sub')
+
+        >>> baca.make_dynamic('f-effort-sub')
+        Dynamic('f', command='\\baca-f-effort-sub')
+
+    ..  container:: example
+
         Poco scr. dynamics:
 
         >>> baca.make_dynamic('p-poco-scr')
@@ -2953,6 +2963,10 @@ def make_dynamic(string: str) -> typing.Union[
     elif string.endswith('-ancora'):
         dynamic = string.split('-')[0]
         command = rf'\baca-{dynamic}-ancora'
+        indicator = abjad.Dynamic(dynamic, command=command)
+    elif string.endswith('-effort-sub'):
+        dynamic = string.split('-')[0]
+        command = rf'\baca-{dynamic}-effort-sub'
         indicator = abjad.Dynamic(dynamic, command=command)
     elif string.endswith('-poco-scr'):
         dynamic = string.split('-')[0]

@@ -1,3 +1,13 @@
+%%% NOTE: Use ...
+%%%
+%%%       DynamicText.X-extent = #'(0 . 0)
+%%%
+%%% ... instead of ...
+%%%
+%%%       DynamicText.X-extent = ##f
+%%%
+%%% ... to avoid warnings in LilyPond log.
+
 %%% ANCORA DYNAMICS %%%
 
 #(define-markup-command
@@ -474,17 +484,68 @@ baca-fff-sub =
         )
     )
 
+%%% SUB. EFFORT DYNAMICS %%%
+
+#(define-markup-command
+    (baca-effort-sub-dynamic layout props left dynamic right)
+    (number? string? number?)
+    (interpret-markup layout props
+    #{
+    \markup
+    \whiteout
+    \line {
+        \general-align #Y #-2 \normal-text \larger "“"
+        \hspace #left
+        \dynamic #dynamic
+        \hspace #right
+        \general-align #Y #-2 \normal-text \larger "”"
+        \hspace #0.25
+        \normal-text sub.
+        }
+    #}))
+
+baca-ppp-effort-sub = #(
+    make-dynamic-script
+    (markup #:baca-effort-sub-dynamic -0.1 "ppp" -0.25)
+    )
+
+baca-pp-effort-sub = #(
+    make-dynamic-script
+    (markup #:baca-effort-sub-dynamic -0.1 "pp" -0.25)
+    )
+
+baca-p-effort-sub = #(
+    make-dynamic-script
+    (markup #:baca-effort-sub-dynamic -0.1 "p" -0.25)
+    )
+
+baca-mp-effort-sub = #(
+    make-dynamic-script
+    (markup #:baca-effort-sub-dynamic -0.1 "mp" -0.25)
+    )
+
+baca-mf-effort-sub = #(
+    make-dynamic-script
+    (markup #:baca-effort-sub-dynamic -0.1 "mf" -0.2)
+    )
+
+baca-f-effort-sub = #(
+    make-dynamic-script
+    (markup #:baca-effort-sub-dynamic -0.4 "f" -0.2)
+    )
+
+baca-ff-effort-sub = #(
+    make-dynamic-script
+    (markup #:baca-effort-sub-dynamic -0.4 "ff" -0.2)
+    )
+
+baca-fff-effort-sub = #(
+    make-dynamic-script
+    (markup #:baca-effort-sub-dynamic -0.4 "fff" -0.2)
+    )
+
 %%% TEXT-ONLY DYNAMICS %%%
 
-    %%% NOTE: Use ...
-    %%%
-    %%%       DynamicText.X-extent = #'(0 . 0)
-    %%%
-    %%% ... instead of ...
-    %%%
-    %%%       DynamicText.X-extent = ##f
-    %%%
-    %%% ... to avoid warnings in LilyPond log.
 
 baca-appena-udibile = 
     \tweak DynamicText.self-alignment-X #LEFT
@@ -508,16 +569,6 @@ baca-niente = #(
     )
 
 %%% TEXTUAL DYNAMICS %%%
-
-    %%% NOTE: Use ...
-    %%%
-    %%%       DynamicText.X-extent = #'(0 . 0)
-    %%%
-    %%% ... instead of ...
-    %%%
-    %%%       DynamicText.X-extent = ##f
-    %%%
-    %%% ... to avoid warnings in LilyPond log.
 
 baca-p-sub-but-accents-continue-sffz = 
     \tweak DynamicText.self-alignment-X #LEFT
