@@ -37,11 +37,13 @@ segmentmaker
       :nosignatures:
 
       __call__
+      activate
       allow_empty_selections
       breaks
       clock_time_override
       color_octaves
       commands
+      deactivate
       do_not_check_out_of_range_pitches
       do_not_check_persistence
       do_not_check_wellformedness
@@ -136,6 +138,8 @@ segmentmaker
    .. rubric:: Read-only properties
       :class: class-header
 
+   .. autoattribute:: SegmentMaker.activate
+
    .. autoattribute:: SegmentMaker.allow_empty_selections
 
    .. autoattribute:: SegmentMaker.breaks
@@ -145,6 +149,8 @@ segmentmaker
    .. autoattribute:: SegmentMaker.color_octaves
 
    .. autoattribute:: SegmentMaker.commands
+
+   .. autoattribute:: SegmentMaker.deactivate
 
    .. autoattribute:: SegmentMaker.do_not_check_out_of_range_pitches
 

@@ -172,7 +172,7 @@ bacaStopTextSpanLMI = #(
         \with-color #(x11-color 'DarkCyan)
         \fontsize #-3
         \upright
-        \concat { "<"  #lmi ">" \hspace #0.5 }
+        \concat { #lmi \hspace #0.5 }
         #}
         )
     )
@@ -196,7 +196,7 @@ baca-lmi-left-text-tweak = #(
         \with-color #(x11-color 'DarkCyan)
         \fontsize #-3
         \upright
-        \concat { "<" #lmi ">" }
+        #lmi
         #}
         )
     )
@@ -255,7 +255,7 @@ bacaStopTextSpanLMN = #(
         \with-color #(x11-color 'DarkCyan)
         \fontsize #-3
         \upright
-        \concat { "(("  #lmn "))" \hspace #0.5 }
+        \concat { #lmn \hspace #0.5 }
         #}
         )
     )
@@ -279,7 +279,7 @@ baca-lmn-left-text-tweak = #(
         \with-color #(x11-color 'DarkCyan)
         \fontsize #-3
         \upright
-        \concat { "<" #lmn ">" }
+        #lmn
         #}
         )
     )
@@ -335,10 +335,10 @@ bacaStopTextSpanMN = #(
     (interpret-markup layout props
         #{
         \markup
-        \with-color #(x11-color 'DarkCyan)
+        \with-color #(x11-color 'DarkOrchid)
         \fontsize #-3
         \upright
-        \concat { "("  #mn ")" \hspace #0.5 }
+        \concat { #mn \hspace #0.5 }
         #}
         )
     )
@@ -359,10 +359,10 @@ baca-mn-left-text-tweak = #(
     (interpret-markup layout props
         #{
         \markup 
-        \with-color #(x11-color 'DarkCyan)
+        \with-color #(x11-color 'DarkOrchid)
         \fontsize #-3
         \upright
-        \concat { "(" #mn ")" }
+        #mn
         #}
         )
     )

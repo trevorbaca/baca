@@ -146,12 +146,14 @@ class SegmentMaker(abjad.SegmentMaker):
     ### CLASS ATTRIBUTES ###
 
     __slots__ = (
+        '_activate',
         '_allow_empty_selections',
         '_breaks',
         '_cache',
         '_cached_time_signatures',
         '_clock_time_override',
         '_color_octaves',
+        '_deactivate',
         '_do_not_check_out_of_range_pitches',
         '_do_not_check_persistence',
         '_do_not_check_wellformedness',
@@ -266,10 +268,12 @@ class SegmentMaker(abjad.SegmentMaker):
     def __init__(
         self,
         *,
+        activate: typing.List[str] = None,
         allow_empty_selections: bool = None,
         breaks: segmentclasses.BreakMeasureMap = None,
         clock_time_override: abjad.MetronomeMark = None,
         color_octaves: bool = None,
+        deactivate: typing.List[str] = None,
         do_not_check_out_of_range_pitches: bool = None,
         do_not_check_persistence: bool = None,
         do_not_check_wellformedness: bool = None,
@@ -305,6 +309,7 @@ class SegmentMaker(abjad.SegmentMaker):
         validate_measure_count: int = None,
         ) -> None:
         super().__init__()
+        self._activate = activate
         self._allow_empty_selections = allow_empty_selections
         self._breaks = breaks
         if clock_time_override is not None:
@@ -313,6 +318,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._color_octaves = color_octaves
         self._cache = None
         self._cached_time_signatures: typing.List[abjad.TimeSignature] = []
+        self._deactivate = deactivate
         if do_not_check_out_of_range_pitches is not None:
             do_not_check_out_of_range_pitches = bool(
                 do_not_check_out_of_range_pitches)
@@ -758,6 +764,24 @@ class SegmentMaker(abjad.SegmentMaker):
                     self.commands.append(command_)
 
     ### PRIVATE METHODS ###
+
+    def _activate_tags(self, tags):
+        tags = tags or []
+        tags = set(tags)
+        tags.update(self.activate or [])
+        if not tags:
+            return
+        for leaf in abjad.iterate(self.score).leaves():
+            if not isinstance(leaf, abjad.Skip):
+                continue
+            wrappers = abjad.inspect(leaf).wrappers()
+            for wrapper in wrappers:
+                if wrapper.tag is None:
+                    continue
+                for tag in tags:
+                    if tag in wrapper.tag:
+                        wrapper.deactivate = False
+                        break
 
     def _add_final_markup(self):
         if self.final_markup is None:
@@ -1842,10 +1866,16 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.attach(literal, leaf, tag='_comment_measure_numbers')
 
     def _deactivate_tags(self, tags):
+        tags = tags or []
+        tags = set(tags)
+        tags.update(self.deactivate or [])
         if not tags:
             return
         for leaf in abjad.iterate(self.score).leaves():
-            for wrapper in abjad.inspect(leaf).wrappers():
+            if not isinstance(leaf, abjad.Skip):
+                continue
+            wrappers = abjad.inspect(leaf).wrappers()
+            for wrapper in wrappers:
                 if wrapper.tag is None:
                     continue
                 for tag in tags:
@@ -3311,6 +3341,13 @@ class SegmentMaker(abjad.SegmentMaker):
     ### PUBLIC PROPERTIES ###
 
     @property
+    def activate(self) -> typing.Optional[typing.List[str]]:
+        """
+        Gets tags to activate in LilyPond output.
+        """
+        return self._activate
+
+    @property
     def allow_empty_selections(self) -> typing.Optional[bool]:
         """
         Is true when segment allows empty selectors.
@@ -3580,6 +3617,13 @@ class SegmentMaker(abjad.SegmentMaker):
         Gets commands.
         """
         return self._commands
+
+    @property
+    def deactivate(self) -> typing.Optional[typing.List[str]]:
+        """
+        Gets tags to deactivate in LilyPond output.
+        """
+        return self._deactivate
 
     @property
     def do_not_check_out_of_range_pitches(self) -> typing.Optional[bool]:
@@ -6027,6 +6071,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def run(
         self,
+        activate: typing.List[str] = None,
         deactivate: typing.List[str] = None,
         do_not_print_timing: bool = None,
         environment: str = None,
@@ -6135,7 +6180,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._apply_breaks()
                 self._style_fermata_measures()
                 self._shift_clefs_into_fermata_measures()
-                self._deactivate_tags(deactivate or [])
+                self._activate_tags(activate)
+                self._deactivate_tags(deactivate)
                 self._remove_tags(remove)
                 self._add_container_identifiers()
                 self._check_all_music_in_part_containers()
