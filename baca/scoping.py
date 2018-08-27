@@ -342,9 +342,7 @@ class Command(abjad.AbjadObject):
     def _remove_reapplied_wrappers(leaf, indicator):
         if not getattr(indicator, 'persistent', False):
             return
-        # TODO: getattr(indicator, 'parameter', NONE) == # 'TEXT_SPAN'
-        prototype = (abjad.StartTextSpan, abjad.StopTextSpan)
-        if isinstance(indicator, prototype):
+        if getattr(indicator, 'parameter', None) == 'TEXT_SPANNER':
             return
         if abjad.inspect(leaf).timespan().start_offset != 0:
             return
