@@ -308,6 +308,7 @@ rhythmcommands
    ~silence_last
    ~sustain_first
    ~sustain_last
+   ~tacet
    ~tie_from
    ~tie_to
    ~untie_to
@@ -357,6 +358,8 @@ rhythmcommands
 .. autofunction:: sustain_first
 
 .. autofunction:: sustain_last
+
+.. autofunction:: tacet
 
 .. autofunction:: tie_from
 

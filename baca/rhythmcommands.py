@@ -9,6 +9,7 @@ import typing
 from abjadext import rmakers
 from . import classes
 from . import divisions as baca_divisions
+from . import overrides
 from . import scoping
 from . import typings
 mask_typing = typing.Union[rmakers.SilenceMask, rmakers.SustainMask]
@@ -2763,6 +2764,16 @@ def sustain_last() -> rmakers.SustainMask:
 
     """
     return rmakers.sustain([-1])
+
+def tacet(
+    color: str = 'red',
+    *,
+    selector: typings.Selector = 'baca.mmrests()',
+    ):
+    """
+    Colors multimeasure rests.
+    """
+    return overrides.mmrest_color(color, selector=selector)
 
 def tie_from(
     *,
