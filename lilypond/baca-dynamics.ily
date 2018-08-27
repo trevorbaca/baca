@@ -226,6 +226,61 @@ baca-fff-sempre = #(
     (markup #:baca-sempre-dynamic "fff")
     )
 
+%%% SCRATCH DYNAMICS %%%
+
+#(define-markup-command
+    (baca-scratch-dynamic layout props dynamic)
+    (string?)
+    (interpret-markup layout props
+    #{
+    \markup
+    \line {
+        \dynamic #dynamic
+        \hspace #0.25
+        \normal-text scratch
+        }
+    #}))
+
+baca-ppp-scratch = #(
+    make-dynamic-script
+    (markup #:baca-scratch-dynamic "ppp")
+    )
+
+baca-pp-scratch = #(
+    make-dynamic-script
+    (markup #:baca-scratch-dynamic "pp")
+    )
+
+baca-p-scratch = #(
+    make-dynamic-script
+    (markup #:baca-scratch-dynamic "p")
+    )
+
+baca-mp-scratch = #(
+    make-dynamic-script
+    (markup #:baca-scratch-dynamic "mp")
+    )
+
+baca-mf-scratch = #(
+    make-dynamic-script
+    (markup #:baca-scratch-dynamic "mf")
+    )
+
+baca-f-scratch = #(
+    make-dynamic-script
+    (markup #:baca-scratch-dynamic "f")
+    )
+
+baca-ff-scratch = #(
+    make-dynamic-script
+    (markup #:baca-scratch-dynamic "ff")
+    )
+
+baca-fff-scratch = #(
+    make-dynamic-script
+    (markup #:baca-scratch-dynamic "fff")
+    )
+
 %%% SFORZANDO DYNAMICS %%%
 
 baca-sff = #(make-dynamic-script "sff")
