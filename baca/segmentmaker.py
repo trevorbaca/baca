@@ -1232,7 +1232,9 @@ class SegmentMaker(abjad.SegmentMaker):
             else:
                 style = 'invisible-line'
             if 0 < i:
-                stop_text_span = abjad.StopTextSpan()
+                stop_text_span = abjad.StopTextSpan(
+                    command=r'\bacaStopTextSpanMM',
+                    )
                 abjad.attach(
                     stop_text_span,
                     skip,
@@ -1243,6 +1245,7 @@ class SegmentMaker(abjad.SegmentMaker):
             else:
                 right_text = None
             start_text_span = abjad.StartTextSpan(
+                command=r'\bacaStartTextSpanMM',
                 left_text=left_text,
                 right_text=right_text,
                 style=style,
@@ -1318,6 +1321,7 @@ class SegmentMaker(abjad.SegmentMaker):
             else:
                 right_text_with_color = None
             start_text_span = abjad.StartTextSpan(
+                command=r'\bacaStartTextSpanMM',
                 left_text=left_text_with_color,
                 right_text=right_text_with_color,
                 style=style,
@@ -1330,7 +1334,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
         if indicator_count:
             last_skip = skip
-            stop_text_span = abjad.StopTextSpan()
+            stop_text_span = abjad.StopTextSpan(
+                command=r'\bacaStopTextSpanMM',
+                )
             abjad.attach(
                 stop_text_span,
                 last_skip,
@@ -2279,7 +2285,6 @@ class SegmentMaker(abjad.SegmentMaker):
             brackets=True,
             clock_time=True,
             global_offset=segment_start_offset,
-            markup_command=r'\baca-clock-time-markup',
             )
         segment_stop_offset = abjad.Offset(segment_stop_duration)
         self._stop_clock_time = segment_stop_offset.to_clock_string()
@@ -2289,6 +2294,52 @@ class SegmentMaker(abjad.SegmentMaker):
         if self.clock_time_override:
             metronome_mark = self.clock_time_override
             abjad.detach(metronome_mark, skips[0])
+        clock_times = []
+        for skip in skips:
+            wrappers = abjad.inspect(skip).wrappers(abjad.Markup)
+            for wrapper in wrappers:
+                if 'CLOCK_TIME_MARKUP' in str(wrapper.tag):
+                    abjad.detach(wrapper, skip)
+                    markup = wrapper.indicator
+                    string = str(markup).strip(r'^ \markup')
+                    string = string.strip('{').strip('}').strip(' ')
+                    clock_times.append(string)
+        total = len(skips)
+        for measure_index in range(len(skips)):
+            skip = skips[measure_index]
+            clock_time = clock_times[measure_index]
+            if measure_index < total - 1:
+                tag = abjad.Tag(abjad.tags.CLOCK_TIME_MARKUP)
+                if measure_index == total - 2:
+                    last_clock_time = clock_times[-1]
+                    string = r'- \baca-start-ct-both'
+                    string += f' "{clock_time}" "{last_clock_time}"'
+                else:
+                    string = r'- \baca-start-ct-left-only'
+                    string += f' "{clock_time}"'
+                start_text_span = abjad.StartTextSpan(
+                    command=r'\bacaStartTextSpanCT',
+                    left_text=string,
+                    )
+                abjad.attach(
+                    start_text_span,
+                    skip,
+                    context='GlobalSkips',
+                    deactivate=True,
+                    tag=tag,
+                    )
+            if 0 < measure_index:
+                tag = abjad.Tag(abjad.tags.CLOCK_TIME_MARKUP)
+                stop_text_span = abjad.StopTextSpan(
+                    command=r'\bacaStopTextSpanCT',
+                    )
+                abjad.attach(
+                    stop_text_span,
+                    skip,
+                    context='GlobalSkips',
+                    deactivate=True,
+                    tag=tag,
+                    )
 
     def _label_measure_indices(self):
         skips = classes.Selection(self.score['Global_Skips']).skips()

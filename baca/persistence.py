@@ -4505,16 +4505,16 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                         %@% - \abjad-invisible-line                                                      %! EXPLICIT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
                         %@% - \baca-metronome-mark-spanner-left-text 2 0 1 "112"                         %! EXPLICIT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
-                        %@% \startTextSpan                                                               %! EXPLICIT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
+                        %@% \bacaStartTextSpanMM                                                         %! EXPLICIT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
                             - \abjad-invisible-line                                                      %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                             - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'blue          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
-                            \startTextSpan                                                               %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
+                            \bacaStartTextSpanMM                                                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #25                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \stopTextSpan                                                                %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(4)
+                            \bacaStopTextSpanMM                                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(4)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
@@ -4610,16 +4610,16 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                         %@% - \abjad-invisible-line                                                      %! EXPLICIT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
                         %@% - \baca-metronome-mark-spanner-left-text 2 0 1 "112"                         %! EXPLICIT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
-                        %@% \startTextSpan                                                               %! EXPLICIT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
+                        %@% \bacaStartTextSpanMM                                                         %! EXPLICIT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
                             - \abjad-invisible-line                                                      %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                             - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'blue          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
-                            \startTextSpan                                                               %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
+                            \bacaStartTextSpanMM                                                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \stopTextSpan                                                                %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(4)
+                            \bacaStopTextSpanMM                                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(4)
                             \revert TextSpanner.staff-padding                                            %! baca_text_spanner_staff_padding:OverrideCommand(2)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -4717,16 +4717,16 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                         %@% - \abjad-invisible-line                                                      %! REAPPLIED_METRONOME_MARK:_set_status_tag:_reapply_persistent_indicators(2):_attach_metronome_marks(2)
                         %@% - \baca-metronome-mark-spanner-left-text 2 0 1 "90"                          %! REAPPLIED_METRONOME_MARK:_set_status_tag:_reapply_persistent_indicators(2):_attach_metronome_marks(2)
-                        %@% \startTextSpan                                                               %! REAPPLIED_METRONOME_MARK:_set_status_tag:_reapply_persistent_indicators(2):_attach_metronome_marks(2)
+                        %@% \bacaStartTextSpanMM                                                         %! REAPPLIED_METRONOME_MARK:_set_status_tag:_reapply_persistent_indicators(2):_attach_metronome_marks(2)
                             - \abjad-invisible-line                                                      %! REAPPLIED_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                             - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "90" #'green4         %! REAPPLIED_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
-                            \startTextSpan                                                               %! REAPPLIED_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
+                            \bacaStartTextSpanMM                                                         %! REAPPLIED_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \stopTextSpan                                                                %! REAPPLIED_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(4)
+                            \bacaStopTextSpanMM                                                          %! REAPPLIED_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(4)
                             \revert TextSpanner.staff-padding                                            %! baca_text_spanner_staff_padding:OverrideCommand(2)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -4813,7 +4813,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         %@% - \tweak bound-details.right.text \markup {                                  %! EXPLICIT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
                         %@%     \abjad-metronome-mark-markup #2 #0 #1 #"112"                             %! EXPLICIT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
                         %@%     }                                                                        %! EXPLICIT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
-                        %@% \startTextSpan                                                               %! EXPLICIT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
+                        %@% \bacaStartTextSpanMM                                                         %! EXPLICIT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
                             - \abjad-invisible-line                                                      %! REDUNDANT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(3)
                             - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'blue          %! REDUNDANT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(3)
                             - \tweak bound-details.right.text \markup {                                  %! REDUNDANT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(3)
@@ -4821,13 +4821,13 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                     #(x11-color 'DeepPink1)                                              %! REDUNDANT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(3)
                                     \abjad-metronome-mark-markup #2 #0 #1 #"112"                         %! REDUNDANT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(3)
                                 }                                                                        %! REDUNDANT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(3)
-                            \startTextSpan                                                               %! REDUNDANT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(3)
+                            \bacaStartTextSpanMM                                                         %! REDUNDANT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(3)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \stopTextSpan                                                                %! REDUNDANT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(4)
+                            \bacaStopTextSpanMM                                                          %! REDUNDANT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(4)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
@@ -4923,16 +4923,16 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                         %@% - \abjad-invisible-line                                                      %! REDUNDANT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
                         %@% - \baca-metronome-mark-spanner-left-text 2 0 1 "112"                         %! REDUNDANT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
-                        %@% \startTextSpan                                                               %! REDUNDANT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
+                        %@% \bacaStartTextSpanMM                                                         %! REDUNDANT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
                             - \abjad-invisible-line                                                      %! REDUNDANT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                             - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'DeepPink1     %! REDUNDANT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
-                            \startTextSpan                                                               %! REDUNDANT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
+                            \bacaStartTextSpanMM                                                         %! REDUNDANT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \stopTextSpan                                                                %! REDUNDANT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(4)
+                            \bacaStopTextSpanMM                                                          %! REDUNDANT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(4)
                             \revert TextSpanner.staff-padding                                            %! baca_text_spanner_staff_padding:OverrideCommand(2)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -5880,7 +5880,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         %@%                 #0.5                                                         %! EXPLICIT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
                         %@%         }                                                                    %! EXPLICIT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
                         %@%     }                                                                        %! EXPLICIT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
-                        %@% \startTextSpan                                                               %! EXPLICIT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
+                        %@% \bacaStartTextSpanMM                                                         %! EXPLICIT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
                             - \abjad-dashed-line-with-arrow                                              %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                             - \tweak bound-details.left.text \markup {                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                                 \concat                                                                  %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
@@ -5894,13 +5894,13 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                             #0.5                                                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                                     }                                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                                 }                                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
-                            \startTextSpan                                                               %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
+                            \bacaStartTextSpanMM                                                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #25                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \stopTextSpan                                                                %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(4)
+                            \bacaStopTextSpanMM                                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(4)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
@@ -6004,7 +6004,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         %@%                 #0.5                                                         %! EXPLICIT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
                         %@%         }                                                                    %! EXPLICIT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
                         %@%     }                                                                        %! EXPLICIT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
-                        %@% \startTextSpan                                                               %! EXPLICIT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
+                        %@% \bacaStartTextSpanMM                                                         %! EXPLICIT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
                             - \abjad-dashed-line-with-arrow                                              %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                             - \tweak bound-details.left.text \markup {                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                                 \concat                                                                  %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
@@ -6018,13 +6018,13 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                             #0.5                                                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                                     }                                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                                 }                                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
-                            \startTextSpan                                                               %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
+                            \bacaStartTextSpanMM                                                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \stopTextSpan                                                                %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(4)
+                            \bacaStopTextSpanMM                                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(4)
                             \revert TextSpanner.staff-padding                                            %! baca_text_spanner_staff_padding:OverrideCommand(2)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -6130,7 +6130,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         %@%                 #0.5                                                         %! REAPPLIED_METRONOME_MARK:_set_status_tag:_reapply_persistent_indicators(2):_attach_metronome_marks(2)
                         %@%         }                                                                    %! REAPPLIED_METRONOME_MARK:_set_status_tag:_reapply_persistent_indicators(2):_attach_metronome_marks(2)
                         %@%     }                                                                        %! REAPPLIED_METRONOME_MARK:_set_status_tag:_reapply_persistent_indicators(2):_attach_metronome_marks(2)
-                        %@% \startTextSpan                                                               %! REAPPLIED_METRONOME_MARK:_set_status_tag:_reapply_persistent_indicators(2):_attach_metronome_marks(2)
+                        %@% \bacaStartTextSpanMM                                                         %! REAPPLIED_METRONOME_MARK:_set_status_tag:_reapply_persistent_indicators(2):_attach_metronome_marks(2)
                             - \abjad-dashed-line-with-arrow                                              %! REAPPLIED_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                             - \tweak bound-details.left.text \markup {                                   %! REAPPLIED_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                                 \concat                                                                  %! REAPPLIED_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
@@ -6144,13 +6144,13 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                             #0.5                                                         %! REAPPLIED_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                                     }                                                                    %! REAPPLIED_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                                 }                                                                        %! REAPPLIED_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
-                            \startTextSpan                                                               %! REAPPLIED_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
+                            \bacaStartTextSpanMM                                                         %! REAPPLIED_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \stopTextSpan                                                                %! REAPPLIED_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(4)
+                            \bacaStopTextSpanMM                                                          %! REAPPLIED_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(4)
                             \revert TextSpanner.staff-padding                                            %! baca_text_spanner_staff_padding:OverrideCommand(2)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -6246,7 +6246,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         %@%                 #0.5                                                         %! EXPLICIT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
                         %@%         }                                                                    %! EXPLICIT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
                         %@%     }                                                                        %! EXPLICIT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
-                        %@% \startTextSpan                                                               %! EXPLICIT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
+                        %@% \bacaStartTextSpanMM                                                         %! EXPLICIT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
                             - \abjad-dashed-line-with-arrow                                              %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                             - \tweak bound-details.left.text \markup {                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                                 \concat                                                                  %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
@@ -6260,13 +6260,13 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                             #0.5                                                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                                     }                                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                                 }                                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
-                            \startTextSpan                                                               %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
+                            \bacaStartTextSpanMM                                                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \stopTextSpan                                                                %! REDUNDANT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(1)
+                            \bacaStopTextSpanMM                                                          %! REDUNDANT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(1)
                         %@% - \abjad-dashed-line-with-arrow                                              %! REDUNDANT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
                         %@% - \tweak bound-details.left.text \markup {                                   %! REDUNDANT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
                         %@%     \concat                                                                  %! REDUNDANT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
@@ -6278,7 +6278,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         %@%                 #0.5                                                         %! REDUNDANT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
                         %@%         }                                                                    %! REDUNDANT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
                         %@%     }                                                                        %! REDUNDANT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
-                        %@% \startTextSpan                                                               %! REDUNDANT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
+                        %@% \bacaStartTextSpanMM                                                         %! REDUNDANT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
                             - \abjad-dashed-line-with-arrow                                              %! REDUNDANT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                             - \tweak bound-details.left.text \markup {                                   %! REDUNDANT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                                 \concat                                                                  %! REDUNDANT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
@@ -6292,13 +6292,13 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                             #0.5                                                         %! REDUNDANT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                                     }                                                                    %! REDUNDANT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                                 }                                                                        %! REDUNDANT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
-                            \startTextSpan                                                               %! REDUNDANT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
+                            \bacaStartTextSpanMM                                                         %! REDUNDANT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                 <BLANKLINE>
                             % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \stopTextSpan                                                                %! REDUNDANT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(4)
+                            \bacaStopTextSpanMM                                                          %! REDUNDANT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(4)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
@@ -6405,7 +6405,7 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                         %@%                 #0.5                                                         %! REDUNDANT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
                         %@%         }                                                                    %! REDUNDANT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
                         %@%     }                                                                        %! REDUNDANT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
-                        %@% \startTextSpan                                                               %! REDUNDANT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
+                        %@% \bacaStartTextSpanMM                                                         %! REDUNDANT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(2)
                             - \abjad-dashed-line-with-arrow                                              %! REDUNDANT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                             - \tweak bound-details.left.text \markup {                                   %! REDUNDANT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                                 \concat                                                                  %! REDUNDANT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
@@ -6419,13 +6419,13 @@ class PersistentIndicatorTests(abjad.AbjadObject):
                                             #0.5                                                         %! REDUNDANT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                                     }                                                                    %! REDUNDANT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                                 }                                                                        %! REDUNDANT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
-                            \startTextSpan                                                               %! REDUNDANT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
+                            \bacaStartTextSpanMM                                                         %! REDUNDANT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \stopTextSpan                                                                %! REDUNDANT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(4)
+                            \bacaStopTextSpanMM                                                          %! REDUNDANT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(4)
                             \revert TextSpanner.staff-padding                                            %! baca_text_spanner_staff_padding:OverrideCommand(2)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line

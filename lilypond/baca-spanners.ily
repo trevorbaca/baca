@@ -1,3 +1,25 @@
+%%% GLOBALS %%%
+
+baca-lower-annotation-layer = #(
+    define-music-function
+    (parser location music)
+    (ly:music?)
+    #{
+    \tweak extra-offset #'(0 . 10)
+    $music
+    #}
+    )
+
+baca-upper-annotation-layer = #(
+    define-music-function
+    (parser location music)
+    (ly:music?)
+    #{
+    \tweak extra-offset #'(0 . 13)
+    $music
+    #}
+    )
+
 %%% BCP SPANNER %%%
 
 bacaStartTextSpanBCP = #(
@@ -47,6 +69,89 @@ baca-bcp-spanner-right-text = #(
     $music
     #}
     ) 
+
+%%% CLOCK TIME SPANNER %%%
+
+bacaStartTextSpanCT = #(
+    make-music 'TextSpanEvent 'span-direction START 'spanner-id "CT"
+    )
+
+bacaStopTextSpanCT = #(
+    make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "CT"
+    )
+
+#(define-markup-command
+    (baca-ct-left-markup layout props ct)
+    (string?)
+    (interpret-markup layout props
+        #{
+        \markup
+        \with-color #(x11-color 'ForestGreen)
+        \fontsize #-3
+        \upright
+        \concat { #ct \hspace #0.5 }
+        #}
+        )
+    )
+
+baca-ct-left-text-tweak = #(
+    define-music-function
+    (parser location left music)
+    (string? ly:music?)
+    #{
+    \tweak bound-details.left.text \markup \baca-ct-left-markup #left
+    $music
+    #}
+    )
+
+#(define-markup-command
+    (baca-ct-right-markup layout props ct)
+    (string?)
+    (interpret-markup layout props
+        #{
+        \markup 
+        \with-color #(x11-color 'ForestGreen)
+        \fontsize #-3
+        \upright
+        #ct
+        #}
+        )
+    )
+
+baca-ct-right-text-tweak = #(
+    define-music-function
+    (parser location right music)
+    (string? ly:music?)
+    #{
+    \tweak bound-details.right.text \markup \baca-ct-right-markup #right
+    $music
+    #}
+    ) 
+
+baca-start-ct-left-only = #(
+    define-music-function
+    (parser location left music)
+    (string? ly:music?)
+    #{
+    - \abjad-invisible-line
+    - \baca-ct-left-text-tweak #left
+    - \baca-upper-annotation-layer
+    $music
+    #}
+    )
+
+baca-start-ct-both = #(
+    define-music-function
+    (parser location left right music)
+    (string? string? ly:music?)
+    #{
+    - \abjad-invisible-line
+    - \baca-ct-left-text-tweak #left
+    - \baca-ct-right-text-tweak #right
+    - \baca-upper-annotation-layer
+    $music
+    #}
+    )
 
 %%% LOCAL MEASURE INDEX SPANNER %%%
 
@@ -113,7 +218,7 @@ baca-start-lmi-left-only = #(
     #{
     - \abjad-invisible-line
     - \baca-lmi-left-text-tweak #left
-    - \tweak extra-offset #'(0 . 9)
+    - \baca-lower-annotation-layer
     $music
     #}
     )
@@ -126,7 +231,7 @@ baca-start-lmi-both = #(
     - \abjad-invisible-line
     - \baca-lmi-left-text-tweak #left
     - \baca-lmi-right-text-tweak #right
-    - \tweak extra-offset #'(0 . 9)
+    - \baca-lower-annotation-layer
     $music
     #}
     )
@@ -196,7 +301,7 @@ baca-start-lmn-left-only = #(
     #{
     - \abjad-invisible-line
     - \baca-lmn-left-text-tweak #left
-    - \tweak extra-offset #'(0 . 9)
+    - \baca-lower-annotation-layer
     $music
     #}
     )
@@ -209,7 +314,7 @@ baca-start-lmn-both = #(
     - \abjad-invisible-line
     - \baca-lmn-left-text-tweak #left
     - \baca-lmn-right-text-tweak #right
-    - \tweak extra-offset #'(0 . 9)
+    - \baca-lower-annotation-layer
     $music
     #}
     )
@@ -279,7 +384,7 @@ baca-start-mn-left-only = #(
     #{
     - \abjad-invisible-line
     - \baca-mn-left-text-tweak #left
-    - \tweak extra-offset #'(0 . 12)
+    - \baca-lower-annotation-layer
     $music
     #}
     )
@@ -292,18 +397,37 @@ baca-start-mn-both = #(
     - \abjad-invisible-line
     - \baca-mn-left-text-tweak #left
     - \baca-mn-right-text-tweak #right
-    - \tweak extra-offset #'(0 . 12)
+    - \baca-lower-annotation-layer
     $music
     #}
     )
 
 %%% METRONOME MARK SPANNER %%%
 
+bacaStartTextSpanMM = #(
+    make-music 'TextSpanEvent 'span-direction START 'spanner-id "MM"
+    )
+
+bacaStopTextSpanMM = #(
+    make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "MM"
+    )
+
+baca-metronome-mark-spanner-layer = #(
+    define-music-function
+    (parser location music)
+    (ly:music?)
+    #{
+    \tweak extra-offset #'(0 . 6)
+    $music
+    #}
+    )
+
 baca-metronome-mark-spanner-colored-left-text = #(
     define-music-function
     (parser location log dots stem string color music)
     (number? number? number? string? symbol? ly:music?)
     #{
+    \baca-metronome-mark-spanner-layer
     \tweak bound-details.left.text \markup \concat {
         \with-color #(x11-color color)
         \abjad-metronome-mark-markup #log #dots #stem #string
@@ -318,56 +442,11 @@ baca-metronome-mark-spanner-left-text = #(
     (parser location log dots stem string music)
     (number? number? number? string? ly:music?)
     #{
+    \baca-metronome-mark-spanner-layer
     \tweak bound-details.left.text \markup \concat {
         \abjad-metronome-mark-markup #log #dots #stem #string
         \hspace #0.5
         }
-    $music
-    #}
-    )
-
-%%% TEXT SPANNER %%%
-
-baca-text-spanner-left-markup = #(
-    define-music-function
-    (parser location markup music)
-    (markup? ly:music?)
-    #{
-    \tweak bound-details.left.text \markup \concat {
-        \upright #markup \hspace #0.5
-        }
-    $music
-    #}
-    )
-
-baca-text-spanner-left-text = #(
-    define-music-function
-    (parser location string music)
-    (string? ly:music?)
-    #{
-    \tweak bound-details.left.text \markup \concat {
-        \upright #string \hspace #0.5
-        }
-    $music
-    #}
-    )
-
-baca-text-spanner-right-markup = #(
-    define-music-function
-    (parser location markup music)
-    (markup? ly:music?)
-    #{
-    \tweak bound-details.right.text \markup \upright #markup
-    $music
-    #}
-    )
-
-baca-text-spanner-right-text = #(
-    define-music-function
-    (parser location string music)
-    (string? ly:music?)
-    #{
-    \tweak bound-details.right.text \markup \upright #string
     $music
     #}
     )
@@ -437,7 +516,7 @@ baca-start-spm-left-only = #(
     #{
     - \abjad-invisible-line
     - \baca-spm-left-text-tweak #left
-    - \tweak extra-offset #'(0 . 15)
+    - \baca-upper-annotation-layer
     $music
     #}
     )
@@ -450,7 +529,7 @@ baca-start-spm-both = #(
     - \abjad-invisible-line
     - \baca-spm-left-text-tweak #left
     - \baca-spm-right-text-tweak #right
-    - \tweak extra-offset #'(0 . 15)
+    - \baca-upper-annotation-layer
     $music
     #}
     )
@@ -471,7 +550,7 @@ bacaStopTextSpanSNM = #(
     (interpret-markup layout props
         #{
         \markup
-        \with-color #(x11-color 'ForestGreen)
+        \with-color #(x11-color 'red)
         \fontsize #-3
         \upright
         \concat { #snm \hspace #0.5 }
@@ -495,7 +574,7 @@ baca-snm-left-text-tweak = #(
     (interpret-markup layout props
         #{
         \markup 
-        \with-color #(x11-color 'ForestGreen)
+        \with-color #(x11-color 'red)
         \fontsize #-3
         \upright
         #snm
@@ -520,7 +599,7 @@ baca-start-snm-left-only = #(
     #{
     - \abjad-invisible-line
     - \baca-snm-left-text-tweak #left
-    - \tweak extra-offset #'(0 . 15)
+    - \baca-upper-annotation-layer
     $music
     #}
     )
@@ -533,7 +612,54 @@ baca-start-snm-both = #(
     - \abjad-invisible-line
     - \baca-snm-left-text-tweak #left
     - \baca-snm-right-text-tweak #right
-    - \tweak extra-offset #'(0 . 15)
+    - \baca-upper-annotation-layer
     $music
     #}
     )
+
+%%% TEXT SPANNER %%%
+
+baca-text-spanner-left-markup = #(
+    define-music-function
+    (parser location markup music)
+    (markup? ly:music?)
+    #{
+    \tweak bound-details.left.text \markup \concat {
+        \upright #markup \hspace #0.5
+        }
+    $music
+    #}
+    )
+
+baca-text-spanner-left-text = #(
+    define-music-function
+    (parser location string music)
+    (string? ly:music?)
+    #{
+    \tweak bound-details.left.text \markup \concat {
+        \upright #string \hspace #0.5
+        }
+    $music
+    #}
+    )
+
+baca-text-spanner-right-markup = #(
+    define-music-function
+    (parser location markup music)
+    (markup? ly:music?)
+    #{
+    \tweak bound-details.right.text \markup \upright #markup
+    $music
+    #}
+    )
+
+baca-text-spanner-right-text = #(
+    define-music-function
+    (parser location string music)
+    (string? ly:music?)
+    #{
+    \tweak bound-details.right.text \markup \upright #string
+    $music
+    #}
+    )
+
