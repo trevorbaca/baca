@@ -385,8 +385,6 @@ baca-sfz-p = #(
 %%% SUBITO DYNAMICS %%%
 
 baca-ppp-sub = 
-    \tweak DynamicText.self-alignment-X #LEFT
-    \tweak DynamicText.X-extent #'(0 . 0)
     #(make-dynamic-script
     (markup
         #:line (
@@ -398,8 +396,6 @@ baca-ppp-sub =
     )
 
 baca-pp-sub = 
-    \tweak DynamicText.self-alignment-X #LEFT
-    \tweak DynamicText.X-extent #'(0 . 0)
     #(make-dynamic-script
     (markup
         #:line (
@@ -411,8 +407,6 @@ baca-pp-sub =
     )
 
 baca-p-sub = 
-    \tweak DynamicText.self-alignment-X #LEFT
-    \tweak DynamicText.X-extent #'(0 . 0)
     #(make-dynamic-script
     (markup
         #:line (
@@ -424,8 +418,6 @@ baca-p-sub =
     )
 
 baca-mp-sub = 
-    \tweak DynamicText.self-alignment-X #LEFT
-    \tweak DynamicText.X-extent #'(0 . 0)
     #(make-dynamic-script
     (markup
         #:line (
@@ -437,8 +429,6 @@ baca-mp-sub =
     )
 
 baca-mf-sub =
-    \tweak DynamicText.self-alignment-X #LEFT
-    \tweak DynamicText.X-extent #'(0 . 0)
     #(make-dynamic-script
     (markup
         #:line (
@@ -450,8 +440,6 @@ baca-mf-sub =
     )
 
 baca-f-sub =
-    \tweak DynamicText.self-alignment-X #LEFT
-    \tweak DynamicText.X-extent #'(0 . 0)
     #(make-dynamic-script
     (markup
         #:line (
@@ -546,10 +534,7 @@ baca-fff-effort-sub = #(
 
 %%% TEXT-ONLY DYNAMICS %%%
 
-
 baca-appena-udibile = 
-    \tweak DynamicText.self-alignment-X #LEFT
-    \tweak DynamicText.X-extent #'(0 . 0)
     #(make-dynamic-script
     (markup
         #:whiteout
@@ -571,8 +556,6 @@ baca-niente = #(
 %%% TEXTUAL DYNAMICS %%%
 
 baca-p-sub-but-accents-continue-sffz = 
-    \tweak DynamicText.self-alignment-X #LEFT
-    \tweak DynamicText.X-extent #'(0 . 0)
     #(make-dynamic-script
     (markup
         #:whiteout
@@ -587,8 +570,6 @@ baca-p-sub-but-accents-continue-sffz =
     )
 
 baca-f-but-accents-sffz =
-    \tweak DynamicText.self-alignment-X #LEFT
-    \tweak DynamicText.X-extent #'(0 . 0)
     #(make-dynamic-script
     (markup
         #:whiteout
@@ -605,8 +586,6 @@ baca-f-but-accents-sffz =
     )
 
 baca-f-sub-but-accents-continue-sffz =
-    \tweak DynamicText.self-alignment-X #LEFT
-    \tweak DynamicText.X-extent #'(0 . 0)
     #(make-dynamic-script
     (markup
         #:whiteout
