@@ -28,7 +28,7 @@ baca
    indicatorcommands
    indicators
    markups
-   musicmaker
+   mmaker
    overrides
    persistence
    piecewise
@@ -51,7 +51,7 @@ baca
    indicatorcommands
    indicators
    markups
-   musicmaker
+   mmaker
    overrides
    persistence
    piecewise

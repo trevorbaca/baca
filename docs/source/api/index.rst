@@ -540,7 +540,7 @@ indicators.Markup library.
 
    <hr/>
 
-.. rubric:: :ref:`baca.musicmaker <baca--musicmaker>`
+.. rubric:: :ref:`baca.mmaker <baca--mmaker>`
    :class: section-header
 
 .. raw:: html
@@ -553,18 +553,18 @@ indicators.Markup library.
 .. autosummary::
    :nosignatures:
 
-   ~baca.musicmaker.AcciaccaturaSpecifier
-   ~baca.musicmaker.AnchorSpecifier
-   ~baca.musicmaker.Coat
-   ~baca.musicmaker.ImbricationCommand
-   ~baca.musicmaker.LMRSpecifier
-   ~baca.musicmaker.MusicAccumulator
-   ~baca.musicmaker.MusicContribution
-   ~baca.musicmaker.MusicMaker
-   ~baca.musicmaker.NestingCommand
-   ~baca.musicmaker.PitchFirstRhythmCommand
-   ~baca.musicmaker.PitchSpecifier
-   ~baca.musicmaker.RestAffixSpecifier
+   ~baca.mmaker.AcciaccaturaSpecifier
+   ~baca.mmaker.AnchorSpecifier
+   ~baca.mmaker.Coat
+   ~baca.mmaker.ImbricationCommand
+   ~baca.mmaker.LMRSpecifier
+   ~baca.mmaker.MusicAccumulator
+   ~baca.mmaker.MusicContribution
+   ~baca.mmaker.MusicMaker
+   ~baca.mmaker.NestingCommand
+   ~baca.mmaker.PitchFirstRhythmCommand
+   ~baca.mmaker.PitchSpecifier
+   ~baca.mmaker.RestAffixSpecifier
 
 .. raw:: html
 
@@ -576,20 +576,20 @@ indicators.Markup library.
 .. autosummary::
    :nosignatures:
 
-   ~baca.musicmaker.anchor
-   ~baca.musicmaker.anchor_after
-   ~baca.musicmaker.anchor_to_figure
-   ~baca.musicmaker.coat
-   ~baca.musicmaker.imbricate
-   ~baca.musicmaker.nest
-   ~baca.musicmaker.rests_after
-   ~baca.musicmaker.rests_around
-   ~baca.musicmaker.rests_before
-   ~baca.musicmaker.resume
-   ~baca.musicmaker.resume_after
-   ~baca.musicmaker.skips_after
-   ~baca.musicmaker.skips_around
-   ~baca.musicmaker.skips_before
+   ~baca.mmaker.anchor
+   ~baca.mmaker.anchor_after
+   ~baca.mmaker.anchor_to_figure
+   ~baca.mmaker.coat
+   ~baca.mmaker.imbricate
+   ~baca.mmaker.nest
+   ~baca.mmaker.rests_after
+   ~baca.mmaker.rests_around
+   ~baca.mmaker.rests_before
+   ~baca.mmaker.resume
+   ~baca.mmaker.resume_after
+   ~baca.mmaker.skips_after
+   ~baca.mmaker.skips_around
+   ~baca.mmaker.skips_before
 
 .. raw:: html
 
@@ -601,7 +601,7 @@ indicators.Markup library.
 .. autosummary::
    :nosignatures:
 
-   ~baca.musicmaker.PitchFirstRhythmMaker
+   ~baca.mmaker.PitchFirstRhythmMaker
 
 .. raw:: html
 

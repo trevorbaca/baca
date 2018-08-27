@@ -1,16 +1,16 @@
-.. _baca--musicmaker:
+.. _baca--mmaker:
 
-musicmaker
-==========
+mmaker
+======
 
-.. automodule:: baca.musicmaker
+.. automodule:: baca.mmaker
 
-.. currentmodule:: baca.musicmaker
+.. currentmodule:: baca.mmaker
 
 .. container:: svg-container
 
    .. inheritance-diagram:: baca
-      :lineage: baca.musicmaker
+      :lineage: baca.mmaker
 
 .. raw:: html
 
@@ -237,33 +237,6 @@ musicmaker
 
       <hr/>
 
-   .. rubric:: Read/write properties
-      :class: class-header
-
-   .. container:: inherited
-
-      .. autoattribute:: ImbricationCommand.map
-
-   .. container:: inherited
-
-      .. autoattribute:: ImbricationCommand.measures
-
-   .. container:: inherited
-
-      .. autoattribute:: ImbricationCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: ImbricationCommand.scope
-
-   .. container:: inherited
-
-      .. autoattribute:: ImbricationCommand.tag_measure_number
-
-   .. raw:: html
-
-      <hr/>
-
    .. rubric:: Read-only properties
       :class: class-header
 
@@ -281,7 +254,23 @@ musicmaker
 
    .. container:: inherited
 
+      .. autoattribute:: ImbricationCommand.map
+
+   .. container:: inherited
+
       .. autoattribute:: ImbricationCommand.match
+
+   .. container:: inherited
+
+      .. autoattribute:: ImbricationCommand.measures
+
+   .. container:: inherited
+
+      .. autoattribute:: ImbricationCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: ImbricationCommand.scope
 
    .. autoattribute:: ImbricationCommand.segment
 
@@ -292,6 +281,10 @@ musicmaker
    .. container:: inherited
 
       .. autoattribute:: ImbricationCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: ImbricationCommand.tag_measure_number
 
    .. container:: inherited
 
@@ -646,12 +639,22 @@ musicmaker
 
       <hr/>
 
-   .. rubric:: Read/write properties
+   .. rubric:: Read-only properties
       :class: class-header
 
    .. container:: inherited
 
+      .. autoattribute:: NestingCommand.deactivate
+
+   .. autoattribute:: NestingCommand.lmr_specifier
+
+   .. container:: inherited
+
       .. autoattribute:: NestingCommand.map
+
+   .. container:: inherited
+
+      .. autoattribute:: NestingCommand.match
 
    .. container:: inherited
 
@@ -667,32 +670,15 @@ musicmaker
 
    .. container:: inherited
 
-      .. autoattribute:: NestingCommand.tag_measure_number
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read-only properties
-      :class: class-header
-
-   .. container:: inherited
-
-      .. autoattribute:: NestingCommand.deactivate
-
-   .. autoattribute:: NestingCommand.lmr_specifier
-
-   .. container:: inherited
-
-      .. autoattribute:: NestingCommand.match
-
-   .. container:: inherited
-
       .. autoattribute:: NestingCommand.selector
 
    .. container:: inherited
 
       .. autoattribute:: NestingCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: NestingCommand.tag_measure_number
 
    .. container:: inherited
 
@@ -748,8 +734,12 @@ musicmaker
 
       <hr/>
 
-   .. rubric:: Read/write properties
+   .. rubric:: Read-only properties
       :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchFirstRhythmCommand.deactivate
 
    .. container:: inherited
 
@@ -757,7 +747,15 @@ musicmaker
 
    .. container:: inherited
 
+      .. autoattribute:: PitchFirstRhythmCommand.match
+
+   .. container:: inherited
+
       .. autoattribute:: PitchFirstRhythmCommand.measures
+
+   .. autoattribute:: PitchFirstRhythmCommand.pattern
+
+   .. autoattribute:: PitchFirstRhythmCommand.rhythm_maker
 
    .. container:: inherited
 
@@ -769,34 +767,15 @@ musicmaker
 
    .. container:: inherited
 
-      .. autoattribute:: PitchFirstRhythmCommand.tag_measure_number
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read-only properties
-      :class: class-header
-
-   .. container:: inherited
-
-      .. autoattribute:: PitchFirstRhythmCommand.deactivate
-
-   .. container:: inherited
-
-      .. autoattribute:: PitchFirstRhythmCommand.match
-
-   .. autoattribute:: PitchFirstRhythmCommand.pattern
-
-   .. autoattribute:: PitchFirstRhythmCommand.rhythm_maker
-
-   .. container:: inherited
-
       .. autoattribute:: PitchFirstRhythmCommand.selector
 
    .. container:: inherited
 
       .. autoattribute:: PitchFirstRhythmCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchFirstRhythmCommand.tag_measure_number
 
    .. container:: inherited
 

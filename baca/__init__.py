@@ -4,7 +4,7 @@ from .commands import *
 from .divisions import *
 from .indicatorcommands import *
 from .indicators import *
-from .musicmaker import *
+from .mmaker import *
 from .overrides import *
 from .persistence import *
 from .piecewise import *
