@@ -1,7 +1,9 @@
 %%% BAR LINES %%%
 
-baca-bar-line-visible = #(define-music-function
-    (parser location music) (ly:music?)
+baca-bar-line-visible = #(
+    define-music-function
+    (parser location music)
+    (ly:music?)
     #{
     \once \override Score.BarLine.transparent = ##f
     $music

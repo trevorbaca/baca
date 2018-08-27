@@ -1,233 +1,124 @@
 %%% ANCORA DYNAMICS %%%
 
+#(define-markup-command
+    (baca-ancora-dynamic layout props dynamic)
+    (string?)
+    (interpret-markup layout props
+    #{
+    \markup
+    \line {
+        \dynamic #dynamic
+        \hspace #0.25
+        \normal-text ancora
+        }
+    #}))
+
 baca-ppp-ancora = #(
     make-dynamic-script
-    (markup
-        #:line (
-            #:dynamic "ppp"
-            #:hspace 0.25
-            #:normal-text "ancora"
-            )
-        )
+    (markup #:baca-ancora-dynamic "ppp")
     )
 
 baca-pp-ancora = #(
     make-dynamic-script
-    (markup
-        #:line (
-            #:dynamic "pp"
-            #:hspace 0.25
-            #:normal-text "ancora"
-            )
-        )
+    (markup #:baca-ancora-dynamic "pp")
     )
 
 baca-p-ancora = #(
     make-dynamic-script
-    (markup
-        #:line (
-            #:dynamic "p"
-            #:hspace 0.25
-            #:normal-text "ancora"
-            )
-        )
+    (markup #:baca-ancora-dynamic "p")
     )
 
 baca-mp-ancora = #(
     make-dynamic-script
-    (markup
-        #:line (
-            #:dynamic "mp"
-            #:hspace 0.25
-            #:normal-text "ancora"
-            )
-        )
+    (markup #:baca-ancora-dynamic "mp")
     )
 
-baca-mf-ancora = #(
+baca-mm-ancora = #(
     make-dynamic-script
-    (markup
-        #:line (
-            #:dynamic "mf"
-            #:hspace 0.25
-            #:normal-text "ancora"
-            )
-        )
+    (markup #:baca-ancora-dynamic "mm")
     )
 
 baca-f-ancora = #(
     make-dynamic-script
-    (markup
-        #:line (
-            #:dynamic "f"
-            #:hspace 0.25
-            #:normal-text "ancora"
-            )
-        )
+    (markup #:baca-ancora-dynamic "f")
     )
 
 baca-ff-ancora = #(
     make-dynamic-script
-    (markup
-        #:line (
-            #:dynamic "ff"
-            #:hspace 0.25
-            #:normal-text "ancora"
-            )
-        )
+    (markup #:baca-ancora-dynamic "ff")
     )
 
 baca-fff-ancora = #(
     make-dynamic-script
-    (markup
-        #:line (
-            #:dynamic "fff"
-            #:hspace 0.25
-            #:normal-text "ancora"
-            )
-        )
+    (markup #:baca-ancora-dynamic "fff")
     )
 
 %%% EFFORT DYNAMICS %%%
 
+#(define-markup-command
+    (baca-effort-dynamic layout props left dynamic right)
+    (number? string? number?)
+    (interpret-markup layout props
+    #{
+    \markup
+    \whiteout
+    \line {
+        \general-align #Y #-2 \normal-text \larger "“"
+        \hspace #left
+        \dynamic #dynamic
+        \hspace #right
+        \general-align #Y #-2 \normal-text \larger "”"
+        }
+    #}))
+
 baca-effort-ppp = #(
     make-dynamic-script
-    (markup
-        #:whiteout
-        #:line (
-            #:general-align Y -2 #:normal-text #:larger "“"
-            #:hspace -0.1
-            #:dynamic "ppp"
-            #:hspace -0.25
-            #:general-align Y -2 #:normal-text #:larger "”"
-            )
-        )
+    (markup #:baca-effort-dynamic -0.1 "ppp" -0.25)
     )
 
 baca-effort-pp = #(
     make-dynamic-script
-    (markup
-        #:whiteout
-        #:line (
-            #:general-align Y -2 #:normal-text #:larger "“"
-            #:hspace -0.1
-            #:dynamic "pp"
-            #:hspace -0.25
-            #:general-align Y -2 #:normal-text #:larger "”"
-            )
-        )
+    (markup #:baca-effort-dynamic -0.1 "pp" -0.25)
     )
 
 baca-effort-p = #(
     make-dynamic-script
-    (markup
-        #:whiteout
-        #:line (
-            #:general-align Y -2 #:normal-text #:larger "“"
-            #:hspace -0.1
-            #:dynamic "p"
-            #:hspace -0.25
-            #:general-align Y -2 #:normal-text #:larger "”"
-            )
-        )
+    (markup #:baca-effort-dynamic -0.1 "p" -0.25)
     )
 
 baca-effort-mp = #(
     make-dynamic-script
-    (markup
-        #:whiteout
-        #:line (
-            #:general-align Y -2 #:normal-text #:larger "“"
-            #:hspace -0.1
-            #:dynamic "mp"
-            #:hspace -0.25
-            #:general-align Y -2 #:normal-text #:larger "”"
-            )
-        )
+    (markup #:baca-effort-dynamic -0.1 "mp" -0.25)
     )
 
 baca-effort-mf = #(
     make-dynamic-script
-    (markup
-        #:whiteout
-        #:line (
-            #:general-align Y -2 #:normal-text #:larger "“"
-            #:hspace -0.1
-            #:dynamic "mf"
-            #:hspace -0.2
-            #:general-align Y -2 #:normal-text #:larger "”"
-            )
-        )
+    (markup #:baca-effort-dynamic -0.1 "mf" -0.2)
     )
 
 baca-effort-f = #(
     make-dynamic-script
-    (markup
-        #:whiteout
-        #:line (
-            #:general-align Y -2 #:normal-text #:larger "“"
-            #:hspace -0.4
-            #:dynamic "f"
-            #:hspace -0.2
-            #:general-align Y -2 #:normal-text #:larger "”"
-            )
-        )
+    (markup #:baca-effort-dynamic -0.4 "mf" -0.2)
     )
 
 baca-effort-ff = #(
     make-dynamic-script
-    (markup
-        #:whiteout
-        #:line (
-            #:general-align Y -2 #:normal-text #:larger "“"
-            #:hspace -0.4
-            #:dynamic "ff"
-            #:hspace -0.2
-            #:general-align Y -2 #:normal-text #:larger "”"
-            )
-        )
+    (markup #:baca-effort-dynamic -0.4 "mf" -0.2)
     )
 
 baca-effort-fff = #(
     make-dynamic-script
-    (markup
-        #:whiteout
-        #:line (
-            #:general-align Y -2 #:normal-text #:larger "“"
-            #:hspace -0.4
-            #:dynamic "fff"
-            #:hspace -0.2
-            #:general-align Y -2 #:normal-text #:larger "”"
-            )
-        )
+    (markup #:baca-effort-dynamic -0.4 "mf" -0.2)
     )
 
 baca-effort-sfz = #(
     make-dynamic-script
-    (markup
-        #:whiteout
-        #:line (
-            #:general-align Y -2 #:normal-text #:larger "“"
-            #:hspace -0.3
-            #:dynamic "sfz"
-            #:hspace -0.2
-            #:general-align Y -2 #:normal-text #:larger "”"
-            )
-        )
+    (markup #:baca-effort-dynamic -0.3 "mf" -0.2)
     )
 
 baca-effort-sffz = #(
     make-dynamic-script
-    (markup
-        #:whiteout
-        #:line (
-            #:general-align Y -2 #:normal-text #:larger "“"
-            #:hspace -0.3
-            #:dynamic "sffz"
-            #:hspace -0.2
-            #:general-align Y -2 #:normal-text #:larger "”"
-            )
-        )
+    (markup #:baca-effort-dynamic -0.3 "mf" -0.2)
     )
 
 %%% FP DYNAMICS %%%
@@ -235,162 +126,104 @@ baca-effort-sffz = #(
 baca-ffp = #(make-dynamic-script "ffp")
 baca-fffp = #(make-dynamic-script "fffp")
 
-%%% POSSIBILE DYNAMICS %%%
+%%% POSS. DYNAMICS %%%
+
+#(define-markup-command
+    (baca-poss-dynamic layout props dynamic)
+    (string?)
+    (interpret-markup layout props
+    #{
+    \markup
+    \line {
+        \dynamic #dynamic
+        \hspace #0.25
+        \normal-text poss.
+        }
+    #}))
 
 baca-ppp-poss = #(
     make-dynamic-script
-    (markup
-        #:line (
-            #:dynamic "ppp"
-            #:hspace 0.25
-            #:normal-text "poss."
-            )
-        )
+    (markup #:baca-poss-dynamic "ppp")
     )
 
 baca-pp-poss = #(
     make-dynamic-script
-    (markup
-        #:line (
-            #:dynamic "pp"
-            #:hspace 0.25
-            #:normal-text "poss."
-            )
-        )
+    (markup #:baca-poss-dynamic "pp")
     )
 
 baca-p-poss = #(
     make-dynamic-script
-    (markup
-        #:line (
-            #:dynamic "p"
-            #:hspace 0.25
-            #:normal-text "poss."
-            )
-        )
+    (markup #:baca-poss-dynamic "p")
     )
 
 baca-f-poss = #(
     make-dynamic-script
-    (markup
-        #:line (
-            #:dynamic "f"
-            #:hspace 0.25
-            #:normal-text "poss."
-            )
-        )
+    (markup #:baca-poss-dynamic "f")
     )
 
 baca-ff-poss = #(
     make-dynamic-script
-    (markup
-        #:line (
-            #:dynamic "ff"
-            #:hspace 0.25
-            #:normal-text "poss."
-            )
-        )
+    (markup #:baca-poss-dynamic "ff")
     )
 
 baca-fff-poss = #(
     make-dynamic-script
-    (markup
-        #:line (
-            #:dynamic "fff"
-            #:hspace 0.25 
-            #:normal-text "poss."
-            )
-        )
+    (markup #:baca-poss-dynamic "fff")
     )
 
 %%% SEMPRE DYNAMICS %%%
 
+#(define-markup-command
+    (baca-sempre-dynamic layout props dynamic)
+    (string?)
+    (interpret-markup layout props
+    #{
+    \markup
+    \line {
+        \dynamic #dynamic
+        \hspace #0.25
+        \normal-text sempre
+        }
+    #}))
+
 baca-ppp-sempre = #(
     make-dynamic-script
-    (markup
-        #:line (
-            #:dynamic "ppp"
-            #:hspace 0.25
-            #:normal-text "sempre"
-            )
-        )
+    (markup #:baca-sempre-dynamic "ppp")
     )
 
 baca-pp-sempre = #(
     make-dynamic-script
-    (markup
-        #:line (
-            #:dynamic "pp"
-            #:hspace 0.25
-            #:normal-text "sempre"
-            )
-        )
+    (markup #:baca-sempre-dynamic "pp")
     )
 
 baca-p-sempre = #(
     make-dynamic-script
-    (markup
-        #:line (
-            #:dynamic "p"
-            #:hspace 0.25
-            #:normal-text "sempre"
-            )
-        )
+    (markup #:baca-sempre-dynamic "p")
     )
 
 baca-mp-sempre = #(
     make-dynamic-script
-    (markup
-        #:line (
-            #:dynamic "mp"
-            #:hspace 0.25
-            #:normal-text "sempre"
-            )
-        )
+    (markup #:baca-sempre-dynamic "mp")
     )
 
 baca-mf-sempre = #(
     make-dynamic-script
-    (markup
-        #:line (
-            #:dynamic "mf"
-            #:hspace 0.25
-            #:normal-text "sempre"
-            )
-        )
+    (markup #:baca-sempre-dynamic "mf")
     )
 
 baca-f-sempre = #(
     make-dynamic-script
-    (markup
-        #:line (
-            #:dynamic "f"
-            #:hspace 0.25
-            #:normal-text "sempre"
-            )
-        )
+    (markup #:baca-sempre-dynamic "f")
     )
 
 baca-ff-sempre = #(
     make-dynamic-script
-    (markup
-        #:line (
-            #:dynamic "ff"
-            #:hspace 0.25
-            #:normal-text "sempre"
-            )
-        )
+    (markup #:baca-sempre-dynamic "ff")
     )
 
 baca-fff-sempre = #(
     make-dynamic-script
-    (markup
-        #:line (
-            #:dynamic "fff"
-            #:hspace 0.25
-            #:normal-text "sempre"
-            )
-        )
+    (markup #:baca-sempre-dynamic "fff")
     )
 
 %%% SFORZANDO DYNAMICS %%%

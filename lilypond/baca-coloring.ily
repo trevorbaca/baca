@@ -1,85 +1,3 @@
-%%% PERSISTENT INDICATOR MARKUP %%%
-
-baca-explicit-indicator-markup = #(
-    define-music-function
-    string
-    (string?)
-    #{
-    - \markup \with-color #(x11-color 'blue) { #string }
-    #}
-    )
-
-baca-default-indicator-markup = #(
-    define-music-function
-    string
-    (string?)
-    #{
-    - \markup \with-color #(x11-color 'DarkViolet) { #string }
-    #}
-    )
-
-baca-redundant-indicator-markup = #(
-    define-music-function
-    string
-    (string?)
-    #{
-    - \markup \with-color #(x11-color 'DeepPink1) { #string }
-    #}
-    )
-
-baca-reapplied-indicator-markup = #(
-    define-music-function
-    string
-    (string?)
-    #{
-    - \markup \with-color #(x11-color 'green4) { #string }
-    #}
-    )
-
-%%% COLORED MARKUP %%%
-
-baca-clock-time-markup = #(
-    define-music-function
-    string
-    (string?)
-    #{
-    - \tweak extra-offset #'(0 . 14)
-    - \tweak font-size #2
-    - \markup
-    \with-dimensions-from \null
-    \with-color #(x11-color 'DarkCyan)
-    { #string }
-    #}
-    )
-
-baca-spacing-markup = #(
-    define-music-function
-    string
-    (string?)
-    #{
-    - \tweak extra-offset #'(0 . 14)
-    - \tweak font-size #2
-    - \markup
-    \with-dimensions-from \null
-    \with-color #(x11-color 'ForestGreen)
-    { #string }
-    #}
-    )
-
-baca-stage-number-markup = #(
-    define-music-function
-    string
-    (string?)
-    #{
-    - \tweak extra-offset #'(0 . 14)
-    - \tweak font-size #2
-    - \markup
-    \with-dimensions-from \null
-    \with-color #(x11-color 'DarkCyan)
-    { #string }
-    #}
-    )
-
 %%% COLORED MUSIC %%%
 
 baca-octave-warning = #(
@@ -157,11 +75,60 @@ baca-invisible-music = #(
     #}
     )
 
-% NOTE: this works:
-%zebra = #(define-music-function (color) (color?)
+%%% PERSISTENT INDICATOR MARKUP %%%
+
+baca-explicit-indicator-markup = #(
+    define-music-function
+    string
+    (string?)
+    #{
+    - \markup
+    \with-color #(x11-color 'blue)
+    #string
+    #}
+    )
+
+baca-default-indicator-markup = #(
+    define-music-function
+    string
+    (string?)
+    #{
+    - \markup
+    \with-color #(x11-color 'DarkViolet)
+    #string
+    #}
+    )
+
+baca-redundant-indicator-markup = #(
+    define-music-function
+    string
+    (string?)
+    #{
+    - \markup
+    \with-color #(x11-color 'DeepPink1)
+    #string
+    #}
+    )
+
+baca-reapplied-indicator-markup = #(
+    define-music-function
+    string
+    (string?)
+    #{
+    - \markup
+    \with-color #(x11-color 'green4)
+    #string
+    #}
+    )
+
+% Note that this works:
+%zebra = #(
+%    define-music-function
+%    (color)
+%    (color?)
 %    #{
 %    - \tweak color #color
-%    - \markup { FOO }
+%    - \markup
+%    FOO
 %    #}
 %    )
-

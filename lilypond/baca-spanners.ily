@@ -31,7 +31,8 @@ bacaStopTextSpanBCP = #(
     )
 
 #(define-markup-command
-    (baca-bcp-left layout props n d) (number? number?)
+    (baca-bcp-left layout props n d)
+    (number? number?)
     (interpret-markup layout props
     #{
     \markup \concat {
