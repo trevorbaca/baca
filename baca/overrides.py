@@ -2059,7 +2059,7 @@ def hairpin_transparent(
 def mmrest_color(
     color: str = 'red',
     *,
-    selector: typings.Selector = 'baca.leaves()',
+    selector: typings.Selector = 'baca.mmrests()',
     tag: typing.Optional[str] = 'baca_mmrest_text_color',
     ) -> OverrideCommand:
     r"""
@@ -2077,7 +2077,7 @@ def mmrest_color(
 def mmrest_text_color(
     color: str = 'red',
     *,
-    selector: typings.Selector = 'baca.leaves()',
+    selector: typings.Selector = 'baca.mmrests()',
     tag: typing.Optional[str] = 'baca_mmrest_text_color',
     ) -> OverrideCommand:
     r"""
@@ -2095,7 +2095,7 @@ def mmrest_text_color(
         ...     baca.markup(
         ...         'still',
         ...         boxed=True,
-        ...         selector=baca.leaf(1),
+        ...         selector=baca.mmrest(1),
         ...         ),
         ...     baca.mmrest_text_color('red'),
         ...     )
@@ -2197,7 +2197,7 @@ def mmrest_text_color(
         ...         boxed=True,
         ...         selector=baca.leaf(1),
         ...         ),
-        ...     baca.mmrest_text_color('red'),
+        ...     baca.mmrest_text_color('red', selector=baca.leaves()),
         ...     baca.pitches([2, 4]),
         ...     )
 
@@ -2219,7 +2219,7 @@ def mmrest_text_color(
 def mmrest_text_extra_offset(
     pair: typings.NumberPair,
     *,
-    selector: typings.Selector = 'baca.leaves()',
+    selector: typings.Selector = 'baca.mmrests()',
     tag: typing.Optional[str] = 'baca_mmrest_text_extra_offset',
     ) -> OverrideCommand:
     r"""
@@ -2237,7 +2237,7 @@ def mmrest_text_extra_offset(
         ...     baca.markup(
         ...         'still',
         ...         boxed=True,
-        ...         selector=baca.leaf(1),
+        ...         selector=baca.mmrest(1),
         ...         ),
         ...     baca.mmrest_text_extra_offset((0, 2)),
         ...     )
@@ -2334,7 +2334,7 @@ def mmrest_text_extra_offset(
 def mmrest_text_padding(
     n: typings.Number,
     *,
-    selector: typings.Selector = 'baca.leaves()',
+    selector: typings.Selector = 'baca.mmrests()',
     tag: typing.Optional[str] = 'baca_mmrest_text_padding',
     ) -> OverrideCommand:
     r"""
@@ -2352,7 +2352,7 @@ def mmrest_text_padding(
         ...     baca.markup(
         ...         'still',
         ...         boxed=True,
-        ...         selector=baca.leaf(1),
+        ...         selector=baca.mmrest(1),
         ...         ),
         ...     baca.mmrest_text_padding(2),
         ...     )
@@ -2448,7 +2448,7 @@ def mmrest_text_padding(
 
 def mmrest_text_parent_center(
     *,
-    selector: typings.Selector = 'baca.leaves()',
+    selector: typings.Selector = 'baca.mmrests()',
     tag: typing.Optional[str] = 'baca_mmrest_text_parent_center',
     ) -> OverrideCommand:
     r"""
@@ -2466,7 +2466,7 @@ def mmrest_text_parent_center(
         ...     baca.markup(
         ...         'still',
         ...         boxed=True,
-        ...         selector=baca.leaf(1),
+        ...         selector=baca.mmrest(1),
         ...         ),
         ...     baca.mmrest_text_parent_center(),
         ...     )
@@ -2563,7 +2563,7 @@ def mmrest_text_parent_center(
 def mmrest_text_staff_padding(
     n: typings.Number,
     *,
-    selector: typings.Selector = 'baca.leaves()',
+    selector: typings.Selector = 'baca.mmrests()',
     tag: typing.Optional[str] = 'baca_mmrest_text_staff_padding',
     ) -> OverrideCommand:
     r"""
@@ -2581,7 +2581,7 @@ def mmrest_text_staff_padding(
         ...     baca.markup(
         ...         'still',
         ...         boxed=True,
-        ...         selector=baca.leaf(1),
+        ...         selector=baca.mmrest(1),
         ...         ),
         ...     baca.mmrest_text_staff_padding(2),
         ...     )
