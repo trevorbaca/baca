@@ -125,7 +125,7 @@ class AccidentalAdjustmentCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.Slice = None,
         parenthesized: bool = None,
-        scope: scoping.scope_typing = None,
+        scope: scoping.ScopeTyping = None,
         selector: typings.Selector = 'baca.pleaf(0)',
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
         ) -> None:
@@ -745,7 +745,7 @@ class ClusterCommand(scoping.Command):
         map: typings.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
-        scope: scoping.scope_typing = None,
+        scope: scoping.ScopeTyping = None,
         selector='baca.plts()',
         start_pitch=None,
         widths=None,
@@ -1807,7 +1807,7 @@ class ColorFingeringCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.Slice = None,
         numbers=None,
-        scope: scoping.scope_typing = None,
+        scope: scoping.ScopeTyping = None,
         selector='baca.pheads()',
         ) -> None:
         scoping.Command.__init__(
@@ -1900,7 +1900,7 @@ class DiatonicClusterCommand(scoping.Command):
         map: typings.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
-        scope: scoping.scope_typing = None,
+        scope: scoping.ScopeTyping = None,
         widths,
         selector='baca.plts()',
         ) -> None:
@@ -2240,7 +2240,7 @@ class MicrotoneDeviationCommand(scoping.Command):
         map: typings.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
-        scope: scoping.scope_typing = None,
+        scope: scoping.ScopeTyping = None,
         selector='baca.plts()',
         ) -> None:
         scoping.Command.__init__(
@@ -2445,7 +2445,7 @@ class OctaveDisplacementCommand(scoping.Command):
         map: typings.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
-        scope: scoping.scope_typing = None,
+        scope: scoping.ScopeTyping = None,
         selector='baca.plts()',
         ) -> None:
         scoping.Command.__init__(
@@ -2929,7 +2929,7 @@ class PitchCommand(scoping.Command):
         measures: typings.Slice = None,
         persist: str = None,
         pitches: typing.Iterable = None,
-        scope: scoping.scope_typing = None,
+        scope: scoping.ScopeTyping = None,
         selector: typings.Selector = None,
         ) -> None:
         scoping.Command.__init__(
@@ -3558,7 +3558,7 @@ class RegisterCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.Slice = None,
         registration=None,
-        scope: scoping.scope_typing = None,
+        scope: scoping.ScopeTyping = None,
         selector='baca.plts()',
         ) -> None:
         scoping.Command.__init__(
@@ -4660,7 +4660,7 @@ class RegisterInterpolationCommand(scoping.Command):
         map: typings.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
-        scope: scoping.scope_typing = None,
+        scope: scoping.ScopeTyping = None,
         selector: typings.Selector = 'baca.plts()',
         start_pitch: typing.Union[typings.Number, abjad.NumberedPitch] = 0,
         stop_pitch: typing.Union[typings.Number, abjad.NumberedPitch] = 0,
@@ -5286,7 +5286,7 @@ class RegisterToOctaveCommand(scoping.Command):
         map: typings.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
-        scope: scoping.scope_typing = None,
+        scope: scoping.ScopeTyping = None,
         selector='baca.plts()',
         ) -> None:
         scoping.Command.__init__(
@@ -5589,7 +5589,7 @@ class StaffPositionCommand(scoping.Command):
         map: typings.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
-        scope: scoping.scope_typing = None,
+        scope: scoping.ScopeTyping = None,
         selector: typings.Selector = 'baca.plts()',
         ) -> None:
         scoping.Command.__init__(
@@ -5852,7 +5852,7 @@ class StaffPositionInterpolationCommand(scoping.Command):
         map: typings.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
-        scope: scoping.scope_typing = None,
+        scope: scoping.ScopeTyping = None,
         selector: typings.Selector = 'baca.plts()',
         start_pitch: typing.Union[str, abjad.NamedPitch] = 'C4',
         stop_pitch: typing.Union[str, abjad.NamedPitch] = 'C4',

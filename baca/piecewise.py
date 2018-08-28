@@ -278,7 +278,7 @@ class PiecewiseCommand(scoping.Command):
         piece_selector: typings.Selector = 'baca.leaves()',
         remove_length_1_spanner_start: bool = None,
         right_broken: typing.Any = None,
-        scope: scoping.scope_typing = None,
+        scope: scoping.ScopeTyping = None,
         selector: typings.Selector = 'baca.leaves()',
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
         ) -> None:

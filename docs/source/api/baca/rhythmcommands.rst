@@ -37,7 +37,6 @@ rhythmcommands
    .. autosummary::
       :nosignatures:
 
-      __call__
       annotate_unpitched_music
       division_expression
       division_maker
@@ -62,7 +61,9 @@ rhythmcommands
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: RhythmCommand.__call__
+   .. container:: inherited
+
+      .. automethod:: RhythmCommand.__call__
 
    .. container:: inherited
 

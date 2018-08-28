@@ -182,7 +182,7 @@ class TimelineScope(abjad.AbjadObject):
         """
         return 'Timeline_Scope'
 
-scope_typing = typing.Union[
+ScopeTyping = typing.Union[
     Scope,
     TimelineScope,
     ]
@@ -220,7 +220,7 @@ class Command(abjad.AbjadObject):
         map: typings.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
-        scope: scope_typing = None,
+        scope: ScopeTyping = None,
         selector: typings.Selector = None,
         tag_measure_number: bool = None,
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
@@ -245,10 +245,16 @@ class Command(abjad.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None, runtime=None) -> None:
+    def __call__(
+        self,
+        argument=None,
+        runtime: abjad.OrderedDict = None,
+        ) -> None:
         """
         Calls command on ``argument``.
         """
+        if runtime is not None:
+            assert isinstance(runtime, abjad.OrderedDict)
         self._runtime = runtime or abjad.OrderedDict()
         if self.map is not None:
             assert isinstance(self.map, abjad.Expression)
@@ -448,7 +454,7 @@ class Command(abjad.AbjadObject):
         return self._runtime
 
     @property
-    def scope(self) -> scope_typing:
+    def scope(self) -> typing.Optional[ScopeTyping]:
         """
         Gets scope.
         """

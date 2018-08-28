@@ -211,7 +211,7 @@ class SpannerCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.Slice = None,
         right_broken: bool = None,
-        scope: scoping.scope_typing = None,
+        scope: scoping.ScopeTyping = None,
         selector: typings.Selector = 'baca.leaves()',
         spanner: abjad.Spanner = None,
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,

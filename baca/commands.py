@@ -33,7 +33,7 @@ class BCPCommand(scoping.Command):
         map: typings.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
-        scope: scoping.scope_typing = None,
+        scope: scoping.ScopeTyping = None,
         selector: typings.Selector = None,
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
         tweaks: typing.Tuple[abjad.LilyPondTweakManager, ...] = None,
@@ -968,7 +968,7 @@ class ColorCommand(scoping.Command):
         map: typings.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
-        scope: scoping.scope_typing = None,
+        scope: scoping.ScopeTyping = None,
         selector: typings.Selector = 'baca.leaves()',
         ) -> None:
         assert selector is not None
@@ -1112,7 +1112,7 @@ class ContainerCommand(scoping.Command):
         map: typings.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
-        scope: scoping.scope_typing = None,
+        scope: scoping.ScopeTyping = None,
         selector: typings.Selector = 'baca.leaves()',
         ) -> None:
         scoping.Command.__init__(
@@ -1197,7 +1197,7 @@ class GlobalFermataCommand(scoping.Command):
         map: typings.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
-        scope: scoping.scope_typing = None,
+        scope: scoping.ScopeTyping = None,
         selector: typings.Selector = 'baca.leaf(0)',
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
         ) -> None:
@@ -1498,7 +1498,7 @@ class IndicatorCommand(scoping.Command):
         measures: typings.Slice = None,
         predicate: typing.Callable = None,
         redundant: bool = None,
-        scope: scoping.scope_typing = None,
+        scope: scoping.ScopeTyping = None,
         selector: typings.Selector = 'baca.pheads()',
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
         tweaks: typing.Tuple[abjad.LilyPondTweakManager, ...] = None,
@@ -2006,7 +2006,7 @@ class LabelCommand(scoping.Command):
         map: typings.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
-        scope: scoping.scope_typing = None,
+        scope: scoping.ScopeTyping = None,
         selector='baca.leaves()',
         ) -> None:
         scoping.Command.__init__(
@@ -2085,7 +2085,7 @@ class MetronomeMarkCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.Slice = None,
         redundant: bool = None,
-        scope: scoping.scope_typing = None,
+        scope: scoping.ScopeTyping = None,
         selector: typings.Selector = 'baca.leaf(0)',
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
         ) -> None:
@@ -2184,7 +2184,7 @@ class PartAssignmentCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.Slice = None,
         part_assignment: abjad.PartAssignment = None,
-        scope: scoping.scope_typing = None,
+        scope: scoping.ScopeTyping = None,
         selector: typings.Selector = 'baca.leaves()',
         ) -> None:
         scoping.Command.__init__(

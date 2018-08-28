@@ -229,7 +229,7 @@ class OverrideCommand(scoping.Command):
         map: typings.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
-        scope: scoping.scope_typing = None,
+        scope: scoping.ScopeTyping = None,
         selector: typings.Selector = 'baca.leaves()',
         tag_measure_number: bool = None,
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,

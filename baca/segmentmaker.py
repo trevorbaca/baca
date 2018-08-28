@@ -1525,7 +1525,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 start_offset, time_signatures = result
                 runtime = self._bundle_manifests(voice.name)
                 try:
-                    command(runtime, start_offset, time_signatures)
+                    command._call(runtime, start_offset, time_signatures)
                 except:
                     print(f'Interpreting ...\n\n{format(command)}\n')
                     raise
@@ -3263,7 +3263,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _unpack_scopes(self, scopes, abbreviations):
         scope_type = (scoping.Scope, scoping.TimelineScope)
-        scopes__: typing.List[scoping.scope_typing]
+        scopes__: typing.List[scoping.ScopeTyping]
         if isinstance(scopes, str):
             voice_name = abbreviations.get(scopes, scopes)
             scope = scoping.Scope(voice_name=voice_name)

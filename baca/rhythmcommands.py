@@ -202,7 +202,7 @@ class RhythmCommand(scoping.Command):
         rewrite_rest_filled: bool = None,
         rhythm_maker: typings.RhythmMakerTyping = None,
         right_broken: bool = None,
-        scope: scoping.scope_typing = None,
+        scope: scoping.ScopeTyping = None,
         split_at_measure_boundaries: bool = None,
         ) -> None:
         scoping.Command.__init__(
@@ -255,7 +255,7 @@ class RhythmCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(
+    def _call(
         self,
         runtime: abjad.OrderedDict = None,
         start_offset: abjad.Offset = None,
@@ -1449,7 +1449,7 @@ class TieCorrectionCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.Slice = None,
         repeat: bool = None,
-        scope: scoping.scope_typing = None,
+        scope: scoping.ScopeTyping = None,
         selector: typings.Selector = 'baca.pleaf(-1)',
         untie: bool = None,
         ) -> None:
