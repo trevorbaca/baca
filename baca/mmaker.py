@@ -5398,9 +5398,7 @@ class MusicAccumulator(abjad.AbjadObject):
                 fused_selection.extend(selection.annotation)
             else:
                 assert isinstance(selection, abjad.Timespan)
-                multiplier = abjad.Multiplier(selection.duration)
-                skip = abjad.Skip(1)
-                abjad.attach(multiplier, skip)
+                skip = abjad.Skip(1, multiplier=selection.duration)
                 fused_selection.append(skip)
         fused_selection = abjad.select(fused_selection)
         return fused_selection
@@ -9745,7 +9743,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
     @classmethod
     def _make_accelerando(class_, leaf_selection, accelerando_indicator):
         assert accelerando_indicator in ('accel', 'rit')
-        tuplet = abjad.Tuplet((1, 1), leaf_selection)
+        tuplet = abjad.Tuplet((1, 1), leaf_selection, hide=True)
         if len(tuplet) == 1:
             return tuplet
         durations = [abjad.inspect(_).duration() for _ in leaf_selection]
@@ -9756,7 +9754,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         multipliers = class_._make_accelerando_multipliers(durations, exponent)
         assert len(leaf_selection) == len(multipliers)
         for multiplier, leaf in zip(multipliers, leaf_selection):
-            abjad.attach(multiplier, leaf)
+            leaf.multiplier = multiplier
         rhythm_maker_class = rmakers.AccelerandoRhythmMaker
         if rhythm_maker_class._is_accelerando(leaf_selection):
             abjad.override(leaf_selection[0]).beam.grow_direction = abjad.Right

@@ -2546,19 +2546,21 @@ class SegmentMaker(abjad.SegmentMaker):
         for time_signature in self.time_signatures:
             rest = abjad.MultimeasureRest(
                 abjad.Duration(1),
+                multiplier=time_signature.duration,
                 tag='_make_global_rests',
                 )
-            multiplier = abjad.Multiplier(time_signature.duration)
-            abjad.attach(multiplier, rest, tag=None)
+
             rests.append(rest)
         return rests
 
     def _make_global_skips(self):
         context = self.score['Global_Skips']
         for time_signature in self.time_signatures:
-            skip = abjad.Skip(1, tag='_make_global_skips(1)')
-            multiplier = abjad.Multiplier(time_signature.duration)
-            abjad.attach(multiplier, skip, tag=None)
+            skip = abjad.Skip(
+                1,
+                multiplier=time_signature.duration,
+                tag='_make_global_skips(1)',
+                )
             abjad.attach(
                 time_signature,
                 skip,
@@ -2643,15 +2645,18 @@ class SegmentMaker(abjad.SegmentMaker):
                     duration,
                     )
             else:
-                multiplier = abjad.Multiplier(duration)
                 if self.skips_instead_of_rests:
-                    silence = abjad.Skip(1, tag='_make_measure_silences')
+                    silence = abjad.Skip(
+                        1,
+                        multiplier=duration,
+                        tag='_make_measure_silences',
+                        )
                 else:
                     silence = abjad.MultimeasureRest(
                         1,
+                        multiplier=duration,
                         tag='_make_measure_silences',
                         )
-                abjad.attach(multiplier, silence, tag=None)
             silences.append(silence)
         return silences
 
@@ -2665,9 +2670,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _make_multimeasure_rest_container(self, voice_name, duration):
         tag = '_make_multimeasure_rest_container'
-        multiplier = abjad.Multiplier(duration)
-        note = abjad.Note("c'1", tag=tag)
-        abjad.attach(multiplier, note, tag=None)
+        note = abjad.Note("c'1", multiplier=duration, tag=tag)
         literal = abjad.LilyPondLiteral(r'\baca-invisible-music')
         abjad.attach(literal, note, tag=tag)
         abjad.annotate(note, enums.HIDDEN, True)
@@ -2675,10 +2678,9 @@ class SegmentMaker(abjad.SegmentMaker):
         abjad.annotate(hidden_note_voice, enums.HIDDEN_NOTE_VOICE, True)
         abjad.annotate(hidden_note_voice, enums.INTERMITTENT, True)
         if self.skips_instead_of_rests:
-            rest = abjad.Skip(1, tag=tag)
+            rest = abjad.Skip(1, multiplier=duration, tag=tag)
         else:
-            rest = abjad.MultimeasureRest(1, tag=tag)
-        abjad.attach(multiplier, rest, tag=None)
+            rest = abjad.MultimeasureRest(1, multiplier=duration, tag=tag)
         if 'Music_Voice' in voice_name:
             name = voice_name.replace('Music_Voice', 'Rest_Voice')
         else:

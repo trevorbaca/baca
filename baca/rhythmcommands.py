@@ -1265,9 +1265,8 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
         written_duration = abjad.Duration(written_duration)
         for multiplied_duration in multiplied_durations:
             multiplied_duration = abjad.Duration(multiplied_duration)
-            skip = abjad.Skip(written_duration, tag=tag)
             multiplier = multiplied_duration / written_duration
-            abjad.attach(multiplier, skip)
+            skip = abjad.Skip(written_duration, multiplier=multiplier, tag=tag)
             skips.append(skip)
         return abjad.select(skips)
 

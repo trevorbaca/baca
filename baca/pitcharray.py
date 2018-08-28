@@ -284,8 +284,7 @@ class PitchArray(abjad.AbjadObject):
         written_duration = abjad.Duration(1, 4)
         for duration in durations:
             multiplier = duration / written_duration
-            note = abjad.Note(0, written_duration)
-            abjad.attach(multiplier, note)
+            note = abjad.Note(0, written_duration, multiplier=multiplier)
             notes.append(note)
         notes = abjad.Selection(notes)
         return notes

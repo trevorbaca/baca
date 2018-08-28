@@ -1413,10 +1413,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         for leaf in leaves:
             leaf_timespan = abjad.inspect(leaf).timespan()
             leaf_duration = leaf_timespan.duration
-            prototype = (abjad.Multiplier, abjad.NonreducedFraction)
-            multiplier = abjad.inspect(leaf).indicator(prototype)
-            if multiplier is not None:
-                leaf_duration = leaf_duration / multiplier
+            if leaf.multiplier is not None:
+                leaf_duration = leaf_duration / leaf.multiplier
             pair = (leaf_timespan, leaf_duration)
             leaf_timespans.add(pair)
             leaf_count += 1
