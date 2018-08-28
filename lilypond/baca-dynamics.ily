@@ -136,10 +136,10 @@ baca-effort-sffz = #(
 baca-ffp = #(make-dynamic-script "ffp")
 baca-fffp = #(make-dynamic-script "fffp")
 
-%%% POCO SCR. DYNAMICS %%%
+%%% POCO SCRATCH DYNAMICS %%%
 
 #(define-markup-command
-    (baca-poco-scr-dynamic layout props dynamic)
+    (baca-poco-scratch-dynamic layout props dynamic)
     (string?)
     (interpret-markup layout props
     #{
@@ -148,48 +148,48 @@ baca-fffp = #(make-dynamic-script "fffp")
         \dynamic #dynamic
         \hspace #0.25
         \normal-text poco
-        \normal-text scr.
+        \normal-text scratch
         }
     #}))
 
-baca-ppp-poco-scr = #(
+baca-ppp-poco-scratch = #(
     make-dynamic-script
-    (markup #:baca-poco-scr-dynamic "ppp")
+    (markup #:baca-poco-scratch-dynamic "ppp")
     )
 
-baca-pp-poco-scr = #(
+baca-pp-poco-scratch = #(
     make-dynamic-script
-    (markup #:baca-poco-scr-dynamic "pp")
+    (markup #:baca-poco-scratch-dynamic "pp")
     )
 
-baca-p-poco-scr = #(
+baca-p-poco-scratch = #(
     make-dynamic-script
-    (markup #:baca-poco-scr-dynamic "p")
+    (markup #:baca-poco-scratch-dynamic "p")
     )
 
-baca-mp-poco-scr = #(
+baca-mp-poco-scratch = #(
     make-dynamic-script
-    (markup #:baca-poco-scr-dynamic "mp")
+    (markup #:baca-poco-scratch-dynamic "mp")
     )
 
-baca-mf-poco-scr = #(
+baca-mf-poco-scratch = #(
     make-dynamic-script
-    (markup #:baca-poco-scr-dynamic "mf")
+    (markup #:baca-poco-scratch-dynamic "mf")
     )
 
-baca-f-poco-scr = #(
+baca-f-poco-scratch = #(
     make-dynamic-script
-    (markup #:baca-poco-scr-dynamic "f")
+    (markup #:baca-poco-scratch-dynamic "f")
     )
 
-baca-ff-poco-scr = #(
+baca-ff-poco-scratch = #(
     make-dynamic-script
-    (markup #:baca-poco-scr-dynamic "ff")
+    (markup #:baca-poco-scratch-dynamic "ff")
     )
 
-baca-fff-poco-scr = #(
+baca-fff-poco-scratch = #(
     make-dynamic-script
-    (markup #:baca-poco-scr-dynamic "fff")
+    (markup #:baca-poco-scratch-dynamic "fff")
     )
 
 %%% POSS. DYNAMICS %%%

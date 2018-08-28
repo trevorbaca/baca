@@ -2885,13 +2885,13 @@ def make_dynamic(string: str) -> typing.Union[
 
     ..  container:: example
 
-        Poco scr. dynamics:
+        Poco scratch dynamics:
 
-        >>> baca.make_dynamic('p-poco-scr')
-        Dynamic('p', command='\\baca-p-poco-scr')
+        >>> baca.make_dynamic('p-poco-scratch')
+        Dynamic('p', command='\\baca-p-poco-scratch')
 
-        >>> baca.make_dynamic('f-poco-scr')
-        Dynamic('f', command='\\baca-f-poco-scr')
+        >>> baca.make_dynamic('f-poco-scratch')
+        Dynamic('f', command='\\baca-f-poco-scratch')
 
     ..  container:: example
 
@@ -2960,9 +2960,9 @@ def make_dynamic(string: str) -> typing.Union[
         dynamic = string.split('-')[0]
         command = rf'\baca-{dynamic}-effort-sub'
         indicator = abjad.Dynamic(dynamic, command=command)
-    elif string.endswith('-poco-scr'):
+    elif string.endswith('-poco-scratch'):
         dynamic = string.split('-')[0]
-        command = rf'\baca-{dynamic}-poco-scr'
+        command = rf'\baca-{dynamic}-poco-scratch'
         indicator = abjad.Dynamic(dynamic, command=command)
     elif string.endswith('-poss'):
         dynamic = string.split('-')[0]
