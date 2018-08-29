@@ -17,6 +17,7 @@ class BCPCommand(scoping.Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
+        '_bow_change_tweaks',
         '_bow_contact_points',
         '_final_spanner',
         '_helper',
@@ -28,6 +29,7 @@ class BCPCommand(scoping.Command):
     def __init__(
         self,
         bcps: typing.Iterable[typings.IntegerPair] = None,
+        bow_change_tweaks: typing.Tuple[abjad.LilyPondTweakManager, ...] = None,
         final_spanner: bool = None,
         helper: typing.Callable = None,
         map: typings.Selector = None,
@@ -50,6 +52,10 @@ class BCPCommand(scoping.Command):
         if bcps is None:
             self._validate_bcps(bcps)
         self._bow_contact_points = bcps
+        if bow_change_tweaks is not None:
+            self._validate_tweaks(bow_change_tweaks)
+            #raise Exception(bow_change_tweaks)
+        self._bow_change_tweaks = bow_change_tweaks
         if final_spanner is not None:
             final_spanner = bool(final_spanner)
         self._final_spanner = final_spanner
@@ -178,28 +184,56 @@ class BCPCommand(scoping.Command):
                 pass
             elif self._is_rest(previous_leaf) or previous_bcp is None:
                 if bcp_fraction > next_bcp_fraction:
+                    articulation = abjad.Articulation('upbow')
+                    if self.bow_change_tweaks:
+                        self._apply_tweaks(
+                            articulation,
+                            self.bow_change_tweaks,
+                            )
                     abjad.attach(
-                        abjad.Articulation('upbow'),
+                        #abjad.Articulation('upbow'),
+                        articulation,
                         lt.head,
                         tag=self.tag.append('BCPCommand(5)'),
                         )
                 elif bcp_fraction < next_bcp_fraction:
+                    articulation = abjad.Articulation('downbow')
+                    if self.bow_change_tweaks:
+                        self._apply_tweaks(
+                            articulation,
+                            self.bow_change_tweaks,
+                            )
                     abjad.attach(
-                        abjad.Articulation('downbow'),
+                        #abjad.Articulation('downbow'),
+                        articulation,
                         lt.head,
                         tag=self.tag.append('BCPCommand(6)'),
                         )
             else:
                 previous_bcp_fraction = abjad.Fraction(*previous_bcp)
                 if previous_bcp_fraction < bcp_fraction > next_bcp_fraction:
+                    articulation = abjad.Articulation('upbow')
+                    if self.bow_change_tweaks:
+                        self._apply_tweaks(
+                            articulation,
+                            self.bow_change_tweaks,
+                            )
                     abjad.attach(
-                        abjad.Articulation('upbow'),
+                        #abjad.Articulation('upbow'),
+                        articulation,
                         lt.head,
                         tag=self.tag.append('BCPCommand(7)'),
                         )
                 elif previous_bcp_fraction > bcp_fraction < next_bcp_fraction:
+                    articulation = abjad.Articulation('downbow')
+                    if self.bow_change_tweaks:
+                        self._apply_tweaks(
+                            articulation,
+                            self.bow_change_tweaks,
+                            )
                     abjad.attach(
-                        abjad.Articulation('downbow'),
+                        #abjad.Articulation('downbow'),
+                        articulation,
                         lt.head,
                         tag=self.tag.append('BCPCommand(8)'),
                         )
@@ -429,6 +463,15 @@ class BCPCommand(scoping.Command):
 
         """
         return self._bow_contact_points
+
+    @property
+    def bow_change_tweaks(self) -> typing.Optional[
+        typing.Tuple[abjad.LilyPondTweakManager, ...]
+        ]:
+        """
+        Gets bow change tweaks.
+        """
+        return self._bow_change_tweaks
 
     @property
     def final_spanner(self) -> typing.Optional[bool]:
@@ -2445,6 +2488,7 @@ def bar_extent_persistent(
 def bcps(
     bcps: typing.Iterable[typings.IntegerPair],
     *tweaks: abjad.LilyPondTweakManager,
+    bow_change_tweaks: typing.Tuple[abjad.LilyPondTweakManager, ...] = None,
     final_spanner: bool = None,
     helper: typing.Callable = None,
     selector: typings.Selector = 'baca.leaves()',
@@ -2648,6 +2692,7 @@ def bcps(
         final_spanner = bool(final_spanner)
     return BCPCommand(
         bcps=bcps,
+        bow_change_tweaks=bow_change_tweaks,
         final_spanner=final_spanner,
         helper=helper,
         selector=selector,

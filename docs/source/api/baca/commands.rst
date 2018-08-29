@@ -46,6 +46,7 @@ commands
       :nosignatures:
 
       bcps
+      bow_change_tweaks
       final_spanner
       helper
       start_command
@@ -91,6 +92,8 @@ commands
       :class: class-header
 
    .. autoattribute:: BCPCommand.bcps
+
+   .. autoattribute:: BCPCommand.bow_change_tweaks
 
    .. container:: inherited
 
