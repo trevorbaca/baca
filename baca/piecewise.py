@@ -236,14 +236,9 @@ class PiecewiseCommand(scoping.Command):
         for i, piece in enumerate(pieces):
             start_leaf = classes.Selection(piece).leaf(0)
             stop_leaf = classes.Selection(piece).leaf(-1)
-            if i == 0:
-                is_first_piece = True
-            else:
-                is_first_piece = False
-            if i == piece_count - 1:
-                is_final_piece = True
-            else:
-                is_final_piece = False
+            is_first_piece = i == 0
+            is_penultimate_piece = i == piece_count - 2
+            is_final_piece = i == piece_count - 1
             if is_final_piece and self.right_broken:
                 bundle = Bundle(spanner_start=self.right_broken)
                 self._attach_indicators(
@@ -259,12 +254,15 @@ class PiecewiseCommand(scoping.Command):
             if is_final_piece and self.right_broken:
                 should_bookend = False
             bundle = self.bundles[i]
-
-#            print()
-#            print(i, piece)
-#            abjad.f(bundle)
-
+            next_bundle = self.bundles[i + 1]
             if should_bookend and bundle.bookended_spanner_start:
+                bundle = abjad.new(
+                    bundle,
+                    spanner_start=bundle.bookended_spanner_start,
+                    )
+            if (is_penultimate_piece and
+                len(pieces[-1]) == 1 and
+                isinstance(next_bundle.spanner_start, abjad.StartTextSpan)):
                 bundle = abjad.new(
                     bundle,
                     spanner_start=bundle.bookended_spanner_start,
@@ -276,23 +274,17 @@ class PiecewiseCommand(scoping.Command):
                     bundle,
                     spanner_start=None,
                     )
-            if is_final_piece:
-                if bundle.spanner_start:
-                    if self.final_piece_spanner:
-                        bundle = abjad.new(
-                            bundle,
-                            spanner_start=self.final_piece_spanner,
-                            )
-                    elif self.final_piece_spanner is False:
-                        bundle = abjad.new(
-                            bundle,
-                            spanner_start=None,
-                            )
-#                if bundle.spanner_stop:
-#                    bundle = abjad.new(
-#                        bundle,
-#                        spanner_stop=None,
-#                        )
+            if is_final_piece and bundle.spanner_start:
+                if self.final_piece_spanner:
+                    bundle = abjad.new(
+                        bundle,
+                        spanner_start=self.final_piece_spanner,
+                        )
+                elif self.final_piece_spanner is False:
+                    bundle = abjad.new(
+                        bundle,
+                        spanner_start=None,
+                        )
             if is_first_piece or previous_had_bookend:
                 bundle = abjad.new(
                     bundle,
@@ -307,7 +299,6 @@ class PiecewiseCommand(scoping.Command):
                 just_bookended_leaf=just_bookended_leaf,
                 tag=tag,
                 )
-            next_bundle = self.bundles[i + 1]
             if should_bookend:
                 if bundle.bookended_spanner_start is not None:
                     next_bundle = abjad.new(
@@ -334,10 +325,13 @@ class PiecewiseCommand(scoping.Command):
                     tag='PiecewiseCommand(2)',
                     )
                 just_bookended_leaf = stop_leaf
-            elif is_final_piece and next_bundle.spanner_stop:
-                spanner_stop = next_bundle.spanner_stop
-                if self.leak:
-                    spanner_stop = abjad.new(spanner_stop, leak=True)
+            elif (is_final_piece and
+                start_leaf is not stop_leaf and
+                next_bundle.spanner_stop):
+                spanner_stop = abjad.new(
+                    next_bundle.spanner_stop,
+                    leak=self.leak,
+                    )
                 bundle = Bundle(spanner_stop=spanner_stop)
                 self._attach_indicators(
                     bundle,
@@ -3052,7 +3046,6 @@ def text_spanner(
     *tweaks: abjad.LilyPondTweakManager,
     bookend: typing.Union[bool, int] = -1,
     boxed: bool = None,
-    final_piece_spanner: bool = None,
     leak: bool = None,
     lilypond_id: int = None,
     map: typings.Selector = None,
@@ -4642,6 +4635,148 @@ def text_spanner(
             <BLANKLINE>
             >>                                                                                       %! SingleStaffScoreTemplate
 
+    ..  container:: example
+
+        REGRESSION. Handles length-1 pieces correctly:
+
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     spacing=baca.minimum_duration((1, 12)),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'Music_Voice',
+        ...     baca.text_spanner(
+        ...         'P -> T -> P',
+        ...         piece_selector=baca.plts(),
+        ...     ),
+        ...     baca.make_notes(),
+        ...     baca.pitches('C4 D4 E4 F4 G4 A4'),
+        ...     baca.text_spanner_staff_padding(4.5),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
+            \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+            <<                                                                                       %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
+                <<                                                                                   %! _make_global_context
+            <BLANKLINE>
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
+                    {                                                                                %! _make_global_context
+            <BLANKLINE>
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 5]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 6]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+                        \baca-bar-line-visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
+            <BLANKLINE>
+                    }                                                                                %! _make_global_context
+            <BLANKLINE>
+                >>                                                                                   %! _make_global_context
+            <BLANKLINE>
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
+                <<                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
+                    {                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
+                        {                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
+                            \override TextSpanner.staff-padding = #4.5                               %! baca_text_spanner_staff_padding:OverrideCommand(1)
+                            c'2                                                                      %! baca_make_notes
+                            - \abjad-solid-line-with-arrow                                           %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "P"                                       %! baca_text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
+            <BLANKLINE>
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
+                            d'4.                                                                     %! baca_make_notes
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
+                            - \abjad-solid-line-with-arrow                                           %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "T"                                       %! baca_text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
+            <BLANKLINE>
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
+                            e'2                                                                      %! baca_make_notes
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
+                            - \abjad-invisible-line                                                  %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "P"                                       %! baca_text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
+            <BLANKLINE>
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
+                            f'4.                                                                     %! baca_make_notes
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
+                            - \abjad-solid-line-with-arrow                                           %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "P"                                       %! baca_text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
+            <BLANKLINE>
+                            % [Music_Voice measure 5]                                                %! _comment_measure_numbers
+                            g'2                                                                      %! baca_make_notes
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
+                            - \abjad-solid-line-with-arrow                                           %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "T"                                       %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-right-text "P"                                      %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.padding #0.5                                %! baca_text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! baca_text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
+            <BLANKLINE>
+                            % [Music_Voice measure 6]                                                %! _comment_measure_numbers
+                            a'4.                                                                     %! baca_make_notes
+                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
+                            - \abjad-invisible-line                                                  %! baca_text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "P"                                       %! baca_text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
+                            \revert TextSpanner.staff-padding                                        %! baca_text_spanner_staff_padding:OverrideCommand(2)
+            <BLANKLINE>
+                        }                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                    }                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                >>                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
+            >>                                                                                       %! SingleStaffScoreTemplate
+
     """
     shape_to_style = {
         '=>': 'dashed-line-with-arrow',
@@ -4771,7 +4906,6 @@ def text_spanner(
     return PiecewiseCommand(
         bookend=bookend,
         bundles=bundles,
-        final_piece_spanner=final_piece_spanner,
         leak=leak,
         map=map,
         match=match,
