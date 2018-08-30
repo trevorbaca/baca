@@ -22,10 +22,10 @@ piecewise
 .. autosummary::
    :nosignatures:
 
-   ~IndicatorBundle
+   ~Bundle
    ~PiecewiseCommand
 
-.. autoclass:: IndicatorBundle
+.. autoclass:: Bundle
 
    .. raw:: html
 
@@ -48,9 +48,6 @@ piecewise
       spanner_start
       spanner_start_only
       spanner_stop
-      with_indicator
-      with_spanner_start
-      with_spanner_stop
 
    .. raw:: html
 
@@ -61,15 +58,15 @@ piecewise
 
    .. container:: inherited
 
-      .. automethod:: IndicatorBundle.__format__
+      .. automethod:: Bundle.__format__
 
-   .. automethod:: IndicatorBundle.__iter__
+   .. automethod:: Bundle.__iter__
 
-   .. automethod:: IndicatorBundle.__len__
+   .. automethod:: Bundle.__len__
 
    .. container:: inherited
 
-      .. automethod:: IndicatorBundle.__repr__
+      .. automethod:: Bundle.__repr__
 
    .. raw:: html
 
@@ -78,19 +75,13 @@ piecewise
    .. rubric:: Methods
       :class: class-header
 
-   .. automethod:: IndicatorBundle.compound
+   .. automethod:: Bundle.compound
 
-   .. automethod:: IndicatorBundle.indicator_only
+   .. automethod:: Bundle.indicator_only
 
-   .. automethod:: IndicatorBundle.simple
+   .. automethod:: Bundle.simple
 
-   .. automethod:: IndicatorBundle.spanner_start_only
-
-   .. automethod:: IndicatorBundle.with_indicator
-
-   .. automethod:: IndicatorBundle.with_spanner_start
-
-   .. automethod:: IndicatorBundle.with_spanner_stop
+   .. automethod:: Bundle.spanner_start_only
 
    .. raw:: html
 
@@ -99,15 +90,15 @@ piecewise
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: IndicatorBundle.bookended_spanner_start
+   .. autoattribute:: Bundle.bookended_spanner_start
 
-   .. autoattribute:: IndicatorBundle.indicator
+   .. autoattribute:: Bundle.indicator
 
-   .. autoattribute:: IndicatorBundle.indicators
+   .. autoattribute:: Bundle.indicators
 
-   .. autoattribute:: IndicatorBundle.spanner_start
+   .. autoattribute:: Bundle.spanner_start
 
-   .. autoattribute:: IndicatorBundle.spanner_stop
+   .. autoattribute:: Bundle.spanner_stop
 
 .. autoclass:: PiecewiseCommand
 

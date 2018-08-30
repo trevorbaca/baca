@@ -787,7 +787,7 @@ Piecewise library.
 .. autosummary::
    :nosignatures:
 
-   ~baca.piecewise.IndicatorBundle
+   ~baca.piecewise.Bundle
    ~baca.piecewise.PiecewiseCommand
 
 .. raw:: html
