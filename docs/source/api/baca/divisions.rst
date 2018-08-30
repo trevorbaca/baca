@@ -784,10 +784,6 @@ divisions
 
    .. container:: inherited
 
-      .. autoattribute:: DivisionSequenceExpression.argument_count
-
-   .. container:: inherited
-
       .. autoattribute:: DivisionSequenceExpression.argument_values
 
    .. container:: inherited

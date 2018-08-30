@@ -314,10 +314,6 @@ classes
 
    .. container:: inherited
 
-      .. autoattribute:: Expression.argument_count
-
-   .. container:: inherited
-
       .. autoattribute:: Expression.argument_values
 
    .. container:: inherited
