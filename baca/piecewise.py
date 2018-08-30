@@ -259,6 +259,11 @@ class PiecewiseCommand(scoping.Command):
             if is_final_piece and self.right_broken:
                 should_bookend = False
             bundle = self.bundles[i]
+
+#            print()
+#            print(i, piece)
+#            abjad.f(bundle)
+
             if should_bookend and bundle.bookended_spanner_start:
                 bundle = abjad.new(
                     bundle,
@@ -271,17 +276,23 @@ class PiecewiseCommand(scoping.Command):
                     bundle,
                     spanner_start=None,
                     )
-            if is_final_piece and bundle.compound():
-                if self.final_piece_spanner:
-                    bundle = abjad.new(
-                        bundle,
-                        spanner_start=self.final_piece_spanner,
-                        )
-                elif self.final_piece_spanner is False:
-                    bundle = abjad.new(
-                        bundle,
-                        spanner_start=None,
-                        )
+            if is_final_piece:
+                if bundle.spanner_start:
+                    if self.final_piece_spanner:
+                        bundle = abjad.new(
+                            bundle,
+                            spanner_start=self.final_piece_spanner,
+                            )
+                    elif self.final_piece_spanner is False:
+                        bundle = abjad.new(
+                            bundle,
+                            spanner_start=None,
+                            )
+#                if bundle.spanner_stop:
+#                    bundle = abjad.new(
+#                        bundle,
+#                        spanner_stop=None,
+#                        )
             if is_first_piece or previous_had_bookend:
                 bundle = abjad.new(
                     bundle,
