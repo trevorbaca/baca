@@ -11,7 +11,6 @@ from . import typings
 
 ### CLASSES ###
 
-# TODO: change __init__ / __repr__ so indicators are visible in interpreter
 class IndicatorBundle(abjad.AbjadObject):
     """
     IndicatorBundle.
@@ -32,23 +31,26 @@ class IndicatorBundle(abjad.AbjadObject):
 
     def __init__(
         self,
-        *arguments: typing.Any,
+        *,
         bookended_spanner_start: typing.Any = None,
+        indicator: typing.Any = None,
+        spanner_start: typing.Any = None,
+        spanner_stop: typing.Any = None,
         ) -> None:
-        assert len(arguments) <= 3, repr(arguments)
-        self._indicator = None
-        self._spanner_start = None
-        self._spanner_stop = None
-        for argument in arguments:
-            if argument is None:
-                continue
-            elif getattr(argument, 'spanner_start', False) is True:
-                self._spanner_start = argument
-            elif getattr(argument, 'spanner_stop', False) is True:
-                self._spanner_stop = argument
-            else:
-                self._indicator = argument
         self._bookended_spanner_start = bookended_spanner_start
+        self._indicator = indicator
+        self._spanner_start = spanner_start
+        self._spanner_stop = spanner_stop
+
+#        for argument in arguments:
+#            if argument is None:
+#                continue
+#            elif getattr(argument, 'spanner_start', False) is True:
+#                self._spanner_start = argument
+#            elif getattr(argument, 'spanner_stop', False) is True:
+#                self._spanner_stop = argument
+#            else:
+#                self._indicator = argument
 
     ### SPECIAL METHODS ###
 
@@ -64,13 +66,13 @@ class IndicatorBundle(abjad.AbjadObject):
         """
         return len(self.indicators)
 
-    def __repr__(self):
-        """
-        Gets interpreter representation.
-        """
-        class_ = type(self).__name__
-        string = ', '.join([repr(_) for _ in self.indicators])
-        return f'{class_}({string})'
+#    def __repr__(self):
+#        """
+#        Gets interpreter representation.
+#        """
+#        class_ = type(self).__name__
+#        string = ', '.join([repr(_) for _ in self.indicators])
+#        return f'{class_}({string})'
 
     ### PUBLIC PROPERTIES ###
 
@@ -153,24 +155,28 @@ class IndicatorBundle(abjad.AbjadObject):
         ..  container:: example
 
             >>> bundle = baca.IndicatorBundle(
-            ...     abjad.Dynamic('p'),
-            ...     abjad.DynamicTrend('<'),
+            ...     indicator=abjad.Dynamic('p'),
+            ...     spanner_start=abjad.DynamicTrend('<'),
             ...     )
 
             >>> bundle.with_indicator(abjad.Dynamic('f'))
-            IndicatorBundle(Dynamic('f'), DynamicTrend(shape='<'))
+            IndicatorBundle(indicator=Dynamic('f'), spanner_start=DynamicTrend(shape='<'))
 
             >>> bundle.with_indicator(None)
-            IndicatorBundle(DynamicTrend(shape='<'))
+            IndicatorBundle(spanner_start=DynamicTrend(shape='<'))
 
         """
-        if indicator is None:
-            return type(self)(self.spanner_start)
-        return type(self)(
-            self.spanner_stop,
-            indicator,
-            self.spanner_start,
-            bookended_spanner_start=self.bookended_spanner_start,
+#        if indicator is None:
+#            return type(self)(spanner_start=self.spanner_start)
+#        return type(self)(
+#            bookended_spanner_start=self.bookended_spanner_start,
+#            indicator=indicator,
+#            spanner_start=self.spanner_start,
+#            spanner_stop=self.spanner_stop,
+#            )
+        return abjad.new(
+            self,
+            indicator=indicator,
             )
 
     def with_spanner_start(self, spanner_start) -> 'IndicatorBundle':
@@ -180,40 +186,44 @@ class IndicatorBundle(abjad.AbjadObject):
         ..  container:: example
 
             >>> bundle = baca.IndicatorBundle(
-            ...     abjad.Dynamic('p'),
-            ...     abjad.DynamicTrend('<'),
+            ...     indicator=abjad.Dynamic('p'),
+            ...     spanner_start=abjad.DynamicTrend('<'),
             ...     )
 
             >>> bundle.with_spanner_start(abjad.DynamicTrend('>'))
-            IndicatorBundle(Dynamic('p'), DynamicTrend(shape='>'))
+            IndicatorBundle(indicator=Dynamic('p'), spanner_start=DynamicTrend(shape='>'))
 
             >>> bundle.with_spanner_start(None)
-            IndicatorBundle(Dynamic('p'))
+            IndicatorBundle(indicator=Dynamic('p'))
 
         ..  container:: example
 
             >>> bundle = baca.IndicatorBundle(
-            ...     abjad.StopTextSpan(),
-            ...     abjad.StartTextSpan(left_text=abjad.Markup('pont.')),
+            ...     spanner_start=abjad.StartTextSpan(left_text=abjad.Markup('pont.')),
+            ...     spanner_stop=abjad.StopTextSpan(),
             ...     )
 
             >>> bundle.with_spanner_start(
             ...     abjad.StartTextSpan(command=r'\startTextSpanOne')
             ...     )
-            IndicatorBundle(StopTextSpan(command='\\stopTextSpan'), StartTextSpan(command='\\startTextSpanOne', concat_hspace_left=0.5))
+            IndicatorBundle(spanner_start=StartTextSpan(command='\\startTextSpanOne', concat_hspace_left=0.5), spanner_stop=StopTextSpan(command='\\stopTextSpan'))
 
             >>> bundle.with_spanner_start(None)
-            IndicatorBundle(StopTextSpan(command='\\stopTextSpan'))
+            IndicatorBundle(spanner_stop=StopTextSpan(command='\\stopTextSpan'))
 
         """
-        if (spanner_start is not None and
-            getattr(spanner_start, 'spanner_start', False) is not True):
-            raise Exception(spanner_start)
-        return type(self)(
-            self.spanner_stop,
-            self.indicator,
-            spanner_start,
-            bookended_spanner_start=self.bookended_spanner_start,
+#        if (spanner_start is not None and
+#            getattr(spanner_start, 'spanner_start', False) is not True):
+#            raise Exception(spanner_start)
+#        return type(self)(
+#            self.spanner_stop,
+#            self.indicator,
+#            spanner_start,
+#            bookended_spanner_start=self.bookended_spanner_start,
+#            )
+        return abjad.new(
+            self,
+            spanner_start=spanner_start,
             )
 
     def with_spanner_stop(self, spanner_stop) -> 'IndicatorBundle':
@@ -223,26 +233,30 @@ class IndicatorBundle(abjad.AbjadObject):
         ..  container:: example
 
             >>> bundle = baca.IndicatorBundle(
-            ...     abjad.StopTextSpan(),
-            ...     abjad.StartTextSpan(left_text=abjad.Markup('pont.')),
+            ...     spanner_start=abjad.StartTextSpan(left_text=abjad.Markup('pont.')),
+            ...     spanner_stop=abjad.StopTextSpan(),
             ...     )
 
             >>> string = r'\stopTextSpanOne'
             >>> bundle.with_spanner_stop(abjad.StopTextSpan(command=string))
-            IndicatorBundle(StopTextSpan(command='\\stopTextSpanOne'), StartTextSpan(command='\\startTextSpan', concat_hspace_left=0.5, left_text=Markup(contents=['pont.'])))
+            IndicatorBundle(spanner_start=StartTextSpan(command='\\startTextSpan', concat_hspace_left=0.5, left_text=Markup(contents=['pont.'])), spanner_stop=StopTextSpan(command='\\stopTextSpanOne'))
 
             >>> bundle.with_spanner_stop(None)
-            IndicatorBundle(StartTextSpan(command='\\startTextSpan', concat_hspace_left=0.5, left_text=Markup(contents=['pont.'])))
+            IndicatorBundle(spanner_start=StartTextSpan(command='\\startTextSpan', concat_hspace_left=0.5, left_text=Markup(contents=['pont.'])))
 
         """
-        if (spanner_stop is not None and
-            getattr(spanner_stop, 'spanner_stop', False) is not True):
-            raise Exception(spanner_stop)
-        return type(self)(
-            spanner_stop,
-            self.indicator,
-            self.spanner_start,
-            bookended_spanner_start=self.bookended_spanner_start,
+#        if (spanner_stop is not None and
+#            getattr(spanner_stop, 'spanner_stop', False) is not True):
+#            raise Exception(spanner_stop)
+#        return type(self)(
+#            spanner_stop,
+#            self.indicator,
+#            self.spanner_start,
+#            bookended_spanner_start=self.bookended_spanner_start,
+#            )
+        return abjad.new(
+            self,
+            spanner_stop=spanner_stop,
             )
 
 class PiecewiseCommand(scoping.Command):
@@ -359,7 +373,8 @@ class PiecewiseCommand(scoping.Command):
             else:
                 is_final_piece = False
             if is_final_piece and self.right_broken:
-                bundle = IndicatorBundle(self.right_broken)
+                #bundle = IndicatorBundle(self.right_broken)
+                bundle = IndicatorBundle(spanner_start=self.right_broken)
                 self._attach_indicators(
                     bundle,
                     stop_leaf,
@@ -405,11 +420,19 @@ class PiecewiseCommand(scoping.Command):
                 if next_bundle.compound():
                     next_bundle = next_bundle.with_spanner_start(None)
                 if self.leak:
-                    indicators_ = []
-                    for indicator in next_bundle.indicators:
-                        indicator_ = abjad.new(indicator, leak=True)
-                        indicators_.append(indicator_)
-                    next_bundle = IndicatorBundle(*indicators_)
+                    #indicators_ = []
+                    #for indicator in next_bundle.indicators:
+                    #    indicator_ = abjad.new(indicator, leak=True)
+                    #    indicators_.append(indicator_)
+                    #next_bundle = IndicatorBundle(*indicators_)
+                    leaked_indicator = abjad.new(
+                        next_bundle.indicator,
+                        leak=True,
+                        )
+                    next_bundle = abjad.new(
+                        next_bundle,
+                        indicator=leaked_indicator,
+                        )
                 self._attach_indicators(
                     next_bundle,
                     stop_leaf,
@@ -420,7 +443,8 @@ class PiecewiseCommand(scoping.Command):
                 spanner_stop = next_bundle.spanner_stop
                 if self.leak:
                     spanner_stop = abjad.new(spanner_stop, leak=True)
-                bundle = IndicatorBundle(spanner_stop)
+                #bundle = IndicatorBundle(spanner_stop)
+                bundle = IndicatorBundle(spanner_stop=spanner_stop)
                 self._attach_indicators(
                     bundle,
                     stop_leaf,
@@ -2809,7 +2833,8 @@ def hairpin(
         bundle = bundles[0]
         assert bundle.spanner_start_only()
         dynamic_trend = abjad.new(bundle.spanner_start, left_broken=True)
-        bundle = IndicatorBundle(dynamic_trend)
+        #bundle = IndicatorBundle(dynamic_trend)
+        bundle = IndicatorBundle(spanner_start=dynamic_trend)
         bundles[0] = bundle
     if remove_length_1_spanner_start is not None:
         remove_length_1_spanner_start = bool(remove_length_1_spanner_start)
@@ -3022,64 +3047,64 @@ def parse_hairpin_descriptor(
 
         >>> for item in baca.parse_hairpin_descriptor('f'):
         ...     item
-        IndicatorBundle(Dynamic('f'))
+        IndicatorBundle(indicator=Dynamic('f'))
 
         >>> for item in baca.parse_hairpin_descriptor('"f"'):
         ...     item
-        IndicatorBundle(Dynamic('"f"', command='\\baca-effort-f', direction=Down))
+        IndicatorBundle(indicator=Dynamic('"f"', command='\\baca-effort-f', direction=Down))
 
         >>> for item in baca.parse_hairpin_descriptor('niente'):
         ...     item
-        IndicatorBundle(Dynamic('niente', command='\\!', direction=Down, name_is_textual=True))
+        IndicatorBundle(indicator=Dynamic('niente', command='\\!', direction=Down, name_is_textual=True))
 
         >>> for item in baca.parse_hairpin_descriptor('<'):
         ...     item
-        IndicatorBundle(DynamicTrend(shape='<'))
+        IndicatorBundle(spanner_start=DynamicTrend(shape='<'))
 
         >>> for item in baca.parse_hairpin_descriptor('o<|'):
         ...     item
-        IndicatorBundle(DynamicTrend(shape='o<|'))
+        IndicatorBundle(spanner_start=DynamicTrend(shape='o<|'))
 
         >>> for item in baca.parse_hairpin_descriptor('--'):
         ...     item
-        IndicatorBundle(DynamicTrend(shape='--'))
+        IndicatorBundle(spanner_start=DynamicTrend(shape='--'))
 
         >>> for item in baca.parse_hairpin_descriptor('< f'):
         ...     item
-        IndicatorBundle(DynamicTrend(shape='<'))
-        IndicatorBundle(Dynamic('f'))
+        IndicatorBundle(spanner_start=DynamicTrend(shape='<'))
+        IndicatorBundle(indicator=Dynamic('f'))
 
         >>> for item in baca.parse_hairpin_descriptor('o< f'):
         ...     item
-        IndicatorBundle(DynamicTrend(shape='o<'))
-        IndicatorBundle(Dynamic('f'))
+        IndicatorBundle(spanner_start=DynamicTrend(shape='o<'))
+        IndicatorBundle(indicator=Dynamic('f'))
 
         >>> for item in baca.parse_hairpin_descriptor('niente o<| f'):
         ...     item
-        IndicatorBundle(Dynamic('niente', command='\\!', direction=Down, name_is_textual=True), DynamicTrend(shape='o<|'))
-        IndicatorBundle(Dynamic('f'))
+        IndicatorBundle(indicator=Dynamic('niente', command='\\!', direction=Down, name_is_textual=True), spanner_start=DynamicTrend(shape='o<|'))
+        IndicatorBundle(indicator=Dynamic('f'))
 
         >>> for item in baca.parse_hairpin_descriptor('f >'):
         ...     item
-        IndicatorBundle(Dynamic('f'), DynamicTrend(shape='>'))
+        IndicatorBundle(indicator=Dynamic('f'), spanner_start=DynamicTrend(shape='>'))
 
         >>> for item in baca.parse_hairpin_descriptor('f >o'):
         ...     item
-        IndicatorBundle(Dynamic('f'), DynamicTrend(shape='>o', tweaks=LilyPondTweakManager(('to_barline', True))))
+        IndicatorBundle(indicator=Dynamic('f'), spanner_start=DynamicTrend(shape='>o', tweaks=LilyPondTweakManager(('to_barline', True))))
 
         >>> for item in baca.parse_hairpin_descriptor('p mp mf f'):
         ...     item
-        IndicatorBundle(Dynamic('p'))
-        IndicatorBundle(Dynamic('mp'))
-        IndicatorBundle(Dynamic('mf'))
-        IndicatorBundle(Dynamic('f'))
+        IndicatorBundle(indicator=Dynamic('p'))
+        IndicatorBundle(indicator=Dynamic('mp'))
+        IndicatorBundle(indicator=Dynamic('mf'))
+        IndicatorBundle(indicator=Dynamic('f'))
 
         >>> for item in baca.parse_hairpin_descriptor('p < f f > p'):
         ...     item
-        IndicatorBundle(Dynamic('p'), DynamicTrend(shape='<'))
-        IndicatorBundle(Dynamic('f'))
-        IndicatorBundle(Dynamic('f'), DynamicTrend(shape='>'))
-        IndicatorBundle(Dynamic('p'))
+        IndicatorBundle(indicator=Dynamic('p'), spanner_start=DynamicTrend(shape='<'))
+        IndicatorBundle(indicator=Dynamic('f'))
+        IndicatorBundle(indicator=Dynamic('f'), spanner_start=DynamicTrend(shape='>'))
+        IndicatorBundle(indicator=Dynamic('p'))
 
     """
     assert isinstance(descriptor, str), repr(descriptor)
@@ -3090,16 +3115,25 @@ def parse_hairpin_descriptor(
         indicator = make_dynamic(string)
         indicators.append(indicator)
     if len(indicators) == 1:
-        bundle = IndicatorBundle(indicators[0])
+        #bundle = IndicatorBundle(indicators[0])
+        if isinstance(indicators[0], abjad.DynamicTrend):
+            bundle = IndicatorBundle(spanner_start=indicators[0]) 
+        else:
+            assert isinstance(indicators[0], abjad.Dynamic)
+            bundle = IndicatorBundle(indicator=indicators[0]) 
         bundles.append(bundle)
         return bundles
     if isinstance(indicators[0], abjad.DynamicTrend):
         result = indicators.pop(0)
         assert isinstance(result, abjad.DynamicTrend)
-        bundle = IndicatorBundle(result)
+        #bundle = IndicatorBundle(result)
+        bundle = IndicatorBundle(spanner_start=result)
         bundles.append(bundle)
     if len(indicators) == 1:
-        bundle = IndicatorBundle(indicators[0])
+        if isinstance(indicators[0], abjad.DynamicTrend):
+            bundle = IndicatorBundle(spanner_start=indicators[0])
+        else:
+            bundle = IndicatorBundle(indicator=indicators[0])
         bundles.append(bundle)
         return bundles
     for left, right in classes.Sequence(indicators).nwise():
@@ -3108,14 +3142,20 @@ def parse_hairpin_descriptor(
             raise Exception('consecutive dynamic trends')
         elif (isinstance(left, abjad.Dynamic) and
             isinstance(right, abjad.Dynamic)):
-            bundle = IndicatorBundle(left)
+            #bundle = IndicatorBundle(left)
+            bundle = IndicatorBundle(indicator=left)
             bundles.append(bundle)
         elif (isinstance(left, abjad.Dynamic) and
             isinstance(right, abjad.DynamicTrend)):
-            bundle = IndicatorBundle(left, right)
+            #bundle = IndicatorBundle(left, right)
+            bundle = IndicatorBundle(
+                indicator=left,
+                spanner_start=right,
+                )
             bundles.append(bundle)
     if indicators and isinstance(indicators[-1], abjad.Dynamic):
-        bundle = IndicatorBundle(indicators[-1])
+        #bundle = IndicatorBundle(indicators[-1])
+        bundle = IndicatorBundle(indicator=indicators[-1])
         bundles.append(bundle)
     return bundles
 
@@ -4834,9 +4874,9 @@ def text_spanner(
         else:
             manager.bound_details__right__padding = 0.5
         bundle = IndicatorBundle(
-            stop_text_span,
-            start_text_span,
             bookended_spanner_start=bookended_spanner_start,
+            spanner_start=start_text_span,
+            spanner_stop=stop_text_span,
             )
         bundles.append(bundle)
     return PiecewiseCommand(

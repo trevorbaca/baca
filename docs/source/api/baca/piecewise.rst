@@ -39,7 +39,6 @@ piecewise
 
       __iter__
       __len__
-      __repr__
       bookended_spanner_start
       compound
       indicator
@@ -68,7 +67,9 @@ piecewise
 
    .. automethod:: IndicatorBundle.__len__
 
-   .. automethod:: IndicatorBundle.__repr__
+   .. container:: inherited
+
+      .. automethod:: IndicatorBundle.__repr__
 
    .. raw:: html
 
