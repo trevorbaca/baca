@@ -211,7 +211,7 @@ class Division(abjad.NonreducedFraction):
 
     ### INITIALIZER ###
 
-    def __init__(self, *arguments, **keywords):
+    def __init__(self, *arguments, **keywords) -> None:
         """
         Dummy initializer to satisfy mypy.
         """
@@ -1196,7 +1196,7 @@ class DivisionMaker(abjad.AbjadValueObject):
         self,
         *,
         callbacks=None,
-        ):
+        ) -> None:
         callbacks = callbacks or ()
         if callbacks:
             callbacks = tuple(callbacks)
@@ -1204,7 +1204,7 @@ class DivisionMaker(abjad.AbjadValueObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
+    def __call__(self, argument=None) -> typing.List['Division']:
         """
         Makes divisions from ``argument``.
 
@@ -1299,9 +1299,10 @@ class DivisionMaker(abjad.AbjadValueObject):
             ...     durations=[(1, 4)],
             ...     )
 
-            >>> division_maker.callbacks
-            (SplitByDurationsDivisionCallback(compound_meter_multiplier=Multiplier(1,
-            1), cyclic=True, durations=(Division((1, 4)),), pattern_rotation_index=0, remainder=Right),)
+            >>> for callback in division_maker.callbacks:
+            ...     callback
+            ...
+            SplitByDurationsDivisionCallback(cyclic=True, durations=(Division((1, 4)),))
 
         Returns tuple of zero or more callbacks.
         """
@@ -1309,19 +1310,15 @@ class DivisionMaker(abjad.AbjadValueObject):
 
     ### PUBLIC METHODS ###
 
-    def append_callback(self, callback):
+    def append_callback(self, callback) -> 'DivisionMaker':
         """
         Configures division-maker with arbitrary ``callback``.
-
-        Returns new division-maker.
         """
         return self._append_callback(callback)
 
-    def flatten(self, depth=1):
+    def flatten(self, depth=1) -> 'DivisionMaker':
         """
         Flattens division lists.
-
-        Returns new division-maker.
         """
         callback = FlattenDivisionCallback(depth=depth)
         return self._append_callback(callback)
@@ -1330,7 +1327,7 @@ class DivisionMaker(abjad.AbjadValueObject):
         self,
         cyclic=None,
         counts=None,
-        ):
+        ) -> 'DivisionMaker':
         r"""
         Fuses divisions (or division lists) by ``counts``.
 
@@ -1380,10 +1377,10 @@ class DivisionMaker(abjad.AbjadValueObject):
     def partition_by_counts(
         self,
         counts=None,
-        fuse_assignable_total_duration=False,
-        append_remainder=False,
-        remainder_direction=abjad.Right,
-        ):
+        fuse_assignable_total_duration=None,
+        append_remainder=None,
+        remainder_direction=None,
+        ) -> 'DivisionMaker':
         """
         Partitions divisions (or division lists) by ``counts``.
 
@@ -1557,11 +1554,9 @@ class DivisionMaker(abjad.AbjadValueObject):
         return self._append_callback(callback)
 
     @staticmethod
-    def show(music, divisions=None):
+    def show(music, divisions=None) -> abjad.LilyPondFile:
         """
         Makes rhythm-maker-style LilyPond file for documentation examples.
-
-        Returns LilyPond file.
         """
         return abjad.LilyPondFile.rhythm(
             music,
@@ -1570,13 +1565,13 @@ class DivisionMaker(abjad.AbjadValueObject):
 
     def split_by_durations(
         self,
-        compound_meter_multiplier=abjad.Multiplier(1),
+        compound_meter_multiplier=None,
         cyclic=None,
-        durations=(),
-        pattern_rotation_index=0,
-        remainder=abjad.Right,
+        durations=None,
+        pattern_rotation_index=None,
+        remainder=None,
         remainder_fuse_threshold=None,
-        ):
+        ) -> 'DivisionMaker':
         r"""
         Splits divisions by durations.
 
@@ -1702,7 +1697,7 @@ class DivisionMaker(abjad.AbjadValueObject):
     def split_by_rounded_ratios(
         self,
         ratios=None,
-        ):
+        ) -> 'DivisionMaker':
         r"""
         Splits divisions by rounded ratios.
 
@@ -1821,7 +1816,7 @@ class DivisionSequence(abjad.Sequence):
 
     ### INITIALIZER ###
 
-    def __init__(self, items=None):
+    def __init__(self, items=None) -> None:
         items = items or []
         if not isinstance(items, collections.Iterable):
             items = [items]
@@ -1928,9 +1923,9 @@ class DivisionSequence(abjad.Sequence):
         self,
         compound_meter_multiplier=None,
         cyclic=None,
-        durations=(),
-        pattern_rotation_index=0,
-        remainder=abjad.Right,
+        durations=None,
+        pattern_rotation_index=None,
+        remainder=None,
         remainder_fuse_threshold=None,
         ) -> 'DivisionSequence':
         """
@@ -2119,9 +2114,9 @@ class DivisionSequenceExpression(abjad.Expression):
         self,
         compound_meter_multiplier=None,
         cyclic=None,
-        durations=(),
-        pattern_rotation_index=0,
-        remainder=abjad.Right,
+        durations=None,
+        pattern_rotation_index=None,
+        remainder=None,
         remainder_fuse_threshold=None,
         ) -> 'DivisionSequenceExpression':
         """
@@ -2186,7 +2181,7 @@ class FlattenDivisionCallback(abjad.AbjadValueObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, *, depth=1):
+    def __init__(self, *, depth=1) -> None:
         self._depth = depth
 
     ### SPECIAL METHODS ###
@@ -2202,11 +2197,9 @@ class FlattenDivisionCallback(abjad.AbjadValueObject):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def depth(self):
+    def depth(self) -> typing.Optional[int]:
         """
         Gets depth of callback.
-
-        Returns integer.
         """
         return self._depth
 
@@ -2339,7 +2332,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
         cyclic=None,
         counts=None,
         secondary_division_maker=None,
-        ):
+        ) -> None:
         if cyclic is not None:
             cyclic = bool(cyclic)
         self._cyclic = cyclic
@@ -2780,7 +2773,9 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def counts(self):
+    def counts(self) -> typing.Optional[
+        typing.Union[abjad.mathtools.Infinity, typing.List[int]]
+        ]:
         """
         Gets counts.
 
@@ -2791,16 +2786,14 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
         return self._counts
 
     @property
-    def cyclic(self):
+    def cyclic(self) -> typing.Optional[bool]:
         """
         Is true when callback treats measure counts cyclically.
-
-        Set to true or false.
         """
         return self._cyclic
 
     @property
-    def secondary_division_maker(self):
+    def secondary_division_maker(self) -> typing.Optional['DivisionMaker']:
         """
         Gets secondary division-maker.
 
@@ -2924,13 +2917,15 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
         self,
         *,
         counts=None,
-        fuse_assignable_total_duration=False,
-        append_remainder=False,
-        remainder_direction=abjad.Right,
-        ):
+        fuse_assignable_total_duration=None,
+        append_remainder=None,
+        remainder_direction=None,
+        ) -> None:
         self._counts = counts
         self._fuse_assignable_total_duration = fuse_assignable_total_duration
         self._append_remainder = append_remainder
+        if remainder_direction is not None:
+            assert remainder_direction in (abjad.Left, abjad.Right)
         self._remainder_direction = remainder_direction
 
     ### SPECIAL METHODS ###
@@ -3015,7 +3010,7 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
             )
         return result
 
-    def __format__(self, format_specification=''):
+    def __format__(self, format_specification='') -> str:
         """
         Formats beat callback.
 
@@ -3023,31 +3018,22 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
 
             >>> callback = baca.PartitionDivisionCallback()
             >>> abjad.f(callback, strict=89)
-            baca.PartitionDivisionCallback(
-                fuse_assignable_total_duration=False,
-                append_remainder=False,
-                remainder_direction=Right,
-                )
+            baca.PartitionDivisionCallback()
 
-        Returns string.
         """
-        return abjad.AbjadValueObject.__format__(
-            self,
-            format_specification=format_specification,
-            )
+        return super().__format__(format_specification=format_specification)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """
         Gets interpreter representation of beat callback.
 
         ..  container:: example
 
             >>> baca.PartitionDivisionCallback()
-            PartitionDivisionCallback(fuse_assignable_total_duration=False, append_remainder=False, remainder_direction=Right)
+            PartitionDivisionCallback()
 
-        Returns string.
         """
-        return abjad.AbjadValueObject.__repr__(self)
+        return super().__repr__()
 
     ### PRIVATE METHODS ###
 
@@ -3110,7 +3096,7 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def append_remainder(self):
+    def append_remainder(self) -> typing.Optional[bool]:
         """
         Is true when remainder beat group fuses to next closest beat group.
 
@@ -3216,14 +3202,11 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
             >>> [len(beat_group) for beat_group in _]
             [2, 2, 2, 3]
 
-        Defaults to false.
-
-        Set to true or false.
         """
         return self._append_remainder
 
     @property
-    def counts(self):
+    def counts(self) -> typing.Optional[typing.List[int]]:
         """
         Gets counts of beat callback.
 
@@ -3271,14 +3254,11 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
             >>> [len(beat_group) for beat_group in _]
             [3, 3]
 
-        Defaults to none.
-
-        Set to positive integers or none.
         """
         return self._counts
 
     @property
-    def fuse_assignable_total_duration(self):
+    def fuse_assignable_total_duration(self) -> typing.Optional[bool]:
         """
         Is true when assignable total duration of all input beats fuse into
         a single duration.
@@ -3379,15 +3359,12 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
             [2, 2, 2, 2, 1]
 
         Overrides all other settings when total duration is assignable.
-
-        Defaults to false.
-
-        Set to true or false.
         """
         return self._fuse_assignable_total_duration
 
     @property
-    def remainder_direction(self):
+    def remainder_direction(self) -> typing.Optional[
+        abjad.enums.HorizontalAlignment]:
         """
         Gets remainder direction of beat callback.
 
@@ -3473,9 +3450,6 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
             >>> [len(beat_group) for beat_group in _]
             [1, 2, 2, 2]
 
-        Defaults to right.
-
-        Set to right or left.
         """
         return self._remainder_direction
 
@@ -3617,15 +3591,16 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
     def __init__(
         self,
         *,
-        compound_meter_multiplier=abjad.Multiplier(1),
+        compound_meter_multiplier=None,
         cyclic=None,
-        durations=(),
-        pattern_rotation_index=0,
-        remainder=abjad.Right,
+        durations=None,
+        pattern_rotation_index=None,
+        remainder=None,
         remainder_fuse_threshold=None,
-        ):
-        compound_meter_multiplier = compound_meter_multiplier or 1
-        compound_meter_multiplier = abjad.Multiplier(compound_meter_multiplier)
+        ) -> None:
+        if compound_meter_multiplier is not None:
+            compound_meter_multiplier = abjad.Multiplier(
+                compound_meter_multiplier)
         self._compound_meter_multiplier = compound_meter_multiplier
         if cyclic is not None:
             cyclic = bool(cyclic)
@@ -3637,9 +3612,11 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             pattern_.append(division)
         durations = tuple(pattern_)
         self._pattern = durations
-        assert remainder in (abjad.Left, abjad.Right), repr(remainder)
+        if remainder is not None:
+            assert remainder in (abjad.Left, abjad.Right), repr(remainder)
         self._remainder = remainder
-        assert isinstance(pattern_rotation_index, int)
+        if pattern_rotation_index is not None:
+            assert isinstance(pattern_rotation_index, int)
         self._pattern_rotation_index = pattern_rotation_index
         if remainder_fuse_threshold is not None:
             remainder_fuse_threshold = abjad.Duration(remainder_fuse_threshold)
@@ -3903,7 +3880,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             if input_meter.is_simple or not self.durations:
                 durations = self.durations[:]
             elif input_meter.is_compound:
-                multiplier = self.compound_meter_multiplier
+                multiplier = self.compound_meter_multiplier or 1
                 durations = [
                     abjad.Duration(multiplier * _)
                     for _ in self.durations
@@ -3925,8 +3902,6 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             if total_duration == input_duration:
                 division_lists.append(division_list)
                 continue
-            if self.remainder is None:
-                raise Exception(f'bad fill {input_division} from {durations}.')
             remainder = input_division - total_duration
             remainder = Division(remainder)
             if self.remainder == abjad.Left:
@@ -3938,7 +3913,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
                     division_list[0] = fused_value
                 else:
                     division_list.insert(0, remainder)
-            elif self.remainder == abjad.Right:
+            else:
                 if self.remainder_fuse_threshold is None:
                     division_list.append(remainder)
                 elif remainder <= self.remainder_fuse_threshold:
@@ -3947,8 +3922,6 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
                     division_list[-1] = fused_value
                 else:
                     division_list.append(remainder)
-            else:
-                raise ValueError((self.remainder, remainder))
             total_duration = abjad.Duration(sum(division_list))
             pair = total_duration, input_duration
             assert total_duration == input_duration, pair
@@ -3983,7 +3956,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def compound_meter_multiplier(self):
+    def compound_meter_multiplier(self) -> typing.Optional[abjad.Multiplier]:
         r"""
         Gets compound meter multiplier of callback.
 
@@ -4081,16 +4054,11 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
                     }
                 >>
 
-        Defaults to ``1``.
-
-        Set to multiplier.
-
-        Returns multiplier.
         """
         return self._compound_meter_multiplier
 
     @property
-    def cyclic(self):
+    def cyclic(self) -> typing.Optional[bool]:
         r"""
         Is true when division-maker reads durations cyclically for each
         input division.
@@ -4204,16 +4172,11 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
                     }
                 >>
 
-        Defaults to true.
-
-        Set to true or false.
-
-        Returns true or false.
         """
         return self._cyclic
 
     @property
-    def durations(self):
+    def durations(self) -> typing.Optional[typing.List[abjad.Duration]]:
         r"""
         Gets durations of division-maker.
 
@@ -4322,7 +4285,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
         return self._pattern
 
     @property
-    def pattern_rotation_index(self):
+    def pattern_rotation_index(self) -> typing.Optional[int]:
         r"""
         Gets durations rotation index of division-maker.
 
@@ -4486,16 +4449,11 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
                     }
                 >>
 
-        Defaults to 0.
-
-        Set to integer.
-
-        Returns integer.
         """
         return self._pattern_rotation_index
 
     @property
-    def remainder(self):
+    def remainder(self) -> typing.Optional[abjad.enums.VerticalAlignment]:
         r"""
         Gets direction to which any remainder will be positioned.
 
@@ -4665,16 +4623,11 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
                     }
                 >>
 
-        Defaults to right.
-
-        Set to left or right.
-
-        Returns left or right.
         """
         return self._remainder
 
     @property
-    def remainder_fuse_threshold(self):
+    def remainder_fuse_threshold(self) -> typing.Optional[abjad.Duration]:
         r"""
         Gets remainder fuse threshold of division-maker.
 
@@ -4842,18 +4795,13 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
                     }
                 >>
 
-        Defaults to none.
-
-        Set to duration or none.
-
-        Returns duration or none.
         """
         return self._remainder_fuse_threshold
 
     ### PUBLIC METHODS ###
 
     @staticmethod
-    def show(music, divisions):
+    def show(music, divisions) -> abjad.LilyPondFile:
         """
         Makes rhythm-maker-style LilyPond file for documentation examples.
 
@@ -4916,7 +4864,7 @@ class SplitByRoundedRatiosDivisionCallback(abjad.AbjadValueObject):
         self,
         *,
         ratios=None,
-        ):
+        ) -> None:
         if ratios is not None:
             ratios = ratios or ()
             ratios = [abjad.Ratio(_) for _ in ratios]
