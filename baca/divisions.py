@@ -1322,7 +1322,7 @@ class DivisionMaker(abjad.AbjadValueObject):
 
     def fuse_by_counts(
         self,
-        cyclic=True,
+        cyclic=None,
         counts=None,
         ):
         r"""
@@ -2211,6 +2211,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
         >>> division_maker = baca.DivisionMaker()
         >>> division_maker = division_maker.fuse_by_counts(
         ...     counts=[2],
+        ...     cyclic=True,
         ...     )
 
         >>> input_divisions = [(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)]
@@ -2249,6 +2250,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
         >>> division_maker = baca.DivisionMaker()
         >>> division_maker = division_maker.fuse_by_counts(
         ...     counts=[2],
+        ...     cyclic=True,
         ...     )
         >>> division_maker = division_maker.split_by_durations(
         ...     durations=[(3, 16)],
@@ -2321,11 +2323,12 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
     def __init__(
         self,
         *,
-        cyclic=True,
+        cyclic=None,
         counts=None,
         secondary_division_maker=None,
         ):
-        assert isinstance(cyclic, bool), repr(cyclic)
+        if cyclic is not None:
+            cyclic = bool(cyclic)
         self._cyclic = cyclic
         counts = counts or ()
         if counts == abjad.Infinity:
@@ -2396,6 +2399,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
             >>> division_maker = baca.DivisionMaker()
             >>> division_maker = division_maker.fuse_by_counts(
             ...     counts=[2],
+            ...     cyclic=True,
             ...     )
 
             >>> input_divisions = [(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)]
@@ -2436,6 +2440,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
             >>> division_maker = baca.DivisionMaker()
             >>> division_maker = division_maker.fuse_by_counts(
             ...     counts=[2],
+            ...     cyclic=True,
             ...     )
             >>> division_maker = division_maker.split_by_durations(
             ...     durations=[(3, 16)],
@@ -2488,6 +2493,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
             >>> division_maker = baca.DivisionMaker()
             >>> division_maker = division_maker.fuse_by_counts(
             ...     counts=[2],
+            ...     cyclic=True,
             ...     )
             >>> division_maker = division_maker.split_by_durations(
             ...     durations=[(3, 16)],
@@ -2754,25 +2760,12 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
             divisions_.append(division_)
         return divisions_
 
-    def _get_storage_format_specification(self):
-        agent = abjad.StorageFormatManager(self)
-        keyword_argument_names = agent.signature_keyword_names
-        keyword_argument_names = list(keyword_argument_names)
-        if bool(self.cyclic):
-            keyword_argument_names.remove('cyclic')
-        if not self.counts:
-            keyword_argument_names.remove('counts')
-        return abjad.StorageFormatSpecification(
-            self,
-            keyword_argument_names=keyword_argument_names,
-            )
-
     ### PUBLIC PROPERTIES ###
 
     @property
     def counts(self):
         """
-        Gets measure counts of hypermeasure division-maker.
+        Gets counts.
 
         Set to (possibly empty) list or tuple of positive integers.
 
@@ -2783,8 +2776,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
     @property
     def cyclic(self):
         """
-        Is true when hypermeasure division-maker treats measure counts
-        cyclically.
+        Is true when callback treats measure counts cyclically.
 
         Set to true or false.
         """
@@ -2793,7 +2785,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
     @property
     def secondary_division_maker(self):
         """
-        Gets hypermeasure postprocessor of hypermeasure division-maker.
+        Gets secondary division-maker.
 
         Returns division-maker or none.
         """
