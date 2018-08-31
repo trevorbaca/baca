@@ -2343,6 +2343,9 @@ class SegmentMaker(abjad.SegmentMaker):
                     clock_times.append(string)
         total = len(skips)
         for measure_index in range(len(skips)):
+            measure_number = measure_index + 1
+            if measure_number in self._fermata_measure_numbers:
+                continue
             skip = skips[measure_index]
             clock_time = clock_times[measure_index]
             if measure_index < total - 1:
