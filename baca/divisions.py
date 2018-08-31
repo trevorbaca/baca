@@ -909,6 +909,7 @@ class DivisionMaker(abjad.AbjadValueObject):
 
         >>> division_maker = baca.DivisionMaker()
         >>> division_maker = division_maker.split_by_durations(
+        ...     cyclic=True,
         ...     durations=[(1, 4)],
         ...     )
 
@@ -998,6 +999,7 @@ class DivisionMaker(abjad.AbjadValueObject):
         ...     counts=abjad.Infinity,
         ...     )
         >>> division_maker = division_maker.split_by_durations(
+        ...     cyclic=True,
         ...     durations=[(1, 4)],
         ...     )
 
@@ -1043,6 +1045,7 @@ class DivisionMaker(abjad.AbjadValueObject):
 
         >>> division_maker = baca.DivisionMaker()
         >>> division_maker = division_maker.split_by_durations(
+        ...     cyclic=True,
         ...     durations=[(3, 8)],
         ...     )
 
@@ -1090,6 +1093,7 @@ class DivisionMaker(abjad.AbjadValueObject):
 
         >>> division_maker = baca.DivisionMaker()
         >>> division_maker = division_maker.split_by_durations(
+        ...     cyclic=True,
         ...     durations=[(3, 8)],
         ...     )
         >>> division_maker = division_maker.flatten(depth=-1)
@@ -1132,6 +1136,7 @@ class DivisionMaker(abjad.AbjadValueObject):
 
         >>> division_maker = baca.DivisionMaker()
         >>> division_maker = division_maker.split_by_durations(
+        ...     cyclic=True,
         ...     durations=[(3, 8)],
         ...     )
         >>> division_maker = division_maker.flatten(depth=-1)
@@ -1290,6 +1295,7 @@ class DivisionMaker(abjad.AbjadValueObject):
 
             >>> division_maker = baca.DivisionMaker()
             >>> division_maker = division_maker.split_by_durations(
+            ...     cyclic=True,
             ...     durations=[(1, 4)],
             ...     )
 
@@ -1565,7 +1571,7 @@ class DivisionMaker(abjad.AbjadValueObject):
     def split_by_durations(
         self,
         compound_meter_multiplier=abjad.Multiplier(1),
-        cyclic=True,
+        cyclic=None,
         durations=(),
         pattern_rotation_index=0,
         remainder=abjad.Right,
@@ -1580,6 +1586,7 @@ class DivisionMaker(abjad.AbjadValueObject):
 
             >>> division_maker = baca.DivisionMaker()
             >>> division_maker = division_maker.split_by_durations(
+            ...     cyclic=True,
             ...     durations=[(1, 4)],
             ...     )
 
@@ -1632,6 +1639,7 @@ class DivisionMaker(abjad.AbjadValueObject):
 
             >>> division_maker = baca.DivisionMaker()
             >>> division_maker = division_maker.split_by_durations(
+            ...     cyclic=True,
             ...     durations=[(1, 4)],
             ...     remainder=abjad.Left,
             ...     )
@@ -1919,7 +1927,7 @@ class DivisionSequence(abjad.Sequence):
     def split_by_durations(
         self,
         compound_meter_multiplier=None,
-        cyclic=True,
+        cyclic=None,
         durations=(),
         pattern_rotation_index=0,
         remainder=abjad.Right,
@@ -1980,6 +1988,7 @@ class DivisionSequenceExpression(abjad.Expression):
         >>> expression = baca.DivisionSequenceExpression()
         >>> expression = expression.division_sequence()
         >>> expression = expression.split_by_durations(
+        ...     cyclic=True,
         ...     durations=[(1, 4)],
         ...     )
 
@@ -1997,6 +2006,7 @@ class DivisionSequenceExpression(abjad.Expression):
         >>> expression = baca.DivisionSequenceExpression()
         >>> expression = expression.division_sequence()
         >>> expression = expression.split_by_durations(
+        ...     cyclic=True,
         ...     durations=[(1, 4)],
         ...     )
         >>> expression = expression.flatten(depth=-1)
@@ -2024,6 +2034,7 @@ class DivisionSequenceExpression(abjad.Expression):
         >>> expression = expression.division_sequence()
         >>> expression = expression.split_by_durations(
         ...     compound_meter_multiplier=(3, 2),
+        ...     cyclic=True,
         ...     durations=[(1, 4)],
         ...     )
 
@@ -2043,6 +2054,7 @@ class DivisionSequenceExpression(abjad.Expression):
         >>> expression = expression.division_sequence()
         >>> expression = expression.split_by_durations(
         ...     compound_meter_multiplier=(3, 2),
+        ...     cyclic=True,
         ...     durations=[(1, 4)],
         ...     )
         >>> expression_2 = baca.DivisionSequenceExpression()
@@ -2106,7 +2118,7 @@ class DivisionSequenceExpression(abjad.Expression):
     def split_by_durations(
         self,
         compound_meter_multiplier=None,
-        cyclic=True,
+        cyclic=None,
         durations=(),
         pattern_rotation_index=0,
         remainder=abjad.Right,
@@ -2253,6 +2265,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
         ...     cyclic=True,
         ...     )
         >>> division_maker = division_maker.split_by_durations(
+        ...     cyclic=True,
         ...     durations=[(3, 16)],
         ...     remainder=abjad.Right,
         ...     )
@@ -2443,6 +2456,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
             ...     cyclic=True,
             ...     )
             >>> division_maker = division_maker.split_by_durations(
+            ...     cyclic=True,
             ...     durations=[(3, 16)],
             ...     remainder=abjad.Right,
             ...     )
@@ -2496,6 +2510,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
             ...     cyclic=True,
             ...     )
             >>> division_maker = division_maker.split_by_durations(
+            ...     cyclic=True,
             ...     durations=[(3, 16)],
             ...     remainder=abjad.Left,
             ...     )
@@ -2588,6 +2603,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
             ...     counts=abjad.Infinity,
             ...     )
             >>> division_maker = division_maker.split_by_durations(
+            ...     cyclic=True,
             ...     durations=[(3, 16)],
             ...     remainder=abjad.Right,
             ...     )
@@ -2637,6 +2653,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
             ...     counts=abjad.Infinity,
             ...     )
             >>> division_maker = division_maker.split_by_durations(
+            ...     cyclic=True,
             ...     durations=[(3, 16)],
             ...     remainder=abjad.Left,
             ...     )
@@ -2802,6 +2819,7 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
         >>> division_maker = baca.DivisionMaker()
         >>> division_maker = division_maker.split_by_durations(
         ...     compound_meter_multiplier=(3, 2),
+        ...     cyclic=True,
         ...     durations=[(1, 4)],
         ...     )
         >>> meters = [
@@ -3472,6 +3490,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
         Makes quarter-valued divisions with remainder at right:
 
         >>> division_maker = baca.SplitByDurationsDivisionCallback(
+        ...     cyclic=True,
         ...     durations=[(1, 4)]
         ...     )
 
@@ -3524,6 +3543,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
         Makes quarter-valued divisions with remainder at left:
 
         >>> division_maker = baca.SplitByDurationsDivisionCallback(
+        ...     cyclic=True,
         ...     durations=[(1, 4)],
         ...     remainder=abjad.Left,
         ...     )
@@ -3598,7 +3618,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
         self,
         *,
         compound_meter_multiplier=abjad.Multiplier(1),
-        cyclic=True,
+        cyclic=None,
         durations=(),
         pattern_rotation_index=0,
         remainder=abjad.Right,
@@ -3607,7 +3627,8 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
         compound_meter_multiplier = compound_meter_multiplier or 1
         compound_meter_multiplier = abjad.Multiplier(compound_meter_multiplier)
         self._compound_meter_multiplier = compound_meter_multiplier
-        assert isinstance(cyclic, bool), repr(cyclic)
+        if cyclic is not None:
+            cyclic = bool(cyclic)
         self._cyclic = cyclic
         durations = durations or ()
         pattern_ = []
@@ -3676,6 +3697,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             Splits divisions with remainder:
 
             >>> division_maker = baca.SplitByDurationsDivisionCallback(
+            ...     cyclic=True,
             ...     durations=[(1, 4)],
             ...     )
 
@@ -3834,6 +3856,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             ...     counts=abjad.Infinity,
             ...     )
             >>> division_maker = division_maker.split_by_durations(
+            ...     cyclic=True,
             ...     durations=[(3, 16)],
             ...     remainder=abjad.Left,
             ...     )
@@ -3970,6 +3993,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             >>> division_maker = baca.DivisionMaker()
             >>> division_maker = division_maker.split_by_durations(
+            ...     cyclic=True,
             ...     durations=[(1, 4)],
             ...     )
 
@@ -4017,6 +4041,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             >>> division_maker = baca.DivisionMaker()
             >>> division_maker = division_maker.split_by_durations(
             ...     compound_meter_multiplier=abjad.Multiplier(3, 2),
+            ...     cyclic=True,
             ...     durations=[(1, 4)],
             ...     )
 
@@ -4078,6 +4103,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             Reads durations cyclically for each input division:
 
             >>> division_maker = baca.SplitByDurationsDivisionCallback(
+            ...     cyclic=True,
             ...     durations=[(1, 4)],
             ...     )
 
@@ -4195,7 +4221,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             Returns input division unchanged when durations is empty:
 
-                >>> division_maker = baca.SplitByDurationsDivisionCallback()
+            >>> division_maker = baca.SplitByDurationsDivisionCallback()
 
             >>> time_signatures = [(7, 8), (7, 8), (7, 16)]
             >>> division_lists = division_maker(time_signatures)
@@ -4238,9 +4264,10 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             Applies durations to each input division:
 
-                >>> division_maker = baca.SplitByDurationsDivisionCallback(
-                ...     durations=[(1, 4)],
-                ...     )
+            >>> division_maker = baca.SplitByDurationsDivisionCallback(
+            ...     cyclic=True,
+            ...     durations=[(1, 4)],
+            ...     )
 
             >>> time_signatures = [(7, 8), (7, 8), (7, 16)]
             >>> division_lists = division_maker(time_signatures)
@@ -4517,6 +4544,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             Positions remainder to right of cyclic durations:
 
             >>> division_maker = baca.SplitByDurationsDivisionCallback(
+            ...     cyclic=True,
             ...     durations=[(4, 16), (1, 16)],
             ...     )
 
@@ -4655,6 +4683,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             No threshold. Remainder unfused to the right:
 
             >>> division_maker = baca.SplitByDurationsDivisionCallback(
+            ...     cyclic=True,
             ...     durations=[(1, 4)],
             ...     remainder_fuse_threshold=None,
             ...     )
@@ -4695,6 +4724,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             Remainder less than or equal to ``1/8`` fused to the right:
 
             >>> division_maker = baca.SplitByDurationsDivisionCallback(
+            ...     cyclic=True,
             ...     durations=[(1, 4)],
             ...     remainder_fuse_threshold=abjad.Duration(1, 8),
             ...     )
@@ -5099,6 +5129,7 @@ def compound_quarter_divisions() -> DivisionSequenceExpression:
     expression = DivisionSequenceExpression()
     expression = expression.split_by_durations(
         compound_meter_multiplier=abjad.Multiplier((3, 2)),
+        cyclic=True,
         durations=[abjad.Duration(1, 4)],
         )
     expression = expression.flatten(depth=-1)
@@ -5155,6 +5186,7 @@ def fuse_compound_quarter_divisions(
     expression = expression.division_sequence()
     expression = expression.split_by_durations(
         compound_meter_multiplier=abjad.Multiplier((3, 2)),
+        cyclic=True,
         durations=[abjad.Duration(1, 4)],
         )
     expression = expression.flatten(depth=-1)
@@ -5230,6 +5262,7 @@ def strict_quarter_divisions() -> DivisionSequenceExpression:
     expression = DivisionSequenceExpression()
     expression = expression.division_sequence()
     expression = expression.split_by_durations(
+        cyclic=True,
         durations=[abjad.Duration(1, 4)]
         )
     expression = expression.sequence()
