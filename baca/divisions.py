@@ -1316,7 +1316,7 @@ class DivisionMaker(abjad.AbjadValueObject):
         """
         return self._append_callback(callback)
 
-    def flatten(self, depth=1) -> 'DivisionMaker':
+    def flatten(self, *, depth=1) -> 'DivisionMaker':
         """
         Flattens division lists.
         """
@@ -1325,6 +1325,7 @@ class DivisionMaker(abjad.AbjadValueObject):
 
     def fuse_by_counts(
         self,
+        *,
         cyclic=None,
         counts=None,
         ) -> 'DivisionMaker':
@@ -1376,9 +1377,10 @@ class DivisionMaker(abjad.AbjadValueObject):
 
     def partition_by_counts(
         self,
+        *,
+        append_remainder=None,
         counts=None,
         fuse_assignable_total_duration=None,
-        append_remainder=None,
         remainder_direction=None,
         ) -> 'DivisionMaker':
         """
@@ -1565,6 +1567,7 @@ class DivisionMaker(abjad.AbjadValueObject):
 
     def split_by_durations(
         self,
+        *,
         compound_meter_multiplier=None,
         cyclic=None,
         durations=None,
@@ -1696,6 +1699,7 @@ class DivisionMaker(abjad.AbjadValueObject):
 
     def split_by_rounded_ratios(
         self,
+        *,
         ratios=None,
         ) -> 'DivisionMaker':
         r"""
