@@ -1311,7 +1311,7 @@ class DivisionMaker(abjad.AbjadValueObject):
         """
         return self._append_callback(callback)
 
-    def flatten(self, depth=-1):
+    def flatten(self, depth=1):
         """
         Flattens division lists.
 
@@ -2174,7 +2174,7 @@ class FlattenDivisionCallback(abjad.AbjadValueObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, *, depth=-1):
+    def __init__(self, *, depth=1):
         self._depth = depth
 
     ### SPECIAL METHODS ###
