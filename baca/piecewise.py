@@ -936,7 +936,7 @@ def dynamic(
 
 def hairpin(
     dynamics: typing.Union[str, typing.List],
-    *,
+    *tweaks: abjad.LilyPondTweakManager,
     bookend: typing.Union[bool, int] = -1,
     final_hairpin: typing.Union[bool, str, abjad.DynamicTrend] = None,
     leak: bool = None,
@@ -2710,9 +2710,137 @@ def hairpin(
             <BLANKLINE>
             >>                                                                                       %! SingleStaffScoreTemplate
 
+    ..  container:: example
+
+        REGRESSION. Works with to-barline tweak:
+
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     spacing=baca.minimum_duration((1, 12)),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'Music_Voice',
+        ...     baca.dls_staff_padding(4),
+        ...     baca.hairpin(
+        ...         'p -- niente',
+        ...         abjad.tweak(True).to_barline,
+        ...         selector=baca.leaves()[:2],
+        ...         ),
+        ...     baca.hairpin(
+        ...         'f -- niente',
+        ...         abjad.tweak(True).to_barline,
+        ...         selector=baca.leaves()[2:],
+        ...         ),
+        ...     baca.pitches('C4 D4'),
+        ...     baca.rhythm('{ c2 r4. c2 r4. }'),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
+            \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+            <<                                                                                       %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
+                <<                                                                                   %! _make_global_context
+            <BLANKLINE>
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
+                    {                                                                                %! _make_global_context
+            <BLANKLINE>
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+                        \baca-bar-line-visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
+            <BLANKLINE>
+                    }                                                                                %! _make_global_context
+            <BLANKLINE>
+                >>                                                                                   %! _make_global_context
+            <BLANKLINE>
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
+                <<                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
+                    {                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
+                        {                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                            {
+            <BLANKLINE>
+                                % [Music_Voice measure 1]                                            %! _comment_measure_numbers
+                                \override DynamicLineSpanner.staff-padding = #'4                     %! baca_dls_staff_padding:OverrideCommand(1)
+                                c'2
+                                - \tweak color #(x11-color 'blue)                                    %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
+                                - \tweak to-barline ##t                                              %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                                \p                                                                   %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                                - \tweak color #(x11-color 'blue)                                    %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
+                                - \tweak to-barline ##t                                              %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                                - \tweak stencil #constante-hairpin                                  %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                                \<                                                                   %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+            <BLANKLINE>
+                                % [Music_Voice measure 2]                                            %! _comment_measure_numbers
+                                r4.
+                                - \tweak color #(x11-color 'blue)                                    %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
+                                - \tweak to-barline ##t                                              %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
+                                \!                                                                   %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
+            <BLANKLINE>
+                                % [Music_Voice measure 3]                                            %! _comment_measure_numbers
+                                d'2
+                                - \tweak color #(x11-color 'blue)                                    %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
+                                - \tweak to-barline ##t                                              %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                                \f                                                                   %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                                - \tweak color #(x11-color 'blue)                                    %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
+                                - \tweak to-barline ##t                                              %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                                - \tweak stencil #constante-hairpin                                  %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                                \<                                                                   %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+            <BLANKLINE>
+                                % [Music_Voice measure 4]                                            %! _comment_measure_numbers
+                                r4.
+                                - \tweak color #(x11-color 'blue)                                    %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
+                                - \tweak to-barline ##t                                              %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
+                                \!                                                                   %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
+                                \revert DynamicLineSpanner.staff-padding                             %! baca_dls_staff_padding:OverrideCommand(2)
+            <BLANKLINE>
+                            }
+            <BLANKLINE>
+                        }                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                    }                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                >>                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
+            >>                                                                                       %! SingleStaffScoreTemplate
+
     """
     if isinstance(dynamics, str):
-        bundles = parse_hairpin_descriptor(dynamics)
+        bundles = parse_hairpin_descriptor(dynamics, *tweaks)
     else:
         bundles = dynamics
     for item in bundles:
@@ -2932,7 +3060,8 @@ def make_dynamic(string: str) -> typing.Union[
     return indicator
 
 def parse_hairpin_descriptor(
-    descriptor: str
+    descriptor: str,
+    *tweaks: abjad.LilyPondTweakManager,
     ) -> typing.List[Bundle]:
     r"""
     Parses hairpin descriptor.
@@ -3007,6 +3136,8 @@ def parse_hairpin_descriptor(
     bundles: typing.List[Bundle] = []
     for string in descriptor.split():
         indicator = make_dynamic(string)
+        if tweaks:
+            PiecewiseCommand._apply_tweaks(indicator, tweaks)
         indicators.append(indicator)
     if len(indicators) == 1:
         if isinstance(indicators[0], abjad.DynamicTrend):
