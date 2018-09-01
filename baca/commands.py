@@ -54,7 +54,6 @@ class BCPCommand(scoping.Command):
         self._bow_contact_points = bcps
         if bow_change_tweaks is not None:
             self._validate_tweaks(bow_change_tweaks)
-            #raise Exception(bow_change_tweaks)
         self._bow_change_tweaks = bow_change_tweaks
         if final_spanner is not None:
             final_spanner = bool(final_spanner)
