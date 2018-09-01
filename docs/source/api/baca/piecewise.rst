@@ -120,6 +120,7 @@ piecewise
       remove_length_1_spanner_start
       right_broken
       selector
+      tweaks
 
    .. raw:: html
 
@@ -209,6 +210,8 @@ piecewise
    .. container:: inherited
 
       .. autoattribute:: PiecewiseCommand.tags
+
+   .. autoattribute:: PiecewiseCommand.tweaks
 
 .. raw:: html
 

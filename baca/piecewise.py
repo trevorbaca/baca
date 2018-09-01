@@ -147,6 +147,7 @@ class PiecewiseCommand(scoping.Command):
         '_remove_length_1_spanner_start',
         '_right_broken',
         '_selector',
+        '_tweaks',
         )
 
     ### INITIALIZER ###
@@ -167,6 +168,7 @@ class PiecewiseCommand(scoping.Command):
         scope: scoping.ScopeTyping = None,
         selector: typings.Selector = 'baca.leaves()',
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
+        tweaks: typing.Tuple[typings.TweaksTyping, ...] = None,
         ) -> None:
         # for selector evaluation
         import baca
@@ -202,6 +204,8 @@ class PiecewiseCommand(scoping.Command):
             remove_length_1_spanner_start = bool(remove_length_1_spanner_start)
         self._remove_length_1_spanner_start = remove_length_1_spanner_start
         self._right_broken = right_broken
+        self._validate_tweaks(tweaks)
+        self._tweaks = tweaks
 
     ### SPECIAL METHODS ###
 
@@ -233,6 +237,7 @@ class PiecewiseCommand(scoping.Command):
             bookend_pattern = abjad.index([self.bookend], period=piece_count)
         just_bookended_leaf = None
         previous_had_bookend = None
+        total_pieces = len(pieces)
         for i, piece in enumerate(pieces):
             start_leaf = classes.Selection(piece).leaf(0)
             stop_leaf = classes.Selection(piece).leaf(-1)
@@ -244,6 +249,8 @@ class PiecewiseCommand(scoping.Command):
                 self._attach_indicators(
                     bundle,
                     stop_leaf,
+                    i,
+                    total_pieces,
                     tag=str(abjad.tags.HIDE_TO_JOIN_BROKEN_SPANNERS),
                     )
             if (bookend_pattern.matches_index(i, piece_count) and
@@ -303,6 +310,8 @@ class PiecewiseCommand(scoping.Command):
             self._attach_indicators(
                 bundle,
                 start_leaf,
+                i,
+                total_pieces,
                 just_bookended_leaf=just_bookended_leaf,
                 tag=tag,
                 )
@@ -329,6 +338,8 @@ class PiecewiseCommand(scoping.Command):
                 self._attach_indicators(
                     next_bundle,
                     stop_leaf,
+                    i,
+                    total_pieces,
                     tag='PiecewiseCommand(2)',
                     )
                 just_bookended_leaf = stop_leaf
@@ -343,6 +354,8 @@ class PiecewiseCommand(scoping.Command):
                 self._attach_indicators(
                     bundle,
                     stop_leaf,
+                    i,
+                    total_pieces,
                     tag='PiecewiseCommand(3)',
                     )
             previous_had_bookend = should_bookend
@@ -353,6 +366,8 @@ class PiecewiseCommand(scoping.Command):
         self,
         bundle,
         leaf,
+        i,
+        total_pieces,
         just_bookended_leaf=None,
         tag=None,
         ):
@@ -363,6 +378,13 @@ class PiecewiseCommand(scoping.Command):
             if (not getattr(indicator, 'trend', False) and
                 leaf is just_bookended_leaf):
                 continue
+            if self.tweaks and hasattr(indicator, '_tweaks'):
+                self._apply_tweaks(
+                    indicator,
+                    self.tweaks,
+                    i=i,
+                    total=total_pieces,
+                    )
             reapplied = scoping.Command._remove_reapplied_wrappers(
                 leaf,
                 indicator,
@@ -451,6 +473,14 @@ class PiecewiseCommand(scoping.Command):
         Gets (first-order) selector.
         """
         return self._selector
+
+    @property
+    def tweaks(self) -> typing.Optional[
+        typing.Tuple[typings.TweaksTyping, ...]]:
+        r"""
+        Gets tweaks.
+        """
+        return self._tweaks
 
 ### FACTORY FUNCTIONS ###
 
@@ -3181,7 +3211,7 @@ def parse_hairpin_descriptor(
 
 def text_spanner(
     items: typing.Union[str, typing.List],
-    *tweaks: abjad.LilyPondTweakManager,
+    *tweaks: typings.TweaksTyping,
     bookend: typing.Union[bool, int] = -1,
     boxed: bool = None,
     final_piece_spanner: bool = None,
@@ -4479,6 +4509,132 @@ def text_spanner(
 
     ..  container:: example
 
+        Indexes tweaks. No purple appears because tweakable indicators appear
+        on pieces 0, 1, 2 but piece 3 carries only a stop text span:
+
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     spacing=baca.minimum_duration((1, 12)),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'Music_Voice',
+        ...     baca.text_spanner(
+        ...         'P -> T ->',
+        ...         (abjad.tweak('red').color, 0),
+        ...         (abjad.tweak('blue').color, 1),
+        ...         (abjad.tweak('green').color, 2),
+        ...         (abjad.tweak('purple').color, 3),
+        ...         final_piece_spanner=False,
+        ...         piece_selector=baca.plts(),
+        ...     ),
+        ...     baca.rhythm('{ c2 c4. c2 c4. }'),
+        ...     baca.pitches('C4 D4 E4 F4'),
+        ...     baca.text_spanner_staff_padding(4.5),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
+            \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+            <<                                                                                       %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
+                <<                                                                                   %! _make_global_context
+            <BLANKLINE>
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
+                    {                                                                                %! _make_global_context
+            <BLANKLINE>
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+                        \baca-bar-line-visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
+            <BLANKLINE>
+                    }                                                                                %! _make_global_context
+            <BLANKLINE>
+                >>                                                                                   %! _make_global_context
+            <BLANKLINE>
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
+                <<                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
+                    {                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
+                        {                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                            {
+            <BLANKLINE>
+                                % [Music_Voice measure 1]                                            %! _comment_measure_numbers
+                                \override TextSpanner.staff-padding = #4.5                           %! baca_text_spanner_staff_padding:OverrideCommand(1)
+                                c'2
+                                - \abjad-solid-line-with-arrow                                       %! baca_text_spanner:PiecewiseCommand(1)
+                                - \baca-text-spanner-left-text "P"                                   %! baca_text_spanner:PiecewiseCommand(1)
+                                - \tweak color #red                                                  %! baca_text_spanner:PiecewiseCommand(1)
+                                \startTextSpan                                                       %! baca_text_spanner:PiecewiseCommand(1)
+            <BLANKLINE>
+                                % [Music_Voice measure 2]                                            %! _comment_measure_numbers
+                                d'4.
+                                \stopTextSpan                                                        %! baca_text_spanner:PiecewiseCommand(1)
+                                - \abjad-solid-line-with-arrow                                       %! baca_text_spanner:PiecewiseCommand(1)
+                                - \baca-text-spanner-left-text "T"                                   %! baca_text_spanner:PiecewiseCommand(1)
+                                - \tweak color #blue                                                 %! baca_text_spanner:PiecewiseCommand(1)
+                                \startTextSpan                                                       %! baca_text_spanner:PiecewiseCommand(1)
+            <BLANKLINE>
+                                % [Music_Voice measure 3]                                            %! _comment_measure_numbers
+                                e'2
+                                \stopTextSpan                                                        %! baca_text_spanner:PiecewiseCommand(1)
+                                - \abjad-solid-line-with-arrow                                       %! baca_text_spanner:PiecewiseCommand(1)
+                                - \baca-text-spanner-left-text "P"                                   %! baca_text_spanner:PiecewiseCommand(1)
+                                - \baca-text-spanner-right-text "T"                                  %! baca_text_spanner:PiecewiseCommand(1)
+                                - \tweak bound-details.right.padding #0.5                            %! baca_text_spanner:PiecewiseCommand(1)
+                                - \tweak bound-details.right.stencil-align-dir-y #center             %! baca_text_spanner:PiecewiseCommand(1)
+                                - \tweak color #green                                                %! baca_text_spanner:PiecewiseCommand(1)
+                                \startTextSpan                                                       %! baca_text_spanner:PiecewiseCommand(1)
+            <BLANKLINE>
+                                % [Music_Voice measure 4]                                            %! _comment_measure_numbers
+                                f'4.
+                                \stopTextSpan                                                        %! baca_text_spanner:PiecewiseCommand(1)
+                                \revert TextSpanner.staff-padding                                    %! baca_text_spanner_staff_padding:OverrideCommand(2)
+            <BLANKLINE>
+                            }
+            <BLANKLINE>
+                        }                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                    }                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                >>                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
+            >>                                                                                       %! SingleStaffScoreTemplate
+
+    ..  container:: example
+
         REGRESSION. Handles backslashed markup correctly:
 
         >>> maker = baca.SegmentMaker(
@@ -5137,8 +5293,8 @@ def text_spanner(
             left_text=item_markup,
             style=style,
             )
-        if tweaks:
-            PiecewiseCommand._apply_tweaks(start_text_span, tweaks)
+#        if tweaks:
+#            PiecewiseCommand._apply_tweaks(start_text_span, tweaks)
         # kerns bookended hook
         if 'hook' in style:
             assert isinstance(right_markup, abjad.Markup)
@@ -5175,4 +5331,5 @@ def text_spanner(
         piece_selector=piece_selector,
         selector=selector,
         tags=[tag],
+        tweaks=tweaks,
         )

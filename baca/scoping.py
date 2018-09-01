@@ -269,11 +269,21 @@ class Command(abjad.AbjadObject):
     ### PRIVATE METHODS ###
 
     @staticmethod
-    def _apply_tweaks(argument, tweaks):
+    def _apply_tweaks(argument, tweaks, i=None, total=None):
         if not tweaks:
             return
         manager = abjad.tweak(argument)
-        for manager_ in tweaks:
+        for item in tweaks:
+            if isinstance(item, tuple):
+                assert len(item) == 2
+                manager_, i_ = item
+                if 0 <= i_ and i_ != i:
+                    continue
+                if i_ < 0 and i_ != -(total - i):
+                    continue
+            else:
+                manager_ = item
+            assert isinstance(manager_, abjad.LilyPondTweakManager)
             tuples = manager_._get_attribute_tuples()
             for attribute, value in tuples:
                 setattr(manager, attribute, value)
@@ -413,8 +423,13 @@ class Command(abjad.AbjadObject):
             return
         assert isinstance(tweaks, tuple), repr(tweaks)
         for tweak in tweaks:
-            if not isinstance(tweak, abjad.LilyPondTweakManager):
-                raise Exception(tweaks)
+            if isinstance(tweak, abjad.LilyPondTweakManager):
+                continue
+            if (isinstance(tweak, tuple) and
+                len(tweak) == 2 and
+                isinstance(tweak[0], abjad.LilyPondTweakManager)):
+                continue
+            raise Exception(tweak)
 
     ### PUBLIC PROPERTIES ###
 
