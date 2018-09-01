@@ -115,12 +115,10 @@ baca-damp-half-clt-markup =
 
 baca-black-diamond-markup =
     \markup
-    \scale #'(0.75 . 0.75)
     \musicglyph #"noteheads.s2harmonic"
 
 baca-diamond-markup =
     \markup
-    \scale #'(0.75 . 0.75)
     \musicglyph #"noteheads.s0harmonic"
 
 baca-double-black-diamond-markup =
