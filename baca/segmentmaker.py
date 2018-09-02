@@ -1904,12 +1904,12 @@ class SegmentMaker(abjad.SegmentMaker):
             duration = abjad.inspect(beam.leaves).duration()
             durations.append(duration)
         intervening_skips = []
-        index = 1
+        current_leaf = leaf
         while True:
-            next_leaf = abjad.inspect(leaf).leaf(index)
+            next_leaf = abjad.inspect(current_leaf).leaf(1)
             if next_leaf is None:
                 return
-            index += 1
+            current_leaf = next_leaf
             if isinstance(next_leaf, abjad.Skip):
                 beam = abjad.inspect(next_leaf).spanner(abjad.Beam)
                 if beam is None:
