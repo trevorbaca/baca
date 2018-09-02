@@ -9317,7 +9317,7 @@ class Tree(abjad.AbjadObject):
         """
         if negative:
             return -self._get_depth()
-        return len(self._get_parentage(include_self=False))
+        return len(self._get_parentage()[1:])
 
     def _get_next_n_nodes_at_level(
         self,
@@ -9571,8 +9571,9 @@ class Tree(abjad.AbjadObject):
             result = result[index]
         return result
 
-    def _get_parentage(self, include_self=True):
-        """Gets parentage.
+    def _get_parentage(self):
+        """
+        Gets parentage.
 
         ..  container:: example
 
@@ -9590,16 +9591,14 @@ class Tree(abjad.AbjadObject):
 
             >>> items = [[[0, 1], [2, 3]], [4, 5]]
             >>> tree = baca.Tree(items=items)
-            >>> parentage = tree[1]._get_parentage(include_self=False)
-            >>> for tree in parentage:
+            >>> for tree in tree[1]._get_parentage()[1:]:
             ...     tree
             Tree(items=[Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])]), Tree(items=[Tree(items=4), Tree(items=5)])])
 
         Returns tuple.
         """
         result = []
-        if include_self:
-            result.append(self)
+        result.append(self)
         current = self._parent
         while current is not None:
             result.append(current)

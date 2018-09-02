@@ -7907,7 +7907,7 @@ class PitchTree(classes.Tree):
                 abjad.Duration(1, 8),
                 )
             if node._is_leftmost_leaf():
-                for parent in node._get_parentage(include_self=True):
+                for parent in node._get_parentage():
                     if parent._expression is not None:
                         node_markup = parent._expression.get_markup()
                         if node_markup is not None:
