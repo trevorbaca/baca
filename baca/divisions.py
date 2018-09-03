@@ -2147,7 +2147,9 @@ class DivisionSequenceExpression(abjad.Expression):
             evaluation_template=evaluation_template,
             module_names=['baca'],
             )
-        return self.append_callback(callback)
+        expression = self.append_callback(callback)
+        assert isinstance(expression, DivisionSequenceExpression)
+        return expression
 
     def split_by_rounded_ratios(
         self,
@@ -2170,7 +2172,9 @@ class DivisionSequenceExpression(abjad.Expression):
             evaluation_template=evaluation_template,
             module_names=['baca'],
             )
-        return self.append_callback(callback)
+        expression = self.append_callback(callback)
+        assert isinstance(expression, DivisionSequenceExpression)
+        return expression
 
 class FlattenDivisionCallback(abjad.AbjadValueObject):
     """
@@ -5217,6 +5221,7 @@ def strict_quarter_divisions() -> DivisionSequenceExpression:
         cyclic=True,
         durations=[abjad.Duration(1, 4)]
         )
-    expression = expression.sequence()
-    expression = expression.flatten(depth=-1)
+    expression_ = expression.sequence()
+    assert isinstance(expression_, DivisionSequenceExpression)
+    expression = expression_.flatten(depth=-1)
     return expression
