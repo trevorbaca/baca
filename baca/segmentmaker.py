@@ -3346,8 +3346,12 @@ class SegmentMaker(abjad.SegmentMaker):
             literal = abjad.LilyPondLiteral('', 'absolute_before')
             abjad.attach(literal, leaf, tag=None)
         for container in abjad.iterate(self.score).components(abjad.Container):
-            literal = abjad.LilyPondLiteral('', 'absolute_before')
-            abjad.attach(literal, container, tag=None)
+            if hasattr(container, '_main_leaf'):
+                literal = abjad.LilyPondLiteral('', 'absolute_after')
+                abjad.attach(literal, container, tag=None)
+            else:
+                literal = abjad.LilyPondLiteral('', 'absolute_before')
+                abjad.attach(literal, container, tag=None)
             literal = abjad.LilyPondLiteral('', 'closing')
             abjad.attach(literal, container, tag=None)
 
