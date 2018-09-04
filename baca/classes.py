@@ -2311,6 +2311,200 @@ class Selection(abjad.Selection):
             overhang=True,
             )
 
+    def hleaf(
+        self,
+        n: int = 0,
+        *,
+        exclude: typings.Strings = None,
+        ) -> typing.Union[abjad.Leaf, abjad.Expression]:
+        r"""
+        Selects haupt leaf ``n``.
+
+        ..  container:: example
+
+            Selects haupt leaf 1:
+
+            ..  container:: example
+
+                >>> staff = abjad.Staff("c'8 d'8 e'8 f'8")
+                >>> container = abjad.GraceContainer("cf''16 bf'16")
+                >>> abjad.attach(container, staff[1])
+                >>> container = abjad.AfterGraceContainer("af'16 gf'16")
+                >>> abjad.attach(container, staff[1])
+                >>> abjad.setting(staff).auto_beaming = False
+                >>> abjad.show(staff) # doctest: +SKIP
+
+                ..  docs::
+
+                    >>> abjad.f(staff)
+                    \new Staff
+                    \with
+                    {
+                        autoBeaming = ##f
+                    }
+                    {
+                        c'8
+                        \grace {
+                            cf''16
+                            bf'16
+                        }
+                        \afterGrace
+                        d'8
+                        {
+                            af'16
+                            gf'16
+                        }
+                        e'8
+                        f'8
+                    }
+
+                >>> baca.select(staff).hleaf(1)
+                Note("d'8")
+
+            ..  container:: example expression
+
+                >>> selector = baca.select().hleaf(1)
+                >>> result = selector(staff)
+
+                >>> selector.print(result)
+                Note("d'8")
+
+                >>> selector.color(result)
+                >>> abjad.show(staff) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(staff, strict=89)
+                \new Staff
+                \with
+                {
+                    autoBeaming = ##f
+                }
+                {
+                    c'8
+                    \grace {
+                        cf''16
+                        bf'16
+                    }
+                    \afterGrace
+                    \abjad-color-music #'green
+                    d'8
+                    {
+                        af'16
+                        gf'16
+                    }
+                    e'8
+                    f'8
+                }
+
+        """
+        if self._expression:
+            return self._update_expression(inspect.currentframe(), lone=True)
+        return self.hleaves(exclude=exclude)[n]
+
+    def hleaves(
+        self,
+        *,
+        exclude: typings.Strings = None,
+        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        r"""
+        Selects haupt leaves.
+
+        ..  container:: example
+
+            Selects haupt leaves:
+
+            ..  container:: example
+
+                >>> staff = abjad.Staff("c'8 d'8 e'8 f'8")
+                >>> container = abjad.GraceContainer("cf''16 bf'16")
+                >>> abjad.attach(container, staff[1])
+                >>> container = abjad.AfterGraceContainer("af'16 gf'16")
+                >>> abjad.attach(container, staff[1])
+                >>> abjad.setting(staff).auto_beaming = False
+                >>> abjad.show(staff) # doctest: +SKIP
+
+                ..  docs::
+
+                    >>> abjad.f(staff)
+                    \new Staff
+                    \with
+                    {
+                        autoBeaming = ##f
+                    }
+                    {
+                        c'8
+                        \grace {
+                            cf''16
+                            bf'16
+                        }
+                        \afterGrace
+                        d'8
+                        {
+                            af'16
+                            gf'16
+                        }
+                        e'8
+                        f'8
+                    }
+
+                >>> result = baca.select(staff).hleaves()
+
+                >>> for item in result:
+                ...     item
+                ...
+                Note("c'8")
+                Note("d'8")
+                Note("e'8")
+                Note("f'8")
+
+            ..  container:: example expression
+
+                >>> selector = baca.select().hleaves()
+                >>> result = selector(staff)
+
+                >>> selector.print(result)
+                Note("c'8")
+                Note("d'8")
+                Note("e'8")
+                Note("f'8")
+
+                >>> selector.color(result)
+                >>> abjad.show(staff) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(staff, strict=89)
+                \new Staff
+                \with
+                {
+                    autoBeaming = ##f
+                }
+                {
+                    \abjad-color-music #'red
+                    c'8
+                    \grace {
+                        cf''16
+                        bf'16
+                    }
+                    \afterGrace
+                    \abjad-color-music #'blue
+                    d'8
+                    {
+                        af'16
+                        gf'16
+                    }
+                    \abjad-color-music #'red
+                    e'8
+                    \abjad-color-music #'blue
+                    f'8
+                }
+
+        """
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        return self.leaves(exclude=exclude, grace_notes=False)
+
     def lleaf(
         self,
         n: int = 0,

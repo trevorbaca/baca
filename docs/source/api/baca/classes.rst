@@ -528,6 +528,8 @@ classes
       clparts
       cmgroups
       enchain
+      hleaf
+      hleaves
       lleaf
       lleak
       lleaves
@@ -731,6 +733,10 @@ classes
    .. container:: inherited
 
       .. automethod:: Selection.group_by_pitch
+
+   .. automethod:: Selection.hleaf
+
+   .. automethod:: Selection.hleaves
 
    .. container:: inherited
 

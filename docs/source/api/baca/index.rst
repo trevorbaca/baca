@@ -101,6 +101,8 @@ baca
    ~group_by_length
    ~group_by_measure
    ~group_by_pitch
+   ~hleaf
+   ~hleaves
    ~index
    ~items
    ~leaf
@@ -216,6 +218,10 @@ baca
 .. autofunction:: group_by_measure
 
 .. autofunction:: group_by_pitch
+
+.. autofunction:: hleaf
+
+.. autofunction:: hleaves
 
 .. autofunction:: index
 

@@ -49,6 +49,8 @@ Bača API
    ~baca.group_by_length
    ~baca.group_by_measure
    ~baca.group_by_pitch
+   ~baca.hleaf
+   ~baca.hleaves
    ~baca.index
    ~baca.items
    ~baca.leaf
