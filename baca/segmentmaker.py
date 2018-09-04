@@ -1417,7 +1417,8 @@ class SegmentMaker(abjad.SegmentMaker):
             measure_timespans.append(measure_timespan)
         self._cache = abjad.OrderedDict()
         for leaf in abjad.select(self.score).leaves():
-            context = abjad.inspect(leaf).parentage().get(abjad.Context)
+            parentage = abjad.inspect(leaf).parentage(grace_notes=True)
+            context = parentage.get(abjad.Context)
             leaves_by_measure_number = self._cache.setdefault(
                 context.name,
                 abjad.OrderedDict()

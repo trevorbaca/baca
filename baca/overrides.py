@@ -7874,7 +7874,7 @@ def tie_up(
 def time_signature_extra_offset(
     pair: typings.NumberPair,
     *,
-    selector: typings.Selector = 'baca.leaf(0)',
+    selector: typings.Selector = 'baca.hleaf(0)',
     tag: typing.Optional[str] = 'baca_time_signature_extra_offset',
     ) -> OverrideCommand:
     r"""
