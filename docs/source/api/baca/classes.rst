@@ -528,6 +528,8 @@ classes
       clparts
       cmgroups
       enchain
+      grace
+      graces
       hleaf
       hleaves
       lleaf
@@ -705,6 +707,10 @@ classes
    .. container:: inherited
 
       .. automethod:: Selection.flatten
+
+   .. automethod:: Selection.grace
+
+   .. automethod:: Selection.graces
 
    .. container:: inherited
 

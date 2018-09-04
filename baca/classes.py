@@ -2311,6 +2311,200 @@ class Selection(abjad.Selection):
             overhang=True,
             )
 
+    def grace(
+        self,
+        n: int = 0,
+        *,
+        exclude: typings.Strings = None,
+        ) -> typing.Union[abjad.Leaf, abjad.Expression]:
+        r"""
+        Selects grace ``n``.
+
+        ..  container:: example
+
+            Selects grace -1:
+
+            ..  container:: example
+
+                >>> staff = abjad.Staff("c'8 d'8 e'8 f'8")
+                >>> container = abjad.GraceContainer("cf''16 bf'16")
+                >>> abjad.attach(container, staff[1])
+                >>> container = abjad.AfterGraceContainer("af'16 gf'16")
+                >>> abjad.attach(container, staff[1])
+                >>> abjad.setting(staff).auto_beaming = False
+                >>> abjad.show(staff) # doctest: +SKIP
+
+                ..  docs::
+
+                    >>> abjad.f(staff)
+                    \new Staff
+                    \with
+                    {
+                        autoBeaming = ##f
+                    }
+                    {
+                        c'8
+                        \grace {
+                            cf''16
+                            bf'16
+                        }
+                        \afterGrace
+                        d'8
+                        {
+                            af'16
+                            gf'16
+                        }
+                        e'8
+                        f'8
+                    }
+
+                >>> baca.select(staff).grace(-1)
+                Note("gf'16")
+
+            ..  container:: example expression
+
+                >>> selector = baca.select().grace(-1)
+                >>> result = selector(staff)
+
+                >>> selector.print(result)
+                Note("gf'16")
+
+                >>> selector.color(result)
+                >>> abjad.show(staff) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(staff, strict=89)
+                \new Staff
+                \with
+                {
+                    autoBeaming = ##f
+                }
+                {
+                    c'8
+                    \grace {
+                        cf''16
+                        bf'16
+                    }
+                    \afterGrace
+                    d'8
+                    {
+                        af'16
+                        \abjad-color-music #'green
+                        gf'16
+                    }
+                    e'8
+                    f'8
+                }
+
+        """
+        if self._expression:
+            return self._update_expression(inspect.currentframe(), lone=True)
+        return self.graces(exclude=exclude)[n]
+
+    def graces(
+        self,
+        *,
+        exclude: typings.Strings = None,
+        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        r"""
+        Selects graces.
+
+        ..  container:: example
+
+            Selects graces:
+
+            ..  container:: example
+
+                >>> staff = abjad.Staff("c'8 d'8 e'8 f'8")
+                >>> container = abjad.GraceContainer("cf''16 bf'16")
+                >>> abjad.attach(container, staff[1])
+                >>> container = abjad.AfterGraceContainer("af'16 gf'16")
+                >>> abjad.attach(container, staff[1])
+                >>> abjad.setting(staff).auto_beaming = False
+                >>> abjad.show(staff) # doctest: +SKIP
+
+                ..  docs::
+
+                    >>> abjad.f(staff)
+                    \new Staff
+                    \with
+                    {
+                        autoBeaming = ##f
+                    }
+                    {
+                        c'8
+                        \grace {
+                            cf''16
+                            bf'16
+                        }
+                        \afterGrace
+                        d'8
+                        {
+                            af'16
+                            gf'16
+                        }
+                        e'8
+                        f'8
+                    }
+
+                >>> result = baca.select(staff).graces()
+
+                >>> for item in result:
+                ...     item
+                ...
+                Note("cf''16")
+                Note("bf'16")
+                Note("af'16")
+                Note("gf'16")
+
+            ..  container:: example expression
+
+                >>> selector = baca.select().graces()
+                >>> result = selector(staff)
+
+                >>> selector.print(result)
+                Note("cf''16")
+                Note("bf'16")
+                Note("af'16")
+                Note("gf'16")
+
+                >>> selector.color(result)
+                >>> abjad.show(staff) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(staff, strict=89)
+                \new Staff
+                \with
+                {
+                    autoBeaming = ##f
+                }
+                {
+                    c'8
+                    \grace {
+                        \abjad-color-music #'red
+                        cf''16
+                        \abjad-color-music #'blue
+                        bf'16
+                    }
+                    \afterGrace
+                    d'8
+                    {
+                        \abjad-color-music #'red
+                        af'16
+                        \abjad-color-music #'blue
+                        gf'16
+                    }
+                    e'8
+                    f'8
+                }
+
+        """
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        return self.leaves(exclude=exclude, grace_notes=True)
+
     def hleaf(
         self,
         n: int = 0,

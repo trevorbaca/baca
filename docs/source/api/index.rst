@@ -42,6 +42,8 @@ Bača API
    ~baca.filter_pitches
    ~baca.filter_preprolated
    ~baca.flatten
+   ~baca.grace
+   ~baca.graces
    ~baca.group
    ~baca.group_by
    ~baca.group_by_contiguity

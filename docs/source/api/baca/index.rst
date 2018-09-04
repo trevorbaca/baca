@@ -94,6 +94,8 @@ baca
    ~filter_pitches
    ~filter_preprolated
    ~flatten
+   ~grace
+   ~graces
    ~group
    ~group_by
    ~group_by_contiguity
@@ -204,6 +206,10 @@ baca
 .. autofunction:: filter_preprolated
 
 .. autofunction:: flatten
+
+.. autofunction:: grace
+
+.. autofunction:: graces
 
 .. autofunction:: group
 
