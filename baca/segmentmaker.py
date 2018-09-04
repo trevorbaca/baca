@@ -4422,7 +4422,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \acciaccatura {
                 <BLANKLINE>
                                             fs'16
-                                            [                                                            %! ACC_1
+                                            [                                                            %! AcciaccaturaSpecifier
                 <BLANKLINE>
                                             d'16
                 <BLANKLINE>
@@ -4433,8 +4433,10 @@ class SegmentMaker(abjad.SegmentMaker):
                                             a'16
                 <BLANKLINE>
                                             af'16
-                                            ]                                                            %! ACC_1
+                                            ]                                                            %! AcciaccaturaSpecifier
+                <BLANKLINE>
                                         }
+                <BLANKLINE>
                                         c'8.
                 <BLANKLINE>
                                     }
@@ -4460,7 +4462,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \acciaccatura {
                 <BLANKLINE>
                                             bf'16
-                                            [                                                            %! ACC_1
+                                            [                                                            %! AcciaccaturaSpecifier
                 <BLANKLINE>
                                             g'16
                 <BLANKLINE>
@@ -4469,8 +4471,10 @@ class SegmentMaker(abjad.SegmentMaker):
                                             af'16
                 <BLANKLINE>
                                             c'16
-                                            ]                                                            %! ACC_1
+                                            ]                                                            %! AcciaccaturaSpecifier
+                <BLANKLINE>
                                         }
+                <BLANKLINE>
                                         f'8.
                 <BLANKLINE>
                                     }
@@ -4611,7 +4615,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                             \baca-unregistered-pitch-warning                             %! _color_unregistered_pitches
                                             fs'16
-                                            [                                                            %! ACC_1
+                                            [                                                            %! AcciaccaturaSpecifier
                 <BLANKLINE>
                                             \baca-unregistered-pitch-warning                             %! _color_unregistered_pitches
                                             d'16
@@ -4627,8 +4631,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                             \baca-unregistered-pitch-warning                             %! _color_unregistered_pitches
                                             af'16
-                                            ]                                                            %! ACC_1
+                                            ]                                                            %! AcciaccaturaSpecifier
+                <BLANKLINE>
                                         }
+                <BLANKLINE>
                                         \baca-unregistered-pitch-warning                                 %! _color_unregistered_pitches
                                         c'8.
                 <BLANKLINE>
@@ -4657,7 +4663,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                             \baca-unregistered-pitch-warning                             %! _color_unregistered_pitches
                                             bf'16
-                                            [                                                            %! ACC_1
+                                            [                                                            %! AcciaccaturaSpecifier
                 <BLANKLINE>
                                             \baca-unregistered-pitch-warning                             %! _color_unregistered_pitches
                                             g'16
@@ -4670,8 +4676,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                             \baca-unregistered-pitch-warning                             %! _color_unregistered_pitches
                                             c'16
-                                            ]                                                            %! ACC_1
+                                            ]                                                            %! AcciaccaturaSpecifier
+                <BLANKLINE>
                                         }
+                <BLANKLINE>
                                         \baca-unregistered-pitch-warning                                 %! _color_unregistered_pitches
                                         f'8.
                 <BLANKLINE>

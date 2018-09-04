@@ -80,42 +80,42 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                     \scaleDurations #'(1 . 1) {
                         \acciaccatura {
                             fs''16
-                            [                                                                        %! ACC_1
+                            [                                                                        %! AcciaccaturaSpecifier
                             e''16
-                            ]                                                                        %! ACC_1
+                            ]                                                                        %! AcciaccaturaSpecifier
                         }
                         ef''8
                     }
                     \scaleDurations #'(1 . 1) {
                         \acciaccatura {
                             af''16
-                            [                                                                        %! ACC_1
+                            [                                                                        %! AcciaccaturaSpecifier
                             g''16
                             a'16
-                            ]                                                                        %! ACC_1
+                            ]                                                                        %! AcciaccaturaSpecifier
                         }
                         c'8
                     }
                     \scaleDurations #'(1 . 1) {
                         \acciaccatura {
                             d'16
-                            [                                                                        %! ACC_1
+                            [                                                                        %! AcciaccaturaSpecifier
                             bf'16
                             fs''16
                             e''16
-                            ]                                                                        %! ACC_1
+                            ]                                                                        %! AcciaccaturaSpecifier
                         }
                         ef''8
                     }
                     \scaleDurations #'(1 . 1) {
                         \acciaccatura {
                             af''16
-                            [                                                                        %! ACC_1
+                            [                                                                        %! AcciaccaturaSpecifier
                             g''16
                             a'16
                             c'16
                             d'16
-                            ]                                                                        %! ACC_1
+                            ]                                                                        %! AcciaccaturaSpecifier
                         }
                         bf'8
                     }
@@ -181,7 +181,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                 abjad.attach(
                     abjad.Beam(),
                     acciaccatura_container[:],
-                    tag='ACC_1',
+                    tag='AcciaccaturaSpecifier',
                     )
             acciaccatura_containers.append(acciaccatura_container)
         assert len(acciaccatura_containers) == len(collection)
@@ -265,42 +265,42 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 fs''16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 e''16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 g''16
                                 a'16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             c'8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 bf'16
                                 fs''16
                                 e''16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 g''16
                                 a'16
                                 c'16
                                 d'16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             bf'8
                         }
@@ -367,42 +367,42 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 fs''8
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 e''8
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''8
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 g''8
                                 a'8
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             c'8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'8
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 bf'8
                                 fs''8
                                 e''8
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''8
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 g''8
                                 a'8
                                 c'8
                                 d'8
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             bf'8
                         }
@@ -480,42 +480,42 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 fs''16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 e''16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 g''16
                                 a'16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             c'8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 bf'16
                                 fs''16
                                 e''16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 g''16
                                 a'16
                                 c'16
                                 d'16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             bf'8
                         }
@@ -587,18 +587,18 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 fs''16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 e''16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 g''16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             a'8
                             [
@@ -608,9 +608,9 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 bf'16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             fs''8
                             [
@@ -621,9 +621,9 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 g''16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             a'8
                             [
@@ -699,9 +699,9 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 fs''16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 e''16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             ef''8
                         }
@@ -710,9 +710,9 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             [
                             \acciaccatura {
                                 g''16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 a'16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             c'8
                             ]
@@ -723,9 +723,9 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             bf'8
                             \acciaccatura {
                                 fs''16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 e''16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             ef''8
                             ]
@@ -737,9 +737,9 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             a'8
                             \acciaccatura {
                                 c'16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 d'16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             bf'8
                             ]
@@ -813,18 +813,18 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 fs''16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 e''16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 g''16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             a'8
                             [
@@ -834,9 +834,9 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 bf'16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             fs''8
                             [
@@ -849,17 +849,17 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 g''16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             a'8
                             [
                             \acciaccatura {
                                 c'16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 d'16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             bf'8
                             ]
@@ -940,9 +940,9 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             [
                             \acciaccatura {
                                 g''16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 a'16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             c'8
                             ]
@@ -952,10 +952,10 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             [
                             \acciaccatura {
                                 bf'16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 fs''16
                                 e''16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             ef''8
                             ]
@@ -965,11 +965,11 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             [
                             \acciaccatura {
                                 g''16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 a'16
                                 c'16
                                 d'16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             bf'8
                             ]
@@ -1048,42 +1048,42 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 fs''16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 e''16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 g''16
                                 a'16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             c'8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 bf'16
                                 fs''16
                                 e''16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 g''16
                                 a'16
                                 c'16
                                 d'16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             bf'8
                         }
@@ -1174,12 +1174,12 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 g''16
                                 a'16
                                 c'16
                                 d'16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             bf'8
                         }
@@ -1253,10 +1253,10 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 g''16
                                 a'16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             c'8
                         }
@@ -1272,12 +1272,12 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 g''16
                                 a'16
                                 c'16
                                 d'16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             bf'8
                         }
@@ -10141,42 +10141,42 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 fs''16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 e''16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             ef''4
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 g''16
                                 a'16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             c'4
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 bf'16
                                 fs''16
                                 e''16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             ef''4
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 g''16
                                 a'16
                                 c'16
                                 d'16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             bf'4
                         }
@@ -10244,55 +10244,55 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 bf'16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             r4
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 fs''16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 e''16
                                 ef''16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             r4
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 g''16
                                 a'16
                                 c'16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             r4
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 bf'16
                                 fs''16
                                 e''16
                                 ef''16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             r4
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! ACC_1
+                                [                                                                        %! AcciaccaturaSpecifier
                                 g''16
                                 a'16
                                 c'16
                                 d'16
                                 bf'16
-                                ]                                                                        %! ACC_1
+                                ]                                                                        %! AcciaccaturaSpecifier
                             }
                             r4
                         }
