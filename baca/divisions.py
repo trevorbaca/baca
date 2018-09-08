@@ -3035,7 +3035,7 @@ class PartitionDivisionCallback(object):
             baca.PartitionDivisionCallback()
 
         """
-        return super().__format__(format_specification=format_specification)
+        return abjad.StorageFormatManager(self).get_storage_format()
 
     def __repr__(self) -> str:
         """
