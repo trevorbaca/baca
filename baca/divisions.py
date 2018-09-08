@@ -897,7 +897,7 @@ class Division(abjad.NonreducedFraction):
                     lhs -= 1
             number += 1
 
-class DivisionMaker(abjad.AbjadValueObject):
+class DivisionMaker(object):
     r"""
     Division-maker.
 
@@ -1219,6 +1219,12 @@ class DivisionMaker(abjad.AbjadValueObject):
             argument = callback(argument)
         result, start_offset = self._to_divisions(argument)
         return result
+
+    def __repr__(self) -> str:
+        """
+        Gets interpreter representation.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
 
     ### PRIVATE METHODS ###
 
@@ -2176,7 +2182,7 @@ class DivisionSequenceExpression(abjad.Expression):
         assert isinstance(expression, DivisionSequenceExpression)
         return expression
 
-class FlattenDivisionCallback(abjad.AbjadValueObject):
+class FlattenDivisionCallback(object):
     """
     Flatten division callback.
     """
@@ -2211,7 +2217,7 @@ class FlattenDivisionCallback(abjad.AbjadValueObject):
         """
         return self._depth
 
-class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
+class FuseByCountsDivisionCallback(object):
     r"""
     Fuse-by-counts division callback.
 
@@ -2809,7 +2815,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
         """
         return self._secondary_division_maker
 
-class PartitionDivisionCallback(abjad.AbjadValueObject):
+class PartitionDivisionCallback(object):
     """
     Partition division callback.
 
@@ -3041,7 +3047,7 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
             PartitionDivisionCallback()
 
         """
-        return super().__repr__()
+        return abjad.StorageFormatManager(self).get_repr_format()
 
     ### PRIVATE METHODS ###
 
@@ -3461,7 +3467,7 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
         """
         return self._remainder_direction
 
-class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
+class SplitByDurationsDivisionCallback(object):
     r"""
     Split-by-durations division callback.
 
@@ -3941,6 +3947,12 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             start_offset
             )
         return division_lists
+
+    def __repr__(self) -> str:
+        """
+        Gets interpreter representation.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
 
     ### PRIVATE METHODS ###
 
@@ -4820,7 +4832,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             divisions=divisions,
             )
 
-class SplitByRoundedRatiosDivisionCallback(abjad.AbjadValueObject):
+class SplitByRoundedRatiosDivisionCallback(object):
     """
     Split-by-rounded-ratios division callback.
 

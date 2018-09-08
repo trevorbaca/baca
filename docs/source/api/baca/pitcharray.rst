@@ -44,10 +44,12 @@ pitcharray
       __contains__
       __copy__
       __eq__
+      __format__
       __getitem__
       __hash__
       __iadd__
       __ne__
+      __repr__
       __setitem__
       __str__
       append_column
@@ -95,9 +97,7 @@ pitcharray
 
    .. automethod:: PitchArray.__eq__
 
-   .. container:: inherited
-
-      .. automethod:: PitchArray.__format__
+   .. automethod:: PitchArray.__format__
 
    .. automethod:: PitchArray.__getitem__
 
@@ -107,9 +107,7 @@ pitcharray
 
    .. automethod:: PitchArray.__ne__
 
-   .. container:: inherited
-
-      .. automethod:: PitchArray.__repr__
+   .. automethod:: PitchArray.__repr__
 
    .. automethod:: PitchArray.__setitem__
 
@@ -346,19 +344,11 @@ pitcharray
 
    .. automethod:: PitchArrayColumn.__eq__
 
-   .. container:: inherited
-
-      .. automethod:: PitchArrayColumn.__format__
-
    .. automethod:: PitchArrayColumn.__getitem__
 
    .. automethod:: PitchArrayColumn.__hash__
 
    .. automethod:: PitchArrayColumn.__ne__
-
-   .. container:: inherited
-
-      .. automethod:: PitchArrayColumn.__repr__
 
    .. automethod:: PitchArrayColumn.__str__
 

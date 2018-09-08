@@ -5,7 +5,7 @@ import typing
 
 ### CLASSES ###
 
-class Accelerando(abjad.AbjadValueObject):
+class Accelerando(object):
     r"""
     Accelerando.
 
@@ -70,6 +70,24 @@ class Accelerando(abjad.AbjadValueObject):
         self._markup = markup
 
     ### SPECIAL METHODS ###
+
+    def __eq__(self, argument) -> bool:
+        """
+        Is true when all initialization values of Abjad value object equal
+        the initialization values of ``argument``.
+        """
+        return abjad.StorageFormatManager.compare_objects(self, argument)
+
+    def __hash__(self) -> int:
+        """
+        Hashes Abjad value object.
+        """
+        hash_values = abjad.StorageFormatManager(self).get_hash_values()
+        try:
+            result = hash(hash_values)
+        except TypeError:
+            raise TypeError(f'unhashable type: {self}')
+        return result
 
     def __str__(self) -> str:
         r"""
@@ -245,7 +263,7 @@ class Markup(abjad.Markup):
         """
         return self.box().override(('box-padding', 0.5))
 
-class Ritardando(abjad.AbjadValueObject):
+class Ritardando(object):
     r"""
     Ritardando.
 
@@ -346,6 +364,24 @@ class Ritardando(abjad.AbjadValueObject):
         self._markup = markup
 
     ### SPECIAL METHODS ###
+
+    def __eq__(self, argument) -> bool:
+        """
+        Is true when all initialization values of Abjad value object equal
+        the initialization values of ``argument``.
+        """
+        return abjad.StorageFormatManager.compare_objects(self, argument)
+
+    def __hash__(self) -> int:
+        """
+        Hashes Abjad value object.
+        """
+        hash_values = abjad.StorageFormatManager(self).get_hash_values()
+        try:
+            result = hash(hash_values)
+        except TypeError:
+            raise TypeError(f'unhashable type: {self}')
+        return result
 
     def __str__(self) -> str:
         r"""

@@ -1292,7 +1292,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
         """
         return self._pattern
 
-class AnchorSpecifier(abjad.AbjadValueObject):
+class AnchorSpecifier(object):
     """
     Anchor specifier.
 
@@ -1350,6 +1350,38 @@ class AnchorSpecifier(abjad.AbjadValueObject):
         if use_remote_stop_offset is not None:
             use_remote_stop_offset = bool(use_remote_stop_offset)
         self._use_remote_stop_offset = use_remote_stop_offset
+
+    ### SPECIAL METHODS ###
+
+    def __eq__(self, argument) -> bool:
+        """
+        Is true when all initialization values of Abjad value object equal
+        the initialization values of ``argument``.
+        """
+        return abjad.StorageFormatManager.compare_objects(self, argument)
+
+    def __format__(self, format_specification='') -> str:
+        """
+        Formats Abjad object.
+        """
+        return abjad.StorageFormatManager(self).get_storage_format()
+
+    def __hash__(self) -> int:
+        """
+        Hashes Abjad value object.
+        """
+        hash_values = abjad.StorageFormatManager(self).get_hash_values()
+        try:
+            result = hash(hash_values)
+        except TypeError:
+            raise TypeError(f'unhashable type: {self}')
+        return result
+
+    def __repr__(self) -> str:
+        """
+        Gets interpreter representation.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
 
     ### PUBLIC PROPERTIES ###
 
@@ -5489,7 +5521,7 @@ class MusicAccumulator(abjad.AbjadObject):
             pitched_staff=True,
             )
 
-class MusicContribution(abjad.AbjadValueObject):
+class MusicContribution(object):
     """
     Music contribution.
 
@@ -5559,6 +5591,12 @@ class MusicContribution(abjad.AbjadValueObject):
         """
         for voice_name in self.selections:
             yield voice_name
+
+    def __repr__(self) -> str:
+        """
+        Gets interpreter representation.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
 
     ### PRIVATE METHODS ###
 
@@ -12720,7 +12758,7 @@ class PitchSpecifier(abjad.AbjadObject):
         """
         return self._to_pitch_classes
 
-class RestAffixSpecifier(abjad.AbjadValueObject):
+class RestAffixSpecifier(object):
     r"""
     Rest affix specifier.
 
@@ -12986,6 +13024,36 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
         elif self.pattern.matches_index(collection_index, total_collections):
             return self.prefix, self.suffix
         return None, None
+
+    def __eq__(self, argument) -> bool:
+        """
+        Is true when all initialization values of Abjad value object equal
+        the initialization values of ``argument``.
+        """
+        return abjad.StorageFormatManager.compare_objects(self, argument)
+
+    def __format__(self, format_specification='') -> str:
+        """
+        Formats Abjad object.
+        """
+        return abjad.StorageFormatManager(self).get_storage_format()
+
+    def __hash__(self) -> int:
+        """
+        Hashes Abjad value object.
+        """
+        hash_values = abjad.StorageFormatManager(self).get_hash_values()
+        try:
+            result = hash(hash_values)
+        except TypeError:
+            raise TypeError(f'unhashable type: {self}')
+        return result
+
+    def __repr__(self) -> str:
+        """
+        Gets interpreter representation.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
 
     ### PUBLIC PROPERTIES ###
 

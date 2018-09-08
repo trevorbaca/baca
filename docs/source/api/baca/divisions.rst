@@ -321,6 +321,7 @@ divisions
       :nosignatures:
 
       __call__
+      __repr__
       append_callback
       callbacks
       flatten
@@ -339,21 +340,7 @@ divisions
 
    .. automethod:: DivisionMaker.__call__
 
-   .. container:: inherited
-
-      .. automethod:: DivisionMaker.__eq__
-
-   .. container:: inherited
-
-      .. automethod:: DivisionMaker.__format__
-
-   .. container:: inherited
-
-      .. automethod:: DivisionMaker.__hash__
-
-   .. container:: inherited
-
-      .. automethod:: DivisionMaker.__repr__
+   .. automethod:: DivisionMaker.__repr__
 
    .. raw:: html
 
@@ -886,22 +873,6 @@ divisions
 
    .. automethod:: FlattenDivisionCallback.__call__
 
-   .. container:: inherited
-
-      .. automethod:: FlattenDivisionCallback.__eq__
-
-   .. container:: inherited
-
-      .. automethod:: FlattenDivisionCallback.__format__
-
-   .. container:: inherited
-
-      .. automethod:: FlattenDivisionCallback.__hash__
-
-   .. container:: inherited
-
-      .. automethod:: FlattenDivisionCallback.__repr__
-
    .. raw:: html
 
       <hr/>
@@ -936,22 +907,6 @@ divisions
       :class: class-header
 
    .. automethod:: FuseByCountsDivisionCallback.__call__
-
-   .. container:: inherited
-
-      .. automethod:: FuseByCountsDivisionCallback.__eq__
-
-   .. container:: inherited
-
-      .. automethod:: FuseByCountsDivisionCallback.__format__
-
-   .. container:: inherited
-
-      .. automethod:: FuseByCountsDivisionCallback.__hash__
-
-   .. container:: inherited
-
-      .. automethod:: FuseByCountsDivisionCallback.__repr__
 
    .. raw:: html
 
@@ -995,15 +950,7 @@ divisions
 
    .. automethod:: PartitionDivisionCallback.__call__
 
-   .. container:: inherited
-
-      .. automethod:: PartitionDivisionCallback.__eq__
-
    .. automethod:: PartitionDivisionCallback.__format__
-
-   .. container:: inherited
-
-      .. automethod:: PartitionDivisionCallback.__hash__
 
    .. automethod:: PartitionDivisionCallback.__repr__
 
@@ -1035,6 +982,7 @@ divisions
       :nosignatures:
 
       __call__
+      __repr__
       compound_meter_multiplier
       cyclic
       durations
@@ -1052,21 +1000,7 @@ divisions
 
    .. automethod:: SplitByDurationsDivisionCallback.__call__
 
-   .. container:: inherited
-
-      .. automethod:: SplitByDurationsDivisionCallback.__eq__
-
-   .. container:: inherited
-
-      .. automethod:: SplitByDurationsDivisionCallback.__format__
-
-   .. container:: inherited
-
-      .. automethod:: SplitByDurationsDivisionCallback.__hash__
-
-   .. container:: inherited
-
-      .. automethod:: SplitByDurationsDivisionCallback.__repr__
+   .. automethod:: SplitByDurationsDivisionCallback.__repr__
 
    .. raw:: html
 
@@ -1119,22 +1053,6 @@ divisions
       :class: class-header
 
    .. automethod:: SplitByRoundedRatiosDivisionCallback.__call__
-
-   .. container:: inherited
-
-      .. automethod:: SplitByRoundedRatiosDivisionCallback.__eq__
-
-   .. container:: inherited
-
-      .. automethod:: SplitByRoundedRatiosDivisionCallback.__format__
-
-   .. container:: inherited
-
-      .. automethod:: SplitByRoundedRatiosDivisionCallback.__hash__
-
-   .. container:: inherited
-
-      .. automethod:: SplitByRoundedRatiosDivisionCallback.__repr__
 
    .. raw:: html
 

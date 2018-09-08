@@ -40,6 +40,8 @@ indicators
    .. autosummary::
       :nosignatures:
 
+      __eq__
+      __hash__
       __str__
       context
       hide
@@ -55,21 +57,9 @@ indicators
    .. rubric:: Special methods
       :class: class-header
 
-   .. container:: inherited
+   .. automethod:: Accelerando.__eq__
 
-      .. automethod:: Accelerando.__eq__
-
-   .. container:: inherited
-
-      .. automethod:: Accelerando.__format__
-
-   .. container:: inherited
-
-      .. automethod:: Accelerando.__hash__
-
-   .. container:: inherited
-
-      .. automethod:: Accelerando.__repr__
+   .. automethod:: Accelerando.__hash__
 
    .. automethod:: Accelerando.__str__
 
@@ -456,6 +446,8 @@ indicators
    .. autosummary::
       :nosignatures:
 
+      __eq__
+      __hash__
       __str__
       context
       hide
@@ -471,21 +463,9 @@ indicators
    .. rubric:: Special methods
       :class: class-header
 
-   .. container:: inherited
+   .. automethod:: Ritardando.__eq__
 
-      .. automethod:: Ritardando.__eq__
-
-   .. container:: inherited
-
-      .. automethod:: Ritardando.__format__
-
-   .. container:: inherited
-
-      .. automethod:: Ritardando.__hash__
-
-   .. container:: inherited
-
-      .. automethod:: Ritardando.__repr__
+   .. automethod:: Ritardando.__hash__
 
    .. automethod:: Ritardando.__str__
 

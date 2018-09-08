@@ -10,7 +10,7 @@ from . import classes
 
 ### CLASSES ###
 
-class PitchArray(abjad.AbjadObject):
+class PitchArray(object):
     """
     Pitch array.
 
@@ -156,6 +156,17 @@ class PitchArray(abjad.AbjadObject):
                 return True
         return False
 
+    def __format__(self, format_specification='') -> str:
+        """
+        Formats Abjad object.
+
+        Set ``format_specification`` to ``''`` or ``'storage'``.
+        Interprets ``''`` equal to ``'storage'``.
+        """
+        if format_specification in ('', 'storage'):
+            return abjad.StorageFormatManager(self).get_storage_format()
+        return str(self)
+
     def __getitem__(self, argument):
         """
         Gets row ``argument`` from pitch array.
@@ -222,6 +233,12 @@ class PitchArray(abjad.AbjadObject):
         """
         return not self == argument
 
+    def __repr__(self) -> str:
+        """
+        Gets interpreter representation.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
+
     def __setitem__(self, i, argument):
         """
         Sets pitch array row ``i`` to ``argument``.
@@ -264,6 +281,9 @@ class PitchArray(abjad.AbjadObject):
         result = [str(cell) for cell in cells]
         result = ' '.join(result)
         return result
+
+    def _get_format_specification(self):
+        return abjad.FormatSpecification(client=self)
 
     @staticmethod
     def _get_leaf_offsets(argment):
@@ -1627,7 +1647,7 @@ class PitchArrayCell(abjad.AbjadObject):
                     return True
         return False
 
-class PitchArrayColumn(abjad.AbjadValueObject):
+class PitchArrayColumn(object):
     """Pitch array column.
 
     ..  container:: example

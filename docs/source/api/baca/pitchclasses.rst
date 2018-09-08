@@ -53,6 +53,10 @@ pitchclasses
       :nosignatures:
 
       __call__
+      __eq__
+      __format__
+      __hash__
+      __repr__
       direction
       pattern
 
@@ -65,21 +69,13 @@ pitchclasses
 
    .. automethod:: ArpeggiationSpacingSpecifier.__call__
 
-   .. container:: inherited
+   .. automethod:: ArpeggiationSpacingSpecifier.__eq__
 
-      .. automethod:: ArpeggiationSpacingSpecifier.__eq__
+   .. automethod:: ArpeggiationSpacingSpecifier.__format__
 
-   .. container:: inherited
+   .. automethod:: ArpeggiationSpacingSpecifier.__hash__
 
-      .. automethod:: ArpeggiationSpacingSpecifier.__format__
-
-   .. container:: inherited
-
-      .. automethod:: ArpeggiationSpacingSpecifier.__hash__
-
-   .. container:: inherited
-
-      .. automethod:: ArpeggiationSpacingSpecifier.__repr__
+   .. automethod:: ArpeggiationSpacingSpecifier.__repr__
 
    .. raw:: html
 
@@ -105,6 +101,10 @@ pitchclasses
       :nosignatures:
 
       __call__
+      __eq__
+      __format__
+      __hash__
+      __repr__
       bass
       direction
       minimum_semitones
@@ -120,21 +120,13 @@ pitchclasses
 
    .. automethod:: ChordalSpacingSpecifier.__call__
 
-   .. container:: inherited
+   .. automethod:: ChordalSpacingSpecifier.__eq__
 
-      .. automethod:: ChordalSpacingSpecifier.__eq__
+   .. automethod:: ChordalSpacingSpecifier.__format__
 
-   .. container:: inherited
+   .. automethod:: ChordalSpacingSpecifier.__hash__
 
-      .. automethod:: ChordalSpacingSpecifier.__format__
-
-   .. container:: inherited
-
-      .. automethod:: ChordalSpacingSpecifier.__hash__
-
-   .. container:: inherited
-
-      .. automethod:: ChordalSpacingSpecifier.__repr__
+   .. automethod:: ChordalSpacingSpecifier.__repr__
 
    .. raw:: html
 
@@ -1626,6 +1618,10 @@ pitchclasses
       :nosignatures:
 
       __call__
+      __eq__
+      __format__
+      __hash__
+      __repr__
       components
 
    .. raw:: html
@@ -1637,21 +1633,13 @@ pitchclasses
 
    .. automethod:: Registration.__call__
 
-   .. container:: inherited
+   .. automethod:: Registration.__eq__
 
-      .. automethod:: Registration.__eq__
+   .. automethod:: Registration.__format__
 
-   .. container:: inherited
+   .. automethod:: Registration.__hash__
 
-      .. automethod:: Registration.__format__
-
-   .. container:: inherited
-
-      .. automethod:: Registration.__hash__
-
-   .. container:: inherited
-
-      .. automethod:: Registration.__repr__
+   .. automethod:: Registration.__repr__
 
    .. raw:: html
 
@@ -1677,6 +1665,7 @@ pitchclasses
       __eq__
       __format__
       __hash__
+      __repr__
       source_pitch_range
       target_octave_start_pitch
 
@@ -1693,9 +1682,7 @@ pitchclasses
 
    .. automethod:: RegistrationComponent.__hash__
 
-   .. container:: inherited
-
-      .. automethod:: RegistrationComponent.__repr__
+   .. automethod:: RegistrationComponent.__repr__
 
    .. raw:: html
 

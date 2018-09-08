@@ -94,6 +94,10 @@ mmaker
    .. autosummary::
       :nosignatures:
 
+      __eq__
+      __format__
+      __hash__
+      __repr__
       figure_name
       local_selector
       remote_selector
@@ -107,21 +111,13 @@ mmaker
    .. rubric:: Special methods
       :class: class-header
 
-   .. container:: inherited
+   .. automethod:: AnchorSpecifier.__eq__
 
-      .. automethod:: AnchorSpecifier.__eq__
+   .. automethod:: AnchorSpecifier.__format__
 
-   .. container:: inherited
+   .. automethod:: AnchorSpecifier.__hash__
 
-      .. automethod:: AnchorSpecifier.__format__
-
-   .. container:: inherited
-
-      .. automethod:: AnchorSpecifier.__hash__
-
-   .. container:: inherited
-
-      .. automethod:: AnchorSpecifier.__repr__
+   .. automethod:: AnchorSpecifier.__repr__
 
    .. raw:: html
 
@@ -448,6 +444,7 @@ mmaker
 
       __getitem__
       __iter__
+      __repr__
       anchor
       color_selector
       color_selector_result
@@ -465,25 +462,11 @@ mmaker
    .. rubric:: Special methods
       :class: class-header
 
-   .. container:: inherited
-
-      .. automethod:: MusicContribution.__eq__
-
-   .. container:: inherited
-
-      .. automethod:: MusicContribution.__format__
-
    .. automethod:: MusicContribution.__getitem__
-
-   .. container:: inherited
-
-      .. automethod:: MusicContribution.__hash__
 
    .. automethod:: MusicContribution.__iter__
 
-   .. container:: inherited
-
-      .. automethod:: MusicContribution.__repr__
+   .. automethod:: MusicContribution.__repr__
 
    .. raw:: html
 
@@ -835,6 +818,10 @@ mmaker
       :nosignatures:
 
       __call__
+      __eq__
+      __format__
+      __hash__
+      __repr__
       pattern
       prefix
       skips_instead_of_rests
@@ -849,21 +836,13 @@ mmaker
 
    .. automethod:: RestAffixSpecifier.__call__
 
-   .. container:: inherited
+   .. automethod:: RestAffixSpecifier.__eq__
 
-      .. automethod:: RestAffixSpecifier.__eq__
+   .. automethod:: RestAffixSpecifier.__format__
 
-   .. container:: inherited
+   .. automethod:: RestAffixSpecifier.__hash__
 
-      .. automethod:: RestAffixSpecifier.__format__
-
-   .. container:: inherited
-
-      .. automethod:: RestAffixSpecifier.__hash__
-
-   .. container:: inherited
-
-      .. automethod:: RestAffixSpecifier.__repr__
+   .. automethod:: RestAffixSpecifier.__repr__
 
    .. raw:: html
 

@@ -12,7 +12,7 @@ from . import classes
 
 ### CLASSES ###
 
-class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
+class ArpeggiationSpacingSpecifier(object):
     """
     Arpeggiation spacing specifier.
 
@@ -114,6 +114,36 @@ class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
             else:
                 collections_.append(collections[i])
         return CollectionList(collections_)
+
+    def __eq__(self, argument) -> bool:
+        """
+        Is true when all initialization values of Abjad value object equal
+        the initialization values of ``argument``.
+        """
+        return abjad.StorageFormatManager.compare_objects(self, argument)
+
+    def __format__(self, format_specification='') -> str:
+        """
+        Formats Abjad object.
+        """
+        return abjad.StorageFormatManager(self).get_storage_format()
+
+    def __hash__(self) -> int:
+        """
+        Hashes Abjad value object.
+        """
+        hash_values = abjad.StorageFormatManager(self).get_hash_values()
+        try:
+            result = hash(hash_values)
+        except TypeError:
+            raise TypeError(f'unhashable type: {self}')
+        return result
+
+    def __repr__(self) -> str:
+        """
+        Gets interpreter representation.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
 
     ### PUBLIC PROPERTIES ###
 
@@ -236,7 +266,7 @@ class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
         """
         return self._pattern
 
-class ChordalSpacingSpecifier(abjad.AbjadValueObject):
+class ChordalSpacingSpecifier(object):
     """
     Chordal spacing specifier.
 
@@ -357,6 +387,36 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
                 collection_ = self._space_collection(collection)
                 collections_.append(collection_)
         return CollectionList(collections_)
+
+    def __eq__(self, argument) -> bool:
+        """
+        Is true when all initialization values of Abjad value object equal
+        the initialization values of ``argument``.
+        """
+        return abjad.StorageFormatManager.compare_objects(self, argument)
+
+    def __format__(self, format_specification='') -> str:
+        """
+        Formats Abjad object.
+        """
+        return abjad.StorageFormatManager(self).get_storage_format()
+
+    def __hash__(self) -> int:
+        """
+        Hashes Abjad value object.
+        """
+        hash_values = abjad.StorageFormatManager(self).get_hash_values()
+        try:
+            result = hash(hash_values)
+        except TypeError:
+            raise TypeError(f'unhashable type: {self}')
+        return result
+
+    def __repr__(self) -> str:
+        """
+        Gets interpreter representation.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
 
     ### PRIVATE METHODS ###
 
@@ -749,7 +809,7 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
         """
         return self._soprano
 
-class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
+class CollectionList(collections_module.Sequence):
     """
     Collection list.
 
@@ -1082,7 +1142,7 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
 
         Returns string.
         """
-        return super().__format__()
+        return abjad.StorageFormatManager(self).get_storage_format()
 
     def __getitem__(self, argument):
         """
@@ -1258,6 +1318,9 @@ class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
         collections_ = [self._to_baca_collection(_) for _ in collections_]
         assert all(isinstance(_, prototype) for _ in collections_)
         return collections_
+
+    def _get_format_specification(self):
+        return abjad.FormatSpecification(client=self)
 
     def _get_pitch_class_class(self):
         item_class = self.item_class or abjad.NumberedPitch
@@ -9161,7 +9224,7 @@ class PitchTreeSpanner(abjad.Spanner):
         """
         return self._level
 
-class Registration(abjad.AbjadValueObject):
+class Registration(object):
     """
     Registration.
 
@@ -9266,6 +9329,36 @@ class Registration(abjad.AbjadValueObject):
         """
         return [self._transpose_pitch(_) for _ in pitches]
 
+    def __eq__(self, argument) -> bool:
+        """
+        Is true when all initialization values of Abjad value object equal
+        the initialization values of ``argument``.
+        """
+        return abjad.StorageFormatManager.compare_objects(self, argument)
+
+    def __format__(self, format_specification='') -> str:
+        """
+        Formats Abjad object.
+        """
+        return abjad.StorageFormatManager(self).get_storage_format()
+
+    def __hash__(self) -> int:
+        """
+        Hashes Abjad value object.
+        """
+        hash_values = abjad.StorageFormatManager(self).get_hash_values()
+        try:
+            result = hash(hash_values)
+        except TypeError:
+            raise TypeError(f'unhashable type: {self}')
+        return result
+
+    def __repr__(self) -> str:
+        """
+        Gets interpreter representation.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
+
     ### PRIVATE METHODS ###
 
     def _transpose_pitch(self, pitch):
@@ -9300,7 +9393,7 @@ class Registration(abjad.AbjadValueObject):
         """
         return self._components
 
-class RegistrationComponent(abjad.AbjadValueObject):
+class RegistrationComponent(object):
     """
     Registration component.
 
@@ -9349,7 +9442,7 @@ class RegistrationComponent(abjad.AbjadValueObject):
 
         Returns true or false.
         """
-        return super().__eq__(argument)
+        return abjad.StorageFormatManager.compare_objects(self, argument)
 
     def __format__(self, format_specification=''):
         """
@@ -9369,7 +9462,23 @@ class RegistrationComponent(abjad.AbjadValueObject):
 
         Returns integer.
         """
-        return super().__hash__()
+        hash_values = abjad.StorageFormatManager(self).get_hash_values()
+        try:
+            result = hash(hash_values)
+        except TypeError:
+            raise TypeError(f'unhashable type: {self}')
+        return result
+
+    def __repr__(self) -> str:
+        """
+        Gets interpreter representation.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
+
+    ### PRIVATE METHODS ###
+
+    def _get_format_specification(self):
+        return abjad.FormatSpecification(client=self)
 
     ### PUBLIC PROPERTIES ###
 
