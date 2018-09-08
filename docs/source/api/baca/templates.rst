@@ -61,22 +61,6 @@ templates
 
    .. container:: inherited
 
-      .. automethod:: ScoreTemplate.__copy__
-
-   .. container:: inherited
-
-      .. automethod:: ScoreTemplate.__eq__
-
-   .. container:: inherited
-
-      .. automethod:: ScoreTemplate.__format__
-
-   .. container:: inherited
-
-      .. automethod:: ScoreTemplate.__hash__
-
-   .. container:: inherited
-
       .. automethod:: ScoreTemplate.__illustrate__
 
    .. container:: inherited
@@ -159,22 +143,6 @@ templates
       :class: class-header
 
    .. automethod:: SingleStaffScoreTemplate.__call__
-
-   .. container:: inherited
-
-      .. automethod:: SingleStaffScoreTemplate.__copy__
-
-   .. container:: inherited
-
-      .. automethod:: SingleStaffScoreTemplate.__eq__
-
-   .. container:: inherited
-
-      .. automethod:: SingleStaffScoreTemplate.__format__
-
-   .. container:: inherited
-
-      .. automethod:: SingleStaffScoreTemplate.__hash__
 
    .. container:: inherited
 
@@ -275,22 +243,6 @@ templates
 
    .. container:: inherited
 
-      .. automethod:: StringTrioScoreTemplate.__copy__
-
-   .. container:: inherited
-
-      .. automethod:: StringTrioScoreTemplate.__eq__
-
-   .. container:: inherited
-
-      .. automethod:: StringTrioScoreTemplate.__format__
-
-   .. container:: inherited
-
-      .. automethod:: StringTrioScoreTemplate.__hash__
-
-   .. container:: inherited
-
       .. automethod:: StringTrioScoreTemplate.__illustrate__
 
    .. container:: inherited
@@ -388,22 +340,6 @@ templates
 
    .. container:: inherited
 
-      .. automethod:: TwoVoiceStaffScoreTemplate.__copy__
-
-   .. container:: inherited
-
-      .. automethod:: TwoVoiceStaffScoreTemplate.__eq__
-
-   .. container:: inherited
-
-      .. automethod:: TwoVoiceStaffScoreTemplate.__format__
-
-   .. container:: inherited
-
-      .. automethod:: TwoVoiceStaffScoreTemplate.__hash__
-
-   .. container:: inherited
-
       .. automethod:: TwoVoiceStaffScoreTemplate.__illustrate__
 
    .. container:: inherited
@@ -498,22 +434,6 @@ templates
       :class: class-header
 
    .. automethod:: ViolinSoloScoreTemplate.__call__
-
-   .. container:: inherited
-
-      .. automethod:: ViolinSoloScoreTemplate.__copy__
-
-   .. container:: inherited
-
-      .. automethod:: ViolinSoloScoreTemplate.__eq__
-
-   .. container:: inherited
-
-      .. automethod:: ViolinSoloScoreTemplate.__format__
-
-   .. container:: inherited
-
-      .. automethod:: ViolinSoloScoreTemplate.__hash__
 
    .. container:: inherited
 

@@ -393,10 +393,6 @@ rhythmcommands
 
    .. container:: inherited
 
-      .. automethod:: SkipRhythmMaker.__copy__
-
-   .. container:: inherited
-
       .. automethod:: SkipRhythmMaker.__eq__
 
    .. automethod:: SkipRhythmMaker.__format__

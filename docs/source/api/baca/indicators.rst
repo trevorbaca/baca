@@ -57,10 +57,6 @@ indicators
 
    .. container:: inherited
 
-      .. automethod:: Accelerando.__copy__
-
-   .. container:: inherited
-
       .. automethod:: Accelerando.__eq__
 
    .. container:: inherited
@@ -474,10 +470,6 @@ indicators
 
    .. rubric:: Special methods
       :class: class-header
-
-   .. container:: inherited
-
-      .. automethod:: Ritardando.__copy__
 
    .. container:: inherited
 

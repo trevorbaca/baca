@@ -341,10 +341,6 @@ divisions
 
    .. container:: inherited
 
-      .. automethod:: DivisionMaker.__copy__
-
-   .. container:: inherited
-
       .. automethod:: DivisionMaker.__eq__
 
    .. container:: inherited
@@ -426,10 +422,6 @@ divisions
    .. container:: inherited
 
       .. automethod:: DivisionSequence.__contains__
-
-   .. container:: inherited
-
-      .. automethod:: DivisionSequence.__copy__
 
    .. container:: inherited
 
@@ -665,10 +657,6 @@ divisions
 
    .. container:: inherited
 
-      .. automethod:: DivisionSequenceExpression.__copy__
-
-   .. container:: inherited
-
       .. automethod:: DivisionSequenceExpression.__eq__
 
    .. container:: inherited
@@ -900,10 +888,6 @@ divisions
 
    .. container:: inherited
 
-      .. automethod:: FlattenDivisionCallback.__copy__
-
-   .. container:: inherited
-
       .. automethod:: FlattenDivisionCallback.__eq__
 
    .. container:: inherited
@@ -952,10 +936,6 @@ divisions
       :class: class-header
 
    .. automethod:: FuseByCountsDivisionCallback.__call__
-
-   .. container:: inherited
-
-      .. automethod:: FuseByCountsDivisionCallback.__copy__
 
    .. container:: inherited
 
@@ -1017,10 +997,6 @@ divisions
 
    .. container:: inherited
 
-      .. automethod:: PartitionDivisionCallback.__copy__
-
-   .. container:: inherited
-
       .. automethod:: PartitionDivisionCallback.__eq__
 
    .. automethod:: PartitionDivisionCallback.__format__
@@ -1075,10 +1051,6 @@ divisions
       :class: class-header
 
    .. automethod:: SplitByDurationsDivisionCallback.__call__
-
-   .. container:: inherited
-
-      .. automethod:: SplitByDurationsDivisionCallback.__copy__
 
    .. container:: inherited
 
@@ -1147,10 +1119,6 @@ divisions
       :class: class-header
 
    .. automethod:: SplitByRoundedRatiosDivisionCallback.__call__
-
-   .. container:: inherited
-
-      .. automethod:: SplitByRoundedRatiosDivisionCallback.__copy__
 
    .. container:: inherited
 

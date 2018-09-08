@@ -109,10 +109,6 @@ mmaker
 
    .. container:: inherited
 
-      .. automethod:: AnchorSpecifier.__copy__
-
-   .. container:: inherited
-
       .. automethod:: AnchorSpecifier.__eq__
 
    .. container:: inherited
@@ -468,10 +464,6 @@ mmaker
 
    .. rubric:: Special methods
       :class: class-header
-
-   .. container:: inherited
-
-      .. automethod:: MusicContribution.__copy__
 
    .. container:: inherited
 
@@ -859,10 +851,6 @@ mmaker
 
    .. container:: inherited
 
-      .. automethod:: RestAffixSpecifier.__copy__
-
-   .. container:: inherited
-
       .. automethod:: RestAffixSpecifier.__eq__
 
    .. container:: inherited
@@ -989,10 +977,6 @@ mmaker
       :class: class-header
 
    .. automethod:: PitchFirstRhythmMaker.__call__
-
-   .. container:: inherited
-
-      .. automethod:: PitchFirstRhythmMaker.__copy__
 
    .. container:: inherited
 

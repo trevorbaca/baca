@@ -199,10 +199,6 @@ classes
 
    .. container:: inherited
 
-      .. automethod:: Expression.__copy__
-
-   .. container:: inherited
-
       .. automethod:: Expression.__eq__
 
    .. container:: inherited
@@ -593,10 +589,6 @@ classes
 
    .. container:: inherited
 
-      .. automethod:: Selection.__copy__
-
-   .. container:: inherited
-
       .. automethod:: Selection.__eq__
 
    .. container:: inherited
@@ -957,10 +949,6 @@ classes
    .. container:: inherited
 
       .. automethod:: Sequence.__contains__
-
-   .. container:: inherited
-
-      .. automethod:: Sequence.__copy__
 
    .. container:: inherited
 

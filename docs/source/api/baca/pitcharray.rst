@@ -344,10 +344,6 @@ pitcharray
    .. rubric:: Special methods
       :class: class-header
 
-   .. container:: inherited
-
-      .. automethod:: PitchArrayColumn.__copy__
-
    .. automethod:: PitchArrayColumn.__eq__
 
    .. container:: inherited

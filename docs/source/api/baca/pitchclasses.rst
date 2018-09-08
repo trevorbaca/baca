@@ -67,10 +67,6 @@ pitchclasses
 
    .. container:: inherited
 
-      .. automethod:: ArpeggiationSpacingSpecifier.__copy__
-
-   .. container:: inherited
-
       .. automethod:: ArpeggiationSpacingSpecifier.__eq__
 
    .. container:: inherited
@@ -123,10 +119,6 @@ pitchclasses
       :class: class-header
 
    .. automethod:: ChordalSpacingSpecifier.__call__
-
-   .. container:: inherited
-
-      .. automethod:: ChordalSpacingSpecifier.__copy__
 
    .. container:: inherited
 
@@ -224,10 +216,6 @@ pitchclasses
    .. container:: inherited
 
       .. automethod:: CollectionList.__contains__
-
-   .. container:: inherited
-
-      .. automethod:: CollectionList.__copy__
 
    .. automethod:: CollectionList.__eq__
 
@@ -1651,10 +1639,6 @@ pitchclasses
 
    .. container:: inherited
 
-      .. automethod:: Registration.__copy__
-
-   .. container:: inherited
-
       .. automethod:: Registration.__eq__
 
    .. container:: inherited
@@ -1702,10 +1686,6 @@ pitchclasses
 
    .. rubric:: Special methods
       :class: class-header
-
-   .. container:: inherited
-
-      .. automethod:: RegistrationComponent.__copy__
 
    .. automethod:: RegistrationComponent.__eq__
 
