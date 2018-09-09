@@ -355,10 +355,6 @@ pitchclasses
 
    .. automethod:: Constellation.__contains__
 
-   .. container:: inherited
-
-      .. automethod:: Constellation.__format__
-
    .. automethod:: Constellation.__getitem__
 
    .. automethod:: Constellation.__len__
@@ -452,10 +448,6 @@ pitchclasses
    .. rubric:: Special methods
       :class: class-header
 
-   .. container:: inherited
-
-      .. automethod:: ConstellationCircuit.__format__
-
    .. automethod:: ConstellationCircuit.__getitem__
 
    .. automethod:: ConstellationCircuit.__len__
@@ -516,6 +508,7 @@ pitchclasses
       :nosignatures:
 
       __call__
+      __repr__
       partition
       partition_cyclic
 
@@ -528,13 +521,7 @@ pitchclasses
 
    .. automethod:: DesignMaker.__call__
 
-   .. container:: inherited
-
-      .. automethod:: DesignMaker.__format__
-
-   .. container:: inherited
-
-      .. automethod:: DesignMaker.__repr__
+   .. automethod:: DesignMaker.__repr__
 
    .. raw:: html
 
@@ -570,15 +557,7 @@ pitchclasses
    .. rubric:: Special methods
       :class: class-header
 
-   .. container:: inherited
-
-      .. automethod:: HarmonicSeries.__format__
-
    .. automethod:: HarmonicSeries.__illustrate__
-
-   .. container:: inherited
-
-      .. automethod:: HarmonicSeries.__repr__
 
    .. raw:: html
 
@@ -610,6 +589,7 @@ pitchclasses
    .. autosummary::
       :nosignatures:
 
+      __repr__
       approximation
       deviation
       fundamental
@@ -622,13 +602,7 @@ pitchclasses
    .. rubric:: Special methods
       :class: class-header
 
-   .. container:: inherited
-
-      .. automethod:: Partial.__format__
-
-   .. container:: inherited
-
-      .. automethod:: Partial.__repr__
+   .. automethod:: Partial.__repr__
 
    .. raw:: html
 
@@ -1725,15 +1699,7 @@ pitchclasses
 
    .. automethod:: ZaggedPitchClassMaker.__eq__
 
-   .. container:: inherited
-
-      .. automethod:: ZaggedPitchClassMaker.__format__
-
    .. automethod:: ZaggedPitchClassMaker.__hash__
-
-   .. container:: inherited
-
-      .. automethod:: ZaggedPitchClassMaker.__repr__
 
    .. raw:: html
 

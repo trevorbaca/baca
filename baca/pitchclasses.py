@@ -2899,7 +2899,7 @@ class CollectionList(collections_module.Sequence):
             collections_.append(collection_)
         return abjad.new(self, collections=collections_)
 
-class Constellation(abjad.AbjadObject):
+class Constellation(object):
     """
     Constellation.
 
@@ -3342,7 +3342,7 @@ class Constellation(abjad.AbjadObject):
         self._label_chord(pivot)
         self._show_chords([pivot])
 
-class ConstellationCircuit(abjad.AbjadObject):
+class ConstellationCircuit(object):
     """
     Constellation circuit.
 
@@ -3913,7 +3913,7 @@ class ConstellationCircuit(abjad.AbjadObject):
         """
         return class_(class_.CC1, abjad.PitchRange('[A0, C8]'))
 
-class DesignMaker(abjad.AbjadObject):
+class DesignMaker(object):
     """
     Design-maker.
 
@@ -3948,6 +3948,12 @@ class DesignMaker(abjad.AbjadObject):
         design = PitchTree(items=self._result)
         self._check_duplicate_pitch_classes(design)
         return design
+
+    def __repr__(self):
+        """
+        Gets interpreter representation.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
 
     ### PRIVATE METHODS ###
 
@@ -4024,7 +4030,7 @@ class DesignMaker(abjad.AbjadObject):
         parts = [PitchClassSegment(_) for _ in parts]
         self._result.extend(parts)
 
-class HarmonicSeries(abjad.AbjadObject):
+class HarmonicSeries(object):
     r"""
     Harmonic series.
 
@@ -4273,7 +4279,7 @@ class HarmonicSeries(abjad.AbjadObject):
             number=n,
             )
 
-class Partial(abjad.AbjadObject):
+class Partial(object):
     """
     Partial.
 
@@ -4314,6 +4320,14 @@ class Partial(abjad.AbjadObject):
         deviation_cents = 100 * deviation_semitones
         deviation = round(deviation_cents)
         self._deviation = deviation
+
+    ### SPECIAL METHODS ###
+
+    def __repr__(self):
+        """
+        Gets interpret representation.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
 
     ### PUBLIC PROPERTIES ###
 
@@ -9516,7 +9530,7 @@ class RegistrationComponent(object):
         """
         return self._target_octave_start_pitch
 
-class ZaggedPitchClassMaker(abjad.AbjadObject):
+class ZaggedPitchClassMaker(object):
     r"""
     Zagged-pitch-class-maker.
 
