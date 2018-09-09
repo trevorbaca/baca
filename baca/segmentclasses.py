@@ -10,7 +10,7 @@ from . import typings
 
 ### CLASSES ###
 
-class BreakMeasureMap(abjad.AbjadObject):
+class BreakMeasureMap(object):
     r"""
     Breaks measure map.
 
@@ -383,7 +383,7 @@ class BreakMeasureMap(abjad.AbjadObject):
         assert scoping.Command._validate_tags(self._tags), repr(self._tags)
         return self._tags[:]
 
-class HorizontalSpacingSpecifier(abjad.AbjadObject):
+class HorizontalSpacingSpecifier(object):
     r"""
     Horizontal spacing specifier.
 
@@ -1899,7 +1899,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             message = f'measures must be int, pair or list (not {measures!r}).'
             raise TypeError(message)
 
-class LBSD(abjad.AbjadObject):
+class LBSD(object):
     """
     Line-break system details.
     """
@@ -1955,7 +1955,7 @@ class LBSD(abjad.AbjadObject):
         """
         return self._y_offset
 
-class PageSpecifier(abjad.AbjadObject):
+class PageSpecifier(object):
     """
     Page specifier.
     """
@@ -2011,7 +2011,7 @@ class PageSpecifier(abjad.AbjadObject):
         """
         return self._systems
 
-class SystemSpecifier(abjad.AbjadObject):
+class SystemSpecifier(object):
     """
     System specifier.
     """
@@ -2072,7 +2072,7 @@ class SystemSpecifier(abjad.AbjadObject):
         """
         return self._y_offset
 
-class TimeSignatureMaker(abjad.AbjadObject):
+class TimeSignatureMaker(object):
     """
     Time-signature-maker.
 

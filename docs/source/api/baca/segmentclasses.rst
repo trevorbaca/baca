@@ -60,14 +60,6 @@ segmentclasses
 
    .. automethod:: BreakMeasureMap.__call__
 
-   .. container:: inherited
-
-      .. automethod:: BreakMeasureMap.__format__
-
-   .. container:: inherited
-
-      .. automethod:: BreakMeasureMap.__repr__
-
    .. raw:: html
 
       <hr/>
@@ -126,14 +118,6 @@ segmentclasses
       :class: class-header
 
    .. automethod:: HorizontalSpacingSpecifier.__call__
-
-   .. container:: inherited
-
-      .. automethod:: HorizontalSpacingSpecifier.__format__
-
-   .. container:: inherited
-
-      .. automethod:: HorizontalSpacingSpecifier.__repr__
 
    .. raw:: html
 
@@ -194,21 +178,6 @@ segmentclasses
 
       <hr/>
 
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. container:: inherited
-
-      .. automethod:: LBSD.__format__
-
-   .. container:: inherited
-
-      .. automethod:: LBSD.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
    .. rubric:: Read-only properties
       :class: class-header
 
@@ -230,21 +199,6 @@ segmentclasses
 
       number
       systems
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. container:: inherited
-
-      .. automethod:: PageSpecifier.__format__
-
-   .. container:: inherited
-
-      .. automethod:: PageSpecifier.__repr__
 
    .. raw:: html
 
@@ -277,21 +231,6 @@ segmentclasses
 
       <hr/>
 
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. container:: inherited
-
-      .. automethod:: SystemSpecifier.__format__
-
-   .. container:: inherited
-
-      .. automethod:: SystemSpecifier.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
    .. rubric:: Read-only properties
       :class: class-header
 
@@ -318,21 +257,6 @@ segmentclasses
       rotation
       run
       time_signatures
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. container:: inherited
-
-      .. automethod:: TimeSignatureMaker.__format__
-
-   .. container:: inherited
-
-      .. automethod:: TimeSignatureMaker.__repr__
 
    .. raw:: html
 
