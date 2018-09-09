@@ -61,14 +61,6 @@ mmaker
 
    .. automethod:: AcciaccaturaSpecifier.__call__
 
-   .. container:: inherited
-
-      .. automethod:: AcciaccaturaSpecifier.__format__
-
-   .. container:: inherited
-
-      .. automethod:: AcciaccaturaSpecifier.__repr__
-
    .. raw:: html
 
       <hr/>
@@ -149,21 +141,6 @@ mmaker
       :nosignatures:
 
       argument
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. container:: inherited
-
-      .. automethod:: Coat.__format__
-
-   .. container:: inherited
-
-      .. automethod:: Coat.__repr__
 
    .. raw:: html
 
@@ -321,14 +298,6 @@ mmaker
 
    .. automethod:: LMRSpecifier.__call__
 
-   .. container:: inherited
-
-      .. automethod:: LMRSpecifier.__format__
-
-   .. container:: inherited
-
-      .. automethod:: LMRSpecifier.__repr__
-
    .. raw:: html
 
       <hr/>
@@ -388,14 +357,6 @@ mmaker
       :class: class-header
 
    .. automethod:: MusicAccumulator.__call__
-
-   .. container:: inherited
-
-      .. automethod:: MusicAccumulator.__format__
-
-   .. container:: inherited
-
-      .. automethod:: MusicAccumulator.__repr__
 
    .. raw:: html
 
@@ -529,14 +490,6 @@ mmaker
       :class: class-header
 
    .. automethod:: MusicMaker.__call__
-
-   .. container:: inherited
-
-      .. automethod:: MusicMaker.__format__
-
-   .. container:: inherited
-
-      .. automethod:: MusicMaker.__repr__
 
    .. raw:: html
 
@@ -783,10 +736,6 @@ mmaker
       :class: class-header
 
    .. automethod:: PitchSpecifier.__call__
-
-   .. container:: inherited
-
-      .. automethod:: PitchSpecifier.__format__
 
    .. automethod:: PitchSpecifier.__repr__
 

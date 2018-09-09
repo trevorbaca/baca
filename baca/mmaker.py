@@ -16,7 +16,7 @@ from . import typings
 
 ### CLASSES ###
 
-class AcciaccaturaSpecifier(abjad.AbjadObject):
+class AcciaccaturaSpecifier(object):
     r"""
     Acciaccatura specifier.
 
@@ -1438,7 +1438,7 @@ class AnchorSpecifier(object):
         """
         return self._use_remote_stop_offset
 
-class Coat(abjad.AbjadObject):
+class Coat(object):
     """
     Coat.
     """
@@ -4273,7 +4273,7 @@ class ImbricationCommand(scoping.Command):
         """
         return self._voice_name
 
-class LMRSpecifier(abjad.AbjadObject):
+class LMRSpecifier(object):
     """
     Left-middle-right specifier.
 
@@ -5196,7 +5196,7 @@ class LMRSpecifier(abjad.AbjadObject):
         """
         return self._right_reversed
 
-class MusicAccumulator(abjad.AbjadObject):
+class MusicAccumulator(object):
     """
     Music-accumulator.
     """
@@ -5701,7 +5701,7 @@ class MusicContribution(object):
             return
         self.color_selector.print(self.color_selector_result)
 
-class MusicMaker(abjad.AbjadObject):
+class MusicMaker(object):
     r"""
     Music-maker.
 
@@ -12259,7 +12259,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             time_signatures=time_signatures,
             )
 
-class PitchSpecifier(abjad.AbjadObject):
+class PitchSpecifier(object):
     r"""
     Pitch specifier.
 
@@ -12456,7 +12456,7 @@ class PitchSpecifier(abjad.AbjadObject):
 
         Returns string.
         """
-        return super().__repr__()
+        return abjad.StorageFormatManager(self).get_repr_format()
 
     ### PRIVATE METHODS ###
 
