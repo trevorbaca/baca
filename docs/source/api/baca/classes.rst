@@ -44,6 +44,7 @@ classes
       :nosignatures:
 
       __call__
+      __repr__
       current
       start
 
@@ -56,13 +57,7 @@ classes
 
    .. automethod:: Counter.__call__
 
-   .. container:: inherited
-
-      .. automethod:: Counter.__format__
-
-   .. container:: inherited
-
-      .. automethod:: Counter.__repr__
+   .. automethod:: Counter.__repr__
 
    .. raw:: html
 
@@ -92,6 +87,7 @@ classes
       __hash__
       __iter__
       __len__
+      __repr__
       cyclic
       from_pitch_class_segments
       is_exhausted
@@ -111,10 +107,6 @@ classes
 
    .. automethod:: Cursor.__eq__
 
-   .. container:: inherited
-
-      .. automethod:: Cursor.__format__
-
    .. automethod:: Cursor.__getitem__
 
    .. automethod:: Cursor.__hash__
@@ -123,9 +115,7 @@ classes
 
    .. automethod:: Cursor.__len__
 
-   .. container:: inherited
-
-      .. automethod:: Cursor.__repr__
+   .. automethod:: Cursor.__repr__
 
    .. raw:: html
 
@@ -418,6 +408,7 @@ classes
       __hash__
       __iter__
       __len__
+      __repr__
       items
       pad
 
@@ -432,10 +423,6 @@ classes
 
    .. automethod:: PaddedTuple.__eq__
 
-   .. container:: inherited
-
-      .. automethod:: PaddedTuple.__format__
-
    .. automethod:: PaddedTuple.__getitem__
 
    .. automethod:: PaddedTuple.__hash__
@@ -444,9 +431,7 @@ classes
 
    .. automethod:: PaddedTuple.__len__
 
-   .. container:: inherited
-
-      .. automethod:: PaddedTuple.__repr__
+   .. automethod:: PaddedTuple.__repr__
 
    .. raw:: html
 
@@ -473,21 +458,6 @@ classes
 
       dynamic_to_steady_state
       dynamics
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. container:: inherited
-
-      .. automethod:: SchemeManifest.__format__
-
-   .. container:: inherited
-
-      .. automethod:: SchemeManifest.__repr__
 
    .. raw:: html
 

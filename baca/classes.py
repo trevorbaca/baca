@@ -9,7 +9,7 @@ from . import typings
 
 ### CLASSES ###
 
-class Counter(abjad.AbjadObject):
+class Counter(object):
     """
     Counter.
 
@@ -91,6 +91,12 @@ class Counter(abjad.AbjadObject):
         self._current = current
         return count
 
+    def __repr__(self):
+        """
+        Gets interpret representation.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
+
     ### PUBLIC PROPERTIES ###
 
     @property
@@ -113,7 +119,7 @@ class Counter(abjad.AbjadObject):
         """
         return self._start
 
-class Cursor(abjad.AbjadObject):
+class Cursor(object):
     """
     Cursor.
 
@@ -295,6 +301,12 @@ class Cursor(abjad.AbjadObject):
         Returns nonnegative integer.
         """
         return len(self.source)
+
+    def __repr__(self):
+        """
+        Gets interpret representation.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
 
     ### PUBLIC PROPERTIES ###
 
@@ -1324,7 +1336,7 @@ class Expression(abjad.Expression):
             template='baca',
             )
 
-class PaddedTuple(abjad.AbjadObject):
+class PaddedTuple(object):
     """
     Padded tuple.
 
@@ -1497,6 +1509,12 @@ class PaddedTuple(abjad.AbjadObject):
         assert isinstance(self._items, tuple)
         return self._items.__len__()
 
+    def __repr__(self):
+        """
+        Gets interpret representation.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
+
     ### PRIVATE METHODS ###
 
     def _get_format_specification(self):
@@ -1662,7 +1680,7 @@ class PaddedTuple(abjad.AbjadObject):
         """
         return self._pad
 
-class SchemeManifest(abjad.AbjadObject):
+class SchemeManifest(object):
     """
     Scheme manifest.
 
@@ -9135,7 +9153,7 @@ class Sequence(abjad.Sequence):
                     return type(self)(items=items_)
         return type(self)(items=items_)
 
-class Tree(abjad.AbjadObject):
+class Tree(object):
     """
     Tree.
 
@@ -9418,7 +9436,7 @@ class Tree(abjad.AbjadObject):
 
         Returns string.
         """
-        return super().__format__(format_specification=format_specification)
+        return abjad.StorageFormatManager(self).get_storage_format()
 
     def __getitem__(self, argument):
         """
@@ -9599,7 +9617,7 @@ class Tree(abjad.AbjadObject):
 
         Returns string.
         """
-        return super().__repr__()
+        return abjad.StorageFormatManager(self).get_repr_format()
 
     ### PRIVATE PROPERTIES ###
 
@@ -9650,6 +9668,9 @@ class Tree(abjad.AbjadObject):
         for node in self._iterate_depth_first():
             levels.add(node._get_level())
         return max(levels) - self._get_level() + 1
+
+    def _get_format_specification(self):
+        return abjad.FormatSpecification(client=self)
 
     def _get_index_in_parent(self):
         if self._parent is not None:
