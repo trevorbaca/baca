@@ -9,7 +9,7 @@ from . import typings
 
 ### CLASSES ###
 
-class Scope(abjad.AbjadObject):
+class Scope(object):
     """
     Scope.
 
@@ -59,6 +59,25 @@ class Scope(abjad.AbjadObject):
             assert isinstance(voice_name, str), repr(voice_name)
         self._voice_name = voice_name
 
+    ### SPECIAL METHODS ###
+
+    def __format__(self, format_specification=''):
+        """
+        Formats object.
+        """
+        return abjad.StorageFormatManager(self).get_storage_format()
+
+    def __repr__(self):
+        """
+        Gets interpreter representation.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
+
+    ### PRIVATE METHODS ###
+
+    def _get_format_specification(self):
+        return abjad.FormatSpecification(client=self)
+
     ### PUBLIC PROPERTIES ###
 
     @property
@@ -75,7 +94,7 @@ class Scope(abjad.AbjadObject):
         """
         return self._voice_name
 
-class TimelineScope(abjad.AbjadObject):
+class TimelineScope(object):
     """
     Timeline scope.
 
@@ -143,6 +162,20 @@ class TimelineScope(abjad.AbjadObject):
             scopes = tuple(scopes)
         self._scopes = scopes
 
+    ### SPECIAL METHODS ###
+
+    def __format__(self, format_specification=''):
+        """
+        Formats object.
+        """
+        return abjad.StorageFormatManager(self).get_storage_format()
+
+    def __repr__(self):
+        """
+        Gets interpreter representation.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
+
     ### PRIVATE METHODS ###
 
     @staticmethod
@@ -187,7 +220,7 @@ ScopeTyping = typing.Union[
     TimelineScope,
     ]
 
-class Command(abjad.AbjadObject):
+class Command(object):
     """
     Command.
     """
@@ -266,6 +299,18 @@ class Command(abjad.AbjadObject):
         else:
             return self._call(argument=argument)
 
+    def __format__(self, format_specification=''):
+        """
+        Formats object.
+        """
+        return abjad.StorageFormatManager(self).get_storage_format()
+
+    def __repr__(self):
+        """
+        Gets interpreter representation.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
+
     ### PRIVATE METHODS ###
 
     @staticmethod
@@ -290,6 +335,9 @@ class Command(abjad.AbjadObject):
 
     def _call(self, argument=None):
         pass
+
+    def _get_format_specification(self):
+        return abjad.FormatSpecification(client=self)
 
     def _initialize_tags(self, tags):
         tags_ = []
@@ -537,7 +585,7 @@ class Command(abjad.AbjadObject):
         # TODO: return empty tag (instead of none)
         return None
 
-class Suite(abjad.AbjadObject):
+class Suite(object):
     """
     Suite.
 
@@ -688,11 +736,23 @@ class Suite(abjad.AbjadObject):
         for command in self.commands:
             command(argument, runtime=runtime)
 
+    def __format__(self, format_specification=''):
+        """
+        Formats object.
+        """
+        return abjad.StorageFormatManager(self).get_storage_format()
+
     def __iter__(self):
         """
         Iterates commands.
         """
         return iter(self.commands)
+
+    def __repr__(self):
+        """
+        Gets interpreter representation.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
 
     ### PRIVATE METHODS ###
 

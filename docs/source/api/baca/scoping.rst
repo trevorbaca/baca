@@ -40,6 +40,8 @@ scoping
       :nosignatures:
 
       __call__
+      __format__
+      __repr__
       deactivate
       get_tag
       map
@@ -61,13 +63,9 @@ scoping
 
    .. automethod:: Command.__call__
 
-   .. container:: inherited
+   .. automethod:: Command.__format__
 
-      .. automethod:: Command.__format__
-
-   .. container:: inherited
-
-      .. automethod:: Command.__repr__
+   .. automethod:: Command.__repr__
 
    .. raw:: html
 
@@ -117,6 +115,8 @@ scoping
    .. autosummary::
       :nosignatures:
 
+      __format__
+      __repr__
       measures
       voice_name
 
@@ -127,13 +127,9 @@ scoping
    .. rubric:: Special methods
       :class: class-header
 
-   .. container:: inherited
+   .. automethod:: Scope.__format__
 
-      .. automethod:: Scope.__format__
-
-   .. container:: inherited
-
-      .. automethod:: Scope.__repr__
+   .. automethod:: Scope.__repr__
 
    .. raw:: html
 
@@ -159,7 +155,9 @@ scoping
       :nosignatures:
 
       __call__
+      __format__
       __iter__
+      __repr__
       commands
 
    .. raw:: html
@@ -171,15 +169,11 @@ scoping
 
    .. automethod:: Suite.__call__
 
-   .. container:: inherited
-
-      .. automethod:: Suite.__format__
+   .. automethod:: Suite.__format__
 
    .. automethod:: Suite.__iter__
 
-   .. container:: inherited
-
-      .. automethod:: Suite.__repr__
+   .. automethod:: Suite.__repr__
 
    .. raw:: html
 
@@ -202,6 +196,8 @@ scoping
    .. autosummary::
       :nosignatures:
 
+      __format__
+      __repr__
       scopes
       voice_name
 
@@ -212,13 +208,9 @@ scoping
    .. rubric:: Special methods
       :class: class-header
 
-   .. container:: inherited
+   .. automethod:: TimelineScope.__format__
 
-      .. automethod:: TimelineScope.__format__
-
-   .. container:: inherited
-
-      .. automethod:: TimelineScope.__repr__
+   .. automethod:: TimelineScope.__repr__
 
    .. raw:: html
 
