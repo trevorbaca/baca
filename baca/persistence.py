@@ -1,7 +1,7 @@
 import abjad
 
 
-class PersistentIndicatorTests(abjad.AbjadObject):
+class PersistentIndicatorTests(object):
     """
     Persistent indicator tests.
     """

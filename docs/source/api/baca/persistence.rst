@@ -49,21 +49,6 @@ persistence
 
       <hr/>
 
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. container:: inherited
-
-      .. automethod:: PersistentIndicatorTests.__format__
-
-   .. container:: inherited
-
-      .. automethod:: PersistentIndicatorTests.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
    .. rubric:: Read-only properties
       :class: class-header
 

@@ -502,6 +502,7 @@ indicators
 
       __eq__
       __hash__
+      __repr__
       __str__
       duration
       from_string
@@ -515,15 +516,9 @@ indicators
 
    .. automethod:: SpacingSection.__eq__
 
-   .. container:: inherited
-
-      .. automethod:: SpacingSection.__format__
-
    .. automethod:: SpacingSection.__hash__
 
-   .. container:: inherited
-
-      .. automethod:: SpacingSection.__repr__
+   .. automethod:: SpacingSection.__repr__
 
    .. automethod:: SpacingSection.__str__
 
@@ -558,6 +553,7 @@ indicators
       :nosignatures:
 
       __eq__
+      __format__
       context
       hide
       line_count
@@ -572,13 +568,7 @@ indicators
 
    .. automethod:: StaffLines.__eq__
 
-   .. container:: inherited
-
-      .. automethod:: StaffLines.__format__
-
-   .. container:: inherited
-
-      .. automethod:: StaffLines.__repr__
+   .. automethod:: StaffLines.__format__
 
    .. raw:: html
 

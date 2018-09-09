@@ -204,6 +204,8 @@ pitcharray
    .. autosummary::
       :nosignatures:
 
+      __format__
+      __repr__
       __str__
       append_pitch
       column_indices
@@ -231,13 +233,9 @@ pitcharray
    .. rubric:: Special methods
       :class: class-header
 
-   .. container:: inherited
+   .. automethod:: PitchArrayCell.__format__
 
-      .. automethod:: PitchArrayCell.__format__
-
-   .. container:: inherited
-
-      .. automethod:: PitchArrayCell.__repr__
+   .. automethod:: PitchArrayCell.__repr__
 
    .. automethod:: PitchArrayCell.__str__
 
@@ -569,6 +567,7 @@ pitcharray
       __iter__
       __len__
       __ne__
+      __repr__
       __str__
       append
       apply_pitches
@@ -610,10 +609,6 @@ pitcharray
 
    .. automethod:: PitchArrayRow.__eq__
 
-   .. container:: inherited
-
-      .. automethod:: PitchArrayRow.__format__
-
    .. automethod:: PitchArrayRow.__getitem__
 
    .. automethod:: PitchArrayRow.__hash__
@@ -626,9 +621,7 @@ pitcharray
 
    .. automethod:: PitchArrayRow.__ne__
 
-   .. container:: inherited
-
-      .. automethod:: PitchArrayRow.__repr__
+   .. automethod:: PitchArrayRow.__repr__
 
    .. automethod:: PitchArrayRow.__str__
 

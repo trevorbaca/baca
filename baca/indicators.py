@@ -552,7 +552,7 @@ class Ritardando(object):
         """
         pass
 
-class StaffLines(abjad.AbjadObject):
+class StaffLines(object):
     """
     Staff lines.
     """
@@ -621,6 +621,12 @@ class StaffLines(abjad.AbjadObject):
         if not isinstance(argument, type(self)):
             return False
         return self.line_count == argument.line_count
+
+    def __format__(self, format_specification='') -> str:
+        """
+        Formats Abjad object.
+        """
+        return abjad.StorageFormatManager(self).get_storage_format()
 
     ### PRIVATE METHODS ###
 
@@ -707,7 +713,7 @@ class StaffLines(abjad.AbjadObject):
         """
         return self._persistent
 
-class SpacingSection(abjad.AbjadObject):
+class SpacingSection(object):
     r"""
     Spacing section.
 
@@ -789,16 +795,21 @@ class SpacingSection(abjad.AbjadObject):
         """
         if isinstance(argument, type(self)):
             return self.duration == argument.duration
+        return False
 
     def __hash__(self):
         """
         Hashes spacing section.
 
-        Required to be explicitly redefined on Python 3 if __eq__ changes.
-
-        Returns integer.
+        Redefined with ``__eq__()``.
         """
         return super().__hash__()
+
+    def __repr__(self) -> str:
+        """
+        Gets interpreter representation.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
 
     def __str__(self):
         """

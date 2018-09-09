@@ -11,7 +11,7 @@ from . import typings
 
 ### CLASSES ###
 
-class Bundle(abjad.AbjadObject):
+class Bundle(object):
     """
     Bundle.
     """
@@ -55,6 +55,12 @@ class Bundle(abjad.AbjadObject):
         Gets length.
         """
         return len(self.indicators)
+
+    def __repr__(self) -> str:
+        """
+        Gets interpreter representation.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
 
     ### PUBLIC PROPERTIES ###
 

@@ -39,6 +39,7 @@ piecewise
 
       __iter__
       __len__
+      __repr__
       bookended_spanner_start
       compound
       indicator
@@ -56,17 +57,11 @@ piecewise
    .. rubric:: Special methods
       :class: class-header
 
-   .. container:: inherited
-
-      .. automethod:: Bundle.__format__
-
    .. automethod:: Bundle.__iter__
 
    .. automethod:: Bundle.__len__
 
-   .. container:: inherited
-
-      .. automethod:: Bundle.__repr__
+   .. automethod:: Bundle.__repr__
 
    .. raw:: html
 

@@ -927,7 +927,7 @@ class PitchArray(object):
             containers.append(container)
         return containers
 
-class PitchArrayCell(abjad.AbjadObject):
+class PitchArrayCell(object):
     """
     Pitch array cell.
 
@@ -1115,6 +1115,18 @@ class PitchArrayCell(abjad.AbjadObject):
 
     ### SPECIAL METHODS ###
 
+    def __format__(self, format_specification='') -> str:
+        """
+        Formats Abjad object.
+        """
+        return abjad.StorageFormatManager(self).get_storage_format()
+
+    def __repr__(self) -> str:
+        """
+        Gets interpreter representation.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
+
     def __str__(self):
         """
         Gets string representation of pitch array cell.
@@ -1186,6 +1198,9 @@ class PitchArrayCell(abjad.AbjadObject):
         return 'x%s' % self.width
 
     ### PRIVATE METHODS ###
+
+    def _get_format_specification(self):
+        return abjad.FormatSpecification(client=self)
 
     def _parse_cell_token(self, cell_token):
         if cell_token is None:
@@ -2298,7 +2313,7 @@ class PitchArrayList(abjad.TypedList):
                 staff.append(measure)
         return score
 
-class PitchArrayRow(abjad.AbjadObject):
+class PitchArrayRow(object):
     """
     Pitch array row.
 
@@ -2535,6 +2550,12 @@ class PitchArrayRow(abjad.AbjadObject):
         """
         return not self == argument
 
+    def __repr__(self) -> str:
+        """
+        Gets interpreter representation.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
+
     def __str__(self):
         """
         Gets string representation of pitch array row.
@@ -2572,6 +2593,11 @@ class PitchArrayRow(abjad.AbjadObject):
             result.append(cell._format_row_column_repr_string)
         result = ', '.join(result)
         return result
+
+    ### PRIVATE METHODS ###
+
+    def _get_format_specification(self):
+        return abjad.FormatSpecification(client=self)
 
     ### PUBLIC PROPERTIES ###
 
