@@ -227,9 +227,8 @@ class SpannerIndicatorCommand(scoping.Command):
         With music-maker:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.SpannerCommand(
+        ...     baca.slur(
         ...         selector=baca.tuplet(1),
-        ...         spanner=abjad.Slur(),
         ...         ),
         ...     )
 
@@ -256,14 +255,14 @@ class SpannerIndicatorCommand(scoping.Command):
                         }
                         \scaleDurations #'(1 . 1) {
                             fs''16
+                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             [
-                            (                                                                        %! SpannerCommand
                             e''16
                             ef''16
                             af''16
                             g''16
+                            )                                                                        %! baca_slur:SpannerIndicatorCommand(2)
                             ]
-                            )                                                                        %! SpannerCommand
                         }
                         \scaleDurations #'(1 . 1) {
                             a'16
@@ -285,9 +284,8 @@ class SpannerIndicatorCommand(scoping.Command):
         ...     'Music_Voice',
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-        ...     baca.SpannerCommand(
+        ...     baca.slur(
         ...         selector=baca.leaves()[4:7],
-        ...         spanner=abjad.Slur(),
         ...         ),
         ...     )
 
@@ -355,14 +353,14 @@ class SpannerIndicatorCommand(scoping.Command):
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
+                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             [                                                                        %! baca_make_even_divisions
-                            (                                                                        %! SpannerCommand
             <BLANKLINE>
                             f''8                                                                     %! baca_make_even_divisions
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
+                            )                                                                        %! baca_slur:SpannerIndicatorCommand(2)
                             ]                                                                        %! baca_make_even_divisions
-                            )                                                                        %! SpannerCommand
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
