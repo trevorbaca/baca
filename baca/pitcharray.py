@@ -729,7 +729,6 @@ class PitchArray(object):
             parts = abjad.mutate(items).split(
                 durations,
                 cyclic=False,
-                fracture_spanners=False,
                 )
             part_lengths = [len(part) for part in parts]
             cells = pitch_array_row.cells
