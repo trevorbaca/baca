@@ -421,6 +421,7 @@ class Command(object):
             'MARGIN_MARKUP',
             'METRONOME_MARK',
             'PERSISTENT_OVERRIDE',
+            'SLUR',
             'STAFF_LINES',
             ), repr(stem)
         reapplied_wrappers = []
@@ -893,8 +894,8 @@ def new(
                             c'8                                                                      %! baca_make_even_divisions
                             - \marcato                                                               %! baca_marcato:IndicatorCommand
                             - \staccato                                                              %! baca_staccato:IndicatorCommand
+                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             [                                                                        %! baca_make_even_divisions
-                            (                                                                        %! baca_slur:SpannerCommand
             <BLANKLINE>
                             \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                             c'8                                                                      %! baca_make_even_divisions
@@ -928,8 +929,8 @@ def new(
                             c'8                                                                      %! baca_make_even_divisions
                             - \marcato                                                               %! baca_marcato:IndicatorCommand
                             - \staccato                                                              %! baca_staccato:IndicatorCommand
+                            )                                                                        %! baca_slur:SpannerIndicatorCommand(2)
                             ]                                                                        %! baca_make_even_divisions
-                            )                                                                        %! baca_slur:SpannerCommand
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             \baca-unpitched-music-warning                                            %! _color_unpitched_notes
@@ -1047,8 +1048,8 @@ def new(
                             c'8                                                                      %! baca_make_even_divisions
                             - \marcato                                                               %! baca_marcato:IndicatorCommand
                             - \staccato                                                              %! baca_staccato:IndicatorCommand
+                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             [                                                                        %! baca_make_even_divisions
-                            (                                                                        %! baca_slur:SpannerCommand
             <BLANKLINE>
                             \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                             c'8                                                                      %! baca_make_even_divisions
@@ -1082,8 +1083,8 @@ def new(
                             c'8                                                                      %! baca_make_even_divisions
                             - \marcato                                                               %! baca_marcato:IndicatorCommand
                             - \staccato                                                              %! baca_staccato:IndicatorCommand
+                            )                                                                        %! baca_slur:SpannerIndicatorCommand(2)
                             ]                                                                        %! baca_make_even_divisions
-                            )                                                                        %! baca_slur:SpannerCommand
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             \baca-unpitched-music-warning                                            %! _color_unpitched_notes

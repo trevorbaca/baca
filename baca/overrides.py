@@ -4971,21 +4971,21 @@ def slur_down(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
+                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             [
-                            (                                                                        %! baca_slur:SpannerCommand
                             d'16
                             ]
                             bf'4
                             ~
                             bf'16
-                            )                                                                        %! baca_slur:SpannerCommand
+                            )                                                                        %! baca_slur:SpannerIndicatorCommand(2)
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
+                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             [
-                            (                                                                        %! baca_slur:SpannerCommand
                             e''16
                             ]
                             ef''4
@@ -4995,8 +4995,8 @@ def slur_down(
                             af''16
                             [
                             g''16
+                            )                                                                        %! baca_slur:SpannerIndicatorCommand(2)
                             ]
-                            )                                                                        %! baca_slur:SpannerCommand
                         }
                         \times 4/5 {
                             a'16
@@ -5046,22 +5046,22 @@ def slur_down(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
+                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             [
-                            (                                                                        %! baca_slur:SpannerCommand
                             d'16
                             ]
                             bf'4
                             ~
                             bf'16
-                            )                                                                        %! baca_slur:SpannerCommand
+                            )                                                                        %! baca_slur:SpannerIndicatorCommand(2)
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             \override Slur.direction = #down                                         %! baca_slur_down:OverrideCommand(1)
                             fs''16
+                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             [
-                            (                                                                        %! baca_slur:SpannerCommand
                             e''16
                             ]
                             ef''4
@@ -5071,8 +5071,8 @@ def slur_down(
                             af''16
                             [
                             g''16
+                            )                                                                        %! baca_slur:SpannerIndicatorCommand(2)
                             ]
-                            )                                                                        %! baca_slur:SpannerCommand
                             \revert Slur.direction                                                   %! baca_slur_down:OverrideCommand(2)
                         }
                         \times 4/5 {
@@ -5141,21 +5141,21 @@ def slur_up(
                             r8
                             \override Stem.direction = #down                                         %! baca_stem_down:OverrideCommand(1)
                             c'16
+                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             [
-                            (                                                                        %! baca_slur:SpannerCommand
                             d'16
                             ]
                             bf'4
                             ~
                             bf'16
-                            )                                                                        %! baca_slur:SpannerCommand
+                            )                                                                        %! baca_slur:SpannerIndicatorCommand(2)
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
+                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             [
-                            (                                                                        %! baca_slur:SpannerCommand
                             e''16
                             ]
                             ef''4
@@ -5165,8 +5165,8 @@ def slur_up(
                             af''16
                             [
                             g''16
+                            )                                                                        %! baca_slur:SpannerIndicatorCommand(2)
                             ]
-                            )                                                                        %! baca_slur:SpannerCommand
                         }
                         \times 4/5 {
                             a'16
@@ -5222,22 +5222,22 @@ def slur_up(
                             r8
                             \override Stem.direction = #down                                         %! baca_stem_down:OverrideCommand(1)
                             c'16
+                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             [
-                            (                                                                        %! baca_slur:SpannerCommand
                             d'16
                             ]
                             bf'4
                             ~
                             bf'16
-                            )                                                                        %! baca_slur:SpannerCommand
+                            )                                                                        %! baca_slur:SpannerIndicatorCommand(2)
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             \override Slur.direction = #up                                           %! baca_slur_up:OverrideCommand(1)
                             fs''16
+                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             [
-                            (                                                                        %! baca_slur:SpannerCommand
                             e''16
                             ]
                             ef''4
@@ -5247,8 +5247,8 @@ def slur_up(
                             af''16
                             [
                             g''16
+                            )                                                                        %! baca_slur:SpannerIndicatorCommand(2)
                             ]
-                            )                                                                        %! baca_slur:SpannerCommand
                             \revert Slur.direction                                                   %! baca_slur_up:OverrideCommand(2)
                         }
                         \times 4/5 {

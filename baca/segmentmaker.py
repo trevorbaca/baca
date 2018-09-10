@@ -1727,8 +1727,11 @@ class SegmentMaker(abjad.SegmentMaker):
             dictionary = context._get_persistent_wrappers()
             for wrapper in dictionary.values():
                 leaf = wrapper.component
-                first_context = abjad.inspect(leaf).parentage().get(abjad.Context)
+                parentage = abjad.inspect(leaf).parentage()
+                first_context = parentage.get(abjad.Context)
                 indicator = wrapper.indicator
+                if isinstance(indicator, abjad.StopSlur):
+                    continue
                 if isinstance(indicator, abjad.StopTextSpan):
                     continue
                 prototype, manifest = None, None
@@ -3090,7 +3093,9 @@ class SegmentMaker(abjad.SegmentMaker):
         assert isinstance(leaf, abjad.Leaf), repr(wrapper)
         indicator = wrapper.indicator
         prototype = (
+            abjad.StartSlur,
             abjad.StartTextSpan,
+            abjad.StopSlur,
             abjad.StopTextSpan,
             )
         if isinstance(indicator, prototype):
@@ -6212,7 +6217,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._check_all_music_in_part_containers()
                 self._check_duplicate_part_assignments()
                 self._collect_metadata()
-                #self._parallelize_multimeasure_rests()
 
         count = int(timer.elapsed_time)
         seconds = abjad.String('second').pluralize(count)

@@ -7582,8 +7582,8 @@ class MusicMaker(object):
                             {
                                 \scaleDurations #'(1 . 1) {
                                     c'16
+                                    (                                                                    %! baca_slur:SpannerIndicatorCommand(1)
                                     [
-                                    (                                                                    %! baca_slur:SpannerCommand
                                     d'16
                                     bf'16
                                     fs''16
@@ -7602,8 +7602,8 @@ class MusicMaker(object):
                                     cs''16
                                     a'16
                                     af'16
+                                    )                                                                    %! baca_slur:SpannerIndicatorCommand(2)
                                     ]
-                                    )                                                                    %! baca_slur:SpannerCommand
                                 }
                             }
                         }
@@ -7653,32 +7653,32 @@ class MusicMaker(object):
                             {
                                 \scaleDurations #'(1 . 1) {
                                     c'16
+                                    (                                                                    %! baca_slur:SpannerIndicatorCommand(1)
                                     [
-                                    (                                                                    %! baca_slur:SpannerCommand
                                     d'16
                                     bf'16
                                     fs''16
+                                    )                                                                    %! baca_slur:SpannerIndicatorCommand(2)
                                     ]
-                                    )                                                                    %! baca_slur:SpannerCommand
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     e''16
+                                    (                                                                    %! baca_slur:SpannerIndicatorCommand(1)
                                     [
-                                    (                                                                    %! baca_slur:SpannerCommand
                                     ef''16
                                     b''16
+                                    )                                                                    %! baca_slur:SpannerIndicatorCommand(2)
                                     ]
-                                    )                                                                    %! baca_slur:SpannerCommand
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     g''16
+                                    (                                                                    %! baca_slur:SpannerIndicatorCommand(1)
                                     [
-                                    (                                                                    %! baca_slur:SpannerCommand
                                     cs''16
                                     a'16
                                     af'16
+                                    )                                                                    %! baca_slur:SpannerIndicatorCommand(2)
                                     ]
-                                    )                                                                    %! baca_slur:SpannerCommand
                                 }
                             }
                         }
@@ -7730,29 +7730,29 @@ class MusicMaker(object):
                             {
                                 \scaleDurations #'(1 . 1) {
                                     c'16
+                                    (                                                                    %! baca_slur:SpannerIndicatorCommand(1)
                                     [
-                                    (                                                                    %! baca_slur:SpannerCommand
                                     d'16
-                                    )                                                                    %! baca_slur:SpannerCommand
+                                    )                                                                    %! baca_slur:SpannerIndicatorCommand(2)
                                     bf'16
                                     fs''16
                                     ]
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     e''16
+                                    (                                                                    %! baca_slur:SpannerIndicatorCommand(1)
                                     [
-                                    (                                                                    %! baca_slur:SpannerCommand
                                     ef''16
-                                    )                                                                    %! baca_slur:SpannerCommand
+                                    )                                                                    %! baca_slur:SpannerIndicatorCommand(2)
                                     b''16
                                     ]
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     g''16
+                                    (                                                                    %! baca_slur:SpannerIndicatorCommand(1)
                                     [
-                                    (                                                                    %! baca_slur:SpannerCommand
                                     cs''16
-                                    )                                                                    %! baca_slur:SpannerCommand
+                                    )                                                                    %! baca_slur:SpannerIndicatorCommand(2)
                                     a'16
                                     af'16
                                     ]
@@ -7810,29 +7810,29 @@ class MusicMaker(object):
                                     [
                                     d'16
                                     bf'16
-                                    (                                                                    %! baca_slur:SpannerCommand
+                                    (                                                                    %! baca_slur:SpannerIndicatorCommand(1)
                                     fs''16
+                                    )                                                                    %! baca_slur:SpannerIndicatorCommand(2)
                                     ]
-                                    )                                                                    %! baca_slur:SpannerCommand
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     e''16
                                     [
                                     ef''16
-                                    (                                                                    %! baca_slur:SpannerCommand
+                                    (                                                                    %! baca_slur:SpannerIndicatorCommand(1)
                                     b''16
+                                    )                                                                    %! baca_slur:SpannerIndicatorCommand(2)
                                     ]
-                                    )                                                                    %! baca_slur:SpannerCommand
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     g''16
                                     [
                                     cs''16
                                     a'16
-                                    (                                                                    %! baca_slur:SpannerCommand
+                                    (                                                                    %! baca_slur:SpannerIndicatorCommand(1)
                                     af'16
+                                    )                                                                    %! baca_slur:SpannerIndicatorCommand(2)
                                     ]
-                                    )                                                                    %! baca_slur:SpannerCommand
                                 }
                             }
                         }

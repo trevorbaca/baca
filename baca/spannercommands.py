@@ -10,6 +10,217 @@ from . import typings
 class SpannerCommand(scoping.Command):
     r"""
     Spanner command.
+    """
+
+    ### CLASS VARIABLES ###
+
+    __slots__ = (
+        '_detach_first',
+        '_left_broken',
+        '_right_broken',
+        '_spanner',
+        '_tags',
+        '_tweaks',
+        )
+
+    ### INITIALIZER ###
+
+    def __init__(
+        self,
+        *,
+        deactivate: bool = None,
+        detach_first: bool = None,
+        left_broken: bool = None,
+        map: typings.Selector = None,
+        match: typings.Indices = None,
+        measures: typings.Slice = None,
+        right_broken: bool = None,
+        scope: scoping.ScopeTyping = None,
+        selector: typings.Selector = 'baca.leaves()',
+        spanner: abjad.Spanner = None,
+        tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
+        tweaks: typing.Tuple[typings.TweaksTyping, ...] = None,
+        ) -> None:
+        scoping.Command.__init__(
+            self,
+            deactivate=deactivate,
+            map=map,
+            match=match,
+            measures=measures,
+            scope=scope,
+            selector=selector,
+            tags=tags,
+            )
+        if detach_first is not None:
+            detach_first = bool(detach_first)
+        self._detach_first = detach_first
+        if left_broken is not None:
+            left_broken = bool(left_broken)
+        self._left_broken = left_broken
+        if right_broken is not None:
+            right_broken = bool(right_broken)
+        self._right_broken = right_broken
+        self._spanner = spanner
+        self._validate_tweaks(tweaks)
+        self._tweaks = tweaks
+
+    ### SPECIAL METHODS ###
+
+    def _call(self, argument=None):
+        """
+        Calls command on ``argument``.
+
+        Returns spanner (for handoff to piecewise command).
+        """
+        if argument is None:
+            return
+        if self.spanner is None:
+            return
+        if self.selector:
+            argument = self.selector(argument)
+        leaves = abjad.select(argument).leaves()
+        spanner = abjad.new(self.spanner)
+        if self.left_broken:
+            spanner = abjad.new(spanner, left_broken=self.left_broken)
+        if self.right_broken:
+            spanner = abjad.new(spanner, right_broken=self.right_broken)
+        self._apply_tweaks(spanner, self.tweaks)
+        if self.detach_first:
+            abjad.detach(
+                type(spanner),
+                leaves,
+                )
+        abjad.attach(
+            spanner,
+            leaves,
+            deactivate=self.deactivate,
+            tag=self.tag.append('SpannerCommand'),
+            )
+        return spanner
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def detach_first(self) -> typing.Optional[bool]:
+        """
+        Is true when command detaches existing spanners before attaching new
+        ones.
+        """
+        return self._detach_first
+
+    @property
+    def left_broken(self) -> typing.Optional[bool]:
+        """
+        Is true when spanner is left-broken.
+        """
+        return self._left_broken
+
+    @property
+    def right_broken(self) -> typing.Optional[bool]:
+        """
+        Is true when spanner is right-broken.
+        """
+        return self._right_broken
+
+    @property
+    def selector(self) -> typing.Optional[abjad.Expression]:
+        r"""
+        Gets selector.
+        """
+        return self._selector
+
+    @property
+    def spanner(self) -> typing.Optional[abjad.Spanner]:
+        r"""
+        Gets spanner.
+
+        ..  container:: example
+
+            Ties are smart enough to remove existing ties prior to attach:
+
+            >>> music_maker = baca.MusicMaker()
+
+            >>> contribution = music_maker(
+            ...     'Voice_1',
+            ...     [[14, 14, 14]],
+            ...     counts=[5],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {
+                            \scaleDurations #'(1 . 1) {
+                                d''4
+                                ~
+                                d''16
+                                d''4
+                                ~
+                                d''16
+                                d''4
+                                ~
+                                d''16
+                            }
+                        }
+                    }
+                >>
+
+            >>> contribution = music_maker(
+            ...     'Voice_1',
+            ...     [[14, 14, 14]],
+            ...     baca.SpannerCommand(spanner=abjad.Tie()),
+            ...     counts=[5],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {
+                            \scaleDurations #'(1 . 1) {
+                                d''4
+                                ~                                                                        %! SpannerCommand
+                                d''16
+                                ~                                                                        %! SpannerCommand
+                                d''4
+                                ~                                                                        %! SpannerCommand
+                                d''16
+                                ~                                                                        %! SpannerCommand
+                                d''4
+                                ~                                                                        %! SpannerCommand
+                                d''16
+                            }
+                        }
+                    }
+                >>
+
+        """
+        return self._spanner
+
+    @property
+    def tweaks(self) -> typing.Optional[
+        typing.Tuple[typings.TweaksTyping, ...]]:
+        """
+        Gets tweaks.
+        """
+        return self._tweaks
+
+class SpannerIndicatorCommand(scoping.Command):
+    r"""
+    Spanner indicator command.
 
     ..  container:: example
 
@@ -191,10 +402,10 @@ class SpannerCommand(scoping.Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_detach_first',
         '_left_broken',
         '_right_broken',
-        '_spanner',
+        '_start_indicator',
+        '_stop_indicator',
         '_tags',
         '_tweaks',
         )
@@ -205,7 +416,6 @@ class SpannerCommand(scoping.Command):
         self,
         *,
         deactivate: bool = None,
-        detach_first: bool = None,
         left_broken: bool = None,
         map: typings.Selector = None,
         match: typings.Indices = None,
@@ -213,7 +423,8 @@ class SpannerCommand(scoping.Command):
         right_broken: bool = None,
         scope: scoping.ScopeTyping = None,
         selector: typings.Selector = 'baca.leaves()',
-        spanner: abjad.Spanner = None,
+        start_indicator: typing.Any = None,
+        stop_indicator: typing.Any = None,
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
         tweaks: typing.Tuple[typings.TweaksTyping, ...] = None,
         ) -> None:
@@ -227,16 +438,14 @@ class SpannerCommand(scoping.Command):
             selector=selector,
             tags=tags,
             )
-        if detach_first is not None:
-            detach_first = bool(detach_first)
-        self._detach_first = detach_first
         if left_broken is not None:
             left_broken = bool(left_broken)
         self._left_broken = left_broken
         if right_broken is not None:
             right_broken = bool(right_broken)
         self._right_broken = right_broken
-        self._spanner = spanner
+        self._start_indicator = start_indicator
+        self._stop_indicator = stop_indicator
         self._validate_tweaks(tweaks)
         self._tweaks = tweaks
 
@@ -245,44 +454,78 @@ class SpannerCommand(scoping.Command):
     def _call(self, argument=None):
         """
         Calls command on ``argument``.
-
-        Returns spanner (for handoff to piecewise command).
         """
         if argument is None:
             return
-        if self.spanner is None:
+        if self.start_indicator is None and self.stop_indicator is None:
             return
         if self.selector:
             argument = self.selector(argument)
-        leaves = abjad.select(argument).leaves()
-        spanner = abjad.new(self.spanner)
-        if self.left_broken:
-            spanner = abjad.new(spanner, left_broken=self.left_broken)
-        if self.right_broken:
-            spanner = abjad.new(spanner, right_broken=self.right_broken)
-        self._apply_tweaks(spanner, self.tweaks)
-        if self.detach_first:
-            abjad.detach(
-                type(spanner),
-                leaves,
+        if self.start_indicator is not None:
+            start_indicator = self.start_indicator
+            if self.left_broken:
+                start_indicator = abjad.new(
+                    start_indicator,
+                    left_broken=self.left_broken,
+                    )
+            self._apply_tweaks(start_indicator, self.tweaks)
+            first_leaf = abjad.select(argument).leaf(0)
+            self._attach_indicator(
+                start_indicator,
+                first_leaf,
+                deactivate=self.deactivate,
+                tag='SpannerIndicatorCommand(1)',
                 )
-        abjad.attach(
-            spanner,
-            leaves,
-            deactivate=self.deactivate,
-            tag=self.tag.append('SpannerCommand'),
+        if self.stop_indicator is not None:
+            stop_indicator = self.stop_indicator
+            if self.right_broken:
+                stop_indicator = abjad.new(
+                    stop_indicator,
+                    right_broken=self.right_broken,
+                    )
+            last_leaf = abjad.select(argument).leaf(-1)
+            self._attach_indicator(
+                stop_indicator,
+                last_leaf,
+                deactivate=self.deactivate,
+                tag='SpannerIndicatorCommand(2)',
+                )
+
+    ### PRIVATE METHODS ###
+
+    def _attach_indicator(
+        self,
+        indicator,
+        leaf,
+        deactivate=None,
+        tag=None,
+        ):
+        # TODO: factor out late import
+        from .segmentmaker import SegmentMaker
+        assert isinstance(tag, str), repr(tag)
+        reapplied = scoping.Command._remove_reapplied_wrappers(
+            leaf,
+            indicator,
             )
-        return spanner
+        wrapper = abjad.attach(
+            indicator,
+            leaf,
+            deactivate=deactivate,
+            tag=self.tag.append(tag),
+            wrapper=True,
+            )
+        if scoping.compare_persistent_indicators(
+            indicator,
+            reapplied,
+            ):
+            status = 'redundant'
+            SegmentMaker._treat_persistent_wrapper(
+                self.runtime['manifests'],
+                wrapper,
+                status,
+                )
 
     ### PUBLIC PROPERTIES ###
-
-    @property
-    def detach_first(self) -> typing.Optional[bool]:
-        """
-        Is true when command detaches existing spanners before attaching new
-        ones.
-        """
-        return self._detach_first
 
     @property
     def left_broken(self) -> typing.Optional[bool]:
@@ -302,141 +545,22 @@ class SpannerCommand(scoping.Command):
     def selector(self) -> typing.Optional[abjad.Expression]:
         r"""
         Gets selector.
-
-        ..  container:: example
-
-            Selects trimmed leaves by default:
-
-            >>> music_maker = baca.MusicMaker(baca.slur())
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> contribution = music_maker('Voice_1', collections)
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {
-                            \scaleDurations #'(1 . 1) {
-                                c'16
-                                [
-                                (                                                                        %! baca_slur:SpannerCommand
-                                d'16
-                                bf'16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                fs''16
-                                [
-                                e''16
-                                ef''16
-                                af''16
-                                g''16
-                                ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                a'16
-                                )                                                                        %! baca_slur:SpannerCommand
-                            }
-                        }
-                    }
-                >>
-
-        Set to selector or none.
-
-        Returns selector or none.
         """
         return self._selector
 
     @property
-    def spanner(self) -> typing.Optional[abjad.Spanner]:
-        r"""
-        Gets spanner.
-
-        ..  container:: example
-
-            Ties are smart enough to remove existing ties prior to attach:
-
-            >>> music_maker = baca.MusicMaker()
-
-            >>> contribution = music_maker(
-            ...     'Voice_1',
-            ...     [[14, 14, 14]],
-            ...     counts=[5],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {
-                            \scaleDurations #'(1 . 1) {
-                                d''4
-                                ~
-                                d''16
-                                d''4
-                                ~
-                                d''16
-                                d''4
-                                ~
-                                d''16
-                            }
-                        }
-                    }
-                >>
-
-            >>> contribution = music_maker(
-            ...     'Voice_1',
-            ...     [[14, 14, 14]],
-            ...     baca.SpannerCommand(spanner=abjad.Tie()),
-            ...     counts=[5],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {
-                            \scaleDurations #'(1 . 1) {
-                                d''4
-                                ~                                                                        %! SpannerCommand
-                                d''16
-                                ~                                                                        %! SpannerCommand
-                                d''4
-                                ~                                                                        %! SpannerCommand
-                                d''16
-                                ~                                                                        %! SpannerCommand
-                                d''4
-                                ~                                                                        %! SpannerCommand
-                                d''16
-                            }
-                        }
-                    }
-                >>
-
-        Set to spanner or none.
-
-        Returns spanner or none.
+    def start_indicator(self) -> typing.Optional[typing.Any]:
         """
-        return self._spanner
+        Gets start indicator.
+        """
+        return self._start_indicator
+
+    @property
+    def stop_indicator(self) -> typing.Optional[typing.Any]:
+        """
+        Gets stop indicator.
+        """
+        return self._stop_indicator
 
     @property
     def tweaks(self) -> typing.Optional[
@@ -1455,8 +1579,10 @@ def repeat_tie_repeat_pitches(
 def slur(
     *tweaks: abjad.LilyPondTweakManager,
     selector: typings.Selector = 'baca.tleaves()',
+    start_slur: abjad.StartSlur = None,
+    stop_slur: abjad.StopSlur = None,
     tag: typing.Optional[str] = 'baca_slur',
-    ) -> SpannerCommand:
+    ) -> SpannerIndicatorCommand:
     r"""
     Attaches slur.
 
@@ -1493,8 +1619,8 @@ def slur(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
+                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             [
-                            (                                                                        %! baca_slur:SpannerCommand
                             d'16
                             ]
                             bf'4
@@ -1519,7 +1645,7 @@ def slur(
                         }
                         \times 4/5 {
                             a'16
-                            )                                                                        %! baca_slur:SpannerCommand
+                            )                                                                        %! baca_slur:SpannerIndicatorCommand(2)
                             r4
                             \revert Slur.direction                                                   %! baca_slur_down:OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
@@ -1575,8 +1701,8 @@ def slur(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
+                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             [
-                            (                                                                        %! baca_slur:SpannerCommand
                             e''16
                             ]
                             ef''4
@@ -1586,8 +1712,8 @@ def slur(
                             af''16
                             [
                             g''16
+                            )                                                                        %! baca_slur:SpannerIndicatorCommand(2)
                             ]
-                            )                                                                        %! baca_slur:SpannerCommand
                         }
                         \times 4/5 {
                             a'16
@@ -1600,9 +1726,12 @@ def slur(
             >>
 
     """
-    return SpannerCommand(
+    start_slur = start_slur or abjad.StartSlur()
+    stop_slur = stop_slur or abjad.StopSlur()
+    return SpannerIndicatorCommand(
         selector=selector,
-        spanner=abjad.Slur(),
+        start_indicator=start_slur,
+        stop_indicator=stop_slur,
         tags=[tag],
         tweaks=tweaks,
         )
