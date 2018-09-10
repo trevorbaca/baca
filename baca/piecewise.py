@@ -288,7 +288,7 @@ class PiecewiseCommand(scoping.Command):
                     spanner_start=None,
                     )
             if is_final_piece and bundle.spanner_start:
-                if isinstance(bundle.spanner_start, abjad.DynamicTrend):
+                if isinstance(bundle.spanner_start, abjad.HairpinIndicator):
                     if self.final_piece_spanner:
                         bundle = abjad.new(
                             bundle,
@@ -956,7 +956,7 @@ def dynamic(
         indicator = make_dynamic(dynamic)
     else:
         indicator = dynamic
-    prototype = (abjad.Dynamic, abjad.DynamicTrend)
+    prototype = (abjad.Dynamic, abjad.HairpinIndicator)
     assert isinstance(indicator, prototype), repr(indicator)
     return commands.IndicatorCommand(
         context='Voice',
@@ -974,7 +974,7 @@ def hairpin(
     dynamics: typing.Union[str, typing.List],
     *tweaks: abjad.LilyPondTweakManager,
     bookend: typing.Union[bool, int] = -1,
-    final_hairpin: typing.Union[bool, str, abjad.DynamicTrend] = None,
+    final_hairpin: typing.Union[bool, str, abjad.HairpinIndicator] = None,
     leak: bool = None,
     left_broken: bool = None,
     map: typings.Selector = None,
@@ -2881,11 +2881,11 @@ def hairpin(
         bundles = dynamics
     for item in bundles:
         assert isinstance(item, Bundle), repr(dynamic)
-    final_hairpin_: typing.Union[bool, abjad.DynamicTrend, None] = None
+    final_hairpin_: typing.Union[bool, abjad.HairpinIndicator, None] = None
     if isinstance(final_hairpin, bool):
         final_hairpin_ = final_hairpin
     elif isinstance(final_hairpin, str):
-        final_hairpin_ = abjad.DynamicTrend(final_hairpin)
+        final_hairpin_ = abjad.HairpinIndicator(final_hairpin)
     if left_broken is not None:
         left_broken = bool(left_broken)
     if left_broken is True:
@@ -2915,7 +2915,7 @@ def hairpin(
         )
 
 def make_dynamic(string: str) -> typing.Union[
-    abjad.Dynamic, abjad.DynamicTrend
+    abjad.Dynamic, abjad.HairpinIndicator
     ]:
     r"""
     Makes dynamic.
@@ -2932,10 +2932,10 @@ def make_dynamic(string: str) -> typing.Union[
         Dynamic('niente', command='\\!', direction=Down, name_is_textual=True)
 
         >>> baca.make_dynamic('<')
-        DynamicTrend(shape='<')
+        HairpinIndicator(shape='<')
 
         >>> baca.make_dynamic('o<|')
-        DynamicTrend(shape='o<|')
+        HairpinIndicator(shape='o<|')
 
         >>> baca.make_dynamic('appena-udibile')
         Dynamic('appena udibile', command='\\baca-appena-udibile', name_is_textual=True, sforzando=False)
@@ -3025,16 +3025,16 @@ def make_dynamic(string: str) -> typing.Union[
         Al niente hairpins are special-cased to carry to-barline tweaks:
 
         >>> baca.make_dynamic('>o')
-        DynamicTrend(shape='>o', tweaks=LilyPondTweakManager(('to_barline', True)))
+        HairpinIndicator(shape='>o', tweaks=LilyPondTweakManager(('to_barline', True)))
 
         >>> baca.make_dynamic('|>o')
-        DynamicTrend(shape='|>o', tweaks=LilyPondTweakManager(('to_barline', True)))
+        HairpinIndicator(shape='|>o', tweaks=LilyPondTweakManager(('to_barline', True)))
 
     """
     assert isinstance(string, str), repr(string)
     scheme_manifest = classes.SchemeManifest()
-    known_shapes = abjad.DynamicTrend('<').known_shapes
-    indicator: typing.Union[abjad.Dynamic, abjad.DynamicTrend]
+    known_shapes = abjad.HairpinIndicator('<').known_shapes
+    indicator: typing.Union[abjad.Dynamic, abjad.HairpinIndicator]
     if '_' in string:
         raise Exception(f'use hyphens instead of underscores ({string!r}).')
     if string == 'niente':
@@ -3088,7 +3088,7 @@ def make_dynamic(string: str) -> typing.Union[
         command = rf'\baca-effort-{stripped_string}'
         indicator = abjad.Dynamic(f'{string}', command=command)
     elif string in known_shapes:
-        indicator = abjad.DynamicTrend(string)
+        indicator = abjad.HairpinIndicator(string)
         if string.endswith('>o'):
             abjad.tweak(indicator).to_barline = True
     else:
@@ -3118,38 +3118,38 @@ def parse_hairpin_descriptor(
 
         >>> for item in baca.parse_hairpin_descriptor('<'):
         ...     item
-        Bundle(spanner_start=DynamicTrend(shape='<'))
+        Bundle(spanner_start=HairpinIndicator(shape='<'))
 
         >>> for item in baca.parse_hairpin_descriptor('o<|'):
         ...     item
-        Bundle(spanner_start=DynamicTrend(shape='o<|'))
+        Bundle(spanner_start=HairpinIndicator(shape='o<|'))
 
         >>> for item in baca.parse_hairpin_descriptor('--'):
         ...     item
-        Bundle(spanner_start=DynamicTrend(shape='--'))
+        Bundle(spanner_start=HairpinIndicator(shape='--'))
 
         >>> for item in baca.parse_hairpin_descriptor('< f'):
         ...     item
-        Bundle(spanner_start=DynamicTrend(shape='<'))
+        Bundle(spanner_start=HairpinIndicator(shape='<'))
         Bundle(indicator=Dynamic('f'))
 
         >>> for item in baca.parse_hairpin_descriptor('o< f'):
         ...     item
-        Bundle(spanner_start=DynamicTrend(shape='o<'))
+        Bundle(spanner_start=HairpinIndicator(shape='o<'))
         Bundle(indicator=Dynamic('f'))
 
         >>> for item in baca.parse_hairpin_descriptor('niente o<| f'):
         ...     item
-        Bundle(indicator=Dynamic('niente', command='\\!', direction=Down, name_is_textual=True), spanner_start=DynamicTrend(shape='o<|'))
+        Bundle(indicator=Dynamic('niente', command='\\!', direction=Down, name_is_textual=True), spanner_start=HairpinIndicator(shape='o<|'))
         Bundle(indicator=Dynamic('f'))
 
         >>> for item in baca.parse_hairpin_descriptor('f >'):
         ...     item
-        Bundle(indicator=Dynamic('f'), spanner_start=DynamicTrend(shape='>'))
+        Bundle(indicator=Dynamic('f'), spanner_start=HairpinIndicator(shape='>'))
 
         >>> for item in baca.parse_hairpin_descriptor('f >o'):
         ...     item
-        Bundle(indicator=Dynamic('f'), spanner_start=DynamicTrend(shape='>o', tweaks=LilyPondTweakManager(('to_barline', True))))
+        Bundle(indicator=Dynamic('f'), spanner_start=HairpinIndicator(shape='>o', tweaks=LilyPondTweakManager(('to_barline', True))))
 
         >>> for item in baca.parse_hairpin_descriptor('p mp mf f'):
         ...     item
@@ -3160,15 +3160,15 @@ def parse_hairpin_descriptor(
 
         >>> for item in baca.parse_hairpin_descriptor('p < f f > p'):
         ...     item
-        Bundle(indicator=Dynamic('p'), spanner_start=DynamicTrend(shape='<'))
+        Bundle(indicator=Dynamic('p'), spanner_start=HairpinIndicator(shape='<'))
         Bundle(indicator=Dynamic('f'))
-        Bundle(indicator=Dynamic('f'), spanner_start=DynamicTrend(shape='>'))
+        Bundle(indicator=Dynamic('f'), spanner_start=HairpinIndicator(shape='>'))
         Bundle(indicator=Dynamic('p'))
 
     """
     assert isinstance(descriptor, str), repr(descriptor)
     indicators: typing.List[
-        typing.Union[abjad.Dynamic, abjad.DynamicTrend]] = []
+        typing.Union[abjad.Dynamic, abjad.HairpinIndicator]] = []
     bundles: typing.List[Bundle] = []
     for string in descriptor.split():
         indicator = make_dynamic(string)
@@ -3176,35 +3176,35 @@ def parse_hairpin_descriptor(
             PiecewiseCommand._apply_tweaks(indicator, tweaks)
         indicators.append(indicator)
     if len(indicators) == 1:
-        if isinstance(indicators[0], abjad.DynamicTrend):
+        if isinstance(indicators[0], abjad.HairpinIndicator):
             bundle = Bundle(spanner_start=indicators[0]) 
         else:
             assert isinstance(indicators[0], abjad.Dynamic)
             bundle = Bundle(indicator=indicators[0]) 
         bundles.append(bundle)
         return bundles
-    if isinstance(indicators[0], abjad.DynamicTrend):
+    if isinstance(indicators[0], abjad.HairpinIndicator):
         result = indicators.pop(0)
-        assert isinstance(result, abjad.DynamicTrend)
+        assert isinstance(result, abjad.HairpinIndicator)
         bundle = Bundle(spanner_start=result)
         bundles.append(bundle)
     if len(indicators) == 1:
-        if isinstance(indicators[0], abjad.DynamicTrend):
+        if isinstance(indicators[0], abjad.HairpinIndicator):
             bundle = Bundle(spanner_start=indicators[0])
         else:
             bundle = Bundle(indicator=indicators[0])
         bundles.append(bundle)
         return bundles
     for left, right in classes.Sequence(indicators).nwise():
-        if (isinstance(left, abjad.DynamicTrend) and
-            isinstance(right, abjad.DynamicTrend)):
+        if (isinstance(left, abjad.HairpinIndicator) and
+            isinstance(right, abjad.HairpinIndicator)):
             raise Exception('consecutive dynamic trends')
         elif (isinstance(left, abjad.Dynamic) and
             isinstance(right, abjad.Dynamic)):
             bundle = Bundle(indicator=left)
             bundles.append(bundle)
         elif (isinstance(left, abjad.Dynamic) and
-            isinstance(right, abjad.DynamicTrend)):
+            isinstance(right, abjad.HairpinIndicator)):
             bundle = Bundle(
                 indicator=left,
                 spanner_start=right,

@@ -2199,7 +2199,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 key = 'niente'
             else:
                 key = indicator.command or indicator.name
-        elif isinstance(indicator, abjad.DynamicTrend):
+        elif isinstance(indicator, abjad.HairpinIndicator):
             key = indicator.shape
         elif isinstance(indicator, abjad.Instrument):
             key = SegmentMaker._get_key(
@@ -2754,7 +2754,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for leaf in abjad.iterate(self.score).leaves():
             for wrapper in abjad.inspect(leaf).wrappers():
                 if (isinstance(wrapper.indicator, abjad.Dynamic) and
-                    abjad.inspect(leaf).indicators(abjad.DynamicTrend)):
+                    abjad.inspect(leaf).indicators(abjad.HairpinIndicator)):
                     self._treat_persistent_wrapper(
                         self.manifests,
                         wrapper,
@@ -3101,9 +3101,9 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.inspect(leaf).has_indicator(tempo_trend)):
             status = 'explicit'
         if (isinstance(wrapper.indicator, abjad.Dynamic) and
-            abjad.inspect(leaf).indicators(abjad.DynamicTrend)):
+            abjad.inspect(leaf).indicators(abjad.HairpinIndicator)):
             status = 'explicit'
-        if isinstance(wrapper.indicator, (abjad.Dynamic, abjad.DynamicTrend)):
+        if isinstance(wrapper.indicator, (abjad.Dynamic, abjad.HairpinIndicator)):
             color = SegmentMaker._status_to_color[status]
             words = [
                 f'{status.upper()}_DYNAMIC_COLOR',
@@ -3170,7 +3170,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _treat_untreated_persistent_wrappers(self):
         dynamic_prototype = (
             abjad.Dynamic,
-            abjad.DynamicTrend,
+            abjad.HairpinIndicator,
             )
         tempo_prototype = (
             indicators.Accelerando,
