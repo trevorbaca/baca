@@ -9679,6 +9679,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             collection_index=collection_index,
             total_collections=total_collections,
             )
+        selections = self._apply_tuplet_specifier(selections, divisions=None)
         selections = self._apply_specifiers(selections)
         #self._check_wellformedness(selections)
         state = self._make_state()
@@ -9942,13 +9943,6 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         beam_specifier = self._get_beam_specifier()
         beam_specifier(selections)
         selections = self._apply_division_masks(selections)
-        specifier = self._get_duration_specifier()
-        if specifier.rewrite_meter:
-            #selections = specifier._rewrite_meter_(
-            #    selections,
-            #    input_divisions,
-            #    )
-            raise NotImplementedError()
         return selections
 
     def _make_selection(
