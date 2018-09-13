@@ -944,52 +944,52 @@ def glissando(
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             e'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
             <BLANKLINE>
                             f'8                                                                      %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
             <BLANKLINE>
                             e''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
             <BLANKLINE>
                             f''8                                                                     %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
             <BLANKLINE>
                             f'8                                                                      %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
             <BLANKLINE>
                             e''8                                                                     %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
             <BLANKLINE>
                             g'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
@@ -1073,7 +1073,7 @@ def glissando(
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             e'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
             <BLANKLINE>
@@ -1107,7 +1107,7 @@ def glissando(
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
@@ -1166,17 +1166,17 @@ def glissando(
                         \times 9/10 {
                             fs''16
                             [
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
                             e''16
                             ]
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
                             ef''4
                             ~
                             ef''16
                             r16
                             af''16
                             [
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
                             g''16
                             ]
                         }
@@ -1261,65 +1261,65 @@ def glissando(
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             e'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
-                            - \tweak color #red                                                      %! baca_glissando:SpannerCommand
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            - \tweak color #red                                                      %! baca_glissando
+                            \glissando                                                               %! baca_glissando
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #red                                                      %! baca_glissando:SpannerCommand
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            - \tweak color #red                                                      %! baca_glissando
+                            \glissando                                                               %! baca_glissando
             <BLANKLINE>
                             f'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #red                                                      %! baca_glissando:SpannerCommand
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            - \tweak color #red                                                      %! baca_glissando
+                            \glissando                                                               %! baca_glissando
             <BLANKLINE>
                             e''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
-                            - \tweak color #red                                                      %! baca_glissando:SpannerCommand
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            - \tweak color #red                                                      %! baca_glissando
+                            \glissando                                                               %! baca_glissando
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
-                            - \tweak color #red                                                      %! baca_glissando:SpannerCommand
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            - \tweak color #red                                                      %! baca_glissando
+                            \glissando                                                               %! baca_glissando
             <BLANKLINE>
                             f''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #red                                                      %! baca_glissando:SpannerCommand
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            - \tweak color #red                                                      %! baca_glissando
+                            \glissando                                                               %! baca_glissando
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
-                            - \tweak color #red                                                      %! baca_glissando:SpannerCommand
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            - \tweak color #red                                                      %! baca_glissando
+                            \glissando                                                               %! baca_glissando
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
-                            - \tweak color #red                                                      %! baca_glissando:SpannerCommand
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            - \tweak color #red                                                      %! baca_glissando
+                            \glissando                                                               %! baca_glissando
             <BLANKLINE>
                             f'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #red                                                      %! baca_glissando:SpannerCommand
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            - \tweak color #red                                                      %! baca_glissando
+                            \glissando                                                               %! baca_glissando
             <BLANKLINE>
                             e''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #red                                                      %! baca_glissando:SpannerCommand
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            - \tweak color #red                                                      %! baca_glissando
+                            \glissando                                                               %! baca_glissando
             <BLANKLINE>
                             g'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
-                            - \tweak color #red                                                      %! baca_glissando:SpannerCommand
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            - \tweak color #red                                                      %! baca_glissando
+                            \glissando                                                               %! baca_glissando
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
-                            - \tweak color #red                                                      %! baca_glissando:SpannerCommand
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            - \tweak color #red                                                      %! baca_glissando
+                            \glissando                                                               %! baca_glissando
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #red                                                      %! baca_glissando:SpannerCommand
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            - \tweak color #red                                                      %! baca_glissando
+                            \glissando                                                               %! baca_glissando
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
@@ -1333,30 +1333,30 @@ def glissando(
             >>                                                                                       %! SingleStaffScoreTemplate
 
     """
-    glissando = abjad.Glissando(
-        allow_repeats=allow_repeats,
-        allow_ties=allow_ties,
-        stems=stems,
-        style=style,
-        zero_padding=zero_padding,
-        )
-    return SpannerCommand(
-        right_broken=right_broken,
-        selector=selector,
-        spanner=glissando,
-        tags=[tag],
-        tweaks=tweaks,
-        )
-#    return commands.GlissandoCommand(
+#    glissando = abjad.Glissando(
 #        allow_repeats=allow_repeats,
 #        allow_ties=allow_ties,
-#        right_broken=right_broken,
-#        selector=selector,
 #        stems=stems,
-#        tags=[tag],
-#        tweaks=tweaks,
+#        style=style,
 #        zero_padding=zero_padding,
 #        )
+#    return SpannerCommand(
+#        right_broken=right_broken,
+#        selector=selector,
+#        spanner=glissando,
+#        tags=[tag],
+#        tweaks=tweaks,
+#        )
+    return commands.GlissandoCommand(
+        allow_repeats=allow_repeats,
+        allow_ties=allow_ties,
+        right_broken=right_broken,
+        selector=selector,
+        stems=stems,
+        tags=[tag],
+        tweaks=tweaks,
+        zero_padding=zero_padding,
+        )
 
 def ottava(
     *,

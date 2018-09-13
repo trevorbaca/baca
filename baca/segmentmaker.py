@@ -1730,6 +1730,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 parentage = abjad.inspect(leaf).parentage()
                 first_context = parentage.get(abjad.Context)
                 indicator = wrapper.indicator
+                if isinstance(indicator, abjad.GlissandoIndicator):
+                    continue
                 if isinstance(indicator, abjad.StopBeam):
                     continue
                 if isinstance(indicator, abjad.StopSlur):

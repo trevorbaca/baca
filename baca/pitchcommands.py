@@ -5772,63 +5772,63 @@ class StaffPositionInterpolationCommand(scoping.Command):
                             \clef "treble"                                                           %! baca_clef:IndicatorCommand
                             ef'16
                             [
-                            \glissando                                                               %! baca_glissando:SpannerCommand
-                            \hide NoteHead                                                           %! baca_glissando:SpannerCommand
-                            \override Accidental.stencil = ##f                                       %! baca_glissando:SpannerCommand
-                            \override NoteColumn.glissando-skip = ##t                                %! baca_glissando:SpannerCommand
-                            \override NoteHead.no-ledgers = ##t                                      %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
+                            \hide NoteHead                                                           %! baca_glissando
+                            \override Accidental.stencil = ##f                                       %! baca_glissando
+                            \override NoteColumn.glissando-skip = ##t                                %! baca_glissando
+                            \override NoteHead.no-ledgers = ##t                                      %! baca_glissando
                             e'16
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
                             f'16
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
                             f'16
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
                             f'16
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
                             g'16
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
                             g'16
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
                             g'16
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
                             a'16
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
                             a'16
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
                             a'16
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
                             b'16
                             ]
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
                         }
                         \scaleDurations #'(1 . 1) {
                             b'16
                             [
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
                             c''16
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
                             c''16
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
                             c''16
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
                             d''16
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
                             d''16
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
                             d''16
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
                             e''16
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
                             e''16
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
                             e''16
-                            \glissando                                                               %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
                             f''16
-                            \glissando                                                               %! baca_glissando:SpannerCommand
-                            \revert Accidental.stencil                                               %! baca_glissando:SpannerCommand
-                            \revert NoteColumn.glissando-skip                                        %! baca_glissando:SpannerCommand
-                            \revert NoteHead.no-ledgers                                              %! baca_glissando:SpannerCommand
-                            \undo \hide NoteHead                                                     %! baca_glissando:SpannerCommand
+                            \glissando                                                               %! baca_glissando
+                            \revert Accidental.stencil                                               %! baca_glissando
+                            \revert NoteColumn.glissando-skip                                        %! baca_glissando
+                            \revert NoteHead.no-ledgers                                              %! baca_glissando
+                            \undo \hide NoteHead                                                     %! baca_glissando
                             fs''16
                             ]
                             \revert Glissando.thickness                                              %! baca_glissando_thickness:OverrideCommand(2)
