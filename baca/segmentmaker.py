@@ -208,8 +208,8 @@ class SegmentMaker(abjad.SegmentMaker):
         '/',
         'Users',
         'trevorbaca',
-        'Scores',
-        '_docs',
+        'baca',
+        'docs',
         'source',
         '_stylesheets',
         'string-trio.ily',
@@ -219,8 +219,8 @@ class SegmentMaker(abjad.SegmentMaker):
         '/',
         'Users',
         'trevorbaca',
-        'Scores',
-        '_docs',
+        'baca',
+        'docs',
         'source',
         '_stylesheets',
         'two-voice-staff.ily',
@@ -1730,6 +1730,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 parentage = abjad.inspect(leaf).parentage()
                 first_context = parentage.get(abjad.Context)
                 indicator = wrapper.indicator
+                if isinstance(indicator, abjad.StopBeam):
+                    continue
                 if isinstance(indicator, abjad.StopSlur):
                     continue
                 if isinstance(indicator, abjad.StopTextSpan):
@@ -1896,53 +1898,85 @@ class SegmentMaker(abjad.SegmentMaker):
 
     @staticmethod
     def _extend_beam(leaf):
-        beam = abjad.inspect(leaf).spanner(abjad.Beam)
-        if beam is None:
-            return
-        all_leaves = []
-        all_leaves.extend(beam.leaves)
-        durations = []
-        if beam.durations:
-            durations.extend(beam.durations)
-        else:
-            duration = abjad.inspect(beam.leaves).duration()
-            durations.append(duration)
-        intervening_skips = []
+        if not abjad.inspect(leaf).has_indicator(abjad.StopBeam):
+            voice = abjad.inspect(leaf).parentage().get(abjad.Voice)
+            message = f'leaf {leaf!s} in {voice.name} has no StopBeam.'
+            raise Exception(message)
+        abjad.detach(abjad.StopBeam, leaf)
+        if not abjad.inspect(leaf).has_indicator(abjad.StartBeam):
+            abjad.detach(abjad.BeamCount, leaf)
+            left = leaf.written_duration.flag_count
+            beam_count = abjad.BeamCount(left, 1)
+            abjad.attach(beam_count, leaf, '_extend_beam')
         current_leaf = leaf
         while True:
             next_leaf = abjad.inspect(current_leaf).leaf(1)
             if next_leaf is None:
+                voice = abjad.inspect(current_leaf).parentage().get(
+                    abjad.Voice)
+                message = f'no leaf follows {current_leaf!s} in {voice.name};'
+                message += '\n\tDo not set extend_beam=True on last figure.'
+                raise Exception(message)
+                return
+            if abjad.inspect(next_leaf).has_indicator(abjad.StartBeam):
+                #voice = abjad.inspect(next_leaf).parentage().get(abjad.Voice)
+                #print(f'DETACHING START BEAM from {next_leaf!s} in {voice.name} ...')
+                abjad.detach(abjad.StartBeam, next_leaf)
+                if not abjad.inspect(next_leaf).has_indicator(abjad.StopBeam):
+                    abjad.detach(abjad.BeamCount, next_leaf)
+                    right = next_leaf.written_duration.flag_count
+                    beam_count = abjad.BeamCount(1, right)
+                    abjad.attach(beam_count, next_leaf, '_extend_beam')
                 return
             current_leaf = next_leaf
-            if isinstance(next_leaf, abjad.Skip):
-                beam = abjad.inspect(next_leaf).spanner(abjad.Beam)
-                if beam is None:
-                    intervening_skips.append(next_leaf)
-                    continue
-            break
-        abjad.detach(abjad.Beam, leaf)
-        all_leaves.extend(intervening_skips)
-        if intervening_skips:
-            intervening_skips = abjad.select(intervening_skips)
-            duration = abjad.inspect(intervening_skips).duration()
-            durations.append(duration)
-        beam = abjad.inspect(next_leaf).spanner(abjad.Beam)
-        if beam is None:
-            all_leaves.append(next_leaf)
-            duration = abjad.inspect(next_leaf).duration()
-            durations.append(duration)
-        else:
-            all_leaves.extend(beam.leaves)
-            if beam.durations:
-                durations.extend(beam.durations)
-            else:
-                duration = abjad.inspect(beam.leaves).duration()
-                durations.append(duration)
-        abjad.detach(abjad.Beam, next_leaf)
-        all_leaves = abjad.select(all_leaves)
-        assert abjad.inspect(all_leaves).duration() == sum(durations)
-        beam = abjad.Beam(beam_rests=True, durations=durations)
-        abjad.attach(beam, all_leaves, tag='_extend_beam')
+
+#        beam = abjad.inspect(leaf).spanner(abjad.Beam)
+#        if beam is None:
+#            return
+#        all_leaves = []
+#        all_leaves.extend(beam.leaves)
+#        durations = []
+#        if beam.durations:
+#            durations.extend(beam.durations)
+#        else:
+#            duration = abjad.inspect(beam.leaves).duration()
+#            durations.append(duration)
+#        intervening_skips = []
+#        current_leaf = leaf
+#        while True:
+#            next_leaf = abjad.inspect(current_leaf).leaf(1)
+#            if next_leaf is None:
+#                return
+#            current_leaf = next_leaf
+#            if isinstance(next_leaf, abjad.Skip):
+#                beam = abjad.inspect(next_leaf).spanner(abjad.Beam)
+#                if beam is None:
+#                    intervening_skips.append(next_leaf)
+#                    continue
+#            break
+#        abjad.detach(abjad.Beam, leaf)
+#        all_leaves.extend(intervening_skips)
+#        if intervening_skips:
+#            intervening_skips = abjad.select(intervening_skips)
+#            duration = abjad.inspect(intervening_skips).duration()
+#            durations.append(duration)
+#        beam = abjad.inspect(next_leaf).spanner(abjad.Beam)
+#        if beam is None:
+#            all_leaves.append(next_leaf)
+#            duration = abjad.inspect(next_leaf).duration()
+#            durations.append(duration)
+#        else:
+#            all_leaves.extend(beam.leaves)
+#            if beam.durations:
+#                durations.extend(beam.durations)
+#            else:
+#                duration = abjad.inspect(beam.leaves).duration()
+#                durations.append(duration)
+#        abjad.detach(abjad.Beam, next_leaf)
+#        all_leaves = abjad.select(all_leaves)
+#        assert abjad.inspect(all_leaves).duration() == sum(durations)
+#        beam = abjad.Beam(beam_rests=True, durations=durations)
+#        abjad.attach(beam, all_leaves, tag='_extend_beam')
 
     def _extend_beams(self):
         for leaf in abjad.iterate(self.score).leaves():
@@ -3087,19 +3121,21 @@ class SegmentMaker(abjad.SegmentMaker):
         assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
         assert bool(wrapper.indicator.persistent), repr(wrapper)
         assert isinstance(status, str), repr(status)
-        context = wrapper._find_correct_effective_context()
-        assert isinstance(context, abjad.Context), repr(wrapper)
-        leaf = wrapper.component
-        assert isinstance(leaf, abjad.Leaf), repr(wrapper)
         indicator = wrapper.indicator
         prototype = (
+            abjad.StartBeam,
             abjad.StartSlur,
             abjad.StartTextSpan,
+            abjad.StopBeam,
             abjad.StopSlur,
             abjad.StopTextSpan,
             )
         if isinstance(indicator, prototype):
             return
+        context = wrapper._find_correct_effective_context()
+        assert isinstance(context, abjad.Context), repr(wrapper)
+        leaf = wrapper.component
+        assert isinstance(leaf, abjad.Leaf), repr(wrapper)
         existing_tag = wrapper.tag
         tempo_trend = (indicators.Accelerando, indicators.Ritardando)
         if (isinstance(indicator, abjad.MetronomeMark) and
@@ -4306,21 +4342,21 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Ignores unregistered pitches:
 
-                >>> music_maker = baca.MusicMaker(
-                ...     baca.PitchFirstRhythmCommand(
-                ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-                ...             acciaccatura_specifiers=[
-                ...                 baca.AcciaccaturaSpecifier(),
-                ...                 ],
-                ...             talea=rmakers.Talea(
-                ...                 counts=[3],
-                ...                 denominator=16,
-                ...                 ),
-                ...             ),
-                ...         ),
-                ...     color_unregistered_pitches=True,
-                ...     denominator=8,
-                ...     )
+            >>> music_maker = baca.MusicMaker(
+            ...     baca.PitchFirstRhythmCommand(
+            ...         rhythm_maker=baca.PitchFirstRhythmMaker(
+            ...             acciaccatura_specifiers=[
+            ...                 baca.AcciaccaturaSpecifier(),
+            ...                 ],
+            ...             talea=rmakers.Talea(
+            ...                 counts=[3],
+            ...                 denominator=16,
+            ...                 ),
+            ...             ),
+            ...         ),
+            ...     color_unregistered_pitches=True,
+            ...     denominator=8,
+            ...     )
 
             >>> collection_lists = [
             ...     [[4]],

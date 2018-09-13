@@ -801,14 +801,18 @@ class ClusterCommand(scoping.Command):
         else:
             start_pitch = plt.head.written_pitch
         pitches = self._make_pitches(start_pitch, width)
-        indicator = abjad.KeyCluster(
+        key_cluster = abjad.KeyCluster(
             include_black_keys=not self.hide_flat_markup,
             )
         for pleaf in plt:
             chord = abjad.Chord(pitches, pleaf.written_duration)
+            indicators = abjad.detach(object, pleaf)
+            for indicator in indicators:
+                abjad.attach(indicator, chord)
             abjad.mutate(pleaf).replace(chord)
-            abjad.attach(indicator, chord)
+            abjad.attach(key_cluster, chord)
             abjad.attach(abjad.tags.ALLOW_REPEAT_PITCH, chord)
+            abjad.detach(abjad.tags.NOT_YET_PITCHED, chord)
 
     def _make_pitches(self, start_pitch, width):
         pitches = [start_pitch]

@@ -4971,8 +4971,8 @@ def slur_down(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             [
+                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             d'16
                             ]
                             bf'4
@@ -4984,8 +4984,8 @@ def slur_down(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             [
+                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             e''16
                             ]
                             ef''4
@@ -5046,8 +5046,8 @@ def slur_down(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             [
+                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             d'16
                             ]
                             bf'4
@@ -5060,8 +5060,8 @@ def slur_down(
                         \times 9/10 {
                             \override Slur.direction = #down                                         %! baca_slur_down:OverrideCommand(1)
                             fs''16
-                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             [
+                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             e''16
                             ]
                             ef''4
@@ -5141,8 +5141,8 @@ def slur_up(
                             r8
                             \override Stem.direction = #down                                         %! baca_stem_down:OverrideCommand(1)
                             c'16
-                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             [
+                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             d'16
                             ]
                             bf'4
@@ -5154,8 +5154,8 @@ def slur_up(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             [
+                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             e''16
                             ]
                             ef''4
@@ -5222,8 +5222,8 @@ def slur_up(
                             r8
                             \override Stem.direction = #down                                         %! baca_stem_down:OverrideCommand(1)
                             c'16
-                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             [
+                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             d'16
                             ]
                             bf'4
@@ -5236,8 +5236,8 @@ def slur_up(
                         \times 9/10 {
                             \override Slur.direction = #up                                           %! baca_slur_up:OverrideCommand(1)
                             fs''16
-                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             [
+                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             e''16
                             ]
                             ef''4
@@ -6122,8 +6122,8 @@ def sustain_pedal_staff_padding(
                             af''16
                             [
                             g''16
-                            ]
                             \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
+                            ]
                             \revert Staff.SustainPedalLineSpanner.staff-padding                      %! baca_sustain_pedal_staff_padding:OverrideCommand(2)
                         }
                         \times 4/5 {
@@ -7366,13 +7366,13 @@ def text_spanner_staff_padding(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
+                            [
                             - \abjad-dashed-line-with-arrow                                          %! baca_text_spanner:PiecewiseCommand(1)
                             - \baca-text-spanner-left-text "pont."                                   %! baca_text_spanner:PiecewiseCommand(1)
                             - \baca-text-spanner-right-text "ord."                                   %! baca_text_spanner:PiecewiseCommand(1)
                             - \tweak bound-details.right.padding #0.5                                %! baca_text_spanner:PiecewiseCommand(1)
                             - \tweak bound-details.right.stencil-align-dir-y #center                 %! baca_text_spanner:PiecewiseCommand(1)
                             \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
-                            [
                             d'16
                             ]
                             bf'4
@@ -7459,13 +7459,13 @@ def text_spanner_staff_padding(
                         \times 9/10 {
                             \override TextSpanner.staff-padding = #6                                 %! baca_text_spanner_staff_padding:OverrideCommand(1)
                             fs''16
+                            [
                             - \abjad-dashed-line-with-arrow                                          %! baca_text_spanner:PiecewiseCommand(1)
                             - \baca-text-spanner-left-text "pont."                                   %! baca_text_spanner:PiecewiseCommand(1)
                             - \baca-text-spanner-right-text "ord."                                   %! baca_text_spanner:PiecewiseCommand(1)
                             - \tweak bound-details.right.padding #0.5                                %! baca_text_spanner:PiecewiseCommand(1)
                             - \tweak bound-details.right.stencil-align-dir-y #center                 %! baca_text_spanner:PiecewiseCommand(1)
                             \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
-                            [
                             e''16
                             ]
                             ef''4

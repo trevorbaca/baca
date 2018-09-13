@@ -415,6 +415,7 @@ class Command(object):
             prototype = type(indicator)
         stem = abjad.String.to_indicator_stem(indicator)
         assert stem in (
+            'BEAM',
             'CLEF',
             'DYNAMIC',
             'INSTRUMENT',
@@ -894,8 +895,8 @@ def new(
                             c'8                                                                      %! baca_make_even_divisions
                             - \marcato                                                               %! baca_marcato:IndicatorCommand
                             - \staccato                                                              %! baca_staccato:IndicatorCommand
-                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             [                                                                        %! baca_make_even_divisions
+                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
             <BLANKLINE>
                             \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                             c'8                                                                      %! baca_make_even_divisions
@@ -1048,8 +1049,8 @@ def new(
                             c'8                                                                      %! baca_make_even_divisions
                             - \marcato                                                               %! baca_marcato:IndicatorCommand
                             - \staccato                                                              %! baca_staccato:IndicatorCommand
-                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             [                                                                        %! baca_make_even_divisions
+                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
             <BLANKLINE>
                             \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                             c'8                                                                      %! baca_make_even_divisions

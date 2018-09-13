@@ -1721,7 +1721,6 @@ def beam_divisions(
 
 def beam_everything(
     *,
-    hide_nibs: bool = False,
     stemlets: typings.Number = None,
     ) -> rmakers.BeamSpecifier:
     r"""
@@ -1753,7 +1752,7 @@ def beam_everything(
                         \scaleDurations #'(1 . 1) {
                             r8
                             [
-                            \set stemLeftBeamCount = 2
+                            \set stemLeftBeamCount = 1
                             \set stemRightBeamCount = 2
                             c'16
                             \set stemLeftBeamCount = 2
@@ -1818,7 +1817,7 @@ def beam_everything(
                             \override Staff.Stem.stemlet-length = 2
                             r8
                             [
-                            \set stemLeftBeamCount = 2
+                            \set stemLeftBeamCount = 1
                             \set stemRightBeamCount = 2
                             c'16
                             \set stemLeftBeamCount = 2
@@ -1857,62 +1856,15 @@ def beam_everything(
                 }
             >>
 
-    ..  container:: example
-
-        Beams everything without nibs:
-
-        >>> music_maker = baca.MusicMaker()
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.beam_everything(hide_nibs=True),
-        ...     baca.rests_around([2], [2]),
-        ...     )
-        >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
-            <<
-                \context Voice = "Voice_1"
-                {
-                    \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
-                            r8
-                            [
-                            c'16
-                            d'16
-                            bf'16
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            fs''16
-                            e''16
-                            ef''16
-                            af''16
-                            g''16
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            a'16
-                            r8
-                            ]
-                        }
-                    }
-                }
-            >>
-
     """
     return rmakers.BeamSpecifier(
         beam_divisions_together=True,
         beam_each_division=True,
         beam_rests=True,
-        hide_nibs=hide_nibs,
         stemlet_length=stemlets,
         )
 
-def beam_runs(*, hide_nibs: bool = False) -> rmakers.BeamSpecifier:
+def beam_runs() -> rmakers.BeamSpecifier:
     r"""
     Beams PLT runs.
 
@@ -1946,12 +1898,12 @@ def beam_runs(*, hide_nibs: bool = False) -> rmakers.BeamSpecifier:
                         \times 9/10 {
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            \set stemLeftBeamCount = 2
+                            \set stemLeftBeamCount = 0
                             \set stemRightBeamCount = 2
                             c'16
                             [
                             \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
+                            \set stemRightBeamCount = 0
                             d'16
                             ]
                             bf'4
@@ -1959,18 +1911,16 @@ def beam_runs(*, hide_nibs: bool = False) -> rmakers.BeamSpecifier:
                             \set stemLeftBeamCount = 2
                             \set stemRightBeamCount = 2
                             bf'16
-                            [
-                            ]
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \set stemLeftBeamCount = 0
+                            \set stemLeftBeamCount = 1
                             \set stemRightBeamCount = 2
                             fs''16
                             [
                             \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
+                            \set stemRightBeamCount = 0
                             e''16
                             ]
                             ef''4
@@ -1978,10 +1928,8 @@ def beam_runs(*, hide_nibs: bool = False) -> rmakers.BeamSpecifier:
                             \set stemLeftBeamCount = 2
                             \set stemRightBeamCount = 2
                             ef''16
-                            [
-                            ]
                             r16
-                            \set stemLeftBeamCount = 2
+                            \set stemLeftBeamCount = 0
                             \set stemRightBeamCount = 2
                             af''16
                             [
@@ -2001,75 +1949,11 @@ def beam_runs(*, hide_nibs: bool = False) -> rmakers.BeamSpecifier:
                 }
             >>
 
-    ..  container:: example
-
-        Beams PLT runs without nibs:
-
-        >>> music_maker = baca.MusicMaker()
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.beam_runs(hide_nibs=True),
-        ...     baca.rests_around([2], [2]),
-        ...     baca.tuplet_bracket_staff_padding(5),
-        ...     counts=[1, 1, 5, -1],
-        ...     time_treatments=[-1],
-        ...     )
-        >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
-            <<
-                \context Voice = "Voice_1"
-                {
-                    \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
-                            c'16
-                            [
-                            d'16
-                            ]
-                            bf'4
-                            ~
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
-                            [
-                            e''16
-                            ]
-                            ef''4
-                            ~
-                            ef''16
-                            r16
-                            af''16
-                            [
-                            g''16
-                        }
-                        \times 2/3 {
-                            a'16
-                            ]
-                            r8
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }
-                    }
-                }
-            >>
-
     """
     return rmakers.BeamSpecifier(
         beam_divisions_together=True,
         beam_each_division=True,
         beam_rests=False,
-        hide_nibs=hide_nibs,
         )
 
 def flags() -> rmakers.BeamSpecifier:

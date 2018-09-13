@@ -255,8 +255,8 @@ class SpannerIndicatorCommand(scoping.Command):
                         }
                         \scaleDurations #'(1 . 1) {
                             fs''16
-                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             [
+                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             e''16
                             ef''16
                             af''16
@@ -353,8 +353,8 @@ class SpannerIndicatorCommand(scoping.Command):
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
-                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             [                                                                        %! baca_make_even_divisions
+                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
             <BLANKLINE>
                             f''8                                                                     %! baca_make_even_divisions
             <BLANKLINE>
@@ -400,6 +400,7 @@ class SpannerIndicatorCommand(scoping.Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
+        '_detach_first',
         '_left_broken',
         '_right_broken',
         '_start_indicator',
@@ -414,6 +415,7 @@ class SpannerIndicatorCommand(scoping.Command):
         self,
         *,
         deactivate: bool = None,
+        detach_first: bool = None,
         left_broken: bool = None,
         map: typings.Selector = None,
         match: typings.Indices = None,
@@ -436,6 +438,9 @@ class SpannerIndicatorCommand(scoping.Command):
             selector=selector,
             tags=tags,
             )
+        if detach_first is not None:
+            detach_first = bool(detach_first)
+        self._detach_first = detach_first
         if left_broken is not None:
             left_broken = bool(left_broken)
         self._left_broken = left_broken
@@ -461,6 +466,9 @@ class SpannerIndicatorCommand(scoping.Command):
             argument = self.selector(argument)
         if self.start_indicator is not None:
             start_indicator = self.start_indicator
+            if self.detach_first:
+                for leaf in abjad.iterate(argument).leaves(grace_notes=False):
+                    abjad.detach(type(start_indicator), leaf)
             if self.left_broken:
                 start_indicator = abjad.new(
                     start_indicator,
@@ -476,6 +484,9 @@ class SpannerIndicatorCommand(scoping.Command):
                 )
         if self.stop_indicator is not None:
             stop_indicator = self.stop_indicator
+            if self.detach_first:
+                for leaf in abjad.iterate(argument).leaves(grace_notes=False):
+                    abjad.detach(type(stop_indicator), leaf)
             if self.right_broken:
                 stop_indicator = abjad.new(
                     stop_indicator,
@@ -526,6 +537,13 @@ class SpannerIndicatorCommand(scoping.Command):
     ### PUBLIC PROPERTIES ###
 
     @property
+    def detach_first(self) -> typing.Optional[bool]:
+        """
+        Is true when command detaches existing indicator first.
+        """
+        return self._detach_first
+
+    @property
     def left_broken(self) -> typing.Optional[bool]:
         """
         Is true when spanner is left-broken.
@@ -573,8 +591,10 @@ class SpannerIndicatorCommand(scoping.Command):
 def beam(
     *tweaks: abjad.LilyPondTweakManager,
     selector: typings.Selector = 'baca.tleaves()',
+    start_beam: abjad.StartBeam = None,
+    stop_beam: abjad.StopBeam = None,
     tag: typing.Optional[str] = 'baca_beam',
-    ) -> SpannerCommand:
+    ) -> SpannerIndicatorCommand:
     r"""
     Attaches beam.
 
@@ -652,7 +672,7 @@ def beam(
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             c'8                                                                      %! baca_make_even_divisions
-                            [                                                                        %! baca_beam:SpannerCommand
+                            [                                                                        %! baca_beam:SpannerIndicatorCommand(1)
             <BLANKLINE>
                             c'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
@@ -682,7 +702,7 @@ def beam(
                             c'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             c'8                                                                      %! baca_make_even_divisions
-                            ]                                                                        %! baca_beam:SpannerCommand
+                            ]                                                                        %! baca_beam:SpannerIndicatorCommand(2)
             <BLANKLINE>
                         }                                                                            %! SingleStaffScoreTemplate
             <BLANKLINE>
@@ -693,10 +713,20 @@ def beam(
             >>                                                                                       %! SingleStaffScoreTemplate
 
     """
-    return SpannerCommand(
+#    return SpannerCommand(
+#        detach_first=True,
+#        selector=selector,
+#        spanner=abjad.Beam(),
+#        tags=[tag],
+#        tweaks=tweaks,
+#        )
+    start_beam = start_beam or abjad.StartBeam()
+    stop_beam = stop_beam or abjad.StopBeam()
+    return SpannerIndicatorCommand(
         detach_first=True,
         selector=selector,
-        spanner=abjad.Beam(),
+        start_indicator=start_beam,
+        stop_indicator=stop_beam,
         tags=[tag],
         tweaks=tweaks,
         )
@@ -1617,8 +1647,8 @@ def slur(
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             [
+                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             d'16
                             ]
                             bf'4
@@ -1699,8 +1729,8 @@ def slur(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             [
+                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
                             e''16
                             ]
                             ef''4
@@ -1870,8 +1900,8 @@ def sustain_pedal(
                             af''16
                             [
                             g''16
-                            ]
                             \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
+                            ]
                         }
                         \times 4/5 {
                             a'16
@@ -1942,8 +1972,8 @@ def sustain_pedal(
                             af''16
                             [
                             g''16
-                            ]
                             \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
+                            ]
                         }
                         \times 4/5 {
                             a'16
@@ -2161,8 +2191,8 @@ def sustain_pedal(
                             af''16
                             [
                             g''16
-                            ]
                             \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
+                            ]
                         }
                         \times 4/5 {
                             \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
@@ -2240,8 +2270,8 @@ def sustain_pedal(
                             [
                             \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
                             g''16
-                            ]
                             \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
+                            ]
                             \sustainOn                                                               %! baca_sustain_pedal:SpannerCommand
                         }
                         \times 4/5 {
@@ -2630,8 +2660,8 @@ def trill_spanner(
                             [
                             \startTrillSpan
                             d'16
-                            ]
                             \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
+                            ]
                             \startTrillSpan
                             bf'4
                             ~
@@ -2647,8 +2677,8 @@ def trill_spanner(
                             [
                             \startTrillSpan
                             e''16
-                            ]
                             \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
+                            ]
                             \startTrillSpan
                             ef''4
                             ~
@@ -2661,8 +2691,8 @@ def trill_spanner(
                             [
                             \startTrillSpan
                             g''16
-                            ]
                             \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
+                            ]
                             \startTrillSpan
                         }
                         \times 4/5 {
@@ -2789,8 +2819,8 @@ def trill_spanner(
                             [
                             \startTrillSpan ef'
                             d'16
-                            ]
                             \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
+                            ]
                             bf'4
                             ~
                             bf'16
@@ -2860,8 +2890,8 @@ def trill_spanner(
                             \startTrillSpan ef'
                             \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
                             d'16
-                            ]
                             \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
+                            ]
                             \startTrillSpan ef'
                             \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
                             bf'4
@@ -2880,8 +2910,8 @@ def trill_spanner(
                             \startTrillSpan ef'
                             \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
                             e''16
-                            ]
                             \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
+                            ]
                             \startTrillSpan ef'
                             \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
                             ef''4
@@ -2897,8 +2927,8 @@ def trill_spanner(
                             \startTrillSpan ef'
                             \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
                             g''16
-                            ]
                             \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
+                            ]
                             \startTrillSpan ef'
                         }
                         \times 4/5 {
@@ -2954,8 +2984,8 @@ def trill_spanner(
                             \startTrillSpan d'
                             \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
                             d'16
-                            ]
                             \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
+                            ]
                             \startTrillSpan e'
                             \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
                             bf'4
@@ -2974,8 +3004,8 @@ def trill_spanner(
                             \startTrillSpan gs''
                             \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
                             e''16
-                            ]
                             \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
+                            ]
                             \startTrillSpan fs''
                             \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
                             ef''4
@@ -2991,8 +3021,8 @@ def trill_spanner(
                             \startTrillSpan bf''
                             \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
                             g''16
-                            ]
                             \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
+                            ]
                             \startTrillSpan a''
                         }
                         \times 4/5 {

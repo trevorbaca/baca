@@ -141,6 +141,7 @@ spannercommands
    .. autosummary::
       :nosignatures:
 
+      detach_first
       left_broken
       right_broken
       selector
@@ -188,6 +189,8 @@ spannercommands
    .. container:: inherited
 
       .. autoattribute:: SpannerIndicatorCommand.deactivate
+
+   .. autoattribute:: SpannerIndicatorCommand.detach_first
 
    .. autoattribute:: SpannerIndicatorCommand.left_broken
 

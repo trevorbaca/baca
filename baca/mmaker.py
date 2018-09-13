@@ -178,8 +178,7 @@ class AcciaccaturaSpecifier(object):
             grace_leaves = maker(grace_token, durations)
             acciaccatura_container = abjad.AcciaccaturaContainer(grace_leaves)
             if 1 < len(acciaccatura_container):
-                abjad.attach(
-                    abjad.Beam(),
+                abjad.beam(
                     acciaccatura_container[:],
                     tag='AcciaccaturaSpecifier',
                     )
@@ -1490,6 +1489,9 @@ class ImbricationCommand(scoping.Command):
         ...     baca.ImbricationCommand(
         ...         'Voice_1',
         ...         [2, 19, 9, 18, 16],
+        ...         rmakers.BeamSpecifier(
+        ...             beam_divisions_together=True,
+        ...             ),
         ...         ),
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
@@ -1514,6 +1516,8 @@ class ImbricationCommand(scoping.Command):
                             \override TupletNumber.stencil = ##f
                             \scaleDurations #'(1 . 1) {
                                 s16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 d'16
                                 s16
                                 s16
@@ -1522,8 +1526,12 @@ class ImbricationCommand(scoping.Command):
                             \scaleDurations #'(1 . 1) {
                                 s16
                                 s16
+                                \set stemLeftBeamCount = 0
+                                \set stemRightBeamCount = 2
                                 g''16
                                 [
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 0
                                 a'16
                                 ]
                                 s16
@@ -1531,8 +1539,12 @@ class ImbricationCommand(scoping.Command):
                             \scaleDurations #'(1 . 1) {
                                 s16
                                 s16
+                                \set stemLeftBeamCount = 0
+                                \set stemRightBeamCount = 2
                                 fs''16
                                 [
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 0
                                 e''16
                                 ]
                                 s16
@@ -2285,11 +2297,11 @@ class ImbricationCommand(scoping.Command):
 
             Extends beam across figures:
 
-                >>> music_maker = baca.MusicMaker(
-                ...     rmakers.BeamSpecifier(
-                ...         beam_divisions_together=True,
-                ...         ),
-                ...     )
+            >>> music_maker = baca.MusicMaker(
+            ...     rmakers.BeamSpecifier(
+            ...         beam_divisions_together=True,
+            ...         ),
+            ...     )
 
             >>> voice_1_selections = []
             >>> voice_2_selections = []
@@ -2358,6 +2370,7 @@ class ImbricationCommand(scoping.Command):
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2407,15 +2420,15 @@ class ImbricationCommand(scoping.Command):
                 <BLANKLINE>
                                         % [Music_Voice_One measure 1]                                    %! _comment_measure_numbers
                                         s16
-                                        [                                                                %! _extend_beam
+                                        [
                 <BLANKLINE>
-                                        \set stemLeftBeamCount = 2                                       %! _extend_beam
-                                        \set stemRightBeamCount = 2                                      %! _extend_beam
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 2
                                         d'16
                                         - \staccato                                                      %! baca_staccato:IndicatorCommand
                 <BLANKLINE>
-                                        \set stemLeftBeamCount = 2                                       %! _extend_beam
-                                        \set stemRightBeamCount = 2                                      %! _extend_beam
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 2
                                         bf'!16
                                         - \staccato                                                      %! baca_staccato:IndicatorCommand
                 <BLANKLINE>
@@ -2429,6 +2442,8 @@ class ImbricationCommand(scoping.Command):
                 <BLANKLINE>
                                         s16
                 <BLANKLINE>
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 1
                                         s16
                 <BLANKLINE>
                                     }
@@ -2444,20 +2459,22 @@ class ImbricationCommand(scoping.Command):
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % [Music_Voice_One measure 2]                                    %! _comment_measure_numbers
+                                        \set stemLeftBeamCount = 1
+                                        \set stemRightBeamCount = 2
                                         s16
                 <BLANKLINE>
-                                        \set stemLeftBeamCount = 2                                       %! _extend_beam
-                                        \set stemRightBeamCount = 2                                      %! _extend_beam
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 2
                                         cs''!16
                                         - \staccato                                                      %! baca_staccato:IndicatorCommand
                 <BLANKLINE>
-                                        \set stemLeftBeamCount = 2                                       %! _extend_beam
-                                        \set stemRightBeamCount = 2                                      %! _extend_beam
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 2
                                         a'16
                                         - \staccato                                                      %! baca_staccato:IndicatorCommand
                 <BLANKLINE>
                                         s16
-                                        ]                                                                %! _extend_beam
+                                        ]
                 <BLANKLINE>
                                     }
                                     \revert TupletBracket.stencil
@@ -2569,6 +2586,9 @@ class ImbricationCommand(scoping.Command):
             ...     baca.ImbricationCommand(
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
+            ...         rmakers.BeamSpecifier(
+            ...             beam_divisions_together=True,
+            ...             ),
             ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
@@ -2592,13 +2612,19 @@ class ImbricationCommand(scoping.Command):
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
                                 \scaleDurations #'(1 . 1) {
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     d'16
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     s16
                                     s16
+                                    \set stemLeftBeamCount = 0
+                                    \set stemRightBeamCount = 2
                                     g''16
                                     [
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 0
                                     a'16
                                     ]
                                     s16
@@ -2606,8 +2632,12 @@ class ImbricationCommand(scoping.Command):
                                 \scaleDurations #'(1 . 1) {
                                     s16
                                     s16
+                                    \set stemLeftBeamCount = 0
+                                    \set stemRightBeamCount = 2
                                     fs''16
                                     [
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 0
                                     e''16
                                     ]
                                     s16
@@ -2621,7 +2651,7 @@ class ImbricationCommand(scoping.Command):
                             \voiceTwo
                             {
                                 \scaleDurations #'(1 . 1) {
-                                    \set stemLeftBeamCount = 0
+                                    \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     <c' d' bf' e'' fs''>16
                                     [
@@ -2687,6 +2717,9 @@ class ImbricationCommand(scoping.Command):
             ...     baca.ImbricationCommand(
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
+            ...         rmakers.BeamSpecifier(
+            ...             beam_divisions_together=True,
+            ...             ),
             ...         ),
             ...     baca.rests_around([2], [2]),
             ...     )
@@ -2713,6 +2746,8 @@ class ImbricationCommand(scoping.Command):
                                 \scaleDurations #'(1 . 1) {
                                     s8
                                     s16
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     d'16
                                     s16
                                     s16
@@ -2721,8 +2756,12 @@ class ImbricationCommand(scoping.Command):
                                 \scaleDurations #'(1 . 1) {
                                     s16
                                     s16
+                                    \set stemLeftBeamCount = 0
+                                    \set stemRightBeamCount = 2
                                     g''16
                                     [
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 0
                                     a'16
                                     ]
                                     s16
@@ -2730,8 +2769,12 @@ class ImbricationCommand(scoping.Command):
                                 \scaleDurations #'(1 . 1) {
                                     s16
                                     s16
+                                    \set stemLeftBeamCount = 0
+                                    \set stemRightBeamCount = 2
                                     fs''16
                                     [
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 0
                                     e''16
                                     ]
                                     s16
@@ -2747,7 +2790,7 @@ class ImbricationCommand(scoping.Command):
                             {
                                 \scaleDurations #'(1 . 1) {
                                     r8
-                                    \set stemLeftBeamCount = 2
+                                    \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     c'16
                                     [
@@ -2795,7 +2838,7 @@ class ImbricationCommand(scoping.Command):
                                     \set stemRightBeamCount = 2
                                     e''16
                                     \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
+                                    \set stemRightBeamCount = 0
                                     ef''16
                                     ]
                                     r8
@@ -3727,8 +3770,6 @@ class ImbricationCommand(scoping.Command):
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
-                                    [
-                                    ]
                                     s16
                                     s16
                                     s16
@@ -3736,12 +3777,12 @@ class ImbricationCommand(scoping.Command):
                                 \scaleDurations #'(1 . 1) {
                                     s16
                                     s16
-                                    \set stemLeftBeamCount = 2
+                                    \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     g''16
                                     [
                                     \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
+                                    \set stemRightBeamCount = 0
                                     a'16
                                     ]
                                     s16
@@ -3749,12 +3790,12 @@ class ImbricationCommand(scoping.Command):
                                 \scaleDurations #'(1 . 1) {
                                     s16
                                     s16
-                                    \set stemLeftBeamCount = 2
+                                    \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     fs''16
                                     [
                                     \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
+                                    \set stemRightBeamCount = 0
                                     e''16
                                     ]
                                     s16
@@ -7582,8 +7623,8 @@ class MusicMaker(object):
                             {
                                 \scaleDurations #'(1 . 1) {
                                     c'16
-                                    (                                                                    %! baca_slur:SpannerIndicatorCommand(1)
                                     [
+                                    (                                                                    %! baca_slur:SpannerIndicatorCommand(1)
                                     d'16
                                     bf'16
                                     fs''16
@@ -7653,8 +7694,8 @@ class MusicMaker(object):
                             {
                                 \scaleDurations #'(1 . 1) {
                                     c'16
-                                    (                                                                    %! baca_slur:SpannerIndicatorCommand(1)
                                     [
+                                    (                                                                    %! baca_slur:SpannerIndicatorCommand(1)
                                     d'16
                                     bf'16
                                     fs''16
@@ -7663,8 +7704,8 @@ class MusicMaker(object):
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     e''16
-                                    (                                                                    %! baca_slur:SpannerIndicatorCommand(1)
                                     [
+                                    (                                                                    %! baca_slur:SpannerIndicatorCommand(1)
                                     ef''16
                                     b''16
                                     )                                                                    %! baca_slur:SpannerIndicatorCommand(2)
@@ -7672,8 +7713,8 @@ class MusicMaker(object):
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     g''16
-                                    (                                                                    %! baca_slur:SpannerIndicatorCommand(1)
                                     [
+                                    (                                                                    %! baca_slur:SpannerIndicatorCommand(1)
                                     cs''16
                                     a'16
                                     af'16
@@ -7730,8 +7771,8 @@ class MusicMaker(object):
                             {
                                 \scaleDurations #'(1 . 1) {
                                     c'16
-                                    (                                                                    %! baca_slur:SpannerIndicatorCommand(1)
                                     [
+                                    (                                                                    %! baca_slur:SpannerIndicatorCommand(1)
                                     d'16
                                     )                                                                    %! baca_slur:SpannerIndicatorCommand(2)
                                     bf'16
@@ -7740,8 +7781,8 @@ class MusicMaker(object):
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     e''16
-                                    (                                                                    %! baca_slur:SpannerIndicatorCommand(1)
                                     [
+                                    (                                                                    %! baca_slur:SpannerIndicatorCommand(1)
                                     ef''16
                                     )                                                                    %! baca_slur:SpannerIndicatorCommand(2)
                                     b''16
@@ -7749,8 +7790,8 @@ class MusicMaker(object):
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     g''16
-                                    (                                                                    %! baca_slur:SpannerIndicatorCommand(1)
                                     [
+                                    (                                                                    %! baca_slur:SpannerIndicatorCommand(1)
                                     cs''16
                                     )                                                                    %! baca_slur:SpannerIndicatorCommand(2)
                                     a'16
@@ -8861,37 +8902,37 @@ class NestingCommand(scoping.Command):
                                     \scaleDurations #'(1 . 1) {
             <BLANKLINE>
                                         % [Music_Voice measure 1]                                    %! _comment_measure_numbers
-                                        \set stemLeftBeamCount = 0                                   %! _extend_beam
-                                        \set stemRightBeamCount = 2                                  %! _extend_beam
+                                        \set stemLeftBeamCount = 0
+                                        \set stemRightBeamCount = 2
                                         c'16
-                                        [                                                            %! _extend_beam
+                                        [
             <BLANKLINE>
-                                        \set stemLeftBeamCount = 2                                   %! _extend_beam
-                                        \set stemRightBeamCount = 2                                  %! _extend_beam
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 2
                                         d'16
             <BLANKLINE>
-                                        \set stemLeftBeamCount = 2                                   %! _extend_beam
-                                        \set stemRightBeamCount = 2                                  %! _extend_beam
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 2
                                         bf'!16
             <BLANKLINE>
-                                        \set stemLeftBeamCount = 2                                   %! _extend_beam
-                                        \set stemRightBeamCount = 1                                  %! _extend_beam
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 1
                                         fs''!16
             <BLANKLINE>
                                     }
             <BLANKLINE>
                                     \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                        \set stemLeftBeamCount = 1                                   %! _extend_beam
-                                        \set stemRightBeamCount = 2                                  %! _extend_beam
+                                        \set stemLeftBeamCount = 1
+                                        \set stemRightBeamCount = 2
                                         e''16
             <BLANKLINE>
-                                        \set stemLeftBeamCount = 2                                   %! _extend_beam
-                                        \set stemRightBeamCount = 2                                  %! _extend_beam
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 2
                                         ef''!16
             <BLANKLINE>
-                                        \set stemLeftBeamCount = 2                                   %! _extend_beam
-                                        \set stemRightBeamCount = 1                                  %! _extend_beam
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 1
                                         b''16
             <BLANKLINE>
                                     }
@@ -8905,22 +8946,22 @@ class NestingCommand(scoping.Command):
                                 \scaleDurations #'(1 . 1) {
             <BLANKLINE>
                                     % [Music_Voice measure 2]                                        %! _comment_measure_numbers
-                                    \set stemLeftBeamCount = 1                                       %! _extend_beam
-                                    \set stemRightBeamCount = 2                                      %! _extend_beam
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
                                     g''16
             <BLANKLINE>
-                                    \set stemLeftBeamCount = 2                                       %! _extend_beam
-                                    \set stemRightBeamCount = 2                                      %! _extend_beam
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     cs''!16
             <BLANKLINE>
-                                    \set stemLeftBeamCount = 2                                       %! _extend_beam
-                                    \set stemRightBeamCount = 2                                      %! _extend_beam
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     a'16
             <BLANKLINE>
-                                    \set stemLeftBeamCount = 2                                       %! _extend_beam
-                                    \set stemRightBeamCount = 0                                      %! _extend_beam
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 0
                                     af'!16
-                                    ]                                                                %! _extend_beam
+                                    ]
             <BLANKLINE>
                                 }
             <BLANKLINE>
@@ -9011,7 +9052,7 @@ class NestingCommand(scoping.Command):
                                 \times 17/16 {
                                     \scaleDurations #'(1 . 1) {
                                         r8
-                                        \set stemLeftBeamCount = 2
+                                        \set stemLeftBeamCount = 0
                                         \set stemRightBeamCount = 2
                                         c'16
                                         [
@@ -9047,7 +9088,7 @@ class NestingCommand(scoping.Command):
                                         \set stemRightBeamCount = 2
                                         a'16
                                         \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
+                                        \set stemRightBeamCount = 0
                                         af'16
                                         ]
                                         r8.
@@ -9265,7 +9306,10 @@ class PitchFirstRhythmCommand(scoping.Command):
                 duration = note.written_duration
                 pitches = collection
                 chord = abjad.Chord(pitches, duration)
+                indicators = abjad.detach(object, note)
                 abjad.mutate(note).replace([chord])
+                for indicator in indicators:
+                    abjad.attach(indicator, chord)
             selections[index] = stage_selection
         return selections
 
@@ -10482,7 +10526,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 3/2 {
                             \set stemLeftBeamCount = 1
-                            \set stemRightBeamCount = 0
+                            \set stemRightBeamCount = 1
                             a'8
                             ]
                         }
@@ -10728,8 +10772,6 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 3/2 {
-                            \override Staff.Stem.stemlet-length = 0.75
-                            \revert Staff.Stem.stemlet-length
                             a'8
                         }
                     }
@@ -11237,8 +11279,6 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                             ]
                         }
                         \scaleDurations #'(1 . 1) {
-                            \override Staff.Stem.stemlet-length = 1.5
-                            \revert Staff.Stem.stemlet-length
                             a'8
                         }
                     }
@@ -13528,6 +13568,9 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ...     baca.imbricate(
         ...         'Voice_2',
         ...         [baca.coat(0), baca.coat(2), 10, 0, 2],
+        ...         rmakers.BeamSpecifier(
+        ...             beam_divisions_together=True,
+        ...             ),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     time_treatments=[-1],
@@ -13586,11 +13629,17 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                 s8
                                 s16
                                 s16
+                                \set stemLeftBeamCount = 0
+                                \set stemRightBeamCount = 2
                                 bf'16
+                                [
                             }
                             \times 2/3 {
+                                \set stemLeftBeamCount = 1
+                                \set stemRightBeamCount = 2
                                 c'16
-                                [
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 0
                                 d'16
                                 ]
                                 s16
