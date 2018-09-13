@@ -1206,6 +1206,140 @@ class ContainerCommand(scoping.Command):
         """
         return self._identifier
 
+class GlissandoCommand(scoping.Command):
+    """
+    Glissando command.
+
+    ..  container:: example
+
+        >>> baca.GlissandoCommand()
+        GlissandoCommand(selector=baca.tleaves(), tags=[])
+
+    """
+
+    ### CLASS VARIABLES ###
+
+    __slots__ = (
+        '_allow_repeats',
+        '_allow_ties',
+        '_parenthesize_repeats',
+        '_right_broken',
+        '_stems',
+        '_tweaks',
+        '_zero_padding',
+        )
+
+    ### INITIALIZER ###
+
+    def __init__(
+        self,
+        allow_repeats: bool = None,
+        allow_ties: bool = None,
+        map: typings.Selector = None,
+        match: typings.Indices = None,
+        measures: typings.Slice = None,
+        parenthesize_repeats: bool = None,
+        right_broken: bool = None,
+        scope: scoping.ScopeTyping = None,
+        selector: typings.Selector = 'baca.tleaves()',
+        stems: bool = None,
+        tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
+        tweaks: typings.TweaksTyping = None,
+        zero_padding: bool = None,
+        ):
+        scoping.Command.__init__(
+            self,
+            map=map,
+            match=match,
+            measures=measures,
+            scope=scope,
+            selector=selector,
+            tags=tags,
+            )
+        self._allow_repeats = allow_repeats
+        self._allow_ties = allow_ties
+        self._parenthesize_repeats = parenthesize_repeats
+        self._right_broken = right_broken
+        self._stems = stems
+        self._validate_tweaks(tweaks)
+        self._tweaks = tweaks
+        self._zero_padding = zero_padding
+
+    ### SPECIAL METHODS ###
+
+    def _call(self, argument=None) -> None:
+        """
+        Applies command to result of selector called on ``argument``.
+        """
+        if argument is None:
+            return
+        if self.selector is not None:
+            argument = self.selector(argument)
+        leaves = classes.Selection(argument).leaves()
+        abjad.glissando(
+            leaves,
+            *self.tweaks,
+            allow_repeats=self.allow_repeats,
+            allow_ties=self.allow_ties,
+            parenthesize_repeats=self.parenthesize_repeats,
+            right_broken=self.right_broken,
+            stems=self.stems,
+            tag=self.tag,
+            zero_padding=self.zero_padding,
+            )
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def allow_repeats(self) -> typing.Optional[bool]:
+        """
+        Is true when glissando allows repeats.
+        """
+        return self._allow_repeats
+
+    @property
+    def allow_ties(self) -> typing.Optional[bool]:
+        """
+        Is true when glissando allows ties.
+        """
+        return self._allow_ties
+
+    @property
+    def parenthesize_repeats(self) -> typing.Optional[bool]:
+        """
+        Is true when glissando parenthesizes repeats.
+        """
+        return self._parenthesize_repeats
+
+    @property
+    def right_broken(self) -> typing.Optional[bool]:
+        """
+        Is true when glissando is right-broken.
+        """
+        return self._right_broken
+
+    @property
+    def stems(self) -> typing.Optional[bool]:
+        """
+        Is true when glissando formats stems.
+        """
+        return self._stems
+
+    @property
+    def tweaks(self) -> typing.Optional[
+        typing.Tuple[abjad.LilyPondTweakManager, ...]]:
+        """
+        Gets tweaks.
+        """
+        return self._tweaks
+
+    @property
+    def zero_padding(self) -> typing.Optional[bool]:
+        """
+        Is true when glissando formats zero padding.
+        """
+        return self._zero_padding
+
 class GlobalFermataCommand(scoping.Command):
     """
     Global fermata command.

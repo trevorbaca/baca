@@ -176,6 +176,7 @@ Bača API
    ~baca.commands.BCPCommand
    ~baca.commands.ColorCommand
    ~baca.commands.ContainerCommand
+   ~baca.commands.GlissandoCommand
    ~baca.commands.GlobalFermataCommand
    ~baca.commands.IndicatorCommand
    ~baca.commands.InstrumentChangeCommand

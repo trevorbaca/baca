@@ -1,6 +1,7 @@
 import abjad
 import typing
 from . import classes
+from . import commands
 from . import scoping
 from . import typings
 
@@ -1346,6 +1347,16 @@ def glissando(
         tags=[tag],
         tweaks=tweaks,
         )
+#    return commands.GlissandoCommand(
+#        allow_repeats=allow_repeats,
+#        allow_ties=allow_ties,
+#        right_broken=right_broken,
+#        selector=selector,
+#        stems=stems,
+#        tags=[tag],
+#        tweaks=tweaks,
+#        zero_padding=zero_padding,
+#        )
 
 def ottava(
     *,

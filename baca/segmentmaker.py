@@ -3123,6 +3123,7 @@ class SegmentMaker(abjad.SegmentMaker):
         assert isinstance(status, str), repr(status)
         indicator = wrapper.indicator
         prototype = (
+            abjad.GlissandoIndicator,
             abjad.StartBeam,
             abjad.StartSlur,
             abjad.StartTextSpan,

@@ -25,6 +25,7 @@ commands
    ~BCPCommand
    ~ColorCommand
    ~ContainerCommand
+   ~GlissandoCommand
    ~GlobalFermataCommand
    ~IndicatorCommand
    ~InstrumentChangeCommand
@@ -314,6 +315,117 @@ commands
    .. container:: inherited
 
       .. autoattribute:: ContainerCommand.tags
+
+.. autoclass:: GlissandoCommand
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
+   .. autosummary::
+      :nosignatures:
+
+      allow_repeats
+      allow_ties
+      parenthesize_repeats
+      right_broken
+      stems
+      tweaks
+      zero_padding
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: GlissandoCommand.__call__
+
+   .. container:: inherited
+
+      .. automethod:: GlissandoCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: GlissandoCommand.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: GlissandoCommand.get_tag
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: GlissandoCommand.allow_repeats
+
+   .. autoattribute:: GlissandoCommand.allow_ties
+
+   .. container:: inherited
+
+      .. autoattribute:: GlissandoCommand.deactivate
+
+   .. container:: inherited
+
+      .. autoattribute:: GlissandoCommand.map
+
+   .. container:: inherited
+
+      .. autoattribute:: GlissandoCommand.match
+
+   .. container:: inherited
+
+      .. autoattribute:: GlissandoCommand.measures
+
+   .. autoattribute:: GlissandoCommand.parenthesize_repeats
+
+   .. autoattribute:: GlissandoCommand.right_broken
+
+   .. container:: inherited
+
+      .. autoattribute:: GlissandoCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: GlissandoCommand.scope
+
+   .. container:: inherited
+
+      .. autoattribute:: GlissandoCommand.selector
+
+   .. autoattribute:: GlissandoCommand.stems
+
+   .. container:: inherited
+
+      .. autoattribute:: GlissandoCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: GlissandoCommand.tag_measure_number
+
+   .. container:: inherited
+
+      .. autoattribute:: GlissandoCommand.tags
+
+   .. autoattribute:: GlissandoCommand.tweaks
+
+   .. autoattribute:: GlissandoCommand.zero_padding
 
 .. autoclass:: GlobalFermataCommand
 
