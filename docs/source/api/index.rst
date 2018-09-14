@@ -204,6 +204,8 @@ Bača API
    ~baca.commands.dynamic_down
    ~baca.commands.dynamic_up
    ~baca.commands.edition
+   ~baca.commands.finger_pressure_transition
+   ~baca.commands.glissando
    ~baca.commands.global_fermata
    ~baca.commands.instrument
    ~baca.commands.label
@@ -1138,8 +1140,6 @@ Rhythm library.
    :nosignatures:
 
    ~baca.spannercommands.beam
-   ~baca.spannercommands.finger_pressure_transition
-   ~baca.spannercommands.glissando
    ~baca.spannercommands.ottava
    ~baca.spannercommands.ottava_bassa
    ~baca.spannercommands.repeat_tie

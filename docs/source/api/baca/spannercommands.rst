@@ -247,8 +247,6 @@ spannercommands
    :nosignatures:
 
    ~beam
-   ~finger_pressure_transition
-   ~glissando
    ~ottava
    ~ottava_bassa
    ~repeat_tie
@@ -260,10 +258,6 @@ spannercommands
    ~trill_spanner
 
 .. autofunction:: beam
-
-.. autofunction:: finger_pressure_transition
-
-.. autofunction:: glissando
 
 .. autofunction:: ottava
 

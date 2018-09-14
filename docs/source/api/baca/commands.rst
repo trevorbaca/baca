@@ -1105,6 +1105,8 @@ commands
    ~dynamic_down
    ~dynamic_up
    ~edition
+   ~finger_pressure_transition
+   ~glissando
    ~global_fermata
    ~instrument
    ~label
@@ -1136,6 +1138,10 @@ commands
 .. autofunction:: dynamic_up
 
 .. autofunction:: edition
+
+.. autofunction:: finger_pressure_transition
+
+.. autofunction:: glissando
 
 .. autofunction:: global_fermata
 
