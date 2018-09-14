@@ -37,7 +37,4 @@ Slice = typing.Union[int, IntegerPair]
 
 Strings = typing.Union[str, typing.Sequence[str]]
 
-TweaksTyping = typing.Union[
-    abjad.LilyPondTweakManager,
-    typing.Tuple[abjad.LilyPondTweakManager, int],
-    ]
+TweaksTyping = abjad.TweaksTyping

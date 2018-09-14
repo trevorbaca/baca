@@ -870,7 +870,7 @@ def glissando(
     style: str = None,
     tag: typing.Optional[str] = 'baca_glissando',
     zero_padding: bool = None,
-    ) -> SpannerCommand:
+    ) -> commands.GlissandoCommand:
     r"""
     Attaches glissando.
 
@@ -1333,20 +1333,6 @@ def glissando(
             >>                                                                                       %! SingleStaffScoreTemplate
 
     """
-#    glissando = abjad.Glissando(
-#        allow_repeats=allow_repeats,
-#        allow_ties=allow_ties,
-#        stems=stems,
-#        style=style,
-#        zero_padding=zero_padding,
-#        )
-#    return SpannerCommand(
-#        right_broken=right_broken,
-#        selector=selector,
-#        spanner=glissando,
-#        tags=[tag],
-#        tweaks=tweaks,
-#        )
     return commands.GlissandoCommand(
         allow_repeats=allow_repeats,
         allow_ties=allow_ties,

@@ -1244,9 +1244,9 @@ class GlissandoCommand(scoping.Command):
         selector: typings.Selector = 'baca.tleaves()',
         stems: bool = None,
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
-        tweaks: typings.TweaksTyping = None,
+        tweaks: typing.Tuple[typings.TweaksTyping, ...] = None,
         zero_padding: bool = None,
-        ):
+        ) -> None:
         scoping.Command.__init__(
             self,
             map=map,
@@ -1276,15 +1276,19 @@ class GlissandoCommand(scoping.Command):
         if self.selector is not None:
             argument = self.selector(argument)
         leaves = classes.Selection(argument).leaves()
+        tweaks_: typing.List[abjad.LilyPondTweakManager] = []
+        for tweak in self.tweaks or []:
+            assert isinstance(tweak, abjad.LilyPondTweakManager)
+            tweaks_.append(tweak)
         abjad.glissando(
             leaves,
-            *self.tweaks,
+            *tweaks_,
             allow_repeats=self.allow_repeats,
             allow_ties=self.allow_ties,
             parenthesize_repeats=self.parenthesize_repeats,
             right_broken=self.right_broken,
             stems=self.stems,
-            tag=self.tag,
+            tag=str(self.tag),
             zero_padding=self.zero_padding,
             )
 
@@ -1327,7 +1331,7 @@ class GlissandoCommand(scoping.Command):
 
     @property
     def tweaks(self) -> typing.Optional[
-        typing.Tuple[abjad.LilyPondTweakManager, ...]]:
+        typing.Tuple[typings.TweaksTyping, ...]]:
         """
         Gets tweaks.
         """
