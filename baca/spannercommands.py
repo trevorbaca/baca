@@ -1151,10 +1151,12 @@ def slur(
 def sustain_pedal(
     *,
     selector: typings.Selector = 'baca.leaves()',
+    start_piano_pedal: abjad.StartPianoPedal = None,
+    stop_piano_pedal: abjad.StopPianoPedal = None,
     tag: typing.Optional[str] = 'baca_sustain_pedal',
-    ) -> SpannerCommand:
+    ) -> SpannerIndicatorCommand:
     r"""
-    Attaches sustain pedal.
+    Attaches sustain pedal indicators.
 
     ..  container:: example
 
@@ -1187,9 +1189,8 @@ def sustain_pedal(
                         \times 9/10 {
                             \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! baca_sustain_pedal_staff_padding:OverrideCommand(1)
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
                             r8
-                            \sustainOn                                                               %! baca_sustain_pedal:SpannerCommand
+                            \sustainOn                                                               %! baca_sustain_pedal:SpannerIndicatorCommand(1)
                             c'16
                             [
                             d'16
@@ -1217,7 +1218,7 @@ def sustain_pedal(
                         \times 4/5 {
                             a'16
                             r4
-                            \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
+                            \sustainOff                                                              %! baca_sustain_pedal:SpannerIndicatorCommand(2)
                             \revert Staff.SustainPedalLineSpanner.staff-padding                      %! baca_sustain_pedal_staff_padding:OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
@@ -1271,10 +1272,9 @@ def sustain_pedal(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
                             fs''16
                             [
-                            \sustainOn                                                               %! baca_sustain_pedal:SpannerCommand
+                            \sustainOn                                                               %! baca_sustain_pedal:SpannerIndicatorCommand(1)
                             e''16
                             ]
                             ef''4
@@ -1284,7 +1284,7 @@ def sustain_pedal(
                             af''16
                             [
                             g''16
-                            \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
+                            \sustainOff                                                              %! baca_sustain_pedal:SpannerIndicatorCommand(2)
                             ]
                         }
                         \times 4/5 {
@@ -1339,9 +1339,8 @@ def sustain_pedal(
                             bf'4
                             ~
                             bf'16
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
                             r16
-                            \sustainOn                                                               %! baca_sustain_pedal:SpannerCommand
+                            \sustainOn                                                               %! baca_sustain_pedal:SpannerIndicatorCommand(1)
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
@@ -1356,7 +1355,7 @@ def sustain_pedal(
                             af''16
                             [
                             g''16
-                            \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
+                            \sustainOff                                                              %! baca_sustain_pedal:SpannerIndicatorCommand(2)
                             ]
                         }
                         \times 4/5 {
@@ -1415,10 +1414,9 @@ def sustain_pedal(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
                             fs''16
                             [
-                            \sustainOn                                                               %! baca_sustain_pedal:SpannerCommand
+                            \sustainOn                                                               %! baca_sustain_pedal:SpannerIndicatorCommand(1)
                             e''16
                             ]
                             ef''4
@@ -1432,7 +1430,7 @@ def sustain_pedal(
                         }
                         \times 4/5 {
                             a'16
-                            \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
+                            \sustainOff                                                              %! baca_sustain_pedal:SpannerIndicatorCommand(2)
                             r4
                             \revert Staff.SustainPedalLineSpanner.staff-padding                      %! baca_sustain_pedal_staff_padding:OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
@@ -1483,9 +1481,8 @@ def sustain_pedal(
                             bf'4
                             ~
                             bf'16
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
                             r16
-                            \sustainOn                                                               %! baca_sustain_pedal:SpannerCommand
+                            \sustainOn                                                               %! baca_sustain_pedal:SpannerIndicatorCommand(1)
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
@@ -1504,7 +1501,7 @@ def sustain_pedal(
                         }
                         \times 4/5 {
                             a'16
-                            \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
+                            \sustainOff                                                              %! baca_sustain_pedal:SpannerIndicatorCommand(2)
                             r4
                             \revert Staff.SustainPedalLineSpanner.staff-padding                      %! baca_sustain_pedal_staff_padding:OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
@@ -1547,9 +1544,8 @@ def sustain_pedal(
                         \times 9/10 {
                             \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! baca_sustain_pedal_staff_padding:OverrideCommand(1)
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
                             r8
-                            \sustainOn                                                               %! baca_sustain_pedal:SpannerCommand
+                            \sustainOn                                                               %! baca_sustain_pedal:SpannerIndicatorCommand(1)
                             c'16
                             [
                             d'16
@@ -1558,14 +1554,13 @@ def sustain_pedal(
                             ~
                             bf'16
                             r16
-                            \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
+                            \sustainOff                                                              %! baca_sustain_pedal:SpannerIndicatorCommand(2)
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
                             fs''16
                             [
-                            \sustainOn                                                               %! baca_sustain_pedal:SpannerCommand
+                            \sustainOn                                                               %! baca_sustain_pedal:SpannerIndicatorCommand(1)
                             e''16
                             ]
                             ef''4
@@ -1575,15 +1570,14 @@ def sustain_pedal(
                             af''16
                             [
                             g''16
-                            \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
+                            \sustainOff                                                              %! baca_sustain_pedal:SpannerIndicatorCommand(2)
                             ]
                         }
                         \times 4/5 {
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
                             a'16
-                            \sustainOn                                                               %! baca_sustain_pedal:SpannerCommand
+                            \sustainOn                                                               %! baca_sustain_pedal:SpannerIndicatorCommand(1)
                             r4
-                            \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
+                            \sustainOff                                                              %! baca_sustain_pedal:SpannerIndicatorCommand(2)
                             \revert Staff.SustainPedalLineSpanner.staff-padding                      %! baca_sustain_pedal_staff_padding:OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
@@ -1625,9 +1619,8 @@ def sustain_pedal(
                         \times 9/10 {
                             \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! baca_sustain_pedal_staff_padding:OverrideCommand(1)
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
                             r8
-                            \sustainOn                                                               %! baca_sustain_pedal:SpannerCommand
+                            \sustainOn                                                               %! baca_sustain_pedal:SpannerIndicatorCommand(1)
                             c'16
                             [
                             d'16
@@ -1635,10 +1628,9 @@ def sustain_pedal(
                             bf'4
                             ~
                             bf'16
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
                             r16
-                            \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
-                            \sustainOn                                                               %! baca_sustain_pedal:SpannerCommand
+                            \sustainOff                                                              %! baca_sustain_pedal:SpannerIndicatorCommand(2)
+                            \sustainOn                                                               %! baca_sustain_pedal:SpannerIndicatorCommand(1)
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
@@ -1652,16 +1644,15 @@ def sustain_pedal(
                             r16
                             af''16
                             [
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
                             g''16
-                            \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
+                            \sustainOff                                                              %! baca_sustain_pedal:SpannerIndicatorCommand(2)
                             ]
-                            \sustainOn                                                               %! baca_sustain_pedal:SpannerCommand
+                            \sustainOn                                                               %! baca_sustain_pedal:SpannerIndicatorCommand(1)
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
+                            \sustainOff                                                              %! baca_sustain_pedal:SpannerIndicatorCommand(2)
                             \revert Staff.SustainPedalLineSpanner.staff-padding                      %! baca_sustain_pedal_staff_padding:OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
@@ -1703,9 +1694,8 @@ def sustain_pedal(
                         \times 9/10 {
                             \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! baca_sustain_pedal_staff_padding:OverrideCommand(1)
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
                             r8
-                            \sustainOn                                                               %! baca_sustain_pedal:SpannerCommand
+                            \sustainOn                                                               %! baca_sustain_pedal:SpannerIndicatorCommand(1)
                             c'16
                             [
                             d'16
@@ -1717,11 +1707,10 @@ def sustain_pedal(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
                             fs''16
-                            \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
+                            \sustainOff                                                              %! baca_sustain_pedal:SpannerIndicatorCommand(2)
                             [
-                            \sustainOn                                                               %! baca_sustain_pedal:SpannerCommand
+                            \sustainOn                                                               %! baca_sustain_pedal:SpannerIndicatorCommand(1)
                             e''16
                             ]
                             ef''4
@@ -1734,12 +1723,11 @@ def sustain_pedal(
                             ]
                         }
                         \times 4/5 {
-                            \set Staff.pedalSustainStyle = #'bracket                                 %! baca_sustain_pedal:SpannerCommand
                             a'16
-                            \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
-                            \sustainOn                                                               %! baca_sustain_pedal:SpannerCommand
+                            \sustainOff                                                              %! baca_sustain_pedal:SpannerIndicatorCommand(2)
+                            \sustainOn                                                               %! baca_sustain_pedal:SpannerIndicatorCommand(1)
                             r4
-                            \sustainOff                                                              %! baca_sustain_pedal:SpannerCommand
+                            \sustainOff                                                              %! baca_sustain_pedal:SpannerIndicatorCommand(2)
                             \revert Staff.SustainPedalLineSpanner.staff-padding                      %! baca_sustain_pedal_staff_padding:OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
@@ -1748,9 +1736,12 @@ def sustain_pedal(
             >>
 
     """
-    return SpannerCommand(
+    start_piano_pedal = start_piano_pedal or abjad.StartPianoPedal()
+    stop_piano_pedal = stop_piano_pedal or abjad.StopPianoPedal()
+    return SpannerIndicatorCommand(
         selector=selector,
-        spanner=abjad.PianoPedalSpanner(style='bracket'),
+        start_indicator=start_piano_pedal,
+        stop_indicator=stop_piano_pedal,
         tags=[tag],
         )
 

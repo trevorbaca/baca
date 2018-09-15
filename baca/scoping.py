@@ -422,6 +422,7 @@ class Command(object):
             'MARGIN_MARKUP',
             'METRONOME_MARK',
             'OTTAVA',
+            'PEDAL',
             'PERSISTENT_OVERRIDE',
             'SLUR',
             'STAFF_LINES',

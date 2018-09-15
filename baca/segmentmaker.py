@@ -1734,6 +1734,8 @@ class SegmentMaker(abjad.SegmentMaker):
                     continue
                 if isinstance(indicator, abjad.StopBeam):
                     continue
+                if isinstance(indicator, abjad.StopPianoPedal):
+                    continue
                 if isinstance(indicator, abjad.StopSlur):
                     continue
                 if isinstance(indicator, abjad.StopTextSpan):
@@ -3130,10 +3132,12 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.GlissandoIndicator,
             abjad.Ottava,
             abjad.StartBeam,
+            abjad.StartPianoPedal,
             abjad.StartSlur,
             abjad.StartTextSpan,
             abjad.StartTrillSpan,
             abjad.StopBeam,
+            abjad.StopPianoPedal,
             abjad.StopSlur,
             abjad.StopTextSpan,
             abjad.StopTrillSpan,
