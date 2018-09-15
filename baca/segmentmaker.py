@@ -3126,6 +3126,7 @@ class SegmentMaker(abjad.SegmentMaker):
         indicator = wrapper.indicator
         prototype = (
             abjad.GlissandoIndicator,
+            abjad.Ottava,
             abjad.StartBeam,
             abjad.StartSlur,
             abjad.StartTextSpan,
