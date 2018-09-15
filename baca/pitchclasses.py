@@ -7974,8 +7974,7 @@ class PitchTree(classes.Tree):
                 leaves_with_skips = abjad.select(leaves_with_skips)
                 abjad.attach(spanner, leaves_with_skips)
                 if brackets:
-                    bracket = abjad.HorizontalBracket()
-                    abjad.attach(bracket, leaves_with_skips)
+                    abjad.horizontal_bracket(leaves_with_skips)
                 leaf_list_stack.pop()
         else:
             assert node._payload is not None
