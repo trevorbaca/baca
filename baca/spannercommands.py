@@ -726,16 +726,18 @@ def beam(
         )
 
 def ottava(
+    start_ottava: abjad.Ottava = abjad.Ottava(n=1),
+    stop_ottava: abjad.Ottava = abjad.Ottava(n=0, format_slot='after'),
     *,
     selector: typings.Selector = 'baca.tleaves()',
     tag: typing.Optional[str] = 'baca_ottava',
     ) -> SpannerCommand:
     r"""
-    Attaches ottava spanner.
+    Attaches ottava indicators.
 
     ..  container:: example
 
-        Attaches ottava spanner to trimmed leaves:
+        Attaches ottava indicators to trimmed leaves:
 
         >>> music_maker = baca.MusicMaker()
         >>> contribution = music_maker(
@@ -763,7 +765,7 @@ def ottava(
                         \times 9/10 {
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            \ottava #1                                                               %! baca_ottava:SpannerCommand
+                            \ottava 1                                                                %! baca_ottava:SpannerIndicatorCommand(1)
                             c'16
                             [
                             d'16
@@ -790,7 +792,7 @@ def ottava(
                         }
                         \times 4/5 {
                             a'16
-                            \ottava #0                                                               %! baca_ottava:SpannerCommand
+                            \ottava 0                                                                %! baca_ottava:SpannerIndicatorCommand(2)
                             r4
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
@@ -799,23 +801,26 @@ def ottava(
             >>
 
     """
-    return SpannerCommand(
+    return SpannerIndicatorCommand(
         selector=selector,
-        spanner=abjad.OctavationSpanner(start=1, stop=0),
+        start_indicator=start_ottava,
+        stop_indicator=stop_ottava,
         tags=[tag],
         )
 
 def ottava_bassa(
+    start_ottava: abjad.Ottava = abjad.Ottava(n=-1),
+    stop_ottava: abjad.Ottava = abjad.Ottava(n=0, format_slot='after'),
     *,
     selector: typings.Selector = 'baca.tleaves()',
     tag: typing.Optional[str] = 'baca_ottava_bassa',
     ) -> SpannerCommand:
     r"""
-    Attaches ottava bassa spanner.
+    Attaches ottava bassa indicators.
 
     ..  container:: example
 
-        Attaches ottava bassa spanner to trimmed leaves:
+        Attaches ottava bassa indicators to trimmed leaves:
 
         >>> music_maker = baca.MusicMaker()
         >>> contribution = music_maker(
@@ -843,7 +848,7 @@ def ottava_bassa(
                         \times 9/10 {
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            \ottava #-1                                                              %! baca_ottava_bassa:SpannerCommand
+                            \ottava -1                                                               %! baca_ottava_bassa:SpannerIndicatorCommand(1)
                             c'16
                             [
                             d'16
@@ -870,7 +875,7 @@ def ottava_bassa(
                         }
                         \times 4/5 {
                             a'16
-                            \ottava #0                                                               %! baca_ottava_bassa:SpannerCommand
+                            \ottava 0                                                                %! baca_ottava_bassa:SpannerIndicatorCommand(2)
                             r4
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
@@ -879,9 +884,10 @@ def ottava_bassa(
             >>
 
     """
-    return SpannerCommand(
+    return SpannerIndicatorCommand(
         selector=selector,
-        spanner=abjad.OctavationSpanner(start=-1, stop=0),
+        start_indicator=start_ottava,
+        stop_indicator=stop_ottava,
         tags=[tag],
         )
 
