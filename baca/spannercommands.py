@@ -1930,16 +1930,18 @@ def tie_repeat_pitches(
     return command
 
 def trill_spanner(
-    string: str = None,
+    argument: str = None,
     *,
     harmonic: bool = None,
     left_broken: bool = None,
     right_broken: bool = None,
     selector: typings.Selector = 'baca.tleaves().with_next_leaf()',
+    start_trill_span: abjad.StartTrillSpan = None,
+    stop_trill_span: abjad.StopTrillSpan = None,
     tag: typing.Optional[str] = 'baca_trill_spanner',
-    ) -> SpannerCommand:
+    ) -> SpannerIndicatorCommand:
     r"""
-    Attaches trill spanner.
+    Attaches trill spanner indicators.
 
     ..  container:: example
 
@@ -1973,7 +1975,7 @@ def trill_spanner(
                             r8
                             c'16
                             [
-                            \startTrillSpan
+                            \startTrillSpan                                                          %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             d'16
                             ]
                             bf'4
@@ -1999,7 +2001,7 @@ def trill_spanner(
                         \times 4/5 {
                             a'16
                             r4
-                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
@@ -2042,49 +2044,49 @@ def trill_spanner(
                             r8
                             c'16
                             [
-                            \startTrillSpan
+                            \startTrillSpan                                                          %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             d'16
-                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
                             ]
-                            \startTrillSpan
+                            \startTrillSpan                                                          %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             bf'4
                             ~
-                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
-                            \startTrillSpan
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
+                            \startTrillSpan                                                          %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             bf'16
                             r16
-                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
                             [
-                            \startTrillSpan
+                            \startTrillSpan                                                          %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             e''16
-                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
                             ]
-                            \startTrillSpan
+                            \startTrillSpan                                                          %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             ef''4
                             ~
-                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
-                            \startTrillSpan
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
+                            \startTrillSpan                                                          %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             ef''16
                             r16
-                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
                             af''16
                             [
-                            \startTrillSpan
+                            \startTrillSpan                                                          %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             g''16
-                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
                             ]
-                            \startTrillSpan
+                            \startTrillSpan                                                          %! baca_trill_spanner:SpannerIndicatorCommand(1)
                         }
                         \times 4/5 {
                             a'16
-                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
-                            \startTrillSpan
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
+                            \startTrillSpan                                                          %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             r4
-                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
@@ -2127,37 +2129,37 @@ def trill_spanner(
                             r8
                             c'16
                             [
-                            \startTrillSpan
+                            \startTrillSpan                                                          %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             d'16
                             ]
                             bf'4
                             ~
                             bf'16
                             r16
-                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
                             [
-                            \startTrillSpan
+                            \startTrillSpan                                                          %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             e''16
                             ]
                             ef''4
                             ~
                             ef''16
                             r16
-                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
                             af''16
                             [
-                            \startTrillSpan
+                            \startTrillSpan                                                          %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             g''16
                             ]
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
@@ -2175,7 +2177,7 @@ def trill_spanner(
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.rests_around([2], [4]),
         ...     baca.new(
-        ...         baca.trill_spanner(string='Eb4'),
+        ...         baca.trill_spanner('Eb4'),
         ...         map=baca.qrun(0),
         ...         ),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -2198,12 +2200,12 @@ def trill_spanner(
                         \times 9/10 {
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             c'16
                             [
-                            \startTrillSpan ef'
+                            \startTrillSpan ef'                                                      %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             d'16
-                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
                             ]
                             bf'4
                             ~
@@ -2244,7 +2246,7 @@ def trill_spanner(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.new(
-        ...         baca.trill_spanner(string='Eb4'),
+        ...         baca.trill_spanner('D4', harmonic=True),
         ...         map=baca.qruns(),
         ...         ),
         ...     baca.rests_around([2], [4]),
@@ -2268,60 +2270,69 @@ def trill_spanner(
                         \times 9/10 {
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             c'16
                             [
-                            \startTrillSpan ef'
-                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
+                            - \tweak TrillPitchHead.stencil #(lambda (grob) (grob-interpret-markup grob #{ \markup \musicglyph #"noteheads.s0harmonic" #})) %! baca_trill_spanner:SpannerIndicatorCommand(1)
+                            \startTrillSpan d'                                                       %! baca_trill_spanner:SpannerIndicatorCommand(1)
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             d'16
-                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
                             ]
-                            \startTrillSpan ef'
-                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
+                            - \tweak TrillPitchHead.stencil #(lambda (grob) (grob-interpret-markup grob #{ \markup \musicglyph #"noteheads.s0harmonic" #})) %! baca_trill_spanner:SpannerIndicatorCommand(1)
+                            \startTrillSpan d'                                                       %! baca_trill_spanner:SpannerIndicatorCommand(1)
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             bf'4
                             ~
-                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
-                            \startTrillSpan ef'
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
+                            - \tweak TrillPitchHead.stencil #(lambda (grob) (grob-interpret-markup grob #{ \markup \musicglyph #"noteheads.s0harmonic" #})) %! baca_trill_spanner:SpannerIndicatorCommand(1)
+                            \startTrillSpan d'                                                       %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             bf'16
                             r16
-                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             fs''16
                             [
-                            \startTrillSpan ef'
-                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
+                            - \tweak TrillPitchHead.stencil #(lambda (grob) (grob-interpret-markup grob #{ \markup \musicglyph #"noteheads.s0harmonic" #})) %! baca_trill_spanner:SpannerIndicatorCommand(1)
+                            \startTrillSpan d'                                                       %! baca_trill_spanner:SpannerIndicatorCommand(1)
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             e''16
-                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
                             ]
-                            \startTrillSpan ef'
-                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
+                            - \tweak TrillPitchHead.stencil #(lambda (grob) (grob-interpret-markup grob #{ \markup \musicglyph #"noteheads.s0harmonic" #})) %! baca_trill_spanner:SpannerIndicatorCommand(1)
+                            \startTrillSpan d'                                                       %! baca_trill_spanner:SpannerIndicatorCommand(1)
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             ef''4
                             ~
-                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
-                            \startTrillSpan ef'
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
+                            - \tweak TrillPitchHead.stencil #(lambda (grob) (grob-interpret-markup grob #{ \markup \musicglyph #"noteheads.s0harmonic" #})) %! baca_trill_spanner:SpannerIndicatorCommand(1)
+                            \startTrillSpan d'                                                       %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             ef''16
                             r16
-                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
-                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             af''16
                             [
-                            \startTrillSpan ef'
-                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
+                            - \tweak TrillPitchHead.stencil #(lambda (grob) (grob-interpret-markup grob #{ \markup \musicglyph #"noteheads.s0harmonic" #})) %! baca_trill_spanner:SpannerIndicatorCommand(1)
+                            \startTrillSpan d'                                                       %! baca_trill_spanner:SpannerIndicatorCommand(1)
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             g''16
-                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
                             ]
-                            \startTrillSpan ef'
+                            - \tweak TrillPitchHead.stencil #(lambda (grob) (grob-interpret-markup grob #{ \markup \musicglyph #"noteheads.s0harmonic" #})) %! baca_trill_spanner:SpannerIndicatorCommand(1)
+                            \startTrillSpan d'                                                       %! baca_trill_spanner:SpannerIndicatorCommand(1)
                         }
                         \times 4/5 {
-                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             a'16
-                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
-                            \startTrillSpan ef'
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
+                            - \tweak TrillPitchHead.stencil #(lambda (grob) (grob-interpret-markup grob #{ \markup \musicglyph #"noteheads.s0harmonic" #})) %! baca_trill_spanner:SpannerIndicatorCommand(1)
+                            \startTrillSpan d'                                                       %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             r4
-                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
@@ -2329,16 +2340,16 @@ def trill_spanner(
             >>
 
     ..  container:: example
-
+ 
         Attaches pitched trill (specified by interval) to trimmed leaves
         (leaked to the right) in every equipitch run:
-
+ 
         >>> music_maker = baca.MusicMaker()
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.new(
-        ...         baca.trill_spanner(string='M2'),
+        ...         baca.trill_spanner('M2'),
         ...         map=baca.qruns(),
         ...         ),
         ...     baca.rests_around([2], [4]),
@@ -2348,9 +2359,9 @@ def trill_spanner(
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
+ 
         ..  docs::
-
+ 
             >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff
             <<
@@ -2362,60 +2373,60 @@ def trill_spanner(
                         \times 9/10 {
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             c'16
                             [
-                            \startTrillSpan d'
-                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
+                            \startTrillSpan d'                                                       %! baca_trill_spanner:SpannerIndicatorCommand(1)
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             d'16
-                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
                             ]
-                            \startTrillSpan e'
-                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
+                            \startTrillSpan e'                                                       %! baca_trill_spanner:SpannerIndicatorCommand(1)
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             bf'4
                             ~
-                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
-                            \startTrillSpan c''
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
+                            \startTrillSpan c''                                                      %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             bf'16
                             r16
-                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             fs''16
                             [
-                            \startTrillSpan gs''
-                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
+                            \startTrillSpan gs''                                                     %! baca_trill_spanner:SpannerIndicatorCommand(1)
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             e''16
-                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
                             ]
-                            \startTrillSpan fs''
-                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
+                            \startTrillSpan fs''                                                     %! baca_trill_spanner:SpannerIndicatorCommand(1)
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             ef''4
                             ~
-                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
-                            \startTrillSpan f''
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
+                            \startTrillSpan f''                                                      %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             ef''16
                             r16
-                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
-                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             af''16
                             [
-                            \startTrillSpan bf''
-                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
+                            \startTrillSpan bf''                                                     %! baca_trill_spanner:SpannerIndicatorCommand(1)
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             g''16
-                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
                             ]
-                            \startTrillSpan a''
+                            \startTrillSpan a''                                                      %! baca_trill_spanner:SpannerIndicatorCommand(1)
                         }
                         \times 4/5 {
-                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerCommand
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             a'16
-                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
-                            \startTrillSpan b'
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
+                            \startTrillSpan b'                                                       %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             r4
-                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerCommand
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
@@ -2423,24 +2434,32 @@ def trill_spanner(
             >>
 
     """
-    if string is None:
-        interval = None
-        pitch = None
-    else:
+    interval = pitch = None
+    if argument is not None:
         try:
-            interval = None
-            pitch = abjad.NamedPitch(string)
-        except ValueError:
-            interval = abjad.NamedInterval(string)
-            pitch = None
-    return SpannerCommand(
+            pitch = abjad.NamedPitch(argument)
+        except:
+            try:
+                interval = abjad.NamedInterval(argument)
+            except:
+                pass
+    start_trill_span = start_trill_span or abjad.StartTrillSpan()
+    if pitch is not None or interval is not None:
+        start_trill_span = abjad.new(
+            start_trill_span,
+            interval=interval,
+            pitch=pitch,
+            )
+    if harmonic is True:
+        string = '#(lambda (grob) (grob-interpret-markup grob'
+        string += ' #{ \markup \musicglyph #"noteheads.s0harmonic" #}))'
+        abjad.tweak(start_trill_span).TrillPitchHead.stencil = string
+    stop_trill_span = stop_trill_span or abjad.StopTrillSpan()
+    return SpannerIndicatorCommand(
         left_broken=left_broken,
         right_broken=right_broken,
-        spanner=abjad.TrillSpanner(
-            interval=interval,
-            is_harmonic=harmonic,
-            pitch=pitch,
-            ),
         selector=selector,
+        start_indicator=start_trill_span,
+        stop_indicator=stop_trill_span,
         tags=[tag],
         )

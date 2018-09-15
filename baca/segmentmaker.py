@@ -1738,6 +1738,8 @@ class SegmentMaker(abjad.SegmentMaker):
                     continue
                 if isinstance(indicator, abjad.StopTextSpan):
                     continue
+                if isinstance(indicator, abjad.StopTrillSpan):
+                    continue
                 prototype, manifest = None, None
                 if isinstance(indicator, abjad.Instrument):
                     manifest = 'instruments'
@@ -3130,9 +3132,11 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.StartBeam,
             abjad.StartSlur,
             abjad.StartTextSpan,
+            abjad.StartTrillSpan,
             abjad.StopBeam,
             abjad.StopSlur,
             abjad.StopTextSpan,
+            abjad.StopTrillSpan,
             )
         if isinstance(indicator, prototype):
             return

@@ -425,6 +425,7 @@ class Command(object):
             'PERSISTENT_OVERRIDE',
             'SLUR',
             'STAFF_LINES',
+            'TRILL',
             ), repr(stem)
         reapplied_wrappers = []
         reapplied_indicators = []
