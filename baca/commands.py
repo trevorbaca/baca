@@ -514,8 +514,7 @@ class BCPCommand(scoping.Command):
         return super().tag
 
     @property
-    def tweaks(self) -> typing.Optional[
-        typing.Tuple[abjad.TweakTyping, ...]]:
+    def tweaks(self) -> typing.Optional[abjad.IndexedTweakTuple]:
         r"""
         Gets tweaks.
 
@@ -1244,7 +1243,7 @@ class GlissandoCommand(scoping.Command):
         selector: typings.Selector = 'baca.tleaves()',
         stems: bool = None,
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
-        tweaks: typing.Tuple[abjad.TweakTyping, ...] = None,
+        tweaks: abjad.IndexedTweakTuple = None,
         zero_padding: bool = None,
         ) -> None:
         scoping.Command.__init__(
@@ -1330,8 +1329,7 @@ class GlissandoCommand(scoping.Command):
         return self._stems
 
     @property
-    def tweaks(self) -> typing.Optional[
-        typing.Tuple[abjad.TweakTyping, ...]]:
+    def tweaks(self) -> typing.Optional[abjad.IndexedTweakTuple]:
         """
         Gets tweaks.
         """
@@ -1945,8 +1943,7 @@ class IndicatorCommand(scoping.Command):
         return self._redundant
 
     @property
-    def tweaks(self) -> typing.Optional[
-        typing.Tuple[abjad.TweakTyping, ...]]:
+    def tweaks(self) -> typing.Optional[abjad.IndexedTweakTuple]:
         """
         Gets tweaks.
         """
@@ -4014,7 +4011,7 @@ def finger_pressure_transition(
         )
 
 def glissando(
-    *tweaks: abjad.TweakTyping,
+    *tweaks: abjad.IndexedTweak,
     allow_repeats: bool = None,
     allow_ties: bool = None,
     right_broken: bool = None,

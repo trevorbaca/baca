@@ -174,7 +174,7 @@ class PiecewiseCommand(scoping.Command):
         scope: scoping.ScopeTyping = None,
         selector: typings.Selector = 'baca.leaves()',
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
-        tweaks: typing.Tuple[abjad.TweakTyping, ...] = None,
+        tweaks: abjad.IndexedTweakTuple = None,
         ) -> None:
         # for selector evaluation
         import baca
@@ -481,8 +481,7 @@ class PiecewiseCommand(scoping.Command):
         return self._selector
 
     @property
-    def tweaks(self) -> typing.Optional[
-        typing.Tuple[abjad.TweakTyping, ...]]:
+    def tweaks(self) -> typing.Optional[abjad.IndexedTweakTuple]:
         r"""
         Gets tweaks.
         """
@@ -3217,7 +3216,7 @@ def parse_hairpin_descriptor(
 
 def text_spanner(
     items: typing.Union[str, typing.List],
-    *tweaks: abjad.TweakTyping,
+    *tweaks: abjad.IndexedTweak,
     bookend: typing.Union[bool, int] = -1,
     boxed: bool = None,
     final_piece_spanner: bool = None,
