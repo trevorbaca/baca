@@ -731,7 +731,7 @@ def ottava(
     *,
     selector: typings.Selector = 'baca.tleaves()',
     tag: typing.Optional[str] = 'baca_ottava',
-    ) -> SpannerCommand:
+    ) -> SpannerIndicatorCommand:
     r"""
     Attaches ottava indicators.
 
@@ -814,7 +814,7 @@ def ottava_bassa(
     *,
     selector: typings.Selector = 'baca.tleaves()',
     tag: typing.Optional[str] = 'baca_ottava_bassa',
-    ) -> SpannerCommand:
+    ) -> SpannerIndicatorCommand:
     r"""
     Attaches ottava bassa indicators.
 
