@@ -515,7 +515,7 @@ class BCPCommand(scoping.Command):
 
     @property
     def tweaks(self) -> typing.Optional[
-        typing.Tuple[abjad.LilyPondTweakManager, ...]]:
+        typing.Tuple[abjad.TweakTyping, ...]]:
         r"""
         Gets tweaks.
 
@@ -1946,7 +1946,7 @@ class IndicatorCommand(scoping.Command):
 
     @property
     def tweaks(self) -> typing.Optional[
-        typing.Tuple[abjad.LilyPondTweakManager, ...]]:
+        typing.Tuple[abjad.TweakTyping, ...]]:
         """
         Gets tweaks.
         """
