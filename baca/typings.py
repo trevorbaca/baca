@@ -36,5 +36,3 @@ Selector = typing.Union[str, abjad.Expression]
 Slice = typing.Union[int, IntegerPair]
 
 Strings = typing.Union[str, typing.Sequence[str]]
-
-TweaksTyping = abjad.TweaksTyping

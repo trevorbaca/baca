@@ -40,7 +40,7 @@ class SpannerCommand(scoping.Command):
         selector: typings.Selector = 'baca.leaves()',
         spanner: abjad.Spanner = None,
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
-        tweaks: typing.Tuple[typings.TweaksTyping, ...] = None,
+        tweaks: typing.Tuple[abjad.TweakTyping, ...] = None,
         ) -> None:
         scoping.Command.__init__(
             self,
@@ -213,7 +213,7 @@ class SpannerCommand(scoping.Command):
 
     @property
     def tweaks(self) -> typing.Optional[
-        typing.Tuple[typings.TweaksTyping, ...]]:
+        typing.Tuple[abjad.TweakTyping, ...]]:
         """
         Gets tweaks.
         """
@@ -427,7 +427,7 @@ class SpannerIndicatorCommand(scoping.Command):
         start_indicator: typing.Any = None,
         stop_indicator: typing.Any = None,
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
-        tweaks: typing.Tuple[typings.TweaksTyping, ...] = None,
+        tweaks: typing.Tuple[abjad.TweakTyping, ...] = None,
         ) -> None:
         scoping.Command.__init__(
             self,
@@ -581,7 +581,7 @@ class SpannerIndicatorCommand(scoping.Command):
 
     @property
     def tweaks(self) -> typing.Optional[
-        typing.Tuple[typings.TweaksTyping, ...]]:
+        typing.Tuple[abjad.TweakTyping, ...]]:
         """
         Gets tweaks.
         """

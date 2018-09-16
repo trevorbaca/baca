@@ -1244,7 +1244,7 @@ class GlissandoCommand(scoping.Command):
         selector: typings.Selector = 'baca.tleaves()',
         stems: bool = None,
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
-        tweaks: typing.Tuple[typings.TweaksTyping, ...] = None,
+        tweaks: typing.Tuple[abjad.TweakTyping, ...] = None,
         zero_padding: bool = None,
         ) -> None:
         scoping.Command.__init__(
@@ -1331,7 +1331,7 @@ class GlissandoCommand(scoping.Command):
 
     @property
     def tweaks(self) -> typing.Optional[
-        typing.Tuple[typings.TweaksTyping, ...]]:
+        typing.Tuple[abjad.TweakTyping, ...]]:
         """
         Gets tweaks.
         """
@@ -4014,7 +4014,7 @@ def finger_pressure_transition(
         )
 
 def glissando(
-    *tweaks: typings.TweaksTyping,
+    *tweaks: abjad.TweakTyping,
     allow_repeats: bool = None,
     allow_ties: bool = None,
     right_broken: bool = None,
