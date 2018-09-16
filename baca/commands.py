@@ -29,7 +29,7 @@ class BCPCommand(scoping.Command):
     def __init__(
         self,
         bcps: typing.Iterable[typings.IntegerPair] = None,
-        bow_change_tweaks: typing.Tuple[abjad.LilyPondTweakManager, ...] = None,
+        bow_change_tweaks: abjad.IndexedTweakTuple = None,
         final_spanner: bool = None,
         helper: typing.Callable = None,
         map: typings.Selector = None,
@@ -38,7 +38,7 @@ class BCPCommand(scoping.Command):
         scope: scoping.ScopeTyping = None,
         selector: typings.Selector = None,
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
-        tweaks: typing.Tuple[abjad.LilyPondTweakManager, ...] = None,
+        tweaks: abjad.IndexedTweakTuple = None,
         ) -> None:
         scoping.Command.__init__(
             self,
@@ -52,8 +52,8 @@ class BCPCommand(scoping.Command):
         if bcps is None:
             self._validate_bcps(bcps)
         self._bow_contact_points = bcps
-        if bow_change_tweaks is not None:
-            self._validate_tweaks(bow_change_tweaks)
+        self._bow_change_tweaks = None
+        self._validate_indexed_tweaks(bow_change_tweaks)
         self._bow_change_tweaks = bow_change_tweaks
         if final_spanner is not None:
             final_spanner = bool(final_spanner)
@@ -61,7 +61,7 @@ class BCPCommand(scoping.Command):
         if helper is not None:
             assert callable(helper), repr(helper)
         self._helper = helper
-        self._validate_tweaks(tweaks)
+        self._validate_indexed_tweaks(tweaks)
         self._tweaks = tweaks
 
     ### SPECIAL METHODS ###
@@ -464,9 +464,7 @@ class BCPCommand(scoping.Command):
         return self._bow_contact_points
 
     @property
-    def bow_change_tweaks(self) -> typing.Optional[
-        typing.Tuple[abjad.LilyPondTweakManager, ...]
-        ]:
+    def bow_change_tweaks(self) -> typing.Optional[abjad.IndexedTweakTuple]:
         """
         Gets bow change tweaks.
         """
@@ -1260,7 +1258,7 @@ class GlissandoCommand(scoping.Command):
         self._parenthesize_repeats = parenthesize_repeats
         self._right_broken = right_broken
         self._stems = stems
-        self._validate_tweaks(tweaks)
+        self._validate_indexed_tweaks(tweaks)
         self._tweaks = tweaks
         self._zero_padding = zero_padding
 
@@ -1679,7 +1677,7 @@ class IndicatorCommand(scoping.Command):
         scope: scoping.ScopeTyping = None,
         selector: typings.Selector = 'baca.pheads()',
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
-        tweaks: typing.Tuple[abjad.LilyPondTweakManager, ...] = None,
+        tweaks: abjad.IndexedTweakTuple = None,
         ) -> None:
         scoping.Command.__init__(
             self,
@@ -1705,7 +1703,7 @@ class IndicatorCommand(scoping.Command):
         if redundant is not None:
             redundant = bool(redundant)
         self._redundant = redundant
-        self._validate_tweaks(tweaks)
+        self._validate_indexed_tweaks(tweaks)
         self._tweaks = tweaks
 
     ### SPECIAL METHODS ###
@@ -2621,8 +2619,8 @@ def bar_extent_persistent(
 
 def bcps(
     bcps: typing.Iterable[typings.IntegerPair],
-    *tweaks: abjad.LilyPondTweakManager,
-    bow_change_tweaks: typing.Tuple[abjad.LilyPondTweakManager, ...] = None,
+    *tweaks: abjad.IndexedTweak,
+    bow_change_tweaks: abjad.IndexedTweakTuple = None,
     final_spanner: bool = None,
     helper: typing.Callable = None,
     selector: typings.Selector = 'baca.leaves()',

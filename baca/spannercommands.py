@@ -62,7 +62,7 @@ class SpannerCommand(scoping.Command):
             right_broken = bool(right_broken)
         self._right_broken = right_broken
         self._spanner = spanner
-        self._validate_tweaks(tweaks)
+        self._validate_indexed_tweaks(tweaks)
         self._tweaks = tweaks
 
     ### SPECIAL METHODS ###
@@ -449,7 +449,7 @@ class SpannerIndicatorCommand(scoping.Command):
         self._right_broken = right_broken
         self._start_indicator = start_indicator
         self._stop_indicator = stop_indicator
-        self._validate_tweaks(tweaks)
+        self._validate_indexed_tweaks(tweaks)
         self._tweaks = tweaks
 
     ### SPECIAL METHODS ###

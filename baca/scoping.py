@@ -470,8 +470,9 @@ class Command(object):
         assert not any(':' in _ for _ in tags), repr(tags)
         return True
 
+    # TODO: change name to _validate_indexed_tweaks
     @staticmethod
-    def _validate_tweaks(tweaks):
+    def _validate_indexed_tweaks(tweaks):
         if tweaks is None:
             return
         assert isinstance(tweaks, tuple), repr(tweaks)

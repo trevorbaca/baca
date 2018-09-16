@@ -210,7 +210,7 @@ class PiecewiseCommand(scoping.Command):
             remove_length_1_spanner_start = bool(remove_length_1_spanner_start)
         self._remove_length_1_spanner_start = remove_length_1_spanner_start
         self._right_broken = right_broken
-        self._validate_tweaks(tweaks)
+        self._validate_indexed_tweaks(tweaks)
         self._tweaks = tweaks
 
     ### SPECIAL METHODS ###
@@ -5298,8 +5298,6 @@ def text_spanner(
             left_text=item_markup,
             style=style,
             )
-#        if tweaks:
-#            PiecewiseCommand._apply_tweaks(start_text_span, tweaks)
         # kerns bookended hook
         if 'hook' in style:
             assert isinstance(right_markup, abjad.Markup)
