@@ -3048,25 +3048,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 runtime = self._bundle_manifests()
                 suite(leaf, runtime=runtime)
 
-    def _shorten_long_repeat_ties(self):
-        leaves = abjad.iterate(self.score).leaves()
-        for leaf in leaves:
-            ties = abjad.inspect(leaf).spanners(abjad.Tie)
-            if not ties:
-                continue
-            tie = ties.pop()
-            if not tie.repeat:
-                continue
-            previous_leaf = abjad.inspect(leaf).leaf(-1)
-            if previous_leaf is None:
-                continue
-            minimum_duration = abjad.Duration(1, 8)
-            if abjad.inspect(previous_leaf).duration() < minimum_duration:
-                string = r"\shape #'((2 . 0) (1 . 0) (0.5 . 0) (0 . 0))"
-                string += " RepeatTie"
-                literal = abjad.LilyPondLiteral(string)
-                abjad.attach(literal, leaf, tag='_shorten_long_repeat_ties')
-
     def _style_fermata_measures(self):
         if self.fermata_measure_staff_line_count is None:
             return
@@ -6275,7 +6256,6 @@ class SegmentMaker(abjad.SegmentMaker):
             with abjad.ForbidUpdate(component=self.score, update_on_exit=True):
                 self._remove_redundant_time_signatures()
                 self._cache_fermata_measure_numbers()
-                self._shorten_long_repeat_ties()
                 self._treat_untreated_persistent_wrappers()
                 self._attach_metronome_marks()
                 self._reanalyze_trending_dynamics()
