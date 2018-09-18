@@ -5182,8 +5182,8 @@ def text_spanner(
             <BLANKLINE>
                                 % [Music_Voice measure 4]                                            %! _comment_measure_numbers
                                 f'4
-                                ~
                                 \stopTextSpan                                                        %! baca_text_spanner:PiecewiseCommand(1)
+                                ~
             <BLANKLINE>
                                 f'8
                                 \stopTextSpan                                                        %! baca_text_spanner:PiecewiseCommand(2)

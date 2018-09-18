@@ -2420,6 +2420,132 @@ class PartAssignmentCommand(scoping.Command):
         """
         return self._part_assignment
 
+class TieCommand(scoping.Command):
+    """
+    Tie command.
+
+    ..  container:: example
+
+        >>> baca.TieCommand()
+        TieCommand(selector=baca.tleaves(), tags=[])
+
+    """
+
+    ### CLASS VARIABLES ###
+
+    __slots__ = (
+        '_direction',
+        '_left_broken',
+        '_repeat',
+        '_right_broken',
+        '_tweaks',
+        )
+
+    ### INITIALIZER ###
+
+    def __init__(
+        self,
+        direction: abjad.VerticalAlignment = None,
+        left_broken: bool = None,
+        map: typings.Selector = None,
+        match: typings.Indices = None,
+        measures: typings.Slice = None,
+        repeat: typing.Union[
+            bool, typings.IntegerPair, abjad.DurationInequality
+            ] = None,
+        right_broken: bool = None,
+        scope: scoping.ScopeTyping = None,
+        selector: typings.Selector = 'baca.tleaves()',
+        tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
+        tweaks: abjad.IndexedTweakManagers = None,
+        ) -> None:
+        scoping.Command.__init__(
+            self,
+            map=map,
+            match=match,
+            measures=measures,
+            scope=scope,
+            selector=selector,
+            tags=tags,
+            )
+        if direction is not None:
+            assert direction in (abjad.Right, abjad.Left, None)
+        self._direction = direction
+        self._left_broken = left_broken 
+        self._repeat = repeat
+        self._right_broken = right_broken
+        self._validate_indexed_tweaks(tweaks)
+        self._tweaks = tweaks
+
+    ### SPECIAL METHODS ###
+
+    def _call(self, argument=None) -> None:
+        """
+        Applies command to result of selector called on ``argument``.
+        """
+        if argument is None:
+            return
+        if self.selector is not None:
+            argument = self.selector(argument)
+        leaves = classes.Selection(argument).leaves(
+            do_not_iterate_grace_containers=True,
+            )
+        assert isinstance(leaves, classes.Selection)
+        if len(leaves) == 1:
+            return
+        tweaks_: typing.List[abjad.LilyPondTweakManager] = []
+        for tweak in self.tweaks or []:
+            assert isinstance(tweak, abjad.LilyPondTweakManager)
+            tweaks_.append(tweak)
+        abjad.tie(
+            leaves,
+            #*tweaks_,
+            direction=self.direction,
+            #left_broken=self.left_broken,
+            repeat=self.repeat,
+            #right_broken=self.right_broken,
+            tag=str(self.tag),
+            )
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def direction(self) -> typing.Optional[abjad.VerticalAlignment]:
+        """
+        Gets tie direction.
+        """
+        return self._direction
+
+    @property
+    def left_broken(self) -> typing.Optional[bool]:
+        """
+        Is true when tie is left-broken.
+        """
+        return self._left_broken
+
+    @property
+    def repeat(self) -> typing.Optional[
+        typing.Union[bool, typings.IntegerPair, abjad.DurationInequality]
+        ]:
+        """
+        Gets repeat-tie threshold.
+        """
+        return self._repeat
+
+    @property
+    def right_broken(self) -> typing.Optional[bool]:
+        """
+        Is true when tie is right-broken.
+        """
+        return self._right_broken
+
+    @property
+    def tweaks(self) -> typing.Optional[abjad.IndexedTweakManagers]:
+        """
+        Gets tweaks.
+        """
+        return self._tweaks
+
 class VoltaCommand(scoping.Command):
     """
     Volta command.
@@ -5274,6 +5400,274 @@ def previous_metadata(path: str) -> typing.Optional[abjad.OrderedDict]:
     previous_segment = paths[previous_index]
     previous_metadata = previous_segment.get_metadata()
     return previous_metadata
+
+def repeat_tie(
+    *,
+    selector: typings.Selector = 'baca.qrun(0)',
+    tag: typing.Optional[str] = 'baca_repeat_tie',
+    ) -> TieCommand:
+    r"""
+    Attaches repeat tie.
+
+    ..  container:: example
+
+        Attaches repeat tie to each equipitch run:
+
+        >>> music_maker = baca.MusicMaker()
+        >>> contribution = music_maker(
+        ...     'Voice_1',
+        ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
+        ...     baca.new(
+        ...         baca.repeat_tie(),
+        ...         map=baca.qruns(),
+        ...         ),
+        ...     baca.rests_around([2], [4]),
+        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     counts=[1, 1, 5, -1],
+        ...     time_treatments=[-1],
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+            \new Staff
+            <<
+                \context Voice = "Voice_1"
+                {
+                    \voiceOne
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            r8
+                            c'16
+                            [
+                            c'16
+                            \repeatTie                                                               %! baca_repeat_tie
+                            ]
+                            bf'4
+                            bf'16
+                            \repeatTie                                                               %! baca_repeat_tie
+                            r16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            bf'16
+                            [
+                            e''16
+                            ]
+                            e''4
+                            \repeatTie                                                               %! baca_repeat_tie
+                            e''16
+                            \repeatTie                                                               %! baca_repeat_tie
+                            r16
+                            fs''16
+                            [
+                            af''16
+                            ]
+                        }
+                        \times 4/5 {
+                            a'16
+                            r4
+                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                        }
+                    }
+                }
+            >>
+
+    """
+    return TieCommand(
+        repeat=True,
+        selector=selector,
+        tags=[tag],
+        )
+
+def repeat_tie_repeat_pitches(
+    *,
+    tag: typing.Optional[str] = 'baca_repeat_tie_repeat_pitches',
+    ) -> TieCommand:
+    """
+    Repeat-ties repeat pitches.
+    """
+    return TieCommand(
+        map=classes.selector().ltqruns().nontrivial(),
+        repeat=True,
+        selector='baca.qrun(0)',
+        tags=[tag],
+        )
+
+def tie(
+    *,
+    map: typings.Selector = None,
+    repeat: typing.Union[
+        bool,
+        typings.IntegerPair,
+        abjad.DurationInequality,
+        ] = None,
+    selector: typings.Selector = 'baca.qrun(0)',
+    tag: typing.Optional[str] = 'baca_tie',
+    ) -> TieCommand:
+    r"""
+    Attaches tie.
+
+    ..  container:: example
+
+        Attaches ties to equipitch runs:
+
+        >>> music_maker = baca.MusicMaker()
+        >>> contribution = music_maker(
+        ...     'Voice_1',
+        ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
+        ...     baca.new(
+        ...         baca.tie(),
+        ...         map=baca.qruns(),
+        ...         ),
+        ...     baca.rests_around([2], [4]),
+        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     counts=[1, 1, 5, -1],
+        ...     time_treatments=[-1],
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+            \new Staff
+            <<
+                \context Voice = "Voice_1"
+                {
+                    \voiceOne
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            r8
+                            c'16
+                            [
+                            ~                                                                        %! baca_tie
+                            c'16
+                            ]
+                            bf'4
+                            ~                                                                        %! baca_tie
+                            bf'16
+                            r16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            bf'16
+                            [
+                            e''16
+                            ]
+                            ~                                                                        %! baca_tie
+                            e''4
+                            ~                                                                        %! baca_tie
+                            e''16
+                            r16
+                            fs''16
+                            [
+                            af''16
+                            ]
+                        }
+                        \times 4/5 {
+                            a'16
+                            r4
+                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                        }
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        Attaches repeat-threshold ties to equipitch runs:
+
+        >>> music_maker = baca.MusicMaker()
+        >>> contribution = music_maker(
+        ...     'Voice_1',
+        ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
+        ...     baca.new(
+        ...         baca.tie(repeat=(1, 8)),
+        ...         map=baca.qruns(),
+        ...         ),
+        ...     baca.rests_around([2], [4]),
+        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     counts=[1, 1, 5, -1],
+        ...     time_treatments=[-1],
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+            \new Staff
+            <<
+                \context Voice = "Voice_1"
+                {
+                    \voiceOne
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            r8
+                            c'16
+                            [
+                            ~                                                                        %! baca_tie
+                            c'16
+                            ]
+                            bf'4
+                            bf'16
+                            \repeatTie                                                               %! baca_tie
+                            r16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            bf'16
+                            [
+                            e''16
+                            ]
+                            ~                                                                        %! baca_tie
+                            e''4
+                            e''16
+                            \repeatTie                                                               %! baca_tie
+                            r16
+                            fs''16
+                            [
+                            af''16
+                            ]
+                        }
+                        \times 4/5 {
+                            a'16
+                            r4
+                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                        }
+                    }
+                }
+            >>
+
+    """
+    return TieCommand(
+        map=map,
+        repeat=repeat,
+        tags=[tag],
+        )
+
+def tie_repeat_pitches(
+    *,
+    tag: typing.Optional[str] = 'baca_tie_repeat_pitches',
+    ) -> TieCommand:
+    """
+    Ties repeat pitches.
+    """
+    map = classes.selector().ltqruns().nontrivial()
+    command = tie(
+        map=map,
+        tag=tag,
+        )
+    return command
 
 def voice_four(
     *,

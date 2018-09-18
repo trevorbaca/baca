@@ -3283,11 +3283,11 @@ def repeat_tie_down(
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie
                             ]
                             c''4
                             c''16
-                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -3295,12 +3295,12 @@ def repeat_tie_down(
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie
                             ]
                             b'4
-                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie
                             b'16
-                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie
                             r16
                         }
                         \times 4/5 {
@@ -3356,11 +3356,11 @@ def repeat_tie_down(
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie
                             ]
                             c''4
                             c''16
-                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -3369,12 +3369,12 @@ def repeat_tie_down(
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie
                             ]
                             b'4
-                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie
                             b'16
-                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie
                             \revert RepeatTie.direction                                              %! baca_repeat_tie_down:OverrideCommand(2)
                             r16
                         }
@@ -3477,11 +3477,11 @@ def repeat_tie_up(
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie
                             ]
                             c''4
                             c''16
-                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -3489,12 +3489,12 @@ def repeat_tie_up(
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie
                             ]
                             b'4
-                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie
                             b'16
-                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie
                             r16
                         }
                         \times 4/5 {
@@ -3550,11 +3550,11 @@ def repeat_tie_up(
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie
                             ]
                             c''4
                             c''16
-                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -3563,12 +3563,12 @@ def repeat_tie_up(
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie
                             ]
                             b'4
-                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie
                             b'16
-                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
+                            \repeatTie                                                               %! baca_repeat_tie
                             \revert RepeatTie.direction                                              %! baca_repeat_tie_up:OverrideCommand(2)
                             r16
                         }
@@ -7587,25 +7587,25 @@ def tie_down(
                             \override Stem.direction = #up                                           %! baca_stem_up:OverrideCommand(1)
                             \override Tie.direction = #down                                          %! baca_tie_down:OverrideCommand(1)
                             b'16
-                            ~                                                                        %! baca_tie:SpannerCommand
                             [
+                            ~                                                                        %! baca_tie
                             b'16
                             ]
                             c''4
-                            ~                                                                        %! baca_tie:SpannerCommand
+                            ~                                                                        %! baca_tie
                             c''16
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 7/8 {
                             b'16
-                            ~                                                                        %! baca_tie:SpannerCommand
                             [
+                            ~                                                                        %! baca_tie
                             b'16
-                            ~                                                                        %! baca_tie:SpannerCommand
                             ]
+                            ~                                                                        %! baca_tie
                             b'4
-                            ~                                                                        %! baca_tie:SpannerCommand
+                            ~                                                                        %! baca_tie
                             b'16
                             r16
                         }
@@ -7660,12 +7660,12 @@ def tie_down(
                             r8
                             \override Stem.direction = #up                                           %! baca_stem_up:OverrideCommand(1)
                             b'16
-                            ~                                                                        %! baca_tie:SpannerCommand
                             [
+                            ~                                                                        %! baca_tie
                             b'16
                             ]
                             c''4
-                            ~                                                                        %! baca_tie:SpannerCommand
+                            ~                                                                        %! baca_tie
                             c''16
                             r16
                         }
@@ -7673,13 +7673,13 @@ def tie_down(
                         \times 7/8 {
                             \override Tie.direction = #down                                          %! baca_tie_down:OverrideCommand(1)
                             b'16
-                            ~                                                                        %! baca_tie:SpannerCommand
                             [
+                            ~                                                                        %! baca_tie
                             b'16
-                            ~                                                                        %! baca_tie:SpannerCommand
                             ]
+                            ~                                                                        %! baca_tie
                             b'4
-                            ~                                                                        %! baca_tie:SpannerCommand
+                            ~                                                                        %! baca_tie
                             b'16
                             \revert Tie.direction                                                    %! baca_tie_down:OverrideCommand(2)
                             r16
@@ -7749,25 +7749,25 @@ def tie_up(
                             \override Stem.direction = #down                                         %! baca_stem_down:OverrideCommand(1)
                             \override Tie.direction = #up                                            %! baca_tie_up:OverrideCommand(1)
                             b'16
-                            ~                                                                        %! baca_tie:SpannerCommand
                             [
+                            ~                                                                        %! baca_tie
                             b'16
                             ]
                             c''4
-                            ~                                                                        %! baca_tie:SpannerCommand
+                            ~                                                                        %! baca_tie
                             c''16
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 7/8 {
                             b'16
-                            ~                                                                        %! baca_tie:SpannerCommand
                             [
+                            ~                                                                        %! baca_tie
                             b'16
-                            ~                                                                        %! baca_tie:SpannerCommand
                             ]
+                            ~                                                                        %! baca_tie
                             b'4
-                            ~                                                                        %! baca_tie:SpannerCommand
+                            ~                                                                        %! baca_tie
                             b'16
                             r16
                         }
@@ -7822,12 +7822,12 @@ def tie_up(
                             r8
                             \override Stem.direction = #down                                         %! baca_stem_down:OverrideCommand(1)
                             b'16
-                            ~                                                                        %! baca_tie:SpannerCommand
                             [
+                            ~                                                                        %! baca_tie
                             b'16
                             ]
                             c''4
-                            ~                                                                        %! baca_tie:SpannerCommand
+                            ~                                                                        %! baca_tie
                             c''16
                             r16
                         }
@@ -7835,13 +7835,13 @@ def tie_up(
                         \times 7/8 {
                             \override Tie.direction = #up                                            %! baca_tie_up:OverrideCommand(1)
                             b'16
-                            ~                                                                        %! baca_tie:SpannerCommand
                             [
+                            ~                                                                        %! baca_tie
                             b'16
-                            ~                                                                        %! baca_tie:SpannerCommand
                             ]
+                            ~                                                                        %! baca_tie
                             b'4
-                            ~                                                                        %! baca_tie:SpannerCommand
+                            ~                                                                        %! baca_tie
                             b'16
                             \revert Tie.direction                                                    %! baca_tie_up:OverrideCommand(2)
                             r16

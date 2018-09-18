@@ -249,12 +249,8 @@ spannercommands
    ~beam
    ~ottava
    ~ottava_bassa
-   ~repeat_tie
-   ~repeat_tie_repeat_pitches
    ~slur
    ~sustain_pedal
-   ~tie
-   ~tie_repeat_pitches
    ~trill_spanner
 
 .. autofunction:: beam
@@ -263,16 +259,8 @@ spannercommands
 
 .. autofunction:: ottava_bassa
 
-.. autofunction:: repeat_tie
-
-.. autofunction:: repeat_tie_repeat_pitches
-
 .. autofunction:: slur
 
 .. autofunction:: sustain_pedal
-
-.. autofunction:: tie
-
-.. autofunction:: tie_repeat_pitches
 
 .. autofunction:: trill_spanner

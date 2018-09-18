@@ -183,6 +183,7 @@ Bača API
    ~baca.commands.LabelCommand
    ~baca.commands.MetronomeMarkCommand
    ~baca.commands.PartAssignmentCommand
+   ~baca.commands.TieCommand
    ~baca.commands.VoltaCommand
 
 .. raw:: html
@@ -214,6 +215,10 @@ Bača API
    ~baca.commands.one_voice
    ~baca.commands.parts
    ~baca.commands.previous_metadata
+   ~baca.commands.repeat_tie
+   ~baca.commands.repeat_tie_repeat_pitches
+   ~baca.commands.tie
+   ~baca.commands.tie_repeat_pitches
    ~baca.commands.voice_four
    ~baca.commands.voice_one
    ~baca.commands.voice_three
@@ -1142,12 +1147,8 @@ Rhythm library.
    ~baca.spannercommands.beam
    ~baca.spannercommands.ottava
    ~baca.spannercommands.ottava_bassa
-   ~baca.spannercommands.repeat_tie
-   ~baca.spannercommands.repeat_tie_repeat_pitches
    ~baca.spannercommands.slur
    ~baca.spannercommands.sustain_pedal
-   ~baca.spannercommands.tie
-   ~baca.spannercommands.tie_repeat_pitches
    ~baca.spannercommands.trill_spanner
 
 .. raw:: html

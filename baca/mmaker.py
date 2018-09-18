@@ -2900,10 +2900,16 @@ class ImbricationCommand(scoping.Command):
                 self._trim_matching_chord(logical_tie, pitch_number)
                 pitch_number = cursor.next()
                 if self.truncate_ties:
+                    head = logical_tie.head
+                    tail = logical_tie.tail
                     for leaf in logical_tie[1:]:
                         duration = leaf.written_duration
                         skip = abjad.Skip(duration)
                         abjad.mutate(leaf).replace([skip])
+                    abjad.detach(abjad.TieIndicator, head)
+                    next_leaf = abjad.inspect(tail).leaf(1)
+                    if next_leaf is not None:
+                        abjad.detach(abjad.RepeatTie, next_leaf)
                 if self.hocket:
                     for leaf in original_logical_tie:
                         duration = leaf.written_duration

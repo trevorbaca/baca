@@ -872,7 +872,7 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.setting(self.score).current_bar_number = 1
 
     def _apply_first_and_last_ties(self, voice):
-        dummy_tie = abjad.Tie()
+        #dummy_tie = abjad.Tie()
         for current_leaf in abjad.iterate(voice).leaves():
             inspection = abjad.inspect(current_leaf)
             if inspection.has_indicator(abjad.tags.LEFT_BROKEN_REPEAT_TIE_TO):
@@ -889,49 +889,82 @@ class SegmentMaker(abjad.SegmentMaker):
                     repeat=False,
                     )
                 continue
-            if not dummy_tie._attachment_test(current_leaf):
+            #if not dummy_tie._attachment_test(current_leaf):
+            if not isinstance(current_leaf, (abjad.Chord, abjad.Note)):
                 continue
+            string = abjad.tags.REPEAT_TIE 
+            use_repeat_tie = abjad.inspect(current_leaf).has_indicator(string)
             if abjad.inspect(current_leaf).has_indicator(abjad.tags.TIE_TO):
                 previous_leaf = abjad.inspect(current_leaf).leaf(-1)
-                if dummy_tie._attachment_test(previous_leaf):
-                    previous_logical_tie = abjad.inspect(
-                        previous_leaf).logical_tie()
-                    if current_leaf not in previous_logical_tie:
-                        current_logical_tie = abjad.inspect(
-                            current_leaf).logical_tie()
-                        leaves = previous_logical_tie + current_logical_tie
-                        abjad.detach(abjad.Tie, previous_leaf)
-                        abjad.detach(abjad.Tie, current_leaf)
-                        inspection = abjad.inspect(current_leaf)
-                        string = abjad.tags.REPEAT_TIE 
-                        repeat_ties = inspection.has_indicator(string)
-                        tie = abjad.Tie(repeat=repeat_ties)
-                        abjad.attach(
-                            tie,
-                            leaves,
-                            tag='_apply_first_and_last_ties(1)',
-                            )
+                #if dummy_tie._attachment_test(previous_leaf):
+                if isinstance(previous_leaf, (abjad.Chord, abjad.Note)):
+#                    previous_logical_tie = abjad.inspect(
+#                        previous_leaf).logical_tie()
+#                    if current_leaf not in previous_logical_tie:
+#                        current_logical_tie = abjad.inspect(
+#                            current_leaf).logical_tie()
+#                        leaves = previous_logical_tie + current_logical_tie
+#                        abjad.detach(abjad.Tie, previous_leaf)
+#                        abjad.detach(abjad.Tie, current_leaf)
+#                        inspection = abjad.inspect(current_leaf)
+#                        string = abjad.tags.REPEAT_TIE 
+#                        repeat_ties = inspection.has_indicator(string)
+#                        tie = abjad.Tie(repeat=repeat_ties)
+#                        abjad.attach(
+#                            tie,
+#                            leaves,
+#                            tag='_apply_first_and_last_ties(1)',
+#                            )
+                        if use_repeat_tie:
+                            tie = abjad.RepeatTie()
+                            abjad.attach(
+                                tie,
+                                current_leaf,
+                                tag='_apply_first_and_last_ties(1a)',
+                                )
+                        else:
+                            tie = abjad.TieIndicator()
+                            abjad.attach(
+                                tie,
+                                previous_leaf,
+                                tag='_apply_first_and_last_ties(1b)',
+                                )
                 abjad.detach(abjad.tags.TIE_TO, current_leaf)
             if abjad.inspect(current_leaf).has_indicator(abjad.tags.TIE_FROM):
                 next_leaf = abjad.inspect(current_leaf).leaf(1)
-                if dummy_tie._attachment_test(next_leaf):
-                    current_logical_tie = abjad.inspect(
-                        current_leaf).logical_tie()
-                    if next_leaf not in current_logical_tie:
-                        next_logical_tie = abjad.inspect(
-                            next_leaf).logical_tie()
-                        leaves = current_logical_tie + next_logical_tie
-                        abjad.detach(abjad.Tie, current_leaf)
-                        abjad.detach(abjad.Tie, next_leaf)
-                        inspection = abjad.inspect(current_leaf)
-                        string = abjad.tags.REPEAT_TIE
-                        repeat_ties = inspection.has_indicator(string)
-                        tie = abjad.Tie(repeat=repeat_ties)
-                        abjad.attach(
-                            tie,
-                            leaves,
-                            tag='_apply_first_and_last_ties(2)',
-                            )
+                #if dummy_tie._attachment_test(next_leaf):
+                if isinstance(next_leaf, (abjad.Chord, abjad.Note)):
+#                    current_logical_tie = abjad.inspect(
+#                        current_leaf).logical_tie()
+#                    if next_leaf not in current_logical_tie:
+#                        next_logical_tie = abjad.inspect(
+#                            next_leaf).logical_tie()
+#                        leaves = current_logical_tie + next_logical_tie
+#                        abjad.detach(abjad.Tie, current_leaf)
+#                        abjad.detach(abjad.Tie, next_leaf)
+#                        inspection = abjad.inspect(current_leaf)
+#                        string = abjad.tags.REPEAT_TIE
+#                        repeat_ties = inspection.has_indicator(string)
+#                        tie = abjad.Tie(repeat=repeat_ties)
+#                        abjad.attach(
+#                            tie,
+#                            leaves,
+#                            tag='_apply_first_and_last_ties(2)',
+#                            )
+                        if use_repeat_tie:
+                            tie = abjad.RepeatTie()
+                            abjad.attach(
+                                tie,
+                                next_leaf,
+                                tag='_apply_first_and_last_ties(2a)',
+                                )
+                        else:
+                            tie = abjad.TieIndicator()
+                            abjad.attach(
+                                tie,
+                                current_leaf,
+                                tag='_apply_first_and_last_ties(2b)',
+                                )
                 abjad.detach(abjad.tags.TIE_FROM, current_leaf)
 
     def _apply_spacing(self):
@@ -1732,6 +1765,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 indicator = wrapper.indicator
                 if isinstance(indicator, abjad.GlissandoIndicator):
                     continue
+                if isinstance(indicator, abjad.RepeatTie):
+                    continue
                 if isinstance(indicator, abjad.StopBeam):
                     continue
                 if isinstance(indicator, abjad.StopPianoPedal):
@@ -1741,6 +1776,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 if isinstance(indicator, abjad.StopTextSpan):
                     continue
                 if isinstance(indicator, abjad.StopTrillSpan):
+                    continue
+                if isinstance(indicator, abjad.TieIndicator):
                     continue
                 prototype, manifest = None, None
                 if isinstance(indicator, abjad.Instrument):
@@ -3131,6 +3168,7 @@ class SegmentMaker(abjad.SegmentMaker):
         prototype = (
             abjad.GlissandoIndicator,
             abjad.Ottava,
+            abjad.RepeatTie,
             abjad.StartBeam,
             abjad.StartPianoPedal,
             abjad.StartSlur,
@@ -3141,6 +3179,7 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.StopSlur,
             abjad.StopTextSpan,
             abjad.StopTrillSpan,
+            abjad.TieIndicator,
             )
         if isinstance(indicator, prototype):
             return

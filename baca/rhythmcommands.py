@@ -706,6 +706,9 @@ class RhythmCommand(scoping.Command):
 
     @property
     def repeat_ties(self) -> typing.Optional[bool]:
+        """
+        Is true when rhythm command uses repeat ties.
+        """
         tie_specifier = getattr(self.rhythm_maker, 'tie_specifier', None)
         if tie_specifier is None:
             return False
@@ -1483,7 +1486,8 @@ class TieCorrectionCommand(scoping.Command):
         leaves = classes.Selection(argument).leaves()
         for leaf in leaves:
             if self.untie is True:
-                self._sever_tie(leaf, self.direction, self.repeat)
+                #self._sever_tie(leaf, self.direction, self.repeat)
+                self._sever_tie(leaf, self.direction)
             else:
                 self._add_tie(leaf, self.direction, self.repeat)
 
@@ -1495,84 +1499,115 @@ class TieCorrectionCommand(scoping.Command):
         left_broken, right_broken = None, None
         if direction is None:
             direction = abjad.Right
-        current_tie = abjad.inspect(current_leaf).spanner(abjad.Tie)
+        #current_tie = abjad.inspect(current_leaf).spanner(abjad.Tie)
         if direction == abjad.Right:
             next_leaf = abjad.inspect(current_leaf).leaf(1)
             if next_leaf is None:
                 right_broken = True
-                if current_tie is not None:
-                    new_leaves = list(current_tie.leaves)
-                    new_tie = abjad.new(current_tie)
-                else:
-                    new_leaves = [current_leaf]
-                    new_tie = abjad.Tie(repeat=repeat)
+#                if current_tie is not None:
+#                    new_leaves = list(current_tie.leaves)
+#                    new_tie = abjad.new(current_tie)
+#                else:
+#                    new_leaves = [current_leaf]
+#                    new_tie = abjad.Tie(repeat=repeat)
             else:
-                next_tie = abjad.inspect(next_leaf).spanner(abjad.Tie)
-                if current_tie is not None and next_tie is not None:
-                    if current_tie is next_tie:
-                        return
-                    else:
-                        new_leaves = list(current_tie) + list(next_tie)
-                        new_tie = abjad.new(current_tie)
-                elif current_tie is not None and next_tie is None:
-                    new_leaves = list(current_tie) + [next_leaf]
-                    new_tie = abjad.new(current_tie)
-                elif current_tie is None and next_tie is not None:
-                    new_leaves = [current_leaf] + list(next_tie)
-                    new_tie = abjad.Tie(repeat=repeat)
-                else:
-                    assert current_tie is None and next_tie is None
-                    new_leaves = [current_leaf, next_leaf]
-                    new_tie = abjad.Tie(repeat=repeat)
+                pass
+#                next_tie = abjad.inspect(next_leaf).spanner(abjad.Tie)
+#                if current_tie is not None and next_tie is not None:
+#                    if current_tie is next_tie:
+#                        return
+#                    else:
+#                        new_leaves = list(current_tie) + list(next_tie)
+#                        new_tie = abjad.new(current_tie)
+#                elif current_tie is not None and next_tie is None:
+#                    new_leaves = list(current_tie) + [next_leaf]
+#                    new_tie = abjad.new(current_tie)
+#                elif current_tie is None and next_tie is not None:
+#                    new_leaves = [current_leaf] + list(next_tie)
+#                    new_tie = abjad.Tie(repeat=repeat)
+#                else:
+#                    assert current_tie is None and next_tie is None
+#                    new_leaves = [current_leaf, next_leaf]
+#                    new_tie = abjad.Tie(repeat=repeat)
         else:
             assert direction == abjad.Left
             previous_leaf = abjad.inspect(current_leaf).leaf(-1)
             if previous_leaf is None:
                 left_broken = True
-                if current_tie is not None:
-                    new_leaves = list(current_tie.leaves)
-                    new_tie = abjad.new(current_tie, repeat=repeat)
-                else:
-                    new_leaves = [current_leaf]
-                    new_tie = abjad.Tie(repeat=repeat)
+#                if current_tie is not None:
+#                    new_leaves = list(current_tie.leaves)
+#                    new_tie = abjad.new(current_tie, repeat=repeat)
+#                else:
+#                    new_leaves = [current_leaf]
+#                    new_tie = abjad.Tie(repeat=repeat)
             else:
-                previous_tie = abjad.inspect(previous_leaf).spanner(
-                    abjad.Tie)
-                if previous_tie is not None and current_tie is not None:
-                    if previous_tie is current_tie:
-                        return
-                    else:
-                        new_leaves = list(previous_tie) + list(current_tie)
-                        new_tie = abjad.new(previous_tie)
-                elif previous_tie is not None and current_tie is None:
-                    new_leaves = list(previous_tie) + [current_leaf]
-                    new_tie = abjad.new(previous_tie)
-                elif previous_tie is None and current_tie is not None:
-                    new_leaves = [previous_leaf] + list(current_tie)
-                    new_tie = abjad.Tie(repeat=repeat)
-                else:
-                    assert previous_tie is None and current_tie is None
-                    new_leaves = [previous_leaf, current_leaf]
-                    new_tie = abjad.Tie(repeat=repeat)
-        new_leaves = abjad.select(new_leaves)
-        for leaf in new_leaves:
-            abjad.detach(abjad.Tie, leaf)
-        new_tie = abjad.new(
-            new_tie,
-            left_broken=left_broken,
-            right_broken=right_broken,
-            )
-        abjad.attach(new_tie, new_leaves, tag='TieCorrectionCommand')
+                pass
+#                previous_tie = abjad.inspect(previous_leaf).spanner(
+#                    abjad.Tie)
+#                if previous_tie is not None and current_tie is not None:
+#                    if previous_tie is current_tie:
+#                        return
+#                    else:
+#                        new_leaves = list(previous_tie) + list(current_tie)
+#                        new_tie = abjad.new(previous_tie)
+#                elif previous_tie is not None and current_tie is None:
+#                    new_leaves = list(previous_tie) + [current_leaf]
+#                    new_tie = abjad.new(previous_tie)
+#                elif previous_tie is None and current_tie is not None:
+#                    new_leaves = [previous_leaf] + list(current_tie)
+#                    new_tie = abjad.Tie(repeat=repeat)
+#                else:
+#                    assert previous_tie is None and current_tie is None
+#                    new_leaves = [previous_leaf, current_leaf]
+#                    new_tie = abjad.Tie(repeat=repeat)
+
+#        new_leaves = abjad.select(new_leaves)
+#        for leaf in new_leaves:
+#            abjad.detach(abjad.Tie, leaf)
+#        new_tie = abjad.new(
+#            new_tie,
+#            left_broken=left_broken,
+#            right_broken=right_broken,
+#            )
+#        abjad.attach(new_tie, new_leaves, tag='TieCorrectionCommand')
+
+        if direction == abjad.Left:
+            if repeat:
+                repeat_tie = abjad.RepeatTie(left_broken=left_broken)
+                abjad.attach(repeat_tie, current_leaf, tag='TieCorrectionCommand')
+            else:
+                tie = abjad.TieIndicator(right_broken=right_broken)
+                abjad.attach(tie, previous_leaf, tag='TieCorrectionCommand') 
+        else:
+            assert direction == abjad.Right
+            if not repeat:
+                tie = abjad.TieIndicator(right_broken=right_broken)
+                abjad.attach(tie, current_leaf, tag='TieCorrectionCommand')
+            else:
+                repeat_tie = abjad.RepeatTie(left_broken=left_broken)
+                abjad.attach(repeat_tie, next_leaf, tag='TieCorrectionCommand')
 
     @staticmethod
-    def _sever_tie(current_leaf, direction, repeat):
-        current_tie = abjad.inspect(current_leaf).spanner(abjad.Tie)
-        if current_tie is None:
-            return
-        if direction is None:
-            direction = abjad.Right
-        leaf_index = current_tie.leaves.index(current_leaf)
-        current_tie._fracture(leaf_index, direction=direction)
+    #def _sever_tie(current_leaf, direction, repeat):
+    def _sever_tie(current_leaf, direction):
+#        current_tie = abjad.inspect(current_leaf).spanner(abjad.Tie)
+#        if current_tie is None:
+#            return
+#        if direction is None:
+#            direction = abjad.Right
+#        leaf_index = current_tie.leaves.index(current_leaf)
+#        current_tie._fracture(leaf_index, direction=direction)
+        if direction in (abjad.Right, None):
+            abjad.detach(abjad.TieIndicator, current_leaf)
+            next_leaf = abjad.inspect(current_leaf).leaf(1)
+            if next_leaf is not None:
+                abjad.detach(abjad.RepeatTie, next_leaf)
+        else:
+            assert direction == abjad.Left
+            abjad.detach(abjad.RepeatTie, current_leaf)
+            previous_leaf = abjad.inspect(current_leaf).leaf(-1)
+            if previous_leaf is not None:
+                abjad.detach(abjad.TieIndicator, previous_leaf)
             
     ### PUBLIC PROPERTIES ###
 
@@ -2289,9 +2324,23 @@ def make_rhythm(
         assert isinstance(selection, abjad.Selection), repr(selection)
         argument = selection
     if repeat_tie_threshold is not None:
-        repeat = abjad.Tie._coerce_inequality(repeat_tie_threshold)
-        for tie in abjad.inspect(argument).spanners(abjad.Tie):
-            tie._repeat = repeat
+#        repeat = abjad.Tie._coerce_inequality(repeat_tie_threshold)
+#        for tie in abjad.inspect(argument).spanners(abjad.Tie):
+#            tie._repeat = repeat
+        temporary_container = abjad.Container([argument])
+        for logical_tie in abjad.select(temporary_container).logical_ties():
+            if logical_tie.is_trivial:
+                continue
+            for leaf in logical_tie.leaves:
+                abjad.detach(abjad.TieIndicator, leaf)
+                abjad.detach(abjad.RepeatTie, leaf)
+            abjad.tie(
+                logical_tie,
+                repeat=repeat_tie_threshold,
+                # TODO: add tag
+                #tag='baca_make_rhythm',
+                )
+        temporary_container[:] = []
     return RhythmCommand(
         rhythm_maker=argument,
         )

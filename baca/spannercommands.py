@@ -134,80 +134,6 @@ class SpannerCommand(scoping.Command):
     def spanner(self) -> typing.Optional[abjad.Spanner]:
         r"""
         Gets spanner.
-
-        ..  container:: example
-
-            Ties are smart enough to remove existing ties prior to attach:
-
-            >>> music_maker = baca.MusicMaker()
-
-            >>> contribution = music_maker(
-            ...     'Voice_1',
-            ...     [[14, 14, 14]],
-            ...     counts=[5],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {
-                            \scaleDurations #'(1 . 1) {
-                                d''4
-                                ~
-                                d''16
-                                d''4
-                                ~
-                                d''16
-                                d''4
-                                ~
-                                d''16
-                            }
-                        }
-                    }
-                >>
-
-            >>> contribution = music_maker(
-            ...     'Voice_1',
-            ...     [[14, 14, 14]],
-            ...     baca.SpannerCommand(spanner=abjad.Tie()),
-            ...     counts=[5],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {
-                            \scaleDurations #'(1 . 1) {
-                                d''4
-                                ~                                                                        %! SpannerCommand
-                                d''16
-                                ~                                                                        %! SpannerCommand
-                                d''4
-                                ~                                                                        %! SpannerCommand
-                                d''16
-                                ~                                                                        %! SpannerCommand
-                                d''4
-                                ~                                                                        %! SpannerCommand
-                                d''16
-                            }
-                        }
-                    }
-                >>
-
         """
         return self._spanner
 
@@ -886,103 +812,6 @@ def ottava_bassa(
         selector=selector,
         start_indicator=start_ottava,
         stop_indicator=stop_ottava,
-        tags=[tag],
-        )
-
-def repeat_tie(
-    *,
-    selector: typings.Selector = 'baca.qrun(0)',
-    tag: typing.Optional[str] = 'baca_repeat_tie',
-    ) -> SpannerCommand:
-    r"""
-    Attaches repeat tie.
-
-    ..  container:: example
-
-        Attaches repeat tie to each equipitch run:
-
-        >>> music_maker = baca.MusicMaker()
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-        ...     baca.new(
-        ...         baca.repeat_tie(),
-        ...         map=baca.qruns(),
-        ...         ),
-        ...     baca.rests_around([2], [4]),
-        ...     baca.tuplet_bracket_staff_padding(5),
-        ...     counts=[1, 1, 5, -1],
-        ...     time_treatments=[-1],
-        ...     )
-        >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
-            <<
-                \context Voice = "Voice_1"
-                {
-                    \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
-                            c'16
-                            [
-                            c'16
-                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
-                            ]
-                            bf'4
-                            bf'16
-                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            bf'16
-                            [
-                            e''16
-                            ]
-                            e''4
-                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
-                            e''16
-                            \repeatTie                                                               %! baca_repeat_tie:SpannerCommand
-                            r16
-                            fs''16
-                            [
-                            af''16
-                            ]
-                        }
-                        \times 4/5 {
-                            a'16
-                            r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }
-                    }
-                }
-            >>
-
-    """
-    return SpannerCommand(
-        selector=selector,
-        spanner=abjad.Tie(repeat=True),
-        tags=[tag],
-        )
-
-def repeat_tie_repeat_pitches(
-    *,
-    tag: typing.Optional[str] = 'baca_repeat_tie_repeat_pitches',
-    ) -> SpannerCommand:
-    """
-    Repeat-ties repeat pitches.
-    """
-    return SpannerCommand(
-        map=classes.selector().ltqruns().nontrivial(),
-        selector='baca.qrun(0)',
-        spanner=abjad.Tie(repeat=True),
         tags=[tag],
         )
 
@@ -1743,181 +1572,6 @@ def sustain_pedal(
         tags=[tag],
         )
 
-def tie(
-    *,
-    map: typings.Selector = None,
-    repeat: typing.Union[
-        bool,
-        typings.IntegerPair,
-        abjad.DurationInequality,
-        ] = None,
-    selector: typings.Selector = 'baca.qrun(0)',
-    tag: typing.Optional[str] = 'baca_tie',
-    ) -> SpannerCommand:
-    r"""
-    Attaches tie.
-
-    ..  container:: example
-
-        Attaches ties to equipitch runs:
-
-        >>> music_maker = baca.MusicMaker()
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-        ...     baca.new(
-        ...         baca.tie(),
-        ...         map=baca.qruns(),
-        ...         ),
-        ...     baca.rests_around([2], [4]),
-        ...     baca.tuplet_bracket_staff_padding(5),
-        ...     counts=[1, 1, 5, -1],
-        ...     time_treatments=[-1],
-        ...     )
-        >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
-            <<
-                \context Voice = "Voice_1"
-                {
-                    \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
-                            c'16
-                            ~                                                                        %! baca_tie:SpannerCommand
-                            [
-                            c'16
-                            ]
-                            bf'4
-                            ~                                                                        %! baca_tie:SpannerCommand
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            bf'16
-                            [
-                            e''16
-                            ~                                                                        %! baca_tie:SpannerCommand
-                            ]
-                            e''4
-                            ~                                                                        %! baca_tie:SpannerCommand
-                            e''16
-                            r16
-                            fs''16
-                            [
-                            af''16
-                            ]
-                        }
-                        \times 4/5 {
-                            a'16
-                            r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }
-                    }
-                }
-            >>
-
-    ..  container:: example
-
-        Attaches repeat-threshold ties to equipitch runs:
-
-        >>> music_maker = baca.MusicMaker()
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-        ...     baca.new(
-        ...         baca.tie(repeat=(1, 8)),
-        ...         map=baca.qruns(),
-        ...         ),
-        ...     baca.rests_around([2], [4]),
-        ...     baca.tuplet_bracket_staff_padding(5),
-        ...     counts=[1, 1, 5, -1],
-        ...     time_treatments=[-1],
-        ...     )
-        >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
-            <<
-                \context Voice = "Voice_1"
-                {
-                    \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
-                            c'16
-                            ~                                                                        %! baca_tie:SpannerCommand
-                            [
-                            c'16
-                            ]
-                            bf'4
-                            bf'16
-                            \repeatTie                                                               %! baca_tie:SpannerCommand
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            bf'16
-                            [
-                            e''16
-                            ~                                                                        %! baca_tie:SpannerCommand
-                            ]
-                            e''4
-                            e''16
-                            \repeatTie                                                               %! baca_tie:SpannerCommand
-                            r16
-                            fs''16
-                            [
-                            af''16
-                            ]
-                        }
-                        \times 4/5 {
-                            a'16
-                            r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }
-                    }
-                }
-            >>
-
-    """
-    tie = abjad.Tie(
-        repeat=repeat,
-        )
-    return SpannerCommand(
-        map=map,
-        selector=selector,
-        spanner=tie,
-        tags=[tag],
-        )
-
-def tie_repeat_pitches(
-    *,
-    tag: typing.Optional[str] = 'baca_tie_repeat_pitches',
-    ) -> SpannerCommand:
-    """
-    Ties repeat pitches.
-    """
-    map = classes.selector().ltqruns().nontrivial()
-    command = tie(
-        map=map,
-        tag=tag,
-        )
-    return command
-
 def trill_spanner(
     argument: str = None,
     *,
@@ -2039,8 +1693,8 @@ def trill_spanner(
                             ]
                             \startTrillSpan                                                          %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             bf'4
-                            ~
                             \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
+                            ~
                             \startTrillSpan                                                          %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             bf'16
                             r16
@@ -2056,8 +1710,8 @@ def trill_spanner(
                             ]
                             \startTrillSpan                                                          %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             ef''4
-                            ~
                             \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
+                            ~
                             \startTrillSpan                                                          %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             ef''16
                             r16
@@ -2272,8 +1926,8 @@ def trill_spanner(
                             \startTrillSpan d'                                                       %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             \pitchedTrill                                                            %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             bf'4
-                            ~
                             \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
+                            ~
                             - \tweak TrillPitchHead.stencil #(lambda (grob) (grob-interpret-markup grob #{ \markup \musicglyph #"noteheads.s0harmonic" #})) %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             \startTrillSpan d'                                                       %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             bf'16
@@ -2295,8 +1949,8 @@ def trill_spanner(
                             \startTrillSpan d'                                                       %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             \pitchedTrill                                                            %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             ef''4
-                            ~
                             \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
+                            ~
                             - \tweak TrillPitchHead.stencil #(lambda (grob) (grob-interpret-markup grob #{ \markup \musicglyph #"noteheads.s0harmonic" #})) %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             \startTrillSpan d'                                                       %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             ef''16
@@ -2373,8 +2027,8 @@ def trill_spanner(
                             \startTrillSpan e'                                                       %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             \pitchedTrill                                                            %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             bf'4
-                            ~
                             \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
+                            ~
                             \startTrillSpan c''                                                      %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             bf'16
                             r16
@@ -2393,8 +2047,8 @@ def trill_spanner(
                             \startTrillSpan fs''                                                     %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             \pitchedTrill                                                            %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             ef''4
-                            ~
                             \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
+                            ~
                             \startTrillSpan f''                                                      %! baca_trill_spanner:SpannerIndicatorCommand(1)
                             ef''16
                             r16
