@@ -7797,7 +7797,7 @@ class PitchTree(classes.Tree):
         staff = abjad.Staff([voice])
         score = abjad.Score([staff])
         leaf_list_stack = []
-        self._populate_voice(
+        leaf_groups = self._populate_voice(
             leaf_list_stack,
             self,
             voice,
@@ -7809,8 +7809,8 @@ class PitchTree(classes.Tree):
         first_leaf = abjad.inspect(voice).leaf(n=0)
         abjad.attach(abjad.TimeSignature((1, 8)), first_leaf)
         self._color_repeats(color_repeats, voice)
-        self._attach_cell_indices(cell_indices, voice)
-        self._label_set_classes(set_classes, voice)
+        self._attach_cell_indices(cell_indices, leaf_groups)
+        self._label_set_classes(set_classes, leaf_groups)
         score.add_final_bar_line()
         abjad.override(score).bar_line.transparent = True
         abjad.override(score).bar_number.stencil = False
@@ -7863,26 +7863,25 @@ class PitchTree(classes.Tree):
 
     ### PRIVATE METHODS ###
 
-    def _attach_cell_indices(self, cell_indices, voice):
+    def _attach_cell_indices(self, cell_indices, leaf_groups):
         if not cell_indices:
             return
-        cell_spanners = self._get_cell_spanners(voice)
-        cell_spanners.sort(
-            key=lambda x: abjad.inspect(x).timespan().start_offset
+        leaf_groups.sort(
+            key=lambda _: abjad.inspect(_[1][0]).timespan().start_offset
             )
         if cell_indices is True:
             direction = abjad.Up
         else:
             direction = cell_indices
         cell_index = 0
-        for cell_spanner in cell_spanners:
-            negative_level = cell_spanner.level
+        for leaf_group in leaf_groups:
+            negative_level = leaf_group[0]
             if negative_level != -2:
                 continue
             markup = abjad.Markup(cell_index, direction=direction)
             if direction == abjad.Down:
                 abjad.tweak(markup).staff_padding = 7
-            first_leaf = cell_spanner.leaves[0]
+            first_leaf = leaf_group[1][0]
             abjad.attach(markup, first_leaf)
             cell_index += 1
 
@@ -7902,25 +7901,15 @@ class PitchTree(classes.Tree):
             else:
                 current_color = 'red'
 
-    def _get_cell_spanners(self, voice):
-        spanners = []
-        prototype = PitchTreeSpanner
-        for leaf in abjad.iterate(voice).leaves():
-            for spanner in abjad.inspect(leaf).spanners(prototype):
-                if spanner not in spanners:
-                    spanners.append(spanner)
-        return spanners
-
     def _label_set_classes(
         self,
         set_classes,
-        voice,
+        leaf_groups,
         ):
         if not set_classes:
             return
-        spanners = self._get_cell_spanners(voice)
-        for spanner in spanners:
-            leaves = spanner.leaves
+        for leaf_group in leaf_groups:
+            leaves = leaf_group[1]
             pitch_class_set = PitchClassSet.from_selection(leaves)
             if not pitch_class_set:
                 continue
@@ -7946,11 +7935,12 @@ class PitchTree(classes.Tree):
         brackets=True,
         markup_direction=None,
         ):
+        leaf_groups = []
         if len(node):
             if node._get_level():
                 leaf_list_stack.append([])
             for child_node in node:
-                self._populate_voice(
+                leaf_groups_ = self._populate_voice(
                     leaf_list_stack,
                     child_node,
                     voice,
@@ -7958,6 +7948,7 @@ class PitchTree(classes.Tree):
                     brackets=brackets,
                     markup_direction=markup_direction,
                     )
+                leaf_groups.extend(leaf_groups_)
             if node._get_level():
                 first_note = leaf_list_stack[-1][0]
                 last_note = leaf_list_stack[-1][-1]
@@ -7968,11 +7959,14 @@ class PitchTree(classes.Tree):
                     leaf = abjad.inspect(leaf).leaf(n=1)
                 leaves_with_skips.append(leaf)
                 negative_level = node._get_level(negative=True)
-                spanner = PitchTreeSpanner(level=negative_level)
-                leaves_with_skips = abjad.select(leaves_with_skips)
-                abjad.attach(spanner, leaves_with_skips)
+                #spanner = PitchTreeSpanner(level=negative_level)
+                #leaves_with_skips = abjad.select(leaves_with_skips)
+                #abjad.attach(spanner, leaves_with_skips)
                 if brackets:
                     abjad.horizontal_bracket(leaves_with_skips)
+                selection = abjad.select(leaves_with_skips)
+                leaf_group = (negative_level, selection)
+                leaf_groups.append(leaf_group)
                 leaf_list_stack.pop()
         else:
             assert node._payload is not None
@@ -7997,6 +7991,7 @@ class PitchTree(classes.Tree):
                     voice.append(skip)
             for leaf_list in leaf_list_stack:
                 leaf_list.append(note)
+        return leaf_groups
 
     ### PUBLIC METHODS ###
 
@@ -9201,39 +9196,6 @@ class PitchTree(classes.Tree):
         """
         operator = abjad.Transposition(n=n)
         return self._apply_to_leaves_and_emit_new_tree(operator)
-
-class PitchTreeSpanner(abjad.Spanner):
-    """
-    Pitch tree spanner.
-    """
-
-    ### CLASS VARIABLES ###
-
-    __slots__ = (
-        '_level',
-        )
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        level=0,
-        ):
-        abjad.Spanner.__init__(self)
-        assert isinstance(level, int), repr(level)
-        self._level = level
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def level(self):
-        """
-        Gets level of pitch tree spanner.
-
-        Returns integer.
-        """
-        return self._level
 
 class Registration(object):
     """

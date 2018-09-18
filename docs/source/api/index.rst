@@ -875,7 +875,6 @@ Pitch library.
    ~baca.pitchclasses.PitchSegment
    ~baca.pitchclasses.PitchSet
    ~baca.pitchclasses.PitchTree
-   ~baca.pitchclasses.PitchTreeSpanner
    ~baca.pitchclasses.Registration
    ~baca.pitchclasses.RegistrationComponent
    ~baca.pitchclasses.ZaggedPitchClassMaker

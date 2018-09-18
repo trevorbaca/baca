@@ -35,7 +35,6 @@ pitchclasses
    ~PitchSegment
    ~PitchSet
    ~PitchTree
-   ~PitchTreeSpanner
    ~Registration
    ~RegistrationComponent
    ~ZaggedPitchClassMaker
@@ -1508,76 +1507,6 @@ pitchclasses
    .. container:: inherited
 
       .. autoattribute:: PitchTree.items
-
-.. autoclass:: PitchTreeSpanner
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Attributes Summary
-      :class: class-header
-
-   .. autosummary::
-      :nosignatures:
-
-      level
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. container:: inherited
-
-      .. automethod:: PitchTreeSpanner.__contains__
-
-   .. container:: inherited
-
-      .. automethod:: PitchTreeSpanner.__copy__
-
-   .. container:: inherited
-
-      .. automethod:: PitchTreeSpanner.__format__
-
-   .. container:: inherited
-
-      .. automethod:: PitchTreeSpanner.__getitem__
-
-   .. container:: inherited
-
-      .. automethod:: PitchTreeSpanner.__iter__
-
-   .. container:: inherited
-
-      .. automethod:: PitchTreeSpanner.__len__
-
-   .. container:: inherited
-
-      .. automethod:: PitchTreeSpanner.__lt__
-
-   .. container:: inherited
-
-      .. automethod:: PitchTreeSpanner.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read-only properties
-      :class: class-header
-
-   .. container:: inherited
-
-      .. autoattribute:: PitchTreeSpanner.leaves
-
-   .. autoattribute:: PitchTreeSpanner.level
-
-   .. container:: inherited
-
-      .. autoattribute:: PitchTreeSpanner.tweaks
 
 .. autoclass:: Registration
 
