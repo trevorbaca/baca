@@ -1131,7 +1131,6 @@ Rhythm library.
 .. autosummary::
    :nosignatures:
 
-   ~baca.spannercommands.SpannerCommand
    ~baca.spannercommands.SpannerIndicatorCommand
 
 .. raw:: html

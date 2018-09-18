@@ -6699,11 +6699,7 @@ class MusicMaker(object):
         assert self._all_are_selections(selections), repr(selections)
         specifiers_ = []
         for specifier in specifiers:
-            if (isinstance(specifier, spannercommands.SpannerCommand) and
-                isinstance(specifier.spanner, abjad.Tie)):
-                specifier(selections)
-            else:
-                specifiers_.append(specifier)
+            specifiers_.append(specifier)
         return specifiers_
 
     @staticmethod
