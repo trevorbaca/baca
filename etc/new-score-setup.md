@@ -134,7 +134,7 @@ Package unpushed trevor/dev commits
 Make new score package
 ----------------------
 
-16. Determine repository metadata:
+16. Select score metadata:
 
     Select score title.
 
@@ -244,6 +244,14 @@ Make new score package
 
 24. Compare subpackage initializers to existing score:
 
+    cc __init__.py
+
+    mm __init__.py
+
+    gg __init__.py
+
+    oo __init__.py
+
     (ci "Configured package initializers.")
 
 25. Configure score for continuous integration:
@@ -310,7 +318,19 @@ Make new score package
 
     Quit and restart terminal.
 
-32. Move sketches into etc directory:
+32. Add test submodule:
+
+    (cc)
+
+    (!trash test)
+
+    (!git submodule add https://github.com/trevorbaca/test.git test)
+
+    Make sure .gitmodules file appears in wrapper directory.
+
+    (ci "Added test repository to .gitmodules file.")
+
+33. Move sketches into etc directory:
 
     Restart IDE.
 
@@ -318,7 +338,7 @@ Make new score package
 
     (ci "Added materials PDF, map PDF.")
 
-33. Make etc files:
+34. Make etc files:
 
     (ee new to-do.md)
 
@@ -326,7 +346,7 @@ Make new score package
 
     (ci "Added etc files.")
 
-34. Set up stylesheets directory:
+35. Set up stylesheets directory:
 
     Leave IDE-generated nonfirst-segment.ily as is.
 
@@ -359,16 +379,6 @@ Make new score package
     (Eventually teach IDE more about part production.)
 
     (ci "Added stylesheets.")
-
-35. Compare initializers against existing score:
-
-    cc __init__.py
-
-    mm __init__.py
-
-    gg __init__.py
-
-    oo __init__.py
 
 36. Get existing instruments:
 
