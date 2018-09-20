@@ -1,55 +1,44 @@
 NEW SCORE SETUP
 ===============
 
-Read and revise this document.
-
-Then follow the steps in the four areas below:
-
-    * pull repositories; test
-
-    * apply software updates; test
-
-    * package unpushed trevor/dev commits; test
-
-    * create new score package; test
+Revise this document during use.
 
 Pull respositories
 ------------------
 
-1.  Pull repositories.
+1.  Pull repositories:
 
-    (!pull_all st* pull*)
+    pull_all
 
-    TODO: Add IDE (pull_all) command.
+2.  Test everything:
 
-2.  Test and rebuild everything.
+    cdj; py.test -rf
 
-    (cdj .. !ajv api -M ^^ ++ ci)
+    cdb; py.test -rf
 
-    (cdi !ajv api -I ^^ ++ ci)
-
-    (ll !make_baca_api.py ^^ ++ ci)
+    cdi; py.test -rf
         
-    cd ~/Scores; make_scores_api.py; git st; git commit "Rebuilt API."
+3.  Rebuild scores:
 
-3.  Rebuild scores.
+    ss
+    >> gg ipn
+    >> gg ipn
+    ...
 
-    (mm pdfm* gg pdfm* ^^ ++)
+4.  Rebuild docs:
 
-4.  Rebuild docs.
+    apim
 
-    cd ~/abjad/abjad/docs; make clean; ajv api -M 
+    apib
 
-    cd ~/abjad-ide/ide/docs; make clean; ajv api -I
+    apii
 
-    cd ~/baca/docs; make clean; make_baca_api.py
-
-    cd ~/Scores/_docs; make clean; make_scores_api.py
+    apis
 
 Apply software updates
 ----------------------
 
-5.  Apply LilyPond, TeXShop and macOS updates.
+5.  Update LilyPond, TeXShop, macOS:
 
     lilypond.org > Unstable release.
 
@@ -59,52 +48,53 @@ Apply software updates
 
     Sanity-check LilyPond with \new Staff { c'4 }.
 
-6.  Test and rebuild everything.
+6.  Test everything:
 
-    (cdj .. !ajv api -M ^^ ++ ci)
+    cdj; py.test -rf
 
-    (cdi !ajv api -I ^^ ++ ci)
+    cdb; py.test -rf
 
-    (ll !make_baca_api.py ^^ ++ ci)
-        
-    cd ~/Scores; make_scores_api.py; git st; git commit "Rebuilt API."
+    cdi; py.test -rf
 
-7.  Rebuild scores.
+7.  Rebuild scores:
 
-    (mm pdfm* gg pdfm* ^^ ++)
+    ss
+    >> gg ipn
+    >> gg ipn
+    ...
 
-8.  Rebuild docs.
+8.  Rebuild docs:
 
-    cd ~/abjad/abjad/docs; make clean; ajv api -M 
+    apim
 
-    cd ~/abjad-ide/ide/docs; make clean; ajv api -I
+    apib
 
-    cd ~/baca/docs; make clean; make_baca_api.py
+    apii
 
-    cd ~/Scores/_docs; make clean; make_scores_api.py
+    apis
 
 9.  Repeat steps above for secondary devices.
 
 Package unpushed trevor/dev commits
 -----------------------------------
 
-10. Package unpushed trevor/dev commits.
+10. Package unpushed trevor/dev commits:
 
     Follow feature management in Git workflow instructions.
 
     Make sure trevor/dev is empty.
 
-11. Update Abjad.
+11. Update Abjad:
 
     cd ~/abjad
 
     pip install -e .
 
-    ajv api -M; ajv doctest; py.test -rf; git st
+    py.test -rf; apim; git st
 
-12. Update the IDE.
+12. Update the IDE:
 
-    cd ~/abjad-ide
+    cd ~/ide
 
     pip install -e .
 
@@ -114,40 +104,45 @@ Package unpushed trevor/dev commits
     
     Sanity-check IDE with restart.
 
-    ajv api -I; ajv doctest; py.test -rf; git st
+    py.test -rf; apii; git st
 
-13. Update Bača.
+13. Update Bača:
 
     cd ~/baca
 
     git pull
 
-    make_baca_api.py; (^^); (++); git st
+    py.test -rf; apib.
 
-    make_scores_api.py
+14. Rebuild scores:
 
-14. Rebuild scores.
+    ss
+    >> gg ipn
+    >> gg ipn
+    ...
 
-    (mm pdfm* gg pdfm* ^^ ++)
+15. Rebuild docs:
 
-15. Rebuild docs.
+    apim
 
-    cd ~/abjad/abjad/docs; make clean; ajv api -M 
+    apib
 
-    cd ~/abjad-ide/ide/docs; make clean; ajv api -I
+    apii
 
-    cd ~/baca/docs; make clean; make_baca_api.py
-
-    cd ~/Scores/_docs; make clean; make_scores_api.py
+    apis
 
 Make new score package
 ----------------------
 
-16. Select score title.
+16. Determine repository metadata:
+
+    Select score title.
 
     Select score package name.
 
-17. Go to www.github.com.
+17. Create new GitHub repository:
+
+    Go to www.github.com.
 
     Click "New Repository".
 
@@ -165,69 +160,93 @@ Make new score package
 
     Click "Create Repository."
 
-18. Click "Clone or download."
+18. Make new score package with IDE:
+
+    (new)
+
+    Stop IDE and respell directory names if necessary.
+
+    nahte/nahte -> naehte/naehte
+
+    [TODO: teach IDE to search (and prompt) for newly created repository.]
+
+19. Add catalog number and forces tagline metadata by hand:
+
+    metadata = abjad.OrderedDict(
+        [
+            ('catalog_number', 'AWN-019'),
+            ('composer', 'Bača'),
+            ('forces_tagline', 'for narrator \& string quartet'),
+            ('title', 'Stirrings Still'),
+            ('year', 2017),
+            ]
+        )
+
+    IDE includes composer, title, year metadata automatically.
+
+20. Move score package to Desktop.
+
+    mv [score] ~/Desktop
+
+21. Clone Github repository:
+
+    Return to GitHub.
+
+    Click "Clone or download."
 
     Copy repository URL with clipboard icon.
 
-19. Return to terminal and clone repository.
+    Return to terminal.
 
     cd ~/Scores
 
     git clone https://github.com/trevorbaca/stirrings.git
 
-20. Start IDE and create score package.
-
-    (new)
-
-    TODO: teach IDE to search (and prompt) for newly created repository.
-
-21. IDE includes composer, title, year metadata automatically.
-
-    Add catalog number and forces tagline metadata by hand.
-    
-        metadata = abjad.OrderedDict(
-            [
-                ('catalog_number', 'AWN-018'),
-                ('composer', 'Bača'),
-                ('forces_tagline', 'for narrator \& string quartet'),
-                ('title', 'Stirrings Still'),
-                ('year', 2017),
-                ]
-            )
-
-22. Symlink .gitignore:
-
-    (ww)
-
-    (!ln -s ~/baca/dotfiles/gitignore ~/Scores/my_score/.gitignore)
-
-23. Get existing .travis.yml.
-
-    (ww get [score] .travis.yml)
-
-    Edit .travis.yml by hand.
-
-24. Get existing README.md.
-
-    (ww get [score] README.md)
-
-    Edit README.md by hand.
-
-25. Check IDE-generated wrapper files by hand.
-
-    requirements.txt
-    setup.cfg
-    setup.py
-
-26. Compare package initializer to package initializer of existing score.
-
-27. Commit.
+22. Move score package contents into GitHub clone:
 
     (ci "Configured Python package.")
+    
+23. Configure wrapper directory:
 
-    Visit https://github.com/trevorbaca/<score> and confirm changes.
+    Symlink .gitignore:
 
-28. Configure score for continuous integration.
+        (ww)
+
+        (!trash .gitignore)
+
+        (!ln -s ~/baca/dotfiles/gitignore ~/Scores/my_score/.gitignore)
+
+    Get existing .travis.yml:
+
+        rm .travis.yml
+
+        (ww get [score] .travis.yml)
+
+        Edit .travis.yml by hand.
+
+    Get existing README.md:
+
+        rm README.md
+
+        (ww get [score] README.md)
+
+        Edit README.md by hand.
+
+    Check IDE-generated wrapper files by hand:
+
+        No requirements.txt file is necessary.
+
+        No setup.cfg file is necessary.
+
+        Check setup.py.
+
+    (ci "Configured wrapper directory.")
+
+24. Compare subpackage initializers to existing score:
+
+    (ci "Configured package initializers.")
+
+25. Configure score for continuous integration:
 
     https://travis-ci.org.
 
@@ -237,9 +256,19 @@ Make new score package
 
     Click "Sync account."
 
+    Refresh page.
+
     Toggle "trevorbaca/<score>." 
 
-29. Return to IDE.
+    Click "settings."
+
+    Cron jobs > interval > "daily" > add.
+
+    Settings > "trigger custom build."
+
+26. Verify continuous integration setup:
+
+    Return to IDE.
 
     Make test commit.
 
@@ -251,29 +280,29 @@ Make new score package
 
     Make sure all tests pass.
 
-30. Add score alias to IDE aliases.
+27. Add score to IDE aliases:
 
     (al)
 
-31. Add aliases to ~/.profile.
+28. Add score to ~/.profile:
 
-        export STIRRINGS_STILL=$SCORES/stirrings_still
-        alias stix="clear; cd $STIRRINGS_STILL/stirrings_still"
-        alias sti="stix; start-abjad-ide sti"
-
-32. Add score package to PYTHONPATH.
+    export STIRRINGS_STILL=$SCORES/stirrings_still
+    alias stix="clear; cd $STIRRINGS_STILL/stirrings_still"
+    alias sti="stix; start-abjad-ide sti"
 
     export PYTHONPATH=$STIRRINGS_STILL:$PYTHONPATH
 
     Quit and restart terminal.
 
-33. Add repository to ~/baca/scr/restart-travis-build-set-n script.
+29. Add repository to ~/baca/scr/restart-travis-build-set-n script.
 
-34. Add repository to clone scores script.
+30. Add repository to clone scores script:
     
-    .../clone_scores.py
+    ~/micellaneous/config/clone_scores.py
 
-35. Change to score package in three terminal windows.
+31. Add terminal window group:
+
+    Change to score package in three terminal windows.
 
     Window > Save Windows as Group ...
 
@@ -281,13 +310,15 @@ Make new score package
 
     Quit and restart terminal.
 
-36. Restart IDE.
+32. Move sketches into etc directory:
 
-    Move sketches into etc directory.
+    Restart IDE.
+
+    Move files by hand.
 
     (ci "Added materials PDF, map PDF.")
 
-37. Make etc files.
+33. Make etc files:
 
     (ee new to-do.md)
 
@@ -295,11 +326,11 @@ Make new score package
 
     (ci "Added etc files.")
 
-38. Change to stylesheets directory.
+34. Set up stylesheets directory:
 
     Leave IDE-generated nonfirst-segment.ily as is.
 
-39. Get existing contexts.ily.
+    Get existing contexts.ily.
 
     (yy get [score] contexts.ily)
 
@@ -309,27 +340,19 @@ Make new score package
     
     Define score contexts in score order.
 
-    Make sure stylesheet includes ...
-
-        \override TextScript.font-name = #"Palatino"
-
-    ... in the Score context to stop LaTeX's pdfpages fl ligature problems.
-
     (No method exists to check LilyPond stylesheet edits.)
 
     (Eventually create much of contexts.ily from ScoreTemplate.py.)
 
-40. Remove IDE-generated stylesheet.ily.
+    Remove IDE-generated stylesheet.ily and get existing stylesheet.
 
     (yy rm stylesheet.ily)
-
-    Get existing stylesheet.ily.
 
     (yy get [score] stylesheet.ily).
 
     Edit stylesheet.ily by hand.
 
-41. Remove IDE-generated parts.ily.
+    Remove IDE-generated parts.ily.
 
     (yy rm parts.ily)
 
@@ -337,21 +360,41 @@ Make new score package
 
     (ci "Added stylesheets.")
 
-42. Get existing instruments.
+35. Compare initializers against existing score:
+
+    cc __init__.py
+
+    mm __init__.py
+
+    gg __init__.py
+
+    oo __init__.py
+
+36. Get existing instruments:
+
+    (mm)
+
+    (!trash __init__.py)
+
+    ([source score] mm !cp __init__.py ~/Desktop)
+    
+    ([target score] mm !mv ~/Desktop/__init__.py .)
+
+    Edit materials __init__.py by hand.
 
     (mm get [score] instruments)
 
-    Edit instruments/definition.py by hand.
+    Edit materials/instruments/definition.py by hand.
 
     Define instruments in score order.
 
-    (dfk)
+    (dpc)
 
-    Eventually run (pdfm).
+    Add instruments to materials/__init__.py by hand.
 
     (ci "Added instruments.")
 
-43. Remove IDE-generated ScoreTemplate.py.
+37. Remove IDE-generated ScoreTemplate.py:
 
     (oo rm ScoreTemplate.py)
 
@@ -371,13 +414,17 @@ Make new score package
 
     Make only one master score template per score.
 
-    (^^ !make_scores_api.py)
+    (^^)
+
+    (!apis)
 
     Visually inspect scores API.
 
     (ci "Added score template.")
 
-44. Get existing metronome marks.
+    (cdsx; git add .; git commit "Rebuilt API.")
+
+38. Get existing metronome marks:
 
     (mm get [score] metronome_marks)
 
@@ -385,29 +432,31 @@ Make new score package
 
     Define metronome marks alphabetically by metronome mark name.
 
-    (dfk)
+    Edit materials/__init__.py by hand.
 
-    (pdfm)
+    (dpc)
 
     (ci "Added metronome marks.")
 
-45. Get existing time signatures (if time-signature-oriented).
+39. Get existing time signatures (if time-signature-oriented):
 
     (mm get [score] time_signatures) 
 
     Edit time_signatures/definition.py by hand.
 
-    (dfk)
+    Edit materials/__init__.py by hand.
+
+    (dpc)
 
     (ci "Added time signatures.")
 
-46. Define stub version of first segment.
+40. Define stub version of first segment:
 
-    (gg new _)
+    (gg new A)
 
-    (_ rm definition.py get [score] definition.py)
+    (A rm definition.py get [score] definition.py)
 
-    Edit _/definition.py by hand.
+    Edit A/definition.py by hand.
 
     Define figure infrastructure if figure-oriented.
 
@@ -417,7 +466,7 @@ Make new score package
 
     Define one figure if figure-oriented.
 
-    Render PDF.
+    Render PDF (ipn).
 
     Check title typography.
 
@@ -425,15 +474,15 @@ Make new score package
     
     Check short instrument names.
 
-    Check (pdfm) messaging for metadata handling.
+    Check (ipn) messaging for metadata handling.
 
-    Check (lp) for LilyPond warnings.
+    Check (le) for LilyPond warnings.
     
-47. Define stub version of second segment.
+41. Define stub version of second segment:
 
-    (gg new A)
+    (gg new B)
 
-    (A rm definition.py get [score] definition.py)
+    (B rm definition.py get [score] definition.py)
 
     Edit definition.py by hand.
 
@@ -451,13 +500,13 @@ Make new score package
 
     Check short instrument names.
 
-    Check (pdfm) messaging for metadata handling.
+    Check (ipn) messaging for metadata handling.
 
     Check (lp) for LilyPond warnings.
 
-    (ci "Segments _, A.")
+    (ci "Segments A, B.")
 
-48. Build stub version of score.
+42. Build stub version of score if ensemble piece:
 
     (bb new ledger) 
 
@@ -497,26 +546,31 @@ Make new score package
 
     (cc ^^ ++ ci "Added ledger build.")
 
-49. Test and rebuild everything.
+43. Test everything:
 
-    (cdj .. !ajv api -M ^^ ++ ci)
+    cdj; py.test -rf
 
-    (cdi !ajv api -I ^^ ++ ci)
+    cdb; py.test -rf
 
-    (ll !make_baca_api.py ^^ ++ ci)
-        
-    cd ~/Scores; make_scores_api.py; git st; git commit "Rebuilt API."
+    cdi; py.test -rf
 
-50. Rebuild scores.
+44. Rebuild scores:
 
-    (mm pdfm* gg pdfm* ^^ ++)
+    ss
+    >> gg ipn
+    >> gg ipn
+    ...
 
-51. Rebuild docs.
+45. Rebuild docs:
 
-    cd ~/abjad/abjad/docs; make clean; ajv api -M 
+    apim
 
-    cd ~/abjad-ide/ide/docs; make clean; ajv api -I
+    apib
 
-    cd ~/baca/docs; make clean; make_baca_api.py
+    apii
 
-    cd ~/Scores/_docs; make clean; make_scores_api.py
+    apis
+
+46. Commit changes to this document:
+
+    (ci "Updated new score setup instructions.")
