@@ -1433,7 +1433,7 @@ def sustain_pedal(
 
 def trill_spanner(
     argument: str = None,
-    *,
+    *tweaks: abjad.LilyPondTweakManager,
     harmonic: bool = None,
     left_broken: bool = None,
     right_broken: bool = None,
@@ -1935,6 +1935,78 @@ def trill_spanner(
                 }
             >>
 
+    ..  container:: example
+ 
+        Tweaks trill spanner:
+ 
+        >>> music_maker = baca.MusicMaker()
+        >>> contribution = music_maker(
+        ...     'Voice_1',
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+        ...     baca.new(
+        ...         baca.trill_spanner(
+        ...             'M2',
+        ...             abjad.tweak('red').color,
+        ...             ),
+        ...         ),
+        ...     baca.rests_around([2], [4]),
+        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     counts=[1, 1, 5, -1],
+        ...     time_treatments=[-1],
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+ 
+        ..  docs::
+ 
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+            \new Staff
+            <<
+                \context Voice = "Voice_1"
+                {
+                    \voiceOne
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            r8
+                            \pitchedTrill                                                            %! baca_trill_spanner:SpannerIndicatorCommand(1)
+                            c'16
+                            [
+                            - \tweak color #red                                                      %! baca_trill_spanner:SpannerIndicatorCommand(1)
+                            \startTrillSpan d'                                                       %! baca_trill_spanner:SpannerIndicatorCommand(1)
+                            d'16
+                            ]
+                            bf'4
+                            ~
+                            bf'16
+                            r16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            fs''16
+                            [
+                            e''16
+                            ]
+                            ef''4
+                            ~
+                            ef''16
+                            r16
+                            af''16
+                            [
+                            g''16
+                            ]
+                        }
+                        \times 4/5 {
+                            a'16
+                            r4
+                            \stopTrillSpan                                                           %! baca_trill_spanner:SpannerIndicatorCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                        }
+                    }
+                }
+            >>
+
     """
     interval = pitch = None
     if argument is not None:
@@ -1964,4 +2036,5 @@ def trill_spanner(
         start_indicator=start_trill_span,
         stop_indicator=stop_trill_span,
         tags=[tag],
+        tweaks=tweaks,
         )
