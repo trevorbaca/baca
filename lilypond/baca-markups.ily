@@ -121,6 +121,31 @@ baca-diamond-markup =
     \markup
     \musicglyph #"noteheads.s0harmonic"
 
+baca-diamond-parenthesized-double-diamond-markup =
+    \markup
+    \concat {
+        \general-align #Y #2.5
+        \scale #'(0.75 . 0.75)
+        \musicglyph #"noteheads.s0harmonic"
+        \hspace #0.45
+        \general-align #Y #1
+        \scale #'(1 . 1.5)
+        "("
+        \hspace #-0.1
+        \general-align #Y #1.25
+        \override #'(baseline-skip . 1.75)
+        \scale #'(0.75 . 0.75)
+        \column
+        {
+            \musicglyph #"noteheads.s0harmonic"
+            \musicglyph #"noteheads.s0harmonic"
+        }
+        \hspace #-0.15
+        \general-align #Y #1
+        \scale #'(1 . 1.5)
+        ")"
+    }
+
 baca-double-black-diamond-markup =
     \markup
     \override #'(baseline-skip . 1.75)
