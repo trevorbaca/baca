@@ -202,6 +202,7 @@ overrides
    ~rehearsal_mark_extra_offset
    ~rehearsal_mark_y_offset
    ~repeat_tie_down
+   ~repeat_tie_extra_offset
    ~repeat_tie_stencil_false
    ~repeat_tie_transparent
    ~repeat_tie_up
@@ -373,6 +374,8 @@ overrides
 .. autofunction:: rehearsal_mark_y_offset
 
 .. autofunction:: repeat_tie_down
+
+.. autofunction:: repeat_tie_extra_offset
 
 .. autofunction:: repeat_tie_stencil_false
 

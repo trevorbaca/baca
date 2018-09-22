@@ -703,6 +703,7 @@ Override library.
    ~baca.overrides.rehearsal_mark_extra_offset
    ~baca.overrides.rehearsal_mark_y_offset
    ~baca.overrides.repeat_tie_down
+   ~baca.overrides.repeat_tie_extra_offset
    ~baca.overrides.repeat_tie_stencil_false
    ~baca.overrides.repeat_tie_transparent
    ~baca.overrides.repeat_tie_up
