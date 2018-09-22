@@ -330,8 +330,8 @@ def instrument(
     """
     return make_instrument_name_markup(
         string,
-        hcenter_in,
         column=column,
+        hcenter_in=hcenter_in,
         )
 
 def keynoise():
@@ -415,7 +415,14 @@ def lv_possibile():
         'l.v. possibile',
         )
 
-def make_instrument_name_markup(string, space, column=True):
+def make_instrument_name_markup(
+    string,
+    *,
+    column=True,
+    hcenter_in=None,
+    ):
+    if hcenter_in is not None:
+        assert isinstance(hcenter_in, (int, float)), repr(hcenter_in)
     if isinstance(string, str):
         parts = [string]
     elif isinstance(string, list):
@@ -423,16 +430,16 @@ def make_instrument_name_markup(string, space, column=True):
     else:
         raise TypeError(string)
     if len(parts) == 1:
-        markup = abjad.Markup(parts[0]).hcenter_in(space)
+        markup = abjad.Markup(parts[0])
     elif column:
         markups = [abjad.Markup(_) for _ in parts]
         markup = abjad.Markup.center_column(markups, direction=None)
-        markup = markup.hcenter_in(space)
     else:
         markups = [abjad.Markup(_) for _ in parts]
         markups = abjad.MarkupList(markups)
         markup = markups.line()
-        markup = markup.hcenter_in(space)
+    if hcenter_in is not None:
+        markup = markup.hcenter_in(hcenter_in)
     return markup
 
 def markup(string):
@@ -910,8 +917,8 @@ def short_instrument(
     """
     return make_instrument_name_markup(
         string,
-        hcenter_in,
         column=column,
+        hcenter_in=hcenter_in,
         )
 
 def snare_drum():
