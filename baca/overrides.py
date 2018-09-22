@@ -3397,6 +3397,23 @@ def repeat_tie_down(
         tags=[tag],
         )
 
+def repeat_tie_extra_offset(
+    pair: typings.NumberPair,
+    *,
+    selector: typings.Selector = 'baca.leaf(0)',
+    tag: typing.Optional[str] = 'baca_repeat_tie_extra_offset',
+    ) -> OverrideCommand:
+    """
+    Overrides repeat tie extra-offset.
+    """
+    return OverrideCommand(
+        attribute='extra_offset',
+        grob='repeat_tie',
+        selector=selector,
+        tags=[tag],
+        value=pair,
+        )
+
 def repeat_tie_stencil_false(
     *,
     selector: typings.Selector = 'baca.leaf(0)',
