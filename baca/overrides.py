@@ -3128,6 +3128,22 @@ def note_head_style_harmonic(
         tags=[tag],
         )
 
+def note_head_style_harmonic_black(
+    *,
+    selector: typings.Selector = 'baca.tleaves()',
+    tag: typing.Optional[str] = 'baca_note_head_style_harmonic_black',
+    ) -> OverrideCommand:
+    r"""
+    Overrides note-head style to harmonic-black.
+    """
+    return OverrideCommand(
+        attribute='style',
+        value='harmonic-black',
+        grob='note_head',
+        selector=selector,
+        tags=[tag],
+        )
+
 def note_head_transparent(
     *,
     selector: typings.Selector = 'baca.leaves()',

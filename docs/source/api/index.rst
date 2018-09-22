@@ -696,6 +696,7 @@ Override library.
    ~baca.overrides.note_head_stencil_false
    ~baca.overrides.note_head_style_cross
    ~baca.overrides.note_head_style_harmonic
+   ~baca.overrides.note_head_style_harmonic_black
    ~baca.overrides.note_head_transparent
    ~baca.overrides.note_head_x_extent_zero
    ~baca.overrides.ottava_bracket_shorten_pair

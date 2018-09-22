@@ -195,6 +195,7 @@ overrides
    ~note_head_stencil_false
    ~note_head_style_cross
    ~note_head_style_harmonic
+   ~note_head_style_harmonic_black
    ~note_head_transparent
    ~note_head_x_extent_zero
    ~ottava_bracket_shorten_pair
@@ -360,6 +361,8 @@ overrides
 .. autofunction:: note_head_style_cross
 
 .. autofunction:: note_head_style_harmonic
+
+.. autofunction:: note_head_style_harmonic_black
 
 .. autofunction:: note_head_transparent
 
