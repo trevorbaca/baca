@@ -1060,6 +1060,9 @@ def beam_positions(
             >>
 
     """
+    if not isinstance(n, (int, float)):
+        message = f'beam position must be number (not {n}).'
+        raise Exception(message)
     return OverrideCommand(
         attribute='positions',
         value=(n, n),
