@@ -3392,7 +3392,7 @@ def stem_tremolo(
     *,
     selector: typings.Selector = 'baca.pleaf(0)',
     tag: typing.Optional[str] = 'baca_stem_tremolo',
-    tremolo_flags:int = 32,
+    tremolo_flags: int = 32,
     ) -> commands.IndicatorCommand:
     r"""
     Attaches stem tremolo.
