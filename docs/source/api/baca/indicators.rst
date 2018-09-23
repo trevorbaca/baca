@@ -42,6 +42,7 @@ indicators
 
       __eq__
       __hash__
+      __repr__
       __str__
       context
       hide
@@ -60,6 +61,8 @@ indicators
    .. automethod:: Accelerando.__eq__
 
    .. automethod:: Accelerando.__hash__
+
+   .. automethod:: Accelerando.__repr__
 
    .. automethod:: Accelerando.__str__
 
@@ -448,6 +451,7 @@ indicators
 
       __eq__
       __hash__
+      __repr__
       __str__
       context
       hide
@@ -466,6 +470,8 @@ indicators
    .. automethod:: Ritardando.__eq__
 
    .. automethod:: Ritardando.__hash__
+
+   .. automethod:: Ritardando.__repr__
 
    .. automethod:: Ritardando.__str__
 

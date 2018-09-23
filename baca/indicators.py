@@ -46,6 +46,7 @@ class Accelerando(object):
     __slots__ = (
         '_hide',
         '_markup',
+        '_tweaks',
         )
 
     _context = 'Score'
@@ -61,6 +62,7 @@ class Accelerando(object):
         *,
         hide: bool = None,
         markup: abjad.Markup = None,
+        tweaks: abjad.LilyPondTweakManager = None,
         ) -> None:
         if hide is not None:
             hide = bool(hide)
@@ -68,6 +70,9 @@ class Accelerando(object):
         if markup is not None:
             assert isinstance(markup, abjad.Markup), repr(markup)
         self._markup = markup
+        if tweaks is not None:
+            assert isinstance(tweaks, abjad.LilyPondTweakManager), repr(tweaks)
+        self._tweaks = abjad.LilyPondTweakManager.set_tweaks(self, tweaks)
 
     ### SPECIAL METHODS ###
 
@@ -88,6 +93,12 @@ class Accelerando(object):
         except TypeError:
             raise TypeError(f'unhashable type: {self}')
         return result
+
+    def __repr__(self) -> str:
+        """
+        Gets interpreter representation.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
 
     def __str__(self) -> str:
         r"""
@@ -142,6 +153,9 @@ class Accelerando(object):
     def _get_lilypond_format_bundle(self, component=None):
         bundle = abjad.LilyPondFormatBundle()
         if not self.hide:
+            if self.tweaks:
+                tweaks = self.tweaks._list_format_contributions()
+                bundle.after.markup.extend(tweaks)
             markup = self._get_markup()
             markup = abjad.new(markup, direction=abjad.Up)
             markup_format_pieces = markup._get_format_pieces()
@@ -226,11 +240,55 @@ class Accelerando(object):
         return self._persistent
 
     @property
-    def tweaks(self) -> None:
+    def tweaks(self) -> typing.Optional[abjad.LilyPondTweakManager]:
         r"""
-        Are not implemented on accelerando.
+        Gets tweaks.
+
+        ..  container:: example
+
+            >>> note = abjad.Note("c'4")
+            >>> accelerando = baca.Accelerando()
+            >>> abjad.tweak(accelerando).color = 'blue'
+            >>> abjad.tweak(accelerando).extra_offset = (0, 2)
+            >>> abjad.attach(accelerando, note)
+            >>> abjad.show(note) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(note)
+                c'4
+                - \tweak color #blue
+                - \tweak extra-offset #'(0 . 2)
+                ^ \markup {
+                    \large
+                        \upright
+                            accel.
+                    }
+
+        ..  container:: example
+
+            Tweaks can set at initialization:
+
+            >>> baca.Accelerando(tweaks=abjad.tweak('blue').color)
+            Accelerando(tweaks=LilyPondTweakManager(('color', 'blue')))
+
+        ..  container:: example
+
+            Tweaks survive copy:
+
+            >>> accelerando = baca.Accelerando()
+            >>> abjad.tweak(accelerando).color = 'blue'
+            >>> accelerando
+            Accelerando(tweaks=LilyPondTweakManager(('color', 'blue')))
+
+            >>> import copy
+            >>> copy.copy(accelerando)
+            Accelerando(tweaks=LilyPondTweakManager(('color', 'blue')))
+
+        Tweak extra-offset to align accelerando markup with other metronome
+        mark spanner segments.
         """
-        pass
+        return self._tweaks
 
 class Markup(abjad.Markup):
     """
@@ -340,6 +398,7 @@ class Ritardando(object):
     __slots__ = (
         '_hide',
         '_markup',
+        '_tweaks',
         )
 
     _context = 'Score'
@@ -355,6 +414,7 @@ class Ritardando(object):
         *,
         hide: bool = None,
         markup: abjad.Markup = None,
+        tweaks: abjad.LilyPondTweakManager = None,
         ) -> None:
         if hide is not None:
             hide = bool(hide)
@@ -362,6 +422,9 @@ class Ritardando(object):
         if markup is not None:
             assert isinstance(markup, abjad.Markup)
         self._markup = markup
+        if tweaks is not None:
+            assert isinstance(tweaks, abjad.LilyPondTweakManager), repr(tweaks)
+        self._tweaks = abjad.LilyPondTweakManager.set_tweaks(self, tweaks)
 
     ### SPECIAL METHODS ###
 
@@ -382,6 +445,12 @@ class Ritardando(object):
         except TypeError:
             raise TypeError(f'unhashable type: {self}')
         return result
+
+    def __repr__(self) -> str:
+        """
+        Gets interpreter representation.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
 
     def __str__(self) -> str:
         r"""
@@ -436,6 +505,9 @@ class Ritardando(object):
     def _get_lilypond_format_bundle(self, component=None):
         bundle = abjad.LilyPondFormatBundle()
         if not self.hide:
+            if self.tweaks:
+                tweaks = self.tweaks._list_format_contributions()
+                bundle.after.markup.extend(tweaks)
             markup = self._get_markup()
             markup = abjad.new(markup, direction=abjad.Up)
             markup_format_pieces = markup._get_format_pieces()
@@ -546,11 +618,55 @@ class Ritardando(object):
         return self._persistent
 
     @property
-    def tweaks(self) -> None:
+    def tweaks(self) -> typing.Optional[abjad.LilyPondTweakManager]:
         r"""
-        Are not implemented on ritardando.
+        Gets tweaks.
+
+        ..  container:: example
+
+            >>> note = abjad.Note("c'4")
+            >>> ritardando = baca.Ritardando()
+            >>> abjad.tweak(ritardando).color = 'blue'
+            >>> abjad.tweak(ritardando).extra_offset = (0, 2)
+            >>> abjad.attach(ritardando, note)
+            >>> abjad.show(note) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(note)
+                c'4
+                - \tweak color #blue
+                - \tweak extra-offset #'(0 . 2)
+                ^ \markup {
+                    \large
+                        \upright
+                            rit.
+                    }
+
+        ..  container:: example
+
+            Tweaks can set at initialization:
+
+            >>> baca.Ritardando(tweaks=abjad.tweak('blue').color)
+            Ritardando(tweaks=LilyPondTweakManager(('color', 'blue')))
+
+        ..  container:: example
+
+            Tweaks survive copy:
+
+            >>> ritardando = baca.Ritardando()
+            >>> abjad.tweak(ritardando).color = 'blue'
+            >>> ritardando
+            Ritardando(tweaks=LilyPondTweakManager(('color', 'blue')))
+
+            >>> import copy
+            >>> copy.copy(ritardando)
+            Ritardando(tweaks=LilyPondTweakManager(('color', 'blue')))
+
+        Tweak extra-offset to align ritardando markup with other metronome
+        mark spanner segments.
         """
-        pass
+        return self._tweaks
 
 class StaffLines(object):
     """
