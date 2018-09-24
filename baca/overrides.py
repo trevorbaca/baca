@@ -2821,6 +2821,23 @@ def note_head_color(
         value=color,
         )
 
+def note_head_extra_offset(
+    pair: typings.NumberPair,
+    *,
+    selector: typings.Selector = 'baca.leaf(0)',
+    tag: typing.Optional[str] = 'baca_note_head_extra_offset',
+    ) -> OverrideCommand:
+    """
+    Overrides note-head color.
+    """
+    return OverrideCommand(
+        attribute='extra_offset',
+        grob='note_head',
+        selector=selector,
+        tags=[tag],
+        value=pair,
+        )
+
 def note_head_stencil_false(
     *,
     selector: typings.Selector = 'baca.leaf(0)',
