@@ -252,6 +252,11 @@ baca-fff-poss = #(
         }
     #}))
 
+baca-pppp-sempre = #(
+    make-dynamic-script
+    (markup #:baca-sempre-dynamic "pppp")
+    )
+
 baca-ppp-sempre = #(
     make-dynamic-script
     (markup #:baca-sempre-dynamic "ppp")
