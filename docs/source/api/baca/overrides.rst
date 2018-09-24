@@ -171,6 +171,7 @@ overrides
    ~dynamic_text_left
    ~dynamic_text_parent_alignment_x
    ~dynamic_text_right
+   ~dynamic_text_self_alignment_x
    ~dynamic_text_stencil_false
    ~dynamic_text_transparent
    ~dynamic_text_x_extent_zero
@@ -314,6 +315,8 @@ overrides
 .. autofunction:: dynamic_text_parent_alignment_x
 
 .. autofunction:: dynamic_text_right
+
+.. autofunction:: dynamic_text_self_alignment_x
 
 .. autofunction:: dynamic_text_stencil_false
 

@@ -1864,6 +1864,23 @@ def dynamic_text_right(
         command_2,
         )
 
+def dynamic_text_self_alignment_x(
+    n: typings.Number,
+    *,
+    selector: typings.Selector = 'baca.pleaf(0)',
+    tag: typing.Optional[str] = 'baca_dynamic_text_self_alignment_x',
+    ) -> OverrideCommand:
+    """
+    Overrides dynamic text self-alignment-X to ``n``.
+    """
+    return OverrideCommand(
+        attribute='self_alignment_X',
+        value=n,
+        grob='dynamic_text',
+        selector=selector,
+        tags=[tag],
+        )
+
 def dynamic_text_stencil_false(
     *,
     selector: typings.Selector = 'baca.pleaf(0)',
