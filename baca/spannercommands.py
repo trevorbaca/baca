@@ -2008,6 +2008,12 @@ def trill_spanner(
             >>
 
     """
+    if argument is not None:
+        prototype = (abjad.NamedPitch, abjad.NamedInterval, str)
+        if not isinstance(argument, prototype):
+            message = f'trill spanner argument must be pitch, interval, str:'
+            message += f'\n   {argument}'
+            raise Exception(message)
     interval = pitch = None
     if argument is not None:
         try:
