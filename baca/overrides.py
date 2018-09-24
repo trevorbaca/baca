@@ -406,6 +406,23 @@ class OverrideCommand(scoping.Command):
 
 ### FACTORY FUNCTIONS ###
 
+def accidental_extra_offset(
+    pair: typings.NumberPair,
+    *,
+    selector: typings.Selector = 'baca.leaf(0)',
+    tag: typing.Optional[str] = 'baca_accidental_extra_offset',
+    ) -> OverrideCommand:
+    """
+    Overrides accidental stencil.
+    """
+    return OverrideCommand(
+        attribute='extra_offset',
+        grob='accidental',
+        selector=selector,
+        tags=[tag],
+        value=pair,
+        )
+
 def accidental_stencil_false(
     *,
     selector: typings.Selector = 'baca.leaf(0)',

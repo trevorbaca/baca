@@ -646,6 +646,7 @@ Override library.
 .. autosummary::
    :nosignatures:
 
+   ~baca.overrides.accidental_extra_offset
    ~baca.overrides.accidental_stencil_false
    ~baca.overrides.accidental_transparent
    ~baca.overrides.accidental_x_extent_false

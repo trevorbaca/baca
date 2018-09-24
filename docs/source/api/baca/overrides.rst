@@ -145,6 +145,7 @@ overrides
 .. autosummary::
    :nosignatures:
 
+   ~accidental_extra_offset
    ~accidental_stencil_false
    ~accidental_transparent
    ~accidental_x_extent_false
@@ -263,6 +264,8 @@ overrides
    ~tuplet_bracket_up
    ~tuplet_number_denominator
    ~tuplet_number_extra_offset
+
+.. autofunction:: accidental_extra_offset
 
 .. autofunction:: accidental_stencil_false
 
