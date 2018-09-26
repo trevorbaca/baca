@@ -42,6 +42,7 @@ segmentclasses
       :nosignatures:
 
       __call__
+      __repr__
       bol_measure_numbers
       commands
       deactivate
@@ -59,6 +60,8 @@ segmentclasses
       :class: class-header
 
    .. automethod:: BreakMeasureMap.__call__
+
+   .. automethod:: BreakMeasureMap.__repr__
 
    .. raw:: html
 

@@ -315,6 +315,17 @@ class BreakMeasureMap(object):
             for command in commands:
                 command(context)
 
+    def __repr__(self):
+        """
+        Gets interpreter representation.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
+
+    ### PRIVATE METHODS ###
+
+    def _get_format_specification(self):
+        return abjad.FormatSpecification()
+
     ### PUBLIC PROPERTIES ###
 
     @property

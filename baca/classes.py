@@ -93,7 +93,7 @@ class Counter(object):
 
     def __repr__(self):
         """
-        Gets interpret representation.
+        Gets interpreter representation.
         """
         return abjad.StorageFormatManager(self).get_repr_format()
 
@@ -304,7 +304,7 @@ class Cursor(object):
 
     def __repr__(self):
         """
-        Gets interpret representation.
+        Gets interpreter representation.
         """
         return abjad.StorageFormatManager(self).get_repr_format()
 
@@ -1511,7 +1511,7 @@ class PaddedTuple(object):
 
     def __repr__(self):
         """
-        Gets interpret representation.
+        Gets interpreter representation.
         """
         return abjad.StorageFormatManager(self).get_repr_format()
 
