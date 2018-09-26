@@ -1400,9 +1400,11 @@ class HorizontalSpacingSpecifier(object):
             eol_adjusted = True
         return duration, eol_adjusted, duration_
 
-    def _coerce_measure_number(self, measure_number):
+    def _coerce_measure_number(self, measure_number, force_local=False):
         if measure_number == 0:
             raise Exception(f'zero-valued measure number not allowed.')
+        if force_local is True:
+            measure_number = self.first_measure_number + measure_number - 1
         if measure_number < 0:
             measure_number = self.last_measure_number - abs(measure_number) + 1
         if measure_number < self.first_measure_number:
@@ -1693,6 +1695,8 @@ class HorizontalSpacingSpecifier(object):
         self,
         measures: typing.Union[int, tuple, list],
         pair: typing.Union[typings.IntegerPair, str],
+        *,
+        force_local: bool = None,
         ) -> None:
         r"""
         Overrides ``measures`` with spacing ``pair``.
@@ -1893,18 +1897,30 @@ class HorizontalSpacingSpecifier(object):
         """
         duration = abjad.NonreducedFraction(pair)
         if isinstance(measures, int):
-            number = self._coerce_measure_number(measures)
+            number = self._coerce_measure_number(
+                measures,
+                force_local=force_local,
+                )
             self.measures[number] = duration
         elif isinstance(measures, tuple):
             assert len(measures) == 2, repr(measures)
             start_measure, stop_measure = measures
-            start_measure = self._coerce_measure_number(start_measure)
-            stop_measure = self._coerce_measure_number(stop_measure)
+            start_measure = self._coerce_measure_number(
+                start_measure,
+                force_local=force_local,
+                )
+            stop_measure = self._coerce_measure_number(
+                stop_measure,
+                force_local=force_local,
+                )
             for number in range(start_measure, stop_measure + 1):
                 self.measures[number] = duration
         elif isinstance(measures, list):
             for measure in measures:
-                number = self._coerce_measure_number(measure)
+                number = self._coerce_measure_number(
+                    measure,
+                    force_local=force_local,
+                    )
                 self.measures[number] = duration
         else:
             message = f'measures must be int, pair or list (not {measures!r}).'
