@@ -1273,9 +1273,10 @@ class GlissandoCommand(scoping.Command):
         if self.selector is not None:
             argument = self.selector(argument)
         leaves = classes.Selection(argument).leaves()
-        tweaks_: typing.List[abjad.LilyPondTweakManager] = []
+        tweaks_: typing.List[abjad.IndexedTweakManager] = []
+        prototype = (abjad.LilyPondTweakManager, tuple)
         for tweak in self.tweaks or []:
-            assert isinstance(tweak, abjad.LilyPondTweakManager)
+            assert isinstance(tweak, prototype)
             tweaks_.append(tweak)
         abjad.glissando(
             leaves,
@@ -4589,6 +4590,139 @@ def glissando(
                             f''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
                             - \tweak color #red                                                      %! baca_glissando
+                            \glissando                                                               %! baca_glissando
+            <BLANKLINE>
+                            e'8                                                                      %! baca_make_even_divisions
+                            - \tweak color #red                                                      %! baca_glissando
+                            \glissando                                                               %! baca_glissando
+            <BLANKLINE>
+                            d''8                                                                     %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
+            <BLANKLINE>
+                        }                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                    }                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                >>                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
+            >>                                                                                       %! SingleStaffScoreTemplate
+
+    ..  container:: example
+
+        Works with indexed tweaks:
+
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'Music_Voice',
+        ...     baca.make_even_divisions(),
+        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+        ...     baca.glissando(
+        ...         (abjad.tweak('red').color, 0),
+        ...         (abjad.tweak('red').color, -1),
+        ...         ),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
+            \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+            <<                                                                                       %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
+                <<                                                                                   %! _make_global_context
+            <BLANKLINE>
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
+                    {                                                                                %! _make_global_context
+            <BLANKLINE>
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+                        \baca-bar-line-visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
+            <BLANKLINE>
+                    }                                                                                %! _make_global_context
+            <BLANKLINE>
+                >>                                                                                   %! _make_global_context
+            <BLANKLINE>
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
+                <<                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
+                    {                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
+                        {                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
+                            e'8                                                                      %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
+                            - \tweak color #red                                                      %! baca_glissando
+                            \glissando                                                               %! baca_glissando
+            <BLANKLINE>
+                            d''8                                                                     %! baca_make_even_divisions
+                            \glissando                                                               %! baca_glissando
+            <BLANKLINE>
+                            f'8                                                                      %! baca_make_even_divisions
+                            \glissando                                                               %! baca_glissando
+            <BLANKLINE>
+                            e''8                                                                     %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
+                            \glissando                                                               %! baca_glissando
+            <BLANKLINE>
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
+                            g'8                                                                      %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
+                            \glissando                                                               %! baca_glissando
+            <BLANKLINE>
+                            f''8                                                                     %! baca_make_even_divisions
+                            \glissando                                                               %! baca_glissando
+            <BLANKLINE>
+                            e'8                                                                      %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
+                            \glissando                                                               %! baca_glissando
+            <BLANKLINE>
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
+                            d''8                                                                     %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
+                            \glissando                                                               %! baca_glissando
+            <BLANKLINE>
+                            f'8                                                                      %! baca_make_even_divisions
+                            \glissando                                                               %! baca_glissando
+            <BLANKLINE>
+                            e''8                                                                     %! baca_make_even_divisions
+                            \glissando                                                               %! baca_glissando
+            <BLANKLINE>
+                            g'8                                                                      %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
+                            \glissando                                                               %! baca_glissando
+            <BLANKLINE>
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
+                            f''8                                                                     %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
                             \glissando                                                               %! baca_glissando
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
