@@ -2805,6 +2805,23 @@ def mmrest_text_staff_padding(
         whitelist=(abjad.MultimeasureRest,),
         )
 
+def mmrest_text_transparent(
+    *,
+    selector: typings.Selector = 'baca.leaves()',
+    tag: typing.Optional[str] = 'baca_script_transparent',
+    ) -> OverrideCommand:
+    """
+    Overrides script transparent.
+    """
+    return OverrideCommand(
+        attribute='transparent',
+        value=True,
+        grob='multi_measure_rest_text',
+        selector=selector,
+        tags=[tag],
+        whitelist=(abjad.MultimeasureRest,),
+        )
+
 def no_ledgers(
     *,
     selector: typings.Selector = 'baca.leaves()',

@@ -191,6 +191,7 @@ overrides
    ~mmrest_text_padding
    ~mmrest_text_parent_center
    ~mmrest_text_staff_padding
+   ~mmrest_text_transparent
    ~no_ledgers
    ~note_column_shift
    ~note_head_color
@@ -356,6 +357,8 @@ overrides
 .. autofunction:: mmrest_text_parent_center
 
 .. autofunction:: mmrest_text_staff_padding
+
+.. autofunction:: mmrest_text_transparent
 
 .. autofunction:: no_ledgers
 
