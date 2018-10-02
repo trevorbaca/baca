@@ -665,6 +665,7 @@ Override library.
    ~baca.overrides.dls_padding
    ~baca.overrides.dls_staff_padding
    ~baca.overrides.dls_up
+   ~baca.overrides.dots_extra_offset
    ~baca.overrides.dots_stencil_false
    ~baca.overrides.dots_transparent
    ~baca.overrides.dynamic_shift

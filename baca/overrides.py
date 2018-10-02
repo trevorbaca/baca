@@ -1555,6 +1555,23 @@ def dls_up(
         tags=[tag],
         )
 
+def dots_extra_offset(
+    pair: typings.NumberPair,
+    *,
+    selector: typings.Selector = 'baca.leaves()',
+    tag: typing.Optional[str] = 'baca_dots_extra_offset',
+    ) -> OverrideCommand:
+    """
+    Overrides dots extra offset.
+    """
+    return OverrideCommand(
+        attribute='extra_offset',
+        grob='dots',
+        selector=selector,
+        tags=[tag],
+        value=pair,
+        )
+
 def dots_stencil_false(
     *,
     selector: typings.Selector = 'baca.leaves()',

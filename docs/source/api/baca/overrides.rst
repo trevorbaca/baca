@@ -164,6 +164,7 @@ overrides
    ~dls_padding
    ~dls_staff_padding
    ~dls_up
+   ~dots_extra_offset
    ~dots_stencil_false
    ~dots_transparent
    ~dynamic_shift
@@ -303,6 +304,8 @@ overrides
 .. autofunction:: dls_staff_padding
 
 .. autofunction:: dls_up
+
+.. autofunction:: dots_extra_offset
 
 .. autofunction:: dots_stencil_false
 
