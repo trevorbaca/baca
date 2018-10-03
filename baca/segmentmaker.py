@@ -1243,6 +1243,11 @@ class SegmentMaker(abjad.SegmentMaker):
             metric_modulation = inspection.indicator(abjad.MetricModulation)
             accelerando = inspection.indicator(indicators.Accelerando)
             ritardando = inspection.indicator(indicators.Ritardando)
+            if (metronome_mark is None and
+                metric_modulation is None and
+                accelerando is None and
+                ritardando is None):
+                continue
             if metronome_mark is not None:
                 metronome_mark._hide = True
                 wrapper = inspection.wrapper(abjad.MetronomeMark)
@@ -1261,10 +1266,6 @@ class SegmentMaker(abjad.SegmentMaker):
             if metronome_mark is None and ritardando is not None:
                 wrapper = inspection.wrapper(indicators.Ritardando)
             has_trend = accelerando is not None or ritardando is not None
-            if (metronome_mark is None and
-                metric_modulation is None and
-                not has_trend):
-                continue
             indicator_count += 1
             tag = wrapper.tag
             if metronome_mark is not None:
@@ -1401,6 +1402,7 @@ class SegmentMaker(abjad.SegmentMaker):
             stop_text_span = abjad.StopTextSpan(
                 command=r'\bacaStopTextSpanMM',
                 )
+            tag = wrapper.tag
             abjad.attach(
                 stop_text_span,
                 last_skip,

@@ -4514,7 +4514,7 @@ class PersistentIndicatorTests(object):
                             \baca-new-spacing-section #1 #25                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \bacaStopTextSpanMM                                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(4)
+                            \bacaStopTextSpanMM                                                          %! EXPLICIT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(4)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
@@ -4619,7 +4619,7 @@ class PersistentIndicatorTests(object):
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \bacaStopTextSpanMM                                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(4)
+                            \bacaStopTextSpanMM                                                          %! EXPLICIT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(4)
                             \revert TextSpanner.staff-padding                                            %! baca_text_spanner_staff_padding:OverrideCommand(2)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -4726,7 +4726,7 @@ class PersistentIndicatorTests(object):
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \bacaStopTextSpanMM                                                          %! REAPPLIED_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(4)
+                            \bacaStopTextSpanMM                                                          %! REAPPLIED_METRONOME_MARK:_set_status_tag:_reapply_persistent_indicators(2):_attach_metronome_marks(4)
                             \revert TextSpanner.staff-padding                                            %! baca_text_spanner_staff_padding:OverrideCommand(2)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -4932,7 +4932,7 @@ class PersistentIndicatorTests(object):
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \bacaStopTextSpanMM                                                          %! REDUNDANT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(4)
+                            \bacaStopTextSpanMM                                                          %! REDUNDANT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(4)
                             \revert TextSpanner.staff-padding                                            %! baca_text_spanner_staff_padding:OverrideCommand(2)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -5900,7 +5900,7 @@ class PersistentIndicatorTests(object):
                             \baca-new-spacing-section #1 #25                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \bacaStopTextSpanMM                                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(4)
+                            \bacaStopTextSpanMM                                                          %! EXPLICIT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(4)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
@@ -6024,7 +6024,7 @@ class PersistentIndicatorTests(object):
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \bacaStopTextSpanMM                                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(4)
+                            \bacaStopTextSpanMM                                                          %! EXPLICIT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(4)
                             \revert TextSpanner.staff-padding                                            %! baca_text_spanner_staff_padding:OverrideCommand(2)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -6150,7 +6150,7 @@ class PersistentIndicatorTests(object):
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \bacaStopTextSpanMM                                                          %! REAPPLIED_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(4)
+                            \bacaStopTextSpanMM                                                          %! REAPPLIED_METRONOME_MARK:_set_status_tag:_reapply_persistent_indicators(2):_attach_metronome_marks(4)
                             \revert TextSpanner.staff-padding                                            %! baca_text_spanner_staff_padding:OverrideCommand(2)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -6298,7 +6298,7 @@ class PersistentIndicatorTests(object):
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \bacaStopTextSpanMM                                                          %! REDUNDANT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(4)
+                            \bacaStopTextSpanMM                                                          %! REDUNDANT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(4)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
@@ -6425,7 +6425,7 @@ class PersistentIndicatorTests(object):
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
-                            \bacaStopTextSpanMM                                                          %! REDUNDANT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(4)
+                            \bacaStopTextSpanMM                                                          %! REDUNDANT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(4)
                             \revert TextSpanner.staff-padding                                            %! baca_text_spanner_staff_padding:OverrideCommand(2)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
