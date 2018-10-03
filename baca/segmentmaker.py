@@ -1303,7 +1303,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 abjad.attach(
                     stop_text_span,
                     skip,
-                    tag=tag.append('_attach_metronome_marks(1)'),
+                    tag='_attach_metronome_marks(1)',
                     )
             if add_right_text_to_me is skip:
                 right_text = last_leaf_metronome_mark._get_markup()
@@ -1402,11 +1402,10 @@ class SegmentMaker(abjad.SegmentMaker):
             stop_text_span = abjad.StopTextSpan(
                 command=r'\bacaStopTextSpanMM',
                 )
-            tag = wrapper.tag
             abjad.attach(
                 stop_text_span,
                 last_skip,
-                tag=tag.append('_attach_metronome_marks(4)'),
+                tag='_attach_metronome_marks(4)',
                 )
 
     def _born_this_segment(self, component):
