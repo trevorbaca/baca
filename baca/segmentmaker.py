@@ -3345,9 +3345,16 @@ class SegmentMaker(abjad.SegmentMaker):
         scope_type = (scoping.Scope, scoping.TimelineScope)
         scopes__: typing.List[scoping.ScopeTyping]
         if isinstance(scopes, str):
-            voice_name = abbreviations.get(scopes, scopes)
-            scope = scoping.Scope(voice_name=voice_name)
-            scopes__ = [scope]
+            result = abbreviations.get(scopes, scopes)
+            if isinstance(result, str):
+                voice_names = [result]
+            else:
+                assert isinstance(result, list), repr(result)
+                voice_names = result
+            scopes__ = []
+            for voice_name in voice_names:
+                scope = scoping.Scope(voice_name=voice_name)
+                scopes__.append(scope)
         elif isinstance(scopes, tuple):
             scopes__ = self._unpack_scope_pair(scopes, abbreviations)
         elif isinstance(scopes, scope_type):
