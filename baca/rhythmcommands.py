@@ -2060,12 +2060,14 @@ def flags() -> rmakers.BeamSpecifier:
 
 def make_even_divisions(
     *,
+    measures: typings.Slice = None,
     tag: str = 'baca_make_even_divisions',
     ) -> RhythmCommand:
     """
     Makes even divisions.
     """
     return RhythmCommand(
+        measures=measures,
         rhythm_maker=rmakers.EvenDivisionRhythmMaker(
             tag=tag,
             tuplet_specifier=rmakers.TupletSpecifier(
@@ -2076,6 +2078,7 @@ def make_even_divisions(
 
 def make_fused_tuplet_monads(
     *,
+    measures: typings.Slice = None,
     tag: str  = 'baca_make_fused_tuplet_monads',
     tuplet_ratio: typing.Tuple[int] = None,
     ) -> RhythmCommand:
@@ -2091,6 +2094,7 @@ def make_fused_tuplet_monads(
         division_expression=abjad.sequence()
             .sum()
             .sequence(),
+        measures=measures,
         rhythm_maker=rmakers.TupletRhythmMaker(
             tag=tag,
             tie_specifier=rmakers.TieSpecifier(
@@ -2106,6 +2110,8 @@ def make_fused_tuplet_monads(
         )
 
 def make_multimeasure_rests(
+    *,
+    measures: typings.Slice = None,
     tag: str = 'baca_make_multimeasure_rests',
     ) -> RhythmCommand:
     """
@@ -2116,6 +2122,7 @@ def make_multimeasure_rests(
         use_multimeasure_rests=True,
         )
     return RhythmCommand(
+        measures=measures,
         rhythm_maker=rmakers.NoteRhythmMaker(
             division_masks=[mask],
             tag=tag,
@@ -2125,6 +2132,7 @@ def make_multimeasure_rests(
 def make_notes(
     *,
     dmask: rmakers.MaskKeyword = None,
+    measures: typings.Slice = None,
     repeat_ties: bool = False,
     tag: str = 'baca_make_notes',
     ) -> RhythmCommand:
@@ -2135,6 +2143,7 @@ def make_notes(
     if repeat_ties:
         tie_specifier = rmakers.TieSpecifier(repeat_ties=True)
     return RhythmCommand(
+        measures=measures,
         rewrite_meter=True,
         rhythm_maker=rmakers.NoteRhythmMaker(
             division_masks=dmask,
@@ -2147,12 +2156,14 @@ def make_repeat_tied_notes(
     *,
     dmask: rmakers.MaskKeyword = None,
     do_not_rewrite_meter: bool = None,
+    measures: typings.Slice = None,
     tag: str = 'baca_make_repeat_tied_notes',
     ) -> RhythmCommand:
     """
     Makes repeat-tied notes; rewrites meter.
     """
     return RhythmCommand(
+        measures=measures,
         rewrite_meter=not(do_not_rewrite_meter),
         rhythm_maker=rmakers.NoteRhythmMaker(
             division_masks=dmask,
@@ -2170,6 +2181,7 @@ def make_repeated_duration_notes(
     beam_specifier: rmakers.BeamSpecifier = None,
     dmask: rmakers.MaskKeyword = None,
     do_not_rewrite_meter: bool = None,
+    measures: typings.Slice = None,
     tag: str = 'baca_make_repeated_duration_notes',
     ) -> RhythmCommand:
     """
@@ -2188,6 +2200,7 @@ def make_repeated_duration_notes(
         )
     return RhythmCommand(
         division_expression=division_expression,
+        measures=measures,
         rewrite_meter=not(do_not_rewrite_meter),
         rhythm_maker=rmakers.NoteRhythmMaker(
             beam_specifier=beam_specifier,
@@ -2197,11 +2210,16 @@ def make_repeated_duration_notes(
             ),
         )
 
-def make_rests(tag: str = 'baca_make_rests') -> RhythmCommand:
+def make_rests(
+    *,
+    measures: typings.Slice = None,
+    tag: str = 'baca_make_rests',
+    ) -> RhythmCommand:
     """
     Makes rests.
     """
     return RhythmCommand(
+        measures=measures,
         rhythm_maker=rmakers.NoteRhythmMaker(
             division_masks=[rmakers.silence([0], 1)],
             tag=tag,
@@ -2211,6 +2229,7 @@ def make_rests(tag: str = 'baca_make_rests') -> RhythmCommand:
 def make_rhythm(
     selection: typing.Union[str, abjad.Selection],
     *,
+    measures: typings.Slice = None,
     repeat_tie_threshold: typing.Union[
         bool,
         typings.IntegerPair,
@@ -2342,12 +2361,14 @@ def make_rhythm(
                 )
         temporary_container[:] = []
     return RhythmCommand(
+        measures=measures,
         rhythm_maker=argument,
         )
 
 def make_single_attack(
     duration,
     *,
+    measures: typings.Slice = None,
     tag: str = 'baca_make_single_attack',
     ) -> RhythmCommand:
     """
@@ -2366,22 +2387,33 @@ def make_single_attack(
         tag=tag,
         )
     return RhythmCommand(
+        measures=measures,
         rhythm_maker=rhythm_maker,
         )
 
-def make_skips(tag: str = 'baca_make_skips') -> RhythmCommand:
+def make_skips(
+    *,
+    measures: typings.Slice = None,
+    tag: str = 'baca_make_skips',
+    ) -> RhythmCommand:
     """
     Makes skips.
     """
     return RhythmCommand(
+        measures=measures,
         rhythm_maker=SkipRhythmMaker()
         )
 
-def make_tied_notes(tag: str = 'baca_make_tied_notes') -> RhythmCommand:
+def make_tied_notes(
+    *,
+    measures: typings.Slice = None,
+    tag: str = 'baca_make_tied_notes',
+    ) -> RhythmCommand:
     """
     Makes tied notes; rewrites meter.
     """
     return RhythmCommand(
+        measures=measures,
         rewrite_meter=True,
         rhythm_maker=rmakers.NoteRhythmMaker(
             tag=tag,
@@ -2394,12 +2426,17 @@ def make_tied_notes(tag: str = 'baca_make_tied_notes') -> RhythmCommand:
 def make_tied_repeated_durations(
     durations: typing.Iterable,
     *,
+    measures: typings.Slice = None,
     tag: str = 'baca_make_tied_reepated_durations',
     ) -> RhythmCommand:
     """
     Makes tied repeated durations; does not rewrite meter.
     """
-    command = make_repeated_duration_notes(durations, tag=tag)
+    command = make_repeated_duration_notes(
+        durations,
+        measures=measures,
+        tag=tag,
+        )
     return abjad.new(
         command,
         rewrite_meter=False,
