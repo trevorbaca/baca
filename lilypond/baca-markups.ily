@@ -250,6 +250,10 @@ baca-very-long-fermata-markup =
     \with-dimensions-from \null
     \musicglyph #"scripts.uverylongfermata"
 
+%%% NULL MARKUP %%%
+
+baca-null-markup = \markup \null
+
 %%% REHEARSAL MARKS %%%
 
 % IMPORTANT: markup attach direction must be neutral or down (- or _);
