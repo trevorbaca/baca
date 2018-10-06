@@ -2702,12 +2702,16 @@ def sustain_last() -> rmakers.SustainMask:
 def tacet(
     color: str = 'red',
     *,
+    measures: typings.Slice = None,
     selector: typings.Selector = 'baca.mmrests()',
-    ):
+    ) -> overrides.OverrideCommand:
     """
     Colors multimeasure rests.
     """
-    return overrides.mmrest_color(color, selector=selector)
+    command = overrides.mmrest_color(color, selector=selector)
+    command_ = scoping.new(command, measures=measures)
+    assert isinstance(command_, overrides.OverrideCommand)
+    return command_
 
 def tie_from(
     *,
