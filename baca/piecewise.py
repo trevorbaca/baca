@@ -2951,6 +2951,16 @@ def make_dynamic(string: str) -> typing.Union[
 
     ..  container:: example
 
+        Composite dynamics:
+
+        >>> baca.make_dynamic('pf')
+        Dynamic('f', command='\\baca-pf', name_is_textual=True, sforzando=False)
+
+        >>> baca.make_dynamic('pff')
+        Dynamic('ff', command='\\baca-pff', name_is_textual=True, sforzando=False)
+
+    ..  container:: example
+
         Effort dynamics:
 
         >>> baca.make_dynamic('"p"')

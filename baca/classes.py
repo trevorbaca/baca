@@ -1704,6 +1704,19 @@ class SchemeManifest(object):
         ('baca-fffp', 'p'),
         ('niente', 'niente'),
         ('baca-p-sub-but-accents-continue-sffz', 'p'),
+        #
+        ('baca-pppf', 'f'),
+        ('baca-pppff', 'ff'),
+        ('baca-pppfff', 'fff'),
+        #
+        ('baca-ppf', 'f'),
+        ('baca-ppff', 'ff'),
+        ('baca-ppfff', 'fff'),
+        #
+        ('baca-pf', 'f'),
+        ('baca-pff', 'ff'),
+        ('baca-pfff', 'fff'),
+        #
         ('baca-sff', 'ff'),
         ('baca-sffp', 'p'),
         ('baca-sffpp', 'pp'),
@@ -1734,6 +1747,15 @@ class SchemeManifest(object):
             'baca-fffp'
             'niente'
             'baca-p-sub-but-accents-continue-sffz'
+            'baca-pppf'
+            'baca-pppff'
+            'baca-pppfff'
+            'baca-ppf'
+            'baca-ppff'
+            'baca-ppfff'
+            'baca-pf'
+            'baca-pff'
+            'baca-pfff'
             'baca-sff'
             'baca-sffp'
             'baca-sffpp'
