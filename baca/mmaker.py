@@ -3136,7 +3136,7 @@ class ImbricationCommand(scoping.Command):
                     >>
                 >>
 
-        ..  container:: example
+        ..  container:: example exception
 
             Raises exception on unused pitches:
 
@@ -5290,7 +5290,7 @@ class MusicAccumulator(object):
 
         Raises exception on duplicate figure name.
 
-        ..  container:: example
+        ..  container:: example exception
 
             >>> score_template = baca.StringTrioScoreTemplate()
             >>> accumulator = baca.MusicAccumulator(score_template=score_template)

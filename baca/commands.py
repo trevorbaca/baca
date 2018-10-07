@@ -5234,7 +5234,7 @@ def markup(
                 }
             >>
 
-    ..  container:: example
+    ..  container:: example exception
 
         Raises exception on nonstring, nonmarkup ``argument``:
 
@@ -5463,7 +5463,7 @@ def parts(
         <BLANKLINE>
         >>                                                                                       %! StringTrioScoreTemplate
 
-    ..  container:: example
+    ..  container:: example exception
 
         Raises exception when voice does not allow part assignment:
 

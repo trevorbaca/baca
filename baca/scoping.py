@@ -1282,7 +1282,7 @@ def suite(
     """
     Makes suite.
 
-    ..  container:: example
+    ..  container:: example exception
 
         Raises exception on noncommand:
 

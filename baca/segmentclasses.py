@@ -1885,7 +1885,7 @@ class HorizontalSpacingSpecifier(object):
                     ]
                 )
 
-        ..  container:: example
+        ..  container:: example exception
 
             Raises exception when measures is not int, pair or list:
 
@@ -2248,7 +2248,7 @@ def breaks(
     score; leave ``partial_score`` set to none when rendering a complete
     score.
 
-    ..  container:: example
+    ..  container:: example exception
 
         Raises exception on misnumbered pages:
 
@@ -2267,7 +2267,7 @@ def breaks(
             ... 
         Exception: page number (9) is not 2.
 
-    ..  container:: example
+    ..  container:: example exception
 
         Raises exception on too few measures:
 
@@ -2369,7 +2369,7 @@ def page(
     r"""
     Makes page specifier.
 
-    ..  container:: example
+    ..  container:: example exception
         
         Raises exception when systems overlap at Y-offset:
 

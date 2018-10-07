@@ -2275,7 +2275,7 @@ class CollectionList(collections_module.Sequence):
             PitchSegment([17, 19, 5, 12, 14])
             PitchSegment([18, 17, 16, 17, 19])
 
-        ..  container:: example
+        ..  container:: example exception
 
             Raises exception on inexact read:
 

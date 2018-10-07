@@ -468,7 +468,7 @@ class Division(abjad.NonreducedFraction):
             >>> division_2 - division_1
             Division((4, 2), start_offset=Offset(20, 1))
 
-        ..  container:: example
+        ..  container:: example exception
 
              Raises exception when one division has a start offset and the
              other does not:

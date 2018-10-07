@@ -3029,6 +3029,15 @@ def make_dynamic(string: str) -> typing.Union[
         >>> baca.make_dynamic('|>o')
         HairpinIndicator(shape='|>o', tweaks=LilyPondTweakManager(('to_barline', True)))
 
+    ..  container:: example exception
+
+        Errors on nondynamic input:
+
+        >>> baca.make_dynamic('text')
+        Traceback (most recent call last):
+            ...
+        Exception: the string 'text' initializes no known dynamic.
+
     """
     assert isinstance(string, str), repr(string)
     scheme_manifest = classes.SchemeManifest()
@@ -3091,7 +3100,14 @@ def make_dynamic(string: str) -> typing.Union[
         if string.endswith('>o'):
             abjad.tweak(indicator).to_barline = True
     else:
-        indicator = abjad.Dynamic(string)
+        failed = False
+        try:
+            indicator = abjad.Dynamic(string)
+        except:
+            failed = True
+        if failed:
+            message = f'the string {string!r} initializes no known dynamic.'
+            raise Exception(message)
     return indicator
 
 def parse_hairpin_descriptor(

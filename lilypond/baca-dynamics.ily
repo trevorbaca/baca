@@ -63,6 +63,26 @@ baca-fff-ancora = #(
     (markup #:baca-ancora-dynamic "fff")
     )
 
+%%% COMPOSITE DYNAMICS %%%
+
+baca-ppff = #(make-dynamic-script "pppf")
+
+baca-ppfff = #(make-dynamic-script "pppff")
+
+baca-pppfff = #(make-dynamic-script "pppfff")
+
+baca-ppf = #(make-dynamic-script "ppf")
+
+baca-ppff = #(make-dynamic-script "ppff")
+
+baca-ppfff = #(make-dynamic-script "ppfff")
+
+baca-pf = #(make-dynamic-script "pf")
+
+baca-pff = #(make-dynamic-script "pff")
+
+baca-pfff = #(make-dynamic-script "pfff")
+
 %%% EFFORT DYNAMICS %%%
 
 #(define-markup-command
@@ -134,6 +154,7 @@ baca-effort-sffz = #(
 %%% FP DYNAMICS %%%
 
 baca-ffp = #(make-dynamic-script "ffp")
+
 baca-fffp = #(make-dynamic-script "fffp")
 
 %%% POCO SCRATCH DYNAMICS %%%

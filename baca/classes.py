@@ -803,7 +803,7 @@ class Cursor(object):
             >>> cursor.next(count=-3)
             ['rit.', Note("cs'8."), 'da capo']
 
-        ..  container:: example
+        ..  container:: example exception
 
             Raises exception when cursor is exhausted:
 

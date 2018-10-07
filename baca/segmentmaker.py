@@ -682,7 +682,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                 >>                                                                                       %! SingleStaffScoreTemplate
 
-        ..  container:: example
+        ..  container:: example exception
 
             Raises exception on noncommand input:
 
@@ -698,7 +698,7 @@ class SegmentMaker(abjad.SegmentMaker):
             <BLANKLINE>
             text
 
-        ..  container:: example
+        ..  container:: example exception
 
             Raises exception on unknown voice name:
 
@@ -6150,7 +6150,7 @@ class SegmentMaker(abjad.SegmentMaker):
         """
         Gets validate measure count.
 
-        ..  container:: example
+        ..  container:: example exception
 
             Raises exception when measures found do not equal validate count:
 

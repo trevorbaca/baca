@@ -1021,7 +1021,7 @@ class RhythmCommand(scoping.Command):
                 <BLANKLINE>
                 >>                                                                                       %! SingleStaffScoreTemplate
 
-        ..  container:: example
+        ..  container:: example exception
 
             Raises exception on invalid input:
 

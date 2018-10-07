@@ -1803,7 +1803,7 @@ def dynamic_text_extra_offset(
                 }
             >>
 
-    ..  container:: example
+    ..  container:: example exception
 
         Raise exception on nonpair input:
 
@@ -2326,7 +2326,7 @@ def mmrest_text_color(
             <BLANKLINE>
             >>                                                                                       %! SingleStaffScoreTemplate
 
-    ..  container:: example
+    ..  container:: example exception
 
         Raises exception when called on leaves other than multimeasure
         rests:
@@ -6420,7 +6420,7 @@ def text_script_color(
                 }
             >>
 
-    ..  container:: example
+    ..  container:: example exception
 
         Raises exception when called on multimeasure rests:
 
@@ -6614,7 +6614,7 @@ def text_script_down(
                 }
             >>
 
-    ..  container:: example
+    ..  container:: example exception
 
         Raises exception when called on multimeasure rests:
 
@@ -6662,7 +6662,7 @@ def text_script_extra_offset(
     r"""
     Overrides text script extra offset.
 
-    ..  container:: example
+    ..  container:: example exception
 
         Raises exception when called on multimeasure rests:
 
@@ -6880,7 +6880,7 @@ def text_script_padding(
                 }
             >>
 
-    ..  container:: example
+    ..  container:: example exception
 
         Raises exception when called on multimeasure rests:
 
@@ -6927,7 +6927,7 @@ def text_script_parent_center(
     r"""
     Overrides text script parent alignment X to center.
 
-    ..  container:: example
+    ..  container:: example exception
 
         Raises exception when called on multimeasure rests:
 
@@ -7122,7 +7122,7 @@ def text_script_staff_padding(
                 }
             >>
 
-    ..  container:: example
+    ..  container:: example exception
 
         Raises exception when called on multimeasure rests:
 
@@ -7316,7 +7316,7 @@ def text_script_up(
                 }
             >>
 
-    ..  container:: example
+    ..  container:: example exception
 
         Raises exception when called on multimeasure rests:
 
