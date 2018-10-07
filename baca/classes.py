@@ -1717,6 +1717,29 @@ class SchemeManifest(object):
         ('baca-pff', 'ff'),
         ('baca-pfff', 'fff'),
         #
+        ('baca-ppp-pp', 'pp'),
+        ('baca-ppp-mp', 'mp'),
+        ('baca-ppp-mf', 'mf'),
+        ('baca-ppp-f', 'f'),
+        ('baca-ppp-ff', 'ff'),
+        ('baca-ppp-fff', 'fff'),
+        #
+        ('baca-pp-ppp', 'ppp'),
+        ('baca-pp-p', 'p'),
+        ('baca-pp-mp', 'mp'),
+        ('baca-pp-mf', 'mf'),
+        ('baca-pp-f', 'f'),
+        ('baca-pp-ff', 'ff'),
+        ('baca-pp-fff', 'fff'),
+        #
+        ('baca-p-ppp', 'ppp'),
+        ('baca-p-pp', 'pp'),
+        ('baca-p-mp', 'mp'),
+        ('baca-p-mf', 'mf'),
+        ('baca-p-f', 'f'),
+        ('baca-p-ff', 'ff'),
+        ('baca-p-fff', 'fff'),
+        #
         ('baca-sff', 'ff'),
         ('baca-sffp', 'p'),
         ('baca-sffpp', 'pp'),
@@ -1756,6 +1779,26 @@ class SchemeManifest(object):
             'baca-pf'
             'baca-pff'
             'baca-pfff'
+            'baca-ppp-pp'
+            'baca-ppp-mp'
+            'baca-ppp-mf'
+            'baca-ppp-f'
+            'baca-ppp-ff'
+            'baca-ppp-fff'
+            'baca-pp-ppp'
+            'baca-pp-p'
+            'baca-pp-mp'
+            'baca-pp-mf'
+            'baca-pp-f'
+            'baca-pp-ff'
+            'baca-pp-fff'
+            'baca-p-ppp'
+            'baca-p-pp'
+            'baca-p-mp'
+            'baca-p-mf'
+            'baca-p-f'
+            'baca-p-ff'
+            'baca-p-fff'
             'baca-sff'
             'baca-sffp'
             'baca-sffpp'
