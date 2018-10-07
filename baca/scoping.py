@@ -398,7 +398,7 @@ class Command(object):
             return
         dynamic_prototype = (
             abjad.Dynamic,
-            abjad.HairpinIndicator,
+            abjad.StartHairpin,
             )
         tempo_prototype = (
             abjad.MetronomeMark,
