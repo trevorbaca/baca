@@ -3192,6 +3192,12 @@ def parse_hairpin_descriptor(
         Bundle(indicator=Dynamic('f'), spanner_start=StartHairpin(shape='>'))
         Bundle(indicator=Dynamic('p'))
 
+        >>> for item in baca.parse_hairpin_descriptor('f -- ! > p'):
+        ...     item
+        Bundle(indicator=Dynamic('f'), spanner_start=StartHairpin(shape='--'))
+        Bundle(indicator=StopHairpin(), spanner_start=StartHairpin(shape='>'))
+        Bundle(indicator=Dynamic('p'))
+
     """
     assert isinstance(descriptor, str), repr(descriptor)
     indicators: typing.List[
@@ -3231,7 +3237,7 @@ def parse_hairpin_descriptor(
             isinstance(right, abjad.Dynamic)):
             bundle = Bundle(indicator=left)
             bundles.append(bundle)
-        elif (isinstance(left, abjad.Dynamic) and
+        elif (isinstance(left, (abjad.Dynamic, abjad.StopHairpin)) and
             isinstance(right, abjad.StartHairpin)):
             bundle = Bundle(
                 indicator=left,
