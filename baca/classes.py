@@ -4078,7 +4078,7 @@ class Selection(abjad.Selection):
         exclude: typings.Strings = None,
         ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
-        Selects leaves c[y]clically partitioned by ``counts`` (with overhang).
+        Selects leaves cyclically partitioned by ``counts`` (with overhang).
 
         ..  container:: example
 
