@@ -319,15 +319,18 @@ class PiecewiseCommand(scoping.Command):
             if is_final_piece and self.right_broken:
                 tag = f'{tag}:right_broken'
             autodetected_right_padding = None
+            # solution is utterly heuristic;
+            # TextSpanner.bound-details.right.to-extent = ##t implementation
+            # only 100% workable solution
             if is_final_piece and self.autodetect_right_padding:
-                # if stop leaf is multiplied whole note in fermata measure
+                # stop leaf multiplied whole note on fermata measure downbeat
                 if (isinstance(stop_leaf, abjad.Note) and
                     stop_leaf.written_duration == 1 and
                     stop_leaf.multiplier == abjad.Multiplier(1, 4)):
                     autodetected_right_padding = 3.25
-                # if stop leaf is on measure downbeat
+                # stop leaf on normal measure downbeat
                 else:
-                    autodetected_right_padding = 2.25
+                    autodetected_right_padding = 2.75
                 # there's probably a third case for normal midmeasure leaf
                 #else:
                 #    autodetected_right_padding = 1.25
@@ -401,6 +404,7 @@ class PiecewiseCommand(scoping.Command):
         from .segmentmaker import SegmentMaker
         assert isinstance(tag, str), repr(tag)
         for indicator in bundle:
+            indicator = abjad.new(indicator)
             if (not getattr(indicator, 'trend', False) and
                 leaf is just_bookended_leaf):
                 continue
@@ -2051,7 +2055,7 @@ def hairpin(
                             f'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             e''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'DeepPink1)                                   %! REDUNDANT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -2070,7 +2074,7 @@ def hairpin(
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
+                            - \tweak color #(x11-color 'DeepPink1)                                   %! REDUNDANT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \p                                                                       %! REDUNDANT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -2079,7 +2083,7 @@ def hairpin(
                             e''8                                                                     %! baca_make_even_divisions
             <BLANKLINE>
                             g'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'DeepPink1)                                   %! REDUNDANT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
