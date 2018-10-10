@@ -1604,11 +1604,13 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _check_doubled_dynamics(self):
         for leaf in abjad.iterate(self.score).leaves():
-            dynamics = abjad.inspect(leaf).wrappers(abjad.Dynamic)
+            dynamics = abjad.inspect(leaf).indicators(abjad.Dynamic)
             if 1 < len(dynamics):
                 voice = abjad.inspect(leaf).parentage().get(abjad.Voice)
                 message = f'leaf {str(leaf)} in {voice.name} has'
-                message += f' {len(dynamics)} dynamics attached.'
+                message += f' {len(dynamics)} dynamics attached:'
+                for dynamic in dynamics:
+                    message += f'\n   {dynamic!s}'
                 raise Exception(message)
 
     def _check_persistent_indicators(self):

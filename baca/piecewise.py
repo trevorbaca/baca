@@ -606,71 +606,7 @@ def dynamic(
 
     ..  container:: example
 
-        Attaches dynamic to pitched head 0 in tuplet 1:
-
-        >>> music_maker = baca.MusicMaker()
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.dynamic('f', selector=baca.tuplets()[1:2].phead(0)),
-        ...     baca.rests_around([2], [4]),
-        ...     baca.tuplet_bracket_staff_padding(5),
-        ...     counts=[1, 1, 5, -1],
-        ...     time_treatments=[-1],
-        ...     )
-        >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
-            <<
-                \context Voice = "Voice_1"
-                {
-                    \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
-                            c'16
-                            [
-                            d'16
-                            ]
-                            bf'4
-                            ~
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
-                            \f                                                                       %! baca_dynamic:IndicatorCommand
-                            [
-                            e''16
-                            ]
-                            ef''4
-                            ~
-                            ef''16
-                            r16
-                            af''16
-                            [
-                            g''16
-                            ]
-                        }
-                        \times 4/5 {
-                            a'16
-                            r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }
-                    }
-                }
-            >>
-
-    ..  container:: example
-
-        Attaches effort dynamic to pitched head 0:
+        Works with effort dynamics:
 
         >>> music_maker = baca.MusicMaker()
         >>> contribution = music_maker(
@@ -734,7 +670,7 @@ def dynamic(
 
     ..  container:: example
 
-        Works with dynamic trends:
+        Works with hairpins:
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
@@ -748,7 +684,7 @@ def dynamic(
         ...     baca.make_even_divisions(),
         ...     baca.dynamic('p'),
         ...     baca.dynamic('<'),
-        ...     baca.dynamic('f', selector=baca.pleaf(-1)),
+        ...     baca.dynamic('!', selector=baca.pleaf(-1)),
         ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
         ...     )
 
@@ -850,8 +786,7 @@ def dynamic(
                             e'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
-                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
+                            \!                                                                       %! baca_dynamic:IndicatorCommand
                             ]                                                                        %! baca_make_even_divisions
                             \revert DynamicLineSpanner.staff-padding                                 %! baca_dls_staff_padding:OverrideCommand(2)
             <BLANKLINE>
@@ -877,7 +812,7 @@ def dynamic(
         ...     'Music_Voice',
         ...     baca.dls_staff_padding(5),
         ...     baca.make_even_divisions(),
-        ...     baca.dynamic('p', abjad.tweak('red').color),
+        ...     baca.dynamic('p', abjad.tweak((-4, 0)).extra_offset),
         ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
         ...     )
 
@@ -940,6 +875,7 @@ def dynamic(
                             \override DynamicLineSpanner.staff-padding = #'5                         %! baca_dls_staff_padding:OverrideCommand(1)
                             e'8                                                                      %! baca_make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
+                            - \tweak extra-offset #'(-4 . 0)                                         %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
                             \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -993,7 +929,7 @@ def dynamic(
         indicator = make_dynamic(dynamic)
     else:
         indicator = dynamic
-    prototype = (abjad.Dynamic, abjad.StartHairpin)
+    prototype = (abjad.Dynamic, abjad.StartHairpin, abjad.StopHairpin)
     assert isinstance(indicator, prototype), repr(indicator)
     return commands.IndicatorCommand(
         context='Voice',
@@ -2666,12 +2602,9 @@ def hairpin(
         >>> maker(
         ...     'Music_Voice',
         ...     baca.dls_staff_padding(5),
+        ...     baca.hairpin('< !'),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
-        ...     baca.suite(
-        ...         baca.hairpin('<', bookend=False),
-        ...         baca.dynamic('f', selector=baca.pleaf(-1)),
-        ...         ),
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
@@ -2770,8 +2703,7 @@ def hairpin(
                             e'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
-                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
+                            \!                                                                       %! baca_hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
                             \revert DynamicLineSpanner.staff-padding                                 %! baca_dls_staff_padding:OverrideCommand(2)
             <BLANKLINE>
@@ -2952,7 +2884,7 @@ def hairpin(
         )
 
 def make_dynamic(string: str) -> typing.Union[
-    abjad.Dynamic, abjad.StartHairpin
+    abjad.Dynamic, abjad.StartHairpin, abjad.StopHairpin,
     ]:
     r"""
     Makes dynamic.
@@ -2976,6 +2908,13 @@ def make_dynamic(string: str) -> typing.Union[
 
         >>> baca.make_dynamic('appena-udibile')
         Dynamic('appena udibile', command='\\baca-appena-udibile', name_is_textual=True, sforzando=False)
+
+    ..  container:: example
+
+        Stop hairpin:
+
+        >>> baca.make_dynamic('!')
+        StopHairpin()
 
     ..  container:: example
 
@@ -3090,7 +3029,11 @@ def make_dynamic(string: str) -> typing.Union[
     assert isinstance(string, str), repr(string)
     scheme_manifest = classes.SchemeManifest()
     known_shapes = abjad.StartHairpin('<').known_shapes
-    indicator: typing.Union[abjad.Dynamic, abjad.StartHairpin]
+    indicator: typing.Union[
+        abjad.Dynamic,
+        abjad.StartHairpin,
+        abjad.StopHairpin,
+        ]
     if '_' in string:
         raise Exception(f'use hyphens instead of underscores ({string!r}).')
     if string == 'niente':
@@ -3147,6 +3090,8 @@ def make_dynamic(string: str) -> typing.Union[
         indicator = abjad.StartHairpin(string)
         if string.endswith('>o'):
             abjad.tweak(indicator).to_barline = True
+    elif string == '!':
+        indicator = abjad.StopHairpin()
     else:
         failed = False
         try:
@@ -3183,6 +3128,11 @@ def parse_hairpin_descriptor(
         ...     item
         Bundle(spanner_start=StartHairpin(shape='<'))
 
+        >>> for item in baca.parse_hairpin_descriptor('< !'):
+        ...     item
+        Bundle(spanner_start=StartHairpin(shape='<'))
+        Bundle(indicator=StopHairpin())
+
         >>> for item in baca.parse_hairpin_descriptor('o<|'):
         ...     item
         Bundle(spanner_start=StartHairpin(shape='o<|'))
@@ -3190,6 +3140,20 @@ def parse_hairpin_descriptor(
         >>> for item in baca.parse_hairpin_descriptor('--'):
         ...     item
         Bundle(spanner_start=StartHairpin(shape='--'))
+
+        >>> for item in baca.parse_hairpin_descriptor('p < f'):
+        ...     item
+        Bundle(indicator=Dynamic('p'), spanner_start=StartHairpin(shape='<'))
+        Bundle(indicator=Dynamic('f'))
+
+        >>> for item in baca.parse_hairpin_descriptor('p <'):
+        ...     item
+        Bundle(indicator=Dynamic('p'), spanner_start=StartHairpin(shape='<'))
+
+        >>> for item in baca.parse_hairpin_descriptor('p < !'):
+        ...     item
+        Bundle(indicator=Dynamic('p'), spanner_start=StartHairpin(shape='<'))
+        Bundle(indicator=StopHairpin())
 
         >>> for item in baca.parse_hairpin_descriptor('< f'):
         ...     item
@@ -3231,11 +3195,12 @@ def parse_hairpin_descriptor(
     """
     assert isinstance(descriptor, str), repr(descriptor)
     indicators: typing.List[
-        typing.Union[abjad.Dynamic, abjad.StartHairpin]] = []
+        typing.Union[abjad.Dynamic, abjad.StartHairpin, abjad.StopHairpin]
+        ] = []
     bundles: typing.List[Bundle] = []
     for string in descriptor.split():
         indicator = make_dynamic(string)
-        if tweaks:
+        if tweaks and hasattr(indicator, '_tweaks'):
             PiecewiseCommand._apply_tweaks(indicator, tweaks)
         indicators.append(indicator)
     if len(indicators) == 1:
@@ -3261,7 +3226,7 @@ def parse_hairpin_descriptor(
     for left, right in classes.Sequence(indicators).nwise():
         if (isinstance(left, abjad.StartHairpin) and
             isinstance(right, abjad.StartHairpin)):
-            raise Exception('consecutive dynamic trends')
+            raise Exception('consecutive start hairpin commands.')
         elif (isinstance(left, abjad.Dynamic) and
             isinstance(right, abjad.Dynamic)):
             bundle = Bundle(indicator=left)
@@ -3273,7 +3238,8 @@ def parse_hairpin_descriptor(
                 spanner_start=right,
                 )
             bundles.append(bundle)
-    if indicators and isinstance(indicators[-1], abjad.Dynamic):
+    prototype = (abjad.Dynamic, abjad.StopHairpin)
+    if indicators and isinstance(indicators[-1], prototype):
         bundle = Bundle(indicator=indicators[-1])
         bundles.append(bundle)
     return bundles
