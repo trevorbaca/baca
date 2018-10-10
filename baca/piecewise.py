@@ -319,7 +319,7 @@ class PiecewiseCommand(scoping.Command):
             if is_final_piece and self.right_broken:
                 tag = f'{tag}:right_broken'
             autodetected_right_padding = None
-            # solution is utterly heuristic;
+            # solution is merely heuristic;
             # TextSpanner.bound-details.right.to-extent = ##t implementation
             # only 100% workable solution
             if is_final_piece and self.autodetect_right_padding:
