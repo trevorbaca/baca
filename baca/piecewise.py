@@ -25,7 +25,7 @@ class Bundle(object):
         '_spanner_stop',
         )
 
-    _publish_storage_format=True
+    _publish_storage_format = True
 
     ### INITIALIZER ###
 
@@ -145,6 +145,7 @@ class PiecewiseCommand(scoping.Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
+        '_autodetect_right_padding',
         '_bookend',
         '_bundles',
         '_final_piece_spanner',
@@ -161,6 +162,7 @@ class PiecewiseCommand(scoping.Command):
     def __init__(
         self,
         *,
+        autodetect_right_padding: bool = None,
         bookend: typing.Union[bool, int] = None,
         bundles: typing.List[Bundle] = None,
         final_piece_spanner: typing.Any = None,
@@ -187,6 +189,9 @@ class PiecewiseCommand(scoping.Command):
             selector=selector,
             tags=tags,
             )
+        if autodetect_right_padding is not None:
+            autodetect_right_padding = bool(autodetect_right_padding)
+        self._autodetect_right_padding = autodetect_right_padding
         if bookend is not None:
             assert isinstance(bookend, (int, bool)), repr(bookend)
         self._bookend = bookend
@@ -313,11 +318,25 @@ class PiecewiseCommand(scoping.Command):
             tag = 'PiecewiseCommand(1)'
             if is_final_piece and self.right_broken:
                 tag = f'{tag}:right_broken'
+            autodetected_right_padding = None
+            if is_final_piece and self.autodetect_right_padding:
+                # if stop leaf is multiplied whole note in fermata measure
+                if (isinstance(stop_leaf, abjad.Note) and
+                    stop_leaf.written_duration == 1 and
+                    stop_leaf.multiplier == abjad.Multiplier(1, 4)):
+                    autodetected_right_padding = 3.25
+                # if stop leaf is on measure downbeat
+                else:
+                    autodetected_right_padding = 2.25
+                # there's probably a third case for normal midmeasure leaf
+                #else:
+                #    autodetected_right_padding = 1.25
             self._attach_indicators(
                 bundle,
                 start_leaf,
                 i,
                 total_pieces,
+                autodetected_right_padding=autodetected_right_padding,
                 just_bookended_leaf=just_bookended_leaf,
                 tag=tag,
                 )
@@ -374,6 +393,7 @@ class PiecewiseCommand(scoping.Command):
         leaf,
         i,
         total_pieces,
+        autodetected_right_padding=None,
         just_bookended_leaf=None,
         tag=None,
         ):
@@ -384,6 +404,10 @@ class PiecewiseCommand(scoping.Command):
             if (not getattr(indicator, 'trend', False) and
                 leaf is just_bookended_leaf):
                 continue
+            if (autodetected_right_padding is not None and
+                isinstance(indicator, abjad.StartTextSpan)):
+                abjad.tweak(indicator).bound_details__right__padding = \
+                    autodetected_right_padding
             if self.tweaks and hasattr(indicator, '_tweaks'):
                 self._apply_tweaks(
                     indicator,
@@ -413,6 +437,13 @@ class PiecewiseCommand(scoping.Command):
                     )
 
     ### PUBLIC PROPERTIES ###
+
+    @property
+    def autodetect_right_padding(self) -> typing.Optional[bool]:
+        """
+        Is true when (text) spanner autodetects right padding.
+        """
+        return self._autodetect_right_padding
 
     @property
     def bookend(self) -> typing.Optional[typing.Union[bool, int]]:
@@ -3243,6 +3274,7 @@ def parse_hairpin_descriptor(
 def text_spanner(
     items: typing.Union[str, typing.List],
     *tweaks: abjad.IndexedTweakManager,
+    autodetect_right_padding: bool = None,
     bookend: typing.Union[bool, int] = -1,
     boxed: bool = None,
     final_piece_spanner: bool = None,
@@ -5226,6 +5258,8 @@ def text_spanner(
             >>                                                                                       %! SingleStaffScoreTemplate
 
     """
+    if autodetect_right_padding is not None:
+        autodetect_right_padding = bool(autodetect_right_padding)
     shape_to_style = {
         '=>': 'dashed-line-with-arrow',
         '=|': 'dashed-line-with-hook',
@@ -5350,6 +5384,7 @@ def text_spanner(
             )
         bundles.append(bundle)
     return PiecewiseCommand(
+        autodetect_right_padding=autodetect_right_padding,
         bookend=bookend,
         bundles=bundles,
         final_piece_spanner=final_piece_spanner,

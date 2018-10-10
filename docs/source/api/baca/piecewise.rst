@@ -107,6 +107,7 @@ piecewise
    .. autosummary::
       :nosignatures:
 
+      autodetect_right_padding
       bookend
       bundles
       final_piece_spanner
@@ -153,6 +154,8 @@ piecewise
 
    .. rubric:: Read-only properties
       :class: class-header
+
+   .. autoattribute:: PiecewiseCommand.autodetect_right_padding
 
    .. autoattribute:: PiecewiseCommand.bookend
 
