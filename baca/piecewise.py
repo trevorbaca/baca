@@ -406,8 +406,11 @@ class PiecewiseCommand(scoping.Command):
                 continue
             if (autodetected_right_padding is not None and
                 isinstance(indicator, abjad.StartTextSpan)):
-                abjad.tweak(indicator).bound_details__right__padding = \
-                    autodetected_right_padding
+                number = autodetected_right_padding
+                abjad.tweak(
+                    indicator,
+                    tag=self.tag.append(tag).append('autodetect'),
+                    ).bound_details__right__padding = number
             if self.tweaks and hasattr(indicator, '_tweaks'):
                 self._apply_tweaks(
                     indicator,
