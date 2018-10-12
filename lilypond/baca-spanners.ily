@@ -554,7 +554,21 @@ bacaStopTextSpanSNM = #(
         \with-color #(x11-color 'red)
         \fontsize #-3
         \upright
-        \concat { #snm \hspace #0.5 }
+        \concat { #snm \hspace #-0.25 }
+        #}
+        )
+    )
+
+#(define-markup-command
+    (baca-snm-colored-left-markup layout props snm color)
+    (string? color?)
+    (interpret-markup layout props
+        #{
+        \markup
+        \with-color #color
+        \fontsize #-3
+        \upright
+        \concat { #snm \hspace #-0.25 }
         #}
         )
     )
@@ -565,6 +579,17 @@ baca-snm-left-text-tweak = #(
     (string? ly:music?)
     #{
     \tweak bound-details.left.text \markup \baca-snm-left-markup #left
+    $music
+    #}
+    )
+
+baca-snm-colored-left-text-tweak = #(
+    define-music-function
+    (parser location left color music)
+    (string? color? ly:music?)
+    #{
+    \tweak bound-details.left.text \markup
+        \baca-snm-colored-left-markup #left #color
     $music
     #}
     )
@@ -598,9 +623,27 @@ baca-start-snm-left-only = #(
     (parser location left music)
     (string? ly:music?)
     #{
-    - \abjad-invisible-line
+    - \abjad-solid-line-with-hook
     - \baca-snm-left-text-tweak #left
     - \baca-upper-annotation-layer
+    - \tweak bound-details.right.padding 1.25
+    - \tweak color #red
+    $music
+    #}
+    )
+
+% HERE
+baca-start-snm-colored-left-only = #(
+    define-music-function
+    (parser location left color music)
+    (string? color? ly:music?)
+    #{
+    - \abjad-solid-line-with-hook
+    %%%- \baca-snm-left-text-tweak #left
+    - \baca-snm-colored-left-text-tweak #left #color
+    - \baca-upper-annotation-layer
+    - \tweak bound-details.right.padding 1.25
+    - \tweak color #color
     $music
     #}
     )
@@ -610,10 +653,13 @@ baca-start-snm-both = #(
     (parser location left right music)
     (string? string? ly:music?)
     #{
-    - \abjad-invisible-line
+    - \abjad-solid-line-with-hook
     - \baca-snm-left-text-tweak #left
     - \baca-snm-right-text-tweak #right
     - \baca-upper-annotation-layer
+    - \tweak bound-details.right.padding 0
+    - \tweak bound-details.right.stencil-align-dir-y #center
+    - \tweak color #red
     $music
     #}
     )

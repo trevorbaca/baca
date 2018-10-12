@@ -2569,8 +2569,14 @@ class SegmentMaker(abjad.SegmentMaker):
         if not self.stage_markup:
             return
         total = len(self.stage_markup)
-        for i, pair in enumerate(self.stage_markup):
-            value, lmn = pair
+        for i, item in enumerate(self.stage_markup):
+            if len(item) == 2:
+                value, lmn = item
+                color = None
+            elif len(item) == 3:
+                value, lmn, color = item
+            else:
+                raise Exception(item)
             measure_index = lmn - 1
             skip = skips[measure_index]
             if i < total - 1:
@@ -2581,8 +2587,12 @@ class SegmentMaker(abjad.SegmentMaker):
                     string = r'- \baca-start-snm-both'
                     string += f' "{value}" "{next_value}"'
                 else:
-                    string = r'- \baca-start-snm-left-only'
-                    string += f' "{value}"'
+                    if color is not None:
+                        string = r'- \baca-start-snm-colored-left-only'
+                        string += f' "{value}" #{color}'
+                    else:
+                        string = r'- \baca-start-snm-left-only'
+                        string += f' "{value}"'
                 start_text_span = abjad.StartTextSpan(
                     command=r'\bacaStartTextSpanSNM',
                     left_text=string,
