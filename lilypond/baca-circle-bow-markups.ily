@@ -24,50 +24,50 @@ baca-circle-bowing-markup =
 
 %%% MARKUPS %%%
 
-baca-circles-markup = \markup \concat {
+baca-circle-markup = \markup \concat {
     \baca-circle-bowing-markup \hspace #1.25
     }
 
-baca-ext-tight-circles-markup = \markup \concat {
+baca-circle-ext-tight-markup = \markup \concat {
     \baca-circle-bowing-markup \hspace #1.75 \raise #-0.6 "(ext. tight)"
     }
 
-baca-fast-circles-markup = \markup \concat {
+baca-circle-fast-markup = \markup \concat {
     \baca-circle-bowing-markup \hspace #1.75 \raise #-0.6 (fast)
     }
 
-baca-mod-width-circles-markup = \markup \concat {
+baca-circle-mod-width-markup = \markup \concat {
     \baca-circle-bowing-markup \hspace #1.75 \raise #-0.6 "(mod. width)"
     }
 
-baca-poco-tight-circles-markup = \markup \concat {
+baca-circle-poco-tight-markup = \markup \concat {
     \baca-circle-bowing-markup \hspace #1.75 \raise #-0.6 "(poco. tight)"
     }
 
-baca-scratch-circles-markup = \markup \concat {
+baca-circle-scratch-markup = \markup \concat {
     \baca-circle-bowing-markup \hspace #1.75 \raise #-0.6 (scratch)
     }
 
-baca-slow-circles-markup = \markup \concat {
+baca-circle-slow-markup = \markup \concat {
     \baca-circle-bowing-markup \hspace #1.75 \raise #-0.6 (slow)
     }
 
-baca-tight-circles-markup = \markup \concat {
+baca-circle-tight-markup = \markup \concat {
     \baca-circle-bowing-markup \hspace #1.75 \raise #-0.6 (tight)
     }
 
-baca-very-tight-circles-markup = \markup \concat {
+baca-circle-very-tight-markup = \markup \concat {
     \baca-circle-bowing-markup \hspace #1.75 \raise #-0.6 "(very tight)"
     }
 
-baca-very-wide-circles-markup = \markup \concat {
+baca-circle-very-wide-markup = \markup \concat {
     \baca-circle-bowing-markup \hspace #1.75 \raise #-0.6 "(very wide)"
     }
 
-baca-wide-circles-markup = \markup \concat {
+baca-circle-wide-markup = \markup \concat {
     \baca-circle-bowing-markup \hspace #1.75 \raise #-0.6 (wide)
     }
 
-baca-wide-poss-circles-markup = \markup \concat {
+baca-circle-wide-poss-markup = \markup \concat {
     \baca-circle-bowing-markup \hspace #1.75 \raise #-0.6 "(wide poss.)"
     }
