@@ -5111,6 +5111,18 @@ def text_spanner(
             <BLANKLINE>
             >>                                                                                       %! SingleStaffScoreTemplate
 
+    ..  container:: example exception
+
+        Errors on unknown LilyPond ID:
+
+        >>> baca.text_spanner(
+        ...     'T -> P',
+        ...     lilypond_id=4,
+        ...     )
+        Traceback (most recent call last):
+            ...
+        ValueError: lilypond_id must be 1, 2, 3 or none (not 4).
+
     """
     if autodetect_right_padding is not None:
         autodetect_right_padding = bool(autodetect_right_padding)
@@ -5159,7 +5171,8 @@ def text_spanner(
     elif lilypond_id == 3:
         command = r'\stopTextSpanThree'
     else:
-        raise ValueError(lilypond_id)
+        message = f'lilypond_id must be 1, 2, 3 or none (not {lilypond_id}).'
+        raise ValueError(message)
     stop_text_span = abjad.StopTextSpan(command=command)
     cyclic_items = abjad.CyclicTuple(items)
     for i, item in enumerate(cyclic_items):
