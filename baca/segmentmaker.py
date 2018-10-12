@@ -2582,10 +2582,21 @@ class SegmentMaker(abjad.SegmentMaker):
             if i < total - 1:
                 tag = abjad.Tag(abjad.tags.STAGE_NUMBER_MARKUP)
                 if i == total - 2:
-                    next_pair = self.stage_markup[i + 1]
-                    next_value, next_lmn = next_pair
-                    string = r'- \baca-start-snm-both'
-                    string += f' "{value}" "{next_value}"'
+                    next_item = self.stage_markup[i + 1]
+                    if len(next_item) == 2:
+                        next_value, next_lmn = next_item
+                        next_color = None
+                    else:
+                        assert len(next_item) == 3, repr(next_item)
+                        next_value, next_lmn, next_color = next_item
+                    # TODO: handle next_color
+                    #if next_color is not None:
+                    #    string = r'- \baca-start-snm-both'
+                    #    string += f' "{value}" "{next_value}"'
+                    #else:
+                    if True:
+                        string = r'- \baca-start-snm-both'
+                        string += f' "{value}" "{next_value}"'
                 else:
                     if color is not None:
                         string = r'- \baca-start-snm-colored-left-only'
