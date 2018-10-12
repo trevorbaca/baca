@@ -167,12 +167,8 @@ overrides
    ~dots_extra_offset
    ~dots_stencil_false
    ~dots_transparent
-   ~dynamic_shift
-   ~dynamic_text_center
    ~dynamic_text_extra_offset
-   ~dynamic_text_left
    ~dynamic_text_parent_alignment_x
-   ~dynamic_text_right
    ~dynamic_text_self_alignment_x
    ~dynamic_text_stencil_false
    ~dynamic_text_transparent
@@ -311,17 +307,9 @@ overrides
 
 .. autofunction:: dots_transparent
 
-.. autofunction:: dynamic_shift
-
-.. autofunction:: dynamic_text_center
-
 .. autofunction:: dynamic_text_extra_offset
 
-.. autofunction:: dynamic_text_left
-
 .. autofunction:: dynamic_text_parent_alignment_x
-
-.. autofunction:: dynamic_text_right
 
 .. autofunction:: dynamic_text_self_alignment_x
 

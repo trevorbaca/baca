@@ -1604,56 +1604,6 @@ def dots_transparent(
         tags=[tag],
         )
 
-def dynamic_shift(
-    dynamic: typing.Union[str, abjad.Dynamic],
-    *,
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_dynamic_shift',
-    ) -> scoping.Suite:
-    """
-    Shifts dynamic to left by calculated width of dynamic.
-    """
-    dynamic = abjad.Dynamic(dynamic)
-    width = dynamic._to_width[dynamic.name]
-    extra_offset_x = -width
-    return scoping.suite(
-        dynamic_text_extra_offset(
-            (extra_offset_x, 0),
-            selector=selector,
-            tag=tag,
-            ),
-        dynamic_text_x_extent_zero(
-            selector=selector,
-            tag=tag,
-            ),
-        )
-
-# TODO: test and document?
-# TODO: appears not to do anything?
-def dynamic_text_center(
-    *,
-    selector: typings.Selector = 'baca.pleaf(0)',
-    tag: typing.Optional[str] = 'baca_dynamic_text_center',
-    ) -> scoping.Suite:
-    """
-    Overrides dynamic text self-alignment-X and dynamic text X-extent.
-    """
-    command_1 = OverrideCommand(
-        attribute='self_alignment_X',
-        value=abjad.Center,
-        grob='dynamic_text',
-        selector=selector,
-        tags=[tag],
-        )
-    command_2 = dynamic_text_x_extent_zero(
-        selector=selector,
-        tag=tag,
-        )
-    return scoping.suite(
-        command_1,
-        command_2,
-        )
-
 def dynamic_text_extra_offset(
     pair: typings.NumberPair,
     *,
@@ -1829,32 +1779,6 @@ def dynamic_text_extra_offset(
         tags=[tag],
         )
 
-# TODO: test and document?
-# TODO: appears not to do anything?
-def dynamic_text_left(
-    *,
-    selector: typings.Selector = 'baca.pleaf(0)',
-    tag: typing.Optional[str] = 'baca_dynamic_text_left',
-    ) -> scoping.Suite:
-    """
-    Overrides dynamic text self-alignment-X and dynamic text X-extent.
-    """
-    command_1 = OverrideCommand(
-        attribute='self_alignment_X',
-        value=abjad.Left,
-        grob='dynamic_text',
-        selector=selector,
-        tags=[tag],
-        )
-    command_2 = dynamic_text_x_extent_zero(
-        selector=selector,
-        tag=tag,
-        )
-    return scoping.suite(
-        command_1,
-        command_2,
-        )
-
 def dynamic_text_parent_alignment_x(
     n: typings.Number,
     *,
@@ -1870,32 +1794,6 @@ def dynamic_text_parent_alignment_x(
         grob='dynamic_text',
         selector=selector,
         tags=[tag],
-        )
-
-# TODO: test and document?
-# TODO: appears not to do anything?
-def dynamic_text_right(
-    *,
-    selector: typings.Selector = 'baca.pleaf(0)',
-    tag: typing.Optional[str] = 'baca_dynamic_text_right',
-    ) -> scoping.Suite:
-    """
-    Overrides dynamic text self-alignment-X and dynamic text X-extent.
-    """
-    command_1 = OverrideCommand(
-        attribute='self_alignment_X',
-        value=abjad.Right,
-        grob='dynamic_text',
-        selector=selector,
-        tags=[tag],
-        )
-    command_2 = dynamic_text_x_extent_zero(
-        selector=selector,
-        tag=tag,
-        )
-    return scoping.suite(
-        command_1,
-        command_2,
         )
 
 def dynamic_text_self_alignment_x(
