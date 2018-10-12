@@ -2739,7 +2739,7 @@ def sustain_last() -> rmakers.SustainMask:
     return rmakers.sustain([-1])
 
 def tacet(
-    color: str = 'red',
+    color: str = 'green',
     *,
     measures: typings.Slice = None,
     selector: typings.Selector = 'baca.mmrests()',
