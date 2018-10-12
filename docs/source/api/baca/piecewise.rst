@@ -112,7 +112,7 @@ piecewise
       bundles
       final_piece_spanner
       leak
-      piece_selector
+      pieces
       remove_length_1_spanner_start
       right_broken
       selector
@@ -181,7 +181,7 @@ piecewise
 
       .. autoattribute:: PiecewiseCommand.measures
 
-   .. autoattribute:: PiecewiseCommand.piece_selector
+   .. autoattribute:: PiecewiseCommand.pieces
 
    .. autoattribute:: PiecewiseCommand.remove_length_1_spanner_start
 

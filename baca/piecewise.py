@@ -150,7 +150,7 @@ class PiecewiseCommand(scoping.Command):
         '_bundles',
         '_final_piece_spanner',
         '_leak',
-        '_piece_selector',
+        '_pieces',
         '_remove_length_1_spanner_start',
         '_right_broken',
         '_selector',
@@ -170,7 +170,7 @@ class PiecewiseCommand(scoping.Command):
         map: typings.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
-        piece_selector: typings.Selector = 'baca.leaves()',
+        pieces: typings.Selector = 'baca.leaves()',
         remove_length_1_spanner_start: bool = None,
         right_broken: typing.Any = None,
         scope: scoping.ScopeTyping = None,
@@ -205,12 +205,12 @@ class PiecewiseCommand(scoping.Command):
         if leak is not None:
             leak = bool(leak)
         self._leak = leak
-        if isinstance(piece_selector, str):
-            piece_selector = eval(piece_selector)
-        if piece_selector is not None:
-            assert isinstance(piece_selector, abjad.Expression), repr(
-                piece_selector)
-        self._piece_selector = piece_selector
+        if isinstance(pieces, str):
+            pieces = eval(pieces)
+        if pieces is not None:
+            assert isinstance(pieces, abjad.Expression), repr(
+                pieces)
+        self._pieces = pieces
         if remove_length_1_spanner_start is not None:
             remove_length_1_spanner_start = bool(remove_length_1_spanner_start)
         self._remove_length_1_spanner_start = remove_length_1_spanner_start
@@ -231,9 +231,9 @@ class PiecewiseCommand(scoping.Command):
         if self.selector is not None:
             assert not isinstance(self.selector, str)
             argument = self.selector(argument)
-        if self.piece_selector is not None:
-            assert not isinstance(self.piece_selector, str)
-            pieces = self.piece_selector(argument)
+        if self.pieces is not None:
+            assert not isinstance(self.pieces, str)
+            pieces = self.pieces(argument)
         else:
             pieces = argument
         assert pieces is not None
@@ -491,11 +491,11 @@ class PiecewiseCommand(scoping.Command):
         return self._leak
 
     @property
-    def piece_selector(self) -> typing.Optional[abjad.Expression]:
+    def pieces(self) -> typing.Optional[abjad.Expression]:
         """
         Gets piece selector.
         """
-        return self._piece_selector
+        return self._pieces
 
     @property
     def remove_length_1_spanner_start(self) -> typing.Optional[bool]:
@@ -953,7 +953,7 @@ def hairpin(
     map: typings.Selector = None,
     match: typings.Indices = None,
     measures: typings.Slice = None,
-    piece_selector: typings.Selector = 'baca.group()',
+    pieces: typings.Selector = 'baca.group()',
     remove_length_1_spanner_start: bool = None,
     right_broken: bool = None,
     selector: typings.Selector = 'baca.leaves()',
@@ -1641,7 +1641,7 @@ def hairpin(
         ...     baca.dls_staff_padding(5),
         ...     baca.hairpin(
         ...         'p f',
-        ...         piece_selector=baca.cmgroups([1]),
+        ...         pieces=baca.cmgroups([1]),
         ...     ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -1775,7 +1775,7 @@ def hairpin(
         ...     baca.dls_staff_padding(5),
         ...     baca.hairpin(
         ...         'p < f >',
-        ...         piece_selector=baca.cmgroups([1]),
+        ...         pieces=baca.cmgroups([1]),
         ...     ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -1918,7 +1918,7 @@ def hairpin(
         ...     baca.hairpin(
         ...         'p f',
         ...         bookend=True,
-        ...         piece_selector=baca.cmgroups([1]),
+        ...         pieces=baca.cmgroups([1]),
         ...     ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -2059,7 +2059,7 @@ def hairpin(
         ...     baca.hairpin(
         ...         'p -- f >',
         ...         bookend=True,
-        ...         piece_selector=baca.cmgroups([1]),
+        ...         pieces=baca.cmgroups([1]),
         ...     ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -2212,7 +2212,7 @@ def hairpin(
         ...     baca.hairpin(
         ...         'f > p',
         ...         leak=True,
-        ...         piece_selector=baca.cmgroups([2])[:1],
+        ...         pieces=baca.cmgroups([2])[:1],
         ...     ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -2344,7 +2344,7 @@ def hairpin(
         ...     baca.hairpin(
         ...         'f >o niente',
         ...         leak=True,
-        ...         piece_selector=baca.cmgroups([2])[:1],
+        ...         pieces=baca.cmgroups([2])[:1],
         ...     ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -2859,7 +2859,7 @@ def hairpin(
         ...     baca.hairpin(
         ...         'mf niente o< p',
         ...         bookend=False,
-        ...         piece_selector=baca.mgroups([1, 2, 1]),
+        ...         pieces=baca.mgroups([1, 2, 1]),
         ...         ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -3012,7 +3012,7 @@ def hairpin(
         match=match,
         map=map,
         measures=measures,
-        piece_selector=piece_selector,
+        pieces=pieces,
         remove_length_1_spanner_start=remove_length_1_spanner_start,
         right_broken=right_broken_,
         selector=selector,
@@ -3404,7 +3404,7 @@ def text_spanner(
     map: typings.Selector = None,
     match: typings.Indices = None,
     measures: typings.Slice = None,
-    piece_selector: typings.Selector = 'baca.group()',
+    pieces: typings.Selector = 'baca.group()',
     selector: typings.Selector = 'baca.leaves()',
     tag: typing.Optional[str] = 'baca_text_spanner',
     ) -> PiecewiseCommand:
@@ -4100,7 +4100,7 @@ def text_spanner(
         ...     baca.dls_staff_padding(5),
         ...     baca.text_spanner(
         ...         'A || B',
-        ...         piece_selector=baca.cmgroups([1]),
+        ...         pieces=baca.cmgroups([1]),
         ...     ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -4246,7 +4246,7 @@ def text_spanner(
         ...     baca.dls_staff_padding(5),
         ...     baca.text_spanner(
         ...         'A -> B ->',
-        ...         piece_selector=baca.cmgroups([1]),
+        ...         pieces=baca.cmgroups([1]),
         ...     ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -4393,7 +4393,7 @@ def text_spanner(
         ...     baca.text_spanner(
         ...         'A || B',
         ...         bookend=True,
-        ...         piece_selector=baca.cmgroups([1]),
+        ...         pieces=baca.cmgroups([1]),
         ...     ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -4549,7 +4549,7 @@ def text_spanner(
         ...     baca.text_spanner(
         ...         'A -> B ->',
         ...         bookend=True,
-        ...         piece_selector=baca.cmgroups([1]),
+        ...         pieces=baca.cmgroups([1]),
         ...     ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -4711,7 +4711,7 @@ def text_spanner(
         ...         (abjad.tweak('green').color, 2),
         ...         (abjad.tweak('purple').color, 3),
         ...         final_piece_spanner=False,
-        ...         piece_selector=baca.plts(),
+        ...         pieces=baca.plts(),
         ...     ),
         ...     baca.rhythm('{ c2 c4. c2 c4. }'),
         ...     baca.pitches('C4 D4 E4 F4'),
@@ -4966,7 +4966,7 @@ def text_spanner(
         ...     baca.dls_staff_padding(5),
         ...     baca.text_spanner(
         ...         'A -| B -|',
-        ...         piece_selector=baca.cmgroups([1]),
+        ...         pieces=baca.cmgroups([1]),
         ...     ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -5128,7 +5128,7 @@ def text_spanner(
         ...     'Music_Voice',
         ...     baca.text_spanner(
         ...         'P -> T -> P',
-        ...         piece_selector=baca.plts(),
+        ...         pieces=baca.plts(),
         ...     ),
         ...     baca.make_notes(),
         ...     baca.pitches('C4 D4 E4 F4 G4 A4'),
@@ -5271,7 +5271,7 @@ def text_spanner(
         ...     baca.text_spanner(
         ...         'P -> T ->',
         ...         final_piece_spanner=False,
-        ...         piece_selector=baca.plts(),
+        ...         pieces=baca.plts(),
         ...     ),
         ...     baca.rhythm('{ c2 c4. c2 c4 ~ c8 }'),
         ...     baca.pitches('C4 D4 E4 F4'),
@@ -5513,7 +5513,7 @@ def text_spanner(
         map=map,
         match=match,
         measures=measures,
-        piece_selector=piece_selector,
+        pieces=pieces,
         selector=selector,
         tags=[tag],
         tweaks=tweaks,
