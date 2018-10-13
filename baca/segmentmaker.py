@@ -1437,17 +1437,17 @@ class SegmentMaker(abjad.SegmentMaker):
         if 'Global_Rests' not in self.score:
             return
         context = self.score['Global_Rests']
-        mm_rests = abjad.select(context).leaves(abjad.MultimeasureRest)
-        last_measure_index = len(mm_rests) - 1
+        rests = abjad.select(context).leaves(abjad.MultimeasureRest)
+        last_measure_index = len(rests) - 1
         first_measure_number = self._get_first_measure_number()
         tag = abjad.tags.FERMATA_MEASURE
-        for measure_index, mm_rest in enumerate(mm_rests):
-            if not abjad.inspect(mm_rest).has_indicator(tag):
+        for measure_index, rest in enumerate(rests):
+            if not abjad.inspect(rest).has_indicator(tag):
                 continue
             if measure_index == last_measure_index:
                 self._last_measure_is_fermata = True
             measure_number = first_measure_number + measure_index
-            timespan = abjad.inspect(mm_rest).timespan()
+            timespan = abjad.inspect(rest).timespan()
             self._fermata_start_offsets.append(timespan.start_offset)
             self._fermata_stop_offsets.append(timespan.stop_offset)
             self._fermata_measure_numbers.append(measure_number)
@@ -1783,7 +1783,9 @@ class SegmentMaker(abjad.SegmentMaker):
         contexts.sort(key=lambda _: _.name)
         for context in contexts:
             momentos = []
-            dictionary = context._get_persistent_wrappers()
+            dictionary = context._get_persistent_wrappers(
+                omit_annotation=enums.PHANTOM,
+                )
             for wrapper in dictionary.values():
                 leaf = wrapper.component
                 parentage = abjad.inspect(leaf).parentage()
@@ -2639,6 +2641,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 multiplier=(1, 4),
                 tag=tag,
                 )
+            abjad.annotate(rest, enums.PHANTOM, True)
             rests.append(rest)
         return rests
 
@@ -2660,6 +2663,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if self.phantom:
             tag = f'{enums.PHANTOM}:_make_global_skips(3)'
             skip = abjad.Skip(1, multiplier=(1, 4), tag=tag)
+            abjad.annotate(skip, enums.PHANTOM, True)
             context.append(skip)
             time_signature = abjad.TimeSignature((1, 4))
             abjad.attach(
