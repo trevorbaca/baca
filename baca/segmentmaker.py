@@ -183,6 +183,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_midi',
         '_nonfirst_segment_lilypond_include',
         '_offset_to_measure_number',
+        '_phantom',
         '_previously_alive_contexts',
         '_score',
         '_score_template',
@@ -298,6 +299,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ] = None,
         margin_markups: abjad.OrderedDict = None,
         metronome_marks: abjad.OrderedDict = None,
+        phantom: bool = None,
         score_template: templates.ScoreTemplate = None,
         segment_directory: abjad.Path = None,
         spacing: segmentclasses.HorizontalSpacingSpecifier = None,
@@ -359,6 +361,9 @@ class SegmentMaker(abjad.SegmentMaker):
         self._metronome_marks = metronome_marks
         self._midi: typing.Optional[bool] = None
         self._offset_to_measure_number: typing.Dict[abjad.Offset, int] = {}
+        if phantom is not None:
+            phantom = bool(phantom)
+        self._phantom = phantom
         self._previously_alive_contexts: typing.List[str] = []
         self._score_template = score_template
         self._segment_bol_measure_numbers: typing.List[int] = []
@@ -1133,8 +1138,12 @@ class SegmentMaker(abjad.SegmentMaker):
         strings.append(r'\baca-bar-line-visible')
         strings.append(rf'\bar "{abbreviation}"')
         literal = abjad.LilyPondLiteral(strings, 'after')
-        last_skip = classes.Selection(self.score['Global_Skips']).skip(-1)
-        abjad.attach(literal, last_skip, tag='_attach_final_bar_line')
+        skips = self.score['Global_Skips']
+        if self.phantom:
+            skip = skips[-2]
+        else:
+            skip = skips[-1] 
+        abjad.attach(literal, skip, tag='_attach_final_bar_line')
 
     def _attach_first_appearance_score_template_defaults(self):
         if self.first_segment:
@@ -1550,6 +1559,13 @@ class SegmentMaker(abjad.SegmentMaker):
                         )
                 selections = maker(self.time_signatures)
                 voice.extend(selections)
+                if self.phantom:
+                    container = self._make_multimeasure_rest_container(
+                        voice.name,
+                        (1, 4),
+                        phantom=True,
+                        )
+                    voice.append(container)
                 continue
             rhythms = []
             for command in commands:
@@ -1577,6 +1593,13 @@ class SegmentMaker(abjad.SegmentMaker):
             rhythms.sort()
             self._assert_nonoverlapping_rhythms(rhythms, voice.name)
             rhythms = self._intercalate_silences(rhythms, voice.name)
+            if self.phantom:
+                container = self._make_multimeasure_rest_container(
+                    voice.name,
+                    (1, 4),
+                    phantom=True,
+                    )
+                rhythms.append(container)
             voice.extend(rhythms)
             self._apply_first_and_last_ties(voice)
         return command_count
@@ -1965,8 +1988,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 raise Exception(message)
                 return
             if abjad.inspect(next_leaf).has_indicator(abjad.StartBeam):
-                #voice = abjad.inspect(next_leaf).parentage().get(abjad.Voice)
-                #print(f'DETACHING START BEAM from {next_leaf!s} in {voice.name} ...')
                 abjad.detach(abjad.StartBeam, next_leaf)
                 if not abjad.inspect(next_leaf).has_indicator(abjad.StopBeam):
                     abjad.detach(abjad.BeamCount, next_leaf)
@@ -1975,54 +1996,6 @@ class SegmentMaker(abjad.SegmentMaker):
                     abjad.attach(beam_count, next_leaf, '_extend_beam')
                 return
             current_leaf = next_leaf
-
-#        beam = abjad.inspect(leaf).spanner(abjad.Beam)
-#        if beam is None:
-#            return
-#        all_leaves = []
-#        all_leaves.extend(beam.leaves)
-#        durations = []
-#        if beam.durations:
-#            durations.extend(beam.durations)
-#        else:
-#            duration = abjad.inspect(beam.leaves).duration()
-#            durations.append(duration)
-#        intervening_skips = []
-#        current_leaf = leaf
-#        while True:
-#            next_leaf = abjad.inspect(current_leaf).leaf(1)
-#            if next_leaf is None:
-#                return
-#            current_leaf = next_leaf
-#            if isinstance(next_leaf, abjad.Skip):
-#                beam = abjad.inspect(next_leaf).spanner(abjad.Beam)
-#                if beam is None:
-#                    intervening_skips.append(next_leaf)
-#                    continue
-#            break
-#        abjad.detach(abjad.Beam, leaf)
-#        all_leaves.extend(intervening_skips)
-#        if intervening_skips:
-#            intervening_skips = abjad.select(intervening_skips)
-#            duration = abjad.inspect(intervening_skips).duration()
-#            durations.append(duration)
-#        beam = abjad.inspect(next_leaf).spanner(abjad.Beam)
-#        if beam is None:
-#            all_leaves.append(next_leaf)
-#            duration = abjad.inspect(next_leaf).duration()
-#            durations.append(duration)
-#        else:
-#            all_leaves.extend(beam.leaves)
-#            if beam.durations:
-#                durations.extend(beam.durations)
-#            else:
-#                duration = abjad.inspect(beam.leaves).duration()
-#                durations.append(duration)
-#        abjad.detach(abjad.Beam, next_leaf)
-#        all_leaves = abjad.select(all_leaves)
-#        assert abjad.inspect(all_leaves).duration() == sum(durations)
-#        beam = abjad.Beam(beam_rests=True, durations=durations)
-#        abjad.attach(beam, all_leaves, tag='_extend_beam')
 
     def _extend_beams(self):
         for leaf in abjad.iterate(self.score).leaves():
@@ -2655,9 +2628,17 @@ class SegmentMaker(abjad.SegmentMaker):
             rest = abjad.MultimeasureRest(
                 abjad.Duration(1),
                 multiplier=time_signature.duration,
+                # TODO: change to '_make_global_rests(1)':
                 tag='_make_global_rests',
                 )
-
+            rests.append(rest)
+        if self.phantom:
+            tag = f'{enums.PHANTOM}:_make_global_rests(2)'
+            rest = abjad.MultimeasureRest(
+                abjad.Duration(1),
+                multiplier=(1, 4),
+                tag=tag,
+                )
             rests.append(rest)
         return rests
 
@@ -2676,6 +2657,17 @@ class SegmentMaker(abjad.SegmentMaker):
                 tag='_make_global_skips(2)',
                 )
             context.append(skip)
+        if self.phantom:
+            tag = f'{enums.PHANTOM}:_make_global_skips(3)'
+            skip = abjad.Skip(1, multiplier=(1, 4), tag=tag)
+            context.append(skip)
+            time_signature = abjad.TimeSignature((1, 4))
+            abjad.attach(
+                time_signature,
+                skip,
+                context='Score',
+                tag=tag,
+                )
         if self.first_segment:
             return
         # empty start bar allows LilyPond to print bar numbers
@@ -2776,8 +2768,16 @@ class SegmentMaker(abjad.SegmentMaker):
             if first_measure_number != 1:
                 abjad.setting(score).current_bar_number = first_measure_number
 
-    def _make_multimeasure_rest_container(self, voice_name, duration):
-        tag = '_make_multimeasure_rest_container'
+    def _make_multimeasure_rest_container(
+        self,
+        voice_name,
+        duration,
+        phantom=False,
+        ):
+        if phantom is True:
+            tag = enums.PHANTOM
+        else:
+            tag = '_make_multimeasure_rest_container'
         note = abjad.Note("c'1", multiplier=duration, tag=tag)
         literal = abjad.LilyPondLiteral(r'\baca-invisible-music')
         abjad.attach(literal, note, tag=tag)
@@ -2801,6 +2801,7 @@ class SegmentMaker(abjad.SegmentMaker):
             tag=tag,
             )
         abjad.annotate(container, enums.MULTIMEASURE_REST_CONTAINER, True)
+        abjad.annotate(container, enums.PHANTOM, True)
         return container
 
     def _momento_to_indicator(self, momento):
@@ -2837,6 +2838,15 @@ class SegmentMaker(abjad.SegmentMaker):
             offset = abjad.inspect(skip).timespan().start_offset
             self._offset_to_measure_number[offset] = measure_number
             measure_number += 1
+
+    @staticmethod
+    def _prepend_tag_to_wrappers(leaf, tag):
+        for wrapper in abjad.inspect(leaf).wrappers():
+            if isinstance(wrapper.indicator, abjad.LilyPondLiteral):
+                if wrapper.indicator.argument == '':
+                    continue
+            tag_ = wrapper.tag.prepend(tag)
+            wrapper.tag = tag_
 
     def _print_cache(self):
         for context in self._cache:
@@ -3155,6 +3165,38 @@ class SegmentMaker(abjad.SegmentMaker):
                         tag=tag.prepend('_style_fermata_measures(4)'),
                         )
                 bar_lines_already_styled.append(start_offset)
+
+    def _style_phantom_measures(self):
+        if not self.phantom:
+            return
+        tag = f'{enums.PHANTOM}:_format_phantom_measures'
+        skip = self.score['Global_Skips'][-1]
+        mmrest = self.score['Global_Rests'][-1]
+        for literal in abjad.inspect(skip).indicators(abjad.LilyPondLiteral):
+            if r'\baca-time-signature-color' in literal.argument:
+                abjad.detach(literal, skip)
+        for leaf in (skip, mmrest):
+            self._prepend_tag_to_wrappers(leaf, tag)
+        string = r'\baca-time-signature-transparent'
+        literal = abjad.LilyPondLiteral(string)
+        abjad.attach(
+            literal,
+            skip,
+            tag=f'{enums.PHANTOM}:_format_phantom_measures',
+            )
+        start_offset = abjad.inspect(skip).timespan().start_offset
+        enumeration = enums.MULTIMEASURE_REST_CONTAINER
+        containers = []
+        for container in abjad.select(self.score).components(abjad.Container):
+            if abjad.inspect(container).annotation(enumeration) is not True:
+                continue
+            leaf = abjad.inspect(container).leaf(0)
+            if abjad.inspect(leaf).timespan().start_offset != start_offset:
+                continue
+            containers.append(container)
+        for container in containers:
+            for leaf in abjad.select(container).leaves():
+                self._prepend_tag_to_wrappers(leaf, tag)
 
     def _transpose_score_(self):
         if not self.transpose_score:
@@ -5697,6 +5739,13 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._nonfirst_segment_lilypond_include
 
     @property
+    def phantom(self) -> typing.Optional[bool]:
+        """
+        Is true when segment-maker adds segment-final phantom measure.
+        """
+        return self._phantom
+
+    @property
     def previous_metadata(self) -> typing.Optional[abjad.OrderedDict]:
         """
         Gets previous segment metadata.
@@ -6331,6 +6380,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
         with abjad.Timer() as timer:
             self._label_clock_time()
+            self._style_phantom_measures()
         count = int(timer.elapsed_time)
         seconds = abjad.String('second').pluralize(count)
         if not do_not_print_timing and self.environment != 'docs':

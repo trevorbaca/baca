@@ -70,6 +70,7 @@ segmentmaker
       metronome_marks
       midi
       nonfirst_segment_lilypond_include
+      phantom
       previous_metadata
       run
       score_template
@@ -207,6 +208,8 @@ segmentmaker
    .. autoattribute:: SegmentMaker.midi
 
    .. autoattribute:: SegmentMaker.nonfirst_segment_lilypond_include
+
+   .. autoattribute:: SegmentMaker.phantom
 
    .. autoattribute:: SegmentMaker.previous_metadata
 

@@ -62,6 +62,16 @@ baca-time-signature-color = #(
     #}
     )
 
+baca-time-signature-transparent = #(
+    define-music-function
+    (parser location music)
+    (ly:music?)
+    #{
+    \once \override Score.TimeSignature.transparent = ##t
+    $music
+    #}
+    )
+
 baca-invisible-music = #(
     define-music-function
     (parser location music)
