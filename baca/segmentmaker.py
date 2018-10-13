@@ -877,7 +877,6 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.setting(self.score).current_bar_number = 1
 
     def _apply_first_and_last_ties(self, voice):
-        #dummy_tie = abjad.Tie()
         for current_leaf in abjad.iterate(voice).leaves():
             inspection = abjad.inspect(current_leaf)
             if inspection.has_indicator(abjad.tags.LEFT_BROKEN_REPEAT_TIE_TO):
@@ -894,82 +893,45 @@ class SegmentMaker(abjad.SegmentMaker):
                     repeat=False,
                     )
                 continue
-            #if not dummy_tie._attachment_test(current_leaf):
             if not isinstance(current_leaf, (abjad.Chord, abjad.Note)):
                 continue
             string = abjad.tags.REPEAT_TIE 
             use_repeat_tie = abjad.inspect(current_leaf).has_indicator(string)
             if abjad.inspect(current_leaf).has_indicator(abjad.tags.TIE_TO):
                 previous_leaf = abjad.inspect(current_leaf).leaf(-1)
-                #if dummy_tie._attachment_test(previous_leaf):
                 if isinstance(previous_leaf, (abjad.Chord, abjad.Note)):
-#                    previous_logical_tie = abjad.inspect(
-#                        previous_leaf).logical_tie()
-#                    if current_leaf not in previous_logical_tie:
-#                        current_logical_tie = abjad.inspect(
-#                            current_leaf).logical_tie()
-#                        leaves = previous_logical_tie + current_logical_tie
-#                        abjad.detach(abjad.Tie, previous_leaf)
-#                        abjad.detach(abjad.Tie, current_leaf)
-#                        inspection = abjad.inspect(current_leaf)
-#                        string = abjad.tags.REPEAT_TIE 
-#                        repeat_ties = inspection.has_indicator(string)
-#                        tie = abjad.Tie(repeat=repeat_ties)
-#                        abjad.attach(
-#                            tie,
-#                            leaves,
-#                            tag='_apply_first_and_last_ties(1)',
-#                            )
-                        if use_repeat_tie:
-                            tie = abjad.RepeatTie()
-                            abjad.attach(
-                                tie,
-                                current_leaf,
-                                tag='_apply_first_and_last_ties(1a)',
-                                )
-                        else:
-                            tie = abjad.TieIndicator()
-                            abjad.attach(
-                                tie,
-                                previous_leaf,
-                                tag='_apply_first_and_last_ties(1b)',
-                                )
+                    if use_repeat_tie:
+                        tie = abjad.RepeatTie()
+                        abjad.attach(
+                            tie,
+                            current_leaf,
+                            tag='_apply_first_and_last_ties(1a)',
+                            )
+                    else:
+                        tie = abjad.TieIndicator()
+                        abjad.attach(
+                            tie,
+                            previous_leaf,
+                            tag='_apply_first_and_last_ties(1b)',
+                            )
                 abjad.detach(abjad.tags.TIE_TO, current_leaf)
             if abjad.inspect(current_leaf).has_indicator(abjad.tags.TIE_FROM):
                 next_leaf = abjad.inspect(current_leaf).leaf(1)
-                #if dummy_tie._attachment_test(next_leaf):
                 if isinstance(next_leaf, (abjad.Chord, abjad.Note)):
-#                    current_logical_tie = abjad.inspect(
-#                        current_leaf).logical_tie()
-#                    if next_leaf not in current_logical_tie:
-#                        next_logical_tie = abjad.inspect(
-#                            next_leaf).logical_tie()
-#                        leaves = current_logical_tie + next_logical_tie
-#                        abjad.detach(abjad.Tie, current_leaf)
-#                        abjad.detach(abjad.Tie, next_leaf)
-#                        inspection = abjad.inspect(current_leaf)
-#                        string = abjad.tags.REPEAT_TIE
-#                        repeat_ties = inspection.has_indicator(string)
-#                        tie = abjad.Tie(repeat=repeat_ties)
-#                        abjad.attach(
-#                            tie,
-#                            leaves,
-#                            tag='_apply_first_and_last_ties(2)',
-#                            )
-                        if use_repeat_tie:
-                            tie = abjad.RepeatTie()
-                            abjad.attach(
-                                tie,
-                                next_leaf,
-                                tag='_apply_first_and_last_ties(2a)',
-                                )
-                        else:
-                            tie = abjad.TieIndicator()
-                            abjad.attach(
-                                tie,
-                                current_leaf,
-                                tag='_apply_first_and_last_ties(2b)',
-                                )
+                    if use_repeat_tie:
+                        tie = abjad.RepeatTie()
+                        abjad.attach(
+                            tie,
+                            next_leaf,
+                            tag='_apply_first_and_last_ties(2a)',
+                            )
+                    else:
+                        tie = abjad.TieIndicator()
+                        abjad.attach(
+                            tie,
+                            current_leaf,
+                            tag='_apply_first_and_last_ties(2b)',
+                            )
                 abjad.detach(abjad.tags.TIE_FROM, current_leaf)
 
     def _apply_spacing(self):
@@ -1138,7 +1100,7 @@ class SegmentMaker(abjad.SegmentMaker):
         strings.append(r'\baca-bar-line-visible')
         strings.append(rf'\bar "{abbreviation}"')
         literal = abjad.LilyPondLiteral(strings, 'after')
-        skips = self.score['Global_Skips']
+        skips = classes.Selection(self.score['Global_Skips']).skips()
         if self.phantom:
             skip = skips[-2]
         else:
@@ -2973,10 +2935,11 @@ class SegmentMaker(abjad.SegmentMaker):
     def _remove_redundant_time_signatures(self):
         previous_time_signature = None
         self._cached_time_signatures = []
-        for skip in classes.Selection(self.score['Global_Skips']).skips():
-            time_signature = abjad.inspect(skip).indicator(
-                abjad.TimeSignature
-                )
+        skips = classes.Selection(self.score['Global_Skips']).skips()
+        if self.phantom:
+            skips = skips[:-1]
+        for skip in skips:
+            time_signature = abjad.inspect(skip).indicator(abjad.TimeSignature)
             self._cached_time_signatures.append(str(time_signature))
             if time_signature == previous_time_signature:
                 abjad.detach(time_signature, skip)
@@ -3173,7 +3136,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if not self.phantom:
             return
         tag = enums.PHANTOM
-        skip = self.score['Global_Skips'][-1]
+        skip = abjad.inspect(self.score['Global_Skips']).leaf(-1)
         for literal in abjad.inspect(skip).indicators(abjad.LilyPondLiteral):
             if r'\baca-time-signature-color' in literal.argument:
                 abjad.detach(literal, skip)
@@ -6404,7 +6367,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._add_container_identifiers()
                 self._check_all_music_in_part_containers()
                 self._check_duplicate_part_assignments()
-                self._collect_metadata()
+                #self._collect_metadata()
 
         count = int(timer.elapsed_time)
         seconds = abjad.String('second').pluralize(count)
@@ -6421,6 +6384,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
         with abjad.Timer() as timer:
             self._label_clock_time()
+            self._collect_metadata()
             self._style_phantom_measures()
         count = int(timer.elapsed_time)
         seconds = abjad.String('second').pluralize(count)
