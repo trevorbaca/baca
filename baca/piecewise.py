@@ -5,6 +5,7 @@ import abjad
 import typing
 from . import classes
 from . import commands
+from . import enums
 from . import scoping
 from . import typings
 
@@ -324,8 +325,10 @@ class PiecewiseCommand(scoping.Command):
             # TextSpanner.bound-details.right.to-extent = ##t implementation
             # only 100% workable solution
             if is_final_piece and self.autodetect_right_padding:
+                if abjad.inspect(stop_leaf).annotation(enums.PHANTOM) is True:
+                    autodetected_right_padding = 2.5
                 # stop leaf multiplied whole note on fermata measure downbeat
-                if (isinstance(stop_leaf, abjad.Note) and
+                elif (isinstance(stop_leaf, abjad.Note) and
                     stop_leaf.written_duration == 1 and
                     stop_leaf.multiplier == abjad.Multiplier(1, 4)):
                     autodetected_right_padding = 3.25
