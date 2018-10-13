@@ -2344,6 +2344,18 @@ class SegmentMaker(abjad.SegmentMaker):
             clock_time=True,
             global_offset=segment_start_offset,
             )
+        if self.phantom:
+            # recalculate segment_stop_duration without phantom measure:
+            label = abjad.label(
+                skips[:-1],
+                deactivate=True,
+                tag=tag.append('_label_clock_time'),
+                )
+            segment_stop_duration = label.with_start_offsets(
+                brackets=True,
+                clock_time=True,
+                global_offset=segment_start_offset,
+                )
         segment_stop_offset = abjad.Offset(segment_stop_duration)
         self._stop_clock_time = segment_stop_offset.to_clock_string()
         segment_duration = segment_stop_offset - segment_start_offset
@@ -2411,7 +2423,7 @@ class SegmentMaker(abjad.SegmentMaker):
             measure_number = first_measure_number + measure_index
             if measure_index < total - 1:
                 tag = abjad.Tag(abjad.tags.LOCAL_MEASURE_INDEX_MARKUP)
-                if measure_index == total - 2:
+                if not self.phantom and measure_index == total - 2:
                     string = r'- \baca-start-lmi-both'
                     string += f' "{measure_index}" "{measure_index + 1}"'
                 else:
@@ -2429,7 +2441,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     tag=tag,
                     )
                 tag = abjad.Tag(abjad.tags.LOCAL_MEASURE_NUMBER_MARKUP)
-                if measure_index == total - 2:
+                if not self.phantom and measure_index == total - 2:
                     string = r'- \baca-start-lmn-both'
                     string += f' "{local_measure_number}"'
                     string += f' "{local_measure_number + 1}"'
@@ -2448,7 +2460,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     tag=tag,
                     )
                 tag = abjad.Tag(abjad.tags.MEASURE_NUMBER_MARKUP)
-                if measure_index == total - 2:
+                if not self.phantom and measure_index == total - 2:
                     string = r'- \baca-start-mn-both'
                     string += f' "{measure_number}"'
                     string += f' "{measure_number + 1}"'
@@ -2516,9 +2528,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 raise Exception(item)
             measure_index = lmn - 1
             skip = skips[measure_index]
-            if i < total - 1:
+            if self.phantom or (not self.phantom and i < total - 1):
                 tag = abjad.Tag(abjad.tags.STAGE_NUMBER_MARKUP)
-                if i == total - 2:
+                if not self.phantom and i == total - 2:
                     next_item = self.stage_markup[i + 1]
                     if len(next_item) == 2:
                         next_value, next_lmn = next_item
@@ -2526,14 +2538,8 @@ class SegmentMaker(abjad.SegmentMaker):
                     else:
                         assert len(next_item) == 3, repr(next_item)
                         next_value, next_lmn, next_color = next_item
-                    # TODO: handle next_color
-                    #if next_color is not None:
-                    #    string = r'- \baca-start-snm-both'
-                    #    string += f' "{value}" "{next_value}"'
-                    #else:
-                    if True:
-                        string = r'- \baca-start-snm-both'
-                        string += f' "{value}" "{next_value}"'
+                    string = r'- \baca-start-snm-both'
+                    string += f' "{value}" "{next_value}"'
                 else:
                     if color is not None:
                         string = r'- \baca-start-snm-colored-left-only'
@@ -2564,6 +2570,19 @@ class SegmentMaker(abjad.SegmentMaker):
                     deactivate=True,
                     tag=tag,
                     )
+        if self.phantom:
+            skip = skips[-1]
+            tag = abjad.Tag(abjad.tags.STAGE_NUMBER_MARKUP)
+            stop_text_span = abjad.StopTextSpan(
+                command=r'\bacaStopTextSpanSNM',
+                )
+            abjad.attach(
+                stop_text_span,
+                skip,
+                context='GlobalSkips',
+                deactivate=True,
+                tag=tag,
+                )
 
     def _magnify_staves_(self):
         if self.magnify_staves is None:
