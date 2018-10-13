@@ -2766,7 +2766,8 @@ class SegmentMaker(abjad.SegmentMaker):
             tag=tag,
             )
         abjad.annotate(container, enums.MULTIMEASURE_REST_CONTAINER, True)
-        abjad.annotate(container, enums.PHANTOM, True)
+        if phantom is True:
+            abjad.annotate(container, enums.PHANTOM, True)
         return container
 
     def _momento_to_indicator(self, momento):
