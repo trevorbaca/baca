@@ -2774,10 +2774,9 @@ class SegmentMaker(abjad.SegmentMaker):
         duration,
         phantom=False,
         ):
+        tag = '_make_multimeasure_rest_container'
         if phantom is True:
-            tag = enums.PHANTOM
-        else:
-            tag = '_make_multimeasure_rest_container'
+            tag = f'{enums.PHANTOM}:{tag}'
         note = abjad.Note("c'1", multiplier=duration, tag=tag)
         literal = abjad.LilyPondLiteral(r'\baca-invisible-music')
         abjad.attach(literal, note, tag=tag)
@@ -3169,20 +3168,36 @@ class SegmentMaker(abjad.SegmentMaker):
     def _style_phantom_measures(self):
         if not self.phantom:
             return
-        tag = f'{enums.PHANTOM}:_format_phantom_measures'
+        tag = enums.PHANTOM
         skip = self.score['Global_Skips'][-1]
-        mmrest = self.score['Global_Rests'][-1]
         for literal in abjad.inspect(skip).indicators(abjad.LilyPondLiteral):
             if r'\baca-time-signature-color' in literal.argument:
                 abjad.detach(literal, skip)
-        for leaf in (skip, mmrest):
-            self._prepend_tag_to_wrappers(leaf, tag)
+        self._prepend_tag_to_wrappers(
+            skip,
+            f'{tag}:_style_phantom_measures(1)',
+            )
         string = r'\baca-time-signature-transparent'
         literal = abjad.LilyPondLiteral(string)
         abjad.attach(
             literal,
             skip,
-            tag=f'{enums.PHANTOM}:_format_phantom_measures',
+            tag=f'{tag}:_style_phantom_measures(2)',
+            )
+        strings = [
+            r'\once \override Score.BarLine.transparent = ##t',
+            r'\once \override Score.SpanBar.transparent = ##t',
+            ]
+        literal = abjad.LilyPondLiteral(strings, format_slot='after')
+        abjad.attach(
+            literal,
+            skip,
+            tag=f'{tag}:_style_phantom_measures(3)',
+            )
+        rest = self.score['Global_Rests'][-1]
+        self._prepend_tag_to_wrappers(
+            rest,
+            f'{tag}:_style_phantom_measures(4)',
             )
         start_offset = abjad.inspect(skip).timespan().start_offset
         enumeration = enums.MULTIMEASURE_REST_CONTAINER
@@ -3194,9 +3209,31 @@ class SegmentMaker(abjad.SegmentMaker):
             if abjad.inspect(leaf).timespan().start_offset != start_offset:
                 continue
             containers.append(container)
+        string = r'\once \override MultiMeasureRest.transparent = ##t'
+        strings = [
+            '\stopStaff',
+            '\once \override Staff.StaffSymbol.transparent = ##t',
+            '\startStaff',
+            ]
         for container in containers:
             for leaf in abjad.select(container).leaves():
-                self._prepend_tag_to_wrappers(leaf, tag)
+                self._prepend_tag_to_wrappers(
+                    leaf,
+                    f'{tag}:_style_phantom_measures(5)',
+                    )
+                if isinstance(leaf, abjad.MultimeasureRest):
+                    literal = abjad.LilyPondLiteral(string)
+                    abjad.attach(
+                        literal,
+                        leaf,
+                        tag=f'{tag}:_style_phantom_measures(6)',
+                        )
+                    literal = abjad.LilyPondLiteral(strings)
+                    abjad.attach(
+                        literal,
+                        leaf,
+                        tag=f'{tag}:_style_phantom_measures(7)',
+                        )
 
     def _transpose_score_(self):
         if not self.transpose_score:
