@@ -818,7 +818,9 @@ Piecewise library.
    ~baca.piecewise.dynamic
    ~baca.piecewise.hairpin
    ~baca.piecewise.make_dynamic
+   ~baca.piecewise.material_annotation
    ~baca.piecewise.parse_hairpin_descriptor
+   ~baca.piecewise.pitch_annotation
    ~baca.piecewise.text_spanner
 
 .. raw:: html

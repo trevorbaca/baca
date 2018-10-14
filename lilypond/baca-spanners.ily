@@ -320,6 +320,16 @@ baca-start-lmn-both = #(
     #}
     )
 
+%%% MATERIAL ANNOTATION SPANNER %%%
+
+bacaStartTextSpanMA = #(
+    make-music 'TextSpanEvent 'span-direction START 'spanner-id "MA"
+    )
+
+bacaStopTextSpanMA = #(
+    make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "MA"
+    )
+
 %%% MEASURE NUMBER SPANNER %%%
 
 bacaStartTextSpanMN = #(
@@ -450,6 +460,16 @@ baca-metronome-mark-spanner-left-text = #(
         }
     $music
     #}
+    )
+
+%%% PITCH ANNOTATION SPANNER %%%
+
+bacaStartTextSpanPA = #(
+    make-music 'TextSpanEvent 'span-direction START 'spanner-id "PA"
+    )
+
+bacaStopTextSpanPA = #(
+    make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "PA"
     )
 
 %%% SPACING MARKUP SPANNER %%%

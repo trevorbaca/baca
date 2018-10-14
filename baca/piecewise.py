@@ -2950,6 +2950,36 @@ def make_dynamic(string: str) -> typing.Union[
             raise Exception(message)
     return indicator
 
+def material_annotation(
+    items: typing.Union[str, typing.List],
+    *tweaks: abjad.IndexedTweakManager,
+    lilypond_id: int = None,
+    map: typings.Selector = None,
+    match: typings.Indices = None,
+    measures: typings.Slice = None,
+    pieces: typings.Selector = 'baca.group()',
+    selector: typings.Selector = 'baca.leaves()',
+    tag: typing.Optional[str] = f'{enums.MATERIAL}:baca_text_spanner',
+    ) -> PiecewiseCommand:
+    r"""
+    Makes pitch annotation spanner.
+    """
+    tweaks_ = list(tweaks)
+    tweaks_.append(abjad.tweak('darkgreen').color)
+    return text_spanner(
+        items,
+        *tweaks_,
+        autodetect_right_padding=True,
+        bookend=False,
+        lilypond_id='MA',
+        map=map,
+        match=match,
+        measures=measures,
+        pieces=pieces,
+        selector=selector,
+        tag=tag,
+        )
+
 def parse_hairpin_descriptor(
     descriptor: str,
     *tweaks: abjad.LilyPondTweakManager,
@@ -3103,6 +3133,36 @@ def parse_hairpin_descriptor(
         bundles.append(bundle)
     return bundles
 
+def pitch_annotation(
+    items: typing.Union[str, typing.List],
+    *tweaks: abjad.IndexedTweakManager,
+    lilypond_id: int = None,
+    map: typings.Selector = None,
+    match: typings.Indices = None,
+    measures: typings.Slice = None,
+    pieces: typings.Selector = 'baca.group()',
+    selector: typings.Selector = 'baca.leaves()',
+    tag: typing.Optional[str] = f'{enums.PITCH}:baca_text_spanner',
+    ) -> PiecewiseCommand:
+    r"""
+    Makes pitch annotation spanner.
+    """
+    tweaks_ = list(tweaks)
+    tweaks_.append(abjad.tweak('magenta').color)
+    return text_spanner(
+        items,
+        *tweaks_,
+        autodetect_right_padding=True,
+        bookend=False,
+        lilypond_id='PA',
+        map=map,
+        match=match,
+        measures=measures,
+        pieces=pieces,
+        selector=selector,
+        tag=tag,
+        )
+
 def text_spanner(
     items: typing.Union[str, typing.List],
     *tweaks: abjad.IndexedTweakManager,
@@ -3110,7 +3170,7 @@ def text_spanner(
     bookend: typing.Union[bool, int] = -1,
     boxed: bool = None,
     final_piece_spanner: bool = None,
-    lilypond_id: int = None,
+    lilypond_id: typing.Union[int, str] = None,
     map: typings.Selector = None,
     match: typings.Indices = None,
     measures: typings.Slice = None,
@@ -5147,6 +5207,8 @@ def text_spanner(
         command = r'\stopTextSpanTwo'
     elif lilypond_id == 3:
         command = r'\stopTextSpanThree'
+    elif isinstance(lilypond_id, str):
+        command = rf'\bacaStopTextSpan{lilypond_id}'
     else:
         message = f'lilypond_id must be 1, 2, 3 or none (not {lilypond_id}).'
         raise ValueError(message)
@@ -5195,6 +5257,8 @@ def text_spanner(
             command = r'\startTextSpanTwo'
         elif lilypond_id == 3:
             command = r'\startTextSpanThree'
+        elif isinstance(lilypond_id, str):
+            command = rf'\bacaStartTextSpan{lilypond_id}'
         else:
             raise ValueError(lilypond_id)
         start_text_span = abjad.StartTextSpan(

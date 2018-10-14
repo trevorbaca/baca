@@ -221,7 +221,9 @@ piecewise
    ~dynamic
    ~hairpin
    ~make_dynamic
+   ~material_annotation
    ~parse_hairpin_descriptor
+   ~pitch_annotation
    ~text_spanner
 
 .. autofunction:: dynamic
@@ -230,6 +232,10 @@ piecewise
 
 .. autofunction:: make_dynamic
 
+.. autofunction:: material_annotation
+
 .. autofunction:: parse_hairpin_descriptor
+
+.. autofunction:: pitch_annotation
 
 .. autofunction:: text_spanner
