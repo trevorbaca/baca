@@ -2950,7 +2950,7 @@ def make_dynamic(string: str) -> typing.Union[
             raise Exception(message)
     return indicator
 
-def material_annotation(
+def material_annotation_spanner(
     items: typing.Union[str, typing.List],
     *tweaks: abjad.IndexedTweakManager,
     lilypond_id: int = None,
@@ -2958,17 +2958,16 @@ def material_annotation(
     match: typings.Indices = None,
     measures: typings.Slice = None,
     pieces: typings.Selector = 'baca.group()',
-    selector: typings.Selector = 'baca.leaves()',
+    # NOTE: selector differs from text_spanner()
+    selector: typings.Selector = 'baca.leaves().rleak()',
     tag: typing.Optional[str] = f'{enums.MATERIAL}:baca_text_spanner',
     ) -> PiecewiseCommand:
     r"""
     Makes pitch annotation spanner.
     """
-    tweaks_ = list(tweaks)
-    tweaks_.append(abjad.tweak('darkgreen').color)
     return text_spanner(
         items,
-        *tweaks_,
+        *tweaks,
         autodetect_right_padding=True,
         bookend=False,
         lilypond_id='MA',
@@ -3133,7 +3132,7 @@ def parse_hairpin_descriptor(
         bundles.append(bundle)
     return bundles
 
-def pitch_annotation(
+def pitch_annotation_spanner(
     items: typing.Union[str, typing.List],
     *tweaks: abjad.IndexedTweakManager,
     lilypond_id: int = None,
@@ -3141,17 +3140,16 @@ def pitch_annotation(
     match: typings.Indices = None,
     measures: typings.Slice = None,
     pieces: typings.Selector = 'baca.group()',
-    selector: typings.Selector = 'baca.leaves()',
+    # NOTE: selector differs from text_spanner()
+    selector: typings.Selector = 'baca.leaves().rleak()',
     tag: typing.Optional[str] = f'{enums.PITCH}:baca_text_spanner',
     ) -> PiecewiseCommand:
     r"""
     Makes pitch annotation spanner.
     """
-    tweaks_ = list(tweaks)
-    tweaks_.append(abjad.tweak('magenta').color)
     return text_spanner(
         items,
-        *tweaks_,
+        *tweaks,
         autodetect_right_padding=True,
         bookend=False,
         lilypond_id='PA',
