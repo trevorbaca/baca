@@ -112,6 +112,7 @@ segmentclasses
       minimum_duration
       multiplier
       override
+      phantom
 
    .. raw:: html
 
@@ -161,6 +162,8 @@ segmentclasses
    .. autoattribute:: HorizontalSpacingSpecifier.minimum_duration
 
    .. autoattribute:: HorizontalSpacingSpecifier.multiplier
+
+   .. autoattribute:: HorizontalSpacingSpecifier.phantom
 
 .. autoclass:: LBSD
 

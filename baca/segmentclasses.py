@@ -1238,6 +1238,7 @@ class HorizontalSpacingSpecifier(object):
         '_measures',
         '_minimum_duration',
         '_multiplier',
+        '_phantom',
         )
 
     _magic_lilypond_eol_adjustment = abjad.Multiplier(35, 24)
@@ -1249,32 +1250,33 @@ class HorizontalSpacingSpecifier(object):
     def __init__(
         self,
         *,
-        breaks=None,
-        fermata_measure_numbers=None,
-        fermata_measure_duration=(1, 4),
-        first_measure_number=None,
-        measure_count=None,
-        measures=None,
-        minimum_duration=None,
-        multiplier=None,
-        ):
+        breaks: BreakMeasureMap = None,
+        fermata_measure_numbers: typing.List[int] = None,
+        fermata_measure_duration: typings.IntegerPair = (1, 4),
+        first_measure_number: int = None,
+        measure_count: int = None,
+        measures: abjad.OrderedDict = None,
+        minimum_duration: typings.IntegerPair = None,
+        multiplier: typings.IntegerPair = None,
+        phantom: bool = None,
+        ) -> None:
         if breaks is not None:
-            prototype = BreakMeasureMap
-            assert isinstance(breaks, prototype), repr(breaks)
+            assert isinstance(breaks, BreakMeasureMap), repr(breaks)
         self._breaks = breaks
         if fermata_measure_numbers is not None:
             assert isinstance(fermata_measure_numbers, collections.Iterable)
             assert all(isinstance(_, int) for _ in fermata_measure_numbers)
         self._fermata_measure_numbers = fermata_measure_numbers or []
+        duration_ = None
         if fermata_measure_duration is not None:
-            fermata_measure_duration = abjad.Duration(fermata_measure_duration)
-        self._fermata_measure_duration = fermata_measure_duration
-        self._fermata_start_offsets = []
+            duration_ = abjad.Duration(fermata_measure_duration)
+        self._fermata_measure_duration = duration_
+        self._fermata_start_offsets: typing.List[abjad.Offset] = []
         if first_measure_number is not None:
             assert isinstance(first_measure_number, int)
             assert 1 <= first_measure_number
         self._first_measure_number = first_measure_number
-        self._forbid_segment_maker_adjustments = None
+        self._forbid_segment_maker_adjustments: typing.Optional[bool] = None
         if measure_count is not None:
             assert isinstance(measure_count, int)
             assert 0 <= measure_count
@@ -1286,11 +1288,13 @@ class HorizontalSpacingSpecifier(object):
             multiplier = abjad.Multiplier(multiplier)
         self._multiplier = multiplier
         if measures is not None:
-            prototype = abjad.OrderedDict
-            assert isinstance(measures, prototype), repr(measures)
+            assert isinstance(measures, abjad.OrderedDict), repr(measures)
         else:
             measures = abjad.OrderedDict()
         self._measures = measures
+        if phantom is not None:
+            phantom = bool(phantom)
+        self._phantom = phantom
 
     ### SPECIAL METHODS ###
 
@@ -1492,6 +1496,7 @@ class HorizontalSpacingSpecifier(object):
         bol_measure_numbers = []
         if self.breaks and self.breaks.bol_measure_numbers:
             first_breaks_measure_number = self.breaks.bol_measure_numbers[0]
+            assert isinstance(self.first_measure_number, int)
             for bol_measure_number in self.breaks.bol_measure_numbers:
                 offset = bol_measure_number - first_breaks_measure_number
                 bol_measure_number = self.first_measure_number + offset
@@ -1530,14 +1535,13 @@ class HorizontalSpacingSpecifier(object):
             eol_measure_number = bol_measure_number - 1
             eol_measure_numbers.append(eol_measure_number)
         if (self.last_measure_number and
+            not self.phantom and
             self.last_measure_number not in eol_measure_numbers):
             eol_measure_numbers.append(self.last_measure_number)
         return eol_measure_numbers
 
     @property
-    def fermata_measure_duration(self) -> typing.Optional[
-        abjad.NonreducedFraction
-        ]:
+    def fermata_measure_duration(self) -> typing.Optional[abjad.Duration]:
         """
         Gets fermata measure duration.
 
@@ -1569,7 +1573,7 @@ class HorizontalSpacingSpecifier(object):
         return self._fermata_measure_numbers
 
     @property
-    def first_measure_number(self) -> int:
+    def first_measure_number(self) -> typing.Optional[int]:
         """
         Gets first measure number.
 
@@ -1645,7 +1649,7 @@ class HorizontalSpacingSpecifier(object):
         return self._magic_lilypond_eol_adjustment
 
     @property
-    def measure_count(self) -> int:
+    def measure_count(self) -> typing.Optional[int]:
         """
         Gets measure count.
 
@@ -1689,6 +1693,13 @@ class HorizontalSpacingSpecifier(object):
         """
         return self._multiplier
 
+    @property
+    def phantom(self) -> typing.Optional[bool]:
+        """
+        Is true when segment concludes with phantom measure.
+        """
+        return self._phantom
+    
     ### PUBLIC METHODS ###
 
     def override(
@@ -2353,7 +2364,7 @@ def breaks(
     return breaks
 
 def minimum_duration(
-    duration: typing.Union[tuple, abjad.Duration],
+    duration: typing.Union[typings.IntegerPair, abjad.Duration],
     ) -> HorizontalSpacingSpecifier:
     """
     Makes horizontal spacing specifier with ``duration`` minimum width.
