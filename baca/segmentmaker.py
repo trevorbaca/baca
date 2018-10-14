@@ -2820,6 +2820,20 @@ class SegmentMaker(abjad.SegmentMaker):
                 raise Exception(format(momento))
         return indicator
 
+    def _move_global_rests(self):
+        string = '_global_rests_in_topmost_staff'
+        if not getattr(self.score_template, string, None):
+            return
+        if 'Global_Rests' not in self.score:
+            return
+        global_rests = self.score['Global_Rests']
+        self.score['Global_Context'].remove(global_rests)
+        music_context = self.score['Music_Context']
+        for staff in abjad.iterate(music_context).components(abjad.Staff):
+            break
+        staff.is_simultaneous = True
+        staff.insert(0, global_rests)
+
     def _populate_offset_to_measure_number(self):
         measure_number = self._get_first_measure_number()
         for skip in classes.Selection(self.score['Global_Skips']).skips():
@@ -6391,7 +6405,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._add_container_identifiers()
                 self._check_all_music_in_part_containers()
                 self._check_duplicate_part_assignments()
-                #self._collect_metadata()
+                self._move_global_rests()
 
         count = int(timer.elapsed_time)
         seconds = abjad.String('second').pluralize(count)
