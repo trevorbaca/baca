@@ -150,7 +150,6 @@ class PiecewiseCommand(scoping.Command):
         '_bookend',
         '_bundles',
         '_final_piece_spanner',
-        '_leak',
         '_pieces',
         '_remove_length_1_spanner_start',
         '_right_broken',
@@ -167,7 +166,6 @@ class PiecewiseCommand(scoping.Command):
         bookend: typing.Union[bool, int] = None,
         bundles: typing.List[Bundle] = None,
         final_piece_spanner: typing.Any = None,
-        leak: bool = None,
         map: typings.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
@@ -203,10 +201,6 @@ class PiecewiseCommand(scoping.Command):
         if final_piece_spanner not in (None, False):
             assert getattr(final_piece_spanner, 'spanner_start', False)
         self._final_piece_spanner = final_piece_spanner
-        if leak is not None:
-            leak = bool(leak)
-        assert not leak, repr(leak)
-        self._leak = leak
         if isinstance(pieces, str):
             pieces = eval(pieces)
         if pieces is not None:
@@ -358,15 +352,6 @@ class PiecewiseCommand(scoping.Command):
                         next_bundle,
                         spanner_start=None,
                         )
-                if self.leak:
-                    leaked_indicator = abjad.new(
-                        next_bundle.indicator,
-                        leak=True,
-                        )
-                    next_bundle = abjad.new(
-                        next_bundle,
-                        indicator=leaked_indicator,
-                        )
                 self._attach_indicators(
                     next_bundle,
                     stop_leaf,
@@ -380,7 +365,6 @@ class PiecewiseCommand(scoping.Command):
                 next_bundle.spanner_stop):
                 spanner_stop = abjad.new(
                     next_bundle.spanner_stop,
-                    leak=self.leak,
                     )
                 bundle = Bundle(spanner_stop=spanner_stop)
                 self._attach_indicators(
@@ -486,13 +470,6 @@ class PiecewiseCommand(scoping.Command):
         Gets last piece spanner start.
         """
         return self._final_piece_spanner
-
-    @property
-    def leak(self) -> typing.Optional[bool]:
-        """
-        Is true when command leaks final spanner stop.
-        """
-        return self._leak
 
     @property
     def pieces(self) -> typing.Optional[abjad.Expression]:
@@ -952,7 +929,6 @@ def hairpin(
     *tweaks: abjad.LilyPondTweakManager,
     bookend: typing.Union[bool, int] = -1,
     final_hairpin: typing.Union[bool, str, abjad.StartHairpin] = None,
-    ###leak: bool = None,
     left_broken: bool = None,
     map: typings.Selector = None,
     match: typings.Indices = None,
@@ -2744,7 +2720,6 @@ def hairpin(
         bookend=bookend,
         bundles=bundles,
         final_piece_spanner=final_hairpin_,
-        ###leak=leak,
         match=match,
         map=map,
         measures=measures,
@@ -3135,7 +3110,6 @@ def text_spanner(
     bookend: typing.Union[bool, int] = -1,
     boxed: bool = None,
     final_piece_spanner: bool = None,
-    ###leak: bool = None,
     lilypond_id: int = None,
     map: typings.Selector = None,
     match: typings.Indices = None,
@@ -5258,7 +5232,6 @@ def text_spanner(
         bookend=bookend,
         bundles=bundles,
         final_piece_spanner=final_piece_spanner,
-        ###leak=leak,
         map=map,
         match=match,
         measures=measures,

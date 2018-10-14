@@ -111,7 +111,6 @@ piecewise
       bookend
       bundles
       final_piece_spanner
-      leak
       pieces
       remove_length_1_spanner_start
       right_broken
@@ -166,8 +165,6 @@ piecewise
       .. autoattribute:: PiecewiseCommand.deactivate
 
    .. autoattribute:: PiecewiseCommand.final_piece_spanner
-
-   .. autoattribute:: PiecewiseCommand.leak
 
    .. container:: inherited
 
