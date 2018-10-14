@@ -1335,7 +1335,7 @@ class HorizontalSpacingSpecifier(object):
             string_ = self._make_annotation(duration, eol_adjusted, duration_)
             if measure_index < total - 1:
                 tag = abjad.Tag(abjad.tags.SPACING_MARKUP)
-                if measure_index == total - 2:
+                if not self.phantom and measure_index == total - 2:
                     next_skip = skips[measure_index + 1]
                     next_measure_index = measure_index + 1
                     next_measure_number = measure_number + 1
@@ -2460,10 +2460,14 @@ def scorewide_spacing(
     if isinstance(path, tuple):
         assert len(path) == 3, repr(path)
         first_measure_number, measure_count, fermata_measure_numbers = path
+        phantom = None
     else:
         path = abjad.Path(path)
-        first_measure_number, measure_count, fermata_measure_numbers = \
-            path.get_measure_profile_metadata()
+        tuple_ = path.get_measure_profile_metadata()
+        first_measure_number = tuple_[0]
+        measure_count = tuple_[1]
+        fermata_measure_numbers = tuple_[2]
+        phantom = tuple_[3]
         first_measure_number = first_measure_number or 1
     fallback_fraction = abjad.NonreducedFraction(fallback_duration)
     measures = abjad.OrderedDict()
@@ -2477,6 +2481,7 @@ def scorewide_spacing(
         first_measure_number=first_measure_number,
         measure_count=measure_count,
         measures=measures,
+        phantom=phantom,
         )
     specifier._forbid_segment_maker_adjustments = True
     return specifier

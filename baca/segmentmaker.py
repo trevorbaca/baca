@@ -1717,6 +1717,8 @@ class SegmentMaker(abjad.SegmentMaker):
         metadata['last_measure_number'] = self._get_last_measure_number()
         if self._last_measure_is_fermata:
             metadata['last_measure_is_fermata'] = True
+        if self.phantom is not None:
+            metadata['phantom'] = self.phantom
         value = self._collect_persistent_indicators()
         metadata['persistent_indicators'] = value
         if self.segment_name is not None:
@@ -3182,11 +3184,12 @@ class SegmentMaker(abjad.SegmentMaker):
             skip,
             tag=f'{tag}:_style_phantom_measures(3)',
             )
-        rest = self.score['Global_Rests'][-1]
-        self._prepend_tag_to_wrappers(
-            rest,
-            f'{tag}:_style_phantom_measures(4)',
-            )
+        if 'Global_Rests' in self.score:
+            rest = self.score['Global_Rests'][-1]
+            self._prepend_tag_to_wrappers(
+                rest,
+                f'{tag}:_style_phantom_measures(4)',
+                )
         start_offset = abjad.inspect(skip).timespan().start_offset
         enumeration = enums.MULTIMEASURE_REST_CONTAINER
         containers = []
