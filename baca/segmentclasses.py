@@ -1325,6 +1325,8 @@ class HorizontalSpacingSpecifier(object):
                 skip,
                 minimum_durations_by_measure,
                 )
+            if self.phantom and measure_index == total - 1:
+                duration = abjad.Duration(1, 4)
             spacing_section = indicators.SpacingSection(duration=duration)
             tag = abjad.Tag(abjad.tags.SPACING)
             abjad.attach(
