@@ -571,7 +571,7 @@ bacaStopTextSpanSNM = #(
     (interpret-markup layout props
         #{
         \markup
-        \with-color #(x11-color 'red)
+        %%%\with-color #(x11-color 'red)
         \fontsize #-3
         \upright
         \concat { #snm \hspace #-0.25 }
@@ -647,12 +647,11 @@ baca-start-snm-left-only = #(
     - \baca-snm-left-text-tweak #left
     - \baca-upper-annotation-layer
     - \tweak bound-details.right.padding 1.25
-    - \tweak color #red
+    %%%- \tweak color #red
     $music
     #}
     )
 
-% HERE
 baca-start-snm-colored-left-only = #(
     define-music-function
     (parser location left color music)
@@ -679,7 +678,7 @@ baca-start-snm-both = #(
     - \baca-upper-annotation-layer
     - \tweak bound-details.right.padding 0
     - \tweak bound-details.right.stencil-align-dir-y #center
-    - \tweak color #red
+    %%%- \tweak color #red
     $music
     #}
     )
