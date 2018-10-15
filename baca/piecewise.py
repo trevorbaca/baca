@@ -5276,6 +5276,7 @@ def text_spanner(
         ValueError: lilypond_id must be 1, 2, 3 or none (not 4).
 
     """
+    original_items = items
     if autodetect_right_padding is not None:
         autodetect_right_padding = bool(autodetect_right_padding)
     shape_to_style = {
@@ -5313,7 +5314,8 @@ def text_spanner(
         items = items_
     bundles = []
     if len(items) == 1:
-        raise NotImplementedError('implement lone item')
+        message = f'lone item not yet implemented ({original_items!r}).'
+        raise NotImplementedError(message)
     if lilypond_id is None:
         command = r'\stopTextSpan'
     elif lilypond_id == 1:
