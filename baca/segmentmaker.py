@@ -1253,7 +1253,12 @@ class SegmentMaker(abjad.SegmentMaker):
                     markups.append(abjad.Markup(']').upright())
                     left_text = abjad.Markup.concat(markups)
                 elif metronome_mark.custom_markup is not None:
-                    left_text = metronome_mark._get_markup()
+                    assert metronome_mark.custom_markup.literal
+                    #left_text = metronome_mark._get_markup()
+                    left_text = r'- \baca-metronome-mark-spanner-left-markup'
+                    string = format(metronome_mark.custom_markup)
+                    assert string.startswith('\\')
+                    left_text += f' {string}'
                 else:
                     arguments = metronome_mark._get_markup_arguments()
                     log, dots, stem, value = arguments
@@ -1329,6 +1334,10 @@ class SegmentMaker(abjad.SegmentMaker):
             tag = abjad.Tag(tag)
             if isinstance(left_text, str):
                 string = left_text.replace(
+                    'baca-metronome-mark-spanner-left-markup',
+                    'baca-metronome-mark-spanner-colored-left-markup',
+                    )
+                string = string.replace(
                     'baca-metronome-mark-spanner-left-text',
                     'baca-metronome-mark-spanner-colored-left-text',
                     )

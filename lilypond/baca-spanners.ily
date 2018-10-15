@@ -463,6 +463,21 @@ baca-metronome-mark-spanner-layer = #(
     #}
     )
 
+baca-metronome-mark-spanner-colored-left-markup = #(
+    define-music-function
+    (parser location markup color music)
+    (markup? symbol? ly:music?)
+    #{
+    \baca-metronome-mark-spanner-layer
+    \tweak bound-details.left.text \markup \concat {
+        \with-color #(x11-color color)
+        #markup
+        \hspace #0.5
+        }
+    $music
+    #}
+    )
+
 baca-metronome-mark-spanner-colored-left-text = #(
     define-music-function
     (parser location log dots stem string color music)
@@ -472,6 +487,20 @@ baca-metronome-mark-spanner-colored-left-text = #(
     \tweak bound-details.left.text \markup \concat {
         \with-color #(x11-color color)
         \abjad-metronome-mark-markup #log #dots #stem #string
+        \hspace #0.5
+        }
+    $music
+    #}
+    )
+
+baca-metronome-mark-spanner-left-markup = #(
+    define-music-function
+    (parser location markup music)
+    (markup? ly:music?)
+    #{
+    \baca-metronome-mark-spanner-layer
+    \tweak bound-details.left.text \markup \concat {
+        #markup
         \hspace #0.5
         }
     $music
