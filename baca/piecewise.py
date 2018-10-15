@@ -508,6 +508,65 @@ class PiecewiseCommand(scoping.Command):
 
 ### FACTORY FUNCTIONS ###
 
+def circle_bow_spanner(
+    qualifier: str = None,
+    *tweaks: abjad.IndexedTweakManager,
+    map: typings.Selector = None,
+    match: typings.Indices = None,
+    measures: typings.Slice = None,
+    pieces: typings.Selector = 'baca.group()',
+    # NOTE: selector differs from text_spanner(), annotation spanners:
+    selector: typings.Selector = 'baca.ltleaves().rleak()',
+    tag: typing.Optional[str] = f'{enums.CIRCLE_BOW}:baca_circle_bow_spanner',
+    ) -> PiecewiseCommand:
+    r"""
+    Makes circle bow spanner.
+    """
+    if qualifier is None:
+        string = r'\baca-circle-markup =|'
+    else:
+        string = rf'\baca-circle-{qualifier}-markup =|'
+    return text_spanner(
+        string,
+        *tweaks,
+        autodetect_right_padding=True,
+        bookend=False,
+        lilypond_id='CircleBow',
+        map=map,
+        match=match,
+        measures=measures,
+        pieces=pieces,
+        selector=selector,
+        tag=tag,
+        )
+
+def damp_spanner(
+    *tweaks: abjad.IndexedTweakManager,
+    map: typings.Selector = None,
+    match: typings.Indices = None,
+    measures: typings.Slice = None,
+    pieces: typings.Selector = 'baca.group()',
+    # NOTE: selector differs from text_spanner(), annotation spanners:
+    selector: typings.Selector = 'baca.ltleaves().rleak()',
+    tag: typing.Optional[str] = f'{enums.DAMP}:baca_damp_spanner',
+    ) -> PiecewiseCommand:
+    r"""
+    Makes damp spanner.
+    """
+    return text_spanner(
+        r'\baca-damp-markup =|',
+        *tweaks,
+        autodetect_right_padding=True,
+        bookend=False,
+        lilypond_id='Damp',
+        map=map,
+        match=match,
+        measures=measures,
+        pieces=pieces,
+        selector=selector,
+        tag=tag,
+        )
+
 def dynamic(
     dynamic: typing.Union[str, abjad.Dynamic],
     *tweaks: abjad.LilyPondTweakManager,
@@ -2730,6 +2789,33 @@ def hairpin(
         tags=[tag],
         )
 
+def half_clt_spanner(
+    *tweaks: abjad.IndexedTweakManager,
+    map: typings.Selector = None,
+    match: typings.Indices = None,
+    measures: typings.Slice = None,
+    pieces: typings.Selector = 'baca.group()',
+    # NOTE: selector differs from text_spanner(), annotation spanners:
+    selector: typings.Selector = 'baca.ltleaves().rleak()',
+    tag: typing.Optional[str] = f'{enums.HALF_CLT}:baca_half_clt_spanner',
+    ) -> PiecewiseCommand:
+    r"""
+    Makes 1/2 clt spanner.
+    """
+    return text_spanner(
+        '½ clt =|',
+        *tweaks,
+        autodetect_right_padding=True,
+        bookend=False,
+        lilypond_id='HalfCLT',
+        map=map,
+        match=match,
+        measures=measures,
+        pieces=pieces,
+        selector=selector,
+        tag=tag,
+        )
+
 def make_dynamic(string: str) -> typing.Union[
     abjad.Dynamic, abjad.StartHairpin, abjad.StopHairpin,
     ]:
@@ -2960,7 +3046,8 @@ def material_annotation_spanner(
     pieces: typings.Selector = 'baca.group()',
     # NOTE: selector differs from text_spanner()
     selector: typings.Selector = 'baca.leaves().rleak()',
-    tag: typing.Optional[str] = f'{enums.MATERIAL}:baca_text_spanner',
+    tag: typing.Optional[str] = 
+        f'{enums.MATERIAL}:baca_material_annotation_spanner',
     ) -> PiecewiseCommand:
     r"""
     Makes pitch annotation spanner.
@@ -3142,7 +3229,7 @@ def pitch_annotation_spanner(
     pieces: typings.Selector = 'baca.group()',
     # NOTE: selector differs from text_spanner()
     selector: typings.Selector = 'baca.leaves().rleak()',
-    tag: typing.Optional[str] = f'{enums.PITCH}:baca_text_spanner',
+    tag: typing.Optional[str] = f'{enums.PITCH}:baca_pitch_annotation_spanner',
     ) -> PiecewiseCommand:
     r"""
     Makes pitch annotation spanner.
@@ -3153,6 +3240,36 @@ def pitch_annotation_spanner(
         autodetect_right_padding=True,
         bookend=False,
         lilypond_id='PA',
+        map=map,
+        match=match,
+        measures=measures,
+        pieces=pieces,
+        selector=selector,
+        tag=tag,
+        )
+
+def scp_spanner(
+    items: typing.Union[str, typing.List],
+    *tweaks: abjad.IndexedTweakManager,
+    autodetect_right_padding: bool = True,
+    bookend: typing.Union[bool, int] = False,
+    map: typings.Selector = None,
+    match: typings.Indices = None,
+    measures: typings.Slice = None,
+    pieces: typings.Selector = 'baca.group()',
+    # NOTE: selector differs from text_spanner(), annotation spanners:
+    selector: typings.Selector = 'baca.ltleaves().rleak()',
+    tag: typing.Optional[str] = f'{enums.SCP}:baca_scp_spanner',
+    ) -> PiecewiseCommand:
+    r"""
+    Makes SCP spanner.
+    """
+    return text_spanner(
+        items,
+        *tweaks,
+        autodetect_right_padding=autodetect_right_padding,
+        bookend=bookend,
+        lilypond_id='SCP',
         map=map,
         match=match,
         measures=measures,

@@ -218,17 +218,27 @@ piecewise
 .. autosummary::
    :nosignatures:
 
+   ~circle_bow_spanner
+   ~damp_spanner
    ~dynamic
    ~hairpin
+   ~half_clt_spanner
    ~make_dynamic
    ~material_annotation_spanner
    ~parse_hairpin_descriptor
    ~pitch_annotation_spanner
+   ~scp_spanner
    ~text_spanner
+
+.. autofunction:: circle_bow_spanner
+
+.. autofunction:: damp_spanner
 
 .. autofunction:: dynamic
 
 .. autofunction:: hairpin
+
+.. autofunction:: half_clt_spanner
 
 .. autofunction:: make_dynamic
 
@@ -237,5 +247,7 @@ piecewise
 .. autofunction:: parse_hairpin_descriptor
 
 .. autofunction:: pitch_annotation_spanner
+
+.. autofunction:: scp_spanner
 
 .. autofunction:: text_spanner

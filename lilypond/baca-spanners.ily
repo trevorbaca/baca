@@ -154,6 +154,36 @@ baca-start-ct-both = #(
     #}
     )
 
+%%% CIRCLE BOW SPANNER %%%
+
+bacaStartTextSpanCircleBow = #(
+    make-music 'TextSpanEvent 'span-direction START 'spanner-id "CircleBow"
+    )
+
+bacaStopTextSpanCircleBow = #(
+    make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "CircleBow"
+    )
+
+%%% DAMP SPANNER %%%
+
+bacaStartTextSpanDamp = #(
+    make-music 'TextSpanEvent 'span-direction START 'spanner-id "Damp"
+    )
+
+bacaStopTextSpanDamp = #(
+    make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "Damp"
+    )
+
+%%% HALF CLT SPANNER %%%
+
+bacaStartTextSpanHalfCLT = #(
+    make-music 'TextSpanEvent 'span-direction START 'spanner-id "HalfCLT"
+    )
+
+bacaStopTextSpanHalfCLT = #(
+    make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "HalfCLT"
+    )
+
 %%% LOCAL MEASURE INDEX SPANNER %%%
 
 bacaStartTextSpanLMI = #(
@@ -470,6 +500,16 @@ bacaStartTextSpanPA = #(
 
 bacaStopTextSpanPA = #(
     make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "PA"
+    )
+
+%%% SCP SPANNER %%%
+
+bacaStartTextSpanSCP = #(
+    make-music 'TextSpanEvent 'span-direction START 'spanner-id "SCP"
+    )
+
+bacaStopTextSpanSCP = #(
+    make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "SCP"
     )
 
 %%% SPACING MARKUP SPANNER %%%

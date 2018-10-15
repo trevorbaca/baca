@@ -815,12 +815,16 @@ Piecewise library.
 .. autosummary::
    :nosignatures:
 
+   ~baca.piecewise.circle_bow_spanner
+   ~baca.piecewise.damp_spanner
    ~baca.piecewise.dynamic
    ~baca.piecewise.hairpin
+   ~baca.piecewise.half_clt_spanner
    ~baca.piecewise.make_dynamic
    ~baca.piecewise.material_annotation_spanner
    ~baca.piecewise.parse_hairpin_descriptor
    ~baca.piecewise.pitch_annotation_spanner
+   ~baca.piecewise.scp_spanner
    ~baca.piecewise.text_spanner
 
 .. raw:: html
