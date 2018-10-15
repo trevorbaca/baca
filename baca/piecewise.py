@@ -542,6 +542,8 @@ def circle_bow_spanner(
 
 def damp_spanner(
     *tweaks: abjad.IndexedTweakManager,
+    # NOTE: autodetect default differs from text_spanner():
+    autodetect_right_padding: bool = True,
     map: typings.Selector = None,
     match: typings.Indices = None,
     measures: typings.Slice = None,
@@ -556,7 +558,7 @@ def damp_spanner(
     return text_spanner(
         r'\baca-damp-markup =|',
         *tweaks,
-        autodetect_right_padding=True,
+        autodetect_right_padding=autodetect_right_padding,
         bookend=False,
         lilypond_id='Damp',
         map=map,
@@ -3253,6 +3255,7 @@ def scp_spanner(
     *tweaks: abjad.IndexedTweakManager,
     autodetect_right_padding: bool = True,
     bookend: typing.Union[bool, int] = False,
+    final_piece_spanner: bool = None,
     map: typings.Selector = None,
     match: typings.Indices = None,
     measures: typings.Slice = None,
@@ -3269,6 +3272,7 @@ def scp_spanner(
         *tweaks,
         autodetect_right_padding=autodetect_right_padding,
         bookend=bookend,
+        final_piece_spanner=final_piece_spanner,
         lilypond_id='SCP',
         map=map,
         match=match,
