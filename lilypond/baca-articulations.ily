@@ -120,6 +120,24 @@ baca-circle-bowing = #(make-articulation "bacacirclebowing")
 
 baca-damp = #(make-articulation "bacadamp")
 
+%%% DIAMOND ARTICULATIONS %%%
+
+#(append! default-script-alist
+   (list
+    `("bacadoublediamond"
+       . (
+           (stencil . ,ly:text-interface::print)
+           (text . ,baca-double-diamond-markup)
+           (avoid-slur . around)
+           (padding . 0.20)
+           (script-priority . 125)
+           (side-relative-direction . ,DOWN)
+           (skyline-horizontal-padding . 0.20)
+           ;;(toward-stem-shift . 0.5)
+           ))))
+
+baca-double-diamond = #(make-articulation "bacadoublediamond")
+
 %%% STACCATO ARTICULATIONS (MULTIPLE) %%%
 
 baca-staccati =

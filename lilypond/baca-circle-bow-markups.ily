@@ -36,6 +36,10 @@ baca-circle-fast-markup = \markup \concat {
     \baca-circle-bowing-markup \hspace #1.75 \raise #-0.6 (fast)
     }
 
+baca-circle-mod-markup = \markup \concat {
+    \baca-circle-bowing-markup \hspace #1.75 \raise #-0.6 "(mod.)"
+    }
+
 baca-circle-mod-width-markup = \markup \concat {
     \baca-circle-bowing-markup \hspace #1.75 \raise #-0.6 "(mod. width)"
     }
@@ -54,6 +58,15 @@ baca-circle-slow-markup = \markup \concat {
 
 baca-circle-tight-markup = \markup \concat {
     \baca-circle-bowing-markup \hspace #1.75 \raise #-0.6 (tight)
+    }
+
+baca-circle-tight-poss-markup = \markup \concat {
+    \baca-circle-bowing-markup \hspace #1.75 \raise #-0.6 "(tight poss.)"
+    }
+
+baca-circle-tight-poss-grind-at-talon-markup = \markup \concat {
+    \baca-circle-bowing-markup \hspace #1.75 \raise #-0.6
+    "(tight poss.: grind at talon)"
     }
 
 baca-circle-very-tight-markup = \markup \concat {
