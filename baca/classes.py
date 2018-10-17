@@ -4854,6 +4854,24 @@ class Selection(abjad.Selection):
         assert isinstance(result_, Selection), repr(result_)
         return result_
 
+    def ompltgroups(
+        self,
+        counts: typing.Sequence[int] = [1],
+        *,
+        exclude: typings.Strings = None,
+        ) -> typing.Union[abjad.Expression, 'Selection']:
+        r"""
+        Partitions measure-grouped plts (with overhang).
+        """
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        result = self.plts(exclude=exclude)
+        result = result.group_by_measure()
+        result = result.partition_by_counts(counts, overhang=True)
+        result_ = result.map(_select().flatten())
+        assert isinstance(result_, Selection), repr(result_)
+        return result_
+
     def phead(
         self,
         n: int,

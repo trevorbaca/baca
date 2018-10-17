@@ -80,6 +80,7 @@ Bača API
    ~baca.ntrun
    ~baca.ntruns
    ~baca.omgroups
+   ~baca.ompltgroups
    ~baca.partition_by_counts
    ~baca.partition_by_durations
    ~baca.partition_by_ratio
