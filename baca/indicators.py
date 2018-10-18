@@ -684,6 +684,8 @@ class StaffLines(object):
 
     _persistent = True
 
+    _publish_storage_format = True
+
     ### INITIALIZER ###
 
     def __init__(
@@ -743,6 +745,12 @@ class StaffLines(object):
         Formats Abjad object.
         """
         return abjad.StorageFormatManager(self).get_storage_format()
+
+    def __repr__(self) -> str:
+        """
+        Gets interpreter representation.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
 
     ### PRIVATE METHODS ###
 
