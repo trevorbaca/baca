@@ -525,6 +525,7 @@ def circle_bow_spanner(
     if qualifier is None:
         string = r'\baca-circle-markup =|'
     else:
+        assert isinstance(qualifier, str), repr(qualifier)
         string = rf'\baca-circle-{qualifier}-markup =|'
     return text_spanner(
         string,

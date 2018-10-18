@@ -560,6 +560,7 @@ indicators
 
       __eq__
       __format__
+      __repr__
       context
       hide
       line_count
@@ -575,6 +576,8 @@ indicators
    .. automethod:: StaffLines.__eq__
 
    .. automethod:: StaffLines.__format__
+
+   .. automethod:: StaffLines.__repr__
 
    .. raw:: html
 
