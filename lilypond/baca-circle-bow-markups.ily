@@ -36,6 +36,10 @@ baca-circle-fast-markup = \markup \concat {
     \baca-circle-bowing-markup \hspace #1.75 \raise #-0.6 (fast)
     }
 
+baca-circle-granulation-markup = \markup \concat {
+    \baca-circle-bowing-markup \hspace #1.75 \raise #-0.6 (granulation)
+    }
+
 baca-circle-mod-markup = \markup \concat {
     \baca-circle-bowing-markup \hspace #1.75 \raise #-0.6 "(mod.)"
     }
