@@ -3223,7 +3223,8 @@ class SegmentMaker(abjad.SegmentMaker):
             if abjad.inspect(leaf).timespan().start_offset != start_offset:
                 continue
             containers.append(container)
-        string = r'\once \override MultiMeasureRest.transparent = ##t'
+        string_1 = r'\once \override Score.TimeSignature.X-extent = ##f'
+        string_2 = r'\once \override MultiMeasureRest.transparent = ##t'
         strings = [
             '\stopStaff',
             '\once \override Staff.StaffSymbol.transparent = ##t',
@@ -3236,17 +3237,23 @@ class SegmentMaker(abjad.SegmentMaker):
                     f'{tag}:_style_phantom_measures(5)',
                     )
                 if isinstance(leaf, abjad.MultimeasureRest):
-                    literal = abjad.LilyPondLiteral(string)
+                    literal = abjad.LilyPondLiteral(string_1)
                     abjad.attach(
                         literal,
                         leaf,
                         tag=f'{tag}:_style_phantom_measures(6)',
                         )
-                    literal = abjad.LilyPondLiteral(strings)
+                    literal = abjad.LilyPondLiteral(string_2)
                     abjad.attach(
                         literal,
                         leaf,
                         tag=f'{tag}:_style_phantom_measures(7)',
+                        )
+                    literal = abjad.LilyPondLiteral(strings)
+                    abjad.attach(
+                        literal,
+                        leaf,
+                        tag=f'{tag}:_style_phantom_measures(8)',
                         )
 
     def _transpose_score_(self):
