@@ -2622,8 +2622,7 @@ class SegmentMaker(abjad.SegmentMaker):
             rest = abjad.MultimeasureRest(
                 abjad.Duration(1),
                 multiplier=time_signature.duration,
-                # TODO: change to '_make_global_rests(1)':
-                tag='_make_global_rests',
+                tag='_make_global_rests(1)',
                 )
             rests.append(rest)
         if self.phantom:
