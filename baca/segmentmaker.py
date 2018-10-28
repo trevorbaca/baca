@@ -2756,7 +2756,11 @@ class SegmentMaker(abjad.SegmentMaker):
         return silences
 
     def _make_score(self):
-        score = self.score_template()
+        score_template = getattr(self, 'score_template')
+        if score_template is None:
+            message = 'segment-maker can not find score template.'
+            raise Exception(message)
+        score = score_template()
         self._score = score
         if self.do_not_include_layout_ly:
             first_measure_number = self._get_first_measure_number()
