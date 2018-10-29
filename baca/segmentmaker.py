@@ -1689,30 +1689,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 result.append(context.name)
         return result
 
-    # TODO: no longer necessary? superseded by
-    # abjad.Path._context_name_to_first_apperance_margin_markup()?
-    def _collect_first_appearance_margin_markup(self):
-        if self.first_segment:
-            return
-        if not self.margin_markups:
-            return
-        self._cache_previously_alive_contexts()
-        dictionary = abjad.OrderedDict()
-        prototype = abjad.MarginMarkup
-        for staff in abjad.iterate(self.score).components(abjad.Staff):
-            if staff.name in self._previously_alive_contexts:
-                continue
-            for leaf in abjad.iterate(staff).leaves():
-                margin_markup = abjad.inspect(leaf).effective(prototype)
-                if margin_markup is not None:
-                    key = self._indicator_to_key(
-                        margin_markup,
-                        self.manifests,
-                        )
-                    dictionary[staff.name] = key
-                    break
-        return dictionary
-
     def _collect_metadata(self):
         metadata = abjad.OrderedDict()
         metadata['alive_during_segment'] = self._collect_alive_during_segment()
@@ -1729,10 +1705,6 @@ class SegmentMaker(abjad.SegmentMaker):
             metadata['fermata_measure_numbers'] = self._fermata_measure_numbers
         # abjad.Path._context_name_to_first_appearance_margin_markup() handles:
         dictionary = self.metadata.get('first_appearance_margin_markup')
-        if dictionary:
-            metadata['first_appearance_margin_markup'] = dictionary
-        # TODO: remove _collect_first_appearance_margin_markup()?
-        dictionary = self._collect_first_appearance_margin_markup()
         if dictionary:
             metadata['first_appearance_margin_markup'] = dictionary
         metadata['first_measure_number'] = self._get_first_measure_number()
