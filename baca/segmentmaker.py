@@ -1689,6 +1689,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 result.append(context.name)
         return result
 
+    # TODO: no longer necessary? superseded by
+    # abjad.Path._context_name_to_first_apperance_margin_markup()?
     def _collect_first_appearance_margin_markup(self):
         if self.first_segment:
             return
@@ -1714,6 +1716,10 @@ class SegmentMaker(abjad.SegmentMaker):
     def _collect_metadata(self):
         metadata = abjad.OrderedDict()
         metadata['alive_during_segment'] = self._collect_alive_during_segment()
+        # __make_layout_ly__ adds bol measure numbers to metadata
+        bol_measure_numbers = self.metadata.get('bol_measure_numbers')
+        if bol_measure_numbers:
+            metadata['bol_measure_numbers'] = bol_measure_numbers
         if self._container_to_part_assignment:
             value = self._container_to_part_assignment
             metadata['container_to_part_assignment'] = value
@@ -1721,6 +1727,11 @@ class SegmentMaker(abjad.SegmentMaker):
             metadata['duration'] = self._duration
         if self._fermata_measure_numbers:
             metadata['fermata_measure_numbers'] = self._fermata_measure_numbers
+        # abjad.Path._context_name_to_first_appearance_margin_markup() handles:
+        dictionary = self.metadata.get('first_appearance_margin_markup')
+        if dictionary:
+            metadata['first_appearance_margin_markup'] = dictionary
+        # TODO: remove _collect_first_appearance_margin_markup()?
         dictionary = self._collect_first_appearance_margin_markup()
         if dictionary:
             metadata['first_appearance_margin_markup'] = dictionary
@@ -1744,6 +1755,7 @@ class SegmentMaker(abjad.SegmentMaker):
         metadata['time_signatures'] = self._cached_time_signatures
         if self.voice_metadata:
             metadata['voice_metadata'] = self.voice_metadata
+        self.metadata.clear()
         self.metadata.update(metadata)
         self.metadata.sort(recurse=True)
         for key, value in self.metadata.items():
