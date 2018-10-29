@@ -1410,6 +1410,8 @@ class SegmentMaker(abjad.SegmentMaker):
         context = self.score['Global_Rests']
         rests = abjad.select(context).leaves(abjad.MultimeasureRest)
         last_measure_index = len(rests) - 1
+        if self.phantom is True:
+            last_measure_index -= 1
         first_measure_number = self._get_first_measure_number()
         tag = abjad.tags.FERMATA_MEASURE
         for measure_index, rest in enumerate(rests):
@@ -1724,12 +1726,13 @@ class SegmentMaker(abjad.SegmentMaker):
             metadata['first_appearance_margin_markup'] = dictionary
         metadata['first_measure_number'] = self._get_first_measure_number()
         metadata['last_measure_number'] = self._get_last_measure_number()
-        if self._last_measure_is_fermata:
+        if self._last_measure_is_fermata is True:
             metadata['last_measure_is_fermata'] = True
         if self.phantom is not None:
             metadata['phantom'] = self.phantom
-        value = self._collect_persistent_indicators()
-        metadata['persistent_indicators'] = value
+        dictionary = self._collect_persistent_indicators()
+        if dictionary:
+            metadata['persistent_indicators'] = dictionary
         if self.segment_name is not None:
             metadata['segment_name'] = self.segment_name
         metadata['segment_number'] = self._get_segment_number()
