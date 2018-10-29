@@ -56,11 +56,11 @@ segmentmaker
       final_bar_line
       final_markup
       final_markup_extra_offset
+      final_segment
       first_measure_number
       first_segment
       ignore_repeat_pitch_classes
       instruments
-      last_segment
       lilypond_file
       magnify_staves
       manifests
@@ -181,6 +181,8 @@ segmentmaker
 
    .. autoattribute:: SegmentMaker.final_markup_extra_offset
 
+   .. autoattribute:: SegmentMaker.final_segment
+
    .. autoattribute:: SegmentMaker.first_measure_number
 
    .. autoattribute:: SegmentMaker.first_segment
@@ -188,8 +190,6 @@ segmentmaker
    .. autoattribute:: SegmentMaker.ignore_repeat_pitch_classes
 
    .. autoattribute:: SegmentMaker.instruments
-
-   .. autoattribute:: SegmentMaker.last_segment
 
    .. autoattribute:: SegmentMaker.lilypond_file
 

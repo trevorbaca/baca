@@ -464,14 +464,6 @@ class Command(object):
             return reapplied_indicators[0]
 
     @staticmethod
-    def _validate_tags(tags):
-        assert isinstance(tags, list), repr(tags)
-        assert '' not in tags, repr(tags)
-        assert not any(':' in _ for _ in tags), repr(tags)
-        return True
-
-    # TODO: change name to _validate_indexed_tweaks
-    @staticmethod
     def _validate_indexed_tweaks(tweaks):
         if tweaks is None:
             return
@@ -484,6 +476,13 @@ class Command(object):
                 isinstance(tweak[0], abjad.LilyPondTweakManager)):
                 continue
             raise Exception(tweak)
+
+    @staticmethod
+    def _validate_tags(tags):
+        assert isinstance(tags, list), repr(tags)
+        assert '' not in tags, repr(tags)
+        assert not any(':' in _ for _ in tags), repr(tags)
+        return True
 
     ### PUBLIC PROPERTIES ###
 

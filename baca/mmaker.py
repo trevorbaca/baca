@@ -2926,8 +2926,8 @@ class ImbricationCommand(scoping.Command):
             raise Exception(message)
         self._apply_specifiers(container)
         if self.extend_beam:
-            last_leaf = abjad.select(container).leaf(-1)
-            abjad.attach(abjad.tags.RIGHT_BROKEN_BEAM, last_leaf)
+            final_leaf = abjad.select(container).leaf(-1)
+            abjad.attach(abjad.tags.RIGHT_BROKEN_BEAM, final_leaf)
         selection = abjad.select(container)
         if not self.hocket:
             for pleaf in classes.Selection(container).pleaves():
@@ -6759,8 +6759,8 @@ class MusicMaker(object):
         if not extend_beam:
             return
         leaves = list(abjad.iterate(selections).leaves())
-        last_leaf = leaves[-1]
-        abjad.attach(abjad.tags.RIGHT_BROKEN_BEAM, last_leaf)
+        final_leaf = leaves[-1]
+        abjad.attach(abjad.tags.RIGHT_BROKEN_BEAM, final_leaf)
 
     @staticmethod
     def _get_anchor_specifier(specifiers):

@@ -3099,7 +3099,7 @@ class PitchCommand(scoping.Command):
         dictionary = self.runtime['previous_segment_voice_metadata']
         dictionary = dictionary.get(abjad.tags.RHYTHM, None)
         if dictionary:
-            if dictionary.get('incomplete_last_note', False):
+            if dictionary.get('incomplete_final_note', False):
                 pitches_consumed -= 1
         return pitches_consumed
 

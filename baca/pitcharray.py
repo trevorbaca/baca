@@ -953,7 +953,7 @@ class PitchArrayCell(object):
         >>> cell.is_first_in_row
         False
 
-        >>> cell.is_last_in_row
+        >>> cell.is_final_in_row
         False
 
         >>> cell.next
@@ -1169,7 +1169,7 @@ class PitchArrayCell(object):
     @property
     def _format_string(self):
         if self.parent_column is not None:
-            if self._is_last_cell_in_row:
+            if self._is_final_cell_in_row:
                 cell_width = self._composite_column_width - 2
             else:
                 cell_width = self._composite_column_width - 3
@@ -1178,7 +1178,7 @@ class PitchArrayCell(object):
             return '[%s]' % self._conditional_pitch_string
 
     @property
-    def _is_last_cell_in_row(self):
+    def _is_final_cell_in_row(self):
         if self.parent_row is not None:
             if self.column_indices[-1] == (self.parent_row.width - 1):
                 return True
@@ -1373,6 +1373,37 @@ class PitchArrayCell(object):
         return self.row_index, self.column_indices
 
     @property
+    def is_final_in_row(self):
+        """
+        Is true when pitch array cell is last in row.
+
+        ..  container:: example
+
+            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+
+            >>> print(array)
+            [ ] [     ] [ ]
+            [     ] [ ] [ ]
+
+            >>> for row in array:
+            ...     for cell in row:
+            ...         cell, cell.is_final_in_row
+            ...
+            (PitchArrayCell(width=1), False)
+            (PitchArrayCell(width=2), False)
+            (PitchArrayCell(width=1), True)
+            (PitchArrayCell(width=2), False)
+            (PitchArrayCell(width=1), False)
+            (PitchArrayCell(width=1), True)
+
+        Returns true or false.
+        """
+        if self.parent_row is not None:
+            if self.column_indices[-1] == self.parent_row.width - 1:
+                return True
+        return False
+
+    @property
     def is_first_in_row(self):
         """
         Is true when pitch array cell is first in row.
@@ -1400,37 +1431,6 @@ class PitchArrayCell(object):
         """
         if self.parent_row is not None:
             if self.column_indices[0] == 0:
-                return True
-        return False
-
-    @property
-    def is_last_in_row(self):
-        """
-        Is true when pitch array cell is last in row.
-
-        ..  container:: example
-
-            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
-
-            >>> print(array)
-            [ ] [     ] [ ]
-            [     ] [ ] [ ]
-
-            >>> for row in array:
-            ...     for cell in row:
-            ...         cell, cell.is_last_in_row
-            ...
-            (PitchArrayCell(width=1), False)
-            (PitchArrayCell(width=2), False)
-            (PitchArrayCell(width=1), True)
-            (PitchArrayCell(width=2), False)
-            (PitchArrayCell(width=1), False)
-            (PitchArrayCell(width=1), True)
-
-        Returns true or false.
-        """
-        if self.parent_row is not None:
-            if self.column_indices[-1] == self.parent_row.width - 1:
                 return True
         return False
 
@@ -1492,7 +1492,7 @@ class PitchArrayCell(object):
         Returns pitch array cell.
         """
         if self.parent_row is not None:
-            if self.is_last_in_row:
+            if self.is_final_in_row:
                 message = 'cell is last in row.'
                 raise IndexError(message)
             return self.parent_row[self.column_indices[-1] + 1]
@@ -1839,7 +1839,7 @@ class PitchArrayColumn(object):
         format_width += max_string_width
         if self._has_closed_cell_on_right:
             format_width += 1
-        if not self._is_last_column_in_array:
+        if not self._is_final_column_in_array:
             format_width += 1
         return format_width
 
@@ -1870,7 +1870,7 @@ class PitchArrayColumn(object):
         return True
 
     @property
-    def _is_last_column_in_array(self):
+    def _is_final_column_in_array(self):
         if self.parent_array is not None:
             if self.column_index == (self.parent_array.width - 1):
                 return True

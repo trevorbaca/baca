@@ -2062,6 +2062,133 @@ class Selection(abjad.Selection):
             grace_notes=False,
             )
 
+    def clparts(
+        self,
+        counts: typing.Sequence[int],
+        *,
+        exclude: typings.Strings = None,
+        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        r"""
+        Selects leaves cyclically partitioned by ``counts`` (with overhang).
+
+        ..  container:: example
+
+            Selects leaves cyclically partitioned 2, 3, 4:
+
+            ..  container:: example
+
+                >>> tuplets = [
+                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+                ...     ]
+                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+                >>> tuplets = [abjad.select(tuplets)]
+                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.setting(staff).auto_beaming = False
+                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
+                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+                >>> result = baca.select(staff).clparts([2, 3, 4])
+
+                >>> for item in result:
+                ...     item
+                ...
+                Selection([Rest('r16'), Note("bf'16")])
+                Selection([Chord("<a'' b''>16"), Note("c'16"), Chord("<d' e'>4")])
+                Selection([Chord("<d' e'>16"), Rest('r16'), Note("bf'16"), Chord("<a'' b''>16")])
+                Selection([Note("d'16"), Chord("<e' fs'>4")])
+                Selection([Chord("<e' fs'>16"), Rest('r16'), Note("bf'16")])
+                Selection([Chord("<a'' b''>16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+
+            ..  container:: example expression
+
+                >>> selector = baca.clparts([2, 3, 4])
+                >>> result = selector(staff)
+
+                >>> selector.print(result)
+                Selection([Rest('r16'), Note("bf'16")])
+                Selection([Chord("<a'' b''>16"), Note("c'16"), Chord("<d' e'>4")])
+                Selection([Chord("<d' e'>16"), Rest('r16'), Note("bf'16"), Chord("<a'' b''>16")])
+                Selection([Note("d'16"), Chord("<e' fs'>4")])
+                Selection([Chord("<e' fs'>16"), Rest('r16'), Note("bf'16")])
+                Selection([Chord("<a'' b''>16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+
+                >>> selector.color(result)
+                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(staff, strict=89)
+                \new Staff
+                \with
+                {
+                    \override TupletBracket.direction = #up
+                    \override TupletBracket.staff-padding = #3
+                    autoBeaming = ##f
+                }
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        \abjad-color-music #'red
+                        r16
+                        \abjad-color-music #'red
+                        bf'16
+                        \abjad-color-music #'blue
+                        <a'' b''>16
+                        \abjad-color-music #'blue
+                        c'16
+                        \abjad-color-music #'blue
+                        <d' e'>4
+                        ~
+                        \abjad-color-music #'red
+                        <d' e'>16
+                    }
+                    \times 8/9 {
+                        \abjad-color-music #'red
+                        r16
+                        \abjad-color-music #'red
+                        bf'16
+                        \abjad-color-music #'red
+                        <a'' b''>16
+                        \abjad-color-music #'blue
+                        d'16
+                        \abjad-color-music #'blue
+                        <e' fs'>4
+                        ~
+                        \abjad-color-music #'red
+                        <e' fs'>16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 10/9 {
+                        \abjad-color-music #'red
+                        r16
+                        \abjad-color-music #'red
+                        bf'16
+                        \abjad-color-music #'blue
+                        <a'' b''>16
+                        \abjad-color-music #'blue
+                        e'16
+                        \abjad-color-music #'blue
+                        <fs' gs'>4
+                        ~
+                        \abjad-color-music #'blue
+                        <fs' gs'>16
+                    }
+                }
+
+        """
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        return super().leaves(exclude=exclude).partition_by_counts(
+            counts=counts,
+            cyclic=True,
+            overhang=True,
+            )
+
     def cmgroups(
         self,
         counts: typing.List[int] = [1],
@@ -4070,133 +4197,6 @@ class Selection(abjad.Selection):
         if self._expression:
             return self._update_expression(inspect.currentframe())
         return self.logical_ties(exclude=exclude, grace_notes=None)
-
-    def clparts(
-        self,
-        counts: typing.Sequence[int],
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Selection, abjad.Expression]:
-        r"""
-        Selects leaves cyclically partitioned by ``counts`` (with overhang).
-
-        ..  container:: example
-
-            Selects leaves cyclically partitioned 2, 3, 4:
-
-            ..  container:: example
-
-                >>> tuplets = [
-                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-                >>> result = baca.select(staff).clparts([2, 3, 4])
-
-                >>> for item in result:
-                ...     item
-                ...
-                Selection([Rest('r16'), Note("bf'16")])
-                Selection([Chord("<a'' b''>16"), Note("c'16"), Chord("<d' e'>4")])
-                Selection([Chord("<d' e'>16"), Rest('r16'), Note("bf'16"), Chord("<a'' b''>16")])
-                Selection([Note("d'16"), Chord("<e' fs'>4")])
-                Selection([Chord("<e' fs'>16"), Rest('r16'), Note("bf'16")])
-                Selection([Chord("<a'' b''>16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
-
-            ..  container:: example expression
-
-                >>> selector = baca.clparts([2, 3, 4])
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                Selection([Rest('r16'), Note("bf'16")])
-                Selection([Chord("<a'' b''>16"), Note("c'16"), Chord("<d' e'>4")])
-                Selection([Chord("<d' e'>16"), Rest('r16'), Note("bf'16"), Chord("<a'' b''>16")])
-                Selection([Note("d'16"), Chord("<e' fs'>4")])
-                Selection([Chord("<e' fs'>16"), Rest('r16'), Note("bf'16")])
-                Selection([Chord("<a'' b''>16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
-
-                >>> selector.color(result)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(staff, strict=89)
-                \new Staff
-                \with
-                {
-                    \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
-                    autoBeaming = ##f
-                }
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
-                        \abjad-color-music #'red
-                        r16
-                        \abjad-color-music #'red
-                        bf'16
-                        \abjad-color-music #'blue
-                        <a'' b''>16
-                        \abjad-color-music #'blue
-                        c'16
-                        \abjad-color-music #'blue
-                        <d' e'>4
-                        ~
-                        \abjad-color-music #'red
-                        <d' e'>16
-                    }
-                    \times 8/9 {
-                        \abjad-color-music #'red
-                        r16
-                        \abjad-color-music #'red
-                        bf'16
-                        \abjad-color-music #'red
-                        <a'' b''>16
-                        \abjad-color-music #'blue
-                        d'16
-                        \abjad-color-music #'blue
-                        <e' fs'>4
-                        ~
-                        \abjad-color-music #'red
-                        <e' fs'>16
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
-                        \abjad-color-music #'red
-                        r16
-                        \abjad-color-music #'red
-                        bf'16
-                        \abjad-color-music #'blue
-                        <a'' b''>16
-                        \abjad-color-music #'blue
-                        e'16
-                        \abjad-color-music #'blue
-                        <fs' gs'>4
-                        ~
-                        \abjad-color-music #'blue
-                        <fs' gs'>16
-                    }
-                }
-
-        """
-        if self._expression:
-            return self._update_expression(inspect.currentframe())
-        return super().leaves(exclude=exclude).partition_by_counts(
-            counts=counts,
-            cyclic=True,
-            overhang=True,
-            )
 
     def mgroups(
         self,

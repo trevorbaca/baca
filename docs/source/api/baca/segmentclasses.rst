@@ -104,8 +104,8 @@ segmentclasses
       eol_measure_numbers
       fermata_measure_duration
       fermata_measure_numbers
+      final_measure_number
       first_measure_number
-      last_measure_number
       magic_lilypond_eol_adjustment
       measure_count
       measures
@@ -149,9 +149,9 @@ segmentclasses
 
    .. autoattribute:: HorizontalSpacingSpecifier.fermata_measure_numbers
 
-   .. autoattribute:: HorizontalSpacingSpecifier.first_measure_number
+   .. autoattribute:: HorizontalSpacingSpecifier.final_measure_number
 
-   .. autoattribute:: HorizontalSpacingSpecifier.last_measure_number
+   .. autoattribute:: HorizontalSpacingSpecifier.first_measure_number
 
    .. autoattribute:: HorizontalSpacingSpecifier.magic_lilypond_eol_adjustment
 

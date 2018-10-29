@@ -289,7 +289,7 @@ class BreakMeasureMap(object):
             return
         skips = classes.Selection(context).skips()
         measure_count = self.partial_score or len(skips)
-        last_measure_number = self.first_measure_number + measure_count - 1
+        final_measure_number = self.first_measure_number + measure_count - 1
         literal = abjad.LilyPondLiteral(r'\autoPageBreaksOff', 'before')
         abjad.attach(
             literal,
@@ -308,8 +308,8 @@ class BreakMeasureMap(object):
                     )
         assert self.commands is not None
         for measure_number, commands in self.commands.items():
-            if last_measure_number < measure_number:
-                message = f'score ends at measure {last_measure_number}'
+            if final_measure_number < measure_number:
+                message = f'score ends at measure {final_measure_number}'
                 message += f' (not {measure_number}).'
                 raise Exception(message)
             for command in commands:
@@ -1412,12 +1412,12 @@ class HorizontalSpacingSpecifier(object):
         if force_local is True:
             measure_number = self.first_measure_number + measure_number - 1
         if measure_number < 0:
-            measure_number = self.last_measure_number - abs(measure_number) + 1
+            measure_number = self.final_measure_number - abs(measure_number) + 1
         if measure_number < self.first_measure_number:
             measure_number += self.first_measure_number - 1
-        if self.last_measure_number < measure_number:
+        if self.final_measure_number < measure_number:
             raise Exception(f'measure number {measure_number} greater than'
-                f' last measure number ({self.last_measure_number}).')
+                f' last measure number ({self.final_measure_number}).')
         return measure_number
 
     def _get_minimum_durations_by_measure(self, skips, leaves):
@@ -1536,10 +1536,10 @@ class HorizontalSpacingSpecifier(object):
         for bol_measure_number in self.bol_measure_numbers[1:]:
             eol_measure_number = bol_measure_number - 1
             eol_measure_numbers.append(eol_measure_number)
-        if (self.last_measure_number and
+        if (self.final_measure_number and
             not self.phantom and
-            self.last_measure_number not in eol_measure_numbers):
-            eol_measure_numbers.append(self.last_measure_number)
+            self.final_measure_number not in eol_measure_numbers):
+            eol_measure_numbers.append(self.final_measure_number)
         return eol_measure_numbers
 
     @property
@@ -1575,6 +1575,35 @@ class HorizontalSpacingSpecifier(object):
         return self._fermata_measure_numbers
 
     @property
+    def final_measure_number(self) -> typing.Optional[int]:
+        """
+        Gets last measure number.
+
+        ..  container:: example
+
+            >>> breaks = baca.breaks(
+            ...     baca.page([1, 15, (10, 20)], [9, 115, (10, 20)])
+            ...     )
+            >>> spacing = baca.scorewide_spacing(
+            ...     (95, 18, [103, 105]),
+            ...     breaks=breaks,
+            ...     fallback_duration=(1, 20),
+            ...     )
+
+            >>> spacing.final_measure_number
+            112
+
+        Returns none when first measure number is not defined.
+
+        Returns none when measure count is not defined.
+        """
+        if (self.first_measure_number is not None and
+            self.measure_count is not None):
+            return self.first_measure_number + self.measure_count - 1
+        else:
+            return None
+
+    @property
     def first_measure_number(self) -> typing.Optional[int]:
         """
         Gets first measure number.
@@ -1595,35 +1624,6 @@ class HorizontalSpacingSpecifier(object):
 
         """
         return self._first_measure_number
-
-    @property
-    def last_measure_number(self) -> typing.Optional[int]:
-        """
-        Gets last measure number.
-
-        ..  container:: example
-
-            >>> breaks = baca.breaks(
-            ...     baca.page([1, 15, (10, 20)], [9, 115, (10, 20)])
-            ...     )
-            >>> spacing = baca.scorewide_spacing(
-            ...     (95, 18, [103, 105]),
-            ...     breaks=breaks,
-            ...     fallback_duration=(1, 20),
-            ...     )
-
-            >>> spacing.last_measure_number
-            112
-
-        Returns none when first measure number is not defined.
-
-        Returns none when measure count is not defined.
-        """
-        if (self.first_measure_number is not None and
-            self.measure_count is not None):
-            return self.first_measure_number + self.measure_count - 1
-        else:
-            return None
 
     @property
     def magic_lilypond_eol_adjustment(self):
@@ -2449,7 +2449,7 @@ def scorewide_spacing(
         >>> spacing.first_measure_number
         95
 
-        >>> spacing.last_measure_number
+        >>> spacing.final_measure_number
         112
 
         >>> spacing.measure_count
@@ -2473,8 +2473,8 @@ def scorewide_spacing(
         first_measure_number = first_measure_number or 1
     fallback_fraction = abjad.NonreducedFraction(fallback_duration)
     measures = abjad.OrderedDict()
-    last_measure_number = first_measure_number + measure_count - 1
-    for n in range(first_measure_number, last_measure_number + 1):
+    final_measure_number = first_measure_number + measure_count - 1
+    for n in range(first_measure_number, final_measure_number + 1):
         measures[n] = fallback_fraction
     specifier = HorizontalSpacingSpecifier(
         breaks=breaks,

@@ -7820,10 +7820,10 @@ class PitchTree(classes.Tree):
         abjad.override(score).stem.stencil = False
         abjad.override(score).text_script.staff_padding = 2
         abjad.override(score).time_signature.stencil = False
-        last_leaf = abjad.inspect(score).leaf(-1)
+        final_leaf = abjad.inspect(score).leaf(-1)
         string = r'\override Score.BarLine.transparent = ##f'
         literal = abjad.LilyPondLiteral(string, 'after')
-        abjad.attach(literal, last_leaf)
+        abjad.attach(literal, final_leaf)
         moment = abjad.SchemeMoment((1, 16))
         abjad.setting(score).proportional_notation_duration = moment
         lilypond_file = abjad.LilyPondFile.new(
@@ -7951,10 +7951,10 @@ class PitchTree(classes.Tree):
                 leaf_groups.extend(leaf_groups_)
             if node._get_level():
                 first_note = leaf_list_stack[-1][0]
-                last_note = leaf_list_stack[-1][-1]
+                final_note = leaf_list_stack[-1][-1]
                 leaves_with_skips = []
                 leaf = first_note
-                while leaf is not last_note:
+                while leaf is not final_note:
                     leaves_with_skips.append(leaf)
                     leaf = abjad.inspect(leaf).leaf(n=1)
                 leaves_with_skips.append(leaf)

@@ -212,8 +212,8 @@ pitcharray
       column_start_index
       column_stop_index
       indices
+      is_final_in_row
       is_first_in_row
-      is_last_in_row
       item
       matches_cell
       next
@@ -274,9 +274,9 @@ pitcharray
 
    .. autoattribute:: PitchArrayCell.indices
 
-   .. autoattribute:: PitchArrayCell.is_first_in_row
+   .. autoattribute:: PitchArrayCell.is_final_in_row
 
-   .. autoattribute:: PitchArrayCell.is_last_in_row
+   .. autoattribute:: PitchArrayCell.is_first_in_row
 
    .. autoattribute:: PitchArrayCell.item
 

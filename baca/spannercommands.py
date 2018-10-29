@@ -277,10 +277,10 @@ class SpannerIndicatorCommand(scoping.Command):
                     stop_indicator,
                     right_broken=self.right_broken,
                     )
-            last_leaf = abjad.select(argument).leaf(-1)
+            final_leaf = abjad.select(argument).leaf(-1)
             self._attach_indicator(
                 stop_indicator,
-                last_leaf,
+                final_leaf,
                 deactivate=self.deactivate,
                 tag='SpannerIndicatorCommand(2)',
                 )

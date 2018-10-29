@@ -268,7 +268,7 @@ class RhythmCommand(scoping.Command):
         music, start_offset = self._make_rhythm(start_offset, time_signatures)
         assert isinstance(music, (tuple, list, abjad.Voice))
         first_leaf = abjad.inspect(music).leaf(0)
-        last_leaf = abjad.inspect(music).leaf(-1)
+        final_leaf = abjad.inspect(music).leaf(-1)
         pitched_prototype = (abjad.Note, abjad.Chord)
         payload = abjad.AnnotatedTimespan(
             start_offset=start_offset,
@@ -476,19 +476,19 @@ class RhythmCommand(scoping.Command):
         if not isinstance(self.rhythm_maker, rmakers.RhythmMaker):
             return
         if (self.left_broken and
-            self.rhythm_maker.previous_state.get('incomplete_last_note')):
+            self.rhythm_maker.previous_state.get('incomplete_final_note')):
             if not self.repeat_ties:
                 raise Exception('left-broken ties must be repeat ties.')
             first_leaf = abjad.select(selections).leaf(0)
             if isinstance(first_leaf, abjad.Note):
                 abjad.attach(abjad.tags.LEFT_BROKEN_REPEAT_TIE_TO, first_leaf)
         if (self.right_broken and
-            self.rhythm_maker.state.get('incomplete_last_note')):
+            self.rhythm_maker.state.get('incomplete_final_note')):
             if self.repeat_ties:
                 raise Exception('right-broken ties must be conventional.')
-            last_leaf = abjad.select(selections).leaf(-1)
-            if isinstance(last_leaf, abjad.Note):
-                abjad.attach(abjad.tags.RIGHT_BROKEN_TIE_FROM, last_leaf)
+            final_leaf = abjad.select(selections).leaf(-1)
+            if isinstance(final_leaf, abjad.Note):
+                abjad.attach(abjad.tags.RIGHT_BROKEN_TIE_FROM, final_leaf)
 
     ### PUBLIC PROPERTIES ###
 
