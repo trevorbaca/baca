@@ -867,7 +867,6 @@ class SegmentMaker(abjad.SegmentMaker):
             pleaves = classes.Selection(voice).pleaves()
             value = bool(pleaves)
             abjad.annotate(voice, abjad.tags.SOUNDS_DURING_SEGMENT, value)
-            self._sounds_during_segment[voice.name] = value
 
     def _apply_breaks(self):
         if self.breaks is None:
@@ -1719,7 +1718,6 @@ class SegmentMaker(abjad.SegmentMaker):
         if self.segment_name is not None:
             metadata['segment_name'] = self.segment_name
         metadata['segment_number'] = self._get_segment_number()
-        metadata['sounds_during_segment'] = self._sounds_during_segment
         if self._start_clock_time is not None:
             metadata['start_clock_time'] = self._start_clock_time
         if self._stop_clock_time is not None:
@@ -5747,14 +5745,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             ),
                         ),
                     ('segment_number', 2),
-                    (
-                        'sounds_during_segment',
-                        abjad.OrderedDict(
-                            [
-                                ('Music_Voice', False),
-                                ]
-                            ),
-                        ),
                     (
                         'time_signatures',
                         ['4/8', '3/8', '4/8', '3/8'],
