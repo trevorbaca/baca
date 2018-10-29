@@ -6364,9 +6364,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 command_count = self._call_rhythm_commands()
         count = int(timer.elapsed_time)
         seconds = abjad.String('second').pluralize(count)
+        commands = abjad.String('command').pluralize(command_count)
         if not do_not_print_timing and self.environment != 'docs':
             message = f'  Rhythm commands {count} {seconds}'
-            message += f' [for {command_count} commands] ...'
+            message += f' [for {command_count} {commands}] ...'
             print(message)
 
         with abjad.Timer() as timer:
@@ -6380,16 +6381,17 @@ class SegmentMaker(abjad.SegmentMaker):
         count = int(timer.elapsed_time)
         seconds = abjad.String('second').pluralize(count)
         if not do_not_print_timing and self.environment != 'docs':
-            print(f'  After-rhythm commands {count} {seconds} ...')
+            print(f'  After-rhythm methods {count} {seconds} ...')
 
         with abjad.Timer() as timer:
             with abjad.ForbidUpdate(component=self.score, update_on_exit=True):
                 command_count = self._call_commands()
         count = int(timer.elapsed_time)
         seconds = abjad.String('second').pluralize(count)
+        commands = abjad.String('command').pluralize(command_count)
         if not do_not_print_timing and self.environment != 'docs':
             message = f'  Nonrhythm commands {count} {seconds}'
-            message += f' [for {command_count} commands] ...'
+            message += f' [for {command_count} {commands}] ...'
             print(message)
 
         # TODO: optimize by consolidating score iteration:
