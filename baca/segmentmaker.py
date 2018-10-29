@@ -1739,12 +1739,32 @@ class SegmentMaker(abjad.SegmentMaker):
         contexts = abjad.iterate(self.score).components(abjad.Context)
         contexts = list(contexts)
         contexts.sort(key=lambda _: _.name)
+        do_not_persist_on_phantom_measure = (
+            abjad.Instrument,
+            abjad.MetronomeMark,
+            abjad.MarginMarkup,
+            abjad.TimeSignature,
+            )
         for context in contexts:
             momentos = []
+            wrappers = []
             dictionary = context._get_persistent_wrappers(
                 omit_annotation=enums.PHANTOM,
                 )
             for wrapper in dictionary.values():
+                if isinstance(
+                    wrapper.indicator,
+                    do_not_persist_on_phantom_measure,
+                    ):
+                    wrappers.append(wrapper)
+            dictionary = context._get_persistent_wrappers()
+            for wrapper in dictionary.values():
+                if not isinstance(
+                    wrapper.indicator,
+                    do_not_persist_on_phantom_measure,
+                    ):
+                    wrappers.append(wrapper)
+            for wrapper in wrappers:
                 leaf = wrapper.component
                 parentage = abjad.inspect(leaf).parentage()
                 first_context = parentage.get(abjad.Context)
