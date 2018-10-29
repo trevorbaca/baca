@@ -942,6 +942,7 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         if 3 < timer.elapsed_time:
             count = int(timer.elapsed_time)
+            seconds = abjad.String('second').pluralize(count)
             raise Exception(f'spacing application {count} {seconds}!')
 
     def _assert_nonoverlapping_rhythms(self, rhythms, voice):
