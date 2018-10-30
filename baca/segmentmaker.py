@@ -945,10 +945,12 @@ class SegmentMaker(abjad.SegmentMaker):
             self.spacing(self)
         if os.getenv('TRAVIS'):
             return
-        if 3 < timer.elapsed_time:
-            count = int(timer.elapsed_time)
+        count = int(timer.elapsed_time)
+        if False:
             seconds = abjad.String('second').pluralize(count)
+            message = f' Spacing application {count} {seconds} ...'
             raise Exception(f'spacing application {count} {seconds}!')
+        return count
 
     def _assert_nonoverlapping_rhythms(self, rhythms, voice):
         previous_stop_offset = 0
