@@ -798,8 +798,13 @@ class SegmentMaker(abjad.SegmentMaker):
     def _add_final_markup(self):
         if self.final_markup is None:
             return
+        if isinstance(self.final_markup, abjad.Markup):
+            final_markup = self.final_markup
+        else:
+            final_markup = markups.final_markup(*self.final_markup)
+        assert isinstance(final_markup, abjad.Markup)
         command = baca_commands.markup(
-            markups.final_markup(*self.final_markup),
+            final_markup,
             selector='baca.leaf(-1)',
             direction=abjad.Down,
             )
