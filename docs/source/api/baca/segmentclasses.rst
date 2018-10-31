@@ -48,6 +48,7 @@ segmentclasses
       deactivate
       first_measure_number
       local_measure_numbers
+      page_count
       partial_score
       tag
       tags
@@ -79,6 +80,8 @@ segmentclasses
    .. autoattribute:: BreakMeasureMap.first_measure_number
 
    .. autoattribute:: BreakMeasureMap.local_measure_numbers
+
+   .. autoattribute:: BreakMeasureMap.page_count
 
    .. autoattribute:: BreakMeasureMap.partial_score
 

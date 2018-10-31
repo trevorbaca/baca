@@ -235,6 +235,7 @@ class BreakMeasureMap(object):
         '_commands',
         '_deactivate',
         '_local_measure_numbers',
+        '_page_count',
         '_partial_score',
         '_tags',
         )
@@ -249,6 +250,7 @@ class BreakMeasureMap(object):
         commands: abjad.OrderedDict = None,
         deactivate: bool = None,
         local_measure_numbers: bool = None,
+        page_count: int = None,
         partial_score: int = None,
         tags: typing.List[str] = None,
         ) -> None:
@@ -262,6 +264,9 @@ class BreakMeasureMap(object):
         if local_measure_numbers is not None:
             local_measure_numbers = bool(local_measure_numbers)
         self._local_measure_numbers = local_measure_numbers
+        if page_count is not None:
+            assert isinstance(page_count, int), repr(page_count)
+        self._page_count = page_count
         if partial_score is not None:
             assert isinstance(partial_score, int), repr(partial_score)
         self._partial_score = partial_score
@@ -364,6 +369,13 @@ class BreakMeasureMap(object):
         Is true when segment measures numbers starting from 1.
         """
         return self._local_measure_numbers
+
+    @property
+    def page_count(self) -> typing.Optional[int]:
+        """
+        Gets page count.
+        """
+        return self._page_count
 
     @property
     def partial_score(self) -> typing.Optional[int]:
@@ -2305,9 +2317,11 @@ def breaks(
 
     """
     commands = abjad.OrderedDict()
+    page_count = len(page_specifiers)
     if not page_specifiers:
         return BreakMeasureMap(
             commands=commands,
+            page_count=0,
             partial_score=partial_score,
             )
     first_system = page_specifiers[0].systems[0]
@@ -2347,7 +2361,8 @@ def breaks(
                 indicators=[break_],
                 selector=selector,
                 )
-            alignment_distances = classes.Sequence(alignment_distances).flatten()
+            alignment_distances = classes.Sequence(alignment_distances)
+            alignment_distances = alignment_distances.flatten()
             lbsd = LBSD(
                 alignment_distances=alignment_distances,
                 y_offset=y_offset,
@@ -2360,6 +2375,7 @@ def breaks(
     breaks = BreakMeasureMap(
         commands=commands,
         local_measure_numbers=local_measure_numbers,
+        page_count=page_count,
         partial_score=partial_score,
         )
     breaks._bol_measure_numbers.extend(bol_measure_numbers)
