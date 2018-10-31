@@ -3381,6 +3381,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
 
     def _treat_untreated_persistent_wrappers(self):
+        if self.environment == 'layout':
+            return
         dynamic_prototype = (
             abjad.Dynamic,
             abjad.StartHairpin,
@@ -3404,6 +3406,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     prototype = tempo_prototype
                 else:
                     prototype = type(wrapper.indicator)
+                # TODO: optimize
                 previous_indicator = abjad.inspect(leaf).effective(
                     prototype,
                     n=-1,
@@ -6334,6 +6337,7 @@ class SegmentMaker(abjad.SegmentMaker):
             none to render segments in real score.
             Set to ``'docs'`` for API examples.
             Set to ``'external'`` to debug API examples in a separate file.
+            Set to ``'layout'`` when making layout.ly file.
 
         :param metadata: metadata found in current segment directory.
 
@@ -6435,7 +6439,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
         count = int(timer.elapsed_time)
         seconds = abjad.String('second').pluralize(count)
-        if not do_not_print_timing and self.environment != 'docs':
+        if (self.environment == 'layout' or
+            (not do_not_print_timing and self.environment != 'docs')):
             print(f'  Postprocessing {count} {seconds} ...')
 
         with abjad.Timer() as timer:
