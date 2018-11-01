@@ -290,6 +290,164 @@ baca-ffp = #(make-dynamic-script "ffp")
 
 baca-fffp = #(make-dynamic-script "fffp")
 
+%%% PARENTHESIZED DYNAMICS %%%
+
+baca-ppppp-parenthesized = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:normal-text "("
+            #:hspace -0.25
+            #:dynamic "ppppp"
+            #:hspace -0.625
+            #:normal-text ")"
+            )
+        )
+    )
+
+baca-pppp-parenthesized = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:normal-text "("
+            #:hspace -0.25
+            #:dynamic "pppp"
+            #:hspace -0.625
+            #:normal-text ")"
+            )
+        )
+    )
+
+baca-ppp-parenthesized = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:normal-text "("
+            #:hspace -0.25
+            #:dynamic "ppp"
+            #:hspace -0.625
+            #:normal-text ")"
+            )
+        )
+    )
+
+baca-pp-parenthesized = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:normal-text "("
+            #:hspace -0.25
+            #:dynamic "pp"
+            #:hspace -0.625
+            #:normal-text ")"
+            )
+        )
+    )
+
+baca-p-parenthesized = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:normal-text "("
+            #:hspace -0.25
+            #:dynamic "p"
+            #:hspace -0.625
+            #:normal-text ")"
+            )
+        )
+    )
+
+baca-mp-parenthesized = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:normal-text "("
+            #:hspace -0.45
+            #:dynamic "mp"
+            #:hspace -0.625
+            #:normal-text ")"
+            )
+        )
+    )
+
+baca-mf-parenthesized = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:normal-text "("
+            #:hspace -0.45
+            #:dynamic "mf"
+            #:hspace 0
+            #:normal-text ")"
+            )
+        )
+    )
+
+baca-f-parenthesized = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:normal-text "("
+            #:hspace -0.15
+            #:dynamic "f"
+            #:hspace 0
+            #:normal-text ")"
+            )
+        )
+    )
+
+baca-ff-parenthesized = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:normal-text "("
+            #:hspace -0.15
+            #:dynamic "ff"
+            #:hspace 0
+            #:normal-text ")"
+            )
+        )
+    )
+
+baca-fff-parenthesized = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:normal-text "("
+            #:hspace -0.15
+            #:dynamic "fff"
+            #:hspace 0
+            #:normal-text ")"
+            )
+        )
+    )
+
+baca-ffff-parenthesized = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:normal-text "("
+            #:hspace -0.15
+            #:dynamic "ffff"
+            #:hspace 0
+            #:normal-text ")"
+            )
+        )
+    )
+
+baca-fffff-parenthesized = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:normal-text "("
+            #:hspace -0.15
+            #:dynamic "fffff"
+            #:hspace 0
+            #:normal-text ")"
+            )
+        )
+    )
+
 %%% POCO SCRATCH DYNAMICS %%%
 
 #(define-markup-command

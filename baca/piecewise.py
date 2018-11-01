@@ -2619,7 +2619,7 @@ def hairpin(
 
     ..  container:: example
 
-        Works interposed niente dynamics:
+        Works with interposed niente dynamics:
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
@@ -2742,6 +2742,135 @@ def hairpin(
                             e'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
+                            \revert DynamicLineSpanner.staff-padding                                 %! baca_dls_staff_padding:OverrideCommand(2)
+            <BLANKLINE>
+                        }                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                    }                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                >>                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
+            >>                                                                                       %! SingleStaffScoreTemplate
+
+    ..  container:: example
+
+        Works with parenthesized dynamics:
+
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     spacing=baca.minimum_duration((1, 12)),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'Music_Voice',
+        ...     baca.dls_staff_padding(4),
+        ...     baca.hairpin('(mp) < mf'),
+        ...     baca.make_even_divisions(),
+        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
+            \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
+            <<                                                                                       %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                \context GlobalContext = "Global_Context"                                            %! _make_global_context
+                <<                                                                                   %! _make_global_context
+            <BLANKLINE>
+                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
+                    {                                                                                %! _make_global_context
+            <BLANKLINE>
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+                        \baca-bar-line-visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
+            <BLANKLINE>
+                    }                                                                                %! _make_global_context
+            <BLANKLINE>
+                >>                                                                                   %! _make_global_context
+            <BLANKLINE>
+                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
+                <<                                                                                   %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
+                    {                                                                                %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
+                        {                                                                            %! SingleStaffScoreTemplate
+            <BLANKLINE>
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
+                            \override DynamicLineSpanner.staff-padding = #'4                         %! baca_dls_staff_padding:OverrideCommand(1)
+                            e'8                                                                      %! baca_make_even_divisions
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
+                            \baca-mp-parenthesized                                                   %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
+                            \<                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(1)
+                            [                                                                        %! baca_make_even_divisions
+            <BLANKLINE>
+                            d''8                                                                     %! baca_make_even_divisions
+            <BLANKLINE>
+                            f'8                                                                      %! baca_make_even_divisions
+            <BLANKLINE>
+                            e''8                                                                     %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
+            <BLANKLINE>
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
+                            g'8                                                                      %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
+            <BLANKLINE>
+                            f''8                                                                     %! baca_make_even_divisions
+            <BLANKLINE>
+                            e'8                                                                      %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
+            <BLANKLINE>
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
+                            d''8                                                                     %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
+            <BLANKLINE>
+                            f'8                                                                      %! baca_make_even_divisions
+            <BLANKLINE>
+                            e''8                                                                     %! baca_make_even_divisions
+            <BLANKLINE>
+                            g'8                                                                      %! baca_make_even_divisions
+                            ]                                                                        %! baca_make_even_divisions
+            <BLANKLINE>
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
+                            f''8                                                                     %! baca_make_even_divisions
+                            [                                                                        %! baca_make_even_divisions
+            <BLANKLINE>
+                            e'8                                                                      %! baca_make_even_divisions
+            <BLANKLINE>
+                            d''8                                                                     %! baca_make_even_divisions
+                            - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
+                            \mf                                                                      %! EXPLICIT_DYNAMIC:_set_status_tag:baca_hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca_make_even_divisions
                             \revert DynamicLineSpanner.staff-padding                                 %! baca_dls_staff_padding:OverrideCommand(2)
             <BLANKLINE>
@@ -2894,6 +3023,16 @@ def make_dynamic(string: str) -> typing.Union[
 
     ..  container:: example
 
+        Parenthesized dynamics:
+
+        >>> baca.make_dynamic('(p)')
+        Dynamic('p', command='\\baca-p-parenthesized')
+
+        >>> baca.make_dynamic('(f)')
+        Dynamic('f', command='\\baca-f-parenthesized')
+
+    ..  container:: example
+
         Poco scratch dynamics:
 
         >>> baca.make_dynamic('p-poco-scratch')
@@ -2981,6 +3120,10 @@ def make_dynamic(string: str) -> typing.Union[
     elif string.endswith('-effort-sub'):
         dynamic = string.split('-')[0]
         command = rf'\baca-{dynamic}-effort-sub'
+        indicator = abjad.Dynamic(dynamic, command=command)
+    elif string.startswith('(') and string.endswith(')'):
+        dynamic = string.strip('()')
+        command = rf'\baca-{dynamic}-parenthesized'
         indicator = abjad.Dynamic(dynamic, command=command)
     elif string.endswith('-poco-scratch'):
         dynamic = string.split('-')[0]
