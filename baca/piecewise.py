@@ -3196,7 +3196,7 @@ def material_annotation_spanner(
         f'{enums.MATERIAL}:baca_material_annotation_spanner',
     ) -> PiecewiseCommand:
     r"""
-    Makes pitch annotation spanner.
+    Makes material annotation spanner.
     """
     return text_spanner(
         items,
