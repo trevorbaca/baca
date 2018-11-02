@@ -521,6 +521,8 @@ class PiecewiseCommand(scoping.Command):
 def circle_bow_spanner(
     qualifier: str = None,
     *tweaks: abjad.IndexedTweakManager,
+    left_broken_text: typing.Optional[str] =
+        r'\baca-left-broken-circle-bowing-markup',
     map: typings.Selector = None,
     match: typings.Indices = None,
     measures: typings.Slice = None,
@@ -542,6 +544,7 @@ def circle_bow_spanner(
         *tweaks,
         autodetect_right_padding=True,
         bookend=False,
+        left_broken_text=left_broken_text,
         lilypond_id='CircleBow',
         map=map,
         match=match,
@@ -555,6 +558,7 @@ def damp_spanner(
     *tweaks: abjad.IndexedTweakManager,
     # NOTE: autodetect default differs from text_spanner():
     autodetect_right_padding: bool = True,
+    left_broken_text: typing.Optional[str] = r'\baca-left-broken-damp-markup',
     map: typings.Selector = None,
     match: typings.Indices = None,
     measures: typings.Slice = None,
@@ -571,6 +575,7 @@ def damp_spanner(
         *tweaks,
         autodetect_right_padding=autodetect_right_padding,
         bookend=False,
+        left_broken_text=left_broken_text,
         lilypond_id='Damp',
         map=map,
         match=match,
@@ -2933,6 +2938,8 @@ def hairpin(
 
 def half_clt_spanner(
     *tweaks: abjad.IndexedTweakManager,
+    left_broken_text: typing.Optional[str] =
+        r'\baca-left-broken-half-clt-markup',
     map: typings.Selector = None,
     match: typings.Indices = None,
     measures: typings.Slice = None,
@@ -2949,6 +2956,7 @@ def half_clt_spanner(
         *tweaks,
         autodetect_right_padding=True,
         bookend=False,
+        left_broken_text=left_broken_text,
         lilypond_id='HalfCLT',
         map=map,
         match=match,
@@ -3195,7 +3203,7 @@ def make_dynamic(string: str) -> typing.Union[
 def material_annotation_spanner(
     items: typing.Union[str, typing.List],
     *tweaks: abjad.IndexedTweakManager,
-    lilypond_id: int = None,
+    lilypond_id: typing.Union[int, str] = None,
     map: typings.Selector = None,
     match: typings.Indices = None,
     measures: typings.Slice = None,
@@ -3208,12 +3216,13 @@ def material_annotation_spanner(
     r"""
     Makes material annotation spanner.
     """
+    lilypond_id = lilypond_id or 'MA'
     return text_spanner(
         items,
         *tweaks,
         autodetect_right_padding=True,
         bookend=False,
-        lilypond_id='MA',
+        lilypond_id=lilypond_id,
         map=map,
         match=match,
         measures=measures,
@@ -3378,7 +3387,7 @@ def parse_hairpin_descriptor(
 def pitch_annotation_spanner(
     items: typing.Union[str, typing.List],
     *tweaks: abjad.IndexedTweakManager,
-    lilypond_id: int = None,
+    lilypond_id: typing.Union[int, str] = None,
     map: typings.Selector = None,
     match: typings.Indices = None,
     measures: typings.Slice = None,
@@ -3443,6 +3452,7 @@ def text_spanner(
     bookend: typing.Union[bool, int] = -1,
     boxed: bool = None,
     final_piece_spanner: bool = None,
+    left_broken_text: str = None,
     lilypond_id: typing.Union[int, str] = None,
     map: typings.Selector = None,
     match: typings.Indices = None,
@@ -5427,7 +5437,7 @@ def text_spanner(
         ...     )
         Traceback (most recent call last):
             ...
-        ValueError: lilypond_id must be 1, 2, 3 or none (not 4).
+        ValueError: lilypond_id must be 1, 2, 3, str or none (not 4).
 
     """
     original_items = items
@@ -5481,7 +5491,8 @@ def text_spanner(
     elif isinstance(lilypond_id, str):
         command = rf'\bacaStopTextSpan{lilypond_id}'
     else:
-        message = f'lilypond_id must be 1, 2, 3 or none (not {lilypond_id}).'
+        message = 'lilypond_id must be 1, 2, 3, str or none'
+        message += f' (not {lilypond_id}).'
         raise ValueError(message)
     stop_text_span = abjad.StopTextSpan(command=command)
     cyclic_items = abjad.CyclicTuple(items)
@@ -5532,8 +5543,18 @@ def text_spanner(
             command = rf'\bacaStartTextSpan{lilypond_id}'
         else:
             raise ValueError(lilypond_id)
+        if isinstance(left_broken_text, str):
+            left_broken_markup = abjad.Markup.from_literal(
+                left_broken_text,
+                literal=True,
+                )
+        elif isinstance(left_broken_text, abjad.Markup):
+            left_broken_markup = left_broken_text
+        else:
+            left_broken_markup = None
         start_text_span = abjad.StartTextSpan(
             command=command,
+            left_broken_text=left_broken_markup,
             left_text=item_markup,
             style=style,
             )

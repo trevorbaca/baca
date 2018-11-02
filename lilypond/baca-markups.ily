@@ -86,6 +86,33 @@ baca-circle-bowing-markup =
         \filled-box #'(-0.35 . 0.35) #'(-0.35 . 0.35) #0
     }
 
+baca-left-broken-circle-bowing-markup =
+    \markup
+    \upright
+    \line {
+        (
+        \hspace #-0.5
+        \raise #0.5
+        \baca-circle-bowing-markup
+        \hspace #0.65
+        )
+        \hspace #0.5
+    }
+
+%%% CLT MARKUP
+
+baca-left-broken-half-clt-markup =
+    \markup
+    \upright
+    \line {
+        (
+        \hspace #-0.5
+        "½ clt"
+        \hspace #-0.5
+        )
+        \hspace #0.5
+    }
+
 %%% DAMP MARKUP %%%
 
 baca-damp-markup =
@@ -109,6 +136,18 @@ baca-damp-half-clt-markup =
     \line {
         \baca-damp-markup
         "½ clt"
+    }
+
+baca-left-broken-damp-markup =
+    \markup
+    \upright
+    \line {
+        (
+        \hspace #-0.85
+        \baca-damp-markup
+        \hspace #-0.85
+        )
+        \hspace #0.5
     }
 
 %%% DIAMOND MARKUP %%%
