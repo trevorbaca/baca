@@ -268,6 +268,8 @@ class PiecewiseCommand(scoping.Command):
                 should_bookend = False
             if is_final_piece and self.right_broken:
                 should_bookend = False
+            if is_final_piece and self.final_piece_spanner is False:
+                should_bookend = False
             bundle = self.bundles[i]
             if is_final_piece and just_backstole_right_text:
                 bundle = abjad.new(
@@ -288,8 +290,6 @@ class PiecewiseCommand(scoping.Command):
                     spanner_start=bundle.bookended_spanner_start,
                     )
                 just_backstole_right_text = True
-            else:
-                just_backstole_right_text = False
             if (len(piece) == 1 and
                 bundle.compound() and
                 self.remove_length_1_spanner_start):
@@ -371,6 +371,7 @@ class PiecewiseCommand(scoping.Command):
                 just_bookended_leaf = stop_leaf
             elif (is_final_piece and
                 start_leaf is not stop_leaf and
+                not just_backstole_right_text and
                 next_bundle.spanner_stop):
                 spanner_stop = abjad.new(
                     next_bundle.spanner_stop,
@@ -5404,7 +5405,6 @@ def text_spanner(
                                 ~
             <BLANKLINE>
                                 f'8
-                                \stopTextSpan                                                        %! baca_text_spanner:PiecewiseCommand(2)
                                 \revert TextSpanner.staff-padding                                    %! baca_text_spanner_staff_padding:OverrideCommand(2)
             <BLANKLINE>
                             }
