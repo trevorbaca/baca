@@ -1674,7 +1674,6 @@ class SegmentMaker(abjad.SegmentMaker):
                         abjad.attach(literal, pleaf, tag='_check_range')
 
     def _check_wellformedness(self):
-        return
         if self.do_not_check_wellformedness:
             return
         if not abjad.inspect(self.score).wellformed(
