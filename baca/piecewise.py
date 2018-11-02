@@ -242,6 +242,7 @@ class PiecewiseCommand(scoping.Command):
         else:
             assert isinstance(self.bookend, int), repr(self.bookend)
             bookend_pattern = abjad.index([self.bookend], period=piece_count)
+        just_backstole_right_text = None
         just_bookended_leaf = None
         previous_had_bookend = None
         total_pieces = len(pieces)
@@ -268,6 +269,11 @@ class PiecewiseCommand(scoping.Command):
             if is_final_piece and self.right_broken:
                 should_bookend = False
             bundle = self.bundles[i]
+            if is_final_piece and just_backstole_right_text:
+                bundle = abjad.new(
+                    bundle,
+                    spanner_start=None,
+                    )
             next_bundle = self.bundles[i + 1]
             if should_bookend and bundle.bookended_spanner_start:
                 bundle = abjad.new(
@@ -281,6 +287,9 @@ class PiecewiseCommand(scoping.Command):
                     bundle,
                     spanner_start=bundle.bookended_spanner_start,
                     )
+                just_backstole_right_text = True
+            else:
+                just_backstole_right_text = False
             if (len(piece) == 1 and
                 bundle.compound() and
                 self.remove_length_1_spanner_start):
@@ -5276,9 +5285,6 @@ def text_spanner(
                             % [Music_Voice measure 6]                                                %! _comment_measure_numbers
                             a'4.                                                                     %! baca_make_notes
                             \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(1)
-                            - \abjad-invisible-line                                                  %! baca_text_spanner:PiecewiseCommand(1)
-                            - \baca-text-spanner-left-text "P"                                       %! baca_text_spanner:PiecewiseCommand(1)
-                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
                             \revert TextSpanner.staff-padding                                        %! baca_text_spanner_staff_padding:OverrideCommand(2)
             <BLANKLINE>
                         }                                                                            %! SingleStaffScoreTemplate
