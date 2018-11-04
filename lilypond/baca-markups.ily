@@ -1,3 +1,17 @@
+%%% BOW SPEED MARKUP %%%
+
+baca-left-broken-xfb-markup =
+    \markup
+    \upright
+    \line {
+        (
+        \hspace #-0.5
+        XFB
+        \hspace #-0.5
+        )
+        \hspace #0.75
+    }
+
 %%% BOWSTROKE MARKUP %%%
 
 baca-full-downbow-markup =

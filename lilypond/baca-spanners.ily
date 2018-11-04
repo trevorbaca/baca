@@ -71,6 +71,16 @@ baca-bcp-spanner-right-text = #(
     #}
     ) 
 
+%%% BOW SPEED SPANNER %%%
+
+bacaStartTextSpanBowSpeed = #(
+    make-music 'TextSpanEvent 'span-direction START 'spanner-id "BowSpeed"
+    )
+
+bacaStopTextSpanBowSpeed = #(
+    make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "BowSpeed"
+    )
+
 %%% CLOCK TIME SPANNER %%%
 
 bacaStartTextSpanCT = #(

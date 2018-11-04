@@ -518,6 +518,40 @@ class PiecewiseCommand(scoping.Command):
 
 ### FACTORY FUNCTIONS ###
 
+def bow_speed_spanner(
+    items: typing.Union[str, typing.List],
+    *tweaks: abjad.IndexedTweakManager,
+    autodetect_right_padding: bool = True,
+    bookend: typing.Union[bool, int] = False,
+    final_piece_spanner: bool = None,
+    left_broken_text: str = None,
+    map: typings.Selector = None,
+    match: typings.Indices = None,
+    measures: typings.Slice = None,
+    pieces: typings.Selector = 'baca.group()',
+    # NOTE: selector differs from text_spanner(), annotation spanners:
+    selector: typings.Selector = 'baca.ltleaves().rleak()',
+    tag: typing.Optional[str] = f'{enums.BOW_SPEED}:baca_bow_speed_spanner',
+    ) -> PiecewiseCommand:
+    r"""
+    Makes bow speed spanner.
+    """
+    return text_spanner(
+        items,
+        *tweaks,
+        autodetect_right_padding=autodetect_right_padding,
+        bookend=bookend,
+        final_piece_spanner=final_piece_spanner,
+        left_broken_text=left_broken_text,
+        lilypond_id='BowSpeed',
+        map=map,
+        match=match,
+        measures=measures,
+        pieces=pieces,
+        selector=selector,
+        tag=tag,
+        )
+
 def circle_bow_spanner(
     qualifier: str = None,
     *tweaks: abjad.IndexedTweakManager,
@@ -5630,4 +5664,37 @@ def text_spanner(
         selector=selector,
         tags=[tag],
         tweaks=tweaks,
+        )
+
+def xfb_spanner(
+    *tweaks: abjad.IndexedTweakManager,
+    autodetect_right_padding: bool = True,
+    bookend: typing.Union[bool, int] = False,
+    final_piece_spanner: bool = None,
+    left_broken_text: str = r'\baca-left-broken-xfb-markup',
+    map: typings.Selector = None,
+    match: typings.Indices = None,
+    measures: typings.Slice = None,
+    pieces: typings.Selector = 'baca.group()',
+    # NOTE: selector differs from text_spanner(), annotation spanners:
+    selector: typings.Selector = 'baca.ltleaves().rleak()',
+    tag: typing.Optional[str] = f'{enums.BOW_SPEED}:baca_xfb_spanner',
+    ) -> PiecewiseCommand:
+    r"""
+    Makes XFB spanner.
+    """
+    return text_spanner(
+        'XFB =|',
+        *tweaks,
+        autodetect_right_padding=autodetect_right_padding,
+        bookend=bookend,
+        final_piece_spanner=final_piece_spanner,
+        left_broken_text=left_broken_text,
+        lilypond_id='BowSpeed',
+        map=map,
+        match=match,
+        measures=measures,
+        pieces=pieces,
+        selector=selector,
+        tag=tag,
         )

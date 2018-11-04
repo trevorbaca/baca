@@ -218,6 +218,7 @@ piecewise
 .. autosummary::
    :nosignatures:
 
+   ~bow_speed_spanner
    ~circle_bow_spanner
    ~damp_spanner
    ~dynamic
@@ -230,6 +231,9 @@ piecewise
    ~scp_spanner
    ~tasto_spanner
    ~text_spanner
+   ~xfb_spanner
+
+.. autofunction:: bow_speed_spanner
 
 .. autofunction:: circle_bow_spanner
 
@@ -254,3 +258,5 @@ piecewise
 .. autofunction:: tasto_spanner
 
 .. autofunction:: text_spanner
+
+.. autofunction:: xfb_spanner

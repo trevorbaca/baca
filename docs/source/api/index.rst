@@ -817,6 +817,7 @@ Piecewise library.
 .. autosummary::
    :nosignatures:
 
+   ~baca.piecewise.bow_speed_spanner
    ~baca.piecewise.circle_bow_spanner
    ~baca.piecewise.damp_spanner
    ~baca.piecewise.dynamic
@@ -829,6 +830,7 @@ Piecewise library.
    ~baca.piecewise.scp_spanner
    ~baca.piecewise.tasto_spanner
    ~baca.piecewise.text_spanner
+   ~baca.piecewise.xfb_spanner
 
 .. raw:: html
 
