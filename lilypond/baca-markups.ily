@@ -311,3 +311,17 @@ baca-rehearsal-mark-markup = #(
     { #string }
     #}
     )
+
+%%% SCP MARKUP %%%
+
+baca-left-broken-t-markup =
+    \markup
+    \upright
+    \line {
+        (
+        \hspace #-0.5
+        T
+        \hspace #-0.5
+        )
+        \hspace #0.75
+    }

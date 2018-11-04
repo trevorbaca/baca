@@ -3419,6 +3419,7 @@ def scp_spanner(
     autodetect_right_padding: bool = True,
     bookend: typing.Union[bool, int] = False,
     final_piece_spanner: bool = None,
+    left_broken_text: str = None,
     map: typings.Selector = None,
     match: typings.Indices = None,
     measures: typings.Slice = None,
@@ -3436,6 +3437,40 @@ def scp_spanner(
         autodetect_right_padding=autodetect_right_padding,
         bookend=bookend,
         final_piece_spanner=final_piece_spanner,
+        left_broken_text=left_broken_text,
+        lilypond_id='SCP',
+        map=map,
+        match=match,
+        measures=measures,
+        pieces=pieces,
+        selector=selector,
+        tag=tag,
+        )
+
+def tasto_spanner(
+    *tweaks: abjad.IndexedTweakManager,
+    autodetect_right_padding: bool = True,
+    bookend: typing.Union[bool, int] = False,
+    final_piece_spanner: bool = None,
+    left_broken_text: str = r'\baca-left-broken-t-markup',
+    map: typings.Selector = None,
+    match: typings.Indices = None,
+    measures: typings.Slice = None,
+    pieces: typings.Selector = 'baca.group()',
+    # NOTE: selector differs from text_spanner(), annotation spanners:
+    selector: typings.Selector = 'baca.ltleaves().rleak()',
+    tag: typing.Optional[str] = f'{enums.SCP}:baca_tasto_spanner',
+    ) -> PiecewiseCommand:
+    r"""
+    Makes tasto spanner.
+    """
+    return text_spanner(
+        'T =|',
+        *tweaks,
+        autodetect_right_padding=autodetect_right_padding,
+        bookend=bookend,
+        final_piece_spanner=final_piece_spanner,
+        left_broken_text=left_broken_text,
         lilypond_id='SCP',
         map=map,
         match=match,
