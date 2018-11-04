@@ -8581,6 +8581,22 @@ def tuplet_bracket_staff_padding(
         value=n,
         )
 
+def tuplet_bracket_transparent(
+    *,
+    selector: typings.Selector = 'baca.leaves()',
+    tag: typing.Optional[str] = 'baca_tuplet_bracket_transparent',
+    ) -> OverrideCommand:
+    """
+    Overrides tuplet bracket transparency.
+    """
+    return OverrideCommand(
+        attribute='transparent',
+        grob='tuplet_bracket',
+        selector=selector,
+        tags=[tag],
+        value=True,
+        )
+
 def tuplet_bracket_up(
     *,
     selector: typings.Selector = 'baca.leaves()',

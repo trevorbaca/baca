@@ -259,6 +259,7 @@ overrides
    ~tuplet_bracket_padding
    ~tuplet_bracket_shorten_pair
    ~tuplet_bracket_staff_padding
+   ~tuplet_bracket_transparent
    ~tuplet_bracket_up
    ~tuplet_number_denominator
    ~tuplet_number_extra_offset
@@ -490,6 +491,8 @@ overrides
 .. autofunction:: tuplet_bracket_shorten_pair
 
 .. autofunction:: tuplet_bracket_staff_padding
+
+.. autofunction:: tuplet_bracket_transparent
 
 .. autofunction:: tuplet_bracket_up
 

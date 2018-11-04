@@ -761,6 +761,7 @@ Override library.
    ~baca.overrides.tuplet_bracket_padding
    ~baca.overrides.tuplet_bracket_shorten_pair
    ~baca.overrides.tuplet_bracket_staff_padding
+   ~baca.overrides.tuplet_bracket_transparent
    ~baca.overrides.tuplet_bracket_up
    ~baca.overrides.tuplet_number_denominator
    ~baca.overrides.tuplet_number_extra_offset
