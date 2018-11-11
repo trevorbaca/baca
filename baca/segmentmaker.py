@@ -163,6 +163,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_do_not_color_unpitched_music',
         '_do_not_color_unregistered_pitches',
         '_do_not_include_layout_ly',
+        '_do_not_force_nonnatural_accidentals',
         '_duration',
         '_environment',
         '_fermata_measure_numbers',
@@ -282,28 +283,29 @@ class SegmentMaker(abjad.SegmentMaker):
         do_not_color_repeat_pitch_classes: bool = None,
         do_not_color_unpitched_music: bool = None,
         do_not_color_unregistered_pitches: bool = None,
+        do_not_force_nonnatural_accidentals: bool = None,
         do_not_include_layout_ly: bool = None,
         fermata_measure_staff_line_count: int = None,
         final_bar_line: typing.Union[bool, str] = None,
         final_markup: tuple = None,
         final_markup_extra_offset: typings.NumberPair = None,
+        final_segment: bool = None,
         first_measure_number: int = None,
         first_segment: bool = None,
         ignore_repeat_pitch_classes: bool = None,
-        nonfirst_segment_lilypond_include: bool = None,
         instruments: abjad.OrderedDict = None,
-        final_segment: bool = None,
         magnify_staves: typing.Union[
             abjad.Multiplier,
             typing.Tuple[abjad.Multiplier, abjad.Tag],
             ] = None,
         margin_markups: abjad.OrderedDict = None,
         metronome_marks: abjad.OrderedDict = None,
+        nonfirst_segment_lilypond_include: bool = None,
         phantom: bool = None,
         score_template: templates.ScoreTemplate = None,
         segment_directory: abjad.Path = None,
-        spacing: segmentclasses.HorizontalSpacingSpecifier = None,
         skips_instead_of_rests: bool = None,
+        spacing: segmentclasses.HorizontalSpacingSpecifier = None,
         stage_markup: typing.List = None,
         test_container_identifiers: bool = None,
         time_signatures: typing.List[tuple] = None,
@@ -333,7 +335,10 @@ class SegmentMaker(abjad.SegmentMaker):
         self._do_not_color_repeat_pitch_classes = \
             do_not_color_repeat_pitch_classes
         self._do_not_color_unpitched_music = do_not_color_unpitched_music
-        self._do_not_color_unregistered_pitches = do_not_color_unregistered_pitches
+        self._do_not_color_unregistered_pitches = \
+            do_not_color_unregistered_pitches
+        self._do_not_force_nonnatural_accidentals = \
+            do_not_force_nonnatural_accidentals
         self._do_not_include_layout_ly = do_not_include_layout_ly
         self._duration: typing.Optional[abjad.Duration] = None
         self._fermata_measure_numbers: typing.List = []
@@ -2021,6 +2026,8 @@ class SegmentMaker(abjad.SegmentMaker):
         return violators
 
     def _force_nonnatural_accidentals(self):
+        if self.do_not_force_nonnatural_accidentals:
+            return
         natural = abjad.Accidental('natural')
         for pleaf in classes.Selection(self.score).pleaves():
             if isinstance(pleaf, abjad.Note):
@@ -4919,6 +4926,13 @@ class SegmentMaker(abjad.SegmentMaker):
 
         """
         return self._do_not_color_unregistered_pitches
+
+    @property
+    def do_not_force_nonnatural_accidentals(self) -> typing.Optional[bool]:
+        """
+        Is true when segment-maker does not force nonnatural accidentals.
+        """
+        return self._do_not_force_nonnatural_accidentals
 
     @property
     def do_not_include_layout_ly(self) -> typing.Optional[bool]:
