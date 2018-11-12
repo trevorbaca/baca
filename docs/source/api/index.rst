@@ -1056,6 +1056,7 @@ Rhythm library.
 .. autosummary::
    :nosignatures:
 
+   ~baca.scoping.chunk
    ~baca.scoping.compare_persistent_indicators
    ~baca.scoping.new
    ~baca.scoping.not_parts

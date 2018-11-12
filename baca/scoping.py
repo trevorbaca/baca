@@ -781,6 +781,14 @@ class Suite(object):
 
 ### FACTORY FUNCTIONS ###
 
+def chunk(
+    *commands: typing.Union[Command, Suite],
+    ) -> Suite:
+    """
+    Chunks commands.
+    """
+    return suite(commands)
+
 def compare_persistent_indicators(indicator_1, indicator_2) -> bool:
     """
     Compares persistent indicators.

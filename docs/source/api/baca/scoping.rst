@@ -233,6 +233,7 @@ scoping
 .. autosummary::
    :nosignatures:
 
+   ~chunk
    ~compare_persistent_indicators
    ~new
    ~not_parts
@@ -244,6 +245,8 @@ scoping
    ~suite
    ~tag
    ~timeline
+
+.. autofunction:: chunk
 
 .. autofunction:: compare_persistent_indicators
 
