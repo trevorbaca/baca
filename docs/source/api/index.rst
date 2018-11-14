@@ -683,6 +683,7 @@ Override library.
    ~baca.overrides.hairpin_shorten_pair
    ~baca.overrides.hairpin_start_shift
    ~baca.overrides.hairpin_stencil_false
+   ~baca.overrides.hairpin_to_barline
    ~baca.overrides.hairpin_transparent
    ~baca.overrides.mmrest_color
    ~baca.overrides.mmrest_text_color

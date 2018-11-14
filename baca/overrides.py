@@ -1996,6 +1996,22 @@ def hairpin_stencil_false(
         tags=[tag],
         )
 
+def hairpin_to_barline(
+    *,
+    selector: typings.Selector = 'baca.leaves()',
+    tag: typing.Optional[str] = 'baca_hairpin_to_barline',
+    ) -> OverrideCommand:
+    """
+    Overrides hairpin to-barline to true.
+    """
+    return OverrideCommand(
+        attribute='to_barline',
+        value=True,
+        grob='hairpin',
+        selector=selector,
+        tags=[tag],
+        )
+
 def hairpin_transparent(
     *,
     selector: typings.Selector = 'baca.leaves()',
