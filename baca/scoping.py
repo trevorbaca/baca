@@ -787,7 +787,7 @@ def chunk(
     """
     Chunks commands.
     """
-    return suite(commands)
+    return suite(*commands)
 
 def compare_persistent_indicators(indicator_1, indicator_2) -> bool:
     """
