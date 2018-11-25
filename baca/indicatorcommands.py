@@ -583,7 +583,7 @@ def articulations(
         )
 
 def breathe(
-    *,
+    *tweaks: abjad.LilyPondTweakManager,
     selector: typings.Selector = 'baca.pleaf(-1)',
     tag: typing.Optional[str] = 'baca_breathe',
     ) -> commands.IndicatorCommand:
@@ -596,6 +596,7 @@ def breathe(
         indicators=[breathe],
         selector=selector,
         tags=[tag],
+        tweaks=tweaks,
         )
 
 def clef(
