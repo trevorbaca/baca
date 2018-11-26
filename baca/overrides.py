@@ -1194,7 +1194,7 @@ def dls_padding(
     """
     return OverrideCommand(
         attribute='padding',
-        value=str(n),
+        value=n,
         grob='dynamic_line_spanner',
         selector=selector,
         tags=[tag],
@@ -1245,7 +1245,7 @@ def dls_staff_padding(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override DynamicLineSpanner.staff-padding = #'4                         %! baca_dls_staff_padding:OverrideCommand(1)
+                            \override DynamicLineSpanner.staff-padding = #4                          %! baca_dls_staff_padding:OverrideCommand(1)
                             \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
@@ -1341,7 +1341,7 @@ def dls_staff_padding(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override DynamicLineSpanner.staff-padding = #'4                         %! baca_dls_staff_padding:OverrideCommand(1)
+                            \override DynamicLineSpanner.staff-padding = #4                          %! baca_dls_staff_padding:OverrideCommand(1)
                             fs''16
                             \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
                             \<                                                                       %! baca_hairpin:PiecewiseCommand(1)
@@ -1372,7 +1372,7 @@ def dls_staff_padding(
     """
     return OverrideCommand(
         attribute='staff_padding',
-        value=str(n),
+        value=n,
         grob='dynamic_line_spanner',
         selector=selector,
         tags=[tag],
