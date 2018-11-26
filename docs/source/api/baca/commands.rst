@@ -331,6 +331,7 @@ commands
 
       allow_repeats
       allow_ties
+      left_broken
       parenthesize_repeats
       right_broken
       stems
@@ -381,6 +382,8 @@ commands
    .. container:: inherited
 
       .. autoattribute:: GlissandoCommand.deactivate
+
+   .. autoattribute:: GlissandoCommand.left_broken
 
    .. container:: inherited
 

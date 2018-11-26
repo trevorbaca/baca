@@ -1219,6 +1219,7 @@ class GlissandoCommand(scoping.Command):
     __slots__ = (
         '_allow_repeats',
         '_allow_ties',
+        '_left_broken',
         '_parenthesize_repeats',
         '_right_broken',
         '_stems',
@@ -1232,6 +1233,7 @@ class GlissandoCommand(scoping.Command):
         self,
         allow_repeats: bool = None,
         allow_ties: bool = None,
+        left_broken: bool = None,
         map: typings.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
@@ -1255,6 +1257,7 @@ class GlissandoCommand(scoping.Command):
             )
         self._allow_repeats = allow_repeats
         self._allow_ties = allow_ties
+        self._left_broken = left_broken
         self._parenthesize_repeats = parenthesize_repeats
         self._right_broken = right_broken
         self._stems = stems
@@ -1283,6 +1286,7 @@ class GlissandoCommand(scoping.Command):
             *tweaks_,
             allow_repeats=self.allow_repeats,
             allow_ties=self.allow_ties,
+            left_broken=self.left_broken,
             parenthesize_repeats=self.parenthesize_repeats,
             right_broken=self.right_broken,
             stems=self.stems,
@@ -1305,6 +1309,13 @@ class GlissandoCommand(scoping.Command):
         Is true when glissando allows ties.
         """
         return self._allow_ties
+
+    @property
+    def left_broken(self) -> typing.Optional[bool]:
+        """
+        Is true when glissando is left-broken.
+        """
+        return self._left_broken
 
     @property
     def parenthesize_repeats(self) -> typing.Optional[bool]:
@@ -4139,6 +4150,7 @@ def glissando(
     *tweaks: abjad.IndexedTweakManager,
     allow_repeats: bool = None,
     allow_ties: bool = None,
+    left_broken: bool = None,
     right_broken: bool = None,
     selector: typings.Selector = 'baca.tleaves()',
     stems: bool = None,
@@ -4744,6 +4756,7 @@ def glissando(
     return GlissandoCommand(
         allow_repeats=allow_repeats,
         allow_ties=allow_ties,
+        left_broken=left_broken,
         right_broken=right_broken,
         selector=selector,
         stems=stems,
