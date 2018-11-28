@@ -1220,6 +1220,7 @@ class GlissandoCommand(scoping.Command):
         '_allow_repeats',
         '_allow_ties',
         '_hide_middle_note_heads',
+        '_hide_middle_stems',
         '_left_broken',
         '_parenthesize_repeats',
         '_right_broken',
@@ -1235,6 +1236,7 @@ class GlissandoCommand(scoping.Command):
         allow_repeats: bool = None,
         allow_ties: bool = None,
         hide_middle_note_heads: bool = None,
+        hide_middle_stems: bool = None,
         left_broken: bool = None,
         map: typings.Selector = None,
         match: typings.Indices = None,
@@ -1259,11 +1261,12 @@ class GlissandoCommand(scoping.Command):
             )
         self._allow_repeats = allow_repeats
         self._allow_ties = allow_ties
+        self._hide_middle_note_heads = hide_middle_note_heads
+        self._hide_middle_stems = hide_middle_stems
         self._left_broken = left_broken
         self._parenthesize_repeats = parenthesize_repeats
         self._right_broken = right_broken
         self._right_broken_show_next = right_broken_show_next
-        self._hide_middle_note_heads = hide_middle_note_heads
         self._validate_indexed_tweaks(tweaks)
         self._tweaks = tweaks
         self._zero_padding = zero_padding
@@ -1290,6 +1293,7 @@ class GlissandoCommand(scoping.Command):
             allow_repeats=self.allow_repeats,
             allow_ties=self.allow_ties,
             hide_middle_note_heads=self.hide_middle_note_heads,
+            hide_middle_stems=self.hide_middle_stems,
             left_broken=self.left_broken,
             parenthesize_repeats=self.parenthesize_repeats,
             right_broken=self.right_broken,
@@ -1320,6 +1324,13 @@ class GlissandoCommand(scoping.Command):
         Is true when glissando hides middle note heads.
         """
         return self._hide_middle_note_heads
+
+    @property
+    def hide_middle_stems(self) -> typing.Optional[bool]:
+        """
+        Is true when glissando hides middle stems.
+        """
+        return self._hide_middle_stems
 
     @property
     def left_broken(self) -> typing.Optional[bool]:
@@ -4162,6 +4173,7 @@ def glissando(
     allow_repeats: bool = None,
     allow_ties: bool = None,
     hide_middle_note_heads: bool = None,
+    hide_middle_stems: bool = None,
     left_broken: bool = None,
     right_broken: bool = None,
     right_broken_show_next: bool = None,
@@ -4769,6 +4781,7 @@ def glissando(
         allow_repeats=allow_repeats,
         allow_ties=allow_ties,
         hide_middle_note_heads=hide_middle_note_heads,
+        hide_middle_stems=hide_middle_stems,
         left_broken=left_broken,
         right_broken=right_broken,
         right_broken_show_next=right_broken_show_next,
