@@ -5778,53 +5778,31 @@ class StaffPositionInterpolationCommand(scoping.Command):
                             \override NoteColumn.glissando-skip = ##t                                %! baca_glissando
                             \override NoteHead.no-ledgers = ##t                                      %! baca_glissando
                             e'16
-                            \glissando                                                               %! baca_glissando
                             f'16
-                            \glissando                                                               %! baca_glissando
                             f'16
-                            \glissando                                                               %! baca_glissando
                             f'16
-                            \glissando                                                               %! baca_glissando
                             g'16
-                            \glissando                                                               %! baca_glissando
                             g'16
-                            \glissando                                                               %! baca_glissando
                             g'16
-                            \glissando                                                               %! baca_glissando
                             a'16
-                            \glissando                                                               %! baca_glissando
                             a'16
-                            \glissando                                                               %! baca_glissando
                             a'16
-                            \glissando                                                               %! baca_glissando
                             b'16
                             ]
-                            \glissando                                                               %! baca_glissando
                         }
                         \scaleDurations #'(1 . 1) {
                             b'16
                             [
-                            \glissando                                                               %! baca_glissando
                             c''16
-                            \glissando                                                               %! baca_glissando
                             c''16
-                            \glissando                                                               %! baca_glissando
                             c''16
-                            \glissando                                                               %! baca_glissando
                             d''16
-                            \glissando                                                               %! baca_glissando
                             d''16
-                            \glissando                                                               %! baca_glissando
                             d''16
-                            \glissando                                                               %! baca_glissando
                             e''16
-                            \glissando                                                               %! baca_glissando
                             e''16
-                            \glissando                                                               %! baca_glissando
                             e''16
-                            \glissando                                                               %! baca_glissando
                             f''16
-                            \glissando                                                               %! baca_glissando
                             \revert Accidental.stencil                                               %! baca_glissando
                             \revert NoteColumn.glissando-skip                                        %! baca_glissando
                             \revert NoteHead.no-ledgers                                              %! baca_glissando
