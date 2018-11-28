@@ -5752,7 +5752,10 @@ class StaffPositionInterpolationCommand(scoping.Command):
         ...     collections,
         ...     baca.clef('treble'),
         ...     baca.interpolate_staff_positions('Eb4', 'F#5'),
-        ...     baca.glissando(allow_repeats=True, stems=True), 
+        ...     baca.glissando(
+        ...         allow_repeats=True,
+        ...         hide_middle_note_heads=True,
+        ...         ),
         ...     baca.glissando_thickness(3),
         ...     )
         >>> lilypond_file = music_maker.show(contribution)

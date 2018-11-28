@@ -1219,10 +1219,11 @@ class GlissandoCommand(scoping.Command):
     __slots__ = (
         '_allow_repeats',
         '_allow_ties',
+        '_hide_middle_note_heads',
         '_left_broken',
         '_parenthesize_repeats',
         '_right_broken',
-        '_stems',
+        '_right_broken_show_next',
         '_tweaks',
         '_zero_padding',
         )
@@ -1233,15 +1234,16 @@ class GlissandoCommand(scoping.Command):
         self,
         allow_repeats: bool = None,
         allow_ties: bool = None,
+        hide_middle_note_heads: bool = None,
         left_broken: bool = None,
         map: typings.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
         parenthesize_repeats: bool = None,
         right_broken: bool = None,
+        right_broken_show_next: bool = None,
         scope: scoping.ScopeTyping = None,
         selector: typings.Selector = 'baca.tleaves()',
-        stems: bool = None,
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
         tweaks: abjad.IndexedTweakManagers = None,
         zero_padding: bool = None,
@@ -1260,7 +1262,8 @@ class GlissandoCommand(scoping.Command):
         self._left_broken = left_broken
         self._parenthesize_repeats = parenthesize_repeats
         self._right_broken = right_broken
-        self._stems = stems
+        self._right_broken_show_next = right_broken_show_next
+        self._hide_middle_note_heads = hide_middle_note_heads
         self._validate_indexed_tweaks(tweaks)
         self._tweaks = tweaks
         self._zero_padding = zero_padding
@@ -1286,10 +1289,11 @@ class GlissandoCommand(scoping.Command):
             *tweaks_,
             allow_repeats=self.allow_repeats,
             allow_ties=self.allow_ties,
+            hide_middle_note_heads=self.hide_middle_note_heads,
             left_broken=self.left_broken,
             parenthesize_repeats=self.parenthesize_repeats,
             right_broken=self.right_broken,
-            stems=self.stems,
+            right_broken_show_next=self.right_broken_show_next,
             tag=str(self.tag),
             zero_padding=self.zero_padding,
             )
@@ -1309,6 +1313,13 @@ class GlissandoCommand(scoping.Command):
         Is true when glissando allows ties.
         """
         return self._allow_ties
+
+    @property
+    def hide_middle_note_heads(self) -> typing.Optional[bool]:
+        """
+        Is true when glissando hides middle note heads.
+        """
+        return self._hide_middle_note_heads
 
     @property
     def left_broken(self) -> typing.Optional[bool]:
@@ -1332,11 +1343,11 @@ class GlissandoCommand(scoping.Command):
         return self._right_broken
 
     @property
-    def stems(self) -> typing.Optional[bool]:
+    def right_broken_show_next(self) -> typing.Optional[bool]:
         """
-        Is true when glissando formats stems.
+        Is true when right-broken glissando shows next note.
         """
-        return self._stems
+        return self._right_broken_show_next
 
     @property
     def tweaks(self) -> typing.Optional[abjad.IndexedTweakManagers]:
@@ -4150,10 +4161,11 @@ def glissando(
     *tweaks: abjad.IndexedTweakManager,
     allow_repeats: bool = None,
     allow_ties: bool = None,
+    hide_middle_note_heads: bool = None,
     left_broken: bool = None,
     right_broken: bool = None,
+    right_broken_show_next: bool = None,
     selector: typings.Selector = 'baca.tleaves()',
-    stems: bool = None,
     style: str = None,
     tag: typing.Optional[str] = 'baca_glissando',
     zero_padding: bool = None,
@@ -4756,10 +4768,11 @@ def glissando(
     return GlissandoCommand(
         allow_repeats=allow_repeats,
         allow_ties=allow_ties,
+        hide_middle_note_heads=hide_middle_note_heads,
         left_broken=left_broken,
         right_broken=right_broken,
+        right_broken_show_next=right_broken_show_next,
         selector=selector,
-        stems=stems,
         tags=[tag],
         tweaks=tweaks,
         zero_padding=zero_padding,

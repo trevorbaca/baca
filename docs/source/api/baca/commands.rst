@@ -331,10 +331,10 @@ commands
 
       allow_repeats
       allow_ties
+      hide_middle_note_heads
       left_broken
       parenthesize_repeats
       right_broken
-      stems
       tweaks
       zero_padding
 
@@ -383,6 +383,8 @@ commands
 
       .. autoattribute:: GlissandoCommand.deactivate
 
+   .. autoattribute:: GlissandoCommand.hide_middle_note_heads
+
    .. autoattribute:: GlissandoCommand.left_broken
 
    .. container:: inherited
@@ -412,8 +414,6 @@ commands
    .. container:: inherited
 
       .. autoattribute:: GlissandoCommand.selector
-
-   .. autoattribute:: GlissandoCommand.stems
 
    .. container:: inherited
 
