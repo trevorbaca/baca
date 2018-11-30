@@ -18,7 +18,6 @@ from . import scoping
 from . import segmentclasses
 from . import templates
 from . import typings
-abjad_tags = abjad.Tags()
 
 
 class SegmentMaker(abjad.SegmentMaker):
@@ -1397,7 +1396,7 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.attach(
                 stop_text_span,
                 final_skip,
-                tag='_attach_metronome_marks(4)',
+                tag='SEGMENT_FINAL_STOP_MM_SPANNER:_attach_metronome_marks(4)',
                 )
 
     def _born_this_segment(self, component):
