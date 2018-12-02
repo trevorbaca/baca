@@ -691,12 +691,13 @@ class StaffLines(object):
     def __init__(
         self,
         *,
-        line_count=None,
+        line_count=5,
         hide=None,
         ):
-        if line_count is not None:
-            assert isinstance(line_count, int), repr(line_count)
-            assert 0 <= line_count, repr(line_count)
+        if not isinstance(line_count, int):
+            message = f'line count must be integer (not {line_count!r}).'
+            raise Exception(message)
+        assert 0 <= line_count, repr(line_count)
         self._line_count = line_count
         if hide is not None:
             hide = bool(hide)

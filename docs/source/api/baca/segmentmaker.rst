@@ -53,6 +53,7 @@ segmentmaker
       do_not_color_unregistered_pitches
       do_not_force_nonnatural_accidentals
       do_not_include_layout_ly
+      fermata_measure_empty_overrides
       fermata_measure_staff_line_count
       final_bar_line
       final_markup
@@ -175,6 +176,8 @@ segmentmaker
    .. container:: inherited
 
       .. autoattribute:: SegmentMaker.environment
+
+   .. autoattribute:: SegmentMaker.fermata_measure_empty_overrides
 
    .. autoattribute:: SegmentMaker.fermata_measure_staff_line_count
 

@@ -165,6 +165,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_do_not_force_nonnatural_accidentals',
         '_duration',
         '_environment',
+        '_fermata_measure_empty_overrides',
         '_fermata_measure_numbers',
         '_fermata_measure_staff_line_count',
         '_fermata_start_offsets',
@@ -284,6 +285,7 @@ class SegmentMaker(abjad.SegmentMaker):
         do_not_color_unregistered_pitches: bool = None,
         do_not_force_nonnatural_accidentals: bool = None,
         do_not_include_layout_ly: bool = None,
+        fermata_measure_empty_overrides: typing.Sequence[int] = None,
         fermata_measure_staff_line_count: int = None,
         final_bar_line: typing.Union[bool, str] = None,
         final_markup: tuple = None,
@@ -340,6 +342,7 @@ class SegmentMaker(abjad.SegmentMaker):
             do_not_force_nonnatural_accidentals
         self._do_not_include_layout_ly = do_not_include_layout_ly
         self._duration: typing.Optional[abjad.Duration] = None
+        self._fermata_measure_empty_overrides = fermata_measure_empty_overrides
         self._fermata_measure_numbers: typing.List = []
         self._fermata_measure_staff_line_count = \
             fermata_measure_staff_line_count
@@ -3116,15 +3119,17 @@ class SegmentMaker(abjad.SegmentMaker):
                 suite(leaf, runtime=runtime)
 
     def _style_fermata_measures(self):
-        if self.fermata_measure_staff_line_count is None:
+        if (self.fermata_measure_staff_line_count is None and
+            self.fermata_measure_empty_overrides is None):
             return
         if not self._fermata_start_offsets:
             return
         prototype = indicators.StaffLines
-        staff_lines = indicators.StaffLines(
-            line_count=self.fermata_measure_staff_line_count,
-            )
         bar_lines_already_styled = []
+        empty_fermata_measure_start_offsets = []
+        for measure_number in self.fermata_measure_empty_overrides or []:
+            timespan = self._get_measure_timespan(measure_number)
+            empty_fermata_measure_start_offsets.append(timespan.start_offset)
         for staff in abjad.iterate(self.score).components(abjad.Staff):
             for leaf in abjad.iterate(staff).leaves():
                 if abjad.inspect(leaf).annotation(enums.PHANTOM) is True:
@@ -3135,6 +3140,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 voice = abjad.inspect(leaf).parentage().get(abjad.Voice)
                 if 'Rest_Voice' in voice.name:
                     continue
+                if start_offset in empty_fermata_measure_start_offsets:
+                    staff_lines = indicators.StaffLines(line_count=0)
+                elif self.fermata_measure_staff_line_count is None:
+                    continue
+                else:
+                    staff_lines = indicators.StaffLines(
+                        line_count=self.fermata_measure_staff_line_count,
+                        )
                 before = abjad.inspect(leaf).effective(prototype)
                 next_leaf = abjad.inspect(leaf).leaf(1)
                 if abjad.inspect(next_leaf).annotation(enums.PHANTOM) is True:
@@ -3215,6 +3228,15 @@ class SegmentMaker(abjad.SegmentMaker):
                         tag=tag.prepend('_style_fermata_measures(4)'),
                         )
                 bar_lines_already_styled.append(start_offset)
+        if not self.fermata_measure_empty_overrides:
+            return
+        pair = (0, 2.5)
+        prototype = abjad.MultimeasureRest
+        rests = classes.Selection(self.score['Global_Rests']).leaves(prototype)
+        for measure_number in self.fermata_measure_empty_overrides:
+            measure_index = measure_number - 1
+            rest = rests[measure_index]
+            abjad.override(rest).multi_measure_rest_text.extra_offset = pair
 
     def _style_phantom_measures(self):
         if not self.phantom:
@@ -4956,6 +4978,14 @@ class SegmentMaker(abjad.SegmentMaker):
         Is true when segment-maker does not include layout.ly.
         """
         return self._do_not_include_layout_ly
+
+    @property
+    def fermata_measure_empty_overrides(self) -> typing.Optional[
+        typing.Sequence[int]]:
+        """
+        Gets fermata measure empty overrides.
+        """
+        return self._fermata_measure_empty_overrides
 
     @property
     def fermata_measure_staff_line_count(self) -> typing.Optional[int]:
