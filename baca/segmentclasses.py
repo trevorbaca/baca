@@ -1250,6 +1250,7 @@ class HorizontalSpacingSpecifier(object):
         '_measures',
         '_minimum_duration',
         '_multiplier',
+        '_overriden_fermata_measures',
         '_phantom',
         )
 
@@ -1304,6 +1305,7 @@ class HorizontalSpacingSpecifier(object):
         else:
             measures = abjad.OrderedDict()
         self._measures = measures
+        self._overriden_fermata_measures = []
         if phantom is not None:
             phantom = bool(phantom)
         self._phantom = phantom
@@ -1398,12 +1400,16 @@ class HorizontalSpacingSpecifier(object):
         skip,
         minimum_durations_by_measure,
         ):
-        if self.measures and measure_number in self.measures:
+        if (self._is_fermata_measure(measure_number, skip) and
+            measure_number in self._overriden_fermata_measures):
             duration = self.measures[measure_number]
             duration = abjad.NonreducedFraction(duration)
         elif (self.fermata_measure_duration is not None and
             self._is_fermata_measure(measure_number, skip)):
             duration = self.fermata_measure_duration
+        elif self.measures and measure_number in self.measures:
+            duration = self.measures[measure_number]
+            duration = abjad.NonreducedFraction(duration)
         else:
             duration = minimum_durations_by_measure[measure_index]
             if self.minimum_duration is not None:
@@ -1721,6 +1727,7 @@ class HorizontalSpacingSpecifier(object):
         measures: typing.Union[int, tuple, list],
         pair: typing.Union[typings.IntegerPair, str],
         *,
+        fermata: bool = None,
         force_local: bool = None,
         ) -> None:
         r"""
@@ -1920,6 +1927,7 @@ class HorizontalSpacingSpecifier(object):
             TypeError: measures must be int, pair or list (not 'all').
 
         """
+        measures_ = []
         duration = abjad.NonreducedFraction(pair)
         if isinstance(measures, int):
             number = self._coerce_measure_number(
@@ -1927,6 +1935,7 @@ class HorizontalSpacingSpecifier(object):
                 force_local=force_local,
                 )
             self.measures[number] = duration
+            measures_.append(number)
         elif isinstance(measures, tuple):
             assert len(measures) == 2, repr(measures)
             start_measure, stop_measure = measures
@@ -1940,6 +1949,7 @@ class HorizontalSpacingSpecifier(object):
                 )
             for number in range(start_measure, stop_measure + 1):
                 self.measures[number] = duration
+                measures_.append(number)
         elif isinstance(measures, list):
             for measure in measures:
                 number = self._coerce_measure_number(
@@ -1947,9 +1957,13 @@ class HorizontalSpacingSpecifier(object):
                     force_local=force_local,
                     )
                 self.measures[number] = duration
+                measures_.append(number)
         else:
             message = f'measures must be int, pair or list (not {measures!r}).'
             raise TypeError(message)
+        if fermata:
+            self._overriden_fermata_measures.extend(measures_)
+
 
 class LBSD(object):
     """
