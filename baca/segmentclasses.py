@@ -1398,12 +1398,12 @@ class HorizontalSpacingSpecifier(object):
         skip,
         minimum_durations_by_measure,
         ):
-        if (self.fermata_measure_duration is not None and
-            self._is_fermata_measure(measure_number, skip)):
-            duration = self.fermata_measure_duration
-        elif self.measures and measure_number in self.measures:
+        if self.measures and measure_number in self.measures:
             duration = self.measures[measure_number]
             duration = abjad.NonreducedFraction(duration)
+        elif (self.fermata_measure_duration is not None and
+            self._is_fermata_measure(measure_number, skip)):
+            duration = self.fermata_measure_duration
         else:
             duration = minimum_durations_by_measure[measure_index]
             if self.minimum_duration is not None:
