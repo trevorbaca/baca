@@ -3127,6 +3127,8 @@ class SegmentMaker(abjad.SegmentMaker):
         bar_lines_already_styled = []
         for staff in abjad.iterate(self.score).components(abjad.Staff):
             for leaf in abjad.iterate(staff).leaves():
+                if abjad.inspect(leaf).annotation(enums.PHANTOM) is True:
+                    continue
                 start_offset = abjad.inspect(leaf).timespan().start_offset
                 if start_offset not in self._fermata_start_offsets:
                     continue
@@ -3135,6 +3137,9 @@ class SegmentMaker(abjad.SegmentMaker):
                     continue
                 before = abjad.inspect(leaf).effective(prototype)
                 next_leaf = abjad.inspect(leaf).leaf(1)
+                if abjad.inspect(next_leaf).annotation(enums.PHANTOM) is True:
+                    next_leaf = None
+                after = None
                 if next_leaf is not None:
                     after = abjad.inspect(next_leaf).effective(prototype)
                 if before != staff_lines:
@@ -3152,7 +3157,11 @@ class SegmentMaker(abjad.SegmentMaker):
                             tag='_style_fermata_measures(1)',
                             )
                 if next_leaf is not None and staff_lines != after:
-                    strings = after._get_lilypond_format(context=staff)
+                    if after is None:
+                        after_ = indicators.StaffLines(line_count=5)
+                    else:
+                        after_ = after
+                    strings = after_._get_lilypond_format(context=staff)
                     literal = abjad.LilyPondLiteral(strings)
                     abjad.attach(
                         literal,
@@ -3160,16 +3169,24 @@ class SegmentMaker(abjad.SegmentMaker):
                         tag='_style_fermata_measures(2)',
                         )
                 if next_leaf is None and before != staff_lines:
-                    before_line_count = getattr(before, 'line_count', 5)
-                    before_staff_lines = indicators.StaffLines(
-                        line_count=before_line_count,
-                        hide=True,
+                    if before is None:
+                        before_line_count = 5
+                    else:
+                        before_line_count = getattr(before, 'line_count', 5)
+                    strings = [
+                        '\stopStaff',
+                        '\once \override Staff.StaffSymbol.line-count ='
+                            f' {before_line_count}',
+                        '\startStaff',
+                        ]
+                    literal = abjad.LilyPondLiteral(
+                        strings,
+                        format_slot='after'
                         )
                     abjad.attach(
-                        before_staff_lines,
+                        literal,
                         leaf,
                         tag='_style_fermata_measures(3)',
-                        synthetic_offset=1_000_000,
                         )
                 if start_offset in bar_lines_already_styled:
                     continue
