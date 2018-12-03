@@ -1305,7 +1305,7 @@ class HorizontalSpacingSpecifier(object):
         else:
             measures = abjad.OrderedDict()
         self._measures = measures
-        self._overriden_fermata_measures = []
+        self._overriden_fermata_measures: typing.List[int] = []
         if phantom is not None:
             phantom = bool(phantom)
         self._phantom = phantom

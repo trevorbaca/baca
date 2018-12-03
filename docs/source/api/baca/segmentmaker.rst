@@ -62,6 +62,7 @@ segmentmaker
       first_measure_number
       first_segment
       ignore_repeat_pitch_classes
+      includes
       instruments
       lilypond_file
       magnify_staves
@@ -194,6 +195,8 @@ segmentmaker
    .. autoattribute:: SegmentMaker.first_segment
 
    .. autoattribute:: SegmentMaker.ignore_repeat_pitch_classes
+
+   .. autoattribute:: SegmentMaker.includes
 
    .. autoattribute:: SegmentMaker.instruments
 
