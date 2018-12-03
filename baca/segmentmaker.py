@@ -178,6 +178,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_final_segment',
         '_first_segment',
         '_ignore_repeat_pitch_classes',
+        '_includes',
         '_instruments',
         '_magnify_staves',
         '_margin_markups',
@@ -294,6 +295,7 @@ class SegmentMaker(abjad.SegmentMaker):
         first_measure_number: int = None,
         first_segment: bool = None,
         ignore_repeat_pitch_classes: bool = None,
+        includes: typing.Sequence[str] = None,
         instruments: abjad.OrderedDict = None,
         magnify_staves: typing.Union[
             abjad.Multiplier,
@@ -363,6 +365,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._instruments = instruments
         self._final_measure_is_fermata = False
         self._final_segment = final_segment
+        self._includes = includes
         self._magnify_staves = magnify_staves
         self._margin_markups = margin_markups
         self._metronome_marks = metronome_marks
@@ -2079,6 +2082,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if (not self.first_segment or
             self.nonfirst_segment_lilypond_include):
             includes.append(self._score_package_nonfirst_segment_path)
+        includes.extend(self.includes or [])
         return includes
 
     def _get_measure_number_tag(self, leaf):
@@ -5640,6 +5644,13 @@ class SegmentMaker(abjad.SegmentMaker):
         Is true when segment ignores repeat pitch-classes.
         """
         return self._ignore_repeat_pitch_classes
+
+    @property
+    def includes(self) -> typing.Optional[typing.Sequence[str]]:
+        """
+        Gets includes.
+        """
+        return self._includes
 
     @property
     def instruments(self) -> typing.Optional[abjad.OrderedDict]:
