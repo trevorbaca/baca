@@ -783,11 +783,12 @@ class Suite(object):
 
 def chunk(
     *commands: typing.Union[Command, Suite],
+    **keywords,
     ) -> Suite:
     """
     Chunks commands.
     """
-    return suite(*commands)
+    return suite(*commands, **keywords)
 
 def compare_persistent_indicators(indicator_1, indicator_2) -> bool:
     """
