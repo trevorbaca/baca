@@ -3361,27 +3361,28 @@ def start_markup(
     if literal is True:
         assert isinstance(argument, str), repr(argument)
         assert argument.startswith('\\'), repr(argument)
-        start_markup = abjad.StartMarkup(markup=argument)
+        start_markup = abjad.StartMarkup(
+            markup=argument,
+            )
     elif isinstance(argument, (list, str)):
         markup = markups.instrument(argument, hcenter_in=hcenter_in)
         start_markup = abjad.StartMarkup(
-            context=context,
             markup=markup,
             )
     elif isinstance(argument, abjad.Markup):
         markup = abjad.Markup(argument)
         start_markup = abjad.StartMarkup(
-            context=context,
             markup=markup,
             )
     elif isinstance(argument, abjad.StartMarkup):
-        start_markup = abjad.new(
-            argument,
-            context=context,
-            )
+        start_markup = argument
     else:
         raise TypeError(argument)
     assert isinstance(start_markup, abjad.StartMarkup)
+    start_markup = abjad.new(
+        start_markup,
+        context=context,
+        )
     command = commands.IndicatorCommand(
         indicators=[start_markup],
         selector=selector,
