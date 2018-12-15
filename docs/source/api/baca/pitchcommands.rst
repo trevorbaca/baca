@@ -246,6 +246,7 @@ pitchcommands
       :nosignatures:
 
       numbers
+      tweaks
 
    .. raw:: html
 
@@ -325,6 +326,8 @@ pitchcommands
    .. container:: inherited
 
       .. autoattribute:: ColorFingeringCommand.tags
+
+   .. autoattribute:: ColorFingeringCommand.tweaks
 
 .. autoclass:: DiatonicClusterCommand
 

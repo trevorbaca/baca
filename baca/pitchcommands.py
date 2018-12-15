@@ -1800,6 +1800,7 @@ class ColorFingeringCommand(scoping.Command):
 
     __slots__ = (
         '_numbers',
+        '_tweaks',
         )
 
     ### INITIALIZER ###
@@ -1813,6 +1814,7 @@ class ColorFingeringCommand(scoping.Command):
         numbers=None,
         scope: scoping.ScopeTyping = None,
         selector='baca.pheads()',
+        tweaks: abjad.IndexedTweakManagers = None,
         ) -> None:
         scoping.Command.__init__(
             self,
@@ -1826,6 +1828,8 @@ class ColorFingeringCommand(scoping.Command):
             assert abjad.mathtools.all_are_nonnegative_integers(numbers)
             numbers = abjad.CyclicTuple(numbers)
         self._numbers = numbers
+        self._validate_indexed_tweaks(tweaks)
+        self._tweaks = tweaks
 
     ### SPECIAL METHODS ###
 
@@ -1843,10 +1847,18 @@ class ColorFingeringCommand(scoping.Command):
             argument = self.selector(argument)
         if not argument:
             return
-        for i, phead in enumerate(classes.Selection(argument).pheads()):
+        pheads = classes.Selection(argument).pheads()
+        total = len(pheads)
+        for i, phead in enumerate(pheads):
             number = self.numbers[i]
             if number != 0:
                 fingering = abjad.ColorFingering(number)
+                self._apply_tweaks(
+                    fingering,
+                    self.tweaks,
+                    i=i,
+                    total=total,
+                    )
                 abjad.attach(fingering, phead)
 
     ### PUBLIC PROPERTIES ###
@@ -1865,6 +1877,13 @@ class ColorFingeringCommand(scoping.Command):
         Set to nonnegative integers.
         """
         return self._numbers
+
+    @property
+    def tweaks(self) -> typing.Optional[abjad.IndexedTweakManagers]:
+        r"""
+        Gets tweaks.
+        """
+        return self._tweaks
 
 class DiatonicClusterCommand(scoping.Command):
     r"""
@@ -6442,13 +6461,17 @@ def clusters(
 
 def color_fingerings(
     numbers: typing.List[typings.Number],
-    *,
+    *tweaks: abjad.IndexedTweakManager,
     selector: typings.Selector = 'baca.pheads()',
     ) -> ColorFingeringCommand:
     """
     Adds color fingerings.
     """
-    return ColorFingeringCommand(numbers=numbers, selector=selector)
+    return ColorFingeringCommand(
+        numbers=numbers,
+        selector=selector,
+        tweaks=tweaks,
+        )
 
 def deviation(
     deviations: typing.List[typings.Number],
