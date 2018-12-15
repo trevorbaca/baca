@@ -306,6 +306,7 @@ Division library.
    ~baca.indicatorcommands.long_fermata
    ~baca.indicatorcommands.marcato
    ~baca.indicatorcommands.margin_markup
+   ~baca.indicatorcommands.quadruple_staccato
    ~baca.indicatorcommands.rehearsal_mark
    ~baca.indicatorcommands.short_fermata
    ~baca.indicatorcommands.staccatissimo
@@ -317,6 +318,7 @@ Division library.
    ~baca.indicatorcommands.stop_trill
    ~baca.indicatorcommands.stopped
    ~baca.indicatorcommands.tenuto
+   ~baca.indicatorcommands.triple_staccato
    ~baca.indicatorcommands.up_arpeggio
    ~baca.indicatorcommands.up_bow
    ~baca.indicatorcommands.very_long_fermata

@@ -41,6 +41,7 @@ indicatorcommands
    ~long_fermata
    ~marcato
    ~margin_markup
+   ~quadruple_staccato
    ~rehearsal_mark
    ~short_fermata
    ~staccatissimo
@@ -52,6 +53,7 @@ indicatorcommands
    ~stop_trill
    ~stopped
    ~tenuto
+   ~triple_staccato
    ~up_arpeggio
    ~up_bow
    ~very_long_fermata
@@ -94,6 +96,8 @@ indicatorcommands
 
 .. autofunction:: margin_markup
 
+.. autofunction:: quadruple_staccato
+
 .. autofunction:: rehearsal_mark
 
 .. autofunction:: short_fermata
@@ -115,6 +119,8 @@ indicatorcommands
 .. autofunction:: stopped
 
 .. autofunction:: tenuto
+
+.. autofunction:: triple_staccato
 
 .. autofunction:: up_arpeggio
 

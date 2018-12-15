@@ -2346,6 +2346,20 @@ def margin_markup(
     else:
         return command
 
+def quadruple_staccato(
+    *,
+    selector: typings.Selector = 'baca.phead(0)',
+    tag: typing.Optional[str] = 'baca_quadruple_staccato',
+    ) -> commands.IndicatorCommand:
+    """
+    Attaches quadruple-staccato.
+    """
+    return commands.IndicatorCommand(
+        indicators=[abjad.Articulation('baca-staccati #4')],
+        selector=selector,
+        tags=[tag],
+        )
+
 def rehearsal_mark(
     argument: typing.Union[int, str],
     *tweaks: abjad.LilyPondTweakManager,
@@ -3873,6 +3887,20 @@ def tenuto(
     """
     return commands.IndicatorCommand(
         indicators=[abjad.Articulation('tenuto')],
+        selector=selector,
+        tags=[tag],
+        )
+
+def triple_staccato(
+    *,
+    selector: typings.Selector = 'baca.phead(0)',
+    tag: typing.Optional[str] = 'baca_triple_staccato',
+    ) -> commands.IndicatorCommand:
+    """
+    Attaches triple-staccato.
+    """
+    return commands.IndicatorCommand(
+        indicators=[abjad.Articulation('baca-staccati #3')],
         selector=selector,
         tags=[tag],
         )
