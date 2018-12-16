@@ -8088,7 +8088,7 @@ def tremolo_down(
 def trill_spanner_staff_padding(
     n: typings.Number,
     *,
-    selector: typings.Selector = 'baca.tleaves().with_next_leaf()',
+    selector: typings.Selector = 'baca.tleaves().rleak()',
     tag: typing.Optional[str] = 'baca_trill_spanner_staff_padding',
     ) -> OverrideCommand:
     """

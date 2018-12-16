@@ -1437,7 +1437,7 @@ def trill_spanner(
     harmonic: bool = None,
     left_broken: bool = None,
     right_broken: bool = None,
-    selector: typings.Selector = 'baca.tleaves().with_next_leaf()',
+    selector: typings.Selector = 'baca.tleaves().rleak()',
     start_trill_span: abjad.StartTrillSpan = None,
     stop_trill_span: abjad.StopTrillSpan = None,
     tag: typing.Optional[str] = 'baca_trill_spanner',
