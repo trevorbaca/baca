@@ -3181,7 +3181,7 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.leaves(exclude=exclude).lleak()
+        return self.leaves(exclude=exclude).with_previous_leaf()
 
     def lparts(
         self,
@@ -6490,7 +6490,7 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.leaves(exclude=exclude).rleak()
+        return self.leaves(exclude=exclude).with_next_leaf()
 
     def rmleaves(
         self,
@@ -7452,7 +7452,7 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.leaves(exclude=exclude).lleak().rleak()
+        return self.leaves(exclude=exclude).with_previous_leaf().with_next_leaf()
 
 class Sequence(abjad.Sequence):
     r"""
