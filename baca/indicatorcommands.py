@@ -1057,7 +1057,8 @@ def down_arpeggio(
         )
 
 def down_bow(
-    *,
+    *tweaks: abjad.LilyPondTweakManager,
+    full: bool = None,
     selector: typings.Selector = 'baca.phead(0)',
     tag: typing.Optional[str] = 'baca_down_bow',
     ) -> commands.IndicatorCommand:
@@ -1130,15 +1131,15 @@ def down_bow(
 
     ..  container:: example
 
-        Attaches down-bow to pitched heads in tuplet 1:
+        Attaches full down-bow to pitched heads in tuplet 1:
 
         >>> music_maker = baca.MusicMaker()
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.new(
-        ...         baca.down_bow(selector=baca.pheads()),
-        ...         map=baca.tuplet(1),
+        ...     baca.down_bow(
+        ...         full=True,
+        ...         selector=baca.tuplets()[1:2].pheads(),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -1173,21 +1174,21 @@ def down_bow(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \downbow                                                               %! baca_down_bow:IndicatorCommand
+                            - \baca-full-downbow                                                               %! baca_down_bow:IndicatorCommand
                             [
                             e''16
-                            - \downbow                                                               %! baca_down_bow:IndicatorCommand
+                            - \baca-full-downbow                                                               %! baca_down_bow:IndicatorCommand
                             ]
                             ef''4
-                            - \downbow                                                               %! baca_down_bow:IndicatorCommand
+                            - \baca-full-downbow                                                               %! baca_down_bow:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \downbow                                                               %! baca_down_bow:IndicatorCommand
+                            - \baca-full-downbow                                                               %! baca_down_bow:IndicatorCommand
                             [
                             g''16
-                            - \downbow                                                               %! baca_down_bow:IndicatorCommand
+                            - \baca-full-downbow                                                               %! baca_down_bow:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
@@ -1200,10 +1201,15 @@ def down_bow(
             >>
 
     """
+    if full:
+        articulation = abjad.Articulation('baca-full-downbow'),
+    else:
+        articulation = abjad.Articulation('downbow')
     return commands.IndicatorCommand(
-        indicators=[abjad.Articulation('downbow')],
+        indicators=[articulation],
         selector=selector,
         tags=[tag],
+        tweaks=tweaks,
         )
 
 def espressivo(
@@ -3629,9 +3635,9 @@ def stop_on_string(
             >>
 
     """
-    literal = abjad.Articulation('baca-stop-on-string')
+    articulation = abjad.Articulation('baca-stop-on-string')
     return commands.IndicatorCommand(
-        indicators=[literal],
+        indicators=[articulation],
         selector=selector,
         tags=[tag],
         )
@@ -4065,7 +4071,8 @@ def up_arpeggio(
         )
 
 def up_bow(
-    *,
+    *tweaks: abjad.LilyPondTweakManager,
+    full: bool = None,
     selector: typings.Selector = 'baca.phead(0)',
     tag: typing.Optional[str] = 'baca_up_bow',
     ) -> commands.IndicatorCommand:
@@ -4138,15 +4145,15 @@ def up_bow(
 
     ..  container:: example
 
-        Attaches up-bow to pitched heads in tuplet 1:
+        Attaches full up-bow to pitched heads in tuplet 1:
 
         >>> music_maker = baca.MusicMaker()
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.new(
-        ...         baca.up_bow(selector=baca.pheads()),
-        ...         map=baca.tuplet(1),
+        ...     baca.up_bow(
+        ...         full=True,
+        ...         selector=baca.tuplets()[1:2].pheads(),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -4181,21 +4188,21 @@ def up_bow(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \upbow                                                                 %! baca_up_bow:IndicatorCommand
+                            - \baca-full-upbow                                                                 %! baca_up_bow:IndicatorCommand
                             [
                             e''16
-                            - \upbow                                                                 %! baca_up_bow:IndicatorCommand
+                            - \baca-full-upbow                                                                 %! baca_up_bow:IndicatorCommand
                             ]
                             ef''4
-                            - \upbow                                                                 %! baca_up_bow:IndicatorCommand
+                            - \baca-full-upbow                                                                 %! baca_up_bow:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \upbow                                                                 %! baca_up_bow:IndicatorCommand
+                            - \baca-full-upbow                                                                 %! baca_up_bow:IndicatorCommand
                             [
                             g''16
-                            - \upbow                                                                 %! baca_up_bow:IndicatorCommand
+                            - \baca-full-upbow                                                                 %! baca_up_bow:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
@@ -4208,10 +4215,15 @@ def up_bow(
             >>
 
     """
+    if full:
+        articulation = abjad.Articulation('baca-full-upbow')
+    else:
+        articulation = abjad.Articulation('upbow')
     return commands.IndicatorCommand(
-        indicators=[abjad.Articulation('upbow')],
+        indicators=[articulation],
         selector=selector,
         tags=[tag],
+        tweaks=tweaks,
         )
 
 def very_long_fermata(
