@@ -207,6 +207,7 @@ Bača API
    ~baca.commands.dynamic_up
    ~baca.commands.edition
    ~baca.commands.finger_pressure_transition
+   ~baca.commands.flat_glissando
    ~baca.commands.glissando
    ~baca.commands.global_fermata
    ~baca.commands.instrument

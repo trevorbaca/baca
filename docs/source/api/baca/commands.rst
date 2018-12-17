@@ -1221,6 +1221,7 @@ commands
    ~dynamic_up
    ~edition
    ~finger_pressure_transition
+   ~flat_glissando
    ~glissando
    ~global_fermata
    ~instrument
@@ -1259,6 +1260,8 @@ commands
 .. autofunction:: edition
 
 .. autofunction:: finger_pressure_transition
+
+.. autofunction:: flat_glissando
 
 .. autofunction:: glissando
 
