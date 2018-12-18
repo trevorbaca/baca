@@ -1202,7 +1202,7 @@ def down_bow(
 
     """
     if full:
-        articulation = abjad.Articulation('baca-full-downbow'),
+        articulation = abjad.Articulation('baca-full-downbow')
     else:
         articulation = abjad.Articulation('downbow')
     return commands.IndicatorCommand(
