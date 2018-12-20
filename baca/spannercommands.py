@@ -374,6 +374,7 @@ class SpannerIndicatorCommand(scoping.Command):
 
 def beam(
     *tweaks: abjad.LilyPondTweakManager,
+    direction: abjad.VerticalAlignment = None,
     selector: typings.Selector = 'baca.tleaves()',
     start_beam: abjad.StartBeam = None,
     stop_beam: abjad.StopBeam = None,
@@ -384,7 +385,7 @@ def beam(
 
     ..  container:: example
 
-        Beams everything:
+        Beams everything and sets beam direction down:
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
@@ -394,7 +395,9 @@ def beam(
 
         >>> maker(
         ...     'Music_Voice',
-        ...     baca.beam(),
+        ...     baca.beam(
+        ...         direction=abjad.Down,
+        ...         ),
         ...     baca.make_even_divisions(),
         ...     baca.pitch('C4'),
         ...     )
@@ -456,7 +459,7 @@ def beam(
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             c'8                                                                      %! baca_make_even_divisions
-                            [                                                                        %! baca_beam:SpannerIndicatorCommand(1)
+                            _ [                                                                        %! baca_beam:SpannerIndicatorCommand(1)
             <BLANKLINE>
                             c'8                                                                      %! baca_make_even_divisions
             <BLANKLINE>
@@ -497,7 +500,9 @@ def beam(
             >>                                                                                       %! SingleStaffScoreTemplate
 
     """
-    start_beam = start_beam or abjad.StartBeam()
+    start_beam = start_beam or abjad.StartBeam(
+        direction=direction,
+        )
     stop_beam = stop_beam or abjad.StopBeam()
     return SpannerIndicatorCommand(
         detach_first=True,
