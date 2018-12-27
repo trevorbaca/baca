@@ -649,7 +649,7 @@ class Suite(object):
                         ]
                     ),
                 measures=(1, 2),
-                selector=baca.phead(0),
+                selector=baca.phead(0, exclude='HIDDEN'),
                 tags=[
                     abjad.Tag('baca_accent'),
                     ],
@@ -661,7 +661,7 @@ class Suite(object):
                         ]
                     ),
                 measures=(1, 2),
-                selector=baca.phead(0),
+                selector=baca.phead(0, exclude='HIDDEN'),
                 tags=[
                     abjad.Tag('baca_tenuto'),
                     ],
@@ -678,7 +678,7 @@ class Suite(object):
                         ]
                     ),
                 measures=(3, 4),
-                selector=baca.phead(0),
+                selector=baca.phead(0, exclude='HIDDEN'),
                 tags=[
                     abjad.Tag('baca_accent'),
                     ],
@@ -690,7 +690,7 @@ class Suite(object):
                         ]
                     ),
                 measures=(3, 4),
-                selector=baca.phead(0),
+                selector=baca.phead(0, exclude='HIDDEN'),
                 tags=[
                     abjad.Tag('baca_tenuto'),
                     ],
