@@ -1441,6 +1441,7 @@ def trill_spanner(
     *tweaks: abjad.LilyPondTweakManager,
     harmonic: bool = None,
     left_broken: bool = None,
+    map: typings.Selector = None,
     right_broken: bool = None,
     selector: typings.Selector = 'baca.tleaves().rleak()',
     start_trill_span: abjad.StartTrillSpan = None,
@@ -2042,6 +2043,7 @@ def trill_spanner(
     stop_trill_span = stop_trill_span or abjad.StopTrillSpan()
     return SpannerIndicatorCommand(
         left_broken=left_broken,
+        map=map,
         right_broken=right_broken,
         selector=selector,
         start_indicator=start_trill_span,
