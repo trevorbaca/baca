@@ -5040,6 +5040,7 @@ def markup(
     boxed: bool = None,
     direction: abjad.VerticalAlignment = abjad.Up,
     literal: bool = False,
+    map: typings.Selector = None,
     match: typings.Indices = None,
     measures: typings.Slice = None,
     selector: typings.Selector = 'baca.pleaf(0)',
@@ -5369,6 +5370,7 @@ def markup(
     selector = selector or 'baca.phead(0)'
     return IndicatorCommand(
         indicators=[markup],
+        map=map,
         match=match,
         measures=measures,
         selector=selector,
