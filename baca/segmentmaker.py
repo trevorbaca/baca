@@ -1264,6 +1264,12 @@ class SegmentMaker(abjad.SegmentMaker):
                     markups.append(abjad.Markup.hspace(2))
                     markups.append(abjad.Markup('[').upright())
                     modulation = metric_modulation._get_markup()
+                    if modulation.contents[0].startswith(r'\markup'):
+                        string = modulation.contents[0][8:]
+                        modulation = abjad.Markup.from_literal(
+                            string,
+                            literal=True,
+                            )
                     modulation = abjad.Markup.line([modulation])
                     markups.append(modulation)
                     markups.append(abjad.Markup.hspace(0.5))
