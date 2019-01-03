@@ -1258,26 +1258,31 @@ class SegmentMaker(abjad.SegmentMaker):
             tag = wrapper.tag
             if metronome_mark is not None:
                 if metric_modulation is not None:
-                    left_text = metronome_mark._get_markup()
-                    markups = []
-                    markups.append(left_text)
-                    markups.append(abjad.Markup.hspace(2))
-                    markups.append(abjad.Markup('[').upright())
-                    modulation = metric_modulation._get_markup()
-                    if modulation.contents[0].startswith(r'\markup'):
-                        string = modulation.contents[0][8:]
-                        modulation = abjad.Markup.from_literal(
-                            string,
-                            literal=True,
+                    if metronome_mark.custom_markup is not None:
+                        left_text = metronome_mark._get_markup()
+                        markups = []
+                        markups.append(left_text)
+                        markups.append(abjad.Markup.hspace(2))
+                        markups.append(abjad.Markup('[').upright())
+                        modulation = metric_modulation._get_markup()
+                        if modulation.contents[0].startswith(r'\markup'):
+                            string = modulation.contents[0][8:]
+                            modulation = abjad.Markup.from_literal(
+                                string,
+                                literal=True,
+                                )
+                        modulation = abjad.Markup.line([modulation])
+                        markups.append(modulation)
+                        markups.append(abjad.Markup.hspace(0.5))
+                        markups.append(abjad.Markup(']').upright())
+                        left_text = abjad.Markup.concat(markups)
+                    else:
+                        left_text = self._bracket_metric_modulation(
+                            metronome_mark,
+                            metric_modulation,
                             )
-                    modulation = abjad.Markup.line([modulation])
-                    markups.append(modulation)
-                    markups.append(abjad.Markup.hspace(0.5))
-                    markups.append(abjad.Markup(']').upright())
-                    left_text = abjad.Markup.concat(markups)
                 elif metronome_mark.custom_markup is not None:
                     assert metronome_mark.custom_markup.literal
-                    #left_text = metronome_mark._get_markup()
                     left_text = r'- \baca-metronome-mark-spanner-left-markup'
                     string = format(metronome_mark.custom_markup)
                     assert string.startswith('\\')
@@ -1364,6 +1369,10 @@ class SegmentMaker(abjad.SegmentMaker):
                     'baca-metronome-mark-spanner-left-text',
                     'baca-metronome-mark-spanner-colored-left-text',
                     )
+                string = string.replace(
+                    'baca-bracketed-metric-modulation',
+                    'baca-colored-bracketed-metric-modulation',
+                    )
                 left_text_with_color = f"{string} #'{color}"
             else:
                 color = abjad.SchemeColor(color)
@@ -1415,6 +1424,39 @@ class SegmentMaker(abjad.SegmentMaker):
         prototype = (abjad.Staff, abjad.StaffGroup)
         assert isinstance(component, prototype), repr(component)
         return not self._alive_during_previous_segment(component)
+
+    @staticmethod
+    def _bracket_metric_modulation(metronome_mark, metric_modulation):
+        arguments = metronome_mark._get_markup_arguments()
+        mm_length, mm_dots, mm_stem, mm_value = arguments
+        arguments = metric_modulation._get_markup_arguments()
+        if metric_modulation._note_to_note():
+            command = r'- \baca-bracketed-metric-modulation'
+            lhs_length, lhs_dots, rhs_length, rhs_dots = arguments
+            command += f' #{mm_length} #{mm_dots} #{mm_stem} #"{mm_value}"'
+            command += f' #{lhs_length} #{lhs_dots}'
+            command += f' #{rhs_length} #{rhs_dots}'
+        elif metric_modulation._lhs_tuplet():
+            command = r'- \baca-bracketed-metric-modulation-tuplet-lhs'
+            tuplet_length, tuplet_dots, tuplet_n, tuplet_d = arguments[:4]
+            note_length, note_dots = arguments[4:]
+            command += f' #{mm_length} #{mm_dots} #{mm_stem} #"{mm_value}"'
+            command += f' #{tuplet_length} #{tuplet_dots}'
+            command += f' #{tuplet_n} #{tuplet_d}'
+            command += f' #{note_length} #{note_dots}'
+        elif metric_modulation._rhs_tuplet():
+            command = r'- \baca-bracketed-metric-modulation-tuplet-rhs'
+            note_length, note_dots = arguments[:2]
+            tuplet_length, tuplet_dots, tuplet_n, tuplet_d = arguments[2:]
+            command += f' #{mm_length} #{mm_dots} #{mm_stem} #"{mm_value}"'
+            command += f' #{note_length} #{note_dots}'
+            command += f' #{tuplet_length} #{tuplet_dots}'
+            command += f' #{tuplet_n} #{tuplet_d}'
+        else:
+            raise Exception('implement tied note values in metric modulation.')
+        scale = metric_modulation.scale
+        command += f" #'({scale[0]} . {scale[1]})"
+        return command
 
     def _bundle_manifests(self, voice_name=None):
         manifests = abjad.OrderedDict()
