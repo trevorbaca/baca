@@ -2353,7 +2353,7 @@ def margin_markup(
         return command
 
 def mark(
-    argument: typing.Union[abjad.Markup, str],
+    argument: str,
     *tweaks: abjad.LilyPondTweakManager,
     selector: typings.Selector = 'baca.leaf(0)',
     tag: typing.Optional[str] = 'baca_mark',

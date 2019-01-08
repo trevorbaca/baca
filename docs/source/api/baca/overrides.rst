@@ -202,7 +202,10 @@ overrides
    ~note_head_x_extent_zero
    ~ottava_bracket_shorten_pair
    ~ottava_bracket_staff_padding
+   ~rehearsal_mark_down
    ~rehearsal_mark_extra_offset
+   ~rehearsal_mark_padding
+   ~rehearsal_mark_self_alignment_x
    ~rehearsal_mark_y_offset
    ~repeat_tie_down
    ~repeat_tie_extra_offset
@@ -379,7 +382,13 @@ overrides
 
 .. autofunction:: ottava_bracket_staff_padding
 
+.. autofunction:: rehearsal_mark_down
+
 .. autofunction:: rehearsal_mark_extra_offset
+
+.. autofunction:: rehearsal_mark_padding
+
+.. autofunction:: rehearsal_mark_self_alignment_x
 
 .. autofunction:: rehearsal_mark_y_offset
 

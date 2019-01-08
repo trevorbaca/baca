@@ -3217,9 +3217,28 @@ def ottava_bracket_staff_padding(
         tags=[tag],
         )
 
+def rehearsal_mark_down(
+    *,
+    context: str = 'Score',
+    selector: typings.Selector = 'baca.leaf(0)',
+    tag: typing.Optional[str] = 'baca_rehearsal_mark_down',
+    ) -> OverrideCommand:
+    """
+    Overrides rehearsal mark direction.
+    """
+    return OverrideCommand(
+        attribute='direction',
+        value=abjad.Down,
+        context=context,
+        grob='rehearsal_mark',
+        selector=selector,
+        tags=[tag],
+        )
+
 def rehearsal_mark_extra_offset(
     pair: typings.NumberPair,
     *,
+    context: str = 'Score',
     selector: typings.Selector = 'baca.leaf(0)',
     tag: typing.Optional[str] = 'baca_rehearsal_mark_extra_offset',
     ) -> OverrideCommand:
@@ -3229,7 +3248,45 @@ def rehearsal_mark_extra_offset(
     return OverrideCommand(
         attribute='extra_offset',
         value=pair,
-        context='GlobalContext',
+        context=context,
+        grob='rehearsal_mark',
+        selector=selector,
+        tags=[tag],
+        )
+
+def rehearsal_mark_padding(
+    n: typings.Number,
+    *,
+    context: str = 'Score',
+    selector: typings.Selector = 'baca.leaf(0)',
+    tag: typing.Optional[str] = 'baca_rehearsal_padding',
+    ) -> OverrideCommand:
+    """
+    Overrides rehearsal mark padding.
+    """
+    return OverrideCommand(
+        attribute='padding',
+        value=n,
+        context=context,
+        grob='rehearsal_mark',
+        selector=selector,
+        tags=[tag],
+        )
+
+def rehearsal_mark_self_alignment_x(
+    n: typings.Number,
+    *,
+    context: str = 'Score',
+    selector: typings.Selector = 'baca.leaf(0)',
+    tag: typing.Optional[str] = 'baca_rehearsal_mark_self_alignment_x',
+    ) -> OverrideCommand:
+    """
+    Overrides rehearsal mark self-alignment-X.
+    """
+    return OverrideCommand(
+        attribute='self_alignment_X',
+        value=n,
+        context=context,
         grob='rehearsal_mark',
         selector=selector,
         tags=[tag],
@@ -3238,6 +3295,7 @@ def rehearsal_mark_extra_offset(
 def rehearsal_mark_y_offset(
     n: typings.Number,
     *,
+    context: str = 'Score',
     selector: typings.Selector = 'baca.leaf(0)',
     tag: typing.Optional[str] = 'baca_rehearsal_mark_y_offset',
     ) -> OverrideCommand:
@@ -3247,7 +3305,7 @@ def rehearsal_mark_y_offset(
     return OverrideCommand(
         attribute='Y_offset',
         value=n,
-        context='GlobalContext',
+        context=context,
         grob='rehearsal_mark',
         selector=selector,
         tags=[tag],

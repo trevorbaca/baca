@@ -708,7 +708,10 @@ Override library.
    ~baca.overrides.note_head_x_extent_zero
    ~baca.overrides.ottava_bracket_shorten_pair
    ~baca.overrides.ottava_bracket_staff_padding
+   ~baca.overrides.rehearsal_mark_down
    ~baca.overrides.rehearsal_mark_extra_offset
+   ~baca.overrides.rehearsal_mark_padding
+   ~baca.overrides.rehearsal_mark_self_alignment_x
    ~baca.overrides.rehearsal_mark_y_offset
    ~baca.overrides.repeat_tie_down
    ~baca.overrides.repeat_tie_extra_offset
