@@ -284,6 +284,164 @@ baca-effort-sffz = #(
     (markup #:baca-effort-dynamic -0.3 "sffz" -0.2)
     )
 
+%%% EFFORT DYNAMICS (PARENTHESIZED) %%%
+
+baca-effort-ppppp-parenthesized = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:normal-text "("
+            #:hspace -0.25
+            #:baca-effort-dynamic -0.1 "ppppp" -0.25
+            #:hspace -0.625
+            #:normal-text ")"
+            )
+        )
+    )
+
+baca-effort-pppp-parenthesized = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:normal-text "("
+            #:hspace -0.25
+            #:baca-effort-dynamic -0.1 "pppp" -0.25
+            #:hspace -0.625
+            #:normal-text ")"
+            )
+        )
+    )
+
+baca-effort-ppp-parenthesized = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:normal-text "("
+            #:hspace -0.25
+            #:baca-effort-dynamic -0.1 "ppp" -0.25
+            #:hspace -0.625
+            #:normal-text ")"
+            )
+        )
+    )
+
+baca-effort-pp-parenthesized = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:normal-text "("
+            #:hspace -0.25
+            #:baca-effort-dynamic -0.1 "pp" -0.25
+            #:hspace -0.625
+            #:normal-text ")"
+            )
+        )
+    )
+
+baca-effort-p-parenthesized = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:normal-text "("
+            #:hspace -0.25
+            #:baca-effort-dynamic -0.1 "p" -0.25
+            #:hspace -0.625
+            #:normal-text ")"
+            )
+        )
+    )
+
+baca-effort-mp-parenthesized = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:normal-text "("
+            #:hspace -0.45
+            #:baca-effort-dynamic -0.1 "mp" -0.25
+            #:hspace -0.625
+            #:normal-text ")"
+            )
+        )
+    )
+
+baca-effort-mf-parenthesized = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:normal-text "("
+            #:hspace -0.45
+            #:baca-effort-dynamic -0.1 "mf" -0.2
+            #:hspace 0
+            #:normal-text ")"
+            )
+        )
+    )
+
+baca-effort-f-parenthesized = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:normal-text "("
+            #:hspace -0.15
+            #:baca-effort-dynamic -0.4 "f" -0.2
+            #:hspace 0
+            #:normal-text ")"
+            )
+        )
+    )
+
+baca-effort-ff-parenthesized = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:normal-text "("
+            #:hspace -0.15
+            #:baca-effort-dynamic -0.4 "ff" -0.2
+            #:hspace 0
+            #:normal-text ")"
+            )
+        )
+    )
+
+baca-effort-fff-parenthesized = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:normal-text "("
+            #:hspace -0.15
+            #:baca-effort-dynamic -0.4 "fff" -0.2
+            #:hspace 0
+            #:normal-text ")"
+            )
+        )
+    )
+
+baca-effort-ffff-parenthesized = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:normal-text "("
+            #:hspace -0.15
+            #:baca-effort-dynamic -0.4 "ffff" -0.2
+            #:hspace 0
+            #:normal-text ")"
+            )
+        )
+    )
+
+baca-effort-fffff-parenthesized = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:normal-text "("
+            #:hspace -0.15
+            #:baca-effort-dynamic -0.4 "fffff" -0.2
+            #:hspace 0
+            #:normal-text ")"
+            )
+        )
+    )
+
 %%% FP DYNAMICS %%%
 
 baca-ffp = #(make-dynamic-script "ffp")

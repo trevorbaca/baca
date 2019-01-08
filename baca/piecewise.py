@@ -3065,6 +3065,16 @@ def make_dynamic(string: str) -> typing.Union[
 
     ..  container:: example
 
+        Effort dynamics (parenthesized):
+
+        >>> baca.make_dynamic('("p")')
+        Dynamic('p', command='\\baca-effort-p-parenthesized')
+
+        >>> baca.make_dynamic('("f")')
+        Dynamic('f', command='\\baca-effort-f-parenthesized')
+
+    ..  container:: example
+
         Sub. effort dynamics:
 
         >>> baca.make_dynamic('p-effort-sub')
@@ -3172,6 +3182,10 @@ def make_dynamic(string: str) -> typing.Union[
     elif string.endswith('-effort-sub'):
         dynamic = string.split('-')[0]
         command = rf'\baca-{dynamic}-effort-sub'
+        indicator = abjad.Dynamic(dynamic, command=command)
+    elif string.startswith('("') and string.endswith('")'):
+        dynamic = string.strip('(")')
+        command = rf'\baca-effort-{dynamic}-parenthesized'
         indicator = abjad.Dynamic(dynamic, command=command)
     elif string.startswith('(') and string.endswith(')'):
         dynamic = string.strip('()')
