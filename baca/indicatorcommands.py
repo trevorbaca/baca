@@ -2352,6 +2352,26 @@ def margin_markup(
     else:
         return command
 
+def mark(
+    argument: typing.Union[abjad.Markup, str],
+    *tweaks: abjad.LilyPondTweakManager,
+    selector: typings.Selector = 'baca.leaf(0)',
+    tag: typing.Optional[str] = 'baca_mark',
+    ) -> commands.IndicatorCommand:
+    """
+    Attaches mark.
+    """
+    assert isinstance(argument, (abjad.Markup, str)), repr(argument)
+    rehearsal_mark = abjad.RehearsalMark(
+        markup=argument,
+        )
+    return commands.IndicatorCommand(
+        indicators=[rehearsal_mark],
+        selector=selector,
+        tags=[tag],
+        tweaks=tweaks,
+        )
+
 def quadruple_staccato(
     *,
     selector: typings.Selector = 'baca.phead(0, exclude=baca.enums.HIDDEN)',

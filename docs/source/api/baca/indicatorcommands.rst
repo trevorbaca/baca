@@ -41,6 +41,7 @@ indicatorcommands
    ~long_fermata
    ~marcato
    ~margin_markup
+   ~mark
    ~quadruple_staccato
    ~rehearsal_mark
    ~short_fermata
@@ -95,6 +96,8 @@ indicatorcommands
 .. autofunction:: marcato
 
 .. autofunction:: margin_markup
+
+.. autofunction:: mark
 
 .. autofunction:: quadruple_staccato
 
