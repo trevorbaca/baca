@@ -1897,7 +1897,7 @@ def dynamic_text_y_offset(
 
 def flag_stencil_false(
     *,
-    selector: typings.Selector = 'baca.leaf(0)',
+    selector: typings.Selector = 'baca.pleaf(0)',
     tag: typing.Optional[str] = 'baca_flag_stencil_false',
     ) -> OverrideCommand:
     """
@@ -1913,7 +1913,7 @@ def flag_stencil_false(
 
 def flag_transparent(
     *,
-    selector: typings.Selector = 'baca.leaves()',
+    selector: typings.Selector = 'baca.pleaves()',
     tag: typing.Optional[str] = 'baca_flag_transparent',
     ) -> OverrideCommand:
     """
@@ -1930,7 +1930,7 @@ def flag_transparent(
 def glissando_thickness(
     n: typings.Number,
     *,
-    selector: typings.Selector = 'baca.tleaves()',
+    selector: typings.Selector = 'baca.pleaves()',
     tag: typing.Optional[str] = 'baca_glissando_thickness',
     ) -> OverrideCommand:
     """
@@ -2738,7 +2738,7 @@ def mmrest_text_staff_padding(
 
 def mmrest_text_transparent(
     *,
-    selector: typings.Selector = 'baca.leaves()',
+    selector: typings.Selector = 'baca.mmrests()',
     tag: typing.Optional[str] = 'baca_script_transparent',
     ) -> OverrideCommand:
     """
@@ -2755,7 +2755,7 @@ def mmrest_text_transparent(
 
 def no_ledgers(
     *,
-    selector: typings.Selector = 'baca.leaves()',
+    selector: typings.Selector = 'baca.pleaves()',
     tag: typing.Optional[str] = 'baca_no_ledgers',
     ) -> OverrideCommand:
     """
@@ -2806,7 +2806,7 @@ def note_head_color(
 def note_head_extra_offset(
     pair: typings.NumberPair,
     *,
-    selector: typings.Selector = 'baca.leaf(0)',
+    selector: typings.Selector = 'baca.pleaf(0)',
     tag: typing.Optional[str] = 'baca_note_head_extra_offset',
     ) -> OverrideCommand:
     """
@@ -2822,7 +2822,7 @@ def note_head_extra_offset(
 
 def note_head_stencil_false(
     *,
-    selector: typings.Selector = 'baca.leaf(0)',
+    selector: typings.Selector = 'baca.pleaf(0)',
     tag: typing.Optional[str] = 'baca_note_head_stencil_false',
     ) -> OverrideCommand:
     """
@@ -2838,7 +2838,7 @@ def note_head_stencil_false(
 
 def note_head_style_cross(
     *,
-    selector: typings.Selector = 'baca.tleaves()',
+    selector: typings.Selector = 'baca.pleaves()',
     tag: typing.Optional[str] = 'baca_note_head_style_cross',
     ) -> OverrideCommand:
     r"""
@@ -2985,7 +2985,7 @@ def note_head_style_cross(
 
 def note_head_style_harmonic(
     *,
-    selector: typings.Selector = 'baca.tleaves()',
+    selector: typings.Selector = 'baca.pleaves()',
     tag: typing.Optional[str] = 'baca_note_head_style_harmonic',
     ) -> OverrideCommand:
     r"""
@@ -3132,7 +3132,7 @@ def note_head_style_harmonic(
 
 def note_head_style_harmonic_black(
     *,
-    selector: typings.Selector = 'baca.tleaves()',
+    selector: typings.Selector = 'baca.pleaves()',
     tag: typing.Optional[str] = 'baca_note_head_style_harmonic_black',
     ) -> OverrideCommand:
     r"""
@@ -3148,7 +3148,7 @@ def note_head_style_harmonic_black(
 
 def note_head_transparent(
     *,
-    selector: typings.Selector = 'baca.leaves()',
+    selector: typings.Selector = 'baca.pleaves()',
     tag: typing.Optional[str] = 'baca_note_head_transparent',
     ):
     """
@@ -3164,7 +3164,7 @@ def note_head_transparent(
 
 def note_head_x_extent_zero(
     *,
-    selector: typings.Selector = 'baca.leaf(0)',
+    selector: typings.Selector = 'baca.pleaf(0)',
     tag: typing.Optional[str] = 'baca_note_head_x_extent_zero',
     ) -> OverrideCommand:
     """
@@ -3313,7 +3313,7 @@ def rehearsal_mark_y_offset(
 
 def repeat_tie_down(
     *,
-    selector: typings.Selector = 'baca.tleaves()',
+    selector: typings.Selector = 'baca.pleaves()',
     tag: typing.Optional[str] = 'baca_repeat_tie_down',
     ) -> OverrideCommand:
     r"""
@@ -3476,7 +3476,7 @@ def repeat_tie_down(
 def repeat_tie_extra_offset(
     pair: typings.NumberPair,
     *,
-    selector: typings.Selector = 'baca.leaf(0)',
+    selector: typings.Selector = 'baca.pleaf(0)',
     tag: typing.Optional[str] = 'baca_repeat_tie_extra_offset',
     ) -> OverrideCommand:
     """
@@ -3492,7 +3492,7 @@ def repeat_tie_extra_offset(
 
 def repeat_tie_stencil_false(
     *,
-    selector: typings.Selector = 'baca.leaf(0)',
+    selector: typings.Selector = 'baca.pleaf(0)',
     tag: typing.Optional[str] = 'baca_repeat_tie_stencil_false',
     ) -> OverrideCommand:
     """
@@ -3508,7 +3508,7 @@ def repeat_tie_stencil_false(
 
 def repeat_tie_transparent(
     *,
-    selector: typings.Selector = 'baca.leaves()',
+    selector: typings.Selector = 'baca.pleaves()',
     tag: typing.Optional[str] = 'baca_repeat_tie_transparent',
     ):
     """
@@ -3524,7 +3524,7 @@ def repeat_tie_transparent(
 
 def repeat_tie_up(
     *,
-    selector: typings.Selector = 'baca.tleaves()',
+    selector: typings.Selector = 'baca.pleaves()',
     tag: typing.Optional[str] = 'baca_repeat_tie_up',
     ) -> OverrideCommand:
     r"""
@@ -5492,7 +5492,7 @@ def stem_color(
     color: str = 'red',
     *,
     context: str = None,
-    selector: typings.Selector = 'baca.tleaves()',
+    selector: typings.Selector = 'baca.pleaves()',
     tag: typing.Optional[str] = 'baca_stem_color',
     ) -> OverrideCommand:
     r"""
@@ -5643,7 +5643,7 @@ def stem_color(
 
 def stem_down(
     *,
-    selector: typings.Selector = 'baca.tleaves()',
+    selector: typings.Selector = 'baca.pleaves()',
     tag: typing.Optional[str] ='baca_stem_down',
     ) -> OverrideCommand:
     r"""
@@ -5796,7 +5796,7 @@ def stem_down(
 
 def stem_stencil_false(
     *,
-    selector: typings.Selector = 'baca.leaf(0)',
+    selector: typings.Selector = 'baca.pleaf(0)',
     tag: typing.Optional[str] = 'baca_stem_stencil_false',
     ) -> OverrideCommand:
     """
@@ -5812,7 +5812,7 @@ def stem_stencil_false(
 
 def stem_transparent(
     *,
-    selector: typings.Selector = 'baca.leaves()',
+    selector: typings.Selector = 'baca.pleaves()',
     tag: typing.Optional[str] = 'baca_stem_transparent',
     ) -> OverrideCommand:
     """
@@ -5828,7 +5828,7 @@ def stem_transparent(
 
 def stem_up(
     *,
-    selector: typings.Selector = 'baca.tleaves()',
+    selector: typings.Selector = 'baca.pleaves()',
     tag: typing.Optional[str] = 'baca_stem_up',
     ) -> OverrideCommand:
     r"""
@@ -7636,7 +7636,7 @@ def text_spanner_y_offset(
 
 def tie_down(
     *,
-    selector: typings.Selector = 'baca.tleaves()',
+    selector: typings.Selector = 'baca.pleaves()',
     tag: typing.Optional[str] = 'baca_tie_down',
     ) -> OverrideCommand:
     r"""
@@ -7798,7 +7798,7 @@ def tie_down(
 
 def tie_up(
     *,
-    selector: typings.Selector = 'baca.tleaves()',
+    selector: typings.Selector = 'baca.pleaves()',
     tag: typing.Optional[str] = 'baca_tie_up',
     ) -> OverrideCommand:
     r"""
@@ -8044,7 +8044,7 @@ def time_signature_extra_offset(
 
 def time_signature_transparent(
     *,
-    selector: typings.Selector = 'baca.leaves()',
+    selector: typings.Selector = 'baca.hleaves()',
     tag: typing.Optional[str] = 'baca_time_signature_transparent',
     ) -> OverrideCommand:
     r"""
