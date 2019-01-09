@@ -761,7 +761,6 @@ Override library.
    ~baca.overrides.tie_up
    ~baca.overrides.time_signature_extra_offset
    ~baca.overrides.time_signature_transparent
-   ~baca.overrides.tremolo_down
    ~baca.overrides.trill_spanner_staff_padding
    ~baca.overrides.tuplet_bracket_down
    ~baca.overrides.tuplet_bracket_extra_offset

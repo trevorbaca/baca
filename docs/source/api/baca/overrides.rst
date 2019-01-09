@@ -255,7 +255,6 @@ overrides
    ~tie_up
    ~time_signature_extra_offset
    ~time_signature_transparent
-   ~tremolo_down
    ~trill_spanner_staff_padding
    ~tuplet_bracket_down
    ~tuplet_bracket_extra_offset
@@ -487,8 +486,6 @@ overrides
 .. autofunction:: time_signature_extra_offset
 
 .. autofunction:: time_signature_transparent
-
-.. autofunction:: tremolo_down
 
 .. autofunction:: trill_spanner_staff_padding
 

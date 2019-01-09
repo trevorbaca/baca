@@ -8125,28 +8125,10 @@ def time_signature_transparent(
         value=True,
         )
 
-def tremolo_down(
-    n: typings.Number,
-    *,
-    selector: typings.Selector = 'baca.tleaves()',
-    tag: typing.Optional[str] = 'baca_tremolo_down',
-    ) -> OverrideCommand:
-    """
-    Overrides stem tremolo extra offset.
-    """
-    pair = (0, -n)
-    return OverrideCommand(
-        attribute='extra_offset',
-        grob='stem_tremolo',
-        selector=selector,
-        tags=[tag],
-        value=str(pair),
-        )
-
 def trill_spanner_staff_padding(
     n: typings.Number,
     *,
-    selector: typings.Selector = 'baca.tleaves().rleak()',
+    selector: typings.Selector = 'baca.leaves()',
     tag: typing.Optional[str] = 'baca_trill_spanner_staff_padding',
     ) -> OverrideCommand:
     """
