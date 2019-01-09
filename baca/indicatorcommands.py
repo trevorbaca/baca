@@ -1213,7 +1213,7 @@ def down_bow(
         )
 
 def espressivo(
-    *,
+    *tweaks: abjad.LilyPondTweakManager,
     selector: typings.Selector = 'baca.phead(0, exclude=baca.enums.HIDDEN)',
     tag: typing.Optional[str] = 'baca_espressivo',
     ) -> commands.IndicatorCommand:
@@ -1360,6 +1360,7 @@ def espressivo(
         indicators=[abjad.Articulation('espressivo')],
         selector=selector,
         tags=[tag],
+        tweaks=tweaks,
         )
 
 def fermata(
