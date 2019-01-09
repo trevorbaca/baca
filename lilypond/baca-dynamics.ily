@@ -289,6 +289,7 @@ baca-effort-sffz = #(
 baca-effort-ppppp-parenthesized = #(
     make-dynamic-script
     (markup
+        #:whiteout
         #:line (
             #:normal-text "("
             #:hspace -0.25
@@ -302,6 +303,7 @@ baca-effort-ppppp-parenthesized = #(
 baca-effort-pppp-parenthesized = #(
     make-dynamic-script
     (markup
+        #:whiteout
         #:line (
             #:normal-text "("
             #:hspace -0.25
@@ -315,6 +317,7 @@ baca-effort-pppp-parenthesized = #(
 baca-effort-ppp-parenthesized = #(
     make-dynamic-script
     (markup
+        #:whiteout
         #:line (
             #:normal-text "("
             #:hspace -0.25
@@ -328,6 +331,7 @@ baca-effort-ppp-parenthesized = #(
 baca-effort-pp-parenthesized = #(
     make-dynamic-script
     (markup
+        #:whiteout
         #:line (
             #:normal-text "("
             #:hspace -0.25
@@ -341,6 +345,7 @@ baca-effort-pp-parenthesized = #(
 baca-effort-p-parenthesized = #(
     make-dynamic-script
     (markup
+        #:whiteout
         #:line (
             #:normal-text "("
             #:hspace -0.25
@@ -354,6 +359,7 @@ baca-effort-p-parenthesized = #(
 baca-effort-mp-parenthesized = #(
     make-dynamic-script
     (markup
+        #:whiteout
         #:line (
             #:normal-text "("
             #:hspace -0.45
@@ -367,6 +373,7 @@ baca-effort-mp-parenthesized = #(
 baca-effort-mf-parenthesized = #(
     make-dynamic-script
     (markup
+        #:whiteout
         #:line (
             #:normal-text "("
             #:hspace -0.45
@@ -380,6 +387,7 @@ baca-effort-mf-parenthesized = #(
 baca-effort-f-parenthesized = #(
     make-dynamic-script
     (markup
+        #:whiteout
         #:line (
             #:normal-text "("
             #:hspace -0.15
@@ -393,6 +401,7 @@ baca-effort-f-parenthesized = #(
 baca-effort-ff-parenthesized = #(
     make-dynamic-script
     (markup
+        #:whiteout
         #:line (
             #:normal-text "("
             #:hspace -0.15
@@ -406,6 +415,7 @@ baca-effort-ff-parenthesized = #(
 baca-effort-fff-parenthesized = #(
     make-dynamic-script
     (markup
+        #:whiteout
         #:line (
             #:normal-text "("
             #:hspace -0.15
@@ -419,6 +429,7 @@ baca-effort-fff-parenthesized = #(
 baca-effort-ffff-parenthesized = #(
     make-dynamic-script
     (markup
+        #:whiteout
         #:line (
             #:normal-text "("
             #:hspace -0.15
@@ -432,6 +443,7 @@ baca-effort-ffff-parenthesized = #(
 baca-effort-fffff-parenthesized = #(
     make-dynamic-script
     (markup
+        #:whiteout
         #:line (
             #:normal-text "("
             #:hspace -0.15
@@ -453,6 +465,7 @@ baca-fffp = #(make-dynamic-script "fffp")
 baca-ppppp-parenthesized = #(
     make-dynamic-script
     (markup
+        #:whiteout
         #:line (
             #:normal-text "("
             #:hspace -0.25
@@ -466,6 +479,7 @@ baca-ppppp-parenthesized = #(
 baca-pppp-parenthesized = #(
     make-dynamic-script
     (markup
+        #:whiteout
         #:line (
             #:normal-text "("
             #:hspace -0.25
@@ -479,6 +493,7 @@ baca-pppp-parenthesized = #(
 baca-ppp-parenthesized = #(
     make-dynamic-script
     (markup
+        #:whiteout
         #:line (
             #:normal-text "("
             #:hspace -0.25
@@ -492,6 +507,7 @@ baca-ppp-parenthesized = #(
 baca-pp-parenthesized = #(
     make-dynamic-script
     (markup
+        #:whiteout
         #:line (
             #:normal-text "("
             #:hspace -0.25
@@ -505,6 +521,7 @@ baca-pp-parenthesized = #(
 baca-p-parenthesized = #(
     make-dynamic-script
     (markup
+        #:whiteout
         #:line (
             #:normal-text "("
             #:hspace -0.25
@@ -518,6 +535,7 @@ baca-p-parenthesized = #(
 baca-mp-parenthesized = #(
     make-dynamic-script
     (markup
+        #:whiteout
         #:line (
             #:normal-text "("
             #:hspace -0.45
@@ -531,6 +549,7 @@ baca-mp-parenthesized = #(
 baca-mf-parenthesized = #(
     make-dynamic-script
     (markup
+        #:whiteout
         #:line (
             #:normal-text "("
             #:hspace -0.45
@@ -544,6 +563,7 @@ baca-mf-parenthesized = #(
 baca-f-parenthesized = #(
     make-dynamic-script
     (markup
+        #:whiteout
         #:line (
             #:normal-text "("
             #:hspace -0.15
@@ -557,6 +577,7 @@ baca-f-parenthesized = #(
 baca-ff-parenthesized = #(
     make-dynamic-script
     (markup
+        #:whiteout
         #:line (
             #:normal-text "("
             #:hspace -0.15
@@ -570,6 +591,7 @@ baca-ff-parenthesized = #(
 baca-fff-parenthesized = #(
     make-dynamic-script
     (markup
+        #:whiteout
         #:line (
             #:normal-text "("
             #:hspace -0.15
@@ -583,6 +605,7 @@ baca-fff-parenthesized = #(
 baca-ffff-parenthesized = #(
     make-dynamic-script
     (markup
+        #:whiteout
         #:line (
             #:normal-text "("
             #:hspace -0.15
@@ -596,6 +619,7 @@ baca-ffff-parenthesized = #(
 baca-fffff-parenthesized = #(
     make-dynamic-script
     (markup
+        #:whiteout
         #:line (
             #:normal-text "("
             #:hspace -0.15
