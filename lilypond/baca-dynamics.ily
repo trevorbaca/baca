@@ -16,6 +16,9 @@
     (interpret-markup layout props
     #{
     \markup
+    \override #'(style . outline)
+    \override #'(thickness . 4.5)
+    \whiteout
     \line {
         \dynamic #dynamic
         \hspace #0.25
@@ -93,6 +96,9 @@ baca-pfff = #(make-dynamic-script "pfff")
     (interpret-markup layout props
     #{
     \markup
+    \override #'(style . outline)
+    \override #'(thickness . 4.5)
+    \whiteout
     \line {
         \dynamic #left
         \hspace #-0.625
@@ -224,6 +230,8 @@ baca-p-fff = #(
     (interpret-markup layout props
     #{
     \markup
+    \override #'(style . outline)
+    \override #'(thickness . 4.5)
     \whiteout
     \line {
         \general-align #Y #-2 \normal-text \larger "“"
@@ -638,6 +646,9 @@ baca-fffff-parenthesized = #(
     (interpret-markup layout props
     #{
     \markup
+    \override #'(style . outline)
+    \override #'(thickness . 4.5)
+    \whiteout
     \line {
         \dynamic #dynamic
         \hspace #0.25
@@ -694,6 +705,9 @@ baca-fff-poco-scratch = #(
     (interpret-markup layout props
     #{
     \markup
+    \override #'(style . outline)
+    \override #'(thickness . 4.5)
+    \whiteout
     \line {
         \dynamic #dynamic
         \hspace #0.25
@@ -739,6 +753,9 @@ baca-fff-poss = #(
     (interpret-markup layout props
     #{
     \markup
+    \override #'(style . outline)
+    \override #'(thickness . 4.5)
+    \whiteout
     \line {
         \dynamic #dynamic
         \hspace #0.25
@@ -799,6 +816,9 @@ baca-fff-sempre = #(
     (interpret-markup layout props
     #{
     \markup
+    \override #'(style . outline)
+    \override #'(thickness . 4.5)
+    \whiteout
     \line {
         \dynamic #dynamic
         \hspace #0.25
@@ -979,6 +999,8 @@ baca-fff-sub =
     (interpret-markup layout props
     #{
     \markup
+    \override #'(style . outline)
+    \override #'(thickness . 4.5)
     \whiteout
     \line {
         \general-align #Y #-2 \normal-text \larger "“"
