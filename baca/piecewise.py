@@ -3145,6 +3145,16 @@ def make_dynamic(string: str) -> typing.Union[
 
     ..  container:: example
 
+        Whiteout dynamics:
+
+        >>> baca.make_dynamic('p-whiteout')
+        Dynamic('p', command='\\baca-p-whiteout')
+
+        >>> baca.make_dynamic('f-whiteout')
+        Dynamic('f', command='\\baca-f-whiteout')
+
+    ..  container:: example
+
         Al niente hairpins are special-cased to carry to-barline tweaks:
 
         >>> baca.make_dynamic('>o')
@@ -3210,6 +3220,10 @@ def make_dynamic(string: str) -> typing.Union[
     elif string.endswith('-sub'):
         dynamic = string.split('-')[0]
         command = rf'\baca-{dynamic}-sub'
+        indicator = abjad.Dynamic(dynamic, command=command)
+    elif string.endswith('-whiteout'):
+        dynamic = string.split('-')[0]
+        command = rf'\baca-{dynamic}-whiteout'
         indicator = abjad.Dynamic(dynamic, command=command)
     elif 'baca-' + string in scheme_manifest.dynamics:
         name = scheme_manifest.dynamic_to_steady_state(string)

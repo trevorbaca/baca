@@ -1098,3 +1098,79 @@ baca-f-sub-but-accents-continue-sffz =
             )
         )
     )
+
+%%% WHITEOUT DYNAMICS %%%
+
+#(define-markup-command
+    (baca-whiteout-dynamic layout props dynamic)
+    (string?)
+    (interpret-markup layout props
+    #{
+    \markup
+    \override #'(style . outline)
+    \override #'(thickness . 4.5)
+    \whiteout
+    \line {
+        \dynamic #dynamic
+        }
+    #}))
+
+baca-ppppp-whiteout = #(
+    make-dynamic-script
+    (markup #:baca-whiteout-dynamic "ppppp")
+    )
+
+baca-pppp-whiteout = #(
+    make-dynamic-script
+    (markup #:baca-whiteout-dynamic "pppp")
+    )
+
+baca-ppp-whiteout = #(
+    make-dynamic-script
+    (markup #:baca-whiteout-dynamic "ppp")
+    )
+
+baca-pp-whiteout = #(
+    make-dynamic-script
+    (markup #:baca-whiteout-dynamic "pp")
+    )
+
+baca-p-whiteout = #(
+    make-dynamic-script
+    (markup #:baca-whiteout-dynamic "p")
+    )
+
+baca-mp-whiteout = #(
+    make-dynamic-script
+    (markup #:baca-whiteout-dynamic "mp")
+    )
+
+baca-mf-whiteout = #(
+    make-dynamic-script
+    (markup #:baca-whiteout-dynamic "mf")
+    )
+
+baca-f-whiteout = #(
+    make-dynamic-script
+    (markup #:baca-whiteout-dynamic "f")
+    )
+
+baca-ff-whiteout = #(
+    make-dynamic-script
+    (markup #:baca-whiteout-dynamic "ff")
+    )
+
+baca-fff-whiteout = #(
+    make-dynamic-script
+    (markup #:baca-whiteout-dynamic "fff")
+    )
+
+baca-ffff-whiteout = #(
+    make-dynamic-script
+    (markup #:baca-whiteout-dynamic "ffff")
+    )
+
+baca-fffff-whiteout = #(
+    make-dynamic-script
+    (markup #:baca-whiteout-dynamic "fffff")
+    )
