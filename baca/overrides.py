@@ -5020,6 +5020,22 @@ def script_up(
         tags=[tag],
         )
 
+def script_x_extent_zero(
+    *,
+    selector: typings.Selector = 'baca.leaves()',
+    tag: typing.Optional[str] = 'baca_script_x_extent_zero',
+    ) -> OverrideCommand:
+    """
+    Overrides script X-extent.
+    """
+    return OverrideCommand(
+        attribute='X_extent',
+        value=(0, 0),
+        grob='script',
+        selector=selector,
+        tags=[tag],
+        )
+
 def slur_down(
     *,
     selector: typings.Selector = 'baca.leaves()',

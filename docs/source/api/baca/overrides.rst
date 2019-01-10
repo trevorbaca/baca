@@ -223,6 +223,7 @@ overrides
    ~script_padding
    ~script_staff_padding
    ~script_up
+   ~script_x_extent_zero
    ~slur_down
    ~slur_up
    ~span_bar_color
@@ -422,6 +423,8 @@ overrides
 .. autofunction:: script_staff_padding
 
 .. autofunction:: script_up
+
+.. autofunction:: script_x_extent_zero
 
 .. autofunction:: slur_down
 

@@ -729,6 +729,7 @@ Override library.
    ~baca.overrides.script_padding
    ~baca.overrides.script_staff_padding
    ~baca.overrides.script_up
+   ~baca.overrides.script_x_extent_zero
    ~baca.overrides.slur_down
    ~baca.overrides.slur_up
    ~baca.overrides.span_bar_color
