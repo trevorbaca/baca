@@ -1746,6 +1746,32 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
             raise Exception('\n' + message)
 
+    def _clone_segment_initial_short_instrument_name(self):
+        if self.first_segment:
+            return
+        prototype = abjad.MarginMarkup
+        for context in abjad.iterate(self.score).components(abjad.Context):
+            first_leaf = abjad.inspect(context).leaf(0)
+            if abjad.inspect(first_leaf).has_indicator(abjad.StartMarkup):
+                continue
+            margin_markup = abjad.inspect(first_leaf).indicator(prototype)
+            if margin_markup is None:
+                continue
+            if isinstance(margin_markup.markup, str):
+                markup = margin_markup.markup
+            else:
+                markup = abjad.new(margin_markup.markup)
+            start_markup = abjad.StartMarkup(
+                context=margin_markup.context,
+                format_slot=margin_markup.format_slot,
+                markup=markup,
+                )
+            abjad.attach(
+                start_markup,
+                first_leaf,
+                tag='_clone_segment_initial_short_instrument_name',
+                )
+
     def _collect_alive_during_segment(self):
         result = []
         for context in abjad.iterate(self.score).components(abjad.Context):
@@ -6524,6 +6550,7 @@ class SegmentMaker(abjad.SegmentMaker):
         # TODO: optimize by consolidating score iteration:
         with abjad.Timer() as timer:
             with abjad.ForbidUpdate(component=self.score, update_on_exit=True):
+                self._clone_segment_initial_short_instrument_name()
                 self._remove_redundant_time_signatures()
                 self._cache_fermata_measure_numbers()
                 self._treat_untreated_persistent_wrappers()
