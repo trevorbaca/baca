@@ -3399,7 +3399,7 @@ def start_markup(
     """
     Attaches start markup.
     """
-    if literal is True:
+    if literal is True or argument.startswith('\\'):
         assert isinstance(argument, str), repr(argument)
         assert argument.startswith('\\'), repr(argument)
         start_markup = abjad.StartMarkup(
