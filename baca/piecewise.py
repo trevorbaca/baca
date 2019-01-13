@@ -529,6 +529,7 @@ def bow_speed_spanner(
     match: typings.Indices = None,
     measures: typings.Slice = None,
     pieces: typings.Selector = 'baca.group()',
+    right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector: typings.Selector = 'baca.ltleaves().rleak()',
     tag: typing.Optional[str] = f'{const.BOW_SPEED}:baca_bow_speed_spanner',
@@ -548,6 +549,7 @@ def bow_speed_spanner(
         match=match,
         measures=measures,
         pieces=pieces,
+        right_broken=right_broken,
         selector=selector,
         tag=tag,
         )
@@ -561,6 +563,7 @@ def circle_bow_spanner(
     match: typings.Indices = None,
     measures: typings.Slice = None,
     pieces: typings.Selector = 'baca.group()',
+    right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector: typings.Selector = 'baca.ltleaves().rleak()',
     tag: typing.Optional[str] = f'{const.CIRCLE_BOW}:baca_circle_bow_spanner',
@@ -584,6 +587,7 @@ def circle_bow_spanner(
         match=match,
         measures=measures,
         pieces=pieces,
+        right_broken=right_broken,
         selector=selector,
         tag=tag,
         )
@@ -597,6 +601,7 @@ def damp_spanner(
     match: typings.Indices = None,
     measures: typings.Slice = None,
     pieces: typings.Selector = 'baca.group()',
+    right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector: typings.Selector = 'baca.ltleaves().rleak()',
     tag: typing.Optional[str] = f'{const.DAMP}:baca_damp_spanner',
@@ -615,6 +620,7 @@ def damp_spanner(
         match=match,
         measures=measures,
         pieces=pieces,
+        right_broken=right_broken,
         selector=selector,
         tag=tag,
         )
@@ -2978,6 +2984,7 @@ def half_clt_spanner(
     match: typings.Indices = None,
     measures: typings.Slice = None,
     pieces: typings.Selector = 'baca.group()',
+    right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector: typings.Selector = 'baca.ltleaves().rleak()',
     tag: typing.Optional[str] = f'{const.HALF_CLT}:baca_half_clt_spanner',
@@ -2996,6 +3003,7 @@ def half_clt_spanner(
         match=match,
         measures=measures,
         pieces=pieces,
+        right_broken=right_broken,
         selector=selector,
         tag=tag,
         )
@@ -3270,6 +3278,7 @@ def material_annotation_spanner(
     match: typings.Indices = None,
     measures: typings.Slice = None,
     pieces: typings.Selector = 'baca.group()',
+    right_broken: bool = None,
     # NOTE: selector differs from text_spanner()
     selector: typings.Selector = 'baca.leaves().rleak()',
     tag: typing.Optional[str] = 
@@ -3289,6 +3298,7 @@ def material_annotation_spanner(
         match=match,
         measures=measures,
         pieces=pieces,
+        right_broken=right_broken,
         selector=selector,
         tag=tag,
         )
@@ -3454,6 +3464,7 @@ def pitch_annotation_spanner(
     match: typings.Indices = None,
     measures: typings.Slice = None,
     pieces: typings.Selector = 'baca.group()',
+    right_broken: bool = None,
     # NOTE: selector differs from text_spanner()
     selector: typings.Selector = 'baca.leaves().rleak()',
     tag: typing.Optional[str] = f'{const.PITCH}:baca_pitch_annotation_spanner',
@@ -3471,6 +3482,7 @@ def pitch_annotation_spanner(
         match=match,
         measures=measures,
         pieces=pieces,
+        right_broken=right_broken,
         selector=selector,
         tag=tag,
         )
@@ -3486,6 +3498,7 @@ def scp_spanner(
     match: typings.Indices = None,
     measures: typings.Slice = None,
     pieces: typings.Selector = 'baca.group()',
+    right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector: typings.Selector = 'baca.ltleaves().rleak()',
     tag: typing.Optional[str] = f'{const.SCP}:baca_scp_spanner',
@@ -3505,6 +3518,7 @@ def scp_spanner(
         match=match,
         measures=measures,
         pieces=pieces,
+        right_broken=right_broken,
         selector=selector,
         tag=tag,
         )
@@ -3520,6 +3534,7 @@ def string_number_spanner(
     match: typings.Indices = None,
     measures: typings.Slice = None,
     pieces: typings.Selector = 'baca.group()',
+    right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector: typings.Selector = 'baca.ltleaves().rleak()',
     tag: typing.Optional[str] = 
@@ -3540,6 +3555,7 @@ def string_number_spanner(
         match=match,
         measures=measures,
         pieces=pieces,
+        right_broken=right_broken,
         selector=selector,
         tag=tag,
         )
@@ -3554,6 +3570,7 @@ def tasto_spanner(
     match: typings.Indices = None,
     measures: typings.Slice = None,
     pieces: typings.Selector = 'baca.group()',
+    right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector: typings.Selector = 'baca.ltleaves().rleak()',
     tag: typing.Optional[str] = f'{const.SCP}:baca_tasto_spanner',
@@ -3573,6 +3590,7 @@ def tasto_spanner(
         match=match,
         measures=measures,
         pieces=pieces,
+        right_broken=right_broken,
         selector=selector,
         tag=tag,
         )
@@ -3590,6 +3608,7 @@ def text_spanner(
     match: typings.Indices = None,
     measures: typings.Slice = None,
     pieces: typings.Selector = 'baca.group()',
+    right_broken: bool = None,
     selector: typings.Selector = 'baca.leaves()',
     tag: typing.Optional[str] = 'baca_text_spanner',
     ) -> PiecewiseCommand:
@@ -5724,6 +5743,7 @@ def text_spanner(
         match=match,
         measures=measures,
         pieces=pieces,
+        right_broken=right_broken,
         selector=selector,
         tags=[tag],
         tweaks=tweaks,
@@ -5739,6 +5759,7 @@ def xfb_spanner(
     match: typings.Indices = None,
     measures: typings.Slice = None,
     pieces: typings.Selector = 'baca.group()',
+    right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector: typings.Selector = 'baca.ltleaves().rleak()',
     tag: typing.Optional[str] = f'{const.BOW_SPEED}:baca_xfb_spanner',
@@ -5758,6 +5779,7 @@ def xfb_spanner(
         match=match,
         measures=measures,
         pieces=pieces,
+        right_broken=right_broken,
         selector=selector,
         tag=tag,
         )
