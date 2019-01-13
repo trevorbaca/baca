@@ -8,7 +8,7 @@ import typing
 from abjadext import rmakers
 from . import classes
 from . import commands as baca_commands
-from . import enums
+from . import const
 from . import indicators
 from . import markups
 from . import overrides as baca_overrides
@@ -1646,12 +1646,12 @@ class SegmentMaker(abjad.SegmentMaker):
         name = 'all_music_in_part_containers'
         if getattr(self.score_template, name, None) is not True:
             return
-        annotation = enums.MULTIMEASURE_REST_CONTAINER
+        annotation = const.MULTIMEASURE_REST_CONTAINER
         for voice in abjad.iterate(self.score).components(abjad.Voice):
             for component in voice:
                 if isinstance(component, (abjad.MultimeasureRest, abjad.Skip)):
                     continue
-                if abjad.inspect(component).annotation(enums.HIDDEN) is True:
+                if abjad.inspect(component).annotation(const.HIDDEN) is True:
                     continue
                 if abjad.inspect(component).annotation(annotation) is True:
                     continue
@@ -1715,7 +1715,7 @@ class SegmentMaker(abjad.SegmentMaker):
         tag = abjad.tags.ALLOW_OUT_OF_RANGE
         for voice in abjad.iterate(self.score).components(abjad.Voice):
             for pleaf in abjad.iterate(voice).leaves(pitched=True):
-                if abjad.inspect(pleaf).annotation(enums.HIDDEN):
+                if abjad.inspect(pleaf).annotation(const.HIDDEN):
                     continue
                 instrument = abjad.inspect(pleaf).effective(
                     abjad.Instrument
@@ -1840,7 +1840,7 @@ class SegmentMaker(abjad.SegmentMaker):
             momentos = []
             wrappers = []
             dictionary = context._get_persistent_wrappers(
-                omit_annotation=enums.PHANTOM,
+                omit_annotation=const.PHANTOM,
                 )
             for wrapper in dictionary.values():
                 if isinstance(
@@ -1926,7 +1926,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for vertical_moment in vertical_moments:
             pleaves, pitches = [], []
             for leaf in vertical_moment.leaves:
-                if abjad.inspect(leaf).annotation(enums.HIDDEN) is True:
+                if abjad.inspect(leaf).annotation(const.HIDDEN) is True:
                     continue
                 if abjad.inspect(leaf).has_indicator(
                     abjad.tags.STAFF_POSITION,
@@ -2077,12 +2077,12 @@ class SegmentMaker(abjad.SegmentMaker):
     def _find_repeat_pitch_classes(argument):
         violators = []
         for voice in abjad.iterate(argument).components(abjad.Voice):
-            if abjad.inspect(voice).annotation(enums.INTERMITTENT) is True:
+            if abjad.inspect(voice).annotation(const.INTERMITTENT) is True:
                 continue
             previous_lt, previous_pcs = None, []
             for lt in abjad.iterate(voice).logical_ties():
                 inspection = abjad.inspect(lt.head)
-                if inspection.annotation(enums.HIDDEN) is True:
+                if inspection.annotation(const.HIDDEN) is True:
                     written_pitches = []
                 elif isinstance(lt.head, abjad.Note):
                     written_pitches = [lt.head.written_pitch]
@@ -2725,13 +2725,13 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
             rests.append(rest)
         if self.phantom:
-            tag = f'{enums.PHANTOM}:_make_global_rests(2)'
+            tag = f'{const.PHANTOM}:_make_global_rests(2)'
             rest = abjad.MultimeasureRest(
                 abjad.Duration(1),
                 multiplier=(1, 4),
                 tag=tag,
                 )
-            abjad.annotate(rest, enums.PHANTOM, True)
+            abjad.annotate(rest, const.PHANTOM, True)
             rests.append(rest)
         return rests
 
@@ -2751,9 +2751,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
             context.append(skip)
         if self.phantom:
-            tag = f'{enums.PHANTOM}:_make_global_skips(3)'
+            tag = f'{const.PHANTOM}:_make_global_skips(3)'
             skip = abjad.Skip(1, multiplier=(1, 4), tag=tag)
-            abjad.annotate(skip, enums.PHANTOM, True)
+            abjad.annotate(skip, const.PHANTOM, True)
             context.append(skip)
             time_signature = abjad.TimeSignature((1, 4))
             abjad.attach(
@@ -2862,14 +2862,14 @@ class SegmentMaker(abjad.SegmentMaker):
         ):
         tag = '_make_multimeasure_rest_container'
         if phantom is True:
-            tag = f'{enums.PHANTOM}:{tag}'
+            tag = f'{const.PHANTOM}:{tag}'
         note = abjad.Note("c'1", multiplier=duration, tag=tag)
         literal = abjad.LilyPondLiteral(r'\baca-invisible-music')
         abjad.attach(literal, note, tag=tag)
-        abjad.annotate(note, enums.HIDDEN, True)
+        abjad.annotate(note, const.HIDDEN, True)
         hidden_note_voice = abjad.Voice([note], name=voice_name, tag=tag)
-        abjad.annotate(hidden_note_voice, enums.HIDDEN_NOTE_VOICE, True)
-        abjad.annotate(hidden_note_voice, enums.INTERMITTENT, True)
+        abjad.annotate(hidden_note_voice, const.HIDDEN_NOTE_VOICE, True)
+        abjad.annotate(hidden_note_voice, const.INTERMITTENT, True)
         if self.skips_instead_of_rests:
             rest = abjad.Skip(1, multiplier=duration, tag=tag)
         else:
@@ -2879,16 +2879,16 @@ class SegmentMaker(abjad.SegmentMaker):
         else:
             name = voice_name.replace('Voice', 'Rest_Voice')
         multimeasure_rest_voice = abjad.Voice([rest], name=name, tag=tag)
-        abjad.annotate(multimeasure_rest_voice, enums.INTERMITTENT, True)
+        abjad.annotate(multimeasure_rest_voice, const.INTERMITTENT, True)
         container = abjad.Container(
             [hidden_note_voice, multimeasure_rest_voice],
             is_simultaneous=True,
             tag=tag,
             )
-        abjad.annotate(container, enums.MULTIMEASURE_REST_CONTAINER, True)
+        abjad.annotate(container, const.MULTIMEASURE_REST_CONTAINER, True)
         if phantom is True:
             for component in abjad.iterate(container).components():
-                abjad.annotate(component, enums.PHANTOM, True)
+                abjad.annotate(component, const.PHANTOM, True)
         return container
 
     def _make_score(self):
@@ -3210,7 +3210,7 @@ class SegmentMaker(abjad.SegmentMaker):
             empty_fermata_measure_start_offsets.append(timespan.start_offset)
         for staff in abjad.iterate(self.score).components(abjad.Staff):
             for leaf in abjad.iterate(staff).leaves():
-                if abjad.inspect(leaf).annotation(enums.PHANTOM) is True:
+                if abjad.inspect(leaf).annotation(const.PHANTOM) is True:
                     continue
                 start_offset = abjad.inspect(leaf).timespan().start_offset
                 if start_offset not in self._fermata_start_offsets:
@@ -3228,7 +3228,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         )
                 before = abjad.inspect(leaf).effective(prototype)
                 next_leaf = abjad.inspect(leaf).leaf(1)
-                if abjad.inspect(next_leaf).annotation(enums.PHANTOM) is True:
+                if abjad.inspect(next_leaf).annotation(const.PHANTOM) is True:
                     next_leaf = None
                 after = None
                 if next_leaf is not None:
@@ -3319,7 +3319,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _style_phantom_measures(self):
         if not self.phantom:
             return
-        tag = enums.PHANTOM
+        tag = const.PHANTOM
         skip = abjad.inspect(self.score['Global_Skips']).leaf(-1)
         for literal in abjad.inspect(skip).indicators(abjad.LilyPondLiteral):
             if r'\baca-time-signature-color' in literal.argument:
@@ -3352,7 +3352,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 f'{tag}:_style_phantom_measures(4)',
                 )
         start_offset = abjad.inspect(skip).timespan().start_offset
-        enumeration = enums.MULTIMEASURE_REST_CONTAINER
+        enumeration = const.MULTIMEASURE_REST_CONTAINER
         containers = []
         for container in abjad.select(self.score).components(abjad.Container):
             if abjad.inspect(container).annotation(enumeration) is not True:

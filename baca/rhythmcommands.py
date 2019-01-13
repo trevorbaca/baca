@@ -9,7 +9,7 @@ import typing
 from abjadext import rmakers
 from . import classes
 from . import divisions as baca_divisions
-from . import enums
+from . import const
 from . import overrides
 from . import scoping
 from . import typings
@@ -2751,7 +2751,7 @@ def tacet(
     command = overrides.mmrest_color(
         color,
         selector=selector,
-        tag=f'{enums.TACET}:baca_tacet',
+        tag=f'{const.TACET}:baca_tacet',
         )
     command_ = scoping.new(command, measures=measures)
     assert isinstance(command_, overrides.OverrideCommand)

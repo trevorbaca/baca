@@ -17,7 +17,7 @@ from .segmentclasses import *
 from .segmentmaker import *
 from .spannercommands import *
 from .templates import *
-from . import enums
+from . import const
 from . import markups
 
 # expression constructors

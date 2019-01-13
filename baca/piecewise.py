@@ -5,7 +5,7 @@ import abjad
 import typing
 from . import classes
 from . import commands
-from . import enums
+from . import const
 from . import scoping
 from . import typings
 
@@ -328,7 +328,7 @@ class PiecewiseCommand(scoping.Command):
             # TextSpanner.bound-details.right.to-extent = ##t implementation
             # only 100% workable solution
             if is_final_piece and self.autodetect_right_padding:
-                if abjad.inspect(stop_leaf).annotation(enums.PHANTOM) is True:
+                if abjad.inspect(stop_leaf).annotation(const.PHANTOM) is True:
                     autodetected_right_padding = 2.5
                 # stop leaf multiplied whole note on fermata measure downbeat
                 elif (isinstance(stop_leaf, abjad.Note) and
@@ -531,7 +531,7 @@ def bow_speed_spanner(
     pieces: typings.Selector = 'baca.group()',
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector: typings.Selector = 'baca.ltleaves().rleak()',
-    tag: typing.Optional[str] = f'{enums.BOW_SPEED}:baca_bow_speed_spanner',
+    tag: typing.Optional[str] = f'{const.BOW_SPEED}:baca_bow_speed_spanner',
     ) -> PiecewiseCommand:
     r"""
     Makes bow speed spanner.
@@ -563,7 +563,7 @@ def circle_bow_spanner(
     pieces: typings.Selector = 'baca.group()',
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector: typings.Selector = 'baca.ltleaves().rleak()',
-    tag: typing.Optional[str] = f'{enums.CIRCLE_BOW}:baca_circle_bow_spanner',
+    tag: typing.Optional[str] = f'{const.CIRCLE_BOW}:baca_circle_bow_spanner',
     ) -> PiecewiseCommand:
     r"""
     Makes circle bow spanner.
@@ -599,7 +599,7 @@ def damp_spanner(
     pieces: typings.Selector = 'baca.group()',
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector: typings.Selector = 'baca.ltleaves().rleak()',
-    tag: typing.Optional[str] = f'{enums.DAMP}:baca_damp_spanner',
+    tag: typing.Optional[str] = f'{const.DAMP}:baca_damp_spanner',
     ) -> PiecewiseCommand:
     r"""
     Makes damp spanner.
@@ -2980,7 +2980,7 @@ def half_clt_spanner(
     pieces: typings.Selector = 'baca.group()',
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector: typings.Selector = 'baca.ltleaves().rleak()',
-    tag: typing.Optional[str] = f'{enums.HALF_CLT}:baca_half_clt_spanner',
+    tag: typing.Optional[str] = f'{const.HALF_CLT}:baca_half_clt_spanner',
     ) -> PiecewiseCommand:
     r"""
     Makes 1/2 clt spanner.
@@ -3273,7 +3273,7 @@ def material_annotation_spanner(
     # NOTE: selector differs from text_spanner()
     selector: typings.Selector = 'baca.leaves().rleak()',
     tag: typing.Optional[str] = 
-        f'{enums.MATERIAL}:baca_material_annotation_spanner',
+        f'{const.MATERIAL}:baca_material_annotation_spanner',
     ) -> PiecewiseCommand:
     r"""
     Makes material annotation spanner.
@@ -3456,7 +3456,7 @@ def pitch_annotation_spanner(
     pieces: typings.Selector = 'baca.group()',
     # NOTE: selector differs from text_spanner()
     selector: typings.Selector = 'baca.leaves().rleak()',
-    tag: typing.Optional[str] = f'{enums.PITCH}:baca_pitch_annotation_spanner',
+    tag: typing.Optional[str] = f'{const.PITCH}:baca_pitch_annotation_spanner',
     ) -> PiecewiseCommand:
     r"""
     Makes pitch annotation spanner.
@@ -3488,7 +3488,7 @@ def scp_spanner(
     pieces: typings.Selector = 'baca.group()',
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector: typings.Selector = 'baca.ltleaves().rleak()',
-    tag: typing.Optional[str] = f'{enums.SCP}:baca_scp_spanner',
+    tag: typing.Optional[str] = f'{const.SCP}:baca_scp_spanner',
     ) -> PiecewiseCommand:
     r"""
     Makes SCP spanner.
@@ -3523,7 +3523,7 @@ def string_number_spanner(
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector: typings.Selector = 'baca.ltleaves().rleak()',
     tag: typing.Optional[str] = 
-        f'{enums.STRING_NUMBER}:baca_string_number_spanner',
+        f'{const.STRING_NUMBER}:baca_string_number_spanner',
     ) -> PiecewiseCommand:
     r"""
     Makes string number spanner.
@@ -3556,7 +3556,7 @@ def tasto_spanner(
     pieces: typings.Selector = 'baca.group()',
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector: typings.Selector = 'baca.ltleaves().rleak()',
-    tag: typing.Optional[str] = f'{enums.SCP}:baca_tasto_spanner',
+    tag: typing.Optional[str] = f'{const.SCP}:baca_tasto_spanner',
     ) -> PiecewiseCommand:
     r"""
     Makes tasto spanner.
@@ -5741,7 +5741,7 @@ def xfb_spanner(
     pieces: typings.Selector = 'baca.group()',
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector: typings.Selector = 'baca.ltleaves().rleak()',
-    tag: typing.Optional[str] = f'{enums.BOW_SPEED}:baca_xfb_spanner',
+    tag: typing.Optional[str] = f'{const.BOW_SPEED}:baca_xfb_spanner',
     ) -> PiecewiseCommand:
     r"""
     Makes XFB spanner.
