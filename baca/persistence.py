@@ -5082,7 +5082,6 @@ class PersistentIndicatorTests(object):
                                 context='Music_Voice',
                                 prototype='abjad.PersistentOverride',
                                 value=abjad.PersistentOverride(
-                                    after=True,
                                     attribute='bar_extent',
                                     context='Staff',
                                     grob='bar_line',
@@ -5189,9 +5188,9 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! SingleStaffScoreTemplate
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! REAPPLIED_PERSISTENT_OVERRIDE:_set_status_tag:_reapply_persistent_indicators(3)
                                 \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'4.                                                                     %! baca_make_notes
+                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! REAPPLIED_PERSISTENT_OVERRIDE:_set_status_tag:_reapply_persistent_indicators(3)
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 \baca-unpitched-music-warning                                            %! _color_unpitched_notes

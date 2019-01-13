@@ -474,7 +474,7 @@ def accidental_x_extent_false(
 def bar_extent(
     pair: typings.NumberPair,
     *,
-    after: bool = False,
+    after: bool = None,
     selector: typings.Selector = 'baca.leaf(0)',
     tag: typing.Optional[str] = 'baca_bar_extent',
     ) -> OverrideCommand:

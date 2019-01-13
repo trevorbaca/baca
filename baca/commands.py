@@ -2635,6 +2635,7 @@ def allow_octaves(
 def bar_extent_persistent(
     pair: typings.NumberPair = None,
     *,
+    after: bool = None,
     selector: typings.Selector = 'baca.leaf(0)',
     tag: typing.Optional[str] = 'baca_bar_extent_persistent',
     ) -> IndicatorCommand:
@@ -2767,7 +2768,7 @@ def bar_extent_persistent(
 
     """
     override = abjad.PersistentOverride(
-        after=True,
+        after=after,
         attribute='bar_extent',
         context='Staff',
         grob='bar_line',
