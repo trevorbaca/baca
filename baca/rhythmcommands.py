@@ -469,7 +469,8 @@ class RhythmCommand(scoping.Command):
         dictionary = self.runtime.get('previous_segment_voice_metadata')
         if dictionary:
             previous_segment_stop_state = dictionary.get(abjad.tags.RHYTHM)
-            if previous_segment_stop_state.get('name') != self.persist:
+            if (previous_segment_stop_state is not None and
+                previous_segment_stop_state.get('name') != self.persist):
                 previous_segment_stop_state = None
         return previous_segment_stop_state
 
