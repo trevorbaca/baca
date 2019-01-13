@@ -229,6 +229,7 @@ piecewise
    ~parse_hairpin_descriptor
    ~pitch_annotation_spanner
    ~scp_spanner
+   ~string_number_spanner
    ~tasto_spanner
    ~text_spanner
    ~xfb_spanner
@@ -254,6 +255,8 @@ piecewise
 .. autofunction:: pitch_annotation_spanner
 
 .. autofunction:: scp_spanner
+
+.. autofunction:: string_number_spanner
 
 .. autofunction:: tasto_spanner
 

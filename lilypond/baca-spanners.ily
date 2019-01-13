@@ -908,6 +908,16 @@ baca-start-snm-both = #(
     #}
     )
 
+%%% STRING NUMBER SPANNER %%%
+
+bacaStartTextSpanStringNumber = #(
+    make-music 'TextSpanEvent 'span-direction START 'spanner-id "StringNumber"
+    )
+
+bacaStopTextSpanStringNumber = #(
+    make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "StringNumber"
+    )
+
 %%% TEXT SPANNER %%%
 
 baca-text-spanner-left-markup = #(

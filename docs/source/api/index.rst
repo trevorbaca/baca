@@ -836,6 +836,7 @@ Piecewise library.
    ~baca.piecewise.parse_hairpin_descriptor
    ~baca.piecewise.pitch_annotation_spanner
    ~baca.piecewise.scp_spanner
+   ~baca.piecewise.string_number_spanner
    ~baca.piecewise.tasto_spanner
    ~baca.piecewise.text_spanner
    ~baca.piecewise.xfb_spanner

@@ -3509,6 +3509,41 @@ def scp_spanner(
         tag=tag,
         )
 
+def string_number_spanner(
+    items: typing.Union[str, typing.List],
+    *tweaks: abjad.IndexedTweakManager,
+    autodetect_right_padding: bool = True,
+    bookend: typing.Union[bool, int] = False,
+    final_piece_spanner: bool = None,
+    left_broken_text: str = None,
+    map: typings.Selector = None,
+    match: typings.Indices = None,
+    measures: typings.Slice = None,
+    pieces: typings.Selector = 'baca.group()',
+    # NOTE: selector differs from text_spanner(), annotation spanners:
+    selector: typings.Selector = 'baca.ltleaves().rleak()',
+    tag: typing.Optional[str] = 
+        f'{enums.STRING_NUMBER}:baca_string_number_spanner',
+    ) -> PiecewiseCommand:
+    r"""
+    Makes string number spanner.
+    """
+    return text_spanner(
+        items,
+        *tweaks,
+        autodetect_right_padding=autodetect_right_padding,
+        bookend=bookend,
+        final_piece_spanner=final_piece_spanner,
+        left_broken_text=left_broken_text,
+        lilypond_id='StringNumber',
+        map=map,
+        match=match,
+        measures=measures,
+        pieces=pieces,
+        selector=selector,
+        tag=tag,
+        )
+
 def tasto_spanner(
     *tweaks: abjad.IndexedTweakManager,
     autodetect_right_padding: bool = True,
