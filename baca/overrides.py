@@ -2135,6 +2135,23 @@ def mmrest_color(
         whitelist=(abjad.MultimeasureRest,),
         )
 
+def mmrest_transparent(
+    *,
+    selector: typings.Selector = 'baca.mmrests()',
+    tag: typing.Optional[str] = 'baca_mmrest_transparent',
+    ) -> OverrideCommand:
+    r"""
+    Overrides multimeasure rest transparent.
+    """
+    return OverrideCommand(
+        attribute='transparent',
+        value=True,
+        grob='multi_measure_rest',
+        selector=selector,
+        tags=[tag],
+        whitelist=(abjad.MultimeasureRest,),
+        )
+
 def mmrest_text_color(
     color: str = 'red',
     *,

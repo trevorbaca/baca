@@ -696,6 +696,7 @@ Override library.
    ~baca.overrides.mmrest_text_parent_center
    ~baca.overrides.mmrest_text_staff_padding
    ~baca.overrides.mmrest_text_transparent
+   ~baca.overrides.mmrest_transparent
    ~baca.overrides.no_ledgers
    ~baca.overrides.note_column_shift
    ~baca.overrides.note_head_color

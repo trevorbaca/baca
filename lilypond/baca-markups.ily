@@ -1,3 +1,11 @@
+%%% ACCIDENTAL MARKUP %%%
+
+baca-sharp-markup = \markup
+    \line {
+        \scale #'(0.65 . 0.65)
+        \sharp
+    }
+
 %%% BOW SPEED MARKUP %%%
 
 baca-left-broken-xfb-markup =
