@@ -517,6 +517,7 @@ def ottava(
     start_ottava: abjad.Ottava = abjad.Ottava(n=1),
     stop_ottava: abjad.Ottava = abjad.Ottava(n=0, format_slot='after'),
     *,
+    right_broken: bool = None,
     selector: typings.Selector = 'baca.tleaves()',
     tag: typing.Optional[str] = 'baca_ottava',
     ) -> SpannerIndicatorCommand:
@@ -590,6 +591,7 @@ def ottava(
 
     """
     return SpannerIndicatorCommand(
+        right_broken=right_broken,
         selector=selector,
         start_indicator=start_ottava,
         stop_indicator=stop_ottava,
