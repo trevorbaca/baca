@@ -75,7 +75,6 @@ segmentmaker
       nonfirst_segment_lilypond_include
       phantom
       previous_metadata
-      replace_full_measure_rests
       run
       score_template
       skips_instead_of_rests
@@ -222,8 +221,6 @@ segmentmaker
    .. autoattribute:: SegmentMaker.phantom
 
    .. autoattribute:: SegmentMaker.previous_metadata
-
-   .. autoattribute:: SegmentMaker.replace_full_measure_rests
 
    .. container:: inherited
 

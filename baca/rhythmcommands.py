@@ -2345,9 +2345,6 @@ def make_rhythm(
         assert isinstance(selection, abjad.Selection), repr(selection)
         argument = selection
     if repeat_tie_threshold is not None:
-#        repeat = abjad.Tie._coerce_inequality(repeat_tie_threshold)
-#        for tie in abjad.inspect(argument).spanners(abjad.Tie):
-#            tie._repeat = repeat
         temporary_container = abjad.Container([argument])
         for logical_tie in abjad.select(temporary_container).logical_ties():
             if logical_tie.is_trivial:
