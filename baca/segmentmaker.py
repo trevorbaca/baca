@@ -188,6 +188,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_offset_to_measure_number',
         '_phantom',
         '_previously_alive_contexts',
+        '_replace_full_measure_rests',
         '_score',
         '_score_template',
         '_segment_bol_measure_numbers',
@@ -305,6 +306,7 @@ class SegmentMaker(abjad.SegmentMaker):
         metronome_marks: abjad.OrderedDict = None,
         nonfirst_segment_lilypond_include: bool = None,
         phantom: bool = None,
+        replace_full_measure_rests: bool = None,
         score_template: templates.ScoreTemplate = None,
         segment_directory: abjad.Path = None,
         skips_instead_of_rests: bool = None,
@@ -375,6 +377,7 @@ class SegmentMaker(abjad.SegmentMaker):
             phantom = bool(phantom)
         self._phantom = phantom
         self._previously_alive_contexts: typing.List[str] = []
+        self._replace_full_measure_rests = replace_full_measure_rests
         self._score_template = score_template
         self._segment_bol_measure_numbers: typing.List[int] = []
         if segment_directory is not None:
@@ -3107,6 +3110,32 @@ class SegmentMaker(abjad.SegmentMaker):
                     if word in tags:
                         abjad.detach(wrapper, leaf)
                         break
+
+    def _replace_full_measure_rests_(self):
+        if not self.replace_full_measure_rests:
+            return
+        rests_to_replace = []
+        for rest in abjad.iterate(self.score).leaves(abjad.Rest):
+            start_offset = abjad.inspect(rest).timespan().start_offset
+            start_measure_number = self._offset_to_measure_number.get(
+                start_offset,
+                None,
+                )
+            if start_measure_number is None:
+                continue
+            stop_offset = abjad.inspect(rest).timespan().stop_offset
+            stop_measure_number = self._offset_to_measure_number.get(
+                stop_offset,
+                None,
+                )
+            if stop_measure_number is None:
+                continue
+            if start_measure_number == stop_measure_number - 1:
+                rests_to_replace.append(rest)
+        for rest in rests_to_replace:
+            duration = abjad.inspect(rest).duration()
+            mmrest = abjad.MultimeasureRest(1, multiplier=duration)
+            abjad.mutate(rest).replace([mmrest])
 
     def _scope_to_leaf_selection(self, command):
         leaves = []
@@ -5966,6 +5995,13 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._previous_metadata
 
     @property
+    def replace_full_measure_rests(self) -> typing.Optional[bool]:
+        """
+        Is true when segment-maker rewrites full-measure rests.
+        """
+        return self._replace_full_measure_rests
+
+    @property
     def score_template(self) -> typing.Optional[abjad.ScoreTemplate]:
         """
         Gets score template.
@@ -6581,6 +6617,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._check_all_music_in_part_containers()
                 self._check_duplicate_part_assignments()
                 self._move_global_rests()
+                self._replace_full_measure_rests_()
 
         count = int(timer.elapsed_time)
         seconds = abjad.String('second').pluralize(count)
