@@ -233,6 +233,7 @@ piecewise
    ~string_number_spanner
    ~tasto_spanner
    ~text_spanner
+   ~vibrato_spanner
    ~xfb_spanner
 
 .. autofunction:: bow_speed_spanner
@@ -264,5 +265,7 @@ piecewise
 .. autofunction:: tasto_spanner
 
 .. autofunction:: text_spanner
+
+.. autofunction:: vibrato_spanner
 
 .. autofunction:: xfb_spanner

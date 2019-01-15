@@ -5783,6 +5783,42 @@ def text_spanner(
         tweaks=tweaks,
         )
 
+def vibrato_spanner(
+    items: typing.Union[str, typing.List],
+    *tweaks: abjad.IndexedTweakManager,
+    autodetect_right_padding: bool = True,
+    bookend: typing.Union[bool, int] = False,
+    final_piece_spanner: bool = None,
+    left_broken_text: str = None,
+    map: typings.Selector = None,
+    match: typings.Indices = None,
+    measures: typings.Slice = None,
+    pieces: typings.Selector = 'baca.group()',
+    right_broken: bool = None,
+    # NOTE: selector differs from text_spanner(), annotation spanners:
+    selector: typings.Selector = 'baca.ltleaves().rleak()',
+    tag: typing.Optional[str] = f'{const.VIBRATO}:baca_vibrato_spanner',
+    ) -> PiecewiseCommand:
+    r"""
+    Makes vibrato spanner.
+    """
+    return text_spanner(
+        items,
+        *tweaks,
+        autodetect_right_padding=autodetect_right_padding,
+        bookend=bookend,
+        final_piece_spanner=final_piece_spanner,
+        left_broken_text=left_broken_text,
+        lilypond_id='Vibrato',
+        map=map,
+        match=match,
+        measures=measures,
+        pieces=pieces,
+        right_broken=right_broken,
+        selector=selector,
+        tag=tag,
+        )
+
 def xfb_spanner(
     *tweaks: abjad.IndexedTweakManager,
     autodetect_right_padding: bool = True,

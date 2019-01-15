@@ -841,6 +841,7 @@ Piecewise library.
    ~baca.piecewise.string_number_spanner
    ~baca.piecewise.tasto_spanner
    ~baca.piecewise.text_spanner
+   ~baca.piecewise.vibrato_spanner
    ~baca.piecewise.xfb_spanner
 
 .. raw:: html

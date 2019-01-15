@@ -974,3 +974,12 @@ baca-text-spanner-right-text = #(
     #}
     )
 
+%%% VIBRATO SPANNER %%%
+
+bacaStartTextSpanVibrato = #(
+    make-music 'TextSpanEvent 'span-direction START 'spanner-id "Vibrato"
+    )
+
+bacaStopTextSpanVibrato = #(
+    make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "Vibrato"
+    )
