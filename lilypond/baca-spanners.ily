@@ -780,6 +780,16 @@ baca-start-spm-both = #(
     #}
     )
 
+%%% SPAZZOLATO SPANNER %%%
+
+bacaStartTextSpanSpazzolato = #(
+    make-music 'TextSpanEvent 'span-direction START 'spanner-id "Spazzolato"
+    )
+
+bacaStopTextSpanSpazzolato = #(
+    make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "Spazzolato"
+    )
+
 %%% STAGE NUMBER SPANNER %%%
 
 bacaStartTextSpanSNM = #(

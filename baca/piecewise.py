@@ -3523,6 +3523,40 @@ def scp_spanner(
         tag=tag,
         )
 
+def spazzolato_spanner(
+    *tweaks: abjad.IndexedTweakManager,
+    # NOTE: autodetect default differs from text_spanner():
+    autodetect_right_padding: bool = True,
+    items: typing.Union[str, typing.List] = r'\baca-spazzolato-markup =|',
+    left_broken_text: typing.Optional[str] = r'\baca-left-broken-spazz-markup',
+    map: typings.Selector = None,
+    match: typings.Indices = None,
+    measures: typings.Slice = None,
+    pieces: typings.Selector = 'baca.group()',
+    right_broken: bool = None,
+    # NOTE: selector differs from text_spanner(), annotation spanners:
+    selector: typings.Selector = 'baca.ltleaves().rleak()',
+    tag: typing.Optional[str] = f'{const.SPAZZOLATO}:baca_spazzolato_spanner',
+    ) -> PiecewiseCommand:
+    r"""
+    Makes spazzolato spanner.
+    """
+    return text_spanner(
+        items,
+        *tweaks,
+        autodetect_right_padding=autodetect_right_padding,
+        bookend=False,
+        left_broken_text=left_broken_text,
+        lilypond_id='Spazzolato',
+        map=map,
+        match=match,
+        measures=measures,
+        pieces=pieces,
+        right_broken=right_broken,
+        selector=selector,
+        tag=tag,
+        )
+
 def string_number_spanner(
     items: typing.Union[str, typing.List],
     *tweaks: abjad.IndexedTweakManager,

@@ -347,3 +347,23 @@ baca-left-broken-t-markup =
         )
         \hspace #0.75
     }
+
+%%% SPAZZOLATO MARKUP %%%
+
+baca-spazzolato-markup =
+    \markup
+    \upright
+    spazzolato
+
+baca-left-broken-spazz-markup =
+    \markup
+    \upright
+    \line {
+        (
+        \hspace #-0.5
+        spazz. 
+        \hspace #-0.5
+        )
+        \hspace #0.75
+    }
+
