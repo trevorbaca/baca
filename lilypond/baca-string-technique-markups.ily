@@ -15,6 +15,10 @@ baca-col-legno-battuto-markup = \markup
     \box
     "col legno battuto"
 
+baca-ob-markup = \markup
+    \whiteout
+    "OB"
+
 baca-pochiss-scratch-markup = \markup
     \whiteout
     "pochiss. scratch"
