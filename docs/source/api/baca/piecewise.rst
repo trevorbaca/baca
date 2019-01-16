@@ -220,6 +220,7 @@ piecewise
 
    ~bow_speed_spanner
    ~circle_bow_spanner
+   ~clb_spanner
    ~damp_spanner
    ~dynamic
    ~hairpin
@@ -239,6 +240,8 @@ piecewise
 .. autofunction:: bow_speed_spanner
 
 .. autofunction:: circle_bow_spanner
+
+.. autofunction:: clb_spanner
 
 .. autofunction:: damp_spanner
 

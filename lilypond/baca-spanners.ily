@@ -81,6 +81,16 @@ bacaStopTextSpanBowSpeed = #(
     make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "BowSpeed"
     )
 
+%%% CLB SPANNER %%%
+
+bacaStartTextSpanCLB = #(
+    make-music 'TextSpanEvent 'span-direction START 'spanner-id "CLB"
+    )
+
+bacaStopTextSpanCLB = #(
+    make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "CLB"
+    )
+
 %%% CLOCK TIME SPANNER %%%
 
 bacaStartTextSpanCT = #(

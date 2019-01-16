@@ -172,6 +172,56 @@ baca-left-broken-damp-markup =
         \hspace #0.5
     }
 
+%%% CLB MARKUP %%%
+
+baca-damp-clb-one-markup =
+    \markup
+    \upright
+    \line {
+        \baca-damp-markup
+        col legno battuto
+        (I)
+    }
+
+baca-damp-clb-two-markup =
+    \markup
+    \upright
+    \line {
+        \baca-damp-markup
+        col legno battuto
+        (II)
+    }
+
+baca-damp-clb-three-markup =
+    \markup
+    \upright
+    \line {
+        \baca-damp-markup
+        col legno battuto
+        (III)
+    }
+
+baca-damp-clb-four-markup =
+    \markup
+    \upright
+    \line {
+        \baca-damp-markup
+        col legno battuto
+        (IV)
+    }
+
+baca-left-broken-clb-markup =
+    \markup
+    \upright
+    \line {
+        (
+        \hspace #-0.5
+        clb
+        \hspace #-0.5
+        )
+        \hspace #0.75
+    }
+
 %%% DIAMOND MARKUP %%%
 
 baca-black-diamond-markup =

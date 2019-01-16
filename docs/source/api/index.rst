@@ -828,6 +828,7 @@ Piecewise library.
 
    ~baca.piecewise.bow_speed_spanner
    ~baca.piecewise.circle_bow_spanner
+   ~baca.piecewise.clb_spanner
    ~baca.piecewise.damp_spanner
    ~baca.piecewise.dynamic
    ~baca.piecewise.hairpin

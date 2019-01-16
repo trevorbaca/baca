@@ -592,6 +592,51 @@ def circle_bow_spanner(
         tag=tag,
         )
 
+def clb_spanner(
+    string_number: int,
+    *tweaks: abjad.IndexedTweakManager,
+    # NOTE: autodetect default differs from text_spanner():
+    autodetect_right_padding: bool = True,
+    left_broken_text: typing.Optional[str] = r'\baca-left-broken-clb-markup',
+    map: typings.Selector = None,
+    match: typings.Indices = None,
+    measures: typings.Slice = None,
+    pieces: typings.Selector = 'baca.group()',
+    right_broken: bool = None,
+    # NOTE: selector differs from text_spanner(), annotation spanners:
+    selector: typings.Selector = 'baca.ltleaves().rleak()',
+    tag: typing.Optional[str] = f'{const.CLB}:baca_clb_spanner',
+    ) -> PiecewiseCommand:
+    r"""
+    Makes clb spanner.
+    """
+    assert string_number in (1, 2, 3, 4), repr(string_number)
+    if string_number == 1:
+        markup = r'\baca-damp-clb-one-markup'
+    elif string_number == 2:
+        markup = r'\baca-damp-clb-two-markup'
+    elif string_number == 3:
+        markup = r'\baca-damp-clb-three-markup'
+    elif string_number == 4:
+        markup = r'\baca-damp-clb-four-markup'
+    else:
+        raise Exception(string_number)
+    return text_spanner(
+        f'{markup} =|',
+        *tweaks,
+        autodetect_right_padding=autodetect_right_padding,
+        bookend=False,
+        left_broken_text=left_broken_text,
+        lilypond_id='CLB',
+        map=map,
+        match=match,
+        measures=measures,
+        pieces=pieces,
+        right_broken=right_broken,
+        selector=selector,
+        tag=tag,
+        )
+
 def damp_spanner(
     *tweaks: abjad.IndexedTweakManager,
     # NOTE: autodetect default differs from text_spanner():
