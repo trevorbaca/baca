@@ -29,7 +29,7 @@ baca-spazz-markup = \markup
     \box
     spazz.
 
-baca-spazzolato-markup = \markup
+baca-spazzolato-boxed-markup = \markup
     \whiteout
     \override #'(box-padding . 0.5)
     \box
