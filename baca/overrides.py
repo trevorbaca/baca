@@ -9000,3 +9000,19 @@ def tuplet_number_extra_offset(
         tags=[tag],
         value=pair,
         )
+
+def tuplet_number_transparent(
+    *,
+    selector: typings.Selector = 'baca.leaves()',
+    tag: typing.Optional[str] = 'baca_tuplet_number_transparent',
+    ) -> OverrideCommand:
+    """
+    Overrides tuplet number transparent.
+    """
+    return OverrideCommand(
+        attribute='transparent',
+        grob='tuplet_number',
+        selector=selector,
+        tags=[tag],
+        value=True,
+        )

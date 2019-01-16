@@ -774,6 +774,7 @@ Override library.
    ~baca.overrides.tuplet_bracket_up
    ~baca.overrides.tuplet_number_denominator
    ~baca.overrides.tuplet_number_extra_offset
+   ~baca.overrides.tuplet_number_transparent
 
 .. raw:: html
 
