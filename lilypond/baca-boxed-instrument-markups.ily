@@ -48,7 +48,7 @@ baca-ratchet-markup = \markup
     \box
     ratchet
 
-baca-woodblock-boxed = \markup
+baca-woodblock-markup = \markup
     \whiteout
     \override #'(box-padding . 0.5)
     \box
