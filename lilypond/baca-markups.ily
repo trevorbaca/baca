@@ -419,6 +419,11 @@ baca-left-broken-spazz-markup =
 
 %%% VIBRATO MARKUP %%%
 
+baca-non-vib-markup =
+    \markup
+    \upright
+    "non vib."
+
 baca-sub-non-vib-markup =
     \markup
     \upright
