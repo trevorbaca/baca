@@ -9,3 +9,4 @@
 \include "baca-note-heads.ily"
 \include "baca-page-layout.ily"
 \include "baca-spanners.ily"
+\include "baca-string-technique-markups.ily"
