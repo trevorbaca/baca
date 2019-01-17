@@ -17,6 +17,8 @@ baca-col-legno-battuto-markup = \markup
 
 baca-ob-markup = \markup
     \whiteout
+    \override #'(box-padding . 0.5)
+    \box
     "OB"
 
 baca-pochiss-scratch-markup = \markup
