@@ -3332,7 +3332,6 @@ def material_annotation_spanner(
     r"""
     Makes material annotation spanner.
     """
-    return
     lilypond_id = lilypond_id or 'MA'
     return text_spanner(
         items,
