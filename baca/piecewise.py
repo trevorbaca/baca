@@ -5773,6 +5773,7 @@ def text_spanner(
             command = rf'\bacaStartTextSpan{lilypond_id}'
         else:
             raise ValueError(lilypond_id)
+        left_broken_markup = None
         if isinstance(left_broken_text, str):
             left_broken_markup = abjad.Markup(
                 left_broken_text,
@@ -5780,8 +5781,6 @@ def text_spanner(
                 )
         elif isinstance(left_broken_text, abjad.Markup):
             left_broken_markup = left_broken_text
-        else:
-            left_broken_markup = None
         start_text_span = abjad.StartTextSpan(
             command=command,
             left_broken_text=left_broken_markup,

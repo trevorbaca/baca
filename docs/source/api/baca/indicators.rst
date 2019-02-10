@@ -356,10 +356,6 @@ indicators
 
    .. container:: inherited
 
-      .. automethod:: Markup.from_literal
-
-   .. container:: inherited
-
       .. automethod:: Markup.hspace
 
    .. container:: inherited
