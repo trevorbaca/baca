@@ -2398,7 +2398,7 @@ def rehearsal_mark(
     """
     assert isinstance(argument, str), repr(argument)
     string = rf'\baca-rehearsal-mark-markup "{argument}"'
-    markup = abjad.Markup.from_literal(
+    markup = abjad.Markup(
         string,
         direction=abjad.Center,
         literal=True,

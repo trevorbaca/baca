@@ -1444,7 +1444,7 @@ class GlobalFermataCommand(scoping.Command):
         for leaf in abjad.iterate(argument).leaves():
             assert isinstance(leaf, abjad.MultimeasureRest)
             string = rf'\baca-{command}-markup'
-            markup = abjad.Markup.from_literal(string, literal=True)
+            markup = abjad.Markup(string, literal=True)
             markup = abjad.new(markup, direction=abjad.Up)
             abjad.attach(
                 markup,
@@ -5270,7 +5270,7 @@ def markup(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.markup(
-        ...         r'\baca-triple-diamond-markup',
+        ...         r'\markup { \baca-triple-diamond-markup }',
         ...         literal=True,
         ...         ),
         ...     baca.rests_around([2], [4]),
@@ -5348,9 +5348,10 @@ def markup(
         raise Exception(message)
     if isinstance(argument, str):
         if literal:
-            markup = abjad.Markup.from_literal(
+            markup = abjad.Markup(
                 argument,
                 direction=direction,
+                literal=True,
                 )
         else:
             markup = abjad.Markup(argument, direction=direction)

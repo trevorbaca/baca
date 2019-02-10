@@ -7919,7 +7919,10 @@ class PitchTree(classes.Tree):
                 transposition_only=True,
                 )
             string = str(set_class)
-            markup = abjad.Markup.from_literal(string)
+            markup = abjad.Markup(
+                string,
+                literal=True,
+                )
             label = abjad.Markup.line([markup], direction=abjad.Up)
             if label is not None:
                 label = label.small()

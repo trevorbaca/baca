@@ -1195,7 +1195,7 @@ class SegmentMaker(abjad.SegmentMaker):
         string = f'{left}{key}{right}'
         markup_function = SegmentMaker._status_to_markup_function[status]
         string = fr'\{markup_function} "{string}"'
-        markup = abjad.Markup.from_literal(
+        markup = abjad.Markup(
             string,
             direction=abjad.Up,
             literal=True
@@ -1267,7 +1267,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         modulation = metric_modulation._get_markup()
                         if modulation.contents[0].startswith(r'\markup'):
                             string = modulation.contents[0][8:]
-                            modulation = abjad.Markup.from_literal(
+                            modulation = abjad.Markup(
                                 string,
                                 literal=True,
                                 )
