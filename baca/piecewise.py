@@ -5688,7 +5688,7 @@ def text_spanner(
                 if current_item:
                     item_ = ' '.join(current_item)
                     if boxed:
-                        markup = abjad.Markup.from_literal(item_)
+                        markup = abjad.Markup(item_, literal=True)
                         markup = markup.box().override(('box-padding', 0.5))
                         items_.append(markup)
                     else:
@@ -5700,7 +5700,7 @@ def text_spanner(
         if current_item:
             item_ = ' '.join(current_item)
             if boxed:
-                markup = abjad.Markup.from_literal(item_)
+                markup = abjad.Markup(item_, literal=True)
                 markup = markup.box().override(('box-padding', 0.5))
                 items_.append(markup)
             else:
@@ -5755,7 +5755,7 @@ def text_spanner(
                     right_markup = rf'- \baca-text-spanner-right-text'
                     right_markup += rf' "{right_text}"'
             else:
-                right_markup = abjad.Markup.from_literal(right_text)
+                right_markup = abjad.Markup(right_text, literal=True)
                 assert isinstance(right_markup, abjad.Markup)
                 right_markup = right_markup.upright()
         else:
@@ -5774,7 +5774,7 @@ def text_spanner(
         else:
             raise ValueError(lilypond_id)
         if isinstance(left_broken_text, str):
-            left_broken_markup = abjad.Markup.from_literal(
+            left_broken_markup = abjad.Markup(
                 left_broken_text,
                 literal=True,
                 )
