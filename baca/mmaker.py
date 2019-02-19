@@ -2376,14 +2376,14 @@ class ImbricationCommand(scoping.Command):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! TwoVoiceStaffScoreTemplate
-                <<                                                                                       %! TwoVoiceStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -2399,18 +2399,18 @@ class ImbricationCommand(scoping.Command):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! TwoVoiceStaffScoreTemplate
-                    <<                                                                                   %! TwoVoiceStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context MusicStaff = "Music_Staff"                                              %! TwoVoiceStaffScoreTemplate
-                        <<                                                                               %! TwoVoiceStaffScoreTemplate
+                        \context MusicStaff = "Music_Staff"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        <<                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context MusicVoiceOne = "Music_Voice_One"                                   %! TwoVoiceStaffScoreTemplate
-                            {                                                                            %! TwoVoiceStaffScoreTemplate
+                            \context MusicVoiceOne = "Music_Voice_One"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
+                            {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 {
                                     \override TupletBracket.stencil = ##f
@@ -2482,10 +2482,10 @@ class ImbricationCommand(scoping.Command):
                 <BLANKLINE>
                                 }
                 <BLANKLINE>
-                            }                                                                            %! TwoVoiceStaffScoreTemplate
+                            }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context MusicVoiceTwo = "Music_Voice_Two"                                   %! TwoVoiceStaffScoreTemplate
-                            {                                                                            %! TwoVoiceStaffScoreTemplate
+                            \context MusicVoiceTwo = "Music_Voice_Two"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
+                            {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 {
                 <BLANKLINE>
@@ -2557,13 +2557,13 @@ class ImbricationCommand(scoping.Command):
                 <BLANKLINE>
                                 }
                 <BLANKLINE>
-                            }                                                                            %! TwoVoiceStaffScoreTemplate
+                            }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        >>                                                                               %! TwoVoiceStaffScoreTemplate
+                        >>                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! TwoVoiceStaffScoreTemplate
+                    >>                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! TwoVoiceStaffScoreTemplate
+                >>                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__
 
         ..  container:: example
 
@@ -8856,18 +8856,18 @@ class NestingCommand(scoping.Command):
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
             <BLANKLINE>
-            \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-            \with                                                                                    %! SingleStaffScoreTemplate
-            {                                                                                        %! SingleStaffScoreTemplate
-                \override Beam.positions = #'(-5.5 . -5.5)                                           %! SingleStaffScoreTemplate
-            }                                                                                        %! SingleStaffScoreTemplate
-            <<                                                                                       %! SingleStaffScoreTemplate
+            \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+            \with                                                                                    %! baca.SingleStaffScoreTemplate.__call__
+            {                                                                                        %! baca.SingleStaffScoreTemplate.__call__
+                \override Beam.positions = #'(-5.5 . -5.5)                                           %! baca.SingleStaffScoreTemplate.__call__
+            }                                                                                        %! baca.SingleStaffScoreTemplate.__call__
+            <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
-                \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                <<                                                                                   %! _make_global_context
+                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                <<                                                                                   %! abjad.ScoreTemplate._make_global_context
             <BLANKLINE>
-                    \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                    {                                                                                %! _make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                    {                                                                                %! abjad.ScoreTemplate._make_global_context
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -8883,18 +8883,18 @@ class NestingCommand(scoping.Command):
                         \baca-bar-line-visible                                                       %! _attach_final_bar_line
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
-                    }                                                                                %! _make_global_context
+                    }                                                                                %! abjad.ScoreTemplate._make_global_context
             <BLANKLINE>
-                >>                                                                                   %! _make_global_context
+                >>                                                                                   %! abjad.ScoreTemplate._make_global_context
             <BLANKLINE>
-                \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                <<                                                                                   %! SingleStaffScoreTemplate
+                \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
-                    \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                    {                                                                                %! SingleStaffScoreTemplate
+                    \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                    {                                                                                %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
-                        \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                        {                                                                            %! SingleStaffScoreTemplate
+                        \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             {
             <BLANKLINE>
@@ -8969,13 +8969,13 @@ class NestingCommand(scoping.Command):
             <BLANKLINE>
                             }
             <BLANKLINE>
-                        }                                                                            %! SingleStaffScoreTemplate
+                        }                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
-                    }                                                                                %! SingleStaffScoreTemplate
+                    }                                                                                %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
-                >>                                                                                   %! SingleStaffScoreTemplate
+                >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
-            >>                                                                                       %! SingleStaffScoreTemplate
+            >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
     """
 

@@ -51,14 +51,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -79,37 +79,37 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                \clef "treble"                                                           %! DEFAULT_CLEF:_set_status_tag:attach_defaults
+                                \clef "treble"                                                           %! DEFAULT_CLEF:_set_status_tag:abjad.ScoreTemplate.attach_defaults
                                 \once \override Staff.Clef.color = #(x11-color 'DarkViolet)              %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                             %@% \override Staff.Clef.color = ##f                                         %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
-                                \set Staff.forceClef = ##t                                               %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):attach_defaults
+                                \set Staff.forceClef = ##t                                               %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):abjad.ScoreTemplate.attach_defaults
                                 R1 * 3/8                                                                 %! _call_rhythm_commands
                                 \override Staff.Clef.color = #(x11-color 'violet)                        %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 R1 * 3/8                                                                 %! _call_rhythm_commands
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
         ..  container:: example
 
@@ -143,14 +143,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -171,18 +171,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \clef "treble"                                                           %! EXPLICIT_CLEF:_set_status_tag:baca_clef:IndicatorCommand
@@ -195,13 +195,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 R1 * 3/8                                                                 %! _call_rhythm_commands
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             Even after a previous clef:
 
@@ -246,14 +246,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -275,18 +275,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \clef "alto"                                                             %! EXPLICIT_CLEF:_set_status_tag:baca_clef:IndicatorCommand
@@ -299,13 +299,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 R1 * 3/8                                                                 %! _call_rhythm_commands
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
         ..  container:: example
 
@@ -349,14 +349,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -378,18 +378,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \clef "treble"                                                           %! REAPPLIED_CLEF:_set_status_tag:_reapply_persistent_indicators(3)
@@ -402,13 +402,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 R1 * 3/8                                                                 %! _call_rhythm_commands
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
         ..  container:: example
 
@@ -443,14 +443,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -476,18 +476,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \clef "treble"                                                           %! EXPLICIT_CLEF:_set_status_tag:baca_clef:IndicatorCommand
@@ -508,13 +508,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                                 R1 * 3/8                                                                 %! _call_rhythm_commands
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             Even at the beginning of a segment:
 
@@ -560,14 +560,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -589,18 +589,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \clef "treble"                                                           %! REDUNDANT_CLEF:_set_status_tag:baca_clef:IndicatorCommand
@@ -613,13 +613,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 R1 * 3/8                                                                 %! _call_rhythm_commands
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
         Returns none.
         """
@@ -656,14 +656,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -677,18 +677,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -698,13 +698,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             Even after a previous dynamic:
 
@@ -743,14 +743,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -765,18 +765,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -786,13 +786,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
         ..  container:: example
 
@@ -832,14 +832,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -854,18 +854,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -875,13 +875,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
         ..  container:: example
 
@@ -910,14 +910,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -931,18 +931,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -954,13 +954,13 @@ class PersistentIndicatorTests(object):
                                 - \tweak color #(x11-color 'DeepPink1)                                   %! REDUNDANT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                                 \f                                                                       %! REDUNDANT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             Even at the beginning of a segment:
 
@@ -999,14 +999,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -1021,18 +1021,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -1042,13 +1042,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             Sforzando dynamics do not count as redundant:
 
@@ -1075,14 +1075,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -1096,18 +1096,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -1119,13 +1119,13 @@ class PersistentIndicatorTests(object):
                                 - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                                 \sfz                                                                     %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             Even at the beginning of a segment:
 
@@ -1164,14 +1164,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -1186,18 +1186,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -1207,13 +1207,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
         ..  container:: example
 
@@ -1243,14 +1243,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -1264,18 +1264,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -1287,13 +1287,13 @@ class PersistentIndicatorTests(object):
                                 - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                                 \baca-effort-mf                                                          %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
         """
         pass
@@ -1347,14 +1347,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -1375,18 +1375,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -1395,13 +1395,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             >>> score = lilypond_file[abjad.Score]
             >>> text = format(score, 'lilypond')
@@ -1418,14 +1418,14 @@ class PersistentIndicatorTests(object):
 
                 >>> print(text)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -1446,18 +1446,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -1466,13 +1466,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             >>> tags_ = abjad.tags.instrument_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
@@ -1485,14 +1485,14 @@ class PersistentIndicatorTests(object):
 
                 >>> print(text)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -1513,18 +1513,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -1533,13 +1533,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
         ..  container:: example
 
@@ -1569,14 +1569,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -1597,18 +1597,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -1617,13 +1617,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             >>> score = lilypond_file[abjad.Score]
             >>> text = format(score, 'lilypond')
@@ -1640,14 +1640,14 @@ class PersistentIndicatorTests(object):
 
                 >>> print(text)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -1668,18 +1668,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -1688,13 +1688,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             >>> tags_ = abjad.tags.instrument_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
@@ -1708,14 +1708,14 @@ class PersistentIndicatorTests(object):
 
                 >>> print(text)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -1736,18 +1736,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -1756,13 +1756,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             Even after a previous instrument:
 
@@ -1803,14 +1803,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -1832,18 +1832,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -1852,13 +1852,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             >>> score = lilypond_file[abjad.Score]
             >>> text = format(score, 'lilypond')
@@ -1875,14 +1875,14 @@ class PersistentIndicatorTests(object):
 
                 >>> print(text)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -1904,18 +1904,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -1924,13 +1924,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             >>> tags_ = abjad.tags.instrument_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
@@ -1943,14 +1943,14 @@ class PersistentIndicatorTests(object):
 
                 >>> print(text)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -1972,18 +1972,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -1992,13 +1992,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
         ..  container:: example
 
@@ -2040,14 +2040,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -2069,18 +2069,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -2089,13 +2089,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             >>> score = lilypond_file[abjad.Score]
             >>> text = format(score, 'lilypond')
@@ -2112,14 +2112,14 @@ class PersistentIndicatorTests(object):
 
                 >>> print(text)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -2141,18 +2141,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -2161,13 +2161,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             >>> tags_ = abjad.tags.instrument_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
@@ -2181,14 +2181,14 @@ class PersistentIndicatorTests(object):
 
                 >>> print(text)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -2210,18 +2210,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -2230,13 +2230,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
         ..  container:: example
 
@@ -2276,14 +2276,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -2309,18 +2309,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'2                                                                      %! baca_make_notes
@@ -2333,13 +2333,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                                 c'2                                                                      %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             >>> score = lilypond_file[abjad.Score]
             >>> text = format(score, 'lilypond')
@@ -2356,14 +2356,14 @@ class PersistentIndicatorTests(object):
 
                 >>> print(text)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -2389,18 +2389,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'2                                                                      %! baca_make_notes
@@ -2413,13 +2413,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                                 c'2                                                                      %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             >>> tags_ = abjad.tags.instrument_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
@@ -2432,14 +2432,14 @@ class PersistentIndicatorTests(object):
 
                 >>> print(text)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -2465,18 +2465,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'2                                                                      %! baca_make_notes
@@ -2489,13 +2489,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                                 c'2                                                                      %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             Even at the beginning of a segment:
 
@@ -2542,14 +2542,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -2571,18 +2571,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -2591,13 +2591,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             >>> score = lilypond_file[abjad.Score]
             >>> text = format(score, 'lilypond')
@@ -2614,14 +2614,14 @@ class PersistentIndicatorTests(object):
 
                 >>> print(text)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -2643,18 +2643,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -2663,13 +2663,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             >>> tags_ = abjad.tags.instrument_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
@@ -2682,14 +2682,14 @@ class PersistentIndicatorTests(object):
 
                 >>> print(text)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -2711,18 +2711,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -2731,13 +2731,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
         """
         pass
@@ -2799,14 +2799,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -2827,39 +2827,39 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                \set Staff.shortInstrumentName =                                         %! DEFAULT_MARGIN_MARKUP:_set_status_tag:attach_defaults:-PARTS
-                                \markup { I+II }                                                         %! DEFAULT_MARGIN_MARKUP:_set_status_tag:attach_defaults:-PARTS
+                                \set Staff.shortInstrumentName =                                         %! DEFAULT_MARGIN_MARKUP:_set_status_tag:abjad.ScoreTemplate.attach_defaults:-PARTS
+                                \markup { I+II }                                                         %! DEFAULT_MARGIN_MARKUP:_set_status_tag:abjad.ScoreTemplate.attach_defaults:-PARTS
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)    %! DEFAULT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'4.                                                                     %! baca_make_notes
                                 ^ \baca-default-indicator-markup "[“I+II”]"                              %! DEFAULT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'violet)              %! REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName =                                         %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):attach_defaults:-PARTS
-                                \markup { I+II }                                                         %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):attach_defaults:-PARTS
+                                \set Staff.shortInstrumentName =                                         %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):abjad.ScoreTemplate.attach_defaults:-PARTS
+                                \markup { I+II }                                                         %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):abjad.ScoreTemplate.attach_defaults:-PARTS
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             >>> score = lilypond_file[abjad.Score]
             >>> text = format(score, 'lilypond')
@@ -2876,14 +2876,14 @@ class PersistentIndicatorTests(object):
 
                 >>> print(text)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -2904,39 +2904,39 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                \set Staff.shortInstrumentName =                                         %! DEFAULT_MARGIN_MARKUP:_set_status_tag:attach_defaults:-PARTS
-                                \markup { I+II }                                                         %! DEFAULT_MARGIN_MARKUP:_set_status_tag:attach_defaults:-PARTS
+                                \set Staff.shortInstrumentName =                                         %! DEFAULT_MARGIN_MARKUP:_set_status_tag:abjad.ScoreTemplate.attach_defaults:-PARTS
+                                \markup { I+II }                                                         %! DEFAULT_MARGIN_MARKUP:_set_status_tag:abjad.ScoreTemplate.attach_defaults:-PARTS
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)    %! DEFAULT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'4.                                                                     %! baca_make_notes
                             %%% ^ \baca-default-indicator-markup "[“I+II”]"                              %! DEFAULT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                             %%% \override Staff.InstrumentName.color = #(x11-color 'violet)              %! REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName =                                         %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):attach_defaults:-PARTS
-                                \markup { I+II }                                                         %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):attach_defaults:-PARTS
+                                \set Staff.shortInstrumentName =                                         %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):abjad.ScoreTemplate.attach_defaults:-PARTS
+                                \markup { I+II }                                                         %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):abjad.ScoreTemplate.attach_defaults:-PARTS
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             >>> tags_ = abjad.tags.margin_markup_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
@@ -2949,14 +2949,14 @@ class PersistentIndicatorTests(object):
 
                 >>> print(text)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -2977,39 +2977,39 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                \set Staff.shortInstrumentName =                                         %! DEFAULT_MARGIN_MARKUP:_set_status_tag:attach_defaults:-PARTS
-                                \markup { I+II }                                                         %! DEFAULT_MARGIN_MARKUP:_set_status_tag:attach_defaults:-PARTS
+                                \set Staff.shortInstrumentName =                                         %! DEFAULT_MARGIN_MARKUP:_set_status_tag:abjad.ScoreTemplate.attach_defaults:-PARTS
+                                \markup { I+II }                                                         %! DEFAULT_MARGIN_MARKUP:_set_status_tag:abjad.ScoreTemplate.attach_defaults:-PARTS
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)    %! DEFAULT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'4.                                                                     %! baca_make_notes
                                 ^ \baca-default-indicator-markup "[“I+II”]"                              %! DEFAULT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'violet)              %! REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName =                                         %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):attach_defaults:-PARTS
-                                \markup { I+II }                                                         %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):attach_defaults:-PARTS
+                                \set Staff.shortInstrumentName =                                         %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):abjad.ScoreTemplate.attach_defaults:-PARTS
+                                \markup { I+II }                                                         %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):abjad.ScoreTemplate.attach_defaults:-PARTS
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
         ..  container:: example
 
@@ -3039,14 +3039,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -3067,18 +3067,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
@@ -3093,13 +3093,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             >>> score = lilypond_file[abjad.Score]
             >>> text = format(score, 'lilypond')
@@ -3116,14 +3116,14 @@ class PersistentIndicatorTests(object):
 
                 >>> print(text)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -3144,18 +3144,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
@@ -3170,13 +3170,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             >>> tags_ = abjad.tags.margin_markup_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
@@ -3189,14 +3189,14 @@ class PersistentIndicatorTests(object):
 
                 >>> print(text)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -3217,18 +3217,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
@@ -3243,13 +3243,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             Even after previous margin markup:
 
@@ -3290,14 +3290,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -3319,18 +3319,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
@@ -3347,13 +3347,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             >>> score = lilypond_file[abjad.Score]
             >>> text = format(score, 'lilypond')
@@ -3370,14 +3370,14 @@ class PersistentIndicatorTests(object):
 
                 >>> print(text)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -3399,18 +3399,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
@@ -3427,13 +3427,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             >>> tags_ = abjad.tags.margin_markup_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
@@ -3446,14 +3446,14 @@ class PersistentIndicatorTests(object):
 
                 >>> print(text)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -3475,18 +3475,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
@@ -3503,13 +3503,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
         ..  container:: example
 
@@ -3551,14 +3551,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -3580,18 +3580,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \set Staff.shortInstrumentName =                                         %! REAPPLIED_MARGIN_MARKUP:_set_status_tag:_reapply_persistent_indicators(3):-PARTS
@@ -3608,13 +3608,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             >>> score = lilypond_file[abjad.Score]
             >>> text = format(score, 'lilypond')
@@ -3631,14 +3631,14 @@ class PersistentIndicatorTests(object):
 
                 >>> print(text)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -3660,18 +3660,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \set Staff.shortInstrumentName =                                         %! REAPPLIED_MARGIN_MARKUP:_set_status_tag:_reapply_persistent_indicators(3):-PARTS
@@ -3688,13 +3688,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             >>> tags_ = abjad.tags.margin_markup_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
@@ -3707,14 +3707,14 @@ class PersistentIndicatorTests(object):
 
                 >>> print(text)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -3736,18 +3736,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \set Staff.shortInstrumentName =                                         %! REAPPLIED_MARGIN_MARKUP:_set_status_tag:_reapply_persistent_indicators(3):-PARTS
@@ -3764,13 +3764,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
         ..  container:: example
 
@@ -3810,14 +3810,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -3843,18 +3843,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
@@ -3879,13 +3879,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                                 c'2                                                                      %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             >>> score = lilypond_file[abjad.Score]
             >>> text = format(score, 'lilypond')
@@ -3902,14 +3902,14 @@ class PersistentIndicatorTests(object):
 
                 >>> print(text)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -3935,18 +3935,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
@@ -3971,13 +3971,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                                 c'2                                                                      %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             >>> tags_ = abjad.tags.margin_markup_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
@@ -3990,14 +3990,14 @@ class PersistentIndicatorTests(object):
 
                 >>> print(text)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -4023,18 +4023,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
@@ -4059,13 +4059,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                                 c'2                                                                      %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             Even at the beginning of a segment:
 
@@ -4112,14 +4112,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -4141,18 +4141,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \set Staff.shortInstrumentName =                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
@@ -4169,13 +4169,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             >>> score = lilypond_file[abjad.Score]
             >>> text = format(score, 'lilypond')
@@ -4192,14 +4192,14 @@ class PersistentIndicatorTests(object):
 
                 >>> print(text)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -4221,18 +4221,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \set Staff.shortInstrumentName =                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
@@ -4249,13 +4249,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             >>> tags_ = abjad.tags.margin_markup_color_tags()
             >>> match = lambda tags: bool(set(tags) & set(tags_))
@@ -4268,14 +4268,14 @@ class PersistentIndicatorTests(object):
 
                 >>> print(text)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -4297,18 +4297,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \set Staff.shortInstrumentName =                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
@@ -4325,13 +4325,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
         ..  container:: example
 
@@ -4380,14 +4380,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -4413,18 +4413,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:-PARTS:IndicatorCommand
@@ -4449,13 +4449,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                                 c'2                                                                      %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
         """
         return None
@@ -4503,14 +4503,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #25                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -4536,18 +4536,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -4555,13 +4555,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             Even after a previous metronome mark:
 
@@ -4606,14 +4606,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -4642,18 +4642,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -4661,13 +4661,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
         ..  container:: example
 
@@ -4713,14 +4713,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -4749,18 +4749,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -4768,13 +4768,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
         ..  container:: example
 
@@ -4808,14 +4808,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -4849,18 +4849,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -4868,13 +4868,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             Even at the beginning of a segment:
 
@@ -4919,14 +4919,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -4955,18 +4955,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -4974,13 +4974,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
         """
         pass
@@ -5017,14 +5017,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -5038,18 +5038,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! EXPLICIT_PERSISTENT_OVERRIDE:_set_status_tag:baca_bar_extent_persistent:IndicatorCommand
@@ -5062,13 +5062,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 b'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             Persistent overrides also appear in segment metadata:
 
@@ -5152,14 +5152,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -5174,18 +5174,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \baca-unpitched-music-warning                                            %! _color_unpitched_notes
@@ -5196,13 +5196,13 @@ class PersistentIndicatorTests(object):
                                 \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
         ..  container:: example
 
@@ -5234,14 +5234,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -5255,18 +5255,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! EXPLICIT_PERSISTENT_OVERRIDE:_set_status_tag:baca_bar_extent_persistent:IndicatorCommand
@@ -5280,13 +5280,13 @@ class PersistentIndicatorTests(object):
                                 \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! REDUNDANT_PERSISTENT_OVERRIDE:_set_status_tag:baca_bar_extent_persistent:IndicatorCommand
                                 b'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             Even at the beginning of a segment:
 
@@ -5330,14 +5330,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -5352,18 +5352,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! REDUNDANT_PERSISTENT_OVERRIDE:_set_status_tag:baca_bar_extent_persistent:IndicatorCommand
@@ -5374,13 +5374,13 @@ class PersistentIndicatorTests(object):
                                 \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
         """
         pass
@@ -5416,14 +5416,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -5437,18 +5437,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
@@ -5460,13 +5460,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             Even after previous staff lines:
 
@@ -5505,14 +5505,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -5527,18 +5527,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
@@ -5550,13 +5550,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
         ..  container:: example
 
@@ -5596,14 +5596,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -5618,18 +5618,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \stopStaff                                                               %! REAPPLIED_STAFF_LINES:_set_status_tag:_reapply_persistent_indicators(3)
@@ -5641,13 +5641,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
         ..  container:: example
 
@@ -5676,14 +5676,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -5697,18 +5697,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
@@ -5724,13 +5724,13 @@ class PersistentIndicatorTests(object):
                                 \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)        %! REDUNDANT_STAFF_LINES_COLOR:_attach_color_literal(2)
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             Even at the beginning of a segment:
 
@@ -5769,14 +5769,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -5791,18 +5791,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \stopStaff                                                               %! REDUNDANT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
@@ -5814,13 +5814,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
         """
         pass
@@ -5868,14 +5868,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #25                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -5921,18 +5921,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -5940,13 +5940,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             Even after a previous tempo trend:
 
@@ -5990,14 +5990,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -6046,18 +6046,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -6065,13 +6065,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
         ..  container:: example
 
@@ -6116,14 +6116,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -6172,18 +6172,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -6191,13 +6191,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 
         ..  container:: example
 
@@ -6234,14 +6234,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -6319,18 +6319,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -6341,13 +6341,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
             Even at the beginning of a segment:
 
@@ -6391,14 +6391,14 @@ class PersistentIndicatorTests(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! SingleStaffScoreTemplate
-                <<                                                                                       %! SingleStaffScoreTemplate
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! _make_global_context
-                    <<                                                                                   %! _make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! _make_global_context
-                        {                                                                                %! _make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
@@ -6447,18 +6447,18 @@ class PersistentIndicatorTests(object):
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
-                        }                                                                                %! _make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    >>                                                                                   %! _make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! SingleStaffScoreTemplate
-                    <<                                                                                   %! SingleStaffScoreTemplate
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! SingleStaffScoreTemplate
-                        {                                                                                %! SingleStaffScoreTemplate
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! SingleStaffScoreTemplate
-                            {                                                                            %! SingleStaffScoreTemplate
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -6466,13 +6466,13 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
-                            }                                                                            %! SingleStaffScoreTemplate
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                        }                                                                                %! SingleStaffScoreTemplate
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                    >>                                                                                   %! SingleStaffScoreTemplate
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                >>                                                                                       %! SingleStaffScoreTemplate
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
         """
         pass
