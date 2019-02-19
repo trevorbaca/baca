@@ -468,7 +468,7 @@ class RhythmCommand(scoping.Command):
         previous_segment_stop_state = None
         dictionary = self.runtime.get('previous_segment_voice_metadata')
         if dictionary:
-            previous_segment_stop_state = dictionary.get(abjad.tags.RHYTHM)
+            previous_segment_stop_state = dictionary.get(const.RHYTHM)
             if (previous_segment_stop_state is not None and
                 previous_segment_stop_state.get('name') != self.persist):
                 previous_segment_stop_state = None
@@ -483,7 +483,7 @@ class RhythmCommand(scoping.Command):
                 raise Exception('left-broken ties must be repeat ties.')
             first_leaf = abjad.select(selections).leaf(0)
             if isinstance(first_leaf, abjad.Note):
-                abjad.attach(abjad.tags.LEFT_BROKEN_REPEAT_TIE_TO, first_leaf)
+                abjad.attach(const.LEFT_BROKEN_REPEAT_TIE_TO, first_leaf)
         if (self.right_broken and
             self.rhythm_maker.state.get('incomplete_final_note')):
             if self.repeat_ties:
@@ -679,7 +679,7 @@ class RhythmCommand(scoping.Command):
             'RHYTHM'
 
         """
-        return abjad.tags.RHYTHM
+        return const.RHYTHM
 
     @property
     def payload(self) -> abjad.AnnotatedTimespan:

@@ -3,6 +3,7 @@ import collections
 import numbers
 import typing
 from . import classes
+from . import const
 from . import pitchclasses
 from . import scoping
 from . import typings
@@ -3104,7 +3105,7 @@ class PitchCommand(scoping.Command):
         dictionary = self.runtime.get('previous_segment_voice_metadata', None)
         if not dictionary:
             return 0
-        dictionary = dictionary.get(abjad.tags.PITCH, None)
+        dictionary = dictionary.get(const.PITCH, None)
         if not dictionary:
             return 0
         if dictionary.get('name') != self.persist:
@@ -3116,7 +3117,7 @@ class PitchCommand(scoping.Command):
         if self.ignore_incomplete:
             return pitches_consumed
         dictionary = self.runtime['previous_segment_voice_metadata']
-        dictionary = dictionary.get(abjad.tags.RHYTHM, None)
+        dictionary = dictionary.get(const.RHYTHM, None)
         if dictionary:
             if dictionary.get('incomplete_final_note', False):
                 pitches_consumed -= 1
@@ -3213,7 +3214,7 @@ class PitchCommand(scoping.Command):
             'PITCH'
 
         """
-        return abjad.tags.PITCH
+        return const.PITCH
         
     @property
     def persist(self) -> typing.Optional[str]:

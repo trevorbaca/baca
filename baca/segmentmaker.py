@@ -881,7 +881,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for voice in abjad.iterate(self.score).components(abjad.Voice):
             pleaves = classes.Selection(voice).pleaves()
             value = bool(pleaves)
-            abjad.annotate(voice, abjad.tags.SOUNDS_DURING_SEGMENT, value)
+            abjad.annotate(voice, const.SOUNDS_DURING_SEGMENT, value)
 
     def _apply_breaks(self):
         if self.breaks is None:
@@ -893,14 +893,14 @@ class SegmentMaker(abjad.SegmentMaker):
     def _apply_first_and_final_ties(self, voice):
         for current_leaf in abjad.iterate(voice).leaves():
             inspection = abjad.inspect(current_leaf)
-            if inspection.has_indicator(abjad.tags.LEFT_BROKEN_REPEAT_TIE_TO):
+            if inspection.has_indicator(const.LEFT_BROKEN_REPEAT_TIE_TO):
                 rhythmcommands.TieCorrectionCommand._add_tie(
                     current_leaf,
                     direction=abjad.Left,
                     repeat=True,
                     )
                 continue
-            elif inspection.has_indicator(abjad.tags.RIGHT_BROKEN_TIE_FROM):
+            elif inspection.has_indicator(const.RIGHT_BROKEN_TIE_FROM):
                 rhythmcommands.TieCorrectionCommand._add_tie(
                     current_leaf,
                     direction=abjad.Right,
@@ -909,9 +909,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 continue
             if not isinstance(current_leaf, (abjad.Chord, abjad.Note)):
                 continue
-            string = abjad.tags.REPEAT_TIE 
+            string = const.REPEAT_TIE
             use_repeat_tie = abjad.inspect(current_leaf).has_indicator(string)
-            if abjad.inspect(current_leaf).has_indicator(abjad.tags.TIE_TO):
+            if abjad.inspect(current_leaf).has_indicator(const.TIE_TO):
                 previous_leaf = abjad.inspect(current_leaf).leaf(-1)
                 if isinstance(previous_leaf, (abjad.Chord, abjad.Note)):
                     if use_repeat_tie:
@@ -928,8 +928,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             previous_leaf,
                             tag='_apply_first_and_final_ties(1b)',
                             )
-                abjad.detach(abjad.tags.TIE_TO, current_leaf)
-            if abjad.inspect(current_leaf).has_indicator(abjad.tags.TIE_FROM):
+                abjad.detach(const.TIE_TO, current_leaf)
+            if abjad.inspect(current_leaf).has_indicator(const.TIE_FROM):
                 next_leaf = abjad.inspect(current_leaf).leaf(1)
                 if isinstance(next_leaf, (abjad.Chord, abjad.Note)):
                     if use_repeat_tie:
@@ -946,7 +946,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             current_leaf,
                             tag='_apply_first_and_final_ties(2b)',
                             )
-                abjad.detach(abjad.tags.TIE_FROM, current_leaf)
+                abjad.detach(const.TIE_FROM, current_leaf)
 
     def _apply_spacing(self):
         if self.spacing is None:
@@ -1679,7 +1679,7 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         if self.environment == 'docs':
             return
-        tag = abjad.tags.SOUNDS_DURING_SEGMENT
+        tag = const.SOUNDS_DURING_SEGMENT
         for voice in abjad.iterate(self.score).components(abjad.Voice):
             if not abjad.inspect(voice).annotation(tag):
                 continue
