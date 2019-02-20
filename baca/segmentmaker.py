@@ -1651,7 +1651,7 @@ class SegmentMaker(abjad.SegmentMaker):
             for component in voice:
                 if isinstance(component, (abjad.MultimeasureRest, abjad.Skip)):
                     continue
-                if abjad.inspect(component).annotation(const.HIDDEN) is True:
+                if abjad.inspect(component).annotation(abjad.const.HIDDEN) is True:
                     continue
                 if abjad.inspect(component).annotation(annotation) is True:
                     continue
@@ -1715,7 +1715,7 @@ class SegmentMaker(abjad.SegmentMaker):
         tag = abjad.tags.ALLOW_OUT_OF_RANGE
         for voice in abjad.iterate(self.score).components(abjad.Voice):
             for pleaf in abjad.iterate(voice).leaves(pitched=True):
-                if abjad.inspect(pleaf).annotation(const.HIDDEN):
+                if abjad.inspect(pleaf).annotation(abjad.const.HIDDEN):
                     continue
                 instrument = abjad.inspect(pleaf).effective(
                     abjad.Instrument
@@ -1926,7 +1926,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for vertical_moment in vertical_moments:
             pleaves, pitches = [], []
             for leaf in vertical_moment.leaves:
-                if abjad.inspect(leaf).annotation(const.HIDDEN) is True:
+                if abjad.inspect(leaf).annotation(abjad.const.HIDDEN) is True:
                     continue
                 if abjad.inspect(leaf).has_indicator(
                     abjad.tags.STAFF_POSITION,
@@ -2082,7 +2082,7 @@ class SegmentMaker(abjad.SegmentMaker):
             previous_lt, previous_pcs = None, []
             for lt in abjad.iterate(voice).logical_ties():
                 inspection = abjad.inspect(lt.head)
-                if inspection.annotation(const.HIDDEN) is True:
+                if inspection.annotation(abjad.const.HIDDEN) is True:
                     written_pitches = []
                 elif isinstance(lt.head, abjad.Note):
                     written_pitches = [lt.head.written_pitch]
@@ -2866,7 +2866,7 @@ class SegmentMaker(abjad.SegmentMaker):
         note = abjad.Note("c'1", multiplier=duration, tag=tag)
         literal = abjad.LilyPondLiteral(r'\baca-invisible-music')
         abjad.attach(literal, note, tag=tag)
-        abjad.annotate(note, const.HIDDEN, True)
+        abjad.annotate(note, abjad.const.HIDDEN, True)
         hidden_note_voice = abjad.Voice([note], name=voice_name, tag=tag)
         abjad.annotate(hidden_note_voice, const.HIDDEN_NOTE_VOICE, True)
         abjad.annotate(hidden_note_voice, const.INTERMITTENT, True)
