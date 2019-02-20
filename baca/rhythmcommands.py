@@ -2111,6 +2111,108 @@ def make_fused_tuplet_monads(
             ),
         )
 
+def make_monads(
+    fractions: str,
+    ) -> RhythmCommand:
+    r"""
+    Makes monads.
+
+    ..  container:: example
+
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     spacing=baca.minimum_duration((1, 12)),
+        ...     time_signatures=[(4, 4)],
+        ...     )
+
+        >>> maker(
+        ...     'Music_Voice',
+        ...     baca.make_monads('2/5 2/5 1/5'),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
+            \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+            <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+            <BLANKLINE>
+                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                    {                                                                                %! abjad.ScoreTemplate._make_global_context
+            <BLANKLINE>
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \time 4/4                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1                                                                       %! _make_global_skips(1)
+                        \baca-bar-line-visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
+            <BLANKLINE>
+                    }                                                                                %! abjad.ScoreTemplate._make_global_context
+            <BLANKLINE>
+                >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+            <BLANKLINE>
+                \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                    \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                    {                                                                                %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                        \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                            %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                            \tweak edge-height #'(0.7 . 0)
+                            \times 4/5 {
+            <BLANKLINE>
+                                % [Music_Voice measure 1]                                            %! _comment_measure_numbers
+                                \baca-unpitched-music-warning                                        %! _color_unpitched_notes
+                                c'2
+            <BLANKLINE>
+                            }
+            <BLANKLINE>
+                            \tweak edge-height #'(0.7 . 0)
+                            \times 4/5 {
+            <BLANKLINE>
+                                \baca-unpitched-music-warning                                        %! _color_unpitched_notes
+                                c'2
+            <BLANKLINE>
+                            }
+            <BLANKLINE>
+                            \tweak edge-height #'(0.7 . 0)
+                            \times 4/5 {
+            <BLANKLINE>
+                                \baca-unpitched-music-warning                                        %! _color_unpitched_notes
+                                c'4
+            <BLANKLINE>
+                            }
+            <BLANKLINE>
+                        }                                                                            %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                    }                                                                                %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+            >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+
+    """
+    components = []
+    maker = abjad.LeafMaker()
+    pitch = 0
+    for fraction in fractions.split():
+        leaves = maker([pitch], [fraction])
+        components.extend(leaves)
+    rhythm_maker = abjad.select(components)
+    return RhythmCommand(
+        annotate_unpitched_music=True,
+        rhythm_maker=rhythm_maker,
+        )
+
 def make_multimeasure_rests(
     *,
     measures: typings.Slice = None,

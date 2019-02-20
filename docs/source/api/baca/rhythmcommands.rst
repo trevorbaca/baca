@@ -278,6 +278,7 @@ rhythmcommands
    ~flags
    ~make_even_divisions
    ~make_fused_tuplet_monads
+   ~make_monads
    ~make_multimeasure_rests
    ~make_notes
    ~make_repeat_tied_notes
@@ -311,6 +312,8 @@ rhythmcommands
 .. autofunction:: make_even_divisions
 
 .. autofunction:: make_fused_tuplet_monads
+
+.. autofunction:: make_monads
 
 .. autofunction:: make_multimeasure_rests
 

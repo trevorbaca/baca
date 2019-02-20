@@ -1004,6 +1004,7 @@ Rhythm library.
    ~baca.rhythmcommands.flags
    ~baca.rhythmcommands.make_even_divisions
    ~baca.rhythmcommands.make_fused_tuplet_monads
+   ~baca.rhythmcommands.make_monads
    ~baca.rhythmcommands.make_multimeasure_rests
    ~baca.rhythmcommands.make_notes
    ~baca.rhythmcommands.make_repeat_tied_notes
