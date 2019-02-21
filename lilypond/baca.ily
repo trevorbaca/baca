@@ -10,6 +10,7 @@
 \include "baca-page-layout.ily"
 \include "baca-percussion-technique-markups.ily"
 \include "baca-piano-technique-markups.ily"
+\include "baca-sforzando-markups.ily"
 \include "baca-shared-instrumental-technique-markups.ily"
 \include "baca-spanners.ily"
 \include "baca-string-technique-markups.ily"
