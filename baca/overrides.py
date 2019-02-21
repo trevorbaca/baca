@@ -680,7 +680,7 @@ def bar_line_extra_offset(
 
 def bar_line_transparent(
     *,
-    selector: typings.Selector = 'baca.leaves()',
+    selector: typings.Selector = 'baca.leaf(0)',
     tag: typing.Optional[str] = 'baca_bar_line_transparent',
     ) -> OverrideCommand:
     r"""
@@ -761,7 +761,7 @@ def bar_line_transparent(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                            \override Score.BarLine.transparent = ##t                                %! baca_bar_line_transparent:OverrideCommand(1)
+                            \once \override Score.BarLine.transparent = ##t                          %! baca_bar_line_transparent:OverrideCommand(1)
                             e'8
                             [
             <BLANKLINE>
@@ -800,7 +800,6 @@ def bar_line_transparent(
             <BLANKLINE>
                             g'8
                             ]
-                            \revert Score.BarLine.transparent                                        %! baca_bar_line_transparent:OverrideCommand(2)
             <BLANKLINE>
                         }                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
