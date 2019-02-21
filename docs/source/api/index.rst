@@ -748,7 +748,8 @@ Override library.
    ~baca.overrides.text_script_extra_offset
    ~baca.overrides.text_script_font_size
    ~baca.overrides.text_script_padding
-   ~baca.overrides.text_script_parent_center
+   ~baca.overrides.text_script_parent_alignment_x
+   ~baca.overrides.text_script_self_alignment_x
    ~baca.overrides.text_script_staff_padding
    ~baca.overrides.text_script_up
    ~baca.overrides.text_script_x_offset

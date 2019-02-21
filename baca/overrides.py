@@ -6923,39 +6923,15 @@ def text_script_padding(
         tags=[tag],
         )
 
-def text_script_parent_center(
+def text_script_parent_alignment_x(
+    n: typings.Number,
     *,
     allow_mmrests: bool = False,
     selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_text_script_parent_center',
+    tag: typing.Optional[str] = 'baca_text_script_parent_alignment_x',
     ) -> OverrideCommand:
-    r"""
-    Overrides text script parent alignment X to center.
-
-    ..  container:: example exception
-
-        Raises exception when called on multimeasure rests:
-
-        >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
-
-        >>> maker(
-        ...     'Music_Voice',
-        ...     baca.markup(
-        ...         'still',
-        ...         boxed=True,
-        ...         selector=baca.leaf(1),
-        ...         ),
-        ...     baca.text_script_parent_center()
-        ...     )
-
-        >>> lilypond_file = maker.run(environment='docs')
-        Traceback (most recent call last):
-            ...
-        Exception: MultimeasureRest is forbidden.
-
+    """
+    Overrides text script parent-alignment-X.
     """
     if allow_mmrests is True:
         blacklist = None
@@ -6967,7 +6943,30 @@ def text_script_parent_center(
         grob='text_script',
         selector=selector,
         tags=[tag],
-        value=0,
+        value=n,
+        )
+
+def text_script_self_alignment_x(
+    n: typings.Number,
+    *,
+    allow_mmrests: bool = False,
+    selector: typings.Selector = 'baca.leaves()',
+    tag: typing.Optional[str] = 'baca_text_script_self_alignment_x',
+    ) -> OverrideCommand:
+    """
+    Overrides text script self-alignment-X.
+    """
+    if allow_mmrests is True:
+        blacklist = None
+    else:
+        blacklist = (abjad.MultimeasureRest,)
+    return OverrideCommand(
+        attribute='self_alignment_X',
+        blacklist=blacklist,
+        grob='text_script',
+        selector=selector,
+        tags=[tag],
+        value=n,
         )
 
 def text_script_staff_padding(

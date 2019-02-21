@@ -242,7 +242,8 @@ overrides
    ~text_script_extra_offset
    ~text_script_font_size
    ~text_script_padding
-   ~text_script_parent_center
+   ~text_script_parent_alignment_x
+   ~text_script_self_alignment_x
    ~text_script_staff_padding
    ~text_script_up
    ~text_script_x_offset
@@ -464,7 +465,9 @@ overrides
 
 .. autofunction:: text_script_padding
 
-.. autofunction:: text_script_parent_center
+.. autofunction:: text_script_parent_alignment_x
+
+.. autofunction:: text_script_self_alignment_x
 
 .. autofunction:: text_script_staff_padding
 
