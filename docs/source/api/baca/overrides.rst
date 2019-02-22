@@ -260,6 +260,7 @@ overrides
    ~tie_down
    ~tie_up
    ~time_signature_extra_offset
+   ~time_signature_stencil_false
    ~time_signature_transparent
    ~trill_spanner_staff_padding
    ~tuplet_bracket_down
@@ -503,6 +504,8 @@ overrides
 .. autofunction:: tie_up
 
 .. autofunction:: time_signature_extra_offset
+
+.. autofunction:: time_signature_stencil_false
 
 .. autofunction:: time_signature_transparent
 

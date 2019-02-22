@@ -8124,6 +8124,23 @@ def time_signature_extra_offset(
         value=pair,
         )
 
+def time_signature_stencil_false(
+    *,
+    selector: typings.Selector = 'baca.hleaves()',
+    tag: typing.Optional[str] = 'baca_time_signature_stencil_false',
+    ) -> OverrideCommand:
+    """
+    Overrides time signature stencil property.
+    """
+    return OverrideCommand(
+        attribute='stencil',
+        context='Score',
+        grob='time_signature',
+        selector=selector,
+        tags=[tag],
+        value=False,
+        )
+
 def time_signature_transparent(
     *,
     selector: typings.Selector = 'baca.hleaves()',
