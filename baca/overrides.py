@@ -2819,6 +2819,23 @@ def note_head_color(
         value=color,
         )
 
+def note_head_duration_log(
+    n: int,
+    *,
+    selector: typings.Selector = 'baca.pleaves()',
+    tag: typing.Optional[str] = 'baca_note_head_color',
+    ) -> OverrideCommand:
+    """
+    Overrides note-head duration-log property.
+    """
+    return OverrideCommand(
+        attribute='duration_log',
+        grob='note_head',
+        selector=selector,
+        tags=[tag],
+        value=n,
+        )
+
 def note_head_extra_offset(
     pair: typings.NumberPair,
     *,
@@ -2836,6 +2853,23 @@ def note_head_extra_offset(
         value=pair,
         )
 
+def note_head_no_ledgers(
+    value: bool,
+    *,
+    selector: typings.Selector = 'baca.pleaf(0)',
+    tag: typing.Optional[str] = 'baca_note_head_extra_offset',
+    ) -> OverrideCommand:
+    """
+    Overrides note-head no-ledgers property.
+    """
+    return OverrideCommand(
+        attribute='no_ledgers',
+        grob='note_head',
+        selector=selector,
+        tags=[tag],
+        value=value,
+        )
+
 def note_head_stencil_false(
     *,
     selector: typings.Selector = 'baca.pleaf(0)',
@@ -2850,6 +2884,23 @@ def note_head_stencil_false(
         selector=selector,
         tags=[tag],
         value=False,
+        )
+
+def note_head_style(
+    string: str,
+    *,
+    selector: typings.Selector = 'baca.pleaf(0)',
+    tag: typing.Optional[str] = 'baca_note_head_stencil_false',
+    ) -> OverrideCommand:
+    """
+    Overrides note-head style property.
+    """
+    return OverrideCommand(
+        attribute='style',
+        grob='note_head',
+        selector=selector,
+        tags=[tag],
+        value=string,
         )
 
 def note_head_style_cross(
