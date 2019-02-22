@@ -700,8 +700,11 @@ Override library.
    ~baca.overrides.no_ledgers
    ~baca.overrides.note_column_shift
    ~baca.overrides.note_head_color
+   ~baca.overrides.note_head_duration_log
    ~baca.overrides.note_head_extra_offset
+   ~baca.overrides.note_head_no_ledgers
    ~baca.overrides.note_head_stencil_false
+   ~baca.overrides.note_head_style
    ~baca.overrides.note_head_style_cross
    ~baca.overrides.note_head_style_harmonic
    ~baca.overrides.note_head_style_harmonic_black

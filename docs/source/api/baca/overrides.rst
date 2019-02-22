@@ -194,8 +194,11 @@ overrides
    ~no_ledgers
    ~note_column_shift
    ~note_head_color
+   ~note_head_duration_log
    ~note_head_extra_offset
+   ~note_head_no_ledgers
    ~note_head_stencil_false
+   ~note_head_style
    ~note_head_style_cross
    ~note_head_style_harmonic
    ~note_head_style_harmonic_black
@@ -369,9 +372,15 @@ overrides
 
 .. autofunction:: note_head_color
 
+.. autofunction:: note_head_duration_log
+
 .. autofunction:: note_head_extra_offset
 
+.. autofunction:: note_head_no_ledgers
+
 .. autofunction:: note_head_stencil_false
+
+.. autofunction:: note_head_style
 
 .. autofunction:: note_head_style_cross
 

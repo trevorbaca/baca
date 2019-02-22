@@ -2201,7 +2201,7 @@ def make_monads(
             >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
     """
-    components = []
+    components: typing.List[abjad.Component] = []
     maker = abjad.LeafMaker()
     pitch = 0
     for fraction in fractions.split():
