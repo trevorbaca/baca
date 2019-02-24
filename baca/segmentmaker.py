@@ -2454,18 +2454,19 @@ class SegmentMaker(abjad.SegmentMaker):
             clock_time=True,
             global_offset=segment_start_offset,
             )
-        if self.phantom:
-            # recalculate segment_stop_duration without phantom measure:
-            label = abjad.label(
-                skips[:-1],
-                deactivate=True,
-                tag=tag.append('_label_clock_time'),
-                )
-            segment_stop_duration = label.with_start_offsets(
-                brackets=True,
-                clock_time=True,
-                global_offset=segment_start_offset,
-                )
+        # TODO: remove?
+#        if self.phantom:
+#            # recalculate segment_stop_duration without phantom measure:
+#            label = abjad.label(
+#                skips[:-1],
+#                deactivate=True,
+#                tag=tag.append('_label_clock_time'),
+#                )
+#            segment_stop_duration = label.with_start_offsets(
+#                brackets=True,
+#                clock_time=True,
+#                global_offset=segment_start_offset,
+#                )
         segment_stop_offset = abjad.Offset(segment_stop_duration)
         self._stop_clock_time = segment_stop_offset.to_clock_string()
         segment_duration = segment_stop_offset - segment_start_offset
