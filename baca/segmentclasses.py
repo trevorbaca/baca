@@ -1350,7 +1350,7 @@ class HorizontalSpacingSpecifier(object):
                 )
             string_ = self._make_annotation(duration, eol_adjusted, duration_)
             if measure_index < total - 1:
-                tag = abjad.Tag(abjad.tags.SPACING_MARKUP)
+                tag = abjad.Tag(abjad.const.SPACING_MARKUP)
                 if not self.phantom and measure_index == total - 2:
                     next_skip = skips[measure_index + 1]
                     next_measure_index = measure_index + 1
@@ -1379,7 +1379,7 @@ class HorizontalSpacingSpecifier(object):
                     tag=tag,
                     )
             if 0 < measure_index:
-                tag = abjad.Tag(abjad.tags.SPACING_MARKUP)
+                tag = abjad.Tag(abjad.const.SPACING_MARKUP)
                 stop_text_span = abjad.StopTextSpan(
                     command=r'\bacaStopTextSpanSPM',
                     )

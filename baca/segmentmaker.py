@@ -2443,7 +2443,7 @@ class SegmentMaker(abjad.SegmentMaker):
         seconds = int(seconds)
         seconds = 60 * minutes + seconds
         segment_start_offset = abjad.Duration(seconds)
-        tag = abjad.Tag(abjad.tags.CLOCK_TIME_MARKUP)
+        tag = abjad.Tag(abjad.const.CLOCK_TIME_MARKUP)
         label = abjad.label(
             skips,
             deactivate=True,
@@ -2492,7 +2492,7 @@ class SegmentMaker(abjad.SegmentMaker):
             skip = skips[measure_index]
             clock_time = clock_times[measure_index]
             if measure_index < total - 1:
-                tag = abjad.Tag(abjad.tags.CLOCK_TIME_MARKUP)
+                tag = abjad.Tag(abjad.const.CLOCK_TIME_MARKUP)
                 if measure_index == total - 2:
                     final_clock_time = clock_times[-1]
                     string = r'- \baca-start-ct-both'
@@ -2512,7 +2512,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     tag=tag,
                     )
             if 0 < measure_index:
-                tag = abjad.Tag(abjad.tags.CLOCK_TIME_MARKUP)
+                tag = abjad.Tag(abjad.const.CLOCK_TIME_MARKUP)
                 stop_text_span = abjad.StopTextSpan(
                     command=r'\bacaStopTextSpanCT',
                     )
@@ -2532,7 +2532,7 @@ class SegmentMaker(abjad.SegmentMaker):
             local_measure_number = measure_index + 1
             measure_number = first_measure_number + measure_index
             if measure_index < total - 1:
-                tag = abjad.Tag(abjad.tags.LOCAL_MEASURE_INDEX_MARKUP)
+                tag = abjad.Tag(abjad.const.LOCAL_MEASURE_INDEX_MARKUP)
                 if not self.phantom and measure_index == total - 2:
                     string = r'- \baca-start-lmi-both'
                     string += f' "{measure_index}" "{measure_index + 1}"'
@@ -2550,7 +2550,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     deactivate=True,
                     tag=tag,
                     )
-                tag = abjad.Tag(abjad.tags.LOCAL_MEASURE_NUMBER_MARKUP)
+                tag = abjad.Tag(abjad.const.LOCAL_MEASURE_NUMBER_MARKUP)
                 if not self.phantom and measure_index == total - 2:
                     string = r'- \baca-start-lmn-both'
                     string += f' "{local_measure_number}"'
@@ -2569,7 +2569,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     deactivate=True,
                     tag=tag,
                     )
-                tag = abjad.Tag(abjad.tags.MEASURE_NUMBER_MARKUP)
+                tag = abjad.Tag(abjad.const.MEASURE_NUMBER_MARKUP)
                 if not self.phantom and measure_index == total - 2:
                     string = r'- \baca-start-mn-both'
                     string += f' "{measure_number}"'
@@ -2589,7 +2589,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     tag=tag,
                     )
             if 0 < measure_index:
-                tag = abjad.Tag(abjad.tags.LOCAL_MEASURE_INDEX_MARKUP)
+                tag = abjad.Tag(abjad.const.LOCAL_MEASURE_INDEX_MARKUP)
                 stop_text_span = abjad.StopTextSpan(
                     command=r'\bacaStopTextSpanLMI',
                     )
@@ -2600,7 +2600,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     deactivate=True,
                     tag=tag,
                     )
-                tag = abjad.Tag(abjad.tags.LOCAL_MEASURE_NUMBER_MARKUP)
+                tag = abjad.Tag(abjad.const.LOCAL_MEASURE_NUMBER_MARKUP)
                 stop_text_span = abjad.StopTextSpan(
                     command=r'\bacaStopTextSpanLMN',
                     )
@@ -2611,7 +2611,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     deactivate=True,
                     tag=tag,
                     )
-                tag = abjad.Tag(abjad.tags.MEASURE_NUMBER_MARKUP)
+                tag = abjad.Tag(abjad.const.MEASURE_NUMBER_MARKUP)
                 stop_text_span = abjad.StopTextSpan(
                     command=r'\bacaStopTextSpanMN',
                     )
@@ -2639,7 +2639,7 @@ class SegmentMaker(abjad.SegmentMaker):
             measure_index = lmn - 1
             skip = skips[measure_index]
             if self.phantom or (not self.phantom and i < total - 1):
-                tag = abjad.Tag(abjad.tags.STAGE_NUMBER_MARKUP)
+                tag = abjad.Tag(abjad.const.STAGE_NUMBER_MARKUP)
                 if not self.phantom and i == total - 2:
                     next_item = self.stage_markup[i + 1]
                     if len(next_item) == 2:
@@ -2669,7 +2669,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     tag=tag,
                     )
             if 0 < i:
-                tag = abjad.Tag(abjad.tags.STAGE_NUMBER_MARKUP)
+                tag = abjad.Tag(abjad.const.STAGE_NUMBER_MARKUP)
                 stop_text_span = abjad.StopTextSpan(
                     command=r'\bacaStopTextSpanSNM',
                     )
@@ -2682,7 +2682,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     )
         if self.phantom:
             skip = skips[-1]
-            tag = abjad.Tag(abjad.tags.STAGE_NUMBER_MARKUP)
+            tag = abjad.Tag(abjad.const.STAGE_NUMBER_MARKUP)
             stop_text_span = abjad.StopTextSpan(
                 command=r'\bacaStopTextSpanSNM',
                 )
