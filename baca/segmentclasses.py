@@ -563,25 +563,25 @@ class HorizontalSpacingSpecifier(object):
                     {                                                                                %! abjad.ScoreTemplate._make_global_context
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                        \baca-new-spacing-section #1 #8                                              %! HorizontalSpacingSpecifier(1):SPACING
+                        \baca-new-spacing-section #1 #8                                              %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                         \time 8/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                        \baca-new-spacing-section #1 #8                                              %! HorizontalSpacingSpecifier(1):SPACING
+                        \baca-new-spacing-section #1 #8                                              %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
-                        \baca-new-spacing-section #1 #8                                              %! HorizontalSpacingSpecifier(1):SPACING
+                        \baca-new-spacing-section #1 #8                                              %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                         \time 2/4                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
-                        \baca-new-spacing-section #1 #8                                              %! HorizontalSpacingSpecifier(1):SPACING
+                        \baca-new-spacing-section #1 #8                                              %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                         \time 1/2                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
@@ -688,25 +688,25 @@ class HorizontalSpacingSpecifier(object):
                     {                                                                                %! abjad.ScoreTemplate._make_global_context
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                        \baca-new-spacing-section #1 #8                                              %! HorizontalSpacingSpecifier(1):SPACING
+                        \baca-new-spacing-section #1 #8                                              %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                         \time 8/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                        \baca-new-spacing-section #1 #8                                              %! HorizontalSpacingSpecifier(1):SPACING
+                        \baca-new-spacing-section #1 #8                                              %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
-                        \baca-new-spacing-section #1 #8                                              %! HorizontalSpacingSpecifier(1):SPACING
+                        \baca-new-spacing-section #1 #8                                              %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                         \time 2/4                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
-                        \baca-new-spacing-section #1 #8                                              %! HorizontalSpacingSpecifier(1):SPACING
+                        \baca-new-spacing-section #1 #8                                              %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                         \time 1/2                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
@@ -814,25 +814,25 @@ class HorizontalSpacingSpecifier(object):
                     {                                                                                %! abjad.ScoreTemplate._make_global_context
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                        \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                         \time 8/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                        \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
-                        \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                         \time 2/4                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
-                        \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                         \time 1/2                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
@@ -941,25 +941,25 @@ class HorizontalSpacingSpecifier(object):
                     {                                                                                %! abjad.ScoreTemplate._make_global_context
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                        \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                         \time 8/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                        \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
-                        \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                         \time 2/4                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
-                        \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                         \time 1/2                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
@@ -1080,13 +1080,13 @@ class HorizontalSpacingSpecifier(object):
                     {                                                                                %! abjad.ScoreTemplate._make_global_context
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                        \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/2                                                                     %! _make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                        \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING
+                        \baca-new-spacing-section #1 #16                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 3/8                                                                     %! _make_global_skips(1)
@@ -1342,7 +1342,7 @@ class HorizontalSpacingSpecifier(object):
             if self.phantom and measure_index == total - 1:
                 duration = abjad.Duration(1, 4)
             spacing_section = indicators.SpacingSection(duration=duration)
-            tag = abjad.Tag(abjad.tags.SPACING)
+            tag = abjad.Tag(abjad.const.SPACING_COMMAND)
             abjad.attach(
                 spacing_section,
                 skip,
@@ -1350,7 +1350,7 @@ class HorizontalSpacingSpecifier(object):
                 )
             string_ = self._make_annotation(duration, eol_adjusted, duration_)
             if measure_index < total - 1:
-                tag = abjad.Tag(abjad.const.SPACING_MARKUP)
+                tag = abjad.Tag(abjad.const.SPACING)
                 if not self.phantom and measure_index == total - 2:
                     next_skip = skips[measure_index + 1]
                     next_measure_index = measure_index + 1
@@ -1379,7 +1379,7 @@ class HorizontalSpacingSpecifier(object):
                     tag=tag,
                     )
             if 0 < measure_index:
-                tag = abjad.Tag(abjad.const.SPACING_MARKUP)
+                tag = abjad.Tag(abjad.const.SPACING)
                 stop_text_span = abjad.StopTextSpan(
                     command=r'\bacaStopTextSpanSPM',
                     )

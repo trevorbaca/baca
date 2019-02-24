@@ -61,7 +61,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -71,7 +71,7 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -153,7 +153,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -163,7 +163,7 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -256,7 +256,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -267,7 +267,7 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -359,7 +359,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -370,7 +370,7 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -453,7 +453,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -463,12 +463,12 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -570,7 +570,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -581,7 +581,7 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -666,13 +666,13 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -753,14 +753,14 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar ""                                                                      %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -842,14 +842,14 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar ""                                                                      %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -920,13 +920,13 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -1009,14 +1009,14 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar ""                                                                      %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -1085,13 +1085,13 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -1174,14 +1174,14 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar ""                                                                      %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -1253,13 +1253,13 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -1357,7 +1357,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -1367,7 +1367,7 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -1428,7 +1428,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -1438,7 +1438,7 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -1495,7 +1495,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -1505,7 +1505,7 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -1579,7 +1579,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -1589,7 +1589,7 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -1650,7 +1650,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -1660,7 +1660,7 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -1718,7 +1718,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -1728,7 +1728,7 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -1813,7 +1813,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -1824,7 +1824,7 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -1885,7 +1885,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -1896,7 +1896,7 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -1953,7 +1953,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -1964,7 +1964,7 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -2050,7 +2050,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -2061,7 +2061,7 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -2122,7 +2122,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -2133,7 +2133,7 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -2191,7 +2191,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -2202,7 +2202,7 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -2286,7 +2286,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -2296,12 +2296,12 @@ class PersistentIndicatorTests(object):
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -2366,7 +2366,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -2376,12 +2376,12 @@ class PersistentIndicatorTests(object):
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -2442,7 +2442,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -2452,12 +2452,12 @@ class PersistentIndicatorTests(object):
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -2552,7 +2552,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -2563,7 +2563,7 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -2624,7 +2624,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -2635,7 +2635,7 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -2692,7 +2692,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -2703,7 +2703,7 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -2809,7 +2809,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -2819,7 +2819,7 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -2886,7 +2886,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -2896,7 +2896,7 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -2959,7 +2959,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -2969,7 +2969,7 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -3049,7 +3049,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -3059,7 +3059,7 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -3126,7 +3126,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -3136,7 +3136,7 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -3199,7 +3199,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -3209,7 +3209,7 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -3300,7 +3300,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -3311,7 +3311,7 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -3380,7 +3380,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -3391,7 +3391,7 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -3456,7 +3456,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -3467,7 +3467,7 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -3561,7 +3561,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -3572,7 +3572,7 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -3641,7 +3641,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -3652,7 +3652,7 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -3717,7 +3717,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -3728,7 +3728,7 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -3820,7 +3820,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -3830,12 +3830,12 @@ class PersistentIndicatorTests(object):
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -3912,7 +3912,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -3922,12 +3922,12 @@ class PersistentIndicatorTests(object):
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -4000,7 +4000,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -4010,12 +4010,12 @@ class PersistentIndicatorTests(object):
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -4122,7 +4122,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -4133,7 +4133,7 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -4202,7 +4202,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -4213,7 +4213,7 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -4278,7 +4278,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -4289,7 +4289,7 @@ class PersistentIndicatorTests(object):
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
@@ -4390,7 +4390,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #0 #'(11)                                                         %! BREAK:IndicatorCommand
@@ -4400,14 +4400,14 @@ class PersistentIndicatorTests(object):
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #15 #'(11)                                                        %! BREAK:IndicatorCommand
                             \break                                                                       %! BREAK:IndicatorCommand
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 1/2                                                                     %! _make_global_skips(1)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
@@ -4513,7 +4513,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #25                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #25                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #4 #'(8)                                                          %! BREAK:IndicatorCommand
@@ -4529,7 +4529,7 @@ class PersistentIndicatorTests(object):
                             \bacaStartTextSpanMM                                                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #25                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #25                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \bacaStopTextSpanMM                                                          %! SEGMENT_FINAL_STOP_MM_SPANNER:_attach_metronome_marks(4)
@@ -4616,7 +4616,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \override TextSpanner.staff-padding = #4                                     %! baca_text_spanner_staff_padding:OverrideCommand(1)
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
@@ -4634,7 +4634,7 @@ class PersistentIndicatorTests(object):
                             \bacaStartTextSpanMM                                                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \bacaStopTextSpanMM                                                          %! SEGMENT_FINAL_STOP_MM_SPANNER:_attach_metronome_marks(4)
@@ -4723,7 +4723,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \override TextSpanner.staff-padding = #4                                     %! baca_text_spanner_staff_padding:OverrideCommand(1)
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
@@ -4741,7 +4741,7 @@ class PersistentIndicatorTests(object):
                             \bacaStartTextSpanMM                                                         %! REAPPLIED_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \bacaStopTextSpanMM                                                          %! SEGMENT_FINAL_STOP_MM_SPANNER:_attach_metronome_marks(4)
@@ -4818,7 +4818,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #4 #'(8)                                                          %! BREAK:IndicatorCommand
@@ -4842,7 +4842,7 @@ class PersistentIndicatorTests(object):
                             \bacaStartTextSpanMM                                                         %! REDUNDANT_METRONOME_MARK:_set_status_tag:_attach_metronome_marks(3)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \bacaStopTextSpanMM                                                          %! SEGMENT_FINAL_STOP_MM_SPANNER:_attach_metronome_marks(4)
@@ -4929,7 +4929,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \override TextSpanner.staff-padding = #4                                     %! baca_text_spanner_staff_padding:OverrideCommand(1)
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
@@ -4947,7 +4947,7 @@ class PersistentIndicatorTests(object):
                             \bacaStartTextSpanMM                                                         %! REDUNDANT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \bacaStopTextSpanMM                                                          %! SEGMENT_FINAL_STOP_MM_SPANNER:_attach_metronome_marks(4)
@@ -5027,13 +5027,13 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -5162,14 +5162,14 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar ""                                                                      %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -5244,13 +5244,13 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -5340,14 +5340,14 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar ""                                                                      %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -5426,13 +5426,13 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -5515,14 +5515,14 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar ""                                                                      %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -5606,14 +5606,14 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar ""                                                                      %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -5686,13 +5686,13 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -5779,14 +5779,14 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                             \bar ""                                                                      %! _make_global_skips(3):+SEGMENT:EMPTY_START_BAR
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \baca-bar-line-visible                                                       %! _attach_final_bar_line
                             \bar "|"                                                                     %! _attach_final_bar_line
@@ -5878,7 +5878,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #25                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #25                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #4 #'(8)                                                          %! BREAK:IndicatorCommand
@@ -5914,7 +5914,7 @@ class PersistentIndicatorTests(object):
                             \bacaStartTextSpanMM                                                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #25                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #25                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \bacaStopTextSpanMM                                                          %! SEGMENT_FINAL_STOP_MM_SPANNER:_attach_metronome_marks(4)
@@ -6000,7 +6000,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \override TextSpanner.staff-padding = #4                                     %! baca_text_spanner_staff_padding:OverrideCommand(1)
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
@@ -6038,7 +6038,7 @@ class PersistentIndicatorTests(object):
                             \bacaStartTextSpanMM                                                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \bacaStopTextSpanMM                                                          %! SEGMENT_FINAL_STOP_MM_SPANNER:_attach_metronome_marks(4)
@@ -6126,7 +6126,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \override TextSpanner.staff-padding = #4                                     %! baca_text_spanner_staff_padding:OverrideCommand(1)
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
@@ -6164,7 +6164,7 @@ class PersistentIndicatorTests(object):
                             \bacaStartTextSpanMM                                                         %! REAPPLIED_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \bacaStopTextSpanMM                                                          %! SEGMENT_FINAL_STOP_MM_SPANNER:_attach_metronome_marks(4)
@@ -6244,7 +6244,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #4 #'(8)                                                          %! BREAK:IndicatorCommand
@@ -6280,7 +6280,7 @@ class PersistentIndicatorTests(object):
                             \bacaStartTextSpanMM                                                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \bacaStopTextSpanMM                                                          %! _attach_metronome_marks(1)
@@ -6312,7 +6312,7 @@ class PersistentIndicatorTests(object):
                             \bacaStartTextSpanMM                                                         %! REDUNDANT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                 <BLANKLINE>
                             % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \bacaStopTextSpanMM                                                          %! SEGMENT_FINAL_STOP_MM_SPANNER:_attach_metronome_marks(4)
@@ -6401,7 +6401,7 @@ class PersistentIndicatorTests(object):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \override TextSpanner.staff-padding = #4                                     %! baca_text_spanner_staff_padding:OverrideCommand(1)
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
@@ -6439,7 +6439,7 @@ class PersistentIndicatorTests(object):
                             \bacaStartTextSpanMM                                                         %! REDUNDANT_METRONOME_MARK_WITH_COLOR:_attach_metronome_marks(3)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING
+                            \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! _make_global_skips(1)
                             \bacaStopTextSpanMM                                                          %! SEGMENT_FINAL_STOP_MM_SPANNER:_attach_metronome_marks(4)
