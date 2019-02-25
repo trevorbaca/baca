@@ -1780,7 +1780,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return result
 
     def _collect_metadata(self):
-        metadata = abjad.OrderedDict()
+        metadata, persist = abjad.OrderedDict(), abjad.OrderedDict()
         metadata['alive_during_segment'] = self._collect_alive_during_segment()
         # __make_layout_ly__ adds bol measure numbers to metadata
         bol_measure_numbers = self.metadata.get('bol_measure_numbers')
@@ -1788,7 +1788,8 @@ class SegmentMaker(abjad.SegmentMaker):
             metadata['bol_measure_numbers'] = bol_measure_numbers
         if self._container_to_part_assignment:
             value = self._container_to_part_assignment
-            metadata['container_to_part_assignment'] = value
+            #metadata['container_to_part_assignment'] = value
+            persist['container_to_part_assignment'] = value
         if self._duration is not None:
             metadata['duration'] = self._duration
         if self._fermata_measure_numbers:
@@ -1822,6 +1823,14 @@ class SegmentMaker(abjad.SegmentMaker):
         for key, value in self.metadata.items():
             if not bool(value):
                 message = f'{key} metadata should be nonempty'
+                message += f' (not {value!r}).'
+                raise Exception(message)
+        self.persist.clear()
+        self.persist.update(persist)
+        self.persist.sort(recurse=True)
+        for key, value in self.persist.items():
+            if not bool(value):
+                message = f'{key} persist should be nonempty'
                 message += f' (not {value!r}).'
                 raise Exception(message)
 
@@ -5953,6 +5962,13 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._nonfirst_segment_lilypond_include
 
     @property
+    def persist(self) -> abjad.OrderedDict:
+        """
+        Gets persist metadata.
+        """
+        return self._persist
+
+    @property
     def phantom(self) -> typing.Optional[bool]:
         """
         Is true when segment-maker adds segment-final phantom measure.
@@ -6469,7 +6485,9 @@ class SegmentMaker(abjad.SegmentMaker):
         environment: str = None,
         metadata: abjad.OrderedDict = None,
         midi: bool = None,
+        persist: abjad.OrderedDict = None,
         previous_metadata: abjad.OrderedDict = None,
+        previous_persist: abjad.OrderedDict = None,
         remove: typing.List[str] = None,
         segment_directory: abjad.Path = None,
         ) -> abjad.LilyPondFile:
@@ -6499,7 +6517,9 @@ class SegmentMaker(abjad.SegmentMaker):
         self._environment = environment
         self._metadata: abjad.OrderedDict = abjad.OrderedDict(metadata)
         self._midi = midi
+        self._persist = abjad.OrderedDict(persist)
         self._previous_metadata = abjad.OrderedDict(previous_metadata)
+        self._previous_persist = abjad.OrderedDict(previous_persist)
         self._segment_directory = segment_directory
         self._import_manifests()
         with abjad.Timer() as timer:
