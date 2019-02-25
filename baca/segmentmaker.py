@@ -1807,6 +1807,7 @@ class SegmentMaker(abjad.SegmentMaker):
         dictionary = self._collect_persistent_indicators()
         if dictionary:
             metadata['persistent_indicators'] = dictionary
+            #persist['persistent_indicators'] = dictionary
         if self.segment_name is not None:
             metadata['segment_name'] = self.segment_name
         metadata['segment_number'] = self._get_segment_number()
@@ -1816,7 +1817,8 @@ class SegmentMaker(abjad.SegmentMaker):
             metadata['stop_clock_time'] = self._stop_clock_time
         metadata['time_signatures'] = self._cached_time_signatures
         if self.voice_metadata:
-            metadata['voice_metadata'] = self.voice_metadata
+            #metadata['voice_metadata'] = self.voice_metadata
+            persist['voice_metadata'] = self.voice_metadata
         self.metadata.clear()
         self.metadata.update(metadata)
         self.metadata.sort(recurse=True)
@@ -2238,19 +2240,23 @@ class SegmentMaker(abjad.SegmentMaker):
                 return (indicator, momento.context)
 
     def _get_previous_segment_voice_metadata(self, voice_name):
-        if not self.previous_metadata:
+        #if not self.previous_metadata:
+        if not self.previous_persist:
             return
-        voice_metadata = self.previous_metadata.get('voice_metadata')
+        #voice_metadata = self.previous_metadata.get('voice_metadata')
+        voice_metadata = self.previous_persist.get('voice_metadata')
         if not voice_metadata:
             return
         return voice_metadata.get(voice_name, abjad.OrderedDict())
 
     def _get_previous_state(self, voice_name, command_persist):
-        if not self.previous_metadata:
+        #if not self.previous_metadata:
+        if not self.previous_persist:
             return
         if not command_persist:
             return
-        dictionary = self.previous_metadata.get('voice_metadata')
+        #dictionary = self.previous_metadata.get('voice_metadata')
+        dictionary = self.previous_persist.get('voice_metadata')
         if not bool(dictionary):
             return
         dictionary = dictionary.get(voice_name)
@@ -5981,6 +5987,13 @@ class SegmentMaker(abjad.SegmentMaker):
         Gets previous segment metadata.
         """
         return self._previous_metadata
+
+    @property
+    def previous_persist(self) -> typing.Optional[abjad.OrderedDict]:
+        """
+        Gets previous segment persist.
+        """
+        return self._previous_persist
 
     @property
     def score_template(self) -> typing.Optional[abjad.ScoreTemplate]:
