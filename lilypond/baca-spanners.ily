@@ -93,6 +93,8 @@ bacaStopTextSpanCLB = #(
 
 %%% CLOCK TIME SPANNER %%%
 
+clock-time-extra-offset = #'(0 . 13)
+
 bacaStartTextSpanCT = #(
     make-music 'TextSpanEvent 'span-direction START 'spanner-id "CT"
     )
@@ -156,7 +158,7 @@ baca-start-ct-left-only = #(
     #{
     - \abjad-invisible-line
     - \baca-ct-left-text-tweak #left
-    - \baca-upper-annotation-layer
+    - \tweak extra-offset #clock-time-extra-offset
     $music
     #}
     )
@@ -169,7 +171,7 @@ baca-start-ct-both = #(
     - \abjad-invisible-line
     - \baca-ct-left-text-tweak #left
     - \baca-ct-right-text-tweak #right
-    - \baca-upper-annotation-layer
+    - \tweak extra-offset #clock-time-extra-offset
     $music
     #}
     )

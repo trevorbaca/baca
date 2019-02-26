@@ -40,6 +40,7 @@ segmentmaker
       activate
       allow_empty_selections
       breaks
+      clock_time_extra_offset
       clock_time_override
       color_octaves
       commands
@@ -149,6 +150,8 @@ segmentmaker
    .. autoattribute:: SegmentMaker.allow_empty_selections
 
    .. autoattribute:: SegmentMaker.breaks
+
+   .. autoattribute:: SegmentMaker.clock_time_extra_offset
 
    .. autoattribute:: SegmentMaker.clock_time_override
 

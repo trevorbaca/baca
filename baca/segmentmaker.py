@@ -150,6 +150,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_breaks',
         '_cache',
         '_cached_time_signatures',
+        '_clock_time_extra_offset',
         '_clock_time_override',
         '_color_octaves',
         '_commands',
@@ -274,6 +275,7 @@ class SegmentMaker(abjad.SegmentMaker):
         activate: typing.List[str] = None,
         allow_empty_selections: bool = None,
         breaks: segmentclasses.BreakMeasureMap = None,
+        clock_time_extra_offset: typing.Union[bool, typings.Pair] = None,
         clock_time_override: abjad.MetronomeMark = None,
         color_octaves: bool = None,
         deactivate: typing.List[str] = None,
@@ -319,6 +321,10 @@ class SegmentMaker(abjad.SegmentMaker):
         self._activate = activate
         self._allow_empty_selections = allow_empty_selections
         self._breaks = breaks
+        if clock_time_extra_offset not in (False, None):
+            assert isinstance(clock_time_extra_offset, tuple)
+            assert len(clock_time_extra_offset) == 2
+        self._clock_time_extra_offset = clock_time_extra_offset
         if clock_time_override is not None:
             assert isinstance(clock_time_override, abjad.MetronomeMark)
         self._clock_time_override = clock_time_override
@@ -2168,6 +2174,15 @@ class SegmentMaker(abjad.SegmentMaker):
                 return [self._absolute_string_trio_stylesheet_path]
         includes = []
         includes.append(self._score_package_stylesheet_path)
+        if self.clock_time_extra_offset is not None:
+            value = self.clock_time_extra_offset
+            if isinstance(value, tuple):
+                string = f"#'({value[0]} . {value[1]})"
+            else:
+                value = abjad.Scheme.format_embedded_scheme_value(value)
+            string = f'clock-time-extra-offset = {string}'
+            literal = abjad.LilyPondLiteral(string)
+            includes.append(literal)
         if (not self.first_segment or
             self.nonfirst_segment_lilypond_include):
             includes.append(self._score_package_nonfirst_segment_path)
@@ -3744,6 +3759,13 @@ class SegmentMaker(abjad.SegmentMaker):
         Gets breaks.
         """
         return self._breaks
+
+    @property
+    def clock_time_extra_offset(self) -> typing.Union[bool, typings.Pair]:
+        """
+        Gets clock time extra offset.
+        """
+        return self._clock_time_extra_offset
 
     @property
     def clock_time_override(self) -> typing.Optional[abjad.MetronomeMark]:
