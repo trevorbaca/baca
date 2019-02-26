@@ -2179,7 +2179,7 @@ class SegmentMaker(abjad.SegmentMaker):
             if isinstance(value, tuple):
                 string = f"#'({value[0]} . {value[1]})"
             else:
-                value = abjad.Scheme.format_embedded_scheme_value(value)
+                string = abjad.Scheme.format_embedded_scheme_value(value)
             string = f'clock-time-extra-offset = {string}'
             literal = abjad.LilyPondLiteral(string)
             includes.append(literal)
@@ -3761,7 +3761,8 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._breaks
 
     @property
-    def clock_time_extra_offset(self) -> typing.Union[bool, typings.Pair]:
+    def clock_time_extra_offset(self) -> typing.Union[
+        bool, typings.Pair, None]:
         """
         Gets clock time extra offset.
         """
