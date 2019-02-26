@@ -1554,6 +1554,33 @@ class SegmentMaker(abjad.SegmentMaker):
         voice_names_ = tuple(voice_names)
         self._voice_names = voice_names_
 
+    def _calculate_clock_times(self):
+        skips = classes.Selection(self.score['Global_Skips']).skips()
+        if self.clock_time_override:
+            metronome_mark = self.clock_time_override
+            abjad.attach(metronome_mark, skips[0])
+        if abjad.inspect(skips[0]).effective(abjad.MetronomeMark) is None:
+            return
+        first_measure_number = self._get_first_measure_number()
+        clock_times = []
+        start_offset = 0
+        clock_times.append(0)
+        for local_measure_index, skip in enumerate(skips):
+            measure_number = first_measure_number + local_measure_index
+            if measure_number in self._fermata_measure_numbers:
+                duration = 1
+                start_offset += duration
+                clock_times.append(duration)
+            else:
+                duration = abjad.inspect(skip).duration()
+                start_offset += duration
+                clock_times.append(start_offset)
+        assert len(skips) == len(clock_times) - 1
+        if self.clock_time_override:
+            metronome_mark = self.clock_time_override
+            abjad.detach(metronome_mark, skips[0])
+        return durations
+
     def _call_commands(self):
         command_count = 0
         for command in self.commands:
@@ -2459,15 +2486,8 @@ class SegmentMaker(abjad.SegmentMaker):
         start_clock_time = self._get_previous_stop_clock_time()
         start_clock_time = start_clock_time or "0'00''"
         self._start_clock_time = start_clock_time 
-        minutes = 0
-        if "'" in self._start_clock_time:
-            tick_index = self._start_clock_time.find("'")
-            minutes = self._start_clock_time[:tick_index]
-            minutes = int(minutes)
-        seconds = self._start_clock_time[-4:-2]
-        seconds = int(seconds)
-        seconds = 60 * minutes + seconds
-        segment_start_offset = abjad.Duration(seconds)
+        segment_start_offset = abjad.Duration.from_clock_string(
+            start_clock_time)
         tag = abjad.Tag(abjad.const.CLOCK_TIME)
         label = abjad.label(
             skips,
