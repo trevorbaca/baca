@@ -1790,7 +1790,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _collect_metadata(self):
         metadata, persist = abjad.OrderedDict(), abjad.OrderedDict()
-        #metadata['alive_during_segment'] = self._collect_alive_during_segment()
         persist['alive_during_segment'] = self._collect_alive_during_segment()
         # __make_layout_ly__ adds bol measure numbers to metadata
         bol_measure_numbers = self.metadata.get('bol_measure_numbers')
@@ -1798,13 +1797,11 @@ class SegmentMaker(abjad.SegmentMaker):
             metadata['bol_measure_numbers'] = bol_measure_numbers
         if self._container_to_part_assignment:
             value = self._container_to_part_assignment
-            #metadata['container_to_part_assignment'] = value
             persist['container_to_part_assignment'] = value
         if self._duration is not None:
             metadata['duration'] = self._duration
         if self._fermata_measure_numbers:
             metadata['fermata_measure_numbers'] = self._fermata_measure_numbers
-        # abjad.Path._context_name_to_first_appearance_margin_markup() handles:
         dictionary = self.metadata.get('first_appearance_margin_markup')
         if dictionary:
             metadata['first_appearance_margin_markup'] = dictionary
@@ -1816,7 +1813,6 @@ class SegmentMaker(abjad.SegmentMaker):
             metadata['phantom'] = self.phantom
         dictionary = self._collect_persistent_indicators()
         if dictionary:
-            #metadata['persistent_indicators'] = dictionary
             persist['persistent_indicators'] = dictionary
         if self.segment_name is not None:
             metadata['segment_name'] = self.segment_name
@@ -1827,7 +1823,6 @@ class SegmentMaker(abjad.SegmentMaker):
             metadata['stop_clock_time'] = self._stop_clock_time
         metadata['time_signatures'] = self._cached_time_signatures
         if self.voice_metadata:
-            #metadata['voice_metadata'] = self.voice_metadata
             persist['voice_metadata'] = self.voice_metadata
         self.metadata.clear()
         self.metadata.update(metadata)
@@ -2259,22 +2254,18 @@ class SegmentMaker(abjad.SegmentMaker):
                 return (indicator, momento.context)
 
     def _get_previous_segment_voice_metadata(self, voice_name):
-        #if not self.previous_metadata:
         if not self.previous_persist:
             return
-        #voice_metadata = self.previous_metadata.get('voice_metadata')
         voice_metadata = self.previous_persist.get('voice_metadata')
         if not voice_metadata:
             return
         return voice_metadata.get(voice_name, abjad.OrderedDict())
 
     def _get_previous_state(self, voice_name, command_persist):
-        #if not self.previous_metadata:
         if not self.previous_persist:
             return
         if not command_persist:
             return
-        #dictionary = self.previous_metadata.get('voice_metadata')
         dictionary = self.previous_persist.get('voice_metadata')
         if not bool(dictionary):
             return
@@ -2488,19 +2479,6 @@ class SegmentMaker(abjad.SegmentMaker):
             clock_time=True,
             global_offset=segment_start_offset,
             )
-        # TODO: remove?
-#        if self.phantom:
-#            # recalculate segment_stop_duration without phantom measure:
-#            label = abjad.label(
-#                skips[:-1],
-#                deactivate=True,
-#                tag=tag.append('_label_clock_time'),
-#                )
-#            segment_stop_duration = label.with_start_offsets(
-#                brackets=True,
-#                clock_time=True,
-#                global_offset=segment_start_offset,
-#                )
         segment_stop_offset = abjad.Offset(segment_stop_duration)
         self._stop_clock_time = segment_stop_offset.to_clock_string()
         segment_duration = segment_stop_offset - segment_start_offset
@@ -2513,21 +2491,23 @@ class SegmentMaker(abjad.SegmentMaker):
         for skip in skips:
             wrappers = abjad.inspect(skip).wrappers(abjad.Markup)
             for wrapper in wrappers:
-                if 'CLOCK_TIME' in str(wrapper.tag):
+                if abjad.const.CLOCK_TIME in str(wrapper.tag):
                     abjad.detach(wrapper, skip)
                     markup = wrapper.indicator
                     string = str(markup).strip(r'^ \markup')
                     string = string.strip('{').strip('}').strip(' ')
                     clock_times.append(string)
         total = len(skips)
+        first_measure_number = self._get_first_measure_number()
         for measure_index in range(len(skips)):
-            measure_number = measure_index + 1
-            if measure_number in self._fermata_measure_numbers:
+            measure_number = first_measure_number + measure_index
+            if (measure_number in self._fermata_measure_numbers and
+                measure_index != total - 1):
                 continue
             skip = skips[measure_index]
             clock_time = clock_times[measure_index]
             if measure_index < total - 1:
-                tag = abjad.Tag(abjad.const.CLOCK_TIME)
+                tag = abjad.const.CLOCK_TIME
                 if measure_index == total - 2:
                     final_clock_time = clock_times[-1]
                     string = r'- \baca-start-ct-both'
