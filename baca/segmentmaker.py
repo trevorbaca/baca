@@ -825,8 +825,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _alive_during_any_previous_segment(self, context) -> bool:
         assert isinstance(context, abjad.Context), repr(context)
-        assert self.previous_metadata is not None
-        names: typing.List = self.previous_metadata.get(
+        assert self.previous_persist is not None
+        names: typing.List = self.previous_persist.get(
             'alive_during_segment',
             [],
             )
@@ -834,8 +834,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _alive_during_previous_segment(self, context) -> bool:
         assert isinstance(context, abjad.Context), repr(context)
-        assert self.previous_metadata is not None
-        names: typing.List = self.previous_metadata.get(
+        assert self.previous_persist is not None
+        names: typing.List = self.previous_persist.get(
             'alive_during_segment',
             [],
             )
@@ -1523,7 +1523,10 @@ class SegmentMaker(abjad.SegmentMaker):
         for segment in self.segment_directory.parent.list_paths():
             if segment == self.segment_directory:
                 break
-            contexts_ = segment.get_metadatum(string)
+            contexts_ = segment.get_metadatum(
+                string,
+                file_name='__persist__.py',
+                )
             contexts.update(contexts_)
         self._previously_alive_contexts.extend(sorted(contexts))
 
@@ -1781,7 +1784,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _collect_metadata(self):
         metadata, persist = abjad.OrderedDict(), abjad.OrderedDict()
-        metadata['alive_during_segment'] = self._collect_alive_during_segment()
+        #metadata['alive_during_segment'] = self._collect_alive_during_segment()
+        persist['alive_during_segment'] = self._collect_alive_during_segment()
         # __make_layout_ly__ adds bol measure numbers to metadata
         bol_measure_numbers = self.metadata.get('bol_measure_numbers')
         if bol_measure_numbers:
@@ -5897,17 +5901,6 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> abjad.f(maker.metadata, strict=89)
             abjad.OrderedDict(
                 [
-                    (
-                        'alive_during_segment',
-                        [
-                            'Score',
-                            'Global_Context',
-                            'Global_Skips',
-                            'Music_Context',
-                            'Music_Staff',
-                            'Music_Voice',
-                            ],
-                        ),
                     ('final_measure_number', 4),
                     ('first_measure_number', 1),
                     ('segment_number', 2),
@@ -5921,6 +5914,17 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> abjad.f(maker.persist, strict=89)
             abjad.OrderedDict(
                 [
+                    (
+                        'alive_during_segment',
+                        [
+                            'Score',
+                            'Global_Context',
+                            'Global_Skips',
+                            'Music_Context',
+                            'Music_Staff',
+                            'Music_Voice',
+                            ],
+                        ),
                     (
                         'persistent_indicators',
                         abjad.OrderedDict(
