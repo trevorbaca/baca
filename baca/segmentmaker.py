@@ -2812,12 +2812,13 @@ class SegmentMaker(abjad.SegmentMaker):
             )
 
     def _make_lilypond_file(self):
+        tag = 'baca.SegmentMaker._make_lilypond_file'
         includes = self._get_lilypond_includes()
         lilypond_file = abjad.LilyPondFile.new(
             music=self.score,
             date_time_token=False,
             includes=includes,
-            tag='_make_lilypond_file',
+            tag=tag,
             use_relative_includes=False,
             )
         block_names = ('layout', 'paper')
@@ -2834,16 +2835,20 @@ class SegmentMaker(abjad.SegmentMaker):
             assert len(lilypond_file.score_block.items) == 1
             score = lilypond_file.score_block.items[0]
             assert isinstance(score, abjad.Score)
-            include = abjad.Container(tag='_make_lilypond_file')
+            include = abjad.Container(tag=tag)
             literal = abjad.LilyPondLiteral('', 'absolute_before')
             abjad.attach(literal, include, tag=None)
             string = r'\include "layout.ly"'
             literal = abjad.LilyPondLiteral(string, 'opening')
-            abjad.attach(literal, include, tag='_make_lilypond_file')
+            abjad.attach(
+                literal,
+                include,
+                tag=tag,
+                )
             container = abjad.Container(
                 [include, score],
                 is_simultaneous=True,
-                tag='_make_lilypond_file',
+                tag=tag,
                 )
             literal = abjad.LilyPondLiteral('', 'absolute_before')
             abjad.attach(literal, container, tag=None)
