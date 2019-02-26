@@ -223,9 +223,9 @@ class PersistentIndicatorTests(object):
             ...     baca.clef('alto'),
             ...     )
 
-            >>> metadata = {}
-            >>> metadata['persistent_indicators'] = {}
-            >>> metadata['persistent_indicators']['Music_Staff'] = [
+            >>> metadata, persist = {}, {}
+            >>> persist['persistent_indicators'] = {}
+            >>> persist['persistent_indicators']['Music_Staff'] = [
             ...     abjad.Momento(
             ...         context='Music_Voice',
             ...         prototype='abjad.Clef',
@@ -236,6 +236,7 @@ class PersistentIndicatorTests(object):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
+            ...     previous_persist=persist,
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -325,9 +326,9 @@ class PersistentIndicatorTests(object):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
 
-            >>> metadata = {}
-            >>> metadata['persistent_indicators'] = {}
-            >>> metadata['persistent_indicators']['Music_Staff'] = [
+            >>> metadata, persist = {}, {}
+            >>> persist['persistent_indicators'] = {}
+            >>> persist['persistent_indicators']['Music_Staff'] = [
             ...     abjad.Momento(
             ...         context='Music_Voice',
             ...         prototype='abjad.Clef',
@@ -338,6 +339,7 @@ class PersistentIndicatorTests(object):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
+            ...     previous_persist=persist,
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -536,9 +538,9 @@ class PersistentIndicatorTests(object):
             ...     baca.clef('treble'),
             ...     )
 
-            >>> metadata = {}
-            >>> metadata['persistent_indicators'] = {}
-            >>> metadata['persistent_indicators']['Music_Staff'] = [
+            >>> metadata, persist = {}, {}
+            >>> persist['persistent_indicators'] = {}
+            >>> persist['persistent_indicators']['Music_Staff'] = [
             ...     abjad.Momento(
             ...         context='Music_Voice',
             ...         prototype='abjad.Clef',
@@ -549,6 +551,7 @@ class PersistentIndicatorTests(object):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
+            ...     previous_persist=persist,
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -720,9 +723,9 @@ class PersistentIndicatorTests(object):
             ...     baca.dynamic('p'),
             ...     )
 
-            >>> metadata = {}
-            >>> metadata['persistent_indicators'] = {}
-            >>> metadata['persistent_indicators']['Music_Voice'] = [
+            >>> metadata, persist = {}, {}
+            >>> persist['persistent_indicators'] = {}
+            >>> persist['persistent_indicators']['Music_Voice'] = [
             ...     abjad.Momento(
             ...         context='Music_Voice',
             ...         prototype='abjad.Dynamic',
@@ -733,6 +736,7 @@ class PersistentIndicatorTests(object):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
+            ...     previous_persist=persist,
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -809,9 +813,9 @@ class PersistentIndicatorTests(object):
             ...     baca.make_notes(),
             ...     )
 
-            >>> metadata = {}
-            >>> metadata['persistent_indicators'] = {}
-            >>> metadata['persistent_indicators']['Music_Voice'] = [
+            >>> metadata, persist = {}, {}
+            >>> persist['persistent_indicators'] = {}
+            >>> persist['persistent_indicators']['Music_Voice'] = [
             ...     abjad.Momento(
             ...         context='Music_Voice',
             ...         prototype='abjad.Dynamic',
@@ -822,6 +826,7 @@ class PersistentIndicatorTests(object):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
+            ...     previous_persist=persist,
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -976,9 +981,9 @@ class PersistentIndicatorTests(object):
             ...     baca.dynamic('f'),
             ...     )
 
-            >>> metadata = {}
-            >>> metadata['persistent_indicators'] = {}
-            >>> metadata['persistent_indicators']['Music_Voice'] = [
+            >>> metadata, persist = {}, {}
+            >>> persist['persistent_indicators'] = {}
+            >>> persist['persistent_indicators']['Music_Voice'] = [
             ...     abjad.Momento(
             ...         context='Music_Voice',
             ...         prototype='abjad.Dynamic',
@@ -989,6 +994,7 @@ class PersistentIndicatorTests(object):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
+            ...     previous_persist=persist,
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -1141,9 +1147,9 @@ class PersistentIndicatorTests(object):
             ...     baca.dynamic('sfz'),
             ...     )
 
-            >>> metadata = {}
-            >>> metadata['persistent_indicators'] = {}
-            >>> metadata['persistent_indicators']['Music_Voice'] = [
+            >>> metadata, persist = {}, {}
+            >>> persist['persistent_indicators'] = {}
+            >>> persist['persistent_indicators']['Music_Voice'] = [
             ...     abjad.Momento(
             ...         context='Music_Voice',
             ...         prototype='abjad.Dynamic',
@@ -1154,6 +1160,7 @@ class PersistentIndicatorTests(object):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
+            ...     previous_persist=persist,
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -1780,9 +1787,9 @@ class PersistentIndicatorTests(object):
             ...     baca.make_notes(),
             ...     )
 
-            >>> metadata = {}
-            >>> metadata['persistent_indicators'] = {}
-            >>> metadata['persistent_indicators']['Music_Staff'] = [
+            >>> metadata, persist = {}, {}
+            >>> persist['persistent_indicators'] = {}
+            >>> persist['persistent_indicators']['Music_Staff'] = [
             ...     abjad.Momento(
             ...         context='Music_Voice',
             ...         manifest='instruments',
@@ -1793,6 +1800,7 @@ class PersistentIndicatorTests(object):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
+            ...     previous_persist=persist,
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -2017,9 +2025,9 @@ class PersistentIndicatorTests(object):
             ...     baca.make_notes(),
             ...     )
 
-            >>> metadata = {}
-            >>> metadata['persistent_indicators'] = {}
-            >>> metadata['persistent_indicators']['Music_Staff'] = [
+            >>> metadata, persist = {}, {}
+            >>> persist['persistent_indicators'] = {}
+            >>> persist['persistent_indicators']['Music_Staff'] = [
             ...     abjad.Momento(
             ...         context='Music_Voice',
             ...         manifest='instruments',
@@ -2030,6 +2038,7 @@ class PersistentIndicatorTests(object):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
+            ...     previous_persist=persist,
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -2519,9 +2528,9 @@ class PersistentIndicatorTests(object):
             ...     baca.make_notes(),
             ...     )
 
-            >>> metadata = {}
-            >>> metadata['persistent_indicators'] = {}
-            >>> metadata['persistent_indicators']['Music_Staff'] = [
+            >>> metadata, persist = {}, {}
+            >>> persist['persistent_indicators'] = {}
+            >>> persist['persistent_indicators']['Music_Staff'] = [
             ...     abjad.Momento(
             ...         context='Music_Voice',
             ...         manifest='instruments',
@@ -2532,6 +2541,7 @@ class PersistentIndicatorTests(object):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
+            ...     previous_persist=persist,
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -3267,9 +3277,9 @@ class PersistentIndicatorTests(object):
             ...     baca.make_notes(),
             ...     )
 
-            >>> metadata = {}
-            >>> metadata['persistent_indicators'] = {}
-            >>> metadata['persistent_indicators']['Music_Staff'] = [
+            >>> metadata, persist = {}, {}
+            >>> persist['persistent_indicators'] = {}
+            >>> persist['persistent_indicators']['Music_Staff'] = [
             ...     abjad.Momento(
             ...         context='Music_Voice',
             ...         manifest='margin_markups',
@@ -3280,6 +3290,7 @@ class PersistentIndicatorTests(object):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
+            ...     previous_persist=persist,
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -3528,9 +3539,9 @@ class PersistentIndicatorTests(object):
             ...     baca.make_notes(),
             ...     )
 
-            >>> metadata = {}
-            >>> metadata['persistent_indicators'] = {}
-            >>> metadata['persistent_indicators']['Music_Staff'] = [
+            >>> metadata, persist = {}, {}
+            >>> persist['persistent_indicators'] = {}
+            >>> persist['persistent_indicators']['Music_Staff'] = [
             ...     abjad.Momento(
             ...         context='Music_Voice',
             ...         manifest='margin_markups',
@@ -3541,6 +3552,7 @@ class PersistentIndicatorTests(object):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
+            ...     previous_persist=persist,
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -4089,9 +4101,9 @@ class PersistentIndicatorTests(object):
             ...     baca.make_notes(),
             ...     )
 
-            >>> metadata = {}
-            >>> metadata['persistent_indicators'] = {}
-            >>> metadata['persistent_indicators']['Music_Staff'] = [
+            >>> metadata, persist = {}, {}
+            >>> persist['persistent_indicators'] = {}
+            >>> persist['persistent_indicators']['Music_Staff'] = [
             ...     abjad.Momento(
             ...         context='Music_Voice',
             ...         manifest='margin_markups',
@@ -4102,6 +4114,7 @@ class PersistentIndicatorTests(object):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
+            ...     previous_persist=persist,
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -4583,9 +4596,9 @@ class PersistentIndicatorTests(object):
             ...     baca.make_notes(),
             ...     )
 
-            >>> metadata = {}
-            >>> metadata['persistent_indicators'] = {}
-            >>> metadata['persistent_indicators']['Score'] = [
+            >>> metadata, persist = {}, {}
+            >>> persist['persistent_indicators'] = {}
+            >>> persist['persistent_indicators']['Score'] = [
             ...     abjad.Momento(
             ...         context='Global_Skips',
             ...         manifest='metronome_marks',
@@ -4596,6 +4609,7 @@ class PersistentIndicatorTests(object):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
+            ...     previous_persist=persist,
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -4690,9 +4704,9 @@ class PersistentIndicatorTests(object):
             ...     baca.text_spanner_staff_padding(4),
             ...     )
 
-            >>> metadata = {}
-            >>> metadata['persistent_indicators'] = {}
-            >>> metadata['persistent_indicators']['Score'] = [
+            >>> metadata, persist = {}, {}
+            >>> persist['persistent_indicators'] = {}
+            >>> persist['persistent_indicators']['Score'] = [
             ...     abjad.Momento(
             ...         context='Global_Skips',
             ...         manifest='metronome_marks',
@@ -4703,6 +4717,7 @@ class PersistentIndicatorTests(object):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
+            ...     previous_persist=persist,
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -4896,9 +4911,9 @@ class PersistentIndicatorTests(object):
             ...     baca.make_notes(),
             ...     )
 
-            >>> metadata = {}
-            >>> metadata['persistent_indicators'] = {}
-            >>> metadata['persistent_indicators']['Score'] = [
+            >>> metadata, persist = {}, {}
+            >>> persist['persistent_indicators'] = {}
+            >>> persist['persistent_indicators']['Score'] = [
             ...     abjad.Momento(
             ...         context='Global_Skips',
             ...         manifest='metronome_marks',
@@ -4909,6 +4924,7 @@ class PersistentIndicatorTests(object):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
+            ...     previous_persist=persist,
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -5072,7 +5088,7 @@ class PersistentIndicatorTests(object):
 
             Persistent overrides also appear in segment metadata:
 
-            >>> abjad.f(maker.metadata['persistent_indicators'])
+            >>> abjad.f(maker.persist['persistent_indicators'])
             abjad.OrderedDict(
                 [
                     (
@@ -5123,9 +5139,9 @@ class PersistentIndicatorTests(object):
             ...     baca.make_notes(),
             ...     )
 
-            >>> metadata = {}
-            >>> metadata['persistent_indicators'] = {}
-            >>> metadata['persistent_indicators']['Music_Voice'] = [
+            >>> metadata, persist = {}, {}
+            >>> persist['persistent_indicators'] = {}
+            >>> persist['persistent_indicators']['Music_Voice'] = [
             ...     abjad.Momento(
             ...         context='Music_Voice',
             ...         prototype='abjad.PersistentOverride',
@@ -5142,6 +5158,7 @@ class PersistentIndicatorTests(object):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
+            ...     previous_persist=persist,
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -5301,9 +5318,9 @@ class PersistentIndicatorTests(object):
             ...     baca.make_notes(),
             ...     )
 
-            >>> metadata = {}
-            >>> metadata['persistent_indicators'] = {}
-            >>> metadata['persistent_indicators']['Music_Voice'] = [
+            >>> metadata, persist = {}, {}
+            >>> persist['persistent_indicators'] = {}
+            >>> persist['persistent_indicators']['Music_Voice'] = [
             ...     abjad.Momento(
             ...         context='Music_Voice',
             ...         prototype='abjad.PersistentOverride',
@@ -5320,6 +5337,7 @@ class PersistentIndicatorTests(object):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
+            ...     previous_persist=persist,
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -5482,9 +5500,9 @@ class PersistentIndicatorTests(object):
             ...     baca.staff_lines(1),
             ...     )
 
-            >>> metadata = {}
-            >>> metadata['persistent_indicators'] = {}
-            >>> metadata['persistent_indicators']['Music_Staff'] = [
+            >>> metadata, persist = {}, {}
+            >>> persist['persistent_indicators'] = {}
+            >>> persist['persistent_indicators']['Music_Staff'] = [
             ...     abjad.Momento(
             ...         context='Music_Voice',
             ...         prototype='baca.StaffLines',
@@ -5495,6 +5513,7 @@ class PersistentIndicatorTests(object):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
+            ...     previous_persist=persist,
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -5573,9 +5592,9 @@ class PersistentIndicatorTests(object):
             ...     baca.make_notes(),
             ...     )
 
-            >>> metadata = {}
-            >>> metadata['persistent_indicators'] = {}
-            >>> metadata['persistent_indicators']['Music_Staff'] = [
+            >>> metadata, persist = {}, {}
+            >>> persist['persistent_indicators'] = {}
+            >>> persist['persistent_indicators']['Music_Staff'] = [
             ...     abjad.Momento(
             ...         context='Music_Voice',
             ...         prototype='baca.StaffLines',
@@ -5586,6 +5605,7 @@ class PersistentIndicatorTests(object):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
+            ...     previous_persist=persist,
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -5746,9 +5766,9 @@ class PersistentIndicatorTests(object):
             ...     baca.staff_lines(5),
             ...     )
 
-            >>> metadata = {}
-            >>> metadata['persistent_indicators'] = {}
-            >>> metadata['persistent_indicators']['Music_Staff'] = [
+            >>> metadata, persist = {}, {}
+            >>> persist['persistent_indicators'] = {}
+            >>> persist['persistent_indicators']['Music_Staff'] = [
             ...     abjad.Momento(
             ...         context='Music_Voice',
             ...         prototype='baca.StaffLines',
@@ -5759,6 +5779,7 @@ class PersistentIndicatorTests(object):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
+            ...     previous_persist=persist,
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -5968,9 +5989,9 @@ class PersistentIndicatorTests(object):
             ...     baca.make_notes(),
             ...     )
 
-            >>> metadata = {}
-            >>> metadata['persistent_indicators'] = {}
-            >>> metadata['persistent_indicators']['Score'] = [
+            >>> metadata, persist = {}, {}
+            >>> persist['persistent_indicators'] = {}
+            >>> persist['persistent_indicators']['Score'] = [
             ...     abjad.Momento(
             ...         context='Global_Skips',
             ...         prototype='baca.Ritardando',
@@ -5980,6 +6001,7 @@ class PersistentIndicatorTests(object):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
+            ...     previous_persist=persist,
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -6094,9 +6116,9 @@ class PersistentIndicatorTests(object):
             ...     baca.text_spanner_staff_padding(4),
             ...     )
 
-            >>> metadata = {}
-            >>> metadata['persistent_indicators'] = {}
-            >>> metadata['persistent_indicators']['Score'] = [
+            >>> metadata, persist = {}, {}
+            >>> persist['persistent_indicators'] = {}
+            >>> persist['persistent_indicators']['Score'] = [
             ...     abjad.Momento(
             ...         context='Global_Skips',
             ...         prototype='baca.Accelerando',
@@ -6106,6 +6128,7 @@ class PersistentIndicatorTests(object):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
+            ...     previous_persist=persist,
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -6369,9 +6392,9 @@ class PersistentIndicatorTests(object):
             ...     baca.make_notes(),
             ...     )
 
-            >>> metadata = {}
-            >>> metadata['persistent_indicators'] = {}
-            >>> metadata['persistent_indicators']['Score'] = [
+            >>> metadata, persist = {}, {}
+            >>> persist['persistent_indicators'] = {}
+            >>> persist['persistent_indicators']['Score'] = [
             ...     abjad.Momento(
             ...         context='Global_Skips',
             ...         prototype='baca.Accelerando',
@@ -6381,6 +6404,7 @@ class PersistentIndicatorTests(object):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
+            ...     previous_persist=persist,
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0

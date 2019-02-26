@@ -1128,7 +1128,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if self.first_segment:
             return
         staff__group = (abjad.Staff, abjad.StaffGroup)
-        dictionary = self.previous_metadata['persistent_indicators']
+        dictionary = self.previous_persist['persistent_indicators']
         for staff__group in abjad.iterate(self.score).components(staff__group):
             if staff__group.name in dictionary:
                 continue
@@ -1806,8 +1806,8 @@ class SegmentMaker(abjad.SegmentMaker):
             metadata['phantom'] = self.phantom
         dictionary = self._collect_persistent_indicators()
         if dictionary:
-            metadata['persistent_indicators'] = dictionary
-            #persist['persistent_indicators'] = dictionary
+            #metadata['persistent_indicators'] = dictionary
+            persist['persistent_indicators'] = dictionary
         if self.segment_name is not None:
             metadata['segment_name'] = self.segment_name
         metadata['segment_number'] = self._get_segment_number()
@@ -1920,7 +1920,7 @@ class SegmentMaker(abjad.SegmentMaker):
             if momentos:
                 momentos.sort(key=lambda _: format(_))
                 result[context.name] = momentos
-        dictionary = self.previous_metadata.get('persistent_indicators')
+        dictionary = self.previous_persist.get('persistent_indicators')
         if dictionary:
             for context_name, momentos in dictionary.items():
                 if context_name not in result:
@@ -2227,7 +2227,7 @@ class SegmentMaker(abjad.SegmentMaker):
         assert isinstance(context, abjad.Context), repr(context)
         if not self.previous_metadata:
             return
-        dictionary = self.previous_metadata.get('persistent_indicators')
+        dictionary = self.previous_persist.get('persistent_indicators')
         if not dictionary:
             return
         momentos = dictionary.get(context.name)
@@ -3008,7 +3008,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if self.first_segment:
             return
         string = 'persistent_indicators'
-        dictionary = self.previous_metadata.get('persistent_indicators')
+        dictionary = self.previous_persist.get('persistent_indicators')
         if not dictionary:
             return
         for context in abjad.iterate(self.score).components(abjad.Context):
@@ -5801,9 +5801,10 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
-            >>> metadata = {}
-            >>> metadata['persistent_indicators'] = {}
-            >>> metadata['persistent_indicators']['MusicStaff'] = [
+            >>> metadata = abjad.OrderedDict()
+            >>> persist = abjad.OrderedDict()
+            >>> persist['persistent_indicators'] = abjad.OrderedDict()
+            >>> persist['persistent_indicators']['MusicStaff'] = [
             ...     abjad.Momento(
             ...         context='Music_Voice',
             ...         prototype='abjad.Clef',
@@ -5819,6 +5820,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
+            ...     previous_persist=persist,
             ...     )
 
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -5908,6 +5910,17 @@ class SegmentMaker(abjad.SegmentMaker):
                         ),
                     ('final_measure_number', 4),
                     ('first_measure_number', 1),
+                    ('segment_number', 2),
+                    (
+                        'time_signatures',
+                        ['4/8', '3/8', '4/8', '3/8'],
+                        ),
+                    ]
+                )
+
+            >>> abjad.f(maker.persist, strict=89)
+            abjad.OrderedDict(
+                [
                     (
                         'persistent_indicators',
                         abjad.OrderedDict(
@@ -5934,11 +5947,6 @@ class SegmentMaker(abjad.SegmentMaker):
                                     ),
                                 ]
                             ),
-                        ),
-                    ('segment_number', 2),
-                    (
-                        'time_signatures',
-                        ['4/8', '3/8', '4/8', '3/8'],
                         ),
                     ]
                 )
