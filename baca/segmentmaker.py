@@ -181,6 +181,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_ignore_repeat_pitch_classes',
         '_includes',
         '_instruments',
+        '_local_measure_number_extra_offset',
         '_magnify_staves',
         '_margin_markups',
         '_metronome_marks',
@@ -299,6 +300,8 @@ class SegmentMaker(abjad.SegmentMaker):
         ignore_repeat_pitch_classes: bool = None,
         includes: typing.Sequence[str] = None,
         instruments: abjad.OrderedDict = None,
+        local_measure_number_extra_offset: typing.Union[
+            bool, typings.Pair] = None,
         magnify_staves: typing.Union[
             abjad.Multiplier,
             typing.Tuple[abjad.Multiplier, abjad.Tag],
@@ -372,6 +375,8 @@ class SegmentMaker(abjad.SegmentMaker):
         self._final_measure_is_fermata = False
         self._final_segment = final_segment
         self._includes = includes
+        self._local_measure_number_extra_offset = \
+            local_measure_number_extra_offset
         self._magnify_staves = magnify_staves
         self._margin_markups = margin_markups
         self._metronome_marks = metronome_marks
@@ -2218,6 +2223,15 @@ class SegmentMaker(abjad.SegmentMaker):
             else:
                 string = abjad.Scheme.format_embedded_scheme_value(value)
             string = f'clock-time-extra-offset = {string}'
+            literal = abjad.LilyPondLiteral(string)
+            includes.append(literal)
+        if self.local_measure_number_extra_offset is not None:
+            value = self.local_measure_number_extra_offset
+            if isinstance(value, tuple):
+                string = f"#'({value[0]} . {value[1]})"
+            else:
+                string = abjad.Scheme.format_embedded_scheme_value(value)
+            string = f'local-measure-number-extra-offset = {string}'
             literal = abjad.LilyPondLiteral(string)
             includes.append(literal)
         if (not self.first_segment or
@@ -5792,6 +5806,14 @@ class SegmentMaker(abjad.SegmentMaker):
         Gets LilyPond file.
         """
         return self._lilypond_file
+
+    @property
+    def local_measure_number_extra_offset(self) -> typing.Union[
+        bool, typings.Pair, None]:
+        """
+        Gets local measure number extra offset.
+        """
+        return self._local_measure_number_extra_offset
 
     @property
     def magnify_staves(self) -> typing.Union[

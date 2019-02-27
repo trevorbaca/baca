@@ -66,6 +66,7 @@ segmentmaker
       includes
       instruments
       lilypond_file
+      local_measure_number_extra_offset
       magnify_staves
       manifests
       margin_markups
@@ -206,6 +207,8 @@ segmentmaker
    .. autoattribute:: SegmentMaker.instruments
 
    .. autoattribute:: SegmentMaker.lilypond_file
+
+   .. autoattribute:: SegmentMaker.local_measure_number_extra_offset
 
    .. autoattribute:: SegmentMaker.magnify_staves
 

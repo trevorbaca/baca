@@ -388,6 +388,8 @@ baca-start-lmi-both = #(
 
 %%% LOCAL MEASURE NUMBER SPANNER %%%
 
+local-measure-number-extra-offset = #'(0 . 10)
+
 bacaStartTextSpanLMN = #(
     make-music 'TextSpanEvent 'span-direction START 'spanner-id "LMN"
     )
@@ -451,7 +453,7 @@ baca-start-lmn-left-only = #(
     #{
     - \abjad-invisible-line
     - \baca-lmn-left-text-tweak #left
-    - \baca-lower-annotation-layer
+    - \tweak extra-offset #local-measure-number-extra-offset
     $music
     #}
     )
@@ -464,7 +466,7 @@ baca-start-lmn-both = #(
     - \abjad-invisible-line
     - \baca-lmn-left-text-tweak #left
     - \baca-lmn-right-text-tweak #right
-    - \baca-lower-annotation-layer
+    - \tweak extra-offset #local-measure-number-extra-offset
     $music
     #}
     )
