@@ -1556,6 +1556,14 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _calculate_clock_times(self):
         skips = classes.Selection(self.score['Global_Skips']).skips()
+        if 'Global_Rests' not in self.score:
+            return
+        rests = classes.Selection(self.score['Global_Rests']).rests()
+        assert len(skips) == len(rests)
+        start_clock_time = self._get_previous_stop_clock_time()
+        start_clock_time = start_clock_time or "0'00''"
+        self._start_clock_time = start_clock_time
+        start_offset = abjad.Duration.from_clock_string(start_clock_time)
         if self.clock_time_override:
             metronome_mark = self.clock_time_override
             abjad.attach(metronome_mark, skips[0])
@@ -1563,23 +1571,30 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         first_measure_number = self._get_first_measure_number()
         clock_times = []
-        start_offset = 0
-        clock_times.append(0)
         for local_measure_index, skip in enumerate(skips):
             measure_number = first_measure_number + local_measure_index
-            if measure_number in self._fermata_measure_numbers:
-                duration = 1
-                start_offset += duration
-                clock_times.append(duration)
-            else:
-                duration = abjad.inspect(skip).duration()
-                start_offset += duration
+            if measure_number not in self._fermata_measure_numbers:
                 clock_times.append(start_offset)
+                duration = abjad.inspect(skip).duration(in_seconds=True)
+            else:
+                rest = rests[local_measure_index]
+                fermata_duration = abjad.inspect(rest).annotation(
+                    const.FERMATA_DURATION
+                    )
+                duration = abjad.Duration(fermata_duration)
+                clock_times.append(duration)
+            start_offset += duration
+        clock_times.append(start_offset)
         assert len(skips) == len(clock_times) - 1
         if self.clock_time_override:
             metronome_mark = self.clock_time_override
             abjad.detach(metronome_mark, skips[0])
-        return durations
+        stop_clock_time = clock_times[-1].to_clock_string()
+        self._stop_clock_time = stop_clock_time
+        duration = clock_times[-1] - clock_times[0]
+        duration_clock_string = duration.to_clock_string()
+        self._duration = duration_clock_string
+        return clock_times
 
     def _call_commands(self):
         command_count = 0
@@ -2478,63 +2493,53 @@ class SegmentMaker(abjad.SegmentMaker):
         if self.environment == 'docs':
             return
         skips = classes.Selection(self.score['Global_Skips']).skips()
-        if self.clock_time_override:
-            metronome_mark = self.clock_time_override
-            abjad.attach(metronome_mark, skips[0])
-        if abjad.inspect(skips[0]).effective(abjad.MetronomeMark) is None:
+        clock_times = self._calculate_clock_times()
+        if clock_times is None:
             return
-        start_clock_time = self._get_previous_stop_clock_time()
-        start_clock_time = start_clock_time or "0'00''"
-        self._start_clock_time = start_clock_time 
-        segment_start_offset = abjad.Duration.from_clock_string(
-            start_clock_time)
-        tag = abjad.Tag(abjad.const.CLOCK_TIME)
-        label = abjad.label(
-            skips,
-            deactivate=True,
-            tag=tag.append('_label_clock_time'),
-            )
-        segment_stop_duration = label.with_start_offsets(
-            brackets=True,
-            clock_time=True,
-            global_offset=segment_start_offset,
-            )
-        segment_stop_offset = abjad.Offset(segment_stop_duration)
-        self._stop_clock_time = segment_stop_offset.to_clock_string()
-        segment_duration = segment_stop_offset - segment_start_offset
-        segment_duration = segment_duration.to_clock_string()
-        self._duration = segment_duration
-        if self.clock_time_override:
-            metronome_mark = self.clock_time_override
-            abjad.detach(metronome_mark, skips[0])
-        clock_times = []
-        for skip in skips:
-            wrappers = abjad.inspect(skip).wrappers(abjad.Markup)
-            for wrapper in wrappers:
-                if abjad.const.CLOCK_TIME in str(wrapper.tag):
-                    abjad.detach(wrapper, skip)
-                    markup = wrapper.indicator
-                    string = str(markup).strip(r'^ \markup')
-                    string = string.strip('{').strip('}').strip(' ')
-                    clock_times.append(string)
         total = len(skips)
+        clock_times = clock_times[:total]
         first_measure_number = self._get_first_measure_number()
+        final_clock_time = clock_times[-1]
+        final_clock_string = final_clock_time.to_clock_string()
+        final_seconds = int(final_clock_time)
+        final_fermata_string = f"{final_seconds}''"
+        final_measure_number = first_measure_number + total - 1
+        final_is_fermata = False
+        if final_measure_number in self._fermata_measure_numbers:
+            final_is_fermata = True
         for measure_index in range(len(skips)):
             measure_number = first_measure_number + measure_index
-            if (measure_number in self._fermata_measure_numbers and
-                measure_index != total - 1):
-                continue
+            is_fermata, fermata_duration = False, None
+            if measure_number in self._fermata_measure_numbers:
+                is_fermata = True
             skip = skips[measure_index]
             clock_time = clock_times[measure_index]
+            clock_string = clock_time.to_clock_string()
+            seconds = int(clock_time)
+            fermata_string = f"{seconds}''"
             if measure_index < total - 1:
                 tag = abjad.const.CLOCK_TIME
                 if measure_index == total - 2:
-                    final_clock_time = clock_times[-1]
-                    string = r'- \baca-start-ct-both'
-                    string += f' "{clock_time}" "{final_clock_time}"'
+                    if is_fermata and final_is_fermata:
+                        string = r'- \baca-start-ct-both-fermata'
+                        string += f' "{fermata_string}" "{final_fermata_string}"'
+                    elif is_fermata and not final_is_fermata:
+                        string = r'- \baca-start-ct-both-left-fermata'
+                        string += f' "{fermata_string}" "[{final_clock_string}]"'
+                    elif not is_fermata and final_is_fermata:
+                        string = r'- \baca-start-ct-both-right-fermata'
+                        string += f' "[{clock_string}]" "{final_fermata_string}"'
+                    else:
+                        string = r'- \baca-start-ct-both'
+                        string += f' "[{clock_string}]" "[{final_clock_string}]"'
                 else:
-                    string = r'- \baca-start-ct-left-only'
-                    string += f' "{clock_time}"'
+                    if not is_fermata:
+                        string = r'- \baca-start-ct-left-only'
+                        string += f' "[{clock_string}]"'
+                    else:
+                        seconds = int(clock_time)
+                        string = r'- \baca-start-ct-left-only-fermata'
+                        string += f' "{fermata_string}"'
                 start_text_span = abjad.StartTextSpan(
                     command=r'\bacaStartTextSpanCT',
                     left_text=string,

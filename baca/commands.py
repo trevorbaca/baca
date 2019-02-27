@@ -2,6 +2,7 @@ import abjad
 import collections
 import typing
 from . import classes
+from . import const
 from . import indicators
 from . import pitchcommands
 from . import rhythmcommands
@@ -1441,6 +1442,16 @@ class GlobalFermataCommand(scoping.Command):
             command = f'{description}-fermata'
         else:
             command = 'fermata'
+        if self.description == 'short':
+            fermata_duration = 1
+        elif self.description == 'fermata':
+            fermata_duration = 2
+        elif self.description == 'long':
+            fermata_duration = 4
+        elif self.description == 'very_long':
+            fermata_duration = 8
+        else:
+            raise Exception(self.description)
         for leaf in abjad.iterate(argument).leaves():
             assert isinstance(leaf, abjad.MultimeasureRest)
             string = rf'\baca-{command}-markup'
@@ -1466,6 +1477,11 @@ class GlobalFermataCommand(scoping.Command):
                 abjad.tags.FERMATA_MEASURE,
                 leaf,
                 tag=abjad.tags.FERMATA_MEASURE,
+                )
+            abjad.annotate(
+                leaf,
+                const.FERMATA_DURATION,
+                fermata_duration,
                 )
 
     ### PUBLIC PROPERTIES ###

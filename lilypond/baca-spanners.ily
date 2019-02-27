@@ -117,12 +117,47 @@ bacaStopTextSpanCT = #(
         )
     )
 
+#(define-markup-command
+    (baca-ct-fermata-left-markup layout props ct)
+    (string?)
+    (interpret-markup layout props
+        #{
+        \markup
+        \with-color #(x11-color 'HotPink)
+        \fontsize #-3
+        \upright
+        \concat { #ct \hspace #0.5 }
+        #}
+        )
+    )
+
 baca-ct-left-text-tweak = #(
     define-music-function
     (parser location left music)
     (string? ly:music?)
     #{
     \tweak bound-details.left.text \markup \baca-ct-left-markup #left
+    $music
+    #}
+    )
+
+baca-fermata-ct-fermata-left-text-tweak = #(
+    define-music-function
+    (parser location left music)
+    (string? ly:music?)
+    #{
+    \tweak bound-details.left.text \markup \baca-ct-fermata-left-markup #left
+    $music
+    #}
+    )
+
+
+baca-ct-fermata-left-text-tweak = #(
+    define-music-function
+    (parser location left music)
+    (string? ly:music?)
+    #{
+    \tweak bound-details.left.text \markup \baca-ct-fermata-left-markup #left
     $music
     #}
     )
@@ -141,6 +176,20 @@ baca-ct-left-text-tweak = #(
         )
     )
 
+#(define-markup-command
+    (baca-fermata-ct-right-markup layout props ct)
+    (string?)
+    (interpret-markup layout props
+        #{
+        \markup
+        \with-color #(x11-color 'HotPink)
+        \fontsize #-3
+        \upright
+        #ct
+        #}
+        )
+    )
+
 baca-ct-right-text-tweak = #(
     define-music-function
     (parser location right music)
@@ -150,6 +199,16 @@ baca-ct-right-text-tweak = #(
     $music
     #}
     ) 
+
+baca-fermata-ct-right-text-tweak = #(
+    define-music-function
+    (parser location right music)
+    (string? ly:music?)
+    #{
+    \tweak bound-details.right.text \markup \baca-fermata-ct-right-markup #right
+    $music
+    #}
+    )
 
 baca-start-ct-left-only = #(
     define-music-function
@@ -163,6 +222,18 @@ baca-start-ct-left-only = #(
     #}
     )
 
+baca-start-ct-left-only-fermata = #(
+    define-music-function
+    (parser location left music)
+    (string? ly:music?)
+    #{
+    - \abjad-invisible-line
+    - \baca-ct-fermata-left-text-tweak #left
+    - \tweak extra-offset #clock-time-extra-offset
+    $music
+    #}
+    )
+
 baca-start-ct-both = #(
     define-music-function
     (parser location left right music)
@@ -171,6 +242,32 @@ baca-start-ct-both = #(
     - \abjad-invisible-line
     - \baca-ct-left-text-tweak #left
     - \baca-ct-right-text-tweak #right
+    - \tweak extra-offset #clock-time-extra-offset
+    $music
+    #}
+    )
+
+baca-start-ct-both-left-fermata = #(
+    define-music-function
+    (parser location left right music)
+    (string? string? ly:music?)
+    #{
+    - \abjad-invisible-line
+    - \baca-ct-fermata-left-text-tweak #left
+    - \baca-ct-right-text-tweak #right
+    - \tweak extra-offset #clock-time-extra-offset
+    $music
+    #}
+    )
+
+baca-start-ct-both-right-fermata = #(
+    define-music-function
+    (parser location left right music)
+    (string? string? ly:music?)
+    #{
+    - \abjad-invisible-line
+    - \baca-ct-left-text-tweak #left
+    - \baca-fermata-ct-right-text-tweak #right
     - \tweak extra-offset #clock-time-extra-offset
     $music
     #}
