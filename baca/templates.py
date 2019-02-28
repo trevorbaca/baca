@@ -257,6 +257,13 @@ class SingleStaffScoreTemplate(ScoreTemplate):
                         \baca-bar-line-visible                                                       %! _attach_final_bar_line
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
+                        % [Global_Skips measure 5]                                                   %! PHANTOM:_style_phantom_measures(1):_comment_measure_numbers
+                        \time 1/4                                                                    %! PHANTOM:_style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(3)
+                        \baca-time-signature-transparent                                             %! PHANTOM:_style_phantom_measures(2)
+                        s1 * 1/4                                                                     %! PHANTOM:_make_global_skips(3)
+                        \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:_style_phantom_measures(3)
+                        \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:_style_phantom_measures(3)
+            <BLANKLINE>
                     }                                                                                %! abjad.ScoreTemplate._make_global_context
             <BLANKLINE>
                 >>                                                                                   %! abjad.ScoreTemplate._make_global_context
@@ -281,6 +288,32 @@ class SingleStaffScoreTemplate(ScoreTemplate):
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
+            <BLANKLINE>
+                            <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                \context Voice = "Music_Voice"                                       %! PHANTOM:_make_multimeasure_rest_container
+                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    % [Music_Voice measure 5]                                        %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                    \baca-invisible-music                                            %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
+                                    c'1 * 1/4                                                        %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                \context Voice = "Rest_Voice"                                        %! PHANTOM:_make_multimeasure_rest_container
+                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    % [Rest_Voice measure 5]                                         %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                    \once \override Score.TimeSignature.X-extent = ##f               %! PHANTOM:_style_phantom_measures(6)
+                                    \once \override MultiMeasureRest.transparent = ##t               %! PHANTOM:_style_phantom_measures(7)
+                                    \stopStaff                                                       %! PHANTOM:_style_phantom_measures(8)
+                                    \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:_style_phantom_measures(8)
+                                    \startStaff                                                      %! PHANTOM:_style_phantom_measures(8)
+                                    R1 * 1/4                                                         %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                            >>                                                                       %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
                         }                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
@@ -380,6 +413,13 @@ class StringTrioScoreTemplate(ScoreTemplate):
                         \baca-bar-line-visible                                                       %! _attach_final_bar_line
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
+                        % [Global_Skips measure 5]                                                   %! PHANTOM:_style_phantom_measures(1):_comment_measure_numbers
+                        \time 1/4                                                                    %! PHANTOM:_style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(3)
+                        \baca-time-signature-transparent                                             %! PHANTOM:_style_phantom_measures(2)
+                        s1 * 1/4                                                                     %! PHANTOM:_make_global_skips(3)
+                        \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:_style_phantom_measures(3)
+                        \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:_style_phantom_measures(3)
+            <BLANKLINE>
                     }                                                                                %! abjad.ScoreTemplate._make_global_context
             <BLANKLINE>
                 >>                                                                                   %! abjad.ScoreTemplate._make_global_context
@@ -415,6 +455,32 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                 % [Violin_Music_Voice measure 4]                                     %! _comment_measure_numbers
                                 R1 * 3/8                                                             %! _call_rhythm_commands
             <BLANKLINE>
+                                <<                                                                   %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    \context Voice = "Violin_Music_Voice"                            %! PHANTOM:_make_multimeasure_rest_container
+                                    {                                                                %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                        % [Violin_Music_Voice measure 5]                             %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                        \baca-invisible-music                                        %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
+                                        c'1 * 1/4                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    }                                                                %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    \context Voice = "Violin_Rest_Voice"                             %! PHANTOM:_make_multimeasure_rest_container
+                                    {                                                                %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                        % [Violin_Rest_Voice measure 5]                              %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                        \once \override Score.TimeSignature.X-extent = ##f           %! PHANTOM:_style_phantom_measures(6)
+                                        \once \override MultiMeasureRest.transparent = ##t           %! PHANTOM:_style_phantom_measures(7)
+                                        \stopStaff                                                   %! PHANTOM:_style_phantom_measures(8)
+                                        \once \override Staff.StaffSymbol.transparent = ##t          %! PHANTOM:_style_phantom_measures(8)
+                                        \startStaff                                                  %! PHANTOM:_style_phantom_measures(8)
+                                        R1 * 1/4                                                     %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    }                                                                %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                >>                                                                   %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
                             }                                                                        %! baca.StringTrioScoreTemplate.__call__
             <BLANKLINE>
                         }                                                                            %! baca.StringTrioScoreTemplate.__call__
@@ -444,6 +510,32 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                 % [Viola_Music_Voice measure 4]                                      %! _comment_measure_numbers
                                 R1 * 3/8                                                             %! _call_rhythm_commands
             <BLANKLINE>
+                                <<                                                                   %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    \context Voice = "Viola_Music_Voice"                             %! PHANTOM:_make_multimeasure_rest_container
+                                    {                                                                %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                        % [Viola_Music_Voice measure 5]                              %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                        \baca-invisible-music                                        %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
+                                        c'1 * 1/4                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    }                                                                %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    \context Voice = "Viola_Rest_Voice"                              %! PHANTOM:_make_multimeasure_rest_container
+                                    {                                                                %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                        % [Viola_Rest_Voice measure 5]                               %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                        \once \override Score.TimeSignature.X-extent = ##f           %! PHANTOM:_style_phantom_measures(6)
+                                        \once \override MultiMeasureRest.transparent = ##t           %! PHANTOM:_style_phantom_measures(7)
+                                        \stopStaff                                                   %! PHANTOM:_style_phantom_measures(8)
+                                        \once \override Staff.StaffSymbol.transparent = ##t          %! PHANTOM:_style_phantom_measures(8)
+                                        \startStaff                                                  %! PHANTOM:_style_phantom_measures(8)
+                                        R1 * 1/4                                                     %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    }                                                                %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                >>                                                                   %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
                             }                                                                        %! baca.StringTrioScoreTemplate.__call__
             <BLANKLINE>
                         }                                                                            %! baca.StringTrioScoreTemplate.__call__
@@ -472,6 +564,32 @@ class StringTrioScoreTemplate(ScoreTemplate):
             <BLANKLINE>
                                 % [Cello_Music_Voice measure 4]                                      %! _comment_measure_numbers
                                 R1 * 3/8                                                             %! _call_rhythm_commands
+            <BLANKLINE>
+                                <<                                                                   %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    \context Voice = "Cello_Music_Voice"                             %! PHANTOM:_make_multimeasure_rest_container
+                                    {                                                                %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                        % [Cello_Music_Voice measure 5]                              %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                        \baca-invisible-music                                        %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
+                                        c'1 * 1/4                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    }                                                                %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    \context Voice = "Cello_Rest_Voice"                              %! PHANTOM:_make_multimeasure_rest_container
+                                    {                                                                %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                        % [Cello_Rest_Voice measure 5]                               %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                        \once \override Score.TimeSignature.X-extent = ##f           %! PHANTOM:_style_phantom_measures(6)
+                                        \once \override MultiMeasureRest.transparent = ##t           %! PHANTOM:_style_phantom_measures(7)
+                                        \stopStaff                                                   %! PHANTOM:_style_phantom_measures(8)
+                                        \once \override Staff.StaffSymbol.transparent = ##t          %! PHANTOM:_style_phantom_measures(8)
+                                        \startStaff                                                  %! PHANTOM:_style_phantom_measures(8)
+                                        R1 * 1/4                                                     %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    }                                                                %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                >>                                                                   %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
                             }                                                                        %! baca.StringTrioScoreTemplate.__call__
             <BLANKLINE>
@@ -668,6 +786,13 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
                         \baca-bar-line-visible                                                       %! _attach_final_bar_line
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
+                        % [Global_Skips measure 5]                                                   %! PHANTOM:_style_phantom_measures(1):_comment_measure_numbers
+                        \time 1/4                                                                    %! PHANTOM:_style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(3)
+                        \baca-time-signature-transparent                                             %! PHANTOM:_style_phantom_measures(2)
+                        s1 * 1/4                                                                     %! PHANTOM:_make_global_skips(3)
+                        \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:_style_phantom_measures(3)
+                        \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:_style_phantom_measures(3)
+            <BLANKLINE>
                     }                                                                                %! abjad.ScoreTemplate._make_global_context
             <BLANKLINE>
                 >>                                                                                   %! abjad.ScoreTemplate._make_global_context
@@ -693,6 +818,32 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
                             % [Music_Voice_One measure 4]                                            %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
+                            <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                \context Voice = "Music_Voice_One"                                   %! PHANTOM:_make_multimeasure_rest_container
+                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    % [Music_Voice_One measure 5]                                    %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                    \baca-invisible-music                                            %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
+                                    c'1 * 1/4                                                        %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                \context Voice = "Rest_Voice_One"                                    %! PHANTOM:_make_multimeasure_rest_container
+                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    % [Rest_Voice_One measure 5]                                     %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                    \once \override Score.TimeSignature.X-extent = ##f               %! PHANTOM:_style_phantom_measures(6)
+                                    \once \override MultiMeasureRest.transparent = ##t               %! PHANTOM:_style_phantom_measures(7)
+                                    \stopStaff                                                       %! PHANTOM:_style_phantom_measures(8)
+                                    \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:_style_phantom_measures(8)
+                                    \startStaff                                                      %! PHANTOM:_style_phantom_measures(8)
+                                    R1 * 1/4                                                         %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                            >>                                                                       %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
                         }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
             <BLANKLINE>
                         \context MusicVoiceTwo = "Music_Voice_Two"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
@@ -709,6 +860,32 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
             <BLANKLINE>
                             % [Music_Voice_Two measure 4]                                            %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
+            <BLANKLINE>
+                            <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                \context Voice = "Music_Voice_Two"                                   %! PHANTOM:_make_multimeasure_rest_container
+                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    % [Music_Voice_Two measure 5]                                    %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                    \baca-invisible-music                                            %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
+                                    c'1 * 1/4                                                        %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                \context Voice = "Rest_Voice_Two"                                    %! PHANTOM:_make_multimeasure_rest_container
+                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    % [Rest_Voice_Two measure 5]                                     %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                    \once \override Score.TimeSignature.X-extent = ##f               %! PHANTOM:_style_phantom_measures(6)
+                                    \once \override MultiMeasureRest.transparent = ##t               %! PHANTOM:_style_phantom_measures(7)
+                                    \stopStaff                                                       %! PHANTOM:_style_phantom_measures(8)
+                                    \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:_style_phantom_measures(8)
+                                    \startStaff                                                      %! PHANTOM:_style_phantom_measures(8)
+                                    R1 * 1/4                                                         %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                            >>                                                                       %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
                         }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
             <BLANKLINE>
@@ -816,6 +993,13 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                         \baca-bar-line-visible                                                       %! _attach_final_bar_line
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
+                        % [Global_Skips measure 5]                                                   %! PHANTOM:_style_phantom_measures(1):_comment_measure_numbers
+                        \time 1/4                                                                    %! PHANTOM:_style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(3)
+                        \baca-time-signature-transparent                                             %! PHANTOM:_style_phantom_measures(2)
+                        s1 * 1/4                                                                     %! PHANTOM:_make_global_skips(3)
+                        \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:_style_phantom_measures(3)
+                        \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:_style_phantom_measures(3)
+            <BLANKLINE>
                     }                                                                                %! abjad.ScoreTemplate._make_global_context
             <BLANKLINE>
                 >>                                                                                   %! abjad.ScoreTemplate._make_global_context
@@ -847,6 +1031,32 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
             <BLANKLINE>
                             % [Violin_Music_Voice measure 4]                                         %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
+            <BLANKLINE>
+                            <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                \context Voice = "Violin_Music_Voice"                                %! PHANTOM:_make_multimeasure_rest_container
+                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    % [Violin_Music_Voice measure 5]                                 %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                    \baca-invisible-music                                            %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
+                                    c'1 * 1/4                                                        %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                \context Voice = "Violin_Rest_Voice"                                 %! PHANTOM:_make_multimeasure_rest_container
+                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    % [Violin_Rest_Voice measure 5]                                  %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                    \once \override Score.TimeSignature.X-extent = ##f               %! PHANTOM:_style_phantom_measures(6)
+                                    \once \override MultiMeasureRest.transparent = ##t               %! PHANTOM:_style_phantom_measures(7)
+                                    \stopStaff                                                       %! PHANTOM:_style_phantom_measures(8)
+                                    \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:_style_phantom_measures(8)
+                                    \startStaff                                                      %! PHANTOM:_style_phantom_measures(8)
+                                    R1 * 1/4                                                         %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                            >>                                                                       %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
                         }                                                                            %! baca.ViolinSoloScoreTemplate.__call__
             <BLANKLINE>
