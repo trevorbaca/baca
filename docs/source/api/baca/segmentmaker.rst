@@ -76,7 +76,6 @@ segmentmaker
       midi
       nonfirst_segment_lilypond_include
       persist
-      phantom
       previous_metadata
       previous_persist
       run
@@ -227,8 +226,6 @@ segmentmaker
    .. autoattribute:: SegmentMaker.nonfirst_segment_lilypond_include
 
    .. autoattribute:: SegmentMaker.persist
-
-   .. autoattribute:: SegmentMaker.phantom
 
    .. autoattribute:: SegmentMaker.previous_metadata
 

@@ -221,7 +221,6 @@ class SegmentMaker(abjad.SegmentMaker):
         '_midi',
         '_nonfirst_segment_lilypond_include',
         '_offset_to_measure_number',
-        '_phantom',
         '_previously_alive_contexts',
         '_score',
         '_score_template',
@@ -415,9 +414,6 @@ class SegmentMaker(abjad.SegmentMaker):
         self._metronome_marks = metronome_marks
         self._midi: typing.Optional[bool] = None
         self._offset_to_measure_number: typing.Dict[abjad.Offset, int] = {}
-        if phantom is not None:
-            phantom = bool(phantom)
-        self._phantom = phantom
         self._previously_alive_contexts: typing.List[str] = []
         self._score_template = score_template
         self._segment_bol_measure_numbers: typing.List[int] = []
@@ -1232,10 +1228,7 @@ class SegmentMaker(abjad.SegmentMaker):
         strings.append(rf'\bar "{abbreviation}"')
         literal = abjad.LilyPondLiteral(strings, 'after')
         skips = classes.Selection(self.score['Global_Skips']).skips()
-        if self.phantom:
-            skip = skips[-2]
-        else:
-            skip = skips[-1] 
+        skip = skips[-2]
         abjad.attach(literal, skip, tag='_attach_final_bar_line')
 
     def _attach_first_appearance_score_template_defaults(self):
@@ -1589,8 +1582,7 @@ class SegmentMaker(abjad.SegmentMaker):
         context = self.score['Global_Rests']
         rests = abjad.select(context).leaves(abjad.MultimeasureRest)
         final_measure_index = len(rests) - 1
-        if self.phantom is True:
-            final_measure_index -= 1
+        final_measure_index -= 1
         first_measure_number = self._get_first_measure_number()
         tag = abjad.tags.FERMATA_MEASURE
         for measure_index, rest in enumerate(rests):
@@ -1756,13 +1748,12 @@ class SegmentMaker(abjad.SegmentMaker):
                         )
                 selections = maker(self.time_signatures)
                 voice.extend(selections)
-                if self.phantom:
-                    container = self._make_multimeasure_rest_container(
-                        voice.name,
-                        (1, 4),
-                        phantom=True,
-                        )
-                    voice.append(container)
+                container = self._make_multimeasure_rest_container(
+                    voice.name,
+                    (1, 4),
+                    phantom=True,
+                    )
+                voice.append(container)
                 continue
             rhythms = []
             for command in commands:
@@ -1790,13 +1781,12 @@ class SegmentMaker(abjad.SegmentMaker):
             rhythms.sort()
             self._assert_nonoverlapping_rhythms(rhythms, voice.name)
             rhythms = self._intercalate_silences(rhythms, voice.name)
-            if self.phantom:
-                container = self._make_multimeasure_rest_container(
-                    voice.name,
-                    (1, 4),
-                    phantom=True,
-                    )
-                rhythms.append(container)
+            container = self._make_multimeasure_rest_container(
+                voice.name,
+                (1, 4),
+                phantom=True,
+                )
+            rhythms.append(container)
             voice.extend(rhythms)
             self._apply_first_and_final_ties(voice)
         return command_count
@@ -1959,8 +1949,6 @@ class SegmentMaker(abjad.SegmentMaker):
         metadata['final_measure_number'] = self._get_final_measure_number()
         if self._final_measure_is_fermata is True:
             metadata['final_measure_is_fermata'] = True
-        if self.phantom is not None:
-            metadata['phantom'] = self.phantom
         dictionary = self._collect_persistent_indicators()
         if dictionary:
             persist['persistent_indicators'] = dictionary
@@ -2690,12 +2678,8 @@ class SegmentMaker(abjad.SegmentMaker):
             measure_number = first_measure_number + measure_index
             if measure_index < total - 1:
                 tag = abjad.Tag(abjad.const.LOCAL_MEASURE_INDEX)
-                if not self.phantom and measure_index == total - 2:
-                    string = r'- \baca-start-lmi-both'
-                    string += f' "{measure_index}" "{measure_index + 1}"'
-                else:
-                    string = r'- \baca-start-lmi-left-only'
-                    string += f' "{measure_index}"'
+                string = r'- \baca-start-lmi-left-only'
+                string += f' "{measure_index}"'
                 start_text_span = abjad.StartTextSpan(
                     command=r'\bacaStartTextSpanLMI',
                     left_text=string,
@@ -2708,13 +2692,8 @@ class SegmentMaker(abjad.SegmentMaker):
                     tag=tag,
                     )
                 tag = abjad.Tag(abjad.const.LOCAL_MEASURE_NUMBER)
-                if not self.phantom and measure_index == total - 2:
-                    string = r'- \baca-start-lmn-both'
-                    string += f' "{local_measure_number}"'
-                    string += f' "{local_measure_number + 1}"'
-                else:
-                    string = r'- \baca-start-lmn-left-only'
-                    string += f' "{local_measure_number}"'
+                string = r'- \baca-start-lmn-left-only'
+                string += f' "{local_measure_number}"'
                 start_text_span = abjad.StartTextSpan(
                     command=r'\bacaStartTextSpanLMN',
                     left_text=string,
@@ -2727,13 +2706,8 @@ class SegmentMaker(abjad.SegmentMaker):
                     tag=tag,
                     )
                 tag = abjad.Tag(abjad.const.MEASURE_NUMBER)
-                if not self.phantom and measure_index == total - 2:
-                    string = r'- \baca-start-mn-both'
-                    string += f' "{measure_number}"'
-                    string += f' "{measure_number + 1}"'
-                else:
-                    string = r'- \baca-start-mn-left-only'
-                    string += f' "{measure_number}"'
+                string = r'- \baca-start-mn-left-only'
+                string += f' "{measure_number}"'
                 start_text_span = abjad.StartTextSpan(
                     command=r'\bacaStartTextSpanMN',
                     left_text=string,
@@ -2795,36 +2769,24 @@ class SegmentMaker(abjad.SegmentMaker):
                 raise Exception(item)
             measure_index = lmn - 1
             skip = skips[measure_index]
-            if self.phantom or (not self.phantom and i < total - 1):
-                tag = abjad.Tag(abjad.const.STAGE_NUMBER)
-                if not self.phantom and i == total - 2:
-                    next_item = self.stage_markup[i + 1]
-                    if len(next_item) == 2:
-                        next_value, next_lmn = next_item
-                        next_color = None
-                    else:
-                        assert len(next_item) == 3, repr(next_item)
-                        next_value, next_lmn, next_color = next_item
-                    string = r'- \baca-start-snm-both'
-                    string += f' "{value}" "{next_value}"'
-                else:
-                    if color is not None:
-                        string = r'- \baca-start-snm-colored-left-only'
-                        string += f' "{value}" #{color}'
-                    else:
-                        string = r'- \baca-start-snm-left-only'
-                        string += f' "{value}"'
-                start_text_span = abjad.StartTextSpan(
-                    command=r'\bacaStartTextSpanSNM',
-                    left_text=string,
-                    )
-                abjad.attach(
-                    start_text_span,
-                    skip,
-                    context='GlobalSkips',
-                    deactivate=True,
-                    tag=tag,
-                    )
+            tag = abjad.Tag(abjad.const.STAGE_NUMBER)
+            if color is not None:
+                string = r'- \baca-start-snm-colored-left-only'
+                string += f' "{value}" #{color}'
+            else:
+                string = r'- \baca-start-snm-left-only'
+                string += f' "{value}"'
+            start_text_span = abjad.StartTextSpan(
+                command=r'\bacaStartTextSpanSNM',
+                left_text=string,
+                )
+            abjad.attach(
+                start_text_span,
+                skip,
+                context='GlobalSkips',
+                deactivate=True,
+                tag=tag,
+                )
             if 0 < i:
                 tag = abjad.Tag(abjad.const.STAGE_NUMBER)
                 stop_text_span = abjad.StopTextSpan(
@@ -2837,19 +2799,18 @@ class SegmentMaker(abjad.SegmentMaker):
                     deactivate=True,
                     tag=tag,
                     )
-        if self.phantom:
-            skip = skips[-1]
-            tag = abjad.Tag(abjad.const.STAGE_NUMBER)
-            stop_text_span = abjad.StopTextSpan(
-                command=r'\bacaStopTextSpanSNM',
-                )
-            abjad.attach(
-                stop_text_span,
-                skip,
-                context='GlobalSkips',
-                deactivate=True,
-                tag=tag,
-                )
+        skip = skips[-1]
+        tag = abjad.Tag(abjad.const.STAGE_NUMBER)
+        stop_text_span = abjad.StopTextSpan(
+            command=r'\bacaStopTextSpanSNM',
+            )
+        abjad.attach(
+            stop_text_span,
+            skip,
+            context='GlobalSkips',
+            deactivate=True,
+            tag=tag,
+            )
 
     def _magnify_staves_(self):
         if self.magnify_staves is None:
@@ -2881,15 +2842,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 tag='_make_global_rests(1)',
                 )
             rests.append(rest)
-        if self.phantom:
-            tag = f'{const.PHANTOM}:_make_global_rests(2)'
-            rest = abjad.MultimeasureRest(
-                abjad.Duration(1),
-                multiplier=(1, 4),
-                tag=tag,
-                )
-            abjad.annotate(rest, const.PHANTOM, True)
-            rests.append(rest)
+        tag = f'{const.PHANTOM}:_make_global_rests(2)'
+        rest = abjad.MultimeasureRest(
+            abjad.Duration(1),
+            multiplier=(1, 4),
+            tag=tag,
+            )
+        abjad.annotate(rest, const.PHANTOM, True)
+        rests.append(rest)
         return rests
 
     def _make_global_skips(self):
@@ -2907,18 +2867,17 @@ class SegmentMaker(abjad.SegmentMaker):
                 tag='_make_global_skips(2)',
                 )
             context.append(skip)
-        if self.phantom:
-            tag = f'{const.PHANTOM}:_make_global_skips(3)'
-            skip = abjad.Skip(1, multiplier=(1, 4), tag=tag)
-            abjad.annotate(skip, const.PHANTOM, True)
-            context.append(skip)
-            time_signature = abjad.TimeSignature((1, 4))
-            abjad.attach(
-                time_signature,
-                skip,
-                context='Score',
-                tag=tag,
-                )
+        tag = f'{const.PHANTOM}:_make_global_skips(3)'
+        skip = abjad.Skip(1, multiplier=(1, 4), tag=tag)
+        abjad.annotate(skip, const.PHANTOM, True)
+        context.append(skip)
+        time_signature = abjad.TimeSignature((1, 4))
+        abjad.attach(
+            time_signature,
+            skip,
+            context='Score',
+            tag=tag,
+            )
         if self.first_segment:
             return
         # empty start bar allows LilyPond to print bar numbers
@@ -3246,8 +3205,7 @@ class SegmentMaker(abjad.SegmentMaker):
         previous_time_signature = None
         self._cached_time_signatures = []
         skips = classes.Selection(self.score['Global_Skips']).skips()
-        if self.phantom:
-            skips = skips[:-1]
+        skips = skips[:-1]
         for skip in skips:
             time_signature = abjad.inspect(skip).indicator(abjad.TimeSignature)
             self._cached_time_signatures.append(str(time_signature))
@@ -3479,8 +3437,6 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.override(rest).multi_measure_rest_text.extra_offset = pair
 
     def _style_phantom_measures(self):
-        if not self.phantom:
-            return
         tag = const.PHANTOM
         skip = abjad.inspect(self.score['Global_Skips']).leaf(-1)
         for literal in abjad.inspect(skip).indicators(abjad.LilyPondLiteral):
@@ -3973,7 +3929,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
                             % [Global_Skips measure 3]                                                   %! PHANTOM:_style_phantom_measures(1):_comment_measure_numbers
-                            \baca-new-spacing-section #1 #31                                             %! PHANTOM:_style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
+                            \baca-new-spacing-section #1 #4                                              %! PHANTOM:_style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \time 1/4                                                                    %! PHANTOM:_style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(3)
                             \baca-time-signature-transparent                                             %! PHANTOM:_style_phantom_measures(2)
                             s1 * 1/4                                                                     %! PHANTOM:_make_global_skips(3)
@@ -4357,7 +4313,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
                             % [Global_Skips measure 5]                                                   %! PHANTOM:_style_phantom_measures(1):_comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! PHANTOM:_style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
+                            \baca-new-spacing-section #1 #4                                              %! PHANTOM:_style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \time 1/4                                                                    %! PHANTOM:_style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(3)
                             \baca-time-signature-transparent                                             %! PHANTOM:_style_phantom_measures(2)
                             s1 * 1/4                                                                     %! PHANTOM:_make_global_skips(3)
@@ -4577,7 +4533,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
                             % [Global_Skips measure 5]                                                   %! PHANTOM:_style_phantom_measures(1):_comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! PHANTOM:_style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
+                            \baca-new-spacing-section #1 #4                                              %! PHANTOM:_style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \time 1/4                                                                    %! PHANTOM:_style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(3)
                             \baca-time-signature-transparent                                             %! PHANTOM:_style_phantom_measures(2)
                             s1 * 1/4                                                                     %! PHANTOM:_make_global_skips(3)
@@ -5126,7 +5082,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
                             % [Global_Skips measure 5]                                                   %! PHANTOM:_style_phantom_measures(1):_comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! PHANTOM:_style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
+                            \baca-new-spacing-section #1 #4                                              %! PHANTOM:_style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \time 1/4                                                                    %! PHANTOM:_style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(3)
                             \baca-time-signature-transparent                                             %! PHANTOM:_style_phantom_measures(2)
                             s1 * 1/4                                                                     %! PHANTOM:_make_global_skips(3)
@@ -5351,7 +5307,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \bar "|"                                                                     %! _attach_final_bar_line
                 <BLANKLINE>
                             % [Global_Skips measure 5]                                                   %! PHANTOM:_style_phantom_measures(1):_comment_measure_numbers
-                            \baca-new-spacing-section #1 #24                                             %! PHANTOM:_style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
+                            \baca-new-spacing-section #1 #4                                              %! PHANTOM:_style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \time 1/4                                                                    %! PHANTOM:_style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(3)
                             \baca-time-signature-transparent                                             %! PHANTOM:_style_phantom_measures(2)
                             s1 * 1/4                                                                     %! PHANTOM:_make_global_skips(3)
@@ -6547,7 +6503,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 [
                     ('final_measure_number', 4),
                     ('first_measure_number', 1),
-                    ('phantom', True),
                     ('segment_number', 2),
                     (
                         'time_signatures',
@@ -6631,13 +6586,6 @@ class SegmentMaker(abjad.SegmentMaker):
         Gets persist metadata.
         """
         return self._persist
-
-    @property
-    def phantom(self) -> typing.Optional[bool]:
-        """
-        Is true when segment-maker adds segment-final phantom measure.
-        """
-        return True
 
     @property
     def previous_metadata(self) -> typing.Optional[abjad.OrderedDict]:

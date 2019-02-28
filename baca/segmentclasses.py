@@ -708,7 +708,7 @@ class HorizontalSpacingSpecifier(object):
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                         % [Global_Skips measure 5]                                                   %! PHANTOM:_style_phantom_measures(1):_comment_measure_numbers
-                        \baca-new-spacing-section #1 #1                                              %! PHANTOM:_style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
+                        \baca-new-spacing-section #1 #4                                              %! PHANTOM:_style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
                         \time 1/4                                                                    %! PHANTOM:_style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(3)
                         \baca-time-signature-transparent                                             %! PHANTOM:_style_phantom_measures(2)
                         s1 * 1/4                                                                     %! PHANTOM:_make_global_skips(3)
@@ -867,7 +867,7 @@ class HorizontalSpacingSpecifier(object):
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                         % [Global_Skips measure 5]                                                   %! PHANTOM:_style_phantom_measures(1):_comment_measure_numbers
-                        \baca-new-spacing-section #1 #1                                              %! PHANTOM:_style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
+                        \baca-new-spacing-section #1 #4                                              %! PHANTOM:_style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
                         \time 1/4                                                                    %! PHANTOM:_style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(3)
                         \baca-time-signature-transparent                                             %! PHANTOM:_style_phantom_measures(2)
                         s1 * 1/4                                                                     %! PHANTOM:_make_global_skips(3)
@@ -1027,7 +1027,7 @@ class HorizontalSpacingSpecifier(object):
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                         % [Global_Skips measure 5]                                                   %! PHANTOM:_style_phantom_measures(1):_comment_measure_numbers
-                        \baca-new-spacing-section #1 #2                                              %! PHANTOM:_style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
+                        \baca-new-spacing-section #1 #4                                              %! PHANTOM:_style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
                         \time 1/4                                                                    %! PHANTOM:_style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(3)
                         \baca-time-signature-transparent                                             %! PHANTOM:_style_phantom_measures(2)
                         s1 * 1/4                                                                     %! PHANTOM:_make_global_skips(3)
@@ -1188,7 +1188,7 @@ class HorizontalSpacingSpecifier(object):
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                         % [Global_Skips measure 5]                                                   %! PHANTOM:_style_phantom_measures(1):_comment_measure_numbers
-                        \baca-new-spacing-section #1 #16                                             %! PHANTOM:_style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
+                        \baca-new-spacing-section #1 #4                                              %! PHANTOM:_style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
                         \time 1/4                                                                    %! PHANTOM:_style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(3)
                         \baca-time-signature-transparent                                             %! PHANTOM:_style_phantom_measures(2)
                         s1 * 1/4                                                                     %! PHANTOM:_make_global_skips(3)
@@ -1349,7 +1349,7 @@ class HorizontalSpacingSpecifier(object):
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! PHANTOM:_style_phantom_measures(1):_comment_measure_numbers
-                        \baca-new-spacing-section #1 #8                                              %! PHANTOM:_style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
+                        \baca-new-spacing-section #1 #4                                              %! PHANTOM:_style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
                         \time 1/4                                                                    %! PHANTOM:_style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(3)
                         \baca-time-signature-transparent                                             %! PHANTOM:_style_phantom_measures(2)
                         s1 * 1/4                                                                     %! PHANTOM:_make_global_skips(3)
@@ -1628,7 +1628,7 @@ class HorizontalSpacingSpecifier(object):
                 skip,
                 minimum_durations_by_measure,
                 )
-            if self.phantom and measure_index == total - 1:
+            if measure_index == total - 1:
                 duration = abjad.Duration(1, 4)
             spacing_section = indicators.SpacingSection(duration=duration)
             tag = abjad.Tag(abjad.const.SPACING_COMMAND)
@@ -1640,22 +1640,8 @@ class HorizontalSpacingSpecifier(object):
             string_ = self._make_annotation(duration, eol_adjusted, duration_)
             if measure_index < total - 1:
                 tag = abjad.Tag(abjad.const.SPACING)
-                if not self.phantom and measure_index == total - 2:
-                    next_skip = skips[measure_index + 1]
-                    next_measure_index = measure_index + 1
-                    next_measure_number = measure_number + 1
-                    result = self._calculate_duration(
-                        next_measure_index,
-                        next_measure_number,
-                        next_skip,
-                        minimum_durations_by_measure,
-                        )
-                    next_string = self._make_annotation(*result)
-                    string = r'- \baca-start-spm-both'
-                    string += f' "{string_}" "{next_string}"'
-                else:
-                    string = r'- \baca-start-spm-left-only'
-                    string += f' "{string_}"'
+                string = r'- \baca-start-spm-left-only'
+                string += f' "{string_}"'
                 start_text_span = abjad.StartTextSpan(
                     command=r'\bacaStartTextSpanSPM',
                     left_text=string,
@@ -1836,17 +1822,13 @@ class HorizontalSpacingSpecifier(object):
             ...     )
 
             >>> spacing.eol_measure_numbers
-            [102, 112]
+            [102]
 
         """
         eol_measure_numbers = []
         for bol_measure_number in self.bol_measure_numbers[1:]:
             eol_measure_number = bol_measure_number - 1
             eol_measure_numbers.append(eol_measure_number)
-        if (self.final_measure_number and
-            not self.phantom and
-            self.final_measure_number not in eol_measure_numbers):
-            eol_measure_numbers.append(self.final_measure_number)
         return eol_measure_numbers
 
     @property
@@ -2769,7 +2751,7 @@ def scorewide_spacing(
         [95, 103]
 
         >>> spacing.eol_measure_numbers
-        [102, 112]
+        [102]
 
         >>> spacing.fermata_measure_numbers
         [105, 107]
@@ -2797,7 +2779,6 @@ def scorewide_spacing(
         first_measure_number = tuple_[0]
         measure_count = tuple_[1]
         fermata_measure_numbers = tuple_[2]
-        phantom = tuple_[3]
         first_measure_number = first_measure_number or 1
     fallback_fraction = abjad.NonreducedFraction(fallback_duration)
     measures = abjad.OrderedDict()
@@ -2811,7 +2792,6 @@ def scorewide_spacing(
         first_measure_number=first_measure_number,
         measure_count=measure_count,
         measures=measures,
-        phantom=phantom,
         )
     specifier._forbid_segment_maker_adjustments = True
     return specifier

@@ -478,7 +478,7 @@ def beam(
                         \bar "|"                                                                     %! _attach_final_bar_line
             <BLANKLINE>
                         % [Global_Skips measure 5]                                                   %! PHANTOM:_style_phantom_measures(1):_comment_measure_numbers
-                        \baca-new-spacing-section #1 #12                                             %! PHANTOM:_style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
+                        \baca-new-spacing-section #1 #4                                              %! PHANTOM:_style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
                         \time 1/4                                                                    %! PHANTOM:_style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(3)
                         \baca-time-signature-transparent                                             %! PHANTOM:_style_phantom_measures(2)
                         s1 * 1/4                                                                     %! PHANTOM:_make_global_skips(3)
