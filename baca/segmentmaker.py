@@ -2677,20 +2677,6 @@ class SegmentMaker(abjad.SegmentMaker):
             local_measure_number = measure_index + 1
             measure_number = first_measure_number + measure_index
             if measure_index < total - 1:
-                tag = abjad.Tag(abjad.const.LOCAL_MEASURE_INDEX)
-                string = r'- \baca-start-lmi-left-only'
-                string += f' "{measure_index}"'
-                start_text_span = abjad.StartTextSpan(
-                    command=r'\bacaStartTextSpanLMI',
-                    left_text=string,
-                    )
-                abjad.attach(
-                    start_text_span,
-                    skip,
-                    context='GlobalSkips',
-                    deactivate=True,
-                    tag=tag,
-                    )
                 tag = abjad.Tag(abjad.const.LOCAL_MEASURE_NUMBER)
                 string = r'- \baca-start-lmn-left-only'
                 string += f' "{local_measure_number}"'
@@ -2720,17 +2706,6 @@ class SegmentMaker(abjad.SegmentMaker):
                     tag=tag,
                     )
             if 0 < measure_index:
-                tag = abjad.Tag(abjad.const.LOCAL_MEASURE_INDEX)
-                stop_text_span = abjad.StopTextSpan(
-                    command=r'\bacaStopTextSpanLMI',
-                    )
-                abjad.attach(
-                    stop_text_span,
-                    skip,
-                    context='GlobalSkips',
-                    deactivate=True,
-                    tag=tag,
-                    )
                 tag = abjad.Tag(abjad.const.LOCAL_MEASURE_NUMBER)
                 stop_text_span = abjad.StopTextSpan(
                     command=r'\bacaStopTextSpanLMN',
