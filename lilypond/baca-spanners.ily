@@ -1,25 +1,3 @@
-%%% GLOBALS %%%
-
-baca-lower-annotation-layer = #(
-    define-music-function
-    (parser location music)
-    (ly:music?)
-    #{
-    \tweak extra-offset #'(0 . 10)
-    $music
-    #}
-    )
-
-baca-upper-annotation-layer = #(
-    define-music-function
-    (parser location music)
-    (ly:music?)
-    #{
-    \tweak extra-offset #'(0 . 13)
-    $music
-    #}
-    )
-
 %%% BCP SPANNER %%%
 
 bacaStartTextSpanBCP = #(
@@ -93,7 +71,7 @@ bacaStopTextSpanCLB = #(
 
 %%% CLOCK TIME SPANNER %%%
 
-clock-time-extra-offset = #'(0 . 13)
+clock-time-extra-offset = #'(0 . 16)
 
 bacaStartTextSpanCT = #(
     make-music 'TextSpanEvent 'span-direction START 'spanner-id "CT"
@@ -400,6 +378,8 @@ bacaStopTextSpanMA = #(
 
 %%% MEASURE NUMBER SPANNER %%%
 
+measure-number-extra-offset = #'(0 . 10)
+
 bacaStartTextSpanMN = #(
     make-music 'TextSpanEvent 'span-direction START 'spanner-id "MN"
     )
@@ -463,7 +443,7 @@ baca-start-mn-left-only = #(
     #{
     - \abjad-invisible-line
     - \baca-mn-left-text-tweak #left
-    - \baca-lower-annotation-layer
+    - \tweak extra-offset #measure-number-extra-offset
     $music
     #}
     )
@@ -476,7 +456,7 @@ baca-start-mn-both = #(
     - \abjad-invisible-line
     - \baca-mn-left-text-tweak #left
     - \baca-mn-right-text-tweak #right
-    - \baca-lower-annotation-layer
+    - \tweak extra-offset #measure-number-extra-offset
     $music
     #}
     )
@@ -727,6 +707,8 @@ bacaStopTextSpanSCP = #(
 
 %%% SPACING MARKUP SPANNER %%%
 
+spacing-extra-offset = #'(0 . 19)
+
 bacaStartTextSpanSPM = #(
     make-music 'TextSpanEvent 'span-direction START 'spanner-id "SPM"
     )
@@ -790,7 +772,7 @@ baca-start-spm-left-only = #(
     #{
     - \abjad-invisible-line
     - \baca-spm-left-text-tweak #left
-    - \baca-upper-annotation-layer
+    - \tweak extra-offset #spacing-extra-offset
     $music
     #}
     )
@@ -803,7 +785,7 @@ baca-start-spm-both = #(
     - \abjad-invisible-line
     - \baca-spm-left-text-tweak #left
     - \baca-spm-right-text-tweak #right
-    - \baca-upper-annotation-layer
+    - \tweak extra-offset #spacing-extra-offset
     $music
     #}
     )
@@ -819,6 +801,8 @@ bacaStopTextSpanSpazzolato = #(
     )
 
 %%% STAGE NUMBER SPANNER %%%
+
+stage-number-extra-offset = #'(0 . 13)
 
 bacaStartTextSpanSNM = #(
     make-music 'TextSpanEvent 'span-direction START 'spanner-id "SNM"
@@ -908,7 +892,7 @@ baca-start-snm-left-only = #(
     #{
     - \abjad-solid-line-with-hook
     - \baca-snm-left-text-tweak #left
-    - \baca-upper-annotation-layer
+    - \tweak extra-offset #stage-number-extra-offset
     - \tweak bound-details.right.padding 1.25
     %%%- \tweak color #red
     $music
@@ -923,7 +907,7 @@ baca-start-snm-colored-left-only = #(
     - \abjad-solid-line-with-hook
     %%%- \baca-snm-left-text-tweak #left
     - \baca-snm-colored-left-text-tweak #left #color
-    - \baca-upper-annotation-layer
+    - \tweak extra-offset #stage-number-extra-offset
     - \tweak bound-details.right.padding 1.25
     - \tweak color #color
     $music
@@ -938,7 +922,7 @@ baca-start-snm-both = #(
     - \abjad-solid-line-with-hook
     - \baca-snm-left-text-tweak #left
     - \baca-snm-right-text-tweak #right
-    - \baca-upper-annotation-layer
+    - \tweak extra-offset #stage-number-extra-offset
     - \tweak bound-details.right.padding 0
     - \tweak bound-details.right.stencil-align-dir-y #center
     %%%- \tweak color #red

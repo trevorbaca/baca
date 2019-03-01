@@ -217,6 +217,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_local_measure_number_extra_offset',
         '_magnify_staves',
         '_margin_markups',
+        '_measure_number_extra_offset',
         '_metronome_marks',
         '_midi',
         '_nonfirst_segment_lilypond_include',
@@ -230,7 +231,9 @@ class SegmentMaker(abjad.SegmentMaker):
         '_skips_instead_of_rests',
         '_sounds_during_segment',
         '_spacing',
+        '_spacing_extra_offset',
         '_stage_markup',
+        '_stage_number_extra_offset',
         '_start_clock_time',
         '_stop_clock_time',
         '_test_container_identifiers',
@@ -339,6 +342,7 @@ class SegmentMaker(abjad.SegmentMaker):
             typing.Tuple[abjad.Multiplier, abjad.Tag],
             ] = None,
         margin_markups: abjad.OrderedDict = None,
+        measure_number_extra_offset: typing.Union[bool, typings.Pair] = None,
         metronome_marks: abjad.OrderedDict = None,
         nonfirst_segment_lilypond_include: bool = None,
         phantom: bool = None,
@@ -346,7 +350,9 @@ class SegmentMaker(abjad.SegmentMaker):
         segment_directory: abjad.Path = None,
         skips_instead_of_rests: bool = None,
         spacing: segmentclasses.HorizontalSpacingSpecifier = None,
+        spacing_extra_offset: typing.Union[bool, typings.Pair] = None,
         stage_markup: typing.List = None,
+        stage_number_extra_offset: typing.Union[bool, typings.Pair] = None,
         test_container_identifiers: bool = None,
         time_signatures: typing.List[tuple] = None,
         transpose_score: bool = None,
@@ -411,6 +417,7 @@ class SegmentMaker(abjad.SegmentMaker):
             local_measure_number_extra_offset
         self._magnify_staves = magnify_staves
         self._margin_markups = margin_markups
+        self._measure_number_extra_offset = measure_number_extra_offset
         self._metronome_marks = metronome_marks
         self._midi: typing.Optional[bool] = None
         self._offset_to_measure_number: typing.Dict[abjad.Offset, int] = {}
@@ -427,7 +434,9 @@ class SegmentMaker(abjad.SegmentMaker):
         self._skips_instead_of_rests = skips_instead_of_rests
         self._sounds_during_segment: abjad.OrderedDict = abjad.OrderedDict()
         self._spacing = spacing
+        self._spacing_extra_offset = spacing_extra_offset
         self._stage_markup = stage_markup
+        self._stage_number_extra_offset = stage_number_extra_offset
         self._start_clock_time: typing.Optional[str] = None
         self._stop_clock_time: typing.Optional[str] = None
         if test_container_identifiers is not None:
@@ -2325,6 +2334,33 @@ class SegmentMaker(abjad.SegmentMaker):
             string = f'local-measure-number-extra-offset = {string}'
             literal = abjad.LilyPondLiteral(string)
             includes.append(literal)
+        if self.measure_number_extra_offset is not None:
+            value = self.measure_number_extra_offset
+            if isinstance(value, tuple):
+                string = f"#'({value[0]} . {value[1]})"
+            else:
+                string = abjad.Scheme.format_embedded_scheme_value(value)
+            string = f'measure-number-extra-offset = {string}'
+            literal = abjad.LilyPondLiteral(string)
+            includes.append(literal)
+        if self.spacing_extra_offset is not None:
+            value = self.spacing_extra_offset
+            if isinstance(value, tuple):
+                string = f"#'({value[0]} . {value[1]})"
+            else:
+                string = abjad.Scheme.format_embedded_scheme_value(value)
+            string = f'spacing-extra-offset = {string}'
+            literal = abjad.LilyPondLiteral(string)
+            includes.append(literal)
+        if self.stage_number_extra_offset is not None:
+            value = self.stage_number_extra_offset
+            if isinstance(value, tuple):
+                string = f"#'({value[0]} . {value[1]})"
+            else:
+                string = abjad.Scheme.format_embedded_scheme_value(value)
+            string = f'stage-number-extra-offset = {string}'
+            literal = abjad.LilyPondLiteral(string)
+            includes.append(literal)
         if (not self.first_segment or
             self.nonfirst_segment_lilypond_include):
             includes.append(self._score_package_nonfirst_segment_path)
@@ -2669,7 +2705,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     tag=tag,
                     )
 
-    def _label_measure_indices(self):
+    def _label_measure_numbers(self):
         skips = classes.Selection(self.score['Global_Skips']).skips()
         total = len(skips)
         first_measure_number = self._get_first_measure_number()
@@ -6341,6 +6377,14 @@ class SegmentMaker(abjad.SegmentMaker):
         return 0
 
     @property
+    def measure_number_extra_offset(self) -> typing.Union[
+        bool, typings.Pair, None]:
+        """
+        Gets measure number extra offset.
+        """
+        return self._measure_number_extra_offset
+
+    @property
     def metadata(self) -> abjad.OrderedDict:
         r"""
         Gets segment metadata.
@@ -6833,11 +6877,26 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._spacing
 
     @property
+    def spacing_extra_offset(self) -> typing.Union[bool, typings.Pair, None]:
+        """
+        Gets spacing extra offset.
+        """
+        return self._spacing_extra_offset
+
+    @property
     def stage_markup(self) -> typing.Optional[typing.List]:
         """
         Gets stage markup.
         """
         return self._stage_markup
+
+    @property
+    def stage_number_extra_offset(self) -> typing.Union[
+        bool, typings.Pair, None]:
+        """
+        Gets stage number extra offset.
+        """
+        return self._stage_number_extra_offset
 
     @property
     def test_container_identifiers(self) -> typing.Optional[bool]:
@@ -7247,7 +7306,7 @@ class SegmentMaker(abjad.SegmentMaker):
             self._make_score()
             self._make_lilypond_file()
             self._make_global_skips()
-            self._label_measure_indices()
+            self._label_measure_numbers()
             self._label_stage_numbers()
         count = int(timer.elapsed_time)
         seconds = abjad.String('second').pluralize(count)
@@ -7316,7 +7375,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._apply_breaks()
                 self._style_fermata_measures()
                 self._shift_clefs_into_fermata_measures()
-                self._activate_tags(activate)
+                #self._activate_tags(activate)
                 self._deactivate_tags(deactivate)
                 self._remove_tags(remove)
                 self._add_container_identifiers()
@@ -7340,6 +7399,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
         with abjad.Timer() as timer:
             self._label_clock_time()
+            self._activate_tags(activate)
             self._collect_metadata()
             self._style_phantom_measures()
         count = int(timer.elapsed_time)

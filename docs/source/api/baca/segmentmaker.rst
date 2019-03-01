@@ -71,6 +71,7 @@ segmentmaker
       manifests
       margin_markups
       measure_count
+      measure_number_extra_offset
       metadata
       metronome_marks
       midi
@@ -82,7 +83,9 @@ segmentmaker
       score_template
       skips_instead_of_rests
       spacing
+      spacing_extra_offset
       stage_markup
+      stage_number_extra_offset
       test_container_identifiers
       time_signatures
       transpose_score
@@ -217,6 +220,8 @@ segmentmaker
 
    .. autoattribute:: SegmentMaker.measure_count
 
+   .. autoattribute:: SegmentMaker.measure_number_extra_offset
+
    .. autoattribute:: SegmentMaker.metadata
 
    .. autoattribute:: SegmentMaker.metronome_marks
@@ -249,7 +254,11 @@ segmentmaker
 
    .. autoattribute:: SegmentMaker.spacing
 
+   .. autoattribute:: SegmentMaker.spacing_extra_offset
+
    .. autoattribute:: SegmentMaker.stage_markup
+
+   .. autoattribute:: SegmentMaker.stage_number_extra_offset
 
    .. autoattribute:: SegmentMaker.test_container_identifiers
 
