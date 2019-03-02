@@ -13,6 +13,11 @@ Indices = typing.Union[int, IntegerPair, IntegerList]
 
 Number = typing.Union[int, float]
 
+HorizontalAlignmentTyping = typing.Union[
+    Number,
+    abjad.HorizontalAlignment,
+    ]
+
 NumberPair = typing.Tuple[Number, Number]
 
 Pair = typing.Tuple[typing.Any, typing.Any]
@@ -50,6 +55,7 @@ ScopeTyping = typing.Union[
     typing.Tuple[str, typing.Tuple[int, int]],
     typing.Tuple[typing.List[str], int],
     typing.Tuple[typing.List[str], typing.List[int]],
+    typing.Tuple[typing.List[str], typing.List[object]],
     typing.Tuple[typing.List[str], typing.List[typing.Tuple[int, int]]],
     typing.Tuple[typing.List[str], typing.Tuple[int, int]],
     ]

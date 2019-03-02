@@ -3672,7 +3672,7 @@ def rehearsal_mark_padding(
         )
 
 def rehearsal_mark_self_alignment_x(
-    n: typings.Number,
+    n: typings.HorizontalAlignmentTyping,
     *,
     context: str = 'Score',
     selector: typings.Selector = 'baca.leaf(0)',
