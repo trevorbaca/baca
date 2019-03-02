@@ -2716,7 +2716,7 @@ def page(
     return PageSpecifier(number=number, systems=systems_)
 
 def scorewide_spacing(
-    path: typing.Union[abjad.Path, typing.Tuple[int, int, list]],
+    path: typing.Union[str, abjad.Path, typing.Tuple[int, int, list]],
     fallback_duration: typings.IntegerPair,
     breaks: BreakMeasureMap = None,
     fermata_measure_duration: typings.IntegerPair = (1, 4),

@@ -23,38 +23,19 @@ Bača API
 .. autosummary::
    :nosignatures:
 
-   ~baca.are_contiguous_logical_voice
-   ~baca.are_contiguous_same_parent
-   ~baca.are_leaves
-   ~baca.are_logical_voice
    ~baca.chead
    ~baca.cheads
    ~baca.chord
    ~baca.chords
    ~baca.clparts
    ~baca.cmgroups
-   ~baca.components
-   ~baca.count
    ~baca.enchain
-   ~baca.filter
-   ~baca.filter_duration
-   ~baca.filter_length
-   ~baca.filter_pitches
-   ~baca.filter_preprolated
-   ~baca.flatten
    ~baca.grace
    ~baca.graces
    ~baca.group
-   ~baca.group_by
-   ~baca.group_by_contiguity
-   ~baca.group_by_duration
-   ~baca.group_by_length
    ~baca.group_by_measure
-   ~baca.group_by_pitch
    ~baca.hleaf
    ~baca.hleaves
-   ~baca.index
-   ~baca.items
    ~baca.leaf
    ~baca.leaves
    ~baca.lleaf
@@ -74,16 +55,12 @@ Bača API
    ~baca.mleaves
    ~baca.mmrest
    ~baca.mmrests
-   ~baca.nontrivial
    ~baca.note
    ~baca.notes
    ~baca.ntrun
    ~baca.ntruns
    ~baca.omgroups
    ~baca.ompltgroups
-   ~baca.partition_by_counts
-   ~baca.partition_by_durations
-   ~baca.partition_by_ratio
    ~baca.phead
    ~baca.pheads
    ~baca.pleaf
@@ -113,8 +90,6 @@ Bača API
    ~baca.top
    ~baca.tuplet
    ~baca.tuplets
-   ~baca.with_next_leaf
-   ~baca.with_previous_leaf
    ~baca.wleaf
    ~baca.wleaves
 

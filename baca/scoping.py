@@ -805,7 +805,7 @@ def compare_persistent_indicators(indicator_1, indicator_2) -> bool:
     return False
 
 def new(
-    *commands: Command,
+    *commands: typing.Union[Command, Suite],
     **keywords,
     ) -> typing.Union[Command, Suite]:
     r"""

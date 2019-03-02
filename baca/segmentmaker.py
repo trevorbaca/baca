@@ -455,8 +455,12 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def __call__(
         self,
-        scopes: typing.Union[scoping.Scope, scoping.TimelineScope],
-        *commands: typing.Union[scoping.Command, scoping.Suite],
+        scopes: typing.Union[
+            scoping.Scope,
+            scoping.TimelineScope,
+            typings.ScopeTyping,
+            ],
+        *commands: typing.Union[scoping.Command, scoping.Suite, None],
         ) -> None:
         r"""
         Wraps each command in ``commands`` with each scope in ``scopes``.

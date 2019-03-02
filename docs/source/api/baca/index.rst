@@ -75,38 +75,19 @@ baca
 .. autosummary::
    :nosignatures:
 
-   ~are_contiguous_logical_voice
-   ~are_contiguous_same_parent
-   ~are_leaves
-   ~are_logical_voice
    ~chead
    ~cheads
    ~chord
    ~chords
    ~clparts
    ~cmgroups
-   ~components
-   ~count
    ~enchain
-   ~filter
-   ~filter_duration
-   ~filter_length
-   ~filter_pitches
-   ~filter_preprolated
-   ~flatten
    ~grace
    ~graces
    ~group
-   ~group_by
-   ~group_by_contiguity
-   ~group_by_duration
-   ~group_by_length
    ~group_by_measure
-   ~group_by_pitch
    ~hleaf
    ~hleaves
-   ~index
-   ~items
    ~leaf
    ~leaves
    ~lleaf
@@ -126,16 +107,12 @@ baca
    ~mleaves
    ~mmrest
    ~mmrests
-   ~nontrivial
    ~note
    ~notes
    ~ntrun
    ~ntruns
    ~omgroups
    ~ompltgroups
-   ~partition_by_counts
-   ~partition_by_durations
-   ~partition_by_ratio
    ~phead
    ~pheads
    ~pleaf
@@ -165,18 +142,8 @@ baca
    ~top
    ~tuplet
    ~tuplets
-   ~with_next_leaf
-   ~with_previous_leaf
    ~wleaf
    ~wleaves
-
-.. autofunction:: are_contiguous_logical_voice
-
-.. autofunction:: are_contiguous_same_parent
-
-.. autofunction:: are_leaves
-
-.. autofunction:: are_logical_voice
 
 .. autofunction:: chead
 
@@ -190,23 +157,7 @@ baca
 
 .. autofunction:: cmgroups
 
-.. autofunction:: components
-
-.. autofunction:: count
-
 .. autofunction:: enchain
-
-.. autofunction:: filter
-
-.. autofunction:: filter_duration
-
-.. autofunction:: filter_length
-
-.. autofunction:: filter_pitches
-
-.. autofunction:: filter_preprolated
-
-.. autofunction:: flatten
 
 .. autofunction:: grace
 
@@ -214,25 +165,11 @@ baca
 
 .. autofunction:: group
 
-.. autofunction:: group_by
-
-.. autofunction:: group_by_contiguity
-
-.. autofunction:: group_by_duration
-
-.. autofunction:: group_by_length
-
 .. autofunction:: group_by_measure
-
-.. autofunction:: group_by_pitch
 
 .. autofunction:: hleaf
 
 .. autofunction:: hleaves
-
-.. autofunction:: index
-
-.. autofunction:: items
 
 .. autofunction:: leaf
 
@@ -272,8 +209,6 @@ baca
 
 .. autofunction:: mmrests
 
-.. autofunction:: nontrivial
-
 .. autofunction:: note
 
 .. autofunction:: notes
@@ -285,12 +220,6 @@ baca
 .. autofunction:: omgroups
 
 .. autofunction:: ompltgroups
-
-.. autofunction:: partition_by_counts
-
-.. autofunction:: partition_by_durations
-
-.. autofunction:: partition_by_ratio
 
 .. autofunction:: phead
 
@@ -349,10 +278,6 @@ baca
 .. autofunction:: tuplet
 
 .. autofunction:: tuplets
-
-.. autofunction:: with_next_leaf
-
-.. autofunction:: with_previous_leaf
 
 .. autofunction:: wleaf
 

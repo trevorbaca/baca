@@ -6036,7 +6036,7 @@ def markup(
         )
 
 def metronome_mark(
-    key: str,
+    key: typing.Union[str, indicators.Accelerando, indicators.Ritardando],
     *,
     redundant: bool = None,
     selector: typings.Selector = 'baca.leaf(0)',
