@@ -351,7 +351,7 @@ class SegmentMaker(abjad.SegmentMaker):
         skips_instead_of_rests: bool = None,
         spacing: segmentclasses.HorizontalSpacingSpecifier = None,
         spacing_extra_offset: typing.Union[bool, typings.Pair] = None,
-        stage_markup: typing.List = None,
+        stage_markup: typing.Sequence[typing.Tuple] = None,
         stage_number_extra_offset: typing.Union[bool, typings.Pair] = None,
         test_container_identifiers: bool = None,
         time_signatures: typing.List[tuple] = None,
@@ -6888,7 +6888,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._spacing_extra_offset
 
     @property
-    def stage_markup(self) -> typing.Optional[typing.List]:
+    def stage_markup(self) -> typing.Optional[typing.Sequence[typing.Tuple]]:
         """
         Gets stage markup.
         """

@@ -34,8 +34,20 @@ RhythmMakerTyping = typing.Union[
 
 ScopeTyping = typing.Union[
     str,
+    typing.List[str],
+    typing.List[typing.Tuple[str, int]],
+    typing.List[typing.Tuple[str, typing.List[object]]],
+    typing.List[typing.Tuple[str, typing.List[typing.Tuple[int, int]]]],
+    typing.List[typing.Tuple[str, typing.Tuple[int, int]]],
+    typing.List[typing.Tuple[typing.Sequence[str], typing.Tuple[int, int]]],
+    typing.List[typing.Tuple[typing.Sequence[str], object]],
     typing.Tuple[str, int],
+    typing.Tuple[str, typing.List[int]],
+    typing.Tuple[str, typing.List[typing.Tuple[int, int]]],
     typing.Tuple[str, typing.Tuple[int, int]],
+    typing.Tuple[typing.List[str], int],
+    typing.Tuple[typing.List[str], typing.List[typing.Tuple[int, int]]],
+    typing.Tuple[typing.List[str], typing.Tuple[int, int]],
     ]
 
 Selector = typing.Union[str, abjad.Expression]
