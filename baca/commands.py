@@ -6352,7 +6352,7 @@ def one_voice(
         tags=[tag],
         )
 
-def previous_metadata(path: str) -> typing.Optional[abjad.OrderedDict]:
+def previous_metadata(path: str) -> abjad.OrderedDict:
     """
     Gets previous segment metadata before ``path``.
     """
@@ -6368,7 +6368,7 @@ def previous_metadata(path: str) -> typing.Optional[abjad.OrderedDict]:
     assert all(_.is_dir() for _ in paths), repr(paths)
     index = paths.index(segment)
     if index == 0:
-        return None
+        return abjad.OrderedDict()
     previous_index = index - 1
     previous_segment = paths[previous_index]
     previous_metadata = previous_segment.get_metadata()

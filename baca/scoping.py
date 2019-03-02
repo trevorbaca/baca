@@ -1200,7 +1200,7 @@ def new(
 
 _command_typing = typing.Union[Command, Suite]
 
-def not_parts(command: Command) -> _command_typing:
+def not_parts(command: _command_typing) -> _command_typing:
     """
     Tags ``command`` with ``-PARTS``.
 
@@ -1208,7 +1208,7 @@ def not_parts(command: Command) -> _command_typing:
     """
     return tag('-PARTS', command)
 
-def not_score(command: Command) -> _command_typing:
+def not_score(command: _command_typing) -> _command_typing:
     """
     Tags ``command`` with ``-SCORE``.
 
@@ -1216,7 +1216,7 @@ def not_score(command: Command) -> _command_typing:
     """
     return tag('-SCORE', command)
 
-def not_segment(command: Command) -> _command_typing:
+def not_segment(command: _command_typing) -> _command_typing:
     """
     Tags ``command`` with ``-SEGMENT``.
 
@@ -1224,7 +1224,7 @@ def not_segment(command: Command) -> _command_typing:
     """
     return tag('-SEGMENT', command)
 
-def only_parts(command: Command) -> _command_typing:
+def only_parts(command: _command_typing) -> _command_typing:
     """
     Tags ``command`` with ``+PARTS``.
 
@@ -1369,7 +1369,7 @@ def only_parts(command: Command) -> _command_typing:
     """
     return tag('+PARTS', command)
 
-def only_score(command: Command) -> _command_typing:
+def only_score(command: _command_typing) -> _command_typing:
     """
     Tags ``command`` with ``+SCORE``.
 
@@ -1377,7 +1377,7 @@ def only_score(command: Command) -> _command_typing:
     """
     return tag('+SCORE', command)
 
-def only_segment(command: Command) -> _command_typing:
+def only_segment(command: _command_typing) -> _command_typing:
     """
     Tags ``command`` with ``+SEGMENT``.
 

@@ -339,7 +339,7 @@ class SegmentMaker(abjad.SegmentMaker):
             bool, typings.Pair] = None,
         magnify_staves: typing.Union[
             abjad.Multiplier,
-            typing.Tuple[abjad.Multiplier, abjad.Tag],
+            typing.Tuple[abjad.Multiplier, str],
             ] = None,
         margin_markups: abjad.OrderedDict = None,
         measure_number_extra_offset: typing.Union[bool, typings.Pair] = None,
@@ -6347,7 +6347,7 @@ class SegmentMaker(abjad.SegmentMaker):
     @property
     def magnify_staves(self) -> typing.Union[
         abjad.Multiplier,
-        typing.Tuple[abjad.Multiplier, abjad.Tag],
+        typing.Tuple[abjad.Multiplier, str],
         None,
         ]:
         """
