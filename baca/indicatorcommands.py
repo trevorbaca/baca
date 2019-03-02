@@ -3624,7 +3624,7 @@ def staff_lines(
         )
 
 def start_markup(
-    argument: str,
+    argument: typing.Union[str, typing.List[str]],
     *,
     context: str = 'Staff',
     hcenter_in: typings.Number = None,

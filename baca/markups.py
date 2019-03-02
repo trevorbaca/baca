@@ -280,7 +280,7 @@ def hair():
         )
 
 def instrument(
-    string: str,
+    string: typing.Union[str, typing.List[str]],
     hcenter_in: typing.Optional[typings.Number] = 16,
     column: bool = True,
     ):
