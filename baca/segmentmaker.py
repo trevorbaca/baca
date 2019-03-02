@@ -355,7 +355,10 @@ class SegmentMaker(abjad.SegmentMaker):
         stage_number_extra_offset: typing.Union[bool, typings.Pair] = None,
         test_container_identifiers: bool = None,
         time_signatures: typing.Sequence[
-            typing.Union[abjad.TimeSignature, typings.IntegerPair]
+            typing.Union[
+                abjad.NonreducedFraction,
+                abjad.TimeSignature,
+                typings.IntegerPair]
             ] = None,
         transpose_score: bool = None,
         validate_measure_count: int = None,
