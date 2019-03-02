@@ -354,7 +354,7 @@ class SegmentMaker(abjad.SegmentMaker):
         stage_markup: typing.Sequence[typing.Tuple] = None,
         stage_number_extra_offset: typing.Union[bool, typings.Pair] = None,
         test_container_identifiers: bool = None,
-        time_signatures: typing.List[tuple] = None,
+        time_signatures: typing.List[typing.Tuple[int, int]] = None,
         transpose_score: bool = None,
         validate_measure_count: int = None,
         ) -> None:
