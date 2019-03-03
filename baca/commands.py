@@ -3813,7 +3813,7 @@ def cross_staff(
             <BLANKLINE>
                                         % [Viola_Music_Voice measure 3]                              %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
                                         \baca-invisible-music                                        %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
-                                        c'1 * 1/4                                                    %! PHANTOM:_make_multimeasure_rest_container
+                                        R1 * 1/4                                                     %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
                                     }                                                                %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
@@ -3862,7 +3862,7 @@ def cross_staff(
             <BLANKLINE>
                                         % [Cello_Music_Voice measure 3]                              %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
                                         \baca-invisible-music                                        %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
-                                        c'1 * 1/4                                                    %! PHANTOM:_make_multimeasure_rest_container
+                                        R1 * 1/4                                                     %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
                                     }                                                                %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
@@ -4125,7 +4125,7 @@ def cross_staff(
             <BLANKLINE>
                                         % [Viola_Music_Voice measure 3]                              %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
                                         \baca-invisible-music                                        %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
-                                        c'1 * 1/4                                                    %! PHANTOM:_make_multimeasure_rest_container
+                                        R1 * 1/4                                                     %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
                                     }                                                                %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
@@ -4174,7 +4174,7 @@ def cross_staff(
             <BLANKLINE>
                                         % [Cello_Music_Voice measure 3]                              %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
                                         \baca-invisible-music                                        %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
-                                        c'1 * 1/4                                                    %! PHANTOM:_make_multimeasure_rest_container
+                                        R1 * 1/4                                                     %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
                                     }                                                                %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
@@ -6218,7 +6218,7 @@ def parts(
         <BLANKLINE>
                                     % [Viola_Music_Voice measure 5]                              %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
                                     \baca-invisible-music                                        %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
-                                    c'1 * 1/4                                                    %! PHANTOM:_make_multimeasure_rest_container
+                                    R1 * 1/4                                                     %! PHANTOM:_make_multimeasure_rest_container
         <BLANKLINE>
                                 }                                                                %! PHANTOM:_make_multimeasure_rest_container
         <BLANKLINE>
@@ -6273,7 +6273,7 @@ def parts(
         <BLANKLINE>
                                     % [Cello_Music_Voice measure 5]                              %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
                                     \baca-invisible-music                                        %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
-                                    c'1 * 1/4                                                    %! PHANTOM:_make_multimeasure_rest_container
+                                    R1 * 1/4                                                     %! PHANTOM:_make_multimeasure_rest_container
         <BLANKLINE>
                                 }                                                                %! PHANTOM:_make_multimeasure_rest_container
         <BLANKLINE>
@@ -7022,7 +7022,7 @@ def volta(
             <BLANKLINE>
                                     % [Music_Voice measure 5]                                        %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
                                     \baca-invisible-music                                            %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
-                                    c'1 * 1/4                                                        %! PHANTOM:_make_multimeasure_rest_container
+                                    R1 * 1/4                                                         %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>

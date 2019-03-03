@@ -28,11 +28,8 @@ RhythmMakerTyping = typing.Union[
     abjad.Selection,
     typing.Iterable[
         typing.Tuple[
-            typing.Union[
-                rmakers.RhythmMaker,
-                abjad.Selection,
-                ],
-            abjad.Pattern,
+            typing.Any,
+            typing.Union[bool, typing.List[int]],
             ],
         ],
     ]

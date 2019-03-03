@@ -1770,6 +1770,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     voice.name,
                     (1, 4),
                     phantom=True,
+                    suppress_note=True,
                     )
                 voice.append(container)
                 continue
@@ -1799,10 +1800,15 @@ class SegmentMaker(abjad.SegmentMaker):
             rhythms.sort()
             self._assert_nonoverlapping_rhythms(rhythms, voice.name)
             rhythms = self._intercalate_silences(rhythms, voice.name)
+            suppress_note = False
+            final_leaf = abjad.inspect(rhythms).leaf(-1)
+            if isinstance(final_leaf, abjad.MultimeasureRest):
+                suppress_note = True
             container = self._make_multimeasure_rest_container(
                 voice.name,
                 (1, 4),
                 phantom=True,
+                suppress_note=suppress_note,
                 )
             rhythms.append(container)
             voice.extend(rhythms)
@@ -3000,11 +3006,17 @@ class SegmentMaker(abjad.SegmentMaker):
         voice_name,
         duration,
         phantom=False,
+        suppress_note=False,
         ):
         tag = '_make_multimeasure_rest_container'
         if phantom is True:
             tag = f'{const.PHANTOM}:{tag}'
-        note = abjad.Note("c'1", multiplier=duration, tag=tag)
+        if suppress_note is True:
+            assert phantom is True
+        if suppress_note is not True:
+            note = abjad.Note("c'1", multiplier=duration, tag=tag)
+        else:
+            note = abjad.MultimeasureRest(1, multiplier=duration, tag=tag)
         literal = abjad.LilyPondLiteral(r'\baca-invisible-music')
         abjad.attach(literal, note, tag=tag)
         abjad.annotate(note, abjad.const.HIDDEN, True)
@@ -3512,25 +3524,28 @@ class SegmentMaker(abjad.SegmentMaker):
                     leaf,
                     f'{tag}:_style_phantom_measures(5)',
                     )
-                if isinstance(leaf, abjad.MultimeasureRest):
-                    literal = abjad.LilyPondLiteral(string_1)
-                    abjad.attach(
-                        literal,
-                        leaf,
-                        tag=f'{tag}:_style_phantom_measures(6)',
-                        )
-                    literal = abjad.LilyPondLiteral(string_2)
-                    abjad.attach(
-                        literal,
-                        leaf,
-                        tag=f'{tag}:_style_phantom_measures(7)',
-                        )
-                    literal = abjad.LilyPondLiteral(strings)
-                    abjad.attach(
-                        literal,
-                        leaf,
-                        tag=f'{tag}:_style_phantom_measures(8)',
-                        )
+                if not isinstance(leaf, abjad.MultimeasureRest):
+                    continue
+                if abjad.inspect(leaf).annotation(abjad.const.HIDDEN) is True:
+                    continue
+                literal = abjad.LilyPondLiteral(string_1)
+                abjad.attach(
+                    literal,
+                    leaf,
+                    tag=f'{tag}:_style_phantom_measures(6)',
+                    )
+                literal = abjad.LilyPondLiteral(string_2)
+                abjad.attach(
+                    literal,
+                    leaf,
+                    tag=f'{tag}:_style_phantom_measures(7)',
+                    )
+                literal = abjad.LilyPondLiteral(strings)
+                abjad.attach(
+                    literal,
+                    leaf,
+                    tag=f'{tag}:_style_phantom_measures(8)',
+                    )
 
     def _transpose_score_(self):
         if not self.transpose_score:
@@ -4031,7 +4046,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                             % [Violin_Music_Voice measure 3]                             %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
                                             \baca-invisible-music                                        %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
-                                            c'1 * 1/4                                                    %! PHANTOM:_make_multimeasure_rest_container
+                                            R1 * 1/4                                                     %! PHANTOM:_make_multimeasure_rest_container
                 <BLANKLINE>
                                         }                                                                %! PHANTOM:_make_multimeasure_rest_container
                 <BLANKLINE>
@@ -4080,7 +4095,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                             % [Viola_Music_Voice measure 3]                              %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
                                             \baca-invisible-music                                        %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
-                                            c'1 * 1/4                                                    %! PHANTOM:_make_multimeasure_rest_container
+                                            R1 * 1/4                                                     %! PHANTOM:_make_multimeasure_rest_container
                 <BLANKLINE>
                                         }                                                                %! PHANTOM:_make_multimeasure_rest_container
                 <BLANKLINE>
@@ -4168,7 +4183,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                             % [Cello_Music_Voice measure 3]                              %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
                                             \baca-invisible-music                                        %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
-                                            c'1 * 1/4                                                    %! PHANTOM:_make_multimeasure_rest_container
+                                            R1 * 1/4                                                     %! PHANTOM:_make_multimeasure_rest_container
                 <BLANKLINE>
                                         }                                                                %! PHANTOM:_make_multimeasure_rest_container
                 <BLANKLINE>
@@ -6499,7 +6514,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                         % [Music_Voice measure 5]                                        %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
                                         \baca-invisible-music                                            %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
-                                        c'1 * 1/4                                                        %! PHANTOM:_make_multimeasure_rest_container
+                                        R1 * 1/4                                                         %! PHANTOM:_make_multimeasure_rest_container
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:_make_multimeasure_rest_container
                 <BLANKLINE>
@@ -6739,7 +6754,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                         % [Music_Voice measure 5]                                        %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
                                         \baca-invisible-music                                            %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
-                                        c'1 * 1/4                                                        %! PHANTOM:_make_multimeasure_rest_container
+                                        R1 * 1/4                                                         %! PHANTOM:_make_multimeasure_rest_container
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:_make_multimeasure_rest_container
                 <BLANKLINE>
@@ -6852,7 +6867,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                         % [Music_Voice measure 5]                                        %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
                                         \baca-invisible-music                                            %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
-                                        c'1 * 1/4                                                        %! PHANTOM:_make_multimeasure_rest_container
+                                        R1 * 1/4                                                         %! PHANTOM:_make_multimeasure_rest_container
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:_make_multimeasure_rest_container
                 <BLANKLINE>
@@ -7384,7 +7399,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._apply_breaks()
                 self._style_fermata_measures()
                 self._shift_clefs_into_fermata_measures()
-                #self._activate_tags(activate)
                 self._deactivate_tags(deactivate)
                 self._remove_tags(remove)
                 self._add_container_identifiers()
