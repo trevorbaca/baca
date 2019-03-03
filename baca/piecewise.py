@@ -3672,6 +3672,16 @@ def make_dynamic(string: str) -> typing.Union[
 
     ..  container:: example
 
+        Effort dynamics (sempre):
+
+        >>> baca.make_dynamic('"p"-sempre')
+        Dynamic('p', command='\\baca-effort-p-sempre')
+
+        >>> baca.make_dynamic('"f"-sempre')
+        Dynamic('f', command='\\baca-effort-f-sempre')
+
+    ..  container:: example
+
         Sub. effort dynamics:
 
         >>> baca.make_dynamic('p-effort-sub')
@@ -3810,9 +3820,13 @@ def make_dynamic(string: str) -> typing.Union[
         dynamic = string.split('-')[0]
         command = rf'\baca-{dynamic}-scratch'
         indicator = abjad.Dynamic(dynamic, command=command)
-    elif string.endswith('-sempre'):
+    elif string.endswith('-sempre') and not string.startswith('"'):
         dynamic = string.split('-')[0]
         command = rf'\baca-{dynamic}-sempre'
+        indicator = abjad.Dynamic(dynamic, command=command)
+    elif string.endswith('-sempre') and string.startswith('"'):
+        dynamic = string.split('-')[0].strip('"')
+        command = rf'\baca-effort-{dynamic}-sempre'
         indicator = abjad.Dynamic(dynamic, command=command)
     elif string.endswith('-sub'):
         dynamic = string.split('-')[0]

@@ -462,6 +462,88 @@ baca-effort-fffff-parenthesized = #(
         )
     )
 
+%%% EFFORT DYNAMICS (SEMPRE) %%%
+
+#(define-markup-command
+    (baca-effort-dynamic-sempre layout props left dynamic right)
+    (number? string? number?)
+    (interpret-markup layout props
+    #{
+    \markup
+    \override #'(style . outline)
+    \override #'(thickness . 4.5)
+    \whiteout
+    \line {
+        \general-align #Y #-2 \normal-text \larger "“"
+        \hspace #left
+        \dynamic #dynamic
+        \hspace #right
+        \general-align #Y #-2 \normal-text \larger "”"
+        \hspace #0.25
+        \normal-text sempre
+        }
+    #}))
+
+baca-effort-ppppp-sempre = #(
+    make-dynamic-script
+    (markup #:baca-effort-dynamic-sempre -0.1 "ppppp" -0.25)
+    )
+
+baca-effort-pppp-sempre = #(
+    make-dynamic-script
+    (markup #:baca-effort-dynamic-sempre -0.1 "pppp" -0.25)
+    )
+
+baca-effort-ppp-sempre = #(
+    make-dynamic-script
+    (markup #:baca-effort-dynamic-sempre -0.1 "ppp" -0.25)
+    )
+
+baca-effort-pp-sempre = #(
+    make-dynamic-script
+    (markup #:baca-effort-dynamic-sempre -0.1 "pp" -0.25)
+    )
+
+baca-effort-p-sempre = #(
+    make-dynamic-script
+    (markup #:baca-effort-dynamic-sempre -0.1 "p" -0.25)
+    )
+
+baca-effort-mp-sempre = #(
+    make-dynamic-script
+    (markup #:baca-effort-dynamic-sempre -0.1 "mp" -0.25)
+    )
+
+baca-effort-mf-sempre = #(
+    make-dynamic-script
+    (markup #:baca-effort-dynamic-sempre -0.1 "mf" -0.2)
+    )
+
+baca-effort-f-sempre = #(
+    make-dynamic-script
+    (markup #:baca-effort-dynamic-sempre -0.4 "f" -0.2)
+    )
+
+baca-effort-ff-sempre = #(
+    make-dynamic-script
+    (markup #:baca-effort-dynamic-sempre -0.4 "ff" -0.2)
+    )
+
+baca-effort-fff-sempre = #(
+    make-dynamic-script
+    (markup #:baca-effort-dynamic-sempre -0.4 "fff" -0.2)
+    )
+
+baca-effort-ffff-sempre = #(
+    make-dynamic-script
+    (markup #:baca-effort-dynamic-sempre -0.4 "ffff" -0.2)
+    )
+
+baca-effort-fffff-sempre = #(
+    make-dynamic-script
+    (markup #:baca-effort-dynamic-sempre -0.4 "fffff" -0.2)
+    )
+
 %%% FP DYNAMICS %%%
 
 baca-ffp = #(make-dynamic-script "ffp")
