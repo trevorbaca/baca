@@ -2897,13 +2897,14 @@ class SegmentMaker(abjad.SegmentMaker):
         skip = abjad.Skip(1, multiplier=(1, 4), tag=tag)
         abjad.annotate(skip, const.PHANTOM, True)
         context.append(skip)
-        time_signature = abjad.TimeSignature((1, 4))
-        abjad.attach(
-            time_signature,
-            skip,
-            context='Score',
-            tag=tag,
-            )
+        if time_signature != abjad.TimeSignature((1, 4)):
+            time_signature = abjad.TimeSignature((1, 4))
+            abjad.attach(
+                time_signature,
+                skip,
+                context='Score',
+                tag=tag,
+                )
         if self.first_segment:
             return
         # empty start bar allows LilyPond to print bar numbers
