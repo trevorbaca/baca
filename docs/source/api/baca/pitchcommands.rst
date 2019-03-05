@@ -1092,6 +1092,7 @@ pitchcommands
    .. autosummary::
       :nosignatures:
 
+      allow_out_of_range
       allow_repeats
       exact
       numbers
@@ -1132,6 +1133,8 @@ pitchcommands
 
    .. rubric:: Read-only properties
       :class: class-header
+
+   .. autoattribute:: StaffPositionCommand.allow_out_of_range
 
    .. autoattribute:: StaffPositionCommand.allow_repeats
 

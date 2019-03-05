@@ -6257,6 +6257,7 @@ class StaffPositionCommand(scoping.Command):
     ### CLASS ATTRIBUTES ###
 
     __slots__ = (
+        '_allow_out_of_range',
         '_allow_repeats',
         '_exact',
         '_numbers',
@@ -6268,6 +6269,7 @@ class StaffPositionCommand(scoping.Command):
         self,
         *,
         numbers,
+        allow_out_of_range: bool = None,
         allow_repeats: bool = None,
         exact: bool = None, 
         map: typings.Selector = None,
@@ -6291,6 +6293,9 @@ class StaffPositionCommand(scoping.Command):
             assert all(isinstance(_, int) for _ in numbers), repr(numbers)
             numbers = abjad.CyclicTuple(numbers)
         self._numbers = numbers
+        if allow_out_of_range is not None:
+            allow_out_of_range = bool(allow_out_of_range)
+        self._allow_out_of_range = allow_out_of_range
         if allow_repeats is not None:
             allow_repeats = bool(allow_repeats)
         self._allow_repeats = allow_repeats
@@ -6320,6 +6325,8 @@ class StaffPositionCommand(scoping.Command):
             plt_count += 1
             for pleaf in plt:
                 abjad.attach(abjad.tags.STAFF_POSITION, pleaf)
+                if self.allow_out_of_range:
+                    abjad.attach(abjad.const.ALLOW_OUT_OF_RANGE, pleaf)
                 if self.allow_repeats:
                     abjad.attach(abjad.tags.ALLOW_REPEAT_PITCH, pleaf)
                     abjad.attach(abjad.tags.DO_NOT_TRANSPOSE, pleaf)
@@ -6329,6 +6336,13 @@ class StaffPositionCommand(scoping.Command):
             raise Exception(message)
 
     ### PUBLIC PROPERTIES ###
+
+    @property
+    def allow_out_of_range(self) -> typing.Optional[bool]:
+        """
+        Is true when out-of-range staff positions are allowed.
+        """
+        return self._allow_out_of_range
 
     @property
     def allow_repeats(self) -> typing.Optional[bool]:
@@ -8153,6 +8167,7 @@ def soprano_to_octave(
 def staff_position(
     number: int,
     *,
+    allow_out_of_range: bool = None,
     selector: typings.Selector = 'baca.plts(exclude=abjad.const.HIDDEN)',
     ) -> StaffPositionCommand:
     """
@@ -8160,6 +8175,7 @@ def staff_position(
     """
     assert isinstance(number, int), repr(number)
     return StaffPositionCommand(
+        allow_out_of_range=allow_out_of_range,
         allow_repeats=True,
         numbers=[number],
         selector=selector,
@@ -8168,6 +8184,7 @@ def staff_position(
 def staff_positions(
     numbers,
     *,
+    allow_out_of_range: bool = None,
     allow_repeats: bool = None,
     exact: bool = None,
     selector: typings.Selector = 'baca.plts(exclude=abjad.const.HIDDEN)',
@@ -8178,6 +8195,7 @@ def staff_positions(
     if allow_repeats is None and len(numbers) == 1:
         allow_repeats = True
     return StaffPositionCommand(
+        allow_out_of_range=allow_out_of_range,
         allow_repeats=allow_repeats,
         exact=exact,
         numbers=numbers,
