@@ -1948,7 +1948,7 @@ def laissez_vibrer(
         )
 
 def literal(
-    string: str,
+    string: typing.Union[str, typing.List[str]],
     *,
     format_slot: str = 'before',
     selector: typings.Selector = 'baca.leaf(0)',
