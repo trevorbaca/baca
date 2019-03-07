@@ -223,6 +223,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_nonfirst_segment_lilypond_include',
         '_offset_to_measure_number',
         '_previously_alive_contexts',
+        '_remove_phantom_measure',
         '_score',
         '_score_template',
         '_segment_bol_measure_numbers',
@@ -346,6 +347,7 @@ class SegmentMaker(abjad.SegmentMaker):
         metronome_marks: abjad.OrderedDict = None,
         nonfirst_segment_lilypond_include: bool = None,
         phantom: bool = None,
+        remove_phantom_measure: bool = None,
         score_template: templates.ScoreTemplate = None,
         segment_directory: abjad.Path = None,
         skips_instead_of_rests: bool = None,
@@ -427,6 +429,9 @@ class SegmentMaker(abjad.SegmentMaker):
         self._midi: typing.Optional[bool] = None
         self._offset_to_measure_number: typing.Dict[abjad.Offset, int] = {}
         self._previously_alive_contexts: typing.List[str] = []
+        if remove_phantom_measure is not None:
+            remove_phantom_measure = bool(remove_phantom_measure)
+        self._remove_phantom_measure = remove_phantom_measure
         self._score_template = score_template
         self._segment_bol_measure_numbers: typing.List[int] = []
         if segment_directory is not None:
@@ -1246,7 +1251,10 @@ class SegmentMaker(abjad.SegmentMaker):
         strings.append(rf'\bar "{abbreviation}"')
         literal = abjad.LilyPondLiteral(strings, 'after')
         skips = classes.Selection(self.score['Global_Skips']).skips()
-        skip = skips[-2]
+        if self.remove_phantom_measure:
+            skip = skips[-1]
+        else:
+            skip = skips[-2]
         abjad.attach(literal, skip, tag='_attach_final_bar_line')
 
     def _attach_first_appearance_score_template_defaults(self):
@@ -1766,13 +1774,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         )
                 selections = maker(self.time_signatures)
                 voice.extend(selections)
-                container = self._make_multimeasure_rest_container(
-                    voice.name,
-                    (1, 4),
-                    phantom=True,
-                    suppress_note=True,
-                    )
-                voice.append(container)
+                if not self.remove_phantom_measure:
+                    container = self._make_multimeasure_rest_container(
+                        voice.name,
+                        (1, 4),
+                        phantom=True,
+                        suppress_note=True,
+                        )
+                    voice.append(container)
                 continue
             rhythms = []
             for command in commands:
@@ -1800,17 +1809,18 @@ class SegmentMaker(abjad.SegmentMaker):
             rhythms.sort()
             self._assert_nonoverlapping_rhythms(rhythms, voice.name)
             rhythms = self._intercalate_silences(rhythms, voice.name)
-            suppress_note = False
-            final_leaf = abjad.inspect(rhythms).leaf(-1)
-            if isinstance(final_leaf, abjad.MultimeasureRest):
-                suppress_note = True
-            container = self._make_multimeasure_rest_container(
-                voice.name,
-                (1, 4),
-                phantom=True,
-                suppress_note=suppress_note,
-                )
-            rhythms.append(container)
+            if not self.remove_phantom_measure:
+                suppress_note = False
+                final_leaf = abjad.inspect(rhythms).leaf(-1)
+                if isinstance(final_leaf, abjad.MultimeasureRest):
+                    suppress_note = True
+                container = self._make_multimeasure_rest_container(
+                    voice.name,
+                    (1, 4),
+                    phantom=True,
+                    suppress_note=suppress_note,
+                    )
+                rhythms.append(container)
             voice.extend(rhythms)
             self._apply_first_and_final_ties(voice)
         return command_count
@@ -2868,14 +2878,15 @@ class SegmentMaker(abjad.SegmentMaker):
                 tag='_make_global_rests(1)',
                 )
             rests.append(rest)
-        tag = f'{const.PHANTOM}:_make_global_rests(2)'
-        rest = abjad.MultimeasureRest(
-            abjad.Duration(1),
-            multiplier=(1, 4),
-            tag=tag,
-            )
-        abjad.annotate(rest, const.PHANTOM, True)
-        rests.append(rest)
+        if not self.remove_phantom_measure:
+            tag = f'{const.PHANTOM}:_make_global_rests(2)'
+            rest = abjad.MultimeasureRest(
+                abjad.Duration(1),
+                multiplier=(1, 4),
+                tag=tag,
+                )
+            abjad.annotate(rest, const.PHANTOM, True)
+            rests.append(rest)
         return rests
 
     def _make_global_skips(self):
@@ -2893,18 +2904,19 @@ class SegmentMaker(abjad.SegmentMaker):
                 tag='_make_global_skips(2)',
                 )
             context.append(skip)
-        tag = f'{const.PHANTOM}:_make_global_skips(3)'
-        skip = abjad.Skip(1, multiplier=(1, 4), tag=tag)
-        abjad.annotate(skip, const.PHANTOM, True)
-        context.append(skip)
-        if time_signature != abjad.TimeSignature((1, 4)):
-            time_signature = abjad.TimeSignature((1, 4))
-            abjad.attach(
-                time_signature,
-                skip,
-                context='Score',
-                tag=tag,
-                )
+        if not self.remove_phantom_measure:
+            tag = f'{const.PHANTOM}:_make_global_skips(3)'
+            skip = abjad.Skip(1, multiplier=(1, 4), tag=tag)
+            abjad.annotate(skip, const.PHANTOM, True)
+            context.append(skip)
+            if time_signature != abjad.TimeSignature((1, 4)):
+                time_signature = abjad.TimeSignature((1, 4))
+                abjad.attach(
+                    time_signature,
+                    skip,
+                    context='Score',
+                    tag=tag,
+                    )
         if self.first_segment:
             return
         # empty start bar allows LilyPond to print bar numbers
@@ -3238,7 +3250,8 @@ class SegmentMaker(abjad.SegmentMaker):
         previous_time_signature = None
         self._cached_time_signatures = []
         skips = classes.Selection(self.score['Global_Skips']).skips()
-        skips = skips[:-1]
+        if not self.remove_phantom_measure:
+            skips = skips[:-1]
         for skip in skips:
             time_signature = abjad.inspect(skip).indicator(abjad.TimeSignature)
             self._cached_time_signatures.append(str(time_signature))
@@ -3470,6 +3483,8 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.override(rest).multi_measure_rest_text.extra_offset = pair
 
     def _style_phantom_measures(self):
+        if self.remove_phantom_measure:
+            return
         tag = const.PHANTOM
         skip = abjad.inspect(self.score['Global_Skips']).leaf(-1)
         for literal in abjad.inspect(skip).indicators(abjad.LilyPondLiteral):
@@ -6644,6 +6659,13 @@ class SegmentMaker(abjad.SegmentMaker):
         Gets previous segment persist.
         """
         return self._previous_persist
+
+    @property
+    def remove_phantom_measure(self) -> typing.Optional[bool]:
+        """
+        Is true when segment-maker removes phantom measure.
+        """
+        return self._remove_phantom_measure
 
     @property
     def score_template(self) -> typing.Optional[abjad.ScoreTemplate]:

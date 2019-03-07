@@ -79,6 +79,7 @@ segmentmaker
       persist
       previous_metadata
       previous_persist
+      remove_phantom_measure
       run
       score_template
       skips_instead_of_rests
@@ -235,6 +236,8 @@ segmentmaker
    .. autoattribute:: SegmentMaker.previous_metadata
 
    .. autoattribute:: SegmentMaker.previous_persist
+
+   .. autoattribute:: SegmentMaker.remove_phantom_measure
 
    .. container:: inherited
 
