@@ -2439,6 +2439,85 @@ def mark(
         tweaks=tweaks,
         )
 
+def parenthesize(
+    *,
+    selector: typings.Selector = 'baca.phead(0, exclude=abjad.const.HIDDEN)',
+    tag: typing.Optional[str] = 'baca_parenthesize',
+    ) -> commands.IndicatorCommand:
+    r"""
+    Attaches LilyPond ``\parenthesize`` command.
+
+    ..  container:: example
+
+        Attaches parenthesize command to pitched head 0:
+
+        >>> music_maker = baca.MusicMaker()
+        >>> contribution = music_maker(
+        ...     'Voice_1',
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+        ...     baca.parenthesize(),
+        ...     baca.rests_around([2], [4]),
+        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     counts=[1, 1, 5, -1],
+        ...     time_treatments=[-1],
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+            \new Staff
+            <<
+                \context Voice = "Voice_1"
+                {
+                    \voiceOne
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            r8
+                            \parenthesize                                                            %! baca_parenthesize:IndicatorCommand
+                            c'16
+                            [
+                            d'16
+                            ]
+                            bf'4
+                            ~
+                            bf'16
+                            r16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            fs''16
+                            [
+                            e''16
+                            ]
+                            ef''4
+                            ~
+                            ef''16
+                            r16
+                            af''16
+                            [
+                            g''16
+                            ]
+                        }
+                        \times 4/5 {
+                            a'16
+                            r4
+                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                        }
+                    }
+                }
+            >>
+
+    """
+    return commands.IndicatorCommand(
+        indicators=[abjad.LilyPondLiteral(r'\parenthesize')],
+        selector=selector,
+        tags=[tag],
+        )
+
 def quadruple_staccato(
     *,
     selector: typings.Selector = 'baca.phead(0, exclude=abjad.const.HIDDEN)',

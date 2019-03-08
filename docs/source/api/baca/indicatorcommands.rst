@@ -42,6 +42,7 @@ indicatorcommands
    ~marcato
    ~margin_markup
    ~mark
+   ~parenthesize
    ~quadruple_staccato
    ~rehearsal_mark
    ~short_fermata
@@ -98,6 +99,8 @@ indicatorcommands
 .. autofunction:: margin_markup
 
 .. autofunction:: mark
+
+.. autofunction:: parenthesize
 
 .. autofunction:: quadruple_staccato
 

@@ -283,6 +283,7 @@ Division library.
    ~baca.indicatorcommands.marcato
    ~baca.indicatorcommands.margin_markup
    ~baca.indicatorcommands.mark
+   ~baca.indicatorcommands.parenthesize
    ~baca.indicatorcommands.quadruple_staccato
    ~baca.indicatorcommands.rehearsal_mark
    ~baca.indicatorcommands.short_fermata
