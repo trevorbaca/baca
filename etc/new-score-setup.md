@@ -204,7 +204,6 @@ Make new score package
 
     git push -u origin master
 
-
 23. Configure wrapper directory:
 
     Symlink .gitignore:
@@ -253,7 +252,19 @@ Make new score package
 
     (ci "Configured package initializers.")
 
-25. Configure score for continuous integration:
+25. Remove IDE-generated segment-maker:
+
+    (oo)
+
+    (rm SegmentMaker.py)
+
+26. Run mypy:
+
+    (ww)
+
+    (!mypy stirrings_still)
+
+27. Configure score for continuous integration:
 
     https://travis-ci.org.
 
@@ -273,7 +284,7 @@ Make new score package
 
     More options > "Trigger build".
 
-26. Verify continuous integration setup:
+28. Verify continuous integration setup:
 
     Return to IDE.
 
@@ -287,11 +298,11 @@ Make new score package
 
     Make sure all tests pass.
 
-27. Add score to IDE aliases:
+29. Add score to IDE aliases:
 
     (al)
 
-28. Add score to ~/.profile:
+30. Add score to ~/.profile:
 
     export STIRRINGS_STILL=$SCORES/stirrings_still
     alias stix="clear; cd $STIRRINGS_STILL/stirrings_still"
@@ -301,23 +312,25 @@ Make new score package
 
     Quit and restart terminal.
 
-29. Add repository to ~/baca/scr/restart-travis-build-set-n script.
+31. Add repository to ~/baca/scr/restart-travis-build-set-n script.
 
-30. Add repository to clone scores script:
+    cdb
+
+    (..)
+
+    (ci)
+    
+    "Taught Travis restart scripts about Stirrings Still."
+
+32. Add repository to clone scores script:
     
     ~/micellaneous/config/clone_scores.py
 
-31. Add terminal window group:
+    cdm
 
-    Change to score package in three terminal windows.
+    ci "Taught score clone scripts about Stirrings Still."
 
-    Window > Save Windows as Group ...
-
-    Use window group when terminal starts.
-
-    Quit and restart terminal.
-
-32. Add test submodule:
+33. Add test submodule:
 
     (cc)
 
@@ -329,7 +342,7 @@ Make new score package
 
     (ci "Added test repository to .gitmodules file.")
 
-33. Move sketches into etc directory:
+34. Move sketches into etc directory:
 
     Restart IDE.
 
@@ -337,7 +350,7 @@ Make new score package
 
     (ci "Added materials PDF, map PDF.")
 
-34. Make etc files:
+35. Make etc files:
 
     (ee new to-do.md)
 
@@ -345,7 +358,7 @@ Make new score package
 
     (ci "Added etc files.")
 
-35. Set up stylesheets directory:
+36. Set up stylesheets directory:
 
     Leave IDE-generated nonfirst-segment.ily as is.
 
@@ -379,7 +392,7 @@ Make new score package
 
     (ci "Added stylesheets.")
 
-36. Get existing instruments:
+37. Get existing instruments:
 
     (mm)
 
@@ -403,7 +416,7 @@ Make new score package
 
     (ci "Added instruments.")
 
-37. Remove IDE-generated ScoreTemplate.py:
+38. Remove IDE-generated ScoreTemplate.py:
 
     (oo rm ScoreTemplate.py)
 
@@ -433,7 +446,7 @@ Make new score package
 
     (cdsx; git add .; git commit "Rebuilt API.")
 
-38. Get existing metronome marks:
+39. Get existing metronome marks:
 
     (mm get [score] metronome_marks)
 
@@ -447,7 +460,7 @@ Make new score package
 
     (ci "Added metronome marks.")
 
-39. Get existing time signatures (if time-signature-oriented):
+40. Get existing time signatures (if time-signature-oriented):
 
     (mm get [score] time_signatures) 
 
@@ -459,7 +472,7 @@ Make new score package
 
     (ci "Added time signatures.")
 
-40. Define stub version of first segment:
+41. Define stub version of first segment:
 
     (gg new A)
 
@@ -487,7 +500,7 @@ Make new score package
 
     Check (le) for LilyPond warnings.
     
-41. Define stub version of second segment:
+42. Define stub version of second segment:
 
     (gg new B)
 
@@ -515,7 +528,7 @@ Make new score package
 
     (ci "Segments A, B.")
 
-42. Build stub version of score if ensemble piece:
+43. Build stub version of score if ensemble piece:
 
     (bb new ledger) 
 
@@ -555,7 +568,7 @@ Make new score package
 
     (cc ^^ ++ ci "Added ledger build.")
 
-43. Test everything:
+44. Test everything:
 
     cdj; py.test -rf
 
@@ -563,14 +576,14 @@ Make new score package
 
     cdi; py.test -rf
 
-44. Rebuild scores:
+45. Rebuild scores:
 
     ss
     >> gg ipn
     >> gg ipn
     ...
 
-45. Rebuild docs:
+46. Rebuild docs:
 
     apim
 
@@ -580,6 +593,6 @@ Make new score package
 
     apis
 
-46. Commit changes to this document:
+47. Commit changes to this document:
 
     (ci "Updated new score setup instructions.")
