@@ -84,7 +84,15 @@ Package unpushed trevor/dev commits
 
     Make sure trevor/dev is empty.
 
-11. Update Abjad:
+11. Update pip:
+
+    pip install --upgrade pip
+
+12. Update Sphinx:
+
+    pip install --upgrade sphinx
+
+13. Update Abjad:
 
     cd ~/abjad
 
@@ -92,7 +100,7 @@ Package unpushed trevor/dev commits
 
     py.test -rf; apim; git st
 
-12. Update the IDE:
+14. Update the IDE:
 
     cd ~/ide
 
@@ -106,7 +114,7 @@ Package unpushed trevor/dev commits
 
     py.test -rf; apii; git st
 
-13. Update Bača:
+15. Update Bača:
 
     cd ~/baca
 
@@ -114,14 +122,14 @@ Package unpushed trevor/dev commits
 
     py.test -rf; apib.
 
-14. Rebuild scores:
+16. Rebuild scores:
 
     ss
     >> gg ipn
     >> gg ipn
     ...
 
-15. Rebuild docs:
+17. Rebuild docs:
 
     apim
 
@@ -134,33 +142,13 @@ Package unpushed trevor/dev commits
 Make new score package
 ----------------------
 
-16. Select score metadata:
+18. Select score metadata:
 
-    Select score title.
+    Determine score title.
 
-    Select score package name.
+    Determine score package name.
 
-17. Create new GitHub repository:
-
-    Go to www.github.com.
-
-    Click "New Repository".
-
-    Name the repository.
-
-    Add description: "Stirrings Still (2017) for narrator and string quartet."
-
-    Make repository public.
-
-    Do not initialize with README.
-
-    Do not add .gitignore.
-
-    Do not add license.
-
-    Click "Create Repository."
-
-18. Make new score package with IDE:
+19. Make new score package with IDE:
 
     (new)
 
@@ -168,9 +156,7 @@ Make new score package
 
     nahte/nahte -> naehte/naehte
 
-    [TODO: teach IDE to search (and prompt) for newly created repository.]
-
-19. Add catalog number and forces tagline metadata by hand:
+20. Add catalog number and forces tagline metadata by hand:
 
     metadata = abjad.OrderedDict(
         [
@@ -184,28 +170,41 @@ Make new score package
 
     IDE includes composer, title, year metadata automatically.
 
-20. Move score package to Desktop.
+21. Create new GitHub repository:
 
-    mv [score] ~/Desktop
+    Go to www.github.com.
 
-21. Clone Github repository:
+    Click "New Repository".
 
-    Return to GitHub.
+    Name the repository.
 
-    Click "Clone or download."
+    Add description: "Stirrings Still (2018) for narrator and string quartet."
 
-    Copy repository URL with clipboard icon.
+    Make repository public.
 
-    Return to terminal.
+    Do not initialize with README.
 
-    cd ~/Scores
+    Do not add .gitignore.
 
-    git clone https://github.com/trevorbaca/stirrings.git
+    Do not add license.
 
-22. Move score package contents into GitHub clone:
+    Click "Create Repository."
 
-    (ci "Configured Python package.")
+22. Initialize IDE-created directory as GitHub repository:
+
+    cd ~/Scores/stirrings_still
+
+    git init
+
+    git add .
     
+    git commit
+
+    git remote add origin https://github.com/trevorbaca/stirrings_still.git
+
+    git push -u origin master
+
+
 23. Configure wrapper directory:
 
     Symlink .gitignore:
@@ -238,7 +237,7 @@ Make new score package
 
         No setup.cfg file is necessary.
 
-        Check setup.py.
+        Check setup.py in comparison to existing score package.
 
     (ci "Configured wrapper directory.")
 
@@ -272,7 +271,7 @@ Make new score package
 
     Cron jobs > interval > "daily" > add.
 
-    Settings > "trigger custom build."
+    More options > "Trigger build".
 
 26. Verify continuous integration setup:
 
