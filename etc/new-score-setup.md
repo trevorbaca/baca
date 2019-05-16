@@ -334,11 +334,17 @@ Make new score package
 
     (cc)
 
-    (!trash test)
+    (rm test)
+
+    (ci "Removed test directory.")
 
     (!git submodule add https://github.com/trevorbaca/test.git test)
 
     Make sure .gitmodules file appears in wrapper directory.
+
+    (ww)
+
+    (ls -a)
 
     (ci "Added test repository to .gitmodules file.")
 
