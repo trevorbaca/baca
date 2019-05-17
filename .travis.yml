@@ -4,8 +4,14 @@ language: python
 
 python:
     - 3.6
-    - "3.7-dev"
-    - "3.8-dev"
+    #- "3.7-dev"
+    #- "3.8-dev"
+
+matrix:
+  include:
+    - python: 3.7
+      dist: xenial
+      sudo: true
 
 before_install:
     # alias package
