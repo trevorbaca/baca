@@ -64,6 +64,7 @@ install:
     - pip install -e . 
 
 script:
+    - black --target-version=py36 --line-length=79 --check --diff $PACKAGE
     - mypy --ignore-missing-imports $PACKAGE
     - coverage run -a `which baca-doctest` $PACKAGE/*.py
 
