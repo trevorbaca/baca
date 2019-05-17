@@ -269,7 +269,7 @@ class RhythmCommand(scoping.Command):
             assert isinstance(persist, str), repr(persist)
         self._persist = persist
         if reference_meters is not None:
-            assert isinstance(reference_meters, collections.Iterable)
+            assert isinstance(reference_meters, collections.abc.Iterable)
             assert all(isinstance(_, abjad.Meter) for _ in reference_meters)
         self._reference_meters = reference_meters
         if rewrite_meter is not None:
@@ -367,7 +367,7 @@ class RhythmCommand(scoping.Command):
             raise Exception(message)
 
     def _check_rhythm_maker_pattern_pairs(self, pairs):
-        if not isinstance(pairs, collections.Sequence): 
+        if not isinstance(pairs, collections.abc.Sequence): 
             return False
         prototype = (abjad.Selection, rmakers.RhythmMaker, type(self))
         for pair in pairs:

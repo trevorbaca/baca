@@ -1913,7 +1913,7 @@ class IndicatorCommand(scoping.Command):
         self._context = context
         indicators_ = None
         if indicators is not None:
-            if isinstance(indicators, collections.Iterable):
+            if isinstance(indicators, collections.abc.Iterable):
                 indicators_ = abjad.CyclicTuple(indicators)
             else:
                 indicators_ = abjad.CyclicTuple([indicators])

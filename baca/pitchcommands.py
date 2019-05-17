@@ -2371,12 +2371,12 @@ class Loop(abjad.CyclicTuple):
         intervals=None,
         ):
         if items is not None:
-            assert isinstance(items, collections.Iterable), repr(items)
+            assert isinstance(items, collections.abc.Iterable), repr(items)
             items = [abjad.NamedPitch(_) for _ in items]
             items = abjad.CyclicTuple(items)
         abjad.CyclicTuple.__init__(self, items=items)
         if intervals is not None:
-            assert isinstance(items, collections.Iterable), repr(items)
+            assert isinstance(items, collections.abc.Iterable), repr(items)
             intervals = abjad.CyclicTuple(intervals)
         self._intervals = intervals
 
@@ -2606,7 +2606,7 @@ class MicrotoneDeviationCommand(scoping.Command):
             selector=selector,
             )
         if deviations is not None:
-            assert isinstance(deviations, collections.Iterable)
+            assert isinstance(deviations, collections.abc.Iterable)
             assert all(isinstance(_, numbers.Number) for _ in deviations)
         self._deviations = abjad.CyclicTuple(deviations)
 
@@ -3526,7 +3526,7 @@ class PitchCommand(scoping.Command):
                 item = abjad.PitchSet(item, abjad.NamedPitch)
             elif isinstance(item, str):
                 item = abjad.NamedPitch(item)
-            elif isinstance(item, collections.Iterable):
+            elif isinstance(item, collections.abc.Iterable):
                 item = abjad.PitchSet(item, abjad.NamedPitch)
             else:
                 item = abjad.NamedPitch(item)
@@ -3539,7 +3539,7 @@ class PitchCommand(scoping.Command):
 
     def _mutates_score(self):
         pitches = self.pitches or []
-        if any(isinstance(_, collections.Iterable) for _ in pitches):
+        if any(isinstance(_, collections.abc.Iterable) for _ in pitches):
             return True
         return self._mutated_score
 
@@ -3598,7 +3598,7 @@ class PitchCommand(scoping.Command):
                     rest = abjad.Rest(leaf.written_duration)
                     abjad.mutate(leaf).replace(rest, wrappers=True)
                 new_lt = abjad.inspect(rest).logical_tie()
-        elif isinstance(pitch, collections.Iterable):
+        elif isinstance(pitch, collections.abc.Iterable):
             if isinstance(lt.head, abjad.Chord):
                 for chord in lt:
                     chord.written_pitches = pitch

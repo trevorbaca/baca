@@ -13067,13 +13067,13 @@ class RestAffixSpecifier(object):
             raise TypeError(f'pattern or none: {pattern!r}.')
         self._pattern = pattern
         if prefix is not None:
-            assert isinstance(prefix, collections.Iterable), repr(prefix)
+            assert isinstance(prefix, collections.abc.Iterable), repr(prefix)
         self._prefix = prefix
         if skips_instead_of_rests is not None:
             skips_instead_of_rests = bool(skips_instead_of_rests)
         self._skips_instead_of_rests = skips_instead_of_rests
         if suffix is not None:
-            assert isinstance(suffix, collections.Iterable), repr(suffix)
+            assert isinstance(suffix, collections.abc.Iterable), repr(suffix)
         self._suffix = suffix
 
     ### SPECIAL METHODS ###

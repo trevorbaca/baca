@@ -193,7 +193,7 @@ class Cursor(object):
             cyclic = bool(cyclic)
         self._cyclic = cyclic
         source = source or ()
-        assert isinstance(source, collections.Iterable), repr(source)
+        assert isinstance(source, collections.abc.Iterable), repr(source)
         if cyclic:
             source = abjad.CyclicTuple(source)
         self._source = source
@@ -8362,20 +8362,20 @@ class Sequence(abjad.Sequence):
                 for item in self:
                     result.append(copy.copy(item))
             elif i % 2 == 0:
-                if isinstance(self[0], collections.Iterable):
+                if isinstance(self[0], collections.abc.Iterable):
                     result.append(self[0][1:])
                 else:
                     pass
                 for item in self[1:]:
                     result.append(copy.copy(item))
             else:
-                if isinstance(self[-1], collections.Iterable):
+                if isinstance(self[-1], collections.abc.Iterable):
                     item = type(self[-1])(list(reversed(self[-1]))[1:])
                     result.append(item)
                 else:
                     pass
                 for item in reversed(self[:-1]):
-                    if isinstance(item, collections.Iterable):
+                    if isinstance(item, collections.abc.Iterable):
                         item = type(item)(list(reversed(item)))
                         result.append(item)
                     else:
@@ -9009,7 +9009,7 @@ class Sequence(abjad.Sequence):
         if counts is None:
             return type(self)(self)
         counts = counts or [1]
-        assert isinstance(counts, collections.Iterable)
+        assert isinstance(counts, collections.abc.Iterable)
         if cyclic is True:
             counts = abjad.CyclicTuple(counts)
         items = []
@@ -9218,7 +9218,7 @@ class Sequence(abjad.Sequence):
         current = 0
         items_ = []
         for item in self:
-            if isinstance(item, collections.Iterable):
+            if isinstance(item, collections.abc.Iterable):
                 subitems_ = []
                 for subitem in item:
                     subitems_.append(subitem)
@@ -9724,7 +9724,7 @@ class Tree(object):
         return result
 
     def _are_internal_nodes(self, argument):
-        if (isinstance(argument, collections.Iterable) and
+        if (isinstance(argument, collections.abc.Iterable) and
             not isinstance(argument, str)):
             return True
         if isinstance(argument, type(self)) and len(argument):

@@ -1566,7 +1566,7 @@ class HorizontalSpacingSpecifier(object):
             assert isinstance(breaks, BreakMeasureMap), repr(breaks)
         self._breaks = breaks
         if fermata_measure_numbers is not None:
-            assert isinstance(fermata_measure_numbers, collections.Iterable)
+            assert isinstance(fermata_measure_numbers, collections.abc.Iterable)
             assert all(isinstance(_, int) for _ in fermata_measure_numbers)
         self._fermata_measure_numbers = fermata_measure_numbers or []
         duration_ = None
@@ -2261,7 +2261,7 @@ class LBSD(object):
         ):
         self._y_offset = y_offset
         if alignment_distances is not None:
-            assert isinstance(alignment_distances, collections.Iterable)
+            assert isinstance(alignment_distances, collections.abc.Iterable)
             alignment_distances = tuple(alignment_distances)
         self._alignment_distances = alignment_distances
 
@@ -2372,7 +2372,7 @@ class SystemSpecifier(object):
         ) -> None:
         distances_: typing.Optional[typing.List[typings.Number]] = None
         if distances is not None:
-            assert isinstance(distances, collections.Iterable), repr(distances)
+            assert isinstance(distances, collections.abc.Iterable), repr(distances)
             for distance in distances:
                 assert isinstance(distance, (int, float)), repr(distance)
             distances_ = list(distances)

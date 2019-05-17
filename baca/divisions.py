@@ -1828,7 +1828,7 @@ class DivisionSequence(abjad.Sequence):
 
     def __init__(self, items=None) -> None:
         items = items or []
-        if not isinstance(items, collections.Iterable):
+        if not isinstance(items, collections.abc.Iterable):
             items = [items]
         items_ = []
         for item in items:
