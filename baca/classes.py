@@ -873,7 +873,7 @@ class Cursor(object):
         self._position = 0
 
 class Expression(abjad.Expression):
-    """
+    r"""
     Expression.
 
     ..  container:: example expression

@@ -6342,7 +6342,7 @@ def one_voice(
     selector: typings.Selector = 'baca.leaf(0)',
     tag: typing.Optional[str] = 'baca_one_voice',
     ) -> IndicatorCommand:
-    """
+    r"""
     Makes LilyPond ``\oneVoice`` command.
     """
     literal = abjad.LilyPondLiteral(r'\oneVoice')

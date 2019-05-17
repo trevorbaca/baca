@@ -3431,10 +3431,10 @@ class SegmentMaker(abjad.SegmentMaker):
                     else:
                         before_line_count = getattr(before, 'line_count', 5)
                     strings = [
-                        '\stopStaff',
-                        '\once \override Staff.StaffSymbol.line-count ='
+                        r'\stopStaff',
+                        r'\once \override Staff.StaffSymbol.line-count ='
                             f' {before_line_count}',
-                        '\startStaff',
+                        r'\startStaff',
                         ]
                     literal = abjad.LilyPondLiteral(
                         strings,
@@ -3530,9 +3530,9 @@ class SegmentMaker(abjad.SegmentMaker):
         string_1 = r'\once \override Score.TimeSignature.X-extent = ##f'
         string_2 = r'\once \override MultiMeasureRest.transparent = ##t'
         strings = [
-            '\stopStaff',
-            '\once \override Staff.StaffSymbol.transparent = ##t',
-            '\startStaff',
+            r'\stopStaff',
+            r'\once \override Staff.StaffSymbol.transparent = ##t',
+            r'\startStaff',
             ]
         for container in containers:
             for leaf in abjad.select(container).leaves():

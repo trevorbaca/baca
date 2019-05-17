@@ -1225,7 +1225,7 @@ def not_segment(command: _command_typing) -> _command_typing:
     return tag('-SEGMENT', command)
 
 def only_parts(command: _command_typing) -> _command_typing:
-    """
+    r"""
     Tags ``command`` with ``+PARTS``.
 
     ..  container:: example

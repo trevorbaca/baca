@@ -3984,7 +3984,7 @@ def stop_trill(
     selector: typings.Selector = 'baca.leaf(0)',
     tag: typing.Optional[str] = 'baca_stop_trill',
     ) -> commands.IndicatorCommand:
-    """
+    r"""
     Attaches stop trill to closing-slot.
 
     The closing format slot is important because LilyPond fails to compile

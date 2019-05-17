@@ -1847,7 +1847,7 @@ class DivisionSequence(abjad.Sequence):
         subscript='n',
         )
     def rotate(self, n=0) -> 'DivisionSequence':
-        """
+        r"""
         Rotates division sequence by index ``n``.
 
         ..  container:: example
