@@ -334,19 +334,19 @@ Make new score package
 
     (cc)
 
-    (rm test)
+    (!trash test)
 
-    (ci "Removed test directory.")
+    (ci "Removed test submodule.")
 
-    (!git submodule add https://github.com/trevorbaca/test.git test)
+    (!git submodule add https://github.com/trevorbaca/test.git)
 
     Make sure .gitmodules file appears in wrapper directory.
 
     (ww)
 
-    (ls -a)
+    (!ls -a)
 
-    (ci "Added test repository to .gitmodules file.")
+    (ci "Added test submodule.")
 
 34. Move sketches into etc directory:
 

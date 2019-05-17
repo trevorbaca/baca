@@ -804,7 +804,7 @@ class ChordalSpacingSpecifier(object):
         return self._soprano
 
 
-class CollectionList(collections_module.Sequence):
+class CollectionList(collections_module.abc.Sequence):
     """
     Collection list.
 
@@ -1027,7 +1027,7 @@ class CollectionList(collections_module.Sequence):
 
         Returns new collection list.
         """
-        if not isinstance(argument, collections_module.Iterable):
+        if not isinstance(argument, collections_module.abc.Iterable):
             raise TypeError(f"must be collection list: {argument!r}.")
         argument_collections = [
             self._initialize_collection(_) for _ in argument
@@ -1346,7 +1346,7 @@ class CollectionList(collections_module.Sequence):
         else:
             if isinstance(argument, str):
                 return PitchSegment(items=items, item_class=abjad.NamedPitch)
-            elif isinstance(argument, collections_module.Iterable):
+            elif isinstance(argument, collections_module.abc.Iterable):
                 return PitchSegment(
                     items=items, item_class=abjad.NumberedPitch
                 )
